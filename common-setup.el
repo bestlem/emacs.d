@@ -1,3 +1,10 @@
+;; git
+
+ (require 'vc-git)
+ (when (featurep 'vc-git) (add-to-list 'vc-handled-backends 'git))
+ (require 'git)
+ (autoload 'git-blame-mode "git-blame"
+           "Minor mode for incremental blame for Git." t)
 
 
 ;; set up files and soft links
@@ -94,10 +101,6 @@
 
 ; colours
 
-
-;; tcl
-(defvar tcl-default-application "~/fos/tcl/TclFosShell/TclFosShell" "Default tcl/tk application to run in tcl subprocess.")
-					;(defvar tcl-default-application "/LocalDeveloper/OBS/Ldndevl/obs/Release96/src/app/OBS/OBSTclApp/TclMain" "Default tcl/tk application to run in tcl subprocess.")
 
 
 ;;; Some simple handy functions.

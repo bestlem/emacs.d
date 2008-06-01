@@ -9,3 +9,12 @@
 (define-key osx-key-mode-map [C-kp-home] 'beginning-of-buffer )
 (define-key osx-key-mode-map [S-kp-next] 'scroll-other-window-down )
 (define-key osx-key-mode-map [S-kp-prior] 'scroll-other-window )
+
+;; emacs server
+(server-start)
+
+
+;; common bits
+(load "common-setup")
+(load "common-modes")
+(load "common-keys")

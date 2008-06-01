@@ -1,18 +1,4 @@
 
-; elib
-;(setq load-path (append (list "~/emacs/lib")
-;			load-path))
-
-; cvs
-
-;tcl
-
-(defun my-tcl-mode-hook ()
-  "My Tcl settings"
-  (define-key tcl-mode-map [M-return] 'tcl-send-current-line)
-  )
-
-(add-hook 'tcl-mode-hook 'my-tcl-mode-hook)
 
 ;; perl
 ;; perl mode set up
@@ -51,19 +37,6 @@
 
 ; load libraries 
 
-(defun my-fonts()
-  "Hilite and fonts stuff"
-;;(require 'emacs-vers)
-  (require 'font-lock)
-  (global-font-lock-mode t)
-;  (setq font-lock-support-mode 'fast-lock-mode)
-  (custom-set-variables
-   '(resize-minibuffer-window-max-height 0)
-   '(show-paren-mode t nil (paren)))
-  (custom-set-faces)
-  )
-
-(my-fonts) 
 
 ; modes
 
@@ -108,35 +81,6 @@
 ;(define-key c-mode-map [C-return] 'newline )
 
 
-
-;(setq gnus-select-group-hook
-;	  '(lambda ()
-;		 ;; First of all, sort by date.
-;		 (gnus-keysort-headers
-;		  (function string-lessp)
-;		  (function
-;		   (lambda (a)
-;			 (gnus-sortable-date (gnus-header-date a)))))
-;		 ;; Then sort by subject ignoring `Re:'.
-;		 (gnus-keysort-headers
-;		  (function string-lessp)
-;		  (function
-;		   (lambda (a)
-;			 (if case-fold-search
-;				 (downcase (gnus-simplify-subject (gnus-header-subject a) t))
-;			   (gnus-simplify-subject (gnus-header-subject a) t)))))
-;		 ))
-
-;; OOBR
-;; OO browser
-;(setq br-directory "~/emacs/oobr/")
-
-;(load "~/emacs/oobr/hypb/hversion")
-
-;(autoload 'oobr "~/emacs/oobr/br-start" "Invoke the OO-Browser" t)
-;(autoload 'br-env-browse "~/emacs/oobr/br-start"
-;  "Browse an existing OO-Browser Environment" t)
-
 ;;
 (autoload 'hscroll-mode "hscroll"
   "In HScroll mode, truncated lines will automatically scroll left or right
@@ -164,17 +108,5 @@ when point gets near either edge of the window."
 (setq auto-mode-alist
       (cons '("\\.tgz$" . uncompress-while-visiting) auto-mode-alist))
 
-;;
-;;  --- HTML-mode
-;;
-;;
-;;  --- csh-mode
-;;
-(autoload 'csh-mode "csh-mode" "Major mode for editing csh scripts." t)
-(setq auto-mode-alist
-      (cons '("\\.csh$" . csh-mode)
-	    (cons '("\\.sh$" . csh-mode)
-		  (cons '("\\.cshrc$" . csh-mode)
-			(cons '("\\.login$" . csh-mode) auto-mode-alist)))))
-;;
+
 

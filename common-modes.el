@@ -1,4 +1,6 @@
-
+;; git
+;; git://github.com/tsgates/git-emacs.git
+(require 'git-emacs)
 
 ;; perl
 ;; perl mode set up

@@ -1464,15 +1464,17 @@ If predicate return nil continue to scan, otherwise stop and return the node"
 
   (let ((buffer (get-buffer-create git--log-view-buffer)))
     (with-current-buffer buffer
+     
       (let ((buffer-read-only nil)) (erase-buffer))
 
       (local-set-key "q" 'git--quit-buffer)
 
+        
+      (let ((buffer-read-only nil))
+	(save-excursion 
+	  (git--rev-list "--pretty=full" "HEAD"))
+	)
       (vc-git-log-view-mode)
-
-      (save-excursion 
-        (git--rev-list "--pretty=full" "HEAD"))
-
       (message "Please 'q' to quit"))
     (pop-to-buffer buffer)))
 

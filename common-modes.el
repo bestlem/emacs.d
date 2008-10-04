@@ -1,6 +1,14 @@
 ;; git
+
+(require 'vc-git)
+;; (when (featurep 'vc-git) (add-to-list 'vc-handled-backends 'git))
+ (autoload 'git-blame-mode "git-blame"
+           "Minor mode for incremental blame for Git." t);; git
 ;; git://github.com/tsgates/git-emacs.git
 (require 'git-emacs)
+;; http://zagadka.vm.bytemark.co.uk/magit/magit.html
+(autoload 'magit-status "magit" nil t)
+
 
 ;; perl
 ;; perl mode set up
@@ -52,10 +60,10 @@
 ;(autoload 'python-mode "python-mode" "Mode for python" t)
 ;(setq auto-mode-alist	  (append '(("\\.py$"  . python-mode)					) auto-mode-alist))
 
- (setq auto-mode-alist (cons '("\\.py$" . python-mode) auto-mode-alist))
- (setq interpreter-mode-alist (cons '("python" . python-mode) interpreter-mode-alist))
- (autoload 'python-mode "python-mode" "Python editing mode." t)
-
+(setq auto-mode-alist (cons '("\\.py$" . python-mode) auto-mode-alist))
+(setq interpreter-mode-alist (cons '("python" . python-mode) interpreter-mode-alist))
+(autoload 'python-mode "python-mode" "Python editing mode." t)
+;(require 'ipython)
 										;(defvar py-python-command "/LocalDisk/wa/src/app/OBS/CacheServer/product-NeXT-i386-debug/CacheServer -OBSAPP OBSPython"
 										; "*Shell command used to start Python interpreter.")
 

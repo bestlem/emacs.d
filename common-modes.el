@@ -57,13 +57,12 @@
 
 ;; python
 (setq load-path      (cons "~/Library/Application Support/Emacs/python-mode-1.0"  load-path ))
-;(autoload 'python-mode "python-mode" "Mode for python" t)
 ;(setq auto-mode-alist	  (append '(("\\.py$"  . python-mode)					) auto-mode-alist))
-
+(require 'ipython)
 (setq auto-mode-alist (cons '("\\.py$" . python-mode) auto-mode-alist))
 (setq interpreter-mode-alist (cons '("python" . python-mode) interpreter-mode-alist))
-(autoload 'python-mode "python-mode" "Python editing mode." t)
-;(require 'ipython)
+;;(autoload 'python-mode "python-mode" "Python editing mode." t)
+(require 'ipython)
 										;(defvar py-python-command "/LocalDisk/wa/src/app/OBS/CacheServer/product-NeXT-i386-debug/CacheServer -OBSAPP OBSPython"
 										; "*Shell command used to start Python interpreter.")
 

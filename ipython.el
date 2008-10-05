@@ -246,6 +246,9 @@ buffer already exists."
               (concat (or (getenv "IPYTHONDIR") "~/.ipython") "/history")
             (or (getenv "PYTHONHISTORY") "~/.python-history.py")))
     (comint-read-input-ring t)
+	(unless (equal ipython-backup-of-py-python-command py-python-command)
+      (setq ipython-backup-of-py-python-command py-python-command))
+    (setq py-python-command ipython-command)
     (let ((buf (current-buffer)))
       ad-do-it
       (unless py-shell-initial-switch-buffers

@@ -32,6 +32,9 @@
 ; emACs server
 ;(server-start)
 
+;; remove toolbar
+(tool-bar-mode nil)
+
 ; do not add blank lines by arrow down
 (setq next-line-add-newlines nil)
 

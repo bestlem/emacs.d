@@ -74,7 +74,7 @@
   (define-key py-mode-map [return] 'newline-and-indent )
   (define-key py-mode-map [C-return] 'newline )
   (define-key py-mode-map [f5] 'py-execute-region )
-  (define-key py-mode-map "C-c\C-c" 'py-execute-region )
+  (define-key py-mode-map "\C-c\C-c" 'py-execute-region )
  ; (define-key python-mode-map "\C-c\C-c" 'python-send-region )
 
  ; (define-key python-mode-map "\C-c\C-b" 'python-execute-buffer )

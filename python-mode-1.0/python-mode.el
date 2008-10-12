@@ -420,7 +420,7 @@ support for features needed by `python-mode'.")
 			  "from"     "global"   "if"      "import"
 			  "in"       "is"       "lambda"  "not"
 			  "or"       "pass"     "print"   "raise"
-			  "return"   "while"    "yield"
+			  "return"   "while"    "with"    "yield"
 			  )
 			"\\|"))
 	(kw2 (mapconcat 'identity

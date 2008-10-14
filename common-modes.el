@@ -67,7 +67,8 @@
 										; "*Shell command used to start Python interpreter.")
 
 
-(load "pdb" 'noerror 'nomessage)
+;;(load "pdb" 'noerror 'nomessage)
+(require 'pydb)
 
 (defun my-python-mode-hook ()
   "My Python settings"

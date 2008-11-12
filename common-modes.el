@@ -58,6 +58,7 @@
 ;; python
 (setq load-path      (cons "~/Library/Application Support/Emacs/python-mode-1.0"  load-path ))
 ;(setq auto-mode-alist	  (append '(("\\.py$"  . python-mode)					) auto-mode-alist))
+;(setq ipython-command "/Library/Frameworks/Python.framework/Versions/4.0.30002/bin/ipython" )
 (require 'ipython)
 (setq auto-mode-alist (cons '("\\.py$" . python-mode) auto-mode-alist))
 (setq interpreter-mode-alist (cons '("python" . python-mode) interpreter-mode-alist))

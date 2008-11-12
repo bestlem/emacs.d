@@ -126,3 +126,66 @@ Use temporary buffer *temp*."
   (insert- (current-time-string)))
 
 
+;; GNUS
+; gmail
+(add-to-list 'gnus-secondary-select-methods 
+			 '(nnimap "gmail"
+					  (nnimap-address "imap.gmail.com")
+					  (nnimap-server-port 993)
+					  (nnimap-stream ssl)))
+
+(setq message-send-mail-function 'smtpmail-send-it
+      smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
+      smtpmail-auth-credentials '(("smtp.gmail.com" 587 "mark.bestley@googlemail.com" nil))
+      smtpmail-default-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-service 587
+      smtpmail-local-domain "bestley.co.uk")
+
+
+
+(add-hook 'nnfolder-save-buffer-hook 'turn-off-backup)
+(setq gnus-thread-sort-functions
+	  '((lambda (t1 t2)
+		  (not (gnus-thread-sort-by-number t1 t2)))
+		gnus-thread-sort-by-score))
+
+(setq gnus-use-trees t
+           gnus-generate-tree-function 'gnus-generate-horizontal-tree
+           gnus-tree-minimize-window nil)
+     (gnus-add-configuration
+      '(article
+        (vertical 1.0
+                  (horizontal 0.25
+                              (summary 0.75 point)
+                              (tree 1.0))
+                  (article 1.0))))
+;; (setq gnus-load-hook
+;; 	  '((lambda ()
+;; ;		  (setq gnus-nntp-server "chinewshost.chi.swissbank.com")
+;; ;		  (setq gnus-nntp-server "ldnnewshost.ldn.swissbank.com")
+;; ;		  (setq gnus-nntp-server "localhost")
+;; 		  (setq gnus-use-tree t )
+;; 		  (setq gnus-group-sort-function 'gnus-group-sort-by-rank)
+;; 		  ))
+;; 	  )
+
+
+;; (setq gnus-select-group-hook
+;; 	  '(lambda ()
+;; 		 ;; First of all, sort by date.
+;; 		 (gnus-keysort-headers
+;; 		  (function string-lessp)
+;; 		  (function
+;; 		   (lambda (a)
+;; 			 (gnus-sortable-date (gnus-header-date a)))))
+;; 		 ;;Then sort by subject ignoring `Re:'.
+;; 		 (gnus-keysort-headers
+;; 		  (function string-lessp)
+;; 		  (function
+;; 		   (lambda (a)
+;; 			 (if case-fold-search
+;; 				 (downcase (gnus-simplify-subject (gnus-header-subject a) t))
+;; 			   (gnus-simplify-subject (gnus-header-subject a) t)))))
+;; 		 ))
+

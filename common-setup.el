@@ -128,11 +128,22 @@ Use temporary buffer *temp*."
 
 ;; GNUS
 ; gmail
+(require 'gnus )
+	
+(setq gnus-select-method '(nntp "news.gmane.org"))
+
 (add-to-list 'gnus-secondary-select-methods 
 			 '(nnimap "gmail"
 					  (nnimap-address "imap.gmail.com")
 					  (nnimap-server-port 993)
-					  (nnimap-stream ssl)))
+					  (nnimap-stream ssl))
+)
+(add-to-list 'gnus-secondary-select-methods 
+			 '(nnimap "by2"
+					  (nnimap-address "imap4.blueyonder.co.uk")
+					  (nnimap-server-port 143)
+					  )
+)
 
 (setq message-send-mail-function 'smtpmail-send-it
       smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
@@ -145,30 +156,34 @@ Use temporary buffer *temp*."
 
 
 (add-hook 'nnfolder-save-buffer-hook 'turn-off-backup)
-(setq gnus-thread-sort-functions
-	  '((lambda (t1 t2)
-		  (not (gnus-thread-sort-by-number t1 t2)))
-		gnus-thread-sort-by-score))
 
-(setq gnus-use-trees t
-           gnus-generate-tree-function 'gnus-generate-horizontal-tree
-           gnus-tree-minimize-window nil)
-     (gnus-add-configuration
-      '(article
-        (vertical 1.0
-                  (horizontal 0.25
-                              (summary 0.75 point)
-                              (tree 1.0))
-                  (article 1.0))))
-;; (setq gnus-load-hook
-;; 	  '((lambda ()
+
+(setq gnus-load-hook
+ 	  '((lambda ()
 ;; ;		  (setq gnus-nntp-server "chinewshost.chi.swissbank.com")
 ;; ;		  (setq gnus-nntp-server "ldnnewshost.ldn.swissbank.com")
 ;; ;		  (setq gnus-nntp-server "localhost")
-;; 		  (setq gnus-use-tree t )
-;; 		  (setq gnus-group-sort-function 'gnus-group-sort-by-rank)
-;; 		  ))
-;; 	  )
+ 		  (setq gnus-group-sort-function 'gnus-group-sort-by-rank)
+		  (setq gnus-thread-sort-functions
+				'((lambda (t1 t2)
+					(not (gnus-thread-sort-by-number t1 t2)))
+				  gnus-thread-sort-by-score))
+		  (setq gnus-use-trees t
+				gnus-generate-tree-function 'gnus-generate-vertical-tree
+				gnus-tree-minimize-window nil)
+		  (gnus-add-configuration
+		   '(article
+			 (vertical 1.0
+					   (horizontal 0.25
+								   (tree 1.0)
+								   (summary 0.75 point)
+								   )
+					   (article 1.0))));; 	
+		  ))
+	 
+
+
+ 	  )
 
 
 ;; (setq gnus-select-group-hook
@@ -189,3 +204,39 @@ Use temporary buffer *temp*."
 ;; 			   (gnus-simplify-subject (gnus-header-subject a) t)))))
 ;; 		 ))
 
+;(setq nnimap-split-inbox "nnimap+by2:INBOX")
+
+(setq nnimap-split-inbox
+        '("INBOX" ))
+
+(setq nnimap-split-rule '(("by2" ("INBOX" nnimap-split-fancy))
+                          ("gmail" ("INBOX" nnimap-split-fancy))))
+(setq nnimap-split-predicate "UNDELETED")
+(setq nnimap-split-fancy ;; (1)
+	  '(|                                ;; (2)
+	;;	(: gnus-registry-split-fancy-with-parent) ;; (3)
+		;; splitting rules go here       ;; (4)
+
+		("List-Id" ".*<\\(.+\\)>.*" "lists.\\1")
+
+	;; old yahoo  has no List Id - nore does apple
+		(any "\\b\\(\\w+\\)@yahoogroups\\.com" "lists.yahoo.\\1")
+		(any "\\b\\(\\w+\\)@lists\\.apple\\.com" "lists.apple.\\1")
+
+		;; Rules to hit the various google groups. We're having
+		;; problems with dashes, so we have to expand these
+	;; my fail	(any  "<\\(.*\\)\\.googlegroups\\.com>" "lists.google.\\1")
+
+	;	(any "\\b\\(\\w+\\)-\\b\\(\\w+\\)@googlegroups.com" "lists.google.\\1-\\2")
+	;	(any "\\b\\(\\w+\\)@googlegroups\\.com" "lists.google.\\1")
+		(from "calendar-notification" "calendar" )
+
+
+		"unfiled"                          ;; (5)
+        )
+)
+
+
+;(setq nnimap-split-rule 'nnmail-split-fancy)
+;;(setq nnmail-split-methods 'nnimap-split-fancy) ;; (6)
+(gnus-registry-initialize) ;; (7)

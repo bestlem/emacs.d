@@ -157,6 +157,26 @@ Use temporary buffer *temp*."
 
 (add-hook 'nnfolder-save-buffer-hook 'turn-off-backup)
 
+;; mime from http://www.emacswiki.org/emacs/MimeTypesWithGnus
+;; Inline images?
+(setq mm-attachment-override-types '("image/.*"))
+
+;; No HTML mail
+(setq mm-discouraged-alternatives '("text/html" "text/richtext"))
+(defun my-gnus-summary-view-html-alternative-in-mozilla ()
+      "Display the HTML part of the current multipart/alternative MIME message
+    in OmniWeb."
+      (interactive)
+      (save-current-buffer
+        (gnus-summary-show-article)
+        (set-buffer gnus-article-buffer)
+        (let ((file (make-temp-file "html-message-" nil ".html"))
+              (handle (nth 3 (assq 1 gnus-article-mime-handle-alist))))
+          (mm-save-part-to-file handle file)
+          (browse-url (concat "file://" file)))))
+(define-key gnus-summary-mode-map [?K ?M]
+  'my-gnus-summary-view-html-alternative-in-mozilla)
+(setq gnus-group-sort-function 'gnus-group-sort-by-rank)
 
 (setq gnus-load-hook
  	  '((lambda ()

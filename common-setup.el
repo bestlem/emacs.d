@@ -138,12 +138,12 @@ Use temporary buffer *temp*."
 					  (nnimap-server-port 993)
 					  (nnimap-stream ssl))
 )
-(add-to-list 'gnus-secondary-select-methods 
-			 '(nnimap "by2"
-					  (nnimap-address "imap4.blueyonder.co.uk")
-					  (nnimap-server-port 143)
-					  )
-)
+;; (add-to-list 'gnus-secondary-select-methods 
+;; 			 '(nnimap "by2"
+;; 					  (nnimap-address "imap4.blueyonder.co.uk")
+;; 					  (nnimap-server-port 143)
+;; 					  )
+;; )
 
 (setq message-send-mail-function 'smtpmail-send-it
       smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))

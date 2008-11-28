@@ -153,6 +153,8 @@ Use temporary buffer *temp*."
       smtpmail-smtp-service 587
       smtpmail-local-domain "bestley.co.uk")
 
+;;(require 'gnus-pers)
+;;(gnus-personality-init)
 
 
 (add-hook 'nnfolder-save-buffer-hook 'turn-off-backup)
@@ -177,7 +179,10 @@ Use temporary buffer *temp*."
 (define-key gnus-summary-mode-map [?K ?M]
   'my-gnus-summary-view-html-alternative-in-mozilla)
 (setq gnus-group-sort-function 'gnus-group-sort-by-rank)
-
+(setq gnus-thread-sort-functions
+	  '((lambda (t1 t2)
+		  (not (gnus-thread-sort-by-number t1 t2)))
+		gnus-thread-sort-by-score))
 (setq gnus-load-hook
  	  '((lambda ()
 ;; ;		  (setq gnus-nntp-server "chinewshost.chi.swissbank.com")
@@ -237,6 +242,8 @@ Use temporary buffer *temp*."
 	;;	(: gnus-registry-split-fancy-with-parent) ;; (3)
 		;; splitting rules go here       ;; (4)
 
+;; accu seems to have an issue
+		("List-Id" ".*accu-general.*" "lists.accugeneral.new" )
 		("List-Id" ".*<\\(.+\\)>.*" "lists.\\1")
 
 	;; old yahoo  has no List Id - nore does apple
@@ -259,4 +266,4 @@ Use temporary buffer *temp*."
 
 ;(setq nnimap-split-rule 'nnmail-split-fancy)
 ;;(setq nnmail-split-methods 'nnimap-split-fancy) ;; (6)
-(gnus-registry-initialize) ;; (7)
+;;(gnus-registry-initialize) ;; (7)

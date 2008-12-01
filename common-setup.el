@@ -243,7 +243,7 @@ Use temporary buffer *temp*."
 		;; splitting rules go here       ;; (4)
 
 ;; accu seems to have an issue
-		("List-Id" ".*accu-general.*" "lists.accugeneral.new" )
+;;		("List-Id" ".*accu-general.*" "lists.accugeneral.new" )
 		("List-Id" ".*<\\(.+\\)>.*" "lists.\\1")
 
 	;; old yahoo  has no List Id - nore does apple

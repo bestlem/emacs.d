@@ -9,6 +9,13 @@
 ;; http://zagadka.vm.bytemark.co.uk/magit/magit.html
 (autoload 'magit-status "magit" nil t)
 
+;; objective C
+(setq auto-mode-alist
+	  (append 
+	   '(("\\.h$" . objc-mode)
+		 ("\\.m$" . objc-mode)
+		 ("\\.mm$" . objc-mode))))
+
 
 ;; perl
 ;; perl mode set up

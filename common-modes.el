@@ -44,23 +44,15 @@
 ;; (add-hook 'perldb-mode-hook 'my-perldb-mode-hook)
 
 
-
-
-
-
-
 ;; python
 (setq load-path      (cons "~/Library/Application Support/Emacs/python-mode-1.0"  load-path ))
-;(setq auto-mode-alist	  (append '(("\\.py$"  . python-mode)					) auto-mode-alist))
+)
 ;(setq ipython-command "/Library/Frameworks/Python.framework/Versions/4.0.30002/bin/ipython" )
 (require 'ipython)
 (setq auto-mode-alist (cons '("\\.py$" . python-mode) auto-mode-alist))
 (setq interpreter-mode-alist (cons '("python" . python-mode) interpreter-mode-alist))
 ;;(autoload 'python-mode "python-mode" "Python editing mode." t)
 (require 'ipython)
-										;(defvar py-python-command "/LocalDisk/wa/src/app/OBS/CacheServer/product-NeXT-i386-debug/CacheServer -OBSAPP OBSPython"
-										; "*Shell command used to start Python interpreter.")
-
 
 ;;(load "pdb" 'noerror 'nomessage)
 (require 'pydb)
@@ -71,6 +63,7 @@
   (define-key py-mode-map [C-return] 'newline )
   (define-key py-mode-map [f5] 'py-execute-region )
   (define-key py-mode-map "\C-c\C-c" 'py-execute-region )
+  (define-key py-mode-map "\C-c\C-b"  'py-execute-buffer)
  ; (define-key python-mode-map "\C-c\C-c" 'python-send-region )
 
  ; (define-key python-mode-map "\C-c\C-b" 'python-execute-buffer )

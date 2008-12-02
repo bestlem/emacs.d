@@ -33,27 +33,21 @@
   (setq  perl-label-offset -2)
   (define-key perl-mode-map [f3] 'perldb )
 ;  (setq perldb-command-name "/run/pd/packages/perl/5.003/bin/perl")
-  (setq perldb-command-name "/sbcimp/run/pd/perl/prod/bin/perl")
+;  (setq perldb-command-name "/sbcimp/run/pd/perl/prod/bin/perl")
   )
 (add-hook 'perl-mode-hook 'my-perl-mode-hook)
 
 ;; perl debug
-(defun my-perldb-mode-hook ()
-  (setq perldb-command-name "/run/pd/packages/perl/5.003/bin/perl")
-)
-(add-hook 'perldb-mode-hook 'my-perldb-mode-hook)
+;; (defun my-perldb-mode-hook ()
+;;   (setq perldb-command-name "/run/pd/packages/perl/5.003/bin/perl")
+;; )
+;; (add-hook 'perldb-mode-hook 'my-perldb-mode-hook)
 
 
 
-; load libraries 
 
 
-; modes
 
-;; mail
-;(define-mail-abbrev "mark" "mark@bestley.demon.co.uk")
-
-;(add-hook 'mail-setup-hook 'mail-abbrevs-setup)
 
 ;; python
 (setq load-path      (cons "~/Library/Application Support/Emacs/python-mode-1.0"  load-path ))
@@ -110,14 +104,14 @@ when point gets near either edge of the window."
 ;;
 ;;  --- uncompress *.Z and *.gz files when visiting ---
 ;;
-(autoload 'uncompress-while-visiting "uncompress"
-  "Temporary \"major mode\" used for .Z and .gz files, to uncompress them.")
-(setq auto-mode-alist
-	  (cons '("\\.Z$" . uncompress-while-visiting) auto-mode-alist))
-(setq auto-mode-alist
-	  (cons '("\\.gz$" . uncompress-while-visiting) auto-mode-alist))
-(setq auto-mode-alist
-      (cons '("\\.tgz$" . uncompress-while-visiting) auto-mode-alist))
+;; (autoload 'uncompress-while-visiting "uncompress"
+;;   "Temporary \"major mode\" used for .Z and .gz files, to uncompress them.")
+;; (setq auto-mode-alist
+;; 	  (cons '("\\.Z$" . uncompress-while-visiting) auto-mode-alist))
+;; (setq auto-mode-alist
+;; 	  (cons '("\\.gz$" . uncompress-while-visiting) auto-mode-alist))
+;; (setq auto-mode-alist
+;;       (cons '("\\.tgz$" . uncompress-while-visiting) auto-mode-alist))
 
 
 

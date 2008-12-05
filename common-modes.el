@@ -10,13 +10,17 @@
 (autoload 'magit-status "magit" nil t)
 
 ;; objective C
-(setq auto-mode-alist
+(add-to-list 'auto-mode-alist
 	  (append 
 	   '(("\\.h$" . objc-mode)
 		 ("\\.m$" . objc-mode)
 		 ("\\.mm$" . objc-mode))))
 
-
+;(defun my-objc-hook ()
+;  "Ny objc-settings"
+;;   (define-key py-mode-map [return] 'newline-and-indent )
+;;   (define-key py-mode-map [C-return] 'newline )
+;)
 ;; perl
 ;; perl mode set up
 
@@ -53,7 +57,7 @@
 
 ;; python
 (setq load-path      (cons "~/Library/Application Support/Emacs/python-mode-1.0"  load-path ))
-)
+
 ;(setq ipython-command "/Library/Frameworks/Python.framework/Versions/4.0.30002/bin/ipython" )
 (require 'ipython)
 (setq auto-mode-alist (cons '("\\.py$" . python-mode) auto-mode-alist))

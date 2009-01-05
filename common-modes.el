@@ -10,11 +10,9 @@
 (autoload 'magit-status "magit" nil t)
 
 ;; objective C
-(add-to-list 'auto-mode-alist
-	  (append 
-	   '(("\\.h$" . objc-mode)
-		 ("\\.m$" . objc-mode)
-		 ("\\.mm$" . objc-mode))))
+(add-to-list 'auto-mode-alist '("\\.h$" . objc-mode) )
+(add-to-list 'auto-mode-alist '("\\.m$" . objc-mode))
+(add-to-list 'auto-mode-alist '("\\.mm$" . objc-mode))
 
 ;(defun my-objc-hook ()
 ;  "Ny objc-settings"

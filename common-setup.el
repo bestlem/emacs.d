@@ -176,6 +176,7 @@ Use temporary buffer *temp*."
               (handle (nth 3 (assq 1 gnus-article-mime-handle-alist))))
           (mm-save-part-to-file handle file)
           (browse-url (concat "file://" file)))))
+
 (define-key gnus-summary-mode-map [?K ?M]
   'my-gnus-summary-view-html-alternative-in-mozilla)
 (setq gnus-group-sort-function 'gnus-group-sort-by-rank)
@@ -183,32 +184,25 @@ Use temporary buffer *temp*."
 	  '((lambda (t1 t2)
 		  (not (gnus-thread-sort-by-number t1 t2)))
 		gnus-thread-sort-by-score))
-(setq gnus-load-hook
- 	  '((lambda ()
-;; ;		  (setq gnus-nntp-server "chinewshost.chi.swissbank.com")
-;; ;		  (setq gnus-nntp-server "ldnnewshost.ldn.swissbank.com")
-;; ;		  (setq gnus-nntp-server "localhost")
- 		  (setq gnus-group-sort-function 'gnus-group-sort-by-rank)
-		  (setq gnus-thread-sort-functions
-				'((lambda (t1 t2)
-					(not (gnus-thread-sort-by-number t1 t2)))
-				  gnus-thread-sort-by-score))
-		  (setq gnus-use-trees t
-				gnus-generate-tree-function 'gnus-generate-vertical-tree
-				gnus-tree-minimize-window nil)
-		  (gnus-add-configuration
-		   '(article
-			 (vertical 1.0
-					   (horizontal 0.25
-								   (tree 1.0)
-								   (summary 0.75 point)
-								   )
-					   (article 1.0))));; 	
-		  ))
-	 
-
-
- 	  )
+;; (setq gnus-load-hook
+;;  	  '((lambda ()
+;; ;;  		  (setq gnus-group-sort-function 'gnus-group-sort-by-rank)
+;; ;; 		  (setq gnus-thread-sort-functions
+;; ;; 				'((lambda (t1 t2)
+;; ;; 					(not (gnus-thread-sort-by-number t1 t2)))
+;; ;; 				  gnus-thread-sort-by-score))
+;; ;; 		  (setq gnus-use-trees t
+;; ;; 				gnus-generate-tree-function 'gnus-generate-vertical-tree
+;; ;; 				gnus-tree-minimize-window nil)
+;; ;; 		  (gnus-add-configuration
+;; ;; 		   '(article
+;; ;; 			 (vertical 1.0
+;; ;; 					   (horizontal 0.25
+;; ;; 								   (tree 1.0)
+;; ;; 								   (summary 0.75 point)
+;; ;; 								   )
+;; ;; 					   (article 1.0))));; 	
+;; 		  )))
 
 
 ;; (setq gnus-select-group-hook

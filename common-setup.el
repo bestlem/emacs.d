@@ -1,6 +1,8 @@
 
+(add-hook 'after-init-hook
+               (lambda () (setq debug-on-error t)))
 
-
+(setq debug-on-error t)
 ;; set up files and soft links
 (setq find-file-visit-truename t)	; visit a file under its true name
 (setq backup-by-copying-when-linked t)	; be careful with hard links
@@ -35,14 +37,8 @@
 ;; remove toolbar
 (tool-bar-mode nil)
 
-; do not add blank lines by arrow down
-(setq next-line-add-newlines nil)
 
-; show both paren - remove as slow
-(require 'paren)
 
-; show line number in mode
-(setq line-number-mode 1)
 
 ; --- highlight words during query replacement ---
 ;
@@ -179,11 +175,13 @@ Use temporary buffer *temp*."
 
 (define-key gnus-summary-mode-map [?K ?M]
   'my-gnus-summary-view-html-alternative-in-mozilla)
-(setq gnus-group-sort-function 'gnus-group-sort-by-rank)
-(setq gnus-thread-sort-functions
-	  '((lambda (t1 t2)
-		  (not (gnus-thread-sort-by-number t1 t2)))
-		gnus-thread-sort-by-score))
+;;(setq gnus-group-sort-function 'gnus-group-sort-by-rank)
+;; (setq gnus-thread-sort-functions
+;; 	  '((lambda (t1 t2)
+;; 		  (not (gnus-thread-sort-by-number t1 t2)))
+;; 		gnus-thread-sort-by-score))
+
+
 ;; (setq gnus-load-hook
 ;;  	  '((lambda ()
 ;; ;;  		  (setq gnus-group-sort-function 'gnus-group-sort-by-rank)

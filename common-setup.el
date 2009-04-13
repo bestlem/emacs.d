@@ -151,7 +151,7 @@ Use temporary buffer *temp*."
 
 ;;(require 'gnus-pers)
 ;;(gnus-personality-init)
-
+(setq gnus-auto-select-next "almost-quietly")
 
 (add-hook 'nnfolder-save-buffer-hook 'turn-off-backup)
 

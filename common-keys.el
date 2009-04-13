@@ -97,11 +97,11 @@
 
 ;(global-set-key [?\A-x] 'execute-extended-command )
 ;(global-set-key [?\A-SPC] 'set-mark-command )
-(defun unbury-buffer ()
-  "Unbury buffer (from Vegard@protek.unit.no (Vegard Vesterheim))"
-  (interactive)
-  (require 'cl)
-  (switch-to-buffer (car (last (buffer-list)))))
+;; (defun unbury-buffer ()
+;;   "Unbury buffer (from Vegard@protek.unit.no (Vegard Vesterheim))"
+;;   (interactive)
+;;   (require 'cl)
+;;   (switch-to-buffer (car (last (buffer-list)))))
 
 ;(global-set-key [f2] 'bury-buffer)
 ;(global-set-key [S-f2] 'unbury-buffer)

@@ -140,7 +140,10 @@ Use temporary buffer *temp*."
 ;; 					  (nnimap-server-port 143)
 ;; 					  )
 ;; )
+(setq user-full-name "Mark Bestley")
+(setq user-mail-address "gnus@bestley.co.uk")
 
+(setq message-send-mail-function 'smtpmail-send-it)
 (setq message-send-mail-function 'smtpmail-send-it
       smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
       smtpmail-auth-credentials '(("smtp.gmail.com" 587 "mark.bestley@googlemail.com" nil))
@@ -202,7 +205,20 @@ Use temporary buffer *temp*."
 ;; ;; 					   (article 1.0))));; 	
 ;; 		  )))
 
-
+(defun my-hook-fn()
+  (message "In my-hook" )
+)
+(add-hook 'gnus-summary-exit-hook 
+		  (lambda()
+					(message "in gnus-summary-exit-hook" ))
+)
+(add-hook 'gnus-summary-prepare-exit-hook 'my-hook-fn)
+(add-hook 'gnus-load-hook
+		  (lambda()
+			(message "My gnus hook")
+			(setq gnus-auto-select-next "almost-quietly")
+			)
+)
 ;; (setq gnus-select-group-hook
 ;; 	  '(lambda ()
 ;; 		 ;; First of all, sort by date.
@@ -236,6 +252,9 @@ Use temporary buffer *temp*."
 
 ;; accu seems to have an issue
 ;;		("List-Id" ".*accu-general.*" "lists.accugeneral.new" )
+;; we have size problems
+
+		("List-Id" ".*<\\(.+\\)\\.googlegroups\\.com>.*" "lists.\\1\\.gg")
 		("List-Id" ".*<\\(.+\\)>.*" "lists.\\1")
 
 	;; old yahoo  has no List Id - nore does apple

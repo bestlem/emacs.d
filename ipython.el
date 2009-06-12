@@ -8,6 +8,7 @@
 ;; FIXME: #$@! INPUT RING
 (defconst ipython-version "$Revision: 2927 $"
   "VC version number.")
+(message "Loading ipython.el")
 
 ;;; Commentary
 ;; This library makes all the functionality python-mode has when running with
@@ -191,6 +192,7 @@ the second for a 'normal' command, and the third for a multiline command.")
       (define-key py-mode-map [(meta tab)] 'ipython-complete)
 
       )
+(message "Adding ipython py-shell hook")
     (add-hook 'py-shell-hook 'ipython-shell-hook)
     ;; Regular expression that describes tracebacks for IPython in context and
     ;; verbose mode.
@@ -314,7 +316,7 @@ gets converted to:
         (replace-match "" t nil)))))
 
 (defvar ipython-completion-command-string
-  "print ';'.join(__IP.Completer.all_completions('%s')) #PYTHON-MODE SILENT\n"
+  "print(';'.join(__IP.Completer.all_completions('%s'))) #PYTHON-MODE SILENT\n"
   "The string send to ipython to query for all possible completions")
 
 
@@ -377,6 +379,7 @@ in the current *Python* session."
     "Try to complete the python symbol before point. Only knows about the stuff
 in the current *Python* session."
     (interactive)
+	(message "In  ipython-complete")
     (let* ((ugly-return nil)
            (sep ";")
            (python-process (or (get-buffer-process (current-buffer))
@@ -404,7 +407,7 @@ in the current *Python* session."
       (accept-process-output python-process)
       (setq completions
             (split-string (substring ugly-return 0 (position ?\n ugly-return)) sep))
-                                        ;(message (format "DEBUG completions: %S" completions))
+                                        (message (format "DEBUG completions: %S" completions))
       (setq completion-table (loop for str in completions
                                    collect (list str nil)))
       (setq completion (try-completion pattern completion-table))

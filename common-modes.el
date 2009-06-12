@@ -1,8 +1,6 @@
-;; fiddle an error
-;;(require 'cl)
-;;  (require 'cl-seq)
 
-(load "python-setup")
+
+;;(load "python-setup")
 
 ;; add cdet
 (load "cedet-1.0pre6/common/cedet.el")

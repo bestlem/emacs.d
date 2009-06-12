@@ -3,12 +3,17 @@
 					; keys
 (global-set-key [end] 'end-of-line )
 (global-set-key [home] 'beginning-of-line )
+
+;; Aqua macs defaults these to same
 ;(global-set-key [C-end] 'end-of-buffer )
-(global-set-key [C-home] 'beginning-of-buffer )
+;(global-set-key [C-home] 'beginning-of-buffer )
+
+;; Unknown
 (global-set-key [C-kp-end] 'end-of-buffer )
 (global-set-key [C-kp-home] 'beginning-of-buffer )
 (global-set-key [S-kp-next] 'scroll-other-window-down )
 (global-set-key [S-kp-prior] 'scroll-other-window )
+
 ;(global-set-key [s-left] 'scroll-left)
 ;(global-set-key [s-right] 'scroll-right)
 
@@ -28,6 +33,7 @@
 ;(global-set-key [?\A-v] 'cua-paste)
 ;(global-set-key [?\A-x] 'cua-cut-region)
 (global-set-key [S-kp-delete] 'cua-cut-region)
+;; Cocoa emacs does not recognise this key
 (global-set-key [S-kp-insert] 'cua-paste)
 (global-set-key [C-kp-insert] 'cua-copy-region)
 ;(global-set-key [?\M-x] 'kill-region)

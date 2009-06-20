@@ -131,7 +131,7 @@
 	;	(any "\\b\\(\\w+\\)-\\b\\(\\w+\\)@googlegroups.com" "lists.google.\\1-\\2")
 	;	(any "\\b\\(\\w+\\)@googlegroups\\.com" "lists.google.\\1")
 		(from "calendar-notification" "calendar" )
-
+		(to "moneywell@bestley.co.uk" "moneywell" )
 
 		"unfiled"                          ;; (5)
         )

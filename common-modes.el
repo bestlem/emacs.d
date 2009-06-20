@@ -69,7 +69,7 @@
 ;; git
 
 (require 'vc-git)
-;; (when (featurep 'vc-git) (add-to-list 'vc-handled-backends 'git))
+;; (when (featurep 'vc-git) (add--list 'vc-handled-backends 'git))
  (autoload 'git-blame-mode "git-blame"
            "Minor mode for incremental blame for Git." t);; git
 ;; git://github.com/tsgates/git-emacs.git
@@ -148,4 +148,4 @@ when point gets near either edge of the window."
 ;;       (cons '("\\.tgz$" . uncompress-while-visiting) auto-mode-alist))
 
 
-
+(load "python-setup")

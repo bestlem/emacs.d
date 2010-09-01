@@ -109,15 +109,19 @@
                           ("gmail" ("INBOX" nnimap-split-fancy))))
 (setq nnimap-split-predicate "UNDELETED")
 (setq nnimap-split-fancy ;; (1)
-	  '(|                                ;; (2)
+	  '(|                                ;; (2) begin a split list
 	;;	(: gnus-registry-split-fancy-with-parent) ;; (3)
 		;; splitting rules go here       ;; (4)
 
 ;; accu seems to have an issue
 ;;		("List-Id" ".*accu-general.*" "lists.accugeneral.new" )
+
+
 ;; we have size problems
+ 		("List-Id" ".*<\\(.+\\)\\.lists\\.mysociety\\.org>.*" "lists.\\1\\.mysociety")
 
 		("List-Id" ".*<\\(.+\\)\\.googlegroups\\.com>.*" "lists.\\1\\.gg")
+
 		("List-Id" ".*<\\(.+\\)>.*" "lists.\\1")
 
 	;; old yahoo  has no List Id - nore does apple
@@ -133,6 +137,13 @@
 		(from "calendar-notification" "calendar" )
 		(to "moneywell@bestley.co.uk" "moneywell" )
 
+		; note also the subject has to have waf in it - but wait until I join more projects
+		(from "codesite-noreply@google.com" 
+			  (|
+			   ("subject" "waf" "lists.waf-users.gg")
+			   "unfiled"
+			   )
+			  )
 		"unfiled"                          ;; (5)
         )
 )

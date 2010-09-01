@@ -5,14 +5,19 @@
 
 ;; git
 
-(require 'vc-git)
-;; (when (featurep 'vc-git) (add--list 'vc-handled-backends 'git))
- (autoload 'git-blame-mode "git-blame"
-           "Minor mode for incremental blame for Git." t);; git
+; Changed for latest version 
 ;; git://github.com/tsgates/git-emacs.git
+
+;(require 'vc-git)
+;; (when (featurep 'vc-git) (add--list 'vc-handled-backends 'git))
+; (autoload 'git-blame-mode "git-blame"
+;           "Minor mode for incremental blame for Git." t);; git
+;; git://github.com/tsgates/git-emacs.git
+(add-to-list 'load-path "/Users/mark/src/third_party/git-emacs")
 (require 'git-emacs)
+
 ;; http://zagadka.vm.bytemark.co.uk/magit/magit.html
-(autoload 'magit-status "magit" nil t)
+;(autoload 'magit-status "magit" nil t)
 
 ;; objective C
 (add-to-list 'auto-mode-alist '("\\.h$" . objc-mode) )
@@ -85,3 +90,20 @@ when point gets near either edge of the window."
 ;;       (cons '("\\.tgz$" . uncompress-while-visiting) auto-mode-alist))
 
 
+
+;; nxml
+ ;; from http://sinewalker.wordpress.com/2008/06/26/pretty-printing-xml-with-emacs-nxml-mode/
+(defun nxml-pretty-print-xml-region (begin end)
+  "Pretty format XML markup in region. You need to have nxml-mode
+http://www.emacswiki.org/cgi-bin/wiki/NxmlMode installed to do
+this.  The function inserts linebreaks to separate tags that have
+nothing but whitespace between them.  It then indents the markup
+by using nxml's indentation rules."
+  (interactive "r")
+  (save-excursion
+      (nxml-mode)
+      (goto-char begin)
+      (while (search-forward-regexp "\>[ \\t]*\<" nil t)
+        (backward-char) (insert "\n"))
+      (indent-region begin end))
+    (message "Ah, much better!"))

@@ -12,19 +12,28 @@
 ;; (require 'ipython)
 ;(setq py-python-command-args '("-pylab" "-colors" "LightBG"))
 
-(setq ipython-command "/Users/mark/bin/ipython")
+;(setq ipython-command "/Users/mark/bin/ipython")
+(setq ipython-command "/opt/local/bin/ipython2-6")
+;(setq py-python-command-args '("--autocall" "0"))
+(require 'python-mode)
 (require 'ipython)
 
+(require 'anything-ipython)
+(add-hook 'python-mode-hook #'(lambda ()
+								(define-key py-mode-map (kbd "M-<tab>") 'anything-ipython-complete)))
+(add-hook 'ipython-shell-hook #'(lambda ()
+								  (define-key py-mode-map (kbd "M-<tab>") 'anything-ipython-complete)))
+
 ;;(load "pdb" 'noerror 'nomessage)
-;(require 'pydb)
+(require 'pydb)
 
 (defun my-python-mode-hook ()
   "My Python settings"
-  (define-key py-mode-map [return] 'newline-and-indent )
-  (define-key py-mode-map [C-return] 'newline )
-  (define-key py-mode-map [f5] 'py-execute-region )
-  (define-key py-mode-map "\C-c\C-c" 'py-execute-region )
-  (define-key py-mode-map "\C-c\C-b"  'py-execute-buffer)
+  (define-key python-mode-map [return] 'newline-and-indent )
+  (define-key python-mode-map [C-return] 'newline )
+  (define-key python-mode-map [f5] 'py-execute-region )
+  (define-key python-mode-map "\C-c\C-c" 'py-execute-region )
+  (define-key python-mode-map "\C-c\C-b"  'py-execute-buffer)
  ; (define-key python-mode-map "\C-c\C-c" 'python-send-region )
 
  ; (define-key python-mode-map "\C-c\C-b" 'python-execute-buffer )

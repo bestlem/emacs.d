@@ -13,7 +13,7 @@
 ;(setq py-python-command-args '("-pylab" "-colors" "LightBG"))
 
 ;(setq ipython-command "/Users/mark/bin/ipython")
-(setq ipython-command "/opt/local/bin/ipython2-6")
+(setq ipython-command "/opt/local/bin/ipython")
 ;(setq py-python-command-args '("--autocall" "0"))
 (require 'python-mode)
 (require 'ipython)

@@ -39,11 +39,11 @@
 ;(global-set-key [?\M-x] 'kill-region)
 
 
-(global-set-key [C-return] 'newline-and-indent )
+;(global-set-key [C-return] 'newline-and-indent )
 ;;(global-set-key [?\M-left] 'scroll-left )
 
 
-(global-set-key [C-backspace] 'backward-delete-char-untabify )
+;(global-set-key [C-backspace] 'backward-delete-char-untabify )
 (global-set-key [kp-delete] 'delete-char )
 (global-set-key [backspace] 'backward-delete-char-untabify)
 
@@ -74,7 +74,7 @@
 ;;(global-set-key [S-f7]  'next-error )
 (global-set-key [S-f8] 'previous-error)
 
-(global-set-key [ESC-SPC] 'set-mark-command )
+;(global-set-key [ESC-SPC] 'set-mark-command )
 
 (global-set-key [M-up] 'next-multiframe-window)
 (global-set-key [M-down] 'previous-multiframe-window)

@@ -1,4 +1,4 @@
-;;; sql-mode.el --- Mode for editing and testing SQL.
+psql;;; sql-mode.el --- Mode for editing and testing SQL.
 
 ;; Copyright (C) 1994,1999-2002 Rob Riepel.
 
@@ -432,7 +432,7 @@ Mode Specific Bindings:
   ;; Developed for and works with psql versions 7.0.3 and 7.1.2
   (set-process-filter
    (start-process sql-process-name sql-buffer-name sql-command
-		  "-h" sql-server "-U" sql-username "-W" "-P" "pager=" "-d"
+		  "-h" sql-server "-U" sql-username "-E" "-W" "-P" "pager" "-d"
 		  (sql-string-prompt "Database: " 'sql-postgres-dbname-hist 1))
    (function
     (lambda (process output)
@@ -440,9 +440,11 @@ Mode Specific Bindings:
        ;; The password can't be specified on the command line; it has to
        ;; be sent after psql prompts for it.  psql writes 'Password: ' to
        ;; STDOUT and waits for the password to be input.
-       ((equal output "Password: ")
-	(send-string (get-process sql-process-name)
-		     (concat (sql-ange-ftp-read-passwd "Password: ") "\n")))
+	  
+       ((equal output "Password for user mark: ")
+		(message "Ah, much better!")
+		(send-string (get-process sql-process-name)
+					 (concat (sql-ange-ftp-read-passwd "Password: ") "\n")))
        ;; We want to get rid of psql prompt, which otherwise would appear
        ;; in the sql buffer.  Unfortunately, psql resets the variables
        ;; PROMPT[123] even if they are set on the command line, so we
@@ -489,6 +491,7 @@ Also shows the string at the top of the SQL output buffer."
   (sql-echo-in-buffer sql-buffer-name (if sql-display-commands "\n\n" "\n"))
   (let ((string (apply 'concat strings))
         (process  (get-buffer-process sql-buffer-name)))
+	(message "%s" strings)
     (send-string process (concat string "\n"))
     (if (eq (current-buffer) (process-buffer process))
         (set-marker (process-mark process) (point))))

@@ -1,8 +1,0 @@
-*.elc
-common-modes (original).el
-common-setup.old.el
-sym-comp.el.old
-RCS
-gnus-pers.el
-old/*
-python-mode.el-*

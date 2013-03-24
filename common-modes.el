@@ -21,21 +21,21 @@
 (load "python-setup")
 ;;(load "cedet")
 
-;; git
+;; ;; git
 
-; Changed for latest version 
-;; git://github.com/tsgates/git-emacs.git
+;; ; Changed for latest version 
+;; ;; git://github.com/tsgates/git-emacs.git
 
-;(require 'vc-git)
-;; (when (featurep 'vc-git) (add--list 'vc-handled-backends 'git))
-; (autoload 'git-blame-mode "git-blame"
-;           "Minor mode for incremental blame for Git." t);; git
-;; git://github.com/tsgates/git-emacs.git
-(add-to-list 'load-path "/Users/mark/src/third_party/git-emacs")
-(require 'git-emacs)
+;; ;(require 'vc-git)
+;; ;; (when (featurep 'vc-git) (add--list 'vc-handled-backends 'git))
+;; ; (autoload 'git-blame-mode "git-blame"
+;; ;           "Minor mode for incremental blame for Git." t);; git
+;; ;; git://github.com/tsgates/git-emacs.git
+;; (add-to-list 'load-path "/Users/mark/src/third_party/git-emacs")
+;; (require 'git-emacs)
 
-;; http://zagadka.vm.bytemark.co.uk/magit/magit.html
-;(autoload 'magit-status "magit" nil t)
+;; ;; http://zagadka.vm.bytemark.co.uk/magit/magit.html
+;; ;(autoload 'magit-status "magit" nil t)
 
 
 ;;; SQL
@@ -142,27 +142,27 @@ by using nxml's indentation rules."
 
 
 ;; haskell
-;(speedbar-add-supported-extension ".hs")
+;; ;(speedbar-add-supported-extension ".hs")
 
 
-;; Substitute the desired version for <version>
-(add-to-list 'load-path "/Users/mark/.cabal/share/scion-0.1.0.9/emacs")
-(require 'scion)
+;; ;; Substitute the desired version for <version>
+;; (add-to-list 'load-path "/Users/mark/.cabal/share/scion-0.1.0.9/emacs")
+;; (require 'scion)
 
-;; if ./cabal/bin is not in your $PATH
-(setq scion-program "~/.cabal/bin/scion-server")
+;; ;; if ./cabal/bin is not in your $PATH
+;; (setq scion-program "~/.cabal/bin/scion-server")
 
-(defun my-haskell-hook ()
-  ;; Whenever we open a file in Haskell mode, also activate Scion
-  (scion-mode 1)
-  ;; Whenever a file is saved, immediately type check it and
-  ;; highlight errors/warnings in the source.
-  (scion-flycheck-on-save 1))
+;; (defun my-haskell-hook ()
+;;   ;; Whenever we open a file in Haskell mode, also activate Scion
+;;   (scion-mode 1)
+;;   ;; Whenever a file is saved, immediately type check it and
+;;   ;; highlight errors/warnings in the source.
+;;   (scion-flycheck-on-save 1))
 
-(add-hook 'haskell-mode-hook 'my-haskell-hook)
+;; (add-hook 'haskell-mode-hook 'my-haskell-hook)
 
-;; Use ido-mode completion (matches anywhere, not just beginning)
-;;
-;; WARNING: This causes some versions of Emacs to fail so badly
-;; that Emacs needs to be restarted.
-(setq scion-completing-read-function 'ido-completing-read)
+;; ;; Use ido-mode completion (matches anywhere, not just beginning)
+;; ;;
+;; ;; WARNING: This causes some versions of Emacs to fail so badly
+;; ;; that Emacs needs to be restarted.
+;; (setq scion-completing-read-function 'ido-completing-read)

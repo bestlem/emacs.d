@@ -2,8 +2,6 @@
 ;; python
 
 
-(add-to-list 'load-path "/Users/mark/Library/Application Support/Emacs/python-mode.el-6.0.3/") 
-(setq py-install-directory " /Users/mark/Library/Application Support/Emacs/python-mode.el-6.0.3")
 (require 'python-mode)
 
 (autoload 'python-mode "python-mode" "Python editing mode." t)

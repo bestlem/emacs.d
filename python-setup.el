@@ -1,10 +1,13 @@
 
 ;; python
-
+(add-to-list 'load-path "/Users/mark/Library/Application Support/Emacs/python-mode.el-6.1.1/") 
+(setq py-install-directory  "/Users/mark/Library/Application Support/Emacs/python-mode.el-6.1.1/")
 
 (require 'python-mode)
 
 (autoload 'python-mode "python-mode" "Python editing mode." t)
+
+(setq py-shell-name "ipython33")
 
 ;(setq ipython-command "/Library/Frameworks/Python.framework/Versions/4.0.30002/bin/ipython" )
 ;; (require 'ipython)
@@ -28,11 +31,12 @@
 ;; ;;(load "pdb" 'noerror 'nomessage)
 ;;(require 'pydb)
 
+
 (defun my-python-mode-hook ()
   "My Python settings"
   (define-key python-mode-map [return] 'newline-and-indent )
   (define-key python-mode-map [C-return] 'newline )
-  (define-key python-mode-map [f5] 'py-execute-region )
+  (define-key python-mode-map [f16] 'py-execute-region )
   (define-key python-mode-map "\C-c\C-c" 'py-execute-region )
   (define-key python-mode-map "\C-c\C-b"  'py-execute-buffer)
  ; (define-key python-mode-map "\C-c\C-c" 'python-send-region )
@@ -42,7 +46,11 @@
 (message "In python mode hook" )
 )
 
-;(add-hook 'python-mode-hook 'my-python-mode-hook)
+
+(require 'highlight-indentation)
+(add-hook 'python-mode-hook 'highlight-indentation)
+ 
+(add-hook 'python-mode-hook 'my-python-mode-hook)
 
 
 ;(setq py-python-command (expand-file-name "/usr/local/bin/python" ))

@@ -18,6 +18,8 @@
              (groovy-electric-mode)))
 (require 'gradle)
 
+(require 'smalltalk-mode)
+
 (load "python-setup")
 ;;(load "cedet")
 

@@ -1049,7 +1049,7 @@ Whitespace is defined as spaces, tabs, and comments."
 		     (throw 'archive-mode (cdr mode-assoc))))))
       auto-mode-alist)
 
-(push "\\.star\\'" inhibit-first-line-modes-regexps)
+;;(push "\\.star\\'" inhibit-first-line-modes-regexps)
 
 (push '("\\.st\\'" . smalltalk-mode) auto-mode-alist)
 

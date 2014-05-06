@@ -1,7 +1,7 @@
 
 ;; python
-(add-to-list 'load-path "/Users/mark/Library/Application Support/Emacs/python-mode.el-6.1.1/") 
-(setq py-install-directory  "/Users/mark/Library/Application Support/Emacs/python-mode.el-6.1.1/")
+;(add-to-list 'load-path "/Users/mark/Library/Application Support/Emacs/python-mode.el-6.1.1/") 
+;(setq py-install-directory  "/Users/mark/Library/Application Support/Emacs/python-mode.el-6.1.1/")
 
 (require 'python-mode)
 

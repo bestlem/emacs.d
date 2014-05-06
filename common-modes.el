@@ -25,19 +25,8 @@
 
 ;; ;; git
 
-;; ; Changed for latest version 
-;; ;; git://github.com/tsgates/git-emacs.git
 
-;; ;(require 'vc-git)
-;; ;; (when (featurep 'vc-git) (add--list 'vc-handled-backends 'git))
-;; ; (autoload 'git-blame-mode "git-blame"
-;; ;           "Minor mode for incremental blame for Git." t);; git
-;; ;; git://github.com/tsgates/git-emacs.git
-;; (add-to-list 'load-path "/Users/mark/src/third_party/git-emacs")
-;; (require 'git-emacs)
-
-;; ;; http://zagadka.vm.bytemark.co.uk/magit/magit.html
-;; ;(autoload 'magit-status "magit" nil t)
+(load "mygit")
 
 
 ;;; SQL

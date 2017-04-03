@@ -8,13 +8,6 @@
 (setq find-file-existing-other-name t)
 
 
-;; Add packaging
-(require 'package)
-;; (add-to-list 'package-archives 
-;;     '("marmalade" .
-;;       "http://marmalade-repo.org/packages/"))
-(package-initialize)
-
 (defun dos-to-unix ()
   "Replace \r\n with \n"
   (interactive)

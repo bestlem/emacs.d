@@ -7,7 +7,7 @@
 
 (autoload 'python-mode "python-mode" "Python editing mode." t)
 
-(setq py-shell-name "ipython33")
+;;(setq py-shell-name "ipython33")
 
 ;(setq ipython-command "/Library/Frameworks/Python.framework/Versions/4.0.30002/bin/ipython" )
 ;; (require 'ipython)
@@ -43,12 +43,11 @@
 
  ; (define-key python-mode-map "\C-c\C-b" 'python-execute-buffer )
  ; (define-key python-mode-map "\C-m" 'newline-and-indent)
-(message "In python mode hook" )
 )
 
 
-(require 'highlight-indentation)
-(add-hook 'python-mode-hook 'highlight-indentation)
+;(require 'highlight-indentation)
+;(add-hook 'python-mode-hook 'highlight-indentation)
  
 (add-hook 'python-mode-hook 'my-python-mode-hook)
 

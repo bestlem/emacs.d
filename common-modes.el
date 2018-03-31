@@ -162,4 +162,11 @@ by using nxml's indentation rules."
 (smart-tabs-insinuate 'c 'c++ 'java 'javascript 'cperl 'python
 					  'ruby 'nxml)
 
+(require 'highlight-indent-guides)
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+(setq highlight-indent-guides-method 'column)
+(setq highlight-indent-guides-auto-odd-face-perc 50)
+(setq highlight-indent-guides-auto-even-face-perc 50)
+(setq highlight-indent-guides-auto-character-face-perc 20)
+
 

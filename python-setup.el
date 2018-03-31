@@ -42,7 +42,7 @@
  ; (define-key python-mode-map "\C-c\C-c" 'python-send-region )
 
  ; (define-key python-mode-map "\C-c\C-b" 'python-execute-buffer )
- ; (define-key python-mode-map "\C-m" 'newline-and-indent)
+										; (define-key python-mode-map "\C-m" 'newline-and-indent)
 )
 
 
@@ -51,6 +51,9 @@
  
 (add-hook 'python-mode-hook 'my-python-mode-hook)
 
+;(add-hook 'python-mode-hook 'guess-style-guess-tabs-mode)
+;   (add-hook 'python-mode-hook (lambda ()
+ ;                                   (guess-style-guess-tab-width)))
 
 ;(setq py-python-command (expand-file-name "/usr/local/bin/python" ))
 ;(define-key c-mode-map [return] 'newline-and-indent )

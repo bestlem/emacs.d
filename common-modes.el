@@ -157,3 +157,9 @@ by using nxml's indentation rules."
 ;; ;; WARNING: This causes some versions of Emacs to fail so badly
 ;; ;; that Emacs needs to be restarted.
 ;; (setq scion-completing-read-function 'ido-completing-read)
+
+
+(smart-tabs-insinuate 'c 'c++ 'java 'javascript 'cperl 'python
+					  'ruby 'nxml)
+
+

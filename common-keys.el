@@ -51,18 +51,13 @@
 
 (global-set-key (kbd "M-g") 'goto-line)
 
+(global-set-key (kbd "A-u") 'revert-buffer )
+
 (global-set-key [f3] 'gdb)
 (global-set-key [f4] 'grep )
+(global-set-key [f5] 'compile )
 (global-set-key [kp-f3] 'gdb)
 (global-set-key [kp-f4] 'grep )
-
-(global-set-key [f5] 'compile )
-(global-set-key [f6] 'narrow-to-region )
-(global-set-key [S-f6] 'widen )
-(global-set-key [f7] 'call-last-kbd-macro )
-(global-set-key [f8] 'next-error )
-(global-set-key [f9] 'replace-string )
-(global-set-key [f14] 'undo )
 
 (global-set-key [f12] 'gud-step )
 (global-set-key [f11] 'gud-next )

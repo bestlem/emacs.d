@@ -4,3 +4,5 @@
 ;; evaluating this file and print errors in the *Messags* buffer.
 ;; Use this file in place of ~/.emacs (which is loaded as well.)
 
+;; The order of files ise site-start.el cusomizations.el Preferences.el
+

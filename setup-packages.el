@@ -1,3 +1,4 @@
+;; This is a mix of elpa packages and use-package <https://github.com/jwiegley/use-package>
 
 ;; from https://github.com/paolodedios/dot-files/blob/1a7b4500c8ce07d0d473dbf714a2303f4d440ef5/.emacs.d/init.el
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; From https://github.com/paolodedios/dot-files/blob/1a7b4500c8ce07d0d473dbf714a2303f4d440ef5/.emacs.d/init.el
@@ -55,9 +56,30 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Initialize packages immediately and not after init.el is read post startup
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; include use-package setup from <https://github.com/CachesToCaches/getting_started_with_use_package/blob/master/init-use-package.el>
 
-(setq package-enable-at-startup  nil)
+;; Update package-archive lists
+(require 'package)
+(setq package-enable-at-startup nil)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
 (package-initialize)
+
+;; Install 'use-package' if necessary
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+;; Enable use-package
+(eval-when-compile
+  (require 'use-package))
+;;(require 'diminish)                ;; if you use :diminish
+(require 'bind-key)            
+
+;;(setq package-enable-at-startup  nil)
+;;(package-initialize)
+
 ;; '(package-archive-upload-base "/Users/mark/.cache/emacs-package")
 ;;  '(package-archives
 ;;    (quote

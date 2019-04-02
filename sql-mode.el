@@ -1,6 +1,6 @@
-psql;;; sql-mode.el --- Mode for editing and testing SQL.
+;;; sql-mode.el --- Mode for editing and testing SQL.
 
-;; Copyright (C) 1994,1999-2002 Rob Riepel.
+;; Copyright (C) 1994,1999-2002,2017 Rob Riepel.
 
 ;; Author: Rob Riepel <riepel@networking.stanford.edu>
 ;; Maintainer: Rob Riepel <riepel@networking.stanford.edu>
@@ -53,7 +53,7 @@ psql;;; sql-mode.el --- Mode for editing and testing SQL.
 
 ;;;  Revision Information
 
-(defconst sql-revision "$Id: sql-mode.el,v 4.0 2004/10/29 08:40:15 riepel Exp $")
+(defconst sql-revision "$Id: sql-mode.el,v 4.4 2017/09/07 06:42:24 riepel Exp $")
 
 
 ;;;  Variables
@@ -74,7 +74,7 @@ psql;;; sql-mode.el --- Mode for editing and testing SQL.
 (defvar sql-mode-abbrev-table nil "Abbrev table used in SQL mode buffers.")
 (defvar sql-mode-map nil "Keymap used in SQL mode.")
 
-(defvar sql-get-vendor-hist (list "sybase" "oracle" "sybase" "mysql" "postgres"))
+(defvar sql-get-vendor-hist (list "mysql" "oracle" "mysql" "postgres" "sqlite" "sybase"))
 (defvar sql-get-server-hist (make-list 2 ""))
 (defvar sql-get-username-hist (make-list 2 (user-login-name)))
 (defvar sql-postgres-dbname-hist (make-list 1 ""))
@@ -101,15 +101,15 @@ psql;;; sql-mode.el --- Mode for editing and testing SQL.
     "database" "dbcc" "deallocate" "declare" "default" "delete" "desc" "disk"
     "distinct" "double" "drop" "dummy" "dump" "else" "end" "endtran" "escape"
     "except" "exec" "execute" "exists" "exit" "fetch" "fillfactor" "for"
-    "foreign" "from" "goto" "grant" "group" "having" "holdlock" "identity"
-    "identity_insert" "if" "in" "index" "insert" "intersect" "into" "is"
-    "isolation" "key" "kill" "level" "like" "lineno" "load" "mirror"
-    "mirrorexit" "national" "noholdlock" "nonclustered" "not"
+    "foreign" "from" "full" "goto" "grant" "group" "having" "holdlock" "identity"
+    "identity_insert" "if" "in" "index" "inner" "insert" "intersect" "into" "is"
+    "isolation" "join" "key" "kill" "left" "level" "like" "lineno" "load" "mirror"
+    "mirrorexit" "national" "natural" "noholdlock" "nonclustered" "not"
     "numeric_truncation" "of" "off" "offsets" "on" "once" "only" "open" "option"
-    "or" "order" "over" "perm" "permanent" "plan" "precision" "prepare"
+    "or" "order" "outer" "over" "perm" "permanent" "plan" "precision" "prepare"
     "primary" "print" "privileges" "proc" "procedure" "processexit" "public"
     "raiserror" "read" "readtext" "recofigure" "reconfigure" "references"
-    "replace" "reserved_pgs" "return" "revoke" "role" "rollback" "rowcount"
+    "replace" "reserved_pgs" "return" "revoke" "right" "role" "rollback" "rowcount"
     "rows" "rule" "save" "schema" "select" "set" "setuser" "shared" "shutdown"
     "some" "statistics" "stripe" "syb_identity" "syb_restree" "syb_terminate"
     "table" "temp" "temporary" "textsize" "to" "tran" "transaction" "trigger"
@@ -276,6 +276,7 @@ psql;;; sql-mode.el --- Mode for editing and testing SQL.
   (define-abbrev sql-mode-abbrev-table "co"  "connect"      nil)
   (define-abbrev sql-mode-abbrev-table "sy"  "synonym"      nil)
   (define-abbrev sql-mode-abbrev-table "tr"  "trigger"      nil)
+  (define-abbrev sql-mode-abbrev-table "u"   "update"       nil)
   (define-abbrev sql-mode-abbrev-table "up"  "update"       nil)
   (define-abbrev sql-mode-abbrev-table "ins" "insert"       nil)
   (define-abbrev sql-mode-abbrev-table "gr"  "grant"        nil)
@@ -283,7 +284,7 @@ psql;;; sql-mode.el --- Mode for editing and testing SQL.
   (define-abbrev sql-mode-abbrev-table "pu"  "public"       nil)
   (define-abbrev sql-mode-abbrev-table "un"  "unique"       nil)
   (define-abbrev sql-mode-abbrev-table "cl"  "cluster"      nil)
-  (define-abbrev sql-mode-abbrev-table "we"  "whenever"     nil)
+  (define-abbrev sql-mode-abbrev-table "whe" "whenever"     nil)
   (define-abbrev sql-mode-abbrev-table "ta"  "table"        nil)
   (define-abbrev sql-mode-abbrev-table "pr"  "priviledges"  nil)
   (define-abbrev sql-mode-abbrev-table "dr"  "drop"         nil)
@@ -291,7 +292,6 @@ psql;;; sql-mode.el --- Mode for editing and testing SQL.
   (define-abbrev sql-mode-abbrev-table "rb"  "rollback"     nil)
   (define-abbrev sql-mode-abbrev-table "tr"  "transaction"  nil)
   (define-abbrev sql-mode-abbrev-table "us"  "using"        nil)
-  (define-abbrev sql-mode-abbrev-table "u"   "using"        nil)
   (define-abbrev sql-mode-abbrev-table "vc"  "varchar"      nil))
 
 
@@ -381,6 +381,7 @@ Mode Specific Bindings:
    ((string= vendor "pgsql")       (sql-postgres))
    ((string= vendor "postgres")    (sql-postgres))
    ((string= vendor "postgresql")  (sql-postgres))
+   ((string= vendor "sqlite")      (sql-sqlite))
    ((string= vendor "sybase")      (sql-sybase))))
 
 (defun sql-sybase nil
@@ -400,6 +401,12 @@ Mode Specific Bindings:
   (setq sql-terminator ";")
   (setq sql-command "sqlplus")
   (fset 'sql-start-interpreter 'sql-start-sqlplus))
+
+(defun sql-sqlite nil
+  "Configure SQL-mode for SQLite ``sqlite'' interaction."
+  (setq sql-terminator ";")
+  (setq sql-command "sqlite3")
+  (fset 'sql-start-interpreter 'sql-start-sqlite))
 
 (defun sql-postgres nil
   "Configure SQL-mode for PostgreSQL ``psql'' interaction."
@@ -427,12 +434,19 @@ Mode Specific Bindings:
    (concat sql-username "/" (sql-ange-ftp-read-passwd "Password: ")
            (if (string= sql-server "") "" (concat "@" sql-server)))))
 
+(defun sql-start-sqlite nil
+  "Start up the SQLite sqlite program."
+  (start-process
+   sql-process-name sql-buffer-name sql-command
+   "-header" "-column" "-nullvalue" "NULL" sql-username))
+
 (defun sql-start-psql nil
   "Start up the PostgreSQL psql program."
-  ;; Developed for and works with psql versions 7.0.3 and 7.1.2
+  ;; Developed for and worked with psql versions 7.0.3 and 7.1.2
+  ;; Updated for and works with psql version 9.4.12
   (set-process-filter
    (start-process sql-process-name sql-buffer-name sql-command
-		  "-h" sql-server "-U" sql-username "-E" "-W" "-P" "pager" "-d"
+		  "-h" sql-server "-U" sql-username "-W" "-P" "pager=off" "-d"
 		  (sql-string-prompt "Database: " 'sql-postgres-dbname-hist 1))
    (function
     (lambda (process output)
@@ -440,11 +454,10 @@ Mode Specific Bindings:
        ;; The password can't be specified on the command line; it has to
        ;; be sent after psql prompts for it.  psql writes 'Password: ' to
        ;; STDOUT and waits for the password to be input.
-	  
-       ((equal output "Password for user mark: ")
-		(message "Ah, much better!")
-		(send-string (get-process sql-process-name)
-					 (concat (sql-ange-ftp-read-passwd "Password: ") "\n")))
+       ((equal output (concat "Password for user " sql-username ": "))
+	(send-string (get-process sql-process-name)
+		     (concat (sql-ange-ftp-read-passwd
+			      (concat "Password for user " sql-username ": ")) "\n")))
        ;; We want to get rid of psql prompt, which otherwise would appear
        ;; in the sql buffer.  Unfortunately, psql resets the variables
        ;; PROMPT[123] even if they are set on the command line, so we
@@ -491,11 +504,17 @@ Also shows the string at the top of the SQL output buffer."
   (sql-echo-in-buffer sql-buffer-name (if sql-display-commands "\n\n" "\n"))
   (let ((string (apply 'concat strings))
         (process  (get-buffer-process sql-buffer-name)))
-	(message "%s" strings)
     (send-string process (concat string "\n"))
     (if (eq (current-buffer) (process-buffer process))
         (set-marker (process-mark process) (point))))
   (sql-buffer-redisplay-current))
+
+(defun sql-just-send-strings (strings)
+  "Sends strings to the SQL process without showing it in the SQL output buffer."
+  (sql-verify-buffer)
+  (let ((string (apply 'concat strings))
+        (process  (get-buffer-process sql-buffer-name)))
+    (send-string process (concat string "\n"))))
 
 (defun sql-toggle-display nil
   "Toggle display of SQL commands in the results buffer."
@@ -538,9 +557,12 @@ of the expression listed in 'sql-seperater-regexp."
 (defun sql-send-oracle-block nil
   "Send the current SQL block to the SQL process."
   (interactive)
+  (and (string= sql-vendor "mysql") (sql-just-send-strings (list "delimiter /")))
   (let ((sql-separator-regexp "^/[ \t]*$") (sql-terminator "/"))
     (sql-mark-current)
-    (sql-send-region sql-region-beginning-mark sql-region-end-mark)))
+    (and (string-match "^\\(postgres\\|pgsql\\)" sql-vendor) (setq sql-terminator ";"))
+    (sql-send-region sql-region-beginning-mark sql-region-end-mark))
+  (and (string= sql-vendor "mysql") (sql-just-send-strings (list "delimiter ;"))))
 
 (defun sql-send-whole-buffer nil
   "Send the current SQL buffer to the SQL process."

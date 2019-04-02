@@ -5,3 +5,4 @@ minibuffer-history.el
 places.el
 auto-save-list
 Packages
+*.elc

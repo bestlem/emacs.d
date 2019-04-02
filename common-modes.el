@@ -1,32 +1,9 @@
 
-;; gradle and other java
-(autoload 'groovy-mode "groovy-mode" "Major mode for editing Groovy code." t)
+(load "setup-java-env")
 
-(add-to-list 'auto-mode-alist '("\.groovy$" . groovy-mode))
-(add-to-list 'auto-mode-alist '("\.gradle$" . groovy-mode))
-;; This does work with Aquamacs
-(add-to-list 'auto-mode-alist (cons "\\.gradle\\'" 'groovy-mode))
-(add-to-list 'auto-mode-alist (cons "\\.groovy\\'" 'groovy-mode))
-;; This _might_ not work with Aquamacs (not sure what value it offers)
-;(add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
-;(add-to-list 'interpreter-mode-alist '("gradle" . groovy-mode))
+(load "setup-python")
 
-;;; make Groovy mode electric by default.
-(add-hook 'groovy-mode-hook
-          '(lambda ()
-             (require 'groovy-electric)
-             (groovy-electric-mode)))
-(require 'gradle)
-
-(require 'smalltalk-mode)
-
-(load "python-setup")
-;;(load "cedet")
-
-;; ;; git
-
-
-(load "mygit")
+(load "setup-git")
 
 
 ;;; SQL
@@ -97,9 +74,6 @@ when point gets near either edge of the window."
 ;;
 ;;
 ;;
-;;  --- file tree browser (start with M-x browse)
-;;
-(autoload 'browse "filebrowser" "File and directory tree browser" t)
 ;;
 ;;  --- uncompress *.Z and *.gz files when visiting ---
 ;;
@@ -132,11 +106,11 @@ by using nxml's indentation rules."
     (message "Ah, much better!"))
 
 
-(load "haskell-setup")
+(load "setup-haskell-env")
 
 
-(smart-tabs-insinuate 'c 'c++ 'java 'javascript 'cperl 'python
-					  'ruby 'nxml)
+;; (smart-tabs-insinuate 'c 'c++ 'java 'javascript 'cperl 'python
+;; 					  'ruby 'nxml)
 
 (require 'highlight-indent-guides)
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)

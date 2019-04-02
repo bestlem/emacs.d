@@ -12,6 +12,6 @@
 
 
 (load "common-setup")
-;;(load "common-modes")
+(load "common-modes")
 (load "common-keys")
 

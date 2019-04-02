@@ -2,7 +2,6 @@
 (add-hook 'after-init-hook
                (lambda () (setq debug-on-error t)))
 
-(package-initialize)
 (setq find-file-visit-truename t)	; visit a file under its true name
 (setq backup-by-copying-when-linked t)	; be careful with hard links
 

@@ -43,9 +43,24 @@
 
 
 ;; from http://ergoemacs.org/emacs/emacs_make_modern.html but some are in aquamacs
+;; and https://github.com/anschwa/emacs.d
+
 ;; UTF-8 as default encoding
+;; UTF-8 please
+(setq locale-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
+
+;; Move files to trash when deleting
+(setq delete-by-moving-to-trash t)
+
+;; Transparently open compressed files
+(auto-compression-mode t)
+
 
 (setq backup-by-copying t)
 

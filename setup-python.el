@@ -1,61 +1,96 @@
 
 ;; python
-;(add-to-list 'load-path "/Users/mark/Library/Application Support/Emacs/python-mode.el-6.1.1/") 
-;(setq py-install-directory  "/Users/mark/Library/Application Support/Emacs/python-mode.el-6.1.1/")
 
-(require 'python-mode)
+; python from use-package maintainer https://github.com/jwiegley/dot-emacs/blob/master/init.el#L1013
+(use-package python-mode
+	 :mode "\\.py\\'"
+	 :ensure t
+  :interpreter "python3"
+  :bind (:map python-mode-map
+              ("C-c c")
+			  ("C-c C-c" . py-execute-region )
+			  ("C-c C-b"  . py-execute-buffer)
+			  ("[return]" . newline-and-indent )
+			  ("[C-return]" . newline )
+			  ("[f16]" . py-execute-region )
+              ("C-c C-z" . python-shell))
+  
+  :config
+  (defvar python-mode-initialized nil)
 
-(autoload 'python-mode "python-mode" "Python editing mode." t)
+  (defun my-python-mode-hook ()
+    (unless python-mode-initialized
+      (setq python-mode-initialized t)
 
-;;(setq py-shell-name "ipython33")
+      (info-lookup-add-help
+       :mode 'python-mode
+       :regexp "[a-zA-Z_0-9.]+"
+       :doc-spec
+       '(("(python)Python Module Index" )
+         ("(python)Index"
+          (lambda
+            (item)
+            (cond
+             ((string-match
+               "\\([A-Za-z0-9_]+\\)() (in module \\([A-Za-z0-9_.]+\\))" item)
+              (format "%s.%s" (match-string 2 item)
+                      (match-string 1 item)))))))))
 
-;(setq ipython-command "/Library/Frameworks/Python.framework/Versions/4.0.30002/bin/ipython" )
-;; (require 'ipython)
-;; (setq auto-mode-alist (cons '("\\.py$" . python-mode) auto-mode-alist))
-;; (setq interpreter-mode-alist (cons '("python" . python-mode) interpreter-mode-alist))
-;; ;;(autoload 'python-mode "python-mode" "Python editing mode." t)
-;; (require 'ipython)
-;(setq py-python-command-args '("-pylab" "-colors" "LightBG"))
+    (set (make-local-variable 'parens-require-spaces) nil)
+    (setq indent-tabs-mode nil))
 
-;(setq ipython-command "/Users/mark/bin/ipython")
-;(setq ipython-command "/opt/local/bin/ipython")
-;(setq py-python-command-args '("--autocall" "0"))
-;; (require 'ipython)
-
-;; (require 'anything-ipython)
-;; (add-hook 'python-mode-hook #'(lambda ()
-;; 								(define-key py-mode-map (kbd "M-<tab>") 'anything-ipython-complete)))
-;; (add-hook 'ipython-shell-hook #'(lambda ()
-;; 								  (define-key py-mode-map (kbd "M-<tab>") 'anything-ipython-complete)))
-
-;; ;;(load "pdb" 'noerror 'nomessage)
-;;(require 'pydb)
-
-
-(defun my-python-mode-hook ()
-  "My Python settings"
-  (define-key python-mode-map [return] 'newline-and-indent )
-  (define-key python-mode-map [C-return] 'newline )
-  (define-key python-mode-map [f16] 'py-execute-region )
-  (define-key python-mode-map "\C-c\C-c" 'py-execute-region )
-  (define-key python-mode-map "\C-c\C-b"  'py-execute-buffer)
- ; (define-key python-mode-map "\C-c\C-c" 'python-send-region )
-
- ; (define-key python-mode-map "\C-c\C-b" 'python-execute-buffer )
-										; (define-key python-mode-map "\C-m" 'newline-and-indent)
-)
-
+  (add-hook 'python-mode-hook 'my-python-mode-hook))
 
 ;(require 'highlight-indentation)
 ;(add-hook 'python-mode-hook 'highlight-indentation)
  
-(add-hook 'python-mode-hook 'my-python-mode-hook)
-
 ;(add-hook 'python-mode-hook 'guess-style-guess-tabs-mode)
 ;   (add-hook 'python-mode-hook (lambda ()
  ;                                   (guess-style-guess-tab-width)))
 
-;(setq py-python-command (expand-file-name "/usr/local/bin/python" ))
-;(define-key c-mode-map [return] 'newline-and-indent )
-;(define-key c-mode-map [C-return] 'newline )
+;; Anaconda from https://github.com/howardabrams/dot-files/blob/master/emacs-python.org
+(use-package anaconda-mode
+  :ensure t
+  :after 'python-mode
+  :init (add-hook 'python-mode-hook 'anaconda-mode)
+        (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+  :config (use-package company-anaconda
+            :ensure t
+            :init (add-hook 'python-mode-hook 'anaconda-mode)
+            (eval-after-load "company"
+              '(add-to-list 'company-backends '(company-anaconda :with company-capf)))))
+
+;; This gives an older version
+;; (add-to-list 'package-archives
+;; 			 '("elpy" . "http://jorgenschaefer.github.io/packages/"))
+
+(use-package elpy
+  :ensure t
+  :commands elpy-enable
+  :init (with-eval-after-load 'python (elpy-enable))
+
+  :config
+  (electric-indent-local-mode -1)
+  (delete 'elpy-module-highlight-indentation elpy-modules)
+  (delete 'elpy-module-flymake elpy-modules)
+
+  (defun ha/elpy-goto-definition ()
+    (interactive)
+    (condition-case err
+        (elpy-goto-definition)
+      ('error (xref-find-definitions (symbol-name (symbol-at-point))))))
+
+  :bind (:map elpy-mode-map ([remap elpy-goto-definition] .
+                             ha/elpy-goto-definition)))
+
+(use-package jedi
+  :ensure t
+  :init
+  (add-to-list 'company-backends 'company-jedi)
+  :config
+  (use-package company-jedi
+    :ensure t
+    :init
+    (add-hook 'python-mode-hook (lambda () (add-to-list 'company-backends 'company-jedi)))
+    (setq company-jedi-python-bin "python")))
 

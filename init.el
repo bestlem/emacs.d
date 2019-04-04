@@ -1,8 +1,8 @@
 ;; aquamacs setup
-;; Move that to Preferences
+;; In init.el so more standard emacs name.
+;; In Aquamacs loded from Preferences
+;; If used in non Aquamacs needs custom.el sorted out.
 
-;; This file is run before and should really be for OS independent stuff and is before customisation
-;; In effect an init file
 ;; From gnu site-start.el should not be used it is loaded before init Should use defaults.el loaded after init
 ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Init-File.html
 

@@ -6,3 +6,4 @@
 
 ;; The order of files ise site-start.el cusomizations.el Preferences.el
 
+(load "init.el")

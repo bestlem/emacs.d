@@ -1,32 +1,19 @@
 
-;; gradle and other java
-(autoload 'groovy-mode "groovy-mode" "Major mode for editing Groovy code." t)
+(use-package highlight-indent-guides
+  :config
+  (setq highlight-indent-guides-method 'fill)
+  ;; Indent character samples: ┃| ┆ ┊
+  (setq highlight-indent-guides-character ?\┃)
+  (setq highlight-indent-guides-auto-odd-face-perc 50)
+  (setq highlight-indent-guides-auto-even-face-perc 20)
+  (setq highlight-indent-guides-auto-character-face-perc 20)
+  :hook ( prog-mode . highlight-indent-guides-mode))
 
-(add-to-list 'auto-mode-alist '("\.groovy$" . groovy-mode))
-(add-to-list 'auto-mode-alist '("\.gradle$" . groovy-mode))
-;; This does work with Aquamacs
-(add-to-list 'auto-mode-alist (cons "\\.gradle\\'" 'groovy-mode))
-(add-to-list 'auto-mode-alist (cons "\\.groovy\\'" 'groovy-mode))
-;; This _might_ not work with Aquamacs (not sure what value it offers)
-;(add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
-;(add-to-list 'interpreter-mode-alist '("gradle" . groovy-mode))
+(load "setup-java-env")
 
-;;; make Groovy mode electric by default.
-(add-hook 'groovy-mode-hook
-          '(lambda ()
-             (require 'groovy-electric)
-             (groovy-electric-mode)))
-(require 'gradle)
+(load "setup-python")
 
-(require 'smalltalk-mode)
-
-(load "python-setup")
-;;(load "cedet")
-
-;; ;; git
-
-
-(load "mygit")
+(load "setup-git")
 
 
 ;;; SQL
@@ -97,9 +84,6 @@ when point gets near either edge of the window."
 ;;
 ;;
 ;;
-;;  --- file tree browser (start with M-x browse)
-;;
-(autoload 'browse "filebrowser" "File and directory tree browser" t)
 ;;
 ;;  --- uncompress *.Z and *.gz files when visiting ---
 ;;
@@ -132,17 +116,10 @@ by using nxml's indentation rules."
     (message "Ah, much better!"))
 
 
-(load "haskell-setup")
+(load "setup-haskell-env")
 
 
-(smart-tabs-insinuate 'c 'c++ 'java 'javascript 'cperl 'python
-					  'ruby 'nxml)
-
-(require 'highlight-indent-guides)
-(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-(setq highlight-indent-guides-method 'column)
-(setq highlight-indent-guides-auto-odd-face-perc 50)
-(setq highlight-indent-guides-auto-even-face-perc 50)
-(setq highlight-indent-guides-auto-character-face-perc 20)
+;; (smart-tabs-insinuate 'c 'c++ 'java 'javascript 'cperl 'python
+;; 					  'ruby 'nxml)
 
 

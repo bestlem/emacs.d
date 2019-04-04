@@ -3,7 +3,7 @@
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
-(package-initialize)
+;(package-initialize)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -35,15 +35,9 @@
    (quote
 	(org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-mouse)))
  '(org-todo-keywords (quote ((sequence "TODO" "|" "DONE" "LEAVE(@)"))))
- '(package-archive-upload-base "/Users/mark/.cache/emacs-package")
- '(package-archives
-   (quote
-	(("gnu" . "http://elpa.gnu.org/packages/")
-	 ("melpa-stable" . "http://melpa.org/packages/")
-	 ("marmalade" . "http://marmalade-repo.org/packages/"))))
  '(package-selected-packages
    (quote
-	(highlight-indent-guides json-mode smart-tabs-mode smart-tab ## python-mode ensime fish-mode)))
+	(quelpa-use-package quelpa highlight-indent-guides python-mode anaconda-mode smalltalk-mode use-package)))
  '(py-auto-complete-p t)
  '(py-imenu-create-index-p t)
  '(py-imenu-show-method-args-p t)

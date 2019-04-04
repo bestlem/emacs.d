@@ -37,7 +37,7 @@
  '(org-todo-keywords (quote ((sequence "TODO" "|" "DONE" "LEAVE(@)"))))
  '(package-selected-packages
    (quote
-	(python-mode anaconda-mode smalltalk-mode use-package)))
+	(highlight-indent-guides python-mode anaconda-mode smalltalk-mode use-package)))
  '(py-auto-complete-p t)
  '(py-imenu-create-index-p t)
  '(py-imenu-show-method-args-p t)

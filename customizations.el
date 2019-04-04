@@ -11,7 +11,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(aquamacs-additional-fontsets nil t)
- '(aquamacs-customization-version-id 308 t)
+ '(aquamacs-customization-version-id 310 t)
  '(aquamacs-tool-bar-user-customization nil t)
  '(auto-word-wrap-default-function nil)
  '(cua-enable-cua-keys nil)
@@ -55,3 +55,17 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:stipple nil :background "White" :foreground "Black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "apple" :family "Menlo"))))
  '(python-mode-default ((t (:inherit prog-mode-default :height 120 :family "Fira Code"))) t))
+
+;; Check custom-file compatibility
+(when (and (boundp 'aquamacs-version-id)
+           (< (floor (/ aquamacs-version-id 10))
+           (floor (/ aquamacs-customization-version-id 10))))
+  (defadvice frame-notice-user-settings (before show-version-warning activate)
+    (defvar aquamacs-backup-custom-file nil "Backup of `custom-file', if any.")
+    (setq aquamacs-backup-custom-file "~/Library/Preferences/Aquamacs Emacs/customizations.3.0.el")
+    (let ((msg "Aquamacs options were saved by a more recent program version.
+Errors may occur.  Save Options to overwrite the customization file. The original, older customization file was backed up to ~/Library/Preferences/Aquamacs Emacs/customizations.3.0.el."))
+      (if window-system
+          (x-popup-dialog t (list msg '("OK" . nil) 'no-cancel) "Warning")
+        (message msg)))))
+;; End compatibility check

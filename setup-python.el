@@ -83,14 +83,14 @@
   :bind (:map elpy-mode-map ([remap elpy-goto-definition] .
                              ha/elpy-goto-definition)))
 
-(use-package jedi
-  :ensure t
-  :init
-  (add-to-list 'company-backends 'company-jedi)
-  :config
-  (use-package company-jedi
-    :ensure t
-    :init
-    (add-hook 'python-mode-hook (lambda () (add-to-list 'company-backends 'company-jedi)))
-    (setq company-jedi-python-bin "python")))
+;; (use-package jedi
+;;   :ensure t
+;;   :init
+;;   (add-to-list 'company-backends 'company-jedi)
+;;   :config
+;;   (use-package company-jedi
+;;     :ensure t
+;;     :init
+;;     (add-hook 'python-mode-hook (lambda () (add-to-list 'company-backends 'company-jedi)))
+;;     (setq company-jedi-python-bin "python")))
 

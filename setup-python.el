@@ -4,7 +4,6 @@
 ; python from use-package maintainer https://github.com/jwiegley/dot-emacs/blob/master/init.el#L1013
 (use-package python-mode
 	 :mode "\\.py\\'"
-	 :ensure t
   :interpreter "python3"
   :bind (:map python-mode-map
               ("C-c c")
@@ -50,12 +49,10 @@
 
 ;; Anaconda from https://github.com/howardabrams/dot-files/blob/master/emacs-python.org
 (use-package anaconda-mode
-  :ensure t
   :after 'python-mode
   :init (add-hook 'python-mode-hook 'anaconda-mode)
         (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
   :config (use-package company-anaconda
-            :ensure t
             :init (add-hook 'python-mode-hook 'anaconda-mode)
             (eval-after-load "company"
               '(add-to-list 'company-backends '(company-anaconda :with company-capf)))))
@@ -65,7 +62,6 @@
 ;; 			 '("elpy" . "http://jorgenschaefer.github.io/packages/"))
 
 (use-package elpy
-  :ensure t
   :commands elpy-enable
   :init (with-eval-after-load 'python (elpy-enable))
 
@@ -84,12 +80,10 @@
                              ha/elpy-goto-definition)))
 
 ;; (use-package jedi
-;;   :ensure t
 ;;   :init
 ;;   (add-to-list 'company-backends 'company-jedi)
 ;;   :config
 ;;   (use-package company-jedi
-;;     :ensure t
 ;;     :init
 ;;     (add-hook 'python-mode-hook (lambda () (add-to-list 'company-backends 'company-jedi)))
 ;;     (setq company-jedi-python-bin "python")))

@@ -77,6 +77,10 @@
 ;;(require 'diminish)                ;; if you use :diminish
 (require 'bind-key)            
 
+;; Make all use[package use :ensure t
+(require 'use-package-ensure)
+(setq use-package-always-ensure t)
+
 ;;(setq package-enable-at-startup  nil)
 ;;(package-initialize)
 

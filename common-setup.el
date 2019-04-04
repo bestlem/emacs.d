@@ -20,7 +20,6 @@
 ;; ^k does line
 (setq kill-whole-line t)
 
-
 ; --- highlight words during query replacement ---
 ;
 (setq query-replace-highlight t)
@@ -34,12 +33,9 @@
 (setq track-eol t)
 (setq truncate-lines t)
 
-
-; tabs
+;; tabs
 (setq-default tab-width 4)
 (setq-default tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100))
-
-
 
 ;; from http://ergoemacs.org/emacs/emacs_make_modern.html but some are in aquamacs
 ;; and https://github.com/anschwa/emacs.d
@@ -55,12 +51,18 @@
 (set-default-coding-systems 'utf-8)
 
 ;; Move files to trash when deleting
-(setq delete-by-moving-to-trash t)
+;(setq delete-by-moving-to-trash t)
 
 ;; Transparently open compressed files
 (auto-compression-mode t)
 
-
-(setq backup-by-copying t)
+;; backups from https://www.emacswiki.org/emacs/ForceBackups et al
+(setq version-control t ;; Use version numbers for backups.
+	  kept-new-versions 10 ;; Number of newest versions to keep.
+	  kept-old-versions 0 ;; Number of oldest versions to keep.
+	  delete-old-versions t ;; Don't ask to delete excess backup versions.
+	  backup-by-copying t ;; Copy all files, don't rename them.
+	  vc-make-backup-files t ;; even if under version control
+	  )
 
 (load "setup-gnus")

@@ -3,7 +3,6 @@
                (lambda () (setq debug-on-error t)))
 
 (setq find-file-visit-truename t)	; visit a file under its true name
-(setq backup-by-copying-when-linked t)	; be careful with hard links
 
 (setq find-file-existing-other-name t)
 
@@ -50,19 +49,6 @@
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
 
-;; Move files to trash when deleting
-;(setq delete-by-moving-to-trash t)
 
-;; Transparently open compressed files
-(auto-compression-mode t)
-
-;; backups from https://www.emacswiki.org/emacs/ForceBackups et al
-(setq version-control t ;; Use version numbers for backups.
-	  kept-new-versions 10 ;; Number of newest versions to keep.
-	  kept-old-versions 0 ;; Number of oldest versions to keep.
-	  delete-old-versions t ;; Don't ask to delete excess backup versions.
-	  backup-by-copying t ;; Copy all files, don't rename them.
-	  vc-make-backup-files t ;; even if under version control
-	  )
-
+(load "setup-file-management")
 (load "setup-gnus")

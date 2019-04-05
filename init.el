@@ -33,6 +33,6 @@
 ;; common bits
 (load "setup-packages") ; Package management
 (load "common-setup") ; odds mainly variables
-(load "common-modes")
+(load "common-programming") ; modes for programming
 (load "common-keys")
 

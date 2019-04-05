@@ -9,6 +9,14 @@
   (setq highlight-indent-guides-auto-character-face-perc 20)
   :hook ( prog-mode . highlight-indent-guides-mode))
 
+
+;; kill whitespace at end of edited line
+(use-package ws-butler
+  :ensure t
+  :diminish ws-butler-mode
+  :hook ((prog-mode org-mode) . ws-butler-mode ))
+
+(load "setup-lisp-env")
 (load "setup-java-env")
 
 (load "setup-python")

@@ -16,6 +16,7 @@
  '(auto-word-wrap-default-function nil)
  '(backup-directory-alist (quote (("." . ".~"))))
  '(cua-enable-cua-keys nil)
+ '(custom-enabled-themes nil)
  '(delete-old-versions t)
  '(explicit-shell-file-name "/opt/local/bin/fish")
  '(gnus-directory "~/Library/Application Support/Aquamacs Emacs/News")
@@ -31,6 +32,7 @@
  '(ns-tool-bar-display-mode (quote both) t)
  '(ns-tool-bar-size-mode (quote regular) t)
  '(nxml-slash-auto-complete-flag t)
+ '(one-buffer-one-frame-mode nil nil (aquamacs-frame-setup))
  '(org-log-done (quote time))
  '(org-modules
    (quote

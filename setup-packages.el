@@ -59,6 +59,7 @@
 ;; include use-package setup from <https://github.com/CachesToCaches/getting_started_with_use_package/blob/master/init-use-package.el>
 
 ;; Update package-archive lists
+;; commented out as Aquamacs does setup
 (require 'package)
 (setq package-enable-at-startup nil)
 ;(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))'
@@ -74,29 +75,18 @@
 ;; Enable use-package
 (eval-when-compile
   (require 'use-package))
-;;(require 'diminish)                ;; if you use :diminish
+  ;(require 'diminish)                ;; if you use :diminish
 (require 'bind-key)            
-
+(use-package key-chord
+  :commands key-chord-mode)
 ;; Make all use[package use :ensure t
 (require 'use-package-ensure)
 (setq use-package-always-ensure t)
+(use-package diminish      :demand t)
 
-
-;; Add quelpa
-(if (require 'quelpa nil t)
-    (quelpa-self-upgrade)
-  (with-temp-buffer
-    (url-insert-file-contents "https://framagit.org/steckerhalter/quelpa/raw/master/bootstrap.el")
-    (eval-buffer)))
-(quelpa
- '(quelpa-use-package
-   :fetcher git
-   :url "https://framagit.org/steckerhalter/quelpa-use-package.git"))
-(require 'quelpa-use-package)
-
-
-;; Handle the `use-package-always-ensure' setting
-(quelpa-use-package-activate-advice)
+;; Make all use-package use :ensure t
+;; (require 'use-package-ensure)
+;; (setq use-package-always-ensure t)
 
 ;;(setq package-enable-at-startup  nil)
 ;;(package-initialize)

@@ -8,6 +8,7 @@
 
 ;; Manipulate garbage collection from https://github.com/jwiegley/dot-emacs/blob/master/init.el#L1013
 
+;; From https://github.com/jwiegley/dot-emacs/blob/master/init.el#L1013
 (defconst emacs-start-time (current-time))
 
 (defvar file-name-handler-alist-old file-name-handler-alist)

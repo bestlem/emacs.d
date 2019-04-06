@@ -40,7 +40,7 @@
  '(org-todo-keywords (quote ((sequence "TODO" "|" "DONE" "LEAVE(@)"))))
  '(package-selected-packages
    (quote
-	(ws-butler rainbow-delimiters rainbow-mode quelpa-use-package quelpa highlight-indent-guides python-mode anaconda-mode smalltalk-mode use-package)))
+	(key-chord elpy gradle-mode groovy-imports groovy-mode diminish ws-butler rainbow-delimiters rainbow-mode quelpa-use-package quelpa highlight-indent-guides python-mode anaconda-mode smalltalk-mode use-package)))
  '(py-auto-complete-p t)
  '(py-imenu-create-index-p t)
  '(py-imenu-show-method-args-p t)

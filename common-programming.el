@@ -9,7 +9,6 @@
   (setq highlight-indent-guides-auto-character-face-perc 20)
   :hook ( prog-mode . highlight-indent-guides-mode))
 
-
 ;; kill whitespace at end of edited line
 (use-package ws-butler
   :ensure t
@@ -18,11 +17,8 @@
 
 (load "setup-lisp-env")
 (load "setup-java-env")
-
 (load "setup-python")
-
 (load "setup-git")
-
 
 ;;; SQL
 (autoload 'sql "sql-mode"
@@ -35,7 +31,6 @@
   "Create or move to the sql-mode \"*SQL commands*\" buffer." t)
 
 (setq auto-mode-alist (cons '("\\.sql$" . sql-mode) auto-mode-alist))
-
 
 ;; objective C
 (add-to-list 'auto-mode-alist '("\\.h$" . objc-mode) )
@@ -91,8 +86,6 @@ when point gets near either edge of the window."
 ;(load "uniquify")
 ;;
 ;;
-;;
-;;
 ;;  --- uncompress *.Z and *.gz files when visiting ---
 ;;
 ;; (autoload 'uncompress-while-visiting "uncompress"
@@ -103,8 +96,6 @@ when point gets near either edge of the window."
 ;; 	  (cons '("\\.gz$" . uncompress-while-visiting) auto-mode-alist))
 ;; (setq auto-mode-alist
 ;;       (cons '("\\.tgz$" . uncompress-while-visiting) auto-mode-alist))
-
-
 
 ;; nxml
  ;; from http://sinewalker.wordpress.com/2008/06/26/pretty-printing-xml-with-emacs-nxml-mode/
@@ -123,11 +114,7 @@ by using nxml's indentation rules."
       (indent-region begin end))
     (message "Ah, much better!"))
 
-
 (load "setup-haskell-env")
-
 
 ;; (smart-tabs-insinuate 'c 'c++ 'java 'javascript 'cperl 'python
 ;; 					  'ruby 'nxml)
-
-

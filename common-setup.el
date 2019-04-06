@@ -6,7 +6,6 @@
 
 (setq find-file-existing-other-name t)
 
-
 (defun dos-to-unix ()
   "Replace \r\n with \n"
   (interactive)
@@ -52,3 +51,6 @@
 
 (load "setup-file-management")
 (load "setup-gnus")
+
+
+(load "setup-apperance")

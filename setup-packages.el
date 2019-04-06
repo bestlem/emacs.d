@@ -79,7 +79,8 @@
 (require 'bind-key)            
 (use-package key-chord
   :commands key-chord-mode)
-;; Make all use[package use :ensure t
+
+;; Make all use-[package use :ensure t
 (require 'use-package-ensure)
 (setq use-package-always-ensure t)
 (use-package diminish      :demand t)

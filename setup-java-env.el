@@ -37,7 +37,7 @@
 
 (use-package gradle-mode
   :ensure t
-   :delight
+   :diminish
 ;  :quelpa (gradle-mode :repo "seblemaguer/emacs-gradle-mode" :fetcher github)
   :config
   (setq gradle-gradlew-executable "./gradlew"

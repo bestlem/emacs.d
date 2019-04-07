@@ -78,12 +78,12 @@
   ;(require 'diminish)                ;; if you use :diminish
 (require 'bind-key)            
 (use-package key-chord
+  :ensure t
   :commands key-chord-mode)
-
-;; Make all use-[package use :ensure t
-(require 'use-package-ensure)
-(setq use-package-always-ensure t)
-(use-package diminish      :demand t)
+;; Make all use[package use :ensure t
+;;(require 'use-package-ensure)
+;;(setq use-package-always-ensure t)
+(use-package diminish   :ensure t   :demand t)
 
 ;; Make all use-package use :ensure t
 ;; (require 'use-package-ensure)

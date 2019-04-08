@@ -48,6 +48,10 @@
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
 
+;; Better selection
+(use-package expand-region
+  :ensure t
+  :bind ("C-=" . er/expand-region))
 
 (load "setup-file-management")
 (load "setup-gnus")

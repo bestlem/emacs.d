@@ -7,4 +7,7 @@
   :hook (prog-mode . rainbow-delimiters-mode)
   )
 
-
+(use-package aggressive-indent
+  :ensure t
+  :hook (elisp-mode . aggresive-indent-mode)
+  )

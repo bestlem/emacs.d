@@ -16,6 +16,8 @@
   :diminish ws-butler-mode
   :hook ((prog-mode org-mode) . ws-butler-mode ))
 
+(electric-indent-mode +1)
+
 (load "setup-lisp-env")
 (load "setup-java-env")
 (load "setup-python")
@@ -47,7 +49,7 @@
 ;; perl mode set up
 
 (setq auto-mode-alist
-      (cons '("\\.pl$" . perl-mode) auto-mode-alist))
+	  (cons '("\\.pl$" . perl-mode) auto-mode-alist))
 (setq auto-mode-alist
       (cons '("\\.pm$" . perl-mode) auto-mode-alist))
 

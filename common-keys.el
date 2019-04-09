@@ -63,20 +63,20 @@
 
 (global-set-key (kbd "A-u") 'revert-buffer )
 
-(global-set-key [f3] 'gdb)
+;; (global-set-key [f3] 'gdb)
 (global-set-key [f4] 'grep )
 (global-set-key [f5] 'compile )
 (global-set-key [kp-f3] 'gdb)
 (global-set-key [kp-f4] 'grep )
 
-(global-set-key [f12] 'gud-step )
-(global-set-key [f11] 'gud-next )
-(global-set-key [C-f10] 'gud-cont )
-(global-set-key [f10] 'gud-finish )
-(global-set-key [C-f11] 'gud-break )
-(global-set-key [C-f12] 'gud-tbreak )
+;; (global-set-key [f12] 'gud-step )
+;; (global-set-key [f11] 'gud-next )
+;; (global-set-key [C-f10] 'gud-cont )
+;; (global-set-key [f10] 'gud-finish )
+;; (global-set-key [C-f11] 'gud-break )
+;; (global-set-key [C-f12] 'gud-tbreak )
 
-;;(global-set-key [S-f7]  'next-error )
+(global-set-key [S-f7]  'next-error )
 (global-set-key [S-f8] 'previous-error)
 
 ;(global-set-key [ESC-SPC] 'set-mark-command )

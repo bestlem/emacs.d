@@ -1,4 +1,3 @@
-;; $Header: /Users/mark/Library/Emacs/RCS/common-keys.el,v 1.1.1.7 2006/07/23 12:24:49 mark Exp mark $
 
 ;; ; keys
 (define-key osx-key-mode-map [end] 'end-of-line )
@@ -27,26 +26,11 @@
 ;(global-set-key [s-left] 'scroll-left)
 ;(global-set-key [s-right] 'scroll-right)
 
-;; for PC
-;(load-library "pc-select")
-;(pc-selection-mode) 
-;(global-set-key [s-left] 'backward-sexp)
-;(global-set-key [s-right] 'forward-sexp)
-;(global-set-key [M-left] 'scroll-left)
-;(global-set-key [M-right] 'scroll-right)
-
 ;; Apple
-;(global-set-key [M-c] 'cua-copy-region)
-;(global-set-key [M-x] 'cua-cut-region)
-;(global-set-key [M-v] 'cua-paste)
-;(global-set-key [?\A-c] 'cua-copy-region)
-;(global-set-key [?\A-v] 'cua-paste)
-;(global-set-key [?\A-x] 'cua-cut-region)
 (global-set-key [S-kp-delete] 'cua-cut-region)
 ;; Cocoa emacs does not recognise this key
 (global-set-key [S-kp-insert] 'cua-paste)
 (global-set-key [C-kp-insert] 'cua-copy-region)
-;(global-set-key [?\M-x] 'kill-region)
 
 
 ;(global-set-key [C-return] 'newline-and-indent )
@@ -66,9 +50,9 @@
 ;; (global-set-key [f3] 'gdb)
 (global-set-key [f4] 'grep )
 (global-set-key [f5] 'compile )
-(global-set-key [kp-f3] 'gdb)
 (global-set-key [kp-f4] 'grep )
 
+;; (global-set-key [kp-f3] 'gdb)
 ;; (global-set-key [f12] 'gud-step )
 ;; (global-set-key [f11] 'gud-next )
 ;; (global-set-key [C-f10] 'gud-cont )
@@ -79,23 +63,9 @@
 (global-set-key [S-f7]  'next-error )
 (global-set-key [S-f8] 'previous-error)
 
-;(global-set-key [ESC-SPC] 'set-mark-command )
-
-(global-set-key [M-up] 'next-multiframe-window)
-(global-set-key [M-down] 'previous-multiframe-window)
-
-; do for Next
-;(global-set-key [?\H-n] 'next-error )
-;(global-set-key [?\H-p] 'previous-error )
-
-;(global-set-key [?\H-4] 'grep )
-;(global-set-key [?\H-5] 'compile )
-;(global-set-key [?\H-g] 'gdb )
-
-;(global-set-key [?\H-7] 'call-last-kbd-macro )
-;(global-set-key [?\H-8] 'name-last-kbd-macro )
-;(global-set-key [?\H-9] 'replace-string )
-;(global-set-key [?\H-delete] 'undo )
+;; Conflicts with org-mode
+;; (global-set-key [M-up] 'next-multiframe-window)
+;; (global-set-key [M-down] 'previous-multiframe-window)
 
 
 ;(global-set-key [?\A-=] 'what-line )
@@ -105,33 +75,3 @@
 ;(global-set-key "\M-q" 'query-replace)
 ;(global-set-key "\M-r" 'replace-string)
 ;(global-set-key "\M-i" 'indent-region)
-
-;(global-set-key [?\A-x] 'execute-extended-command )
-;(global-set-key [?\A-SPC] 'set-mark-command )
-;; (defun unbury-buffer ()
-;;   "Unbury buffer (from Vegard@protek.unit.no (Vegard Vesterheim))"
-;;   (interactive)
-;;   (require 'cl)
-;;   (switch-to-buffer (car (last (buffer-list)))))
-
-;(global-set-key [f2] 'bury-buffer)
-;(global-set-key [S-f2] 'unbury-buffer)
-
-;; $Log: common-keys.el,v $
-;; Revision 1.1.1.7  2006/07/23 12:24:49  mark
-;; Apple chnages for emacs NS 9
-;;
-;; Revision 1.1.1.6  2002/12/07 01:56:02  mark
-;; Get it right
-;;
-;; Revision 1.1.1.5  2002/12/07 01:54:57  mark
-;; Adddd c-insert
-;;
-;; Revision 1.1.1.4  2002/12/07 01:44:35  mark
-;; Put in Apple/Next keys fot cut/paste and #
-;;
-;; Revision 1.1.1.3  2002/11/16 11:13:11  mark
-;; Get rcs correct
-;;
-
-

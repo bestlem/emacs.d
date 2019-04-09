@@ -58,3 +58,4 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:stipple nil :background "White" :foreground "Black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "apple" :family "Menlo"))))
  '(python-mode-default ((t (:inherit prog-mode-default :height 120 :family "Fira Code"))) t))
+(put 'downcase-region 'disabled nil)

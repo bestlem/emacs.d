@@ -2,6 +2,9 @@
 (add-hook 'after-init-hook
                (lambda () (setq debug-on-error t)))
 
+;; This variable tells Emacs to prefer the .el file if it’s newer, even if there is a corresponding .elc file.
+(customize-set-variable 'load-prefer-newer t)
+
 (setq find-file-visit-truename t)	; visit a file under its true name
 
 (setq find-file-existing-other-name t)

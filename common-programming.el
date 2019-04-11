@@ -1,6 +1,7 @@
 
 (use-package highlight-indent-guides
   :ensure t
+  :diminish highlight-indent-guides-mode
   :config
   (setq highlight-indent-guides-method 'fill)
   ;; Indent character samples: ┃| ┆ ┊

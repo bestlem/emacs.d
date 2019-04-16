@@ -29,10 +29,11 @@
  '(haskell-program-name "ghci")
  '(mail-setup-with-from t)
  '(make-backup-files t)
+ '(ns-right-alternate-modifier (quote super))
+ '(ns-right-command-modifier (quote control))
  '(ns-tool-bar-display-mode (quote both) t)
  '(ns-tool-bar-size-mode (quote regular) t)
  '(nxml-slash-auto-complete-flag t)
- '(one-buffer-one-frame-mode nil nil (aquamacs-frame-setup))
  '(org-log-done (quote time))
  '(org-modules
    (quote
@@ -40,7 +41,7 @@
  '(org-todo-keywords (quote ((sequence "TODO" "|" "DONE" "LEAVE(@)"))))
  '(package-selected-packages
    (quote
-	(treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ranger dired-toggle expand-region lispy aggressive-indent rainbow-delimiters gradle-mode groovy-imports groovy-mode ws-butler highlight-indent-guides diminish key-chord use-package)))
+	(ws-butlerz helm elisp-format origami comment-dwim-2 smex discover-my-major json-navigator json-mode treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ranger dired-toggle expand-region lispy aggressive-indent rainbow-delimiters gradle-mode groovy-imports groovy-mode ws-butler highlight-indent-guides diminish key-chord use-package)))
  '(py-auto-complete-p t)
  '(py-imenu-create-index-p t)
  '(py-imenu-show-method-args-p t)
@@ -50,6 +51,7 @@
  '(text-mode-hook
    (quote
 	(turn-on-flyspell smart-spacing-mode auto-detect-wrap)))
+ '(tool-bar-mode nil)
  '(visual-line-mode nil t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

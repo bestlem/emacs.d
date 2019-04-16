@@ -1,3 +1,7 @@
+;; This set started off as for NeXT and also ran on Solaris and Linux
+;; Then from 2002 on OSX
+;;  Then from 2004 from Aquamacs
+;; But history lost uintil 2008 although file had some but not all RCS history from earlier
 
 ;; ; keys
 ;;  Use bind-key* if do not want to be overridden see <https://stackoverflow.com/a/27441815/151019>
@@ -6,6 +10,16 @@
 ;; "<return>" is the Return key while emacs runs in a graphical user interface.
 ;; "RET" is the Return key while emacs runs in a terminal.
 ;; "RET" is also equivalent to "C-m" (【Ctrl+m】). (For why, see: Emacs's Key Syntax Explained)
+
+;; Aquamacs seems to overide with customization so has to be there
+;; Function key though can't be customized
+;; Well seems that the screen describe key shows the keypress as per unswapped but swaps the binding
+(setq ns-function-modifier 'hyper)
+(setq ns-command-modifier (quote control))
+(setq ns-control-modifier (quote alt))
+(setq ns-right-alternate-modifier (quote super))
+(setq ns-right-command-modifier (quote control))
+(setq ns-right-control-modifier (quote alt))
 
 
 
@@ -18,21 +32,13 @@
 (define-key osx-key-mode-map [S-kp-next] 'scroll-other-window-down )
 (define-key osx-key-mode-map [S-kp-prior] 'scroll-other-window )
 
-(when (eq system-type 'darwin)
-  ;; when using Windows keyboard on Mac, the insert key is mapped to <help>
-  ;; copy ctrl-insert, paste shift-insert on windows keyboard
-  ;; From https://emacs.stackexchange.com/a/30288/9874
-  ;; Noter this is emacs cut and paste not CUA
-  (global-set-key [C-help] #'clipboard-kill-ring-save)
-  (global-set-key [S-help] #'clipboard-yank)
-  ;; insert to toggle `overwrite-mode'
-  (global-set-key [help] #'overwrite-mode))
 
 
 ;;  Old attempt
 ;; I think that the ?-kp-* entries sre for <insert> etc on non Mac keyboards
 
 ;; Apple
+;; Aquamacs thinks the insert key is <help>
 (global-set-key [S-kp-delete] 'cua-cut-region)
 ;; Cocoa emacs does not recognise this key
 (global-set-key [S-kp-insert] 'cua-paste)
@@ -106,7 +112,7 @@
 ;(global-set-key "\M-r" 'replace-string)
 ;(global-set-key "\M-i" 'indent-region)
 
-;;  From Xah Lee amke search easier http://ergoemacs.org/emacs/emacs_isearch_by_arrow_keys.html
+;;  From Xah Lee make search easier http://ergoemacs.org/emacs/emacs_isearch_by_arrow_keys.html
 (progn
   ;; set arrow keys in isearch. left/right is backward/forward, up/down is history. press Return to exit
   (define-key isearch-mode-map (kbd "<up>") 'isearch-ring-retreat )

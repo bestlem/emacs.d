@@ -7,10 +7,10 @@
   :delight rainbow-delimiters-mode
   :hook (prog-mode . rainbow-delimiters-mode))
 
-(use-package
-  aggressive-indent
-  :ensure t
-  :hook (emacs-lisp-mode . aggresive-indent-mode))
+;; (use-package
+;;   aggressive-indent
+;;   :ensure t
+;;   :hook (emacs-lisp-mode . aggresive-indent-mode))
 
 (use-package
   lispy

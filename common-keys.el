@@ -5,6 +5,7 @@
 
 ;; ; keys
 ;;  Use bind-key* if do not want to be overridden see <https://stackoverflow.com/a/27441815/151019>
+;; Aquamacsa see https://www.emacswiki.org/emacs/AquamacsFAQ#toc13 when global-set-key fails
 
 ;;  From Xah Lee explains more of syntax
 ;; "<return>" is the Return key while emacs runs in a graphical user interface.
@@ -123,3 +124,9 @@
 
   (define-key minibuffer-local-isearch-map (kbd "<left>") 'isearch-reverse-exit-minibuffer)
   (define-key minibuffer-local-isearch-map (kbd "<right>") 'isearch-forward-exit-minibuffer))
+
+
+;;  Hyper
+(define-key osx-key-mode-map (kbd "H-1")  'delete-other-windows)
+(define-key osx-key-mode-map (kbd "H-0")  'delete-window)
+(define-key osx-key-mode-map (kbd "H-t") 'treemacs)

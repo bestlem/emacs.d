@@ -1,7 +1,4 @@
 
-(add-hook 'after-init-hook
-               (lambda () (setq debug-on-error t)))
-
 ;; This variable tells Emacs to prefer the .el file if it’s newer, even if there is a corresponding .elc file.
 (customize-set-variable 'load-prefer-newer t)
 
@@ -61,6 +58,7 @@
 
 ;; Show keyboard macro as elisp
 (use-package elmacro :ensure t)
+
 (load "setup-file-management")
 (load "setup-gnus")
 

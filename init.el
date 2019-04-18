@@ -20,6 +20,10 @@
       gc-cons-percentage 0.6
       auto-window-vscroll nil)
 
+
+(add-hook 'after-init-hook
+               (lambda () (setq debug-on-error t)))
+
 (add-hook 'after-init-hook
           `(lambda ()
              (setq file-name-handler-alist file-name-handler-alist-old

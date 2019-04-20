@@ -3,7 +3,7 @@
 
 ; python from use-package maintainer https://github.com/jwiegley/dot-emacs/blob/master/init.el#L1013
 (use-package python-mode
-	 :mode "\\.py\\'"
+  :mode "\\.py\\'"
   :interpreter "python3"
   :bind (:map python-mode-map
               ("C-c c")
@@ -39,52 +39,4 @@
     (setq indent-tabs-mode nil))
 
   (add-hook 'python-mode-hook 'my-python-mode-hook))
-
-;(require 'highlight-indentation)
-;(add-hook 'python-mode-hook 'highlight-indentation)
- 
-;(add-hook 'python-mode-hook 'guess-style-guess-tabs-mode)
-;   (add-hook 'python-mode-hook (lambda ()
- ;                                   (guess-style-guess-tab-width)))
-
-;; Anaconda from https://github.com/howardabrams/dot-files/blob/master/emacs-python.org
-(use-package anaconda-mode
-  :after 'python-mode
-  :init (add-hook 'python-mode-hook 'anaconda-mode)
-        (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
-  :config (use-package company-anaconda
-            :init (add-hook 'python-mode-hook 'anaconda-mode)
-            (eval-after-load "company"
-              '(add-to-list 'company-backends '(company-anaconda :with company-capf)))))
-
-;; This gives an older version
-;; (add-to-list 'package-archives
-;; 			 '("elpy" . "http://jorgenschaefer.github.io/packages/"))
-
-(use-package elpy
-  :commands elpy-enable
-  :init (with-eval-after-load 'python (elpy-enable))
-
-  :config
-  (electric-indent-local-mode -1)
-  (delete 'elpy-module-highlight-indentation elpy-modules)
-  (delete 'elpy-module-flymake elpy-modules)
-
-  (defun ha/elpy-goto-definition ()
-    (interactive)
-    (condition-case err
-        (elpy-goto-definition)
-      ('error (xref-find-definitions (symbol-name (symbol-at-point))))))
-
-  :bind (:map elpy-mode-map ([remap elpy-goto-definition] .
-                             ha/elpy-goto-definition)))
-
-;; (use-package jedi
-;;   :init
-;;   (add-to-list 'company-backends 'company-jedi)
-;;   :config
-;;   (use-package company-jedi
-;;     :init
-;;     (add-hook 'python-mode-hook (lambda () (add-to-list 'company-backends 'company-jedi)))
-;;     (setq company-jedi-python-bin "python")))
 

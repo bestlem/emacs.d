@@ -11,6 +11,12 @@
   (setq highlight-indent-guides-auto-character-face-perc 20)
   :hook ( prog-mode . highlight-indent-guides-mode))
 
+;;  Aggressive indent make indents as you type
+(use-package
+  aggressive-indent
+  :ensure t
+  :hook (emacs-lisp-mode . aggressive-indent-mode))
+
 ;; kill whitespace at end of edited line
 (use-package ws-butler
   :ensure t

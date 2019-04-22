@@ -1,13 +1,14 @@
 ;; This set started off as for NeXT and also ran on Solaris and Linux
 ;; Then from 2002 on OSX
 ;;  Then from 2004 from Aquamacs
-;; But history lost uintil 2008 although file had some but not all RCS history from earlier
+;; But history lost until 2008 although file had some but not all RCS history from earlier
 
 ;; ; keys
 ;;  Use bind-key* if do not want to be overridden see <https://stackoverflow.com/a/27441815/151019>
-;; Aquamacsa see https://www.emacswiki.org/emacs/AquamacsFAQ#toc13 when global-set-key fails
+;; Aquamacs see https://www.emacswiki.org/emacs/AquamacsFAQ#toc13 when global-set-key fails so use define-key osx-key-mode-map
+;;  See Next keyboard with command bar under space - these were the ?\ keys Help was next to space so ?\H was help not hyper
 
-;;  From Xah Lee explains more of syntax
+;; From Xah Lee explains more of syntax
 ;; "<return>" is the Return key while emacs runs in a graphical user interface.
 ;; "RET" is the Return key while emacs runs in a terminal.
 ;; "RET" is also equivalent to "C-m" (【Ctrl+m】). (For why, see: Emacs's Key Syntax Explained)
@@ -33,7 +34,14 @@
 (define-key osx-key-mode-map [S-kp-next] 'scroll-other-window-down )
 (define-key osx-key-mode-map [S-kp-prior] 'scroll-other-window )
 
+;; From pragmatic Emacs http://pragmaticemacs.com/emacs/dont-kill-buffer-kill-this-buffer-instead/
+;;  By default C-x k runs the command kill-buffer which prompts you for which buffer you want to kill, defaulting to the current active buffer. I don’t know about you, but I rarely want to kill a different buffer than the one I am looking at, so I rebind C-x k to kill-this-buffer which just kills the current buffer without prompting (unless there are unsaved changes).
+(defun bjm/kill-this-buffer ()
+  "Kill the current buffer."
+  (interactive)
+  (kill-buffer (current-buffer)))
 
+(define-key osx-key-mode-map (kbd "C-x k") 'bjm/kill-this-buffer)
 
 ;;  Old attempt
 ;; I think that the ?-kp-* entries sre for <insert> etc on non Mac keyboards
@@ -129,4 +137,5 @@
 ;;  Hyper
 (define-key osx-key-mode-map (kbd "H-1")  'delete-other-windows)
 (define-key osx-key-mode-map (kbd "H-0")  'delete-window)
+(define-key osx-key-mode-map (kbd "H-r") 'query-replace)
 (define-key osx-key-mode-map (kbd "H-t") 'treemacs)

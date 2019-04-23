@@ -56,9 +56,6 @@
 ;;  Sentances do not end with two spaces
 (setq sentence-end-double-space nil)
 
-;; Show keyboard macro as elisp
-(use-package elmacro :ensure t)
-
 (load "setup-file-management")
 (load "setup-gnus")
 
@@ -86,17 +83,8 @@
   (use-package comment-dwim-2
 	:ensure t
 	:bind* ("M-;" . comment-dwim-2))
-)
+  )
 ;;  Hide show etc
-(use-package
-  origami
-  :ensure t
-  :commands (origami-toggle-node)
-  :bind* (("M-m -" . orgiami-toggle-node)
-		  ("C-c TAB" . origami-recursively-toggle-node)
-		  ("C-\\" . origami-recursively-toggle-node)
-		  ("M-\\" . origami-close-all-nodes)
-		  ("M-+" . origami-open-all-nodes)))
 
 
 ;;  Completer

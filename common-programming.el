@@ -31,6 +31,14 @@
   :hook ((sh-mode json-mode nxml-mode python-mode emacs-lisp-mode lisp-interaction-mode) . flymake-mode-on)
   :config (flymake-mode-on))
 
+;;  Start completion
+(use-package
+  company
+  :ensure t
+  :config (add-hook
+		   'after-init-hook
+		   'global-company-mode))
+
 (load "setup-lisp-env")
 (load "setup-java-env")
 (load "setup-python")

@@ -3,6 +3,21 @@
 ;;  Then from 2004 from Aquamacs
 ;; But history lost until 2008 although file had some but not all RCS history from earlier
 
+
+;;  Show keys
+(use-package
+  which-key
+  :ensure t
+  :init (which-key-mode)
+  :config (which-key-setup-side-window-right-bottom)
+  (setq which-key-sort-order
+		'which-key-key-order-alpha
+		which-key-side-window-max-width
+		0.33
+		which-key-idle-delay
+		0.05)
+  :diminish which-key-mode)
+
 ;; ; keys
 ;;  Use bind-key* if do not want to be overridden see <https://stackoverflow.com/a/27441815/151019>
 ;; Aquamacs see https://www.emacswiki.org/emacs/AquamacsFAQ#toc13 when global-set-key fails so use define-key osx-key-mode-map
@@ -22,7 +37,6 @@
 (setq ns-right-alternate-modifier (quote super))
 (setq ns-right-command-modifier (quote control))
 (setq ns-right-control-modifier (quote alt))
-
 
 
 (define-key osx-key-mode-map [end] 'end-of-line )
@@ -138,4 +152,5 @@
 (define-key osx-key-mode-map (kbd "H-1")  'delete-other-windows)
 (define-key osx-key-mode-map (kbd "H-0")  'delete-window)
 (define-key osx-key-mode-map (kbd "H-r") 'query-replace)
+(define-key osx-key-mode-map (kbd "H-s") 'sr-speedbar-toggle)
 (define-key osx-key-mode-map (kbd "H-t") 'treemacs)

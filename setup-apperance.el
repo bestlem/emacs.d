@@ -9,3 +9,6 @@
 
 ;; remove toolbar
 (tool-bar-mode 0)
+
+;; display standard Emacs (and not standard Mac) modifier symbols
+(setq ns-use-mac-modifier-symbols  nil)

@@ -14,11 +14,13 @@
 	  vc-make-backup-files t ;; even if under version control
 	  )
 
+;;  backup directory is .~ set in cusomisation
 
 ;;recent files f
 ;; Should be a customise but Aquamets sets it so keeps adding to it
 ;; from https://www.reddit.com/r/emacs/comments/3g468d/stop_recent_files_showing_elpa_packages/
 ;; Problem is this is set after the recent files are set https://emacs.stackexchange.com/questions/48784/recent-files-in-aquamacs
+;;  Seems to be OK
 
 (setq recentf-exclude (append recentf-exclude
 			  '("^/var/folders\\.*"

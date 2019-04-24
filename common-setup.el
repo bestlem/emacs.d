@@ -56,9 +56,15 @@
 ;;  Sentances do not end with two spaces
 (setq sentence-end-double-space nil)
 
+;; Allow view of imenu
+(use-package sr-speedbar
+  :ensure t
+  :init
+  (set-variable 'sr-speedbar-right-side nil))
+
 (load "setup-file-management")
 (load "setup-gnus")
-
+(load "setup-org")
 
 (load "setup-apperance")
 

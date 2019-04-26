@@ -32,12 +32,19 @@
 ;; Function key though can't be customized
 ;; Well seems that the screen describe key shows the keypress as per unswapped but swaps the binding
 (setq ns-function-modifier 'hyper)
-(setq ns-command-modifier (quote control))
-(setq ns-control-modifier (quote alt))
+(setq ns-alternate-modifier (quote super))
+
+;; (setq ns-command-modifier (quote control))
+;; (setq ns-control-modifier (quote alt))
 (setq ns-right-alternate-modifier (quote super))
 (setq ns-right-command-modifier (quote control))
 (setq ns-right-control-modifier (quote alt))
 
+;; Display in help can use apple symbols or Emacs codes Aquamacs default is to use Apple
+;; display standard Emacs (and not standard Mac) modifier symbols
+;; Use Mac modifier symbols if non-nil
+
+;; (setq ns-use-mac-modifier-symbols  nil)
 
 (define-key osx-key-mode-map [end] 'end-of-line )
 (define-key osx-key-mode-map [home] 'beginning-of-line )
@@ -151,6 +158,7 @@
 ;;  Hyper
 (define-key osx-key-mode-map (kbd "H-1")  'delete-other-windows)
 (define-key osx-key-mode-map (kbd "H-0")  'delete-window)
+(define-key osx-key-mode-map (kbd "H-n") 'tabbar-move-current-buffer-to-new-frame)
 (define-key osx-key-mode-map (kbd "H-r") 'query-replace)
 (define-key osx-key-mode-map (kbd "H-s") 'sr-speedbar-toggle)
 (define-key osx-key-mode-map (kbd "H-t") 'treemacs)

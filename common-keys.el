@@ -3,6 +3,21 @@
 ;;  Then from 2004 from Aquamacs
 ;; But history lost until 2008 although file had some but not all RCS history from earlier
 
+
+;;  Show keys
+(use-package
+  which-key
+  :ensure t
+  :init (which-key-mode)
+  :config (which-key-setup-side-window-right-bottom)
+  (setq which-key-sort-order
+		'which-key-key-order-alpha
+		which-key-side-window-max-width
+		0.33
+		which-key-idle-delay
+		0.05)
+  :diminish which-key-mode)
+
 ;; ; keys
 ;;  Use bind-key* if do not want to be overridden see <https://stackoverflow.com/a/27441815/151019>
 ;; Aquamacs see https://www.emacswiki.org/emacs/AquamacsFAQ#toc13 when global-set-key fails so use define-key osx-key-mode-map
@@ -17,13 +32,19 @@
 ;; Function key though can't be customized
 ;; Well seems that the screen describe key shows the keypress as per unswapped but swaps the binding
 (setq ns-function-modifier 'hyper)
-(setq ns-command-modifier (quote control))
-(setq ns-control-modifier (quote alt))
+;; (setq ns-alternate-modifier (quote super))
+
+;; (setq ns-command-modifier (quote control))
+;; (setq ns-control-modifier (quote alt))
 (setq ns-right-alternate-modifier (quote super))
 (setq ns-right-command-modifier (quote control))
 (setq ns-right-control-modifier (quote alt))
 
-
+;; Display in help can use apple symbols or Emacs codes Aquamacs default is to use Apple
+;; display standard Emacs (and not standard Mac) modifier symbols
+;; Although this is a simple mapping and not looking at actual keys ie The opt key is shown as super even under Apple
+;; Use Mac modifier symbols if non-nil
+(setq ns-use-mac-modifier-symbols  t)
 
 (define-key osx-key-mode-map [end] 'end-of-line )
 (define-key osx-key-mode-map [home] 'beginning-of-line )
@@ -137,5 +158,7 @@
 ;;  Hyper
 (define-key osx-key-mode-map (kbd "H-1")  'delete-other-windows)
 (define-key osx-key-mode-map (kbd "H-0")  'delete-window)
+(define-key osx-key-mode-map (kbd "H-n") 'tabbar-move-current-buffer-to-new-frame)
 (define-key osx-key-mode-map (kbd "H-r") 'query-replace)
+(define-key osx-key-mode-map (kbd "H-s") 'sr-speedbar-toggle)
 (define-key osx-key-mode-map (kbd "H-t") 'treemacs)

@@ -28,12 +28,10 @@
 	(turn-on-haskell-indentation turn-on-font-lock imenu-add-menubar-index)) t)
  '(haskell-program-name "ghci")
  '(mail-setup-with-from t)
- '(make-backup-files t)
- '(ns-alternate-modifier (quote super))
  '(ns-right-alternate-modifier (quote super))
  '(ns-right-command-modifier (quote control))
  '(ns-tool-bar-display-mode (quote both) t)
- '(ns-tool-bar-size-mode (quote regular) t)
+ '(ns-tool-bar-size-mode nil t)
  '(nxml-slash-auto-complete-flag t)
  '(org-log-done (quote time))
  '(org-modules

@@ -32,7 +32,7 @@
 ;; Function key though can't be customized
 ;; Well seems that the screen describe key shows the keypress as per unswapped but swaps the binding
 (setq ns-function-modifier 'hyper)
-(setq ns-alternate-modifier (quote super))
+;; (setq ns-alternate-modifier (quote super))
 
 ;; (setq ns-command-modifier (quote control))
 ;; (setq ns-control-modifier (quote alt))
@@ -42,9 +42,9 @@
 
 ;; Display in help can use apple symbols or Emacs codes Aquamacs default is to use Apple
 ;; display standard Emacs (and not standard Mac) modifier symbols
+;; Although this is a simple mapping and not looking at actual keys ie The opt key is shown as super even under Apple
 ;; Use Mac modifier symbols if non-nil
-
-;; (setq ns-use-mac-modifier-symbols  nil)
+(setq ns-use-mac-modifier-symbols  t)
 
 (define-key osx-key-mode-map [end] 'end-of-line )
 (define-key osx-key-mode-map [home] 'beginning-of-line )

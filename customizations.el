@@ -29,6 +29,7 @@
  '(haskell-program-name "ghci")
  '(mail-setup-with-from t)
  '(make-backup-files t)
+ '(ns-alternate-modifier (quote super))
  '(ns-right-alternate-modifier (quote super))
  '(ns-right-command-modifier (quote control))
  '(ns-tool-bar-display-mode (quote both) t)

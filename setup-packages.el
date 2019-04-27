@@ -80,7 +80,7 @@
 (use-package key-chord
   :ensure t
   :commands key-chord-mode)
-;; Make all use[package use :ensure t
+;; Make all use-[package use :ensure t
 ;;(require 'use-package-ensure)
 ;;(setq use-package-always-ensure t)
 (use-package diminish   :ensure t   :demand t)
@@ -89,15 +89,7 @@
 ;; (require 'use-package-ensure)
 ;; (setq use-package-always-ensure t)
 
+(use-package use-package-hydra :ensure t)
+
 ;;(setq package-enable-at-startup  nil)
 ;;(package-initialize)
-
-;; '(package-archive-upload-base "/Users/mark/.cache/emacs-package")
-;;  '(package-archives
-;;    (quote
-;; 	(("gnu" . "http://elpa.gnu.org/packages/")
-;; 	 ("melpa-stable" . "http://melpa.org/packages/")
-;; 	 ("marmalade" . "http://marmalade-repo.org/packages/"))))
-;;  '(package-selected-packages
-;;    (quote
-;; 	(highlight-indent-guides json-mode smart-tabs-mode smart-tab ## python-mode ensime fish-mode)))

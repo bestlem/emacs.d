@@ -1,8 +1,3 @@
-;; #+PROPERTY:header-args :results output :session :cache yes :tangle yes :comments org :exports both
-
-
-
-
 ;; aquamacs setup
 ;; In init.el so more standard emacs name.
 ;; In Aquamacs loded from Preferences
@@ -45,3 +40,4 @@
 (load "common-setup") ; odds mainly variables
 (load "common-programming") ; modes for programming
 (load "common-keys")
+

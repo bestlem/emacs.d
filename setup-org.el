@@ -12,7 +12,9 @@
   :hydra (hydra-org-mode
 		  (:color teal)
 		  ""
+		  ("b" org-babel-tangle "Tangle buffer")
 		  ("c" hydra-org-template/body "Insert code")
+		  ("d" org-toggle-link-display "Show links")
 		  ("l" org-insert-link "link")
 		  ("g" org-set-tags-command "tags")
 		  ("t" org-todo "todo")

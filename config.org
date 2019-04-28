@@ -1,7 +1,8 @@
-;; #+PROPERTY:header-args :results output :session :cache yes :tangle yes :comments org :exports both
+#+PROPERTY:header-args :results output :session :cache yes :tangle yes :comments org :exports both
 
 
 
+#+begin_src emacs-lisp :tangle yes
 
 ;; aquamacs setup
 ;; In init.el so more standard emacs name.
@@ -45,3 +46,4 @@
 (load "common-setup") ; odds mainly variables
 (load "common-programming") ; modes for programming
 (load "common-keys")
+#+end_src

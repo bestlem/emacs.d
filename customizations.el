@@ -13,12 +13,26 @@
  '(aquamacs-additional-fontsets nil t)
  '(aquamacs-customization-version-id 310 t)
  '(aquamacs-tool-bar-user-customization nil t)
+ '(auto-fill-function nil t)
  '(auto-word-wrap-default-function nil)
  '(backup-directory-alist (quote (("." . ".~"))))
  '(cua-enable-cua-keys nil)
  '(custom-enabled-themes nil)
  '(delete-old-versions t)
  '(explicit-shell-file-name "/opt/local/bin/fish")
+ '(fringe-indicator-alist
+   (quote
+	((continuation nil nil)
+	 (truncation left-truncation right-truncation)
+	 (continuation left-continuation right-continuation)
+	 (overlay-arrow . right-triangle)
+	 (up . up-arrow)
+	 (down . down-arrow)
+	 (top top-left-angle top-right-angle)
+	 (bottom bottom-left-angle bottom-right-angle top-right-angle top-left-angle)
+	 (top-bottom left-bracket right-bracket top-right-angle top-left-angle)
+	 (empty-line . empty-line)
+	 (unknown . question-mark))) t)
  '(gnus-directory "~/Library/Application Support/Aquamacs Emacs/News")
  '(gnus-group-sort-function (quote (gnus-group-sort-by-rank)))
  '(haskell-font-lock-symbols t)
@@ -40,18 +54,17 @@
  '(org-todo-keywords (quote ((sequence "TODO" "|" "DONE" "LEAVE(@)"))))
  '(package-selected-packages
    (quote
-	(sr-speedbar which-key company elmacro ws-butlerz helm elisp-format origami comment-dwim-2 smex discover-my-major json-navigator json-mode treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ranger dired-toggle expand-region lispy aggressive-indent rainbow-delimiters gradle-mode groovy-imports groovy-mode ws-butler highlight-indent-guides diminish key-chord use-package)))
+	(org-bullets sr-speedbar which-key company elmacro ws-butlerz helm elisp-format origami comment-dwim-2 smex discover-my-major json-navigator json-mode treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ranger dired-toggle expand-region lispy aggressive-indent rainbow-delimiters gradle-mode groovy-imports groovy-mode ws-butler highlight-indent-guides diminish key-chord use-package)))
  '(py-auto-complete-p t)
  '(py-imenu-create-index-p t)
  '(py-imenu-show-method-args-p t)
  '(py-indent-tabs-mode t)
  '(select-enable-clipboard t)
  '(tabbar-mode t nil (tabbar))
- '(text-mode-hook
-   (quote
-	(turn-on-flyspell smart-spacing-mode auto-detect-wrap)))
+ '(text-mode-hook (quote (turn-on-flyspell set-word-wrap)))
  '(tool-bar-mode nil)
- '(visual-line-mode nil t))
+ '(visual-line-mode t t)
+ '(word-wrap t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -59,6 +72,7 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:stipple nil :background "White" :foreground "Black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "apple" :family "Menlo"))))
  '(emacs-lisp-mode-default ((t (:inherit prog-mode-default :height 120 :family "Fira Code"))) t)
+ '(org-block ((t (:inherit shadow :foreground "black" :family "Fira Code"))))
  '(org-mode-default ((t (:inherit outline-mode-default :stipple nil :strike-through nil :underline nil :slant normal :weight normal :height 180 :width normal :family "Georgia"))))
  '(python-mode-default ((t (:inherit prog-mode-default :height 120 :family "Fira Code"))) t))
 (put 'downcase-region 'disabled nil)

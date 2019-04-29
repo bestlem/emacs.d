@@ -61,7 +61,12 @@
       (`(t . _)
        (treemacs-git-mode 'simple)))
 	)
-
+  :hydra (mwb/hydra-treemacs-mode
+		  (:color teal)
+		  ""
+		  ("pc" treemacs-add-project-to-workspace "Create Project")
+		  ("pd" treemacs-remove-project-from-workspace  "Delete Project")
+		  ("q" nil "cancel"))
   :bind
   (:map global-map
         ("M-0"       . treemacs-select-window)
@@ -69,7 +74,9 @@
         ("C-x t t"   . treemacs)
         ("C-x t B"   . treemacs-bookmark)
         ("C-x t C-t" . treemacs-find-file)
-        ("C-x t M-t" . treemacs-find-tag)))
+        ("C-x t M-t" . treemacs-find-tag))
+  (:map treemacs-mode-map
+		("H-a" . mwb/hydra-treemacs-mode/body)))
 
 (use-package treemacs-projectile
   :after treemacs projectile
@@ -83,3 +90,6 @@
 (use-package treemacs-magit
   :after treemacs magit
   :ensure t)
+
+;; treemacs helpful hydra isn't as key-display can't deal with the modifier keys
+;; Plus ^p is not a good key for a modeumacs enhances it)

@@ -1,5 +1,5 @@
 ;; Control init environment
-;; These are speedup and safety changes but not Aquamacs has probably already taken most of the time.
+;; These are speedup and safety changes but note that  Aquamacs has probably already taken most of the time.
 
 ;; Elisps and init files have two ways of doing this. One is to put the whole init inside a let block but I want each src block to be runnable from the org file so not good. The other is to set and copy old values at the beginning then use an end hook to put them back. A long term alternative is to make the loader function do that work.
 ;; The time is probably not that useful - build on Aquamacs instead and there is an emacs profiler.
@@ -49,4 +49,16 @@
 (load "setup-packages") ; Package management
 (load "common-setup") ; odds mainly variables
 (load "common-programming") ; modes for programming
-(load "common-keys")
+
+;; Code to do loading
+;; Need to get the correct directory
+
+;; Function to load the code for this part of the init.
+;; Currently it just loads the .el of that name so could just be (load "load-mwb-init") but eventually it will get the data from load-mwb-init.org and tangle it and use that.
+
+(defun load-mwb-init (file-root)
+  "Load the relevant code. Currently just the same as load it loads
+<file-root>.el but eventually will load <file-root>.org"
+  (load file-root))
+
+(load "mwb-init-global-keys")

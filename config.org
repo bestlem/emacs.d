@@ -119,5 +119,25 @@ This is all the includes
 (load "setup-packages") ; Package management
 (load "common-setup") ; odds mainly variables
 (load "common-programming") ; modes for programming
-(load "common-keys")
+#+end_src
+
+** New loading
+
+*** Code to do loading
+Need to get the correct directory
+
+Function to load the code for this part of the init.
+Currently it just loads the .el of that name so could just be (load "load-mwb-init") but eventually it will get the data from load-mwb-init.org and tangle it and use that.
+
+See [[http://ergoemacs.org/emacs/organize_your_dot_emacs.html][Xah Lee get directory name for file]] for possible work around for user-emacs-directory
+#+begin_src emacs-lisp
+(defun load-mwb-init (file-root)
+  "Load the relevant code. Currently just the same as load it loads
+<file-root>.el but eventually will load <file-root>.org"
+  (load file-root))
+#+end_src
+
+#+begin_src emacs-lisp
+
+ (load "mwb-init-global-keys")
 #+end_src

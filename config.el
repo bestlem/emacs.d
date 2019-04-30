@@ -38,6 +38,10 @@
 
 (server-start)
 
+;; New ones
+
+(load-mwb-init "mwb-init-org-mode")
+
 ;; remains
 
 ;; common bits
@@ -58,4 +62,4 @@
 <file-root>.el but eventually will load <file-root>.org"
   (load file-root))
 
-(load "mwb-init-global-keys")
+(load-mwb-init "mwb-init-global-keys")

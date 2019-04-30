@@ -110,6 +110,13 @@ This is from [[ https://github.com/jwiegley/dot-emacs/blob/master/init.el#L1013]
 
 * Remains
 This is all the includes
+
+** New ones
+ #+begin_src emacs-lisp
+ (load-mwb-init "mwb-init-org-mode")
+
+ #+end_src
+
 ** remains
  #+begin_src emacs-lisp
 
@@ -138,5 +145,5 @@ See [[http://ergoemacs.org/emacs/organize_your_dot_emacs.html][Xah Lee get direc
 
 #+begin_src emacs-lisp
 
- (load "mwb-init-global-keys")
+ (load-mwb-init "mwb-init-global-keys")
 #+end_src

@@ -1,14 +1,9 @@
-;; #+TITLE Emacs configuration org Mode
-;; #+PROPERTY:header-args :results output :session :cache yes :tangle yes :comments org :exports both
-;; #+STARTUP: content
+;; Force load of new version
+;; [[https://github.com/jwiegley/use-package/issues/319#issuecomment-471274348][mzuther  fix]]
 
-
-;; For why not see https://www.reddit.com/r/emacs/comments/5sx7j0/how_do_i_get_usepackage_to_ignore_the_bundled/ddix2ta?utm_source=share&utm_medium=web2x
-;; (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
-
-;;  Forcing load of new not in Aquamacs
-;; https://github.com/jwiegley/use-package/issues/319#issuecomment-471274348
 (assq-delete-all 'org package--builtins)
+
+;; The use package setup
 
 (use-package
   org
@@ -16,7 +11,7 @@
   :hydra (hydra-org-mode
 		  (:color teal)
 		  ""
-		  ("c" mwb-hydra-org-code/body "_C_ode")
+		  ("c" mwb-hydra-org-code/body "Code")
 		  ("d" org-toggle-link-display "Show links")
 		  ("l" org-insert-link "link")
 		  ("g" org-set-tags-command "tags")
@@ -48,12 +43,14 @@
 							   (float-time
 								(time-since zz/pre-tangle-time)))))))
 
+;; Imenu to provide info for treemacs and contextual menu
 
-;; start imenu for  sidebar - also treemacs
 (add-hook 'org-mode-hook
-          (lambda () (imenu-add-to-menubar "Imenu")))
-
+		  (lambda () (imenu-add-to-menubar "Imenu")))
 (setq org-imenu-depth 6)
+
+;; Babel initialisation
+;; Code block behaviour - but also see customization for appearance
 
 ;;  Try making code blocks colorized
 ;; (require 'color)
@@ -69,15 +66,21 @@
 	  org-confirm-babel-evaluate nil
 	  org-edit-src-content-indentation 0)
 
+;; Pretify
+;; Make org mode look prettier. See also the customization
+
 (use-package org-bullets
   :ensure t
   :init (add-hook 'org-mode-hook 'org-bullets-mode))
+
+;; TODO Hydras for tangling
+;; The template one is broken by org-mode version 9m - I suspect I need to learn yasnippet
 
 (defhydra mwb-hydra-org-code
   (:color teal)
   ""
   ("i" hydra-org-template/body "Insert code") ; FIXME
-  ("t" org-babel-tangle "_T_angle buffer")
+  ("t" org-babel-tangle "Tangle buffer")
   ("q" nil "cancel"))
 
 ;;  From https://github.com/abo-abo/hydra/wiki/Org-mode-block-templates
@@ -173,7 +176,7 @@ Use a prefix arg to get regular RET. "
           (org-insert-heading)
         (beginning-of-line)
         (setf (buffer-substring
-               (line-beginning-position) (line-end-position)) "")
+			   (line-beginning-position) (line-end-position)) "")
         (org-return)))
      ((org-at-heading-p)
       (if (not (string= "" (org-element-property :title (org-element-context))))
@@ -181,18 +184,18 @@ Use a prefix arg to get regular RET. "
                  (org-insert-heading))
         (beginning-of-line)
         (setf (buffer-substring
-               (line-beginning-position) (line-end-position)) "")))
+			   (line-beginning-position) (line-end-position)) "")))
      ((org-at-table-p)
       (if (-any?
-           (lambda (x) (not (string= "" x)))
-           (nth
+		   (lambda (x) (not (string= "" x)))
+		   (nth
             (- (org-table-current-dline) 1)
             (org-table-to-lisp)))
           (org-return)
         ;; empty row
         (beginning-of-line)
         (setf (buffer-substring
-               (line-beginning-position) (line-end-position)) "")
+			   (line-beginning-position) (line-end-position)) "")
         (org-return)))
      (t
       (org-return)))))

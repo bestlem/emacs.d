@@ -1,16 +1,17 @@
 #+TITLE Emacs configuration
 #+PROPERTY:header-args :results output :session :cache yes :tangle yes :comments org :exports both
+#+STARTUP: content
 
-* Emacs init files
+* Overview
 
-** Overview
-OK I caught the bug to create an org mode file to document my init files.
+** Introduction
+ OK I caught the bug to create an org mode file to document my init files.
 
-The reason is not for the pretty files that you see on the web or github but that I was writing a few comments and realised that org mode looks nicer for those (no comment marker ; on lines) and you can deal in text mode for documentation.
+ The reason is not for the pretty files that you see on the web or github but that I was writing a few comments and realised that org mode looks nicer for those (no comment marker ; on lines) and you can deal in text mode for documentation.
 
-*** Use of org mode
+** Use of org mode
 
-**** Tangling
+*** Tangling
 Currently this is all being manually tangled and the generated
 config.el is being checked in as well.
 
@@ -26,7 +27,7 @@ Re tangling I am happy to end with just org files and generate elisp
 on the fly as I use GUIs and start emacs and leave it running - even
 if I use docker that would be via tramp so still the main emacs.
 
-**** Include
+*** Include
 I want separate files - so when fiddling a mode then I can see it git
 history easily what changed.
 Methods seem to be
@@ -38,7 +39,7 @@ Methods seem to be
 There are also loaders that optionally load - but as I just have one
 machine just load all.
 
-***** TODO Hack
+**** TODO Hack
 Eventual is probably based off nullman.net
 Start by tangle on save if in init dir [[https://emacs.stackexchange.com/a/20733/9874][SO answer]] and also do a
 starterkit loader that check date of el and org and regenerates if
@@ -53,16 +54,16 @@ Aquamacs though is old Aquamacs 3.4 GNU Emacs 25.3.50.1 Emacs is now on 26 and h
 *** user-emacs-directory
 This is the directory emacs reads and writers support files from. This is a mess as some are yours under version control and others are created on the fly. The ones on the fly can have the same name as packages and so stop loading (e.g. Tramp and Calc). There are several ways round this e.g. [[https://github.com/emacscollective/no-littering][No Littering]] Aquamacs does this by moving user-emacs-directory and putting the start dir on the load-path but also every possible directory so can't find it easily and hard codes paths and no use a directory so have to have our own const.
 
-** Control init
+* Control init
 This sets up variables and environment to run the init.
-**** Load order
+*** Load order
 Startup files aquamacs looks in are site-start.el then init.el and in a
 directory order not including ~/.emacs.d/
 Aquamacs loads Preferences.el I just make that load init.el so I could
 use a more standard emacs note that would need to deal with
 customizations as Aquamacs already has set that. Also see [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Init-File.html][Emacs manual
 on init-files]]
-**** Control init environment
+*** Control init environment
 These are speedup and safety changes but note that  Aquamacs has probably already taken most of the time.
 
 Elisps and init files have two ways of doing this. One is to put the whole init inside a let block but I want each src block to be runnable from the org file so not good. The other is to set and copy old values at the beginning then use an end hook to put them back. A long term alternative is to make the loader function do that work.
@@ -92,42 +93,40 @@ This is from [[ https://github.com/jwiegley/dot-emacs/blob/master/init.el#L1013]
              (garbage-collect)) t)
 
 #+end_src
+**** Emacs Lisp debugging
+ This slows things down so for debugging outside init.
 
+ #+begin_src emacs-lisp
 
-This slows things down so for debugging outside init.
+ (add-hook 'after-init-hook
+				(lambda () (setq debug-on-error t)))
+ #+end_src
+**** Emacs server
+ This is a simple server start - to allow emacsclient from Terminal. There are more complex starters.
+ #+begin_src emacs-lisp
 
-#+begin_src emacs-lisp
+ (server-start)
+ #+end_src
 
-(add-hook 'after-init-hook
-               (lambda () (setq debug-on-error t)))
-#+end_src
-
-This is a simple server start - to allow emacsclient from Terminal. There are more complex starters.
-#+begin_src emacs-lisp
-
-(server-start)
-#+end_src
-
-** Remains
+* Remains
 This is all the includes
+** remains
+ #+begin_src emacs-lisp
 
-#+begin_src emacs-lisp
 
 
+ ;; common bits
+ (load "setup-packages") ; Package management
+ (load "common-setup") ; odds mainly variables
+ (load "common-programming") ; modes for programming
+ #+end_src
 
-;; common bits
-(load "setup-packages") ; Package management
-(load "common-setup") ; odds mainly variables
-(load "common-programming") ; modes for programming
-#+end_src
-
-** New loading
-
-*** Code to do loading
+* New loading
+** Code to do loading
 Need to get the correct directory
 
 Function to load the code for this part of the init.
-Currently it just loads the .el of that name so could just be (load "load-mwb-init") but eventually it will get the data from load-mwb-init.org and tangle it and use that.
+Currently it just loads the .el of that name so could just be (load "load-mwb-init"). I now tangle all org-mode buffers on save. Eventually it will get the data from load-mwb-init.org and tangle it and use that.
 
 See [[http://ergoemacs.org/emacs/organize_your_dot_emacs.html][Xah Lee get directory name for file]] for possible work around for user-emacs-directory
 #+begin_src emacs-lisp

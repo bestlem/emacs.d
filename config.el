@@ -26,24 +26,19 @@
                    gc-cons-percentage 0.1)
              (garbage-collect)) t)
 
-
-
-
-;; This slows things down so for debugging outside init.
+;; Emacs Lisp debugging
+;;  This slows things down so for debugging outside init.
 
 
 (add-hook 'after-init-hook
-               (lambda () (setq debug-on-error t)))
+			   (lambda () (setq debug-on-error t)))
 
-
-
-;; This is a simple server start - to allow emacsclient from Terminal. There are more complex starters.
+;; Emacs server
+;;  This is a simple server start - to allow emacsclient from Terminal. There are more complex starters.
 
 (server-start)
 
-;; Remains
-;; This is all the includes
-
+;; remains
 
 ;; common bits
 (load "setup-packages") ; Package management
@@ -54,7 +49,9 @@
 ;; Need to get the correct directory
 
 ;; Function to load the code for this part of the init.
-;; Currently it just loads the .el of that name so could just be (load "load-mwb-init") but eventually it will get the data from load-mwb-init.org and tangle it and use that.
+;; Currently it just loads the .el of that name so could just be (load "load-mwb-init"). I now tangle all org-mode buffers on save. Eventually it will get the data from load-mwb-init.org and tangle it and use that.
+
+;; See [[http://ergoemacs.org/emacs/organize_your_dot_emacs.html][Xah Lee get directory name for file]] for possible work around for user-emacs-directory
 
 (defun load-mwb-init (file-root)
   "Load the relevant code. Currently just the same as load it loads

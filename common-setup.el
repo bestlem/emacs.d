@@ -13,7 +13,16 @@
     (goto-char (point-min))
     ( replace-string "\r\n" "\n" )))
 
+;;  Scratch buffer to org mode
+(setq initial-major-mode 'org-mode)
+(setq initial-scratch-message
+	  "This buffer is for notes you don't want to save, and for org mode.
+If you want to create a file, visit that file with C-x C-f,then enter the text in that file's own buffer.
 
+#+begin_src emacs-lisp
+
+#+end_src
+")
 ;; ODDS
 ;; ^k does line
 (setq kill-whole-line t)
@@ -64,7 +73,6 @@
 
 (load "setup-file-management")
 (load "setup-gnus")
-(load "setup-org")
 
 (load "setup-apperance")
 

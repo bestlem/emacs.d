@@ -6,6 +6,8 @@
 
 ;; The order of files is site-start.el cusomizations.el Preferences.el
 
+
 ;;(load "init.el") ; This should check for config.el and .org and make sure we have the latest
 (load "config.el")
-;; (load "config.old.el")
+
+(message "Emacs init-time %s" (emacs-init-time) )

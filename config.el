@@ -2,8 +2,8 @@
 ;; These are speedup and safety changes but note that  Aquamacs has probably already taken most of the time.
 
 ;; Elisps and init files have two ways of doing this. One is to put the whole init inside a let block but I want each src block to be runnable from the org file so not good. The other is to set and copy old values at the beginning then use an end hook to put them back. A long term alternative is to make the loader function do that work.
-;; The time is probably not that useful - build on Aquamacs instead and there is an emacs profiler.
-
+;; The time is probably not that useful - build on Aquamacs instead and there is an emacs profiler. I did get the Aquamacs nightly and that is much slower and displaying menus is an issue. I have changed accessibility in System Preferences->Privacy so we will see. Probably wait until mMacs 27 is out and use a plain emacs and see about spell checking
+;; The file-name-handler-alist is probably needed as some of the hooks slow things heavily
 
 ;; This is from [[ https://github.com/jwiegley/dot-emacs/blob/master/init.el#L1013][John Wiegley]]
 
@@ -28,10 +28,30 @@
 
 ;; Emacs Lisp debugging
 ;;  This slows things down so for debugging outside init.
+;; But for debugging init
 
 
 (add-hook 'after-init-hook
 			   (lambda () (setq debug-on-error t)))
+(setq debug-on-error t)
+
+;; Code to do loading
+;;   Need to get the correct directory
+
+;;   Function to load the code for this part of the init.
+;;   Currently it just loads the .el of that name so could just be (load "load-mwb-init"). I now tangle all org-mode buffers on save. Eventually it will get the data from load-mwb-init.org and tangle it and use that.
+
+;;   See [[http://ergoemacs.org/emacs/organize_your_dot_emacs.html][Xah Lee get directory name for file]] for possible work around for user-emacs-directory
+
+(defun load-mwb-init (file-root)
+  "Load the relevant code. Currently just the same as load it loads
+<file-root>.el but eventually will load <file-root>.org"
+  (load file-root))
+
+;; Packaging
+;; Old elisp
+
+(load "setup-packages") ; Package management
 
 ;; Emacs server
 ;;  This is a simple server start - to allow emacsclient from Terminal. There are more complex starters.
@@ -45,21 +65,10 @@
 ;; remains
 
 ;; common bits
-(load "setup-packages") ; Package management
 (load "common-setup") ; odds mainly variables
 (load "common-programming") ; modes for programming
 
-;; Code to do loading
-;; Need to get the correct directory
-
-;; Function to load the code for this part of the init.
-;; Currently it just loads the .el of that name so could just be (load "load-mwb-init"). I now tangle all org-mode buffers on save. Eventually it will get the data from load-mwb-init.org and tangle it and use that.
-
-;; See [[http://ergoemacs.org/emacs/organize_your_dot_emacs.html][Xah Lee get directory name for file]] for possible work around for user-emacs-directory
-
-(defun load-mwb-init (file-root)
-  "Load the relevant code. Currently just the same as load it loads
-<file-root>.el but eventually will load <file-root>.org"
-  (load file-root))
+;; The new versions to be loaded
+;; No comments as just open the files.
 
 (load-mwb-init "mwb-init-global-keys")

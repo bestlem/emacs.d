@@ -1,3 +1,8 @@
+#+TITLE Emacs configuration org Mode
+#+PROPERTY:header-args :results output :session :cache yes :tangle yes :comments org :exports both
+#+STARTUP: content
+
+#+begin_src emacs-lisp
 
 ;; For why not see https://www.reddit.com/r/emacs/comments/5sx7j0/how_do_i_get_usepackage_to_ignore_the_bundled/ddix2ta?utm_source=share&utm_medium=web2x
 ;; (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
@@ -194,3 +199,6 @@ Use a prefix arg to get regular RET. "
       (org-return)))))
 
 ;; (define-key org-mode-map (kbd "RET")  #'ha/org-return)
+
+
+#+end_src

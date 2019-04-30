@@ -6,12 +6,13 @@
 (auto-compression-mode t)
 
 ;; backups from https://www.emacswiki.org/emacs/ForceBackups et al
-(setq version-control t ;; Use version numbers for backups.
+(setq version-control t	   ;; Use version numbers for backups.
 	  kept-new-versions 10 ;; Number of newest versions to keep.
-	  kept-old-versions 0 ;; Number of oldest versions to keep.
+	  kept-old-versions 0  ;; Number of oldest versions to keep.
 	  delete-old-versions t ;; Don't ask to delete excess backup versions.
-	  backup-by-copying t ;; Copy all files, don't rename them.
+	  backup-by-copying t	;; Copy all files, don't rename them.
 	  vc-make-backup-files t ;; even if under version control
+	  make-backup-files t	 ;; Actually make the backups
 	  )
 
 ;;  backup directory is .~ set in cusomisation
@@ -23,15 +24,14 @@
 ;;  Seems to be OK
 
 (setq recentf-exclude (append recentf-exclude
-			  '("^/var/folders\\.*"
-				"COMMIT_EDITMSG\\'"
-				".*-autoloads\\.el\\'"
-				"[/\\]\\.elpa/"
-				)))
+							  '("^/var/folders\\.*"
+								"COMMIT_EDITMSG\\'"
+								".*-autoloads\\.el\\'"
+								"[/\\]\\.elpa/"
+								)))
 
-;;; dired
 
-;; Tremacs
+;; Treemacs
 ;;  first pass has all defaults even if not needed
 (use-package treemacs
   :ensure t

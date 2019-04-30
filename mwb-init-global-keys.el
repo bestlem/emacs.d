@@ -130,10 +130,10 @@
 ;; Hyper global key bindings
 
 ;;  Hyper
-(define-key osx-key-mode-map (kbd "H-1")  'delete-other-windows)
-(define-key osx-key-mode-map (kbd "H-0")  'delete-window)
-;; H-a is major mode specific Hydra so bound to mode keymap by use-packag :hydra
-(define-key osx-key-mode-map (kbd "H-n") 'tabbar-move-current-buffer-to-new-frame)
-(define-key osx-key-mode-map (kbd "H-r") 'query-replace)
-(define-key osx-key-mode-map (kbd "H-s") 'sr-speedbar-toggle)
-(define-key osx-key-mode-map (kbd "H-t") 'treemacs)
+	 (define-key osx-key-mode-map (kbd "H-1")  'delete-other-windows)
+	 (define-key osx-key-mode-map (kbd "H-0")  'delete-window)
+	 ;; H-a is major mode specific Hydra so bound to mode keymap by use-packag :hydra
+	 (define-key osx-key-mode-map (kbd "H-n") 'tabbar-move-current-buffer-to-new-frame)
+	 (define-key osx-key-mode-map (kbd "H-r") 'query-replace)
+; (define-key osx-key-mode-map (kbd "H-s") 'sr-speedbar-toggle)
+	 (define-key osx-key-mode-map (kbd "H-t") 'treemacs)

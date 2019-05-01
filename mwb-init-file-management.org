@@ -83,67 +83,142 @@ Aquamacs seems to turn this off sometimes in customization so need to investigat
   #+end_src
 * Project management
 Started as file management but actually deals with files and what is in them/ Treemacs looks at git so there are files that cannot be see so dired needed.
+** Projectile
+This add functions. I would use John Wiegley's setup but projectile hung
+So take from projectile
 #+begin_src emacs-lisp
-;; Treemacs
-;;  first pass has all defaults even if not needed
-(use-package treemacs
+(use-package
+  projectile
   :ensure t
-  :defer t
-  :init
-  (with-eval-after-load 'winum
-    (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
-  :config
-  (progn
-    (setq treemacs-collapse-dirs (if (executable-find "python3") 3 0)
-		  treemacs-display-in-side-window t
-		  treemacs-is-never-other-window nil
-		  treemacs-no-delete-other-windows t)
+  :pin melpa-stable
+  :config (define-key projectile-mode-map (kbd "H-p")
+			'projectile-command-map)
+  (projectile-mode 1))
+#+end_src
 
-	(add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?)
-    ;; The default width and height of the icons is 22 pixels. If you are
-    ;; using a Hi-DPI display, uncomment this to double the icon size.
-    ;;(treemacs-resize-icons 44)
+*** Matcha hydra
+ I really do not want all but for ease just do it from [[https://github.com/jojojames/matcha][Matcha]]
+ #+begin_src emacs-lisp
+ (defhydra matcha-projectile (:color blue :hint nil :idle 0)
+   "
 
-    (treemacs-follow-mode t)
-    (treemacs-filewatch-mode t)
-    (treemacs-fringe-indicator-mode t)
-    (pcase (cons (not (null (executable-find "git")))
-                 (not (null (executable-find "python3"))))
-      (`(t . t)
-	   (treemacs-git-mode 'deferred))
-      (`(t . _)
-	   (treemacs-git-mode 'simple)))
-	)
-  :hydra (mwb/hydra-treemacs-mode
-		  (:color teal)
-		  ""
-		  ("pc" treemacs-add-project-to-workspace "Create Project")
-		  ("pd" treemacs-remove-project-from-workspace  "Delete Project")
-		  ("q" nil "cancel"))
-  :bind
-  (:map global-map
-        ("M-0"       . treemacs-select-window)
-        ("C-x t 1"   . treemacs-delete-other-windows)
-        ("C-x t t"   . treemacs)
-        ("C-x t B"   . treemacs-bookmark)
-        ("C-x t C-t" . treemacs-find-file)
-        ("C-x t M-t" . treemacs-find-tag))
-  (:map treemacs-mode-map
-		("H-a" . mwb/hydra-treemacs-mode/body)))
-
-(use-package treemacs-projectile
-  :after treemacs projectile
-  :ensure t)
-
-(use-package treemacs-icons-dired
-  :after treemacs dired
-  :ensure t
-  :config (treemacs-icons-dired-mode))
-
-(use-package treemacs-magit
-  :after treemacs magit
-  :ensure t)
-
-;; treemacs helpful hydra isn't as key-display can't deal with the modifier keys
-;; Plus ^p is not a good key for a modeumacs enhances it)
+     Files             Search          Buffer             Do
+   ------------------------------------------------------------------------------
+     _f_ File          _a_ Ag          _b_ Switch        _g_ Magit
+     _l_ File dwim     _A_ Grep        _v_ Display       _P_ Commander
+     _r_ Recent file   _s_ Occur       _i_ IBuffer       _I_ Info
+     _d_ Dir           _S_ Replace     _K_ Kill all      _p_ Switch Project
+     _o_ Other         _t_ Find Tag
+     _u_ Test file     _T_ Make Tags
+     _h_ Root          _R_ Replace Regexp
+     Other Window      Run             Cache
+   ------------------------------------------------------------------------------
+     _F_ File          _U_ Test        _kc_ Clear
+     _L_ Dwim          _m_ Compile     _kk_ Add Current
+     _D_ Dir           _c_ Shell       _ks_ Cleanup
+     _O_ Other         _C_ Command     _kd_ Remove
+     _B_ Buffer
+ "
+   ("a" projectile-ag)
+   ("A" projectile-grep)
+   ("b" projectile-switch-to-buffer)
+   ("B" projectile-switch-to-buffer-other-window)
+   ("c" projectile-run-async-shell-command-in-root)
+   ("C" projectile-run-command-in-root)
+   ("d" projectile-find-dir)
+   ("D" projectile-find-dir-other-window)
+   ("f" projectile-find-file)
+   ("F" projectile-find-file-other-window)
+   ("g" projectile-vc)
+   ("h" projectile-dired)
+   ("I" projectile-project-info)
+   ("kc" projectile-invalidate-cache)
+   ("kd" projectile-remove-known-project)
+   ("kk" projectile-cache-current-file)
+   ("K" projectile-kill-buffers)
+   ("ks" projectile-cleanup-known-projects)
+   ("l" projectile-find-file-dwim)
+   ("L" projectile-find-file-dwim-other-window)
+   ("m" projectile-compile-project)
+   ("o" projectile-find-other-file)
+   ("O" projectile-find-other-file-other-window)
+   ("p" projectile-switch-project)
+   ("P" projectile-commander)
+   ("r" projectile-recentf)
+   ("R" projectile-replace-regexp)
+   ("s" projectile-multi-occur)
+   ("S" projectile-replace)
+   ("t" projectile-find-tag)
+   ("T" projectile-regenerate-tags)
+   ("u" projectile-find-test-file)
+   ("U" projectile-test-project)
+   ("v" projectile-display-buffer)
+   ("i" projectile-ibuffer))
  #+end_src
+** Treemacs
+This is the visual
+ #+begin_src emacs-lisp
+ ;; Treemacs
+ ;;  first pass has all defaults even if not needed
+ (use-package treemacs
+   :ensure t
+   :defer t
+   :init
+   (with-eval-after-load 'winum
+	 (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
+   :config
+   (progn
+	 (setq treemacs-collapse-dirs (if (executable-find "python3") 3 0)
+		   treemacs-display-in-side-window t
+		   treemacs-is-never-other-window nil
+		   treemacs-no-delete-other-windows t)
+
+	 (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?)
+	 ;; The default width and height of the icons is 22 pixels. If you are
+	 ;; using a Hi-DPI display, uncomment this to double the icon size.
+	 ;;(treemacs-resize-icons 44)
+
+	 (treemacs-follow-mode t)
+	 (treemacs-filewatch-mode t)
+	 (treemacs-fringe-indicator-mode t)
+	 (pcase (cons (not (null (executable-find "git")))
+				  (not (null (executable-find "python3"))))
+	   (`(t . t)
+		(treemacs-git-mode 'deferred))
+	   (`(t . _)
+		(treemacs-git-mode 'simple)))
+	 )
+   :hydra (mwb/hydra-treemacs-mode
+		   (:color teal)
+		   ""
+		   ("pp" matcha-projectile/body "Projectile" )
+		   ("pc" treemacs-add-project-to-workspace "Create Project")
+		   ("pd" treemacs-remove-project-from-workspace  "Delete Project")
+		   ("q" nil "cancel"))
+   :bind
+   (:map global-map
+		 ("M-0"       . treemacs-select-window)
+		 ("C-x t 1"   . treemacs-delete-other-windows)
+		 ("C-x t t"   . treemacs)
+		 ("C-x t B"   . treemacs-bookmark)
+		 ("C-x t C-t" . treemacs-find-file)
+		 ("C-x t M-t" . treemacs-find-tag))
+   (:map treemacs-mode-map
+		 ("H-a" . mwb/hydra-treemacs-mode/body)))
+
+ (use-package treemacs-projectile
+   :after treemacs projectile
+   :ensure t)
+
+ (use-package treemacs-icons-dired
+   :after treemacs dired
+   :ensure t
+   :config (treemacs-icons-dired-mode))
+
+ (use-package treemacs-magit
+   :after treemacs magit
+   :ensure t)
+
+ ;; treemacs helpful hydra isn't as key-display can't deal with the modifier keys
+ ;; Plus ^p is not a good key for a modeumacs enhances it)
+  #+end_src

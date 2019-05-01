@@ -27,6 +27,7 @@
 
 ;;;; flymake - syntax checking
 (use-package flymake
+  :disabled
   :diminish
   :hook ((sh-mode json-mode nxml-mode python-mode emacs-lisp-mode lisp-interaction-mode) . flymake-mode-on)
   :config (flymake-mode-on))
@@ -98,19 +99,9 @@ when point gets near either edge of the window."
 ;;
 ;;  --- make unique buffer names dependent on pathname
 ;;
-;(load "uniquify")
+										;(load "uniquify")
 ;;
 ;;
-;;  --- uncompress *.Z and *.gz files when visiting ---
-;;
-;; (autoload 'uncompress-while-visiting "uncompress"
-;;   "Temporary \"major mode\" used for .Z and .gz files, to uncompress them.")
-;; (setq auto-mode-alist
-;; 	  (cons '("\\.Z$" . uncompress-while-visiting) auto-mode-alist))
-;; (setq auto-mode-alist
-;; 	  (cons '("\\.gz$" . uncompress-while-visiting) auto-mode-alist))
-;; (setq auto-mode-alist
-;;       (cons '("\\.tgz$" . uncompress-while-visiting) auto-mode-alist))
 
 
 

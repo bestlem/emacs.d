@@ -42,11 +42,13 @@
 	(turn-on-haskell-indentation turn-on-font-lock imenu-add-menubar-index)) t)
  '(haskell-program-name "ghci")
  '(mail-setup-with-from t)
+ '(make-backup-files t)
  '(ns-right-alternate-modifier (quote super))
  '(ns-right-command-modifier (quote control))
  '(ns-tool-bar-display-mode (quote both) t)
  '(ns-tool-bar-size-mode nil t)
  '(nxml-slash-auto-complete-flag t)
+ '(org-babel-python-mode (quote python-mode))
  '(org-log-done (quote time))
  '(org-modules
    (quote
@@ -54,7 +56,7 @@
  '(org-todo-keywords (quote ((sequence "TODO" "|" "DONE" "LEAVE(@)"))))
  '(package-selected-packages
    (quote
-	(org-bullets sr-speedbar which-key company elmacro ws-butlerz helm elisp-format origami comment-dwim-2 smex discover-my-major json-navigator json-mode treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ranger dired-toggle expand-region lispy aggressive-indent rainbow-delimiters gradle-mode groovy-imports groovy-mode ws-butler highlight-indent-guides diminish key-chord use-package)))
+	(backup-each-save esup org-bullets sr-speedbar which-key company elmacro ws-butlerz helm elisp-format origami comment-dwim-2 smex discover-my-major json-navigator json-mode treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ranger dired-toggle expand-region lispy aggressive-indent rainbow-delimiters gradle-mode groovy-imports groovy-mode ws-butler highlight-indent-guides diminish key-chord use-package)))
  '(py-auto-complete-p t)
  '(py-imenu-create-index-p t)
  '(py-imenu-show-method-args-p t)
@@ -72,7 +74,9 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:stipple nil :background "White" :foreground "Black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "apple" :family "Menlo"))))
  '(emacs-lisp-mode-default ((t (:inherit prog-mode-default :height 120 :family "Fira Code"))) t)
- '(org-block ((t (:inherit shadow :foreground "black" :family "Fira Code"))))
+ '(org-block ((t (:inherit shadow :background "lemon chiffon" :foreground "black" :height 0.8 :family "Fira Code"))))
+ '(org-block-begin-line ((t (:inherit org-meta-line :foreground "blue"))))
+ '(org-block-end-line ((t (:inherit org-block-begin-line :foreground "blue"))))
  '(org-mode-default ((t (:inherit outline-mode-default :stipple nil :strike-through nil :underline nil :slant normal :weight normal :height 180 :width normal :family "Georgia"))))
  '(python-mode-default ((t (:inherit prog-mode-default :height 120 :family "Fira Code"))) t))
 (put 'downcase-region 'disabled nil)

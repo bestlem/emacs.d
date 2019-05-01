@@ -58,6 +58,11 @@
 
 (server-start)
 
+;; Emacs behaviour
+;; General emacs stuff - not common-setup used to have this but separate file might not make sense
+
+(load-mwb-init "mwb-init-file-management")
+
 ;; New ones
 
 (load-mwb-init "mwb-init-org-mode")

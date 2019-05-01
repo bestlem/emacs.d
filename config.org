@@ -134,6 +134,11 @@ Old elisp
  (server-start)
  #+end_src
 
+**** Emacs behaviour
+General emacs stuff - not common-setup used to have this but separate file might not make sense
+ #+begin_src emacs-lisp
+ (load-mwb-init "mwb-init-file-management")
+ #+end_src
 * Remains
 This is all the includes
 

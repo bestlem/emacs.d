@@ -7,7 +7,7 @@
   :delight rainbow-delimiters-mode
   :hook (prog-mode . rainbow-delimiters-mode))
 
-;; Add lisp interaction mode
+;; Lispy
 
 (use-package
   lispy
@@ -15,6 +15,11 @@
   :config
   (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
   (add-hook 'lisp-interaction-mode-hook (lambda () (lispy-mode 1))))
+
+;; and interaction hydra
+
+(use-package lispy-mnemonic)
+(add-hook 'emacs-lisp-mode-hook 'lispy-mnemonic-mode)
 
 ;; Formatter
 ;; I am not certain this is needed now as other things do this

@@ -18,14 +18,22 @@ Although that should be in prog mode
 	#+end_src
 
 *** Add lisp interaction mode
-	#+begin_src emacs-lisp
- (use-package
-   lispy
-   :ensure t
-   :config
-   (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
-   (add-hook 'lisp-interaction-mode-hook (lambda () (lispy-mode 1))))
-	#+end_src
+
+**** Lispy
+	 #+begin_src emacs-lisp
+  (use-package
+	lispy
+	:ensure t
+	:config
+	(add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
+	(add-hook 'lisp-interaction-mode-hook (lambda () (lispy-mode 1))))
+	 #+end_src
+
+**** and interaction hydra
+	 #+begin_src emacs-lisp
+	 (use-package lispy-mnemonic)
+	 (add-hook 'emacs-lisp-mode-hook 'lispy-mnemonic-mode)
+	 #+end_src
 ** Emacs Lisp
 *** Formatter
 I am not certain this is needed now as other things do this

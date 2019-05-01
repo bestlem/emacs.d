@@ -1,0 +1,3 @@
+[submodule "site-lisp/lispy-mnemonic"]
+	path = site-lisp/lispy-mnemonic
+	url = git@github.com:itsjeyd/lispy-mnemonic.git

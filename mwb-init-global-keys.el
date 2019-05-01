@@ -126,12 +126,85 @@
 (global-set-key [S-f7]  'next-error )
 (global-set-key [S-f8] 'previous-error)
 
+;; Matcha
+;; Global hydra from [[https://github.com/jojojames/matcha][Matcha github]] but no idea how good. I din;t want it all but that was the easiest.
+;; ALso see [[https://github.com/jerrypnz/major-mode-hydra.el][Major mode hydra]] for similar but graps a major mode hydra from somewhere.
+
+(use-package matcha
+  :config
+  (matcha-setup))
+
+
+(defhydra hydra-space (:color blue :hint nil :idle .2)
+  "
+
+   Space: %s`default-directory
+
+    Find              Manage             Do                Mode
+  ------------------------------------------------------------------------------
+    _f_ File       _w_ Window      _s_ Search           _m_ Mode
+    _b_ Buffer     _g_ Git         _R_ Refactor         _d_ Debug
+    _r_ Recent     _p_ Project     _v_ Edit Init.el     _e_ Eval
+    _n_ Sidebar    _y_ System      _o_ Org              _t_ Test
+    _SPC_ Any      _U_ Undo        _u_ Universal Arg..  _=_ Format
+
+"
+  ("1" digit-argument)
+  ("2" digit-argument)
+  ("3" digit-argument)
+  ("4" digit-argument)
+  ("5" digit-argument)
+  ("6" digit-argument)
+  ("7" digit-argument)
+  ("8" digit-argument)
+  ("9" digit-argument)
+  ("0" digit-argument)
+  ("u" universal-argument)
+  ("f" +find-file-dwim)
+  ("b" +buffers-dwim)
+  ("r" +recentf-dwim)
+  ("w" hydra-window/body)
+  ("-" split-window-below)
+  ("|" split-window-right)
+  ("\\" split-window-right)
+  ("h" evil-window-left)
+  ("l" evil-window-right)
+  ("k" evil-window-up)
+  ("j" evil-window-down)
+  ("." evil-next-buffer)
+  (">" evil-prev-buffer :color red)
+  ("," evil-prev-buffer)
+  ("<" evil-prev-buffer :color red)
+  ("<backspace>" delete-window)
+  ("DEL" delete-window) ;; For terminals.
+  ("s" hydra-search/body)
+  ("v" (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
+  ("U" undo-tree-visualize)
+  ("x" kill-buffer)
+  ("y" hydra-system/body)
+  ("n" dired-sidebar-toggle-sidebar)
+  ("p" matcha-projectile/body)
+  ("g" +show-vc-hydra)
+  ("SPC" counsel-fzf)
+  ("RET" quickrun)
+  (";" counsel-M-x)
+  (":" eval-expression)
+  ("o" hydra-org-space/body)
+  ("S" +save-all-buffers)
+  ("R" matcha-run-refactor-command)
+  ("=" matcha-run-format-command)
+  ("d" matcha-run-debug-command)
+  ("m" matcha-run-mode-command)
+  ("e" matcha-run-eval-command)
+  ("t" matcha-run-test-command))
+
 ;; Hyper global key bindings
 
 ;;  Hyper
 	 (define-key osx-key-mode-map (kbd "H-1")  'delete-other-windows)
 	 (define-key osx-key-mode-map (kbd "H-0")  'delete-window)
 	 ;; H-a is major mode specific Hydra so bound to mode keymap by use-packag :hydra
+     (define-key osx-key-mode-map (kbd "H-m") 'hydra-space/body)q
 	 (define-key osx-key-mode-map (kbd "H-n") 'tabbar-move-current-buffer-to-new-frame)
 	 (define-key osx-key-mode-map (kbd "H-r") 'query-replace)
 ; (define-key osx-key-mode-map (kbd "H-s") 'sr-speedbar-toggle)

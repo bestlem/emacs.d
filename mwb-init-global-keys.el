@@ -1,6 +1,5 @@
 ;; Which Key
-;;  Package [[https://github.com/justbur/emacs-which-key][which-key]] shows after a key press what you can do next (not useful for control-C as there are too many to show and you can't scroll).
-
+;; Package [[https://github.com/justbur/emacs-which-key][which-key]] shows after a key press what you can do next (not useful for control-C as there are too many to show and you can't scroll).
 
 (use-package
   which-key
@@ -22,7 +21,7 @@
 (setq ns-function-modifier 'hyper)
 
 ;; Display in help and menus
-;;  Note that you can control what the screen displays A for Alt or ⌥. Emacs is not that clever and looks at what it is told and not what appears on the key but I am back to the normal bindings so does not matter. Although hydra seems to object. Set the value to non=nil to use Mac symbols.
+;; Note that you can control what the screen displays A for Alt or ⌥. Emacs is not that clever and looks at what it is told and not what appears on the key but I am back to the normal bindings so does not matter. Although hydra seems to object. Set the value to non=nil to use Mac symbols.
 
 (setq ns-use-mac-modifier-symbols  t)
 

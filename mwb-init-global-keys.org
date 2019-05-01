@@ -9,8 +9,10 @@ The obvious is global key but......Aquamacs has added a map or two mainly to pro
 
 This [[https://stackoverflow.com/a/27441815/151019][Stack Overlow answer]] suggests use of bind-key  if we do not want to be overridden.
 
-*** TODO Replace the key definition functions with a mwb one that can switch between global-key and the Aquamacs way
+ALso see [[https://github.com/noctuid/general.el][General package]]
 
+*** TODO Replace the key definition functions with a mwb one that can switch between global-key and the Aquamacs way
+But see general package as well
 ** Keyboard Thoughts
 
 *** History
@@ -37,38 +39,37 @@ I discovered [[https://github.com/abo-abo/hydra][Hydra Mode]] which allows you t
 
 So hyper-A is now a mode hydra key and I have started defining a hydra on that,
 
-** Implementation
+* Implementation
 
-*** Which Key
- Package [[https://github.com/justbur/emacs-which-key][which-key]] shows after a key press what you can do next (not useful for control-C as there are too many to show and you can't scroll).
+** Which Key
+Package [[https://github.com/justbur/emacs-which-key][which-key]] shows after a key press what you can do next (not useful for control-C as there are too many to show and you can't scroll).
+#+begin_src emacs-lisp
+   (use-package
+	 which-key
+	 :ensure t
+	 :init (which-key-mode)
+	 :config (which-key-setup-side-window-right-bottom)
+	 (setq which-key-sort-order
+		   'which-key-key-order-alpha
+		   which-key-side-window-max-width
+		   0.33
+		   which-key-idle-delay
+		   0.05)
+	 :diminish which-key-mode)
+#+end_src
 
- #+begin_src emacs-lisp
-	(use-package
-	  which-key
-	  :ensure t
-	  :init (which-key-mode)
-	  :config (which-key-setup-side-window-right-bottom)
-	  (setq which-key-sort-order
-			'which-key-key-order-alpha
-			which-key-side-window-max-width
-			0.33
-			which-key-idle-delay
-			0.05)
-	  :diminish which-key-mode)
- #+end_src
-
-*** Mac modifier key Bindings
+** Mac modifier key Bindings
 We have fn available so have it as hyper and then use Karabiner  (try iCue later) to map Caps Lock and Window key to hyper. Super is used sometimes so UI think is confusing and as noted sequence of keys (emacs key-chord and hydra) is better.
 I don't use the right hand modifier keys so not set separately.
 #+begin_src emacs-lisp
 	 (setq ns-function-modifier 'hyper)
 #+end_src
-**** Display in help and menus
- Note that you can control what the screen displays A for Alt or ⌥. Emacs is not that clever and looks at what it is told and not what appears on the key but I am back to the normal bindings so does not matter. Although hydra seems to object. Set the value to non=nil to use Mac symbols.
- #+begin_src emacs-lisp
-	 (setq ns-use-mac-modifier-symbols  t)
- #+end_src
-**** Home/End/Paging
+*** Display in help and menus
+Note that you can control what the screen displays A for Alt or ⌥. Emacs is not that clever and looks at what it is told and not what appears on the key but I am back to the normal bindings so does not matter. Although hydra seems to object. Set the value to non=nil to use Mac symbols.
+#+begin_src emacs-lisp
+	(setq ns-use-mac-modifier-symbols  t)
+#+end_src
+*** Home/End/Paging
  #+begin_src emacs-lisp
 	 (define-key osx-key-mode-map [end] 'end-of-line )
 	 (define-key osx-key-mode-map [home] 'beginning-of-line )
@@ -104,7 +105,7 @@ I don't use the right hand modifier keys so not set separately.
 
 
 #+end_src
-**** Kill buffer
+** Kill buffer
 Normally when you are in a buffer you do ^x-^k to kill the current buffer but emacs asks you for the name. [[http://pragmaticemacs.com/emacs/dont-kill-buffer-kill-this-buffer-instead/][Pragmatic Emacs]] suggests this.
   #+begin_src emacs-lisp
 	 ;;  By default C-x k runs the command kill-buffer which prompts you for which buffer you want to kill, defaulting to the current active buffer. I don’t know about you, but I rarely want to kill a different buffer than the one I am looking at, so I rebind C-x k to kill-this-buffer which just kills the current buffer without prompting (unless there are unsaved changes).
@@ -115,7 +116,7 @@ Normally when you are in a buffer you do ^x-^k to kill the current buffer but em
 
 	 (define-key osx-key-mode-map (kbd "C-x k") 'bjm/kill-this-buffer)
 #+end_src
-**** Deleting and return
+** Deleting and return
   #+begin_src emacs-lisp
 
 
@@ -129,13 +130,13 @@ Normally when you are in a buffer you do ^x-^k to kill the current buffer but em
 
 	 ;(global-set-key [?\A-backspace] 'undo )
 #+end_src
-**** Goto line
+** Goto line
 Now these are very old
   #+begin_src emacs-lisp
 	 (global-set-key (kbd "M-g") 'goto-line)
 	 (global-set-key (kbd "A-u") 'revert-buffer )
 #+end_src
-**** Let search continue with arrows
+** Let search continue with arrows
 But point seems to be messed up and does Aquamacs do something.
 [[http://ergoemacs.org/emacs/emacs_isearch_by_arrow_keys.html][Xah Lee  again]] set arrow keys in isearch. left/right is backward/forward, up/down is history. press Return to exit
 #+begin_src emacs-lisp
@@ -150,7 +151,7 @@ But point seems to be messed up and does Aquamacs do something.
 	   (define-key minibuffer-local-isearch-map (kbd "<left>") 'isearch-reverse-exit-minibuffer)
 	   (define-key minibuffer-local-isearch-map (kbd "<right>") 'isearch-forward-exit-minibuffer))
 #+end_src
-**** Function keys
+** Function keys
 Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in emacs. Just discovered that GNU say what F1-4 should be and seemed good for keyboard macros not my F7. ALso I need to forget F4 for grep but then again I need to see what grep I want. But a hydra will be better allowing start/start/go and format as elisp.
 
 #+begin_src emacs-lisp
@@ -176,7 +177,7 @@ Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in e
 	 (global-set-key [S-f8] 'previous-error)
 
 #+end_src
-**** Old bindings
+** Old bindings
 These will be old NeXT Pizza bindings
 
 
@@ -186,7 +187,7 @@ These will be old NeXT Pizza bindings
 	 ;(global-set-key "\M-q" 'query-replace)
 	 ;(global-set-key "\M-r" 'replace-string)
 	 ;(global-set-key "\M-i" 'indent-region)
-**** Hyper global key bindings
+** Hyper global key bindings
 #+begin_src emacs-lisp
 
 	 ;;  Hyper

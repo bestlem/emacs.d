@@ -1,0 +1,56 @@
+#+TITLE Emacs configuration - lisp
+#+PROPERTY:header-args :results output :session :cache yes :tangle yes :comments org :exports both
+#+STARTUP: content
+
+* Lisp running environment
+We might try a few but Emacs Lisp is the only one currently
+
+** Common to all
+
+*** Make parentheses pretty
+Although that should be in prog mode
+	#+begin_src emacs-lisp
+ (use-package
+   rainbow-delimiters
+   :ensure t
+   :delight rainbow-delimiters-mode
+   :hook (prog-mode . rainbow-delimiters-mode))
+	#+end_src
+
+*** Add lisp interaction mode
+	#+begin_src emacs-lisp
+ (use-package
+   lispy
+   :ensure t
+   :config
+   (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
+   (add-hook 'lisp-interaction-mode-hook (lambda () (lispy-mode 1))))
+	#+end_src
+** Emacs Lisp
+*** Formatter
+I am not certain this is needed now as other things do this
+#+begin_src  emacs-lisp
+(use-package
+	elisp-format
+	:ensure t)
+#+end_src
+*** Protect system emacs lisp from editing
+Idea come from [[https://github.com/purcell/emacs.d][A Resonable Emacs]]
+**** Increase list to exclude Aquamacs etc.
+#+begin_src emacs-lisp
+
+   (defun sanityinc/maybe-set-bundled-elisp-readonly ()
+	 "If this elisp appears to be part of Emacs, then disallow editing."
+	 (when (and (buffer-file-name)
+				(string-match-p "\\.el\\.gz\\'" (buffer-file-name)))
+       (setq buffer-read-only t)
+       (view-mode 1)))
+
+   (add-hook 'emacs-lisp-mode-hook 'sanityinc/maybe-set-bundled-elisp-readonly)
+#+end_src
+*** Keyboard Macros
+Well not really lisp but much can be converted to it
+**** Show as emacs lisp
+   #+begin_src emacs-lisp
+   (use-package elmacro :ensure t)
+   #+end_src

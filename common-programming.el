@@ -40,7 +40,8 @@
 		   'after-init-hook
 		   'global-company-mode))
 
-(load "setup-lisp-env")
+(mwb-init-load "mwb-init-lisp")
+
 (load "setup-java-env")
 (load "setup-python")
 (load "setup-git")

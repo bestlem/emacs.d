@@ -1,11 +1,13 @@
-;; Well just elisp for new
+;; Make parentheses pretty
+;; Although that should be in prog mode
 
-;; Make parens pretty
 (use-package
   rainbow-delimiters
   :ensure t
   :delight rainbow-delimiters-mode
   :hook (prog-mode . rainbow-delimiters-mode))
+
+;; Add lisp interaction mode
 
 (use-package
   lispy
@@ -14,19 +16,24 @@
   (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
   (add-hook 'lisp-interaction-mode-hook (lambda () (lispy-mode 1))))
 
-(use-package
-  elisp-format
-  :ensure t)
+;; Formatter
+;; I am not certain this is needed now as other things do this
 
-;; From https://github.com/purcell/emacs.d/blob/master/lisp/init-lisp.el
+(use-package
+	elisp-format
+	:ensure t)
+
+;; Increase list to exclude Aquamacs etc.
+
 (defun sanityinc/maybe-set-bundled-elisp-readonly ()
   "If this elisp appears to be part of Emacs, then disallow editing."
   (when (and (buffer-file-name)
-             (string-match-p "\\.el\\.gz\\'" (buffer-file-name)))
+			 (string-match-p "\\.el\\.gz\\'" (buffer-file-name)))
     (setq buffer-read-only t)
     (view-mode 1)))
 
 (add-hook 'emacs-lisp-mode-hook 'sanityinc/maybe-set-bundled-elisp-readonly)
 
-;; Show keyboard macro as elisp
+;; Show as emacs lisp
+
 (use-package elmacro :ensure t)

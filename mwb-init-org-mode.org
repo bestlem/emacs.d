@@ -91,9 +91,14 @@ The template one is broken by org-mode version 9m - I suspect I need to learn ya
  (defhydra mwb-hydra-org-code
    (:color teal)
    ""
+   ("e" org-edit-special "Edit the code")
    ("i" hydra-org-template/body "Insert code") ; FIXME
    ("t" org-babel-tangle "Tangle buffer")
    ("q" nil "cancel"))
+
+ #+end_src
+** TODO Messed up code hydra
+ #+begin_src emacs-lisp
 
  ;;  From https://github.com/abo-abo/hydra/wiki/Org-mode-block-templates
  (defhydra hydra-org-template (:color blue :hint nil)

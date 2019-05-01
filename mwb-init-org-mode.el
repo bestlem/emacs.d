@@ -79,9 +79,12 @@
 (defhydra mwb-hydra-org-code
   (:color teal)
   ""
+  ("e" org-edit-special "Edit the code")
   ("i" hydra-org-template/body "Insert code") ; FIXME
   ("t" org-babel-tangle "Tangle buffer")
   ("q" nil "cancel"))
+
+;; TODO Messed up code hydra
 
 ;;  From https://github.com/abo-abo/hydra/wiki/Org-mode-block-templates
 (defhydra hydra-org-template (:color blue :hint nil)

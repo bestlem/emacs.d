@@ -39,11 +39,11 @@
 ;;   Need to get the correct directory
 
 ;;   Function to load the code for this part of the init.
-;;   Currently it just loads the .el of that name so could just be (load "load-mwb-init"). I now tangle all org-mode buffers on save. Eventually it will get the data from load-mwb-init.org and tangle it and use that.
+;;   Currently it just loads the .el of that name so could just be (load "mwb-init-load"). I now tangle all org-mode buffers on save. Eventually it will get the data from mwb-init-load.org and tangle it and use that.
 
 ;;   See [[http://ergoemacs.org/emacs/organize_your_dot_emacs.html][Xah Lee get directory name for file]] for possible work around for user-emacs-directory
 
-(defun load-mwb-init (file-root)
+(defun mwb-init-load (file-root)
   "Load the relevant code. Currently just the same as load it loads
 <file-root>.el but eventually will load <file-root>.org"
   (load file-root))
@@ -61,11 +61,11 @@
 ;; Emacs behaviour
 ;; General emacs stuff - not common-setup used to have this but separate file might not make sense
 
-(load-mwb-init "mwb-init-file-management")
+(mwb-init-load "mwb-init-file-management")
 
 ;; New ones
 
-(load-mwb-init "mwb-init-org-mode")
+(mwb-init-load "mwb-init-org-mode")
 
 ;; remains
 
@@ -76,4 +76,4 @@
 ;; The new versions to be loaded
 ;; No comments as just open the files.
 
-(load-mwb-init "mwb-init-global-keys")
+(mwb-init-load "mwb-init-global-keys")

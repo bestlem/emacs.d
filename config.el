@@ -1,12 +1,4 @@
-;; Control init environment
-;; These are speedup and safety changes but note that  Aquamacs has probably already taken most of the time.
-
-;; Elisps and init files have two ways of doing this. One is to put the whole init inside a let block but I want each src block to be runnable from the org file so not good. The other is to set and copy old values at the beginning then use an end hook to put them back. A long term alternative is to make the loader function do that work.
-;; The time is probably not that useful - build on Aquamacs instead and there is an emacs profiler. I did get the Aquamacs nightly and that is much slower and displaying menus is an issue. I have changed accessibility in System Preferences->Privacy so we will see. Probably wait until mMacs 27 is out and use a plain emacs and see about spell checking
-;; The file-name-handler-alist is probably needed as some of the hooks slow things heavily
-
-;; This is from [[ https://github.com/jwiegley/dot-emacs/blob/master/init.el#L1013][John Wiegley]]
-
+;; [[file:~/Library/Preferences/Aquamacs%20Emacs/config.org::*Control%20init%20environment][Control init environment:1]]
 (defconst emacs-start-time (current-time))
 
 (defvar file-name-handler-alist-old file-name-handler-alist)
@@ -25,55 +17,61 @@
                    gc-cons-threshold 800000
                    gc-cons-percentage 0.1)
              (garbage-collect)) t)
+;; Control init environment:1 ends here
 
-;; Emacs Lisp debugging
-;;  This slows things down so for debugging outside init.
-;; But for debugging init
-
-
+;; [[file:~/Library/Preferences/Aquamacs%20Emacs/config.org::*Emacs%20Lisp%20debugging][Emacs Lisp debugging:1]]
 (add-hook 'after-init-hook
-			   (lambda () (setq debug-on-error t)))
-(setq debug-on-error t)
+				(lambda () (setq debug-on-error t)))
+; (setq debug-on-error t)
+;; Emacs Lisp debugging:1 ends here
 
-;; Code to do loading
-;;   Need to get the correct directory
-
-;;   Function to load the code for this part of the init.
-;;   Currently it just loads the .el of that name so could just be (load "mwb-init-load"). I now tangle all org-mode buffers on save. Eventually it will get the data from mwb-init-load.org and tangle it and use that.
-
-;;   See [[http://ergoemacs.org/emacs/organize_your_dot_emacs.html][Xah Lee get directory name for file]] for possible work around for user-emacs-directory
-
+;; [[file:~/Library/Preferences/Aquamacs%20Emacs/config.org::*Code%20to%20do%20loading][Code to do loading:1]]
 (defun mwb-init-load (file-root)
   "Load the relevant code. Currently just the same as load it loads
 <file-root>.el but eventually will load <file-root>.org"
   (load file-root))
+;; Code to do loading:1 ends here
 
-;; Packaging
-;; Old elisp
-
+;; [[file:~/Library/Preferences/Aquamacs%20Emacs/config.org::*Packaging][Packaging:1]]
 (load "setup-packages") ; Package management
+;; Packaging:1 ends here
 
-;; Emacs server
-;;  This is a simple server start - to allow emacsclient from Terminal. There are more complex starters.
+;; [[file:~/Library/Preferences/Aquamacs%20Emacs/config.org::*Emacs%20server][Emacs server:1]]
+(use-package server
+  :ensure nil
+  :hook (after-init . server-mode))
+;; Emacs server:1 ends here
 
-(server-start)
-
-;; Emacs behaviour
-;; General emacs stuff - not common-setup used to have this but separate file might not make sense
-
-(mwb-init-load "mwb-init-file-management")
-
-;; New ones
-
-(mwb-init-load "mwb-init-org-mode")
-
-;; remains
-
+;; [[file:~/Library/Preferences/Aquamacs%20Emacs/config.org::*Emacs%20behaviour][Emacs behaviour:1]]
 ;; common bits
 (load "common-setup") ; odds mainly variables
+;; Emacs behaviour:1 ends here
+
+;; [[file:~/Library/Preferences/Aquamacs%20Emacs/config.org::*System%20management][System management:1]]
+(mwb-init-load "mwb-init-file-management")
+;; System management:1 ends here
+
+;; [[file:~/Library/Preferences/Aquamacs%20Emacs/config.org::*Org%20Mode][Org Mode:1]]
+(mwb-init-load "mwb-init-org-mode")
+;; Org Mode:1 ends here
+
+;; [[file:~/Library/Preferences/Aquamacs%20Emacs/config.org::*Epub%20reading][Epub reading:1]]
+;; Epub reader
+(use-package nov
+  :ensure t
+  :mode ("\\.epub\\'" . nov-mode)
+  :preface
+  (defun my-nov-setup ()
+	(visual-line-mode 1)
+	(face-remap-add-relative 'variable-pitch :family "Times New Roman" :height 1.5)
+	:hook (nov-mode . my-nov-setup)))
+;; Epub reading:1 ends here
+
+;; [[file:~/Library/Preferences/Aquamacs%20Emacs/config.org::*Programming%20modes][Programming modes:1]]
+;; common bits
 (load "common-programming") ; modes for programming
+;; Programming modes:1 ends here
 
-;; The new versions to be loaded
-;; No comments as just open the files.
-
+;; [[file:~/Library/Preferences/Aquamacs%20Emacs/config.org::*Key%20binding][Key binding:1]]
 (mwb-init-load "mwb-init-global-keys")
+;; Key binding:1 ends here

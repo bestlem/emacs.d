@@ -1,5 +1,5 @@
 #+TITLE Emacs configuration
-#+PROPERTY:header-args :results output :session :cache yes :tangle yes :comments org :exports both
+#+PROPERTY:header-args :results output :session :cache yes :tangle yes :comments link :exports both
 #+STARTUP: content
 
 * Overview
@@ -8,6 +8,8 @@
  OK I caught the bug to create an org mode file to document my init files.
 
  The reason is not for the pretty files that you see on the web or github but that I was writing a few comments and realised that org mode looks nicer for those (no comment marker ; on lines) and you can deal in text mode for documentation.
+
+I would note that my programming style is to have lots of small functions. With org-mode I can execute code from a block and not from a tangle. Unfortunately for init files use-package wants you to pout all code into one lisp form so making comments away from code.
 
 ** Use of org mode
 
@@ -27,6 +29,13 @@ Re tangling I am happy to end with just org files and generate elisp
 on the fly as I use GUIs and start emacs and leave it running - even
 if I use docker that would be via tramp so still the main emacs.
 
+*** Problems
+
+**** TODO Spaces
+ Current babel code encodes files with spaces by http encoding so result is not the sanme as the start. I think that this is not required in tangle but that is a code change. Safest fix is to move init files but need to deal with customisation
+
+**** TODO Links
+I tried to include all the org text in the source code but that adds extra links which seem to defeat detangle - but could be space related
 *** Include
 I want separate files - so when fiddling a mode then I can see it git
 history easily what changed.
@@ -56,8 +65,17 @@ Aquamacs though is old Aquamacs 3.4 GNU Emacs 25.3.50.1 Emacs is now on 26 and h
 *** user-emacs-directory
 This is the directory emacs reads and writers support files from. This is a mess as some are yours under version control and others are created on the fly. The ones on the fly can have the same name as packages and so stop loading (e.g. Tramp and Calc). There are several ways round this e.g. [[https://github.com/emacscollective/no-littering][No Littering]] Aquamacs does this by moving user-emacs-directory and putting the start dir on the load-path but also every possible directory so can't find it easily and hard codes paths and no use a directory so have to have our own const.
 
-* Control init
-This sets up variables and environment to run the init.
+ Aquamacs does doup a lot into its directory and maes use-emacs-directory always this even if the config files are elsewhere.
+
+Now text based things donm't like spaces (programmers are lazy) I want a structured text editor
+The issue here is when tangling the references to files are encoded to remove spaces so the directopry becomes ~/Library/Preferences/Aquamacs%20Emacs so riund tripping fails.
+
+**** TODO Need to move all init files into a path that has no spaces
+
+**** TODO Look at xak lee's get filename codes
+
+* Implement
+Full init
 *** Load order
 Startup files aquamacs looks in are site-start.el then init.el and in a
 directory order not including ~/.emacs.d/
@@ -65,6 +83,8 @@ Aquamacs loads Preferences.el I just make that load init.el so I could
 use a more standard emacs note that would need to deal with
 customizations as Aquamacs already has set that. Also see [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Init-File.html][Emacs manual
 on init-files]]
+
+
 *** Control init environment
 These are speedup and safety changes but note that  Aquamacs has probably already taken most of the time.
 
@@ -103,7 +123,7 @@ But for debugging init
 
  (add-hook 'after-init-hook
 				(lambda () (setq debug-on-error t)))
- (setq debug-on-error t)
+; (setq debug-on-error t)
  #+end_src
 
 **** Code to do loading
@@ -120,47 +140,63 @@ But for debugging init
 	(load file-root))
   #+end_src
 
+*** Emacs environment
+
 **** Packaging
-Old elisp
-  #+begin_src emacs-lisp
+ Old elisp
+   #+begin_src emacs-lisp
 
- (load "setup-packages") ; Package management
-  #+end_src
+  (load "setup-packages") ; Package management
+   #+end_src
 
-**** Emacs server
+*** Emacs server
  This is a simple server start - to allow emacsclient from Terminal. There are more complex starters.
  #+begin_src emacs-lisp
-
- (server-start)
+(use-package server
+  :ensure nil
+  :hook (after-init . server-mode))
  #+end_src
 
-**** Emacs behaviour
+*** Emacs behaviour
 General emacs stuff - not common-setup used to have this but separate file might not make sense
  #+begin_src emacs-lisp
- (mwb-init-load "mwb-init-file-management")
- #+end_src
-* Remains
-This is all the includes
-
-** New ones
- #+begin_src emacs-lisp
- (mwb-init-load "mwb-init-org-mode")
-
- #+end_src
-
-** remains
- #+begin_src emacs-lisp
-
-
-
  ;; common bits
  (load "common-setup") ; odds mainly variables
+ #+end_src
+*** Major modes
+
+***** System management
+Interfacing with the operating system
+  #+begin_src emacs-lisp
+  (mwb-init-load "mwb-init-file-management")
+  #+end_src
+
+***** Text modes
+****** Org Mode
+	 #+begin_src emacs-lisp
+	 (mwb-init-load "mwb-init-org-mode")
+	 #+end_src
+
+****** Epub reading
+	   #+begin_src emacs-lisp
+	   ;; Epub reader
+	   (use-package nov
+		 :ensure t
+		 :mode ("\\.epub\\'" . nov-mode)
+		 :preface
+		 (defun my-nov-setup ()
+		   (visual-line-mode 1)
+		   (face-remap-add-relative 'variable-pitch :family "Times New Roman" :height 1.5)
+		   :hook (nov-mode . my-nov-setup)))
+	   #+end_src
+***** Programming modes
+Includes structured data
+#+begin_src emacs-lisp
+ ;; common bits
  (load "common-programming") ; modes for programming
  #+end_src
-
-* New loading
-** The new versions to be loaded
-No comments as just open the files.
-#+begin_src emacs-lisp
-(mwb-init-load "mwb-init-global-keys")
-#+end_src
+*** Key binding
+  No comments as just open the files.
+  #+begin_src emacs-lisp
+  (mwb-init-load "mwb-init-global-keys")
+  #+end_src

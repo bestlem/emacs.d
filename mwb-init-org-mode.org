@@ -1,5 +1,5 @@
 #+TITLE Emacs configuration org Mode
-#+PROPERTY:header-args :results output :session :cache yes :tangle yes :comments org :exports both
+#+PROPERTY:header-args :results output :session :cache yes :tangle yes :comments links :exports both
 #+STARTUP: content
 * Start using org mode
 This is my first attempt at learning it.
@@ -9,7 +9,7 @@ This is a large config and might be easier to document if not all put in a use-p
 * Loading
 org-mode is a pain as we need a newer than aquamacs supplies and also there are recommendations to use an even later version. Also re packaging emacs package.el reads already built stuff others e.g. straight.el don't and that could be a problem with org-mode. There are reasons not to use the org repo but Elpa - [[https://www.reddit.com/r/emacs/comments/5sx7j0/how_do_i_get_usepackage_to_ignore_the_bundled/ddix2ta/?utm_source=share&utm_medium=web2x][from Reddit]] basically possible security issues so I am with ELPA and missing org-contrib.
 ** Force load of new version
-[[https://github.com/jwiegley/use-package/issues/319#issuecomment-471274348][mzuther  fix]]
+[[https://github.com/jwiegley/use-package/issues/319#issuecomment-471274348][mzuther  fix]] to load via package
  #+begin_src emacs-lisp
 (assq-delete-all 'org package--builtins)
  #+end_src
@@ -30,28 +30,14 @@ org-mode is a pain as we need a newer than aquamacs supplies and also there are 
    :after hydra
    :bind (:map org-mode-map
 			   ("H-a" . hydra-org-mode/body))
-   :hook
-										 ;  Warning this does need some modification - and I need to understand it
-   ;; From https://github.com/zzamboni/dot-emacs/blob/master/init.org#literate-programming-using-org-babel
-   (org-mode . (lambda ()
-				 (add-hook
-				  'after-save-hook
-				  'org-babel-tangle
-				  'run-at-end
-				  'only-in-org-mode)))
+   :hook  (org-mode . (lambda ()
+						(add-hook
+						 'after-save-hook
+						 'org-babel-tangle
+						 'run-at-end
+						 'only-in-org-mode)))
 
-   ;;  I add hooks to measure and report how long the tangling took.
-
-   (org-babel-pre-tangle . (lambda ()
-							 (setq zz/pre-tangle-time
-								   (current-time))))
-   (org-babel-post-tangle . (lambda ()
-							  (message
-							   "org-babel-tangle took %s"
-							   (format
-								"%.2f seconds"
-								(float-time
-								 (time-since zz/pre-tangle-time)))))))
+   )
  #+end_src
 ** Setup outside use-package
 *** Imenu to provide info for treemacs and contextual menu

@@ -1,9 +1,4 @@
-;; Force load of new version
-;; [[https://github.com/jwiegley/use-package/issues/319#issuecomment-471274348][mzuther  fix]]
-
 (assq-delete-all 'org package--builtins)
-
-;; The use package setup
 
 (use-package
   org
@@ -20,37 +15,18 @@
   :after hydra
   :bind (:map org-mode-map
 			  ("H-a" . hydra-org-mode/body))
-  :hook
-										;  Warning this does need some modification - and I need to understand it
-  ;; From https://github.com/zzamboni/dot-emacs/blob/master/init.org#literate-programming-using-org-babel
-  (org-mode . (lambda ()
-				(add-hook
-				 'after-save-hook
-				 'org-babel-tangle
-				 'run-at-end
-				 'only-in-org-mode)))
+  :hook  (org-mode . (lambda ()
+					   (add-hook
+						'after-save-hook
+						'org-babel-tangle
+						'run-at-end
+						'only-in-org-mode)))
 
-  ;;  I add hooks to measure and report how long the tangling took.
-
-  (org-babel-pre-tangle . (lambda ()
-							(setq zz/pre-tangle-time
-								  (current-time))))
-  (org-babel-post-tangle . (lambda ()
-							 (message
-							  "org-babel-tangle took %s"
-							  (format
-							   "%.2f seconds"
-							   (float-time
-								(time-since zz/pre-tangle-time)))))))
-
-;; Imenu to provide info for treemacs and contextual menu
+  )
 
 (add-hook 'org-mode-hook
 		  (lambda () (imenu-add-to-menubar "Imenu")))
 (setq org-imenu-depth 6)
-
-;; Babel initialisation
-;; Code block behaviour - but also see customization for appearance
 
 ;;  Try making code blocks colorized
 ;; (require 'color)
@@ -66,15 +42,9 @@
 	  org-confirm-babel-evaluate nil
 	  org-edit-src-content-indentation 0)
 
-;; Pretify
-;; Make org mode look prettier. See also the customization
-
 (use-package org-bullets
   :ensure t
   :init (add-hook 'org-mode-hook 'org-bullets-mode))
-
-;; TODO Hydras for tangling
-;; The template one is broken by org-mode version 9m - I suspect I need to learn yasnippet
 
 (defhydra mwb-hydra-org-code
   (:color teal)
@@ -83,8 +53,6 @@
   ("i" hydra-org-template/body "Insert code") ; FIXME
   ("t" org-babel-tangle "Tangle buffer")
   ("q" nil "cancel"))
-
-;; TODO Messed up code hydra
 
 ;;  From https://github.com/abo-abo/hydra/wiki/Org-mode-block-templates
 (defhydra hydra-org-template (:color blue :hint nil)

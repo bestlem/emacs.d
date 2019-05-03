@@ -83,6 +83,13 @@ Aquamacs loads Preferences.el I just make that load init.el so I could
 use a more standard emacs note that would need to deal with
 customizations as Aquamacs already has set that. Also see [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Init-File.html][Emacs manual
 on init-files]]
+From  aquamacs-get-custom-file-dotemacs-warning
+;; %s
+;; Warning: After loading this .emacs file, Aquamacs will also load
+;; customizations from `custom-file' (customizations.el). Any settings there
+;; will override those made here.
+;; Consider moving your startup settings to the Preferences.el file, which
+;; is loaded after `custom-file':
 
 
 *** Control init environment

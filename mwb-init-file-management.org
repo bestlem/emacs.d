@@ -1,6 +1,7 @@
 #+TITLE Emacs configuration - file management
-#+PROPERTY:header-args :results output :session :cache yes :tangle yes :comments org :exports both
+#+PROPERTY:header-args :results output :session :cache yes :tangle yes :comments link :exports both
 #+STARTUP: content
+
 
 * TODO Trash
 MacOs needs specific trash management not just mv to ~/.Trash
@@ -87,15 +88,14 @@ Started as file management but actually deals with files and what is in them/ Tr
 This add functions. I would use John Wiegley's setup but projectile hung
 So take from projectile
 #+begin_src emacs-lisp
+(use-package ripgrep :ensure t)
 (use-package
   projectile
   :ensure t
-  :pin melpa-stable
   :config (define-key projectile-mode-map (kbd "H-p")
 			'projectile-command-map)
   (projectile-mode 1))
 #+end_src
-
 *** Matcha hydra
  I really do not want all but for ease just do it from [[https://github.com/jojojames/matcha][Matcha]]
  #+begin_src emacs-lisp

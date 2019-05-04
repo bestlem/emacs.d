@@ -45,7 +45,7 @@
  '(org-log-done (quote time))
  '(org-modules
    (quote
-	(org-crypt org-docview org-eww org-gnus org-id org-info org-irc org-mhe org-mouse org-tempo org-mac-link org-panel)))
+	(org-crypt org-eww org-gnus org-id org-info org-irc org-mouse org-tempo org-mac-link org-panel)))
  '(org-src-ask-before-returning-to-edit-buffer nil)
  '(org-src-window-setup (quote current-window))
  '(org-todo-keywords (quote ((sequence "TODO" "|" "DONE" "LEAVE(@)"))))

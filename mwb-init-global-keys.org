@@ -9,14 +9,14 @@ The obvious is global key but......Aquamacs has added a map or two mainly to pro
 
 This [[https://stackoverflow.com/a/27441815/151019][Stack Overlow answer]] suggests use of bind-key  if we do not want to be overridden.
 
-ALso see [[https://github.com/noctuid/general.el][General package]]
+ALso see [[https://github.com/noctuid/general.el][General package]] but see [[https://github.com/noctuid/general.el/issues/10][comparison]] with bind-key from use package so stick to bind
 
 *** TODO Replace the key definition functions with a mwb one that can switch between global-key and the Aquamacs way
-But see general package as well
+Use bond-key
 ** Keyboard Thoughts
 
 *** History
-I used Teletypes at some stage in the begging or at least very clicky keyboards. My first professional and heavy programming was in APL so I am used to odd layouts (IBM 3278) and clicky keys. My DOS editor was microemacs so learn some of the control xs xc and ae but not all keyboards have arrow keys.
+I used Teletypes at some stage in the beginning or at least very clicky keyboards. My first professional and heavy programming was in APL so I am used to odd layouts (IBM 3278) and clicky keys. My DOS editor was microemacs so learn some of the control xs xc and ae.
 
 This is really the main piece of Emacs customization I have done over the years. I do not have full history before 2008 which is for Aquamacs and by that stage I had forgotten what all the key definitions were. The rcs log was from 2002 and that was 1.1.1.17 so quite a bit there but even that would have been a conversion to OSX, from my work using NT and  Sun (Linux was all server) and a NeXT PC.
 
@@ -30,11 +30,11 @@ These keys are what the \?H bindings were and I had forgotten and probably remov
 *** Keyboard usage.
 Following Xah Lee's comments and seeing [[http://xahlee.info/kbd/space-cadet_keyboard.html][The Space Cadet Keyboard]] which is what emacs was implemented on and they keys outwards of space are control, Meta, Special and Hyper. SO I tried bindin so it went control, meta, super and caps lock as hyper but I am too used to the Apple bindinhg so went back to Command, Meta and control with caps lock as hyper (and right Windows key). However the control key is difficult to hit.
 
-**** Xah Lee bracket binding
+**** TODO Xah Lee bracket binding
 Alt-J etc as suggested [[http://xahlee.info/kbd/best_way_to_insert_brackets.html][here]]
 
 **** Typing style
-I can't touch type but seem to have two modes. One is two yr more finger for text. Then a mode switch to alter things where I have a right hand on the mouse and left with little finger near caps lock, next on a etc. Thus ⌘zxcvasd are easy most of those are Apple keys, similarly the alt versions are OK but emacs does use that. The control ones are difficult. The Hyper ones are OK.
+I can't touch type but seem to have two modes. One is two or more finger for text. Then a mode switch to alter things where I have a right hand on the mouse and left with thumb on ⌘, little finger near caps lock, next on a etc. Thus ⌘zxcvasd are easy most of those are Apple keys, similarly the alt versions are OK but emacs does use that. The control ones are difficult. The Hyper ones are OK.
 I discovered [[https://github.com/abo-abo/hydra][Hydra Mode]] which allows you to define keys and a menu to show what they do. I realised that for a new to me mode I could bind the most interesting functions to a hydra to help me learn what the mode does and also cut down on control-C (That's interrupt, isn't it 🤣must bind control-C to control-G as I have wanted that for ages)
 
 So hyper-A is now a mode hydra key and I have started defining a hydra on that,
@@ -162,7 +162,6 @@ Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in e
 	 ;; (global-set-key [f4] 'grep )
 	 (global-set-key [f5] 'compile )
 	 (global-set-key [S-f4] 'grep )
-
 	 ;; These are the VC6 ones - not used for 15 years so can learn new ones,
 	 ;; (global-set-key [kp-f3] 'gdb)
 	 ;; (global-set-key [f12] 'gud-step )
@@ -262,16 +261,17 @@ ALso see [[https://github.com/jerrypnz/major-mode-hydra.el][Major mode hydra]] f
 #+end_src
 ** Hyper global key bindings
 #+begin_src emacs-lisp
+(define-key osx-key-mode-map (kbd "H-1")  'delete-other-windows)
+(define-key osx-key-mode-map (kbd "H-0")  'delete-window)
+;; H-a is major mode specific Hydra so bound to mode keymap by use-packag :hydra
+(define-key osx-key-mode-map (kbd "H-m") 'hydra-space/body)
+(define-key osx-key-mode-map (kbd "H-n") 'tabbar-move-current-buffer-to-new-frame)
+(define-key osx-key-mode-map (kbd "H-r") 'query-replace)
+										; (define-key osx-key-mode-map (kbd "H-s") 'sr-speedbar-toggle)
+(define-key osx-key-mode-map (kbd "H-t") 'treemacs)
 
-	 ;;  Hyper
-	 (define-key osx-key-mode-map (kbd "H-1")  'delete-other-windows)
-	 (define-key osx-key-mode-map (kbd "H-0")  'delete-window)
-	 ;; H-a is major mode specific Hydra so bound to mode keymap by use-packag :hydra
-     (define-key osx-key-mode-map (kbd "H-m") 'hydra-space/body)
-	 (define-key osx-key-mode-map (kbd "H-n") 'tabbar-move-current-buffer-to-new-frame)
-	 (define-key osx-key-mode-map (kbd "H-r") 'query-replace)
-; (define-key osx-key-mode-map (kbd "H-s") 'sr-speedbar-toggle)
-	 (define-key osx-key-mode-map (kbd "H-t") 'treemacs)
+(bind-key (kbd "H-s") 'org-edit-src-exit org-src-mode-map)
+(bind-key (kbd "H-s") 'org-edit-special org-mode-map)
 
 
 	 #+end_src

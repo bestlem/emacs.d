@@ -112,7 +112,6 @@
 ;; (global-set-key [f4] 'grep )
 (global-set-key [f5] 'compile )
 (global-set-key [S-f4] 'grep )
-
 ;; These are the VC6 ones - not used for 15 years so can learn new ones,
 ;; (global-set-key [kp-f3] 'gdb)
 ;; (global-set-key [f12] 'gud-step )
@@ -200,12 +199,14 @@
 
 ;; Hyper global key bindings
 
-;;  Hyper
-	 (define-key osx-key-mode-map (kbd "H-1")  'delete-other-windows)
-	 (define-key osx-key-mode-map (kbd "H-0")  'delete-window)
-	 ;; H-a is major mode specific Hydra so bound to mode keymap by use-packag :hydra
-     (define-key osx-key-mode-map (kbd "H-m") 'hydra-space/body)
-	 (define-key osx-key-mode-map (kbd "H-n") 'tabbar-move-current-buffer-to-new-frame)
-	 (define-key osx-key-mode-map (kbd "H-r") 'query-replace)
-; (define-key osx-key-mode-map (kbd "H-s") 'sr-speedbar-toggle)
-	 (define-key osx-key-mode-map (kbd "H-t") 'treemacs)
+(define-key osx-key-mode-map (kbd "H-1")  'delete-other-windows)
+(define-key osx-key-mode-map (kbd "H-0")  'delete-window)
+;; H-a is major mode specific Hydra so bound to mode keymap by use-packag :hydra
+(define-key osx-key-mode-map (kbd "H-m") 'hydra-space/body)
+(define-key osx-key-mode-map (kbd "H-n") 'tabbar-move-current-buffer-to-new-frame)
+(define-key osx-key-mode-map (kbd "H-r") 'query-replace)
+										; (define-key osx-key-mode-map (kbd "H-s") 'sr-speedbar-toggle)
+(define-key osx-key-mode-map (kbd "H-t") 'treemacs)
+
+(bind-key (kbd "H-s") 'org-edit-src-exit org-src-mode-map)
+(bind-key (kbd "H-s") 'org-edit-special org-mode-map)

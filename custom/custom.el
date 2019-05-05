@@ -1,10 +1,3 @@
-
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
-;(package-initialize)
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -52,11 +45,13 @@
  '(org-log-done (quote time))
  '(org-modules
    (quote
-	(org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-mouse)))
+	(org-crypt org-eww org-gnus org-id org-info org-irc org-mouse org-tempo org-mac-link org-panel)))
+ '(org-src-ask-before-returning-to-edit-buffer nil)
+ '(org-src-window-setup (quote current-window))
  '(org-todo-keywords (quote ((sequence "TODO" "|" "DONE" "LEAVE(@)"))))
  '(package-selected-packages
    (quote
-	(backup-each-save esup org-bullets sr-speedbar which-key company elmacro ws-butlerz helm elisp-format origami comment-dwim-2 smex discover-my-major json-navigator json-mode treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ranger dired-toggle expand-region lispy aggressive-indent rainbow-delimiters gradle-mode groovy-imports groovy-mode ws-butler highlight-indent-guides diminish key-chord use-package)))
+	(ripgrep gitignore-mode gitconfig-mode nov manual matcha org use-package-hydra backup-each-save esup org-bullets sr-speedbar which-key company elmacro ws-butlerz helm elisp-format origami comment-dwim-2 smex discover-my-major json-navigator json-mode treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ranger dired-toggle expand-region lispy aggressive-indent rainbow-delimiters gradle-mode groovy-imports groovy-mode ws-butler highlight-indent-guides diminish key-chord use-package)))
  '(py-auto-complete-p t)
  '(py-imenu-create-index-p t)
  '(py-imenu-show-method-args-p t)
@@ -75,8 +70,7 @@
  '(default ((t (:stipple nil :background "White" :foreground "Black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "apple" :family "Menlo"))))
  '(emacs-lisp-mode-default ((t (:inherit prog-mode-default :height 120 :family "Fira Code"))) t)
  '(org-block ((t (:inherit shadow :background "lemon chiffon" :foreground "black" :height 0.8 :family "Fira Code"))))
- '(org-block-begin-line ((t (:inherit org-meta-line :foreground "blue"))))
+ '(org-block-begin-line ((t (:inherit org-meta-line :foreground "blue" :weight normal))))
  '(org-block-end-line ((t (:inherit org-block-begin-line :foreground "blue"))))
  '(org-mode-default ((t (:inherit outline-mode-default :stipple nil :strike-through nil :underline nil :slant normal :weight normal :height 180 :width normal :family "Georgia"))))
  '(python-mode-default ((t (:inherit prog-mode-default :height 120 :family "Fira Code"))) t))
-(put 'downcase-region 'disabled nil)

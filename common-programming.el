@@ -23,7 +23,8 @@
   :diminish ws-butler-mode
   :hook ((prog-mode org-mode) . ws-butler-mode ))
 
-(electric-indent-mode +1)
+;; As we have aggressive indent we don't want this
+;; (electric-indent-mode +1)
 
 ;;;; flymake - syntax checking
 (use-package flymake

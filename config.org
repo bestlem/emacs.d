@@ -229,6 +229,33 @@ General emacs stuff - not common-setup used to have this but separate file might
  ;; common bits
  (load "common-setup") ; odds mainly variables
  #+end_src
+
+**** Registers
+I haven't used before but might try with hydra from [[https://sriramkswamy.github.io/dotemacs/#orgheadline245][Hydra heavy init]]
+#+begin_src emacs-lisp
+(defhydra sk/hydra-registers (:color blue
+									 :hint nil)
+  "
+ _a_: append     _c_: copy-to    _j_: jump       _r_: rectangle-copy   _q_: quit
+ _i_: insert     _n_: number-to  _f_: frameset   _w_: window-config
+ _+_: increment  _p_: point-to
+  "
+  ("a" append-to-register)
+  ("c" copy-to-register)
+  ("i" insert-register)
+  ("f" frameset-to-register)
+  ("j" jump-to-register)
+  ("n" number-to-register)
+  ("r" copy-rectangle-to-register)
+  ("w" window-configuration-to-register)
+  ("+" increment-register)
+  ("p" point-to-register)
+  ("q" nil :color blue))
+
+(bind-key "M-r" 'sk/hydra-registers/body)
+
+
+#+end_src
 *** Major modes
 
 ***** System management

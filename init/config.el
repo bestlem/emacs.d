@@ -91,6 +91,29 @@ Main reason to use is so that I can put init under version control and the rest 
 (load "common-setup") ; odds mainly variables
 ;; Emacs behaviour:1 ends here
 
+;; [[file:~/Library/Preferences/Emacs/config.org::*Registers][Registers:1]]
+(defhydra sk/hydra-registers (:color blue
+									 :hint nil)
+  "
+ _a_: append     _c_: copy-to    _j_: jump       _r_: rectangle-copy   _q_: quit
+ _i_: insert     _n_: number-to  _f_: frameset   _w_: window-config
+ _+_: increment  _p_: point-to
+  "
+  ("a" append-to-register)
+  ("c" copy-to-register)
+  ("i" insert-register)
+  ("f" frameset-to-register)
+  ("j" jump-to-register)
+  ("n" number-to-register)
+  ("r" copy-rectangle-to-register)
+  ("w" window-configuration-to-register)
+  ("+" increment-register)
+  ("p" point-to-register)
+  ("q" nil :color blue))
+
+(bind-key "M-r" 'sk/hydra-registers/body)
+;; Registers:1 ends here
+
 ;; [[file:~/Library/Preferences/Emacs/config.org::*System%20management][System management:1]]
 (mwb-init-load "mwb-init-file-management")
 ;; System management:1 ends here

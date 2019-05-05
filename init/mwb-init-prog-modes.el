@@ -1,39 +1,42 @@
-;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org][No heading:1]]
+;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*Highlight%20indents][Highlight indents:1]]
 (use-package highlight-indent-guides
   :ensure t
   :diminish highlight-indent-guides-mode
   :config
-
-(setq highlight-indent-guides-method 'fill)
+  (setq highlight-indent-guides-method 'fill)
   ;; Indent character samples: ┃| ┆ ┊
   (setq highlight-indent-guides-character ?\┃)
   (setq highlight-indent-guides-auto-odd-face-perc 50)
   (setq highlight-indent-guides-auto-even-face-perc 20)
   (setq highlight-indent-guides-auto-character-face-perc 20)
-  :hook ( prog-mode . highlight-indent-guides-mode))
+  :hook (prog-mode . highlight-indent-guides-mode))
+;; Highlight indents:1 ends here
 
+;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*Aggressive%20indent][Aggressive indent:1]]
 ;;  Aggressive indent make indents as you type
 (use-package
   aggressive-indent
   :ensure t
   :hook (emacs-lisp-mode . aggressive-indent-mode))
+;; Aggressive indent:1 ends here
 
-;; kill whitespace at end of edited line
+;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*Whitespace%20at%20end%20of%20line][Whitespace at end of line:1]]
 (use-package ws-butler
   :ensure t
   :diminish ws-butler-mode
   :hook ((prog-mode org-mode) . ws-butler-mode ))
+;; Whitespace at end of line:1 ends here
 
-;; As we have aggressive indent we don't want this
-;; (electric-indent-mode +1)
-
+;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*Flymake][Flymake:1]]
 ;;;; flymake - syntax checking
 (use-package flymake
   :disabled
   :diminish
   :hook ((sh-mode json-mode nxml-mode python-mode emacs-lisp-mode lisp-interaction-mode) . flymake-mode-on)
   :config (flymake-mode-on))
+;; Flymake:1 ends here
 
+;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*Completion][Completion:1]]
 ;;  Start completion
 (use-package
   company
@@ -41,33 +44,44 @@
   :config (add-hook
 		   'after-init-hook
 		   'global-company-mode))
+;; Completion:1 ends here
 
+;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*Lisp][Lisp:1]]
 (mwb-init-load "mwb-init-lisp")
+;; Lisp:1 ends here
 
+;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*Build%20systems][Build systems:1]]
 (load "setup-java-env")
+;; Build systems:1 ends here
+
+;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*Python][Python:1]]
 (load "setup-python")
+;; Python:1 ends here
+
+;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*Git][Git:1]]
 (load "setup-git")
+;; Git:1 ends here
+
+;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*Structured%20data][Structured data:1]]
 (load "setup-structured-data.el")
+;; Structured data:1 ends here
 
+;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*SQL][SQL:1]]
 (load "setup-sql")
+;; SQL:1 ends here
 
+;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*C][C:1]]
 ;; objective C
 (add-to-list 'auto-mode-alist '("\\.h$" . objc-mode) )
 (add-to-list 'auto-mode-alist '("\\.m$" . objc-mode))
 (add-to-list 'auto-mode-alist '("\\.mm$" . objc-mode))
+;; C:1 ends here
 
-;(defun my-objc-hook ()
-;  "Ny objc-settings"
-;;   (define-key py-mode-map [return] 'newline-and-indent )
-;;   (define-key py-mode-map [C-return] 'newline )
-;)
-;; perl
-;; perl mode set up
-
+;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*Perl][Perl:1]]
 (setq auto-mode-alist
 	  (cons '("\\.pl$" . perl-mode) auto-mode-alist))
 (setq auto-mode-alist
-      (cons '("\\.pm$" . perl-mode) auto-mode-alist))
+	  (cons '("\\.pm$" . perl-mode) auto-mode-alist))
 
 ;; set keys
 ;(load-library "perldb")
@@ -93,23 +107,4 @@
 ;;   (setq perldb-command-name "/run/pd/packages/perl/5.003/bin/perl")
 ;; )
 ;; (add-hook 'perldb-mode-hook 'my-perldb-mode-hook)
-
-;;
-(autoload 'hscroll-mode "hscroll"
-  "In HScroll mode, truncated lines will automatically scroll left or right
-when point gets near either edge of the window."
-  t)
-;;
-;;  --- make unique buffer names dependent on pathname
-;;
-										;(load "uniquify")
-;;
-;;
-
-
-
-(load "setup-haskell-env")
-
-;; (smart-tabs-insinuate 'c 'c++ 'java 'javascript 'cperl 'python
-;; 					  'ruby 'nxml)
-;; No heading:1 ends here
+;; Perl:1 ends here

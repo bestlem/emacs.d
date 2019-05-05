@@ -168,8 +168,8 @@ This is the visual
 	 (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
    :config
    (progn
-	 (setq treemacs-silent-refresh  t )
-
+	 (setq treemacs-silent-refresh t
+		   treemacs-persist-file (mwb-user-emacs-file "data/treemacs-persist"))
 	 (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?)
 	 ;; The default width and height of the icons is 22 pixels. If you are
 	 ;; using a Hi-DPI display, uncomment this to double the icon size.
@@ -218,4 +218,5 @@ This is the visual
 
  ;; treemacs helpful hydra isn't as key-display can't deal with the modifier keys
  ;; Plus ^p is not a good key for a modeumacs enhances it)
+
   #+end_src

@@ -1,8 +1,8 @@
-;; [[file:~/Library/Preferences/Aquamacs%20Emacs/mwb-init-file-management.org::*Trash][Trash:1]]
+;; [[file:~/Library/Preferences/Emacs/mwb-init-file-management.org::*Trash][Trash:1]]
 
 ;; Trash:1 ends here
 
-;; [[file:~/Library/Preferences/Aquamacs%20Emacs/mwb-init-file-management.org::*Compressed%20files][Compressed files:1]]
+;; [[file:~/Library/Preferences/Emacs/mwb-init-file-management.org::*Compressed%20files][Compressed files:1]]
 ;; Transparently open compressed files
 (auto-compression-mode t)
 
@@ -20,7 +20,7 @@
 ;;       (cons '("\\.tgz$" . uncompress-while-visiting) auto-mode-alist))
 ;; Compressed files:1 ends here
 
-;; [[file:~/Library/Preferences/Aquamacs%20Emacs/mwb-init-file-management.org::*Backups][Backups:1]]
+;; [[file:~/Library/Preferences/Emacs/mwb-init-file-management.org::*Backups][Backups:1]]
 (setq
  backup-by-copying t     ;  Copy all files, don't rename them and don't clobber symlinks
  kept-new-versions 10    ; keep 10 latest versions
@@ -30,11 +30,11 @@
  vc-make-backup-files t) ; backup version controlled files
 ;; Backups:1 ends here
 
-;; [[file:~/Library/Preferences/Aquamacs%20Emacs/mwb-init-file-management.org::*DO%20the%20backups][DO the backups:1]]
+;; [[file:~/Library/Preferences/Emacs/mwb-init-file-management.org::*DO%20the%20backups][DO the backups:1]]
 (setq make-backup-files t)
 ;; DO the backups:1 ends here
 
-;; [[file:~/Library/Preferences/Aquamacs%20Emacs/mwb-init-file-management.org::*Backup%20on%20save][Backup on save:1]]
+;; [[file:~/Library/Preferences/Emacs/mwb-init-file-management.org::*Backup%20on%20save][Backup on save:1]]
 (defun mwb/mac-key-save-buffer-force-backup ()
   (interactive)
   "Save buffer. If needed, select file by dialog"
@@ -45,7 +45,7 @@
 (define-key osx-key-mode-map [remap mac-key-save-file]  'mwb/mac-key-save-buffer-force-backup)
 ;; Backup on save:1 ends here
 
-;; [[file:~/Library/Preferences/Aquamacs%20Emacs/mwb-init-file-management.org::*Recent%20Files][Recent Files:1]]
+;; [[file:~/Library/Preferences/Emacs/mwb-init-file-management.org::*Recent%20Files][Recent Files:1]]
 ;; Problem is this is set after the recent files are set https://emacs.stackexchange.com/questions/48784/recent-files-in-aquamacs
 ;;  Seems to be OK
 
@@ -57,7 +57,7 @@
 								)))
 ;; Recent Files:1 ends here
 
-;; [[file:~/Library/Preferences/Aquamacs%20Emacs/mwb-init-file-management.org::*Projectile][Projectile:1]]
+;; [[file:~/Library/Preferences/Emacs/mwb-init-file-management.org::*Projectile][Projectile:1]]
 (use-package ripgrep :ensure t)
 (use-package
   projectile
@@ -67,7 +67,7 @@
   (projectile-mode 1))
 ;; Projectile:1 ends here
 
-;; [[file:~/Library/Preferences/Aquamacs%20Emacs/mwb-init-file-management.org::*Matcha%20hydra][Matcha hydra:1]]
+;; [[file:~/Library/Preferences/Emacs/mwb-init-file-management.org::*Matcha%20hydra][Matcha hydra:1]]
 (defhydra matcha-projectile (:color blue :hint nil :idle 0)
   "
 
@@ -125,7 +125,7 @@
   ("i" projectile-ibuffer))
 ;; Matcha hydra:1 ends here
 
-;; [[file:~/Library/Preferences/Aquamacs%20Emacs/mwb-init-file-management.org::*Treemacs][Treemacs:1]]
+;; [[file:~/Library/Preferences/Emacs/mwb-init-file-management.org::*Treemacs][Treemacs:1]]
 ;; Treemacs
 ;;  first pass has all defaults even if not needed
 (use-package treemacs
@@ -136,8 +136,8 @@
 	(define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
   :config
   (progn
-	(setq treemacs-silent-refresh  t )
-
+	(setq treemacs-silent-refresh t
+		  treemacs-persist-file (mwb-user-emacs-file "data/treemacs-persist"))
 	(add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?)
 	;; The default width and height of the icons is 22 pixels. If you are
 	;; using a Hi-DPI display, uncomment this to double the icon size.

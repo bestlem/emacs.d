@@ -1,0 +1,19 @@
+* Default Workspace
+** Aquamacs Emacs My init
+ - path :: /Users/mark/Library/Preferences/Emacs
+** Org
+ - path :: /Users/mark/SyncServices/Dropbox/Docs/org
+** Aquamacs
+ - path :: /Applications/Aquamacs.app/Contents/Resources/lisp/aquamacs
+**  howardabrams
+ - path :: /Users/mark/src/ThirdParty/emacs-init/howardabrams
+** emacs-leuven
+ - path :: /Users/mark/src/ThirdParty/emacs-init/emacs-leuven
+** emacs24-starter-kit
+ - path :: /Users/mark/src/ThirdParty/emacs-init/emacs24-starter-kit
+** odds
+ - path :: /Users/mark/src/ThirdParty/emacs-init/odds
+** jwiegley
+ - path :: /Users/mark/src/ThirdParty/emacs-init/jwiegley
+** zzamboni
+ - path :: /Users/mark/src/ThirdParty/emacs-init/zzamboni

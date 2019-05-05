@@ -48,13 +48,8 @@
   (concat (file-name-directory (or load-file-name buffer-file-name))
 		  @file-relative-path))
 
-(defun mwb-get-directory-of-current-file ()
-  "Return the full directory path of the caller's file location."
-  (file-name-directory (or load-file-name buffer-file-name))
-  )
 
 (setq mwb-init-file (xah-get-fullpath "init.el"))
-(defconst mwb-user-emacs-directory (mwb-get-directory-of-current-file))
 (message "Test initfile directory again <%s>" (mwb-get-directory-of-current-file))
 (message "Test file names again <%s>" mwb-init-file )
 (defun mwb-user-emacs-file (name)

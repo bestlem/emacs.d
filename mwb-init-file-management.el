@@ -136,10 +136,7 @@
 	(define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
   :config
   (progn
-	(setq treemacs-collapse-dirs (if (executable-find "python3") 3 0)
-		  treemacs-display-in-side-window t
-		  treemacs-is-never-other-window nil
-		  treemacs-no-delete-other-windows t)
+	(setq treemacs-silent-refresh  t )
 
 	(add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?)
 	;; The default width and height of the icons is 22 pixels. If you are

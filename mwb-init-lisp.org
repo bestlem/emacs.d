@@ -1,5 +1,6 @@
 #+TITLE Emacs configuration - lisp
-#+PROPERTY:header-args :results output :session :cache yes :tangle yes :comments org :exports both
+#+PROPERTY:header-args :cache yes :tangle (concat "init/" (file-name-base  (buffer-file-name)) ".el") :comments link
+
 #+STARTUP: content
 
 * Lisp running environment

@@ -1,7 +1,8 @@
 #+TITLE Emacs configuration
-#+PROPERTY:header-args :results output :session :cache yes :tangle yes :comments link :exports both
-#+STARTUP: content
+#+PROPERTY:header-args :cache yes :tangle (concat "init/" (file-name-base  (buffer-file-name)) ".el") :comments link
 
+
+#+STARTUP: content
 * Overview
 
 ** Introduction

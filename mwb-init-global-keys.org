@@ -1,4 +1,4 @@
-#+PROPERTY:header-args :results output :session :cache yes :tangle yes :comments org :exports both
+#+PROPERTY:header-args :cache yes :tangle (concat "init/" (file-name-base  (buffer-file-name)) ".el") :comments link
 
 * Global key bindings
 This file manages my global  key bindings excpet in Aquamacs they are not global.

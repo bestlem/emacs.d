@@ -9,17 +9,16 @@
 
 ;; Lispy
 
-(use-package
-  lispy
+(use-package lispy
   :ensure t
-  :config
-  (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
-  (add-hook 'lisp-interaction-mode-hook (lambda () (lispy-mode 1))))
+  :hook ((emacs-lisp-mode lisp-interaction-mode) . lispy-mode))
 
 ;; and interaction hydra
 
-(use-package lispy-mnemonic)
-(add-hook 'emacs-lisp-mode-hook 'lispy-mnemonic-mode)
+(use-package lispy-mnemonic
+  :hook ('emacs-lisp-mode . 'lispy-mnemonic-mode)
+  :bind ("H-d" . 'hydra-lispy-debug/body)
+  )
 
 ;; Formatter
 ;; I am not certain this is needed now as other things do this
@@ -29,6 +28,7 @@
 	:ensure t)
 
 ;; Increase list to exclude Aquamacs etc.
+;; Look at directory variables and then use a customised list to hold directories, loop/map setting them See [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Directory-Variables.html#Directory-Variables][Gnu Emacs Manual]]
 
 (defun sanityinc/maybe-set-bundled-elisp-readonly ()
   "If this elisp appears to be part of Emacs, then disallow editing."

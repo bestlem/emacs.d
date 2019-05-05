@@ -112,8 +112,7 @@ Main reason to use is so that I can put init under version control and the rest 
 ;; Epub reading:1 ends here
 
 ;; [[file:~/Library/Preferences/Emacs/config.org::*Programming%20modes][Programming modes:1]]
-;; common bits
-(load "common-programming") ; modes for programming
+(mwb-init-load "mwb-init-prog-modes")
 ;; Programming modes:1 ends here
 
 ;; [[file:~/Library/Preferences/Emacs/config.org::*Key%20binding][Key binding:1]]

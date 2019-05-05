@@ -258,8 +258,7 @@ Interfacing with the operating system
 ***** Programming modes
 Includes structured data
 #+begin_src emacs-lisp
- ;; common bits
- (load "common-programming") ; modes for programming
+(mwb-init-load "mwb-init-prog-modes")
  #+end_src
 *** Key binding
   No comments as just open the files.

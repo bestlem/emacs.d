@@ -1,9 +1,10 @@
-
+;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org][No heading:1]]
 (use-package highlight-indent-guides
   :ensure t
   :diminish highlight-indent-guides-mode
   :config
-  (setq highlight-indent-guides-method 'fill)
+
+(setq highlight-indent-guides-method 'fill)
   ;; Indent character samples: ┃| ┆ ┊
   (setq highlight-indent-guides-character ?\┃)
   (setq highlight-indent-guides-auto-odd-face-perc 50)
@@ -111,3 +112,4 @@ when point gets near either edge of the window."
 
 ;; (smart-tabs-insinuate 'c 'c++ 'java 'javascript 'cperl 'python
 ;; 					  'ruby 'nxml)
+;; No heading:1 ends here

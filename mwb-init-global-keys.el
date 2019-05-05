@@ -205,8 +205,4 @@
 (define-key osx-key-mode-map (kbd "H-m") 'hydra-space/body)
 (define-key osx-key-mode-map (kbd "H-n") 'tabbar-move-current-buffer-to-new-frame)
 (define-key osx-key-mode-map (kbd "H-r") 'query-replace)
-										; (define-key osx-key-mode-map (kbd "H-s") 'sr-speedbar-toggle)
 (define-key osx-key-mode-map (kbd "H-t") 'treemacs)
-
-(bind-key (kbd "H-s") 'org-edit-src-exit org-src-mode-map)
-(bind-key (kbd "H-s") 'org-edit-special org-mode-map)

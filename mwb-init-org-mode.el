@@ -14,14 +14,14 @@
 		  ("q" nil "cancel"))
   :after hydra
   :bind (:map org-mode-map
-			  ("H-a" . hydra-org-mode/body))
+			  ("H-a" . hydra-org-mode/body)
+			  ("H-s" . org-edit-special)
+			  :map org-src-mode-map
+			  ("H-s" . org-edit-src-exit)
+			  ("A-s" . org-edit-src-exit) ; I press by mistake but it makes sense
+			  )
   :hook  (org-mode . (lambda ()
-					   (add-hook
-						'after-save-hook
-						'org-babel-tangle
-						'run-at-end
-						'only-in-org-mode)))
-
+					   (add-hook 'after-save-hook 'org-babel-tangle 'run-at-end 'only-in-org-mode)))
   )
 
 (add-hook 'org-mode-hook

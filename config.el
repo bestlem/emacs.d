@@ -1,4 +1,4 @@
-;; [[file:~/Library/Preferences/Aquamacs%20Emacs/config.org::*Startup][Startup:1]]
+;; [[file:~/Library/Preferences/Emacs/config.org::*Startup][Startup:1]]
 (defconst emacs-start-time (current-time))
 
 (defvar file-name-handler-alist-old file-name-handler-alist)
@@ -19,13 +19,13 @@
              (garbage-collect)) t)
 ;; Startup:1 ends here
 
-;; [[file:~/Library/Preferences/Aquamacs%20Emacs/config.org::*Emacs%20Lisp%20debugging][Emacs Lisp debugging:1]]
+;; [[file:~/Library/Preferences/Emacs/config.org::*Emacs%20Lisp%20debugging][Emacs Lisp debugging:1]]
 (add-hook 'after-init-hook
 				(lambda () (setq debug-on-error t)))
 ; (setq debug-on-error t)
 ;; Emacs Lisp debugging:1 ends here
 
-;; [[file:~/Library/Preferences/Aquamacs%20Emacs/config.org::*Xah%20Lee%20get%20directory][Xah Lee get directory:1]]
+;; [[file:~/Library/Preferences/Emacs/config.org::*Xah%20Lee%20get%20directory][Xah Lee get directory:1]]
 (defun xah-get-fullpath (@file-relative-path)
   "Return the full path of *file-relative-path, relative to caller's file location.
 
@@ -64,42 +64,47 @@ Main reason to use is so that I can put init under version control and the rest 
   (expand-file-name name mwb-user-emacs-directory))
 ;; Xah Lee get directory:1 ends here
 
-;; [[file:~/Library/Preferences/Aquamacs%20Emacs/config.org::*The%20loader][The loader:1]]
+;; [[file:~/Library/Preferences/Emacs/config.org::*The%20loader][The loader:1]]
 (defun mwb-init-load (file-root)
   "Load the relevant code. Currently just the same as load it loads
 <file-root>.el but eventually will load <file-root>.org"
   (load file-root))
 ;; The loader:1 ends here
 
-;; [[file:~/Library/Preferences/Aquamacs%20Emacs/config.org::*Customisation%20file][Customisation file:1]]
+;; [[file:~/Library/Preferences/Emacs/config.org::*Customisation%20file][Customisation file:1]]
 (setq custom-file ( mwb-user-emacs-file "custom/custom.el"))
 (load custom-file 'noerror)
 ;; Customisation file:1 ends here
 
-;; [[file:~/Library/Preferences/Aquamacs%20Emacs/config.org::*Packaging][Packaging:1]]
+;; [[file:~/Library/Preferences/Emacs/config.org::*Packaging][Packaging:1]]
 (load "setup-packages") ; Package management
 ;; Packaging:1 ends here
 
-;; [[file:~/Library/Preferences/Aquamacs%20Emacs/config.org::*Emacs%20server][Emacs server:1]]
+;; [[file:~/Library/Preferences/Emacs/config.org::*Hydra][Hydra:1]]
+(use-package hydra :ensure t)
+(use-package use-package-hydra :ensure t)
+;; Hydra:1 ends here
+
+;; [[file:~/Library/Preferences/Emacs/config.org::*Emacs%20server][Emacs server:1]]
 (use-package server
   :ensure nil
   :hook (after-init . server-mode))
 ;; Emacs server:1 ends here
 
-;; [[file:~/Library/Preferences/Aquamacs%20Emacs/config.org::*Emacs%20behaviour][Emacs behaviour:1]]
+;; [[file:~/Library/Preferences/Emacs/config.org::*Emacs%20behaviour][Emacs behaviour:1]]
 ;; common bits
 (load "common-setup") ; odds mainly variables
 ;; Emacs behaviour:1 ends here
 
-;; [[file:~/Library/Preferences/Aquamacs%20Emacs/config.org::*System%20management][System management:1]]
+;; [[file:~/Library/Preferences/Emacs/config.org::*System%20management][System management:1]]
 (mwb-init-load "mwb-init-file-management")
 ;; System management:1 ends here
 
-;; [[file:~/Library/Preferences/Aquamacs%20Emacs/config.org::*Org%20Mode][Org Mode:1]]
+;; [[file:~/Library/Preferences/Emacs/config.org::*Org%20Mode][Org Mode:1]]
 (mwb-init-load "mwb-init-org-mode")
 ;; Org Mode:1 ends here
 
-;; [[file:~/Library/Preferences/Aquamacs%20Emacs/config.org::*Epub%20reading][Epub reading:1]]
+;; [[file:~/Library/Preferences/Emacs/config.org::*Epub%20reading][Epub reading:1]]
 ;; Epub reader
 (use-package nov
   :ensure t
@@ -111,11 +116,11 @@ Main reason to use is so that I can put init under version control and the rest 
 	:hook (nov-mode . my-nov-setup)))
 ;; Epub reading:1 ends here
 
-;; [[file:~/Library/Preferences/Aquamacs%20Emacs/config.org::*Programming%20modes][Programming modes:1]]
+;; [[file:~/Library/Preferences/Emacs/config.org::*Programming%20modes][Programming modes:1]]
 ;; common bits
 (load "common-programming") ; modes for programming
 ;; Programming modes:1 ends here
 
-;; [[file:~/Library/Preferences/Aquamacs%20Emacs/config.org::*Key%20binding][Key binding:1]]
+;; [[file:~/Library/Preferences/Emacs/config.org::*Key%20binding][Key binding:1]]
 (mwb-init-load "mwb-init-global-keys")
 ;; Key binding:1 ends here

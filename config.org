@@ -205,6 +205,7 @@ Yes Aquamacs does this but in a directory with a space.
 (load custom-file 'noerror)
 #+end_src
 
+
 **** Packaging
  Old elisp
    #+begin_src emacs-lisp
@@ -212,6 +213,12 @@ Yes Aquamacs does this but in a directory with a space.
   (load "setup-packages") ; Package management
    #+end_src
 
+**** Hydra
+Need key setting menus.
+#+begin_src emacs-lisp
+(use-package hydra :ensure t)
+(use-package use-package-hydra :ensure t)
+#+end_src
 *** Emacs server
  This is a simple server start - to allow emacsclient from Terminal. There are more complex starters.
  #+begin_src emacs-lisp

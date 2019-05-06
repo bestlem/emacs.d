@@ -1,7 +1,6 @@
 #+TITLE Emacs configuration
 #+PROPERTY:header-args :cache yes :tangle (concat "init/" (file-name-base  (buffer-file-name)) ".el") :comments link
 
-
 #+STARTUP: content
 * Overview
 
@@ -95,7 +94,7 @@ From  aquamacs-get-custom-file-dotemacs-warning
 * Implement
 Full init
 *** Control init environment
-
+All this is tangled into init.el which is also under git.
 **** Startup
  These are speedup and safety changes but note that  Aquamacs has probably already taken most of the time.
 
@@ -104,7 +103,7 @@ Full init
  The file-name-handler-alist is probably needed as some of the hooks slow things heavily
 
  This is from [[ https://github.com/jwiegley/dot-emacs/blob/master/init.el#L1013][John Wiegley]]
- #+begin_src emacs-lisp
+ #+begin_src emacs-lisp  :tangle init.el
  (defconst emacs-start-time (current-time))
 
  (defvar file-name-handler-alist-old file-name-handler-alist)
@@ -116,7 +115,52 @@ Full init
 	   gc-cons-percentage 0.6
 	   auto-window-vscroll nil)
  #+end_src
-***** After initialisation
+**** Code to do loading
+  Need to get the correct directory
+
+  Function to load the code for this part of the init.
+  Currently it just loads the .el of that name so could just be (load "mwb-init-load"). I now tangle all org-mode buffers on save. Eventually it will get the data from mwb-init-load.org and tangle it and use that.
+
+**** Helper functions
+Thse are required elisp for initialisation
+
+**** Set where the init file is
+In constant mwb-user-emacs-directory
+	 #+begin_src emacs-lisp  :tangle init.el
+
+;; Need the directory from here.
+(defun mwb-get-directory-of-current-file ()
+  "Return the full directory path of the caller's file location."
+  (file-name-directory (or load-file-name buffer-file-name))
+  )
+(defconst mwb-user-emacs-directory (mwb-get-directory-of-current-file))
+	 #+end_src
+***** Where my init code is
+  See [[http://ergoemacs.org/emacs/organize_your_dot_emacs.html][Xah Lee get directory name for file]] for possible work around for user-emacs-directory. Except in some cases I do want the directory so break it up
+  #+begin_src emacs-lisp  :tangle init.el
+(defun mwb-user-emacs-file (name)
+	"Return an absolute per-user Emacs-specific file name around where the init file is.
+  It is basically locate-user-emacs-file but I have followed Aquiamacs is setting that not where my init.el file is.
+  Main reason to use is so that I can put init under version control and the rest go elsewhere."
+	(expand-file-name name mwb-user-emacs-directory))
+  #+end_src
+***** The loader
+ Actually load the init files
+   #+begin_src emacs-lisp :tangle init.el
+   (defun mwb-init-load (file-root)
+	 "Load the relevant code. Currently just the same as load it loads
+   <file-root>.el but eventually will load <file-root>.org"
+	 (load file-root))
+   #+end_src
+**** The Load
+	 #+begin_src emacs-lisp :tangle init.el
+	 (mwb-init-load "config")
+	 #+end_src
+*** Emacs environment
+Setup minimum to run the configuration.
+I suspect the order after this does not matter
+
+**** After initialisation
 Although see starter kit where they run after init.
   #+begin_src emacs-lisp
 
@@ -139,63 +183,6 @@ But for debugging init
 ; (setq debug-on-error t)
  #+end_src
 
-**** Code to do loading
-  Need to get the correct directory
-
-  Function to load the code for this part of the init.
-  Currently it just loads the .el of that name so could just be (load "mwb-init-load"). I now tangle all org-mode buffers on save. Eventually it will get the data from mwb-init-load.org and tangle it and use that.
-
-**** Helper functions
-Thse are required elisp for initialisation
-
-*****  Xah Lee get directory
-  See [[http://ergoemacs.org/emacs/organize_your_dot_emacs.html][Xah Lee get directory name for file]] for possible work around for user-emacs-directory. Excelpt in some cases I do want the directory so break it up
-  #+begin_src emacs-lisp
-
-  (defun xah-get-fullpath (@file-relative-path)
-	"Return the full path of *file-relative-path, relative to caller's file location.
-
-	  Example: If you have this line
-	   (xah-get-fullpath \"../xyz.el\")
-	  in the file at
-	   /home/mary/emacs/emacs_lib.el
-	  then the return value is
-	   /home/mary/xyz.el
-	  Regardless how or where emacs_lib.el is called.
-
-	  This function solves 2 problems.
-
-	  ① If you have file A, that calls the `load' on a file at B, and B calls `load' on file C using a relative path, then Emacs will complain about unable to find C. Because, emacs does not switch current directory with `load'.
-
-	  To solve this problem, when your code only knows the relative path of another file C, you can use the variable `load-file-name' to get the current file's full path, then use that with the relative path to get a full path of the file you are interested.
-
-	  ② To know the current file's full path, emacs has 2 ways: `load-file-name' and `buffer-file-name'. If the file is loaded by `load', then `load-file-name' works but `buffer-file-name' doesn't. If the file is called by `eval-buffer', then `load-file-name' is nil. You want to be able to get the current file's full path regardless the file is run by `load' or interactively by `eval-buffer'."
-
-	(concat (file-name-directory (or load-file-name buffer-file-name))
-			@file-relative-path))
-
-
-  (setq mwb-init-file (xah-get-fullpath "init.el"))
-  (message "Test initfile directory again <%s>" (mwb-get-directory-of-current-file))
-  (message "Test file names again <%s>" mwb-init-file )
-  (defun mwb-user-emacs-file (name)
-	"Return an absolute per-user Emacs-specific file name around where the init file is.
-  It is basically locate-user-emacs-file but I have followed Aquiamacs is setting that not where my init.el file is.
-  Main reason to use is so that I can put init under version control and the rest go elsewhere."
-	(expand-file-name name mwb-user-emacs-directory))
-  #+end_src
-***** The loader
- Actually load the init files
-   #+begin_src emacs-lisp
-   (defun mwb-init-load (file-root)
-	 "Load the relevant code. Currently just the same as load it loads
-   <file-root>.el but eventually will load <file-root>.org"
-	 (load file-root))
-   #+end_src
-
-*** Emacs environment
-Setup minimum to run the configuration.
-I suspect the order after this does not matter
 **** Customisation file
 Yes Aquamacs does this but in a directory with a space. SO put with code so can be under source code control and user-emacs-directory is not.
 Needs to have initsplit added so can seperate out customization files.

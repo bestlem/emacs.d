@@ -27,6 +27,50 @@
   :hook ((prog-mode org-mode) . ws-butler-mode ))
 ;; Whitespace at end of line:1 ends here
 
+;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*Build%20systems][Build systems:1]]
+;; gradle and other java
+;; from http://www.coli.uni-saarland.de/~slemaguer/emacs/main.html#orgac34543
+
+(use-package groovy-mode
+  :ensure t
+  :mode ("\.groovy$" "\.gradle$")
+  :interpreter ("gradle" "groovy")
+  :config
+  (autoload 'run-groovy "inf-groovy" "Run an inferior Groovy process")
+  (autoload 'inf-groovy-keys "inf-groovy" "Set local key defs for inf-groovy in groovy-mode")
+
+  ;; Some keys for
+  (add-hook 'groovy-mode-hook
+            '(lambda ()
+               (inf-groovy-keys))))
+
+;; Subpackages
+(use-package groovy-imports :ensure t)
+
+
+;; ;; This does work with Aquamacs
+;; (add-to-list 'auto-mode-alist (cons "\\.gradle\\'" 'groovy-mode))
+;; (add-to-list 'auto-mode-alist (cons "\\.groovy\\'" 'groovy-mode))
+;; ;; This _might_ not work with Aquamacs (not sure what value it offers)
+;; ;(add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
+;; ;(add-to-list 'interpreter-mode-alist '("gradle" . groovy-mode))
+
+;; ;;; make Groovy mode electric by default.
+;; (add-hook 'groovy-mode-hook
+;;           '(lambda ()
+;;              (require 'groovy-electric)
+;;              (groovy-electric-mode)))
+;; (require 'gradle)
+
+(use-package gradle-mode
+  :ensure t
+   :diminish
+  :config
+  (setq gradle-gradlew-executable "./gradlew"
+        gradle-use-gradlew t)
+  (gradle-mode))
+;; Build systems:1 ends here
+
 ;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*Flymake][Flymake:1]]
 ;;;; flymake - syntax checking
 (use-package flymake
@@ -35,6 +79,10 @@
   :hook ((sh-mode json-mode nxml-mode python-mode emacs-lisp-mode lisp-interaction-mode) . flymake-mode-on)
   :config (flymake-mode-on))
 ;; Flymake:1 ends here
+
+;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*Git][Git:1]]
+(load "setup-git")
+;; Git:1 ends here
 
 ;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*Completion][Completion:1]]
 ;;  Start completion
@@ -50,24 +98,49 @@
 (mwb-init-load "mwb-init-lisp")
 ;; Lisp:1 ends here
 
-;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*Build%20systems][Build systems:1]]
-(load "setup-java-env")
-;; Build systems:1 ends here
-
 ;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*Python][Python:1]]
 (load "setup-python")
 ;; Python:1 ends here
 
-;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*Git][Git:1]]
-(load "setup-git")
-;; Git:1 ends here
+;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*XML][XML:1]]
+(defun nxml-pretty-print-xml-region (begin end)
+  "Pretty format XML markup in region. You need to have nxml-mode
+http://www.emacswiki.org/cgi-bin/wiki/NxmlMode installed to do
+this.  The function inserts linebreaks to separate tags that have
+nothing but whitespace between them.  It then indents the markup
+by using nxml's indentation rules."
+  (interactive "r")
+  (save-excursion
+      (nxml-mode)
+      (goto-char begin)
+      (while (search-forward-regexp "\>[ \\t]*\<" nil t)
+        (backward-char) (insert "\n"))
+      (indent-region begin end))
+  (message "Ah, much better!"))
+;; XML:1 ends here
 
-;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*Structured%20data][Structured data:1]]
-(load "setup-structured-data.el")
-;; Structured data:1 ends here
+;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*Editing][Editing:1]]
+(use-package json-mode
+  :ensure t
+  :mode "\\.json$")
+;; Editing:1 ends here
+
+;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*Visualisation][Visualisation:1]]
+(use-package json-navigator
+  :ensure t)
+;; Visualisation:1 ends here
 
 ;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*SQL][SQL:1]]
-(load "setup-sql")
+(autoload 'sql "sql-mode"
+  "Start the interactive SQL interpreter in a new buffer." t)
+
+(autoload 'sql-mode "sql-mode"
+  "Mode for editing SQL files and running a SQL interpreter." t)
+
+(autoload 'sql-buffer "sql-mode"
+  "Create or move to the sql-mode \"*SQL commands*\" buffer." t)
+
+(setq auto-mode-alist (cons '("\\.sql$" . sql-mode) auto-mode-alist))
 ;; SQL:1 ends here
 
 ;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*C][C:1]]

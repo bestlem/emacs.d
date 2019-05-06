@@ -81,7 +81,7 @@
 ;; Flymake:1 ends here
 
 ;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*Git][Git:1]]
-(load "setup-git")
+(mwb-init-load "mwb-init-prog-modes-git")
 ;; Git:1 ends here
 
 ;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*Completion][Completion:1]]
@@ -99,7 +99,7 @@
 ;; Lisp:1 ends here
 
 ;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*Python][Python:1]]
-(load "setup-python")
+(load "mwb-init-prog-modes-python")
 ;; Python:1 ends here
 
 ;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*XML][XML:1]]

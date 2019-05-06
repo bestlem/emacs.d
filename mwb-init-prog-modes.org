@@ -102,7 +102,7 @@ As Emacs is bad for java my java setup is now just gradle so that should be a ge
   #+end_src
 ** Git
 #+begin_src emacs-lisp
-   (load "setup-git")
+(mwb-init-load "mwb-init-prog-modes-git")
 #+end_src
 ** Completion
 I need something and company seems to be the current one
@@ -125,7 +125,7 @@ Where there is common put them together. This part is really why I have separate
 ** Python
 Really need to start from scratch
 #+begin_src emacs-lisp
-   (load "setup-python")
+   (load "mwb-init-prog-modes-python")
 #+end_src
 ** Structured data
 Do inline

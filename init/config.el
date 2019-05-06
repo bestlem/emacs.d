@@ -5,18 +5,20 @@
 
 (setq package-enable-at-startup nil
 	  file-name-handler-alist nil
-      message-log-max 16384
-      gc-cons-threshold 402653184
-      gc-cons-percentage 0.6
-      auto-window-vscroll nil)
+	  message-log-max 16384
+	  gc-cons-threshold 402653184
+	  gc-cons-percentage 0.6
+	  auto-window-vscroll nil)
 
 
 (add-hook 'after-init-hook
-          `(lambda ()
-             (setq file-name-handler-alist file-name-handler-alist-old
+		  `(lambda ()
+			 (setq file-name-handler-alist file-name-handler-alist-old
 				   gc-cons-threshold 800000
 				   gc-cons-percentage 0.1)
-             (garbage-collect)) t)
+			 (garbage-collect)
+			 (message "Emacs init-time %s" (emacs-init-time) )
+			 ) t)
 ;; Startup:1 ends here
 
 ;; [[file:~/Library/Preferences/Emacs/config.org::*Emacs%20Lisp%20debugging][Emacs Lisp debugging:1]]
@@ -113,6 +115,21 @@ Main reason to use is so that I can put init under version control and the rest 
 
 (bind-key "M-r" 'sk/hydra-registers/body)
 ;; Registers:1 ends here
+
+;; [[file:~/Library/Preferences/Emacs/config.org::*Sessions][Sessions:1]]
+(use-package savehist
+  :config
+  (setq savehist-additional-variables
+		'(kill-ring
+		  search-ring
+		  regexp-search-ring
+		  last-kbd-macro
+		  kmacro-ring
+		  shell-command-history
+		  Info-history-list
+		  register-alist))
+  (savehist-mode 1))
+;; Sessions:1 ends here
 
 ;; [[file:~/Library/Preferences/Emacs/config.org::*System%20management][System management:1]]
 (mwb-init-load "mwb-init-file-management")

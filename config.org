@@ -58,26 +58,25 @@ starterkit loader that check date of el and org and regenerates if
 needed. Eventually the el file is not needed but let's convert fully
 first (unless you need fast starts)
 
-** Aquamacs
-This file runs under Aquamacs, I use Aquamacs because it was the easiest distribution to set up in 2002. Nowadays with package loaders and starter kits this is not so needed.
-Aquamacs does have one advantage it uses Apple's spellchecker and that will not be rolled into GNU.
-Aquamacs though is old Aquamacs 3.4 GNU Emacs 25.3.50.1 Emacs is now on 26 and has been for over a year but if we just need new packages then version is OK.
+*** Aquamacs
+ This file runs under Aquamacs, I use Aquamacs because it was the easiest distribution to set up in 2002. Nowadays with package loaders and starter kits this is not so needed.
+ Aquamacs does have one advantage it uses Apple's spellchecker and that will not be rolled into GNU.
+ Aquamacs though is old Aquamacs 3.4 GNU Emacs 25.3.50.1 Emacs is now on 26 and has been for over a year but if we just need new packages then version is OK.
 
-*** user-emacs-directory
-This is the directory emacs reads and writers support files from. This is a mess as some are yours under version control and others are created on the fly. The ones on the fly can have the same name as packages and so stop loading (e.g. Tramp and Calc). There are several ways round this e.g. [[https://github.com/emacscollective/no-littering][No Littering]] Aquamacs does this by moving user-emacs-directory and putting the start dir on the load-path but also every possible directory so can't find it easily and hard codes paths and no use a directory so have to have our own const.
+**** user-emacs-directory
+ This is the directory emacs reads and writers support files from. This is a mess as some are yours under version control and others are created on the fly. The ones on the fly can have the same name as packages and so stop loading (e.g. Tramp and Calc). There are several ways round this e.g. [[https://github.com/emacscollective/no-littering][No Littering]] Aquamacs does this by moving user-emacs-directory and putting the start dir on the load-path but also every possible directory so can't find it easily and hard codes paths and no use a directory so have to have our own const.
 
- Aquamacs does doup a lot into its directory and maes use-emacs-directory always this even if the config files are elsewhere.
+  Aquamacs does doup a lot into its directory and maes use-emacs-directory always this even if the config files are elsewhere.
 
-Now text based things donm't like spaces (programmers are lazy) I want a structured text editor
-The issue here is when tangling the references to files are encoded to remove spaces so the directopry becomes ~/Library/Preferences/Aquamacs%20Emacs so riund tripping fails.
+ Now text based things donm't like spaces (programmers are lazy) I want a structured text editor
+ The issue here is when tangling the references to files are encoded to remove spaces so the directopry becomes ~/Library/Preferences/Aquamacs%20Emacs so riund tripping fails.
 
-**** TODO Need to move all init files into a path that has no spaces
+***** DONE Need to move all init files into a path that has no spaces
+	  CLOSED: [2019-05-06 Mon 02:21]
 
-**** DONE Look at xak lee's get filename codes
-	 CLOSED: [2019-05-04 Sat 04:57]
+***** DONE Look at xak lee's get filename codes
+	  CLOSED: [2019-05-04 Sat 04:57]
 
-* Implement
-Full init
 *** Load order
 Startup files aquamacs looks in are site-start.el then init.el and in a
 directory order not including ~/.emacs.d/
@@ -93,7 +92,8 @@ From  aquamacs-get-custom-file-dotemacs-warning
 ;; Consider moving your startup settings to the Preferences.el file, which
 ;; is loaded after `custom-file':
 
-
+* Implement
+Full init
 *** Control init environment
 
 **** Startup
@@ -105,25 +105,26 @@ From  aquamacs-get-custom-file-dotemacs-warning
 
  This is from [[ https://github.com/jwiegley/dot-emacs/blob/master/init.el#L1013][John Wiegley]]
  #+begin_src emacs-lisp
-
  (defconst emacs-start-time (current-time))
 
  (defvar file-name-handler-alist-old file-name-handler-alist)
 
  (setq package-enable-at-startup nil
 	   file-name-handler-alist nil
-       message-log-max 16384
-       gc-cons-threshold 402653184
-       gc-cons-percentage 0.6
-       auto-window-vscroll nil)
+	   message-log-max 16384
+	   gc-cons-threshold 402653184
+	   gc-cons-percentage 0.6
+	   auto-window-vscroll nil)
 
 
  (add-hook 'after-init-hook
-           `(lambda ()
-              (setq file-name-handler-alist file-name-handler-alist-old
+		   `(lambda ()
+			  (setq file-name-handler-alist file-name-handler-alist-old
 					gc-cons-threshold 800000
 					gc-cons-percentage 0.1)
-              (garbage-collect)) t)
+			  (garbage-collect)
+			  (message "Emacs init-time %s" (emacs-init-time) )
+			  ) t)
 
  #+end_src
 **** Emacs Lisp debugging
@@ -142,7 +143,6 @@ But for debugging init
 
   Function to load the code for this part of the init.
   Currently it just loads the .el of that name so could just be (load "mwb-init-load"). I now tangle all org-mode buffers on save. Eventually it will get the data from mwb-init-load.org and tangle it and use that.
-
 
 **** Helper functions
 Thse are required elisp for initialisation
@@ -193,15 +193,15 @@ Thse are required elisp for initialisation
    #+end_src
 
 *** Emacs environment
-
+Setup minimum to run the configuration.
+I suspect the order after this does not matter
 **** Customisation file
-Yes Aquamacs does this but in a directory with a space.
+Yes Aquamacs does this but in a directory with a space. SO put with code so can be under source code control and user-emacs-directory is not.
+Needs to have initsplit added so can seperate out customization files.
 #+begin_src emacs-lisp
 (setq custom-file ( mwb-user-emacs-file "custom/custom.el"))
 (load custom-file 'noerror)
 #+end_src
-
-
 **** Packaging
  Old elisp
    #+begin_src emacs-lisp
@@ -255,6 +255,23 @@ I haven't used before but might try with hydra from [[https://sriramkswamy.githu
 (bind-key "M-r" 'sk/hydra-registers/body)
 
 
+#+end_src
+
+**** Sessions
+Save registers et al but not the whole desktop
+#+begin_src emacs-lisp
+(use-package savehist
+  :config
+  (setq savehist-additional-variables
+		'(kill-ring
+		  search-ring
+		  regexp-search-ring
+		  last-kbd-macro
+		  kmacro-ring
+		  shell-command-history
+		  Info-history-list
+		  register-alist))
+  (savehist-mode 1))
 #+end_src
 *** Major modes
 

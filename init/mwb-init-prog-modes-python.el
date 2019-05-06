@@ -1,4 +1,4 @@
-
+;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes-python.org][No heading:1]]
 ;; python
 
 ; python from use-package maintainer https://github.com/jwiegley/dot-emacs/blob/master/init.el#L1013
@@ -39,4 +39,4 @@
     (setq indent-tabs-mode nil))
 
   (add-hook 'python-mode-hook 'my-python-mode-hook))
-
+;; No heading:1 ends here

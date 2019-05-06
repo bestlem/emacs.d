@@ -125,7 +125,7 @@ Where there is common put them together. This part is really why I have separate
 ** Python
 Really need to start from scratch
 #+begin_src emacs-lisp
-   (load "mwb-init-prog-modes-python")
+(mwb-init-load "mwb-init-prog-modes-python")
 #+end_src
 ** Structured data
 Do inline

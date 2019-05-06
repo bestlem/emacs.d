@@ -1,3 +1,8 @@
+#+TITLE Emacs configuration org Git configuration
+#+PROPERTY:header-args :cache yes :tangle (concat "init/" (file-name-base  (buffer-file-name)) ".el") :comments link
+
+#+begin_src emacs-lisp
+
 ;; set up git mainly for ediff use from git
 
 ;;
@@ -66,3 +71,4 @@
 
 ;; ;; http://zagadka.vm.bytemark.co.uk/magit/magit.html
 ;; ;(autoload 'magit-status "magit" nil t)
+#+end_src

@@ -9,17 +9,17 @@
 	  gc-cons-threshold 402653184
 	  gc-cons-percentage 0.6
 	  auto-window-vscroll nil)
+;; Startup:1 ends here
 
-
+;; [[file:~/Library/Preferences/Emacs/config.org::*After%20initialisation][After initialisation:1]]
 (add-hook 'after-init-hook
 		  `(lambda ()
 			 (setq file-name-handler-alist file-name-handler-alist-old
 				   gc-cons-threshold 800000
 				   gc-cons-percentage 0.1)
 			 (garbage-collect)
-			 (message "Emacs init-time %s" (emacs-init-time) )
-			 ) t)
-;; Startup:1 ends here
+			 (message "Emacs init-time %s" (emacs-init-time))) t)
+;; After initialisation:1 ends here
 
 ;; [[file:~/Library/Preferences/Emacs/config.org::*Emacs%20Lisp%20debugging][Emacs Lisp debugging:1]]
 (add-hook 'after-init-hook

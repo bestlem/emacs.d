@@ -18,4 +18,3 @@
 
 (load "init/config.el")
 
-(message "Emacs init-time %s" (emacs-init-time) )

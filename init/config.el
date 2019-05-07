@@ -8,11 +8,15 @@
 			 (message "Emacs init-time %s" (emacs-init-time))) t)
 ;; After initialisation:1 ends here
 
-;; [[file:~/Library/Preferences/Emacs/config.org::*Emacs%20Lisp%20debugging][Emacs Lisp debugging:1]]
+;; [[file:~/Library/Preferences/Emacs/config.org::*Debugging][Debugging:1]]
 (add-hook 'after-init-hook
 				(lambda () (setq debug-on-error t)))
 ; (setq debug-on-error t)
-;; Emacs Lisp debugging:1 ends here
+;; Debugging:1 ends here
+
+;; [[file:~/Library/Preferences/Emacs/config.org::*Use%20source%20where%20newer][Use source where newer:1]]
+(setq 'load-prefer-newer t)
+;; Use source where newer:1 ends here
 
 ;; [[file:~/Library/Preferences/Emacs/config.org::*Customisation%20file][Customisation file:1]]
 (setq custom-file ( mwb-user-emacs-file "custom/custom.el"))

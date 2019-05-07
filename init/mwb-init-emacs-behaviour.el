@@ -1,5 +1,4 @@
-
-
+;; [[file:~/Library/Preferences/Emacs/mwb-init-emacs-behaviour.org][No heading:1]]
 (setq find-file-visit-truename t)	; visit a file under its true name
 
 (setq find-file-existing-other-name t)
@@ -13,16 +12,17 @@
 
 ;;  Scratch buffer to org mode
 (setq initial-major-mode 'org-mode)
+;;  Note concat needed to stop the whole end_src command breaking org-mode
 (setq initial-scratch-message
-	  "This buffer is for notes you don't want to save, and for org mode.
+	  (concat "This buffer is for notes you don't want to save, and for org mode.
 If you want to create a file, visit that file with C-x C-f,then enter the text in that file's own buffer.
 
 #+begin_src emacs-lisp
 
-#+end_src
-")
-;; ODDS
-;; ^k does line
+#"
+			  "+end_src
+"))
+
 (setq kill-whole-line t)
 
 ; --- highlight words during query replacement ---
@@ -93,3 +93,4 @@ If you want to create a file, visit that file with C-x C-f,then enter the text i
 
 ;;  Completer
 ;; From https://pages.sachachua.com/.emacs.d/Sacha.html#org04e47b9
+;; No heading:1 ends here

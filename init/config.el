@@ -15,7 +15,7 @@
 ;; Debugging:1 ends here
 
 ;; [[file:~/Library/Preferences/Emacs/config.org::*Use%20source%20where%20newer][Use source where newer:1]]
-(setq 'load-prefer-newer t)
+(setq load-prefer-newer t)
 ;; Use source where newer:1 ends here
 
 ;; [[file:~/Library/Preferences/Emacs/config.org::*Customisation%20file][Customisation file:1]]
@@ -39,8 +39,7 @@
 ;; Emacs server:1 ends here
 
 ;; [[file:~/Library/Preferences/Emacs/config.org::*Emacs%20behaviour][Emacs behaviour:1]]
-;; common bits
-(load "common-setup") ; odds mainly variables
+(mwb-init-load  "mwb-init-emacs-behaviour") ; odds mainly variables
 ;; Emacs behaviour:1 ends here
 
 ;; [[file:~/Library/Preferences/Emacs/config.org::*Registers][Registers:1]]

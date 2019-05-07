@@ -76,5 +76,5 @@
   ("," edit-kbd-macro)
   ("q" nil :color blue))
 
-(bind-key "<F3>" 'hydra-macro/body)
+(bind-key "<f3>" 'hydra-macro/body)
 ;; Hydra for macros:1 ends here

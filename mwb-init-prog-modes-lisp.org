@@ -102,6 +102,6 @@ From [[https://github.com/abo-abo/hydra/wiki/Macro][Hydra wiki]]
 		("," edit-kbd-macro)
 		("q" nil :color blue))
 
-	  (bind-key "<F3>" 'hydra-macro/body)
+	  (bind-key "<f3>" 'hydra-macro/body)
 
 	  #+end_src

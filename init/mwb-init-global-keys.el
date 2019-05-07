@@ -186,11 +186,12 @@
 ;; Matcha:1 ends here
 
 ;; [[file:~/Library/Preferences/Emacs/mwb-init-global-keys.org::*Hyper%20global%20key%20bindings][Hyper global key bindings:1]]
-(define-key osx-key-mode-map (kbd "H-1")  'delete-other-windows)
-(define-key osx-key-mode-map (kbd "H-0")  'delete-window)
+(bind-key (kbd "H-1")  'delete-other-windows osx-key-mode-map)
+(bind-key (kbd "H-0")  'delete-window osx-key-mode-map)
 ;; H-a is major mode specific Hydra so bound to mode keymap by use-packag :hydra
-(define-key osx-key-mode-map (kbd "H-m") 'hydra-space/body)
-(define-key osx-key-mode-map (kbd "H-n") 'tabbar-move-current-buffer-to-new-frame)
-(define-key osx-key-mode-map (kbd "H-r") 'query-replace)
-(define-key osx-key-mode-map (kbd "H-t") 'treemacs)
+(bind-key (kbd "H-m") 'hydra-space/body osx-key-mode-map)
+(bind-key (kbd "H-n") 'tabbar-move-current-buffer-to-new-frame osx-key-mode-map)
+(bind-key (kbd "H-r") 'query-replace osx-key-mode-map)
+;; H-s is return from org special edit
+(bind-key (kbd "H-t") 'treemacs osx-key-mode-map)
 ;; Hyper global key bindings:1 ends here

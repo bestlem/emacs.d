@@ -219,11 +219,18 @@ Need key setting menus.
   :hook (after-init . server-mode))
  #+end_src
 
-*** Emacs behaviour
-General emacs stuff - not common-setup used to have this but separate file might not make sense
+*** Emacs settings
+
+**** Apperance
  #+begin_src emacs-lisp
-(mwb-init-load  "mwb-init-emacs-behaviour") ; odds mainly variables
- #+end_src
+ (mwb-init-load  "mwb-init-appearance")
+  #+end_src
+
+**** Emacs behaviour
+ General emacs stuff - not common-setup used to have this but separate file might not make sense
+  #+begin_src emacs-lisp
+ (mwb-init-load  "mwb-init-emacs-behaviour") ; odds mainly variables
+  #+end_src
 **** Registers
 I haven't used before but might try with hydra from [[https://sriramkswamy.github.io/dotemacs/#orgheadline245][Hydra heavy init]]
 #+begin_src emacs-lisp

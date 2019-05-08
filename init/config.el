@@ -38,6 +38,10 @@
   :hook (after-init . server-mode))
 ;; Emacs server:1 ends here
 
+;; [[file:~/Library/Preferences/Emacs/config.org::*Apperance][Apperance:1]]
+(mwb-init-load  "mwb-init-appearance")
+;; Apperance:1 ends here
+
 ;; [[file:~/Library/Preferences/Emacs/config.org::*Emacs%20behaviour][Emacs behaviour:1]]
 (mwb-init-load  "mwb-init-emacs-behaviour") ; odds mainly variables
 ;; Emacs behaviour:1 ends here

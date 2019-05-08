@@ -64,7 +64,6 @@ If you want to create a file, visit that file with C-x C-f,then enter the text i
 (setq sentence-end-double-space nil)
 
 (load "setup-gnus")
-(load "setup-apperance")
 
 (progn
   ;; General emacs behaviour

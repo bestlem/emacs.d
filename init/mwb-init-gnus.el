@@ -1,4 +1,4 @@
-
+;; [[file:~/Library/Preferences/Emacs/mwb-init-gnus.org][No heading:1]]
 ;; GNUS
 ; gmail
 (require 'gnus )
@@ -106,4 +106,4 @@
 		"unfiled"                          ;; (5)
         )
 )
-
+;; No heading:1 ends here

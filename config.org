@@ -273,6 +273,11 @@ Save registers et al but not the whole desktop
 		  register-alist))
   (savehist-mode 1))
 #+end_src
+*** Applications
+**** Gnus
+	 #+begin_src emacs-lisp
+	 (mwb-init-load "mwb-init-gnus")
+	 #+end_src
 *** Major modes
 
 ***** System management

@@ -84,6 +84,10 @@
   (savehist-mode 1))
 ;; Sessions:1 ends here
 
+;; [[file:~/Library/Preferences/Emacs/config.org::*Gnus][Gnus:1]]
+(mwb-init-load "mwb-init-gnus")
+;; Gnus:1 ends here
+
 ;; [[file:~/Library/Preferences/Emacs/config.org::*System%20management][System management:1]]
 (mwb-init-load "mwb-init-file-management")
 ;; System management:1 ends here

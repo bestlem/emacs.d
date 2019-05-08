@@ -23,9 +23,66 @@
 (load custom-file 'noerror)
 ;; Customisation file:1 ends here
 
-;; [[file:~/Library/Preferences/Emacs/config.org::*Packaging][Packaging:1]]
-(load "setup-packages") ; Package management
-;; Packaging:1 ends here
+;; [[file:~/Library/Preferences/Emacs/config.org::*SSL%20network%20connection][SSL  network connection:1]]
+(require 'tls)
+
+(with-eval-after-load 'tls
+  ;; Add the gnutls CA certificate file
+  (push "/private/etc/ssl/cert.pem"                gnutls-trustfiles)
+  ;; Add the curl CA certificate file from Macports
+  (push "/opt/local/share/curl/curl-ca-bundle.crt" gnutls-trustfiles)
+  )
+
+;; Validate TLS certificates
+(setq gnutls-verify-error           t)
+
+;; Increase prime bits on TLS keys
+(setq gnutls-min-prime-bits      2048)
+
+;; Network Security Module settings
+;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Network-Security.html
+(setq network-security-level  'medium)
+(setq nsm-save-host-names           t)
+
+;; Set tls-checktrust to `'ask` instead of `t` to allow user to determine
+;; whether or not to trust a certificate.
+(setq tls-checktrust             'ask)
+
+;; Update the tls-program invocation command line string
+;;
+;; Add `--priority` flag to  prevents the 3des certificate from being used.
+;; Add `:%%PROFILE_MEDIUM` to ban intermediate SHA1 certificates.
+;; Add `--ocsp` flag to require certificate revocation check
+;;
+;; Add `--insecure` flag as a temporary workaround for the expired certificate
+;; on marmalade.org from hanging Aquamacs.
+(setq tls-program
+	  '("gnutls-cli -p %p --dh-bits=2048 --ocsp --x509cafile=%t --insecure \
+--priority='SECURE192:+SECURE128:-VERS-ALL:+VERS-TLS1.2:%%PROFILE_MEDIUM' %h"))
+;; SSL  network connection:1 ends here
+
+;; [[file:~/Library/Preferences/Emacs/config.org::*Package%20Manager][Package Manager:1]]
+(require 'package)
+(setq package-enable-at-startup nil)
+;(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))'
+;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+;(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
+(package-initialize)
+;; Package Manager:1 ends here
+
+;; [[file:~/Library/Preferences/Emacs/config.org::*use-package][use-package:1]]
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+;; Enable use-package
+(eval-when-compile
+  (require 'use-package))
+;; use-package:1 ends here
+
+;; [[file:~/Library/Preferences/Emacs/config.org::*Diminish][Diminish:1]]
+(use-package diminish   :ensure t   :demand t)
+;; Diminish:1 ends here
 
 ;; [[file:~/Library/Preferences/Emacs/config.org::*Hydra][Hydra:1]]
 (use-package hydra :ensure t)

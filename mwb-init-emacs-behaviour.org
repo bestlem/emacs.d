@@ -66,8 +66,6 @@ If you want to create a file, visit that file with C-x C-f,then enter the text i
 ;;  Sentences do not end with two spaces
 (setq sentence-end-double-space nil)
 
-(load "setup-gnus")
-
 (progn
   ;; General emacs behaviour
   ;;  From https://sriramkswamy.github.io/dotemacs/

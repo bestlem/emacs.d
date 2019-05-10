@@ -1,24 +1,28 @@
 #+TITLE Emacs configuration - appearance
 #+PROPERTY:header-args :cache yes :tangle (concat "init/" (file-name-base  (buffer-file-name)) ".el") :comments link
 
-#+STARTUP: content;; Visual appearance
+#+STARTUP: content
+
+This covers what emacs looks like and how windows/frames/menus behave
+
+* Colour theme
+Aquamacs is stuck with old color themes not the cusomisable ones
 #+begin_src emacs-lisp
-
-;; Note Aquamacs is stuck with old color themes not the cusomisable ones
-
 (require 'color-theme)
 (eval-after-load "color-theme"
   '(progn
      (color-theme-initialize)
      (color-theme-high-contrast)))
+#+end_src
 
-;; remove toolbar
+* Remove toolbar
+#+begin_src emacs-lisp
 (tool-bar-mode 0)
+#+end_src
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Beacon-mode: flash the cursor when switching buffers or scrolling
-;;              the goal is to make it easy to find the cursor
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+* TODO Cursor
+Beacon-mode: flash the cursor when switching buffers or scrolling  the goal is to make it easy to find the cursor
+#+begin_src emacs-lisp
 (use-package beacon
   :ensure t
   :init
@@ -28,3 +32,64 @@
   :config
   (beacon-mode t))
 #+end_src
+
+* Windows
+I think I now want mainly one window and have splits but tabs are useful.
+
+** Move/split
+ Try hydra from [[https://www.reddit.com/r/emacs/comments/8of6tx/tip_how_to_be_a_beast_with_hydra/][reddit]] but note user is a vi user for movements so will be messed around with. But a few minutes playing does not add much so use forst from [[https://github.com/abo-abo/hydra/wiki/Window-Management][Hydra wiki]] Needs winner mode for some functions to save window state.
+ #+begin_src emacs-lisp
+ (use-package winner
+   :init
+   (winner-mode))
+ (defhydra hydra-window (:color red
+								:hint nil)
+   "
+  Split: _v_ert _x_:horz
+ Delete: _o_nly  _da_ce  _dw_indow  _db_uffer  _df_rame
+   Move: _s_wap
+ Frames: _f_rame new  _df_ delete
+   Misc: _m_ark _a_ce  _u_ndo  _r_edo"
+   ("h" windmove-left)
+   ("j" windmove-down)
+   ("k" windmove-up)
+   ("l" windmove-right)
+   ("H" hydra-move-splitter-left)
+   ("J" hydra-move-splitter-down)
+   ("K" hydra-move-splitter-up)
+   ("L" hydra-move-splitter-right)
+   ("|" (lambda ()
+		  (interactive)
+		  (split-window-right)
+		  (windmove-right)))
+   ("_" (lambda ()
+		  (interactive)
+		  (split-window-below)
+		  (windmove-down)))
+   ("v" split-window-right)
+   ("x" split-window-below)
+										 ;("t" transpose-frame "'")
+   ;; winner-mode must be enabled
+   ("u" winner-undo)
+   ("r" winner-redo) ;;Fixme, not working?
+   ("o" delete-other-windows :exit t)
+   ("a" ace-window :exit t)
+   ("f" new-frame :exit t)
+   ("s" ace-swap-window)
+   ("da" ace-delete-window)
+   ("dw" delete-window)
+   ("db" kill-this-buffer)
+   ("df" delete-frame :exit t)
+   ("q" nil)
+										 ;("i" ace-maximize-window "ace-one" :color blue)
+										 ;("b" ido-switch-buffer "buf")
+   ("m" headlong-bookmark-jump))
+ (bind-key "H-w" 'hydra-window/body)
+ #+end_src
+
+** Stop special buffers opening in new window
+ It is an aquamacs setting see [[https://www.emacswiki.org/emacs/AquamacsFAQ#toc19][FAQ]]
+ #+begin_src emacs-lisp
+ (one-buffer-one-frame-mode -1)
+ (setq  special-display-regexps nil)
+ #+end_src

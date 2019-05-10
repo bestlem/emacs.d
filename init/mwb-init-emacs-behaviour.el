@@ -1,4 +1,26 @@
-;; [[file:~/Library/Preferences/Emacs/mwb-init-emacs-behaviour.org][No heading:1]]
+;; [[file:~/Library/Preferences/Emacs/mwb-init-emacs-behaviour.org::*Trash][Trash:1]]
+(setq delete-by-moving-to-trash nil)
+;; Trash:1 ends here
+
+;; [[file:~/Library/Preferences/Emacs/mwb-init-emacs-behaviour.org::*General%20files][General files:1]]
+(use-package hardhat                    ; Protect user-writable files
+  :ensure t
+  :init (global-hardhat-mode)
+  :config (validate-setq hardhat-mode-lighter " Ⓗ"))
+;; General files:1 ends here
+
+;; [[file:~/Library/Preferences/Emacs/mwb-init-emacs-behaviour.org::*Increase%20list%20to%20exclude%20Aquamacs%20etc.][Increase list to exclude Aquamacs etc.:1]]
+(defun sanityinc/maybe-set-bundled-elisp-readonly ()
+  "If this elisp appears to be part of Emacs, then disallow editing."
+  (when (and (buffer-file-name)
+			 (string-match-p "\\.el\\.gz\\'" (buffer-file-name)))
+    (setq buffer-read-only t)
+    (view-mode 1)))
+
+(add-hook 'emacs-lisp-mode-hook 'sanityinc/maybe-set-bundled-elisp-readonly)
+;; Increase list to exclude Aquamacs etc.:1 ends here
+
+;; [[file:~/Library/Preferences/Emacs/mwb-init-emacs-behaviour.org::*General%20old%20stuff][General old stuff:1]]
 (setq find-file-visit-truename t)	; visit a file under its true name
 
 (setq find-file-existing-other-name t)
@@ -90,4 +112,4 @@ If you want to create a file, visit that file with C-x C-f,then enter the text i
 
 ;;  Completer
 ;; From https://pages.sachachua.com/.emacs.d/Sacha.html#org04e47b9
-;; No heading:1 ends here
+;; General old stuff:1 ends here

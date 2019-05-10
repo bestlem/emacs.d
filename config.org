@@ -152,7 +152,7 @@ In constant mwb-user-emacs-directory
    (defun mwb-init-load (file-root)
 	 "Load the relevant code. Currently just the same as load it loads
    <file-root>.el but eventually will load <file-root>.org"
-	 (load file-root))
+	 (protect (load file-root)))
    #+end_src
 **** The Load
 	 #+begin_src emacs-lisp
@@ -190,14 +190,6 @@ Although see starter kit where they run after init.
 	  #+begin_src emacs-lisp
 (setq load-prefer-newer t)
 	  #+end_src
-***** Setting variables with a check on type
-Used when overriding a defcustom or defvar.
-Note should check on defconst
-#+begin_src emacs-lisp
-(use-package validate
-  :ensure t)
-#+end_src
-
 **** Customisation file
  Yes Aquamacs does this but in a directory with a space. SO put with code so can be under source code control and user-emacs-directory is not.
  Needs to have initsplit added so can seperate out customization files.
@@ -295,6 +287,14 @@ Note should check on defconst
    (use-package hydra :ensure t)
    (use-package use-package-hydra :ensure t)
    #+end_src
+**** Setting variables with a check on type
+Used when overriding a defcustom or defvar.
+Note should check on defconst
+#+begin_src emacs-lisp
+(use-package validate
+  :ensure t)
+#+end_src
+
 *** Emacs server
  This is a simple server start - to allow emacsclient from Terminal. There are more complex starters.
  #+begin_src emacs-lisp

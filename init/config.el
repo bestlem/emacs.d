@@ -18,11 +18,6 @@
 (setq load-prefer-newer t)
 ;; Use source where newer:1 ends here
 
-;; [[file:~/Library/Preferences/Emacs/config.org::*Setting%20variables%20with%20a%20check%20on%20type][Setting variables with a check on type:1]]
-(use-package validate
-  :ensure t)
-;; Setting variables with a check on type:1 ends here
-
 ;; [[file:~/Library/Preferences/Emacs/config.org::*Customisation%20file][Customisation file:1]]
 (setq custom-file ( mwb-user-emacs-file "custom/custom.el"))
 (load custom-file 'noerror)
@@ -93,6 +88,11 @@
 (use-package hydra :ensure t)
 (use-package use-package-hydra :ensure t)
 ;; Hydra:1 ends here
+
+;; [[file:~/Library/Preferences/Emacs/config.org::*Setting%20variables%20with%20a%20check%20on%20type][Setting variables with a check on type:1]]
+(use-package validate
+  :ensure t)
+;; Setting variables with a check on type:1 ends here
 
 ;; [[file:~/Library/Preferences/Emacs/config.org::*Emacs%20server][Emacs server:1]]
 (use-package server

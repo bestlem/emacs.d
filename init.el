@@ -32,7 +32,7 @@
 (defun mwb-init-load (file-root)
   "Load the relevant code. Currently just the same as load it loads
 <file-root>.el but eventually will load <file-root>.org"
-  (load file-root))
+  (protect (load file-root)))
 ;; The loader:1 ends here
 
 ;; [[file:~/Library/Preferences/Emacs/config.org::*The%20Load][The Load:1]]

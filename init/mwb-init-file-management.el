@@ -59,9 +59,9 @@
 
 ;; [[file:~/Library/Preferences/Emacs/mwb-init-file-management.org::*Projectile][Projectile:1]]
 (use-package ripgrep :ensure t)
-(use-package
-  projectile
+(use-package   projectile
   :ensure t
+  :diminish
   :config (define-key projectile-mode-map (kbd "H-p")
 			'projectile-command-map)
   (projectile-mode 1))

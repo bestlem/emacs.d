@@ -104,17 +104,6 @@ As Emacs is bad for java my java setup is now just gradle so that should be a ge
 #+begin_src emacs-lisp
 (mwb-init-load "mwb-init-prog-modes-git")
 #+end_src
-** Completion
-I need something and company seems to be the current one
-#+begin_src emacs-lisp
-  ;;  Start completion
-  (use-package
-	company
-	:ensure t
-	:config (add-hook
-			 'after-init-hook
-			 'global-company-mode))
-#+end_src
 * Specific groups
 Where there is common put them together. This part is really why I have separate files so I can deal with one thing at a time
 

@@ -84,16 +84,6 @@
 (mwb-init-load "mwb-init-prog-modes-git")
 ;; Git:1 ends here
 
-;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*Completion][Completion:1]]
-;;  Start completion
-(use-package
-  company
-  :ensure t
-  :config (add-hook
-		   'after-init-hook
-		   'global-company-mode))
-;; Completion:1 ends here
-
 ;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*Lisp][Lisp:1]]
 (mwb-init-load "mwb-init-prog-modes-lisp")
 ;; Lisp:1 ends here

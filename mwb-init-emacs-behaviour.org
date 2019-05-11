@@ -126,3 +126,13 @@ If you want to create a file, visit that file with C-x C-f,then enter the text i
 ;;  Completer
 ;; From https://pages.sachachua.com/.emacs.d/Sacha.html#org04e47b9
 #+end_src
+* Completion
+I need something and company seems to be the current one
+#+begin_src emacs-lisp
+(use-package company
+  :ensure t
+  :diminish
+  :config (add-hook
+		   'after-init-hook
+		   'global-company-mode))
+#+end_src

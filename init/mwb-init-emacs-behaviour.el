@@ -113,3 +113,12 @@ If you want to create a file, visit that file with C-x C-f,then enter the text i
 ;;  Completer
 ;; From https://pages.sachachua.com/.emacs.d/Sacha.html#org04e47b9
 ;; General old stuff:1 ends here
+
+;; [[file:~/Library/Preferences/Emacs/mwb-init-emacs-behaviour.org::*Completion][Completion:1]]
+(use-package company
+  :ensure t
+  :diminish
+  :config (add-hook
+		   'after-init-hook
+		   'global-company-mode))
+;; Completion:1 ends here

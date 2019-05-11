@@ -70,7 +70,7 @@ Aquamacs seems to turn this off sometimes in customization so need to investigat
  #+end_src
 
 ** TODO Recent Files
- Should be a customise but Aquamets sets it so keeps adding to it pr does it need to check
+ Should be a customise but Aquamacs sets it so keeps adding to it pr does it need to check
  Exclusion regexes from [[https://www.reddit.com/r/emacs/comments/3g468d/stop_recent_files_showing_elpa_packages/][reddit]]
  #+begin_src emacs-lisp
  ;; Problem is this is set after the recent files are set https://emacs.stackexchange.com/questions/48784/recent-files-in-aquamacs
@@ -90,9 +90,9 @@ This add functions. I would use John Wiegley's setup but projectile hung
 So take from projectile
 #+begin_src emacs-lisp
 (use-package ripgrep :ensure t)
-(use-package
-  projectile
+(use-package   projectile
   :ensure t
+  :diminish
   :config (define-key projectile-mode-map (kbd "H-p")
 			'projectile-command-map)
   (projectile-mode 1))

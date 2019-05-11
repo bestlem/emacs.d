@@ -6,9 +6,17 @@
   :hook (prog-mode . rainbow-delimiters-mode))
 ;; Make parentheses pretty:1 ends here
 
+;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes-lisp.org::*xah%20mode][xah mode:1]]
+(use-package  xah-elisp-mode
+   :ensure t
+:disabled
+   :hook emacs-lisp-mode)
+;; xah mode:1 ends here
+
 ;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes-lisp.org::*Lispy][Lispy:1]]
 (use-package lispy
   :ensure t
+ ;; :config (add-to-list lispy-elisp-modes xah-elisp-mode)
   :hook ((emacs-lisp-mode lisp-interaction-mode) . lispy-mode))
 ;; Lispy:1 ends here
 

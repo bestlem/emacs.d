@@ -20,13 +20,22 @@ Although that should be in prog mode
 
 *** Add lisp interaction mode
 
+**** xah mode
+ This does more formatting and has useful abbreviations but I don't know if will work with lispy
+ #+begin_src emacs-lisp
+ (use-package  xah-elisp-mode
+   :ensure t
+:disabled
+   :hook emacs-lisp-mode)
+
+ #+end_src
 **** Lispy
 	 #+begin_src emacs-lisp
 	 (use-package lispy
 	   :ensure t
+	  ;; :config (add-to-list lispy-elisp-modes xah-elisp-mode)
 	   :hook ((emacs-lisp-mode lisp-interaction-mode) . lispy-mode))
 	 #+end_src
-
 **** and interaction hydra
 	 #+begin_src emacs-lisp
 	 (use-package lispy-mnemonic

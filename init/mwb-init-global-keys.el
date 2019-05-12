@@ -153,21 +153,13 @@
   ("-" split-window-below)
   ("|" split-window-right)
   ("\\" split-window-right)
-  ("h" evil-window-left)
-  ("l" evil-window-right)
-  ("k" evil-window-up)
-  ("j" evil-window-down)
-  ("." evil-next-buffer)
-  (">" evil-prev-buffer :color red)
-  ("," evil-prev-buffer)
-  ("<" evil-prev-buffer :color red)
   ("<backspace>" delete-window)
   ("DEL" delete-window) ;; For terminals.
   ("s" hydra-search/body)
   ("v" (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
   ("U" undo-tree-visualize)
   ("x" kill-buffer)
-  ("y" hydra-system/body)
+  ("y" hydra-system/body)m|
   ("n" dired-sidebar-toggle-sidebar)
   ("p" matcha-projectile/body)
   ("g" +show-vc-hydra)
@@ -191,7 +183,13 @@
 ;; H-a is major mode specific Hydra so bound to mode keymap by use-packag :hydra
 (bind-key (kbd "H-m") 'hydra-space/body osx-key-mode-map)
 (bind-key (kbd "H-n") 'tabbar-move-current-buffer-to-new-frame osx-key-mode-map)
-(bind-key (kbd "H-r") 'query-replace osx-key-mode-map)
+;; H-r is register
 ;; H-s is return from org special edit
 (bind-key (kbd "H-t") 'treemacs osx-key-mode-map)
 ;; Hyper global key bindings:1 ends here
+
+;; [[file:~/Library/Preferences/Emacs/mwb-init-global-keys.org::*Command%20key%20bindings][Command key bindings:1]]
+(bind-key "A-/" 'comment-or-uncomment-region-or-line)
+(bind-key "A-<kp-add>" 'zoom-font)
+(bind-key "A-<kp-subtract>" 'zoom-font-out)
+;; Command key bindings:1 ends here

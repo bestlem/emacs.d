@@ -151,6 +151,8 @@ But point seems to be messed up and does Aquamacs do something.
 	   (define-key minibuffer-local-isearch-map (kbd "<left>") 'isearch-reverse-exit-minibuffer)
 	   (define-key minibuffer-local-isearch-map (kbd "<right>") 'isearch-forward-exit-minibuffer))
 #+end_src
+*** TODO Use with cmd-F
+Aquamacs also messes around with isearch and the two don't exactly match
 ** Function keys
 Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in emacs. Just discovered that GNU say what F1-4 should be and seemed good for keyboard macros not my F7. ALso I need to forget F4 for grep but then again I need to see what grep I want. But a hydra will be better allowing start/start/go and format as elisp.
 
@@ -187,8 +189,8 @@ These will be old NeXT Pizza bindings
 	 ;(global-set-key "\M-r" 'replace-string)
 	 ;(global-set-key "\M-i" 'indent-region)
 ** Matcha
-Global hydra from [[https://github.com/jojojames/matcha][Matcha github]] but no idea how good. I din;t want it all but that was the easiest.
-ALso see [[https://github.com/jerrypnz/major-mode-hydra.el][Major mode hydra]] for similar but graps a major mode hydra from somewhere.
+Global hydra from [[https://github.com/jojojames/matcha][Matcha github]] but no idea how good. I didn't want it all but that was the easiest.
+Also see [[https://github.com/jerrypnz/major-mode-hydra.el][Major mode hydra]] for similar but graps a major mode hydra from somewhere.
 #+begin_src emacs-lisp
 (use-package matcha
   :config
@@ -227,21 +229,13 @@ ALso see [[https://github.com/jerrypnz/major-mode-hydra.el][Major mode hydra]] f
   ("-" split-window-below)
   ("|" split-window-right)
   ("\\" split-window-right)
-  ("h" evil-window-left)
-  ("l" evil-window-right)
-  ("k" evil-window-up)
-  ("j" evil-window-down)
-  ("." evil-next-buffer)
-  (">" evil-prev-buffer :color red)
-  ("," evil-prev-buffer)
-  ("<" evil-prev-buffer :color red)
   ("<backspace>" delete-window)
   ("DEL" delete-window) ;; For terminals.
   ("s" hydra-search/body)
   ("v" (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
   ("U" undo-tree-visualize)
   ("x" kill-buffer)
-  ("y" hydra-system/body)
+  ("y" hydra-system/body)m|
   ("n" dired-sidebar-toggle-sidebar)
   ("p" matcha-projectile/body)
   ("g" +show-vc-hydra)
@@ -267,7 +261,15 @@ ALso see [[https://github.com/jerrypnz/major-mode-hydra.el][Major mode hydra]] f
 ;; H-a is major mode specific Hydra so bound to mode keymap by use-packag :hydra
 (bind-key (kbd "H-m") 'hydra-space/body osx-key-mode-map)
 (bind-key (kbd "H-n") 'tabbar-move-current-buffer-to-new-frame osx-key-mode-map)
-(bind-key (kbd "H-r") 'query-replace osx-key-mode-map)
+;; H-r is register
 ;; H-s is return from org special edit
 (bind-key (kbd "H-t") 'treemacs osx-key-mode-map)
 	 #+end_src
+** Command key bindings
+These should be mac based adding to Aquamacs but some I do not used.
+Note that the Aquanacs binding does not fit through bind-keys
+#+begin_src emacs-lisp
+(bind-key "A-/" 'comment-or-uncomment-region-or-line)
+(bind-key "A-<kp-add>" 'zoom-font)
+(bind-key "A-<kp-subtract>" 'zoom-font-out)
+#+end_src

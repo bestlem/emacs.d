@@ -8,29 +8,15 @@ Think of editing dired
    (setq delete-by-moving-to-trash nil)
    #+end_src
 ** Protect library and other files
-*** General files
 [[https://github.com/rolandwalker/hardhat][Hardhat]] provides an extra layer of protection in your work. If you visit a file which looks unsafe to edit, Emacs will make the buffer read-only -- even when the underlying file is writable.
 #+begin_src emacs-lisp
 (use-package hardhat                    ; Protect user-writable files
   :ensure t
   :init (global-hardhat-mode)
-  :config (validate-setq hardhat-mode-lighter " Ⓗ"))
+  :config (validate-setq hardhat-mode-lighter "Ⓗ"))
 #+end_src
 
-*** Protect system emacs lisp from editing
-Idea come from [[https://github.com/purcell/emacs.d][A Resonable Emacs]]
-**** TODO Increase list to exclude Aquamacs etc.
-Look at directory variables and then use a customised list to hold directories, loop/map setting them See [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Directory-Variables.html#Directory-Variables][Gnu Emacs Manual]] Also see if Hardhat will do this
-#+begin_src emacs-lisp
-   (defun sanityinc/maybe-set-bundled-elisp-readonly ()
-	 "If this elisp appears to be part of Emacs, then disallow editing."
-	 (when (and (buffer-file-name)
-				(string-match-p "\\.el\\.gz\\'" (buffer-file-name)))
-       (setq buffer-read-only t)
-       (view-mode 1)))
 
-   (add-hook 'emacs-lisp-mode-hook 'sanityinc/maybe-set-bundled-elisp-readonly)
-#+end_src
 
 * TODO General old stuff
 #+begin_src emacs-lisp

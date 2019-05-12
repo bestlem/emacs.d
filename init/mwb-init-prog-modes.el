@@ -27,7 +27,11 @@
   :hook ((prog-mode org-mode) . ws-butler-mode ))
 ;; Whitespace at end of line:1 ends here
 
-;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*Build%20systems][Build systems:1]]
+;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*iMenu%20in%20all%20buffers][iMenu in all buffers:1]]
+(add-hook 'prog-mode-hook (lambda () (imenu-add-to-menubar "Imenu")))
+;; iMenu in all buffers:1 ends here
+
+;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*Gradle][Gradle:1]]
 ;; gradle and other java
 ;; from http://www.coli.uni-saarland.de/~slemaguer/emacs/main.html#orgac34543
 
@@ -42,7 +46,7 @@
   ;; Some keys for
   (add-hook 'groovy-mode-hook
             '(lambda ()
-               (inf-groovy-keys))))
+			   (inf-groovy-keys))))
 
 ;; Subpackages
 (use-package groovy-imports :ensure t)
@@ -69,7 +73,7 @@
   (setq gradle-gradlew-executable "./gradlew"
         gradle-use-gradlew t)
   (gradle-mode))
-;; Build systems:1 ends here
+;; Gradle:1 ends here
 
 ;; [[file:~/Library/Preferences/Emacs/mwb-init-prog-modes.org::*Flymake][Flymake:1]]
 ;;;; flymake - syntax checking

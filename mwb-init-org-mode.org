@@ -41,8 +41,7 @@ Note Hydra is not really used after just a couple of weeks.
 				("A-s" . org-edit-src-exit) ; I press by mistake but it makes sense
 				)
 	:hook
- <<org-mode-hooks>>
-
+        <<org-mode-hooks>>
 	)
   #+end_src
 *** TODO Save org files saved in dropbox dir automatically (NB not emacs autosave)

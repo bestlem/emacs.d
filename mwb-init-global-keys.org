@@ -267,7 +267,7 @@ Also see [[https://github.com/jerrypnz/major-mode-hydra.el][Major mode hydra]] f
 	 #+end_src
 ** Command key bindings
 These should be mac based adding to Aquamacs but some I do not used.
-Note that the Aquanacs binding does not fit through bind-keys
+Note that the Aquamacs binding does not fit through bind-keys
 #+begin_src emacs-lisp
 (bind-key "A-/" 'comment-or-uncomment-region-or-line)
 (bind-key "A-<kp-add>" 'zoom-font)

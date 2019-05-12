@@ -127,16 +127,16 @@ All this is tangled into init.el which is also under git.
 **** Helper functions
 Thse are required elisp for initialisation
 
-**** Set where the init file is
-In constant mwb-user-emacs-directory
-	 #+begin_src emacs-lisp
-;; Need the directory from here.
-(defun mwb-get-directory-of-current-file ()
-  "Return the full directory path of the caller's file location."
-  (file-name-directory (or load-file-name buffer-file-name))
-  )
-(defconst mwb-user-emacs-directory (mwb-get-directory-of-current-file))
-	 #+end_src
+***** Set where the init file is
+ In constant mwb-user-emacs-directory
+	  #+begin_src emacs-lisp
+ ;; Need the directory from here.
+ (defun mwb-get-directory-of-current-file ()
+   "Return the full directory path of the caller's file location."
+   (file-name-directory (or load-file-name buffer-file-name))
+   )
+ (defconst mwb-user-emacs-directory (mwb-get-directory-of-current-file))
+	  #+end_src
 ***** Where my init code is
   See [[http://ergoemacs.org/emacs/organize_your_dot_emacs.html][Xah Lee get directory name for file]] for possible work around for user-emacs-directory. Except in some cases I do want the directory so break it up
   #+begin_src emacs-lisp
@@ -152,7 +152,18 @@ In constant mwb-user-emacs-directory
    (defun mwb-init-load (file-root)
 	 "Load the relevant code. Currently just the same as load it loads
    <file-root>.el but eventually will load <file-root>.org"
-	 (protect (load file-root)))
+
+	 (let* ((org-file
+			 (concat (expand-file-name file-root mwb-user-emacs-directory) ".org"))
+			(el-file
+			 (concat
+			  (file-name-as-directory
+			   (expand-file-name "init" mwb-user-emacs-directory)) file-root ".el"))
+			)
+	   (when (file-newer-than-file-p org-file el-file)
+		 (message "tangle <%s> to <%s>" org-file el-file)
+		 (org-babel-tangle-file org-file el-file))
+	   (protect (load file-root))))
    #+end_src
 **** The Load
 	 #+begin_src emacs-lisp

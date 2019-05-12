@@ -9,7 +9,7 @@ This is a large config and might be easier to document if not all put in a use-p
 ** use package issues
 This config gets long so difficult to see in one block
 Currently I put things outside use-package
-* Loading
+* Load and setup org mode
 org-mode is a pain as we need a newer than aquamacs supplies and also there are recommendations to use an even later version. Also re packaging emacs package.el reads already built stuff others e.g. straight.el don't and that could be a problem with org-mode. There are reasons not to use the org repo but Elpa - [[https://www.reddit.com/r/emacs/comments/5sx7j0/how_do_i_get_usepackage_to_ignore_the_bundled/ddix2ta/?utm_source=share&utm_medium=web2x][from Reddit]] basically possible security issues so I am with ELPA and missing org-contrib.
 ** Force load of new version
 [[https://github.com/jwiegley/use-package/issues/319#issuecomment-471274348][mzuther  fix]] to load via package
@@ -17,31 +17,35 @@ org-mode is a pain as we need a newer than aquamacs supplies and also there are 
 (assq-delete-all 'org package--builtins)
  #+end_src
 ** The use package setup
- #+begin_src emacs-lisp
- (use-package
-   org
-   :ensure t
-   :hydra (hydra-org-mode
-		   (:color teal)
-		   ""
-		   ("c" mwb-hydra-org-code/body "Code")
-		   ("d" org-toggle-link-display "Show links")
-		   ("l" org-insert-link "link")
-		   ("g" org-set-tags-command "tags")
-		   ("t" org-todo "todo")
-		   ("q" nil "cancel"))
-   :after hydra
-   :bind (:map org-mode-map
-			   ("H-a" . hydra-org-mode/body)
-			   ("H-s" . org-edit-special)
-			   :map org-src-mode-map
-			   ("H-s" . org-edit-src-exit)
-			   ("A-s" . org-edit-src-exit) ; I press by mistake but it makes sense
-			   )
-   :hook  (org-mode . (lambda ()
-						(add-hook 'after-save-hook 'org-babel-tangle 'run-at-end 'only-in-org-mode)))
-   )
- #+end_src
+Note Hydra is not really used after just a couple of weeks.
+**
+  #+begin_src emacs-lisp
+  (use-package
+	org
+	:ensure t
+	:hydra (hydra-org-mode
+			(:color teal)
+			""
+			("c" mwb-hydra-org-code/body "Code")
+			("d" org-toggle-link-display "Show links")
+			("l" org-insert-link "link")
+			("g" org-set-tags-command "tags")
+			("t" org-todo "todo")
+			("q" nil "cancel"))
+	:after hydra
+	:bind (:map org-mode-map
+				("H-a" . hydra-org-mode/body)
+				("H-s" . org-edit-special)
+				:map org-src-mode-map
+				("H-s" . org-edit-src-exit)
+				("A-s" . org-edit-src-exit) ; I press by mistake but it makes sense
+				)
+	:hook  (org-mode . (lambda ()
+						 (add-hook 'after-save-hook 'org-babel-tangle 'run-at-end 'only-in-org-mode)))
+	)
+  #+end_src
+*** TODO Save org files saved in dropbox dir automatically (NB not emacs autosave)
+See https://www.reddit.com/r/emacs/comments/9e5h4f/is_there_a_way_to_autosave_org_note_buffers/ and real-auto-save-mode and the hook
 ** Setup outside use-package
 *** Imenu to provide info for treemacs and contextual menu
   #+begin_src emacs-lisp
@@ -64,8 +68,43 @@ Make org mode look prettier. See also the customization
    :ensure t
    :init (add-hook 'org-mode-hook 'org-bullets-mode))
  #+end_src
+*** Circular bullets
+From [[http://www.howardism.org/Technical/Emacs/orgmode-wordprocessor.html][here]]
+	#+begin_src emacs-lisp
+	(font-lock-add-keywords
+	 'org-mode
+	 '(("^ +\\([-*]\\) "
+		(0
+		 (prog1
+			 ()
+		   (compose-region
+			(match-beginning 1)
+			(match-end 1)
+			"•"))))))
+	#+end_src
+*** Set fonts for headers
+Set by size not colour.
+This is code to be run once so not tangled
+#+begin_src emacs-lisp :tangle no
+(let* ((variable-tuple '(:font "Times New Roman"))
+	   (base-font-color (face-foreground 'default nil 'default))
+	   (headline `(:inherit default :weight bold :foreground ,base-font-color)))
+
+  (custom-theme-set-faces
+   'user
+   `(org-level-8 ((t (,@headline ,@variable-tuple))))
+   `(org-level-7 ((t (,@headline ,@variable-tuple))))
+   `(org-level-6 ((t (,@headline ,@variable-tuple))))
+   `(org-level-5 ((t (,@headline ,@variable-tuple))))
+   `(org-level-4 ((t (,@headline ,@variable-tuple :height 1.1))))
+   `(org-level-3 ((t (,@headline ,@variable-tuple :height 1.25))))
+   `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.5))))
+   `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.75))))
+   `(org-document-title ((t (,@headline ,@variable-tuple :height 2.0 :underline nil))))))
+#+end_src
 ** TODO Hydras for tangling
 The template one is broken by org-mode version  - I suspect I need to learn yasnippet
+In practice I don't use that.
  #+begin_src emacs-lisp
  (defhydra mwb-hydra-org-code
    (:color teal)

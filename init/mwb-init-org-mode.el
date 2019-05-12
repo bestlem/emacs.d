@@ -47,6 +47,19 @@
   :init (add-hook 'org-mode-hook 'org-bullets-mode))
 ;; Prettify:1 ends here
 
+;; [[file:~/Library/Preferences/Emacs/mwb-init-org-mode.org::*Circular%20bullets][Circular bullets:1]]
+(font-lock-add-keywords
+ 'org-mode
+ '(("^ +\\([-*]\\) "
+	(0
+	 (prog1
+		 ()
+	   (compose-region
+		(match-beginning 1)
+		(match-end 1)
+		"•"))))))
+;; Circular bullets:1 ends here
+
 ;; [[file:~/Library/Preferences/Emacs/mwb-init-org-mode.org::*Hydras%20for%20tangling][Hydras for tangling:1]]
 (defhydra mwb-hydra-org-code
   (:color teal)

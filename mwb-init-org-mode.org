@@ -1,0 +1,274 @@
+#+TITLE Emacs configuration org Mode
+#+PROPERTY:header-args :cache yes :tangle (concat "init/" (file-name-base  (buffer-file-name)) ".el") :comments link
+#+STARTUP: content
+* Start using org mode
+This is my first attempt at learning it.
+The config is a mess as I pick up on things.
+I was going to leave this to last so could make changes as I used org. However as I kept editing it I realised that I needed to comment and than was better in literate programming so this is the first non key file to be done.
+This is a large config and might be easier to document if not all put in a use-package (or break my rule and let some parts not be complete lisp)
+** use package issues
+This config gets long so difficult to see in one block
+Currently I put things outside use-package
+See in future noweb see https://raw.githubusercontent.com/zzamboni/dot-emacs/master/init.org
+* Load and setup org mode
+org-mode is a pain as we need a newer than aquamacs supplies and also there are recommendations to use an even later version. Also re packaging emacs package.el reads already built stuff others e.g. straight.el don't and that could be a problem with org-mode. There are reasons not to use the org repo but Elpa - [[https://www.reddit.com/r/emacs/comments/5sx7j0/how_do_i_get_usepackage_to_ignore_the_bundled/ddix2ta/?utm_source=share&utm_medium=web2x][from Reddit]] basically possible security issues so I am with ELPA and missing org-contrib.
+** Force load of new version
+[[https://github.com/jwiegley/use-package/issues/319#issuecomment-471274348][mzuther  fix]] to load via package
+ #+begin_src emacs-lisp
+(assq-delete-all 'org package--builtins)
+ #+end_src
+** The use package setup
+Note Hydra is not really used after just a couple of weeks.
+
+  #+begin_src emacs-lisp :noweb yes
+  (use-package org
+	:ensure t
+	:hydra (hydra-org-mode
+			(:color teal)
+			""
+			("c" mwb-hydra-org-code/body "Code")
+			("d" org-toggle-link-display "Show links")
+			("l" org-insert-link "link")
+			("g" org-set-tags-command "tags")
+			("t" org-todo "todo")
+			("q" nil "cancel"))
+	:after hydra
+	:bind (:map org-mode-map
+				("H-a" . hydra-org-mode/body)
+				("H-s" . org-edit-special)
+				:map org-src-mode-map
+				("H-s" . org-edit-src-exit)
+				("A-s" . org-edit-src-exit) ; I press by mistake but it makes sense
+				)
+	:hook
+        <<org-mode-hooks>>
+	)
+  #+end_src
+*** TODO Save org files saved in dropbox dir automatically (NB not emacs autosave)
+See https://www.reddit.com/r/emacs/comments/9e5h4f/is_there_a_way_to_autosave_org_note_buffers/ and real-auto-save-mode and the hook
+*** Tangle on save
+	#+begin_src emacs-lisp :tangle no :noweb-ref org-mode-hooks
+	(org-mode . (lambda ()
+						(add-hook
+						 'after-save-hook
+						 'org-babel-tangle
+						 'run-at-end
+						 'only-in-org-mode)))
+	#+end_src
+** Setup outside use-package
+*** Imenu to provide info for treemacs and contextual menu
+  #+begin_src emacs-lisp
+  (add-hook 'org-mode-hook
+			(lambda () (imenu-add-to-menubar "Imenu")))
+  (setq org-imenu-depth 6)
+  #+end_src
+** Babel initialisation
+Code block behaviour - but also see customization for appearance
+ #+begin_src emacs-lisp
+ (setq org-src-fontify-natively t
+	   org-src-tab-acts-natively t
+	   org-confirm-babel-evaluate nil
+	   org-edit-src-content-indentation 0)
+ #+end_src
+** Prettify
+Make org mode look prettier. See also the customization
+Basically set to variable pitch font but note Aquamacs has a way (different of course to do this)
+ #+begin_src emacs-lisp
+ (use-package org-bullets
+   :ensure t
+   :init (add-hook 'org-mode-hook 'org-bullets-mode))
+ #+end_src
+*** Circular bullets
+From [[http://www.howardism.org/Technical/Emacs/orgmode-wordprocessor.html][here]]
+	#+begin_src emacs-lisp
+	(font-lock-add-keywords
+	 'org-mode
+	 '(("^ +\\([-*]\\) "
+		(0
+		 (prog1
+			 ()
+		   (compose-region
+			(match-beginning 1)
+			(match-end 1)
+			"•"))))))
+	#+end_src
+*** Set fonts for headers
+   Set by size not colour.
+   This is code to be run once so not tangled - but does not seem to save so tangle it
+   #+begin_src emacs-lisp
+
+
+   (let* ((variable-tuple
+		   (cond ((x-list-fonts   "Gill Sans") '(:font   "Gill Sans"))
+				 ((x-list-fonts   "Source Sans Pro") '(:font   "Source Sans Pro"))
+				 ((x-list-fonts   "Lucida Grande")   '(:font   "Lucida Grande"))
+				 ((x-list-fonts   "Verdana")         '(:font   "Verdana"))
+				 ((x-family-fonts "Sans Serif")      '(:family "Sans Serif"))
+				 (nil (warn "Cannot find a Sans Serif Font.  Install Source Sans Pro."))))
+		  (base-font-color (face-foreground 'default nil 'default))
+		  (headline       `(:inherit variable-pitch :weight regular :foreground ,base-font-color)))
+
+	 (custom-theme-set-faces
+	  'user
+	  `(org-level-8        ((t (,@headline ,@variable-tuple))))
+	  `(org-level-7        ((t (,@headline ,@variable-tuple))))
+	  `(org-level-6        ((t (,@headline ,@variable-tuple))))
+	  `(org-level-5        ((t (,@headline ,@variable-tuple))))
+	  `(org-level-4        ((t (,@headline ,@variable-tuple :height 1.1))))
+	  `(org-level-3        ((t (,@headline ,@variable-tuple :height 1.25))))
+	  `(org-level-2        ((t (,@headline ,@variable-tuple :height 1.5))))
+	  `(org-level-1        ((t (,@headline ,@variable-tuple :height 1.75))))
+	  `(org-document-title ((t (,@headline ,@variable-tuple :height 2.0 :underline nil))))))
+   #+end_src
+*** Indent other text
+	#+begin_src emacs-lisp
+	(use-package org-indent
+	  :ensure nil
+	  :diminish)
+	#+end_src
+*** Line wrapping
+- Setting up =visual-line-mode= and making all my paragraphs one single line, so that the lines wrap around nicely in the window according to their proportional-font size, instead of at a fixed character count, which does not work so nicely when characters have varying widths. I set up a hook that automatically enables =visual-line-mode= and =variable-pitch-mode= when entering org-mode. From [[https://raw.githubusercontent.com/zzamboni/dot-emacs/master/init.org][zzamboni]]
+  #+begin_src emacs-lisp :tangle no :noweb-ref org-mode-hooks
+    (org-mode . visual-line-mode)
+    (org-mode . variable-pitch-mode)
+  #+end_src
+** TODO Hydras for tangling
+The template one is broken by org-mode version  - I suspect I need to learn yasnippet
+In practice I don't use that.
+ #+begin_src emacs-lisp
+ (defhydra mwb-hydra-org-code
+   (:color teal)
+   ""
+   ("e" org-edit-special "Edit the code")
+   ("i" hydra-org-template/body "Insert code") ; FIXME
+   ("t" org-babel-tangle "Tangle buffer")
+   ("q" nil "cancel"))
+
+ #+end_src
+** TODO Messed up code hydra
+In there is a define-key org-mode-map "<" which is useful for <s - this all needs a cleanup
+It does not always work e.g. here but does at end of file. Try above and below Prettify.
+
+ #+begin_src emacs-lisp
+
+ ;;  From https://github.com/abo-abo/hydra/wiki/Org-mode-block-templates
+ (defhydra hydra-org-template (:color blue :hint nil)
+   "
+  _c_enter  _q_uote     _e_macs-lisp    _L_aTeX:
+  _l_atex   _E_xample   _p_erl          _i_ndex:
+  _a_scii   _v_erse     _P_erl tangled  _I_NCLUDE:
+  _s_rc     _n_ote      plant_u_ml      _H_TML:
+  _h_tml    ^ ^         ^ ^             _A_SCII:
+ "
+   ("s" (hot-expand "<s"))
+   ("E" (hot-expand "<e"))
+   ("q" (hot-expand "<q"))
+   ("v" (hot-expand "<v"))
+   ("n" (hot-expand "<not"))
+   ("c" (hot-expand "<c"))
+   ("l" (hot-expand "<l"))
+   ("h" (hot-expand "<h"))
+   ("a" (hot-expand "<a"))
+   ("L" (hot-expand "<L"))
+   ("i" (hot-expand "<i"))
+   ("e" (hot-expand "<s" "emacs-lisp"))
+   ("p" (hot-expand "<s" "perl"))
+   ("u" (hot-expand "<s" "plantuml :file CHANGE.png"))
+   ("P" (hot-expand "<s" "perl" ":results output :exports both :shebang \"#!/usr/bin/env perl\"\n"))
+   ("I" (hot-expand "<I"))
+   ("H" (hot-expand "<H"))
+   ("A" (hot-expand "<A"))
+   ("<" self-insert-command "ins")
+   ("o" nil "quit"))
+
+ (require 'org-tempo) ; Required from org 9 onwards for old template expansion
+ ;; Reset the org-template expnsion system, this is need after upgrading to org 9 for some reason
+ (setq org-structure-template-alist (eval (car (get 'org-structure-template-alist 'standard-value))))
+ (defun hot-expand (str &optional mod header)
+   "Expand org template.
+
+ STR is a structure template string recognised by org like <s. MOD is a
+ string with additional parameters to add the begin line of the
+ structure element. HEADER string includes more parameters that are
+ prepended to the element after the #+HEADER: tag."
+   (let (text)
+	 (when (region-active-p)
+	   (setq text
+			 (buffer-substring
+			  (region-beginning)
+			  (region-end)))
+	   (delete-region
+		(region-beginning)
+		(region-end))
+	   (deactivate-mark))
+	 (when header
+	   (insert "#+HEADER: " header)
+	   (forward-line))
+	 (insert str)
+	 (org-tempo-complete-tag)
+	 (when mod
+	   (insert mod)
+	   (forward-line))
+	 (when text (insert text))))
+
+ (define-key org-mode-map "<"
+   (lambda () (interactive)
+	 (if (or (region-active-p) (looking-back "^"))
+		 (hydra-org-template/body)
+	   (self-insert-command 1))))
+
+ (eval-after-load "org"
+   '(cl-pushnew
+     '("not" . "note")
+	 org-structure-template-alist))
+
+ ;; From https://github.com/howardabrams/dot-files/blob/master/emacs-org.org
+ ;;  ALso http://kitchingroup.cheme.cmu.edu/blog/2017/04/09/A-better-return-in-org-mode/
+ ;; But messes up plain text entry
+ (defun ha/org-return (&optional ignore)
+   "Add new list item, heading or table row with RET.
+ A double return on an empty element deletes it.
+ Use a prefix arg to get regular RET. "
+   (interactive "P")
+   (if ignore
+       (org-return)
+     (cond
+      ;; Open links like usual
+      ((eq 'link (car (org-element-context)))
+       (org-return))
+      ;; lists end with two blank lines, so we need to make sure we are also not
+      ;; at the beginning of a line to avoid a loop where a new entry gets
+      ;; created with only one blank line.
+      ((and (org-in-item-p) (not (bolp)))
+       (if (org-element-property :contents-begin (org-element-context))
+	   (org-insert-heading)
+	 (beginning-of-line)
+	 (setf (buffer-substring
+				(line-beginning-position) (line-end-position)) "")
+	 (org-return)))
+      ((org-at-heading-p)
+       (if (not (string= "" (org-element-property :title (org-element-context))))
+	   (progn (org-end-of-meta-data)
+		  (org-insert-heading))
+	 (beginning-of-line)
+	 (setf (buffer-substring
+				(line-beginning-position) (line-end-position)) "")))
+      ((org-at-table-p)
+       (if (-any?
+			(lambda (x) (not (string= "" x)))
+			(nth
+	     (- (org-table-current-dline) 1)
+	     (org-table-to-lisp)))
+	   (org-return)
+	 ;; empty row
+	 (beginning-of-line)
+	 (setf (buffer-substring
+				(line-beginning-position) (line-end-position)) "")
+	 (org-return)))
+      (t
+       (org-return)))))
+
+ ;; (define-key org-mode-map (kbd "RET")  #'ha/org-return)
+
+
+ #+end_src

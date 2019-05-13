@@ -4,6 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(aquamacs-additional-fontsets nil t)
+ '(aquamacs-autoface-mode nil)
  '(aquamacs-customization-version-id 310 t)
  '(aquamacs-tool-bar-user-customization nil t)
  '(auto-fill-function nil t)
@@ -64,19 +65,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:stipple nil :background "White" :foreground "Black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "apple" :family "Menlo"))))
- '(emacs-lisp-mode-default ((t (:inherit prog-mode-default :height 120 :family "Fira Code"))) t)
+ '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "Fira Code"))))
+ '(bold-italic ((t (:underline t :slant italic :weight bold :family "Menlo"))))
+ '(highlight ((t (:background "black" :foreground "white"))))
+ '(italic ((t (:underline t :slant italic))))
  '(org-block ((t (:inherit shadow :background "lemon chiffon" :foreground "black" :height 0.8 :family "Fira Code"))))
  '(org-block-begin-line ((t (:inherit org-meta-line :foreground "blue" :weight normal))))
  '(org-block-end-line ((t (:inherit org-block-begin-line :foreground "blue"))))
- '(org-document-title ((t (:inherit default :weight bold :foreground "black" :font "Times New Roman" :height 2.0 :underline nil))))
- '(org-level-1 ((t (:inherit default :weight bold :foreground "black" :font "Times New Roman" :height 1.75))))
- '(org-level-2 ((t (:inherit default :weight bold :foreground "black" :font "Times New Roman" :height 1.5))))
- '(org-level-3 ((t (:inherit default :weight bold :foreground "black" :font "Times New Roman" :height 1.25))))
- '(org-level-4 ((t (:inherit default :weight bold :foreground "black" :font "Times New Roman" :height 1.1))))
- '(org-level-5 ((t (:inherit default :weight bold :foreground "black" :font "Times New Roman"))))
- '(org-level-6 ((t (:inherit default :weight bold :foreground "black" :font "Times New Roman"))))
- '(org-level-7 ((t (:inherit default :weight bold :foreground "black" :font "Times New Roman"))))
- '(org-level-8 ((t (:inherit default :weight bold :foreground "black" :font "Times New Roman"))))
- '(org-mode-default ((t (:inherit outline-mode-default :stipple nil :strike-through nil :underline nil :slant normal :weight normal :height 180 :width normal :family "Times New Roman"))))
- '(python-mode-default ((t (:inherit prog-mode-default :height 120 :family "Fira Code"))) t))
+ '(variable-pitch ((t (:weight normal :height 1.2 :family "Times New Roman")))))

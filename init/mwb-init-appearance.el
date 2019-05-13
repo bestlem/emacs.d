@@ -26,7 +26,7 @@
   :init
   (winner-mode))
 (defhydra hydra-window (:color red
-							   :hint nil)
+							       :hint nil)
   "
  Split: _v_ert _x_:horz
 Delete: _o_nly  _da_ce  _dw_indow  _db_uffer  _df_rame

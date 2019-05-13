@@ -159,7 +159,7 @@
   ("v" (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
   ("U" undo-tree-visualize)
   ("x" kill-buffer)
-  ("y" hydra-system/body)m|
+  ("y" hydra-system/body)
   ("n" dired-sidebar-toggle-sidebar)
   ("p" matcha-projectile/body)
   ("g" +show-vc-hydra)

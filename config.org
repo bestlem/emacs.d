@@ -165,7 +165,7 @@ This fails for config.org so that needs to be in version control.
 		 (message "This loaded an org mode but from the system - best to restart")
 		 (message "tangle <%s> to <%s>" org-file el-file)
 		 (org-babel-tangle-file org-file el-file))
-	   (protect (load file-root))))
+	   (protect (load el-file))))
       #+end_src
 **** The Load
 	 #+begin_src emacs-lisp

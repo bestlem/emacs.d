@@ -33,15 +33,17 @@ Although that should be in prog mode
 	 #+begin_src emacs-lisp
 	 (use-package lispy
 	   :ensure t
-	  ;; :config (add-to-list lispy-elisp-modes xah-elisp-mode)
-	   :hook ((emacs-lisp-mode lisp-interaction-mode) . lispy-mode))
+	   ;; :config (add-to-list lispy-elisp-modes xah-elisp-mode)
+	   :hook ((emacs-lisp-mode lisp-interaction-mode) . lispy-mode)
+	   :bind (:map lispy-mode-map
+				   ("<backspace>" . lispy-delete-backward)
+				   ("<kp-delete>" . lispy-delete-backward)))
 	 #+end_src
 **** and interaction hydra
+Changes are now made directly to the package which is only now here
 	 #+begin_src emacs-lisp
 	 (use-package lispy-mnemonic
-	   :hook ('emacs-lisp-mode . 'lispy-mnemonic-mode)
-	   :bind ("H-d" . 'hydra-lispy-debug/body)
-	   )
+	   :hook ('emacs-lisp-mode . 'lispy-mnemonic-mode))
 	 #+end_src
 ** Emacs Lisp
 *** Formatter

@@ -31,14 +31,16 @@
 ;; [[file:~/Library/Preferences/Emacs/config.org::*The%20loader][The loader:1]]
 (defun mwb-init-load (file-root)
   "Load the relevant code. Currently just the same as load it loads
-   <file-root>.el but eventually will load <file-root>.org"
+	  <file-root>.el but eventually will load <file-root>.org"
   (let* ((org-file
 		  (concat (expand-file-name file-root mwb-user-emacs-directory) ".org"))
-		 (el-file
-		  (concat
-		   (file-name-as-directory
-			(expand-file-name "init" mwb-user-emacs-directory)) file-root ".el")))
+		 (el-dir
+		  (file-name-as-directory (expand-file-name "init" mwb-user-emacs-directory)))
+		 (el-file (expand-file-name (concat file-root ".el") el-dir)))
+	(unless (file-exists-p el-dir)
+	  (make-directory el-dir))
 	(when (file-newer-than-file-p org-file el-file)
+	  (require 'org)
 	  (message "This loaded an org mode but from the system - best to restart")
 	  (message "tangle <%s> to <%s>" org-file el-file)
 	  (org-babel-tangle-file org-file el-file))

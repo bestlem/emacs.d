@@ -51,6 +51,16 @@ I am not certain this is needed now as other things do this
 #+begin_src  emacs-lisp
 (use-package elisp-format :ensure t)
 #+end_src
+*** Completion
+Add company backend from John Widgley
+#+begin_src emacs-lisp
+(use-package company-elisp
+  :after company
+  :config
+  (push 'company-elisp company-backends))
+
+(setq-local company-backend '(company-elisp))
+#+end_src
 *** Keyboard Macros
 Well not really lisp but much can be converted to it
 **** Show as emacs lisp

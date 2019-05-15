@@ -15,9 +15,7 @@ Think of editing dired
   :init (global-hardhat-mode)
   :config (validate-setq hardhat-mode-lighter "Ⓗ"))
 #+end_src
-
-
-
+**
 * TODO General old stuff
 #+begin_src emacs-lisp
 (setq find-file-visit-truename t)	; visit a file under its true name
@@ -94,11 +92,7 @@ If you want to create a file, visit that file with C-x C-f,then enter the text i
 	:bind (("C-h C-m" . discover-my-major)
 		   ("C-h M-m" . discover-my-mode)))
 
-  ;; smex is an amazing program that helps order the M-x commands based on usage and recent items. Let’s install it.
-  (use-package smex
-	:ensure t
-	:config
-	(smex-initialize))
+
 
   ;; comment-dwim-2 improves on the existing comment-dwim command for easy commenting. Pretty useful.
 
@@ -113,12 +107,179 @@ If you want to create a file, visit that file with C-x C-f,then enter the text i
 ;; From https://pages.sachachua.com/.emacs.d/Sacha.html#org04e47b9
 #+end_src
 * Completion
-I need something and company seems to be the current one
-#+begin_src emacs-lisp
-(use-package company
-  :ensure t
-  :diminish
-  :config (add-hook
-		   'after-init-hook
-		   'global-company-mode))
+** Text
+This is completion for text in buffer
+ I need something and company seems to be the current one
+ #+begin_src emacs-lisp
+ (use-package company
+   :ensure t
+   :diminish
+   :config (add-hook
+			'after-init-hook
+			'global-company-mode))
+ #+end_src
+** Emacs
+This is completion for emacs commands. Choice is ido, ivy helm.
+I'll try ivy.
+Note headers have tangle command in to suppress one or other
+*** Ido
+:PROPERTIES:
+  :header-args:    :tangle no
+  :END:
+
+**** Find M-x commands
+  This is [[https://www.emacswiki.org/emacs/Smex][smex]] buy ivy replaces it.
+  #+begin_quote
+  Smex is a M-x enhancement for Emacs. Built on top of IDO, it provides a convenient interface to your recently and most frequently used commands. And to all the other commands, too.
+  #+end_quote
+  #+begin_src emacs-lisp
+	(use-package smex
+	  :ensure t
+	  :config
+	  (smex-initialize))
+  #+end_src
+
+*** Ivy
+Start with a small setup
+
+**** Ivy
+This is the completion tools
+Take some for John Widgley
+	 #+begin_src emacs-lisp
+	 (use-package ivy
+	   :ensure t
+	   :diminish
+	   :demand
+	   :bind (("C-x b" . ivy-switch-buffer)
+			  ("H-b" . ivy-switch-buffer)
+			  ("C-x B" . ivy-switch-buffer-other-window)
+			  ("M-H"   . ivy-resume))
+
+	   :bind (:map ivy-minibuffer-map
+				   ("<tab>" . ivy-alt-done)
+				   ("SPC"   . ivy-alt-done-or-space)
+				   ("C-d"   . ivy-done-or-delete-char)
+				   ("C-i"   . ivy-partial-or-done)
+				   ("C-r"   . ivy-previous-line-or-history)
+				   ("M-r"   . ivy-reverse-i-search))
+
+	   :bind (:map ivy-switch-buffer-map
+				   ("C-k" . ivy-switch-buffer-kill))
+	   :custom
+	   (ivy-dynamic-exhibit-delay-ms 200)
+	   (ivy-height 10)
+	   (ivy-initial-inputs-alist nil t)
+	   (ivy-magic-tilde nil)
+	   (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
+	   (ivy-use-virtual-buffers t)
+	   (ivy-wrap t)
+	   :preface
+	   (defun ivy-done-or-delete-char ()
+		 (interactive)
+		 (call-interactively
+		  (if (eolp)
+			  #'ivy-immediate-done
+			#'ivy-delete-char)))
+
+	   (defun ivy-alt-done-or-space ()
+		 (interactive)
+		 (call-interactively
+		  (if (= ivy--length 1)
+			  #'ivy-alt-done
+			#'self-insert-command)))
+
+	   (defun ivy-switch-buffer-kill ()
+		 (interactive)
+		 (debug)
+		 (let ((bn (ivy-state-current ivy-last)))
+		   (when (get-buffer bn)
+			 (kill-buffer bn))
+		   (unless (buffer-live-p (ivy-state-buffer ivy-last))
+			 (setf (ivy-state-buffer ivy-last)
+				   (with-ivy-window (current-buffer))))
+		   (setq ivy--all-candidates (delete bn ivy--all-candidates))
+		   (ivy--exhibit)))
+
+	   ;; This is the value of `magit-completing-read-function', so that we see
+	   ;; Magit's own sorting choices.
+	   (defun my-ivy-completing-read (&rest args)
+		 (let ((ivy-sort-functions-alist '((t . nil))))
+		   (apply 'ivy-completing-read args)))
+	   :config
+	   (ivy-mode 1)
+	   (ivy-set-occur 'ivy-switch-buffer 'ivy-switch-buffer-occur)
+
+	   ;; Show #/total when scrolling buffers
+	   (setq ivy-count-format "%d/%d ")
+	   )
 #+end_src
+
+**** Ivy hydra
+#+begin_src emacs-lisp :
+	 (use-package ivy-hydra
+	   :ensure t
+	   :after (ivy hydra))
+#+end_src
+
+**** Ivy rich
+More friendly interface for ivy
+#+begin_src emacs-lisp :
+(use-package ivy-rich
+  :after ivy counsel
+  :demand t
+  :ensure t
+  :config
+  (ivy-rich-mode 1)
+  (setq ivy-virtual-abbreviate 'full
+		ivy-rich-switch-buffer-align-virtual-buffer t
+		ivy-rich-path-style 'abbrev))
+#+end_src
+
+**** Swiper
+Replace isearch
+#+begin_src emacs-lisp :
+
+(use-package swiper
+  :after ivy
+  :ensure t
+  :bind (("C-s" . swiper)
+		 ("C-r" . swiper))
+  )
+#+end_src
+
+***** Aquamacs
+Need to integrate with command FG etc (note thet are separate to C-s
+ #+begin_src emacs-lisp :
+
+ (use-package counsel
+   :ensure t
+   :after ivy
+   :bind (("M-x" . counsel-M-x)
+		  ("C-x C-f" . counsel-find-file)
+		  ("C-x C-r" . counsel-recentf)
+		  ("<f1> f" . counsel-describe-function)
+		  ("<f1> v" . counsel-describe-variable)
+		  ("<f1> l" . counsel-find-library)
+										 ; ("<f2> i" . counsel-info-lookup-symbol)
+										 ; ("<f2> u" . counsel-unicode-char)
+		  ("C-c g" . counsel-git-grep)
+		  ("C-c j" . counsel-git)
+										 ;("C-c k" . counsel-ag)
+		  ("C-c r" . counsel-rg)
+		  ("C-x l" . counsel-locate)
+		  :map minibuffer-local-map
+		  ("C-r" . counsel-minibuffer-add)
+		  )
+   :config
+   (if (executable-find "rg")
+	   ;; use ripgrep instead of grep because it's way faster
+	   (setq counsel-grep-base-command
+			 "rg -i -M 120 --no-heading --line-number --color never '%s' %s"
+			 counsel-rg-base-command
+			 "rg -i -M 120 --no-heading --line-number --color never %s ."
+			 )
+	 (warn "\nWARNING: Could not find the ripgrep executable. It "
+		   "is recommended you install ripgrep.")
+	 )
+   )
+	  #+end_src

@@ -37,7 +37,7 @@ Although that should be in prog mode
 	   :hook ((emacs-lisp-mode lisp-interaction-mode) . lispy-mode)
 	   :bind (:map lispy-mode-map
 				   ("<backspace>" . lispy-delete-backward)
-				   ("<kp-delete>" . lispy-delete-backward)))
+				   ("<kp-delete>" . lispy-delete)))
 	 #+end_src
 **** and interaction hydra
 Changes are now made directly to the package which is only now here

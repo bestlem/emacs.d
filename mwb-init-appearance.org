@@ -94,15 +94,21 @@ I think I now want mainly one window and have splits but tabs are useful.
  #+end_src
 
 * Buffers
-Ibuffer seems to be the one. This setup from [[https://emacs.nasy.moe/#org2ffc7b4][nasy.moe]]
+Ibuffer seems to be the one. This setup from [[https://emacs.nasy.moe/#org2ffc7b4][nasy.moe]] and
 #+begin_src emacs-lisp
+(defun mwb/ibuffer-vc-add-vc-filter-groups ()
+  (interactive)
+  (dolist (group (ibuffer-vc-generate-filter-groups-by-vc-root))
+	(add-to-list 'ibuffer-filter-groups group t)))
+
+
 (use-package ibuffer
   :bind (("C-x C-b" . ibuffer)
 		 :map ibuffer-mode-map
 		 ("." . hydra-ibuffer-main/body))
   :init
   (setq ibuffer-saved-filter-groups
-        '(("Normal"
+        '(("Default"
            ("Dired"      (mode . dired-mode))
            ("Emacs"     (or
                          (name . "^\\*dashboard\\*$" )
@@ -110,23 +116,6 @@ Ibuffer seems to be the one. This setup from [[https://emacs.nasy.moe/#org2ffc7b
                          (name . "^\\*Messages\\*$"  )
                          (name . "^\\*Backtrace\\*$" )
                          (name . "^\\*Pp Eval Output\\*$")))
-           ("Text"      (or
-                         (mode . org-mode)
-                         (mode . markdown)
-                         (mode . rst-mode)
-                         (mode . text-mode)))
-           ("TeX"        (mode . tex-mode))
-           ("Languages" (or
-                         (mode . emacs-lisp-mode)
-                         (mode . haskell-mode)
-                         (mode . javascript-mode)
-                         (mode . lisp-mode)
-                         (mode . python-mode)
-                         (mode . ruby-mode)
-                         (mode . rust-mode)
-                         (mode . html-mode)
-                         (mode . css-mode)
-                         (mode . prog-mode)))
            ("GNUs"      (or
                          (mode . message-mode)
                          (mode . bbdb-mode)
@@ -136,11 +125,22 @@ Ibuffer seems to be the one. This setup from [[https://emacs.nasy.moe/#org2ffc7b
                          (mode . gnus-article-mode)
                          (name . "^\\.bbdb$")
                          (name . "^\\.newsrc-dribble")))
+		   ("Magit"      (name . "^magit"))
+		   ("Help"      (or
+						 (name . "^\\*Help\\*$")
+						 (name . "^\\*Apropos\\*$")
+						 (name . "^\\*info\\*$")
+						 (name . "^\\*helpful")))
+		   ("Custom"    (or
+						 (mode . custom-mode)
+						 (name . "^\\*Customize")))
            ("Helm"       (mode . helm-major-mode))
            ))
         ibuffer-show-empty-filter-groups nil
         ibuffer-default-sorting-mode     'filename/process)
-  :hook ((ibuffer-mode . (lambda () (ibuffer-switch-to-saved-filter-groups "Normal")))))
+  :hook ((ibuffer-mode . (lambda ()
+						   (ibuffer-switch-to-saved-filter-groups "Default")
+						   (mwb/ibuffer-vc-add-vc-filter-groups)))))
 #+end_src
 
 ** Directory structure

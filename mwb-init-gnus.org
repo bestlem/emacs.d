@@ -1,8 +1,11 @@
 #+TITLE Emacs configuration gnus
-#+PROPERTY:header-args :cache yes :tangle (concat "init/" (file-name-base  (buffer-file-name)) ".el") :comments link
+#+PROPERTY:header-args :cache yes :tangle yes  :comments link
 
 #+STARTUP: content
 
+#+begin_src emacs-lisp
+;; need some code
+#+end_src
 * Old setup
 Bin it
 #+begin_src emacs-lisp :tangle no

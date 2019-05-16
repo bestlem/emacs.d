@@ -1,5 +1,5 @@
 #+TITLE Emacs configuration org python configuration
-#+PROPERTY:header-args :cache yes :tangle (concat "init/" (file-name-base  (buffer-file-name)) ".el") :comments link
+#+PROPERTY:header-args :cache yes :tangle yes  :comments link
 
 #+begin_src emacs-lisp
 ;; python

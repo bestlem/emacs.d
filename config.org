@@ -1,6 +1,5 @@
 #+TITLE Emacs configuration
-#+PROPERTY:header-args :cache yes :tangle (concat "init/" (file-name-base  (buffer-file-name)) ".el") :comments link
-
+#+PROPERTY:header-args :cache yes :tangle yes :comments link
 #+STARTUP: content
 * Overview
 
@@ -137,6 +136,7 @@ Thse are required elisp for initialisation
    )
  (defconst mwb-user-emacs-directory (mwb-get-directory-of-current-file))
 	  #+end_src
+
 ***** Where my init code is
   See [[http://ergoemacs.org/emacs/organize_your_dot_emacs.html][Xah Lee get directory name for file]] for possible work around for user-emacs-directory. Except in some cases I do want the directory so break it up
   #+begin_src emacs-lisp
@@ -155,11 +155,9 @@ This fails for config.org so that needs to be in version control.
 		 <file-root>.el but eventually will load <file-root>.org"
 	 (let* ((org-file
 			 (concat (expand-file-name file-root mwb-user-emacs-directory) ".org"))
-			(el-dir
-			 (file-name-as-directory (expand-file-name "init" mwb-user-emacs-directory)))
-			(el-file (expand-file-name (concat file-root ".el") el-dir)))
-	   (unless (file-exists-p el-dir)
-		 (make-directory el-dir))
+			(el-file
+			 (concat (expand-file-name file-root mwb-user-emacs-directory) ".el")))
+
 	   (when (file-newer-than-file-p org-file el-file)
 		 (require 'org)
 		 (message "This loaded an org mode but from the system - best to restart")
@@ -176,7 +174,7 @@ Setup minimum to run the configuration.
 I suspect the order after this does not matter
 **** Debug flag
 	 #+begin_src emacs-lisp
-(setq init-file-debug t)
+(setq init-file-debug nil)
 	 #+end_src
 **** After initialisation
 Although see starter kit where they run after init.

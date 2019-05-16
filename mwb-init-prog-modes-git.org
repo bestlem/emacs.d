@@ -1,5 +1,5 @@
-#+TITLE Emacs configuration org Git configuration
-#+PROPERTY:header-args :cache yes :tangle (concat "init/" (file-name-base  (buffer-file-name)) ".el") :comments link
+#+TITLE Emacs configuration org Git configuration0
+#+PROPERTY:header-args :cache yes :tangle yes :comments link
 
 #+begin_src emacs-lisp
 

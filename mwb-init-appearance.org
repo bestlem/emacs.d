@@ -1,5 +1,5 @@
 #+TITLE Emacs configuration - appearance
-#+PROPERTY:header-args :cache yes :tangle (concat "init/" (file-name-base  (buffer-file-name)) ".el") :comments link
+#+PROPERTY:header-args :cache yes :tangle yes :comments link
 #+STARTUP: content
 
 This covers what emacs looks like and how windows/frames/menus behave

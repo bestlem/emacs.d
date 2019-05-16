@@ -1,2 +1,3 @@
 *.elc
-init/*.el
+config.el
+mwb-init-*.el

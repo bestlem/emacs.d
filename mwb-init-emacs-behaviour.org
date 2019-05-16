@@ -1,5 +1,5 @@
 #+TITLE Emacs configuration How emacs reacts
-#+PROPERTY:header-args :cache yes :tangle (concat "init/" (file-name-base  (buffer-file-name)) ".el") :comments link
+#+PROPERTY:header-args :cache yes :tangle yes :comments link
 * File Handling
 ** Trash
 Well I was going to include [[https://github.com/lunaryorn/osx-trash.el][osx trash]] which uses the trash executable or an applescript to do the proper trash. But realised I don't want to trash files - just those I delete by hand so the patching opf the emacs delete is not a good idea. By default emacs does not delete by moving to trash. It is customisable so set to to nevetr.

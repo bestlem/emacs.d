@@ -1,5 +1,5 @@
 #+TITLE Emacs configuration org Mode
-#+PROPERTY:header-args :cache yes :tangle (concat "init/" (file-name-base  (buffer-file-name)) ".el") :comments link
+#+PROPERTY:header-args :cache yes :tangle yes :comments link
 #+STARTUP: content
 * Start using org mode
 This is my first attempt at learning it.

@@ -1,5 +1,5 @@
 #+TITLE Emacs configuration org Programming and structured data modes
-#+PROPERTY:header-args :cache yes :tangle (concat "init/" (file-name-base  (buffer-file-name)) ".el") :comments link
+#+PROPERTY:header-args :cache yes :tangle yes  :comments link
 
 * Common to all programming modes
 

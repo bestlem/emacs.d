@@ -1,6 +1,5 @@
 #+TITLE Emacs configuration - lisp
-#+PROPERTY:header-args :cache yes :tangle (concat "init/" (file-name-base  (buffer-file-name)) ".el") :comments link
-
+#+PROPERTY:header-args :cache yes :tangle yes  :comments link
 #+STARTUP: content
 
 * Lisp running environment
@@ -80,12 +79,12 @@ From [[https://github.com/abo-abo/hydra/wiki/Macro][Hydra wiki]] and [[https://g
 			╭─────────────────────────────────────────────────────────────────────────╯
 					^_p_^           [_e_] execute    [_i_] insert    [_b_] name      [_'_] previous
 					^^↑^^           [_d_] delete     [_c_] set       [_K_] key       [_,_] last
-			 _<f3>_ ←   → _e_       [_o_] edit       [_a_] add       [_x_] register  [_._] losage
+			 _<f2>_ ←   → _e_       [_o_] edit       [_a_] add       [_x_] register  [_._] losage
 					^^↓^^           [_r_] region     [_f_] format    [_B_] defun     [_v_] view
 					^_k_^           [_m_] step
 				   ^^   ^^          [_s_] swap
 			"
-		("<f3>" kmacro-start-macro :color blue)
+		("<f2>" kmacro-start-macro :color blue)
 		("e" kmacro-end-or-call-macro-repeat)
 		("E" kmacro-end-or-call-macro-repeat :color blue)
 

@@ -48,7 +48,7 @@ The best inits I found for this were [[http://pragmaticemacs.com/emacs/auto-save
  vc-make-backup-files t) ; backup version controlled files
 
 #+end_src
-** DO the backups
+** Do the backups
 Aquamacs seems to turn this off sometimes in customization so need to investigate more
  #+begin_src emacs-lisp
  (setq make-backup-files t)
@@ -67,6 +67,7 @@ Aquamacs seems to turn this off sometimes in customization so need to investigat
 	 (mac-key-save-file-as)))
 
  (define-key osx-key-mode-map [remap mac-key-save-file]  'mwb/mac-key-save-buffer-force-backup)
+ (define-key osx-key-mode-map [remap save-buffer]  'mwb/mac-key-save-buffer-force-backup)
  #+end_src
 
 ** TODO Recent Files

@@ -333,7 +333,9 @@ Note should check on defconst
 **** Emacs behaviour
  General emacs stuff - not common-setup used to have this but separate file might not make sense
   #+begin_src emacs-lisp
- (mwb-init-load  "mwb-init-emacs-behaviour") ; odds mainly variables
+  (mwb-init-load  "mwb-init-emacs-behaviour"); odds mainly variables
+  (mwb-init-load  "mwb-init-ibuffer")
+
   #+end_src
 *** Applications
 **** Gnus

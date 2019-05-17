@@ -1,11 +1,10 @@
 #+TITLE Emacs configuration - ibuffer
 #+PROPERTY:header-args :cache yes :tangle yes :comments link
 #+STARTUP: content
-
 * Buffers
 
  Ibuffer seems to be the one.
-This setup from [[https://emacs.nasy.moe/#org2ffc7b4][nasy.moe]] and others for the default and [[https://www.reddit.com/r/emacs/comments/64kr02/emacs_workflow_some_guidance_please/][reddit]] for the filters
+This setup from [[https://emacs.nasy.moe/#org2ffc7b4][nasy.moe]] and others for the default and [[https://www.reddit.com/r/emacs/comments/64kr02/emacs_workflow_some_guidance_please/][reddit]] for the grouping
 
 ** Main use
 The overal load.
@@ -22,39 +21,36 @@ The overal load.
 		   ("." . hydra-ibuffer-main/body))
 	:init
 	(setq ibuffer-saved-filter-groups
-          '(("Default"
-			 ("Dired"      (mode . dired-mode))
-			 ("Emacs"     (or
-                           (name . "^\\*dashboard\\*$" )
-                           (name . "^\\*scratch\\*$"   )
-                           (name . "^\\*Messages\\*$"  )
-                           (name . "^\\*Backtrace\\*$" )
-                           (name . "^\\*Pp Eval Output\\*$")))
-			 ("GNUs"      (or
-                           (mode . message-mode)
-                           (mode . bbdb-mode)
-                           (mode . mail-mode)
-                           (mode . gnus-group-mode)
-                           (mode . gnus-summary-mode)
-                           (mode . gnus-article-mode)
-                           (name . "^\\.bbdb$")
-                           (name . "^\\.newsrc-dribble")))
-			 ("Magit"      (name . "^magit"))
-			 ("Help"      (or
-						   (name . "^\\*Help\\*$")
-						   (name . "^\\*Apropos\\*$")
-						   (name . "^\\*info\\*$")
-						   (name . "^\\*helpful")))
-			 ("Custom"    (or
-						   (mode . custom-mode)
-						   (name . "^\\*Customize")))
-			 ("Helm"       (mode . helm-major-mode))
-			 ))
-          ibuffer-show-empty-filter-groups nil
-          ibuffer-default-sorting-mode     'filename/process)
-	:hook ((ibuffer-mode . (lambda ()
-							 (ibuffer-switch-to-saved-filter-groups "Default")
-							 (mwb/ibuffer-vc-add-vc-filter-groups)))))
+		  '(("Default"
+			 ("Dired" (mode . dired-mode))
+			 ("Emacs" (or
+					   (name . "^\\*dashboard\\*$")
+					   (name . "^\\*scratch\\*$")
+					   (name . "^\\*Messages\\*$")
+					   (name . "^\\*Backtrace\\*$")
+					   (name . "^\\*Pp Eval Output\\*$")))
+			 ("GNUs" (or
+					  (mode . message-mode)
+					  (mode . bbdb-mode)
+					  (mode . mail-mode)
+					  (mode . gnus-group-mode)
+					  (mode . gnus-summary-mode)
+					  (mode . gnus-article-mode)
+					  (name . "^\\.bbdb$")
+					  (name . "^\\.newsrc-dribble")))
+			 ("Magit" (name . "^magit"))
+			 ("Help" (or
+					  (name . "^\\*Help\\*$")
+					  (name . "^\\*Apropos\\*$")
+					  (name . "^\\*info\\*$")
+					  (name . "^\\*helpful")))
+			 ("Custom" (or
+						(mode . custom-mode)
+						(name . "^\\*Customize")))
+			 ("Helm" (mode . helm-major-mode))))
+		  ibuffer-show-empty-filter-groups nil
+		  ibuffer-default-sorting-mode 'filename/process)
+	)
   #+end_src
 
 ** Directory structure
@@ -69,93 +65,132 @@ Use version control to define projects - there is a projectile version as well.
 From reddit above
 #+begin_src emacs-lisp
 
-(require 'cl-lib)
 ;; Use human readable Size column instead of original one
 (define-ibuffer-column size-h
   (:name "Size" :inline t)
   (let ((bs (buffer-size)))
-    (cond ((> bs 1e6) (format "%7.1fmB" (/ bs 1e6)))
+    (cond ((> bs 1e6) (format "%7.1fMB" (/ bs 1e6)))
           ((> bs 1e3) (format "%7.1fkB" (/ bs 1e3)))
           (t          (format "%7d  " bs)))))
 
 (setf ibuffer-formats
       '((mark modified read-only vc-status-mini " "
-              (name 18 18 :left :elide)
+              (name 30 30 :left :elide)
               " "
               (size-h 9 -1 :right)
               " "
-              (mode 16 16 :left :elide)
+              (mode 10 10 :left :elide)
               " "
-              (vc-status 16 16 :left)
+              (vc-status 10 10 :left)
               " "
               filename-and-process))
       ibuffer-show-empty-filter-groups nil)
 
-(define-ibuffer-filter name-not
-    "Negated buffer name match."
-  (:description "buffer name not"
-   :reader (read-from-minibuffer "Exclude buffers (regexp): "))
-  (not (string-match qualifier (buffer-name buf))))
+  #+end_src
 
-(defvar gk-ibuffer-filters
-  '(("Emacs"
-     (name . "^\\*\\(scratch\\|Messages\\)\\*$"))
-    ("VC"
-     (name . "^\\*\\(vc\\|log\\)-?"))
-    ("Documentation"
-     (name . "^\\*\\(Help\\|info\\|Man [0-9]?\\)"))
-    ("Special buffers"
-     (name-not . "compilation")
-     (name . "^\\*.*\\*$"))
-    ("EWW Reading"
-     (mode . eww-mode)))
-  "Fixed filter definitions for ibuffer.")
+** Directory structure
+Use version control to define projects - there is a projectile version as well.
+#+begin_src emacs-lisp
+(use-package ibuffer-vc
+  :after ibuffer
+  :ensure t)
+#+end_src
 
-(cl-defun gk-ibuffer-generate-filter-groups-by-dir ()
-  "Create a set of ibuffer filter groups based on the dirs of buffers."
-  (let ((dirs (ibuffer-remove-duplicates
-               (delq nil (mapcar (lambda (buf)
-                                   (when-let (bufnam (buffer-file-name buf))
-                                     (file-name-directory bufnam)))
-                                 (buffer-list))))))
-    (mapcar (lambda (dir) (cons (concat "Directory: " dir) `((dir . ,dir)))) dirs)))
+** Groups
+This is from
+ #+begin_src emacs-lisp
+ (define-ibuffer-filter name-not
+     "Negated buffer name match."
+   (:description "buffer name not"
+	:reader (read-from-minibuffer "Exclude buffers (regexp): "))
+   (not (string-match qualifier (buffer-name buf))))
 
-(define-ibuffer-filter dir
-    "Toggle current view to buffers with dir QUALIFIER."
-  (:description "directory" :reader (read-from-minibuffer "Filter by dir (regexp): "))
-  (ibuffer-awhen (buffer-file-name buf)
-    (string= qualifier (file-name-directory it))))
+ (defvar mwb-ibuffer-filters-top
+   '(("Dired" (mode . dired-mode))
+	 ("Emacs" (or
+			   (name . "^\\*dashboard\\*$")
+			   (name . "^\\*scratch\\*$")
+			   (name . "^\\*Messages\\*$")
+			   (name . "^\\*Backtrace\\*$")
+			   (name . "^\\*Pp Eval Output\\*$")))
+	 ("GNUs" (or
+			  (mode . message-mode)
+			  (mode . bbdb-mode)
+			  (mode . mail-mode)
+			  (mode . gnus-group-mode)
+			  (mode . gnus-summary-mode)
+			  (mode . gnus-article-mode)
+			  (name . "^\\.bbdb$")
+			  (name . "^\\.newsrc-dribble")))
+	 ("Magit" (name . "^magit"))
+	 ("Help" (or
+			  (name . "^\\*Help\\*$")
+			  (name . "^\\*Apropos\\*$")
+			  (name . "^\\*info\\*$")
+			  (name . "^\\*helpful")
+			  (name . "^\\*\\(Man [0-9]?\\)")))
+	 ("Custom" (or
+				(mode . custom-mode)
+				(name . "^\\*Customize")))
+	 )
+   "Fixed filter definitions for ibuffer up front")
+ (defvar mwb-ibuffer-filters-bottom
+   '(("VC"
+	  (name . "^\\*\\(vc\\|log\\)-?"))
+	 ("Helm" (mode . helm-major-mode))
+	 ("Special buffers"
+	  (name-not . "compilation")
+	  (name . "^\\*.*\\*$"))
+	 ("EWW Reading"
+	  (mode . eww-mode)))
+   "Fixed filter definitions for ibuffer.")
 
-(define-advice ibuffer-update (:before (&rest args) autogroups)
-  "Group related buffers together using ‘ibuffer-vc’ and ‘dir’,
-and special ones sepatarely."
-  (ignore args)
-  (setf ibuffer-filter-groups
-        (append
-         gk-ibuffer-filters
-         (ibuffer-vc-generate-filter-groups-by-vc-root)
-         (gk-ibuffer-generate-filter-groups-by-dir))))
+ (cl-defun gk-ibuffer-generate-filter-groups-by-dir ()
+   "Create a set of ibuffer filter groups based on the dirs of buffers."
+   (let ((dirs (ibuffer-remove-duplicates
+				(delq nil (mapcar (lambda (buf)
+									(when-let (bufnam (buffer-file-name buf))
+                                      (file-name-directory bufnam)))
+                                  (buffer-list))))))
+     (mapcar (lambda (dir) (cons (concat "Directory: " dir) `((dir . ,dir)))) dirs)))
 
-;; Hide these buffers by default.
-(defvar gk-ibuffer-collapsed-groups (list "Special buffers" "Emacs" "Documentation"
-                                          "VC"))
+ (define-ibuffer-filter dir
+     "Toggle current view to buffers with dir QUALIFIER."
+   (:description "directory" :reader (read-from-minibuffer "Filter by dir (regexp): "))
+   (ibuffer-awhen (buffer-file-name buf)
+     (string= qualifier (file-name-directory it))))
 
-(define-advice ibuffer (:after (&rest args) gk-hidden-groups)
-  "Hide groups in ‘gk-ibuffer-collapsed-groups’."
-  (ignore args)
-  (save-excursion
-    (dolist (group gk-ibuffer-collapsed-groups)
-      (ignore-errors
-        (ibuffer-jump-to-filter-group group)
-        (ibuffer-toggle-filter-group)))))
+ (define-advice ibuffer-update (:before (&rest args) autogroups)
+   "Group related buffers together using ‘ibuffer-vc’ and ‘dir’,
+ and special ones sepatarely."
+   (ignore args)
+   (setf ibuffer-filter-groups
+         (append
+          mwb-ibuffer-filters-top
+          (ibuffer-vc-generate-filter-groups-by-vc-root)
+          (gk-ibuffer-generate-filter-groups-by-dir)
+		  mwb-ibuffer-filters-bottom)))
 
-(cl-defun gk-ibuffer-hook ()
-  (unless (eq ibuffer-sorting-mode 'alphabetic)
-    (ibuffer-do-sort-by-filename/process))
-  (ibuffer-update nil t))
+ ;; Hide these buffers by default.
+ (defvar gk-ibuffer-collapsed-groups (list "Special buffers" "Emacs" "Emacs Documentation"
+                                           "VC"))
+
+ (define-advice ibuffer (:after (&rest args) gk-hidden-groups)
+   "Hide groups in ‘gk-ibuffer-collapsed-groups’."
+   (ignore args)
+   (save-excursion
+     (dolist (group gk-ibuffer-collapsed-groups)
+       (ignore-errors
+         (ibuffer-jump-to-filter-group group)
+         (ibuffer-toggle-filter-group)))))
+
+ (cl-defun gk-ibuffer-hook ()
+   (unless (eq ibuffer-sorting-mode 'alphabetic)
+     (ibuffer-do-sort-by-filename/process))
+   (ibuffer-update nil t))
 
 (add-hook 'ibuffer-hook 'gk-ibuffer-hook)
-#+end_src
+ #+end_src
 
 ** Hydra
    #+begin_src emacs-lisp

@@ -42,7 +42,13 @@
 	  (message "This loaded an org mode but from the system - best to restart")
 	  (message "tangle <%s> to <%s>" org-file el-file)
 	  (org-babel-tangle-file org-file el-file))
-	(protect (load el-file))))
+
+	(condition-case err
+		(load el-file)
+	  (error (message "Error loading %s: \"%s\""
+					  file-root
+					  (error-message-string err))
+			 nil))))
 ;; The loader:1 ends here
 
 ;; [[file:~/Library/Preferences/Emacs/config.org::*The%20Load][The Load:1]]

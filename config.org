@@ -163,7 +163,13 @@ This fails for config.org so that needs to be in version control.
 		 (message "This loaded an org mode but from the system - best to restart")
 		 (message "tangle <%s> to <%s>" org-file el-file)
 		 (org-babel-tangle-file org-file el-file))
-	   (protect (load el-file))))
+
+	   (condition-case err
+		   (load el-file)
+		 (error (message "Error loading %s: \"%s\""
+						 file-root
+						 (error-message-string err))
+				nil))))
       #+end_src
 **** The Load
 	 #+begin_src emacs-lisp
@@ -197,7 +203,7 @@ Although see starter kit where they run after init.
 
   (add-hook 'after-init-hook
 				 (lambda () (setq debug-on-error t)))
- ; (setq debug-on-error t)
+ (setq debug-on-error t)
   #+end_src
 ***** Use source where newer
  This variable tells Emacs to prefer the .el file if it’s newer, even if there is a corresponding .elc file.

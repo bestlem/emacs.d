@@ -1,0 +1,97 @@
+#+TITLE Emacs configuration - ibuffer config
+#+PROPERTY:header-args :cache yes :tangle yes :comments link
+#+STARTUP: content
+
+This file is loaded sureing use-package :config ie after ibuffer loaded
+
+* Unused Filters
+
+** A filter not certain if used
+  #+begin_src emacs-lisp
+  (define-ibuffer-filter name-not
+      "Negated buffer name match."
+	(:description "buffer name not"
+	 :reader (read-from-minibuffer "Exclude buffers (regexp): "))
+	(not (string-match qualifier (buffer-name buf))))
+#+end_src
+** Unknown
+#+begin_src emacs-lisp
+(define-ibuffer-filter dir
+	"Toggle current view to buffers with dir QUALIFIER."
+  (:description "directory" :reader (read-from-minibuffer "Filter by dir (regexp): "))
+  (ibuffer-awhen (buffer-file-name buf)
+	(string= qualifier (file-name-directory it))))
+#+end_src
+* Filters
+** Filter before vc and directories
+ #+begin_src emacs-lisp
+ (defvar mwb-ibuffer-filters-top
+   '(("Dired" (mode . dired-mode))
+	 ("Emacs" (or
+			   (name . "^\\*dashboard\\*$")
+			   (name . "^\\*scratch\\*$")
+			   (name . "^\\*Messages\\*$")
+			   (name . "^\\*Backtrace\\*$")
+			   (name . "^\\*Buffer L\\*$")
+			   (name . "^\\*Pp Eval Output\\*$")))
+	 ("Aquamacs" (filename . "^/Applications/Aquamacs"))
+	 ("GNUs" (or
+			  (mode . message-mode)
+			  (mode . bbdb-mode)
+			  (mode . mail-mode)
+			  (mode . gnus-group-mode)
+			  (mode . gnus-summary-mode)
+			  (mode . gnus-article-mode)
+			  (name . "^\\.bbdb$")
+			  (name . "^\\.newsrc-dribble")))
+	 ("Magit" (name . "^magit"))
+	 ("Help" (or
+			  (name . "^\\*Help\\*$")
+			  (name . "^\\*Apropos\\*$")
+			  (name . "^\\*info\\*$")
+			  (name . "^\\*helpful")
+			  (name . "^\\*\\(Man [0-9]?\\)")))
+	 ("Custom" (or
+				(mode . custom-mode)
+				(name . "^\\*Customize")))
+	 )
+   "Fixed filter definitions for ibuffer up front")
+#+end_src
+** Filter for what is left
+#+begin_src emacs-lisp
+(defvar mwb-ibuffer-filters-bottom
+  '(("VC"
+	 (name . "^\\*\\(vc\\|log\\)-?"))
+	("Helm" (mode . helm-major-mode))
+	("Special buffers"
+	 (name-not . "compilation")
+	 (name . "^\\*.*\\*$"))
+	("EWW Reading"
+	 (mode . eww-mode)))
+  "Fixed filter definitions for ibuffer.")
+#+end_src
+** Generate by directory
+#+begin_src emacs-lisp
+(cl-defun gk-ibuffer-generate-filter-groups-by-dir ()
+  "Create a set of ibuffer filter groups based on the dirs of buffers."
+  (let ((dirs (ibuffer-remove-duplicates
+			   (delq nil (mapcar (lambda (buf)
+								   (when-let (bufnam (buffer-file-name buf))
+									 (file-name-directory bufnam)))
+								 (buffer-list))))))
+	(mapcar (lambda (dir) (cons (concat "Directory: " dir) `((dir . ,dir)))) dirs)))
+#+end_src
+
+** Put the buffer together
+#+begin_src emacs-lisp
+(define-advice ibuffer-update (:before (&rest args) autogroups)
+  "Group related buffers together using ‘ibuffer-vc’ and ‘dir’,
+and special ones sepatarely."
+  (ignore args)
+  (setf ibuffer-filter-groups
+		(append
+		 mwb-ibuffer-filters-top
+		 (ibuffer-vc-generate-filter-groups-by-vc-root)
+		 (gk-ibuffer-generate-filter-groups-by-dir)
+		 mwb-ibuffer-filters-bottom)))
+#+end_src

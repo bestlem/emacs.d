@@ -4,197 +4,110 @@
 * Buffers
 
  Ibuffer seems to be the one.
+I would note that this is where use-package and other code reasons to keep together conflict with literate programming. Curreent use literate-programming but I suspect noweb is the way here once I have a working setup. use-package benefit includes a total fail if issue.
+Current attempt is a halfway. Instead of noweb I call a new org file. This keeps all the code in org files as valid lisp. AT some stage for e.g. hydr it might make sense for nopweb as framents are not valid lisp.
+
+
 This setup from [[https://emacs.nasy.moe/#org2ffc7b4][nasy.moe]] and others for the default and [[https://www.reddit.com/r/emacs/comments/64kr02/emacs_workflow_some_guidance_please/][reddit]] for the grouping
+
+However much of the same code appears in many places so I don't know the real source
 
 ** Main use
 The overal load.
   #+begin_src emacs-lisp
-  (defun mwb/ibuffer-vc-add-vc-filter-groups ()
-	(interactive)
-	(dolist (group (ibuffer-vc-generate-filter-groups-by-vc-root))
-	  (add-to-list 'ibuffer-filter-groups group t)))
-
-
   (use-package ibuffer
 	:bind (("C-x C-b" . ibuffer)
 		   :map ibuffer-mode-map
-		   ("." . hydra-ibuffer-main/body))
+		   ("." . hydra-mwb-ibuffer-main/body))
 	:init
-	(setq ibuffer-saved-filter-groups
-		  '(("Default"
-			 ("Dired" (mode . dired-mode))
-			 ("Emacs" (or
-					   (name . "^\\*dashboard\\*$")
-					   (name . "^\\*scratch\\*$")
-					   (name . "^\\*Messages\\*$")
-					   (name . "^\\*Backtrace\\*$")
-					   (name . "^\\*Pp Eval Output\\*$")))
-			 ("GNUs" (or
-					  (mode . message-mode)
-					  (mode . bbdb-mode)
-					  (mode . mail-mode)
-					  (mode . gnus-group-mode)
-					  (mode . gnus-summary-mode)
-					  (mode . gnus-article-mode)
-					  (name . "^\\.bbdb$")
-					  (name . "^\\.newsrc-dribble")))
-			 ("Magit" (name . "^magit"))
-			 ("Help" (or
-					  (name . "^\\*Help\\*$")
-					  (name . "^\\*Apropos\\*$")
-					  (name . "^\\*info\\*$")
-					  (name . "^\\*helpful")))
-			 ("Custom" (or
-						(mode . custom-mode)
-						(name . "^\\*Customize")))
-			 ("Helm" (mode . helm-major-mode))))
-		  ibuffer-show-empty-filter-groups nil
+	(setq ibuffer-show-empty-filter-groups nil
 		  ibuffer-default-sorting-mode 'filename/process)
+	(use-package ibuffer-vc :ensure t) ; need as some config code depends on this
+	:config
+	(require 'ibuf-ext) 					; fiddle the mess to get an internal variable setup
+	(mwb-init-load "mwb-init-ibuffer-config")
 	)
   #+end_src
 
-** Directory structure
-Use version control to define projects - there is a projectile version as well.
+** Display functions
 #+begin_src emacs-lisp
-(use-package ibuffer-vc
-  :after ibuffer
-  :ensure t)
-#+end_src
-
-** Filter functions
-From reddit above
-#+begin_src emacs-lisp
-
 ;; Use human readable Size column instead of original one
 (define-ibuffer-column size-h
-  (:name "Size" :inline t)
+  (:name "Size" :inline nil)
   (let ((bs (buffer-size)))
-    (cond ((> bs 1e6) (format "%7.1fMB" (/ bs 1e6)))
-          ((> bs 1e3) (format "%7.1fkB" (/ bs 1e3)))
-          (t          (format "%7d  " bs)))))
+	(cond ((> bs 1e6) (format "%7.1fMB" (/ bs 1e6)))
+		  ((> bs 1e3) (format "%7.1fkB" (/ bs 1e3)))
+		  (t          (format "%7d  " bs)))))
 
-(setf ibuffer-formats
-      '((mark modified read-only vc-status-mini " "
-              (name 30 30 :left :elide)
-              " "
-              (size-h 9 -1 :right)
-              " "
-              (mode 10 10 :left :elide)
-              " "
-              (vc-status 10 10 :left)
-              " "
-              filename-and-process))
-      ibuffer-show-empty-filter-groups nil)
-
+(setq ibuffer-formats
+	  '((mark modified read-only vc-status-mini " "
+			  (name 30 30 :left :elide)
+			  " "
+			  (size-h 9 -1 :right)
+			  " "
+			  (mode 10 10 :left :elide)
+			  " "
+			  (vc-status 10 10 :left)
+			  " "
+			  filename-and-process)))
   #+end_src
 
-** Directory structure
-Use version control to define projects - there is a projectile version as well.
-#+begin_src emacs-lisp
-(use-package ibuffer-vc
-  :after ibuffer
-  :ensure t)
-#+end_src
-
 ** Groups
-This is from
+This is from  [[https://www.reddit.com/r/emacs/comments/64kr02/emacs_workflow_some_guidance_please/][reddit]]
+
+*** Collapse buffer groups
+***** Choose the groups
  #+begin_src emacs-lisp
- (define-ibuffer-filter name-not
-     "Negated buffer name match."
-   (:description "buffer name not"
-	:reader (read-from-minibuffer "Exclude buffers (regexp): "))
-   (not (string-match qualifier (buffer-name buf))))
-
- (defvar mwb-ibuffer-filters-top
-   '(("Dired" (mode . dired-mode))
-	 ("Emacs" (or
-			   (name . "^\\*dashboard\\*$")
-			   (name . "^\\*scratch\\*$")
-			   (name . "^\\*Messages\\*$")
-			   (name . "^\\*Backtrace\\*$")
-			   (name . "^\\*Pp Eval Output\\*$")))
-	 ("GNUs" (or
-			  (mode . message-mode)
-			  (mode . bbdb-mode)
-			  (mode . mail-mode)
-			  (mode . gnus-group-mode)
-			  (mode . gnus-summary-mode)
-			  (mode . gnus-article-mode)
-			  (name . "^\\.bbdb$")
-			  (name . "^\\.newsrc-dribble")))
-	 ("Magit" (name . "^magit"))
-	 ("Help" (or
-			  (name . "^\\*Help\\*$")
-			  (name . "^\\*Apropos\\*$")
-			  (name . "^\\*info\\*$")
-			  (name . "^\\*helpful")
-			  (name . "^\\*\\(Man [0-9]?\\)")))
-	 ("Custom" (or
-				(mode . custom-mode)
-				(name . "^\\*Customize")))
-	 )
-   "Fixed filter definitions for ibuffer up front")
- (defvar mwb-ibuffer-filters-bottom
-   '(("VC"
-	  (name . "^\\*\\(vc\\|log\\)-?"))
-	 ("Helm" (mode . helm-major-mode))
-	 ("Special buffers"
-	  (name-not . "compilation")
-	  (name . "^\\*.*\\*$"))
-	 ("EWW Reading"
-	  (mode . eww-mode)))
-   "Fixed filter definitions for ibuffer.")
-
- (cl-defun gk-ibuffer-generate-filter-groups-by-dir ()
-   "Create a set of ibuffer filter groups based on the dirs of buffers."
-   (let ((dirs (ibuffer-remove-duplicates
-				(delq nil (mapcar (lambda (buf)
-									(when-let (bufnam (buffer-file-name buf))
-                                      (file-name-directory bufnam)))
-                                  (buffer-list))))))
-     (mapcar (lambda (dir) (cons (concat "Directory: " dir) `((dir . ,dir)))) dirs)))
-
- (define-ibuffer-filter dir
-     "Toggle current view to buffers with dir QUALIFIER."
-   (:description "directory" :reader (read-from-minibuffer "Filter by dir (regexp): "))
-   (ibuffer-awhen (buffer-file-name buf)
-     (string= qualifier (file-name-directory it))))
-
- (define-advice ibuffer-update (:before (&rest args) autogroups)
-   "Group related buffers together using ‘ibuffer-vc’ and ‘dir’,
- and special ones sepatarely."
-   (ignore args)
-   (setf ibuffer-filter-groups
-         (append
-          mwb-ibuffer-filters-top
-          (ibuffer-vc-generate-filter-groups-by-vc-root)
-          (gk-ibuffer-generate-filter-groups-by-dir)
-		  mwb-ibuffer-filters-bottom)))
-
- ;; Hide these buffers by default.
- (defvar gk-ibuffer-collapsed-groups (list "Special buffers" "Emacs" "Emacs Documentation"
-                                           "VC"))
-
- (define-advice ibuffer (:after (&rest args) gk-hidden-groups)
-   "Hide groups in ‘gk-ibuffer-collapsed-groups’."
-   (ignore args)
-   (save-excursion
-     (dolist (group gk-ibuffer-collapsed-groups)
-       (ignore-errors
-         (ibuffer-jump-to-filter-group group)
-         (ibuffer-toggle-filter-group)))))
-
- (cl-defun gk-ibuffer-hook ()
+ (defvar gk-ibuffer-collapsed-groups
+   (list
+	"Special buffers"
+	"Emacs"
+	"Emacs Documentation"
+	"Help"
+	"GNUs"
+	"Magit"
+	"Custom"
+	"Helm"
+	;; "Special buffers"
+	"EWW Reading"
+	"VC"))
+#+end_src
+***** Do the collapsing
+#+begin_src emacs-lisp
+(define-advice ibuffer (:after (&rest args) gk-hidden-groups)
+  "Hide groups in ‘gk-ibuffer-collapsed-groups’."
+  (ignore args)
+  (save-excursion
+	(dolist (group gk-ibuffer-collapsed-groups)
+	  (ignore-errors
+		(ibuffer-jump-to-filter-group group)
+		(ibuffer-toggle-filter-group)))))
+#+end_src
+*** Add the hook for the grouping
+#+begin_src emacs-lisp
+(cl-defun gk-ibuffer-hook ()
    (unless (eq ibuffer-sorting-mode 'alphabetic)
-     (ibuffer-do-sort-by-filename/process))
+	 (ibuffer-do-sort-by-filename/process))
    (ibuffer-update nil t))
 
 (add-hook 'ibuffer-hook 'gk-ibuffer-hook)
- #+end_src
+	#+end_src
 
+** Put cursor on most recent buffer
+ Switching to ibuffer puts the cursor on the most recent buffer and where advices go with use-package to be found out.
+
+   #+begin_src emacs-lisp
+   (defadvice ibuffer (around ibuffer-point-to-most-recent) ()
+	 "Open ibuffer with cursor pointed to most recent buffer name"
+	 (let ((recent-buffer-name (buffer-name)))
+	   ad-do-it
+	   (ibuffer-jump-to-buffer recent-buffer-name)))
+
+   (ad-activate 'ibuffer)
+   #+end_src
 ** Hydra
    #+begin_src emacs-lisp
-   (defhydra hydra-ibuffer-main (:color pink :hint nil)
+   (defhydra hydra-mwb-ibuffer-main (:color pink :hint nil)
 	 "
    ^Mark^         ^Actions^         ^View^          ^Select^              ^Navigation^
    _m_: mark      _D_: delete       _g_: refresh    _q_: quit             _k_:   ↑    _h_

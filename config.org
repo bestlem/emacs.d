@@ -194,6 +194,24 @@ Although see starter kit where they run after init.
 			   (garbage-collect)
 			   (message "Emacs init-time %s" (emacs-init-time))) t)
   #+end_src
+**** Message
+	 Show message with timestamp
+     #+begin_src emacs-lisp
+	 (defun my-message-with-timestamp (old-func fmt-string &rest args)
+	   "Prepend current timestamp (with microsecond precision) to a message"
+	   (apply old-func
+			  (concat (format-time-string "[%F %T.%3N %Z] ")
+					  fmt-string)
+			  args))
+	 (advice-add 'message :around #'my-message-with-timestamp)
+
+	 (defun mwb-message-remove-timestanp ()
+	   (interactive)
+	   (advice-remove 'message #'my-message-with-timestamp)
+	   (message "remove timestamp"))
+
+	 (add-hook 'after-init-hook 'mwb-message-remove-timestanp)
+      #+end_src
 **** Emacs Lisp
 ***** Debugging
   This slows things down so for debugging outside init.
@@ -201,9 +219,9 @@ Although see starter kit where they run after init.
 
   #+begin_src emacs-lisp
 
-  (add-hook 'after-init-hook
-				 (lambda () (setq debug-on-error t)))
- (setq debug-on-error t)
+   (add-hook 'after-init-hook
+				  (lambda () (setq debug-on-error t)))
+  ;(setq debug-on-error t)
   #+end_src
 ***** Use source where newer
  This variable tells Emacs to prefer the .el file if it’s newer, even if there is a corresponding .elc file.
@@ -309,11 +327,12 @@ Although see starter kit where they run after init.
   (use-package diminish   :ensure t   :demand t)
   #+end_src
 ******* Hydra
-   Need key setting menus.
-   #+begin_src emacs-lisp
-   (use-package hydra :ensure t)
-   (use-package use-package-hydra :ensure t)
-   #+end_src
+            Need key setting menus.
+            #+begin_src emacs-lisp
+			(use-package hydra :ensure t
+			  :config (setq hydra-look-for-remap t))
+			(use-package use-package-hydra :ensure t)
+            #+end_src
 **** Setting variables with a check on type
 Used when overriding a defcustom or defvar.
 Note should check on defconst

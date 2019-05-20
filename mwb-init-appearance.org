@@ -24,12 +24,19 @@ Beacon-mode: flash the cursor when switching buffers or scrolling  the goal is t
 #+begin_src emacs-lisp
 (use-package beacon
   :ensure t
-  :init
-  (eval-when-compile
-    ;; Silence missing function warnings
-    (declare-function beacon-mode "beacon.el"))
+  :custom (beacon-blink-when-focused t)
+  :init (eval-when-compile
+		  ;; Silence missing function warnings
+		  (declare-function beacon-mode "beacon.el"))
   :config
-  (beacon-mode t))
+  (defun maybe-recenter-current-window ()
+	(when (and (equal (current-buffer) (window-buffer (selected-window)))
+			   (not (eq recenter-last-op 'middle)))
+	  (recenter-top-bottom)))
+  (add-hook 'beacon-before-blink-hook #'maybe-recenter-current-window)
+  (dolist (mode '(comint-mode term-mode))
+	(push mode beacon-dont-blink-major-modes))
+  (beacon-mode))
 #+end_src
 
 * Windows

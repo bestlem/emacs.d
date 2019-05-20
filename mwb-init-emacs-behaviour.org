@@ -59,6 +59,26 @@ I haven't used before but might try with hydra from [[https://sriramkswamy.githu
 
 
 #+end_src
+* Help
+Let's use [[https://github.com/Wilfred/helpful][Helpful]]
+#+begin_src emacs-lisp
+
+(use-package helpful
+  :ensure t
+  :custom
+  (counsel-describe-function-function #'helpful-callable)
+  (counsel-describe-variable-function #'helpful-variable)
+  :bind
+  ([remap describe-function] . helpful-callable)
+  ([remap describe-command] . helpful-command)
+  ([remap describe-variable] . helpful-variable)
+  ([remap describe-key] . helpful-key))
+#+end_src
+* Delete if selected
+Also see [[https://www.emacswiki.org/emacs/DeleteSelectionMode][EmacsWiki]]
+  #+begin_src emacs-lisp
+  (delete-selection-mode)
+  #+end_src
 * TODO General old stuff
 #+begin_src emacs-lisp
 (setq find-file-visit-truename t)	; visit a file under its true name

@@ -4,6 +4,13 @@
 
 This file is loaded sureing use-package :config ie after ibuffer loaded
 
+* Extra modes used by other stuff in :config
+  This speeds up the load time
+  #+begin_src emacs-lisp
+  (use-package ibuffer-vc :ensure t) ; need as some config code depends on this
+  (require 'ibuf-ext) ; fiddle the mess to get an internal variable setup
+  #+end_src
+
 * Unused Filters
 
 ** A filter not certain if used

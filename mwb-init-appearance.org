@@ -24,6 +24,7 @@ Beacon-mode: flash the cursor when switching buffers or scrolling  the goal is t
 #+begin_src emacs-lisp
 (use-package beacon
   :ensure t
+  :defer t
   :custom (beacon-blink-when-focused t)
   :init (eval-when-compile
 		  ;; Silence missing function warnings
@@ -46,8 +47,12 @@ I think I now want mainly one window and have splits but tabs are useful.
  Try hydra from [[https://www.reddit.com/r/emacs/comments/8of6tx/tip_how_to_be_a_beast_with_hydra/][reddit]] but note user is a vi user for movements so will be messed around with. But a few minutes playing does not add much so use forst from [[https://github.com/abo-abo/hydra/wiki/Window-Management][Hydra wiki]] Needs winner mode for some functions to save window state.
  #+begin_src emacs-lisp
  (use-package winner
-   :init
-   (winner-mode))
+   :unless noninteractive
+   :defer 5
+   :config
+   (winner-mode)
+   :commands (winner-undo winner-redo))
+
  (defhydra hydra-window (:color red
 								:hint nil)
    "

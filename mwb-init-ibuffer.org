@@ -23,9 +23,7 @@ However much of the same code appears in many places so I don't know the real so
 	 :init
 	 (setq ibuffer-show-empty-filter-groups nil
 		   ibuffer-default-sorting-mode 'filename/process)
-	 (use-package ibuffer-vc :ensure t) ; need as some config code depends on this
 	 :config
-	 (require 'ibuf-ext) ; fiddle the mess to get an internal variable setup
 	 (mwb-init-load "mwb-init-ibuffer-config"))
    #+end_src
 

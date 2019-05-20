@@ -177,12 +177,8 @@ This is completion for text in buffer
  (use-package company
    :ensure t
    :diminish
-   :config (add-hook
-			'after-init-hook
-			'global-company-mode))
+   :hook (after-init . global-company-mode))
 #+end_src
-
-
 ** Emacs
 This is completion for emacs commands. Choice is ido, ivy helm.
 I'll try ivy.
@@ -208,13 +204,14 @@ Note headers have tangle command in to suppress one or other
 Start with a small setup
 
 **** Ivy
-This is the completion tools
-Take some for John Widgley
+	 This is the completion tools
+	 Take some for John Wiegley
+	 Note takes time to load
 	 #+begin_src emacs-lisp
 	 (use-package ivy
 	   :ensure t
+	   :defer 2
 	   :diminish
-	   :demand
 	   :bind (("C-x b" . ivy-switch-buffer)
 			  ("H-b" . ivy-switch-buffer)
 			  ("C-x B" . ivy-switch-buffer-other-window)

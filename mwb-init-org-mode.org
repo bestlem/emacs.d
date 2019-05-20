@@ -123,6 +123,7 @@ From [[http://www.howardism.org/Technical/Emacs/orgmode-wordprocessor.html][here
 *** Indent other text
 	#+begin_src emacs-lisp
 	(use-package org-indent
+	  :defer 10
 	  :ensure nil
 	  :diminish)
 	#+end_src

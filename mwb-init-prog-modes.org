@@ -49,26 +49,28 @@ Look at smart-tabs-insinuate
 ** Build systems
 *** Gradle
  As Emacs is bad for java my java setup is now just gradle so that should be a generic build when I rename.
+This also takes time to load. Need to sort out config entries and gradele-mode needs a bind as you need the keystrokes but only in some modes.
  #+begin_src emacs-lisp
 
  ;; gradle and other java
  ;; from http://www.coli.uni-saarland.de/~slemaguer/emacs/main.html#orgac34543
 
  (use-package groovy-mode
+   :disabled
+
    :ensure t
+   :defer 10
    :mode ("\.groovy$" "\.gradle$")
    :interpreter ("gradle" "groovy")
-   :config
+   :init
    (autoload 'run-groovy "inf-groovy" "Run an inferior Groovy process")
    (autoload 'inf-groovy-keys "inf-groovy" "Set local key defs for inf-groovy in groovy-mode")
-
+   ;; Subpackages
+   (use-package groovy-imports :ensure t)
    ;; Some keys for
    (add-hook 'groovy-mode-hook
-             '(lambda ()
+			 '(lambda ()
 				(inf-groovy-keys))))
-
- ;; Subpackages
- (use-package groovy-imports :ensure t)
 
 
  ;; ;; This does work with Aquamacs
@@ -87,10 +89,11 @@ Look at smart-tabs-insinuate
 
  (use-package gradle-mode
    :ensure t
-	:diminish
+   :diminish
+   :disabled
    :config
    (setq gradle-gradlew-executable "./gradlew"
-         gradle-use-gradlew t)
+		 gradle-use-gradlew t)
    (gradle-mode))
  #+end_src
 **** TODO Flymake
@@ -151,10 +154,11 @@ This is the standard mode
    :mode "\\.json$")
   #+end_src
 **** Visualisation
-See as a tree.
-  #+begin_src emacs-lisp
-(use-package json-navigator
-  :ensure t)
+	 See as a tree.
+     #+begin_src emacs-lisp
+	 (use-package json-navigator
+	   :after json
+	   :ensure t)
   #+end_src
 ** SQL
 Not worth separating out.

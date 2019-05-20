@@ -11,6 +11,10 @@
 	  auto-window-vscroll nil)
 ;; Startup:1 ends here
 
+;; [[file:~/Library/Preferences/Emacs/config.org::*Debug%20flag][Debug flag:1]]
+(setq init-file-debug nil)
+;; Debug flag:1 ends here
+
 ;; [[file:~/Library/Preferences/Emacs/config.org::*Set%20where%20the%20init%20file%20is][Set where the init file is:1]]
 ;; Need the directory from here.
 (defun mwb-get-directory-of-current-file ()

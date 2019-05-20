@@ -3,31 +3,31 @@
 #+STARTUP: content
 * Buffers
 
- Ibuffer seems to be the one.
-I would note that this is where use-package and other code reasons to keep together conflict with literate programming. Curreent use literate-programming but I suspect noweb is the way here once I have a working setup. use-package benefit includes a total fail if issue.
+Ibuffer seems to be the one.
+I would note that this is where use-package and other code reasons to keep together conflict with literate programming. Current use literate-programming but I suspect noweb is the way here once I have a working setup. use-package benefit includes a total fail if issue.
 Current attempt is a halfway. Instead of noweb I call a new org file. This keeps all the code in org files as valid lisp. AT some stage for e.g. hydr it might make sense for nopweb as framents are not valid lisp.
 
+There is some comment on internet that other things in ibuffer are a mess. I would say that the list of grouping is another.
 
 This setup from [[https://emacs.nasy.moe/#org2ffc7b4][nasy.moe]] and others for the default and [[https://www.reddit.com/r/emacs/comments/64kr02/emacs_workflow_some_guidance_please/][reddit]] for the grouping
 
 However much of the same code appears in many places so I don't know the real source
 
 ** Main use
-The overal load.
-  #+begin_src emacs-lisp
-  (use-package ibuffer
-	:bind (("C-x C-b" . ibuffer)
-		   :map ibuffer-mode-map
-		   ("." . hydra-mwb-ibuffer-main/body))
-	:init
-	(setq ibuffer-show-empty-filter-groups nil
-		  ibuffer-default-sorting-mode 'filename/process)
-	(use-package ibuffer-vc :ensure t) ; need as some config code depends on this
-	:config
-	(require 'ibuf-ext) 					; fiddle the mess to get an internal variable setup
-	(mwb-init-load "mwb-init-ibuffer-config")
-	)
-  #+end_src
+   The overal load.
+   #+begin_src emacs-lisp
+   (use-package ibuffer
+	 :bind (("C-x C-b" . ibuffer)
+			:map ibuffer-mode-map
+			("." . hydra-mwb-ibuffer-main/body))
+	 :init
+	 (setq ibuffer-show-empty-filter-groups nil
+		   ibuffer-default-sorting-mode 'filename/process)
+	 (use-package ibuffer-vc :ensure t) ; need as some config code depends on this
+	 :config
+	 (require 'ibuf-ext) ; fiddle the mess to get an internal variable setup
+	 (mwb-init-load "mwb-init-ibuffer-config"))
+   #+end_src
 
 ** Display functions
 #+begin_src emacs-lisp
@@ -94,7 +94,7 @@ This is from  [[https://www.reddit.com/r/emacs/comments/64kr02/emacs_workflow_so
 	#+end_src
 
 ** Put cursor on most recent buffer
- Switching to ibuffer puts the cursor on the most recent buffer and where advices go with use-package to be found out.
+   Switching to ibuffer puts the cursor on the most recent buffer and where advices go with use-package to be found out.
 
    #+begin_src emacs-lisp
    (defadvice ibuffer (around ibuffer-point-to-most-recent) ()

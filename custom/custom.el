@@ -12,7 +12,7 @@
  '(backup-directory-alist (quote (("." . ".~"))))
  '(cua-enable-cua-keys nil)
  '(custom-enabled-themes nil)
- '(delete-old-versions t)
+ '(delete-old-versions "keep them all")
  '(explicit-shell-file-name "/opt/local/bin/fish")
  '(fringe-indicator-alist
    (quote
@@ -27,8 +27,13 @@
 	 (top-bottom left-bracket right-bracket top-right-angle top-left-angle)
 	 (empty-line . empty-line)
 	 (unknown . question-mark))) t)
- '(gnus-directory "~/Library/Application Support/Aquamacs Emacs/News")
+ '(gnus-directory "~/Library/Preferences/Aquamacs Emacs/News")
  '(gnus-group-sort-function (quote (gnus-group-sort-by-rank)))
+ '(gnus-kill-save-kill-file t)
+ '(gnus-score-mimic-keymap nil)
+ '(gnus-server-browse-in-group-buffer t)
+ '(gnus-show-all-headers nil)
+ '(gnus-verbose 10)
  '(hardhat-basename-protected-regexps
    (quote
 	("~\\'" "\\.lock\\'" "\\.ix\\'" "\\`test\\.out\\'" "-autoloads\\.el\\'" "\\`Desktop\\.ini\\'" "\\`META\\.yml\\'" "\\`MYMETA\\.yml\\'" "\\`TAGS\\'" "\\`Thumbs\\.db\\'" "\\`\\.dropbox\\'" "\\`\\.dropbox\\.cache\\'" "\\`\\.emacs\\.desktop\\'" "\\`\\.emacs\\.desktop\\.lock\\'" "\\.orig\\'" "\\.rej\\'" "\\.el\\.gz$")))
@@ -43,7 +48,7 @@
  '(ns-tool-bar-size-mode nil t)
  '(nxml-slash-auto-complete-flag t)
  '(org-babel-python-mode (quote python-mode))
- '(org-bullets-bullet-list (quote ("◉" "⦿" "○" "◎")))
+ '(org-bullets-bullet-list (quote ("⦿" "◉" "◎" "○" "●")))
  '(org-log-done (quote time))
  '(org-modules
    (quote
@@ -53,7 +58,7 @@
  '(org-todo-keywords (quote ((sequence "TODO" "|" "DONE" "LEAVE(@)"))))
  '(package-selected-packages
    (quote
-	(ibuffer-vc counsel ivy-rich ivy-hydra org-indent xah-elisp-mode validate hardhat hydra projectile beacon ripgrep gitignore-mode gitconfig-mode nov manual matcha org use-package-hydra backup-each-save esup org-bullets sr-speedbar which-key company elmacro ws-butlerz helm elisp-format origami comment-dwim-2 smex discover-my-major json-navigator json-mode treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ranger dired-toggle expand-region lispy aggressive-indent rainbow-delimiters gradle-mode groovy-imports groovy-mode ws-butler highlight-indent-guides diminish key-chord use-package)))
+	(macrostep helpful ibuffer-vc counsel ivy-rich ivy-hydra org-indent xah-elisp-mode validate hardhat hydra projectile beacon ripgrep gitignore-mode gitconfig-mode nov manual matcha org use-package-hydra backup-each-save esup org-bullets sr-speedbar which-key company elmacro ws-butlerz helm elisp-format origami comment-dwim-2 smex discover-my-major json-navigator json-mode treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ranger dired-toggle expand-region lispy aggressive-indent rainbow-delimiters gradle-mode groovy-imports groovy-mode ws-butler highlight-indent-guides diminish key-chord use-package)))
  '(select-enable-clipboard t)
  '(tabbar-mode t nil (tabbar))
  '(text-mode-hook (quote (turn-on-flyspell set-word-wrap)))

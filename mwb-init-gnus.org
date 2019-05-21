@@ -4,8 +4,100 @@
 #+STARTUP: content
 
 #+begin_src emacs-lisp
-;; need some code
+
+(setq gnus-select-method '(nntp "localhost"))
+(setq gnus-read-active-file nil)
+(setq gnus-use-adaptive-scoring t)
+(setq gnus-default-adaptive-score-alist
+	  '((gnus-unread-mark)
+		(gnus-ticked-mark (subject 10))
+		(gnus-killed-mark (subject -5))
+		(gnus-catchup-mark (subject -1))))
+(setq user-full-name "Mark Bestley")
+(setq user-mail-address "gnus@bestley.co.uk")
+(add-hook 'nnfolder-save-buffer-hook 'turn-off-backup)
+
+(setq gnus-visual t
+	  gnus-large-newsgroup 4000)
+
+(defun exit-gnus-on-exit ()
+  (if (and (fboundp 'gnus-group-exit)
+           (gnus-alive-p))
+      (with-current-buffer (get-buffer "*Group*")
+        (let (gnus-interactive-exit)
+          (gnus-group-exit)))))
+
+(add-hook 'kill-emacs-hook 'exit-gnus-on-exit)
+
+
 #+end_src
+* Group buffer
+  #+begin_src emacs-lisp
+
+  #+end_src
+* Summary buffer
+** Threads
+   Collapse threads when entering a group
+   #+begin_src emacs-lisp
+   (add-hook 'gnus-summary-prepared-hook 'gnus-summary-hide-all-threads)
+
+   #+end_src
+   #+begin_src emacs-lisp
+   (setq gnus-fetch-old-headers 'some               ; Try to connect threads with the minimum number of old headers
+		 gnus-build-sparse-threads 'some            ; Include not-received articles too with References:
+		 gnus-summary-gather-subject-limit 'fuzzy   ; Use a smart fuzzy Subject-matcher
+		 gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references ; Use the References: header to thread
+	root by dummy-article-creation
+		 gnus-treat-display-smileys nil             ; Urgh. You must be joking.
+		 gnus-thread-ignore-subject t               ; Ignore Subject: changes
+
+		 gnus-thread-hide-killed t)                 ; Hiding propagates to subtrees
+
+   #+end_src
+** Sort Order
+   Push the threads with bigger score on top of the buffer
+   #+begin_src emacs-lisp
+   (setq gnus-thread-sort-functions
+		 '(gnus-thread-sort-by-number
+		   gnus-thread-sort-by-date  ; Dates matter...
+		   gnus-thread-sort-by-total-score))
+   #+end_src
+** Tree
+ #+begin_src emacs-lisp
+ (setq gnus-use-trees t
+			gnus-generate-tree-function 'gnus-generate-horizontal-tree
+			gnus-tree-minimize-window nil)
+ (gnus-add-configuration
+  '(article
+	(vertical 1.0
+			  (horizontal 0.25
+						  (summary 0.75 point)
+						  (tree 1.0))
+			  (article 1.0))))
+
+ (setq gnus-thread-hide-subtree
+	   '(or gnus-article-unread-p
+			gnus-article-unseen-p))
+
+ #+end_src
+** Prettify tree
+From [[http://doc.rix.si/cce/cce-gnus.html][Here]]
+#+begin_src emacs-lisp :tangle no
+(setq gnus-summary-line-format "%*%U%R%z%3t%4i %4V %(%&user-date; %-15,15f  %B%s%)\n"
+
+      gnus-sum-thread-tree-false-root ""
+      gnus-sum-thread-tree-indent " "
+      gnus-sum-thread-tree-leaf-with-other "├► "
+      gnus-sum-thread-tree-root ""
+      gnus-sum-thread-tree-single-leaf "╰► "
+      gnus-sum-thread-tree-vertical "│"
+      gnus-user-date-format-alist '((t . "%d %b %Y %H:%M")))
+#+end_src
+* Article buffer
+  #+begin_src emacs-lisp
+  (setq gnus-single-article-buffer t
+		mm-text-html-renderer shr)
+  #+end_src
 * Old setup
 Bin it
 #+begin_src emacs-lisp :tangle no

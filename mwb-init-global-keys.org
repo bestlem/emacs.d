@@ -139,15 +139,16 @@ But point seems to be messed up and does Aquamacs do something.
 [[http://ergoemacs.org/emacs/emacs_isearch_by_arrow_keys.html][Xah Lee  again]] set arrow keys in isearch. left/right is backward/forward, up/down is history. press Return to exit
 #+begin_src emacs-lisp
 
-	 (progn
-	   (define-key isearch-mode-map (kbd "<up>") 'isearch-ring-retreat )
-	   (define-key isearch-mode-map (kbd "<down>") 'isearch-ring-advance )
+(progn
+  ;; (define-key isearch-mode-map (kbd "<up>") 'isearch-ring-retreat )
+  ;; (define-key isearch-mode-map (kbd "<down>") 'isearch-ring-advance )
 
-	   (define-key isearch-mode-map (kbd "<left>") 'isearch-repeat-backward)
-	   (define-key isearch-mode-map (kbd "<right>") 'isearch-repeat-forward)
+  ;; (
+   define-key isearch-mode-map (kbd "<left>") 'isearch-repeat-backward)
+  (define-key isearch-mode-map (kbd "<right>") 'isearch-repeat-forward)
 
-	   (define-key minibuffer-local-isearch-map (kbd "<left>") 'isearch-reverse-exit-minibuffer)
-	   (define-key minibuffer-local-isearch-map (kbd "<right>") 'isearch-forward-exit-minibuffer))
+  (define-key minibuffer-local-isearch-map (kbd "<left>") 'isearch-reverse-exit-minibuffer)
+  (define-key minibuffer-local-isearch-map (kbd "<right>") 'isearch-forward-exit-minibuffer))
 #+end_src
 *** TODO Use with cmd-F
 Aquamacs also messes around with isearch and the two don't exactly match
@@ -252,6 +253,108 @@ Also see [[https://github.com/jerrypnz/major-mode-hydra.el][Major mode hydra]] f
   ("t" matcha-run-test-command))
 
 #+end_src
+** Kitchin hydras
+   From [[https://kitchingroup.cheme.cmu.edu/blog/2015/09/28/A-cursor-goto-hydra-for-emacs/][Kitchin Group]] Original has helm and I add some from Hydra Wiki
+*** Navigate
+	#+begin_src emacs-lisp
+(defhydra hydra-navigate (:color red
+                          :hint nil)
+  "
+_f_: forward-char       _w_: forward-word       _n_: next-line
+_b_: backward-char      _W_: backward-word      _p_: previous-line
+^ ^                     _o_: subword-right      _,_: beginning-of-line
+^ ^                     _O_: subword-left       _._: end-of-line
+
+_s_: forward sentence   _a_: forward paragraph  _g_: forward page
+_S_: backward sentence  _A_: backward paragraph _G_: backward page
+
+ _B_: buffer list       _i_: window
+_<left>_: previous buffer   _<right>_: next buffer
+_<up>_: scroll-up           _<down>_: scroll-down
+
+_[_: backward-sexp _]_: forward-sexp
+_<_ beginning of buffer _>_ end of buffer _m_: set mark _/_: jump to mark
+"
+  ("f" forward-char)
+  ("b" backward-char)
+  ("w" forward-word)
+  ("W" backward-word)
+  ("n" next-line)
+  ("p" previous-line)
+  ("o" subword-right)
+  ("O" subword-left)
+  ("s" forward-sentence)
+  ("S" backward-sentence)
+  ("a" forward-paragraph)
+  ("A" backward-paragraph)
+  ("g" forward-page)
+  ("G" backward-page)
+  ("<right>" next-buffer)
+  ("<left>" previous-buffer)
+  ("i" ace-window :color blue)
+  ("m" org-mark-ring-push)
+  ("/" org-mark-ring-goto :color blue)
+  ("B" counsel-buffers)
+  ("<up>" scroll-up)
+  ("<down>" scroll-down)
+  ("<" beginning-of-buffer)
+  (">" end-of-buffer)
+  ("." end-of-line)
+  ("[" backward-sexp)
+  ("]" forward-sexp)
+  ("," beginning-of-line)
+  ("q" nil "quit" :color blue))
+
+(global-set-key (kbd "H-m") 'hydra-navigate/body)
+	#+end_src
+*** Goto
+	#+begin_src emacs-lisp
+	(defhydra goto (:color blue :hint nil)
+	  "
+	Goto:
+	^Char^              ^Word^                ^search^
+	^^^^^^^^--------------------------------------------------
+	_c_: 2 chars        _w_: word by char     _f_: search forward
+	_C_: char           _W_: some word        _b_: search backward
+	_L_: char in line   _s_: subword by char  _B_: counsel-buffers
+	_l_: avy-goto-line  _S_: some subword     _R_: counsel-recentf
+	_i_: ace-window
+	_n_: Navigate       _._: mark position    _/_: jump to mark
+	----------------------------------------------------------
+	"
+	  ("c" avy-goto-char-2)
+	  ("C" avy-goto-char)
+	  ("L" avy-goto-char-in-line)
+	  ("w" avy-goto-word-1)
+	  ;; jump to beginning of some word
+	  ("W" avy-goto-word-0)
+	  ;; jump to subword starting with a char
+	  ("s" avy-goto-subword-1)
+	  ;; jump to some subword
+	  ("S" avy-goto-subword-0)
+
+	  ("l" avy-goto-line)
+	  ("i" ace-window)
+
+	  ;; ("h" helm-org-headlines)
+	  ;; ("a" helm-org-agenda-files-headings)
+	  ;; ("q" helm-multi-swoop-org)
+
+	  ;; ("o" helm-occur)
+	  ;; ("p" swiper-helm)
+
+	  ("f" isearch-forward)
+	  ("b" isearch-backward)
+
+	  ("." org-mark-ring-push :color red)
+	  ("/" org-mark-ring-goto :color blue)
+	  ("B" ibuffer)
+	  ;; ("m" helm-mini)
+	  ("R" counsel-recentf)
+	  ("n" hydra-navigate/body))
+
+	(bind-key "H-g" 'goto/body)
+	#+end_src
 ** Hyper global key bindings
 #+begin_src emacs-lisp
 

@@ -262,8 +262,7 @@ Also see [[https://github.com/jerrypnz/major-mode-hydra.el][Major mode hydra]] f
 (bind-key (kbd "H-n") 'tabbar-move-current-buffer-to-new-frame osx-key-mode-map)
 ;; H-r is register
 ;; H-s is return from org special edit
-(bind-key (kbd "H-t") 'treemacs osx-key-mode-map)
-
+;;(bind-key (kbd "H-t") 'treemacs osx-key-mode-map)
 (bind-key "H-<return>" 'cua-set-rectangle-mark cua-global-keymap)
 (unbind-key "C-<return>" cua-global-keymap)
 	 #+end_src

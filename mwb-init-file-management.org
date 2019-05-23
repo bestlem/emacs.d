@@ -86,76 +86,73 @@ Aquamacs seems to turn this off sometimes in customization so need to investigat
   #+end_src
 * Project management
 Started as file management but actually deals with files and what is in them/ Treemacs looks at git so there are files that cannot be see so dired needed.
+** Searching
+   rg aka ripgrep seems to be the newest. However there is rg.el and ripgrep.el I am confused
+*** [[https://github.com/Wilfred/deadgrep][Deadgrep]]
+	This seems to provide a cover for ripgrep.
+	#+begin_src emacs-lisp
+	(use-package deadgrep
+	  :ensure t
+	  :bind ("<f4>" . deadgrep)
+	  :config (unless (executable-find "ripgrep")
+				(alert "Please install ripgrep snap...")))
+	#+end_src
 ** Projectile
 This add functions. I would use John Wiegley's setup but projectile hung
 So take from projectile
 #+begin_src emacs-lisp
-(use-package ripgrep :ensure t)
-(use-package   projectile
+(use-package projectile
   :ensure t
+  :defer 5
   :diminish
-  :config (define-key projectile-mode-map (kbd "H-p")
-			'projectile-command-map)
-  (projectile-mode 1))
+  :bind* (
+          ("H-P" . (lambda () (interactive)
+                       (projectile-cleanup-known-projects)
+                       (projectile-discover-projects-in-search-path))))
+  :bind-keymap ("H-p" . projectile-command-map)
+  :config
+  (projectile-global-mode)
 #+end_src
-*** Matcha hydra
- I really do not want all but for ease just do it from [[https://github.com/jojojames/matcha][Matcha]]
+*** Hydra
+ I really do not want all but for ease just do it from [[https://github.com/jojojames/matcha][Matcha]] but that is too much as is the Hydra wiki So lets try from [[http://doc.rix.si/cce/cce-code-core.html][Ryan Rix]], also he uses rg (bbatsov has a complex one as well)
  #+begin_src emacs-lisp
- (defhydra matcha-projectile (:color blue :hint nil :idle 0)
-   "
+ (defhydra hydra-projectile-other-window (:color teal)
+   "projectile-other-window"
+   ("f"  projectile-find-file-other-window        "file")
+   ("g"  projectile-find-file-dwim-other-window   "file dwim")
+   ("d"  projectile-find-dir-other-window         "dir")
+   ("b"  projectile-switch-to-buffer-other-window "buffer")
+   ("q"  nil                                      "cancel" :color blue))
 
-     Files             Search          Buffer             Do
-   ------------------------------------------------------------------------------
-     _f_ File          _a_ Ag          _b_ Switch        _g_ Magit
-     _l_ File dwim     _A_ Grep        _v_ Display       _P_ Commander
-     _r_ Recent file   _s_ Occur       _i_ IBuffer       _I_ Info
-     _d_ Dir           _S_ Replace     _K_ Kill all      _p_ Switch Project
-     _o_ Other         _t_ Find Tag
-     _u_ Test file     _T_ Make Tags
-     _h_ Root          _R_ Replace Regexp
-     Other Window      Run             Cache
-   ------------------------------------------------------------------------------
-     _F_ File          _U_ Test        _kc_ Clear
-     _L_ Dwim          _m_ Compile     _kk_ Add Current
-     _D_ Dir           _c_ Shell       _ks_ Cleanup
-     _O_ Other         _C_ Command     _kd_ Remove
-     _B_ Buffer
+ (defhydra hydra-projectile ( :color teal)
+   "
+	  PROJECTILE: %(projectile-project-root)
+
+ Search: [_a_] deadgrep  [_A_] counsel-rg
+ Find:   [_b_] buffer    [_d_] dir        [_f_] file
+ Look:   [_i_] ibuffer   [_j_] imenu
+
+ Fun:    [_o_] other win [_l_] lsp        [_K_] cleanup
  "
-   ("a" projectile-ag)
-   ("A" projectile-grep)
-   ("b" projectile-switch-to-buffer)
-   ("B" projectile-switch-to-buffer-other-window)
-   ("c" projectile-run-async-shell-command-in-root)
-   ("C" projectile-run-command-in-root)
-   ("d" projectile-find-dir)
-   ("D" projectile-find-dir-other-window)
-   ("f" projectile-find-file)
-   ("F" projectile-find-file-other-window)
-   ("g" projectile-vc)
-   ("h" projectile-dired)
-   ("I" projectile-project-info)
-   ("kc" projectile-invalidate-cache)
-   ("kd" projectile-remove-known-project)
-   ("kk" projectile-cache-current-file)
-   ("K" projectile-kill-buffers)
-   ("ks" projectile-cleanup-known-projects)
-   ("l" projectile-find-file-dwim)
-   ("L" projectile-find-file-dwim-other-window)
-   ("m" projectile-compile-project)
-   ("o" projectile-find-other-file)
-   ("O" projectile-find-other-file-other-window)
-   ("p" projectile-switch-project)
-   ("P" projectile-commander)
-   ("r" projectile-recentf)
-   ("R" projectile-replace-regexp)
-   ("s" projectile-multi-occur)
-   ("S" projectile-replace)
-   ("t" projectile-find-tag)
-   ("T" projectile-regenerate-tags)
-   ("u" projectile-find-test-file)
-   ("U" projectile-test-project)
-   ("v" projectile-display-buffer)
-   ("i" projectile-ibuffer))
+   ("a"   deadgrep "rg")
+   ("A"   counsel-rg "qrg")
+   ("b"   projectile-switch-to-buffer "buf")
+   ("d"   projectile-find-dir "dir")
+   ("f"   projectile-find-file "file")
+   ("i"   projectile-ibuffer "ibuf")
+   ("j"   counsel-imenu "imenu")
+   ("K"   projectile-kill-buffers)
+   ("l"   hydra-lsp/body)
+   ("P"   projectile-switch-project)
+   ("p"   projectile-switch-project)
+   ("r"   projectile-recentf "recentf")
+   ("x"   projectile-remove-known-project)
+   ("X"   projectile-cleanup-known-projects)
+   ("z"   projectile-cache-current-file)
+   ("o"   hydra-projectile-other-window/body "other")
+   ("q"   nil "cancel" :color blue))
+
+ (bind-key "H-p" 'hydra-projectile/body)
  #+end_src
 ** Treemacs
 This is the visual
@@ -185,25 +182,23 @@ This is the visual
 	   (`(t . t)
 		(treemacs-git-mode 'deferred))
 	   (`(t . _)
-		(treemacs-git-mode 'simple)))
-	 )
+		(treemacs-git-mode 'simple))))
    :hydra (mwb/hydra-treemacs-mode
 		   (:color teal)
 		   ""
-		   ("pp" matcha-projectile/body "Projectile" )
-		   ("pc" treemacs-add-project-to-workspace "Create Project")
-		   ("pd" treemacs-remove-project-from-workspace  "Delete Project")
-		   ("q" nil "cancel"))
+		   ("p" matcha-projectile/body "Projectile")
+		   ("c" treemacs-add-project-to-workspace "Create Project")
+		   ("d" treemacs-remove-project-from-workspace "Delete Project")
+		   ("q" nil "Quit"))
    :bind
    (:map global-map
-		 ("M-0"       . treemacs-select-window)
-		 ("C-x t 1"   . treemacs-delete-other-windows)
-		 ("C-x t t"   . treemacs)
-		 ("C-x t B"   . treemacs-bookmark)
-		 ("C-x t C-t" . treemacs-find-file)
-		 ("C-x t M-t" . treemacs-find-tag))
-   (:map treemacs-mode-map
-		 ("H-a" . mwb/hydra-treemacs-mode/body)))
+		 ("H-t 0" . treemacs-select-window)
+		 ("H-t 1" . treemacs-delete-other-windows)
+		 ("H-t t" . treemacs)
+		 ("H-t B" . treemacs-bookmark)
+		 ("H-t f" . treemacs-find-file)
+		 ("H-t T" . treemacs-find-tag)
+		 ("H-t p" . mwb/hydra-treemacs-mode/body)))
 
  (use-package treemacs-projectile
    :after treemacs projectile

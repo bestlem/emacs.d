@@ -72,7 +72,9 @@ Let's use [[https://github.com/Wilfred/helpful][Helpful]]
   ([remap describe-function] . helpful-callable)
   ([remap describe-command] . helpful-command)
   ([remap describe-variable] . helpful-variable)
-  ([remap describe-key] . helpful-key))
+  ([remap describe-key] . helpful-key)
+  ("<f1> F" . helpful-function)
+  ("<f1> ." . helpful-at-point))
 #+end_src
 * Delete if selected
 Also see [[https://www.emacswiki.org/emacs/DeleteSelectionMode][EmacsWiki]]

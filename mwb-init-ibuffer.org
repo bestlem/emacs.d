@@ -24,7 +24,8 @@ However much of the same code appears in many places so I don't know the real so
 	 (setq ibuffer-show-empty-filter-groups nil
 		   ibuffer-default-sorting-mode 'filename/process)
 	 :config
-	 (mwb-init-load "mwb-init-ibuffer-config"))
+	 (mwb-init-load "mwb-init-ibuffer-config")
+	 :hook (ibuffer . hydra-mwb-ibuffer-main/body))
    #+end_src
 
 ** Display functions
@@ -104,8 +105,9 @@ This is from  [[https://www.reddit.com/r/emacs/comments/64kr02/emacs_workflow_so
    (ad-activate 'ibuffer)
    #+end_src
 ** Hydra
+   From [[https://github.com/abo-abo/hydra/wiki/Ibuffer][Hydra Wiki]]
    #+begin_src emacs-lisp
-   (defhydra hydra-mwb-ibuffer-main (:color pink :hint nil)
+   (defhydra hydra-mwb-ibuffer-main (:color red :hint nil)
 	 "
    ^Mark^         ^Actions^         ^View^          ^Select^              ^Navigation^
    _m_: mark      _D_: delete       _g_: refresh    _q_: quit             _k_:   ↑    _h_
@@ -136,7 +138,7 @@ This is from  [[https://www.reddit.com/r/emacs/comments/64kr02/emacs_workflow_so
 	 ("TAB" ibuffer-toggle-filter-group)
 
 	 ("o" ibuffer-visit-buffer-other-window :color blue)
-	 ("q" quit-window :color blue)
+	 ("q" (lambda () (interactive) (quit-window 4)) :color blue)
 	 ("." nil :color blue))
 
 

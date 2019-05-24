@@ -6,6 +6,7 @@
  '(aquamacs-additional-fontsets nil t)
  '(aquamacs-autoface-mode nil)
  '(aquamacs-customization-version-id 310 t)
+ '(aquamacs-save-options-on-quit t)
  '(aquamacs-tool-bar-user-customization nil t)
  '(auto-fill-function nil t)
  '(auto-word-wrap-default-function nil)
@@ -42,6 +43,9 @@
 	("~/\\.emacs\\.d/elpa/" "~/\\.cpan/" "~/\\.cabal/" "~/perl5/perlbrew/" "~/\\.npm/" "~/\\.virtualenv/" "~/\\.virthualenv/" "~/\\.rvm/" "/[._]build/" "/\\.bzr/" "/\\.coverage/" "/\\.git/" "/\\.hg/" "/\\.rspec/" "/\\.sass-cache/" "/\\.svn/" "/_MTN/" "/_darcs/" "/CVS/" "/pm_to_blib/" "/RCS/" "/SCCS/" "/blib/" "/test_output/" "~/\\.emacs\\.d/\\.cask/" "~/\\.cask/" "/Applications/" "~/Library/Preferences/Aquamacs Emacs/Packages")))
  '(mail-setup-with-from t)
  '(make-backup-files t)
+ '(minibuffer-prompt-properties
+   (quote
+	(read-only t cursor-intangible t face minibuffer-prompt cursor-intangible t)))
  '(ns-right-alternate-modifier (quote super))
  '(ns-right-command-modifier (quote control))
  '(ns-tool-bar-display-mode (quote both) t)
@@ -58,7 +62,7 @@
  '(org-todo-keywords (quote ((sequence "TODO" "|" "DONE" "LEAVE(@)"))))
  '(package-selected-packages
    (quote
-	(macrostep helpful ibuffer-vc counsel ivy-rich ivy-hydra org-indent xah-elisp-mode validate hardhat hydra projectile beacon ripgrep gitignore-mode gitconfig-mode nov manual matcha org use-package-hydra backup-each-save esup org-bullets sr-speedbar which-key company elmacro ws-butlerz helm elisp-format origami comment-dwim-2 smex discover-my-major json-navigator json-mode treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ranger dired-toggle expand-region lispy aggressive-indent rainbow-delimiters gradle-mode groovy-imports groovy-mode ws-butler highlight-indent-guides diminish key-chord use-package)))
+	(deadgrep eros macrostep helpful ibuffer-vc counsel ivy-rich ivy-hydra org-indent xah-elisp-mode validate hardhat hydra projectile beacon ripgrep gitignore-mode gitconfig-mode nov manual matcha org use-package-hydra backup-each-save esup org-bullets sr-speedbar which-key company elmacro ws-butlerz helm elisp-format origami comment-dwim-2 smex discover-my-major json-navigator json-mode treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ranger dired-toggle expand-region lispy aggressive-indent rainbow-delimiters gradle-mode groovy-imports groovy-mode ws-butler highlight-indent-guides diminish key-chord use-package)))
  '(select-enable-clipboard t)
  '(tabbar-mode t nil (tabbar))
  '(text-mode-hook (quote (turn-on-flyspell set-word-wrap)))

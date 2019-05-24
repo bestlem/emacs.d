@@ -40,6 +40,8 @@ This file is loaded sureing use-package :config ie after ibuffer loaded
 			   (name . "^\\*Messages\\*$")
 			   (name . "^\\*Backtrace\\*$")
 			   (name . "^\\*Buffer L\\*$")
+			   (name . "^\\*Warnings\\*$")
+			   (name . "^\\*Personal Keybindings\\*$")
 			   (name . "^\\*Pp Eval Output\\*$")))
 	 ("Aquamacs" (filename . "^/Applications/Aquamacs"))
 	 ("GNUs" (or

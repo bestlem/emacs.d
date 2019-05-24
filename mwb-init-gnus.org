@@ -65,8 +65,8 @@
 ** Tree
  #+begin_src emacs-lisp
  (setq gnus-use-trees t
-			gnus-generate-tree-function 'gnus-generate-horizontal-tree
-			gnus-tree-minimize-window nil)
+	   gnus-generate-tree-function 'gnus-generate-horizontal-tree
+	   gnus-tree-minimize-window nil)
  (gnus-add-configuration
   '(article
 	(vertical 1.0
@@ -82,7 +82,7 @@
  #+end_src
 ** Prettify tree
 From [[http://doc.rix.si/cce/cce-gnus.html][Here]]
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 (setq gnus-summary-line-format "%*%U%R%z%3t%4i %4V %(%&user-date; %-15,15f  %B%s%)\n"
 
       gnus-sum-thread-tree-false-root ""

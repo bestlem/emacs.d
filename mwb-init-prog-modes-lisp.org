@@ -71,6 +71,13 @@ Add company backend from John Widgley
 
 (setq-local company-backend '(company-elisp))
 #+end_src
+*** Evaluation
+	Instead of displaying the results in a separate buffer (like the iElm does), The [[https://github.com/xiongtx/eros][EROS project]] displays the results temporarily  /in the buffer/ in an overlay.  No need to do anything special:
+	#+BEGIN_SRC elisp
+	(use-package eros
+	  :ensure t
+	  :hook (emacs-lisp-mode . eros-mode))
+   #+END_SRC
 *** Keyboard Macros
 Well not really lisp but much can be converted to it
 **** Show as emacs lisp

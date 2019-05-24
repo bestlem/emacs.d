@@ -197,9 +197,8 @@ This is the visual
 	("1" treemacs-delete-other-windows "Delete")
 	("B" treemacs-bookmark "Bookmark" :column "Rest")
 	("f" treemacs-find-file "Find File")
-	("T" treemacs-find-tag "Find Tag")))
-
- (bind-key "H-t" 'mwb/hydra-treemacs-global/body)
+	("T" treemacs-find-tag "Find Tag"))
+   :bind ("H-t". mwb/hydra-treemacs-global/body))
 
  (use-package treemacs-projectile
    :after treemacs projectile

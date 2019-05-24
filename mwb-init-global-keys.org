@@ -135,16 +135,17 @@ Now these are very old
 	 (global-set-key (kbd "A-u") 'revert-buffer )
 #+end_src
 ** Let search continue with arrows
+DISABLED
 But point seems to be messed up and does Aquamacs do something.
 [[http://ergoemacs.org/emacs/emacs_isearch_by_arrow_keys.html][Xah Lee  again]] set arrow keys in isearch. left/right is backward/forward, up/down is history. press Return to exit
-#+begin_src emacs-lisp
+How does this work with ivy
+#+begin_src emacs-lisp :tangle no
 
 (progn
   ;; (define-key isearch-mode-map (kbd "<up>") 'isearch-ring-retreat )
   ;; (define-key isearch-mode-map (kbd "<down>") 'isearch-ring-advance )
 
-  ;; (
-   define-key isearch-mode-map (kbd "<left>") 'isearch-repeat-backward)
+  (define-key isearch-mode-map (kbd "<left>") 'isearch-repeat-backward)
   (define-key isearch-mode-map (kbd "<right>") 'isearch-repeat-forward)
 
   (define-key minibuffer-local-isearch-map (kbd "<left>") 'isearch-reverse-exit-minibuffer)
@@ -305,7 +306,7 @@ _<_ beginning of buffer _>_ end of buffer _m_: set mark _/_: jump to mark
   ("," beginning-of-line)
   ("q" nil "quit" :color blue))
 
-(global-set-key (kbd "H-m") 'hydra-navigate/body)
+(bind-key "H-m" 'hydra-navigate/body)
 	#+end_src
 *** Goto
 	#+begin_src emacs-lisp
@@ -355,6 +356,11 @@ _<_ beginning of buffer _>_ end of buffer _m_: set mark _/_: jump to mark
 
 	(bind-key "H-g" 'goto/body)
 	#+end_src
+** Control x binding
+   From [[https://github.com/abo-abo/hydra/wiki/Emacs][Hydra wiki - Find file with xf]]
+   #+begin_src emacs-lisp
+
+   #+end_src
 ** Hyper global key bindings
 #+begin_src emacs-lisp
 

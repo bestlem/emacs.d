@@ -111,7 +111,7 @@ So take from projectile
                        (projectile-discover-projects-in-search-path))))
   :bind-keymap ("H-p" . projectile-command-map)
   :config
-  (projectile-global-mode)
+  (projectile-global-mode))
 #+end_src
 *** Hydra
  I really do not want all but for ease just do it from [[https://github.com/jojojames/matcha][Matcha]] but that is too much as is the Hydra wiki So lets try from [[http://doc.rix.si/cce/cce-code-core.html][Ryan Rix]], also he uses rg (bbatsov has a complex one as well)
@@ -185,20 +185,21 @@ This is the visual
 		(treemacs-git-mode 'simple))))
    :hydra (mwb/hydra-treemacs-mode
 		   (:color teal)
-		   ""
 		   ("p" matcha-projectile/body "Projectile")
 		   ("c" treemacs-add-project-to-workspace "Create Project")
 		   ("d" treemacs-remove-project-from-workspace "Delete Project")
 		   ("q" nil "Quit"))
-   :bind
-   (:map global-map
-		 ("H-t 0" . treemacs-select-window)
-		 ("H-t 1" . treemacs-delete-other-windows)
-		 ("H-t t" . treemacs)
-		 ("H-t B" . treemacs-bookmark)
-		 ("H-t f" . treemacs-find-file)
-		 ("H-t T" . treemacs-find-tag)
-		 ("H-t p" . mwb/hydra-treemacs-mode/body)))
+   (mwb/hydra-treemacs-global
+	(:color blue)
+	("t" treemacs "Treemacs toggle" :column "Project")
+	("p" mwb/hydra-treemacs-mode/body "Projectile")
+	("0" treemacs-select-window "Select" :column "Other Window")
+	("1" treemacs-delete-other-windows "Delete")
+	("B" treemacs-bookmark "Bookmark" :column "Rest")
+	("f" treemacs-find-file "Find File")
+	("T" treemacs-find-tag "Find Tag")))
+
+ (bind-key "H-t" 'mwb/hydra-treemacs-global/body)
 
  (use-package treemacs-projectile
    :after treemacs projectile

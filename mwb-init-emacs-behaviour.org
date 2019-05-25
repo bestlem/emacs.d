@@ -16,7 +16,7 @@ Think of editing dired
   :config (validate-setq hardhat-mode-lighter "Ⓗ"))
 #+end_src
 **
-** Emacs internals
+* Emacs internals
 *** Sessions
  Save registers et al but not the whole desktop
  #+begin_src emacs-lisp
@@ -59,6 +59,19 @@ I haven't used before but might try with hydra from [[https://sriramkswamy.githu
 
 
 #+end_src
+* Minibuffer memory
+  I have had crashes with helpful where emacs has to be killed. Looks like a recursive stack error but also see comment re garbage collection So let's try
+  Note this causes a gc when minibuffer ends - perhaps not the best ti/me
+  #+begin_src emacs-lisp
+  (defun my-minibuffer-setup-hook ()
+	(setq gc-cons-threshold most-positive-fixnum))
+
+  (defun my-minibuffer-exit-hook ()
+	(setq gc-cons-threshold 800000))
+
+  (add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
+  (add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
+  #+end_src
 * Help
 Let's use [[https://github.com/Wilfred/helpful][Helpful]]
 #+begin_src emacs-lisp
@@ -77,7 +90,7 @@ Let's use [[https://github.com/Wilfred/helpful][Helpful]]
   ("<f1> ." . helpful-at-point))
 #+end_src
 * Delete if selected
-Also see [[https://www.emacswiki.org/emacs/DeleteSelectionMode][EmacsWiki]]
+Also see [[https://www.emacswiki.org/emacs/DeleteSelectionMode][EmacsWiki]] but cua should do this
   #+begin_src emacs-lisp
   (delete-selection-mode)
   #+end_src
@@ -163,7 +176,7 @@ If you want to create a file, visit that file with C-x C-f,then enter the text i
 
   (use-package comment-dwim-2
 	:ensure t
-	:bind* ("M-;" . comment-dwim-2))
+	:bind ("M-;" . comment-dwim-2))
   )
 ;;  Hide show etc
 
@@ -311,13 +324,20 @@ Replace isearch
   )
 #+end_src
 
-***** Aquamacs
+***** Recentre
+	   From [[http://pragmaticemacs.com/emacs/dont-search-swipe/][Pragmatic emacs]] advise swiper to recenter on exit (ivy-display-style defaults to fancy)
+	   #+begin_src emacs-lisp
+	   (defun bjm-swiper-recenter (&rest args)
+		 "recenter display after swiper"
+		 (recenter))
+	   (advice-add 'swiper :after #'bjm-swiper-recenter)
+	   #+end_src
+***** TODO Aquamacs
 Need to integrate with command FG etc (note thet are separate to C-s
 
 **** Counsel
 Improve many emacs functions
 #+begin_src emacs-lisp :
-
 (use-package counsel
   :ensure t
   :after ivy
@@ -329,24 +349,21 @@ Improve many emacs functions
 		 ("<f1> l" . counsel-find-library)
 										; ("<f2> i" . counsel-info-lookup-symbol)
 										; ("<f2> u" . counsel-unicode-char)
+		 ("M-i" . counsel-imenu)
 		 ("C-c g" . counsel-git-grep)
 		 ("C-c j" . counsel-git)
 										;("C-c k" . counsel-ag)
 		 ("C-c r" . counsel-rg)
 		 ("C-x l" . counsel-locate)
 		 :map minibuffer-local-map
-		 ("C-r" . counsel-minibuffer-add)
-		 )
+		 ("C-r" . counsel-minibuffer-add))
   :config
   (if (executable-find "rg")
 	  ;; use ripgrep instead of grep because it's way faster
 	  (setq counsel-grep-base-command
 			"rg -i -M 120 --no-heading --line-number --color never '%s' %s"
 			counsel-rg-base-command
-			"rg -i -M 120 --no-heading --line-number --color never %s ."
-			)
+			"rg -i -M 120 --no-heading --line-number --color never %s .")
 	(warn "\nWARNING: Could not find the ripgrep executable. It "
-		  "is recommended you install ripgrep.")
-	)
-  )
+		  "is recommended you install ripgrep.")))
 	 #+end_src

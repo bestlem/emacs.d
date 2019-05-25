@@ -17,5 +17,9 @@
  - path :: /Users/mark/src/ThirdParty/emacs-init/jwiegley
 ** zzamboni
  - path :: /Users/mark/src/ThirdParty/emacs-init/zzamboni
+** castlemacs
+ - path :: /Users/mark/src/ThirdParty/emacs-init/castlemacs
 ** jojojames
  - path :: /Users/mark/src/ThirdParty/emacs-init/jojojames
+** dotfiles
+ - path :: /Users/mark/src/env/dotfiles

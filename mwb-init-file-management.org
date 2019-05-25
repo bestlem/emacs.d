@@ -199,7 +199,9 @@ This is the visual
 	("B" treemacs-bookmark "Bookmark" :column "Rest")
 	("f" treemacs-find-file "Find File")
 	("T" treemacs-find-tag "Find Tag"))
-   :bind ("H-t". mwb/hydra-treemacs-global/body))
+   :bind (("H-t" . mwb/hydra-treemacs-global/body)
+		  :map treemacs-mode-map
+		  ("<mouse-5>" . treemacs-rightclick-menu)))
 
  (use-package treemacs-projectile
    :after treemacs projectile

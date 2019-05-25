@@ -88,7 +88,7 @@ Aquamacs seems to turn this off sometimes in customization so need to investigat
 Started as file management but actually deals with files and what is in them/ Treemacs looks at git so there are files that cannot be see so dired needed.
 ** Searching
    rg aka ripgrep seems to be the newest. However there is rg.el and ripgrep.el I am confused
-*** [[https://github.com/Wilfred/deadgrep][Deadgrep]]
+*** [[https://github.com/Wilfred/deadgrep][Dea.dgrep]]
 	This seems to provide a cover for ripgrep.
 	#+begin_src emacs-lisp
 	(use-package deadgrep
@@ -105,12 +105,13 @@ So take from projectile
   :ensure t
   :defer 5
   :diminish
-  :bind* (
-          ("H-P" . (lambda () (interactive)
-                       (projectile-cleanup-known-projects)
-                       (projectile-discover-projects-in-search-path))))
-  :bind-keymap ("H-p" . projectile-command-map)
+  ;; :bind* (
+  ;;         ("H-P" . (lambda () (interactive)
+  ;;                      (projectile-cleanup-known-projects)
+  ;;                      (projectile-discover-projects-in-search-path))))
+  ;; :bind-keymap ("H-p" . projectile-command-map)
   :config
+  (setq projectile-completion-system 'ivy)
   (projectile-global-mode))
 #+end_src
 *** Hydra

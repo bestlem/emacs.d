@@ -61,7 +61,7 @@ I haven't used before but might try with hydra from [[https://sriramkswamy.githu
 #+end_src
 * Minibuffer memory
   I have had crashes with helpful where emacs has to be killed. Looks like a recursive stack error but also see comment re garbage collection So let's try
-  Note this causes a gc when minibuffer ends - perhaps not the best ti/me
+  Note this causes a gc when minibuffer ends - perhaps not the best time
   #+begin_src emacs-lisp
   (defun my-minibuffer-setup-hook ()
 	(setq gc-cons-threshold most-positive-fixnum))
@@ -90,10 +90,42 @@ Let's use [[https://github.com/Wilfred/helpful][Helpful]]
   ("<f1> ." . helpful-at-point))
 #+end_src
 * Delete if selected
-Also see [[https://www.emacswiki.org/emacs/DeleteSelectionMode][EmacsWiki]] but cua should do this
+Also see [[https://www.emacswiki.org/emacs/DeleteSelectionMode][EmacsWiki]] (and my old init) but cua should do this
   #+begin_src emacs-lisp
   (delete-selection-mode)
   #+end_src
+* Scratch buffer
+  Need to control how it is restarted. Aquamacs saves it
+  #+begin_src emacs-lisp
+  (setq initial-major-mode 'emacs-lisp-mode)
+  (setq initial-scratch-message nil)
+   #+end_src
+* Double Letters
+Let's stop it. from [[https://emacs.stackexchange.com/a/13975/9874][Emacs SE]]
+#+begin_src emacs-lisp
+(defun dcaps-to-scaps ()
+  "Convert word in DOuble CApitals to Single Capitals."
+  (interactive)
+  (and (= ?w (char-syntax (char-before)))
+	   (save-excursion
+		 (and (if (called-interactively-p)
+				  (skip-syntax-backward "w")
+				(= -3 (skip-syntax-backward "w")))
+			  (let (case-fold-search)
+				(looking-at "\\b[[:upper:]]\\{2\\}[[:lower:]]"))
+			  (capitalize-word 1)))))
+
+(define-minor-mode dubcaps-mode
+  "Toggle `dubcaps-mode'.  Converts words in DOuble CApitals to
+Single Capitals as you type."
+  :init-value nil
+  :lighter (" DC")
+  (if dubcaps-mode
+	  (add-hook 'post-self-insert-hook #'dcaps-to-scaps nil 'local)
+	(remove-hook 'post-self-insert-hook #'dcaps-to-scaps 'local)))
+#+end_src
+** TODO Misspelling correction
+See http://endlessparentheses.com/ispell-and-abbrev-the-perfect-auto-correct.html but I need to deal with Aquamacs spelling as well
 * TODO General old stuff
 #+begin_src emacs-lisp
 (setq find-file-visit-truename t)	; visit a file under its true name
@@ -107,18 +139,6 @@ Also see [[https://www.emacswiki.org/emacs/DeleteSelectionMode][EmacsWiki]] but 
     (goto-char (point-min))
     ( replace-string "\r\n" "\n" )))
 
-;;  Scratch buffer to org mode
-(setq initial-major-mode 'org-mode)
-;;  Note concat needed to stop the whole end_src command breaking org-mode
-(setq initial-scratch-message
-	  (concat "This buffer is for notes you don't want to save, and for org mode.
-If you want to create a file, visit that file with C-x C-f,then enter the text in that file's own buffer.
-
-,#+begin_src emacs-lisp
-
-#"
-			  "+end_src
-"))
 
 (setq kill-whole-line t)
 

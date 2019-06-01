@@ -168,6 +168,8 @@ This is the visual
 	 (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
    :config
    (progn
+	 (setq hydra-key-regex "\\[\\|]\\|[-\\[:alnum:] ~.,;:/|?<>={}*+#%@!&^⇧⌘⌥↑↓←→⌫⌦⏎'`()\"$]+?") ; add Mac key symbols
+
 	 (setq treemacs-silent-refresh t
 		   treemacs-persist-file (mwb-user-emacs-file "data/treemacs-persist"))
 	 (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?)

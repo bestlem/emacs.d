@@ -14,7 +14,6 @@
 		(gnus-catchup-mark (subject -1))))
 (setq user-full-name "Mark Bestley")
 (setq user-mail-address "gnus@bestley.co.uk")
-(add-hook 'nnfolder-save-buffer-hook 'turn-off-backup)
 
 (setq gnus-visual t
 	  gnus-large-newsgroup 4000)
@@ -27,6 +26,14 @@
 		  (gnus-group-exit)))))
 
 (add-hook 'kill-emacs-hook 'exit-gnus-on-exit)
+#+end_src
+
+* Backups
+Well turn them off
+#+begin_src emacs-lisp
+(defun turn-off-backup ()
+  (set (make-local-variable 'backup-inhibited) t))
+(add-hook 'nnfolder-save-buffer-hook 'turn-off-backup)
 #+end_src
 * Group buffer
   #+begin_src emacs-lisp
@@ -53,7 +60,7 @@
    #+begin_src emacs-lisp
    (setq gnus-thread-sort-functions
 		 '(gnus-thread-sort-by-number
-		   gnus-thread-sort-by-date  ; Dates matter...
+		   (not gnus-thread-sort-by-date)		; Dates matter...
 		   gnus-thread-sort-by-total-score))
    #+end_src
 ** Tree

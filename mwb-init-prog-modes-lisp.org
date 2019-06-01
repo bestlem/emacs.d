@@ -61,11 +61,16 @@ Although that should be in prog mode
 	  :bind (:map emacs-lisp-mode
 				  ("C-c e m" . macrostep-expand)))
 	#+end_src
+*** Extras
+	Seen but not used yet [[https://github.com/ScottyB/edebug-x][edebug-x]]
+	#+begin_src emacs-lisp
+	(use-package edebug-x :ensure t)
+	#+end_src
 *** Completion
 Add company backend from John Widgley
 #+begin_src emacs-lisp
 (use-package company-elisp
-  :after company
+  :after company 
   :config
   (push 'company-elisp company-backends))
 

@@ -178,6 +178,7 @@ Now I have no idea if it works
 #+end_src
 ** C
 This is where I have really lost history there used to be all sorts of indenation rules.
+Look at jojojames init for a complete one - but no lsp/completion.
 #+begin_src emacs-lisp
    ;; objective C
    (add-to-list 'auto-mode-alist '("\\.h$" . objc-mode) )

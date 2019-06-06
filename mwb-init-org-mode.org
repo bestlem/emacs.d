@@ -34,7 +34,7 @@ Note Hydra is not really used after just a couple of weeks.
 			("q" nil "cancel"))
 	:after hydra
 	:bind (:map org-mode-map
-				("H-a" . hydra-org-mode/body)
+			;	("H-a" . hydra-org-mode/body)
 				("H-s" . org-edit-special)
 				:map org-src-mode-map
 				("H-s" . org-edit-src-exit)

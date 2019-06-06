@@ -116,18 +116,13 @@ Normally when you are in a buffer you do ^x-^k to kill the current buffer but em
 #+end_src
 ** Deleting and return
   #+begin_src emacs-lisp
-
-
-	 ;; (global-set-key [C-return] 'newline-and-indent )
-	 ;;(global-set-key [?\M-left] 'scroll-left )
-
-
-	 ;(global-set-key [C-backspace] 'backward-delete-char-untabify )
-	 (global-set-key [kp-delete] 'delete-char )
-	 (global-set-key [backspace] 'backward-delete-char-untabify)
-
-	 ;(global-set-key [?\A-backspace] 'undo )
-#+end_src
+  ;; (global-set-key [C-return] 'newline-and-indent )
+  ;;(global-set-key [?\M-left] 'scroll-left )
+  ;;(global-set-key [C-backspace] 'backward-delete-char-untabify )
+  (bind-key "<kp-delete>" 'delete-char )
+  (bind-key "<backspace>" 'backward-delete-char-untabify)
+  ;;(global-set-key [?\A-backspace] 'undo )
+  #+end_src
 ** Goto line
 Now these are very old
   #+begin_src emacs-lisp
@@ -190,21 +185,30 @@ These will be old NeXT Pizza bindings
 	 ;(global-set-key "\M-i" 'indent-region)
 ** Matcha
 Global hydra from [[https://github.com/jojojames/matcha][Matcha github]] but no idea how good. I didn't want it all but that was the easiest.
-Also see [[https://github.com/jerrypnz/major-mode-hydra.el][Major mode hydra]] for similar but grabs a major mode hydra from somewhere. Actually it is more like my H-A but automated it looks for
+Also see [[https://github.com/jerrypnz/major-mode-hydra.el][Major mode hydra]] for similar but grabs a major mode hydra from somewhere. Actually it is more like my H-a but automated it looks for
+
+Major mode was missing the last line - I suspect due to echo area
+
+So ended up with matcha again and transient
+
+And that works - I do need to edit the matcha files etc.
+
 #+begin_src emacs-lisp
+(use-package transient
+  :ensure t
+  :config (transient-bind-q-to-quit))
+
 (use-package matcha
-:disabled
+  :ensure nil
   :config
   (matcha-setup))
 
 
 (defhydra hydra-space (:color blue :hint nil :idle .2)
   "
-
    Space: %s`default-directory
-
-    Find              Manage             Do                Mode
-  ------------------------------------------------------------------------------
+      Find         Manage        Do                 Mode
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     _f_ File       _w_ Window      _s_ Search           _m_ Mode
     _b_ Buffer     _g_ Git         _R_ Refactor         _d_ Debug
     _r_ Recent     _p_ Project     _v_ Edit Init.el     _e_ Eval
@@ -252,6 +256,8 @@ Also see [[https://github.com/jerrypnz/major-mode-hydra.el][Major mode hydra]] f
   ("m" matcha-run-mode-command)
   ("e" matcha-run-eval-command)
   ("t" matcha-run-test-command))
+
+(bind-key "H-a" 'hydra-space/body)
 
 #+end_src
 ** Kitchin hydras

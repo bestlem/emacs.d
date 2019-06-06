@@ -18,22 +18,20 @@ Although that should be in prog mode
 	#+end_src
 
 *** Add lisp interaction mode
-
 **** xah mode
- This does more formatting and has useful abbreviations but I don't know if will work with lispy
- #+begin_src emacs-lisp
- (use-package  xah-elisp-mode
-   :ensure t
-:disabled
-   :hook emacs-lisp-mode)
-
- #+end_src
+	 This does more formatting and has useful abbreviations but I don't know if will work with lispy
+     #+begin_src emacs-lisp
+	 (use-package xah-elisp-mode
+	   :ensure t
+	   :disabled
+	   :hook emacs-lisp-mode)
+     #+end_src
 **** Lispy
 	 #+begin_src emacs-lisp
 	 (use-package lispy
 	   :ensure t
 	   ;; :config (add-to-list lispy-elisp-modes xah-elisp-mode)
-	   :hook ((emacs-lisp-mode lisp-interaction-mode) . lispy-mode)
+	   :hook ((emacs-lisp-mode lisp-interaction-mode racket-mode) . lispy-mode)
 	   :bind (:map lispy-mode-map
 				   ("<backspace>" . lispy-delete-backward)
 				   ("<kp-delete>" . lispy-delete)))
@@ -42,9 +40,17 @@ Although that should be in prog mode
 	 Changes are now made directly to the package which is only now here
 	 #+begin_src emacs-lisp
 	 (use-package lispy-mnemonic
-	   :after lispy
+	   :after (lispy eros)
 	   :hook (emacs-lisp-mode . lispy-mnemonic-mode))
 	 #+end_src
+*** Evaluation
+	Instead of displaying the results in a separate buffer (like the iElm does), The [[https://github.com/xiongtx/eros][EROS project]] displays the results temporarily  /in the buffer/ in an overlay.  No need to do anything special:
+However it does uit by remapping the eval keys so interferes with lispy so need to sort that out. PBest idea is make it one of the possible parts of lispy-mnemonic eval.
+	#+BEGIN_SRC elisp
+	(use-package eros
+	  :ensure t
+	  :hook ((emacs-lisp-mode lisp-interaction-mode racket-mode) . eros-mode))
+   #+END_SRC
 ** Emacs Lisp
 *** Formatter
 	I am not certain this is needed now as other things do this
@@ -70,19 +76,12 @@ Although that should be in prog mode
 Add company backend from John Widgley
 #+begin_src emacs-lisp
 (use-package company-elisp
-  :after company 
+  :after company
   :config
   (push 'company-elisp company-backends))
 
 (setq-local company-backend '(company-elisp))
 #+end_src
-*** Evaluation
-	Instead of displaying the results in a separate buffer (like the iElm does), The [[https://github.com/xiongtx/eros][EROS project]] displays the results temporarily  /in the buffer/ in an overlay.  No need to do anything special:
-	#+BEGIN_SRC elisp
-	(use-package eros
-	  :ensure t
-	  :hook (emacs-lisp-mode . eros-mode))
-   #+END_SRC
 *** Keyboard Macros
 Well not really lisp but much can be converted to it
 **** Show as emacs lisp

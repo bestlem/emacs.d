@@ -23,3 +23,7 @@
  - path :: /Users/mark/src/ThirdParty/emacs-init/jojojames
 ** dotfiles
  - path :: /Users/mark/src/env/dotfiles
+** aquamacs-emacs
+ - path :: /Users/mark/src/ThirdParty/aquamacs-emacs
+** jerrypnz_major_hydra
+ - path :: /Users/mark/src/ThirdParty/emacs-init/jerrypnz_major_hydra

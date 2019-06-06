@@ -107,6 +107,29 @@ This also takes time to load. Need to sort out config entries and gradele-mode n
 	  :hook ((sh-mode json-mode nxml-mode python-mode emacs-lisp-mode lisp-interaction-mode) . flymake-mode-on)
 	  :config (flymake-mode-on))
   #+end_src
+*** make
+	#+begin_src emacs-lisp
+	(use-package make-mode
+	  :ensure nil
+	  :mode
+	  ("Imakefile\\'" . makefile-imake-mode)
+	  ("Makeppfile\\(?:\\.mk\\)?\\'" . makefile-makepp-mode)
+	  ("\\.makepp\\'" . makefile-makepp-mode)
+	  ("\\.mk\\'" . makefile-bsdmake-mode)
+	  ("\\.make\\'" . makefile-bsdmake-mode)
+	  ("GNUmakefile\\'" . makefile-gmake-mode)
+	  ("[Mm]akefile\\'" . makefile-bsdmake-mode)
+	  ("\\.am\\'" . makefile-automake-mode))
+	#+end_src
+	#+begin_src emacs-lisp
+	(use-package cmake-mode
+	  :ensure t
+	  :mode
+	  ("\\.cmake\\'" . cmake-mode)
+	  ("CMakeLists\\.txt\\'" . cmake-mode)
+	  :config
+	  (setq cmake-tab-width 2))
+	#+end_src
 ** Git
 #+begin_src emacs-lisp
 (mwb-init-load "mwb-init-prog-modes-git")

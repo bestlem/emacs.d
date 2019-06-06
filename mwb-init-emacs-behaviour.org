@@ -90,9 +90,9 @@ Let's use [[https://github.com/Wilfred/helpful][Helpful]]
   ("<f1> ." . helpful-at-point))
 #+end_src
 * Delete if selected
-Also see [[https://www.emacswiki.org/emacs/DeleteSelectionMode][EmacsWiki]] (and my old init) but cua should do this
+  Also see [[https://www.emacswiki.org/emacs/DeleteSelectionMode][EmacsWiki]] (and my old init) but cua should do this. Possibly because minor modes are toggles
   #+begin_src emacs-lisp
-  (delete-selection-mode)
+  (delete-selection-mode 1)
   #+end_src
 * Scratch buffer
   Need to control how it is restarted. Aquamacs saves it

@@ -4,7 +4,6 @@
 #+STARTUP: content
 
 #+begin_src emacs-lisp
-(setq gnus-select-method '(nntp "localhost"))
 (setq gnus-read-active-file nil)
 (setq gnus-use-adaptive-scoring t)
 (setq gnus-default-adaptive-score-alist
@@ -35,9 +34,16 @@ Well turn them off
   (set (make-local-variable 'backup-inhibited) t))
 (add-hook 'nnfolder-save-buffer-hook 'turn-off-backup)
 #+end_src
-* Group buffer
-  #+begin_src emacs-lisp
 
+* Servers
+  #+begin_src emacs-lisp
+  (setq gnus-select-method '(nntp "localhost"))
+  (setq gnus-secondary-select-methods  '((nntp "news.gmane.org")))
+  #+end_src
+* Group buffer
+Put groups in order by my ranking (comes from NeXT news setup
+  #+begin_src emacs-lisp
+  (setq gnus-group-sort-function 'gnus-group-sort-by-rank)
   #+end_src
 * Summary buffer
 ** Threads
@@ -105,7 +111,6 @@ Bin it
 ; gmail
 (require 'gnus )
 	
-(setq gnus-select-method '(nntp "news.gmane.org"))
 
 
 (add-to-list 'gnus-secondary-select-methods 
@@ -135,7 +140,6 @@ Bin it
 
 
 
-(add-hook 'nnfolder-save-buffer-hook 'turn-off-backup)
 
 ;; mime from http://www.emacswiki.org/emacs/MimeTypesWithGnus
 ;; Inline images?

@@ -336,6 +336,12 @@ Although see starter kit where they run after init.
 			  :config (setq hydra-look-for-remap t))
 			(use-package use-package-hydra :ensure t)
             #+end_src
+******* Org Mode
+	  #+begin_src emacs-lisp
+	  (mwb-init-load "mwb-init-org-mode")
+	  #+end_src
+
+
 **** Setting variables with a check on type
 Used when overriding a defcustom or defvar.
 Note should check on defconst
@@ -343,7 +349,6 @@ Note should check on defconst
 (use-package validate
   :ensure t)
 #+end_src
-
 *** Emacs server
  This is a simple server start - to allow emacsclient from Terminal. There are more complex starters.
  #+begin_src emacs-lisp
@@ -379,11 +384,6 @@ Interfacing with the operating system
   #+end_src
 
 ***** Text modes
-****** Org Mode
-	 #+begin_src emacs-lisp
-	 (mwb-init-load "mwb-init-org-mode")
-	 #+end_src
-
 ****** Epub reading
 	   #+begin_src emacs-lisp
 	   ;; Epub reader

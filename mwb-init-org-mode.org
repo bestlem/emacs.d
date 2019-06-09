@@ -21,27 +21,15 @@ org-mode is a pain as we need a newer than aquamacs supplies and also there are 
 Note Hydra is not really used after just a couple of weeks.
 
   #+begin_src emacs-lisp :noweb yes
-  (use-package org
+  (use-package
+	org
 	:ensure t
-	:hydra (hydra-org-mode
-			(:color teal)
-			""
-			("c" mwb-hydra-org-code/body "Code")
-			("d" org-toggle-link-display "Show links")
-			("l" org-insert-link "link")
-			("g" org-set-tags-command "tags")
-			("t" org-todo "todo")
-			("q" nil "cancel"))
-	:after hydra
-	:bind (:map org-mode-map
-			;	("H-a" . hydra-org-mode/body)
-				("H-s" . org-edit-special)
-				:map org-src-mode-map
+	:bind (:map org-src-mode-map
 				("H-s" . org-edit-src-exit)
 				("A-s" . org-edit-src-exit) ; I press by mistake but it makes sense
 				)
 	:hook
-        <<org-mode-hooks>>
+<<org-mode-hooks>>
 	)
   #+end_src
 *** TODO Save org files saved in dropbox dir automatically (NB not emacs autosave)
@@ -70,7 +58,7 @@ Code block behaviour - but also see customization for appearance
 	   org-confirm-babel-evaluate nil
 	   org-edit-src-content-indentation 0)
  #+end_src
-** Prettify
+q** Prettify
 Make org mode look prettier. See also the customization
 Basically set to variable pitch font but note Aquamacs has a way (different of course to do this)
  #+begin_src emacs-lisp

@@ -192,74 +192,135 @@ Major mode was missing the last line - I suspect due to echo area
 So ended up with matcha again and transient
 
 And that works - I do need to edit the matcha files etc.
+*** Code
+    #+begin_src emacs-lisp
+	(use-package transient
+	  :ensure t
+	  :config (transient-bind-q-to-quit))
 
-#+begin_src emacs-lisp
-(use-package transient
-  :ensure t
-  :config (transient-bind-q-to-quit))
+	(use-package matcha
+	  :ensure nil
+	  :config
+	  (matcha-setup))
+    #+end_src
+*** Hydra space the root hydra
+**** Note on unused or other changes
+***** quickrun
+	  runs the current buffer through a compiler or interpreter. There are also functions to do for a method. Includes C, Racket, Python, Julia
+   #+begin_src emacs-lisp
 
-(use-package matcha
-  :ensure nil
-  :config
-  (matcha-setup))
+   (defhydra hydra-space (:color blue :hint nil :idle .2)
+	 "
+	  Space: %s`default-directory
+		 Find         Manage        Do                 Mode
+	 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+	   _f_ File       _w_ Window      _s_ Search           _m_ Mode
+	   _b_ Buffer     _g_ Git         _R_ Refactor         _d_ Debug
+	   _i_ iBuffer    _p_ Project     _v_ Edit Init.el     _e_ Eval
+	   _r_ Recent     _x_ kill buff   _o_ Org              _t_ Test
+	   _n_ Treemacs   _U_ Undo        _u_ Universal Arg..  _=_ Format
+	   _SPC_ Any
+   "
+	 ("1" digit-argument)
+	 ("2" digit-argument)
+	 ("3" digit-argument)
+	 ("4" digit-argument)
+	 ("5" digit-argument)
+	 ("6" digit-argument)
+	 ("7" digit-argument)
+	 ("8" digit-argument)
+	 ("9" digit-argument)
+	 ("0" digit-argument)
+	 ("u" universal-argument)
+	 ("f" counsel-find-file)
+	 ("b" ivy-switch-buffer)
+	 ("i" ibuffer)
+	 ("r" counsel-recentf)
+	 ("w" hydra-window/body)
+	 ("-" split-window-below)
+	 ("|" split-window-right)
+	 ("\\" split-window-right)
+	 ("<backspace>" delete-window)
+	 ("DEL" delete-window) ;; For terminals.
+	 ("s" hydra-search/body)
+	 ("v" (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
+	 ("U" undo-tree-visualize)
+	 ("x" bjm/kill-this-buffer)
+	 ;;  ("y" hydra-system/body)
+	 ("n" treemacs)
+	 ("p" matcha-projectile/body)
+	 ("g" matcha-magit/body)
+	 ("SPC" counsel-fzf)
+	 ("RET" quickrun)
+	 (";" counsel-M-x)
+	 (":" eval-expression)
+	 ("o" hydra-org-space/body)
+	 ("S" (lambda () (interactive) (save-some-buffers :all-buffers-no-confirm)))
+	 ("R" matcha-run-refactor-command)
+	 ("=" matcha-run-format-command)
+	 ("d" matcha-run-debug-command)
+	 ("m" matcha-run-mode-command)
+	 ("e" matcha-run-eval-command)
+	 ("t" matcha-run-test-command))
 
+   (bind-key "H-a" 'hydra-space/body)
+   #+end_src
+*** Hydra search
+This is incomplete as many ofr the command will fail
+ #+begin_src emacs-lisp
+ (defhydra hydra-search (:color blue :hint nil)
+   "
 
-(defhydra hydra-space (:color blue :hint nil :idle .2)
-  "
-   Space: %s`default-directory
-      Find         Manage        Do                 Mode
-  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    _f_ File       _w_ Window      _s_ Search           _m_ Mode
-    _b_ Buffer     _g_ Git         _R_ Refactor         _d_ Debug
-    _r_ Recent     _p_ Project     _v_ Edit Init.el     _e_ Eval
-    _n_ Sidebar    _y_ System      _o_ Org              _t_ Test
-    _SPC_ Any      _U_ Undo        _u_ Universal Arg..  _=_ Format
+	Search: %s(matcha-projectile-root)
+
+	 ^^Counsel              ^^Occur            ^^Ag
+   ------------------------------------------------------------------------------
+	 _s_ Swiper       _o_ Occur             _a_ Ag
+	 _S_ Swiper All   _O_ Multi-Occur       _p_ Project
+	 _c_ Ag           _m_ Matching Mode
+	 _f_ File         _M_ Matching Regex
+	 _r_ Rg           _P_ Projectile
+	 _g_ Git
+
+ "
+   ("R" j|counsel-rg)
+   ("r" counsel-rg)
+   ("s" swiper)
+   ("S" swiper-all)
+   ("C" j|counsel-ag)
+   ("c" counsel-ag)
+   ("f" counsel-find-file)
+   ("g" counsel-git)
+   ("o" occur)
+   ("O" multi-occur)
+   ("m" j|multi-occur-in-this-mode)
+   ("M" multi-occur-in-matching-buffers)
+   ("P" projectile-multi-occur)
+   ("a" ag)
+   ("p" ag-project))
+
+ #+end_src
+*** Hydra org
+	Note there is also a transient mode
+	#+begin_src emacs-lisp
+(defhydra hydra-org-space (:color blue :hint nil)
+    "
+
+    Org:
+  ------------------------------------------------------------------------------
+    _a_ Agenda    _c_ Capture    _r_ Refile    _t_ Todo
+
+    _l_ Store Link   _i_ Insert Link
 
 "
-  ("1" digit-argument)
-  ("2" digit-argument)
-  ("3" digit-argument)
-  ("4" digit-argument)
-  ("5" digit-argument)
-  ("6" digit-argument)
-  ("7" digit-argument)
-  ("8" digit-argument)
-  ("9" digit-argument)
-  ("0" digit-argument)
-  ("u" universal-argument)
-  ("f" +find-file-dwim)
-  ("b" +buffers-dwim)
-  ("r" +recentf-dwim)
-  ("w" hydra-window/body)
-  ("-" split-window-below)
-  ("|" split-window-right)
-  ("\\" split-window-right)
-  ("<backspace>" delete-window)
-  ("DEL" delete-window) ;; For terminals.
-  ("s" hydra-search/body)
-  ("v" (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
-  ("U" undo-tree-visualize)
-  ("x" kill-buffer)
-  ("y" hydra-system/body)
-  ("n" dired-sidebar-toggle-sidebar)
-  ("p" matcha-projectile/body)
-  ("g" +show-vc-hydra)
-  ("SPC" counsel-fzf)
-  ("RET" quickrun)
-  (";" counsel-M-x)
-  (":" eval-expression)
-  ("o" hydra-org-space/body)
-  ("S" +save-all-buffers)
-  ("R" matcha-run-refactor-command)
-  ("=" matcha-run-format-command)
-  ("d" matcha-run-debug-command)
-  ("m" matcha-run-mode-command)
-  ("e" matcha-run-eval-command)
-  ("t" matcha-run-test-command))
-
-(bind-key "H-a" 'hydra-space/body)
-
-#+end_src
+    ("a" org-agenda)
+    ("c" org-capture)
+    ("l" org-store-link)
+    ("i" org-insert-link)
+    ("r" org-refile)
+    ("o" org-todo)
+    ("t" org-todo))
+	#+end_src
 ** Kitchin hydras
    From [[https://kitchingroup.cheme.cmu.edu/blog/2015/09/28/A-cursor-goto-hydra-for-emacs/][Kitchin Group]] Original has helm and I add some from Hydra Wiki
 *** Navigate

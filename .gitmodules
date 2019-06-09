@@ -1,6 +1,3 @@
 [submodule "fork/matcha"]
 	path = fork/matcha
 	url = https://github.com/jojojames/matcha/
-[submodule "fork/nougat"]
-	path = fork/nougat
-	url = https://github.com/dustinlacewell/emacs-nougat

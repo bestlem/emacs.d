@@ -187,22 +187,11 @@ These will be old NeXT Pizza bindings
 Global hydra from [[https://github.com/jojojames/matcha][Matcha github]] but no idea how good. I didn't want it all but that was the easiest.
 Also see [[https://github.com/jerrypnz/major-mode-hydra.el][Major mode hydra]] for similar but grabs a major mode hydra from somewhere. Actually it is more like my H-a but automated it looks for
 
-Major mode was missing the last line - I suspect due to echo area
+Major mode was missing the last line - I suspect due to echo area or possibly this bug https://github.com/abo-abo/hydra/issues/331
 
 So ended up with matcha again and transient
 
 And that works - I do need to edit the matcha files etc.
-*** Code
-    #+begin_src emacs-lisp
-	(use-package transient
-	  :ensure t
-	  :config (transient-bind-q-to-quit))
-
-	(use-package matcha
-	  :ensure nil
-	  :config
-	  (matcha-setup))
-    #+end_src
 *** Hydra space the root hydra
 **** Note on unused or other changes
 ***** quickrun
@@ -254,7 +243,7 @@ And that works - I do need to edit the matcha files etc.
 	 ("RET" quickrun)
 	 (";" counsel-M-x)
 	 (":" eval-expression)
-	 ("o" hydra-org-space/body)
+	 ("o" mwb/matcha-org-space)
 	 ("S" (lambda () (interactive) (save-some-buffers :all-buffers-no-confirm)))
 	 ("R" matcha-run-refactor-command)
 	 ("=" matcha-run-format-command)
@@ -303,23 +292,23 @@ This is incomplete as many ofr the command will fail
 *** Hydra org
 	Note there is also a transient mode
 	#+begin_src emacs-lisp
-(defhydra hydra-org-space (:color blue :hint nil)
-    "
-
-    Org:
-  ------------------------------------------------------------------------------
-    _a_ Agenda    _c_ Capture    _r_ Refile    _t_ Todo
-
-    _l_ Store Link   _i_ Insert Link
-
-"
-    ("a" org-agenda)
-    ("c" org-capture)
-    ("l" org-store-link)
-    ("i" org-insert-link)
-    ("r" org-refile)
-    ("o" org-todo)
-    ("t" org-todo))
+	(define-transient-command mwb/matcha-org-space
+	  "Org"
+	  [["Org"
+		("a" "Agenda" org-agenda)
+		("c" "Capture" org-capture)
+		("r" "Refile" org-refile)
+		("t" "Todo" org-todo)]
+	   ["Links"
+		("l" "Store" org-store-link)
+		("i" "Insert" org-insert-link)]
+	   ["Subtree"
+		("x" "Cut" org-cut-subtree)
+		("w" "Copy" org-copy-subtree)
+		("y" "Paste" org-paste-subtree)
+		("Y" "Yank" org-yank)
+		("W" "Clone" org-clone-subtree-with-time-shift)]
+	   ])
 	#+end_src
 ** Kitchin hydras
    From [[https://kitchingroup.cheme.cmu.edu/blog/2015/09/28/A-cursor-goto-hydra-for-emacs/][Kitchin Group]] Original has helm and I add some from Hydra Wiki

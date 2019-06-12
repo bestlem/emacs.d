@@ -31,7 +31,7 @@ Although that should be in prog mode
 	 (use-package lispy
 	   :ensure t
 	   ;; :config (add-to-list lispy-elisp-modes xah-elisp-mode)
-	   :hook ((emacs-lisp-mode lisp-interaction-mode racket-mode) . lispy-mode)
+	  ; :hook ((emacs-lisp-mode lisp-interaction-mode racket-mode) . lispy-mode)
 	   :bind (:map lispy-mode-map
 				   ("<backspace>" . lispy-delete-backward)
 				   ("<kp-delete>" . lispy-delete)))
@@ -40,8 +40,7 @@ Although that should be in prog mode
 	 Changes are now made directly to the package which is only now here
 	 #+begin_src emacs-lisp
 	 (use-package lispy-mnemonic
-	   :after (lispy eros)
-	   :hook (emacs-lisp-mode . lispy-mnemonic-mode))
+	   :hook ((emacs-lisp-mode lisp-interaction-mode racket-mode) . lispy-mnemonic-mode))
 	 #+end_src
 *** Evaluation
 	Instead of displaying the results in a separate buffer (like the iElm does), The [[https://github.com/xiongtx/eros][EROS project]] displays the results temporarily  /in the buffer/ in an overlay.  No need to do anything special:
@@ -49,7 +48,7 @@ However it does uit by remapping the eval keys so interferes with lispy so need 
 	#+BEGIN_SRC elisp
 	(use-package eros
 	  :ensure t
-	  :hook ((emacs-lisp-mode lisp-interaction-mode racket-mode) . eros-mode))
+	  :commands eros--eval-overlay)
    #+END_SRC
 ** Emacs Lisp
 *** Formatter
@@ -58,10 +57,11 @@ However it does uit by remapping the eval keys so interferes with lispy so need 
 	(use-package elisp-format :defer 10 :ensure t)
     #+end_src
 *** See macros
+	Dependencies because lispy etc and macrostep use thje same keys
 	#+begin_src emacs-lisp
 	(use-package macrostep
 	  :ensure t
-	  :after emacs-lisp
+	  :after (emacs-lisp lispy-mnemonic lispy)
 	  :commands (macrostep-expand
 				 macrostep-mode)
 	  :bind (:map emacs-lisp-mode
@@ -141,3 +141,13 @@ From [[https://github.com/abo-abo/hydra/wiki/Macro][Hydra wiki]] and [[https://g
 	  (bind-key "<f3>" 'hydra-macro/body)
 
 	  #+end_src
+** Racket mode
+   #+begin_src emacs-lisp
+   (use-package racket-mode
+	 :ensure t
+	 :bind (:map racket-mode-map
+				 ("<f5>" . racket-run)
+				 :map racket-repl-mode-map
+				 ("<f5>" . racket-run))
+	 :config (setq racket-program "/Applications/Racket v7.3/bin/racket"))
+   #+end_src

@@ -192,67 +192,13 @@ Major mode was missing the last line - I suspect due to echo area or possibly th
 So ended up with matcha again and transient
 
 And that works - I do need to edit the matcha files etc.
-*** Hydra space the root hydra
+*** Matcha space the root matcha
 **** Note on unused or other changes
 ***** quickrun
-	  runs the current buffer through a compiler or interpreter. There are also functions to do for a method. Includes C, Racket, Python, Julia
+	  runs the current buffer through a compiler or interpreter. There are also functions to do for a method. Includes C, Racket, Python, Julia Although seems to have diappeared.
    #+begin_src emacs-lisp
-
-   (defhydra hydra-space (:color blue :hint nil :idle .2)
-	 "
-	  Space: %s`default-directory
-		 Find         Manage        Do                 Mode
-	 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	   _f_ File       _w_ Window      _s_ Search           _m_ Mode
-	   _b_ Buffer     _g_ Git         _R_ Refactor         _d_ Debug
-	   _i_ iBuffer    _p_ Project     _v_ Edit Init.el     _e_ Eval
-	   _r_ Recent     _x_ kill buff   _o_ Org              _t_ Test
-	   _n_ Treemacs   _U_ Undo        _u_ Universal Arg..  _=_ Format
-	   _SPC_ Any
-   "
-	 ("1" digit-argument)
-	 ("2" digit-argument)
-	 ("3" digit-argument)
-	 ("4" digit-argument)
-	 ("5" digit-argument)
-	 ("6" digit-argument)
-	 ("7" digit-argument)
-	 ("8" digit-argument)
-	 ("9" digit-argument)
-	 ("0" digit-argument)
-	 ("u" universal-argument)
-	 ("f" counsel-find-file)
-	 ("b" ivy-switch-buffer)
-	 ("i" ibuffer)
-	 ("r" counsel-recentf)
-	 ("w" hydra-window/body)
-	 ("-" split-window-below)
-	 ("|" split-window-right)
-	 ("\\" split-window-right)
-	 ("<backspace>" delete-window)
-	 ("DEL" delete-window) ;; For terminals.
-	 ("s" hydra-search/body)
-	 ("v" (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
-	 ("U" undo-tree-visualize)
-	 ("x" bjm/kill-this-buffer)
-	 ;;  ("y" hydra-system/body)
-	 ("n" treemacs)
-	 ("p" matcha-projectile/body)
-	 ("g" matcha-magit/body)
-	 ("SPC" counsel-fzf)
-	 ("RET" quickrun)
-	 (";" counsel-M-x)
-	 (":" eval-expression)
-	 ("o" mwb/matcha-org-space)
-	 ("S" (lambda () (interactive) (save-some-buffers :all-buffers-no-confirm)))
-	 ("R" matcha-run-refactor-command)
-	 ("=" matcha-run-format-command)
-	 ("d" matcha-run-debug-command)
-	 ("m" matcha-run-mode-command)
-	 ("e" matcha-run-eval-command)
-	 ("t" matcha-run-test-command))
-
-   (bind-key "H-a" 'hydra-space/body)
+   (bind-key "H-a" 'matcha-run-mode-command)
+   (bind-key "H-§" 'matcha-me-space)
    #+end_src
 *** Hydra search
 This is incomplete as many ofr the command will fail

@@ -351,6 +351,12 @@ Although see starter kit where they run after init.
 		  :config
 		  (matcha-setup))
 		#+end_src
+
+******** Support code
+		 Extra functions from JoJoJames
+		 #+begin_src emacs-lisp
+		 (use-package jp-projectile-utils)
+		 #+end_src
 ******* Org Mode
 	  #+begin_src emacs-lisp
 	  (mwb-init-load "mwb-init-org-mode")

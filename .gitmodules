@@ -1,3 +1,6 @@
 [submodule "fork/matcha"]
 	path = fork/matcha
 	url = https://github.com/jojojames/matcha/
+[submodule "fork/lispy"]
+	path = fork/lispy
+	url = https://github.com/bestlem/lispy.git

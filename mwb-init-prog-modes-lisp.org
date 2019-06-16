@@ -27,14 +27,16 @@ Although that should be in prog mode
 	   :hook emacs-lisp-mode)
      #+end_src
 **** Lispy
+	 Set compat so that the keys for these modes work.
 	 #+begin_src emacs-lisp
+	 (setq mwb-path (mwb-user-emacs-file "fork/lispy"))
 	 (use-package lispy
-	   :ensure t
-	   ;; :config (add-to-list lispy-elisp-modes xah-elisp-mode)
-	  ; :hook ((emacs-lisp-mode lisp-interaction-mode racket-mode) . lispy-mode)
+	   :load-path  mwb-path
 	   :bind (:map lispy-mode-map
 				   ("<backspace>" . lispy-delete-backward)
-				   ("<kp-delete>" . lispy-delete)))
+				   ("<kp-delete>" . lispy-delete))
+	   :config (setq  lispy-compat (quote (edebug macrostep))
+					  lispy-safe-paste t))
 	 #+end_src
 **** and interaction hydra
 	 Changes are now made directly to the package which is only now here

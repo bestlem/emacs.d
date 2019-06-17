@@ -200,41 +200,7 @@ And that works - I do need to edit the matcha files etc.
    (bind-key "H-a" 'matcha-run-mode-command)
    (bind-key "H-§" 'matcha-me-space)
    #+end_src
-*** Hydra search
-This is incomplete as many ofr the command will fail
- #+begin_src emacs-lisp
- (defhydra hydra-search (:color blue :hint nil)
-   "
-
-	Search: %s(matcha-projectile-root)
-
-	 ^^Counsel              ^^Occur            ^^Ag
-   ------------------------------------------------------------------------------
-	 _s_ Swiper       _o_ Occur             _a_ Ag
-	 _S_ Swiper All   _O_ Multi-Occur       _p_ Project
-	 _c_ Ag           _m_ Matching Mode
-	 _f_ File         _M_ Matching Regex
-	 _r_ Rg           _P_ Projectile
-	 _g_ Git
-
- "
-   ("R" j|counsel-rg)
-   ("r" counsel-rg)
-   ("s" swiper)
-   ("S" swiper-all)
-   ("C" j|counsel-ag)
-   ("c" counsel-ag)
-   ("f" counsel-find-file)
-   ("g" counsel-git)
-   ("o" occur)
-   ("O" multi-occur)
-   ("m" j|multi-occur-in-this-mode)
-   ("M" multi-occur-in-matching-buffers)
-   ("P" projectile-multi-occur)
-   ("a" ag)
-   ("p" ag-project))
-
- #+end_src
+**
 *** Hydra org
 	Note there is also a transient mode
 	#+begin_src emacs-lisp

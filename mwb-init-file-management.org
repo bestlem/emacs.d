@@ -84,6 +84,17 @@ Aquamacs seems to turn this off sometimes in customization so need to investigat
 								 "[/\\]\\.elpa/"
 								 )))
   #+end_src
+
+* Files
+
+** Sunshine commander
+   #+begin_src emacs-lisp
+   (setq mwb-sunrise-commander-path (mwb-user-emacs-file "fork/sunrise-commander"))
+   (use-package sunrise-commander
+	 :defer t
+	 :load-path mwb-sunrise-commander-path
+	 :commands sunrise)
+   #+end_src
 * Project management
 Started as file management but actually deals with files and what is in them/ Treemacs looks at git so there are files that cannot be see so dired needed.
 ** Searching
@@ -203,7 +214,8 @@ This is the visual
 	("T" treemacs-find-tag "Find Tag"))
    :bind (("H-t" . mwb/hydra-treemacs-global/body)
 		  :map treemacs-mode-map
-		  ("<mouse-5>" . treemacs-rightclick-menu)))
+		  ("<mouse-5>" . treemacs-rightclick-menu)
+		  ("<mouse-4>" . treemacs-rightclick-menu)))
 
  (use-package treemacs-projectile
    :after treemacs projectile

@@ -4,3 +4,6 @@
 [submodule "fork/lispy"]
 	path = fork/lispy
 	url = https://github.com/bestlem/lispy.git
+[submodule "fork/sunrise-commander"]
+	path = fork/sunrise-commander
+	url = https://github.com/escherdragon/sunrise-commander

@@ -153,3 +153,22 @@ From [[https://github.com/abo-abo/hydra/wiki/Macro][Hydra wiki]] and [[https://g
 				 ("<f5>" . racket-run))
 	 :config (setq racket-program "/Applications/Racket v7.3/bin/racket"))
    #+end_src
+*** matcha
+	#+begin_src emacs-lisp
+	(when matcha-use-launcher-p
+	  (matcha-set-mode-command
+	   :mode '(racket-mode )
+	   :command 'matcha-racket-mode)
+	  )
+
+	(define-transient-command matcha-racket-mode ()
+	  "Mode"
+	  [["Run"
+		("r" "run" racket-run)
+		("o" "run and REPL" racket-run-and-switch-to-repl)
+		("R" "Run with errortrace" (lambda () (racket-run 4)))
+		("i" "Instriment for debug" (lambda () (racket-run 16)))
+		]
+	   ["Test"
+		("t" "Test" racket-test)]])
+	#+end_src

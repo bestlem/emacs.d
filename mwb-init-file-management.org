@@ -84,16 +84,15 @@ Aquamacs seems to turn this off sometimes in customization so need to investigat
 								 "[/\\]\\.elpa/"
 								 )))
   #+end_src
-
 * Files
-
 ** Sunshine commander
    #+begin_src emacs-lisp
    (setq mwb-sunrise-commander-path (mwb-user-emacs-file "fork/sunrise-commander"))
    (use-package sunrise-commander
 	 :defer t
 	 :load-path mwb-sunrise-commander-path
-	 :commands sunrise)
+	 :commands sunrise
+	 :config (require 'sunrise-x-buttons))
    #+end_src
 * Project management
 Started as file management but actually deals with files and what is in them/ Treemacs looks at git so there are files that cannot be see so dired needed.
@@ -122,6 +121,11 @@ So take from projectile
   ;;                      (projectile-discover-projects-in-search-path))))
   ;; :bind-keymap ("H-p" . projectile-command-map)
   :config
+  ;; racket from greghendershott
+  (add-to-list 'projectile-globally-ignored-directories "compiled")
+  (projectile-register-project-type 'racket '("info.rkt")
+									:compile "make setup"
+									:test "make test")
   (setq projectile-completion-system 'ivy)
   (projectile-global-mode))
 #+end_src

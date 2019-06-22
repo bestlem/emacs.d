@@ -2,7 +2,6 @@
 #+PROPERTY:header-args :cache yes :tangle yes :comments link
 #+STARTUP: content
 * Overview
-
 ** Introduction
  OK I caught the bug to create an org mode file to document my init files.
 
@@ -72,7 +71,7 @@ first (unless you need fast starts)
 ***** DONE Need to move all init files into a path that has no spaces
 	  CLOSED: [2019-05-06 Mon 02:21]
 
-***** DONE Look at xak lee's get filename codes
+***** DONE Look at xah lee's get filename codes
 	  CLOSED: [2019-05-04 Sat 04:57]
 
 *** Load order

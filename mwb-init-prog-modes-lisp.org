@@ -59,7 +59,7 @@ However it does uit by remapping the eval keys so interferes with lispy so need 
 	(use-package elisp-format :defer 10 :ensure t)
     #+end_src
 *** See macros
-	Dependencies because lispy etc and macrostep use thje same keys
+	Dependencies because lispy etc and macrostep use the same keys
 	#+begin_src emacs-lisp
 	(use-package macrostep
 	  :ensure t
@@ -72,7 +72,7 @@ However it does uit by remapping the eval keys so interferes with lispy so need 
 *** Extras
 	Seen but not used yet [[https://github.com/ScottyB/edebug-x][edebug-x]]
 	#+begin_src emacs-lisp
-	(use-package edebug-x :ensure t)
+	(use-package edebug-x :disabled :ensure t)
 	#+end_src
 *** Completion
 Add company backend from John Widgley
@@ -151,24 +151,32 @@ From [[https://github.com/abo-abo/hydra/wiki/Macro][Hydra wiki]] and [[https://g
 				 ("<f5>" . racket-run)
 				 :map racket-repl-mode-map
 				 ("<f5>" . racket-run))
-	 :config (setq racket-program "/Applications/Racket v7.3/bin/racket"))
+	 :config (setq racket-program "/Applications/Racket v7.3/bin/racket")
+	 :hook (racket-mode . (lambda ()
+							(setq indent-tabs-mode nil))))
    #+end_src
 *** matcha
-	#+begin_src emacs-lisp
-	(when matcha-use-launcher-p
-	  (matcha-set-mode-command
-	   :mode '(racket-mode )
-	   :command 'matcha-racket-mode)
-	  )
+**** Set the mode
+	 #+begin_src emacs-lisp
+	 (when matcha-use-launcher-p
+	   (matcha-set-mode-command
+		:mode '(racket-mode )
+		:command 'matcha-racket-mode)
+	   )
+	 #+end_src
+**** Mode matcha
+	 #+begin_src emacs-lisp
 
-	(define-transient-command matcha-racket-mode ()
-	  "Mode"
-	  [["Run"
-		("r" "run" racket-run)
-		("o" "run and REPL" racket-run-and-switch-to-repl)
-		("R" "Run with errortrace" (lambda () (racket-run 4)))
-		("i" "Instriment for debug" (lambda () (racket-run 16)))
-		]
-	   ["Test"
-		("t" "Test" racket-test)]])
-	#+end_src
+	 (define-transient-command matcha-racket-mode
+	   "Mode"
+	   [["Run"
+		 ("b" "run" racket-run)
+		 ("B" "run and REPL" racket-run-and-switch-to-repl)
+		 ("r"  "Region to REPL" racket-send-region)
+
+		 ;; ("R" "Run with errortrace" (lambda () (interactive) (racket-run 4)))
+		 ;; ("i" "Instrument for debug" (lambda () (interactive) (racket-run 16)))
+		 ]
+		["Test"
+		 ("t" "Test" racket-test)]])
+	 #+end_src

@@ -227,13 +227,13 @@ Add if not message the eros display"
 					 (cdr (lispy--bounds-dwim)))
 					))))))
 
-(defhydra hydra-lispy-eval (:color blue)
-  "Lispy eval"
-  ("e" mwb-lispy-eval "eval")
-  ("r" lispy-eval-and-replace "replace" :color red)
-  ("o" lispy-eval-other-window "other window")
-  ("i" lispy-eval-and-insert "insert")
-  ("c" lispy-eval-and-comment "comment"))
+;; (defhydra hydra-lispy-eval (:color blue)
+;;   "Lispy eval"
+;;   ("e" mwb-lispy-eval "eval")
+;;   ("r" lispy-eval-and-replace "replace" :color red)
+;;   ("o" lispy-eval-other-window "other window")
+;;   ("i" lispy-eval-and-insert "insert")
+;;   ("c" lispy-eval-and-comment "comment"))
 
 (defhydra hydra-lispy-format ()
   "Lispy format"
@@ -326,7 +326,8 @@ Add if not message the eros display"
 ;; a-z
 
 (lispy-define-key lispy-mnemonic-mode-map (kbd "a") 'hydra-lispy-ace/body)
-(lispy-define-key lispy-mnemonic-mode-map (kbd "e") 'hydra-lispy-eval/body)
+(lispy-define-key lispy-mnemonic-mode-map (kbd "e") 'mwb-lispy-eval)
+;; (lispy-define-key lispy-mnemonic-mode-map (kbd "e") 'hydra-lispy-eval/body)
 (lispy-define-key lispy-mnemonic-mode-map (kbd "g") 'hydra-lispy-goto/body)
 ;; (lispy-define-key lispy-mnemonic-mode-map (kbd "m") 'hydra-lispy-mark/body)
 (lispy-define-key lispy-mnemonic-mode-map (kbd "x") 'hydra-lispy-x/body)
@@ -362,6 +363,8 @@ Add if not message the eros display"
   :lighter " 💡"
   :keymap lispy-mnemonic-mode-map
   :after-hook (when lispy-mnemonic-restore-bindings
-                (lispy-mnemonic--restore-bindings)))
+                (lispy-mnemonic--restore-bindings))
+  (message "In lispy-mnemonic-mode")
+  )
 
 (provide 'lispy-mnemonic)

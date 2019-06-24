@@ -57,7 +57,7 @@ So hyper-A is now a mode hydra key and I have started defining a hydra on that,
    #+end_src
 
 ** Mac modifier key Bindings
-We have fn available so have it as hyper and then use Karabiner  (try iCue later) to map Caps Lock and Window key to hyper. Super is used sometimes so UI think is confusing and as noted sequence of keys (emacs key-chord and hydra) is better.
+We have fn available so have it as hyper and then use Karabiner  (try iCue later) to map Caps Lock and Window key to hyper. Super is used sometimes so I think is confusing and as noted sequence of keys (emacs key-chord and hydra) is better.
 I don't use the right hand modifier keys so not set separately.
 #+begin_src emacs-lisp
 	 (setq ns-function-modifier 'hyper)
@@ -69,37 +69,37 @@ Note that you can control what the screen displays A for Alt or ⌥. Emacs is no
 #+end_src
 *** Home/End/Paging
  #+begin_src emacs-lisp
-	 (define-key osx-key-mode-map [end] 'end-of-line )
-	 (define-key osx-key-mode-map [home] 'beginning-of-line )
-	 ;;(define-key osx-key-mode-map [C-end] 'end-of-buffer )
-	 (define-key osx-key-mode-map [C-home] 'beginning-of-buffer )
-	 (define-key osx-key-mode-map [C-kp-end] 'end-of-buffer )
-	 (define-key osx-key-mode-map [C-kp-home] 'beginning-of-buffer )
-	 (define-key osx-key-mode-map [S-kp-next] 'scroll-other-window-down )
-	 (define-key osx-key-mode-map [S-kp-prior] 'scroll-other-window )
+ (bind-key [end] 'end-of-line osx-key-mode-map)
+ (bind-key [home] 'beginning-of-line osx-key-mode-map)
+ ;;(define-key osx-key-mode-map [C-end] 'end-of-buffer )
+ (bind-key [C-home] 'beginning-of-buffer osx-key-mode-map)
+ (bind-key [C-kp-end] 'end-of-buffer osx-key-mode-map)
+ (bind-key [C-kp-home] 'beginning-of-buffer osx-key-mode-map)
+ (bind-key [S-kp-next] 'scroll-other-window-down osx-key-mode-map)
+ (bind-key [S-kp-prior] 'scroll-other-window osx-key-mode-map)
 
-	 ;; Apple
-	 ;; Aquamacs thinks the insert key is <help>
-	 (global-set-key [S-kp-delete] 'cua-cut-region)
-	 ;; Cocoa emacs does not recognise this key
-	 (global-set-key [S-kp-insert] 'cua-paste)
-	 (global-set-key [C-kp-insert] 'cua-copy-region)
+ ;; Apple
+ ;; Aquamacs thinks the insert key is <help>
+ (bind-key [S-kp-delete] 'cua-cut-region)
+ ;; Cocoa emacs does not recognise this key
+ (bind-key [S-kp-insert] 'cua-paste)
+ (bind-key [C-kp-insert] 'cua-copy-region)
 
-	 (global-set-key [end] 'end-of-line )
-	 (global-set-key [home] 'beginning-of-line )
+ (bind-key [end] 'end-of-line )
+ (bind-key [home] 'beginning-of-line )
 
-	 ;; Aqua macs defaults these to same
-	 ;(global-set-key [C-end] 'end-of-buffer )
-	 ;(global-set-key [C-home] 'beginning-of-buffer )
+ ;; Aqua macs defaults these to same
+ ;(bind-key [C-end] 'end-of-buffer )
+ ;(bind-key [C-home] 'beginning-of-buffer )
 
-	 ;; Unknown
-	 (global-set-key [C-kp-end] 'end-of-buffer )
-	 (global-set-key [C-kp-home] 'beginning-of-buffer )
-	 (global-set-key [S-kp-next] 'scroll-other-window-down )
-	 (global-set-key [S-kp-prior] 'scroll-other-window )
+ ;; Unknown
+ (bind-key [C-kp-end] 'end-of-buffer )
+ (bind-key [C-kp-home] 'beginning-of-buffer )
+ (bind-key [S-kp-next] 'scroll-other-window-down )
+ (bind-key [S-kp-prior] 'scroll-other-window )
 
-	 ;(global-set-key [s-left] 'scroll-left)
-	 ;(global-set-key [s-right] 'scroll-right)
+ ;(bind-key [s-left] 'scroll-left)
+ ;(bind-key [s-right] 'scroll-right)
 
 
 #+end_src
@@ -116,18 +116,18 @@ Normally when you are in a buffer you do ^x-^k to kill the current buffer but em
 #+end_src
 ** Deleting and return
   #+begin_src emacs-lisp
-  ;; (global-set-key [C-return] 'newline-and-indent )
-  ;;(global-set-key [?\M-left] 'scroll-left )
-  ;;(global-set-key [C-backspace] 'backward-delete-char-untabify )
+  ;; (bind-key [C-return] 'newline-and-indent )
+  ;;(bind-key [?\M-left] 'scroll-left )
+  ;;(bind-key [C-backspace] 'backward-delete-char-untabify )
   (bind-key "<kp-delete>" 'delete-char )
   (bind-key "<backspace>" 'backward-delete-char-untabify)
-  ;;(global-set-key [?\A-backspace] 'undo )
+  ;;(bind-key [?\A-backspace] 'undo )
   #+end_src
 ** Goto line
 Now these are very old
   #+begin_src emacs-lisp
-	 (global-set-key (kbd "M-g") 'goto-line)
-	 (global-set-key (kbd "A-u") 'revert-buffer )
+  (bind-key (kbd "M-g") 'goto-line)
+  (bind-key (kbd "A-u") 'revert-buffer )
 #+end_src
 ** Let search continue with arrows
 DISABLED
@@ -149,28 +149,28 @@ How does this work with ivy
 *** TODO Use with cmd-F
 Aquamacs also messes around with isearch and the two don't exactly match
 ** Function keys
-Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in emacs. Just discovered that GNU say what F1-4 should be and seemed good for keyboard macros not my F7. ALso I need to forget F4 for grep but then again I need to see what grep I want. But a hydra will be better allowing start/start/go and format as elisp.
+Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in emacs. Just discovered that GNU say what F1-4 should be and seemed good for keyboard macros not my F7.
 
 #+begin_src emacs-lisp
 
-	 (bind-key* [f2] 'er/expand-region) ; I never use 2 column
+(bind-key [f2] 'er/expand-region) ; I never use 2 column
 
-	 ;; (global-set-key [f3] 'gdb)
-	 ;; (global-set-key [f4] 'grep )
-	 (global-set-key [f5] 'compile )
-	 (global-set-key [S-f4] 'grep )
-	 ;; These are the VC6 ones - not used for 15 years so can learn new ones,
-	 ;; (global-set-key [kp-f3] 'gdb)
-	 ;; (global-set-key [f12] 'gud-step )
-	 ;; (global-set-key [f11] 'gud-next )
-	 ;; (global-set-key [C-f10] 'gud-cont )
-	 ;; (global-set-key [f10] 'gud-finish )
-	 ;; (global-set-key [C-f11] 'gud-break )
-	 ;; (global-set-key [C-f12] 'gud-tbreak )
+;; (bind-key [f3] 'gdb)
+;; (bind-key [f4] 'grep )
+(bind-key [f5] 'compile)
+(bind-key [S-f4] 'grep)
+;; These are the VC6 ones - not used for 15 years so can learn new ones,
+;; (bind-key [kp-f3] 'gdb)
+;; (bind-key [f12] 'gud-step )
+;; (bind-key [f11] 'gud-next )
+;; (bind-key [C-f10] 'gud-cont )
+;; (bind-key [f10] 'gud-finish )
+;; (bind-key [C-f11] 'gud-break )
+;; (bind-key [C-f12] 'gud-tbreak )
 
-	 ;;  More VC6 keys
-	 (global-set-key [S-f7]  'next-error )
-	 (global-set-key [S-f8] 'previous-error)
+;;  More VC6 keys
+(bind-key [S-f7] 'next-error)
+(bind-key [S-f8] 'previous-error)
 
 #+end_src
 ** Old bindings
@@ -221,6 +221,21 @@ And that works - I do need to edit the matcha files etc.
 		("Y" "Yank" org-yank)
 		("W" "Clone" org-clone-subtree-with-time-shift)]
 	   ])
+	#+end_src
+*** Hydra transpose
+	From hydra wiki
+	#+begin_src emacs-lisp
+(defhydra hydra-transpose (:color red)
+    "Transpose"
+     ("c" transpose-chars "characters")
+     ("w" transpose-words "words")
+     ("o" org-transpose-words "Org mode words")
+     ("l" transpose-lines "lines")
+     ("s" transpose-sentences "sentences")
+     ("e" org-transpose-elements "Org mode elements")
+     ("p" transpose-paragraphs "paragraphs")
+     ("t" org-table-transpose-table-at-point "Org mode table")
+     ("q" nil "cancel" :color blue))
 	#+end_src
 ** Kitchin hydras
    From [[https://kitchingroup.cheme.cmu.edu/blog/2015/09/28/A-cursor-goto-hydra-for-emacs/][Kitchin Group]] Original has helm and I add some from Hydra Wiki

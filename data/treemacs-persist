@@ -27,3 +27,5 @@
  - path :: /Users/mark/src/ThirdParty/aquamacs-emacs
 ** jerrypnz_major_hydra
  - path :: /Users/mark/src/ThirdParty/emacs-init/jerrypnz_major_hydra
+** oremacs
+ - path :: /Users/mark/src/ThirdParty/emacs-init/oremacs

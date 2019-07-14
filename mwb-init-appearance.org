@@ -37,7 +37,8 @@ Beacon-mode: flash the cursor when switching buffers or scrolling  the goal is t
   (add-hook 'beacon-before-blink-hook #'maybe-recenter-current-window)
   (dolist (mode '(comint-mode term-mode))
 	(push mode beacon-dont-blink-major-modes))
-  (beacon-mode))
+  (setq beacon-blink-duration 1)
+  (beacon-mode 1))
 #+end_src
 
 * Windows

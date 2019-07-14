@@ -8,9 +8,11 @@
 (setq gnus-use-adaptive-scoring t)
 (setq gnus-default-adaptive-score-alist
 	  '((gnus-unread-mark)
+		(gnus-read-mark (subject 1))
 		(gnus-ticked-mark (subject 10))
 		(gnus-killed-mark (subject -5))
-		(gnus-catchup-mark (subject -1))))
+		(gnus-catchup-mark (subject -1))
+		(gnus-spam-mark (from -50))))
 (setq user-full-name "Mark Bestley")
 (setq user-mail-address "gnus@bestley.co.uk")
 

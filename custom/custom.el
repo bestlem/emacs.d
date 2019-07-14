@@ -11,25 +11,26 @@
  '(auto-fill-function nil t)
  '(auto-word-wrap-default-function nil)
  '(backup-directory-alist (quote (("." . ".~"))))
+ '(canlock-password "8ac28fef8ff386f996bee4f20f8b3c40bd1829d4")
  '(cua-enable-cua-keys nil)
  '(custom-enabled-themes nil)
  '(delete-old-versions "keep them all")
  '(explicit-shell-file-name "/opt/local/bin/fish")
  '(fringe-indicator-alist
    (quote
-	((continuation nil nil)
-	 (truncation left-truncation right-truncation)
-	 (continuation left-continuation right-continuation)
-	 (overlay-arrow . right-triangle)
-	 (up . up-arrow)
-	 (down . down-arrow)
-	 (top top-left-angle top-right-angle)
-	 (bottom bottom-left-angle bottom-right-angle top-right-angle top-left-angle)
-	 (top-bottom left-bracket right-bracket top-right-angle top-left-angle)
-	 (empty-line . empty-line)
-	 (unknown . question-mark))) t)
+    ((continuation nil nil)
+     (truncation left-truncation right-truncation)
+     (continuation left-continuation right-continuation)
+     (overlay-arrow . right-triangle)
+     (up . up-arrow)
+     (down . down-arrow)
+     (top top-left-angle top-right-angle)
+     (bottom bottom-left-angle bottom-right-angle top-right-angle top-left-angle)
+     (top-bottom left-bracket right-bracket top-right-angle top-left-angle)
+     (empty-line . empty-line)
+     (unknown . question-mark))) t)
  '(gnus-directory "~/Library/Preferences/Aquamacs Emacs/News")
- '(gnus-group-sort-function (quote (gnus-group-sort-by-rank)) t)
+ '(gnus-group-sort-function (quote (gnus-group-sort-by-rank)))
  '(gnus-kill-save-kill-file t)
  '(gnus-score-mimic-keymap nil)
  '(gnus-server-browse-in-group-buffer t)
@@ -37,16 +38,17 @@
  '(gnus-verbose 10)
  '(hardhat-basename-protected-regexps
    (quote
-	("~\\'" "\\.lock\\'" "\\.ix\\'" "\\`test\\.out\\'" "-autoloads\\.el\\'" "\\`Desktop\\.ini\\'" "\\`META\\.yml\\'" "\\`MYMETA\\.yml\\'" "\\`TAGS\\'" "\\`Thumbs\\.db\\'" "\\`\\.dropbox\\'" "\\`\\.dropbox\\.cache\\'" "\\`\\.emacs\\.desktop\\'" "\\`\\.emacs\\.desktop\\.lock\\'" "\\.orig\\'" "\\.rej\\'" "\\.el\\.gz$")))
+    ("~\\'" "\\.lock\\'" "\\.ix\\'" "\\`test\\.out\\'" "-autoloads\\.el\\'" "\\`Desktop\\.ini\\'" "\\`META\\.yml\\'" "\\`MYMETA\\.yml\\'" "\\`TAGS\\'" "\\`Thumbs\\.db\\'" "\\`\\.dropbox\\'" "\\`\\.dropbox\\.cache\\'" "\\`\\.emacs\\.desktop\\'" "\\`\\.emacs\\.desktop\\.lock\\'" "\\.orig\\'" "\\.rej\\'" "\\.el\\.gz$")))
  '(hardhat-fullpath-protected-regexps
    (quote
-	("~/\\.emacs\\.d/elpa/" "~/\\.cpan/" "~/\\.cabal/" "~/perl5/perlbrew/" "~/\\.npm/" "~/\\.virtualenv/" "~/\\.virthualenv/" "~/\\.rvm/" "/[._]build/" "/\\.bzr/" "/\\.coverage/" "/\\.git/" "/\\.hg/" "/\\.rspec/" "/\\.sass-cache/" "/\\.svn/" "/_MTN/" "/_darcs/" "/CVS/" "/pm_to_blib/" "/RCS/" "/SCCS/" "/blib/" "/test_output/" "~/\\.emacs\\.d/\\.cask/" "~/\\.cask/" "/Applications/" "~/Library/Preferences/Aquamacs Emacs/Packages")))
+    ("~/\\.emacs\\.d/elpa/" "~/\\.cpan/" "~/\\.cabal/" "~/perl5/perlbrew/" "~/\\.npm/" "~/\\.virtualenv/" "~/\\.virthualenv/" "~/\\.rvm/" "/[._]build/" "/\\.bzr/" "/\\.coverage/" "/\\.git/" "/\\.hg/" "/\\.rspec/" "/\\.sass-cache/" "/\\.svn/" "/_MTN/" "/_darcs/" "/CVS/" "/pm_to_blib/" "/RCS/" "/SCCS/" "/blib/" "/test_output/" "~/\\.emacs\\.d/\\.cask/" "~/\\.cask/" "/Applications/" "~/Library/Preferences/Aquamacs Emacs/Packages")))
  '(ibuffer-expert t)
+ '(indent-tabs-mode nil)
  '(mail-setup-with-from t)
  '(make-backup-files t)
  '(minibuffer-prompt-properties
    (quote
-	(read-only t cursor-intangible t face minibuffer-prompt cursor-intangible t)))
+    (read-only t cursor-intangible t face minibuffer-prompt cursor-intangible t)))
  '(ns-right-alternate-modifier (quote super))
  '(ns-right-command-modifier (quote control))
  '(ns-tool-bar-display-mode (quote both) t)
@@ -57,13 +59,14 @@
  '(org-log-done (quote time))
  '(org-modules
    (quote
-	(org-crypt org-eww org-gnus org-id org-info org-irc org-mouse org-tempo)))
+    (org-crypt org-eww org-gnus org-id org-info org-irc org-mouse org-tempo)))
  '(org-src-ask-before-returning-to-edit-buffer nil)
  '(org-src-window-setup (quote current-window))
  '(org-todo-keywords (quote ((sequence "TODO" "|" "DONE" "LEAVE(@)"))))
  '(package-selected-packages
    (quote
-	(undo-tree deadgrep eros macrostep helpful ibuffer-vc counsel ivy-rich ivy-hydra org-indent xah-elisp-mode validate hardhat hydra projectile beacon ripgrep gitignore-mode gitconfig-mode nov manual matcha org use-package-hydra backup-each-save esup org-bullets sr-speedbar which-key company elmacro ws-butlerz helm elisp-format origami comment-dwim-2 smex discover-my-major json-navigator json-mode treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ranger dired-toggle expand-region aggressive-indent rainbow-delimiters gradle-mode groovy-imports groovy-mode ws-butler highlight-indent-guides diminish key-chord use-package)))
+    (lispy racket-mode cmake-mode swiper ivy transient cask-mode flycheck undo-tree deadgrep eros macrostep helpful ibuffer-vc counsel ivy-rich ivy-hydra org-indent xah-elisp-mode validate hardhat hydra projectile beacon ripgrep gitignore-mode gitconfig-mode nov manual matcha org use-package-hydra backup-each-save esup org-bullets sr-speedbar which-key company elmacro ws-butlerz helm elisp-format origami comment-dwim-2 smex discover-my-major json-navigator json-mode treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ranger dired-toggle expand-region aggressive-indent rainbow-delimiters gradle-mode groovy-imports groovy-mode ws-butler highlight-indent-guides diminish key-chord use-package)))
+ '(python-shell-interpreter "python")
  '(select-enable-clipboard t)
  '(tabbar-mode t nil (tabbar))
  '(text-mode-hook (quote (turn-on-flyspell set-word-wrap)))

@@ -59,9 +59,10 @@ Code block behaviour - but also see customization for appearance
  (setq org-src-fontify-natively t
 	   org-src-tab-acts-natively t
 	   org-confirm-babel-evaluate nil
-	   org-edit-src-content-indentation 0)
+	   org-edit-src-content-indentation 0
+	   org-startup-indented t)
  #+end_src
-q** Prettify
+** Prettify
 Make org mode look prettier. See also the customization
 Basically set to variable pitch font but note Aquamacs has a way (different of course to do this)
  #+begin_src emacs-lisp

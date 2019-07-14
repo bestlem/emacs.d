@@ -10,11 +10,11 @@ We might try a few but Emacs Lisp is the only one currently
 *** Make parentheses pretty
 Although that should be in prog mode
 	#+begin_src emacs-lisp
- (use-package
-   rainbow-delimiters
-   :ensure t
-   :delight rainbow-delimiters-mode
-   :hook (prog-mode . rainbow-delimiters-mode))
+    (use-package
+      rainbow-delimiters
+      :ensure t
+      :delight rainbow-delimiters-mode
+      :hook (prog-mode . rainbow-delimiters-mode))
 	#+end_src
 
 *** Add lisp interaction mode
@@ -29,24 +29,27 @@ Although that should be in prog mode
 **** Lispy
 	 Set compat so that the keys for these modes work.
 	 #+begin_src emacs-lisp
-	 (setq mwb-path (mwb-user-emacs-file "fork/lispy"))
-	 (use-package lispy
-	   :load-path  mwb-path
-	   :bind (:map lispy-mode-map
-				   ("<backspace>" . lispy-delete-backward)
-				   ("<kp-delete>" . lispy-delete))
-	   :config (setq  lispy-compat (quote (edebug macrostep))
-					  lispy-safe-paste t))
+     (setq mwb-path (mwb-user-emacs-file "fork/lispy"))
+     (use-package lispy
+       :ensure t
+       :bind (:map lispy-mode-map
+                   ("<backspace>" . lispy-delete-backward)
+                   ("<kp-delete>" . lispy-delete))
+       :config (setq lispy-compat (quote (edebug macrostep))
+                     lispy-safe-paste t))
 	 #+end_src
 **** and interaction hydra
 	 Changes are now made directly to the package which is only now here
 	 #+begin_src emacs-lisp
-	 (use-package lispy-mnemonic
-	   :hook ((emacs-lisp-mode lisp-interaction-mode racket-mode) . lispy-mnemonic-mode))
+     (use-package lispy-mnemonic
+       :hook ((emacs-lisp-mode
+               lisp-interaction-mode
+               racket-mode
+               racket-repl-mode) . lispy-mnemonic-mode))
 	 #+end_src
 *** Evaluation
 	Instead of displaying the results in a separate buffer (like the iElm does), The [[https://github.com/xiongtx/eros][EROS project]] displays the results temporarily  /in the buffer/ in an overlay.  No need to do anything special:
-However it does uit by remapping the eval keys so interferes with lispy so need to sort that out. PBest idea is make it one of the possible parts of lispy-mnemonic eval.
+However it does uit by remapping the eval keys so interferes with lispy so need to sort that out. PBest idea is make it one of the possible parts of lispy-mnemonic eval. lispy itself users cider to do this but I don't use clojurre.
 	#+BEGIN_SRC elisp
 	(use-package eros
 	  :ensure t
@@ -83,6 +86,12 @@ Add company backend from John Widgley
   (push 'company-elisp company-backends))
 
 (setq-local company-backend '(company-elisp))
+#+end_src
+*** Cask
+#+begin_src emacs-lisp
+(use-package cask-mode
+    :ensure t
+    :defer 5)
 #+end_src
 *** Keyboard Macros
 Well not really lisp but much can be converted to it
@@ -144,16 +153,18 @@ From [[https://github.com/abo-abo/hydra/wiki/Macro][Hydra wiki]] and [[https://g
 
 	  #+end_src
 ** Racket mode
+Tried hook for racket-unicode-input-method-enable but this conflicks with lispy.
    #+begin_src emacs-lisp
    (use-package racket-mode
-	 :ensure t
-	 :bind (:map racket-mode-map
-				 ("<f5>" . racket-run)
-				 :map racket-repl-mode-map
-				 ("<f5>" . racket-run))
-	 :config (setq racket-program "/Applications/Racket v7.3/bin/racket")
-	 :hook (racket-mode . (lambda ()
-							(setq indent-tabs-mode nil))))
+     :ensure t
+     :bind (:map racket-mode-map
+                 ("<f5>" . racket-run)
+                 ("<f1> <f1>" . racket-describe)
+                 :map racket-repl-mode-map
+                 ("<f5>" . racket-run))
+     :config (setq racket-program "/Applications/Racket v7.3/bin/racket")
+     (setq tab-always-indent 'complete
+           racket-smart-open-bracket-enable t))
    #+end_src
 *** matcha
 **** Set the mode
@@ -178,5 +189,6 @@ From [[https://github.com/abo-abo/hydra/wiki/Macro][Hydra wiki]] and [[https://g
 		 ;; ("i" "Instrument for debug" (lambda () (interactive) (racket-run 16)))
 		 ]
 		["Test"
-		 ("t" "Test" racket-test)]])
+		 ("t" "Test" racket-test)
+		 ("c" "Check syntax" racket-check-syntax-mode)]])
 	 #+end_src

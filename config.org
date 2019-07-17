@@ -61,12 +61,12 @@ first (unless you need fast starts)
  Aquamacs though is old Aquamacs 3.4 GNU Emacs 25.3.50.1 Emacs is now on 26 and has been for over a year but if we just need new packages then version is OK.
 
 **** user-emacs-directory
- This is the directory emacs reads and writers support files from. This is a mess as some are yours under version control and others are created on the fly. The ones on the fly can have the same name as packages and so stop loading (e.g. Tramp and Calc). There are several ways round this e.g. [[https://github.com/emacscollective/no-littering][No Littering]] Aquamacs does this by moving user-emacs-directory and putting the start dir on the load-path but also every possible directory so can't find it easily and hard codes paths and no use a directory so have to have our own const.
+ This is the directory emacs reads and writers support files from. This is a mess as some files are under version control and others are created on the fly. The ones on the fly can have the same name as packages and so stop loading (e.g. Tramp and Calc). There are several ways round this e.g. [[https://github.com/emacscollective/no-littering][No Littering]] Aquamacs does this by moving user-emacs-directory and putting the start dir on the load-path but also every possible directory so can't find it easily and hard codes paths and no use a directory so have to have our own const.
 
-  Aquamacs does doup a lot into its directory and maes use-emacs-directory always this even if the config files are elsewhere.
+  Aquamacs does drop a lot into its directory and makes use-emacs-directory always this even if the config files are elsewhere.
 
  Now text based things donm't like spaces (programmers are lazy) I want a structured text editor
- The issue here is when tangling the references to files are encoded to remove spaces so the directopry becomes ~/Library/Preferences/Aquamacs%20Emacs so riund tripping fails.
+ The issue here is when tangling the references to files are encoded to remove spaces so the directory becomes ~/Library/Preferences/Aquamacs%20Emacs so riund tripping fails.
 
 ***** DONE Need to move all init files into a path that has no spaces
 	  CLOSED: [2019-05-06 Mon 02:21]
@@ -75,12 +75,10 @@ first (unless you need fast starts)
 	  CLOSED: [2019-05-04 Sat 04:57]
 
 *** Load order
-Startup files aquamacs looks in are site-start.el then init.el and in a
-directory order not including ~/.emacs.d/
-Aquamacs loads Preferences.el I just make that load init.el so I could
-use a more standard emacs note that would need to deal with
-customizations as Aquamacs already has set that. Also see [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Init-File.html][Emacs manual
+Startup files aquamacs looks in are site-start.el then init.el and in a directory order not including ~/.emacs.d/ (actually it does include this)(Aquamacs loads Preferences.el I just make that load init.el so I could use a more standard emacs note that would need to deal with customizations as Aquamacs already has set that.
+Also see [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Init-File.html][Emacs manual
 on init-files]]
+
 From  aquamacs-get-custom-file-dotemacs-warning
 ;; %s
 ;; Warning: After loading this .emacs file, Aquamacs will also load
@@ -236,117 +234,10 @@ Although see starter kit where they run after init.
  (load custom-file 'noerror)
  #+end_src
 **** Packaging
-***** SSL  network connection
- Basically we need gnutls to connect via SSL as certificates have changed
- From https://github.com/paolodedios/dot-files/blob/1a7b4500c8ce07d0d473dbf714a2303f4d440ef5/.emacs.d/init.el
- Configure GnuTLS
-
- GnuTLS requires additional configuration on Emacs 25+ on macOS to prevent it
- from crashing when loading package repositories.
-
- @see https://github.com/davidswelt/aquamacs-emacs/issues/133
- @see https://github.com/davidswelt/aquamacs-emacs/issues/149
- @see https://www.reddit.com/r/emacs/comments/8sykl1/emacs_tls_defaults_are_downright_dangerous/
- @see https://www.gnu.org/software/emacs/manual/html_node/emacs-gnutls/Help-For-Users.html
-
-  @note starttls.el and tls.el have been moved to obsolete in the master branch
-  (what will be Emacs 27).
-	 #+begin_src emacs-lisp
-
-	 (require 'tls)
-
-	 (with-eval-after-load 'tls
-	   ;; Add the gnutls CA certificate file
-	   (push "/private/etc/ssl/cert.pem"                gnutls-trustfiles)
-	   ;; Add the curl CA certificate file from Macports
-	   (push "/opt/local/share/curl/curl-ca-bundle.crt" gnutls-trustfiles)
-	   )
-
-	 ;; Validate TLS certificates
-	 (setq gnutls-verify-error           t)
-
-	 ;; Increase prime bits on TLS keys
-	 (setq gnutls-min-prime-bits      2048)
-
-	 ;; Network Security Module settings
-	 ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Network-Security.html
-	 (setq network-security-level  'medium)
-	 (setq nsm-save-host-names           t)
-
-	 ;; Set tls-checktrust to `'ask` instead of `t` to allow user to determine
-	 ;; whether or not to trust a certificate.
-	 (setq tls-checktrust             'ask)
-
-	 ;; Update the tls-program invocation command line string
-	 ;;
-	 ;; Add `--priority` flag to  prevents the 3des certificate from being used.
-	 ;; Add `:%%PROFILE_MEDIUM` to ban intermediate SHA1 certificates.
-	 ;; Add `--ocsp` flag to require certificate revocation check
-	 ;;
-	 ;; Add `--insecure` flag as a temporary workaround for the expired certificate
-	 ;; on marmalade.org from hanging Aquamacs.
-	 (setq tls-program
-		   '("gnutls-cli -p %p --dh-bits=2048 --ocsp --x509cafile=%t --insecure \
-	 --priority='SECURE192:+SECURE128:-VERS-ALL:+VERS-TLS1.2:%%PROFILE_MEDIUM' %h"))
-	 #+end_src
-***** Package Manager
-	  Initialize packages immediately and not after init.el is read post startup
-	  Note that Aquuamacs set these repositories.
-	  Don't need package-initialize as use package does it all? per https://www.youtube.com/watch?v=2TSKxxYEbII but see this [[https://emacs.stackexchange.com/a/16832/9874][Emacs SE]]sayingn you might want to add a t parameter to that but then takes little tome so just put it in.
-	   #+begin_src emacs-lisp
-       (require 'package)
-       (setq package-user-dir
-             (expand-file-name
-              (format "elpa/%s/elpa"
-                      (concat emacs-version (when (getenv "MELPA_STABLE") "-stable"))) user-emacs-directory))
-       (setq package-enable-at-startup nil)
-        ;(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))'
-        ;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-        ;(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
-       (package-initialize)
-	   #+end_src
-***** Macros to set up how modes are set up
-****** use-package
- include use-package setup from <https://github.com/CachesToCaches/getting_started_with_use_package/blob/master/init-use-package.el>
- #+begin_src emacs-lisp
- (unless (package-installed-p 'use-package)
-   (package-refresh-contents)
-   (package-install 'use-package))
-
- ;; Enable use-package
- (eval-when-compile
-   (require 'use-package)
-   (if init-file-debug
-	   (setq use-package-verbose t
-			 use-package-expand-minimally nil
-			 use-package-compute-statistics t
-			 )
-	 (setq use-package-verbose nil
-		   use-package-expand-minimally t)))
- #+end_src
-****** Extras needed for loading
- These are used in the use-package macro
-******* Diminish
- Mark if the mode being setup should not show in the mode/status line.
-  #+begin_src emacs-lisp
-  (use-package diminish   :ensure t   :demand t)
-  #+end_src
-******* Hydra
-            Need key setting menus.
-            #+begin_src emacs-lisp
-			(use-package hydra :ensure t
-			  :config (setq hydra-look-for-remap t))
-			(use-package use-package-hydra :ensure t)
-            #+end_src
-******* Transient
-		Another key bind [[https://emacsair.me/2019/02/14/transient-0.1/][from the author of magit]]
-		#+begin_src emacs-lisp
-		(use-package transient
-		  :ensure t
-		  :config (transient-bind-q-to-quit))
-		#+end_src
-
-******* Matcha
+      #+begin_src emacs-lisp
+	  (mwb-init-load "mwb-packages")
+	  #+end_src
+**** Matcha
 		Menu bindings from [[https://github.com/jojojames/matcha][jojojames]] originally using hydra but changed to transient as I was editing so a fun day where it did not work. Transient programming interface seems nearer what I want but hydra I suspect has better functionality for my use e.g. can do commands and stay in hydra/
 		#+begin_src emacs-lisp
 		(use-package matcha
@@ -355,12 +246,20 @@ Although see starter kit where they run after init.
 		  (matcha-setup))
 		#+end_src
 
-******** Support code
+***** Support code
 		 Extra functions from JoJoJames
 		 #+begin_src emacs-lisp
 		 (use-package jp-projectile-utils)
 		 #+end_src
-******* Org Mode
+***** Transient
+		Another key bind [[https://emacsair.me/2019/02/14/transient-0.1/][from the author of magit]]
+		#+begin_src emacs-lisp
+		(use-package transient
+		  :ensure t
+		  :config (transient-bind-q-to-quit))
+		#+end_src
+
+**** Org Mode
 	  #+begin_src emacs-lisp
 	  (mwb-init-load "mwb-init-org-mode")
 	  #+end_src

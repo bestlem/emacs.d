@@ -4,7 +4,7 @@
 * Packaging
 Loading other code. Using emacs internal packagemenager and use-package.
 
-*** SSL  network connection
+* SSL  network connection
  Basically we need gnutls to connect via SSL as certificates have changed
  From https://github.com/paolodedios/dot-files/blob/1a7b4500c8ce07d0d473dbf714a2303f4d440ef5/.emacs.d/init.el
  Configure GnuTLS
@@ -57,7 +57,7 @@ Loading other code. Using emacs internal packagemenager and use-package.
 		   '("gnutls-cli -p %p --dh-bits=2048 --ocsp --x509cafile=%t --insecure \
 	 --priority='SECURE192:+SECURE128:-VERS-ALL:+VERS-TLS1.2:%%PROFILE_MEDIUM' %h"))
 	 #+end_src
-** Package Manager
+* Package Manager
 	  Initialize packages immediately and not after init.el is read post startup
 	  Note that Aquuamacs set these repositories.
 	  Don't need package-initialize as use package does it all? per https://www.youtube.com/watch?v=2TSKxxYEbII but see this [[https://emacs.stackexchange.com/a/16832/9874][Emacs SE]]sayingn you might want to add a t parameter to that but then takes little tome so just put it in.
@@ -73,8 +73,8 @@ Loading other code. Using emacs internal packagemenager and use-package.
         ;(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
        (package-initialize)
 	   #+end_src
-***** Macros to set up how modes are set up
-****** use-package
+* Macros to set up how modes are set up
+** use-package
  include use-package setup from <https://github.com/CachesToCaches/getting_started_with_use_package/blob/master/init-use-package.el>
  #+begin_src emacs-lisp
  (unless (package-installed-p 'use-package)
@@ -99,10 +99,10 @@ Loading other code. Using emacs internal packagemenager and use-package.
   #+begin_src emacs-lisp
   (use-package diminish   :ensure t   :demand t)
   #+end_src
-*** Hydra
-            Need key setting menus.
-            #+begin_src emacs-lisp
-			(use-package hydra :ensure t
-			  :config (setq hydra-look-for-remap t))
-			(use-package use-package-hydra :ensure t)
-            #+end_src
+** Hydra
+Need key setting menus.
+#+begin_src emacs-lisp
+(use-package hydra :ensure t
+  :config (setq hydra-look-for-remap t))
+(use-package use-package-hydra :ensure t)
+#+end_src

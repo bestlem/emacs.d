@@ -235,7 +235,7 @@ Although see starter kit where they run after init.
  #+end_src
 **** Packaging
       #+begin_src emacs-lisp
-	  (mwb-init-load "mwb-packages")
+	  (mwb-init-load "mwb-init-packaging")
 	  #+end_src
 **** Matcha
 		Menu bindings from [[https://github.com/jojojames/matcha][jojojames]] originally using hydra but changed to transient as I was editing so a fun day where it did not work. Transient programming interface seems nearer what I want but hydra I suspect has better functionality for my use e.g. can do commands and stay in hydra/
@@ -263,7 +263,6 @@ Although see starter kit where they run after init.
 	  #+begin_src emacs-lisp
 	  (mwb-init-load "mwb-init-org-mode")
 	  #+end_src
-
 
 **** Setting variables with a check on type
 Used when overriding a defcustom or defvar.

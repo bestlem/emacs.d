@@ -15,7 +15,6 @@ Think of editing dired
   :init (global-hardhat-mode)
   :config (validate-setq hardhat-mode-lighter "Ⓗ"))
 #+end_src
-**
 * Emacs internals
 *** Sessions
  Save registers et al but not the whole desktop

@@ -240,16 +240,17 @@ Although see starter kit where they run after init.
 **** Matcha
 		Menu bindings from [[https://github.com/jojojames/matcha][jojojames]] originally using hydra but changed to transient as I was editing so a fun day where it did not work. Transient programming interface seems nearer what I want but hydra I suspect has better functionality for my use e.g. can do commands and stay in hydra/
 		#+begin_src emacs-lisp
-		(use-package matcha
-		  :ensure nil
-		  :config
-		  (matcha-setup))
+        (use-package matcha
+          :mwb-load-path "fork/matcha"
+          :config
+          (matcha-setup))
 		#+end_src
 
 ***** Support code
 		 Extra functions from JoJoJames
 		 #+begin_src emacs-lisp
-		 (use-package jp-projectile-utils)
+         (use-package jp-projectile-utils
+           :mwb-load-path "site-lisp/jojojames")
 		 #+end_src
 ***** Transient
 		Another key bind [[https://emacsair.me/2019/02/14/transient-0.1/][from the author of magit]]

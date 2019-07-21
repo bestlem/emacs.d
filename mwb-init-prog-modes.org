@@ -218,6 +218,7 @@ This is the standard mode
 Not worth separating out.
 Note this is not the internal mode. It is from Emacs wiki as I like the interaction buffer better. Emacs' ones gave too many. Probably was my most use mode at work. As Java was Eclipse.
 Now I have no idea if it works
+*** TODO Need to put in use-package
 #+begin_src emacs-lisp
 (autoload 'sql "sql-mode"
   "Start the interactive SQL interpreter in a new buffer." t)

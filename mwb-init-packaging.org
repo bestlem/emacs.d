@@ -99,6 +99,42 @@ Loading other code. Using emacs internal packagemenager and use-package.
   #+begin_src emacs-lisp
   (use-package diminish   :ensure t   :demand t)
   #+end_src
+**
+*** Add load path
+The code is relative to this file and not user-emacs-directory
+So add :mwb-load-path as a new key to use-package
+#+begin_src emacs-lisp
+(defun use-package-normalize-mwb-paths (label arg &optional recursed)
+  "Normalize a list of filesystem paths."
+  (cond
+   ((and arg (or (use-package-non-nil-symbolp arg) (functionp arg)))
+    (let ((value (use-package-normalize-value label arg)))
+      (use-package-normalize-paths label (eval value))))
+   ((stringp arg)
+    (let ((path (if (file-name-absolute-p arg)
+                    arg
+                  (mwb-user-emacs-file arg))))
+      (list path)))
+   ((and (not recursed) (listp arg) (listp (cdr arg)))
+    (mapcar #'(lambda (x)
+                (car (use-package-normalize-paths label x t))) arg))
+   (t
+    (use-package-error
+     (concat label " wants a directory path, or list of paths")))))
+
+
+;;;; :mwb-load-path
+
+(defun use-package-normalize/:mwb-load-path (_name keyword args)
+  (use-package-as-one (symbol-name keyword) args
+    #'use-package-normalize-mwb-paths))
+
+(defun use-package-handler/:mwb-load-path (name _keyword arg rest state)
+  (use-package-handler/:load-path name _keyword arg rest state))
+
+(add-to-list 'use-package-keywords :mwb-load-path t)
+
+#+end_src
 ** Hydra
 Need key setting menus.
 #+begin_src emacs-lisp

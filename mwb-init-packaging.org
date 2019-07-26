@@ -99,7 +99,22 @@ Loading other code. Using emacs internal packagemenager and use-package.
   #+begin_src emacs-lisp
   (use-package diminish   :ensure t   :demand t)
   #+end_src
-**
+
+**** Improve elisp
+Add more functional methods.
+#+begin_src emacs-lisp
+(use-package dash
+  :ensure t)
+#+end_src
+
+**** Elisp code
+Need to alter list
+#+begin_src emacs-lisp
+(defun mwb-insert-before-element (find-element new-element list)
+  "Find FIND-ELEMENT and then insert NEW-ELEMENT before it in LIST."
+  (let ((i (-elem-index find-element list)))
+    (-insert-at i new-element list)))
+#+end_src
 *** Add load path
 The code is relative to this file and not user-emacs-directory
 So add :mwb-load-path as a new key to use-package
@@ -132,8 +147,8 @@ So add :mwb-load-path as a new key to use-package
 (defun use-package-handler/:mwb-load-path (name _keyword arg rest state)
   (use-package-handler/:load-path name _keyword arg rest state))
 
-(add-to-list 'use-package-keywords :mwb-load-path t)
-
+(setq use-package-keywords
+      (mwb-insert-before-element :load-path :mwb-load-path  use-package-keywords))
 #+end_src
 ** Hydra
 Need key setting menus.

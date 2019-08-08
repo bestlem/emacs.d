@@ -29,15 +29,21 @@ Although that should be in prog mode
 **** Lispy
 	 Set compat so that the keys for these modes work.
 	 #+begin_src emacs-lisp
-     (setq mwb-path (mwb-user-emacs-file "fork/lispy"))
      (use-package lispy
-       :ensure t
+       ;; :ensure t
+       :mwb-load-path "fork/lispy"
        :bind (:map lispy-mode-map
                    ("<backspace>" . lispy-delete-backward)
                    ("<kp-delete>" . lispy-delete))
        :config (setq lispy-compat (quote (edebug macrostep))
                      lispy-safe-paste t))
 	 #+end_src
+**** Get lispy test working
+It assumes things like clojure
+#+begin_src emacs-lisp
+(use-package clojure-mode
+    :ensure t)
+#+end_src
 **** and interaction hydra
 	 Changes are now made directly to the package which is only now here
 	 #+begin_src emacs-lisp

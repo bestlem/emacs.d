@@ -39,8 +39,10 @@ Well turn them off
 
 * Servers
   #+begin_src emacs-lisp
-  (setq gnus-select-method '(nntp "news.eternal-september.org"))
+  (setq auth-source-debug 'trivia)
+  (setq gnus-read-active-file 'some)
   (setq gnus-secondary-select-methods '((nntp "news.gmane.org")))
+  (setq gnus-select-method '(nntp "news.eternal-september.org"))
   #+end_src
 * Group buffer
 Put groups in order by my ranking (comes from NeXT news setup

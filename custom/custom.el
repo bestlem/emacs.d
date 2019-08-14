@@ -29,6 +29,7 @@
      (top-bottom left-bracket right-bracket top-right-angle top-left-angle)
      (empty-line . empty-line)
      (unknown . question-mark))) t)
+ '(fringe-mode (quote (16 . 0)) nil (fringe))
  '(gnus-directory "~/Library/Preferences/Aquamacs Emacs/News")
  '(gnus-group-sort-function (quote (gnus-group-sort-by-rank)))
  '(gnus-kill-save-kill-file t)

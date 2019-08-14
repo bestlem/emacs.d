@@ -60,13 +60,13 @@
  '(org-log-done (quote time))
  '(org-modules
    (quote
-    (org-crypt org-eww org-gnus org-id org-info org-irc org-mouse org-tempo)))
+    (org-crypt org-gnus org-id org-info org-irc org-mouse org-tempo)))
  '(org-src-ask-before-returning-to-edit-buffer nil)
  '(org-src-window-setup (quote current-window))
  '(org-todo-keywords (quote ((sequence "TODO" "|" "DONE" "LEAVE(@)"))))
  '(package-selected-packages
    (quote
-    (clojure-mode lispy racket-mode cmake-mode swiper ivy transient cask-mode flycheck undo-tree deadgrep eros macrostep helpful ibuffer-vc counsel ivy-rich ivy-hydra org-indent xah-elisp-mode validate hardhat hydra projectile beacon ripgrep gitignore-mode gitconfig-mode nov manual matcha org use-package-hydra backup-each-save esup org-bullets sr-speedbar which-key company elmacro ws-butlerz helm elisp-format origami comment-dwim-2 smex discover-my-major json-navigator json-mode treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ranger dired-toggle expand-region aggressive-indent rainbow-delimiters gradle-mode groovy-imports groovy-mode ws-butler highlight-indent-guides diminish key-chord use-package)))
+    (org clojure-mode lispy racket-mode cmake-mode swiper ivy transient cask-mode flycheck undo-tree deadgrep eros macrostep helpful ibuffer-vc counsel ivy-rich ivy-hydra org-indent xah-elisp-mode validate hardhat hydra projectile beacon ripgrep gitignore-mode gitconfig-mode nov manual matcha use-package-hydra backup-each-save esup org-bullets which-key company elmacro ws-butlerz helm elisp-format origami comment-dwim-2 smex discover-my-major json-mode treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ranger dired-toggle expand-region aggressive-indent rainbow-delimiters gradle-mode groovy-imports groovy-mode ws-butler highlight-indent-guides diminish key-chord use-package)))
  '(python-shell-interpreter "python")
  '(select-enable-clipboard t)
  '(tabbar-mode t nil (tabbar))
@@ -86,8 +86,8 @@
  '(highlight ((t (:background "black" :foreground "white"))))
  '(italic ((t (:underline t :slant italic))))
  '(org-block ((t (:inherit shadow :background "lemon chiffon" :foreground "black" :height 0.8 :family "Fira Code"))))
- '(org-block-begin-line ((t (:inherit org-meta-line :foreground "blue" :weight normal))))
- '(org-block-end-line ((t (:inherit org-block-begin-line :foreground "blue"))))
+ '(org-block-begin-line ((t (:inherit org-meta-line :foreground "blue" :weight normal))) t)
+ '(org-block-end-line ((t (:inherit org-block-begin-line :foreground "blue"))) t)
  '(org-document-title ((t (:inherit variable-pitch :weight regular :foreground "black" :font "Gill Sans" :height 2.0 :underline nil))))
  '(org-level-1 ((t (:inherit variable-pitch :weight regular :foreground "black" :font "Gill Sans" :height 1.75))))
  '(org-level-2 ((t (:inherit variable-pitch :weight regular :foreground "black" :font "Gill Sans" :height 1.5))))

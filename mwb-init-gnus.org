@@ -49,6 +49,30 @@ Put groups in order by my ranking (comes from NeXT news setup
   #+begin_src emacs-lisp
   (setq gnus-group-sort-function 'gnus-group-sort-by-rank)
   #+end_src
+Add a hydra https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/gnus-guide-en.org
+#+begin_src emacs-lisp
+(use-package gnus-group
+  :bind (:map gnus-group-mode-map
+              ("H-a" . hydra-gnus-group/body))
+  :hydra (hydra-gnus-group (:color blue)
+                           "
+[_A_] Remote groups (A A) [_g_] Refresh          [_S_] Sort by level
+[_L_] Local groups        [_\\^_] List servers   [_s_] Set level
+[_c_] Mark all read       [_m_] Compose new mail
+[_G_] Search mails (G G)  [_#_] Mark mail
+"
+                           ("A" gnus-group-list-active)
+                           ("L" gnus-group-list-all-groups)
+                           ("c" gnus-topic-catchup-articles)
+                           ("G" dianyou-group-make-nnir-group)
+                           ("g" gnus-group-get-new-news)
+                           ("^" gnus-group-enter-server-mode)
+                           ("m" gnus-group-new-mail)
+                           ("#" gnus-topic-mark-topic)
+                           ("S" gnus-group-sort-by-level)
+                           ("s" (lambda () (interactive) (gnus-group-set-current-level)))
+                           ("q" nil)))
+#+end_src
 * Summary buffer
 ** Threads
    Collapse threads when entering a group

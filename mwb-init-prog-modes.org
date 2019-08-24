@@ -23,7 +23,7 @@ Look at smart-tabs-insinuate
 	:hook (prog-mode . highlight-indent-guides-mode))
  #+end_src
 *** Aggressive indent
- Indent as you type. Only for emacs lisp at the moment
+ Indent as you type. Only for emacs lisp or racket at the moment
  #+begin_src emacs-lisp
  (use-package
    aggressive-indent
@@ -94,50 +94,6 @@ This also takes time to load. Need to sort out config entries and gradele-mode n
 		 gradle-use-gradlew t)
    (gradle-mode))
  #+end_src
-**** TODO Flymake
-  Need to start from scratch. I do have it for emacs but as code in org mode not an elisp file a bit of a waste
-  #+begin_src emacs-lisp
-
-	;;;; flymake - syntax checking
-	(use-package flymake
-	  :disabled
-	  :diminish
-	  :hook ((sh-mode json-mode nxml-mode python-mode emacs-lisp-mode lisp-interaction-mode) . flymake-mode-on)
-	  :config (flymake-mode-on))
-  #+end_src
-**** Flycheck
-	 I have seen comments that for emacs <26 this is definitely better
-	 #+begin_src emacs-lisp
-	 (use-package flycheck
-	   :ensure t
-	   :defer 2
-	   :diminish
-	   :init (global-flycheck-mode)
-	   :custom
-	   (flycheck-display-errors-delay 0.3))
-(defhydra hydra-flycheck (:color blue)
-  "
-  ^
-  ^Flycheck^          ^Errors^            ^Checker^
-  ^────────^──────────^──────^────────────^───────^─────
-  _q_ quit            _<_ previous        _?_ describe
-  _M_ manual          _>_ next            _d_ disable
-  _v_ verify setup    _f_ check           _m_ mode
-  ^^                  _l_ list            _s_ select
-  ^^                  ^^                  ^^
-  "
-  ("q" nil)
-  ("<" flycheck-previous-error :color pink)
-  (">" flycheck-next-error :color pink)
-  ("?" flycheck-describe-checker)
-  ("M" flycheck-manual)
-  ("d" flycheck-disable-checker)
-  ("f" flycheck-buffer)
-  ("l" flycheck-list-errors)
-  ("m" flycheck-mode)
-  ("s" flycheck-select-checker)
-  ("v" flycheck-verify-setup))
-	 #+end_src
 *** make
 	#+begin_src emacs-lisp
 	(use-package make-mode
@@ -161,6 +117,60 @@ This also takes time to load. Need to sort out config entries and gradele-mode n
 	  :config
 	  (setq cmake-tab-width 2))
 	#+end_src
+** Report on the fly
+*** TODO Flymake
+  Need to start from scratch. I do have it for emacs but as code in org mode not an elisp file a bit of a waste
+  #+begin_src emacs-lisp
+
+	;;;; flymake - syntax checking
+	(use-package flymake
+	  :disabled
+	  :diminish
+	  :hook ((sh-mode json-mode nxml-mode python-mode emacs-lisp-mode lisp-interaction-mode) . flymake-mode-on)
+	  :config (flymake-mode-on))
+  #+end_src
+*** Flycheck
+	 I have seen comments that for emacs <26 this is definitely better
+	 #+begin_src emacs-lisp
+     (use-package flycheck
+       :ensure t
+       :defer 2
+       :diminish
+       ;; :init (global-flycheck-mode) ; for all
+
+       ;; I don't like `global-flycheck-mode', some mode, such as elisp mode don't need.
+       :hook (racket-mode . flycheck-mode )
+
+       :custom
+       (flycheck-display-errors-delay 0.3))
+     #+end_src
+**** Hydra to control
+#+begin_src emacs-lisp
+(defhydra hydra-flycheck (:color blue)
+  "
+  ^
+  ^Flycheck^          ^Errors^            ^Checker^
+  ^────────^──────────^──────^────────────^───────^─────
+  _q_ quit            _<_ previous        _?_ describe
+  _M_ manual          _>_ next            _d_ disable
+  _v_ verify setup    _f_ check           _m_ mode
+  ^^                  _l_ list            _s_ select
+  ^^                  ^^                  ^^
+  "
+  ("q" nil)
+  ("<" flycheck-previous-error :color pink)
+  (">" flycheck-next-error :color pink)
+  ("?" flycheck-describe-checker)
+  ("M" flycheck-manual)
+  ("d" flycheck-disable-checker)
+  ("f" flycheck-buffer)
+  ("l" flycheck-list-errors)
+  ("m" flycheck-mode)
+  ("s" flycheck-select-checker)
+  ("v" flycheck-verify-setup))
+
+(bind-key "H-c" 'hydra-flycheck/body)
+	 #+end_src
 ** Git
 #+begin_src emacs-lisp
 (mwb-init-load "mwb-init-prog-modes-git")
@@ -216,7 +226,7 @@ This is the standard mode
   #+end_src
 ** SQL
 Not worth separating out.
-Note this is not the internal mode. It is from Emacs wiki as I like the interaction buffer better. Emacs' ones gave too many. Probably was my most use mode at work. As Java was Eclipse.
+Note this is not the internal mode. It is from Emacs wiki as I like the interaction buffer better. Emacs' ones gave too many. Probably was my most used mode at work. As Java was Eclipse.
 Now I have no idea if it works
 *** TODO Need to put in use-package
 #+begin_src emacs-lisp

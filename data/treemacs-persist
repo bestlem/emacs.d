@@ -1,34 +1,34 @@
 * Default Workspace
 ** Aquamacs Emacs My init .emacs.d
- - path :: /Users/mark/.emacs.d
+ - path :: ~/.emacs.d
 ** Org
- - path :: /Users/mark/SyncServices/Dropbox/Docs/org
+ - path :: ~/SyncServices/Dropbox/Docs/org
 ** Aquamacs
  - path :: /Applications/Aquamacs.app/Contents/Resources/lisp/aquamacs
 **  howardabrams
- - path :: /Users/mark/src/ThirdParty/emacs-init/howardabrams
+ - path :: ~/src/ThirdParty/emacs-init/howardabrams
 ** emacs-leuven
- - path :: /Users/mark/src/ThirdParty/emacs-init/emacs-leuven
+ - path :: ~/src/ThirdParty/emacs-init/emacs-leuven
 ** emacs24-starter-kit
- - path :: /Users/mark/src/ThirdParty/emacs-init/emacs24-starter-kit
+ - path :: ~/src/ThirdParty/emacs-init/emacs24-starter-kit
 ** odds
- - path :: /Users/mark/src/ThirdParty/emacs-init/odds
+ - path :: ~/src/ThirdParty/emacs-init/odds
 ** jwiegley
- - path :: /Users/mark/src/ThirdParty/emacs-init/jwiegley
+ - path :: ~/src/ThirdParty/emacs-init/jwiegley
 ** zzamboni
- - path :: /Users/mark/src/ThirdParty/emacs-init/zzamboni
+ - path :: ~/src/ThirdParty/emacs-init/zzamboni
 ** castlemacs
- - path :: /Users/mark/src/ThirdParty/emacs-init/castlemacs
+ - path :: ~/src/ThirdParty/emacs-init/castlemacs
 ** jojojames
- - path :: /Users/mark/src/ThirdParty/emacs-init/jojojames
+ - path :: ~/src/ThirdParty/emacs-init/jojojames
 ** dotfiles
- - path :: /Users/mark/src/env/dotfiles
+ - path :: ~/src/env/dotfiles
 ** aquamacs-emacs
- - path :: /Users/mark/src/ThirdParty/aquamacs-emacs
+ - path :: ~/src/ThirdParty/aquamacs-emacs
 ** jerrypnz_major_hydra
- - path :: /Users/mark/src/ThirdParty/emacs-init/jerrypnz_major_hydra
+ - path :: ~/src/ThirdParty/emacs-init/jerrypnz_major_hydra
 ** oremacs
- - path :: /Users/mark/src/ThirdParty/emacs-init/oremacs
+ - path :: ~/src/ThirdParty/emacs-init/oremacs
 * Racket
 ** Realm
- - path :: /Users/mark/src/racket/realm
+ - path :: ~/src/racket/realm

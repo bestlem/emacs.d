@@ -64,8 +64,7 @@
 ;;
 ;; If you:
 ;;
-;; - would like to start learning Lispy
-;; - have played around with Lispy but not mastered it
+;; - would like to start learning Lispy;; - have played around with Lispy but not mastered it
 ;; - haven't burned Vim-style key bindings into your muscle memory
 ;; - find that mnemonics make it easier to learn and remember new
 ;;   commands and key bindings
@@ -435,9 +434,9 @@ paredit is loaded, so check for this function's existence using
 
 ;; A-Z
 
-;; (lispy-define-key lispy-mnemonic-mode-map (kbd "F") 'hydra-lispy-format/body)
-;; (lispy-define-key lispy-mnemonic-mode-map (kbd "M") 'hydra-lispy-move/body)
-;; (lispy-define-key lispy-mnemonic-mode-map (kbd "O") 'hydra-lispy-outline/body)
+(lispy-define-key lispy-mnemonic-mode-map (kbd "F") 'hydra-lispy-format/body)
+(lispy-define-key lispy-mnemonic-mode-map (kbd "M") 'hydra-lispy-move/body)
+(lispy-define-key lispy-mnemonic-mode-map (kbd "O") 'hydra-lispy-outline/body)
 (lispy-define-key lispy-mnemonic-mode-map (kbd "R") 'hydra-lispy-raise/body)
 (lispy-define-key lispy-mnemonic-mode-map (kbd "D") 'lispy-describe)
 (lispy-define-key lispy-mnemonic-mode-map (kbd "E") 'lispy-ediff-regions)

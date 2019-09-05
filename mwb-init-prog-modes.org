@@ -44,6 +44,45 @@ Look at smart-tabs-insinuate
 	#+begin_src emacs-lisp
 	(add-hook 'prog-mode-hook (lambda () (imenu-add-to-menubar "Imenu")))
 	#+end_src
+*** Hide show
+Let us set it up
+
+#+begin_src emacs-lisp
+(use-package hideshow
+  :hook (prog-mode . hs-minor-mode))
+#+end_src
+Put markers in the fringe
+#+begin_src emacs-lisp
+(use-package hideshowvis
+  :mwb-load-path "site-lisp/hideshowvis"
+  :hook (prog-mode . hideshowvis-enable)
+  :config (hideshowvis-symbols))
+#+end_src
+
+Use a hydra so don't need the odd keybindings
+#+begin_src emacs-lisp
+(defhydra hydra-hs (:idle 1.0)
+  "
+Hide^^            ^Show^            ^Toggle^    ^Navigation^
+----------------------------------------------------------------
+_h_ hide all      _s_ show all      _t_oggle    _n_ext line
+_d_ hide block    _a_ show block              _p_revious line
+_l_ hide level
+
+_SPC_ cancel
+"
+  ("s" hs-show-all)
+  ("h" hs-hide-all)
+  ("a" hs-show-block)
+  ("d" hs-hide-block)
+  ("t" hs-toggle-hiding)
+  ("l" hs-hide-level)
+  ("n" forward-line)
+  ("p" (forward-line -1))
+  ("SPC" nil))
+
+(bind-key "H-h" 'hydra-hs/body)
+#+end_src
 ** Build systems
 *** Gradle
  As Emacs is bad for java my java setup is now just gradle so that should be a generic build when I rename.

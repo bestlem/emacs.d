@@ -37,9 +37,10 @@ Fails as I think in the middle of changes. Error is not loading pythonic
 	)
   #+end_src
 * Xonsh
-  Try a setup to edit .xsh as xonsh mode separate from python. Nothing really is done but adds recognition as per [[https://github.com/xonsh/xonsh/issues/1074#issuecomment-377048925][xonsh issue]]
+There is now a xonsh mode
   #+begin_src emacs-lisp
-  (define-derived-mode xonsh-mode python-mode "Xonsh Mode"
-	"A mode for .xsh files.")
-  (add-to-list 'auto-mode-alist '("\\.xsh\\'" . xonsh-mode))
+  (use-package xonsh-mode
+    :mwb-load-path "fork/xonsh-mode"
+    :mode "\\.xsh\\'"
+    )
   #+end_src

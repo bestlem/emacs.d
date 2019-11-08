@@ -54,6 +54,7 @@ Let us set it up
 Put markers in the fringe
 #+begin_src emacs-lisp
 (use-package hideshowvis
+  :disabled
   :mwb-load-path "site-lisp/hideshowvis"
   :hook (prog-mode . hideshowvis-enable)
   :config (hideshowvis-symbols))

@@ -30,5 +30,5 @@
 ** oremacs
  - path :: ~/src/ThirdParty/emacs-init/oremacs
 * Racket
-** Realm
- - path :: ~/src/racket/realm
+** realm
+ - path :: ~/src/Racket/realm

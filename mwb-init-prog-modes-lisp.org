@@ -185,17 +185,20 @@ Tried hook for racket-unicode-input-method-enable but this conflicks with lispy.
 **** Mode matcha
 	 #+begin_src emacs-lisp
 
-	 (define-transient-command matcha-racket-mode
-	   "Mode"
-	   [["Run"
-		 ("b" "run" racket-run)
-		 ("B" "run and REPL" racket-run-and-switch-to-repl)
-		 ("r"  "Region to REPL" racket-send-region)
+     (define-transient-command matcha-racket-mode
+       "Mode"
+       [["Run"
+         ("b" "run" racket-run)
+         ("B" "run and REPL" racket-run-and-switch-to-repl)
+         ("r"  "Region to REPL" racket-send-region)
 
-		 ;; ("R" "Run with errortrace" (lambda () (interactive) (racket-run 4)))
-		 ;; ("i" "Instrument for debug" (lambda () (interactive) (racket-run 16)))
-		 ]
-		["Test"
-		 ("t" "Test" racket-test)
-		 ("c" "Check syntax" racket-check-syntax-mode)]])
+         ;; ("R" "Run with errortrace" (lambda () (interactive) (racket-run 4)))
+         ;; ("i" "Instrument for debug" (lambda () (interactive) (racket-run 16)))
+         ]
+        ["Test"
+         ("t" "Test" racket-test)
+         ("c" "Check syntax" racket-check-syntax-mode)]
+        ["Fold"
+         ("h" "Hide tests" racket-fold-all-tests)
+         ("s" "Show tests" racket-unfold-all-tests)]])
 	 #+end_src

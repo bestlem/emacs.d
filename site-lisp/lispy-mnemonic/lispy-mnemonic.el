@@ -378,16 +378,17 @@ When `paredit-mode' is active, use its functions (such as
 paredit is loaded, so check for this function's existence using
 `fboundp'."
 	   (let ((lispy-active (and (boundp 'lispy-mode) lispy-mode)))
-		 (cond ((not paredit-active) (racket--self-insert ch))
-			   ((eq ch ?\()          (lispt-parens))
-			   ((eq ch ?\[)          (lispy-brackets))
-			   ((eq ch ?\{)          (lispy-braces))
-			   (t                    (racket--self-insert ch)))))))
+		 (cond ;; ((not paredit-active) (racket--self-insert ch))
+          ((eq ch ?\()          (lispy-parens))
+          ((eq ch ?\[)          (lispy-brackets))
+          ((eq ch ?\{)          (lispy-braces))
+          (t                    (racket--self-insert ch)))))))
 
-(if (eq major-mode 'racket-mode)
-	(define-key lispy-mnemonic-mode-map (kbd "[") 'lispy-brackets)
-  (define-key lispy-mnemonic-mode-map (kbd "[") 'racket-lispy-smart-open-bracket))
+;; (if (eq major-mode 'racket-mode)
+;;     (define-key lispy-mnemonic-mode-map (kbd "[") 'racket-lispy-smart-open-bracket)
+;;   (define-key lispy-mnemonic-mode-map (kbd "[") 'lispy-brackets))
 
+(define-key lispy-mnemonic-mode-map (kbd "[") 'lispy-brackets)
 (define-key lispy-mnemonic-mode-map (kbd "H-d") 'hydra-lispy-debug/body)
 (define-key lispy-mnemonic-mode-map (kbd "H-m") 'hydra-lispy-mark/body)
 (define-key lispy-mnemonic-mode-map (kbd "H-x") 'hydra-lispy-x/body)

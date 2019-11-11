@@ -237,6 +237,18 @@ Although see starter kit where they run after init.
       #+begin_src emacs-lisp
 	  (mwb-init-load "mwb-init-packaging")
 	  #+end_src
+**** Startup screen
+    #+begin_src emacs-lisp
+    (use-package dashboard
+      :ensure t
+      :config
+      (dashboard-setup-startup-hook)
+      (setq dashboard-items '((recents . 5)
+                              (bookmarks . 5)
+                              (projects . 5)
+                              (agenda . 5)
+                              (registers . 5))))
+    #+end_src
 **** Matcha
 		Menu bindings from [[https://github.com/jojojames/matcha][jojojames]] originally using hydra but changed to transient as I was editing so a fun day where it did not work. Transient programming interface seems nearer what I want but hydra I suspect has better functionality for my use e.g. can do commands and stay in hydra/
 		#+begin_src emacs-lisp

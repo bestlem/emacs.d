@@ -159,20 +159,21 @@ From [[https://github.com/abo-abo/hydra/wiki/Macro][Hydra wiki]] and [[https://g
 	  (bind-key "<f3>" 'hydra-macro/body)
 
 	  #+end_src
-** Racket mode
-Tried hook for racket-unicode-input-method-enable but this conflicks with lispy.
-   #+begin_src emacs-lisp
-   (use-package racket-mode
-     :ensure t
-     :bind (:map racket-mode-map
-                 ("<f5>" . racket-run)
-                 ("<f1> <f1>" . racket-describe)
-                 :map racket-repl-mode-map
-                 ("<f5>" . racket-run))
-     :config (setq racket-program "/Applications/Racket v7.3/bin/racket")
-     (setq tab-always-indent 'complete
-           racket-smart-open-bracket-enable t))
-   #+end_src
+** Racket
+*** Racket mode
+    Tried hook for racket-unicode-input-method-enable but this conflicks with lispy.
+       #+begin_src emacs-lisp
+       (use-package racket-mode
+         :ensure t
+         :bind (:map racket-mode-map
+                     ("<f5>" . racket-run)
+                     ("<f1> <f1>" . racket-describe)
+                     :map racket-repl-mode-map
+                     ("<f5>" . racket-run))
+         :config (setq racket-program "/Applications/Racket v7.3/bin/racket")
+         (setq tab-always-indent 'complete
+               racket-smart-open-bracket-enable t))
+      #+end_src
 *** matcha
 **** Set the mode
 	 #+begin_src emacs-lisp

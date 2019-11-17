@@ -180,46 +180,48 @@ This is the visual
    :defer t
    :init
    (with-eval-after-load 'winum
-	 (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
+     (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
    :config
    (progn
-	 (setq hydra-key-regex "\\[\\|]\\|[-\\[:alnum:] ~.,;:/|?<>={}*+#%@!&^⇧⌘⌥↑↓←→⌫⌦⏎'`()\"$]+?") ; add Mac key symbols
+     (setq hydra-key-regex "\\[\\|]\\|[-\\[:alnum:] ~.,;:/|?<>={}*+#%@!&^⇧⌘⌥↑↓←→⌫⌦⏎'`()\"$]+?") ; add Mac key symbols
 
-	 (setq treemacs-silent-refresh t
-		   treemacs-persist-file (mwb-user-emacs-file "data/treemacs-persist"))
-	 (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?)
-	 ;; The default width and height of the icons is 22 pixels. If you are
-	 ;; using a Hi-DPI display, uncomment this to double the icon size.
-	 ;;(treemacs-resize-icons 44)
+     (setq treemacs-silent-refresh t
+           treemacs-persist-file (mwb-user-emacs-file "data/treemacs-persist"))
+     (with-eval-after-load 'treemacs
+       (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?))
 
-	 (treemacs-follow-mode t)
-	 (treemacs-filewatch-mode t)
-	 (treemacs-fringe-indicator-mode t)
-	 (pcase (cons (not (null (executable-find "git")))
-				  (not (null (executable-find "python3"))))
-	   (`(t . t)
-		(treemacs-git-mode 'deferred))
-	   (`(t . _)
-		(treemacs-git-mode 'simple))))
+     ;; The default width and height of the icons is 22 pixels. If you are
+     ;; using a Hi-DPI display, uncomment this to double the icon size.
+     ;;(treemacs-resize-icons 44)
+
+     (treemacs-follow-mode t)
+     (treemacs-filewatch-mode t)
+     (treemacs-fringe-indicator-mode t)
+     (pcase (cons (not (null (executable-find "git")))
+                  (not (null treemacs-python-executable )))
+       (`(t . t)
+        (treemacs-git-mode 'deferred))
+       (`(t . _)
+        (treemacs-git-mode 'simple))))
    :hydra (mwb/hydra-treemacs-mode
-		   (:color teal)
-		   ("p" matcha-projectile/body "Projectile")
-		   ("c" treemacs-add-project-to-workspace "Create Project")
-		   ("d" treemacs-remove-project-from-workspace "Delete Project")
-		   ("q" nil "Quit"))
+           (:color teal)
+           ("p" matcha-projectile/body "Projectile")
+           ("c" treemacs-add-project-to-workspace "Create Project")
+           ("d" treemacs-remove-project-from-workspace "Delete Project")
+           ("q" nil "Quit"))
    (mwb/hydra-treemacs-global
-	(:color blue)
-	("t" treemacs "Treemacs toggle" :column "Project")
-	("p" mwb/hydra-treemacs-mode/body "Projectile")
-	("0" treemacs-select-window "Select" :column "Other Window")
-	("1" treemacs-delete-other-windows "Delete")
-	("B" treemacs-bookmark "Bookmark" :column "Rest")
-	("f" treemacs-find-file "Find File")
-	("T" treemacs-find-tag "Find Tag"))
+    (:color blue)
+    ("t" treemacs "Treemacs toggle" :column "Project")
+    ("p" mwb/hydra-treemacs-mode/body "Projectile")
+    ("0" treemacs-select-window "Select" :column "Other Window")
+    ("1" treemacs-delete-other-windows "Delete")
+    ("B" treemacs-bookmark "Bookmark" :column "Rest")
+    ("f" treemacs-find-file "Find File")
+    ("T" treemacs-find-tag "Find Tag"))
    :bind (("H-t" . mwb/hydra-treemacs-global/body)
-		  :map treemacs-mode-map
-		  ("<mouse-5>" . treemacs-rightclick-menu)
-		  ("<mouse-4>" . treemacs-rightclick-menu)))
+          :map treemacs-mode-map
+          ("<mouse-5>" . treemacs-rightclick-menu)
+          ("<mouse-4>" . treemacs-rightclick-menu)))
 
  (use-package treemacs-projectile
    :after treemacs projectile
@@ -234,7 +236,5 @@ This is the visual
    :after treemacs magit
    :ensure t)
 
- ;; treemacs helpful hydra isn't as key-display can't deal with the modifier keys
- ;; Plus ^p is not a good key for a modeumacs enhances it)
 
   #+end_src

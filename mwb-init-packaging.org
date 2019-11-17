@@ -115,6 +115,13 @@ Need to alter list
   (let ((i (-elem-index find-element list)))
     (-insert-at i new-element list)))
 #+end_src
+
+**** Key chords
+#+begin_src emacs-lisp
+(use-package use-package-chords
+  :ensure t
+  :config (key-chord-mode 1))
+#+end_src
 *** Add load path
 The code is relative to this file and not user-emacs-directory
 So add :mwb-load-path as a new key to use-package

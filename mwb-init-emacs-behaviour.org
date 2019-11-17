@@ -88,8 +88,15 @@ Let's use [[https://github.com/Wilfred/helpful][Helpful]]
   ("<f1> F" . helpful-function)
   ("<f1> ." . helpful-at-point))
 #+end_src
+* Key Chord
+#+begin_src emacs-lisp
+(use-package key-chord
+  :ensure t
+  :config (key-chord-mode 1))
+#+end_src
 * Delete if selected
-  Also see [[https://www.emacswiki.org/emacs/DeleteSelectionMode][EmacsWiki]] (and my old init) but cua should do this. Possibly because minor modes are toggles
+Also see [[https://www.emacswiki.org/emacs/DeleteSelectionMode][EmacsWiki]] (and my old init) but cua should do this. Possibly because minor modes are toggles
+Issue is lispy removes this as lispy is vi based.
   #+begin_src emacs-lisp
   (delete-selection-mode 1)
   #+end_src

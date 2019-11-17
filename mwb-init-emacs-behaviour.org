@@ -132,6 +132,18 @@ Single Capitals as you type."
 #+end_src
 ** TODO Misspelling correction
 See http://endlessparentheses.com/ispell-and-abbrev-the-perfect-auto-correct.html but I need to deal with Aquamacs spelling as well
+* Navigation
+** Expand region
+#+begin_src emacs-lisp
+;; Better selection
+(use-package expand-region
+  :ensure t
+  :bind ("C-=" . er/expand-region)
+  ("<f2>" . er/expand-region)
+  ("C-<f2>". er/contract-region)
+  )
+
+#+end_src
 * TODO General old stuff
 #+begin_src emacs-lisp
 (setq find-file-visit-truename t)	; visit a file under its true name
@@ -178,10 +190,7 @@ See http://endlessparentheses.com/ispell-and-abbrev-the-perfect-auto-correct.htm
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
 
-;; Better selection
-(use-package expand-region
-  :ensure t
-  :bind ("C-=" . er/expand-region))
+
 
 ;;  Sentences do not end with two spaces
 (setq sentence-end-double-space nil)
@@ -393,3 +402,16 @@ Improve many emacs functions
 	(warn "\nWARNING: Could not find the ripgrep executable. It "
 		  "is recommended you install ripgrep.")))
 	 #+end_src
+
+* Buffer switch
+Switch to last buffer on one key. From https://emacsredux.com/blog/2013/04/28/switch-to-previous-buffer/
+#+begin_src emacs-lisp
+(defun er-switch-to-previous-buffer ()
+  "Switch to previously open buffer.
+Repeated invocations toggle between the two most recently open buffers."
+  (interactive)
+  (switch-to-buffer (other-buffer (current-buffer) 1)))
+
+(key-chord-define-global "zz" #'er-switch-to-previous-buffer)
+
+#+end_src

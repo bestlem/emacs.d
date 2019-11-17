@@ -218,8 +218,8 @@ Although see starter kit where they run after init.
       #+begin_src emacs-lisp
       (add-hook 'after-init-hook
                 (lambda () (setq debug-on-error t)))
-      (setq debug-on-error t)
-      (setq debug-on-quit t)
+      (setq debug-on-error 0)
+      (setq debug-on-quit 0)
      #+end_src
 ***** Use source where newer
  This variable tells Emacs to prefer the .el file if it’s newer, even if there is a corresponding .elc file.
@@ -240,6 +240,7 @@ Although see starter kit where they run after init.
 **** Startup screen
     #+begin_src emacs-lisp
     (use-package dashboard
+:disabled
       :ensure t
       :config
       (dashboard-setup-startup-hook)
@@ -265,11 +266,13 @@ Although see starter kit where they run after init.
            :mwb-load-path "site-lisp/jojojames")
 		 #+end_src
 ***** Transient
-		Another key bind [[https://emacsair.me/2019/02/14/transient-0.1/][from the author of magit]]
+Another key bind menuy like hydra [[https://emacsair.me/2019/02/14/transient-0.1/][from the author of magit]]
+In many ways simpler as just defines a menu but does not allow menu to remain and all entries must be named methods not lambdas.
 		#+begin_src emacs-lisp
-		(use-package transient
-		  :ensure t
-		  :config (transient-bind-q-to-quit))
+        (use-package transient
+          :diminish
+          :ensure t
+          :config (transient-bind-q-to-quit))
 		#+end_src
 
 **** Org Mode
@@ -294,10 +297,10 @@ Note should check on defconst
  #+end_src
 
 *** Emacs settings
-**** Apperance
- #+begin_src emacs-lisp
- (mwb-init-load  "mwb-init-appearance")
-  #+end_src
+**** Appearance
+   #+begin_src emacs-lisp
+   (mwb-init-load  "mwb-init-appearance")
+   #+end_src
 
 **** Emacs behaviour
  General emacs stuff - not common-setup used to have this but separate file might not make sense

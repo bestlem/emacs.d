@@ -12,7 +12,7 @@
 ;; Startup:1 ends here
 
 ;; [[file:~/.emacs.d/config.org::*Debug%20flag][Debug flag:1]]
-(setq init-file-debug t)
+(setq init-file-debug nil)
 ;; Debug flag:1 ends here
 
 ;; [[file:~/.emacs.d/config.org::*Set%20where%20the%20init%20file%20is][Set where the init file is:1]]

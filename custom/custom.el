@@ -31,7 +31,7 @@
      (unknown . question-mark))) t)
  '(fringe-mode (quote (16 . 0)) nil (fringe))
  '(gnus-directory "~/Library/Preferences/Aquamacs Emacs/News")
- '(gnus-group-sort-function (quote (gnus-group-sort-by-rank)))
+ '(gnus-group-sort-function (quote (gnus-group-sort-by-rank)) t)
  '(gnus-kill-save-kill-file t)
  '(gnus-score-mimic-keymap nil)
  '(gnus-server-browse-in-group-buffer t)
@@ -67,7 +67,7 @@
  '(org-todo-keywords (quote ((sequence "TODO" "|" "DONE" "LEAVE(@)"))))
  '(package-selected-packages
    (quote
-    (dashboard org clojure-mode lispy racket-mode cmake-mode swiper ivy transient cask-mode flycheck undo-tree deadgrep eros macrostep helpful ibuffer-vc counsel ivy-rich ivy-hydra org-indent xah-elisp-mode validate hardhat hydra projectile beacon ripgrep gitignore-mode gitconfig-mode nov manual matcha use-package-hydra backup-each-save esup org-bullets which-key company elmacro ws-butlerz helm elisp-format origami comment-dwim-2 smex discover-my-major json-mode treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ranger dired-toggle expand-region aggressive-indent rainbow-delimiters gradle-mode groovy-imports groovy-mode ws-butler highlight-indent-guides diminish key-chord use-package)))
+    (paxedit use-package-chords paredit dashboard org clojure-mode lispy racket-mode cmake-mode swiper ivy transient cask-mode flycheck undo-tree deadgrep eros macrostep helpful ibuffer-vc counsel ivy-rich ivy-hydra org-indent xah-elisp-mode validate hardhat hydra projectile beacon ripgrep gitignore-mode gitconfig-mode nov manual matcha use-package-hydra backup-each-save esup org-bullets which-key company elmacro ws-butlerz helm elisp-format origami comment-dwim-2 smex discover-my-major json-mode treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ranger dired-toggle expand-region aggressive-indent rainbow-delimiters gradle-mode groovy-imports groovy-mode ws-butler highlight-indent-guides diminish key-chord use-package)))
  '(python-shell-interpreter "python")
  '(select-enable-clipboard t)
  '(tabbar-mode t nil (tabbar))

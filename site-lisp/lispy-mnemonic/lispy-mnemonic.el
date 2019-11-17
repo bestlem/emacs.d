@@ -298,91 +298,10 @@ Add if not message the eros display"
 ;;; Key Bindings ;;;
 ;;;;;;;;;;;;;;;;;;;;
 
-;; Global bindings (work in any context)
-
-;; fiddle for racket mode
-(defun racket-lispy-smart-open-bracket ()
-  "Automatically insert a `(` or a `[` as appropriate.
-
-When `racket-smart-open-bracket-enable' is nil, this simply
-inserts `[`. Otherwise, this behaves like the \"Automatically
-adjust opening square brackets\" feature in Dr. Racket:
-
-By default, inserts a `(`. Inserts a `[` in the following cases:
-
-  - `let`-like bindings -- forms with `let` in the name as well
-    as things like `parameterize`, `with-handlers`, and
-    `with-syntax`.
-
-  - `case`, `cond`, `match`, `syntax-case`, `syntax-parse`, and
-    `syntax-rules` clauses.
-
-  - `for`-like bindings and `for/fold` accumulators.
-
-  - `class` declaration syntax, such as `init` and `inherit`.
-
-When the previous s-expression in a sequence is a compound
-expression, uses the same kind of delimiter.
-
-To force insert `[`, use `quoted-insert'.
-
-Combined with `racket-insert-closing' this means that
-you can press the unshifted `[` and `]` keys to get whatever
-delimiters follow the Racket conventions for these forms. (When
-`electric-pair-mode' or `paredit-mode' is active, you need not
-even press `]`."
-  (interactive)
-  (let ((ch (or (and (not racket-smart-open-bracket-enable)
-					 ?\[)
-				(and (save-excursion
-					   (let ((pt (point)))
-						 (beginning-of-defun)
-						 (let ((state (parse-partial-sexp (point) pt)))
-						   (or (racket--ppss-string-p state)
-							   (racket--ppss-comment-p state)))))
-					 ?\[)
-				(cl-some (lambda (xs)
-						   (apply #'racket--smart-open-bracket-helper xs))
-						 racket--smart-open-bracket-data)
-				(racket--open-paren #'backward-sexp)
-				?\()))
-
-	(racket--lispy-aware-open ch)))
-(eval-after-load 'lispy
-  '(progn
-	 (defvar lispy-mode-map nil) ;byte compiler
 
 
 
 
-	 (defun racket--lispy-open-square ()
-	   "`racket-smart-open-bracket' or original `paredit-mode-map' binding.
-
-To be compatible with `paredit-mode', `racket-smart-open-bracket'
-must intercept [ and decide whether to call `paredit-open-round'
-or `paredit-open-square'. To do so it must modify
-`paredit-mode-map', which affects all major modes. Therefore we
-check whether the current buffer's major mode is `racket-mode'.
-If not we call the function in the variable
-`racket--paredit-original-open-bracket-binding'."
-	   (interactive)
-	   (if (racket--mode-edits-racket-p)
-		   (racket-smart-open-bracket)
-		 (funcall racket--paredit-original-open-bracket-binding)))
-
-	 (defun racket--lispy-aware-open (ch)
-	   "A paredit-aware helper for `racket-smart-open-bracket'.
-
-When `paredit-mode' is active, use its functions (such as
-`paredit-open-round') Note: This function isn't defined unless
-paredit is loaded, so check for this function's existence using
-`fboundp'."
-	   (let ((lispy-active (and (boundp 'lispy-mode) lispy-mode)))
-		 (cond ;; ((not paredit-active) (racket--self-insert ch))
-          ((eq ch ?\()          (lispy-parens))
-          ((eq ch ?\[)          (lispy-brackets))
-          ((eq ch ?\{)          (lispy-braces))
-          (t                    (racket--self-insert ch)))))))
 
 ;; (if (eq major-mode 'racket-mode)
 ;;     (define-key lispy-mnemonic-mode-map (kbd "[") 'racket-lispy-smart-open-bracket)

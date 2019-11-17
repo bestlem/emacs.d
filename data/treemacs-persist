@@ -29,6 +29,8 @@
  - path :: ~/src/ThirdParty/emacs-init/jerrypnz_major_hydra
 ** oremacs
  - path :: ~/src/ThirdParty/emacs-init/oremacs
+** otijhuis
+ - path :: ~/src/ThirdParty/emacs-init/otijhuis
 * Racket
 ** realm
  - path :: ~/src/Racket/realm

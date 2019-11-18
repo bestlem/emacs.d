@@ -241,6 +241,7 @@ Although see starter kit where they run after init.
 **** Startup screen
     #+begin_src emacs-lisp
     (use-package dashboard
+:disabled
       :ensure t
       :config
       (dashboard-setup-startup-hook)

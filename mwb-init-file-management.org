@@ -209,16 +209,8 @@ This is the visual
            ("c" treemacs-add-project-to-workspace "Create Project")
            ("d" treemacs-remove-project-from-workspace "Delete Project")
            ("q" nil "Quit"))
-   (mwb/hydra-treemacs-global
-    (:color blue)
-    ("t" treemacs "Treemacs toggle" :column "Project")
-    ("p" mwb/hydra-treemacs-mode/body "Projectile")
-    ("0" treemacs-select-window "Select" :column "Other Window")
-    ("1" treemacs-delete-other-windows "Delete")
-    ("B" treemacs-bookmark "Bookmark" :column "Rest")
-    ("f" treemacs-find-file "Find File")
-    ("T" treemacs-find-tag "Find Tag"))
-   :bind (("H-t" . mwb/hydra-treemacs-global/body)
+  
+   :bind (("H-t" . treemacs)
           :map treemacs-mode-map
           ("<mouse-5>" . treemacs-rightclick-menu)
           ("<mouse-4>" . treemacs-rightclick-menu)

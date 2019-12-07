@@ -55,7 +55,6 @@ So hyper-A is now a mode hydra key and I have started defining a hydra on that,
      (which-key-mode)
      :diminish which-key-mode)
    #+end_src
-
 ** Mac modifier key Bindings
 We have fn available so have it as hyper and then use Karabiner  (try iCue later) to map Caps Lock and Window key to hyper. Super is used sometimes so I think is confusing and as noted sequence of keys (emacs key-chord and hydra) is better.
 I don't use the right hand modifier keys so not set separately.
@@ -159,7 +158,7 @@ Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in e
 ;; (bind-key [f4] 'grep )
 (bind-key [f5] 'compile)
 (bind-key [S-f4] 'grep)
-;; These are the VC6 ones - not used for 15 years so can learn new ones,
+;; These are the VC6 ones - not used for 15 years so could learn new ones,
 ;; (bind-key [kp-f3] 'gdb)
 ;; (bind-key [f12] 'gud-step )
 ;; (bind-key [f11] 'gud-next )
@@ -169,9 +168,12 @@ Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in e
 ;; (bind-key [C-f12] 'gud-tbreak )
 
 ;;  More VC6 keys
-(bind-key [S-f7] 'next-error)
-(bind-key [S-f8] 'previous-error)
+;; (bind-key [S-f7] 'next-error)
+;; (bind-key [S-f8] 'previous-error)
 
+;; But makes more sense ti quickly hit a key
+(bind-key [f8] 'next-error)
+(bind-key [S-f8] 'previous-error)
 #+end_src
 ** Old bindings
 These will be old NeXT Pizza bindings

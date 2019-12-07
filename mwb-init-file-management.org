@@ -221,7 +221,9 @@ This is the visual
    :bind (("H-t" . mwb/hydra-treemacs-global/body)
           :map treemacs-mode-map
           ("<mouse-5>" . treemacs-rightclick-menu)
-          ("<mouse-4>" . treemacs-rightclick-menu)))
+          ("<mouse-4>" . treemacs-rightclick-menu)
+          ("<f5>" . treemacs-switch-workspace)
+          ("<C-f5>" . treemacs-edit-workspaces)))
 
  (use-package treemacs-projectile
    :after treemacs projectile

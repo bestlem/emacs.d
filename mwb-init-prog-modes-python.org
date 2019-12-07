@@ -22,7 +22,7 @@ Fails as I think in the middle of changes. Error is not loading pythonic
 :disabled
 	:ensure t
 	:init
-	(setq conda-anaconda-home (expand-file-name "¬/minconda3"))
+	(setq conda-anaconda-home (expand-file-name "~/minconda3"))
 	:config
 	;; If you want interactive shell support, include:
 	(conda-env-initialize-interactive-shells)

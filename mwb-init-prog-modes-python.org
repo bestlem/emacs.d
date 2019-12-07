@@ -2,9 +2,7 @@
 #+PROPERTY:header-args :cache yes :tangle yes  :comments link
 
 #+begin_src emacs-lisp
-;; python
-
-										; python from use-package maintainer https://github.com/jwiegley/dot-emacs/blob/master/init.el#L1013
+;; python from use-package maintainer https://github.com/jwiegley/dot-emacs/blob/master/init.el#L1013
 (use-package python-mode
   :mode "\\.py\\'"
   :interpreter "python"

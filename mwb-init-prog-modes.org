@@ -7,26 +7,25 @@
 Indentation and tabs
 Look at smart-tabs-insinuate
 *** Highlight indents
- I have wanted a good visual identification of indentation since I had the dos pronter program in mid 80s. I *now* have it
+ I have wanted a good visual identification of indentation since I had the dos printer program in mid 80s. I *now* have it
 
   #+begin_src emacs-lisp
   (use-package highlight-indent-guides
-	:ensure t
-	:diminish highlight-indent-guides-mode
-	:config
-	(setq highlight-indent-guides-method 'fill)
-	;; Indent character samples: ┃| ┆ ┊
-	(setq highlight-indent-guides-character ?\┃)
-	(setq highlight-indent-guides-auto-odd-face-perc 50)
-	(setq highlight-indent-guides-auto-even-face-perc 20)
-	(setq highlight-indent-guides-auto-character-face-perc 20)
-	:hook (prog-mode . highlight-indent-guides-mode))
+    :ensure t
+    :diminish highlight-indent-guides-mode
+    :config
+    (setq highlight-indent-guides-method 'fill)
+    ;; Indent character samples: ┃| ┆ ┊
+    (setq highlight-indent-guides-character ?\┃)
+    (setq highlight-indent-guides-auto-odd-face-perc 50)
+    (setq highlight-indent-guides-auto-even-face-perc 20)
+    (setq highlight-indent-guides-auto-character-face-perc 20)
+    :hook (prog-mode . highlight-indent-guides-mode))
  #+end_src
 *** Aggressive indent
- Indent as you type. Only for emacs lisp or racket at the moment
+ Indent as you type. Only for emacs lisp or racket at the moment. https://github.com/Malabarba/aggressive-indent-mode
  #+begin_src emacs-lisp
- (use-package
-   aggressive-indent
+ (use-package aggressive-indent
    :ensure t
    :hook ((racket-mode emacs-lisp-mode) . aggressive-indent-mode))
  #+end_src
@@ -322,4 +321,10 @@ Possibly lost as I did have cperl at one time but from comments that might have 
    ;;   (setq perldb-command-name "/run/pd/packages/perl/5.003/bin/perl")
    ;; )
    ;; (add-hook 'perldb-mode-hook 'my-perldb-mode-hook)
+#+end_src
+** Shell and other small things
+*** Fish
+#+begin_src emacs-lisp
+(use-package fish-mode
+  :ensure t)
 #+end_src

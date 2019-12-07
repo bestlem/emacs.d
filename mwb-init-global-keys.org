@@ -44,16 +44,16 @@ So hyper-A is now a mode hydra key and I have started defining a hydra on that,
 ** Which Key
    Package [[https://github.com/justbur/emacs-which-key][which-key]] shows after a key press what you can do next (not useful for control-C as there are too many to show and you can't scroll).
    #+begin_src emacs-lisp
-   (use-package
-	 which-key
-	 :ensure t
-	 :defer 5
-	 :config (which-key-setup-side-window-right-bottom)
-	 (setq which-key-sort-order 'which-key-key-order-alpha
-		   which-key-side-window-max-width 0.33
-		   which-key-idle-delay 0.05)
-	 (which-key-mode)
-	 :diminish which-key-mode)
+   (use-package which-key
+     :ensure t
+     :defer 5
+     :config
+     (which-key-setup-side-window-right-bottom)
+     (setq which-key-sort-order 'which-key-key-order-alpha
+	   which-key-side-window-max-width 0.33
+	   which-key-idle-delay 0.05)
+     (which-key-mode)
+     :diminish which-key-mode)
    #+end_src
 
 ** Mac modifier key Bindings

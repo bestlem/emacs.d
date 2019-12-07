@@ -257,9 +257,9 @@ From https://github.com/otijhuis/emacs.d/blob/master/config/hydra-settings.el
                      ("H-A" . hydra-paredit/body)
                      :map racket-repl-mode-map
                      ("<f5>" . racket-run))
-         :config (setq racket-program "/Applications/Racket v7.4/bin/racket"
+         :config (setq racket-program "/Applications/Racket v7.5/bin/racket"
                        tab-always-indent 'complete
-                       key-chord-mode 1        ; unknown why turned off
+                       key-chord-mode 1        ; unknown how it was turned off
                        )
          (use-package racket-support
            :mwb-load-path "site-lisp/lisp")

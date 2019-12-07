@@ -2,7 +2,7 @@
 #+PROPERTY:header-args :cache yes :tangle yes :comments link
 * File Handling
 ** Trash
-Well I was going to include [[https://github.com/lunaryorn/osx-trash.el][osx trash]] which uses the trash executable or an applescript to do the proper trash. But realised I don't want to trash files - just those I delete by hand so the patching opf the emacs delete is not a good idea. By default emacs does not delete by moving to trash. It is customisable so set to to nevetr.
+Well I was going to include [[https://github.com/lunaryorn/osx-trash.el][osx trash]] which uses the trash executable or an applescript to do the proper trash. But realised I don't want to trash files - just those I delete by hand so the patching of the emacs delete is not a good idea. By default emacs does not delete by moving to trash. It is customisable so set to to never.
 Think of editing dired
    #+begin_src emacs-lisp
    (setq delete-by-moving-to-trash nil)
@@ -74,7 +74,6 @@ I haven't used before but might try with hydra from [[https://sriramkswamy.githu
 * Help
 Let's use [[https://github.com/Wilfred/helpful][Helpful]]
 #+begin_src emacs-lisp
-
 (use-package helpful
   :ensure t
   :custom
@@ -258,72 +257,74 @@ Start with a small setup
 	 Take some for John Wiegley
 	 Note takes time to load
 	 #+begin_src emacs-lisp
-	 (use-package ivy
-	   :ensure t
-	   :defer 2
-	   :diminish
-	   :bind (("C-x b" . ivy-switch-buffer)
-			  ("H-b" . ivy-switch-buffer)
-			  ("C-x B" . ivy-switch-buffer-other-window)
-			  ("M-H"   . ivy-resume))
+     (use-package ivy
+       :ensure t
+       :defer 2
+       :diminish
+       :bind (("C-x b" . ivy-switch-buffer)
+              ("H-b" . ivy-switch-buffer)
+              ("C-x B" . ivy-switch-buffer-other-window)
+              ("M-H"   . ivy-resume))
 
-	   :bind (:map ivy-minibuffer-map
-				   ("<tab>" . ivy-alt-done)
-				   ("SPC"   . ivy-alt-done-or-space)
-				   ("C-d"   . ivy-done-or-delete-char)
-				   ("C-i"   . ivy-partial-or-done)
-				   ("C-r"   . ivy-previous-line-or-history)
-				   ("M-r"   . ivy-reverse-i-search))
+       :bind (:map ivy-minibuffer-map
+                   ("<tab>" . ivy-alt-done)
+                   ("SPC"   . ivy-alt-done-or-space)
+                   ("C-d"   . ivy-done-or-delete-char)
+                   ("C-i"   . ivy-partial-or-done)
+                   ("C-r"   . ivy-previous-line-or-history)
+                   ("M-r"   . ivy-reverse-i-search)
+                   ("<C-return>" . ivy-immediate-done)
+                   ( "<ESC>" . minibuffer-keyboard-quit))
 
-	   :bind (:map ivy-switch-buffer-map
-				   ("C-k" . ivy-switch-buffer-kill))
-	   :custom
-	   (ivy-dynamic-exhibit-delay-ms 200)
-	   (ivy-height 10)
-	   (ivy-initial-inputs-alist nil t)
-	   (ivy-magic-tilde nil)
-	   (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
-	   (ivy-use-virtual-buffers t)
-	   (ivy-wrap t)
-	   :preface
-	   (defun ivy-done-or-delete-char ()
-		 (interactive)
-		 (call-interactively
-		  (if (eolp)
-			  #'ivy-immediate-done
-			#'ivy-delete-char)))
+       :bind (:map ivy-switch-buffer-map
+                   ("C-k" . ivy-switch-buffer-kill))
+       :custom
+       (ivy-dynamic-exhibit-delay-ms 200)
+       (ivy-height 10)
+       (ivy-initial-inputs-alist nil t)
+       (ivy-magic-tilde nil)
+       (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
+       (ivy-use-virtual-buffers t)
+       (ivy-wrap t)
+       :preface
+       (defun ivy-done-or-delete-char ()
+         (interactive)
+         (call-interactively
+          (if (eolp)
+              #'ivy-immediate-done
+            #'ivy-delete-char)))
 
-	   (defun ivy-alt-done-or-space ()
-		 (interactive)
-		 (call-interactively
-		  (if (= ivy--length 1)
-			  #'ivy-alt-done
-			#'self-insert-command)))
+       (defun ivy-alt-done-or-space ()
+         (interactive)
+         (call-interactively
+          (if (= ivy--length 1)
+              #'ivy-alt-done
+            #'self-insert-command)))
 
-	   (defun ivy-switch-buffer-kill ()
-		 (interactive)
-		 (debug)
-		 (let ((bn (ivy-state-current ivy-last)))
-		   (when (get-buffer bn)
-			 (kill-buffer bn))
-		   (unless (buffer-live-p (ivy-state-buffer ivy-last))
-			 (setf (ivy-state-buffer ivy-last)
-				   (with-ivy-window (current-buffer))))
-		   (setq ivy--all-candidates (delete bn ivy--all-candidates))
-		   (ivy--exhibit)))
+       (defun ivy-switch-buffer-kill ()
+         (interactive)
+         (debug)
+         (let ((bn (ivy-state-current ivy-last)))
+           (when (get-buffer bn)
+             (kill-buffer bn))
+           (unless (buffer-live-p (ivy-state-buffer ivy-last))
+             (setf (ivy-state-buffer ivy-last)
+                   (with-ivy-window (current-buffer))))
+           (setq ivy--all-candidates (delete bn ivy--all-candidates))
+           (ivy--exhibit)))
 
-	   ;; This is the value of `magit-completing-read-function', so that we see
-	   ;; Magit's own sorting choices.
-	   (defun my-ivy-completing-read (&rest args)
-		 (let ((ivy-sort-functions-alist '((t . nil))))
-		   (apply 'ivy-completing-read args)))
-	   :config
-	   (ivy-mode 1)
-	   (ivy-set-occur 'ivy-switch-buffer 'ivy-switch-buffer-occur)
+       ;; This is the value of `magit-completing-read-function', so that we see
+       ;; Magit's own sorting choices.
+       (defun my-ivy-completing-read (&rest args)
+         (let ((ivy-sort-functions-alist '((t . nil))))
+           (apply 'ivy-completing-read args)))
+       :config
+       (ivy-mode 1)
+       (ivy-set-occur 'ivy-switch-buffer 'ivy-switch-buffer-occur)
 
-	   ;; Show #/total when scrolling buffers
-	   (setq ivy-count-format "%d/%d ")
-	   )
+       ;; Show #/total when scrolling buffers
+       (setq ivy-count-format "%d/%d ")
+       )
 #+end_src
 
 **** Ivy hydra

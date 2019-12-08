@@ -232,13 +232,8 @@ This is completion for text in buffer
 This is completion for emacs commands. Choice is ido, ivy helm.
 I'll try ivy.
 Note headers have tangle command in to suppress one or other
-*** Ido
-:PROPERTIES:
-  :header-args:    :tangle no
-  :END:
-
 **** Find M-x commands
-  This is [[https://www.emacswiki.org/emacs/Smex][smex]] buy ivy replaces it.
+  This is [[https://www.emacswiki.org/emacs/Smex][smex]] buy ivy replaces it actually it uses it - Something changed :(
   #+begin_quote
   Smex is a M-x enhancement for Emacs. Built on top of IDO, it provides a convenient interface to your recently and most frequently used commands. And to all the other commands, too.
   #+end_quote
@@ -248,6 +243,12 @@ Note headers have tangle command in to suppress one or other
 	  :config
 	  (smex-initialize))
   #+end_src
+*** Ido
+:PROPERTIES:
+  :header-args:    :tangle no
+  :END:
+
+
 
 *** Ivy
 Start with a small setup
@@ -264,67 +265,25 @@ Start with a small setup
        :bind (("C-x b" . ivy-switch-buffer)
               ("H-b" . ivy-switch-buffer)
               ("C-x B" . ivy-switch-buffer-other-window)
-              ("M-H"   . ivy-resume))
-
-       :bind (:map ivy-minibuffer-map
-                   ("<tab>" . ivy-alt-done)
-                   ("SPC"   . ivy-alt-done-or-space)
-                   ("C-d"   . ivy-done-or-delete-char)
-                   ("C-i"   . ivy-partial-or-done)
-                   ("C-r"   . ivy-previous-line-or-history)
-                   ("M-r"   . ivy-reverse-i-search)
-                   ("<C-return>" . ivy-immediate-done)
-                   ( "<ESC>" . minibuffer-keyboard-quit))
-
+              ("M-H" . ivy-resume))
+       ;; :bind (:map ivy-minibuffer-map
+       ;;             ("<tab>" . ivy-alt-done)
+       ;;             ("SPC" . ivy-alt-done-or-space)
+       ;;             ("C-d" . ivy-done-or-delete-char)
+       ;;             ("C-i" . ivy-partial-or-done)
+       ;;             ("C-r" . ivy-previous-line-or-history)
+       ;;             ("M-r" . ivy-reverse-i-search)
+       ;;             ("<C-return>" . ivy-immediate-done)
+       ;;             ("<ESC>" . minibuffer-keyboard-quit))
        :bind (:map ivy-switch-buffer-map
                    ("C-k" . ivy-switch-buffer-kill))
-       :custom
-       (ivy-dynamic-exhibit-delay-ms 200)
-       (ivy-height 10)
-       (ivy-initial-inputs-alist nil t)
-       (ivy-magic-tilde nil)
-       (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
-       (ivy-use-virtual-buffers t)
-       (ivy-wrap t)
-       :preface
-       (defun ivy-done-or-delete-char ()
-         (interactive)
-         (call-interactively
-          (if (eolp)
-              #'ivy-immediate-done
-            #'ivy-delete-char)))
 
-       (defun ivy-alt-done-or-space ()
-         (interactive)
-         (call-interactively
-          (if (= ivy--length 1)
-              #'ivy-alt-done
-            #'self-insert-command)))
-
-       (defun ivy-switch-buffer-kill ()
-         (interactive)
-         (debug)
-         (let ((bn (ivy-state-current ivy-last)))
-           (when (get-buffer bn)
-             (kill-buffer bn))
-           (unless (buffer-live-p (ivy-state-buffer ivy-last))
-             (setf (ivy-state-buffer ivy-last)
-                   (with-ivy-window (current-buffer))))
-           (setq ivy--all-candidates (delete bn ivy--all-candidates))
-           (ivy--exhibit)))
-
-       ;; This is the value of `magit-completing-read-function', so that we see
-       ;; Magit's own sorting choices.
-       (defun my-ivy-completing-read (&rest args)
-         (let ((ivy-sort-functions-alist '((t . nil))))
-           (apply 'ivy-completing-read args)))
        :config
        (ivy-mode 1)
-       (ivy-set-occur 'ivy-switch-buffer 'ivy-switch-buffer-occur)
-
+       (setq ivy-use-virtual-buffers t)
+       (setq enable-recursive-minibuffers t)
        ;; Show #/total when scrolling buffers
-       (setq ivy-count-format "%d/%d ")
-       )
+       (setq ivy-count-format "%d/%d "))
 #+end_src
 
 **** Ivy hydra

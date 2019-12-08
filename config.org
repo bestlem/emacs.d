@@ -115,6 +115,16 @@ All this is tangled into init.el which is also under git.
 	   gc-cons-percentage 0.6
 	   auto-window-vscroll nil)
  #+end_src
+
+**** package
+As this is now ~/.emacs.d/init.el and not in ~/Library/Preferences Emacs sees this as startup and adds the package-initialise. SO need to add here to stop init.el changing and being see in github
+#+begin_src emacs-lisp
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+;(package-initialize)
+#+end_src
 **** Debug flag
 	 #+begin_src emacs-lisp
 (setq init-file-debug nil)

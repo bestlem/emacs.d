@@ -375,3 +375,21 @@ Repeated invocations toggle between the two most recently open buffers."
 (key-chord-define-global "zz" #'er-switch-to-previous-buffer)
 
 #+end_src
+* Buffer removal
+** KIll buffer
+Normally when you are in a buffer you do ^x-^k to kill the current buffer but emacs asks you for the name. [[http://pragmaticemacs.com/emacs/dont-kill-buffer-kill-this-buffer-instead/][Pragmatic Emacs]] suggests this.
+By default C-x k runs the command kill-buffer which prompts you for which buffer you want to kill, defaulting to the current active buffer. I don’t know about you, but I rarely want to kill a different buffer than the one I am looking at, so I rebind C-x k to kill-this-buffer which just kills the current buffer without prompting (unless there are unsaved changes).
+#+begin_src emacs-lisp
+(defun bjm/kill-this-buffer ()
+  "Kill the current buffer."
+  (interactive)
+  (kill-buffer (current-buffer)))
+
+(bind-key "C-x k" 'bjm/kill-this-buffer)
+#+end_src
+** Deal with subprocesses
+If a buffer has a subprocess running (e.g. shell, racket-run then emacs will prompt to ask if you want to kill it. I think you always do. So from https://emacs.stackexchange.com/a/14511/9874
+#+begin_src emacs-lisp
+(setq kill-buffer-query-functions
+      (delq 'process-kill-buffer-query-function kill-buffer-query-functions))
+#+end_src

@@ -102,17 +102,7 @@ Note that you can control what the screen displays A for Alt or ⌥. Emacs is no
 
 
 #+end_src
-** Kill buffer
-Normally when you are in a buffer you do ^x-^k to kill the current buffer but emacs asks you for the name. [[http://pragmaticemacs.com/emacs/dont-kill-buffer-kill-this-buffer-instead/][Pragmatic Emacs]] suggests this.
-  #+begin_src emacs-lisp
-	 ;;  By default C-x k runs the command kill-buffer which prompts you for which buffer you want to kill, defaulting to the current active buffer. I don’t know about you, but I rarely want to kill a different buffer than the one I am looking at, so I rebind C-x k to kill-this-buffer which just kills the current buffer without prompting (unless there are unsaved changes).
-	 (defun bjm/kill-this-buffer ()
-	   "Kill the current buffer."
-	   (interactive)
-	   (kill-buffer (current-buffer)))
 
-	 (define-key osx-key-mode-map (kbd "C-x k") 'bjm/kill-this-buffer)
-#+end_src
 ** Deleting and return
   #+begin_src emacs-lisp
   ;; (bind-key [C-return] 'newline-and-indent )

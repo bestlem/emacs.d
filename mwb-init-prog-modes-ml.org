@@ -1,0 +1,47 @@
+#+TITLE Emacs configuration org Programming and structured data modes
+#+PROPERTY:header-args :cache yes :tangle yes  :comments link
+
+* ML
+Setup ML language family
+
+Start with SML for coursera but this is where ocaml and f# should be
+
+* SML
+sml-mode from elpa - documentation on sml/nj is old
+#+begin_src emacs-lisp
+(use-package sml-mode
+  :ensure t
+  :bind (:map sml-mode-map
+              ("<f5>" . mwb-sml-run-file))
+
+  :preface
+
+  (defun mwb-sml--kill-sml-repl ()
+    "Just kill the current *sml* process.
+     Taken from https://stackoverflow.com/a/19341341/151019
+Which is wrong you need delete-process as quit-process wopn't kill if processis owned by shell"
+    (let ((sml-process (get-process "sml")))
+      (when sml-process
+        (delete-process sml-process)))
+    ;; (sleep-for 0.25)
+    ;; (let ((sml-buffer (get-buffer "*sml*")))
+    ;;   (when sml-buffer
+    ;; (kill-buffer sml-buffer)))
+    )
+
+  (defun mwb-sml-run-file (file &optional and-go)
+    "Runs the current file in a new sml REPL
+     Note does not be clever and assumes a lot"
+    (interactive
+     (list (or buffer-file-name
+               (read-file-name "File to load: " nil nil t))
+           current-prefix-arg))
+    (mwb-sml--kill-sml-repl)
+    ;;  Nick saving bufffer from racket mode
+    (when (or (buffer-modified-p)
+              (and (buffer-file-name)
+                   (not (file-exists-p (buffer-file-name)))))
+      (save-buffer))
+    (sml-run sml-program-name file)))
+
+#+end_src

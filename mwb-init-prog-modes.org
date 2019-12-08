@@ -221,6 +221,10 @@ Where there is common put them together. This part is really why I have separate
  #+begin_src emacs-lisp
    (mwb-init-load "mwb-init-prog-modes-lisp")
 #+end_src
+** ML
+#+begin_src emacs-lisp
+   (mwb-init-load "mwb-init-prog-modes-ml")
+#+end_src
 ** Python
 Really need to start from scratch
 #+begin_src emacs-lisp

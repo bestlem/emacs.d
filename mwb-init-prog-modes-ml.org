@@ -13,13 +13,14 @@ sml-mode from elpa - documentation on sml/nj is old
   :ensure t
   :bind (:map sml-mode-map
               ("<f5>" . mwb-sml-run-file))
-
+  :hook agreesive-indent-mode
   :preface
-
   (defun mwb-sml--kill-sml-repl ()
     "Just kill the current *sml* process.
      Taken from https://stackoverflow.com/a/19341341/151019
-Which is wrong you need delete-process as quit-process wopn't kill if processis owned by shell"
+Which is wrong you need delete-process as quit-process won't kill if processis owned by shell
+For a more singing and dancing version see https://www.reddit.com/r/ProgLangEmacs/comments/4x698w/one_command_to_kill_sml_restart_it_guess_and_load/
+but on next read only the killing using comint functions seems better"
     (let ((sml-process (get-process "sml")))
       (when sml-process
         (delete-process sml-process)))
@@ -33,8 +34,7 @@ Which is wrong you need delete-process as quit-process wopn't kill if processis 
     "Runs the current file in a new sml REPL
      Note does not be clever and assumes a lot"
     (interactive
-     (list (or buffer-file-name
-               (read-file-name "File to load: " nil nil t))
+     (list (read-file-name "File to load: " nil nil t)
            current-prefix-arg))
     (mwb-sml--kill-sml-repl)
     ;;  Nick saving bufffer from racket mode
@@ -43,5 +43,4 @@ Which is wrong you need delete-process as quit-process wopn't kill if processis 
                    (not (file-exists-p (buffer-file-name)))))
       (save-buffer))
     (sml-run sml-program-name file)))
-
 #+end_src

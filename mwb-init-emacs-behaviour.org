@@ -282,6 +282,9 @@ Start with a small setup
        (ivy-mode 1)
        (setq ivy-use-virtual-buffers t)
        (setq enable-recursive-minibuffers t)
+       ;; Do not show ./ amd ../ at top
+       ;; https://emacs.stackexchange.com/a/40540/9874
+       (setq ivy-extra-directories ())
        ;; Show #/total when scrolling buffers
        (setq ivy-count-format "%d/%d "))
 #+end_src
@@ -362,6 +365,20 @@ Improve many emacs functions
 	(warn "\nWARNING: Could not find the ripgrep executable. It "
 		  "is recommended you install ripgrep.")))
 	 #+end_src
+
+***** prescient
+[[https://github.com/raxod502/prescient.el][Prescient]]  is a library which sorts and filters lists of candidates,
+#+begin_src emacs-lisp
+(use-package prescient
+  :ensure t
+  )
+(use-package ivy-prescient
+  :ensure t
+  :after (counsel prescient)
+  :config (ivy-prescient-mode 1)
+  (prescient-persist-mode 1)
+  )
+#+end_src
 
 * Buffer switch
 Switch to last buffer on one key. From https://emacsredux.com/blog/2013/04/28/switch-to-previous-buffer/

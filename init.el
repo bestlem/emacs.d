@@ -19,11 +19,11 @@
 ;(package-initialize)
 ;; package:1 ends here
 
-;; [[file:~/.emacs.d/config.org::*Debug%20flag][Debug flag:1]]
+;; [[file:~/.emacs.d/config.org::*Debug flag][Debug flag:1]]
 (setq init-file-debug nil)
 ;; Debug flag:1 ends here
 
-;; [[file:~/.emacs.d/config.org::*Set%20where%20the%20init%20file%20is][Set where the init file is:1]]
+;; [[file:~/.emacs.d/config.org::*Set where the init file is][Set where the init file is:1]]
 ;; Need the directory from here.
 (defun mwb-get-directory-of-current-file ()
   "Return the full directory path of the caller's file location."
@@ -32,7 +32,7 @@
 (defconst mwb-user-emacs-directory (mwb-get-directory-of-current-file))
 ;; Set where the init file is:1 ends here
 
-;; [[file:~/.emacs.d/config.org::*Where%20my%20init%20code%20is][Where my init code is:1]]
+;; [[file:~/.emacs.d/config.org::*Where my init code is][Where my init code is:1]]
 (defun mwb-user-emacs-file (name)
 	"Return an absolute per-user Emacs-specific file name around where the init file is.
   It is basically locate-user-emacs-file but I have followed Aquiamacs is setting that not where my init.el file is.
@@ -40,7 +40,7 @@
 	(expand-file-name name mwb-user-emacs-directory))
 ;; Where my init code is:1 ends here
 
-;; [[file:~/.emacs.d/config.org::*The%20loader][The loader:1]]
+;; [[file:~/.emacs.d/config.org::*The loader][The loader:1]]
 (defun mwb-init-load (file-root)
   "Load the relevant code. Currently just the same as load it loads
 	  <file-root>.el but eventually will load <file-root>.org"
@@ -63,6 +63,6 @@
 			 nil))))
 ;; The loader:1 ends here
 
-;; [[file:~/.emacs.d/config.org::*The%20Load][The Load:1]]
+;; [[file:~/.emacs.d/config.org::*The Load][The Load:1]]
 (mwb-init-load "config")
 ;; The Load:1 ends here

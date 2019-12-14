@@ -337,8 +337,8 @@ Add if not message the eros display"
 (lispy-define-key lispy-mnemonic-mode-map (kbd "g") 'hydra-lispy-goto/body)
 ;; (lispy-define-key lispy-mnemonic-mode-map (kbd "m") 'hydra-lispy-mark/body)
 (lispy-define-key lispy-mnemonic-mode-map (kbd "x") 'hydra-lispy-x/body)
-(lispy-define-key lispy-mnemonic-mode-map (kbd ">") 'hydra-lispy-slurp/body)
-(lispy-define-key lispy-mnemonic-mode-map (kbd "<") 'hydra-lispy-slurp/body)
+;; (lispy-define-key lispy-mnemonic-mode-map (kbd ">") 'hydra-lispy-slurp/body)
+;; (lispy-define-key lispy-mnemonic-mode-map (kbd "<") 'hydra-lispy-slurp/body)
 (lispy-define-key lispy-mnemonic-mode-map (kbd "d") 'lispy-down)
 (lispy-define-key lispy-mnemonic-mode-map (kbd "l") 'lispy-left)
 (lispy-define-key lispy-mnemonic-mode-map (kbd "n") 'lispy-forward)
@@ -349,7 +349,7 @@ Add if not message the eros display"
 (lispy-define-key lispy-mnemonic-mode-map (kbd "u") 'lispy-up)
 (lispy-define-key lispy-mnemonic-mode-map (kbd "w") 'lispy-new-copy)
 (lispy-define-key lispy-mnemonic-mode-map (kbd "z") 'lispy-repeat)
-(lispy-define-key lispy-mnemonic-mode-map (kbd "*") 'pop-tag-mark)
+;; (lispy-define-key lispy-mnemonic-mode-map (kbd "*") 'pop-tag-mark)
 ;; (lispy-define-key lispy-mnemonic-mode-map (kbd "/") 'lispy-undo)
 
 ;; A-Z

@@ -221,12 +221,73 @@ See http://endlessparentheses.com/ispell-and-abbrev-the-perfect-auto-correct.htm
 * Completion
 ** Text
 This is completion for text in buffer
+
+*** Current program
+This looks at the current code and prompts for variables etc
  I need something and company seems to be the current one
+Add some from jweigley
  #+begin_src emacs-lisp
  (use-package company
    :ensure t
    :diminish
-   :hook (after-init . global-company-mode))
+   :commands (company-mode company-indent-or-complete-common)
+
+   :hook (after-init . global-company-mode)
+   :config
+   (define-key company-mode-map [tab]
+     '(menu-item "maybe-company-expand" nil
+                 :filter (lambda (&optional _)
+                           (when (check-expansion)
+                             #'company-complete-common))))
+   )
+#+end_src
+
+*** Language dependant
+This depends on the major mode and helps in code structure
+#+begin_src emacs-lisp
+(use-package yasnippet
+  :ensure t
+  :demand                               ; needed so hysra available in transient
+  :config
+  (yas-global-mode 1)
+  (yas-load-directory (mwb-user-emacs-file "snippets"))
+  (defun company-mode/backend-with-yas (backend)
+    (if (and (listp backend) (member 'company-yasnippet backend))
+        backend
+      (append (if (consp backend) backend (list backend))
+              '(:with company-yasnippet))))
+  (setq company-backends
+        (mapcar #'company-mode/backend-with-yas company-backends))
+  ;; :mode ((mwb-user-emacs-file "snippets") . snippet-mode)
+  :mode ("/\\.emacs\\.d/snippets/" . snippet-mode)
+
+  :hydra (hydra-yasnippet (:color blue :hint nil)
+                          "
+              ^YASnippets^
+--------------------------------------------
+  Modes:    Load/Visit:    Actions:
+
+ _g_lobal  _d_irectory    _i_nsert
+ _m_inor   _f_ile         _t_ryout
+ _e_xtra   _l_ist         _n_ew
+         _a_ll
+"
+                          ("d" yas-load-directory)
+                          ("e" yas-activate-extra-mode)
+                          ("i" yas-insert-snippet)
+                          ("f" yas-visit-snippet-file :color blue)
+                          ("n" yas-new-snippet)
+                          ("t" yas-tryout-snippet)
+                          ("l" yas-describe-tables)
+                          ("g" yas/global-mode)
+                          ("m" yas/minor-mode)
+                          ("a" yas-reload-all)))
+
+;; This adds a lot of snippets especially for emacs not certain if I want them tey
+;; (use-package yasnippet-snippets
+;;   :ensure t)
+
+
 #+end_src
 ** Emacs
 This is completion for emacs commands. Choice is ido, ivy helm.
@@ -389,7 +450,7 @@ Repeated invocations toggle between the two most recently open buffers."
   (interactive)
   (switch-to-buffer (other-buffer (current-buffer) 1)))
 
-(key-chord-define-global "zz" #'er-switch-to-previous-buffer)
+(bind-chord "zz" #'er-switch-to-previous-buffer)
 
 #+end_src
 * Buffer removal

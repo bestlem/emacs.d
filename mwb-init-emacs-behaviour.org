@@ -95,9 +95,11 @@ Let's use [[https://github.com/Wilfred/helpful][Helpful]]
 #+end_src
 * Delete if selected
 Also see [[https://www.emacswiki.org/emacs/DeleteSelectionMode][EmacsWiki]] (and my old init) but cua should do this. Possibly because minor modes are toggles
-Issue is lispy removes this as lispy is vi based.
+Issue is lispy removes this as lispy is vi based. Actually my understanding was wrong the issue is select with mouse puts things into system clipboard.
+So use separate PRIMARY and CLIPBOARD
   #+begin_src emacs-lisp
   (delete-selection-mode 1)
+  (setq select-enable-clipboard t)
   #+end_src
 * Scratch buffer
   Need to control how it is restarted. Aquamacs saves it

@@ -184,13 +184,14 @@ Major mode was missing the last line - I suspect due to echo area or possibly th
 So ended up with matcha again and transient
 
 And that works - I do need to edit the matcha files etc.
+But transient needs a actual function that exists hydra can lazy load.
 *** Matcha space the root matcha
 **** Note on unused or other changes
 ***** quickrun
-	  runs the current buffer through a compiler or interpreter. There are also functions to do for a method. Includes C, Racket, Python, Julia Although seems to have diappeared.
+	  runs the current buffer through a compiler or interpreter. There are also functions to do for a method. Includes C, Racket, Python, Julia Although seems to have disappeared.~
    #+begin_src emacs-lisp
    (bind-key "H-a" 'matcha-run-mode-command)
-   (bind-key "H-§" 'matcha-me-space)
+   ;(bind-key "H-`" 'matcha-me-space)
    #+end_src
 **
 *** Hydra org

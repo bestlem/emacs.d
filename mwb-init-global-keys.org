@@ -68,8 +68,6 @@ Note that you can control what the screen displays A for Alt or ⌥. Emacs is no
 #+end_src
 *** Home/End/Paging
  #+begin_src emacs-lisp
- (bind-key [end] 'end-of-line osx-key-mode-map)
- (bind-key [home] 'beginning-of-line osx-key-mode-map)
  ;;(define-key osx-key-mode-map [C-end] 'end-of-buffer )
  (bind-key [C-home] 'beginning-of-buffer osx-key-mode-map)
  (bind-key [C-kp-end] 'end-of-buffer osx-key-mode-map)
@@ -84,12 +82,9 @@ Note that you can control what the screen displays A for Alt or ⌥. Emacs is no
  (bind-key [S-kp-insert] 'cua-paste)
  (bind-key [C-kp-insert] 'cua-copy-region)
 
- (bind-key [end] 'end-of-line )
- (bind-key [home] 'beginning-of-line )
-
- ;; Aqua macs defaults these to same
- ;(bind-key [C-end] 'end-of-buffer )
- ;(bind-key [C-home] 'beginning-of-buffer )
+ ;; Aquamacs defaults these to same
+ ;;(bind-key [C-end] 'end-of-buffer )
+ ;;(bind-key [C-home] 'beginning-of-buffer )
 
  ;; Unknown
  (bind-key [C-kp-end] 'end-of-buffer )

@@ -89,7 +89,7 @@ From  aquamacs-get-custom-file-dotemacs-warning
 
 * Implement
 Full init
-*** Control init environment
+*** Control init environment (init.el)
 :PROPERTIES:
   :header-args:    :tangle init.el :comments link
   :END:
@@ -188,7 +188,7 @@ This fails for config.org so that needs to be in version control.
 	 #+begin_src emacs-lisp
 	 (mwb-init-load "config")
 	 #+end_src
-*** Emacs environment
+*** Emacs environment (custom.el)
 Setup minimum to run the configuration.
 I suspect the order after this does not matter
 **** After initialisation
@@ -238,7 +238,7 @@ Although see starter kit where they run after init.
 (setq load-prefer-newer t)
 	  #+end_src
 **** Customisation file
- Yes Aquamacs does this but in a directory with a space. SO put with code so can be under source code control and user-emacs-directory is not.
+ Yes Aquamacs does this but in a directory with a space. So put with code so can be under source code control and user-emacs-directory is not.
  Needs to have initsplit added so can seperate out customization files.
  #+begin_src emacs-lisp
  (setq custom-file (mwb-user-emacs-file "custom/custom.el"))
@@ -248,6 +248,13 @@ Although see starter kit where they run after init.
       #+begin_src emacs-lisp
 	  (mwb-init-load "mwb-init-packaging")
 	  #+end_src
+**** Aquamacs undo
+There are somethings that Aquamacs does that IO want to undo.
+e.g. key bindings that they do to stop modes changing them.
+#+begin_src emacs-lisp
+(unbind-key "<end>" osx-key-mode-map)
+(unbind-key "<home>" osx-key-mode-map)
+#+end_src
 **** Startup screen
     #+begin_src emacs-lisp
     (use-package dashboard

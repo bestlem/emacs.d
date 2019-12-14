@@ -136,14 +136,37 @@ See http://endlessparentheses.com/ispell-and-abbrev-the-perfect-auto-correct.htm
 * Navigation
 ** Expand region
 #+begin_src emacs-lisp
-;; Better selection
 (use-package expand-region
   :ensure t
   :bind ("C-=" . er/expand-region)
   ("<f2>" . er/expand-region)
-  ("C-<f2>". er/contract-region)
-  )
+  ("<S-f2>" . er/contract-region)
+  ("<C-f2>" . er/contract-region))
+#+end_src
+** Begin end line
+There are several ways to make begin go to first non whitespace  then to begin lin, some will then make next press go to defun or buffer.
+Note home and end are in Aquamacs osx-mode-map makes life more complex.. Perhaps I will have to unset them to allow modes to do their thingsThese include crux, [[https://github.com/alezost/mwim.el][mwin]] and ergoemacs,  [[https://github.com/alphapapa/mosey.el][mosey]] + snippets on web.
+Note that lispy also does this but not back a form
+*** Mosey
+Try mosey as it has the back function - NB can use paredit, unfortunately does not seem to work with shift and as
 
+#+begin_src emacs-lisp
+(use-package mosey
+  :disabled
+  :ensure t
+  :bind (
+         ;; My personal favorites
+         ("<home>" . mosey-backward-bounce)
+         ("<end>" . mosey-forward-bounce)
+         ))
+#+end_src
+*** mwin
+mwin might have mode aware
+#+begin_src emacs-lisp
+(use-package mwim
+  :ensure t
+  :bind ("<home>" . 'mwim-beginning-of-line-or-code)
+  ("<end>" . 'mwim-end-of-line-or-code))
 #+end_src
 * TODO General old stuff
 #+begin_src emacs-lisp

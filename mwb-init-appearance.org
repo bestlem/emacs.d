@@ -19,8 +19,11 @@ Aquamacs is stuck with old color themes not the cusomisable ones
 (tool-bar-mode 0)
 #+end_src
 
-* TODO Cursor
+* TODO Show line for errors etc
+
+** Beacon mode
 Beacon-mode: flash the cursor when switching buffers or scrolling  the goal is to make it easy to find the cursor
+but does not seem to work well
 #+begin_src emacs-lisp
 (use-package beacon
   :ensure t
@@ -41,6 +44,24 @@ Beacon-mode: flash the cursor when switching buffers or scrolling  the goal is t
   (beacon-mode 1))
 #+end_src
 
+** Hi line
+Try to highlight the line but it is messed up see https://emacs.stackexchange.com/a/10463/9874
+but the answer below has an interesting suggestion
+#+begin_src emacs-lisp
+
+(use-package hl-line
+  :if window-system
+  :preface
+  (defun my-hl-line-range-function ()
+    (cons (line-end-position) (line-beginning-position 2)))
+  (setq hl-line-range-function #'my-hl-line-range-function)
+
+  :config
+  (set-face-attribute 'hl-line nil :inherit nil :background "gray")
+  (setq global-hl-line-sticky-flag t)
+  (global-hl-line-mode 1)
+  )
+#+end_src
 * Windows
 I think I now want mainly one window and have splits but tabs are useful.
 

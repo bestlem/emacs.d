@@ -247,7 +247,6 @@ This depends on the major mode and helps in code structure
 #+begin_src emacs-lisp
 (use-package yasnippet
   :ensure t
-  :demand                               ; needed so hysra available in transient
   :config
   (yas-global-mode 1)
   (yas-load-directory (mwb-user-emacs-file "snippets"))

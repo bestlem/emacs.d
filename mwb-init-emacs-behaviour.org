@@ -164,8 +164,8 @@ mwin might have mode aware
 #+begin_src emacs-lisp
 (use-package mwim
   :ensure t
-  :bind ("<home>" . 'mwim-beginning-of-line-or-code)
-  ("<end>" . 'mwim-end-of-line-or-code))
+  :bind ("<home>" . 'mwim-beginning)    ; comment for testing
+  ("<end>" . 'mwim-end))
 #+end_src
 * TODO General old stuff
 #+begin_src emacs-lisp

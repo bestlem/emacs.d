@@ -148,8 +148,7 @@ There are several ways to make begin go to first non whitespace  then to begin l
 Note home and end are in Aquamacs osx-mode-map makes life more complex.. Perhaps I will have to unset them to allow modes to do their thingsThese include crux, [[https://github.com/alezost/mwim.el][mwin]] and ergoemacs,  [[https://github.com/alphapapa/mosey.el][mosey]] + snippets on web.
 Note that lispy also does this but not back a form
 *** Mosey
-Try mosey as it has the back function - NB can use paredit, unfortunately does not seem to work with shift and as
-
+Try mosey as it has the back function - NB can use paredit, unfortunately does not seem to work with shift and as others do try another.
 #+begin_src emacs-lisp
 (use-package mosey
   :disabled
@@ -246,7 +245,6 @@ mwin might have mode aware
 * Completion
 ** Text
 This is completion for text in buffer
-
 *** Current program
 This looks at the current code and prompts for variables etc
  I need something and company seems to be the current one
@@ -272,6 +270,8 @@ This depends on the major mode and helps in code structure
 #+begin_src emacs-lisp
 (use-package yasnippet
   :ensure t
+  :demand t                             ; need to force the load
+:after company
   :config
   (yas-global-mode 1)
   (yas-load-directory (mwb-user-emacs-file "snippets"))

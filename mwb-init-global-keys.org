@@ -50,8 +50,8 @@ So hyper-A is now a mode hydra key and I have started defining a hydra on that,
      :config
      (which-key-setup-side-window-right-bottom)
      (setq which-key-sort-order 'which-key-key-order-alpha
-	   which-key-side-window-max-width 0.33
-	   which-key-idle-delay 0.05)
+           which-key-side-window-max-width 0.33
+           which-key-idle-delay 0.05)
      (which-key-mode)
      :diminish which-key-mode)
    #+end_src
@@ -131,14 +131,10 @@ How does this work with ivy
   (define-key minibuffer-local-isearch-map (kbd "<right>") 'isearch-forward-exit-minibuffer))
 #+end_src
 *** TODO Use with cmd-F
-Aquamacs also messes around with isearch and the two don't exactly match
+Aquamacs also messes around with isearch and the two don't exactly match. Which might be a good thing
 ** Function keys
 Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in emacs. Just discovered that GNU say what F1-4 should be and seemed good for keyboard macros not my F7.
-
 #+begin_src emacs-lisp
-
-(bind-key [f2] 'er/expand-region) ; I never use 2 column
-
 ;; (bind-key [f3] 'gdb)
 ;; (bind-key [f4] 'grep )
 (bind-key [f5] 'compile)
@@ -156,7 +152,7 @@ Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in e
 ;; (bind-key [S-f7] 'next-error)
 ;; (bind-key [S-f8] 'previous-error)
 
-;; But makes more sense ti quickly hit a key
+;; But makes more sense to quickly hit a key
 (bind-key [f8] 'next-error)
 (bind-key [S-f8] 'previous-error)
 #+end_src
@@ -332,7 +328,6 @@ _<_ beginning of buffer _>_ end of buffer _m_: set mark _/_: jump to mark
 
 ** Hyper global key bindings
 #+begin_src emacs-lisp
-
 (bind-key (kbd "H-1")  'delete-other-windows osx-key-mode-map)
 (bind-key (kbd "H-0")  'delete-window osx-key-mode-map)
 ;; H-a is major mode specific Hydra so bound to mode keymap by use-packag :hydra
@@ -343,7 +338,7 @@ _<_ beginning of buffer _>_ end of buffer _m_: set mark _/_: jump to mark
 ;;(bind-key (kbd "H-t") 'treemacs osx-key-mode-map)
 (bind-key "H-<return>" 'cua-set-rectangle-mark cua-global-keymap)
 (unbind-key "C-<return>" cua-global-keymap)
-	 #+end_src
+#+end_src
 ** Command key bindings
 These should be mac based adding to Aquamacs but some I do not used.
 Note that the Aquamacs binding does not fit through bind-keys

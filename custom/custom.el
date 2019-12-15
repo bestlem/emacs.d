@@ -30,6 +30,7 @@
      (empty-line . empty-line)
      (unknown . question-mark))) t)
  '(fringe-mode (quote (16 . 0)) nil (fringe))
+ '(global-hl-line-mode t)
  '(gnus-directory "~/Library/Preferences/Aquamacs Emacs/News")
  '(gnus-group-sort-function (quote (gnus-group-sort-by-rank)) t)
  '(gnus-kill-save-kill-file t)

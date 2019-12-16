@@ -30,8 +30,8 @@ Although that should be in prog mode
 	 Set compat so that the keys for these modes work.
 	 #+begin_src emacs-lisp
      (use-package lispy
-       ;; :ensure t
-       :mwb-load-path "fork/lispy"
+       :ensure t
+       ;;:mwb-load-path "fork/lispy"
        :bind (:map lispy-mode-map
                    ("<backspace>" . lispy-delete-backward)
                    ("<kp-delete>" . lispy-delete))

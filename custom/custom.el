@@ -58,6 +58,9 @@
  '(nxml-slash-auto-complete-flag t)
  '(org-babel-python-mode (quote python-mode))
  '(org-bullets-bullet-list (quote ("⦿" "◉" "◎" "○" "●")))
+ '(org-datetree-add-timestamp (quote active))
+ '(org-default-notes-file "~/SyncServices/Dropbox/Docs/org/notes.org")
+ '(org-directory "/Users/mark/SyncServices/Dropbox/Docs/org")
  '(org-log-done (quote time))
  '(org-modules
    (quote

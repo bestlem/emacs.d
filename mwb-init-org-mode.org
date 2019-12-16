@@ -31,11 +31,52 @@ Note Hydra is not really used after just a couple of weeks.
                 ("H-s" . org-edit-src-exit)
                 ("A-s" . org-edit-src-exit) ; I press by mistake but it makes sense
                 )
+:config
+ (setq org-datetree-add-timestamp (quote active)
+ org-default-notes-file "~/SyncServices/Dropbox/Docs/org/notes.org"
+ org-directory "/Users/mark/SyncServices/Dropbox/Docs/org"
+)
+(setq org-directory "~/git/org")
+(setq org-default-notes-file "~/git/org/refile.org")
     :hook
     <<org-mode-hooks>>
     )
   #+end_src
+*** Hack around
+basically can't edit the above as tangle - this is ironically the best suggestion for wring in code with outshine and not org mode
+**** Keys
+#+begin_src emacs-lisp
+(bind-key "<f5>" 'org-todo org-mode-map)
+(bind-key "<f12>" 'org-capture)
+(bind-key "<f12>" 'org-capture-finalize org-capture-mode-map)
+#+end_src
+**** Org capture
+From http://doc.norang.ca/org-mode.html#Capture
+#+begin_src emacs-lisp
 
+
+;; I use C-c c to start capture mode
+(global-set-key (kbd "C-c c") 'org-capture)
+
+;; Capture templates for: TODO tasks, Notes, appointments, phone calls, meetings, and org-protocol
+(setq org-capture-templates
+      (quote (("t" "todo" entry (file "~/git/org/refile.org")
+               "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
+              ("r" "respond" entry (file "~/git/org/refile.org")
+               "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
+              ("n" "note" entry (file "~/git/org/refile.org")
+               "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
+              ("j" "Journal" entry (file+datetree "~/git/org/diary.org")
+               "* %?\n%U\n" :clock-in t :clock-resume t)
+              ("w" "org-protocol" entry (file "~/git/org/refile.org")
+               "* TODO Review %c\n%U\n" :immediate-finish t)
+              ("m" "Meeting" entry (file "~/git/org/refile.org")
+               "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
+              ("p" "Phone call" entry (file "~/git/org/refile.org")
+               "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
+              ("h" "Habit" entry (file "~/git/org/refile.org")
+               "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n"))))
+#+end_src
 *** TODO Save org files saved in dropbox dir automatically (NB not emacs autosave)
 See https://www.reddit.com/r/emacs/comments/9e5h4f/is_there_a_way_to_autosave_org_note_buffers/ and real-auto-save-mode and the hook
 *** Tangle on save

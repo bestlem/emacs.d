@@ -124,7 +124,7 @@ Let's stop it. from [[https://emacs.stackexchange.com/a/13975/9874][Emacs SE]]
 
 (define-minor-mode dubcaps-mode
   "Toggle `dubcaps-mode'.  Converts words in DOuble CApitals to
-Single Capitals as you type."
+Single Capitals as you type. "
   :init-value nil
   :lighter (" DC")
   (if dubcaps-mode
@@ -347,19 +347,19 @@ Start with a small setup
        :ensure t
        :defer 2
        :diminish
-       :bind (("C-x b" . ivy-switch-buffer)
+       v:bind (("C-x b" . ivy-switch-buffer)
               ("H-b" . ivy-switch-buffer)
               ("C-x B" . ivy-switch-buffer-other-window)
               ("M-H" . ivy-resume))
-       ;; :bind (:map ivy-minibuffer-map
-       ;;             ("<tab>" . ivy-alt-done)
-       ;;             ("SPC" . ivy-alt-done-or-space)
-       ;;             ("C-d" . ivy-done-or-delete-char)
-       ;;             ("C-i" . ivy-partial-or-done)
-       ;;             ("C-r" . ivy-previous-line-or-history)
-       ;;             ("M-r" . ivy-reverse-i-search)
-       ;;             ("<C-return>" . ivy-immediate-done)
-       ;;             ("<ESC>" . minibuffer-keyboard-quit))
+       :bind (:map ivy-minibuffer-map
+                   ;; ("<tab>" . ivy-alt-done)
+                   ;; ("SPC" . ivy-alt-done-or-space)
+                   ;; ("C-d" . ivy-done-or-delete-char)
+                   ;; ("C-i" . ivy-partial-or-done)
+                   ;; ("C-r" . ivy-previous-line-or-history)
+                   ;; ("M-r" . ivy-reverse-i-search)
+                   ("<C-return>" . ivy-immediate-done)
+                   ("<ESC>" . minibuffer-keyboard-quit))
        :bind (:map ivy-switch-buffer-map
                    ("C-k" . ivy-switch-buffer-kill))
 

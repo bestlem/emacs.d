@@ -2,7 +2,6 @@
 #+PROPERTY:header-args :cache yes :tangle yes  :comments link
 
 * Common to all programming modes
-
 ** Code Edit Structure
 Indentation and tabs
 Look at smart-tabs-insinuate
@@ -43,9 +42,9 @@ Look at smart-tabs-insinuate
 	#+begin_src emacs-lisp
 	(add-hook 'prog-mode-hook (lambda () (imenu-add-to-menubar "Imenu")))
 	#+end_src
-*** Hide show
+*** Folding
+**** Hide show
 Let us set it up
-
 #+begin_src emacs-lisp
 (use-package hideshow
   :hook (prog-mode . hs-minor-mode))
@@ -82,6 +81,23 @@ _SPC_ cancel
   ("SPC" nil))
 
 (bind-key "H-h" 'hydra-hs/body)
+#+end_src
+**** Outlining
+Basically want to collapse/fold depending on comments.
+[[https://github.com/alphapapa/outshine][Outshine]] seems to be the only one still under developement.
+#+begin_src emacs-lisp
+(use-package outshine
+  :ensure t
+  :hook (outline-minor-mode . outshine-hook-function)
+  :init
+  ;; (add-hook 'outline-minor-mode-hook #'outshine-hook-function)
+  :bind (:map outline-minor-mode-map
+              ("M-p" . outline-previous-visible-heading)
+              ("M-p" . outline-next-visible-heading)
+              ("<S-tab>" . outshine-cycle-buffer))
+  :preface
+  (defvar outline-minor-mode-prefix "H-o") ;  to set before loading note other package name
+  )
 #+end_src
 ** Build systems
 *** Gradle

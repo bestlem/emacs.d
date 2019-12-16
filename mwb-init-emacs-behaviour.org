@@ -99,7 +99,8 @@ Issue is lispy removes this as lispy is vi based. Actually my understanding was 
 So use separate PRIMARY and CLIPBOARD
   #+begin_src emacs-lisp
   (delete-selection-mode 1)
-  (setq select-enable-clipboard t)
+  (setq select-enable-clipboard nil)
+  (setq select-enable-primary t)
   #+end_src
 * Scratch buffer
   Need to control how it is restarted. Aquamacs saves it
@@ -328,12 +329,6 @@ Note headers have tangle command in to suppress one or other
 	  :config
 	  (smex-initialize))
   #+end_src
-*** Ido
-:PROPERTIES:
-  :header-args:    :tangle no
-  :END:
-
-
 
 *** Ivy
 Start with a small setup
@@ -352,12 +347,12 @@ Start with a small setup
               ("C-x B" . ivy-switch-buffer-other-window)
               ("M-H" . ivy-resume))
        :bind (:map ivy-minibuffer-map
-                   ;; ("<tab>" . ivy-alt-done)
-                   ;; ("SPC" . ivy-alt-done-or-space)
-                   ;; ("C-d" . ivy-done-or-delete-char)
-                   ;; ("C-i" . ivy-partial-or-done)
-                   ;; ("C-r" . ivy-previous-line-or-history)
-                   ;; ("M-r" . ivy-reverse-i-search)
+                   ("<tab>" . ivy-alt-done)
+                   ("SPC" . ivy-alt-done-or-space)
+                   ("C-d" . ivy-done-or-delete-char)
+                   ("C-i" . ivy-partial-or-done)
+                   ("C-r" . ivy-previous-line-or-history)
+                   ;; ("M-r" . ivy-reverse-i-search) ; emacs com[lains about this]
                    ("<C-return>" . ivy-immediate-done)
                    ("<ESC>" . minibuffer-keyboard-quit))
        :bind (:map ivy-switch-buffer-map

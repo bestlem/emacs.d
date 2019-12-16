@@ -1,0 +1,15 @@
+#+TITLE Emacs configuration org Mode
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+STARTUP: content
+* Test src
+#+begin_src emacs-lisp :noweb yes
+(message
+<<noweb-inc>>
+)
+#+end_src
+
+* noweb-include
+#+NAME: noweb-inc
+#+begin_src emacs-lisp :tangle no
+"hello"
+#+end_src

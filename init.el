@@ -42,25 +42,29 @@
 
 ;; [[file:~/.emacs.d/config.org::*The loader][The loader:1]]
 (defun mwb-init-load (file-root)
-  "Load the relevant code. Currently just the same as load it loads
-	  <file-root>.el but eventually will load <file-root>.org"
+  "Load the relevant code.
+  Look for <file-root>.org and <file-root>.el files.
+  If org and no el or org file is newer
+  then retangle the org file
+  then load <file-root>.el "
+
   (let* ((org-file
-		  (concat (expand-file-name file-root mwb-user-emacs-directory) ".org"))
-		 (el-file
-		  (concat (expand-file-name file-root mwb-user-emacs-directory) ".el")))
+          (concat (expand-file-name file-root mwb-user-emacs-directory) ".org"))
+         (el-file
+          (concat (expand-file-name file-root mwb-user-emacs-directory) ".el")))
 
-	(when (file-newer-than-file-p org-file el-file)
-	  (require 'org)
-	  (message "This loaded an org mode but from the system - best to restart")
-	  (message "tangle <%s> to <%s>" org-file el-file)
-	  (org-babel-tangle-file org-file el-file))
+    (when (file-newer-than-file-p org-file el-file)
+      (require 'org)
+      (warn "This loaded an org mode but from the system - best to restart")
+      (warn "tangle <%s> to <%s>" org-file el-file)
+      (org-babel-tangle-file org-file el-file))
 
-	(condition-case err
-		(load el-file)
-	  (error (message "Error loading %s: \"%s\""
-					  file-root
-					  (error-message-string err))
-			 nil))))
+    (condition-case err
+        (load el-file)
+      (error (message "Error loading %s: \"%s\""
+                      file-root
+                      (error-message-string err))
+             nil))))
 ;; The loader:1 ends here
 
 ;; [[file:~/.emacs.d/config.org::*The Load][The Load:1]]

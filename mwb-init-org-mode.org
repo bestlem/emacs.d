@@ -1,6 +1,7 @@
 #+TITLE Emacs configuration org Mode
-#+PROPERTY:header-args :cache yes :tangle yes :comments link
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
 #+STARTUP: content
+
 * Start using org mode
 This is my first attempt at learning it.
 The config is a mess as I pick up on things.
@@ -24,32 +25,25 @@ Note Hydra is not really used after just a couple of weeks.
   #+begin_src emacs-lisp :noweb yes
   (use-package org
     :ensure t
-    :bind (:map org-mode-map
-                                          ; ("H-a" . hydra-org-mode/body)
-                ("H-s" . org-edit-special)
-                :map org-src-mode-map
-                ("H-s" . org-edit-src-exit)
-                ("A-s" . org-edit-src-exit) ; I press by mistake but it makes sense
-                )
-:config
- (setq org-datetree-add-timestamp (quote active)
- org-default-notes-file "~/SyncServices/Dropbox/Docs/org/notes.org"
- org-directory "/Users/mark/SyncServices/Dropbox/Docs/org"
-)
-(setq org-directory "~/git/org")
-(setq org-default-notes-file "~/git/org/refile.org")
-    :hook
+    :bind (("<f12>" . org-capture)
+         :map org-mode-map
+         ("H-s" . org-edit-special)
+         ("<f5>" . org-todo)
+         :map org-src-mode-map
+         ("H-s" . org-edit-src-exit)
+         ("A-s" . org-edit-src-exit)    ; I press by mistake but it makes sense
+         :map org-capture-mode-map
+         ("<f12>" . org-capture-finalize))
+    :config
+    (setq org-datetree-add-timestamp (quote active)
+          org-default-notes-file "~/SyncServices/Dropbox/Docs/org/notes.org"
+          org-directory "/Users/mark/SyncServices/Dropbox/Docs/org")
+   :hook
     <<org-mode-hooks>>
     )
   #+end_src
 *** Hack around
 basically can't edit the above as tangle - this is ironically the best suggestion for wring in code with outshine and not org mode
-**** Keys
-#+begin_src emacs-lisp
-(bind-key "<f5>" 'org-todo org-mode-map)
-(bind-key "<f12>" 'org-capture)
-(bind-key "<f12>" 'org-capture-finalize org-capture-mode-map)
-#+end_src
 **** Org capture
 From http://doc.norang.ca/org-mode.html#Capture
 #+begin_src emacs-lisp
@@ -86,7 +80,8 @@ From http://doc.norang.ca/org-mode.html#Capture
 See https://www.reddit.com/r/emacs/comments/9e5h4f/is_there_a_way_to_autosave_org_note_buffers/ and real-auto-save-mode and the hook
 *** Tangle on save
 This code is unreadable the consts would make more sens not being there as they would then match the documentation
-	#+begin_src emacs-lisp :tangle no :noweb-ref org-mode-hooks
+#+NAME: org-mode-hooks
+	#+begin_src emacs-lisp :tangle no
     (org-mode . (lambda ()
                         (add-hook
                          'after-save-hook

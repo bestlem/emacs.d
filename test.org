@@ -6,10 +6,28 @@
 (message
 <<noweb-inc>>
 )
+(
+<<noweb-refs>>
+)
+
 #+end_src
 
 * noweb-include
+Also check fonts
+** Use name
 #+NAME: noweb-inc
 #+begin_src emacs-lisp :tangle no
 "hello"
+#+end_src
+
+** Use references
+
+*** function
+#+begin_src emacs-lisp :tangle no :noweb-ref noweb-refs
+message
+#+end_src
+
+*** args
+#+begin_src emacs-lisp :tangle no :noweb-ref noweb-refs
+"the args"
 #+end_src

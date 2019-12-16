@@ -4,4 +4,12 @@
 "hello"
 ;; noweb-inc ends here
 )
+(
+;; [[[[file:~/.emacs.d/test.org::*function][function]]][]]
+message
+;; ends here
+;; [[[[file:~/.emacs.d/test.org::*args][args]]][]]
+"the args"
+;; ends here
+)
 ;; Test src:1 ends here

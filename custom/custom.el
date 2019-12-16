@@ -12,10 +12,14 @@
  '(auto-word-wrap-default-function nil)
  '(backup-directory-alist (quote (("." . ".~"))))
  '(canlock-password "8ac28fef8ff386f996bee4f20f8b3c40bd1829d4")
+ '(comment-auto-fill-only-comments t)
+ '(comment-fill-column 90)
  '(cua-enable-cua-keys nil)
+ '(cursor-type (quote hollow))
  '(custom-enabled-themes nil)
  '(delete-old-versions "keep them all")
  '(explicit-shell-file-name "/opt/local/bin/fish")
+ '(fill-nobreak-predicate (quote (fill-single-char-nobreak-p)))
  '(fringe-indicator-alist
    (quote
     ((continuation nil nil)
@@ -58,7 +62,7 @@
  '(nxml-slash-auto-complete-flag t)
  '(org-babel-python-mode (quote python-mode))
  '(org-bullets-bullet-list (quote ("⦿" "◉" "◎" "○" "●")))
- '(org-datetree-add-timestamp (quote active))
+ '(org-datetree-add-timestamp (quote active) t)
  '(org-default-notes-file "~/SyncServices/Dropbox/Docs/org/notes.org")
  '(org-directory "/Users/mark/SyncServices/Dropbox/Docs/org")
  '(org-log-done (quote time))
@@ -70,7 +74,7 @@
  '(org-todo-keywords (quote ((sequence "TODO" "|" "DONE" "LEAVE(@)"))))
  '(package-selected-packages
    (quote
-    (json-navigator yasnippet mwim mwin mosey ivy-prescient prescient fish-mode sml-mode paxedit use-package-chords paredit dashboard org clojure-mode lispy racket-mode cmake-mode swiper ivy transient cask-mode flycheck undo-tree deadgrep eros macrostep helpful ibuffer-vc counsel ivy-rich ivy-hydra org-indent xah-elisp-mode validate hardhat hydra projectile beacon ripgrep gitignore-mode gitconfig-mode nov manual matcha use-package-hydra backup-each-save esup org-bullets which-key company elmacro ws-butlerz helm elisp-format origami comment-dwim-2 smex discover-my-major json-mode treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ranger dired-toggle expand-region aggressive-indent rainbow-delimiters gradle-mode groovy-imports groovy-mode ws-butler highlight-indent-guides diminish key-chord use-package)))
+    (outshine expand-region json-navigator yasnippet mwim mwin mosey ivy-prescient prescient fish-mode sml-mode paxedit use-package-chords paredit dashboard org clojure-mode lispy racket-mode cmake-mode swiper ivy transient cask-mode flycheck undo-tree deadgrep eros macrostep helpful ibuffer-vc counsel ivy-rich ivy-hydra org-indent xah-elisp-mode validate hardhat hydra projectile beacon ripgrep gitignore-mode gitconfig-mode nov manual matcha use-package-hydra backup-each-save esup org-bullets which-key company elmacro ws-butlerz helm elisp-format origami comment-dwim-2 smex discover-my-major json-mode treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ranger dired-toggle aggressive-indent rainbow-delimiters gradle-mode groovy-imports groovy-mode ws-butler highlight-indent-guides diminish key-chord use-package)))
  '(python-shell-interpreter "python")
  '(tabbar-mode t nil (tabbar))
  '(text-mode-hook (quote (turn-on-flyspell set-word-wrap)))

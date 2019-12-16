@@ -10,3 +10,6 @@
 [submodule "fork/xonsh-mode"]
 	path = fork/xonsh-mode
 	url = https://github.com/seanfarley/xonsh-mode.git
+[submodule "fork/ob-sml"]
+	path = fork/ob-sml
+	url = https://github.com/dmgerman/ob-sml

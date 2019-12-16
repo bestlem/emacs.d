@@ -347,7 +347,7 @@ Start with a small setup
        :ensure t
        :defer 2
        :diminish
-       v:bind (("C-x b" . ivy-switch-buffer)
+       :bind (("C-x b" . ivy-switch-buffer)
               ("H-b" . ivy-switch-buffer)
               ("C-x B" . ivy-switch-buffer-other-window)
               ("M-H" . ivy-resume))

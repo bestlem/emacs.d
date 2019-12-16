@@ -78,10 +78,11 @@ From http://doc.norang.ca/org-mode.html#Capture
 #+end_src
 *** TODO Save org files saved in dropbox dir automatically (NB not emacs autosave)
 See https://www.reddit.com/r/emacs/comments/9e5h4f/is_there_a_way_to_autosave_org_note_buffers/ and real-auto-save-mode and the hook
-*** Tangle on save
+*** TODO Tangle on save
 This code is unreadable the consts would make more sens not being there as they would then match the documentation
 #+NAME: org-mode-hooks
 	#+begin_src emacs-lisp :tangle no
+
     (org-mode . (lambda ()
                         (add-hook
                          'after-save-hook

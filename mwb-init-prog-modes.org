@@ -84,7 +84,7 @@ _SPC_ cancel
 #+end_src
 **** Outlining
 Basically want to collapse/fold depending on comments.
-[[https://github.com/alphapapa/outshine][Outshine]] seems to be the only one still under developement.
+[[https://github.com/alphapapa/outshine][Outshine]] seems to be the only one still under developement, but dioes too much and has the problem that it looks for comments in colum 1 as does hideshow.
 #+begin_src emacs-lisp
 (use-package outshine
   :ensure t
@@ -98,6 +98,11 @@ Basically want to collapse/fold depending on comments.
   :preface
   (defvar outline-minor-mode-prefix "H-o") ;  to set before loading note other package name
   )
+#+end_src
+**** Folding
+Lets try another
+#+begin_src emacs-lisp
+
 #+end_src
 ** Build systems
 *** Gradle

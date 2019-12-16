@@ -37,7 +37,8 @@ So this file will have odd random comments taken from the code.
 So it is are you reading or debugging?
 Doing a course in ml would be better in org-mode
 
-Alternative is can you edit the source buffers - means no weave but can have bad source in the org file but good in the elisp. So try that first and I think an org mode bug - need to set name and not :noweb-ref perhaps latter only works if not light. So use this correctly and stick with org mode.
+Alternative is can you edit the source buffers - means no weave but can have bad source in the org file but good in the elisp. So try that first and I think an org mode bug - need to set name and not :noweb-ref perhaps latter only works if not light.
+So use this correctly and stick with org mode. But to work each code block needas a separate name or at least they mus be in the file next to each other - which blows up my put all hooks on one ref and all config on another and then group by topic.
 
 Issue I think is how much do you need the IDE features.
 *** Problems
@@ -221,22 +222,22 @@ Although see starter kit where they run after init.
 			   (message "Emacs init-time %s" (emacs-init-time))) t)
   #+end_src
 **** Message
-	 Show message with timestamp
-     #+begin_src emacs-lisp
-	 (defun my-message-with-timestamp (old-func fmt-string &rest args)
-	   "Prepend current timestamp (with microsecond precision) to a message"
-	   (apply old-func
-			  (concat (format-time-string "[%F %T.%3N %Z] ")
-					  fmt-string)
-			  args))
-	 (advice-add 'message :around #'my-message-with-timestamp)
+	 Show message with timestamp - commented out
+     #+begin_src emacs-lisp :tangle no
+     (defun my-message-with-timestamp (old-func fmt-string &rest args)
+       "Prepend current timestamp (with microsecond precision) to a message"
+       (apply old-func
+              (concat (format-time-string "[%F %T.%3N %Z] ")
+                      fmt-string)
+              args))
+     (advice-add 'message :around #'my-message-with-timestamp)
 
-	 (defun mwb-message-remove-timestanp ()
-	   (interactive)
-	   (advice-remove 'message #'my-message-with-timestamp)
-	   (message "remove timestamp"))
+     (defun mwb-message-remove-timestanp ()
+       (interactive)
+       (advice-remove 'message #'my-message-with-timestamp)
+       (message "remove timestamp"))
 
-	 (add-hook 'after-init-hook 'mwb-message-remove-timestanp)
+     (add-hook 'after-init-hook 'mwb-message-remove-timestanp)
       #+end_src
 **** Emacs Lisp
 ***** Debugging

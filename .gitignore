@@ -1,5 +1,6 @@
 *.elc
 config.el
 mwb-init-*.el
+init/**/*.el
 SessionDesktop.el
 elpa

@@ -24,7 +24,7 @@ However much of the same code appears in many places so I don't know the real so
 	 (setq ibuffer-show-empty-filter-groups nil
 		   ibuffer-default-sorting-mode 'filename/process)
 	 :config
-	 (mwb-init-load "mwb-init-ibuffer-config")
+	 (mwb-init-load "init/ibuffer-config")
 	 :hook (ibuffer . hydra-mwb-ibuffer-main/body))
    #+end_src
 

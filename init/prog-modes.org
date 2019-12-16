@@ -233,23 +233,23 @@ This also takes time to load. Need to sort out config entries and gradele-mode n
 	 #+end_src
 ** Git
 #+begin_src emacs-lisp
-(mwb-init-load "mwb-init-prog-modes-git")
+(mwb-init-load "init/prog-modes/git")
 #+end_src
 * Specific groups
 Where there is common put them together. This part is really why I have separate files so I can deal with one thing at a time
 
 ** Lisp
  #+begin_src emacs-lisp
-   (mwb-init-load "mwb-init-prog-modes-lisp")
+   (mwb-init-load "init/prog-modes/lisp")
 #+end_src
 ** ML
 #+begin_src emacs-lisp
-   (mwb-init-load "mwb-init-prog-modes-ml")
+   (mwb-init-load "init/prog-modes/ml")
 #+end_src
 ** Python
 Really need to start from scratch
 #+begin_src emacs-lisp
-(mwb-init-load "mwb-init-prog-modes-python")
+(mwb-init-load "init/prog-modes/python")
 #+end_src
 ** Structured data
 Do inline

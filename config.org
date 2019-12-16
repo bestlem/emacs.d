@@ -265,7 +265,7 @@ Although see starter kit where they run after init.
  #+end_src
 **** Packaging
       #+begin_src emacs-lisp
-	  (mwb-init-load "mwb-init-packaging")
+	  (mwb-init-load "init/packaging")
 	  #+end_src
 **** Aquamacs undo
 There are somethings that Aquamacs does that IO want to undo.
@@ -314,7 +314,7 @@ In many ways simpler as just defines a menu but does not allow menu to remain an
 
 **** Org Mode
 	  #+begin_src emacs-lisp
-	  (mwb-init-load "mwb-init-org-mode")
+	  (mwb-init-load "init/org-mode")
 	  #+end_src
 
 **** Setting variables with a check on type
@@ -336,27 +336,27 @@ Note should check on defconst
 *** Emacs settings
 **** Appearance
    #+begin_src emacs-lisp
-   (mwb-init-load  "mwb-init-appearance")
+   (mwb-init-load  "init/appearance")
    #+end_src
 
 **** Emacs behaviour
  General emacs stuff - not common-setup used to have this but separate file might not make sense
   #+begin_src emacs-lisp
-  (mwb-init-load  "mwb-init-emacs-behaviour"); odds mainly variables
-  (mwb-init-load  "mwb-init-ibuffer")
+  (mwb-init-load  "init/behaviour"); odds mainly variables
+  (mwb-init-load  "init/ibuffer")
 
   #+end_src
 *** Applications
 **** Gnus
 	 #+begin_src emacs-lisp
-	 (mwb-init-load "mwb-init-gnus")
+	 (mwb-init-load "init/gnus")
 	 #+end_src
 *** Major modes
 
 ***** System management
 Interfacing with the operating system
   #+begin_src emacs-lisp
-  (mwb-init-load "mwb-init-file-management")
+  (mwb-init-load "init/file-management")
   #+end_src
 
 ***** Text modes
@@ -383,10 +383,10 @@ Interfacing with the operating system
 ***** Programming modes
 Includes structured data
 #+begin_src emacs-lisp
-(mwb-init-load "mwb-init-prog-modes")
+(mwb-init-load "init/prog-modes")
  #+end_src
 *** Key binding
   No comments as just open the files.
   #+begin_src emacs-lisp
-  (mwb-init-load "mwb-init-global-keys")
+  (mwb-init-load "init/keys")
   #+end_src

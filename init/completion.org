@@ -30,9 +30,16 @@ This depends on the major mode and helps in code structure
   :ensure t
   :demand t                             ; need to force the load
   :after company
+  :mode ("/\\.emacs\\.d/data/snippets/" . snippet-mode)
+
+  ;; :init (setq yas--default-user-snippets-dir (mwb-user-emacs-file "data/snippets"))
   :config
+  (setq yas-snippet-dirs (list (mwb-user-emacs-file "data/snippets")))
+  (yas-reload-all)
   (yas-global-mode 1)
-  (yas-load-directory (mwb-user-emacs-file "snippets"))
+  ;; (yas-load-directory (mwb-user-emacs-file "data/snippets"))
+  ;; :mode (yas--default-user-snippets-dir . snippet-mode)
+
   (defun company-mode/backend-with-yas (backend)
     (if (and (listp backend) (member 'company-yasnippet backend))
         backend
@@ -40,19 +47,19 @@ This depends on the major mode and helps in code structure
               '(:with company-yasnippet))))
   (setq company-backends
         (mapcar #'company-mode/backend-with-yas company-backends))
-  ;; :mode ((mwb-user-emacs-file "snippets") . snippet-mode)
-  :mode ("/\\.emacs\\.d/snippets/" . snippet-mode)
+  ;; (defun company-mode/backend-with-yas (backend)
+
   :hydra (hydra-yasnippet (:color blue :hint nil)
                           "
-              ^YASnippets^
---------------------------------------------
-  Modes:    Load/Visit:    Actions:
+                ^YASnippets^
+  --------------------------------------------
+    Modes:    Load/Visit:    Actions:
 
- _g_lobal  _d_irectory    _i_nsert
- _m_inor   _f_ile         _t_ryout
- _e_xtra   _l_ist         _n_ew
-         _a_ll
-"
+   _g_lobal  _d_irectory    _i_nsert
+   _m_inor   _f_ile         _t_ryout
+   _e_xtra   _l_ist         _n_ew
+           _a_ll
+  "
                           ("d" yas-load-directory)
                           ("e" yas-activate-extra-mode)
                           ("i" yas-insert-snippet)
@@ -62,7 +69,8 @@ This depends on the major mode and helps in code structure
                           ("l" yas-describe-tables)
                           ("g" yas/global-mode)
                           ("m" yas/minor-mode)
-                          ("a" yas-reload-all)))
+                          ("a" yas-reload-all))
+  )
 #+end_src
 
 *** yasnippets collection

@@ -40,7 +40,7 @@ Note Hydra is not really used after just a couple of weeks.
 Put the bind bit in noweb
 #+NAME: key-binds
 #+begin_src emacs-lisp :tangle no
-(("<f12>" . org-capture)
+(;("<f12>" . org-capture)
  ("H-s" . org-babel-tangle-jump-to-org)
  :map org-mode-map
  ("H-s" . org-edit-special)
@@ -52,7 +52,6 @@ Put the bind bit in noweb
  ;; ("<f12>" . org-capture-finalize)
  )
 #+end_src
-
 
 
 *** Hack around

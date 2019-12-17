@@ -22,7 +22,7 @@ Note takes time to load
               ("C-d" . ivy-done-or-delete-char)
               ("C-i" . ivy-partial-or-done)
               ("C-r" . ivy-previous-line-or-history)
-              ;; ("M-r" . ivy-reverse-i-search) ; emacs com[lains about this]
+              ("M-r" . ivy-reverse-i-search) ; emacs complains about this]
               ("<C-return>" . ivy-immediate-done)
               ("<ESC>" . minibuffer-keyboard-quit))
   :bind (:map ivy-switch-buffer-map
@@ -36,7 +36,39 @@ Note takes time to load
   ;; https://emacs.stackexchange.com/a/40540/9874
   (setq ivy-extra-directories ())
   ;; Show #/total when scrolling buffers
-  (setq ivy-count-format "%d/%d "))
+  (setq ivy-count-format "%d/%d ")
+  :preface
+  (defun ivy-done-or-delete-char ()
+    (interactive)
+    (call-interactively
+     (if (eolp)
+         #'ivy-immediate-done
+       #'ivy-delete-char)))
+
+  (defun ivy-alt-done-or-space ()
+    (interactive)
+    (call-interactively
+     (if (= ivy--length 1)
+         #'ivy-alt-done
+       #'self-insert-command)))
+
+  (defun ivy-switch-buffer-kill ()
+    (interactive)
+    (debug)
+    (let ((bn (ivy-state-current ivy-last)))
+      (when (get-buffer bn)
+        (kill-buffer bn))
+      (unless (buffer-live-p (ivy-state-buffer ivy-last))
+        (setf (ivy-state-buffer ivy-last)
+              (with-ivy-window (current-buffer))))
+      (setq ivy--all-candidates (delete bn ivy--all-candidates))
+      (ivy--exhibit)))
+
+  ;; This is the value of `magit-completing-read-function', so that we see
+  ;; Magit's own sorting choices.
+  (defun my-ivy-completing-read (&rest args)
+    (let ((ivy-sort-functions-alist '((t . nil))))
+      (apply 'ivy-completing-read args))))
 #+end_src
 
 * Ivy hydra

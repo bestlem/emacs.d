@@ -2,51 +2,51 @@
 #+PROPERTY:header-args :cache yes :tangle yes :comments link
 
 * Ivy
-Start with a small setup
-** Ivy
-	 This is the completion tools
-	 Take some for John Wiegley
-	 Note takes time to load
-	 #+begin_src emacs-lisp
-     (use-package ivy
-       :ensure t
-       :defer 2
-       :diminish
-       :bind (("C-x b" . ivy-switch-buffer)
-              ("H-b" . ivy-switch-buffer)
-              ("C-x B" . ivy-switch-buffer-other-window)
-              ("M-H" . ivy-resume))
-       :bind (:map ivy-minibuffer-map
-                   ("<tab>" . ivy-alt-done)
-                   ("SPC" . ivy-alt-done-or-space)
-                   ("C-d" . ivy-done-or-delete-char)
-                   ("C-i" . ivy-partial-or-done)
-                   ("C-r" . ivy-previous-line-or-history)
-                   ;; ("M-r" . ivy-reverse-i-search) ; emacs com[lains about this]
-                   ("<C-return>" . ivy-immediate-done)
-                   ("<ESC>" . minibuffer-keyboard-quit))
-       :bind (:map ivy-switch-buffer-map
-                   ("C-k" . ivy-switch-buffer-kill))
+Start with a small setup as I lost track but some of it is needed.
 
-       :config
-       (ivy-mode 1)
-       (setq ivy-use-virtual-buffers t)
-       (setq enable-recursive-minibuffers t)
-       ;; Do not show ./ amd ../ at top
-       ;; https://emacs.stackexchange.com/a/40540/9874
-       (setq ivy-extra-directories ())
-       ;; Show #/total when scrolling buffers
-       (setq ivy-count-format "%d/%d "))
+This is the completion tools
+Take some from John Wiegley
+Note takes time to load
+#+begin_src emacs-lisp
+(use-package ivy
+  :ensure t
+  :defer 2
+  :diminish
+  :bind (("C-x b" . ivy-switch-buffer)
+         ("H-b" . ivy-switch-buffer)
+         ("C-x B" . ivy-switch-buffer-other-window)
+         ("M-H" . ivy-resume))
+  :bind (:map ivy-minibuffer-map
+              ("<tab>" . ivy-alt-done)
+              ("SPC" . ivy-alt-done-or-space)
+              ("C-d" . ivy-done-or-delete-char)
+              ("C-i" . ivy-partial-or-done)
+              ("C-r" . ivy-previous-line-or-history)
+              ;; ("M-r" . ivy-reverse-i-search) ; emacs com[lains about this]
+              ("<C-return>" . ivy-immediate-done)
+              ("<ESC>" . minibuffer-keyboard-quit))
+  :bind (:map ivy-switch-buffer-map
+              ("C-k" . ivy-switch-buffer-kill))
+
+  :config
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
+  ;; Do not show ./ amd ../ at top
+  ;; https://emacs.stackexchange.com/a/40540/9874
+  (setq ivy-extra-directories ())
+  ;; Show #/total when scrolling buffers
+  (setq ivy-count-format "%d/%d "))
 #+end_src
 
-** Ivy hydra
+* Ivy hydra
 #+begin_src emacs-lisp :
-	 (use-package ivy-hydra
-	   :ensure t
-	   :after (ivy hydra))
+(use-package ivy-hydra
+  :ensure t
+  :after (ivy hydra))
 #+end_src
 
-** Ivy rich
+* Ivy rich
 More friendly interface for ivy
 #+begin_src emacs-lisp :
 (use-package ivy-rich
@@ -60,10 +60,9 @@ More friendly interface for ivy
 		ivy-rich-path-style 'abbrev))
 #+end_src
 
-** Swiper
+* Swiper
 Replace isearch
 #+begin_src emacs-lisp :
-
 (use-package swiper
   :after ivy
   :ensure t
@@ -72,18 +71,18 @@ Replace isearch
   )
 #+end_src
 
-*** Recentre
+** Recentre
 	   From [[http://pragmaticemacs.com/emacs/dont-search-swipe/][Pragmatic emacs]] advise swiper to recenter on exit (ivy-display-style defaults to fancy)
 	   #+begin_src emacs-lisp
-	   (defun bjm-swiper-recenter (&rest args)
-		 "recenter display after swiper"
-		 (recenter))
-	   (advice-add 'swiper :after #'bjm-swiper-recenter)
+       (defun bjm-swiper-recenter (&rest args)
+         "recenter display after swiper"
+         (recenter))
+       (advice-add 'swiper :after #'bjm-swiper-recenter)
 	   #+end_src
 *** TODO Aquamacs
-Need to integrate with command FG etc (note thet are separate to C-s
+Need to integrate with command FG etc (note thet are separate to C-s) although has been useful top be separate
 
-** Counsel
+* Counsel
 Improve many emacs functions
 #+begin_src emacs-lisp :
 (use-package counsel
@@ -116,16 +115,14 @@ Improve many emacs functions
 		  "is recommended you install ripgrep.")))
 	 #+end_src
 
-*** prescient
+** prescient
 [[https://github.com/raxod502/prescient.el][Prescient]]  is a library which sorts and filters lists of candidates,
 #+begin_src emacs-lisp
 (use-package prescient
-  :ensure t
-  )
+  :ensure t)
 (use-package ivy-prescient
   :ensure t
   :after (counsel prescient)
   :config (ivy-prescient-mode 1)
-  (prescient-persist-mode 1)
-  )
+  (prescient-persist-mode 1))
 #+end_src

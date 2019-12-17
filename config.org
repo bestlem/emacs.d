@@ -252,7 +252,7 @@ I suspect the order after this does not matter
  Yes Aquamacs does this but in a directory with a space. So put with code so can be under source code control and user-emacs-directory is not.
  Needs to have initsplit added so can seperate out customization files.
  #+begin_src emacs-lisp
- (setq custom-file (mwb-user-emacs-file "custom/custom.el"))
+ (setq custom-file (mwb-user-emacs-file "custom.el"))
  (load custom-file 'noerror)
  #+end_src
 **** Packaging

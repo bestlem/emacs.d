@@ -77,6 +77,7 @@
  '(tabbar-mode t nil (tabbar))
  '(text-mode-hook (quote (turn-on-flyspell set-word-wrap)))
  '(tool-bar-mode nil)
+ '(undo-limit 800000)
  '(visual-line-mode t t)
  '(word-wrap t))
 (custom-set-faces

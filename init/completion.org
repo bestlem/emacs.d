@@ -1,0 +1,219 @@
+#+TITLE Emacs configuration How emacs completes
+#+PROPERTY:header-args :cache yes :tangle yes :comments link
+* Completion
+** Text
+This is completion for text in buffer
+*** Current program
+This looks at the current code and prompts for variables etc
+ I need something and company seems to be the current one
+Add some from jweigley
+ #+begin_src emacs-lisp
+ (use-package company
+   :ensure t
+   :diminish
+   :commands (company-mode company-indent-or-complete-common)
+
+   :hook (after-init . global-company-mode)
+   :config
+   (define-key company-mode-map [tab]
+     '(menu-item "maybe-company-expand" nil
+                 :filter (lambda (&optional _)
+                           (when (check-expansion)
+                             #'company-complete-common))))
+   )
+#+end_src
+
+*** Language dependant
+This depends on the major mode and helps in code structure
+#+begin_src emacs-lisp
+(use-package yasnippet
+  :ensure t
+  :demand t                             ; need to force the load
+:after company
+  :config
+  (yas-global-mode 1)
+  (yas-load-directory (mwb-user-emacs-file "snippets"))
+  (defun company-mode/backend-with-yas (backend)
+    (if (and (listp backend) (member 'company-yasnippet backend))
+        backend
+      (append (if (consp backend) backend (list backend))
+              '(:with company-yasnippet))))
+  (setq company-backends
+        (mapcar #'company-mode/backend-with-yas company-backends))
+  ;; :mode ((mwb-user-emacs-file "snippets") . snippet-mode)
+  :mode ("/\\.emacs\\.d/snippets/" . snippet-mode)
+
+  :hydra (hydra-yasnippet (:color blue :hint nil)
+                          "
+              ^YASnippets^
+--------------------------------------------
+  Modes:    Load/Visit:    Actions:
+
+ _g_lobal  _d_irectory    _i_nsert
+ _m_inor   _f_ile         _t_ryout
+ _e_xtra   _l_ist         _n_ew
+         _a_ll
+"
+                          ("d" yas-load-directory)
+                          ("e" yas-activate-extra-mode)
+                          ("i" yas-insert-snippet)
+                          ("f" yas-visit-snippet-file :color blue)
+                          ("n" yas-new-snippet)
+                          ("t" yas-tryout-snippet)
+                          ("l" yas-describe-tables)
+                          ("g" yas/global-mode)
+                          ("m" yas/minor-mode)
+                          ("a" yas-reload-all)))
+
+;; This adds a lot of snippets especially for emacs not certain if I want them tey
+;; (use-package yasnippet-snippets
+;;   :ensure t)
+
+
+#+end_src
+** Emacs
+This is completion for emacs commands. Choice is ido, ivy helm.
+I'll try ivy.
+Note headers have tangle command in to suppress one or other
+**** Find M-x commands
+  This is [[https://www.emacswiki.org/emacs/Smex][smex]] buy ivy replaces it actually it uses it - Something changed :(
+  #+begin_quote
+  Smex is a M-x enhancement for Emacs. Built on top of IDO, it provides a convenient interface to your recently and most frequently used commands. And to all the other commands, too.
+  #+end_quote
+  #+begin_src emacs-lisp
+	(use-package smex
+	  :ensure t
+	  :config
+	  (smex-initialize))
+  #+end_src
+
+*** Ivy
+Start with a small setup
+
+**** Ivy
+	 This is the completion tools
+	 Take some for John Wiegley
+	 Note takes time to load
+	 #+begin_src emacs-lisp
+     (use-package ivy
+       :ensure t
+       :defer 2
+       :diminish
+       :bind (("C-x b" . ivy-switch-buffer)
+              ("H-b" . ivy-switch-buffer)
+              ("C-x B" . ivy-switch-buffer-other-window)
+              ("M-H" . ivy-resume))
+       :bind (:map ivy-minibuffer-map
+                   ("<tab>" . ivy-alt-done)
+                   ("SPC" . ivy-alt-done-or-space)
+                   ("C-d" . ivy-done-or-delete-char)
+                   ("C-i" . ivy-partial-or-done)
+                   ("C-r" . ivy-previous-line-or-history)
+                   ;; ("M-r" . ivy-reverse-i-search) ; emacs com[lains about this]
+                   ("<C-return>" . ivy-immediate-done)
+                   ("<ESC>" . minibuffer-keyboard-quit))
+       :bind (:map ivy-switch-buffer-map
+                   ("C-k" . ivy-switch-buffer-kill))
+
+       :config
+       (ivy-mode 1)
+       (setq ivy-use-virtual-buffers t)
+       (setq enable-recursive-minibuffers t)
+       ;; Do not show ./ amd ../ at top
+       ;; https://emacs.stackexchange.com/a/40540/9874
+       (setq ivy-extra-directories ())
+       ;; Show #/total when scrolling buffers
+       (setq ivy-count-format "%d/%d "))
+#+end_src
+
+**** Ivy hydra
+#+begin_src emacs-lisp :
+	 (use-package ivy-hydra
+	   :ensure t
+	   :after (ivy hydra))
+#+end_src
+
+**** Ivy rich
+More friendly interface for ivy
+#+begin_src emacs-lisp :
+(use-package ivy-rich
+  :after ivy counsel
+  :demand t
+  :ensure t
+  :config
+  (ivy-rich-mode 1)
+  (setq ivy-virtual-abbreviate 'full
+		ivy-rich-switch-buffer-align-virtual-buffer t
+		ivy-rich-path-style 'abbrev))
+#+end_src
+
+**** Swiper
+Replace isearch
+#+begin_src emacs-lisp :
+
+(use-package swiper
+  :after ivy
+  :ensure t
+  :bind (("C-s" . swiper)
+		 ("C-r" . swiper))
+  )
+#+end_src
+
+***** Recentre
+	   From [[http://pragmaticemacs.com/emacs/dont-search-swipe/][Pragmatic emacs]] advise swiper to recenter on exit (ivy-display-style defaults to fancy)
+	   #+begin_src emacs-lisp
+	   (defun bjm-swiper-recenter (&rest args)
+		 "recenter display after swiper"
+		 (recenter))
+	   (advice-add 'swiper :after #'bjm-swiper-recenter)
+	   #+end_src
+***** TODO Aquamacs
+Need to integrate with command FG etc (note thet are separate to C-s
+
+**** Counsel
+Improve many emacs functions
+#+begin_src emacs-lisp :
+(use-package counsel
+  :ensure t
+  :after ivy
+  :bind (("M-x" . counsel-M-x)
+		 ("C-x C-f" . counsel-find-file)
+		 ("C-x C-r" . counsel-recentf)
+		 ("<f1> f" . counsel-describe-function)
+		 ("<f1> v" . counsel-describe-variable)
+		 ("<f1> l" . counsel-find-library)
+										; ("<f2> i" . counsel-info-lookup-symbol)
+										; ("<f2> u" . counsel-unicode-char)
+		 ("M-i" . counsel-imenu)
+		 ("C-c g" . counsel-git-grep)
+		 ("C-c j" . counsel-git)
+										;("C-c k" . counsel-ag)
+		 ("C-c r" . counsel-rg)
+		 ("C-x l" . counsel-locate)
+		 :map minibuffer-local-map
+		 ("C-r" . counsel-minibuffer-add))
+  :config
+  (if (executable-find "rg")
+	  ;; use ripgrep instead of grep because it's way faster
+	  (setq counsel-grep-base-command
+			"rg -i -M 120 --no-heading --line-number --color never '%s' %s"
+			counsel-rg-base-command
+			"rg -i -M 120 --no-heading --line-number --color never %s .")
+	(warn "\nWARNING: Could not find the ripgrep executable. It "
+		  "is recommended you install ripgrep.")))
+	 #+end_src
+
+***** prescient
+[[https://github.com/raxod502/prescient.el][Prescient]]  is a library which sorts and filters lists of candidates,
+#+begin_src emacs-lisp
+(use-package prescient
+  :ensure t
+  )
+(use-package ivy-prescient
+  :ensure t
+  :after (counsel prescient)
+  :config (ivy-prescient-mode 1)
+  (prescient-persist-mode 1)
+  )
+#+end_src
+

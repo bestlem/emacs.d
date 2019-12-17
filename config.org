@@ -343,8 +343,8 @@ Note should check on defconst
  General emacs stuff - not common-setup used to have this but separate file might not make sense
   #+begin_src emacs-lisp
   (mwb-init-load  "init/behaviour"); odds mainly variables
+  (mwb-init-load  "init/completion")
   (mwb-init-load  "init/ibuffer")
-
   #+end_src
 *** Applications
 **** Gnus

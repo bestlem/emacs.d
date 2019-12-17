@@ -41,6 +41,9 @@ Alternative is can you edit the source buffers - means no weave but can have bad
 So use this correctly and stick with org mode. But to work each code block needas a separate name or at least they mus be in the file next to each other - which blows up my put all hooks on one ref and all config on another and then group by topic.
 
 Issue I think is how much do you need the IDE features.
+
+For resilience over org version issues put as much after org as possible (makes case for using non org mode expand until org mode loaded)
+The important bits are init - the loader, packaging and org mode itself. The rest goes to all.org
 *** Problems
 
 **** TODO Spaces
@@ -210,17 +213,6 @@ This fails for config.org so that needs to be in version control.
 *** Emacs environment (custom.el)
 Setup minimum to run the configuration.
 I suspect the order after this does not matter
-**** After initialisation
-Although see starter kit where they run after init.
-  #+begin_src emacs-lisp
-  (add-hook 'after-init-hook
-			`(lambda ()
-			   (setq file-name-handler-alist file-name-handler-alist-old
-					 gc-cons-threshold 800000
-					 gc-cons-percentage 0.1)
-			   (garbage-collect)
-			   (message "Emacs init-time %s" (emacs-init-time))) t)
-  #+end_src
 **** Message
 	 Show message with timestamp - commented out
      #+begin_src emacs-lisp :tangle no
@@ -267,126 +259,12 @@ Although see starter kit where they run after init.
       #+begin_src emacs-lisp
 	  (mwb-init-load "init/packaging")
 	  #+end_src
-**** Aquamacs undo
-There are somethings that Aquamacs does that IO want to undo.
-e.g. key bindings that they do to stop modes changing them.
-#+begin_src emacs-lisp
-(unbind-key "<end>" osx-key-mode-map)
-(unbind-key "<home>" osx-key-mode-map)
-#+end_src
-**** Startup screen
-    #+begin_src emacs-lisp
-    (use-package dashboard
-:disabled
-      :ensure t
-      :config
-      (dashboard-setup-startup-hook)
-      (setq dashboard-items '((recents . 5)
-                              (bookmarks . 5)
-                              (projects . 5)
-                              (agenda . 5)
-                              (registers . 5))))
-    #+end_src
-**** Matcha
-		Menu bindings from [[https://github.com/jojojames/matcha][jojojames]] originally using hydra but changed to transient as I was editing so a fun day where it did not work. Transient programming interface seems nearer what I want but hydra I suspect has better functionality for my use e.g. can do commands and stay in hydra/
-		#+begin_src emacs-lisp
-        (use-package matcha
-          :mwb-load-path "fork/matcha"
-          :config
-          (matcha-setup))
-		#+end_src
-
-***** Support code
-		 Extra functions from JoJoJames
-		 #+begin_src emacs-lisp
-         (use-package jp-projectile-utils
-           :mwb-load-path "site-lisp/jojojames")
-		 #+end_src
-***** Transient
-qqqqAnother key bind menuy like hydra [[https://emacsair.me/2019/02/14/transient-0.1/][from the author of magit]]
-In many ways simpler as just defines a menu but does not allow menu to remain and all entries must be named methods not lambdas.
-		#+begin_src emacs-lisp
-        (use-package transient
-          :diminish
-          :ensure t
-          :config (transient-bind-q-to-quit))
-		#+end_src
-
 **** Org Mode
 	  #+begin_src emacs-lisp
 	  (mwb-init-load "init/org-mode")
 	  #+end_src
-
-**** Setting variables with a check on type
-Used when overriding a defcustom or defvar.
-Note should check on defconst
+*** The rest
 #+begin_src emacs-lisp
-(use-package validate
-  :ensure t)
+(mwb-init-load "init/all")
 #+end_src
 
-*** Emacs server
- This is a simple server start - to allow emacsclient from Terminal. There are more complex starters.
- #+begin_src emacs-lisp
-(use-package server
-  :ensure nil
-  :hook (after-init . server-mode))
- #+end_src
-
-*** Emacs settings
-**** Appearance
-   #+begin_src emacs-lisp
-   (mwb-init-load  "init/appearance")
-   #+end_src
-
-**** Emacs behaviour
- General emacs stuff - not common-setup used to have this but separate file might not make sense
-  #+begin_src emacs-lisp
-  (mwb-init-load  "init/behaviour"); odds mainly variables
-  (mwb-init-load  "init/completion")
-  (mwb-init-load  "init/ibuffer")
-  #+end_src
-*** Applications
-**** Gnus
-	 #+begin_src emacs-lisp
-	 (mwb-init-load "init/gnus")
-	 #+end_src
-*** Major modes
-
-***** System management
-Interfacing with the operating system
-  #+begin_src emacs-lisp
-  (mwb-init-load "init/file-management")
-  #+end_src
-
-***** Text modes
-****** Epub reading
-	   #+begin_src emacs-lisp
-	   ;; Epub reader
-	   (use-package nov
-		 :ensure t
-		 :mode ("\\.epub\\'" . nov-mode)
-		 :preface
-		 (defun my-nov-setup ()
-		   (visual-line-mode 1)
-		   (face-remap-add-relative 'variable-pitch :family "Times New Roman" :height 1.5)
-		   :hook (nov-mode . my-nov-setup)))
-	   #+end_src
-****** Web display
-	   Make contrast higher from steckemacs
-	   #+begin_src emacs-lisp
-	   (use-package shr
-		 :custom
-		 ;; increase contrast between similar colors
-		 (shr-color-visible-luminance-min 60))
-	   #+end_src
-***** Programming modes
-Includes structured data
-#+begin_src emacs-lisp
-(mwb-init-load "init/prog-modes")
- #+end_src
-*** Key binding
-  No comments as just open the files.
-  #+begin_src emacs-lisp
-  (mwb-init-load "init/keys")
-  #+end_src

@@ -40,13 +40,108 @@
 	(expand-file-name name mwb-user-emacs-directory))
 ;; Where my init code is:1 ends here
 
+;; [[file:~/.emacs.d/config.org::*Non org mode expander][Non org mode expander:1]]
+(defun nullman/org-babel-generate-elisp-file (file &optional byte-compile force)
+  "Generate an emacs-lisp file from an org-babel FILE.
+
+Additionally, byte compile the file if BYTE-COMPILE is
+non-nil.
+
+Process file even if timestamp is not newer than target if FORCE
+is non-nil."
+  (let* ((case-fold-search t)
+         (file-base (expand-file-name (file-name-sans-extension file)))
+         (file-org (concat (file-name-base file) ".org"))
+         (file-elisp (concat file-base ".el"))
+         (file-comp (concat file-base ".elc"))
+         (heading-regexp "^\*+ ")
+         (heading-comment-regexp "^\*+ COMMENT ")
+         (begin-regexp "^[ \t]*#\\+BEGIN_SRC emacs-lisp")
+         (begin-tangle-regexp "^[ \t]*#\\+BEGIN_SRC .*:tangle ")
+         (end-regexp "^[ \t]*#\\+END_SRC")
+         (indent-regexp "^  "))
+    ;; generate elisp file if needed
+    (when (or force
+              (not (file-exists-p file-elisp))
+              (file-newer-than-file-p file-org file-elisp))
+      (message "Nullman Writing %s..." file-elisp)
+      (with-temp-file file-elisp
+        (insert-file-contents file)
+        (goto-char (point-min))
+        (let (code
+              headings-counts
+              (level 1)
+              (comment-level 0)
+              (end-comment ""))
+          (while (not (eobp))
+            (cond
+             ;; comment heading
+             ((let ((case-fold-search nil))
+                (looking-at heading-comment-regexp))
+              (setq level (/ (- (match-end 0) (line-beginning-position) 8) 2))
+              (when (or (zerop comment-level)
+                        (< level comment-level))
+                (setq comment-level level))
+              (delete-region (line-beginning-position) (progn (forward-line) (point))))
+             ;; normal heading
+             ((looking-at heading-regexp)
+              (setq level (/ (- (match-end 0) (line-beginning-position)) 2))
+              (when (or (zerop comment-level)
+                        (<= level comment-level))
+                (setq comment-level 0)
+                (if (assoc level headings-counts)
+                    (setf (cdr (assoc level headings-counts))
+                          (cons (buffer-substring-no-properties (match-end 0) (line-end-position)) 1))
+                  (setq headings-counts (append headings-counts (list (cons level (cons "No heading" 1)))))))
+              (delete-region (line-beginning-position) (progn (forward-line) (point))))
+             ;; start of tangled source block
+             ((and (looking-at begin-regexp)
+                   (zerop comment-level)
+                   (not (looking-at begin-tangle-regexp))) ; skip blocks with their own tangle directive
+              (let* ((heading-count (cdr (assoc level headings-counts)))
+                     (heading (car heading-count))
+                     (count (cdr heading-count)))
+                (delete-region (line-beginning-position) (progn (forward-line) (point)))
+                (unless (bobp)
+                  (newline))
+                (when (fboundp 'org-link-escape)
+                  (insert (format ";; [[file:%s::*%s][%s:%s]]\n" file-org (org-link-escape heading) heading count))
+                  (setq end-comment (format ";; %s:%s ends here\n" heading count))
+                  (cl-incf (cddr (assoc level headings-counts))))
+                (setq code t)))
+             ;; end of tangled source block
+             ((and code
+                   (looking-at end-regexp))
+              (delete-region (line-beginning-position) (progn (forward-line) (point)))
+              (insert end-comment)
+              (setq code nil
+                    end-comment ""))
+             ;; inside tangled source block
+             (code
+              (when (looking-at indent-regexp)
+                (delete-char (if (boundp 'org-edit-src-content-indentation)
+                                 org-edit-src-content-indentation
+                               2)))
+              (forward-line))
+             ;; outside tangled source block
+             (t
+              (delete-region (line-beginning-position) (progn (forward-line) (point))))))
+          (time-stamp))
+        (message "Wrote %s..." file-elisp)))
+    ;; byte compile elisp file if needed
+    (when (and byte-compile
+               (or (not (file-exists-p file-comp))
+                   (file-newer-than-file-p file-elisp file-comp)))
+      (byte-compile-file file-elisp))))
+;; Non org mode expander:1 ends here
+
 ;; [[file:~/.emacs.d/config.org::*The loader][The loader:1]]
-(defun mwb-init-load (file-root)
+(defun mwb-init-load (file-root &optional no-org)
   "Load the relevant code.
-  Look for <file-root>.org and <file-root>.el files.
-  If org and no el or org file is newer
-  then retangle the org file
-  then load <file-root>.el "
+     Look for <file-root>.org and <file-root>.el files.
+     If org and no el or org file is newer
+     then retangle the org file if noorg is not nil then use nullmans expand
+     then load <file-root>.el "
 
   (let* ((org-file
           (concat (expand-file-name file-root mwb-user-emacs-directory) ".org"))
@@ -54,10 +149,17 @@
           (concat (expand-file-name file-root mwb-user-emacs-directory) ".el")))
 
     (when (file-newer-than-file-p org-file el-file)
-      (require 'org)
-      (warn "This loaded an org mode but from the system - best to restart")
-      (warn "tangle <%s> to <%s>" org-file el-file)
-      (org-babel-tangle-file org-file el-file))
+
+      (cond (no-org
+             (message "tangle <%s> to <%s> using regex replacement not org mode"
+                   org-file el-file)
+             ( nullman/org-babel-generate-elisp-file org-file el-file))
+            (t
+             (require 'org)
+             (message "This loaded an org mode but from the system - best to restart")
+             (message "tangle <%s> to <%s> using org version %s"
+                   org-file el-file org-version)
+             (org-babel-tangle-file org-file el-file))))
 
     (condition-case err
         (load el-file)
@@ -68,5 +170,5 @@
 ;; The loader:1 ends here
 
 ;; [[file:~/.emacs.d/config.org::*The Load][The Load:1]]
-(mwb-init-load "config")
+(mwb-init-load "config" "no-org")
 ;; The Load:1 ends here

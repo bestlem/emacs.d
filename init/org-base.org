@@ -12,7 +12,7 @@ This is so the file can be processed by nullman's expand - basically no noweb we
  #+end_src
 
 *** Do the load from package.el
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp
 (use-package org
   :ensure t)
 #+end_src
@@ -22,6 +22,6 @@ This file is the only one that using noweb weaving so must be loaded via a prope
 
 Now get the rest which can be expanded by org.
 
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp 
 (mwb-init-load "init/org-all")
 #+end_src

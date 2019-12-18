@@ -32,13 +32,10 @@ This depends on the major mode and helps in code structure
   :after company
   :mode ("/\\.emacs\\.d/data/snippets/" . snippet-mode)
 
-  ;; :init (setq yas--default-user-snippets-dir (mwb-user-emacs-file "data/snippets"))
   :config
   (setq yas-snippet-dirs (list (mwb-user-emacs-file "data/snippets")))
   (yas-reload-all)
   (yas-global-mode 1)
-  ;; (yas-load-directory (mwb-user-emacs-file "data/snippets"))
-  ;; :mode (yas--default-user-snippets-dir . snippet-mode)
 
   (defun company-mode/backend-with-yas (backend)
     (if (and (listp backend) (member 'company-yasnippet backend))
@@ -47,7 +44,11 @@ This depends on the major mode and helps in code structure
               '(:with company-yasnippet))))
   (setq company-backends
         (mapcar #'company-mode/backend-with-yas company-backends))
-  ;; (defun company-mode/backend-with-yas (backend)
+
+  (use-package yasnippet-snippets
+    :config (yasnippet-snippets-initialize)
+    (message "loaded yasnippets collection")
+    :ensure t)
 
   :hydra (hydra-yasnippet (:color blue :hint nil)
                           "
@@ -77,10 +78,7 @@ This depends on the major mode and helps in code structure
 There is a package including a lot of snippets.
 However there are so many elisp ones that it might be too confusing.
 #+begin_src emacs-lisp
-(use-package yasnippet-snippets
-  :after yasnippet
-  :config (yasnippet-snippets-initialize)
-  :ensure t)
+
 #+end_src
 
 * Emacs

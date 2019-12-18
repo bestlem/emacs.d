@@ -31,27 +31,32 @@ This depends on the major mode and helps in code structure
   :demand t                             ; need to force the load
   :after company
   :mode ("/\\.emacs\\.d/data/snippets/" . snippet-mode)
+  ;; :bind (:map yas-minor-mode-map
+  ;; ("SPC" . mwb-yas-expand)
+  )
+;; :preface
+;; (defun mwb-yas-expand ()
+;;   (eval yas-maybe-expand))
+:config
+(setq yas-snippet-dirs (list (mwb-user-emacs-file "data/snippets")))
+(yas-reload-all)
+(yas-global-mode 1)
+(define-key yas-minor-mode-map (kbd "SPC") yas-maybe-expand)
+(defun company-mode/backend-with-yas (backend)
+  (if (and (listp backend) (member 'company-yasnippet backend))
+      backend
+    (append (if (consp backend) backend (list backend))
+            '(:with company-yasnippet))))
+(setq company-backends
+      (mapcar #'company-mode/backend-with-yas company-backends))
 
-  :config
-  (setq yas-snippet-dirs (list (mwb-user-emacs-file "data/snippets")))
-  (yas-reload-all)
-  (yas-global-mode 1)
+(use-package yasnippet-snippets
+  :config (yasnippet-snippets-initialize)
+  (message "loaded yasnippets collection")
+  :ensure t)
 
-  (defun company-mode/backend-with-yas (backend)
-    (if (and (listp backend) (member 'company-yasnippet backend))
-        backend
-      (append (if (consp backend) backend (list backend))
-              '(:with company-yasnippet))))
-  (setq company-backends
-        (mapcar #'company-mode/backend-with-yas company-backends))
-
-  (use-package yasnippet-snippets
-    :config (yasnippet-snippets-initialize)
-    (message "loaded yasnippets collection")
-    :ensure t)
-
-  :hydra (hydra-yasnippet (:color blue :hint nil)
-                          "
+:hydra (hydra-yasnippet (:color blue :hint nil)
+                        "
                 ^YASnippets^
   --------------------------------------------
     Modes:    Load/Visit:    Actions:
@@ -61,17 +66,17 @@ This depends on the major mode and helps in code structure
    _e_xtra   _l_ist         _n_ew
            _a_ll
   "
-                          ("d" yas-load-directory)
-                          ("e" yas-activate-extra-mode)
-                          ("i" yas-insert-snippet)
-                          ("f" yas-visit-snippet-file :color blue)
-                          ("n" yas-new-snippet)
-                          ("t" yas-tryout-snippet)
-                          ("l" yas-describe-tables)
-                          ("g" yas/global-mode)
-                          ("m" yas/minor-mode)
-                          ("a" yas-reload-all))
-  )
+                        ("d" yas-load-directory)
+                        ("e" yas-activate-extra-mode)
+                        ("i" yas-insert-snippet)
+                        ("f" yas-visit-snippet-file :color blue)
+                        ("n" yas-new-snippet)
+                        ("t" yas-tryout-snippet)
+                        ("l" yas-describe-tables)
+                        ("g" yas/global-mode)
+                        ("m" yas/minor-mode)
+                        ("a" yas-reload-all))
+)e
 #+end_src
 
 *** yasnippets collection

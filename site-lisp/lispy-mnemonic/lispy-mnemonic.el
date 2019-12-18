@@ -226,13 +226,13 @@ Add if not message the eros display"
 					 (cdr (lispy--bounds-dwim)))
 					))))))
 
-;; (defhydra hydra-lispy-eval (:color blue)
-;;   "Lispy eval"
-;;   ("e" mwb-lispy-eval "eval")
-;;   ("r" lispy-eval-and-replace "replace" :color red)
-;;   ("o" lispy-eval-other-window "other window")
-;;   ("i" lispy-eval-and-insert "insert")
-;;   ("c" lispy-eval-and-comment "comment"))
+(defhydra hydra-lispy-eval (:color blue)
+  "Lispy eval"
+  ("e" mwb-lispy-eval "eval")
+  ("r" lispy-eval-and-replace "replace" :color red)
+  ("o" lispy-eval-other-window "other window")
+  ("i" lispy-eval-and-insert "insert")
+  ("c" lispy-eval-and-comment "comment"))
 
 (defhydra hydra-lispy-format ()
   "Lispy format"
@@ -302,7 +302,7 @@ Add if not message the eros display"
 
 
 
-
+;;  See racket paredit use a minor mode after this
 ;; (if (eq major-mode 'racket-mode)
 ;;     (define-key lispy-mnemonic-mode-map (kbd "[") 'racket-lispy-smart-open-bracket)
 ;;   (define-key lispy-mnemonic-mode-map (kbd "[") 'lispy-brackets))
@@ -359,7 +359,8 @@ Add if not message the eros display"
 (lispy-define-key lispy-mnemonic-mode-map (kbd "O") 'hydra-lispy-outline/body)
 (lispy-define-key lispy-mnemonic-mode-map (kbd "R") 'hydra-lispy-raise/body)
 (lispy-define-key lispy-mnemonic-mode-map (kbd "D") 'lispy-describe)
-(lispy-define-key lispy-mnemonic-mode-map (kbd "E") 'lispy-ediff-regions)
+;; (lispy-define-key lispy-mnemonic-mode-map (kbd "E") 'lispy-ediff-regions)
+(lispy-define-key lispy-mnemonic-mode-map (kbd "E") 'hydra-lispy-eval/body)
 (lispy-define-key lispy-mnemonic-mode-map (kbd "U") 'lispy-unstringify)
 
 ;;;###autoload

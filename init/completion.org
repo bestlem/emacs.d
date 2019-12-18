@@ -74,9 +74,14 @@ This depends on the major mode and helps in code structure
 #+end_src
 
 *** yasnippets collection
-There is a package including a lot of snippets. However there are so many elips ones that it might be too confusing.
-;; (use-package yasnippet-snippets
-;;   :ensure t)
+There is a package including a lot of snippets.
+However there are so many elisp ones that it might be too confusing.
+#+begin_src emacs-lisp
+(use-package yasnippet-snippets
+  :after yasnippet
+  :config (yasnippet-snippets-initialize)
+  :ensure t)
+#+end_src
 
 * Emacs
 This is completion for emacs commands. Choice is ido, ivy helm.

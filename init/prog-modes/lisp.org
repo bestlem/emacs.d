@@ -1,12 +1,9 @@
 #+TITLE Emacs configuration - lisp
 #+PROPERTY:header-args :cache yes :tangle yes  :comments link
 #+STARTUP: content
-* Lisp running environment
-We might try a few but Emacs Lisp is the only one currently
-
-** Common to all
-
-*** Make parentheses pretty
+* Lisp running environments
+These are for all () languages but could extend to more as manythings are for all structured ASTs or simply brackets
+** Make parentheses pretty
 Although that should be in prog mode
 	#+begin_src emacs-lisp
     (use-package
@@ -16,16 +13,8 @@ Although that should be in prog mode
       :hook (prog-mode . rainbow-delimiters-mode))
 	#+end_src
 
-*** Add lisp interaction mode
-**** xah mode
-	 This does more formatting and has useful abbreviations but I don't know if will work with lispy
-     #+begin_src emacs-lisp
-	 (use-package xah-elisp-mode
-	   :ensure t
-	   :disabled
-	   :hook emacs-lisp-mode)
-     #+end_src
-**** Lispy
+** Add lisp interaction mode
+*** Lispy
 	 Set compat so that the keys for these modes work.
 	 #+begin_src emacs-lisp
      (use-package lispy
@@ -37,13 +26,13 @@ Although that should be in prog mode
        :config (setq lispy-compat (quote (edebug macrostep))
                      lispy-safe-paste t))
 	 #+end_src
-**** Get lispy test working
+*** Get lispy test working
 It assumes things like clojure
 #+begin_src emacs-lisp
 (use-package clojure-mode
     :ensure t)
 #+end_src
-**** and interaction hydra
+*** and interaction hydra
 	 Changes are now made directly to the package which is only now here
 	 #+begin_src emacs-lisp
      (use-package lispy-mnemonic
@@ -51,7 +40,7 @@ It assumes things like clojure
        :hook ((emacs-lisp-mode
                lisp-interaction-mode) . lispy-mnemonic-mode))
 	 #+end_src
-*** Evaluation
+** Evaluation
 	Instead of displaying the results in a separate buffer (like the iElm does), The [[https://github.com/xiongtx/eros][EROS project]] displays the results temporarily  /in the buffer/ in an overlay.  No need to do anything special:
   However it does it by remapping the eval keys so interferes with lispy so need to sort that out. PBest idea is make it one of the possible parts of lispy-mnemonic eval. lispy itself users cider to do this but I don't use clojurre.
 #+BEGIN_SRC emacs-lisp
@@ -59,240 +48,12 @@ It assumes things like clojure
 	  :ensure t
 	  :commands eros--eval-overlay)
    #+END_SRC
+* Lisps
 ** Emacs Lisp
-*** Formatter
-	I am not certain this is needed now as other things do this
-    #+begin_src  emacs-lisp
-	(use-package elisp-format :defer 10 :ensure t)
-    #+end_src
-*** See macros
-	Dependencies because lispy etc and macrostep use the same keys
-	#+begin_src emacs-lisp
-	(use-package macrostep
-	  :ensure t
-	  :after (emacs-lisp lispy-mnemonic lispy)
-	  :commands (macrostep-expand
-				 macrostep-mode)
-	  :bind (:map emacs-lisp-mode
-				  ("C-c e m" . macrostep-expand)))
-	#+end_src
-*** Extras
-	Seen but not used yet [[https://github.com/ScottyB/edebug-x][edebug-x]]
-	#+begin_src emacs-lisp
-	(use-package edebug-x :disabled :ensure t)
-	#+end_src
-*** Completion
-Add company backend from John Widgley
 #+begin_src emacs-lisp
-(use-package company-elisp
-  :after company
-  :config
-  (push 'company-elisp company-backends))
-
-(setq-local company-backend '(company-elisp))
+(mwb-init-load "init/prog-modes/emacs-lisp")
 #+end_src
-*** Cask
-#+begin_src emacs-lisp
-(use-package cask-mode
-    :ensure t
-    :defer 5)
-#+end_src
-*** Keyboard Macros
-Well not really lisp but much can be converted to it
-**** Show as emacs lisp
-***** TODO Put these together
-***** Load the converter to elisp
-	#+begin_src emacs-lisp
-	(use-package elmacro
-	  :ensure t
-	  :commands (elmacro-show-last-macro elmacro-show-last-commands))
-	#+end_src
-***** Hydra for macros
-From [[https://github.com/abo-abo/hydra/wiki/Macro][Hydra wiki]] and [[https://github.com/edil3ra/emacs_save/blob/master/settings.org][another init file]] but not the latter seems to have some odd entries as well so an edit of the two
-	  #+begin_src emacs-lisp
-	  (defhydra hydra-macro (:hint nil :color pink :pre
-								   (when defining-kbd-macro
-									 (kmacro-end-macro 1)))
-		"
-			  ^Create-Cycle^         ^Basic^          ^Insert^        ^Save^         ^Edit^
-			╭─────────────────────────────────────────────────────────────────────────╯
-					^_p_^           [_e_] execute    [_i_] insert    [_b_] name      [_'_] previous
-					^^↑^^           [_d_] delete     [_c_] set       [_K_] key       [_,_] last
-			 _<f2>_ ←   → _e_       [_o_] edit       [_a_] add       [_x_] register  [_._] losage
-					^^↓^^           [_r_] region     [_f_] format    [_B_] defun     [_v_] view
-					^_k_^           [_m_] step                                       [_l_] prev lisp
-				   ^^   ^^          [_s_] swap                                       [_L_] commands
-			"
-		("<f2>" kmacro-start-macro :color blue)
-		("e" kmacro-end-or-call-macro-repeat)
-		("E" kmacro-end-or-call-macro-repeat :color blue)
-
-		("p" kmacro-cycle-ring-previous)
-		("k" kmacro-cycle-ring-next)
-		("r" apply-macro-to-region-lines)
-		("d" kmacro-delete-ring-head)
-		("e" kmacro-end-or-call-macro-repeat)
-		("o" kmacro-edit-macro-repeat)
-		("m" kmacro-step-edit-macro)
-		("s" kmacro-swap-ring)
-		("i" kmacro-insert-counter)
-		("c" kmacro-set-counter)
-		("a" kmacro-add-counter)
-		("f" kmacro-set-format)
-		("b" kmacro-name-last-macro)
-		("K" kmacro-bind-to-key)
-		("B" insert-kbd-macro)
-		("x" kmacro-to-register)
-		("'" kmacro-edit-macro)
-		("," edit-kbd-macro)
-		("." kmacro-edit-lossage)
-		("u" universal-argument)
-		("v" kmacro-view-macro)
-		("V" kmacro-view-ring-2nd-repeat)
-		("l" elmacro-show-last-macro)
-		("L" elmacro-show-last-commands)
-		("q" nil :color blue))
-
-	  (bind-key "<f3>" 'hydra-macro/body)
-
-	  #+end_src
 ** Racket
-Change from lispy to paredit. The delete-selection issue is too much. I keep typing on a selected region
-*** Paredit
-**** Paredit mode
-Setup from racket mode docs
 #+begin_src emacs-lisp
-(use-package paredit
-  :ensure t
-  :diminish
-
-  :config
-  ;;   ;; making paredit work with delete-selection-mode
-
-  (put 'paredit-forward-delete 'delete-selection 'supersede)
-  (put 'paredit-backward-delete 'delete-selection 'supersede)
-  (put 'paredit-open-round 'delete-selection t)
-  (put 'paredit-open-square 'delete-selection t)
-  (put 'paredit-doublequote 'delete-selection t)
-  (put 'paredit-newline 'delete-selection t)
-
-  ;; (dolist (m '(
-  ;;              racket-mode-hook
-  ;;              racket-repl-mode-hook))
-  ;; (add-hook m #'paredit-mode)
-  :bind (:map paredit-mode-map
-              ("{" . paredit-open-curly)
-              ("}" . paredit-close-curly)
-              ("M-[" . paredit-wrap-square)
-              ("M-{" . paredit-wrap-curly)))
-;; (bind-keys)
-;; (unless terminal-frame
-;;   (bind-keys :map paredit-mode-map
-;;              ("M-[" . paredit-wrap-square)
-;;              ("M-{" . paredit-wrap-curly))b
+(mwb-init-load "init/prog-modes/racket")
 #+end_src
-**** Paxedit
-#+begin_src emacs-lisp
-(use-package paxedit
-  :diminish
-  :ensure t
-  :commands (paxedit-mode)
-  :bind
-  ("M-<right>" . paxedit-transpose-forward)
-  ("M-<left>"  . paxedit-transpose-backward)
-  ("M-<up>"    . paxedit-backward-up)
-  ("M-<down>"  . paxedit-backward-end)
-  ("M-b"       . paxedit-previous-symbol)
-  ("M-f"       . paxedit-next-symbol)
-  ("C-%"       . paxedit-copy)
-  ("C-&"       . paxedit-kill)
-  ("C-*"       . paxedit-delete)
-  ("C-^"       . paxedit-sexp-raise)
-  ("M-u"       . paxedit-symbol-change-case)
-  ("C-@"       . paxedit-symbol-copy)
-  ("C-#"       . paxedit-symbol-kill))
-#+end_src
-**** Hydra
-From https://github.com/otijhuis/emacs.d/blob/master/config/hydra-settings.el
-#+begin_src emacs-lisp
-(defhydra hydra-paredit (:color pink
-                                :columns 3
-                                :idle 1.0)
-  "Paredit"
-  ("(" paredit-wrap-round "Wrap round")
-  ("[" paredit-wrap-square "Wrap square")
-  ("]" paredit-wrap-square "Wrap square")
-  ("{" paredit-wrap-curly "Wrap curly")
-  ("s" paredit-splice-sexp "Splice")
-  ("bs" cljr-splice-sexp-killing-backward "Splice kill backward")
-  ("fs" cljr-splice-sexp-killing-forward "Splice kill forward")
-  ("S" paredit-split-sexp "Split")
-  ("j" paredit-join-sexps "Join")
-  ("J" paredit-join-with-next-list "Join next list")
-  ("M-J" paredit-join-with-previous-list "Join prev list")
-  ("C" paredit-convolute-sexp "Convolute")
-  ("M-c" paredit-copy-as-kill "Copy as kill")
-  ("r" paredit-raise-sexp "Raise s-expression")
-  ("R" cljr-raise-sexp "Raise s-expression (cljr)")
-  ("c" paxedit-copy "Copy explicit expression, implicit expression, or comment")
-  ("d" paxedit-delete "Delete expression")
-  ("tb" paxedit-transpose-backward "Transpose backward")
-  ("tf" paxedit-transpose-forward "Transpose forward")
-  ("k" paxedit-kill "Kill explicit expression, implicit expression, or comment")
-  (";" paxedit-wrap-comment "Wrap with comment")
-  ("q" nil "cancel"))
-#+end_src
-*** Racket mode
-    Tried hook for racket-unicode-input-method-enable but this conflicks with lispy.
-       #+begin_src emacs-lisp
-       (use-package racket-mode
-         :ensure t
-         :bind (:map racket-mode-map
-                     ("<f5>" . racket-test)
-                     ("<C-f5>" . racket-run)
-                     ("S-<f5>" .  racket-raco-all-tests)
-                     ("<f1> <f1>" . racket-describe)
-                     ("M-l" . racket-insert-lambda)
-                     ("H-A" . hydra-paredit/body)
-                     :map racket-repl-mode-map
-                     ("<f5>" . racket-run))
-         :config (setq racket-program "/Applications/Racket v7.5/bin/racket"
-                       tab-always-indent 'complete
-                       key-chord-mode 1        ; unknown how it was turned off
-                       )
-         (use-package racket-support
-           :mwb-load-path "site-lisp/lisp")
-         :hook ((racket-mode racket-repl-mode) . racket-unicode-input-method-enable)
-         ((racket-mode racket-repl-mode) . racket-smart-open-bracket-mode)
-         ((racket-mode racket-repl-mode) . paredit-mode)
-         ((racket-mode racket-repl-mode) . paxedit-mode))
-      #+end_src
-*** matcha
-**** Set the mode
-	 #+begin_src emacs-lisp
-	 (when matcha-use-launcher-p
-	   (matcha-set-mode-command
-		:mode '(racket-mode )
-		:command 'matcha-racket-mode)
-	   )
-	 #+end_src
-**** Mode matcha
-	 #+begin_src emacs-lisp
-
-     (define-transient-command matcha-racket-mode
-       "Mode"
-       [["Run"
-         ("b" "run" racket-run)
-         ("B" "run and REPL" racket-run-and-switch-to-repl)
-         ("r"  "Region to REPL" racket-send-region)
-
-         ;; ("R" "Run with errortrace" (lambda () (interactive) (racket-run 4)))
-         ;; ("i" "Instrument for debug" (lambda () (interactive) (racket-run 16)))
-         ]
-        ["Test"
-         ("t" "Test" racket-test)
-         ("c" "Check syntax" racket-check-syntax-mode)]
-        ["Fold"
-         ("h" "Hide tests" racket-fold-all-tests)
-         ("s" "Show tests" racket-unfold-all-tests)]])
-	 #+end_src

@@ -1,4 +1,4 @@
-#+TITLE Emacs configuration org Mode
+#+TITLE Emacs configuration org Mode - all the complete things
 #+PROPERTY:header-args :cache yes :tangle yes :comments noweb
 #+STARTUP: content
 
@@ -15,11 +15,7 @@ See in future noweb see https://raw.githubusercontent.com/zzamboni/dot-emacs/mas
 org-mode is a pain as we need a newer than aquamacs supplies and also there are recommendations to use an even later version. Also re packaging emacs package.el reads already built stuff others e.g. straight.el don't and that could be a problem with org-mode. There are reasons not to use the org repo but Elpa - [[https://www.reddit.com/r/emacs/comments/5sx7j0/how_do_i_get_usepackage_to_ignore_the_bundled/ddix2ta/?utm_source=share&utm_medium=web2x][from Reddit]] basically possible security issues so I am with ELPA and missing org-contrib.
 
 Aug 2019 got an error in cut subtree so revert to org mode with Aquamacs nad lose formatting of code blocks. (and will get namne changes in links in generated files)
-** Force load of new version
-[[https://github.com/jwiegley/use-package/issues/319#issuecomment-471274348][mzuther  fix]] to load via package
- #+begin_src emacs-lisp
-(assq-delete-all 'org package--builtins)
- #+end_src
+
 ** The use package setup
 Note Hydra is not really used after just a couple of weeks.
   #+begin_src emacs-lisp :noweb yes

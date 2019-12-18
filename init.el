@@ -127,12 +127,9 @@ is non-nil."
              (t
               (delete-region (line-beginning-position) (progn (forward-line) (point))))))
           (time-stamp))
-        (message "Wrote %s..." file-elisp)))
-    ;; byte compile elisp file if needed
-    (when (and byte-compile
-               (or (not (file-exists-p file-comp))
-                   (file-newer-than-file-p file-elisp file-comp)))
-      (byte-compile-file file-elisp))))
+        (message "Nullman Wrote %s..." file-elisp)))
+
+    ))
 ;; Non org mode expander:1 ends here
 
 ;; [[file:~/.emacs.d/config.org::*The loader][The loader:1]]

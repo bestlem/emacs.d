@@ -47,3 +47,16 @@ but on next read only the killing using comint functions seems better"
       (projectile-save-project-buffers))
     (sml-run sml-program-name file)))
 #+end_src
+
+*** REPL
+Hmm prob OK for the code, but my tests ar a large thing not one expr + you need to send the ; separately
+
+#+BEGIN_SRC emacs-lisp
+(use-package eval-in-repl-sml
+  :demand t
+  :after sml-mode
+  :config
+  ;; Evaluate expression in the current buffer.
+  :bind (:map sml-mode-map ("<f6>" . eir-eval-in-sml)
+              ("H-;" . eir-send-to-sml-semicolon )))
+#+END_SRC

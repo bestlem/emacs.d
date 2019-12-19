@@ -2,9 +2,16 @@
 #+PROPERTY:header-args :cache yes :tangle yes  :comments link
 
 * Common to all programming modes
+I suspect there is a split between those with a REPPL and not. But all I am interested in are REPL.
+
+Need keys for build
+f5 has always been my main - build and go used to be build all but now do tests
+C-f5 now can be build and run app.
+f6 lets try for send to repl as better one key than shift keys.
+A later thought is to use f5 as leader use key chords and then others for test
 ** Code Edit Structure
 Indentation and tabs
-Look at smart-tabs-insinuate
+Look at smart-tabs-insinuate but aggressive indent means not needed, although if I did an Algol language again I might find that not so true.
 *** Highlight indents
  I have wanted a good visual identification of indentation since I had the dos printer program in mid 80s. I *now* have it
 
@@ -43,6 +50,8 @@ Look at smart-tabs-insinuate
 	(add-hook 'prog-mode-hook (lambda () (imenu-add-to-menubar "Imenu")))
 	#+end_src
 *** Folding
+Keeps chnaging - the issue is with comments before functions I want to collapse the lot. Plu with racket and ml comments are not in fits column so some (outshine) do not spot it.
+Current work to get org mode working better. see send to REPL.
 **** Hide show
 Let us set it up
 #+begin_src emacs-lisp
@@ -231,6 +240,28 @@ This also takes time to load. Need to sort out config entries and gradele-mode n
 
 (bind-key "H-c" 'hydra-flycheck/body)
 	 #+end_src
+** REPL
+Yes you think of lisp, smalltalk but also Swift python, ML, Haskell. I never got on with it, I always wanted the whole program and seeing the ML course and Racket, it is not a major thing as you have to often start again which helps for repeatability.
+
+I want a key to send current buffer, especial in OrgSrc mode to REPL.
+[[https://github.com/kaz-yos/eval-in-repl][Eval in Repl]] seems a base but it in effect uses the keymap as to how to choose what to run. Ideally I would want f5 to do this in orgsrc mode, but a full send in normal mode.
+#+BEGIN_SRC emacs-lisp
+(use-package eval-in-repl
+  :ensure t
+  :config
+  (setq mwb-repl-region-key "<f6>"))
+#+END_SRC
+*** emacs - ielm
+This is simple and works
+#+BEGIN_SRC emacs-lisp
+(use-package  eval-in-repl-ielm
+  :config
+  ;; Evaluate expression in the current buffer.
+  (setq eir-ielm-eval-in-current-buffer t)
+  :bind (:map emacs-lisp-mode-map ( "<f6>". eir-eval-in-ielm)
+              :map Info-mode-map ( "<f6>". eir-eval-in-ielm)
+              :map lisp-interaction-mode-map ( "<f6>". eir-eval-in-ielm)))
+#+END_SRC
 ** Git
 #+begin_src emacs-lisp
 (mwb-init-load "init/prog-modes/git")

@@ -1,7 +1,6 @@
 #+TITLE Emacs configuration org Mode - all the complete things
 #+PROPERTY:header-args :cache yes :tangle yes :comments noweb
 #+STARTUP: content
-
 * Start using org mode
 This is my first attempt at learning it.
 The config is a mess as I pick up on things.
@@ -43,7 +42,7 @@ Put the bind bit in noweb
  ("<f5>" . org-todo)
  :map org-src-mode-map
  ("H-s" . org-edit-src-exit)
- ("A-s" . org-edit-src-exit)            ; I press by mistake but it makes sense
+ ("A-s" . org-edit-src-save)            ; I press by mistake but it makes sensenowsavenotsaveandexit
  ;; :map org-capture-mode-map
  ;; ("<f12>" . org-capture-finalize)
  )

@@ -28,7 +28,7 @@ This depends on the major mode and helps in code structure
 #+begin_src emacs-lisp
 (use-package yasnippet
   :ensure t
-  :demand t                             ; need to force the load
+  :defer 2                             ; need to force the load
   :after company
   :mode ("/\\.emacs\\.d/data/snippets/" . snippet-mode)
   ;; :bind (:map yas-minor-mode-map
@@ -78,7 +78,12 @@ This depends on the major mode and helps in code structure
 There is a package including a lot of snippets.
 However there are so many elisp ones that it might be too confusing.
 #+begin_src emacs-lisp
-
+(use-package yasnippet-snippets
+  :after yasnippet
+  :demand
+  :config (yasnippet-snippets-initialize)
+  (message "loaded yasnippets collection")
+  :ensure t)
 #+end_src
 
 * Emacs

@@ -149,20 +149,20 @@ is non-nil."
 
       (cond (no-org
              (message "tangle <%s> to <%s> using regex replacement not org mode"
-                   org-file el-file)
+                      org-file el-file)
              ( nullman/org-babel-generate-elisp-file org-file el-file))
             (t
              (require 'org)
              (message "This loaded an org mode but from the system - best to restart")
              (message "tangle <%s> to <%s> using org version %s"
-                   org-file el-file org-version)
+                      org-file el-file org-version)
              (org-babel-tangle-file org-file el-file))))
 
     (condition-case err
         (load el-file)
-      (error (message "Error loading %s: \"%s\""
-                      file-root
-                      (error-message-string err))
+      (error (warn "Error loading %s: \"%s\""
+                   file-root
+                   (error-message-string err))
              nil))))
 ;; The loader:1 ends here
 

@@ -21,6 +21,8 @@ can't create the correct header yet.
 Re tangling I am happy to end with just org files and generate elisp on the fly as I use GUIs and start emacs and leave it running - even if I use docker that would be via tramp so still the main emacs.
 
 *** Commentary on process after a few months
+
+**** Tangling
 Well I put it all under and org file to generate but I thought about  changing back to plain elisp - well with comments.
 
 The issues ere
@@ -42,8 +44,13 @@ So use this correctly and stick with org mode. But to work each code block needa
 
 Issue I think is how much do you need the IDE features.
 
+**** Others
 For resilience over org version issues put as much after org as possible (makes case for using non org mode expand until org mode loaded)
 The important bits are init - the loader, packaging and org mode itself. The rest goes to all.org
+
+Seems that really each tangled bit should be in a separate file that if fails can be ignored. and my init load function does the catch so this is why some bits only failed.
+
+So use smaller files.and only call from upper level ie org-base calling org-all is bad but that is a special case, as that has to work - all othe code tends to be independant or at least the editor runs.
 *** Problems
 
 **** TODO Spaces
@@ -293,20 +300,20 @@ This fails for config.org so that needs to be in version control.
 
          (cond (no-org
                 (message "tangle <%s> to <%s> using regex replacement not org mode"
-                      org-file el-file)
+                         org-file el-file)
                 ( nullman/org-babel-generate-elisp-file org-file el-file))
                (t
                 (require 'org)
                 (message "This loaded an org mode but from the system - best to restart")
                 (message "tangle <%s> to <%s> using org version %s"
-                      org-file el-file org-version)
+                         org-file el-file org-version)
                 (org-babel-tangle-file org-file el-file))))
 
        (condition-case err
            (load el-file)
-         (error (message "Error loading %s: \"%s\""
-                         file-root
-                         (error-message-string err))
+         (error (warn "Error loading %s: \"%s\""
+                      file-root
+                      (error-message-string err))
                 nil))))
       #+end_src
 **** The Load

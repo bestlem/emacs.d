@@ -4,6 +4,8 @@
 * Packaging
 Loading other code. Using emacs internal packagemenager and use-package.
 
+This file does too much for error trapping and needs. We only need the SSL, package manager and use-package and the rest can go after org mode.
+But this is working so don;t need to chnage until an actual bug + my org-mode setup is the most complex bit. So these extra things go before org-all.
 * SSL  network connection
  Basically we need gnutls to connect via SSL as certificates have changed
  From https://github.com/paolodedios/dot-files/blob/1a7b4500c8ce07d0d473dbf714a2303f4d440ef5/.emacs.d/init.el

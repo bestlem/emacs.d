@@ -1,9 +1,8 @@
-#+TITLE Emacs configuration How emacs completes
+#+TITLE Emacs configuration How emacs completes text
 #+PROPERTY:header-args :cache yes :tangle yes :comments link
 
-* Text
 This is completion for text in buffer
-** Current program
+** Semantic based
 This looks at the current code and prompts for variables etc
 I need something and company seems to be the current one
 Add some from jweigley
@@ -22,9 +21,10 @@ Add some from jweigley
                              #'company-complete-common))))
    )
 #+end_src
-
-** Language dependant
-This depends on the major mode and helps in code structure
+** Text expansion
+Looking at all the new stuff I see yasnippet but but emacs has had for many yera several things - see [[https://www.gnu.org/software/emacs/manual/html_mono/autotype.html][Emacs manual for autotyping]]. Also look at tempo and auto-insert(the latter is what new files will have inserted but that does the GNU emacs whole thing I suspect ya snippet is better)
+My current view is yasnippet for the templating (old inclue skeleton)
+** Yasnippet
 #+begin_src emacs-lisp
 (use-package yasnippet
   :ensure t
@@ -76,7 +76,7 @@ This depends on the major mode and helps in code structure
 
 *** yasnippets collection
 There is a package including a lot of snippets.
-However there are so many elisp ones that it might be too confusing.
+However there are so many elisp ones that it might be too confusing. Similarly the expansion for org mode is not nice
 #+begin_src emacs-lisp
 (use-package yasnippet-snippets
   :after yasnippet
@@ -86,23 +86,3 @@ However there are so many elisp ones that it might be too confusing.
   :ensure t)
 #+end_src
 
-* Emacs
-This is completion for emacs commands. Choice is ido, ivy helm.
-I'll try ivy.
-Note headers have tangle command in to suppress one or other
-** Find M-x commands
-  This is [[https://www.emacswiki.org/emacs/Smex][smex]] buy ivy replaces it actually it uses it - Something changed :(
-  #+begin_quote
-  Smex is a M-x enhancement for Emacs. Built on top of IDO, it provides a convenient interface to your recently and most frequently used commands. And to all the other commands, too.
-  #+end_quote
-  #+begin_src emacs-lisp
-	(use-package smex
-	  :ensure t
-	  :config
-	  (smex-initialize))
-  #+end_src
-
-** Ivy
-#+begin_src emacs-lisp
-(mwb-init-load "init/ivy")
-#+end_src

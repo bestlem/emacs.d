@@ -5,6 +5,7 @@
 Now minimally useful
 This adds the real use.
 The order hear does not matter much.
+In future this file should really just be a list of mwb-init-load and each one can fail. All structure could be here.
 
 * After initialisation
 Although see starter kit where they run after init.
@@ -91,6 +92,25 @@ Note should check on defconst
   (mwb-init-load  "init/completion")
   (mwb-init-load  "init/ibuffer")
   #+end_src
+** Command completion
+This is completion for emacs commands. Choice is ido, ivy helm.
+I'll try ivy.
+Note headers have tangle command in to suppress one or other
+*** Find M-x commands
+  This is [[https://www.emacswiki.org/emacs/Smex][smex]] buy ivy replaces it actually it uses it - Something changed :(
+  #+begin_quote
+  Smex is a M-x enhancement for Emacs. Built on top of IDO, it provides a convenient interface to your recently and most frequently used commands. And to all the other commands, too.
+  #+end_quote
+  #+begin_src emacs-lisp
+	(use-package smex
+	  :ensure t
+	  :config
+	  (smex-initialize))
+  #+end_src
+*** Ivy
+#+begin_src emacs-lisp
+(mwb-init-load "init/ivy")
+#+end_src
 * Applications
 ** Gnus
 	 #+begin_src emacs-lisp

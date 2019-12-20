@@ -325,16 +325,20 @@ Note this is not the internal mode. It is from Emacs wiki as I like the interact
 Now I have no idea if it works
 *** TODO Need to put in use-package
 #+begin_src emacs-lisp
-(autoload 'sql "sql-mode"
-  "Start the interactive SQL interpreter in a new buffer." t)
+(use-package sql-mode
+  :mwb-load-path "site-lisp/sql")
 
-(autoload 'sql-mode "sql-mode"
-  "Mode for editing SQL files and running a SQL interpreter." t)
 
-(autoload 'sql-buffer "sql-mode"
-  "Create or move to the sql-mode \"*SQL commands*\" buffer." t)
+;; (autoload 'sql "sql-mode"
+;;   "Start the interactive SQL interpreter in a new buffer." t)
 
-(setq auto-mode-alist (cons '("\\.sql$" . sql-mode) auto-mode-alist))
+;; (autoload 'sql-mode "sql-mode"
+;;   "Mode for editing SQL files and running a SQL interpreter." t)
+
+;; (autoload 'sql-buffer "sql-mode"
+;;   "Create or move to the sql-mode \"*SQL commands*\" buffer." t)
+
+;; (setq auto-mode-alist (cons '("\\.sql$" . sql-mode) auto-mode-alist))
 #+end_src
 ** C
 This is where I have really lost history there used to be all sorts of indenation rules.

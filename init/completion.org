@@ -85,4 +85,28 @@ However there are so many elisp ones that it might be too confusing. Similarly t
   (message "loaded yasnippets collection")
   :ensure t)
 #+end_src
-
+*** Abbrev
+Simple text replacement. From John Wiegley
+#+BEGIN_SRC emacs-lisp
+(use-package abbrev
+  :defer 5
+  :diminish
+  :hook
+  ((text-mode prog-mode erc-mode LaTeX-mode) . abbrev-mode)
+  (expand-load
+   . (lambda ()
+       (add-hook 'expand-expand-hook 'indent-according-to-mode)
+       (add-hook 'expand-jump-hook 'indent-according-to-mode)))
+  :config
+  (setq abbrev-file-name (mwb-user-emacs-file "data/abbrev.el") )
+  (if (file-exists-p abbrev-file-name)
+      (quietly-read-abbrev-file))
+  :bind (:map edit-abbrevs-map ("A-s". abbrev-edit-save-buffer) ))
+#+END_SRC
+*** Hippie expand
+This is another basic emacs thing.
+ #+BEGIN_SRC emacs-lisp
+(use-package hippie-exp
+  :bind (("M-/"   . hippie-expand)
+         ("C-M-/" . dabbrev-completion)))
+ #+END_SRC

@@ -18,14 +18,18 @@ Although see starter kit where they run after init.
 			   (garbage-collect)
 			   (message "Emacs init-time %s" (emacs-init-time))) t)
   #+end_src
-**** Aquamacs undo
+** Aquamacs undo
 There are somethings that Aquamacs does that IO want to undo.
 e.g. key bindings that they do to stop modes changing them.
 #+begin_src emacs-lisp
 (unbind-key "<end>" osx-key-mode-map)
 (unbind-key "<home>" osx-key-mode-map)
 #+end_src
-**** Startup screen
+** Startup screen
+*** Desktop
+This saves the state perhaps I need to see how it works. Then also add midnight to kill old buffers
+*** Dashboard
+This seemed interesting but seemed to messup lispy
     #+begin_src emacs-lisp
     (use-package dashboard
 :disabled
@@ -38,7 +42,23 @@ e.g. key bindings that they do to stop modes changing them.
                               (agenda . 5)
                               (registers . 5))))
     #+end_src
-**** Matcha
+*** Current startup settings
+**** Scratch buffer
+  Need to control how it is restarted. Aquamacs saves it
+  #+begin_src emacs-lisp
+  (setq initial-major-mode 'emacs-lisp-mode)
+  (setq initial-scratch-message nil)
+   #+end_src
+**** Windows
+I want two windows in a frame and treemacs
+#+begin_src emacs-lisp
+(add-hook 'window-setup-hook
+          '(lambda ()
+             (split-window-horizontally)
+             (pop-to-buffer "*Messages*" 'other-window)
+             (treemacs)))
+#+end_src
+** Matcha
 		Menu bindings from [[https://github.com/jojojames/matcha][jojojames]] originally using hydra but changed to transient as I was editing so a fun day where it did not work. Transient programming interface seems nearer what I want but hydra I suspect has better functionality for my use e.g. can do commands and stay in hydra/
 		#+begin_src emacs-lisp
         (use-package matcha
@@ -63,7 +83,7 @@ In many ways simpler as just defines a menu but does not allow menu to remain an
           :config (transient-bind-q-to-quit))
 		#+end_src
 
-**** Setting variables with a check on type
+** Setting variables with a check on type
 Used when overriding a defcustom or defvar.
 Note should check on defconst
 #+begin_src emacs-lisp

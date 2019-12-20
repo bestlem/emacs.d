@@ -141,15 +141,15 @@ Basically use-package and helpers - strictly some of these can be left to later.
            use-package-expand-minimally t
            bind-key-describe-special-forms t)))
  #+end_src
-***** Extras needed for loading
+**** Extras needed for loading
  These are used in the use-package macro
-****** Diminish
+***** Diminish
  Mark if the mode being setup should not show in the mode/status line.
   #+begin_src emacs-lisp
   (use-package diminish   :ensure t   :demand t)
   #+end_src
 
-****** Improve elisp
+***** Improve elisp
 Add more functional methods.
 #+begin_src emacs-lisp
 (use-package dash

@@ -2,8 +2,6 @@
 #+PROPERTY:header-args :cache yes :tangle yes :comments link
 
 #+STARTUP: content
-
-
 * TODO Trash
 MacOs needs specific trash management not just mv to ~/.Trash
 Perhaps only if in dired or other user controlled file
@@ -58,6 +56,7 @@ Aquamacs seems to turn this off sometimes in customization so need to investigat
  All the logs are very clever but what I want is the version number to increase so just see [[https://stackoverflow.com/a/9452080/151019][this SO answer]] I have modified it so that only saves on m,ac save ie when you manually save - possibly not good on emacs exit.
  Note need to change
  Filters are interesting for other reasons
+
  #+begin_src emacs-lisp
  (defun mwb/mac-key-save-buffer-force-backup ()
    (interactive)
@@ -69,7 +68,8 @@ Aquamacs seems to turn this off sometimes in customization so need to investigat
  (define-key osx-key-mode-map [remap mac-key-save-file]  'mwb/mac-key-save-buffer-force-backup)
  (define-key osx-key-mode-map [remap save-buffer]  'mwb/mac-key-save-buffer-force-backup)
  #+end_src
-
+**** TODO save special buffers
+There are some modes that have special save actions e.g. *Abbrev* which is a buffer with no file name. I force a save using a dialog box but this should be call the special call - stick with ^x^s
 ** TODO Recent Files
  Should be a customise but Aquamacs sets it so keeps adding to it pr does it need to check
  Exclusion regexes from [[https://www.reddit.com/r/emacs/comments/3g468d/stop_recent_files_showing_elpa_packages/][reddit]]

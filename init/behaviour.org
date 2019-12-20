@@ -102,12 +102,6 @@ So use separate PRIMARY and CLIPBOARD
   (setq select-enable-clipboard nil)
   (setq select-enable-primary t)
   #+end_src
-* Scratch buffer
-  Need to control how it is restarted. Aquamacs saves it
-  #+begin_src emacs-lisp
-  (setq initial-major-mode 'emacs-lisp-mode)
-  (setq initial-scratch-message nil)
-   #+end_src
 * Double Letters
 Let's stop it. from [[https://emacs.stackexchange.com/a/13975/9874][Emacs SE]]
 #+begin_src emacs-lisp

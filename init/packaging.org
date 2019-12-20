@@ -87,12 +87,13 @@ But this is working so don;t need to chnage until an actual bug + my org-mode se
  (eval-when-compile
    (require 'use-package)
    (if init-file-debug
-	   (setq use-package-verbose t
-			 use-package-expand-minimally nil
-			 use-package-compute-statistics t
-			 )
-	 (setq use-package-verbose nil
-		   use-package-expand-minimally t)))
+       (setq use-package-verbose t
+             use-package-expand-minimally nil
+             use-package-compute-statistics t
+             )
+     (setq use-package-verbose nil
+           use-package-expand-minimally t
+           bind-key-describe-special-forms t)))
  #+end_src
 *** Extras needed for loading
  These are used in the use-package macro

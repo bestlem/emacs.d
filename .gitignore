@@ -3,3 +3,5 @@ config.el
 init/**/*.el
 SessionDesktop.el
 elpa
+data/abbrev.el
+

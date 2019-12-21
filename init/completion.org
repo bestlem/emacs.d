@@ -28,7 +28,7 @@ My current view is yasnippet for the templating (old inclue skeleton)
 #+begin_src emacs-lisp
 (use-package yasnippet
   :ensure t
-  :defer 2                             ; need to force the load
+  :defer 2                              ; need to force the load
   :after company
   :mode ("/\\.emacs\\.d/data/snippets/" . snippet-mode)
   ;; :bind (:map yas-minor-mode-map
@@ -39,6 +39,10 @@ My current view is yasnippet for the templating (old inclue skeleton)
   ;;   (eval yas-maybe-expand))
   :config
   (setq yas-snippet-dirs (list (mwb-user-emacs-file "data/snippets")))
+  (use-package yasnippet-snippets
+    :config (yasnippet-snippets-initialize)
+    (message "loaded yasnippets collection")
+    :ensure t)
   (yas-reload-all)
   (yas-global-mode 1)
   (define-key yas-minor-mode-map (kbd "SPC") yas-maybe-expand)
@@ -77,16 +81,11 @@ My current view is yasnippet for the templating (old inclue skeleton)
 *** yasnippets collection
 There is a package including a lot of snippets.
 However there are so many elisp ones that it might be too confusing. Similarly the expansion for org mode is not nice
-#+begin_src emacs-lisp
-(use-package yasnippet-snippets
-  :after yasnippet
-  :demand
-  :config (yasnippet-snippets-initialize)
-  (message "loaded yasnippets collection")
-  :ensure t)
-#+end_src
-*** Abbrev
+For loading as yasnippet is on defer we get this and yasnippets' config on eval-after load/ So what order do they load in? I suspect LIFO as yasnippet is delayed.
+
+** Abbrev
 Simple text replacement. From John Wiegley
+Also run the script from https://www.emacswiki.org/emacs/autocorrection_abbrev_defs to load a fix for typos but note I had to edit out the one for i as that will be lowercase in programming.
 #+BEGIN_SRC emacs-lisp
 (use-package abbrev
   :defer 5
@@ -98,15 +97,18 @@ Simple text replacement. From John Wiegley
        (add-hook 'expand-expand-hook 'indent-according-to-mode)
        (add-hook 'expand-jump-hook 'indent-according-to-mode)))
   :config
-  (setq abbrev-file-name (mwb-user-emacs-file "data/abbrev.el") )
+  (setq abbrev-file-name (mwb-user-emacs-file "data/abbrev.el"))
+  (setq save-abbrevs 'silently)
+  ;; save abbreviations upon exiting xemacs (someon has copied from an old .emacs
+  (setq save-abbrevs t)
+  (quietly-read-abbrev-file)
   (if (file-exists-p abbrev-file-name)
-      (quietly-read-abbrev-file))
-  :bind (:map edit-abbrevs-map ("A-s". abbrev-edit-save-buffer) ))
+      (quietly-read-abbrev-file)))
 #+END_SRC
-*** Hippie expand
+** Hippie expand
 This is another basic emacs thing.
  #+BEGIN_SRC emacs-lisp
-(use-package hippie-exp
-  :bind (("M-/"   . hippie-expand)
-         ("C-M-/" . dabbrev-completion)))
+ (use-package hippie-exp
+   :bind (("M-/"   . hippie-expand)
+          ("C-M-/" . dabbrev-completion)))
  #+END_SRC

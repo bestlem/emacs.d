@@ -1,8 +1,8 @@
 # -*- mode: snippet -*-
-# name: Source Code block for use with weave
+# name: Source Code block named for use with weave
 # key: srcn
 # --
-#+NAME: $1
-#+BEGIN_SRC ${2:emacs-lisp}
+#+name: $1
+#+begin_src ${2:emacs-lisp}
 $0
-#+END_SRC
+#+end_src

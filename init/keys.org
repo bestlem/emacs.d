@@ -187,7 +187,7 @@ But transient needs a actual function that exists hydra can lazy load.
 See https://github.com/syohex/emacs-quickrun but assumes a lot. Better look at org mode and repls.
 
    #+begin_src emacs-lisp
-   (bind-key "H-a" 'matcha-run-mode-command)
+   (bind-key "H-d" 'matcha-run-mode-command)
    ;(bind-key "H-`" 'matcha-me-space)
    #+end_src
 **

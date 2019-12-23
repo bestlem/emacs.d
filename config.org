@@ -206,14 +206,6 @@ So add :mwb-load-path as a new key to use-package
 (setq use-package-keywords
       (mwb-insert-before-element :load-path :mwb-load-path  use-package-keywords))
 #+end_src
-** Hydra
-Need key setting menus.
-#+begin_src emacs-lisp
-(use-package hydra :ensure t
-  :config (setq hydra-look-for-remap t))
-(use-package use-package-hydra :ensure t)
-#+end_src
-
 ** Org Mode base setup
 This is so the file can be processed by nullman's expand - basically no noweb weaving.
 *** Force load of new version
@@ -221,7 +213,7 @@ This is so the file can be processed by nullman's expand - basically no noweb we
  #+begin_src emacs-lisp
 (assq-delete-all 'org package--builtins)
  #+end_src
-*** Do the load from package.el
+*** Do the load of org from package.el
 #+begin_src emacs-lisp
 (use-package org
   :ensure t)
@@ -232,13 +224,37 @@ This all can be written using latest org mode allowing weaving etc.
 
 This file is the only one that using noweb weaving so must be loaded via a proper org babel
 
-Now get the rest which can be expanded by org.
-
+But has requirements like hydra
+*** Hydra
+Need key setting menus.
+#+begin_src emacs-lisp
+(use-package hydra :ensure t
+  :config (setq hydra-look-for-remap t))
+(use-package use-package-hydra :ensure t)
+#+end_src
+**** major mode hydra
+#+begin_src emacs-lisp
+(use-package major-mode-hydra
+  :ensure t
+  :bind
+  ("H-a" . major-mode-hydra)
+  :config
+  (progn
+    (setq major-mode-hydra-invisible-quit-key "q")
+    (defun jp-major-mode-hydra-title-generator (_)
+      `(with-mode-icon major-mode
+                       (propertize (s-concat (format-mode-line mode-name) " Commands")
+                                   'face '(:weight bold :height 1.1))
+                       1.1))
+    (setq major-mode-hydra-title-generator #'jp-major-mode-hydra-title-generator)))
+#+end_src
+*** Remain of org
+This needs the full expansion
 #+begin_src emacs-lisp
 (mwb-init-load "init/org-all")
 #+end_src
 ** The rest
+Now get the rest which can be expanded by org.
 #+begin_src emacs-lisp
 (mwb-init-load "init/all")
 #+end_src
-

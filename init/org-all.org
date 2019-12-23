@@ -115,13 +115,14 @@ Code block behaviour - but also see customization for appearance
 ** Prettify
 Make org mode look prettier. See also the customization
 Basically set to variable pitch font but note Aquamacs has a way (different of course to do this)
+
+*** Circular bullets
+From [[http://www.howardism.org/Technical/Emacs/orgmode-wordprocessor.html][here]]
  #+begin_src emacs-lisp
  (use-package org-bullets
    :ensure t
    :init (add-hook 'org-mode-hook 'org-bullets-mode))
  #+end_src
-*** Circular bullets
-From [[http://www.howardism.org/Technical/Emacs/orgmode-wordprocessor.html][here]]
 	#+begin_src emacs-lisp
     (font-lock-add-keywords
      'org-mode
@@ -189,3 +190,24 @@ In practice I don't use that.
    ("q" nil "cancel"))
 
  #+end_src
+** Mode Hydra
+Using new pretty mode hydra but with #+setupfile: from the matcha
+#+begin_src emacs-lisp
+(major-mode-hydra-define org-mode nil
+  ("Edit Subtree"
+   (("x"  org-cut-subtree "Cut")
+    ("w"  org-copy-subtree "Copy")
+    ("y"  org-paste-subtree "Paste")
+    ("Y"  org-yank "Yank")
+    ("W"  org-clone-subtree-with-time-shift "Clone"))
+   "Babel"
+   (("e"  org-babel-execute-src-block "Execute Source Block")
+    ("'"  org-edit-src-code "Edit Source")
+    ("t"  org-babel-tangle "Tangle"))
+   "Insert"
+   (("m"  org-meta-return "Heading")
+    ("M"  org-insert-heading-respect-content "Heading Under")
+    ("t"  org-insert-todo-heading "Todo")
+    ("T"  org-insert-todo-heading-respect-content "Todo Under"))))
+
+#+end_src

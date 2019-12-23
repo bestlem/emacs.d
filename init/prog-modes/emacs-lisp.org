@@ -3,6 +3,26 @@
 #+STARTUP: content
 
 Emacs lisp specific extras
+
+* Hydra
+#+begin_src emacs-lisp
+(major-mode-hydra-define emacs-lisp-mode nil
+  ("Eval"
+   (("b" eval-buffer "buffer")
+    ("e" eval-defun "defun")
+    ("r" eval-region "region"))
+   "REPL"
+   (("I" ielm "ielm"))
+   "Test"
+   (("t" ert "prompt")
+    ("T" (ert t) "all")
+    ("F" (ert :failed) "failed"))
+   "Doc"
+   (("d" describe-foo-at-point "thing-at-pt")
+    ("f" describe-function "function")
+    ("v" describe-variable "variable")
+    ("i" info-lookup-symbol "info lookup"))))
+#+end_src
 * Formatter
 	I am not certain this is needed now as other things do this
     #+begin_src  emacs-lisp
@@ -19,6 +39,7 @@ Emacs lisp specific extras
       :after (emacs-lisp lispy-mnemonic lispy)
       :commands (macrostep-expand
                  macrostep-mode)
+      :config (set macrostep-expand-in-separate-buffer t)
       :bind (:map emacs-lisp-mode
                   ("C-c e m" . macrostep-expand)))
 	#+end_src

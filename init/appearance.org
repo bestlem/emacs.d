@@ -14,6 +14,34 @@ Aquamacs is stuck with old color themes not the cusomisable ones
      (color-theme-high-contrast)))
 #+end_src
 
+* Show icons
+#+begin_src emacs-lisp
+(use-package all-the-icons
+  :ensure t
+  :demand
+  :config
+
+  (defun with-faicon (icon str &optional height v-adjust)
+    (s-concat (all-the-icons-faicon icon :v-adjust (or v-adjust 0) :height (or height 1)) " " str))
+
+  (defun with-fileicon (icon str &optional height v-adjust)
+    (s-concat (all-the-icons-fileicon icon :v-adjust (or v-adjust 0) :height (or height 1)) " " str))
+
+  (defun with-octicon (icon str &optional height v-adjust)
+    (s-concat (all-the-icons-octicon icon :v-adjust (or v-adjust 0) :height (or height 1)) " " str))
+
+  (defun with-mode-icon (mode str &optional height nospace)
+    (let* ((v-adjust (if (eq major-mode 'emacs-lisp-mode) -0.1 0.05))
+           (icon (all-the-icons-icon-for-mode mode
+                                              :height (or height 1)
+                                              :v-adjust v-adjust))
+           (icon (if (symbolp icon)
+                     (all-the-icons-icon-for-mode 'fundamental-mode
+                                                  :height (or height 1)
+                                                  :v-adjust v-adjust)
+                   icon)))
+      (s-concat icon (if nospace "" " ") str))))
+#+end_src
 * Remove toolbar
 #+begin_src emacs-lisp
 (tool-bar-mode 0)
@@ -75,49 +103,86 @@ I think I now want mainly one window and have splits but tabs are useful.
    (winner-mode)
    :commands (winner-undo winner-redo))
 
- (defhydra hydra-window (:color red
-								:hint nil)
-   "
-  Split: _v_ert _x_:horz
- Delete: _o_nly  _da_ce  _dw_indow  _db_uffer  _df_rame
-   Move: _s_wap
- Frames: _f_rame new  _df_ delete
-   Misc: _m_ark _a_ce  _u_ndo  _r_edo"
+ (defvar jp-window--title (with-faicon "windows" "Window Management" 1 -0.05))
+
+ (pretty-hydra-define hydra-jp-window (:foreign-keys warn :title jp-window--title :quit-key "q")
+   ("Actions"
+    (("TAB" other-window "switch")
+     ("x" ace-delete-window "delete")
+     ("m" ace-delete-other-windows "maximize")
+     ("s" ace-swap-window "swap")
+     ("a" ace-select-window "select"))
+
+    "Resize"
+    (("h" move-border-left "←")
+     ("j" move-border-down "↓")
+     ("k" move-border-up "↑")
+     ("l" move-border-right "→")
+     ("n" balance-windows "balance")
+     ("f" toggle-frame-fullscreen "toggle fullscreen"))
+
+    "Split"
+    (("b" split-window-right "horizontally")
+     ("B" split-window-horizontally-instead "horizontally instead")
+     ("v" split-window-below "vertically")
+     ("V" split-window-vertically-instead "vertically instead"))
+
+    "Zoom"
+    (("+" zoom-in "in")
+     ("=" zoom-in)
+     ("-" zoom-out "out")
+     ("0" jp-zoom-default "reset"))))
+ (defhydra hydra-window ()
+   ""
    ("h" windmove-left)
    ("j" windmove-down)
    ("k" windmove-up)
    ("l" windmove-right)
-   ("H" hydra-move-splitter-left)
-   ("J" hydra-move-splitter-down)
-   ("K" hydra-move-splitter-up)
-   ("L" hydra-move-splitter-right)
    ("|" (lambda ()
-		  (interactive)
-		  (split-window-right)
-		  (windmove-right)))
-   ("_" (lambda ()
-		  (interactive)
-		  (split-window-below)
-		  (windmove-down)))
-   ("v" split-window-right)
-   ("x" split-window-below)
-										 ;("t" transpose-frame "'")
-   ;; winner-mode must be enabled
-   ("u" winner-undo)
-   ("r" winner-redo) ;;Fixme, not working?
-   ("o" delete-other-windows :exit t)
-   ("a" ace-window :exit t)
-   ("f" new-frame :exit t)
-   ("s" ace-swap-window)
-   ("da" ace-delete-window)
-   ("dw" delete-window)
-   ("db" kill-this-buffer)
-   ("df" delete-frame :exit t)
-   ("q" nil)
-										 ;("i" ace-maximize-window "ace-one" :color blue)
-										 ;("b" ido-switch-buffer "buf")
-   ("m" headlong-bookmark-jump))
- (bind-key "H-w" 'hydra-window/body)
+          (interactive)
+          (split-window-right)
+          (windmove-right)))
+   ("-" (lambda ()
+          (interactive)
+          (split-window-below)
+          (windmove-down)))
+   ("u" (progn
+          (winner-undo)
+          (setq this-command 'winner-undo)))
+   ("r" winner-redo)
+   ("b" ivy-switch-buffer)
+   ("f" counsel-find-file)
+   ("a" (lambda ()
+          (interactive)
+          (ace-window 1)
+          (add-hook 'ace-window-end-once-hook
+                    'hydra-window/body)))
+   ("s" (lambda ()
+          (interactive)
+          (ace-swap-window)
+          (add-hook 'ace-window-end-once-hook
+                    'hydra-window/body)))
+   ("<left>" hydra-move-splitter-left)
+   ("<down>" hydra-move-splitter-down)
+   ("<up>" hydra-move-splitter-up)
+   ("<right>" hydra-move-splitter-right)
+   ("M" delete-other-windows)
+   ("d" delete-window)
+
+   ;; ("K" ace-delete-other-windows)
+   ;; ("S" save-buffer)
+   ;; ("d" delete-window)
+   ;; ("D" (lambda ()
+   ;;        (interactive)
+   ;;        (ace-delete-window)
+   ;;        (add-hook 'ace-window-end-once-hook
+   ;;                  'hydra-window/body))
+   ;;  )
+
+   ("x" counsel-M-x)
+   ("q" nil))
+
+ (bind-key "H-w" 'hydra-jp-window/body)
  #+end_src
 
 ** Stop special buffers opening in new window

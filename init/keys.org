@@ -115,7 +115,6 @@ Note that you can control what the screen displays A for Alt or ⌥. Emacs is no
 Now these are very old
   #+begin_src emacs-lisp
   (bind-key (kbd "M-g") 'goto-line)
-  (bind-key (kbd "A-u") 'revert-buffer )
 #+end_src
 ** Let search continue with arrows
 DISABLED

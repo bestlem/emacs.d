@@ -3,6 +3,32 @@
 #+STARTUP: content
 
 Emacs lisp specific extras
+
+* Hydra
+#+begin_src emacs-lisp
+(major-mode-hydra-define emacs-lisp-mode nil
+  ("Eval"
+   (("b" eval-buffer "buffer")
+    ("e" eval-defun "defun")
+    ("r" eval-region "region"))
+   "REPL"
+   (("I" ielm "ielm")
+    ("x" matcha-goto-scratch "*Scratch*"))
+   "Test"
+   (("t" ert "prompt")
+    ("T" (ert t) "all")
+    ("F" (ert :failed) "failed"))
+
+   "Debug"
+   (("m" sk/hydra-macro-step/body "Macrostep...")
+    ("d" matcha-elisp-toggle-edebug-defun "Debug")
+    ("q" cancel-debug-on-entry "Cancel Debug on Entry")
+    ("f" debug-on-entry "Debug on Entry")
+    ;; ["Watch"
+    ;;  ("w" debug-watch "Watch")
+    ;;  ("W" cancel-debug-watch  "Cancel Watch")]
+    )))
+#+end_src
 * Formatter
 	I am not certain this is needed now as other things do this
     #+begin_src  emacs-lisp
@@ -19,9 +45,26 @@ Emacs lisp specific extras
       :after (emacs-lisp lispy-mnemonic lispy)
       :commands (macrostep-expand
                  macrostep-mode)
+      ;;:config (set macrostep-expand-in-separate-buffer t)
       :bind (:map emacs-lisp-mode
                   ("C-c e m" . macrostep-expand)))
 	#+end_src
+and the hydra is from https://sriramkswamy.github.io/dotemacs/ . Note it expands what is at current point,
+#+begin_src emacs-lisp
+(defhydra sk/hydra-macro-step (:pre (macrostep-expand)
+                                    :color red
+                                    :hint nil)
+  "
+ _e_: expand    _j_: next macro    _C_: collapse all
+ _c_: collapse  _k_: prev macro    _q_: quit
+"
+  ("e" macrostep-expand)
+  ("c" macrostep-collapse)
+  ("j" macrostep-next-macro)
+  ("k" macrostep-prev-macro)
+  ("C" macrostep-collapse-all)
+  ("q" macrostep-collapse-all :color blue))
+#+end_src
 * Extra debugging
 	Seen but not used yet [[https://github.com/ScottyB/edebug-x][edebug-x]]
 	#+begin_src emacs-lisp

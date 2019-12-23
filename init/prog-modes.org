@@ -2,7 +2,7 @@
 #+PROPERTY:header-args :cache yes :tangle yes  :comments link
 
 * Common to all programming modes
-I suspect there is a split between those with a REPPL and not. But all I am interested in are REPL.
+I suspect there is a split between those with a REPL and not. But all I am interested in are REPL.
 
 Need keys for build
 f5 has always been my main - build and go used to be build all but now do tests

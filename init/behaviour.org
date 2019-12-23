@@ -134,9 +134,47 @@ See http://endlessparentheses.com/ispell-and-abbrev-the-perfect-auto-correct.htm
 (use-package expand-region
   :ensure t
   :bind ("C-=" . er/expand-region)
-  ("<f2>" . er/expand-region)
+  ("<f2>" . expand-region-hydra/body)
   ("<S-f2>" . er/contract-region)
-  ("<C-f2>" . er/contract-region))
+  ("<C-f2>" . er/contract-region)
+  :pretty-hydra
+  ((:color blue :idle 1.5)
+   ( "Mark"
+     (("d" er/mark-defun "Defun / Function")
+      ("f" er/mark-defun "Defun / Function")
+      ("u" er/mark-url "Url")
+      ("e" mark-sexp "S-Expression")
+      ("E" er/mark-email "Email")
+      ("b" mark-whole-buffer "Buffer"))
+     "Text"
+     (("w" er/mark-word "Word")
+      ("l" ejmr-mark-line "Line")
+      ("s" er/mark-sentence "Sentence")
+      ("p" er/mark-text-paragraph "Paragraph")
+      ("g" mark-page "Page")
+      ("S" er/mark-symbol "Symbol")
+      ("P" er/mark-symbol-with-prefix "Prefixed symbol"))
+     "Pairs"
+     (("q" er/mark-inside-quotes "Inside Quotes")
+      ("Q" er/mark-outside-quotes "Outside Quotes")
+      ("(" er/mark-inside-pairs "Inside Pairs")
+      ("[" er/mark-inside-pairs "Inside Pairs")
+      ("{" er/mark-inside-pairs "Inside Pairs")
+      (")" er/mark-outside-pairs "Outside Pairs")
+      ("]" er/mark-outside-pairs "Outside Pairs")
+      ("}" er/mark-outside-pairs "Outside Pairs"))
+     "Tags"
+     (("t" er/mark-inner-tag "Inner Tag")
+      ("T" er/mark-outer-tag "Outer Tag")
+      ("c" er/mark-comment "Comment")
+      ("a" er/mark-html-attribute "HTML Attribute")
+      ("i" change-inner "Inner")
+      ("o" change-outer "Outer"))
+     "Expand"
+     ( ("." er/expand-region "Expand Region" :exit nil)
+       ("<f2>" er/expand-region "Expand Region" :exit nil)
+       ("," er/contract-region "Contract Region" :exit nil)))))
+
 #+end_src
 ** Begin end line
 There are several ways to make begin go to first non whitespace  then to begin lin, some will then make next press go to defun or buffer.

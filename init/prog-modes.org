@@ -35,24 +35,24 @@ Look at smart-tabs-insinuate but aggressive indent means not needed, although if
    :ensure t
    :hook ((racket-mode emacs-lisp-mode) . aggressive-indent-mode))
  #+end_src
-*** Clean up whitespace
+** Clean up whitespace
  Only do it on my edits
-**** Whitespace at end of line
+*** Whitespace at end of line
   #+begin_src emacs-lisp
    (use-package ws-butler
 	 :ensure t
 	 :diminish ws-butler-mode
 	 :hook ((prog-mode org-mode) . ws-butler-mode ))
  #+end_src
-**** TODO Need to look at this more
-*** iMenu in all buffers
+*** TODO Need to look at this more
+** iMenu in all buffers
 	#+begin_src emacs-lisp
 	(add-hook 'prog-mode-hook (lambda () (imenu-add-to-menubar "Imenu")))
 	#+end_src
-*** Folding
+** Folding
 Keeps chnaging - the issue is with comments before functions I want to collapse the lot. Plu with racket and ml comments are not in fits column so some (outshine) do not spot it.
 Current work to get org mode working better. see send to REPL.
-**** Hide show
+*** Hide show
 Let us set it up
 #+begin_src emacs-lisp
 (use-package hideshow
@@ -91,7 +91,7 @@ _SPC_ cancel
 
 (bind-key "H-h" 'hydra-hs/body)
 #+end_src
-**** Outlining
+*** Outlining
 Basically want to collapse/fold depending on comments.
 [[https://github.com/alphapapa/outshine][Outshine]] seems to be the only one still under developement, but dioes too much and has the problem that it looks for comments in colum 1 as does hideshow.
 #+begin_src emacs-lisp
@@ -108,7 +108,7 @@ Basically want to collapse/fold depending on comments.
   (defvar outline-minor-mode-prefix "H-o") ;  to set before loading note other package name
   )
 #+end_src
-**** Folding
+*** Folding
 Lets try another
 #+begin_src emacs-lisp
 
@@ -262,6 +262,14 @@ This is simple and works
               :map Info-mode-map ( "<f6>". eir-eval-in-ielm)
               :map lisp-interaction-mode-map ( "<f6>". eir-eval-in-ielm)))
 #+END_SRC
+However I can't use that for a send to buffer as the map from mode to function is via the keymap
+#+begin_src emacs-lisp
+(defun mwb-eir-send-to-repl (function-name )
+  "send the last sexpr to the replm using the given function"
+  ;; (interactive "P")
+
+  )
+#+end_src
 ** Git
 #+begin_src emacs-lisp
 (mwb-init-load "init/prog-modes/git")

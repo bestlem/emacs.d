@@ -52,7 +52,7 @@ Emacs lisp specific extras
 and the hydra is from https://sriramkswamy.github.io/dotemacs/ . Note it expands what is at current point,
 #+begin_src emacs-lisp
 (defhydra sk/hydra-macro-step (:pre (macrostep-expand)
-                                    :color red
+                                    :color pink
                                     :hint nil)
   "
  _e_: expand    _j_: next macro    _C_: collapse all

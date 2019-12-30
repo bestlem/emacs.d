@@ -35,7 +35,7 @@ Note Hydra is not really used after just a couple of weeks.
 Put the bind bit in noweb
 #+NAME: key-binds
 #+begin_src emacs-lisp :tangle no
-(;("<f12>" . org-capture)
+(
  ;; ("H-s" . org-babel-tangle-jump-to-org)
  ("H-s" . org-babel-detangle)           ; actually update
  :map org-mode-map
@@ -83,6 +83,7 @@ From http://doc.norang.ca/org-mode.html#Capture
          "* TODO %?\n%U\n%a\n" )
         ))
 #+end_src
+
 *** TODO Save org files saved in dropbox dir automatically (NB not emacs autosave)
 See https://www.reddit.com/r/emacs/comments/9e5h4f/is_there_a_way_to_autosave_org_note_buffers/ and real-auto-save-mode and the hook
 *** TODO Tangle on save
@@ -190,24 +191,90 @@ In practice I don't use that.
    ("q" nil "cancel"))
 
  #+end_src
+** Agenda
+I don't use but the hook is there. Main setup from Jerry Peng, needed as in org hydra and might as well setup up.
+#+begin_src emacs-lisp
+(use-package org-agenda
+  ;; :after (org)
+  :commands (org-agenda)
+  :config
+  (progn
+    (setq org-agenda-restore-windows-after-quit t)
+    (setq org-agenda-window-setup 'only-window)
+
+    (advice-add 'org-agenda-quit :before 'org-save-all-org-buffers)
+
+    (setq org-agenda-custom-commands
+          '(
+            ("s" "Someday"
+             ((tags "+someday/TODO"
+                    ((org-agenda-overriding-header "Maybe Someday:")))))))
+
+    (setq org-agenda-files (list  org-directory
+                                  ))
+
+    (setq org-agenda-category-icon-alist
+          `(("Emacs" ,(list (all-the-icons-fileicon "emacs" :height 0.8 :v-adjust 0.05))
+             nil nil :ascent center)
+            ("Projects" ,(list (all-the-icons-octicon "repo" :v-adjust 0.05))
+             nil nil :ascent center)
+
+            ("Inbox" ,(list (all-the-icons-faicon "inbox" :height 0.9 :v-adjust 0.05))
+             nil nil :ascent center)
+            ("Personal" ,(list (all-the-icons-faicon "user" :height 0.95 :v-adjust 0.05))
+             nil nil :ascent center)))
+
+    (setq org-agenda-sorting-strategy
+          '((agenda habit-down time-up priority-down category-keep)
+            (todo category-keep timestamp-down)
+            (tags category-keep timestamp-down)
+            (search category-keep)))))
+#+end_src
+** Capture
+I should start using this
+Again from jerrypnz
+#+begin_src emacs-lisp
+(use-package org-capture
+  :after (org)
+  :commands (org-capture)
+  :config
+  (progn
+    (setq org-capture-templates
+          `(("t" "TODO" entry (file org-default-notes-file)
+             "* TODO %?\n%u\n")
+            ("p" "Project" entry (file org-default-notes-file)
+             "* %? [%] :PROJECT:\n%u\n")
+            ("m" "Meeting" entry (file org-default-notes-file)
+             "* Meeting notes for %? :MEETING:\n%t" :clock-in t :clock-resume t)
+            ("n" "Notes" entry (file org-default-notes-file)
+             "* %? \n%t")))))
+#+end_src
 ** Mode Hydra
 Using new pretty mode hydra but with #+setupfile: from the matcha
 #+begin_src emacs-lisp
 (major-mode-hydra-define org-mode nil
   ("Edit Subtree"
-   (("x"  org-cut-subtree "Cut")
-    ("w"  org-copy-subtree "Copy")
-    ("y"  org-paste-subtree "Paste")
-    ("Y"  org-yank "Yank")
-    ("W"  org-clone-subtree-with-time-shift "Clone"))
+   (("x" org-cut-subtree "Cut")
+    ("w" org-copy-subtree "Copy")
+    ("y" org-paste-subtree "Paste")
+    ("Y" org-yank "Yank")
+    ("W" org-clone-subtree-with-time-shift "Clone"))
    "Babel"
-   (("e"  org-babel-execute-src-block "Execute Source Block")
-    ("'"  org-edit-src-code "Edit Source")
-    ("t"  org-babel-tangle "Tangle"))
+   (("e" org-babel-execute-src-block "Execute Source Block")
+    ("'" org-edit-src-code "Edit Source")
+    ("b" org-babel-tangle "Tangle"))
    "Insert"
-   (("m"  org-meta-return "Heading")
-    ("M"  org-insert-heading-respect-content "Heading Under")
-    ("t"  org-insert-todo-heading "Todo")
-    ("T"  org-insert-todo-heading-respect-content "Todo Under"))))
+   (("m" org-meta-return "Heading")
+    ("M" org-insert-heading-respect-content "Heading Under")
+
+    ("T" org-insert-todo-heading-respect-content "Todo Under"))
+   "Org"
+   (("a" org-agenda "Agenda")
+    ("c" org-capture "Capture")
+    ("r" org-refile "Refile")
+    ("t" org-todo "Todo"))
+   "Links"
+   (("l" org-store-link "Store")
+    ("i" org-insert-link "Insert"))))
 
 #+end_src

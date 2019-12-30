@@ -113,14 +113,6 @@ From https://github.com/otijhuis/emacs.d/blob/master/config/hydra-settings.el
          ((racket-mode racket-repl-mode) . paxedit-mode))
       #+end_src
 ** matcha
-**** Set the mode
-	 #+begin_src emacs-lisp
-	 (when matcha-use-launcher-p
-	   (matcha-set-mode-command
-		:mode '(racket-mode )
-		:command 'matcha-racket-mode)
-	   )
-	 #+end_src
 *** Mode matcha
 	 #+begin_src emacs-lisp
 

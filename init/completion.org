@@ -25,6 +25,7 @@ Add some from jweigley
 Looking at all the new stuff I see yasnippet but but emacs has had for many yera several things - see [[https://www.gnu.org/software/emacs/manual/html_mono/autotype.html][Emacs manual for autotyping]]. Also look at tempo and auto-insert(the latter is what new files will have inserted but that does the GNU emacs whole thing I suspect ya snippet is better)
 My current view is yasnippet for the templating (old inclue skeleton)
 ** Yasnippet
+
 #+begin_src emacs-lisp
 (use-package yasnippet
   :ensure t
@@ -39,10 +40,10 @@ My current view is yasnippet for the templating (old inclue skeleton)
   ;;   (eval yas-maybe-expand))
   :config
   (setq yas-snippet-dirs (list (mwb-user-emacs-file "data/snippets")))
-  (use-package yasnippet-snippets
-    :config (yasnippet-snippets-initialize)
-    (message "loaded yasnippets collection")
-    :ensure t)
+  ;; (use-package yasnippet-snippets
+  ;;   :config (yasnippet-snippets-initialize)
+  ;;   (message "loaded yasnippets collection")
+  ;;   :ensure t)
   (yas-reload-all)
   (yas-global-mode 1)
   (define-key yas-minor-mode-map (kbd "SPC") yas-maybe-expand)
@@ -81,7 +82,9 @@ My current view is yasnippet for the templating (old inclue skeleton)
 *** yasnippets collection
 There is a package including a lot of snippets.
 However there are so many elisp ones that it might be too confusing. Similarly the expansion for org mode is not nice
-For loading as yasnippet is on defer we get this and yasnippets' config on eval-after load/ So what order do they load in? I suspect LIFO as yasnippet is delayed.
+For loading as yasnippet is on defer we get this and yasnippets' config on eval-after load/ So what order do they load in? I suspect LIFO as yasnippet is delayed. So to get load put the use-package in the "config.
+
+But the expansions are too much so better to copy them as needed.
 
 ** Abbrev
 Simple text replacement. From John Wiegley

@@ -18,7 +18,7 @@ Use bond-key
 *** History
 I used Teletypes at some stage in the beginning or at least very clicky keyboards. My first professional and heavy programming was in APL so I am used to odd layouts (IBM 3279 although this [[https://www.google.com/imgres?imgurl=https%3A%2F%2Flive.staticflickr.com%2F1671%2F25859890091_f7e9173891_b.jpg&imgrefurl=https%3A%2F%2Fwww.flickr.com%2Fphotos%2F22368471%40N04%2F25859890091&docid=ZLVoX24MY-4ACM&tbnid=ZUP2S6AC-ynJIM%3A&vet=10ahUKEwi32JONrMDmAhVOQhUIHV8UCAEQMwhOKAAwAA..i&w=1023&h=445&bih=872&biw=1298&q=apl%20keyboard&ved=0ahUKEwi32JONrMDmAhVOQhUIHV8UCAEQMwhOKAAwAA&iact=mrc&uact=8][one]] looks more like it) and clicky keys. My DOS editor was microemacs so learn some of the control xs xc and c-ae.
 
-This is really the main piece of Emacs customization I have done over the years. I do not have full history before 2008 which is for Aquamacs and by that stage I had forgotten what all the key definitions were. The rcs log was from 2002 and that was 1.1.1.17 so quite a bit there but even that would have been a conversion to OSX, from my work using NT and  Sun (Linux was all server) and a NeXT PC.
+This is really the main piece of Emacs customization I have done over the years. I do not have full history before 2008 which is for Aquamacs and by that stage I had forgotten what all the key definitions were. The rcs log was from 2002 and that was 1.1.1.17 so quite a bit there but even that would have been a conversion to OSX, from my work using NT and Sun (Linux was all server) and a NeXT PC.
 
 I then read about keyboards especially from Xah Lee and came across the [[http://xahlee.info/kbd/i/NeXT_adb_keyboard_87366.jpg][NeXT adb keyboard for Pizza Box NeXT]] which I then realised is what I used and was where I really started to use Emacs. Note the command key is a bar below space and the keys are Help Alt going out from the space. So I used command as a binding and Help.
 These keys are what the \?H bindings were and I had forgotten and probably removed a lot of those as I did not understand them. I also forgot what use the <return> and C-m choices were for. See [[http://ergoemacs.org/emacs/emacs_key_notation_return_vs_RET.html][Xah Lee "<return>" and "RET"]]
@@ -28,11 +28,11 @@ These keys are what the \?H bindings were and I had forgotten and probably remov
 
 *** Function keys
 Muscle memory has a lot to answer for.
-The first app that I which had useful function keys wa Visual C (The IBM had it but most programming was on Micro APL and I forget what that was)
-The lasted MS [[https://docs.microsoft.com/en-us/visualstudio/ide/default-keyboard-shortcuts-for-frequently-used-commands-in-visual-studio?view=vs-2019][document]] lists them. f5 is the one I remember and that now does Debug.Start, which I think does a build then runs the debugger so that was my main hit and go key. Nowadays my usual task is build and run tests and debug only if needed. So change f5. The debug steps are f10 and f11 but can't see a continue, I include f12 there. f8 is Edit.GoToNextLocation so fits with my next error. But the NeXT suggestion looks like f7 and 8 (well equivalent) so the next error got shifted.
+The first app that I which had useful function keys was Visual C (The IBM had it but most programming was on Micro APL and I forget what that was)
+The latest MS [[https://docs.microsoft.com/en-us/visualstudio/ide/default-keyboard-shortcuts-for-frequently-used-commands-in-visual-studio?view=vs-2019][document]] lists them. f5 is the one I remember and that now does Debug.Start, which I think does a build then runs the debugger so that was my main hit and go key. Nowadays my usual task is build and run tests and debug only if needed. So I changed f5 some time ago. The debug steps are f10 and f11 but can't see a continue, I include f12 there. f8 is Edit.GoToNextLocation so fits with my next error. But the NeXT suggestion looks like f7 and 8 (well equivalent) so the next error got shifted.
 
 *** Keyboard usage.
-Following Xah Lee's comments and seeing [[http://xahlee.info/kbd/space-cadet_keyboard.html][The Space Cadet Keyboard]] which is what emacs was implemented on and they keys outwards of space are control, Meta, Special and Hyper. SO I tried bindin so it went control, meta, super and caps lock as hyper but I am too used to the Apple bindinhg so went back to Command, Meta and control with caps lock as hyper (and right Windows key). However the control key is difficult to hit.
+Following Xah Lee's comments and seeing [[http://xahlee.info/kbd/space-cadet_keyboard.html][The Space Cadet Keyboard]] which is what emacs was implemented on and they keys outwards of space are control, Meta, Special and Hyper. So I tried binding so it went control, meta, super and caps lock as hyper but I am too used to the Apple binding so went back to Command, Meta and control with caps lock as hyper (and right Windows key). However the control key is difficult to hit.
 
 **** TODO Xah Lee bracket binding
 Alt-J etc as suggested [[http://xahlee.info/kbd/best_way_to_insert_brackets.html][here]]
@@ -55,7 +55,7 @@ So hyper-A is now a mode hydra key and I have started defining a hydra on that,
      (which-key-setup-side-window-right-bottom)
      (setq which-key-sort-order 'which-key-key-order-alpha
            which-key-side-window-max-width 0.33
-           which-key-idle-delay 0.05)
+           which-key-idle-delay 0.1)
      (which-key-mode)
      :diminish which-key-mode)
    #+end_src
@@ -113,7 +113,7 @@ Note that you can control what the screen displays A for Alt or ⌥. Emacs is no
   #+end_src
 ** Goto line
 Now these are very old
-  #+begin_src emacs-lisp
+#+begin_src emacs-lisp
   (bind-key (kbd "M-g") 'goto-line)
 #+end_src
 ** Let search continue with arrows
@@ -179,39 +179,18 @@ So ended up with matcha again and transient
 
 And that works - I do need to edit the matcha files etc.
 But transient needs a actual function that exists hydra can lazy load.
+But hydra allows lambdas and often not defined functions (although pretty hydra requires the function to be loaded.)
 *** Matcha space the root matcha
 **** Note on unused or other changes
-**** quickrun
-	  runs the current buffer through a compiler or interpreter. There are also functions to do for a method. Includes C, Racket, Python, Julia Although seems to have disappeared.
-See https://github.com/syohex/emacs-quickrun but assumes a lot. Better look at org mode and repls.
-
    #+begin_src emacs-lisp
-   (bind-key "H-d" 'matcha-run-mode-command)
+   ;(bind-key "H-d" 'matcha-run-mode-command)
    ;(bind-key "H-`" 'matcha-me-space)
    #+end_src
-**
-*** Hydra org
-	Note there is also a transient mode
-	#+begin_src emacs-lisp
-	(define-transient-command mwb/matcha-org-space
-	  "Org"
-	  [["Org"
-		("a" "Agenda" org-agenda)
-		("c" "Capture" org-capture)
-		("r" "Refile" org-refile)
-		("t" "Todo" org-todo)]
-	   ["Links"
-		("l" "Store" org-store-link)
-		("i" "Insert" org-insert-link)]
-	   ["Subtree"
-		("x" "Cut" org-cut-subtree)
-		("w" "Copy" org-copy-subtree)
-		("y" "Paste" org-paste-subtree)
-		("Y" "Yank" org-yank)
-		("W" "Clone" org-clone-subtree-with-time-shift)]
-	   ])
-	#+end_src
-*** Hydra transpose
+** quickrun
+	  runs the current buffer through a compiler or interpreter. There are also functions to do for a method. Includes C, Racket, Python, Julia. However all through a batch command so not into RTEPL and not really through make.
+See https://github.com/syohex/emacs-quickrun but assumes a lot. Better look at org mode and repls.
+
+** Hydra transpose
 	From hydra wiki
 	#+begin_src emacs-lisp
 (defhydra hydra-transpose (:color red)
@@ -328,6 +307,7 @@ _<_ beginning of buffer _>_ end of buffer _m_: set mark _/_: jump to mark
 
 	(bind-key "H-g" 'goto/body)
 	#+end_src
+** Global hydra
 ** Control x binding
    From [[https://github.com/abo-abo/hydra/wiki/Emacs][Hydra wiki - Find file with xf]]
 

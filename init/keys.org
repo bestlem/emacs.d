@@ -308,6 +308,37 @@ _<_ beginning of buffer _>_ end of buffer _m_: set mark _/_: jump to mark
 	(bind-key "H-g" 'goto/body)
 	#+end_src
 ** Global hydra
+** Toggle Hydra
+This is from jerrypnz with extras for treemacs
+#+begin_src emacs-lisp
+(defvar jp-toggles--title (with-faicon "toggle-on" "Toggles" 1 -0.05))
+
+(pretty-hydra-define jp-toggles
+  (:color amaranth :quit-key "q" :title jp-toggles--title)
+  ("Basic"
+   (("n" linum-mode "line number" :toggle t)
+    ("w" whitespace-mode "whitespace" :toggle t)
+    ("W" whitespace-cleanup-mode "whitespace cleanup" :toggle t)
+    ("r" rainbow-mode "rainbow" :toggle t)
+    ("L" page-break-lines-mode "page break lines" :toggle t)
+    ("t" treemacs "Treemacs" :toggle t))
+   "Highlight"
+   (("s" symbol-overlay-mode "symbol" :toggle t)
+    ("l" hl-line-mode "line" :toggle t)
+    ("x" highlight-sexp-mode "sexp" :toggle t)
+    ("T" hl-todo-mode "todo" :toggle t))
+   "UI"
+   (("d" jp-themes-toggle-light-dark "dark theme" :toggle jp-current-theme-dark-p))
+   "Coding"
+   (("p" smartparens-mode "smartparens" :toggle t)
+    ("P" smartparens-strict-mode "smartparens strict" :toggle t)
+    ("S" show-smartparens-mode "show smartparens" :toggle t)
+    ("f" flycheck-mode "flycheck" :toggle t))
+   "Emacs"
+   (("D" toggle-debug-on-error "debug on error" :toggle (default-value 'debug-on-error))
+    ("X" toggle-debug-on-quit "debug on quit" :toggle (default-value 'debug-on-quit)))))
+(bind-key "H-t" #'jp-toggles/body)
+#+end_src
 ** Control x binding
    From [[https://github.com/abo-abo/hydra/wiki/Emacs][Hydra wiki - Find file with xf]]
 

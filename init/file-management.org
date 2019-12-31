@@ -209,13 +209,12 @@ This is the visual
            ("c" treemacs-add-project-to-workspace "Create Project")
            ("d" treemacs-remove-project-from-workspace "Delete Project")
            ("q" nil "Quit"))
-  
-   :bind (("H-t" . treemacs)
-          :map treemacs-mode-map
-          ("<mouse-5>" . treemacs-rightclick-menu)
-          ("<mouse-4>" . treemacs-rightclick-menu)
-          ("<f5>" . treemacs-switch-workspace)
-          ("<C-f5>" . treemacs-edit-workspaces)))
+
+   :bind ( :map treemacs-mode-map
+                ("<mouse-5>" . treemacs-rightclick-menu)
+                ("<mouse-4>" . treemacs-rightclick-menu)
+                ("<f5>" . treemacs-switch-workspace)
+                ("<C-f5>" . treemacs-edit-workspaces)))
 
  (use-package treemacs-projectile
    :after treemacs projectile

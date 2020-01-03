@@ -38,7 +38,8 @@ It assumes things like clojure
      (use-package lispy-mnemonic
        :mwb-load-path "site-lisp/lispy-mnemonic"
        :hook ((emacs-lisp-mode
-               lisp-interaction-mode) . lispy-mnemonic-mode))
+               lisp-interaction-mode
+               inferior-emacs-lisp-mode) . lispy-mnemonic-mode))
 	 #+end_src
 ** Evaluation
 	Instead of displaying the results in a separate buffer (like the iElm does), The [[https://github.com/xiongtx/eros][EROS project]] displays the results temporarily  /in the buffer/ in an overlay.  No need to do anything special:

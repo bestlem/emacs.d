@@ -337,11 +337,15 @@ I want a key to send current buffer, especial in OrgSrc mode to REPL.
   (setq mwb-repl-region-key "<f6>"))
 #+END_SRC
 *** emacs - ielm
+<<<<<<< HEAD
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:145FFE4A-96E9-4274-83C9-7713D5C26575
 :END:
 This is simple and works
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_50DBBC02-BB0B-43D7-8FD2-6ECB453AF222
+=======
+This is simple and works. Extended by me to send whole buffer and not switch on key but mode.
+>>>>>>> 4c20df9... Have working base function
 #+BEGIN_SRC emacs-lisp
 (use-package  eval-in-repl-ielm
   :config
@@ -354,11 +358,23 @@ This is simple and works
 However I can't use that for a send to buffer as the map from mode to function is via the keymap
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_D26ABD27-104F-449D-BF75-31B81F383CC5
 #+begin_src emacs-lisp
-(defun mwb-eir-send-to-repl (function-name )
-  "send the last sexpr to the replm using the given function"
-  ;; (interactive "P")
+(setq eir--assoc '())
 
-  )
+(defun eir-mwb-send-to-repl ()
+  "Send the repl to the buffer looking up the major mode"
+  (interactive)
+  (funcall (cdr (assoc major-mode eir--assoc))))
+
+(defun eir-mwb-send-to-repl-define (mode function-name)
+  "send the last sexpr to the repl using the given function"
+  ;; (interactive "P")
+  (add-to-list 'eir--assoc (cons mode function-name)))
+
+(eir-mwb-send-to-repl-define 'emacs-lisp-mode 'eir-eval-in-ielm)
+(eir-mwb-send-to-repl-define 'inferior-emacs-lisp-mode 'eir-eval-in-ielm)
+
+
+
 #+end_src
 ** Git
 :PROPERTIES:

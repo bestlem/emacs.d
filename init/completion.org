@@ -25,10 +25,11 @@ Add some from jweigley
 Looking at all the new stuff I see yasnippet but but emacs has had for many yera several things - see [[https://www.gnu.org/software/emacs/manual/html_mono/autotype.html][Emacs manual for autotyping]]. Also look at tempo and auto-insert(the latter is what new files will have inserted but that does the GNU emacs whole thing I suspect ya snippet is better)
 My current view is yasnippet for the templating (old inclue skeleton)
 ** Yasnippet
-
+I suspect that emacs's inbuilt skeleton can do what I need but there are more examples using yasnippet + Emacs doc is as usual impenetrable until you know how it works,
 #+begin_src emacs-lisp
 (use-package yasnippet
   :ensure t
+  :diminish (yas-minor-mode)
   :defer 2                              ; need to force the load
   :after company
   :mode ("/\\.emacs\\.d/data/snippets/" . snippet-mode)
@@ -75,8 +76,7 @@ My current view is yasnippet for the templating (old inclue skeleton)
                           ("l" yas-describe-tables)
                           ("g" yas/global-mode)
                           ("m" yas/minor-mode)
-                          ("a" yas-reload-all))
-  )
+                          ("a" yas-reload-all)))
 #+end_src
 
 *** yasnippets collection

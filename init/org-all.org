@@ -237,6 +237,7 @@ Again from jerrypnz
 (use-package org-capture
   :after (org)
   :commands (org-capture)
+  :bind ("<f13>" . org-capture)
   :config
   (progn
     (setq org-capture-templates

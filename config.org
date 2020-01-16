@@ -1,7 +1,6 @@
 #+TITLE Emacs configuration where no .el is in got
 #+PROPERTY:header-args :cache yes :tangle yes :comments link
 #+STARTUP: content
-
 * Init environment
 The minimum setup needed to load the rest.
 ** Message
@@ -152,10 +151,9 @@ Basically use-package and helpers - strictly some of these can be left to later.
 ***** Improve elisp
 Add more functional methods.
 #+begin_src emacs-lisp
-(use-package dash
-  :ensure t)
+(use-package dash  :ensure t)
+(use-package s  :ensure t)
 #+end_src
-
 ***** Elisp code
 Need to alter list
 #+begin_src emacs-lisp
@@ -236,6 +234,7 @@ Need key setting menus.
 #+begin_src emacs-lisp
 (use-package major-mode-hydra
   :ensure t
+:demand
   :bind
   ("H-a" . major-mode-hydra)
   :config

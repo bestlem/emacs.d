@@ -14,21 +14,26 @@ See in future noweb see https://raw.githubusercontent.com/zzamboni/dot-emacs/mas
 org-mode is a pain as we need a newer than aquamacs supplies and also there are recommendations to use an even later version. Also re packaging emacs package.el reads already built stuff others e.g. straight.el don't and that could be a problem with org-mode. There are reasons not to use the org repo but Elpa - [[https://www.reddit.com/r/emacs/comments/5sx7j0/how_do_i_get_usepackage_to_ignore_the_bundled/ddix2ta/?utm_source=share&utm_medium=web2x][from Reddit]] basically possible security issues so I am with ELPA and missing org-contrib.
 
 Aug 2019 got an error in cut subtree so revert to org mode with Aquamacs nad lose formatting of code blocks. (and will get namne changes in links in generated files)
-
 ** The use package setup
 Note Hydra is not really used after just a couple of weeks.
   #+begin_src emacs-lisp :noweb yes
   (use-package org
     :ensure t
     :bind
-<<key-binds>>
+    <<key-binds>>
     :config
     (setq org-datetree-add-timestamp (quote active)
           org-default-notes-file "~/SyncServices/Dropbox/Docs/org/notes.org"
-          org-directory "/Users/mark/SyncServices/Dropbox/Docs/org")
+          org-directory "/Users/mark/SyncServices/Dropbox/Docs/org"
+;;          org-use-speed-commands t
+)
     :hook
     <<org-mode-hooks>>
     <<org-mode-hooks-wrapping>>
+<<org-mode-hydrae>>
+<<org-mode-hydrae-code>>
+<<org-mode-hydrae-refile>>
+
     )
   #+end_src
 *** Key bindings
@@ -250,32 +255,61 @@ Again from jerrypnz
             ("n" "Notes" entry (file org-default-notes-file)
              "* %? \n%t")))))
 #+end_src
-** Mode Hydra
+** Mode Hydras
+*** Main mode
 Using new pretty mode hydra but with #+setupfile: from the matcha
-#+begin_src emacs-lisp
-(major-mode-hydra-define org-mode nil
-  ("Edit Subtree"
-   (("x" org-cut-subtree "Cut")
-    ("w" org-copy-subtree "Copy")
-    ("y" org-paste-subtree "Paste")
-    ("Y" org-yank "Yank")
-    ("W" org-clone-subtree-with-time-shift "Clone"))
-   "Babel"
-   (("e" org-babel-execute-src-block "Execute Source Block")
-    ("'" org-edit-src-code "Edit Source")
-    ("b" org-babel-tangle "Tangle"))
-   "Insert"
-   (("m" org-meta-return "Heading")
-    ("M" org-insert-heading-respect-content "Heading Under")
 
-    ("T" org-insert-todo-heading-respect-content "Todo Under"))
-   "Org"
-   (("a" org-agenda "Agenda")
-    ("c" org-capture "Capture")
-    ("r" org-refile "Refile")
-    ("t" org-todo "Todo"))
-   "Links"
-   (("l" org-store-link "Store")
-    ("i" org-insert-link "Insert"))))
+#+NAME: org-mode-hydrae
+#+begin_src emacs-lisp :tangle no
+:mode-hydra
+("Edit Subtree"
+ (("x" org-cut-subtree "Cut")
+  ("w" org-copy-subtree "Copy")
+  ("y" org-paste-subtree "Paste")
+  ("Y" org-yank "Yank")
+  ("W" org-clone-subtree-with-time-shift "Clone"))
+ "Babel"
+ (("e" org-babel-execute-src-block "Execute Source Block")
+  ("'" org-edit-src-code "Edit Source")
+  ("b" org-babel-tangle "Tangle"))
+ "Insert"
+ (("m" org-meta-return "Heading")
+  ("M" org-insert-heading-respect-content "Heading Under")
 
+  ("T" org-insert-todo-heading-respect-content "Todo Under"))
+ "Org"
+ (("a" org-agenda "Agenda")
+  ("c" org-capture "Capture")
+  ("r" org-refile "Refile")
+  ("t" org-todo "Todo"))
+ "Links"
+ (("l" org-store-link "Store")
+  ("i" org-insert-link "Insert")))
+
+#+end_src
+*** Refile
+Based off https://mollermara.com/blog/Fast-refiling-in-org-mode-with-hydras/ to refile to separate files. No doubt will extend in future and follow the later bits.
+**** Code
+#+NAME: org-mode-hydrae-code
+#+begin_src emacs-lisp :tangle no
+:config
+(defun my/refile (file headline &optional arg)
+  (let ((pos (save-excursion
+               (find-file file)
+               (org-find-exact-headline-in-buffer headline))))
+    (org-refile arg nil (list headline file nil pos)))
+  (switch-to-buffer (current-buffer)))
+#+end_src
+
+**** Hydra
+#+NAME: org-mode-hydrae-refile
+#+begin_src emacs-lisp :tangle no
+:pretty-hydra
+((  :color pink :quit-key "q")
+ ( "Shopping"
+   ( ("g" (my/refile Groceries
+                     "shopping.org" "Groceries")  "Groceries")
+     ("s" (my/refile "shopping.org" "Other" ) "Other shopping"))
+   "computer"
+   ( ("e"  (my/refile "todo.org" "Emacs" "Emacs tasks")))))
 #+end_src

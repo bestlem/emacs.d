@@ -307,3 +307,12 @@ I don't want to confirm https://emacs.stackexchange.com/a/10349/9874 The key bin
   (interactive) (revert-buffer t t))
 (bind-key (kbd "A-u") 'revert-buffer-no-confirm)
 #+end_src
+** Kill old buffers
+midnight-mode purges buffers which haven’t been displayed in 3 days. We configure the period so that the cleanup happens every 2 hours (7200 seconds).
+#+begin_src emacs-lisp
+(use-package midnight
+  :defer 20
+  :config
+  (setq midnight-period 7200)
+  (midnight-mode 1))
+#+end_src

@@ -1,4 +1,4 @@
-;; [[file:~/.emacs.d/init.org::*Startup][Startup:1]]
+;; [[file:~/src/env/emacs.d/init.org::*Startup][Startup:1]]
 (defconst emacs-start-time (current-time))
 
 (defvar file-name-handler-alist-old file-name-handler-alist)
@@ -11,7 +11,7 @@
 	  auto-window-vscroll nil)
 ;; Startup:1 ends here
 
-;; [[file:~/.emacs.d/init.org::*package][package:1]]
+;; [[file:~/src/env/emacs.d/init.org::*package][package:1]]
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
@@ -19,11 +19,11 @@
 ;(package-initialize)
 ;; package:1 ends here
 
-;; [[file:~/.emacs.d/init.org::*Debug flag][Debug flag:1]]
+;; [[file:~/src/env/emacs.d/init.org::*Debug flag][Debug flag:1]]
 (setq init-file-debug nil)
 ;; Debug flag:1 ends here
 
-;; [[file:~/.emacs.d/init.org::*Set where the init file is][Set where the init file is:1]]
+;; [[file:~/src/env/emacs.d/init.org::*Set where the init file is][Set where the init file is:1]]
 ;; Need the directory from here.
 (defun mwb-get-directory-of-current-file ()
   "Return the full directory path of the caller's file location."
@@ -32,7 +32,7 @@
 (defconst mwb-user-emacs-directory (mwb-get-directory-of-current-file))
 ;; Set where the init file is:1 ends here
 
-;; [[file:~/.emacs.d/init.org::*Where my init code is][Where my init code is:1]]
+;; [[file:~/src/env/emacs.d/init.org::*Where my init code is][Where my init code is:1]]
 (defun mwb-user-emacs-file (name)
 	"Return an absolute per-user Emacs-specific file name around where the init file is.
   It is basically locate-user-emacs-file but I have followed Aquiamacs is setting that not where my init.el file is.
@@ -40,7 +40,7 @@
 	(expand-file-name name mwb-user-emacs-directory))
 ;; Where my init code is:1 ends here
 
-;; [[file:~/.emacs.d/init.org::*Non org mode expander][Non org mode expander:1]]
+;; [[file:~/src/env/emacs.d/init.org::*Non org mode expander][Non org mode expander:1]]
 (defun nullman/org-babel-generate-elisp-file (file &optional byte-compile force)
   "Generate an emacs-lisp file from an org-babel FILE.
 
@@ -132,7 +132,7 @@ is non-nil."
     ))
 ;; Non org mode expander:1 ends here
 
-;; [[file:~/.emacs.d/init.org::*The loader][The loader:1]]
+;; [[file:~/src/env/emacs.d/init.org::*The loader][The loader:1]]
 (defun mwb-init-load (file-root &optional no-org)
   "Load the relevant code.
      Look for <file-root>.org and <file-root>.el files.
@@ -150,7 +150,7 @@ is non-nil."
       (cond (no-org
              (message "tangle <%s> to <%s> using regex replacement not org mode"
                       org-file el-file)
-             ( nullman/org-babel-generate-elisp-file org-file ))
+             ( nullman/org-babel-generate-elisp-file org-file el-file))
             (t
              (require 'org)
              (message "This loaded an org mode but from the system - best to restart")
@@ -166,6 +166,6 @@ is non-nil."
              nil))))
 ;; The loader:1 ends here
 
-;; [[file:~/.emacs.d/init.org::*The Load][The Load:1]]
+;; [[file:~/src/env/emacs.d/init.org::*The Load][The Load:1]]
 (mwb-init-load "config" "no-org")
 ;; The Load:1 ends here

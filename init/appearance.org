@@ -123,6 +123,7 @@ I think I now want mainly one window and have splits but tabs are useful.
 
     "Split"
     (("b" split-window-right "horizontally")
+     ("|" split-window-right "horizontally")
      ("B" split-window-horizontally-instead "horizontally instead")
      ("v" split-window-below "vertically")
      ("V" split-window-vertically-instead "vertically instead"))

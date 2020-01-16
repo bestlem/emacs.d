@@ -199,7 +199,7 @@ Process file even if timestamp is not newer than target if FORCE
 is non-nil."
   (let* ((case-fold-search t)
          (file-base (expand-file-name (file-name-sans-extension file)))
-         (file-org (concat (file-name-base file) ".org"))
+         (file-org (concat file-base ".org"))
          (file-elisp (concat file-base ".el"))
          (file-comp (concat file-base ".elc"))
          (heading-regexp "^\*+ ")

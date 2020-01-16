@@ -51,7 +51,7 @@ Process file even if timestamp is not newer than target if FORCE
 is non-nil."
   (let* ((case-fold-search t)
          (file-base (expand-file-name (file-name-sans-extension file)))
-         (file-org (concat (file-name-base file) ".org"))
+         (file-org (concat file-base ".org"))
          (file-elisp (concat file-base ".el"))
          (file-comp (concat file-base ".elc"))
          (heading-regexp "^\*+ ")
@@ -150,7 +150,7 @@ is non-nil."
       (cond (no-org
              (message "tangle <%s> to <%s> using regex replacement not org mode"
                       org-file el-file)
-             ( nullman/org-babel-generate-elisp-file org-file el-file))
+             ( nullman/org-babel-generate-elisp-file org-file ))
             (t
              (require 'org)
              (message "This loaded an org mode but from the system - best to restart")

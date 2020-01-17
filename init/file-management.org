@@ -98,8 +98,8 @@ There are some modes that have special save actions e.g. *Abbrev* which is a buf
 Started as file management but actually deals with files and what is in them/ Treemacs looks at git so there are files that cannot be see so dired needed.
 ** Searching
    rg aka ripgrep seems to be the newest. However there is rg.el and ripgrep.el I am confused
-*** [[https://github.com/Wilfred/deadgrep][Dea.dgrep]]
-	This seems to provide a cover for ripgrep.
+*** [[https://github.com/Wilfred/deadgrep][Deadgrep]]
+	This provides a cover for ripgrep.
 	#+begin_src emacs-lisp
 	(use-package deadgrep
 	  :ensure t
@@ -203,12 +203,16 @@ This is the visual
         (treemacs-git-mode 'deferred))
        (`(t . _)
         (treemacs-git-mode 'simple))))
-   :hydra (mwb/hydra-treemacs-mode
-           (:color teal)
-           ("p" matcha-projectile/body "Projectile")
-           ("c" treemacs-add-project-to-workspace "Create Project")
-           ("d" treemacs-remove-project-from-workspace "Delete Project")
-           ("q" nil "Quit"))
+   :mode-hydra
+   (treemacs-mode
+    ("Project"
+     ( ("p" matcha-projectile/body "Projectile")
+       ("c" treemacs-add-project-to-workspace "Create Project")
+       ("d" treemacs-remove-project-from-workspace "Delete Project")
+       ("q" nil "Quit"))
+     "Workspace"
+     (("s" treemacs-switch-workspace "Switch" )
+      ("e" treemacs-edit-workspaces "Edit" ))))
 
    :bind ( :map treemacs-mode-map
                 ("<mouse-5>" . treemacs-rightclick-menu)

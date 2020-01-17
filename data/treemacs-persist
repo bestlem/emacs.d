@@ -1,32 +1,32 @@
 * Default Workspace
 ** Aquamacs Emacs My init .emacs.d
- - path :: ~/.emacs.d
+ - path :: ~/src/env/emacs.d
 ** dotfiles
  - path :: ~/src/env/dotfiles
 ** Org
  - path :: ~/SyncServices/Dropbox/Docs/org
+** jerrypnz_major_hydra
+ - path :: ~/src/ThirdParty/emacs-init/jerrypnz_major_hydra
+** jojojames
+ - path :: ~/src/ThirdParty/emacs-init/jojojames
 ** Aquamacs Application
  - path :: /Applications/Aquamacs.app/Contents/Resources/lisp/aquamacs
 ** aquamacs-emacs code
  - path :: ~/src/ThirdParty/aquamacs-emacs
 **  howardabrams
  - path :: ~/src/ThirdParty/emacs-init/howardabrams
+** jwiegley
+ - path :: ~/src/ThirdParty/emacs-init/jwiegley
 ** emacs-leuven
  - path :: ~/src/ThirdParty/emacs-init/emacs-leuven
 ** emacs24-starter-kit
  - path :: ~/src/ThirdParty/emacs-init/emacs24-starter-kit
 ** odds
  - path :: ~/src/ThirdParty/emacs-init/odds
-** jwiegley
- - path :: ~/src/ThirdParty/emacs-init/jwiegley
 ** zzamboni
  - path :: ~/src/ThirdParty/emacs-init/zzamboni
 ** castlemacs
  - path :: ~/src/ThirdParty/emacs-init/castlemacs
-** jojojames
- - path :: ~/src/ThirdParty/emacs-init/jojojames
-** jerrypnz_major_hydra
- - path :: ~/src/ThirdParty/emacs-init/jerrypnz_major_hydra
 ** oremacs
  - path :: ~/src/ThirdParty/emacs-init/oremacs
 ** otijhuis

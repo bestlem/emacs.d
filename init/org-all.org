@@ -262,29 +262,30 @@ Using new pretty mode hydra but with #+setupfile: from the matcha
 #+NAME: org-mode-hydrae
 #+begin_src emacs-lisp :tangle no
 :mode-hydra
-("Edit Subtree"
- (("x" org-cut-subtree "Cut")
-  ("w" org-copy-subtree "Copy")
-  ("y" org-paste-subtree "Paste")
-  ("Y" org-yank "Yank")
-  ("W" org-clone-subtree-with-time-shift "Clone"))
- "Babel"
- (("e" org-babel-execute-src-block "Execute Source Block")
-  ("'" org-edit-src-code "Edit Source")
-  ("b" org-babel-tangle "Tangle"))
- "Insert"
- (("m" org-meta-return "Heading")
-  ("M" org-insert-heading-respect-content "Heading Under")
+(org-mode
+ ("Edit Subtree"
+  (("x" org-cut-subtree "Cut")
+   ("w" org-copy-subtree "Copy")
+   ("y" org-paste-subtree "Paste")
+   ("Y" org-yank "Yank")
+   ("W" org-clone-subtree-with-time-shift "Clone"))
+  "Babel"
+  (("e" org-babel-execute-src-block "Execute Source Block")
+   ("'" org-edit-src-code "Edit Source")
+   ("b" org-babel-tangle "Tangle"))
+  "Insert"
+  (("m" org-meta-return "Heading")
+   ("M" org-insert-heading-respect-content "Heading Under")
 
-  ("T" org-insert-todo-heading-respect-content "Todo Under"))
- "Org"
- (("a" org-agenda "Agenda")
-  ("c" org-capture "Capture")
-  ("r" org-refile "Refile")
-  ("t" org-todo "Todo"))
- "Links"
- (("l" org-store-link "Store")
-  ("i" org-insert-link "Insert")))
+   ("T" org-insert-todo-heading-respect-content "Todo Under"))
+  "Org"
+  (("a" org-agenda "Agenda")
+   ("c" org-capture "Capture")
+   ("r" org-refile "Refile")
+   ("t" org-todo "Todo"))
+  "Links"
+  (("l" org-store-link "Store")
+   ("i" org-insert-link "Insert"))))
 
 #+end_src
 *** Refile

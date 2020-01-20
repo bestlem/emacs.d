@@ -33,6 +33,8 @@
  - path :: ~/src/ThirdParty/emacs-init/otijhuis
 ** ejmr
  - path :: ~/src/ThirdParty/emacs-init/ejmr
+** grettke
+ - path :: ~/src/ThirdParty/emacs-init/grettke
 * Racket
 ** realm
  - path :: ~/src/Racket/realm

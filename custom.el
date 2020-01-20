@@ -47,7 +47,7 @@
     ("~\\'" "\\.lock\\'" "\\.ix\\'" "\\`test\\.out\\'" "-autoloads\\.el\\'" "\\`Desktop\\.ini\\'" "\\`META\\.yml\\'" "\\`MYMETA\\.yml\\'" "\\`TAGS\\'" "\\`Thumbs\\.db\\'" "\\`\\.dropbox\\'" "\\`\\.dropbox\\.cache\\'" "\\`\\.emacs\\.desktop\\'" "\\`\\.emacs\\.desktop\\.lock\\'" "\\.orig\\'" "\\.rej\\'" "\\.el\\.gz$")))
  '(hardhat-fullpath-protected-regexps
    (quote
-    ("~/\\.emacs\\.d/elpa/" "~/\\.cpan/" "~/\\.cabal/" "~/perl5/perlbrew/" "~/\\.npm/" "~/\\.virtualenv/" "~/\\.virthualenv/" "~/\\.rvm/" "/[._]build/" "/\\.bzr/" "/\\.coverage/" "/\\.git/" "/\\.hg/" "/\\.rspec/" "/\\.sass-cache/" "/\\.svn/" "/_MTN/" "/_darcs/" "/CVS/" "/pm_to_blib/" "/RCS/" "/SCCS/" "/blib/" "/test_output/" "~/\\.emacs\\.d/\\.cask/" "~/\\.cask/" "/Applications/" "~/Library/Preferences/Aquamacs Emacs/Packages")))
+    ("~/\\.emacs\\.d/elpa/" "~/\\.cpan/" "~/\\.cabal/" "~/perl5/perlbrew/" "~/\\.npm/" "~/\\.virtualenv/" "~/\\.virthualenv/" "~/\\.rvm/" "/[._]build/" "/\\.bzr/" "/\\.coverage/" "/\\.git/" "/\\.hg/" "/\\.rspec/" "/\\.sass-cache/" "/\\.svn/" "/_MTN/" "/_darcs/" "/CVS/" "/pm_to_blib/" "/RCS/" "/SCCS/" "/blib/" "/test_output/" "~/\\.emacs\\.d/\\.cask/" "~/\\.cask/" "/Applications/" "~/Library/Preferences/Aquamacs Emacs/Packages" "~/src/ThirdParty/")))
  '(ibuffer-expert t)
  '(indent-tabs-mode nil)
  '(mail-setup-with-from t)
@@ -72,7 +72,7 @@
  '(org-todo-keywords (quote ((sequence "TODO" "|" "DONE" "LEAVE(@)"))))
  '(package-selected-packages
    (quote
-    (all-the-icons major-mode-hydra eval-in-repl xr yasnippet-snippets outshine expand-region json-navigator yasnippet mwim mwin mosey ivy-prescient prescient fish-mode sml-mode paxedit use-package-chords paredit dashboard org clojure-mode lispy racket-mode cmake-mode swiper ivy transient cask-mode flycheck undo-tree deadgrep eros macrostep helpful ibuffer-vc counsel ivy-rich ivy-hydra org-indent xah-elisp-mode validate hardhat hydra projectile beacon ripgrep gitignore-mode gitconfig-mode nov manual matcha use-package-hydra backup-each-save esup org-bullets which-key company elmacro ws-butlerz helm elisp-format origami comment-dwim-2 smex discover-my-major json-mode treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ranger dired-toggle aggressive-indent rainbow-delimiters gradle-mode groovy-imports groovy-mode ws-butler highlight-indent-guides diminish key-chord use-package)))
+    (smartparens smartparens-config all-the-icons major-mode-hydra eval-in-repl xr yasnippet-snippets outshine expand-region json-navigator yasnippet mwim mwin mosey ivy-prescient prescient fish-mode sml-mode paxedit use-package-chords paredit dashboard org clojure-mode lispy racket-mode cmake-mode swiper ivy transient cask-mode flycheck undo-tree deadgrep eros macrostep helpful ibuffer-vc counsel ivy-rich ivy-hydra org-indent xah-elisp-mode validate hardhat hydra projectile beacon ripgrep gitignore-mode gitconfig-mode nov manual matcha use-package-hydra backup-each-save esup org-bullets which-key company elmacro ws-butlerz helm elisp-format origami comment-dwim-2 smex discover-my-major json-mode treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ranger dired-toggle aggressive-indent rainbow-delimiters gradle-mode groovy-imports groovy-mode ws-butler highlight-indent-guides diminish key-chord use-package)))
  '(python-shell-interpreter "python")
  '(tabbar-mode t nil (tabbar))
  '(text-mode-hook (quote (turn-on-flyspell set-word-wrap)))

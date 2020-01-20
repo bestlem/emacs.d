@@ -274,6 +274,16 @@ However I can't use that for a send to buffer as the map from mode to function i
 #+begin_src emacs-lisp
 (mwb-init-load "init/prog-modes/git")
 #+end_src
+** Structure editing
+*** Smartparens
+#+begin_src emacs-lisp
+(use-package smartparens
+  :ensure t
+  :config
+  (setq sp-show-pair-from-inside nil)
+  (require 'smartparens-config)
+  :diminish smartparens-mode)
+#+end_src
 * Specific groups
 Where there is common put them together. This part is really why I have separate files so I can deal with one thing at a time
 

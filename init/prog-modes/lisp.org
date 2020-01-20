@@ -24,7 +24,8 @@ Although that should be in prog mode
                    ("<backspace>" . lispy-delete-backward)
                    ("<kp-delete>" . lispy-delete))
        :config (setq lispy-compat (quote (edebug macrostep))
-                     lispy-safe-paste t))
+                     lispy-safe-paste t)
+       (add-hook 'lispy-mode-hook #'turn-off-smartparens-mode))
 	 #+end_src
 *** Get lispy test working
 It assumes things like clojure

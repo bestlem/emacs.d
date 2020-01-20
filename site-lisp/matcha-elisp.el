@@ -3,12 +3,10 @@
 ;; Copyright (C) 2019 James Nguyen
 
 ;; Author: James Nguyen <james@jojojames.com>
-;; Maintainer: James Nguyen <james@jojojames.com>
-;; URL: https://github.com/jojojames/matcha
-;; Version: 0.0.1
+;; Hwac=vily modified Mark Bestley
+;; Version: 0.0.2
 ;; Package-Requires: ((emacs "25.1"))
 ;; Keywords: hydra, emacs
-;; HomePage: https://github.com/jojojames/matcha
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -27,8 +25,8 @@
 ;;; Integration with Hydra.
 
 ;;; Code:
-(require 'matcha-base)
-(require 'matcha-macrostep)
+;; (require 'matcha-base)
+;; (require 'matcha-macrostep)
 ;; (require 'elisp-refs)
 
 (defun matcha-goto-scratch ()
@@ -82,111 +80,53 @@ Requires smartparens because all movement is done using `sp-forward-symbol'."
   (interactive)
   (let (fn)
     (save-mark-and-excursion
-      (search-backward-regexp matcha-elisp-fns-regexp)
-      (setq fn (match-string 1))
-      (mark-sexp)
-      (narrow-to-region (point) (mark))
-      (if (member fn matcha-fns-in-edebug)
-          ;; If the function is already being edebugged, uninstrument it
-          (progn
-            (setq matcha-fns-in-edebug (delete fn matcha-fns-in-edebug))
-            (eval-region (point) (mark))
-            (setq-default eval-expression-print-length 12)
-            (setq-default eval-expression-print-level  4)
-            (message "Edebug disabled: %s" fn))
-        ;; If the function is not being edebugged, instrument it
-        (progn
-          (add-to-list 'matcha-fns-in-edebug fn)
-          (setq-default eval-expression-print-length nil)
-          (setq-default eval-expression-print-level  nil)
-          (edebug-defun)
-          (message "Edebug: %s" fn)))
-      (widen))))
+     (search-backward-regexp matcha-elisp-fns-regexp)
+     (setq fn (match-string 1))
+     (mark-sexp)
+     (narrow-to-region (point) (mark))
+     (if (member fn matcha-fns-in-edebug)
+         ;; If the function is already being edebugged, uninstrument it
+         (progn
+           (setq matcha-fns-in-edebug (delete fn matcha-fns-in-edebug))
+           (eval-region (point) (mark))
+           (setq-default eval-expression-print-length 12)
+           (setq-default eval-expression-print-level  4)
+           (message "Edebug disabled: %s" fn))
+       ;; If the function is not being edebugged, instrument it
+       (progn
+         (add-to-list 'matcha-fns-in-edebug fn)
+         (setq-default eval-expression-print-length nil)
+         (setq-default eval-expression-print-level  nil)
+         (edebug-defun)
+         (message "Edebug: %s" fn)))
+     (widen))))
 
-(when matcha-use-launcher-p
-  (matcha-set-format-command
-   :mode '(emacs-lisp-mode lisp-interaction-mode)
-   :command 'matcha-indent-region-or-buffer)
-  (matcha-set-debug-command
-   :mode '(emacs-lisp-mode lisp-interaction-mode)
-   :command 'matcha-emacs-lisp-debug)
-  (matcha-set-eval-command
-   :mode '(emacs-lisp-mode lisp-interaction-mode)
-   :command 'matcha-emacs-lisp-eval)
-  (matcha-set-mode-command
-   :mode '(emacs-lisp-mode lisp-interaction-mode)
-   :command 'matcha-emacs-lisp-mode)
-  (matcha-set-refactor-command
-   :mode '(emacs-lisp-mode lisp-interaction-mode)
-   :command 'emr-show-refactor-menu))
+(major-mode-hydra-define emacs-lisp-mode nil
+  ("Eval"
+   (("b" eval-buffer "buffer")
+    ("e" eval-defun "defun")
+    ("r" eval-region "region"))
+   "REPL"
+   (("I" ielm "ielm")
+    ("x" matcha-goto-scratch "*Scratch*"))
+   "Test"
+   (("t" ert "prompt")
+    ("T" (ert t) "all")
+    ("F" (ert :failed) "failed"))
 
-(define-transient-command matcha-emacs-lisp-debug
-  "Debug"
-  [["Debug"
-    ("d" "Debug" matcha-elisp-toggle-edebug-defun)
-    ("q" "Cancel Debug on Entry" cancel-debug-on-entry)
-    ("f" "Debug on Entry" debug-on-entry)]
+   "Debug"
+   (("m" sk/hydra-macro-step/body "Macrostep...")
+    ("d" matcha-elisp-toggle-edebug-defun "Debug")
+    ("q" cancel-debug-on-entry "Cancel Debug on Entry")
+    ("f" debug-on-entry "Debug on Entry"))
    ;; ["Watch"
-   ;;  ("w" "Watch" debug-watch)
-   ;;  ("W" "Cancel Watch" cancel-debug-watch)]
-   ])
-
-(define-transient-command matcha-emacs-lisp-eval ()
-  "Eval"
-  [["Eval"
-    ("e" "Last" eval-last-sexp)
-    ("r" "Region" eval-region)
-    ("f" "Defun" eval-defun)
-    ("b" "Buffer" eval-buffer)]
-   ["Current"
-    ("c" "Form" matcha-elisp-eval-current-form-sp)
-    ("s" "Symbol" matcha-elisp-eval-current-symbol-sp)]
-   ["Misc"
-    ("j" "Eval and Print" eval-print-last-sexp)]])
-
-(define-transient-command matcha-elisp-refs ()
-  "References"
-  [["References"
-    ("f" "Function" elisp-refs-function)
-    ("m" "Macro" elisp-refs-macro)
-    ("c" "Special" elisp-refs-special)
-    ("v" "Variable" elisp-refs-variable)
-    ("s" "Symbol" elisp-refs-symbol)]])
-
-(define-transient-command matcha-emacs-lisp-compile ()
-  "Compile"
-  [["Compile"
-    ("c" "Compile" emacs-lisp-byte-compile)
-    ("l" "Compile and Load" emacs-lisp-byte-compile-and-load)
-    ("r" "Byte Recompile Directory" byte-recompile-directory)
-    ("x" "Disassemble" disassemble)]])
-
-(define-transient-command matcha-emacs-lisp-describe ()
-  "Describe"
-  [["Describe"
-    ("f" "Function" describe-function)
-    ("v" "Variable" describe-variable)
-    ("s" "Symbol" describe-symbol)
-    ("y" "Syntax" describe-syntax)
-    ("c" "Categories" describe-categories)]])
-
-(define-transient-command matcha-emacs-lisp-mode ()
-  "Emacs Lisp"
-  [["Actions"
-    ("c" "Compile..." matcha-emacs-lisp-compile)
-    ("d" "Debug..." matcha-emacs-lisp-debug)
-    ("e" "Eval..." matcha-emacs-lisp-eval)
-    ("m" "Macroexpand..." matcha-macrostep-expand-or-open-menu)
-    ("s" "Describe..." matcha-emacs-lisp-describe)]
-   ["Find"
-    ("v" "Variable" find-variable)
-    ("f" "Function" find-function)
-    ("l" "Library" find-library)
-    ("r" "References..." matcha-elisp-refs)]
-   ["Misc"
-    ("x" "*Scratch*" matcha-goto-scratch)
-    ("z" "IELM" ielm)]])
-
+   ;;  ("w" debug-watch "Watch")
+   ;;  ("W" cancel-debug-watch  "Cancel Watch")]
+   "Compile"
+   (("c" emacs-lisp-byte-compile "Compile")
+    ("l" emacs-lisp-byte-compile-and-load "Compile and Load")
+    ("r" byte-recompile-directory "Byte Recompile Directory")
+    ("x" disassemble "Disassemble"))))
 (provide 'matcha-elisp)
 ;;; matcha-elisp.el ends here
 ;; Local Variables:

@@ -4,31 +4,17 @@
 
 Emacs lisp specific extras
 
-* Hydra
-#+begin_src emacs-lisp
-(major-mode-hydra-define emacs-lisp-mode nil
-  ("Eval"
-   (("b" eval-buffer "buffer")
-    ("e" eval-defun "defun")
-    ("r" eval-region "region"))
-   "REPL"
-   (("I" ielm "ielm")
-    ("x" matcha-goto-scratch "*Scratch*"))
-   "Test"
-   (("t" ert "prompt")
-    ("T" (ert t) "all")
-    ("F" (ert :failed) "failed"))
+Note all loaded immediately as n could be called anytime.
 
-   "Debug"
-   (("m" sk/hydra-macro-step/body "Macrostep...")
-    ("d" matcha-elisp-toggle-edebug-defun "Debug")
-    ("q" cancel-debug-on-entry "Cancel Debug on Entry")
-    ("f" debug-on-entry "Debug on Entry")
-    ;; ["Watch"
-    ;;  ("w" debug-watch "Watch")
-    ;;  ("W" cancel-debug-watch  "Cancel Watch")]
-    )))
+* Hydra
+
+Most from [[https://github.com/jojojames/matcha][matcha]]
+#+begin_src emacs-lisp
+(use-package matcha-elisp
+  :defer 6)
 #+end_src
+
+
 * Formatter
 	I am not certain this is needed now as other things do this
     #+begin_src  emacs-lisp

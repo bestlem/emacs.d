@@ -10,13 +10,22 @@ This is a large config and might be easier to document if not all put in a use-p
 This config gets long so difficult to see in one block
 Currently I put things outside use-package
 See in future noweb see https://raw.githubusercontent.com/zzamboni/dot-emacs/master/init.org if add name property it seems to work
+** Noweb issues
+noweb allows me to totally reorder the org file so better reading so support code can be in an appendix etc.
+However org-babel-detangle cannot deal with detangling as it looks for the whole file and tries to do a block at a time - which does not work with embedded blocks. After days debugging this (well several attempts until it clicked) I found confirmation https://news.ycombinator.com/item?id=17653473
+One fix might be to just detangle the current block.
+** Grettke
+This seems one of the most complete literate programming setups and he does have weave but no examples with links. He does saya few things so lets try.
+As everything is after loading of org dump in a config section after the rest.
+
+
 * Load and setup org mode
 org-mode is a pain as we need a newer than aquamacs supplies and also there are recommendations to use an even later version. Also re packaging emacs package.el reads already built stuff others e.g. straight.el don't and that could be a problem with org-mode. There are reasons not to use the org repo but Elpa - [[https://www.reddit.com/r/emacs/comments/5sx7j0/how_do_i_get_usepackage_to_ignore_the_bundled/ddix2ta/?utm_source=share&utm_medium=web2x][from Reddit]] basically possible security issues so I am with ELPA and missing org-contrib.
 
 Aug 2019 got an error in cut subtree so revert to org mode with Aquamacs nad lose formatting of code blocks. (and will get namne changes in links in generated files)
 ** The use package setup
 Note Hydra is not really used after just a couple of weeks.
-  #+begin_src emacs-lisp :noweb yes
+  #+begin_src emacs-lisp :noweb tangle
   (use-package org
     :ensure t
     :bind
@@ -33,7 +42,7 @@ Note Hydra is not really used after just a couple of weeks.
 <<org-mode-hydrae>>
 <<org-mode-hydrae-code>>
 <<org-mode-hydrae-refile>>
-
+<<org-grettke>>
     )
   #+end_src
 *** Key bindings
@@ -118,6 +127,198 @@ Code block behaviour - but also see customization for appearance
 	   org-edit-src-content-indentation 0
 	   org-startup-indented t)
  #+end_src
+*** Grettke babel
+ :PROPERTIES:
+      :header-args: :noweb-ref org-grettke :tangle no
+      :END:
+**** Minimal config
+Grettke has two set ups
+***** Garbage collection
+:PROPERTIES:
+:ID:       org_gcr_2017-07-30_mara:D9207828-3783-4599-BA48-A6EB2C3FCAE4
+:END:
+Clear memory and disable garbage collection or return garbage collection to
+normal.
+
+#+NAME: org_gcr_2017-07-29_mara_3F459DF6-EA6A-4D48-BB0A-3670FCB25713
+#+BEGIN_SRC emacs-lisp
+(setq help/default-gc-cons-threshold gc-cons-threshold)
+(defun help/set-gc-cons-threshold (&optional multiplier notify)
+  "Set `gc-cons-threshold' either to its default value or a
+   `multiplier' thereof."
+  (let* ((new-multiplier (or multiplier 1))
+         (new-threshold (* help/default-gc-cons-threshold
+                           new-multiplier)))
+    (setq gc-cons-threshold new-threshold)
+    (when notify (message "Setting `gc-cons-threshold' to %s" new-threshold))))
+#+END_SRC
+Helper doubles available memory.
+
+#+NAME: org_gcr_2017-08-02_mara_92B4C3CB-6CE3-4211-8A18-C7BE905BFBC2
+#+BEGIN_SRC emacs-lisp
+(defun help/double-gc-cons-threshold () "Double `gc-cons-threshold'." (help/set-gc-cons-threshold 2))
+#+END_SRC
+
+Double garbage collection during tangling. Instead of storing this in the
+primary Org-Mode Literate Programming configuration I want it here so that it
+is always available.
+
+#+NAME: org_gcr_2017-08-02_mara_DAC6E558-E49D-4551-8789-2B3FB88F6CE7
+#+BEGIN_SRC emacs-lisp
+(add-hook 'org-babel-pre-tangle-hook #'help/double-gc-cons-threshold)
+(add-hook 'org-babel-post-tangle-hook #'help/set-gc-cons-threshold)
+#+END_SRC
+
+Display system info.
+
+#+NAME: org_gcr_2017-05-12_mara_901541A6-1DB6-4EA2-8688-9C888C41902A
+#+BEGIN_SRC emacs-lisp
+(defun help/display-system-info ()
+  (interactive)
+  (message "<<<Org Information>>>\nThis buffer file: %s\nAs Of: %s\nOrg-Version: %s\nOrg-Git-Version:%s\nEmacs-Version: %s\nNoweb wrap start and stop delimeters: '%s' and '%s'\norg-babel-default-header-args:\n"
+           buffer-file-name
+           (help/get-timestamp)
+           (org-version)
+           (org-git-version)
+           (emacs-version)
+           org-babel-noweb-wrap-start
+           org-babel-noweb-wrap-end)
+  (pp org-babel-default-header-args))
+(help/display-system-info)
+#+END_SRC
+****
+
+***** Helper Functions
+   :PROPERTIES:
+   :ID:       orgmode:gcr:vela:B14776FD-6835-4D1D-BCD3-50D56555423C
+   :END:
+
+Help configure Org-Mode.
+
+#+NAME: org_gcr_2017-05-12_mara_21BEDC86-D1A3-43FC-85AC-8FF54D161E2F
+#+BEGIN_SRC emacs-lisp
+(defun help/set-org-babel-default-header-args (property value)
+  "Easily set system header arguments in org mode.
+
+PROPERTY is the system-wide value that you would like to modify.
+
+VALUE is the new value you wish to store.
+
+Attribution: URL `http://orgmode.org/manual/System_002dwide-header-arguments.html#System_002dwide-header-arguments'"
+  (setq org-babel-default-header-args
+        (cons (cons property value)
+              (assq-delete-all property org-babel-default-header-args))))
+
+(defun help/set-org-babel-default-inline-header-args (property value)
+  "See `help/set-org-babel-default-header-args'; same but for inline header args."
+  (setq org-babel-default-inline-header-args
+        (cons (cons property value)
+              (assq-delete-all property org-babel-default-inline-header-args))))
+
+(defun help/set-org-babel-default-header-args:R (property value)
+  "See `help/set-org-babel-default-header-args'; same but for R.
+
+This is a copy and paste. Additional languages would warrant a refactor."
+  (setq org-babel-default-header-args:R
+        (cons (cons property value)
+              (assq-delete-all property org-babel-default-header-args:R))))
+
+(defun help/set-org-babel-default-header-args:ditaa (property value)
+  "See `help/set-org-babel-default-header-args'; same but for ditaa.
+
+This is a copy and paste. Additional languages would warrant a refactor."
+  (setq org-babel-default-header-args:ditaa
+        (cons (cons property value)
+              (assq-delete-all property org-babel-default-header-args:ditaa))))
+
+(defun help/set-org-babel-default-header-args:dot (property value)
+  "See `help/set-org-babel-default-header-args'; same but for dot.
+
+This is a copy and paste. Additional languages would warrant a refactor."
+  (setq org-babel-default-header-args:dot
+        (cons (cons property value)
+              (assq-delete-all property org-babel-default-header-args:dot))))
+
+(defun help/set-org-babel-default-header-args:plantuml (property value)
+  "See `help/set-org-babel-default-header-args'; same but for plantuml.
+
+This is a copy and paste. Additional languages would warrant a refactor."
+  (setq org-babel-default-header-args:plantuml
+        (cons (cons property value)
+              (assq-delete-all property org-babel-default-header-args:plantuml))))
+
+(defun help/org-toggle-macro-markers ()
+  (interactive)
+  (let ((old org-hide-macro-markers)
+        (new (not org-hide-macro-markers)))
+    (setq org-hide-macro-markers new)
+    (message "Just changed org-hide-macro-markers from %s to %s" old new)
+    (font-lock-mode)
+    (font-lock-mode)))
+
+(defun help/org-prp-hdln ()
+  "Visit every Headline. If it doesn't have an ID property then add one and
+  assign it a UUID. Attribution: URL
+  `http://article.gmane.org/gmane.emacs.orgmode/99738'. It is OK to leave the
+  colon separator in here because these are never used as Source-Blocks and
+  the rest of the code expects the colon separator."
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (dolist (p (nreverse
+                (org-element-map (org-element-parse-buffer 'headline) 'headline
+                  (lambda (headline) (org-element-property :begin headline)))))
+      (goto-char p)
+      (org-id-get-create))
+    (save-buffer)))
+
+(defun help/org-id-new ()
+  "Re-purposing `org-id' hit a snag when colons were forbidden in Source-Block
+  names. Adding support for a user-defined Org-Id separator would have fixed
+  this but with no benefit to Org-Id. So this function removes the colon
+  instead.
+ "
+  (interactive)
+  (let* ((gend (org-id-new))
+         (newid (replace-regexp-in-string ":" "_" gend)))
+    newid))
+
+(defun help/org-prp-src-blk ()
+  "If it doesn't have a NAME property then add one and
+   assign it a UUID. Attribution: URL `http://article.gmane.org/gmane.emacs.orgmode/99740'"
+  (interactive)
+  (help/org-2every-src-block
+   #'(lambda (element)
+       (if (not (org-element-property :name element))
+           (let ((i (org-get-indentation)))
+             (beginning-of-line)
+             (save-excursion (insert "#+NAME: " (help/org-id-new) "\n"))
+             (indent-to i)
+             (forward-line 2))))))
+
+(defconst help/org-special-pre "^\s*#[+]")
+
+(defun help/org-2every-src-block (fn)
+  "Visit every Source-Block and evaluate `FN'."
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (let ((case-fold-search t))
+      (while (re-search-forward (concat help/org-special-pre "BEGIN_SRC") nil t)
+        (let ((element (org-element-at-point)))
+          (when (eq (org-element-type element) 'src-block)
+            (funcall fn element)))))
+    (save-buffer)))
+
+(defun help/org-babel-demarcate-block ()
+  "Add a NAME property then assign it a UUID."
+  (interactive)
+  (org-babel-demarcate-block)
+  (insert "#+name: " (help/org-id-new))
+  (beginning-of-line)
+  (insert "\n"))
+#+END_SRC
+
 ** Prettify
 Make org mode look prettier. See also the customization
 Basically set to variable pitch font but note Aquamacs has a way (different of course to do this)

@@ -42,6 +42,7 @@ Note Hydra is not really used after just a couple of weeks.
 <<org-mode-hydrae>>
 <<org-mode-hydrae-code>>
 <<org-mode-hydrae-refile>>
+:config
 <<org-grettke>>
     )
   #+end_src
@@ -133,6 +134,50 @@ Code block behaviour - but also see customization for appearance
       :END:
 **** Minimal config
 Grettke has two set ups
+
+***** Time
+:PROPERTIES:
+:ID:       org_gcr_2018-03-16_mara:BC16A47E-FC4E-4F12-8813-583BF4C3EF5A
+:END:
+Standardize timestamps.
+
+#+name: org_gcr_2018-03-16_mara_24B486D3-AF94-44E7-99F6-AEB7A53FD0E6
+#+begin_src emacs-lisp
+(defun help/get-timestamp ()
+  "Produces a full ISO 8601 format timestamp."
+  (interactive)
+  (let* ((timestamp-without-timezone (format-time-string "%Y-%m-%dT%T"))
+         (timezone-name-in-numeric-form (format-time-string "%z"))
+         (timezone-utf-offset
+          (concat (substring timezone-name-in-numeric-form 0 3)
+                  ":"
+                  (substring timezone-name-in-numeric-form 3 5)))
+         (timestamp (concat timestamp-without-timezone
+                            timezone-utf-offset)))
+    timestamp))
+
+(defun help/insert-timestamp ()
+  "Inserts a full ISO 8601 format timestamp."
+  (interactive)
+  (insert (help/get-timestamp)))
+
+(defun help/get-timestamp-no-colons ()
+  "Produces a full ISO 8601 format timestamp with colons replaced by hyphens."
+  (interactive)
+  (let* ((timestamp (help/get-timestamp))
+         (timestamp-no-colons (replace-regexp-in-string ":" "-" timestamp)))
+    timestamp-no-colons))
+
+(defun help/insert-timestamp-no-colons ()
+  "Inserts a full ISO 8601 format timestamp with colons replaced by hyphens."
+  (interactive)
+  (insert (help/get-timestamp-no-colons)))
+
+(defun help/insert-datestamp ()
+  "Produces and inserts a partial ISO 8601 format timestamp."
+  (interactive)
+  (insert (format-time-string "%F")))
+#+end_src
 ***** Garbage collection
 :PROPERTIES:
 :ID:       org_gcr_2017-07-30_mara:D9207828-3783-4599-BA48-A6EB2C3FCAE4

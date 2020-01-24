@@ -7,8 +7,12 @@ Emacs lisp specific extras
 Note all loaded immediately as n could be called anytime.
 
 * Hydra
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:F65CCA9F-596F-4B8D-A0B2-29C44A4886D3
+:END:
 
 Most from [[https://github.com/jojojames/matcha][matcha]]
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_7676F43A-6F85-4543-A4F0-1CC65BE5BC15
 #+begin_src emacs-lisp
 (use-package matcha-elisp
   :defer 6)
@@ -16,7 +20,11 @@ Most from [[https://github.com/jojojames/matcha][matcha]]
 
 
 * Formatter
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:0C004AE2-22C4-4307-9D4D-57777C260EC0
+:END:
 	I am not certain this is needed now as other things do this
+    #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_371FFD2B-49E8-4C8D-BD20-E974C39BA8E2
     #+begin_src  emacs-lisp
     (use-package elisp-format
       :disabled
@@ -24,6 +32,9 @@ Most from [[https://github.com/jojojames/matcha][matcha]]
       :ensure t)
     #+end_src
 * See macros
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:87193D42-251A-408C-80B7-839BF6CFCE81
+:END:
 	Dependencies because lispy etc and macrostep use the same keys
 	#+begin_src emacs-lisp
     (use-package macrostep
@@ -36,6 +47,7 @@ Most from [[https://github.com/jojojames/matcha][matcha]]
                   ("C-c e m" . macrostep-expand)))
 	#+end_src
 and the hydra is from https://sriramkswamy.github.io/dotemacs/ . Note it expands what is at current point,
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_6CEAF9C9-8E76-4E4D-AB8D-2255FB8A5D42
 #+begin_src emacs-lisp
 (defhydra sk/hydra-macro-step (:pre (macrostep-expand)
                                     :color pink
@@ -52,12 +64,19 @@ and the hydra is from https://sriramkswamy.github.io/dotemacs/ . Note it expands
   ("q" macrostep-collapse-all :color blue))
 #+end_src
 * Extra debugging
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:89E63DE0-5A33-4D24-B08B-F0957A1D5311
+:END:
 	Seen but not used yet [[https://github.com/ScottyB/edebug-x][edebug-x]]
 	#+begin_src emacs-lisp
 	(use-package edebug-x :disabled :ensure t)
 	#+end_src
 * Completion
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:9FE88329-B2B7-4BB0-A9D7-9AD07B006AC0
+:END:
 Add company backend from John Widgley
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_93ECF6C2-B264-4EF0-8130-093F2212EF65
 #+begin_src emacs-lisp
 (use-package company-elisp
   :after company
@@ -67,8 +86,12 @@ Add company backend from John Widgley
 (setq-local company-backend '(company-elisp))
 #+end_src
 * Cask
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:A7E444B1-B2D1-477A-A3E2-A7518E90193E
+:END:
 [[https://github.com/Wilfred/cask-mode][cask-mode]] is a mode for editing [[https://cask.readthedocs.io/en/latest/][cask]] files. Cask is an emacs project management tool. ie contolling dependencies, and running tests like maven etc.
 
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_9EC9B695-2F8B-4E9B-B42A-199CF68F6E58
 #+begin_src emacs-lisp
 (use-package cask-mode
     :ensure t
@@ -76,7 +99,11 @@ Add company backend from John Widgley
 #+end_src
 
 * xah mode
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:FB3F4B30-A5F0-41D1-A9D5-48069D7A5898
+:END:
 	 This does more formatting and has useful abbreviations but I don't know if will work with lispy
+     #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_93A1C8F8-DA67-4EF7-BA47-905CC3187347
      #+begin_src emacs-lisp
 	 (use-package xah-elisp-mode
 	   :ensure t
@@ -85,30 +112,56 @@ Add company backend from John Widgley
      #+end_src
 
 * Regular expressions
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:228658D3-54BA-4A19-886D-E0EA8D21B68D
+:END:
 They are not understanable so these help
 
 ** Rx
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:F417CBEB-06A8-4880-9D6A-3228FBA4E202
+:END:
 Convert a set of function calls to an RE. (it is part of emacs.
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_DBA0912A-D800-4F0D-AB99-78A1399152D5
 #+BEGIN_SRC emacs-lisp
 (use-package rx)
 #+END_SRC
 ** Xr
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:A6466B59-FC11-4679-8AA9-5CED7A0479C6
+:END:
 And this is the reverse
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_7B9B113B-829F-4036-A58B-4935E812ACA1
 #+begin_src emacs-lisp
 (use-package xr
   :ensure t)
 #+end_src
 * Keyboard Macros
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:E9B6E3E8-67D0-4CDE-BB96-BE2B4A67C96E
+:END:
 Well not really lisp but much can be converted to it
 ** Show as emacs lisp
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:E245B723-C582-4F69-81C5-297385A3B89D
+:END:
 *** TODO Put these together
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:8AAA8C94-F704-4379-A330-637D1AE0F099
+:END:
 *** Load the converter to elisp
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:6504C53C-4A9B-40A2-B2DE-8FEA72ED025C
+:END:
 	#+begin_src emacs-lisp
     (use-package elmacro
       :ensure t
       :commands (elmacro-show-last-macro elmacro-show-last-commands))
 	#+end_src
 *** Hydra for macros
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:AAFEA2AA-603E-4FDA-8D33-A57C9CDC5077
+:END:
 From [[https://github.com/abo-abo/hydra/wiki/Macro][Hydra wiki]] and [[https://github.com/edil3ra/emacs_save/blob/master/settings.org][another init file]] but not the latter seems to have some odd entries as well so an edit of the two
 	  #+begin_src emacs-lisp
       (defhydra hydra-macro (:hint nil :color pink :pre

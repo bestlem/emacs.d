@@ -2,13 +2,20 @@
 #+PROPERTY:header-args :cache yes :tangle yes :comments link
 #+STARTUP: content
 * Emacs environment
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:5A4CBEFD-074A-4547-815A-F5E0A16E4BA1
+:END:
 Now minimally useful
 This adds the real use.
 The order hear does not matter much.
 In future this file should really just be a list of mwb-init-load and each one can fail. All structure could be here.
 
 * After initialisation
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:9D8E9437-08ED-4247-BFC3-9B5BEE178468
+:END:
 Although see starter kit where they run after init.
+  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_6BFB6DB1-D7D7-4A49-895F-C5D06CACED2F
   #+begin_src emacs-lisp
   (add-hook 'after-init-hook
 			`(lambda ()
@@ -19,17 +26,31 @@ Although see starter kit where they run after init.
 			   (message "Emacs init-time %s" (emacs-init-time))) t)
   #+end_src
 ** Aquamacs undo
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:628BE0A1-2280-4914-98A9-12830F84FEF8
+:END:
 There are somethings that Aquamacs does that I want to undo.
 e.g. key bindings that they do to stop modes changing them.
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_AD89749B-35DE-4103-925B-3420D46D933F
 #+begin_src emacs-lisp
 (unbind-key "<end>" osx-key-mode-map)
 (unbind-key "<home>" osx-key-mode-map)
 #+end_src
 ** Startup screen
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:CE114471-A55C-4C32-B1DF-C83AFE265D4C
+:END:
 *** Desktop
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:2116C663-621B-43B2-8E69-B86CB71BA9BC
+:END:
 This saves the state perhaps I need to see how it works. Then also add midnight to kill old buffers
 *** Dashboard
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:047865CE-76CF-4835-98C6-1B1313B9544C
+:END:
 This seemed interesting but seemed to messup lispy
+    #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_36B9271A-376B-404D-AC09-6460A21BCBBF
     #+begin_src emacs-lisp
     (use-package dashboard
 :disabled
@@ -43,14 +64,25 @@ This seemed interesting but seemed to messup lispy
                               (registers . 5))))
     #+end_src
 *** Current startup settings
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:0904FB99-90C7-4D22-8B26-846E12DE3921
+:END:
 **** Scratch buffer
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:A300832E-1253-4E83-A0C3-3DAAEE99F20D
+:END:
   Need to control how it is restarted. Aquamacs saves it
+  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_7CE610E6-5D87-43CE-9EF8-5D9112E28EF0
   #+begin_src emacs-lisp
   (setq initial-major-mode 'emacs-lisp-mode)
   (setq initial-scratch-message nil)
    #+end_src
 **** Windows
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:E5DA693A-871D-4201-B814-758C4738654A
+:END:
 I want two windows in a frame and treemacs
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_60953FEE-7E07-48DE-AD1C-66D90DAE2D5A
 #+begin_src emacs-lisp
 (add-hook 'window-setup-hook
           '(lambda ()
@@ -59,14 +91,24 @@ I want two windows in a frame and treemacs
              (treemacs)))
 #+end_src
 ** Environment
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:C615E483-7CA9-42EA-9AEB-E0B541771836
+:END:
 *** load-path
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:BBB5C272-C2B4-4F38-948C-ED758D56E6A4
+:END:
 . Setup for elisp  used by notmal load not org tangle
 Note that if a subdirectory is just for one thinmg then use keyword mwb-load-path in use-package.
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_CC0BEB6F-84DC-4320-9455-9906069CD4C9
 #+begin_src emacs-lisp
 (add-to-list 'load-path (mwb-user-emacs-file "site-lisp"))
 #+end_src
 
 ** Matcha
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:CF24D299-114F-49BE-BBDB-50C08D52E0A6
+:END:
 		Menu bindings from [[https://github.com/jojojames/matcha][jojojames]] originally using hydra but changed to transient as I was editing so a fun day where it did not work. Transient programming interface seems nearer what I want but hydra I suspect has better functionality for my use e.g. can do commands and stay in hydra/
 		#+begin_src emacs-lisp
         (use-package matcha
@@ -77,6 +119,9 @@ Note that if a subdirectory is just for one thinmg then use keyword mwb-load-pat
 		#+end_src
 
 ***** Support code
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:71D38882-5B46-4E4C-AC75-F5653E8B3B3C
+:END:
 		 Extra functions from JoJoJames
 		 #+begin_src emacs-lisp
          (use-package jp-projectile-utils
@@ -84,6 +129,9 @@ Note that if a subdirectory is just for one thinmg then use keyword mwb-load-pat
            :mwb-load-path "site-lisp/jojojames")
 		 #+end_src
 ***** Transient remove after racket mode fixed
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:406D62BB-846D-490E-8AB3-E85911C3CFDC
+:END:
 qqqqAnother key bind menuy like hydra [[https://emacsair.me/2019/02/14/transient-0.1/][from the author of magit]]
 In many ways simpler as just defines a menu but does not allow menu to remain and all entries must be named methods not lambdas.
 		#+begin_src emacs-lisp
@@ -94,15 +142,23 @@ In many ways simpler as just defines a menu but does not allow menu to remain an
 		#+end_src
 
 ** Setting variables with a check on type
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:86E6A7B5-5C85-4429-AE49-FA5AE7AEF73D
+:END:
 Used when overriding a defcustom or defvar.
 Note should check on defconst
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_684763C2-3193-47EF-8CFD-5518949CC4BB
 #+begin_src emacs-lisp
 (use-package validate
   :ensure t)
 #+end_src
 
 * Emacs server
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:605AC9D7-C3F1-495D-872C-C5B901A553BB
+:END:
  This is a simple server start - to allow emacsclient from Terminal. There are more complex starters.
+ #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_922BC8C2-56FC-46E7-B506-2CB94F2BB86A
  #+begin_src emacs-lisp
 (use-package server
   :ensure nil
@@ -110,27 +166,45 @@ Note should check on defconst
  #+end_src
 
 * Emacs settings
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:0EBF0016-296F-41EA-8DC3-96CE752F9E9A
+:END:
 ** Appearance
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:4E2542DC-19A8-480A-A0B2-EF1C192A77FB
+:END:
+   #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_FDEBBB87-4E2F-4E81-87B0-349A09B8D866
    #+begin_src emacs-lisp
    (mwb-init-load  "init/appearance")
    #+end_src
 
 ** Emacs behaviour
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:EB57B856-C1F8-4E5E-82AF-2F8E154DBCA4
+:END:
  General emacs stuff - not common-setup used to have this but separate file might not make sense
+  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_C4B91741-F3AE-4F6A-908F-6FD97A7F65C0
   #+begin_src emacs-lisp
   (mwb-init-load  "init/behaviour"); odds mainly variables
   (mwb-init-load  "init/completion")
   (mwb-init-load  "init/ibuffer")
   #+end_src
 ** Command completion
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:B8539BA6-84DE-4075-80AF-0B37BE1CBA52
+:END:
 This is completion for emacs commands. Choice is ido, ivy helm.
 I'll try ivy.
 Note headers have tangle command in to suppress one or other
 *** Find M-x commands
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:2B101998-0D34-4143-95AF-769C4001D58C
+:END:
   This is [[https://www.emacswiki.org/emacs/Smex][smex]] buy ivy replaces it actually it uses it - Something changed :(
   #+begin_quote
   Smex is a M-x enhancement for Emacs. Built on top of IDO, it provides a convenient interface to your recently and most frequently used commands. And to all the other commands, too.
   #+end_quote
+  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_6410B3FD-5B0A-4478-ADC4-007FCA2F3D9C
   #+begin_src emacs-lisp
 	(use-package smex
 	  :ensure t
@@ -138,23 +212,46 @@ Note headers have tangle command in to suppress one or other
 	  (smex-initialize))
   #+end_src
 *** Ivy
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:DF80C3BB-D098-429D-A993-3DB810603205
+:END:
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_AE80986F-5F2A-4603-A292-6FB20CB43A9C
 #+begin_src emacs-lisp
 (mwb-init-load "init/ivy")
 #+end_src
 * Applications
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:632E759A-7D25-41F9-9349-1F9C7C5D7FE7
+:END:
 ** Gnus
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:B28959EB-4497-40E8-B194-998A9D7C783B
+:END:
 	 #+begin_src emacs-lisp
 	 (mwb-init-load "init/gnus")
 	 #+end_src
 * Major modes
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:0E3CCAD4-14DB-4481-8235-F04F840DF4AD
+:END:
 ** System management
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:21BA326F-D699-439A-BE4F-0F877907CCCE
+:END:
 Interfacing with the operating system
+  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_A59FB0E5-7830-4DE9-886E-B3066C9EEE90
   #+begin_src emacs-lisp
   (mwb-init-load "init/file-management")
   #+end_src
 
 ** Text modes
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:5275BBAD-CBB4-4E9E-9FD1-C79EBBF642B7
+:END:
 *** Epub reading
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:E3F69F7F-65FF-44C2-AA1E-2F74168D8731
+:END:
 	   #+begin_src emacs-lisp
 	   ;; Epub reader
 	   (use-package nov
@@ -167,6 +264,9 @@ Interfacing with the operating system
 		   :hook (nov-mode . my-nov-setup)))
 	   #+end_src
 **** Web display
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:F2507988-AE2D-4676-9002-0FDC2DF2DBCB
+:END:
 	   Make contrast higher from steckemacs
 	   #+begin_src emacs-lisp
 	   (use-package shr
@@ -175,12 +275,20 @@ Interfacing with the operating system
 		 (shr-color-visible-luminance-min 60))
 	   #+end_src
 ** Programming modes
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:3C0D8B60-3C14-4F89-84AB-6D54D08C2C36
+:END:
 Includes structured data
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_1F6B0C11-DD95-4A88-9772-8DD2C2B8950B
 #+begin_src emacs-lisp
 (mwb-init-load "init/prog-modes")
  #+end_src
 * Key binding
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:BF4F840D-AE27-4C9B-B83E-CCFAC0C0E8DB
+:END:
   No comments as just open the files.
+  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_FEA89BFB-F2A3-4C2C-8B2D-944D09F1D38D
   #+begin_src emacs-lisp
   (mwb-init-load "init/keys")
   #+end_src

@@ -1,14 +1,25 @@
 #+TITLE Emacs configuration How emacs reacts
 #+PROPERTY:header-args :cache yes :tangle yes :comments link
 * File Handling
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:7F0DB7D1-63CC-4002-BF3B-FC8F529B24EB
+:END:
 ** Trash
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:B8245402-918E-4781-B89F-2B7BC3A27C0A
+:END:
 Well I was going to include [[https://github.com/lunaryorn/osx-trash.el][osx trash]] which uses the trash executable or an applescript to do the proper trash. But realised I don't want to trash files - just those I delete by hand so the patching of the emacs delete is not a good idea. By default emacs does not delete by moving to trash. It is customisable so set to to never.
 Think of editing dired
+   #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_FA0C03FD-BE8F-4AD2-9BB9-7CBFAB65F9DA
    #+begin_src emacs-lisp
    (setq delete-by-moving-to-trash nil)
    #+end_src
 ** Protect library and other files
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:04EFE611-1F9B-479D-A3BB-0C428F8EBA20
+:END:
 [[https://github.com/rolandwalker/hardhat][Hardhat]] provides an extra layer of protection in your work. If you visit a file which looks unsafe to edit, Emacs will make the buffer read-only -- even when the underlying file is writable.
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_5C4ABBCE-2400-4CD9-8740-96E9FD163C43
 #+begin_src emacs-lisp
 (use-package hardhat                    ; Protect user-writable files
   :ensure t
@@ -16,8 +27,15 @@ Think of editing dired
   :config (validate-setq hardhat-mode-lighter "Ⓗ"))
 #+end_src
 * Emacs internals
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:3D94393D-BCFC-4C55-844D-42D2DCF4FC95
+:END:
 *** Sessions
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:F59E76F4-B802-4ADA-81C2-AE06603587BD
+:END:
  Save registers et al but not the whole desktop
+ #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_F7D6DF89-CC2E-4307-991E-2534CFA83732
  #+begin_src emacs-lisp
  (use-package savehist
    :config
@@ -33,7 +51,11 @@ Think of editing dired
    (savehist-mode 1))
  #+end_src
 *** Registers
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:BB78D792-D0B1-443F-80B7-9633B1AD3B09
+:END:
 I haven't used before but might try with hydra from [[https://sriramkswamy.github.io/dotemacs/#orgheadline245][Hydra heavy init]]
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_E6AD754D-191C-4314-B178-A976FFCA0A45
 #+begin_src emacs-lisp
 (defhydra sk/hydra-registers (:color blue
 									 :hint nil)
@@ -59,8 +81,12 @@ I haven't used before but might try with hydra from [[https://sriramkswamy.githu
 
 #+end_src
 * Minibuffer memory
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:FFDA0E37-D169-4605-81D5-6286FB7C08B4
+:END:
   I have had crashes with helpful where emacs has to be killed. Looks like a recursive stack error but also see comment re garbage collection So let's try
   Note this causes a gc when minibuffer ends - perhaps not the best time
+  #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_6D1AA0E9-63E0-4D18-81AE-142094A987CE
   #+begin_src emacs-lisp
   (defun my-minibuffer-setup-hook ()
 	(setq gc-cons-threshold most-positive-fixnum))
@@ -72,7 +98,11 @@ I haven't used before but might try with hydra from [[https://sriramkswamy.githu
   (add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
   #+end_src
 * Help
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:BA8FE03C-5430-4984-9CD3-7E5971925F68
+:END:
 Let's use [[https://github.com/Wilfred/helpful][Helpful]]
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_20EF0E45-D1C2-493C-B710-6E2B48D98DB9
 #+begin_src emacs-lisp
 (use-package helpful
   :ensure t
@@ -88,22 +118,34 @@ Let's use [[https://github.com/Wilfred/helpful][Helpful]]
   ("<f1> ." . helpful-at-point))
 #+end_src
 * Key Chord
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:727BACF4-7E05-4203-85B7-65661B36F7B5
+:END:
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_CAA5ED48-7C06-4625-A839-267E09964133
 #+begin_src emacs-lisp
 (use-package key-chord
   :ensure t
   :config (key-chord-mode 1))
 #+end_src
 * Delete if selected
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:1093B961-57F6-4B74-9CCD-F155EEDA2E87
+:END:
 Also see [[https://www.emacswiki.org/emacs/DeleteSelectionMode][EmacsWiki]] (and my old init) but cua should do this. Possibly because minor modes are toggles
 Issue is lispy removes this as lispy is vi based. Actually my understanding was wrong the issue is select with mouse puts things into system clipboard.
 So use separate PRIMARY and CLIPBOARD
+  #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_D91D1B0C-20B5-4AEF-8E53-7056B6CE706F
   #+begin_src emacs-lisp
   (delete-selection-mode 1)
   (setq select-enable-clipboard nil)
   (setq select-enable-primary t)
   #+end_src
 * Double Letters
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:8023761D-AF45-4069-8EBB-AF88FA9F8CF1
+:END:
 Let's stop it. from [[https://emacs.stackexchange.com/a/13975/9874][Emacs SE]]
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_FD406B40-617C-43FD-872C-D71407BFE82C
 #+begin_src emacs-lisp
 (defun dcaps-to-scaps ()
   "Convert word in DOuble CApitals to Single Capitals."
@@ -127,9 +169,19 @@ Single Capitals as you type. "
 	(remove-hook 'post-self-insert-hook #'dcaps-to-scaps 'local)))
 #+end_src
 ** TODO Misspelling correction
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:5AA8C57E-7AEA-4F16-AD52-84CE2450344B
+:END:
 See http://endlessparentheses.com/ispell-and-abbrev-the-perfect-auto-correct.html but I need to deal with Aquamacs spelling as well
 * Navigation
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:BE5A6CDF-F170-4698-B347-4B501EE71EB5
+:END:
 ** Expand region
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:CF24C2F4-0089-45C0-A3CE-72AAFBE47D97
+:END:
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_95AB0DCA-FC55-45BB-A888-847322BD6CA0
 #+begin_src emacs-lisp
 (use-package expand-region
   :ensure t
@@ -177,11 +229,18 @@ See http://endlessparentheses.com/ispell-and-abbrev-the-perfect-auto-correct.htm
 
 #+end_src
 ** Begin end line
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:79C47FC8-B71F-40B4-84F3-DB78319B9E33
+:END:
 There are several ways to make begin go to first non whitespace  then to begin lin, some will then make next press go to defun or buffer.
 Note home and end are in Aquamacs osx-mode-map makes life more complex.. Perhaps I will have to unset them to allow modes to do their thingsThese include crux, [[https://github.com/alezost/mwim.el][mwin]] and ergoemacs,  [[https://github.com/alphapapa/mosey.el][mosey]] + snippets on web.
 Note that lispy also does this but not back a form
 *** Mosey
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:7A6F1A54-B69B-4674-8B4B-1B404D40B67D
+:END:
 Try mosey as it has the back function - NB can use paredit, unfortunately does not seem to work with shift and as others do try another.
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_D167236A-A698-4694-A38A-C0A02B3D0153
 #+begin_src emacs-lisp
 (use-package mosey
   :disabled
@@ -193,7 +252,11 @@ Try mosey as it has the back function - NB can use paredit, unfortunately does n
          ))
 #+end_src
 *** mwin
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:73B44400-98DA-4212-B923-8DC1AF3E360A
+:END:
 mwin might have mode aware
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_DBEC557B-9FAB-458C-AACF-C315E3DCB0FB
 #+begin_src emacs-lisp
 (use-package mwim
   :ensure t
@@ -201,6 +264,10 @@ mwin might have mode aware
   ("<end>" . 'mwim-end))
 #+end_src
 * TODO General old stuff
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:1AC892B6-3D59-4A47-83D2-74D291436A0B
+:END:
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_FA715CDB-338C-473F-8511-91E6966446EB
 #+begin_src emacs-lisp
 (setq find-file-visit-truename t)	; visit a file under its true name
 
@@ -271,8 +338,15 @@ mwin might have mode aware
   )
 #+end_src
 * Buffers
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:2C7F2E45-19AE-43EC-8536-C7A69744CCC2
+:END:
 ** Buffer switch
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:4551A020-6DAB-4E1D-A70F-60DF7729834F
+:END:
 Switch to last buffer on one key. From https://emacsredux.com/blog/2013/04/28/switch-to-previous-buffer/
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_BB244CD3-591D-499E-8A36-3DA1E4696166
 #+begin_src emacs-lisp
 (defun er-switch-to-previous-buffer ()
   "Switch to previously open buffer.
@@ -282,9 +356,16 @@ Repeated invocations toggle between the two most recently open buffers."
 (bind-chord "zz" #'er-switch-to-previous-buffer)
 #+end_src
 ** Buffer removal
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:99F964B4-DBAA-4EBE-9B09-0D7840CAA7CC
+:END:
 *** KIll buffer
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:0194DAD8-98E5-42AA-82A6-7C4D741A5F91
+:END:
 Normally when you are in a buffer you do ^x-^k to kill the current buffer but emacs asks you for the name. [[http://pragmaticemacs.com/emacs/dont-kill-buffer-kill-this-buffer-instead/][Pragmatic Emacs]] suggests this.
 By default C-x k runs the command kill-buffer which prompts you for which buffer you want to kill, defaulting to the current active buffer. I don’t know about you, but I rarely want to kill a different buffer than the one I am looking at, so I rebind C-x k to kill-this-buffer which just kills the current buffer without prompting (unless there are unsaved changes).
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_6A3049D3-0E8A-43B3-83DF-07B123D61C04
 #+begin_src emacs-lisp
 (defun bjm/kill-this-buffer ()
   "Kill the current buffer."
@@ -294,13 +375,21 @@ By default C-x k runs the command kill-buffer which prompts you for which buffer
 (bind-key "C-x k" 'bjm/kill-this-buffer)
 #+end_src
 *** Deal with subprocesses
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:EE6B876F-8EE3-40C1-BBD1-0BEA1BBDDD58
+:END:
 If a buffer has a subprocess running (e.g. shell, racket-run then emacs will prompt to ask if you want to kill it. I think you always do. So from https://emacs.stackexchange.com/a/14511/9874
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_4D892993-8FA6-4917-A0AD-D75C5B69035E
 #+begin_src emacs-lisp
 (setq kill-buffer-query-functions
       (delq 'process-kill-buffer-query-function kill-buffer-query-functions))
 #+end_src
 ** Revert buffer
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:10B9D32A-E48F-4CA7-8D0B-397EC17233D6
+:END:
 I don't want to confirm https://emacs.stackexchange.com/a/10349/9874 The key bind is from NeXT days so 25 years of muscle memory.
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_049AD418-4D1B-4088-B9EE-85A110A9E554
 #+begin_src emacs-lisp
 (defun revert-buffer-no-confirm ()
   "Revert buffer without confirmation."
@@ -308,10 +397,16 @@ I don't want to confirm https://emacs.stackexchange.com/a/10349/9874 The key bin
 (bind-key (kbd "A-u") 'revert-buffer-no-confirm)
 #+end_src
 ** Kill old buffers
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:5AA14D72-6BE5-4361-B619-AA006DFD2D32
+:END:
 midnight-mode purges buffers which haven’t been displayed in 3 days. We configure the period so that the cleanup happens every 2 hours (7200 seconds).
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_06A63EF4-FFB6-4C44-BDC8-23241BDE625C
 #+begin_src emacs-lisp
 (use-package midnight
-  :defer 20
+  :defer 1000
+  :init
+  (setq midnight-delay 3600 * 6.5)
   :config
   (setq midnight-period 7200)
   (midnight-mode 1))

@@ -5,7 +5,11 @@
 This covers what emacs looks like and how windows/frames/menus behave
 
 * Colour theme
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:CD3D232B-6BDA-4CBC-BADF-BCEA9B8EBEC4
+:END:
 Aquamacs is stuck with old color themes not the cusomisable ones
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_31D76745-657A-4FFE-A6AB-1077D1192D80
 #+begin_src emacs-lisp
 (require 'color-theme)
 (eval-after-load "color-theme"
@@ -15,6 +19,10 @@ Aquamacs is stuck with old color themes not the cusomisable ones
 #+end_src
 
 * Show icons
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:57CD663C-DDAD-43AD-AFFF-FE62F18F88D2
+:END:
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_2BD033BD-CC86-4B0C-98FA-82B5EDFF67AA
 #+begin_src emacs-lisp
 (use-package all-the-icons
   :ensure t
@@ -43,40 +51,54 @@ Aquamacs is stuck with old color themes not the cusomisable ones
       (s-concat icon (if nospace "" " ") str))))
 #+end_src
 * Remove toolbar
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:2173AD74-D123-45A9-B0B1-8B40D1840823
+:END:
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_5CB800C6-67BA-443E-B65B-FA0247AA6723
 #+begin_src emacs-lisp
 (tool-bar-mode 0)
 #+end_src
 
 * TODO Show line for errors etc
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:D9CBE07A-A1B7-48CB-A163-039F8E86A954
+:END:
 
 ** Beacon mode
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:B70958EE-3BEB-441D-9544-871501B5EF25
+:END:
 Beacon-mode: flash the cursor when switching buffers or scrolling  the goal is to make it easy to find the cursor
 but does not seem to work well
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_623E9D35-0844-41AB-8A86-98118716B519
 #+begin_src emacs-lisp
 (use-package beacon
   :ensure t
   :defer t
   :custom (beacon-blink-when-focused t)
   :init (eval-when-compile
-		  ;; Silence missing function warnings
-		  (declare-function beacon-mode "beacon.el"))
+          ;; Silence missing function warnings
+          (declare-function beacon-mode "beacon.el"))
   :config
   (defun maybe-recenter-current-window ()
-	(when (and (equal (current-buffer) (window-buffer (selected-window)))
-			   (not (eq recenter-last-op 'middle)))
-	  (recenter-top-bottom)))
+    (when (and (equal (current-buffer) (window-buffer (selected-window)))
+               (not (eq recenter-last-op 'middle)))
+      (recenter-top-bottom)))
   (add-hook 'beacon-before-blink-hook #'maybe-recenter-current-window)
   (dolist (mode '(comint-mode term-mode))
-	(push mode beacon-dont-blink-major-modes))
+    (push mode beacon-dont-blink-major-modes))
   (setq beacon-blink-duration 1)
   (beacon-mode 1))
 #+end_src
 
 ** Hi line
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:442D1703-A14F-4EAD-9B24-C86D48FA84F3
+:END:
 Try to highlight the line but it is messed up see https://emacs.stackexchange.com/a/10463/9874
 but the answer below has an interesting suggestion
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_68F04D98-3C61-4F98-9CC1-F4E152D2A007
 #+begin_src emacs-lisp
-
 (use-package hl-line
   :if window-system
   :preface
@@ -91,10 +113,17 @@ but the answer below has an interesting suggestion
   )
 #+end_src
 * Windows
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:2DFC202B-3FB4-41C4-BFE6-9718ECD07F63
+:END:
 I think I now want mainly one window and have splits but tabs are useful.
 
 ** Move/split
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:C6F53E38-7C41-4BC5-9A6C-A0A32AA5CFFC
+:END:
  Try hydra from [[https://www.reddit.com/r/emacs/comments/8of6tx/tip_how_to_be_a_beast_with_hydra/][reddit]] but note user is a vi user for movements so will be messed around with. But a few minutes playing does not add much so use forst from [[https://github.com/abo-abo/hydra/wiki/Window-Management][Hydra wiki]] Needs winner mode for some functions to save window state.
+ #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_AFC382E3-9D15-496B-9A90-B0B4838ADD31
  #+begin_src emacs-lisp
  (use-package winner
    :unless noninteractive
@@ -187,9 +216,12 @@ I think I now want mainly one window and have splits but tabs are useful.
  #+end_src
 
 ** Stop special buffers opening in new window
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:B1304247-BC2C-4292-808D-F38E6D972F3F
+:END:
  It is an aquamacs setting see [[https://www.emacswiki.org/emacs/AquamacsFAQ#toc19][FAQ]]
+ #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_48EF73E1-936C-4BEA-810D-AC96FDD92B40
  #+begin_src emacs-lisp
  (one-buffer-one-frame-mode -1)
  (setq  special-display-regexps nil)
  #+end_src
-

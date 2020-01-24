@@ -212,6 +212,23 @@ This is so the file can be processed by nullman's expand - basically no noweb we
 (assq-delete-all 'org package--builtins)
  #+end_src
 *** Do the load of org from package.el
+With some variables set from https://github.com/grettke/help as these are cutomisation variables they need to be before org.el.
+
+Allow single-character alphabetical bullet lists. This configuration must occur
+before loading Org-Mode. *Never* remove this from a submitted ECM.
+
+#+NAME: org_gcr_2017-05-12_mara_050624C5-3BC5-4049-B070-F0A6736EB754
+#+BEGIN_SRC emacs-lisp
+(setq org-list-allow-alphabetical t)
+#+END_SRC
+Unchecked boxes prevent marking the parent as done. This configuration must
+occur before loading Org-Mode. *Never* remove this from a submitted ECM.
+
+#+NAME: org_gcr_2017-05-12_mara_7A650900-7023-4EA7-B2DB-CAB39437E9F3
+#+BEGIN_SRC emacs-lisp
+(setq org-enforce-todo-checkbox-dependencies t)
+#+END_SRC
+
 #+begin_src emacs-lisp
 (use-package org
   :ensure t)
@@ -247,7 +264,7 @@ Need key setting menus.
                        1.1))
     (setq major-mode-hydra-title-generator #'jp-major-mode-hydra-title-generator)))
 #+end_src
-*** Remain of org
+*** Remainder of org
 This needs the full expansion
 #+begin_src emacs-lisp
 (mwb-init-load "init/org-all")

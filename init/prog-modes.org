@@ -2,6 +2,9 @@
 #+PROPERTY:header-args :cache yes :tangle yes  :comments link
 
 * Common to all programming modes
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:A4CB284C-80C6-491E-898B-9B6519E2757B
+:END:
 I suspect there is a split between those with a REPL and not. But all I am interested in are REPL.
 
 Need keys for build
@@ -10,11 +13,18 @@ C-f5 now can be build and run app.
 f6 lets try for send to repl as better one key than shift keys.
 A later thought is to use f5 as leader use key chords and then others for test
 ** Code Edit Structure
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:800B97C9-1558-4A77-A66F-C526AEBABFFD
+:END:
 Indentation and tabs
 Look at smart-tabs-insinuate but aggressive indent means not needed, although if I did an Algol language again I might find that not so true.
 *** Highlight indents
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:83292AA8-EE2B-4044-9E4B-99DDF6A034D1
+:END:
  I have wanted a good visual identification of indentation since I had the dos printer program in mid 80s. I *now* have it
 
+  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_E4106683-C45F-422A-9DBC-6265837B502D
   #+begin_src emacs-lisp
   (use-package highlight-indent-guides
     :ensure t
@@ -29,15 +39,26 @@ Look at smart-tabs-insinuate but aggressive indent means not needed, although if
     :hook (prog-mode . highlight-indent-guides-mode))
  #+end_src
 *** Aggressive indent
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:25EEAB16-473F-4321-B9CD-085BD4B97CB5
+:END:
  Indent as you type. Only for emacs lisp or racket at the moment. https://github.com/Malabarba/aggressive-indent-mode
+ #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_9DFEE1E2-3416-4ACF-9B5F-44C23CA8722F
  #+begin_src emacs-lisp
  (use-package aggressive-indent
    :ensure t
    :hook ((racket-mode emacs-lisp-mode) . aggressive-indent-mode))
  #+end_src
 ** Clean up whitespace
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:5CBAA3C9-A6AD-4881-BACC-D2A3099D294A
+:END:
  Only do it on my edits
 *** Whitespace at end of line
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:7F269BB3-F95F-4F6D-944B-252975923B43
+:END:
+  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_668C51A9-4FC2-4A35-A424-9FC9C270DACF
   #+begin_src emacs-lisp
    (use-package ws-butler
 	 :ensure t
@@ -45,20 +66,34 @@ Look at smart-tabs-insinuate but aggressive indent means not needed, although if
 	 :hook ((prog-mode org-mode) . ws-butler-mode ))
  #+end_src
 *** TODO Need to look at this more
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:4BDAD971-0F7D-4343-8290-50205E8A77A9
+:END:
 ** iMenu in all buffers
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:7BFB1B10-9C15-4630-8415-FFFF2BC88161
+:END:
 	#+begin_src emacs-lisp
 	(add-hook 'prog-mode-hook (lambda () (imenu-add-to-menubar "Imenu")))
 	#+end_src
 ** Folding
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:1928599E-6243-4314-835D-B5D932F7E372
+:END:
 Keeps chnaging - the issue is with comments before functions I want to collapse the lot. Plu with racket and ml comments are not in fits column so some (outshine) do not spot it.
 Current work to get org mode working better. see send to REPL.
 *** Hide show
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:E10913D4-7B93-4357-B95F-FA5044D80C3C
+:END:
 Let us set it up
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_E36E2091-3DAD-46AC-8634-EC11B5E795C7
 #+begin_src emacs-lisp
 (use-package hideshow
   :hook (prog-mode . hs-minor-mode))
 #+end_src
 Put markers in the fringe
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_C0B47E60-5C02-4FCD-AE13-ABA380EA4866
 #+begin_src emacs-lisp
 (use-package hideshowvis
   :disabled
@@ -68,6 +103,7 @@ Put markers in the fringe
 #+end_src
 
 Use a hydra so don't need the odd keybindings
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_780EA095-1E1A-4E1C-956D-17C68D30AE73
 #+begin_src emacs-lisp
 (defhydra hydra-hs (:idle 1.0)
   "
@@ -92,8 +128,12 @@ _SPC_ cancel
 (bind-key "H-h" 'hydra-hs/body)
 #+end_src
 *** Outlining
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:8D4F7694-0606-4178-A927-DE9365C03B2E
+:END:
 Basically want to collapse/fold depending on comments.
 [[https://github.com/alphapapa/outshine][Outshine]] seems to be the only one still under developement, but dioes too much and has the problem that it looks for comments in colum 1 as does hideshow.
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_CCD484C1-6BB3-4AFD-8A66-0B2F7722A8B6
 #+begin_src emacs-lisp
 (use-package outshine
   :ensure t
@@ -109,14 +149,25 @@ Basically want to collapse/fold depending on comments.
   )
 #+end_src
 *** Folding
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:5E3357DF-791A-45BB-8DD8-300C3689C284
+:END:
 Lets try another
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_30083007-CADD-49A5-8AC3-23B14475C3BB
 #+begin_src emacs-lisp
 
 #+end_src
 ** Build systems
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:0BE82E38-EDB5-4196-B76E-FB6F1DBC0791
+:END:
 *** Gradle
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:D059B203-9EB7-4713-8AB5-3D49422DAFD7
+:END:
  As Emacs is bad for java my java setup is now just gradle so that should be a generic build when I rename.
 This also takes time to load. Need to sort out config entries and gradele-mode needs a bind as you need the keystrokes but only in some modes.
+ #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_8FC0E8CB-72D8-4306-96E3-F856F8917088
  #+begin_src emacs-lisp
 
  ;; gradle and other java
@@ -164,6 +215,9 @@ This also takes time to load. Need to sort out config entries and gradele-mode n
    (gradle-mode))
  #+end_src
 *** make
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:C53BB68B-57E2-4F16-9BE7-B629633B3C4B
+:END:
 	#+begin_src emacs-lisp
 	(use-package make-mode
 	  :ensure nil
@@ -187,8 +241,15 @@ This also takes time to load. Need to sort out config entries and gradele-mode n
 	  (setq cmake-tab-width 2))
 	#+end_src
 ** Report on the fly
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:2C96FB68-3664-43DA-9CD7-8CD203ED8F36
+:END:
 *** TODO Flymake
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:6D225364-60B5-4C41-A802-CFBE5E7E6F2A
+:END:
   Need to start from scratch. I do have it for emacs but as code in org mode not an elisp file a bit of a waste
+  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_57ABBF6F-52E5-4B09-81FB-4B71119DE3DC
   #+begin_src emacs-lisp
 
 	;;;; flymake - syntax checking
@@ -199,6 +260,9 @@ This also takes time to load. Need to sort out config entries and gradele-mode n
 	  :config (flymake-mode-on))
   #+end_src
 *** Flycheck
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:2D0EB2E3-8745-45CE-9B24-937DB5282589
+:END:
 	 I have seen comments that for emacs <26 this is definitely better
 	 #+begin_src emacs-lisp
      (use-package flycheck
@@ -214,6 +278,10 @@ This also takes time to load. Need to sort out config entries and gradele-mode n
        (flycheck-display-errors-delay 0.3))
      #+end_src
 **** Hydra to control
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:48CD7AF6-DA56-471F-98EF-51C816A565FF
+:END:
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_689B92C3-4B81-4F06-A09F-C9947FA18B54
 #+begin_src emacs-lisp
 (defhydra hydra-flycheck (:color blue)
   "
@@ -241,10 +309,14 @@ This also takes time to load. Need to sort out config entries and gradele-mode n
 (bind-key "H-c" 'hydra-flycheck/body)
 	 #+end_src
 ** REPL
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:558A449F-72D3-4F5C-BCE0-02C011944F6B
+:END:
 Yes you think of lisp, smalltalk but also Swift python, ML, Haskell. I never got on with it, I always wanted the whole program and seeing the ML course and Racket, it is not a major thing as you have to often start again which helps for repeatability.
 
 I want a key to send current buffer, especial in OrgSrc mode to REPL.
 [[https://github.com/kaz-yos/eval-in-repl][Eval in Repl]] seems a base but it in effect uses the keymap as to how to choose what to run. Ideally I would want f5 to do this in orgsrc mode, but a full send in normal mode.
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_A713576B-1958-4B3A-B268-DC65DC07499C
 #+BEGIN_SRC emacs-lisp
 (use-package eval-in-repl
   :ensure t
@@ -252,7 +324,11 @@ I want a key to send current buffer, especial in OrgSrc mode to REPL.
   (setq mwb-repl-region-key "<f6>"))
 #+END_SRC
 *** emacs - ielm
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:145FFE4A-96E9-4274-83C9-7713D5C26575
+:END:
 This is simple and works
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_50DBBC02-BB0B-43D7-8FD2-6ECB453AF222
 #+BEGIN_SRC emacs-lisp
 (use-package  eval-in-repl-ielm
   :config
@@ -263,6 +339,7 @@ This is simple and works
               :map lisp-interaction-mode-map ( "<f6>". eir-eval-in-ielm)))
 #+END_SRC
 However I can't use that for a send to buffer as the map from mode to function is via the keymap
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_D26ABD27-104F-449D-BF75-31B81F383CC5
 #+begin_src emacs-lisp
 (defun mwb-eir-send-to-repl (function-name )
   "send the last sexpr to the replm using the given function"
@@ -271,31 +348,74 @@ However I can't use that for a send to buffer as the map from mode to function i
   )
 #+end_src
 ** Git
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:6E33F21B-8867-46F3-8346-5E54A6E9AAD9
+:END:
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_64A36B3D-104D-47BA-A2A1-91E1844F7121
 #+begin_src emacs-lisp
 (mwb-init-load "init/prog-modes/git")
 #+end_src
+** Structure editing
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:C05CF80F-DBBB-4FE8-9E8B-55BED989218B
+:END:
+*** Smartparens
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:838D12E0-E4AA-4DD0-8F6E-56CDA89B5F0E
+:END:
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_A84231FF-A68D-44B0-9010-3CD91C8B2DA4
+#+begin_src emacs-lisp
+(use-package smartparens
+  :ensure t
+  :config
+  (setq sp-show-pair-from-inside nil)
+  (require 'smartparens-config)
+  :diminish smartparens-mode)
+#+end_src
 * Specific groups
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:3CC4E87A-CFCC-442A-8E6C-35D2C41916EC
+:END:
 Where there is common put them together. This part is really why I have separate files so I can deal with one thing at a time
 
 ** Lisp
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:4D3C308D-416D-482E-8220-38569239AAD6
+:END:
+ #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_221FF9C4-8058-4BC7-8E32-05A9A77C88CF
  #+begin_src emacs-lisp
    (mwb-init-load "init/prog-modes/lisp")
 #+end_src
 ** ML
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:3FE1A2FC-78F4-4656-9E6D-EE2F13D8D324
+:END:
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_95999B02-8BAE-4A08-873B-799E1F3F9612
 #+begin_src emacs-lisp
    (mwb-init-load "init/prog-modes/ml")
 #+end_src
 ** Python
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:CCDCBB6B-6D02-4E28-86FE-9F7EC6811786
+:END:
 Really need to start from scratch
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_31F0418B-C499-4833-BB7B-328F6331C36D
 #+begin_src emacs-lisp
 (mwb-init-load "init/prog-modes/python")
 #+end_src
 ** Structured data
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:68308652-6F47-4337-B69A-5CCEAE8AE06E
+:END:
 Do inline
 *** XML
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:6E22A9D3-1EB0-4FD1-A3F6-53C488E929A1
+:END:
 This has been there for a long time (actually only after retirement I suppose I had XML-spy at work)
 Just a pretty print
 From http://blog.bookworm.at/2007/03/pretty-print-xml-with-emacs.html
+ #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_2D695AD2-8485-4365-A27F-FF3E95FAB69B
  #+begin_src emacs-lisp
 (defun nxml-pretty-print-xml-region (begin end)
   "Pretty format XML markup in region. You need to have nxml-mode
@@ -313,25 +433,43 @@ by using nxml's indentation rules."
   (message "Ah, much better!"))
  #+end_src
 *** Json
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:BB5E4DA3-3168-4AA7-9B08-6B3E11930CB2
+:END:
 **** Editing
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:2D11F928-4739-4268-9A5B-91F6FEB2D9A6
+:END:
 This is the standard mode
+  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_61706197-9647-456A-9F2C-0A91722F017C
   #+begin_src emacs-lisp
  (use-package json-mode
    :ensure t
    :mode "\\.json$")
   #+end_src
 **** Visualisation
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:1F9A0E96-B7A9-45BC-BFC4-A1BD0B149E7A
+:END:
 	 See as a tree.
+     #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_15E789B8-CDC5-4AEF-97F8-40F5C631D5D8
      #+begin_src emacs-lisp
 	 (use-package json-navigator
 	   :after json
 	   :ensure t)
   #+end_src
 ** SQL
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:FA08DE52-A532-4D20-AB12-A3B358E3FC56
+:END:
 Not worth separating out.
 Note this is not the internal mode. It is from Emacs wiki as I like the interaction buffer better. Emacs' ones gave too many. Probably was my most used mode at work. As Java was Eclipse.
 Now I have no idea if it works
 *** TODO Need to put in use-package
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:9406F1EB-163A-4FD8-BC4F-8EBCC5A51263
+:END:
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_5052A586-FB4D-4315-B0D8-2D81C60A5E29
 #+begin_src emacs-lisp
 (use-package sql-mode
   :mwb-load-path "site-lisp/sql")
@@ -349,8 +487,12 @@ Now I have no idea if it works
 ;; (setq auto-mode-alist (cons '("\\.sql$" . sql-mode) auto-mode-alist))
 #+end_src
 ** C
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:E0F36384-0C3B-4A4A-A24C-2E644372D6C6
+:END:
 This is where I have really lost history there used to be all sorts of indenation rules.
 Look at jojojames init for a complete one - but no lsp/completion.
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_5983974D-B148-47DA-9331-169894A3CCA5
 #+begin_src emacs-lisp
    ;; objective C
    (add-to-list 'auto-mode-alist '("\\.h$" . objc-mode) )
@@ -358,7 +500,11 @@ Look at jojojames init for a complete one - but no lsp/completion.
    (add-to-list 'auto-mode-alist '("\\.mm$" . objc-mode))
 #+end_src
 ** Perl
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:FD5A12CE-2124-4469-A206-D1C16C2420F1
+:END:
 Possibly lost as I did have cperl at one time but from comments that might have been before heavy development
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_D396FD6D-BFB0-45D4-9DE2-B8E9CA24D4F5
 #+begin_src emacs-lisp
    (setq auto-mode-alist
 		 (cons '("\\.pl$" . perl-mode) auto-mode-alist))
@@ -391,7 +537,14 @@ Possibly lost as I did have cperl at one time but from comments that might have 
    ;; (add-hook 'perldb-mode-hook 'my-perldb-mode-hook)
 #+end_src
 ** Shell and other small things
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:4509E67E-09ED-4C66-855C-BF44B0DC79A9
+:END:
 *** Fish
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:9451EAD0-4CD9-4CAA-AF85-BC358DA8B9F6
+:END:
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_7FB73B6F-73A3-4823-9DC1-F220484A074F
 #+begin_src emacs-lisp
 (use-package fish-mode
   :ensure t)

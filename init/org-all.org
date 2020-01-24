@@ -1171,17 +1171,7 @@ results need to be visibly noticeably different for the reader by making them
 
 Diagramming languages require =RESULTS= output for exporting.
 
-#+NAME: org_gcr_2017-05-12_mara_28D5D5A9-5CC8-4B6C-887F-A02F9D416B0D
-#+BEGIN_SRC emacs-lisp
-(help/set-org-babel-default-header-args:ditaa :wrap "RESULTS")
-(help/set-org-babel-default-header-args:dot :wrap "RESULTS")
-(help/set-org-babel-default-header-args:plantuml :wrap "RESULTS")
-#+END_SRC
 
-#+RESULTS: orgmode:gcr:vela:0F18A334-A192-4DA5-A897-9D7F3E15C64B
-#+BEGIN_EXAMPLE
-((:wrap . RESULTS) (:results . file) (:exports . results))
-#+END_EXAMPLE
 
 
 ** Prettify

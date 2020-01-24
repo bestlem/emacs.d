@@ -409,5 +409,10 @@ midnight-mode purges buffers which haven’t been displayed in 3 days. We config
   (setq midnight-delay 3600 * 6.5)
   :config
   (setq midnight-period 7200)
+  (defun add-to-clean-buffer-regex (str)
+    (add-to-list 'clean-buffer-list-kill-regexps
+                 (rx-to-string `(seq line-start "*" ,str " "))))
+  (add-to-clean-buffer-regex "deadgrep")
+  (add-to-clean-buffer-regex "helpful")
   (midnight-mode 1))
 #+end_src

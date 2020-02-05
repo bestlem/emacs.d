@@ -23,16 +23,18 @@ However much of the same code appears in many places so I don't know the real so
    The overall load.
    #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_8FD96F98-B122-4E26-BC6D-62735E12E33F
    #+begin_src emacs-lisp
-   (use-package ibuffer
-	 :bind (("C-x C-b" . ibuffer)
-			:map ibuffer-mode-map
-			("." . hydra-mwb-ibuffer-main/body))
-	 :init
-	 (setq ibuffer-show-empty-filter-groups nil
-		   ibuffer-default-sorting-mode 'filename/process)
-	 :config
-	 (mwb-init-load "init/ibuffer-config")
-	 :hook (ibuffer . hydra-mwb-ibuffer-main/body))
+(use-package ibuffer
+  :bind (("C-x C-b" . ibuffer)
+	 ("A-M-b" . ibuffer)
+	 :map ibuffer-mode-map
+	 ("." . hydra-mwb-ibuffer-main/body))
+  :init
+  (setq ibuffer-expert t
+	ibuffer-show-empty-filter-groups nil
+	ibuffer-default-sorting-mode 'filename/process)
+  :config
+  (mwb-init-load "init/ibuffer-config")
+  :hook (ibuffer . hydra-mwb-ibuffer-main/body))
    #+end_src
 
 ** Display functions
@@ -143,7 +145,7 @@ This is from  [[https://www.reddit.com/r/emacs/comments/64kr02/emacs_workflow_so
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:7CD44DD7-1332-4C1C-8819-136859BF8AA8
 :END:
-   From [[https://github.com/abo-abo/hydra/wiki/Ibuffer][Hydra Wiki]]
+   From [[https://github.com/abo-abo/hydra/wiki/Ibuffer][Hydra Wiki]] mode hydra
    #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_A6D8D69A-A7A1-431C-BC16-A34732A92A60
    #+begin_src emacs-lisp
 (defhydra hydra-mwb-ibuffer-main (:color red :hint nil)

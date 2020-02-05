@@ -55,7 +55,10 @@ This file is loaded sureing use-package :config ie after ibuffer loaded
  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_2B1FC416-BC5B-4219-BF87-CDD2E7D11356
  #+begin_src emacs-lisp
 (defvar mwb-ibuffer-filters-top
-  '(("Dired" (mode . dired-mode))
+  '(("Aquamacs" (or
+		 (filename . "^/Applications/Aquamacs")
+		 (filename . "/Library/Preferences/Aquamacs Emacs/Packages/elpa")))
+    ("Dired" (mode . dired-mode))
     ("Emacs" (or
 	      (name . "^\\*dashboard\\*$")
 	      (name . "^\\*scratch\\*$")
@@ -66,10 +69,14 @@ This file is loaded sureing use-package :config ie after ibuffer loaded
 	      (name . "^\\*deadgrep")
 	      (name . "\\*\\(Echo\\|Minibuf\\)")
 	      (name . "^\\*Personal Keybindings\\*$")
-	      (name . "^\\*Pp Eval Output\\*$")))
-    ("Aquamacs" (or
-		 (filename . "^/Applications/Aquamacs")
-		 (filename . "/Library/Preferences/Aquamacs Emacs/Packages/elpa")))
+	      (name . "^\\*Pp Eval Output\\*$")
+	      (name . "^\\*Help\\*$")
+	      (name . "^\\*Apropos\\*$")
+	      (name . "^\\*info\\*$")
+	      (name . "^\\*helpful")
+	      (name . "^\\*\\(Man [0-9]?\\)")
+	      (mode . custom-mode)
+	      (name . "^\\*Customize")))
     ("Commands"
      (or
       (mode . shell-mode)
@@ -95,15 +102,8 @@ This file is loaded sureing use-package :config ie after ibuffer loaded
       (name . "^\\*magit")
       (name . "git-monitor")))
 
-    ("Help" (or
-	     (name . "^\\*Help\\*$")
-	     (name . "^\\*Apropos\\*$")
-	     (name . "^\\*info\\*$")
-	     (name . "^\\*helpful")
-	     (name . "^\\*\\(Man [0-9]?\\)")))
-    ("Custom" (or
-	       (mode . custom-mode)
-	       (name . "^\\*Customize")))
+
+
     )
   "Fixed filter definitions for ibuffer up front")
 #+end_src

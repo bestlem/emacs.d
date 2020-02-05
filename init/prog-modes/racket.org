@@ -112,52 +112,46 @@ From https://github.com/otijhuis/emacs.d/blob/master/config/hydra-settings.el
     Tried hook for racket-unicode-input-method-enable but this conflicks with lispy.
        #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_D3137514-0D9E-4ED0-BFB0-313837334926
        #+begin_src emacs-lisp
-       (use-package racket-mode
-         :ensure t
-         :bind (:map racket-mode-map
-                     ("<f5>" . racket-test)
-                     ("<C-f5>" . racket-run)
-                     ("S-<f5>" .  racket-raco-all-tests)
-                     ("<f1> <f1>" . racket-describe)
-                     ("M-l" . racket-insert-lambda)
-                     ("H-A" . hydra-paredit/body)
-                     :map racket-repl-mode-map
-                     ("<f5>" . racket-run))
-         :config (setq racket-program "/Applications/Racket v7.5/bin/racket"
-                       tab-always-indent 'complete
-                       key-chord-mode 1        ; unknown how it was turned off
-                       )
-         (use-package racket-support
-           :mwb-load-path "site-lisp/lisp")
-         :hook ((racket-mode racket-repl-mode) . racket-unicode-input-method-enable)
-         ((racket-mode racket-repl-mode) . racket-smart-open-bracket-mode)
-         ((racket-mode racket-repl-mode) . paredit-mode)
-         ((racket-mode racket-repl-mode) . paxedit-mode))
+(use-package racket-mode
+  :ensure t
+  :bind (:map racket-mode-map
+              ("<f5>" . racket-test)
+              ("<C-f5>" . racket-run)
+              ("S-<f5>" . racket-mwb-raco-all-tests)
+              ("<f1> <f1>" . racket-describe)
+              ("M-l" . racket-insert-lambda)
+              ;("H-A" . hydra-paredit/body)
+              :map racket-repl-mode-map
+              ("<f5>" . racket-run))
+  :config (setq racket-program "/Applications/Racket v7.5/bin/racket"
+                tab-always-indent 'complete
+                key-chord-mode 1 ; unknown how it was turned off
+                )
+  (use-package racket-support
+                                        ;:mwb-load-path "site-lisp/lisp"
+    )
+  :hook ((racket-mode racket-repl-mode) . racket-unicode-input-method-enable)
+  ((racket-mode racket-repl-mode) . racket-smart-open-bracket-mode)
+  ((racket-mode racket-repl-mode) . paredit-mode)
+  ((racket-mode racket-repl-mode) . paxedit-mode))
       #+end_src
-** matcha
+*** Hydra
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:869AF7A1-ADC9-42C0-A04D-5C9629407813
 :END:
-*** Mode matcha
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:D83A516C-5F9E-4D8F-82EB-2167FAB1EEF1
-:END:
 	 #+begin_src emacs-lisp
-
-(define-transient-command matcha-racket-mode
-  "Mode"
-  [["Run"
-    ("b" "run" racket-run)
-    ("B" "run and REPL" racket-run-and-switch-to-repl)
-    ("r" "Region to REPL" racket-send-region)
-
-    ;; ("R" "Run with errortrace" (lambda () (interactive) (racket-run 4)))
-    ;; ("i" "Instrument for debug" (lambda () (interactive) (racket-run 16)))
-    ]
-   ["Test"
-    ("t" "Test" racket-test)
-    ("c" "Check syntax" racket-check-syntax-mode)]
-   ["Fold"
-    ("h" "Hide tests" racket-fold-all-tests)
-    ("s" "Show tests" racket-unfold-all-tests)]])
+(major-mode-hydra-define racket-mode nil
+  ("Run"
+   (("b" racket-run "run")
+    ("B" racket-run-and-switch-to-repl "run and REPL")
+    ("r" racket-send-region "Region to REPL")
+    ("R" (lambda () (interactive) (racket-run 4)) "Run with errortrace")
+    ("i" (lambda () (interactive) (racket-run 16)) "Instrument for debug"))
+   "Test"
+   (("t" racket-test "Test")
+    ("a" racket-mwb-raco-all-tests "All Tests")
+    ("c" racket-check-syntax-mode "Check syntax"))
+   "Fold"
+   (("h" racket-fold-all-tests "Hide tests")
+    ("s" racket-unfold-all-tests "Show tests"))))
 	 #+end_src

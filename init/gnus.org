@@ -49,7 +49,7 @@ Well turn them off
   #+begin_src emacs-lisp
   (setq auth-source-debug 'trivia)
   (setq gnus-read-active-file 'some)
-  (setq gnus-secondary-select-methods '((nntp "news.gmane.org")
+  (setq gnus-secondary-select-methods '((nntp "news.gmane.io")
                                         (nntp "bar.baen.com")))
   (setq gnus-select-method '(nntp "news.eternal-september.org"))
   #+end_src

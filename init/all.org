@@ -105,42 +105,6 @@ Note that if a subdirectory is just for one thinmg then use keyword mwb-load-pat
 (add-to-list 'load-path (mwb-user-emacs-file "site-lisp"))
 #+end_src
 
-** Matcha
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:CF24D299-114F-49BE-BBDB-50C08D52E0A6
-:END:
-		Menu bindings from [[https://github.com/jojojames/matcha][jojojames]] originally using hydra but changed to transient as I was editing so a fun day where it did not work. Transient programming interface seems nearer what I want but hydra I suspect has better functionality for my use e.g. can do commands and stay in hydra/
-		#+begin_src emacs-lisp
-        (use-package matcha
-          :disabled
-          :mwb-load-path "fork/matcha"
-          :config
-          (matcha-setup))
-		#+end_src
-
-***** Support code
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:71D38882-5B46-4E4C-AC75-F5653E8B3B3C
-:END:
-		 Extra functions from JoJoJames
-		 #+begin_src emacs-lisp
-         (use-package jp-projectile-utils
-           :disabled
-           :mwb-load-path "site-lisp/jojojames")
-		 #+end_src
-***** Transient remove after racket mode fixed
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:406D62BB-846D-490E-8AB3-E85911C3CFDC
-:END:
-qqqqAnother key bind menuy like hydra [[https://emacsair.me/2019/02/14/transient-0.1/][from the author of magit]]
-In many ways simpler as just defines a menu but does not allow menu to remain and all entries must be named methods not lambdas.
-		#+begin_src emacs-lisp
-        (use-package transient
-          :diminish
-          :ensure t
-          :config (transient-bind-q-to-quit))
-		#+end_src
-
 ** Setting variables with a check on type
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:86E6A7B5-5C85-4429-AE49-FA5AE7AEF73D

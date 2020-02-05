@@ -69,6 +69,19 @@ Look at smart-tabs-insinuate but aggressive indent means not needed, although if
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:4BDAD971-0F7D-4343-8290-50205E8A77A9
 :END:
+*** Autofill mode on comments and not code
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:2D7FD607-5E36-49DB-8F1A-7C7E1C7CADE6
+:END:
+This is from [[https://www.emacswiki.org/emacs/AutoFillMode][emacs wiki]]
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_9B7EA331-7A72-4DCE-9798-9D3B378A8C1B
+#+begin_src emacs-lisp
+(defun comment-auto-fill ()
+  (setq-local comment-auto-fill-only-comments t)
+  (auto-fill-mode 1))
+
+(add-hook 'prog-mode-hook 'comment-auto-fill)
+#+end_src
 ** iMenu in all buffers
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:7BFB1B10-9C15-4630-8415-FFFF2BC88161

@@ -74,7 +74,6 @@ So hyper-A is now a mode hydra key and I have started defining a hydra on that,
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:0464FD58-5332-45BB-8772-A45A4ABD0B20
 :END:
-
 ** Which Key
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:CF1562A8-8457-4393-ADE7-E36762C1ED47
@@ -161,15 +160,6 @@ Note that you can control what the screen displays A for Alt or ⌥. Emacs is no
   (bind-key "<backspace>" 'backward-delete-char-untabify)
   ;;(bind-key [?\A-backspace] 'undo )
   #+end_src
-** Goto line
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:4AB414FE-AEEF-46D6-955D-44E6AD00B778
-:END:
-Now these are very old
-#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_DBBEEA4B-60A7-4C32-B42F-D74CD1262A49
-#+begin_src emacs-lisp
-  (bind-key (kbd "M-g") 'goto-line)
-#+end_src
 ** Let search continue with arrows
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:9C6C52F9-BD9C-4A80-856B-6D5620E5C9A7
@@ -196,6 +186,61 @@ How does this work with ivy
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:A15CC8C1-7203-4FD0-8E6B-F0923D40F40D
 :END:
 Aquamacs also messes around with isearch and the two don't exactly match. Which might be a good thing
+** Old bindings
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:9DC3CE51-289C-4767-A1DE-E461A402C58F
+:END:
+These will be old NeXT Pizza bindings
+
+
+	 ;(global-set-key [?\A-=] 'what-line )
+	 ;(global-set-key [?\M-g] 'goto-line)
+	 ;(global-set-key [?\A-g] 'goto-line)
+	 ;(global-set-key "\M-q" 'query-replace)
+	 ;(global-set-key "\M-r" 'replace-string)
+	 ;(global-set-key "\M-i" 'indent-region)
+*** Matcha
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:4E3587EA-6CD0-4B4D-B039-CFE7E970811F
+:END:
+Global hydra from [[https://github.com/jojojames/matcha][Matcha github]] but no idea how good. I didn't want it all but that was the easiest.
+Also see [[https://github.com/jerrypnz/major-mode-hydra.el][Major mode hydra]] for similar but grabs a major mode hydra from somewhere. Actually it is more like my H-a but automated it looks for
+
+Major mode was missing the last line - I suspect due to echo area or possibly this bug https://github.com/abo-abo/hydra/issues/331
+
+So ended up with matcha again and transient
+
+And that works - I do need to edit the matcha files etc.
+But transient needs a actual function that exists hydra can lazy load.
+But hydra allows lambdas and often not defined functions (although pretty hydra requires the function to be loaded.)
+
+And I killed it off
+**** Matcha space the root matcha
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:DB24DAF7-FE9D-4A2F-B20B-603A451FD43E
+:END:
+***** Note on unused or other changes
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:513E7AF5-24A0-4C37-80D6-9E95FF9BD8FC
+:END:
+   #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_E1A3E913-3BF3-47B9-BAAF-99E67FB56CA3
+   #+begin_src emacs-lisp
+   ;(bind-key "H-d" 'matcha-run-mode-command)
+   ;(bind-key "H-`" 'matcha-me-space)
+   #+end_src
+** quickrun
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:B9F7371A-DC41-4527-9DFD-EE27FB91DFF5
+:END:
+	  runs the current buffer through a compiler or interpreter. There are also functions to do for a method. Includes C, Racket, Python, Julia. However all through a batch command so not into REPL and not really through make.
+See https://github.com/syohex/emacs-quickrun but assumes a lot. Better look at org mode and repls.
+
+* Single key bindings
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:7A9AB89E-F4F2-4508-8FD9-FCB30C5AE861
+:END:
+These are random and not organised by package
+
 ** Function keys
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:C8D7FB19-15CD-4E95-AA3F-786AE41105A7
@@ -224,53 +269,61 @@ Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in e
 (bind-key [f8] 'next-error)
 (bind-key [S-f8] 'previous-error)
 #+end_src
-** Old bindings
+
+** Meta/alt key bindings
 :PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:9DC3CE51-289C-4767-A1DE-E461A402C58F
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:3F4F065D-FF4D-4D2B-BA34-42AEA1DE2043
 :END:
-These will be old NeXT Pizza bindings
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_A1DB0752-B232-4FA8-BF33-3CE313E5306C
+#+begin_src emacs-lisp
+(bind-key "M-g" 'goto-line)             ; one of the oldest binds
 
-
-	 ;(global-set-key [?\A-=] 'what-line )
-	 ;(global-set-key [?\M-g] 'goto-line)
-	 ;(global-set-key [?\A-g] 'goto-line)
-	 ;(global-set-key "\M-q" 'query-replace)
-	 ;(global-set-key "\M-r" 'replace-string)
-	 ;(global-set-key "\M-i" 'indent-region)
-** Matcha
+#+end_src
+** Hyper key bindings
 :PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:4E3587EA-6CD0-4B4D-B039-CFE7E970811F
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:47F25520-0E9A-4872-B519-59399D80D775
 :END:
-Global hydra from [[https://github.com/jojojames/matcha][Matcha github]] but no idea how good. I didn't want it all but that was the easiest.
-Also see [[https://github.com/jerrypnz/major-mode-hydra.el][Major mode hydra]] for similar but grabs a major mode hydra from somewhere. Actually it is more like my H-a but automated it looks for
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_F6D628C7-FADF-42EB-BA66-CC18C2BD0D2A
 
-Major mode was missing the last line - I suspect due to echo area or possibly this bug https://github.com/abo-abo/hydra/issues/331
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_0ABBEBC7-DD95-4225-A722-008492957813
+#+begin_src emacs-lisp
+(bind-key (kbd "H-1")  'delete-other-windows osx-key-mode-map)
+(bind-key (kbd "H-0")  'delete-window osx-key-mode-map)
+;; H-a is major mode specific Hydra so bound to mode keymap by
+;; use-package :hydra
 
-So ended up with matcha again and transient
+;; (bind-key (kbd "H-h") 'hydra-space/body)
+(bind-key (kbd "H-n") 'tabbar-move-current-buffer-to-new-frame osx-key-mode-map)
+;; H-r is register
+;; H-s is return from org special edit
 
-And that works - I do need to edit the matcha files etc.
-But transient needs a actual function that exists hydra can lazy load.
-But hydra allows lambdas and often not defined functions (although pretty hydra requires the function to be loaded.)
-*** Matcha space the root matcha
+(bind-key "H-<return>" 'cua-set-rectangle-mark cua-global-keymap)
+(unbind-key "C-<return>" cua-global-keymap)
+#+end_src
+** Command key bindings
 :PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:DB24DAF7-FE9D-4A2F-B20B-603A451FD43E
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:FFB638A2-43F0-42D9-8A64-5F2AC0A72E56
 :END:
-**** Note on unused or other changes
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:513E7AF5-24A0-4C37-80D6-9E95FF9BD8FC
-:END:
-   #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_E1A3E913-3BF3-47B9-BAAF-99E67FB56CA3
-   #+begin_src emacs-lisp
-   ;(bind-key "H-d" 'matcha-run-mode-command)
-   ;(bind-key "H-`" 'matcha-me-space)
-   #+end_src
-** quickrun
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:B9F7371A-DC41-4527-9DFD-EE27FB91DFF5
-:END:
-	  runs the current buffer through a compiler or interpreter. There are also functions to do for a method. Includes C, Racket, Python, Julia. However all through a batch command so not into RTEPL and not really through make.
-See https://github.com/syohex/emacs-quickrun but assumes a lot. Better look at org mode and repls.
+These should be mac based adding to Aquamacs but some I do not used.
+Note that the Aquamacs binding does not fit through bind-keys
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_E5C06415-F04E-4599-A173-414139F0F13B
+#+begin_src emacs-lisp
+(bind-key "A-b" 'ivy-switch-buffer)
+(bind-key "A-/" 'comment-or-uncomment-region-or-line)
+(bind-key "A-<kp-add>" 'zoom-font)
+(bind-key "A-<kp-subtract>" 'zoom-font-out)
+#+end_src
 
+** Control x binding
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:69EED50E-06AD-4068-A0FA-34186BCC8E7D
+:END:
+   From [[https://github.com/abo-abo/hydra/wiki/Emacs][Hydra wiki - Find file with xf]]
+
+* Hydra
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:A41389A4-CD6E-44AD-A79A-C170F7936D9D
+:END:
 ** Hydra transpose
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:F0488F70-6114-4DF6-AB8A-70BCCF07A5C2
@@ -444,38 +497,11 @@ This is from jerrypnz with extras for treemacs
      ("X" toggle-debug-on-quit "debug on quit" :toggle (default-value 'debug-on-quit)))))
  )
 #+end_src
-** Control x binding
+*** Toggle treemode as needed often
 :PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:69EED50E-06AD-4068-A0FA-34186BCC8E7D
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:E96CD5B5-8DFE-489A-BBF2-B969886F2607
 :END:
-   From [[https://github.com/abo-abo/hydra/wiki/Emacs][Hydra wiki - Find file with xf]]
-
-** Hyper global key bindings
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:47F25520-0E9A-4872-B519-59399D80D775
-:END:
-#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_F6D628C7-FADF-42EB-BA66-CC18C2BD0D2A
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_B45876F9-F64F-46A1-A3A9-5727BFAB647C
 #+begin_src emacs-lisp
-(bind-key (kbd "H-1")  'delete-other-windows osx-key-mode-map)
-(bind-key (kbd "H-0")  'delete-window osx-key-mode-map)
-;; H-a is major mode specific Hydra so bound to mode keymap by use-packag :hydra
-;; (bind-key (kbd "H-h") 'hydra-space/body)
-(bind-key (kbd "H-n") 'tabbar-move-current-buffer-to-new-frame osx-key-mode-map)
-;; H-r is register
-;; H-s is return from org special edit
-;;(bind-key (kbd "H-t") 'treemacs osx-key-mode-map)
-(bind-key "H-<return>" 'cua-set-rectangle-mark cua-global-keymap)
-(unbind-key "C-<return>" cua-global-keymap)
-#+end_src
-** Command key bindings
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:FFB638A2-43F0-42D9-8A64-5F2AC0A72E56
-:END:
-These should be mac based adding to Aquamacs but some I do not used.
-Note that the Aquamacs binding does not fit through bind-keys
-#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_E5C06415-F04E-4599-A173-414139F0F13B
-#+begin_src emacs-lisp
-(bind-key "A-/" 'comment-or-uncomment-region-or-line)
-(bind-key "A-<kp-add>" 'zoom-font)
-(bind-key "A-<kp-subtract>" 'zoom-font-out)
+(bind-key "A-M-t" 'treemacs)
 #+end_src

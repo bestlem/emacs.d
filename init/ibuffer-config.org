@@ -54,39 +54,58 @@ This file is loaded sureing use-package :config ie after ibuffer loaded
 :END:
  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_2B1FC416-BC5B-4219-BF87-CDD2E7D11356
  #+begin_src emacs-lisp
- (defvar mwb-ibuffer-filters-top
-   '(("Dired" (mode . dired-mode))
-	 ("Emacs" (or
-			   (name . "^\\*dashboard\\*$")
-			   (name . "^\\*scratch\\*$")
-			   (name . "^\\*Messages\\*$")
-			   (name . "^\\*Backtrace\\*$")
-			   (name . "^\\*Buffer L\\*$")
-			   (name . "^\\*Warnings\\*$")
-			   (name . "^\\*Personal Keybindings\\*$")
-			   (name . "^\\*Pp Eval Output\\*$")))
-	 ("Aquamacs" (filename . "^/Applications/Aquamacs"))
-	 ("GNUs" (or
-			  (mode . message-mode)
-			  (mode . bbdb-mode)
-			  (mode . mail-mode)
-			  (mode . gnus-group-mode)
-			  (mode . gnus-summary-mode)
-			  (mode . gnus-article-mode)
-			  (name . "^\\.bbdb$")
-			  (name . "^\\.newsrc-dribble")))
-	 ("Magit" (name . "^magit"))
-	 ("Help" (or
-			  (name . "^\\*Help\\*$")
-			  (name . "^\\*Apropos\\*$")
-			  (name . "^\\*info\\*$")
-			  (name . "^\\*helpful")
-			  (name . "^\\*\\(Man [0-9]?\\)")))
-	 ("Custom" (or
-				(mode . custom-mode)
-				(name . "^\\*Customize")))
-	 )
-   "Fixed filter definitions for ibuffer up front")
+(defvar mwb-ibuffer-filters-top
+  '(("Dired" (mode . dired-mode))
+    ("Emacs" (or
+	      (name . "^\\*dashboard\\*$")
+	      (name . "^\\*scratch\\*$")
+	      (name . "^\\*Messages\\*$")
+	      (name . "^\\*Backtrace\\*$")
+	      (name . "^\\*Buffer L\\*$")
+	      (name . "^\\*Warnings\\*$")
+	      (name . "^\\*deadgrep")
+	      (name . "\\*\\(Echo\\|Minibuf\\)")
+	      (name . "^\\*Personal Keybindings\\*$")
+	      (name . "^\\*Pp Eval Output\\*$")))
+    ("Aquamacs" (or
+		 (filename . "^/Applications/Aquamacs")
+		 (filename . "/Library/Preferences/Aquamacs Emacs/Packages/elpa")))
+    ("Commands"
+     (or
+      (mode . shell-mode)
+      (mode . eshell-mode)
+      (mode . term-mode)
+      (mode . compilation-mode)))
+    ("GNUs" (or
+	     (mode . message-mode)
+	     (mode . bbdb-mode)
+	     (mode . mail-mode)
+	     (mode . gnus-group-mode)
+	     (mode . gnus-summary-mode)
+	     (mode . gnus-article-mode)
+	     (name . "^\\.bbdb$")
+	     (name . "^\\*\\(sent\\|unsent\\|fetch\\)")
+	     (name . "^ \\*\\(nnimap\\|nntp\\|nnmail\\|gnus\\|server\\|mm\\*\\)")
+	     (name . "\\(Original Article\\|canonical address\\|extract address\\)")
+	     (name . "^\\.newsrc-dribble")))
+    ("Magit"
+     (or
+      (mode . magit-status-mode)
+      (mode . magit-log-mode)
+      (name . "^\\*magit")
+      (name . "git-monitor")))
+
+    ("Help" (or
+	     (name . "^\\*Help\\*$")
+	     (name . "^\\*Apropos\\*$")
+	     (name . "^\\*info\\*$")
+	     (name . "^\\*helpful")
+	     (name . "^\\*\\(Man [0-9]?\\)")))
+    ("Custom" (or
+	       (mode . custom-mode)
+	       (name . "^\\*Customize")))
+    )
+  "Fixed filter definitions for ibuffer up front")
 #+end_src
 ** Filter for what is left
 :PROPERTIES:

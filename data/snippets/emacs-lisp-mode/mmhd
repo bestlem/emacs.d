@@ -1,0 +1,15 @@
+# -*- mode: snippet; -*-
+# name : major-mode-hydra-define
+# key : mmhd
+# contributor : Mark Bestley 
+# --
+
+(major-mode-hydra-define $1 nil
+  ("$0"
+   (("b" eval-buffer "buffer")
+    ("e" eval-defun "defun")
+    ("r" eval-region "region"))
+   "REPL"
+   (("I" ielm "ielm")
+    ("x" matcha-goto-scratch "*Scratch*")))
+   

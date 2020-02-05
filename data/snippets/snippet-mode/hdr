@@ -1,0 +1,12 @@
+# name : Snippet header
+# expand-env : ()
+# contributor : joaotavora
+# key: hdr
+# --
+# name : $1${2:
+# key : ${3:expand-key}}${4:
+# group : ${5:group}} 
+# contributor : `user-full-name` 
+# --
+$0
+

@@ -44,6 +44,12 @@ I suspect that emacs's inbuilt skeleton can do what I need but there are more ex
   :defer 2                              ; need to force the load
   :after company
   :mode ("/\\.emacs\\.d/data/snippets/" . snippet-mode)
+  :bind (:map snippet-mode-map
+              ("<f5>" . yas-load-snippet-buffer)
+              ("C-<f5>" . yas-load-snippet-buffer-and-close)
+              :map yas-minor-mode-map
+              ("<SPC>" . yas-maybe-expand))
+
   ;; :bind (:map yas-minor-mode-map
   ;; ("SPC" . mwb-yas-expand)
 
@@ -58,7 +64,6 @@ I suspect that emacs's inbuilt skeleton can do what I need but there are more ex
   ;;   :ensure t)
   (yas-reload-all)
   (yas-global-mode 1)
-  (define-key yas-minor-mode-map (kbd "SPC") yas-maybe-expand)
   (defun company-mode/backend-with-yas (backend)
     (if (and (listp backend) (member 'company-yasnippet backend))
         backend
@@ -98,7 +103,7 @@ There is a package including a lot of snippets.
 However there are so many elisp ones that it might be too confusing. Similarly the expansion for org mode is not nice
 For loading as yasnippet is on defer we get this and yasnippets' config on eval-after load/ So what order do they load in? I suspect LIFO as yasnippet is delayed. So to get load put the use-package in the "config.
 
-But the expansions are too much so better to copy them as needed.
+But the expansions are too much so better to copy them as needed and if understood.
 
 ** Abbrev
 :PROPERTIES:

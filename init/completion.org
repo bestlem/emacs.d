@@ -13,6 +13,7 @@ Add some from jweigley
  #+begin_src emacs-lisp
  (use-package company
    :ensure t
+:demand
    :diminish
    :commands (company-mode company-indent-or-complete-common)
 
@@ -41,7 +42,7 @@ I suspect that emacs's inbuilt skeleton can do what I need but there are more ex
 (use-package yasnippet
   :ensure t
   :diminish (yas-minor-mode)
-  :defer 2                              ; need to force the load
+:demand
   :after company
   :mode ("/\\.emacs\\.d/data/snippets/" . snippet-mode)
   :bind (:map snippet-mode-map
@@ -56,6 +57,8 @@ I suspect that emacs's inbuilt skeleton can do what I need but there are more ex
   ;; :preface
   ;; (defun mwb-yas-expand ()
   ;;   (eval yas-maybe-expand))
+  :init
+  (setq yas-snippet-dirs (list (mwb-user-emacs-file "data/snippets")))
   :config
   (setq yas-snippet-dirs (list (mwb-user-emacs-file "data/snippets")))
   ;; (use-package yasnippet-snippets

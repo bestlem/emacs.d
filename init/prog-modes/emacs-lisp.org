@@ -80,10 +80,10 @@ Add company backend from John Widgley
 #+begin_src emacs-lisp
 (use-package company-elisp
   :after company
+  :disabled                             ; because capf now does this
   :config
-  (push 'company-elisp company-backends))
-
-(setq-local company-backend '(company-elisp))
+  (j|company-push-backend 'company-elisp)
+  )
 #+end_src
 * Cask
 :PROPERTIES:
@@ -166,45 +166,45 @@ From [[https://github.com/abo-abo/hydra/wiki/Macro][Hydra wiki]] and [[https://g
 	  #+begin_src emacs-lisp
       (defhydra hydra-macro (:hint nil :color pink :pre
                                    (when defining-kbd-macro
-                                     (kmacro-end-macro 1)))
-        "
+				     (kmacro-end-macro 1)))
+	"
               ^Create-Cycle^         ^Basic^          ^Insert^        ^Save^         ^Edit^
             ╭─────────────────────────────────────────────────────────────────────────╯
                     ^_p_^           [_e_] execute    [_i_] insert    [_b_] name      [_'_] previous
                     ^^↑^^           [_d_] delete     [_c_] set       [_K_] key       [_,_] last
              _<f3>_ ←   → _e_       [_o_] edit       [_a_] add       [_x_] register  [_._] losage
                     ^^↓^^           [_r_] region     [_f_] format    [_B_] defun     [_v_] view
-                    ^_k_^           [_m_] step                                       [_l_] prev lisp
-                   ^^   ^^          [_s_] swap                                       [_L_] commands
-            "
-        ("<f3>" kmacro-start-macro :color blue)
-        ("e" kmacro-end-or-call-macro-repeat)
-        ("E" kmacro-end-or-call-macro-repeat :color blue)
+		    ^_k_^           [_m_] step                                       [_l_] prev lisp
+		   ^^   ^^          [_s_] swap                                       [_L_] commands
+	    "
+	("<f3>" kmacro-start-macro :color blue)
+	("e" kmacro-end-or-call-macro-repeat)
+	("E" kmacro-end-or-call-macro-repeat :color blue)
 
-        ("p" kmacro-cycle-ring-previous)
-        ("k" kmacro-cycle-ring-next)
-        ("r" apply-macro-to-region-lines)
-        ("d" kmacro-delete-ring-head)
-        ("o" kmacro-edit-macro-repeat)
-        ("m" kmacro-step-edit-macro)
-        ("s" kmacro-swap-ring)
-        ("i" kmacro-insert-counter)
-        ("c" kmacro-set-counter)
-        ("a" kmacro-add-counter)
-        ("f" kmacro-set-format)
-        ("b" kmacro-name-last-macro)
-        ("K" kmacro-bind-to-key)
-        ("B" insert-kbd-macro)
-        ("x" kmacro-to-register)
-        ("'" kmacro-edit-macro)
-        ("," edit-kbd-macro)
-        ("." kmacro-edit-lossage)
-        ("u" universal-argument)
-        ("v" kmacro-view-macro)
-        ("V" kmacro-view-ring-2nd-repeat)
-        ("l" elmacro-show-last-macro)
-        ("L" elmacro-show-last-commands)
-        ("q" nil :color blue))
+	("p" kmacro-cycle-ring-previous)
+	("k" kmacro-cycle-ring-next)
+	("r" apply-macro-to-region-lines)
+	("d" kmacro-delete-ring-head)
+	("o" kmacro-edit-macro-repeat)
+	("m" kmacro-step-edit-macro)
+	("s" kmacro-swap-ring)
+	("i" kmacro-insert-counter)
+	("c" kmacro-set-counter)
+	("a" kmacro-add-counter)
+	("f" kmacro-set-format)
+	("b" kmacro-name-last-macro)
+	("K" kmacro-bind-to-key)
+	("B" insert-kbd-macro)
+	("x" kmacro-to-register)
+	("'" kmacro-edit-macro)
+	("," edit-kbd-macro)
+	("." kmacro-edit-lossage)
+	("u" universal-argument)
+	("v" kmacro-view-macro)
+	("V" kmacro-view-ring-2nd-repeat)
+	("l" elmacro-show-last-macro)
+	("L" elmacro-show-last-commands)
+	("q" nil :color blue))
 
       (bind-key "<f3>" 'hydra-macro/body)
 

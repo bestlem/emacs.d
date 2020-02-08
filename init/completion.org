@@ -7,73 +7,151 @@ This is completion for text in buffer
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:98A7F8D2-8847-4551-B366-4440CD34703C
 :END:
 This looks at the current code and prompts for variables etc
-I need something and company seems to be the current one
+I need something and company seems to be the current one.
+Understandin the order is a bit confusing and this [[https://emacs.stackexchange.com/a/15251/9874][Stackexchnage]] answer helps. Basically test one at a time
 Add some from jweigley
+
  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_0A6134EA-DC55-4651-ACC8-B1478B5A38F3
  #+begin_src emacs-lisp
- (use-package company
-   :ensure t
-:demand
-   :diminish
-   :commands (company-mode company-indent-or-complete-common)
+(use-package company
+  :ensure t
+  :defer 2
+  :diminish
+  :commands (company-mode company-indent-or-complete-common)
 
-   :hook (after-init . global-company-mode)
-   :config
-   (define-key company-mode-map [tab]
-     '(menu-item "maybe-company-expand" nil
-                 :filter (lambda (&optional _)
-                           (when (check-expansion)
-                             #'company-complete-common))))
-   )
+  :config
+  (setq company-dabbrev-ignore-case t
+        company-dabbrev-ignore-case 'keep-prefix
+        ;; Dabbrev all code buffers together.
+        company-dabbrev-code-other-buffers 'code
+        ;; Only search same major mode buffers.
+        company-dabbrev-other-buffers t
+        ;; Don't take too much time searching for matches.
+        company-dabbrev-code-time-limit .0005
+        company-dabbrev-time-limit .0005)
+  (setq company-show-numbers t)
+  (setq company-lighter-base "/"
+        company-tooltip-align-annotations t
+        company-echo-delay 1
+        company-selection-wrap-around t
+        company-idle-delay .05
+        company-minimum-prefix-length 1)
+  (global-company-mode t)        ; don't put in after-init hook
+                                        ; as we are deferred
+  (define-key company-mode-map [tab]
+    '(menu-item "maybe-company-expand" nil
+                :filter (lambda (&optional _)
+                          (when (check-expansion)
+                            #'company-complete-common))))
+  :init
+  ;; jojojames to add a backend with yasnippet in a :with
+  (defun j|company-backend-in-backends (b)
+    "Check if backend B is already in `company-backends'."
+    (if (member b company-backends)
+        t
+      (let ((in-backend nil))
+        (dolist (backend company-backends)
+          (when (and
+                 (consp backend)
+                 (member b backend))
+            (setq in-backend t)))
+        in-backend)))
+
+  (defun j|company-push-backend (backend &optional local append)
+    "Adds backend BACKEND to company mode if it's not already in the list of backends.
+IF APPEND, add to end of list."
+    (when local
+      (make-local-variable 'company-backends))
+    (unless (j|company-backend-in-backends backend)
+      (if append
+          (setcdr (last company-backends) (list backend))
+        (push backend company-backends))
+      (j|company-merge-backends)))
+
+  (defun merge-backend-with-company-backends (backend-to-merge)
+    "Merges a backend with every backend in company-backends.
+BACKEND-TO_MERGE will only be merged if it's not already in the current backend.
+
+Merging `company-yasnippet' to `company-capf' will yield
+'\(company-capf :with company-yasnippet\)."
+    (setq company-backends
+          (mapcar (lambda (backend)
+                    (cond
+                     ((and (listp backend)
+                           (member backend-to-merge backend))
+                      backend)
+                     (:else
+                      (append (if (consp backend)
+                                  backend
+                                (list backend))
+                              (if (and (listp backend)
+                                       (member :with backend))
+                                  `(,backend-to-merge)
+                                `(:with ,backend-to-merge))))))
+                  company-backends)))
+
+  (defun j|company-merge-backends ()
+    "Merge common backends."
+    (interactive)
+    (merge-backend-with-company-backends 'company-yasnippet)
+    (merge-backend-with-company-backends 'company-dabbrev-code)
+    )
+  )
 #+end_src
+*** DONE Add generic methods
+CLOSED: [2020-02-08 Sat 00:21]
+:PROPERTIES:
+:ID:       org_mark_2020-02-07T11-15-13+00-00_mini12:0017C0B5-B14B-4581-A36B-2B54CCBDDF39
+:END:
+j Add| methods from jojojames being generalisation of common yasnippet. Provides a function rather than the code used in yasnippet. Would be useful if adding other backends after yasnippet (as shown before I committed the change I need to see the issue to understand his code)
+
 ** Text expansion
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:15548A48-9E39-4C39-9010-C4B94096DA80
 :END:
-Looking at all the new stuff I see yasnippet but but emacs has had for many yera several things - see [[https://www.gnu.org/software/emacs/manual/html_mono/autotype.html][Emacs manual for autotyping]]. Also look at tempo and auto-insert(the latter is what new files will have inserted but that does the GNU emacs whole thing I suspect ya snippet is better)
-My current view is yasnippet for the templating (old inclue skeleton)
+Looking at all the new stuff I see yasnippet but but emacs has had for many yera several things - see [[https://www.gnu.org/software/emacs/manual/html_mono/autotype.html][Emacs manual for autotyping]]. Also look at tempo and auto-insert(the latter is what new files will have inserted but that does the GNU emacs whole thing I suspect yasnippet is better)
+My current view is yasnippet for the templating (old include skeleton)
 ** Yasnippet
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:876C8965-C38A-42AE-956A-3994F872E82D
 :END:
-I suspect that emacs's inbuilt skeleton can do what I need but there are more examples using yasnippet + Emacs doc is as usual impenetrable until you know how it works,
+I suspect that emacs's inbuilt skeleton can do what I need but there are more examples using yasnippet + Emacs doc is as usual impenetrable until you know how it works.
+
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_CA0CCF5A-02BB-401E-8186-F16136047A8F
 #+begin_src emacs-lisp
 (use-package yasnippet
   :ensure t
-  :diminish (yas-minor-mode)
-:demand
+  :diminish yas-minor-mode
+  :demand t
   :after company
   :mode ("/\\.emacs\\.d/data/snippets/" . snippet-mode)
   :bind (:map snippet-mode-map
               ("<f5>" . yas-load-snippet-buffer)
               ("C-<f5>" . yas-load-snippet-buffer-and-close)
-              :map yas-minor-mode-map
-              ("<SPC>" . yas-maybe-expand))
-
+              ;; :map yas-minor-mode-map
+              ;; ("<SPC>" . yas-maybe-expand)
+              )
   ;; :bind (:map yas-minor-mode-map
   ;; ("SPC" . mwb-yas-expand)
 
   ;; :preface
   ;; (defun mwb-yas-expand ()
   ;;   (eval yas-maybe-expand))
-  :init
-  (setq yas-snippet-dirs (list (mwb-user-emacs-file "data/snippets")))
   :config
   (setq yas-snippet-dirs (list (mwb-user-emacs-file "data/snippets")))
+  ;; Use define key as :bind needs a function but don't use as don't auto expand
+  (define-key yas-minor-mode-map (kbd "SPC") yas-maybe-expand)
+
   ;; (use-package yasnippet-snippets
   ;;   :config (yasnippet-snippets-initialize)
   ;;   (message "loaded yasnippets collection")
   ;;   :ensure t)
   (yas-reload-all)
   (yas-global-mode 1)
-  (defun company-mode/backend-with-yas (backend)
-    (if (and (listp backend) (member 'company-yasnippet backend))
-        backend
-      (append (if (consp backend) backend (list backend))
-              '(:with company-yasnippet))))
-  (setq company-backends
-        (mapcar #'company-mode/backend-with-yas company-backends))
+
+  ;; Add to company
+  (j|company-merge-backends)
+
 
   :hydra (hydra-yasnippet (:color blue :hint nil)
                           "
@@ -98,13 +176,13 @@ I suspect that emacs's inbuilt skeleton can do what I need but there are more ex
                           ("a" yas-reload-all)))
 #+end_src
 
-*** yasnippets collection
+*** yasnippet collection
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:D282CEC9-EFE4-4001-9301-396925A134E0
 :END:
 There is a package including a lot of snippets.
 However there are so many elisp ones that it might be too confusing. Similarly the expansion for org mode is not nice
-For loading as yasnippet is on defer we get this and yasnippets' config on eval-after load/ So what order do they load in? I suspect LIFO as yasnippet is delayed. So to get load put the use-package in the "config.
+For loading as yasnippet is on defer we get this and yasnippets' config on eval-after load/ So what order do they load in? I suspect LIFO as yasnippet is delayed. So to get load put the use-package in the config.
 
 But the expansions are too much so better to copy them as needed and if understood.
 

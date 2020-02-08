@@ -89,7 +89,7 @@ I haven't used before but might try with hydra from [[https://sriramkswamy.githu
   #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_6D1AA0E9-63E0-4D18-81AE-142094A987CE
   #+begin_src emacs-lisp
   (defun my-minibuffer-setup-hook ()
-	(setq gc-cons-threshold most-positive-fixnum))
+	(setq gc-cons-threshold 8000000))
 
   (defun my-minibuffer-exit-hook ()
 	(setq gc-cons-threshold 800000))
@@ -115,7 +115,8 @@ Let's use [[https://github.com/Wilfred/helpful][Helpful]]
   ([remap describe-variable] . helpful-variable)
   ([remap describe-key] . helpful-key)
   ("<f1> F" . helpful-function)
-  ("<f1> ." . helpful-at-point))
+  ("<f1> ." . helpful-at-point)
+  ("<f1> <f1>" . helpful-at-point))
 #+end_src
 * Key Chord
 :PROPERTIES:

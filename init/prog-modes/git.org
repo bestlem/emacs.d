@@ -1,6 +1,7 @@
 #+TITLE Emacs configuration org Git configuration0
 #+PROPERTY:header-args :cache yes :tangle yes :comments link
 
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_567EC3D0-68E6-4AE2-876E-99B3A4EFD421
 #+begin_src emacs-lisp
 
 ;; set up git mainly for ediff use from git
@@ -17,7 +18,6 @@
   (run-hooks 'ediff-after-quit-hooks))
 
 (setq git-mergetool-emacsclient-ediff-active nil)
-
 
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 (setq ediff-split-window-function 'split-window-horizontally)

@@ -2,12 +2,19 @@
 #+PROPERTY:header-args :cache yes :tangle yes  :comments link
 
 * ML
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:512872E0-BF29-4E7B-8851-BBE972462A28
+:END:
 Setup ML language family
 
 Start with SML for coursera but this is where ocaml and f# should be
 
 * SML
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:2FA3F9DB-2E93-49A3-8CF4-653482E10D47
+:END:
 sml-mode from elpa - documentation on sml/nj is old
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_06AB4FFF-E369-48A3-BAED-2DC818FB3C7C
 #+begin_src emacs-lisp
 (use-package sml-mode
   :ensure t
@@ -47,10 +54,13 @@ but on next read only the killing using comint functions seems better"
       (projectile-save-project-buffers))
     (sml-run sml-program-name file)))
 #+end_src
-
 *** REPL
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:135984DE-6093-4E14-AB4E-EA9D2666C799
+:END:
 Hmm prob OK for the code, but my tests ar a large thing not one expr + you need to send the ; separately
 
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_3ADF6D5F-A5EB-4041-A8B4-17DD2B99F4F6
 #+BEGIN_SRC emacs-lisp
 (use-package eval-in-repl-sml
   :demand t

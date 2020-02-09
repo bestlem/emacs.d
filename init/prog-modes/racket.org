@@ -2,10 +2,20 @@
 #+PROPERTY:header-args :cache yes :tangle yes  :comments link
 #+STARTUP: content
 * Racket
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:1C20958B-CC40-4D69-B34D-3F34D5C8699A
+:END:
 Change from lispy to paredit. The delete-selection issue is too much. I keep typing on a selected region
 ** Paredit
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:584E5EE1-6D19-448F-9425-6972980A18F5
+:END:
 *** Paredit mode
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:59FC068F-2044-4EFC-B440-2BB09575A662
+:END:
 Setup from racket mode docs
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_EBAC031A-97F7-48E8-AA77-E35E586F583A
 #+begin_src emacs-lisp
 (use-package paredit
   :ensure t
@@ -37,6 +47,10 @@ Setup from racket mode docs
 ;;              ("M-{" . paredit-wrap-curly))b
 #+end_src
 *** Paxedit
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:98C943CA-434C-4213-9895-4A72E24384BA
+:END:
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_87E13193-E70D-40DE-9F64-4A17687DDF7E
 #+begin_src emacs-lisp
 (use-package paxedit
   :diminish
@@ -58,7 +72,11 @@ Setup from racket mode docs
   ("C-#"       . paxedit-symbol-kill))
 #+end_src
 *** Hydra
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:3BCD67FA-8AC4-4E24-9156-3E8674033262
+:END:
 From https://github.com/otijhuis/emacs.d/blob/master/config/hydra-settings.el
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_DBB78B2B-758D-4E9D-8584-3D6A5CFBC57A
 #+begin_src emacs-lisp
 (defhydra hydra-paredit (:color pink
                                 :columns 3
@@ -88,7 +106,11 @@ From https://github.com/otijhuis/emacs.d/blob/master/config/hydra-settings.el
   ("q" nil "cancel"))
 #+end_src
 ** Racket mode
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:5D2738AD-C2C9-4913-8A9A-AE669A142269
+:END:
     Tried hook for racket-unicode-input-method-enable but this conflicks with lispy.
+       #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_D3137514-0D9E-4ED0-BFB0-313837334926
        #+begin_src emacs-lisp
        (use-package racket-mode
          :ensure t
@@ -113,23 +135,29 @@ From https://github.com/otijhuis/emacs.d/blob/master/config/hydra-settings.el
          ((racket-mode racket-repl-mode) . paxedit-mode))
       #+end_src
 ** matcha
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:869AF7A1-ADC9-42C0-A04D-5C9629407813
+:END:
 *** Mode matcha
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:D83A516C-5F9E-4D8F-82EB-2167FAB1EEF1
+:END:
 	 #+begin_src emacs-lisp
 
-     (define-transient-command matcha-racket-mode
-       "Mode"
-       [["Run"
-         ("b" "run" racket-run)
-         ("B" "run and REPL" racket-run-and-switch-to-repl)
-         ("r"  "Region to REPL" racket-send-region)
+(define-transient-command matcha-racket-mode
+  "Mode"
+  [["Run"
+    ("b" "run" racket-run)
+    ("B" "run and REPL" racket-run-and-switch-to-repl)
+    ("r" "Region to REPL" racket-send-region)
 
-         ;; ("R" "Run with errortrace" (lambda () (interactive) (racket-run 4)))
-         ;; ("i" "Instrument for debug" (lambda () (interactive) (racket-run 16)))
-         ]
-        ["Test"
-         ("t" "Test" racket-test)
-         ("c" "Check syntax" racket-check-syntax-mode)]
-        ["Fold"
-         ("h" "Hide tests" racket-fold-all-tests)
-         ("s" "Show tests" racket-unfold-all-tests)]])
+    ;; ("R" "Run with errortrace" (lambda () (interactive) (racket-run 4)))
+    ;; ("i" "Instrument for debug" (lambda () (interactive) (racket-run 16)))
+    ]
+   ["Test"
+    ("t" "Test" racket-test)
+    ("c" "Check syntax" racket-check-syntax-mode)]
+   ["Fold"
+    ("h" "Hide tests" racket-fold-all-tests)
+    ("s" "Show tests" racket-unfold-all-tests)]])
 	 #+end_src

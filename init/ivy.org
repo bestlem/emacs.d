@@ -2,11 +2,15 @@
 #+PROPERTY:header-args :cache yes :tangle yes :comments link
 
 * Ivy
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:064B90CD-F13F-4BB4-B46E-49B8F0354D54
+:END:
 Start with a small setup as I lost track but some of it is needed.
 
 This is the completion tools
 Take some from John Wiegley
 Note takes time to load
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_9D67023B-7598-49E4-8C6E-F9DF857A30F2
 #+begin_src emacs-lisp
 (use-package ivy
   :ensure t
@@ -72,6 +76,10 @@ Note takes time to load
 #+end_src
 
 * Ivy hydra
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:6826257A-FB43-4551-9B23-C99DA1A1947C
+:END:
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_A70BDBE1-B195-4AC5-A852-D68DE552C579
 #+begin_src emacs-lisp :
 (use-package ivy-hydra
   :ensure t
@@ -79,7 +87,11 @@ Note takes time to load
 #+end_src
 
 * Ivy rich
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:F5A59AEA-8733-49B8-9EFF-C93F935CC468
+:END:
 More friendly interface for ivy
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_29D787D4-65EA-4C99-9F6F-30C2667174CD
 #+begin_src emacs-lisp :
 (use-package ivy-rich
   :after ivy counsel
@@ -93,7 +105,11 @@ More friendly interface for ivy
 #+end_src
 
 * Swiper
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:5C40100D-4B11-4D14-A0F9-E508AE4C1D4C
+:END:
 Replace isearch
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_BD7AD456-5157-41F0-BFF1-A6FF7747F2EA
 #+begin_src emacs-lisp :
 (use-package swiper
   :after ivy
@@ -104,6 +120,9 @@ Replace isearch
 #+end_src
 
 ** Recentre
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:539EBB08-67B6-4B09-983D-E4EF742C8EAD
+:END:
 	   From [[http://pragmaticemacs.com/emacs/dont-search-swipe/][Pragmatic emacs]] advise swiper to recenter on exit (ivy-display-style defaults to fancy)
 	   #+begin_src emacs-lisp
        (defun bjm-swiper-recenter (&rest args)
@@ -112,10 +131,17 @@ Replace isearch
        (advice-add 'swiper :after #'bjm-swiper-recenter)
 	   #+end_src
 *** TODO Aquamacs
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:C3ABE1A8-82F1-450A-951A-C84155C819C9
+:END:
 Need to integrate with command FG etc (note thet are separate to C-s) although has been useful top be separate
 
 * Counsel
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:C41D57FA-BA5C-47DB-A443-79E048D2DD9C
+:END:
 Improve many emacs functions
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_B21800D8-545E-465D-9D90-154F944E30F5
 #+begin_src emacs-lisp :
 (use-package counsel
   :ensure t
@@ -146,9 +172,12 @@ Improve many emacs functions
 	(warn "\nWARNING: Could not find the ripgrep executable. It "
 		  "is recommended you install ripgrep.")))
 	 #+end_src
-
 ** prescient
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:AF2C3A97-2934-4856-9FB3-B831C48B5ADC
+:END:
 [[https://github.com/raxod502/prescient.el][Prescient]]  is a library which sorts and filters lists of candidates,
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_378BD735-5E0C-4075-9ED5-A69FC65B29E4
 #+begin_src emacs-lisp
 (use-package prescient
   :ensure t)

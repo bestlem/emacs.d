@@ -2,9 +2,16 @@
 #+PROPERTY:header-args :cache yes :tangle yes :comments link
 #+STARTUP: content
 * Init environment
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:714AABB4-0858-48B3-BFDB-0F9D17A40C40
+:END:
 The minimum setup needed to load the rest.
 ** Message
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:3247611A-A6FB-40F6-9BB1-7B0772C213DE
+:END:
 	 Show message with timestamp - commented out
+     #+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_6AF865AB-787D-4082-BE2B-6702BA26B4E2
      #+begin_src emacs-lisp :tangle no
      (defun my-message-with-timestamp (old-func fmt-string &rest args)
        "Prepend current timestamp (with microsecond precision) to a message"
@@ -22,10 +29,17 @@ The minimum setup needed to load the rest.
      (add-hook 'after-init-hook 'mwb-message-remove-timestanp)
       #+end_src
 ** Emacs Lisp
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:802F10D5-7A50-432F-99F2-F1D27EB3525D
+:END:
 ***** Debugging
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:62080F1E-8D8F-4EBB-8ACE-9C2D6DCA14A9
+:END:
 	  This slows things down so for debugging outside init. but I now don't like Backtrace mainly as trying to use emacs not edit it.
 	  But for debugging init we don't want the backtrace
 
+      #+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_B6CC1317-E222-4867-9C34-C0396275139E
       #+begin_src emacs-lisp
       ;;  setting to nil turns them off
       (add-hook 'after-init-hook
@@ -34,23 +48,36 @@ The minimum setup needed to load the rest.
       (setq debug-on-quit nil)
      #+end_src
 ***** Use source where newer
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:D13FB268-3059-4AEC-9A25-50AD765F26C5
+:END:
  This variable tells Emacs to prefer the .el file if it’s newer, even if there is a corresponding .elc file.
 	  #+begin_src emacs-lisp
 (setq load-prefer-newer t)
 	  #+end_src
 ** Customisation file
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:A28603F3-9100-4C41-855A-5D202E7ACFE3
+:END:
  Yes Aquamacs does this but in a directory with a space. So put with code so can be under source code control and user-emacs-directory is not.
  Needs to have initsplit added so can seperate out customization files.
+ #+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_7793EC73-CA93-4000-A86E-57B709FF37CE
  #+begin_src emacs-lisp
  (setq custom-file (mwb-user-emacs-file "custom.el"))
  (load custom-file 'noerror)
  #+end_src
 ** Packaging
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:9ACB4F21-BFAB-4D2F-A271-1D8D9B9625FB
+:END:
 Loading other code. Using emacs internal packagemenager and use-package.
 
 This file does too much for error trapping and needs. We only need the SSL, package manager and use-package and the rest can go after org mode.
 But this is working so don;t need to chnage until an actual bug + my org-mode setup is the most complex bit. So these extra things go before org-all.
 **** SSL  network connection
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:836EC728-DBED-4BB7-BC7C-6F39951A32BE
+:END:
  Basically we need gnutls to connect via SSL as certificates have changed
  From https://github.com/paolodedios/dot-files/blob/1a7b4500c8ce07d0d473dbf714a2303f4d440ef5/.emacs.d/init.el
  Configure GnuTLS
@@ -104,6 +131,9 @@ But this is working so don;t need to chnage until an actual bug + my org-mode se
 	 --priority='SECURE192:+SECURE128:-VERS-ALL:+VERS-TLS1.2:%%PROFILE_MEDIUM' %h"))
 	 #+end_src
 **** Package Manager
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:1FAA7B31-FA5B-4485-B186-B85EDF3E5426
+:END:
 	  Initialize packages immediately and not after init.el is read post startup
 	  Note that Aquuamacs set these repositories.
 	  Don't need package-initialize as use package does it all? per https://www.youtube.com/watch?v=2TSKxxYEbII but see this [[https://emacs.stackexchange.com/a/16832/9874][Emacs SE]] saying you might want to add a t parameter to that but then takes little tome so just put it in.
@@ -120,9 +150,16 @@ But this is working so don;t need to chnage until an actual bug + my org-mode se
        (package-initialize)
 	   #+end_src
 ** Macros to set up how modes are set up
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:A3665416-954F-4BD9-B55F-86949CFA7719
+:END:
 Basically use-package and helpers - strictly some of these can be left to later.
 **** use-package
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:3D4EAA9E-BE50-474E-8111-F20ACA6A1703
+:END:
  include use-package setup from <https://github.com/CachesToCaches/getting_started_with_use_package/blob/master/init-use-package.el>
+ #+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_77FB1165-1A41-4244-818F-7BFAF0F191FB
  #+begin_src emacs-lisp
  (unless (package-installed-p 'use-package)
    (package-refresh-contents)
@@ -140,22 +177,38 @@ Basically use-package and helpers - strictly some of these can be left to later.
            use-package-expand-minimally t
            bind-key-describe-special-forms t)))
  #+end_src
+Overridebind-keysothat
 **** Extras needed for loading
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:8EEFB5D5-EB93-442F-8ECA-CB62A943A310
+:END:
  These are used in the use-package macro
 ***** Diminish
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:960EBB57-7FC4-47DB-81FE-C0A425520C00
+:END:
  Mark if the mode being setup should not show in the mode/status line.
+  #+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_B22D3C47-20C6-4BA0-8F8A-9B7618FF2171
   #+begin_src emacs-lisp
   (use-package diminish   :ensure t   :demand t)
   #+end_src
 
 ***** Improve elisp
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:7CFEB4E3-CCEE-4116-8D5C-2B7059905251
+:END:
 Add more functional methods.
+#+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_554AB0FA-40AA-4E6D-A787-46C695874E4C
 #+begin_src emacs-lisp
 (use-package dash  :ensure t)
 (use-package s  :ensure t)
 #+end_src
 ***** Elisp code
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:8A9FE4DD-E2ED-4457-B819-F32FF65A28A9
+:END:
 Need to alter list
+#+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_F280AA26-0D29-4282-8182-17F8DAA8A297
 #+begin_src emacs-lisp
 (defun mwb-insert-before-element (find-element new-element list)
   "Find FIND-ELEMENT and then insert NEW-ELEMENT before it in LIST."
@@ -164,14 +217,22 @@ Need to alter list
 #+end_src
 
 ***** Key chords
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:EFE2E658-C575-4F10-BEEA-60B7FA5D9A7A
+:END:
+#+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_38580E30-B5CF-45B3-850B-07E27178252F
 #+begin_src emacs-lisp
 (use-package use-package-chords
   :ensure t
   :config (key-chord-mode 1))
 #+end_src
 ***** Add load path
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:25E6B29E-1FD7-4FB8-BA7C-5546A45CFA00
+:END:
 The code is relative to this file and not user-emacs-directory
 So add :mwb-load-path as a new key to use-package
+#+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_A19E700E-BA25-4246-8752-B775A2177D5D
 #+begin_src emacs-lisp
 (defun use-package-normalize-mwb-paths (label arg &optional recursed)
   "Normalize a list of filesystem paths."
@@ -205,13 +266,23 @@ So add :mwb-load-path as a new key to use-package
       (mwb-insert-before-element :load-path :mwb-load-path  use-package-keywords))
 #+end_src
 ** Org Mode base setup
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:D93E7BE4-C5B1-419E-B03F-B2D4980DAF02
+:END:
 This is so the file can be processed by nullman's expand - basically no noweb weaving.
 *** Force load of new version
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:CD8344F0-55B3-4A44-8910-693F375848EA
+:END:
 [[https://github.com/jwiegley/use-package/issues/319#issuecomment-471274348][mzuther  fix]] to load via package as otherwise loads from emacs. However first attempt dec 2019 seemed not to be needed but leave here.
+ #+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_CD5FDF9B-34ED-4E57-917C-C1C2295C864F
  #+begin_src emacs-lisp
 (assq-delete-all 'org package--builtins)
  #+end_src
 *** Do the load of org from package.el
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:E973F582-6BC0-4363-A8C1-EAC4A6878532
+:END:
 With some variables set from https://github.com/grettke/help as these are cutomisation variables they need to be before org.el.
 
 Allow single-character alphabetical bullet lists. This configuration must occur
@@ -229,25 +300,40 @@ occur before loading Org-Mode. *Never* remove this from a submitted ECM.
 (setq org-enforce-todo-checkbox-dependencies t)
 #+END_SRC
 
+#+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_450E5072-6040-468E-843F-E62E4CB34FA7
 #+begin_src emacs-lisp
 (use-package org
   :ensure t)
 #+end_src
 * The rest
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:2A8A375D-2708-4559-9CA7-0F81B8DE4247
+:END:
 This all can be written using latest org mode allowing weaving etc.
 ** Complex Org Mode
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:913C5D29-620D-4FB7-9D2E-31D3FE538503
+:END:
 
 This file is the only one that using noweb weaving so must be loaded via a proper org babel
 
 But has requirements like hydra
 *** Hydra
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:F4B80C2A-6E55-4DAA-A894-CEAAF485CEEB
+:END:
 Need key setting menus.
+#+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_4EC591E8-D02C-4F21-97C1-80F28A75490F
 #+begin_src emacs-lisp
 (use-package hydra :ensure t
   :config (setq hydra-look-for-remap t))
 (use-package use-package-hydra :ensure t)
 #+end_src
 **** major mode hydra
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:B0B1AA76-E4F7-424D-A9EA-1E430BD90E28
+:END:
+#+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_7958B394-66F9-4AF5-8C22-10F1CAB276B3
 #+begin_src emacs-lisp
 (use-package major-mode-hydra
   :ensure t
@@ -265,12 +351,20 @@ Need key setting menus.
     (setq major-mode-hydra-title-generator #'jp-major-mode-hydra-title-generator)))
 #+end_src
 *** Remainder of org
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:D04B3869-70E6-42A2-A052-584E36C9DAB7
+:END:
 This needs the full expansion
+#+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_2869E62E-0E38-4C7C-BFBC-70095F484FC1
 #+begin_src emacs-lisp
 (mwb-init-load "init/org-all")
 #+end_src
 ** The rest
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:35D80650-3C0F-4147-8B3A-3BC84158367B
+:END:
 Now get the rest which can be expanded by org.
+#+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_0F0B98B4-9FFF-497E-9DE1-DD93A3CCA73A
 #+begin_src emacs-lisp
 (mwb-init-load "init/all")
 #+end_src

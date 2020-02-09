@@ -3,6 +3,7 @@
 
 #+STARTUP: content
 
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_B5711DCA-2D01-4ADE-A4FF-CB3E2E6A583E
 #+begin_src emacs-lisp
 (setq gnus-read-active-file nil)
 (setq gnus-use-adaptive-scoring t)
@@ -28,9 +29,12 @@
 
 (add-hook 'kill-emacs-hook 'exit-gnus-on-exit)
 #+end_src
-
 * Backups
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:A14E37C1-5805-43D2-A9B0-AC0DFF42BEA0
+:END:
 Well turn them off
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_8DED55B5-DC3E-4E7B-ACF9-45F8C7D77127
 #+begin_src emacs-lisp
 (defun turn-off-backup ()
   (set (make-local-variable 'backup-inhibited) t))
@@ -38,6 +42,10 @@ Well turn them off
 #+end_src
 
 * Servers
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:362C07A4-045F-4987-84D2-6D8E61BD5558
+:END:
+  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_B2356EEF-66A7-45A4-8287-C9E84A56E33A
   #+begin_src emacs-lisp
   (setq auth-source-debug 'trivia)
   (setq gnus-read-active-file 'some)
@@ -46,11 +54,16 @@ Well turn them off
   (setq gnus-select-method '(nntp "news.eternal-september.org"))
   #+end_src
 * Group buffer
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:69B84509-B2E9-488C-AA74-7AC740464640
+:END:
 Put groups in order by my ranking (comes from NeXT news setup
+  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_BE3A6DE4-5A1C-4EDC-BA10-3A62E1A307F4
   #+begin_src emacs-lisp
   (setq gnus-group-sort-function 'gnus-group-sort-by-rank)
   #+end_src
 Add a hydra https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/gnus-guide-en.org
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_2008EC6E-C927-4D6C-8F4A-F72FF33E521F
 #+begin_src emacs-lisp
 (use-package gnus-group
   :bind (:map gnus-group-mode-map
@@ -75,11 +88,19 @@ Add a hydra https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blo
                            ("q" nil)))
 #+end_src
 * Summary buffer
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:9EDC2D64-A78E-4A43-AE91-20545CB9D79A
+:END:
 ** Threads
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:02EDEFDB-B154-47E0-AB5B-13EEA6B01F29
+:END:
    Collapse threads when entering a group
+   #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_7F32243E-4A25-4935-883B-EE7FC54AA1C8
    #+begin_src emacs-lisp
    (add-hook 'gnus-summary-prepared-hook 'gnus-summary-hide-all-threads)
    #+end_src
+   #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_AD216EFA-5702-4A33-A1D7-EEB41DB0EA34
    #+begin_src emacs-lisp
    (setq gnus-fetch-old-headers 'some               ; Try to connect threads with the minimum number of old headers
 		 gnus-build-sparse-threads 'some            ; Include not-received articles too with References:
@@ -91,7 +112,11 @@ Add a hydra https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blo
 		 gnus-thread-hide-killed t)                 ; Hiding propagates to subtrees
    #+end_src
 ** Sort Order
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:D1C6B89C-0CE1-4FC7-B29A-3420DEC97802
+:END:
    Push the threads with bigger score on top of the buffer
+   #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_12F9DBB8-2351-459B-A1F2-A8774BC2379B
    #+begin_src emacs-lisp
    (setq gnus-thread-sort-functions
 		 '(gnus-thread-sort-by-number
@@ -99,6 +124,10 @@ Add a hydra https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blo
 		   gnus-thread-sort-by-total-score))
    #+end_src
 ** Tree
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:757C714E-BC96-4925-8FF9-B1A6E74A677E
+:END:
+ #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_3D80CD27-96E0-4735-9EB5-AA2B404C2B71
  #+begin_src emacs-lisp
  (setq gnus-use-trees t
 	   gnus-generate-tree-function 'gnus-generate-horizontal-tree
@@ -116,7 +145,11 @@ Add a hydra https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blo
 			gnus-article-unseen-p))
  #+end_src
 ** Prettify tree
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:A58333F7-FF23-4C0A-8F27-2D97E8ED92C5
+:END:
 From [[http://doc.rix.si/cce/cce-gnus.html][Here]]
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_C487340F-0BAB-4B52-984E-41534760ABBD
 #+begin_src emacs-lisp
 (setq gnus-summary-line-format "%*%U%R%z%3t%4i %4V %(%&user-date; %-15,15f  %B%s%)\n"
 
@@ -129,6 +162,10 @@ From [[http://doc.rix.si/cce/cce-gnus.html][Here]]
 	  gnus-user-date-format-alist '((t . "%d %b %Y %H:%M")))
 #+end_src
 ** Hydra
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:E8EFA10F-FB8B-4F0D-ACCA-1657E77DC650
+:END:
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_9DE6155E-257B-4E50-8963-F6F79E307C6A
 #+begin_src emacs-lisp
 (use-package gnus-sum
   :bind (:map gnus-summary-mode-map
@@ -160,11 +197,16 @@ From [[http://doc.rix.si/cce/cce-gnus.html][Here]]
        ("q" nil)))
 #+end_src
 * Article buffer
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:312BB8DC-395F-4F6C-AB50-81F336EFAD62
+:END:
+  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_2D9464DC-D14F-4AF0-830B-935B15693080
   #+begin_src emacs-lisp
   (setq gnus-single-article-buffer t
 		mm-text-html-renderer 'shr)
   #+end_src
 From same place as above
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_E6250F15-2AC9-4CCC-8AC3-CFE8494CAD37
 #+begin_src emacs-lisp
 (use-package gnus-art
   :bind (:map gnus-article-mode-map
@@ -194,7 +236,11 @@ From same place as above
   )
 #+end_src
 * Old setup
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:AB214078-BB19-4135-8B01-396536C0F0BA
+:END:
 Bin it
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_1214AA34-1B76-413C-8D80-D3AF2DC48692
 #+begin_src emacs-lisp :tangle no
 ;; GNUS
 ; gmail

@@ -1,6 +1,7 @@
 #+TITLE Emacs configuration org python configuration
 #+PROPERTY:header-args :cache yes :tangle yes  :comments link
 
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_26CAE374-0A00-4CBD-A31D-D465AE7AD800
 #+begin_src emacs-lisp
 ;; python from use-package maintainer https://github.com/jwiegley/dot-emacs/blob/master/init.el#L1013
 (use-package python-mode
@@ -12,9 +13,12 @@
   :init
   (setq py--imenu-create-index-p t))
 #+end_src
-
 * Conda
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:4BA83964-C235-4AA4-8490-70CCC9C25C6D
+:END:
 Fails as I think in the middle of changes. Error is not loading pythonic
+  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_D22A3A48-A2D2-493C-B891-0645341FE000
   #+begin_src emacs-lisp
   (use-package conda
 :disabled
@@ -35,7 +39,11 @@ Fails as I think in the middle of changes. Error is not loading pythonic
 	)
   #+end_src
 * Xonsh
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:62195329-D8AA-4CC1-B7F4-4570BBDCF3A8
+:END:
 There is now a xonsh mode
+  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_59880E6F-AD42-47DF-B04B-957600115D5D
   #+begin_src emacs-lisp
   (use-package xonsh-mode
     :mwb-load-path "fork/xonsh-mode"

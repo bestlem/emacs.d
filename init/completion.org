@@ -3,9 +3,13 @@
 
 This is completion for text in buffer
 ** Semantic based
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:98A7F8D2-8847-4551-B366-4440CD34703C
+:END:
 This looks at the current code and prompts for variables etc
 I need something and company seems to be the current one
 Add some from jweigley
+ #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_0A6134EA-DC55-4651-ACC8-B1478B5A38F3
  #+begin_src emacs-lisp
  (use-package company
    :ensure t
@@ -22,10 +26,17 @@ Add some from jweigley
    )
 #+end_src
 ** Text expansion
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:15548A48-9E39-4C39-9010-C4B94096DA80
+:END:
 Looking at all the new stuff I see yasnippet but but emacs has had for many yera several things - see [[https://www.gnu.org/software/emacs/manual/html_mono/autotype.html][Emacs manual for autotyping]]. Also look at tempo and auto-insert(the latter is what new files will have inserted but that does the GNU emacs whole thing I suspect ya snippet is better)
 My current view is yasnippet for the templating (old inclue skeleton)
 ** Yasnippet
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:876C8965-C38A-42AE-956A-3994F872E82D
+:END:
 I suspect that emacs's inbuilt skeleton can do what I need but there are more examples using yasnippet + Emacs doc is as usual impenetrable until you know how it works,
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_CA0CCF5A-02BB-401E-8186-F16136047A8F
 #+begin_src emacs-lisp
 (use-package yasnippet
   :ensure t
@@ -80,6 +91,9 @@ I suspect that emacs's inbuilt skeleton can do what I need but there are more ex
 #+end_src
 
 *** yasnippets collection
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:D282CEC9-EFE4-4001-9301-396925A134E0
+:END:
 There is a package including a lot of snippets.
 However there are so many elisp ones that it might be too confusing. Similarly the expansion for org mode is not nice
 For loading as yasnippet is on defer we get this and yasnippets' config on eval-after load/ So what order do they load in? I suspect LIFO as yasnippet is delayed. So to get load put the use-package in the "config.
@@ -87,8 +101,12 @@ For loading as yasnippet is on defer we get this and yasnippets' config on eval-
 But the expansions are too much so better to copy them as needed.
 
 ** Abbrev
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:4B573BD4-4E53-431B-AE36-3924CE30D9CC
+:END:
 Simple text replacement. From John Wiegley
 Also run the script from https://www.emacswiki.org/emacs/autocorrection_abbrev_defs to load a fix for typos but note I had to edit out the one for i as that will be lowercase in programming.
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_9B504DE4-BB8F-491A-83E8-60EC58B1D93C
 #+BEGIN_SRC emacs-lisp
 (use-package abbrev
   :defer 5
@@ -109,7 +127,11 @@ Also run the script from https://www.emacswiki.org/emacs/autocorrection_abbrev_d
       (quietly-read-abbrev-file)))
 #+END_SRC
 ** Hippie expand
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:7B9126AB-1E4A-4EBB-ACD2-1D01E8F01BC1
+:END:
 This is another basic emacs thing.
+ #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_8B3666B4-3C4A-4546-9A17-9CAB5BC65623
  #+BEGIN_SRC emacs-lisp
  (use-package hippie-exp
    :bind (("M-/"   . hippie-expand)

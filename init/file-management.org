@@ -3,15 +3,23 @@
 
 #+STARTUP: content
 * TODO Trash
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:D2691EE6-AB96-4EB1-A369-A3CDACD148E2
+:END:
 MacOs needs specific trash management not just mv to ~/.Trash
 Perhaps only if in dired or other user controlled file
 See [[https://github.com/lunaryorn/osx-trash.el][osx-trash]] but might need to find /opt/local/bin/trash
 Or better patch Aquamacs to have this C code - perhaps done?
 Need also to exclude some files - basically only iof you edit them
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_D0BCB9D9-2886-4431-8036-97F0EB10C82D
 #+begin_src emacs-lisp
 #+end_src
 
 * TODO Compressed files
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:D8E61D05-2A53-45CF-A59D-EC1D1883BAC5
+:END:
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_0D6F8AAE-7969-4A3F-BF32-C60F266749AB
 #+begin_src emacs-lisp
 ;; Transparently open compressed files
 (auto-compression-mode t)
@@ -31,11 +39,15 @@ Need also to exclude some files - basically only iof you edit them
 
 #+end_src
 * Backups
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:64531695-B8F1-4AF7-8D8A-7893541FBD6C
+:END:
 Literate programming suggests each setq should be in a separate block - see later but EOL comment changes where closing parenthesis is maybe better copy code iif we had a macro to do this.
 This set of variables is from [[https://www.emacswiki.org/emacs/ForceBackups][Emacs Wiki - Force Backup]] but that is not the best explanation. The version numbers are explained better elsewhere
 
 Need to look in customisation as some things are easier to edit there . e,g, the list for where backup files are. Currently I do to the current directory/.~ which no one's init files seem to have but then found ity in Emacs manual: 🤣😳
 The best inits I found for this were [[http://pragmaticemacs.com/emacs/auto-save-and-backup-every-save/][Pragmatic Emacs]] and [[https://github.com/jwiegley/dot-emacs/blob/master/init.el][developer of use package]]  which build on [[https://www.emacswiki.org/emacs/ForceBackup][Emacs Wiki Force Backups]]
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_9DCF5D76-D3FC-41D2-A9E6-FF186AAB1FEB
 #+begin_src emacs-lisp
 (setq
  backup-by-copying t     ;  Copy all files, don't rename them and don't clobber symlinks
@@ -47,16 +59,24 @@ The best inits I found for this were [[http://pragmaticemacs.com/emacs/auto-save
 
 #+end_src
 ** Do the backups
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:98AE04BC-CDDA-49C0-B0A2-A8152C7E5571
+:END:
 Aquamacs seems to turn this off sometimes in customization so need to investigate more
+ #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_8D7B76E7-DCB4-46D7-8DE7-1063A4FF19D3
  #+begin_src emacs-lisp
  (setq make-backup-files t)
  #+end_src
 *** Backup on save
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:EBBF14AB-888E-4043-8ADB-8DE11ACDBC46
+:END:
  Emacs is odd backups are started when loaded in a session and then not again (I suppose that is what auto save is for) but really we want a copy taken when saved as well.
  All the logs are very clever but what I want is the version number to increase so just see [[https://stackoverflow.com/a/9452080/151019][this SO answer]] I have modified it so that only saves on m,ac save ie when you manually save - possibly not good on emacs exit.
  Note need to change
  Filters are interesting for other reasons
 
+ #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_2B3B6826-1AF6-4ABC-B4F7-4AEE52B62E50
  #+begin_src emacs-lisp
  (defun mwb/mac-key-save-buffer-force-backup ()
    (interactive)
@@ -69,10 +89,17 @@ Aquamacs seems to turn this off sometimes in customization so need to investigat
  (define-key osx-key-mode-map [remap save-buffer]  'mwb/mac-key-save-buffer-force-backup)
  #+end_src
 **** TODO save special buffers
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:0A3506D6-DE37-44F4-A990-C06C1D567023
+:END:
 There are some modes that have special save actions e.g. *Abbrev* which is a buffer with no file name. I force a save using a dialog box but this should be call the special call - stick with ^x^s
 ** TODO Recent Files
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:F7A7B04A-465B-4E07-B218-96A10C71D481
+:END:
  Should be a customise but Aquamacs sets it so keeps adding to it pr does it need to check
  Exclusion regexes from [[https://www.reddit.com/r/emacs/comments/3g468d/stop_recent_files_showing_elpa_packages/][reddit]]
+ #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_8950A078-0D0D-4B58-90E9-2E103AB4934D
  #+begin_src emacs-lisp
  ;; Problem is this is set after the recent files are set https://emacs.stackexchange.com/questions/48784/recent-files-in-aquamacs
  ;;  Seems to be OK
@@ -85,7 +112,14 @@ There are some modes that have special save actions e.g. *Abbrev* which is a buf
 								 )))
   #+end_src
 * Files
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:86DB2C97-15D2-4ADA-8AFA-13397998FDC8
+:END:
 ** Sunshine commander
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:FBD40752-F440-43A7-A059-2FE49F568F52
+:END:
+   #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_39F4B0A8-282D-413C-818C-83EE88C7D15A
    #+begin_src emacs-lisp
    (setq mwb-sunrise-commander-path (mwb-user-emacs-file "fork/sunrise-commander"))
    (use-package sunrise-commander
@@ -95,10 +129,19 @@ There are some modes that have special save actions e.g. *Abbrev* which is a buf
 	 :config (require 'sunrise-x-buttons))
    #+end_src
 * Project management
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:D3D03019-395E-4091-A21C-5639C985398E
+:END:
 Started as file management but actually deals with files and what is in them/ Treemacs looks at git so there are files that cannot be see so dired needed.
 ** Searching
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:B3E628C3-AD55-45E3-86FD-0504FBA08159
+:END:
    rg aka ripgrep seems to be the newest. However there is rg.el and ripgrep.el I am confused
 *** [[https://github.com/Wilfred/deadgrep][Deadgrep]]
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:88F75F08-A36B-4A9D-AC7B-B618451935B6
+:END:
 	This provides a cover for ripgrep.
 	#+begin_src emacs-lisp
 	(use-package deadgrep
@@ -108,8 +151,12 @@ Started as file management but actually deals with files and what is in them/ Tr
 				(alert "Please install ripgrep snap...")))
 	#+end_src
 ** Projectile
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:4F9B2163-41AC-4087-B80D-C1A8815C6D20
+:END:
 This add functions. I would use John Wiegley's setup but projectile hung
 So take from projectile
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_EC0FF02A-9007-4E8B-AFC6-969483F6963D
 #+begin_src emacs-lisp
 (use-package projectile
   :ensure t
@@ -130,7 +177,11 @@ So take from projectile
   (projectile-global-mode))
 #+end_src
 *** Hydra
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:ABDFEF9C-A337-466D-859C-D186DBE3A9ED
+:END:
  I really do not want all but for ease just do it from [[https://github.com/jojojames/matcha][Matcha]] but that is too much as is the Hydra wiki So lets try from [[http://doc.rix.si/cce/cce-code-core.html][Ryan Rix]], also he uses rg (bbatsov has a complex one as well)
+ #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_01B9A5FA-87F9-4520-A7A0-E0C04BA45AD9
  #+begin_src emacs-lisp
  (defhydra hydra-projectile-other-window (:color teal)
    "projectile-other-window"
@@ -171,7 +222,11 @@ So take from projectile
  (bind-key "H-p" 'hydra-projectile/body)
  #+end_src
 ** Treemacs
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:22044AD2-EC4A-4C3B-B3D2-7F994D4BB958
+:END:
 This is the visual
+ #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_55CB1D47-BC33-40F8-BC2A-12D014C6B18D
  #+begin_src emacs-lisp
  ;; Treemacs
  ;;  first pass has all defaults even if not needed

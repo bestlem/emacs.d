@@ -1,10 +1,16 @@
 #+PROPERTY:header-args :cache yes :tangle yes :comments link
 
 * Global key bindings
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:A2A04D70-D20C-4D64-8C03-FE52D779E97B
+:END:
 This file manages my global  key bindings excpet in Aquamacs they are not global.
 Other files might have defined global keys e.g. to start particular modes,  but in general we want them here.
 
 ** How to bind
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:D8A384B2-3A02-4CDA-9A56-AC71DA2150F9
+:END:
 The obvious is global key but......Aquamacs has added a map or two mainly to provide the command keys e.g. ⌘S so [[https://www.emacswiki.org/emacs/AquamacsFAQ#toc13][Aquamacs FAQ]]  suggest (define-key osx-key-mode-map (kbd "H-t") 'treemacs) to alter the OSX map.
 
 This [[https://stackoverflow.com/a/27441815/151019][Stack Overlow answer]] suggests use of bind-key  if we do not want to be overridden.
@@ -12,10 +18,19 @@ This [[https://stackoverflow.com/a/27441815/151019][Stack Overlow answer]] sugge
 ALso see [[https://github.com/noctuid/general.el][General package]] but see [[https://github.com/noctuid/general.el/issues/10][comparison]] with bind-key from use package so stick to bind
 
 *** TODO Replace the key definition functions with a mwb one that can switch between global-key and the Aquamacs way
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:8C7E2431-4A95-4BA4-B084-93325BB68F14
+:END:
 Use bond-key
 ** Keyboard Thoughts
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:68EED975-E28B-4FD7-8E78-BA5A8E260CD1
+:END:
 
 *** History
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:DC0B71B3-E9A2-46D6-A0C9-5C542FD5EDC1
+:END:
 I used Teletypes at some stage in the beginning or at least very clicky keyboards. My first professional and heavy programming was in APL so I am used to odd layouts (IBM 3279 although this [[https://www.google.com/imgres?imgurl=https%3A%2F%2Flive.staticflickr.com%2F1671%2F25859890091_f7e9173891_b.jpg&imgrefurl=https%3A%2F%2Fwww.flickr.com%2Fphotos%2F22368471%40N04%2F25859890091&docid=ZLVoX24MY-4ACM&tbnid=ZUP2S6AC-ynJIM%3A&vet=10ahUKEwi32JONrMDmAhVOQhUIHV8UCAEQMwhOKAAwAA..i&w=1023&h=445&bih=872&biw=1298&q=apl%20keyboard&ved=0ahUKEwi32JONrMDmAhVOQhUIHV8UCAEQMwhOKAAwAA&iact=mrc&uact=8][one]] looks more like it) and clicky keys. My DOS editor was microemacs so learn some of the control xs xc and c-ae.
 
 This is really the main piece of Emacs customization I have done over the years. I do not have full history before 2008 which is for Aquamacs and by that stage I had forgotten what all the key definitions were. The rcs log was from 2002 and that was 1.1.1.17 so quite a bit there but even that would have been a conversion to OSX, from my work using NT and Sun (Linux was all server) and a NeXT PC.
@@ -27,26 +42,45 @@ These keys are what the \?H bindings were and I had forgotten and probably remov
  "RET" is also equivalent to "C-m" (【Ctrl+m】). (For why, see: [[http://ergoemacs.org/emacs/keystroke_rep.html][Emacs's Key Syntax Explained]])
 
 *** Function keys
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:44D1E1EE-D5A8-4B46-B8E2-237CB43139C8
+:END:
 Muscle memory has a lot to answer for.
 The first app that I which had useful function keys was Visual C (The IBM had it but most programming was on Micro APL and I forget what that was)
 The latest MS [[https://docs.microsoft.com/en-us/visualstudio/ide/default-keyboard-shortcuts-for-frequently-used-commands-in-visual-studio?view=vs-2019][document]] lists them. f5 is the one I remember and that now does Debug.Start, which I think does a build then runs the debugger so that was my main hit and go key. Nowadays my usual task is build and run tests and debug only if needed. So I changed f5 some time ago. The debug steps are f10 and f11 but can't see a continue, I include f12 there. f8 is Edit.GoToNextLocation so fits with my next error. But the NeXT suggestion looks like f7 and 8 (well equivalent) so the next error got shifted.
 
 *** Keyboard usage.
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:3D77889B-CC24-41BF-8425-5682FCE44E65
+:END:
 Following Xah Lee's comments and seeing [[http://xahlee.info/kbd/space-cadet_keyboard.html][The Space Cadet Keyboard]] which is what emacs was implemented on and they keys outwards of space are control, Meta, Special and Hyper. So I tried binding so it went control, meta, super and caps lock as hyper but I am too used to the Apple binding so went back to Command, Meta and control with caps lock as hyper (and right Windows key). However the control key is difficult to hit.
 
 **** TODO Xah Lee bracket binding
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:0B6A7551-799C-4E98-8C70-D25F6B1ECF97
+:END:
 Alt-J etc as suggested [[http://xahlee.info/kbd/best_way_to_insert_brackets.html][here]]
 
 **** Typing style
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:A57546DB-DA63-4AC4-9305-AD9B95A71A7D
+:END:
 I can't touch type but seem to have two modes. One is two or more finger for text. Then a mode switch to alter things where I have a right hand on the mouse and left with thumb on ⌘, little finger near caps lock, next on a etc. Thus ⌘zxcvasd are easy most of those are Apple keys, similarly the alt versions are OK but emacs does use that. The control ones are difficult. The Hyper ones are OK.
 I discovered [[https://github.com/abo-abo/hydra][Hydra Mode]] which allows you to define keys and a menu to show what they do. I realised that for a new to me mode I could bind the most interesting functions to a hydra to help me learn what the mode does and also cut down on control-C (That's interrupt, isn't it 🤣must bind control-C to control-G as I have wanted that for ages)
 
 So hyper-A is now a mode hydra key and I have started defining a hydra on that,
 
 * Implementation
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:0464FD58-5332-45BB-8772-A45A4ABD0B20
+:END:
 
 ** Which Key
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:CF1562A8-8457-4393-ADE7-E36762C1ED47
+:END:
    Package [[https://github.com/justbur/emacs-which-key][which-key]] shows after a key press what you can do next (not useful for control-C as there are too many to show and you can't scroll).
+   #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_E1F20E36-2E4C-47E8-B20E-F08B7B7F9C77
    #+begin_src emacs-lisp
    (use-package which-key
      :ensure t
@@ -60,17 +94,29 @@ So hyper-A is now a mode hydra key and I have started defining a hydra on that,
      :diminish which-key-mode)
    #+end_src
 ** Mac modifier key Bindings
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:765A37A9-4373-4321-B31C-CAF07E6A84B0
+:END:
 We have fn available so have it as hyper and then use Karabiner  (try iCue later) to map Caps Lock and Window key to hyper. Super is used sometimes so I think is confusing and as noted sequence of keys (emacs key-chord and hydra) is better.
 I don't use the right hand modifier keys so not set separately.
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_47DFBF48-A6BD-4CFA-925B-811981A1E92B
 #+begin_src emacs-lisp
 	 (setq ns-function-modifier 'hyper)
 #+end_src
 *** Display in help and menus
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:07E735E7-F73B-475D-96E1-7D24627B32DF
+:END:
 Note that you can control what the screen displays A for Alt or ⌥. Emacs is not that clever and looks at what it is told and not what appears on the key but I am back to the normal bindings so does not matter. Although hydra seems to object. Set the value to non=nil to use Mac symbols.
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_8B14E763-46C4-4ADC-ABE3-F119293CCF15
 #+begin_src emacs-lisp
 	(setq ns-use-mac-modifier-symbols  t)
 #+end_src
 *** Home/End/Paging
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:B05228E7-9F92-462C-95B3-D0C74C4A9F46
+:END:
+ #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_4281835C-7CD8-4FE9-B6A7-EBB5B2B0ED08
  #+begin_src emacs-lisp
  ;;(define-key osx-key-mode-map [C-end] 'end-of-buffer )
  (bind-key [C-home] 'beginning-of-buffer osx-key-mode-map)
@@ -103,6 +149,10 @@ Note that you can control what the screen displays A for Alt or ⌥. Emacs is no
 #+end_src
 
 ** Deleting and return
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:FB038850-533F-4334-9607-5BC975283E81
+:END:
+  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_DD9F56DD-C914-46B4-B26D-131CC2ABAD7F
   #+begin_src emacs-lisp
   ;; (bind-key [C-return] 'newline-and-indent )
   ;;(bind-key [?\M-left] 'scroll-left )
@@ -112,15 +162,23 @@ Note that you can control what the screen displays A for Alt or ⌥. Emacs is no
   ;;(bind-key [?\A-backspace] 'undo )
   #+end_src
 ** Goto line
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:4AB414FE-AEEF-46D6-955D-44E6AD00B778
+:END:
 Now these are very old
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_DBBEEA4B-60A7-4C32-B42F-D74CD1262A49
 #+begin_src emacs-lisp
   (bind-key (kbd "M-g") 'goto-line)
 #+end_src
 ** Let search continue with arrows
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:9C6C52F9-BD9C-4A80-856B-6D5620E5C9A7
+:END:
 DISABLED
 But point seems to be messed up and does Aquamacs do something.
 [[http://ergoemacs.org/emacs/emacs_isearch_by_arrow_keys.html][Xah Lee  again]] set arrow keys in isearch. left/right is backward/forward, up/down is history. press Return to exit
 How does this work with ivy
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_91E28470-7CDD-41AD-B712-ACCD36F51EAF
 #+begin_src emacs-lisp :tangle no
 
 (progn
@@ -134,9 +192,16 @@ How does this work with ivy
   (define-key minibuffer-local-isearch-map (kbd "<right>") 'isearch-forward-exit-minibuffer))
 #+end_src
 *** TODO Use with cmd-F
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:A15CC8C1-7203-4FD0-8E6B-F0923D40F40D
+:END:
 Aquamacs also messes around with isearch and the two don't exactly match. Which might be a good thing
 ** Function keys
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:C8D7FB19-15CD-4E95-AA3F-786AE41105A7
+:END:
 Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in emacs. Just discovered that GNU say what F1-4 should be and seemed good for keyboard macros not my F7.
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_ABE6F5EB-5A3A-418A-9980-F45327576935
 #+begin_src emacs-lisp
 ;; (bind-key [f3] 'gdb)
 ;; (bind-key [f4] 'grep )
@@ -160,6 +225,9 @@ Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in e
 (bind-key [S-f8] 'previous-error)
 #+end_src
 ** Old bindings
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:9DC3CE51-289C-4767-A1DE-E461A402C58F
+:END:
 These will be old NeXT Pizza bindings
 
 
@@ -170,6 +238,9 @@ These will be old NeXT Pizza bindings
 	 ;(global-set-key "\M-r" 'replace-string)
 	 ;(global-set-key "\M-i" 'indent-region)
 ** Matcha
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:4E3587EA-6CD0-4B4D-B039-CFE7E970811F
+:END:
 Global hydra from [[https://github.com/jojojames/matcha][Matcha github]] but no idea how good. I didn't want it all but that was the easiest.
 Also see [[https://github.com/jerrypnz/major-mode-hydra.el][Major mode hydra]] for similar but grabs a major mode hydra from somewhere. Actually it is more like my H-a but automated it looks for
 
@@ -181,16 +252,29 @@ And that works - I do need to edit the matcha files etc.
 But transient needs a actual function that exists hydra can lazy load.
 But hydra allows lambdas and often not defined functions (although pretty hydra requires the function to be loaded.)
 *** Matcha space the root matcha
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:DB24DAF7-FE9D-4A2F-B20B-603A451FD43E
+:END:
 **** Note on unused or other changes
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:513E7AF5-24A0-4C37-80D6-9E95FF9BD8FC
+:END:
+   #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_E1A3E913-3BF3-47B9-BAAF-99E67FB56CA3
    #+begin_src emacs-lisp
    ;(bind-key "H-d" 'matcha-run-mode-command)
    ;(bind-key "H-`" 'matcha-me-space)
    #+end_src
 ** quickrun
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:B9F7371A-DC41-4527-9DFD-EE27FB91DFF5
+:END:
 	  runs the current buffer through a compiler or interpreter. There are also functions to do for a method. Includes C, Racket, Python, Julia. However all through a batch command so not into RTEPL and not really through make.
 See https://github.com/syohex/emacs-quickrun but assumes a lot. Better look at org mode and repls.
 
 ** Hydra transpose
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:F0488F70-6114-4DF6-AB8A-70BCCF07A5C2
+:END:
 	From hydra wiki
 	#+begin_src emacs-lisp
 (defhydra hydra-transpose (:color red)
@@ -206,8 +290,14 @@ See https://github.com/syohex/emacs-quickrun but assumes a lot. Better look at o
      ("q" nil "cancel" :color blue))
 	#+end_src
 ** Kitchin hydras
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:CA320A7E-C8CE-4C9D-B24B-C7FFE5F04B9C
+:END:
    From [[https://kitchingroup.cheme.cmu.edu/blog/2015/09/28/A-cursor-goto-hydra-for-emacs/][Kitchin Group]] Original has helm and I add some from Hydra Wiki
 *** Navigate
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:85154714-C478-4D9F-850F-7C01537CFD9C
+:END:
 	#+begin_src emacs-lisp
 (defhydra hydra-navigate (:color red
                           :hint nil)
@@ -260,6 +350,9 @@ _<_ beginning of buffer _>_ end of buffer _m_: set mark _/_: jump to mark
 (bind-key "H-m" 'hydra-navigate/body)
 	#+end_src
 *** Goto
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:F42353DF-4D49-4E20-92C2-7C637E5483A8
+:END:
 	#+begin_src emacs-lisp
 	(defhydra goto (:color blue :hint nil)
 	  "
@@ -308,8 +401,15 @@ _<_ beginning of buffer _>_ end of buffer _m_: set mark _/_: jump to mark
 	(bind-key "H-g" 'goto/body)
 	#+end_src
 ** Global hydra
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:CC787E0F-CFB8-47FE-8112-E4646044C2C5
+:END:
 ** Toggle Hydra
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:B057214C-A937-4D14-A4BC-D5285F7F3749
+:END:
 This is from jerrypnz with extras for treemacs
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_E94F36C2-B325-4D91-B7B4-36474F1F6296
 #+begin_src emacs-lisp
 (defvar jp-toggles--title (with-faicon "toggle-on" "Toggles" 1 -0.05))
 
@@ -345,9 +445,16 @@ This is from jerrypnz with extras for treemacs
  )
 #+end_src
 ** Control x binding
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:69EED50E-06AD-4068-A0FA-34186BCC8E7D
+:END:
    From [[https://github.com/abo-abo/hydra/wiki/Emacs][Hydra wiki - Find file with xf]]
 
 ** Hyper global key bindings
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:47F25520-0E9A-4872-B519-59399D80D775
+:END:
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_F6D628C7-FADF-42EB-BA66-CC18C2BD0D2A
 #+begin_src emacs-lisp
 (bind-key (kbd "H-1")  'delete-other-windows osx-key-mode-map)
 (bind-key (kbd "H-0")  'delete-window osx-key-mode-map)
@@ -361,8 +468,12 @@ This is from jerrypnz with extras for treemacs
 (unbind-key "C-<return>" cua-global-keymap)
 #+end_src
 ** Command key bindings
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:FFB638A2-43F0-42D9-8A64-5F2AC0A72E56
+:END:
 These should be mac based adding to Aquamacs but some I do not used.
 Note that the Aquamacs binding does not fit through bind-keys
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_E5C06415-F04E-4599-A173-414139F0F13B
 #+begin_src emacs-lisp
 (bind-key "A-/" 'comment-or-uncomment-region-or-line)
 (bind-key "A-<kp-add>" 'zoom-font)

@@ -5,15 +5,26 @@
 This file is loaded sureing use-package :config ie after ibuffer loaded
 
 * Extra modes used by other stuff in :config
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:78230D42-5550-4C41-9A10-B216AC3755B4
+:END:
   This speeds up the load time
+  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_168F152C-4EAF-41D2-9110-55B1751912AA
   #+begin_src emacs-lisp
   (use-package ibuffer-vc :ensure t) ; need as some config code depends on this
   (require 'ibuf-ext) ; fiddle the mess to get an internal variable setup
   #+end_src
 
 * Unused Filters
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:DDF85788-36D7-495C-B224-6405A6F7F45E
+:END:
 
 ** A filter not certain if used
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:F7C1B140-AF61-4E91-AD84-FD0A1525E79D
+:END:
+  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_A5A7543E-5271-488C-A83B-F274165EB383
   #+begin_src emacs-lisp
   (define-ibuffer-filter name-not
       "Negated buffer name match."
@@ -22,6 +33,10 @@ This file is loaded sureing use-package :config ie after ibuffer loaded
 	(not (string-match qualifier (buffer-name buf))))
 #+end_src
 ** Unknown
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:A49F17AB-2E17-4E3C-AA96-934B536B6D7F
+:END:
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_C1F977A6-01FB-4389-A955-D80B2FC3A744
 #+begin_src emacs-lisp
 (define-ibuffer-filter dir
 	"Toggle current view to buffers with dir QUALIFIER."
@@ -30,7 +45,14 @@ This file is loaded sureing use-package :config ie after ibuffer loaded
 	(string= qualifier (file-name-directory it))))
 #+end_src
 * Filters
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:76AC61C6-D8F7-4A47-84F3-C3EEDAA9AF21
+:END:
 ** Filter before vc and directories
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:24E37B2D-EE33-4348-8C79-3F89D7837917
+:END:
+ #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_2B1FC416-BC5B-4219-BF87-CDD2E7D11356
  #+begin_src emacs-lisp
  (defvar mwb-ibuffer-filters-top
    '(("Dired" (mode . dired-mode))
@@ -67,6 +89,10 @@ This file is loaded sureing use-package :config ie after ibuffer loaded
    "Fixed filter definitions for ibuffer up front")
 #+end_src
 ** Filter for what is left
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:6DFA2B47-6ABC-421E-A9BE-010DF7D95B41
+:END:
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_3137778E-3ABB-4FEB-9243-7FCE7B7F0714
 #+begin_src emacs-lisp
 (defvar mwb-ibuffer-filters-bottom
   '(("VC"
@@ -80,6 +106,10 @@ This file is loaded sureing use-package :config ie after ibuffer loaded
   "Fixed filter definitions for ibuffer.")
 #+end_src
 ** Generate by directory
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:44444A37-2F58-4EA6-B3B8-15B997CA76FA
+:END:
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_05543859-CB44-45CC-BA74-D4095032D649
 #+begin_src emacs-lisp
 (cl-defun gk-ibuffer-generate-filter-groups-by-dir ()
   "Create a set of ibuffer filter groups based on the dirs of buffers."
@@ -92,6 +122,10 @@ This file is loaded sureing use-package :config ie after ibuffer loaded
 #+end_src
 
 ** Put the buffer together
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:20ACDF50-A967-4095-8541-923E518371C1
+:END:
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_89EF4423-0D2F-4B37-B79D-E37FCBABF47B
 #+begin_src emacs-lisp
 (define-advice ibuffer-update (:before (&rest args) autogroups)
   "Group related buffers together using ‘ibuffer-vc’ and ‘dir’,

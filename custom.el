@@ -36,7 +36,7 @@
  '(fringe-mode (quote (16 . 0)) nil (fringe))
  '(global-hl-line-mode t)
  '(gnus-directory "~/Library/Preferences/Aquamacs Emacs/News")
- '(gnus-group-sort-function (quote (gnus-group-sort-by-rank)) t)
+ '(gnus-group-sort-function (quote (gnus-group-sort-by-rank)))
  '(gnus-kill-save-kill-file t)
  '(gnus-score-mimic-keymap nil)
  '(gnus-server-browse-in-group-buffer t)
@@ -49,6 +49,38 @@
    (quote
     ("~/\\.emacs\\.d/elpa/" "~/\\.cpan/" "~/\\.cabal/" "~/perl5/perlbrew/" "~/\\.npm/" "~/\\.virtualenv/" "~/\\.virthualenv/" "~/\\.rvm/" "/[._]build/" "/\\.bzr/" "/\\.coverage/" "/\\.git/" "/\\.hg/" "/\\.rspec/" "/\\.sass-cache/" "/\\.svn/" "/_MTN/" "/_darcs/" "/CVS/" "/pm_to_blib/" "/RCS/" "/SCCS/" "/blib/" "/test_output/" "~/\\.emacs\\.d/\\.cask/" "~/\\.cask/" "/Applications/" "~/Library/Preferences/Aquamacs Emacs/Packages" "~/src/ThirdParty/")))
  '(ibuffer-expert t)
+ '(ibuffer-fontification-alist
+   (quote
+    ((999
+      (and buffer-file-name
+           (buffer-modified-p))
+      term-cyanbg)
+     (10 buffer-read-only default)
+     (15
+      (and buffer-file-name
+           (string-match ibuffer-compressed-file-name-regexp buffer-file-name))
+      font-lock-doc-face)
+     (20
+      (string-match "^*"
+                    (buffer-name))
+      font-lock-keyword-face)
+     (25
+      (and
+       (string-match "^ "
+                     (buffer-name))
+       (null buffer-file-name))
+      italic)
+     (30
+      (memq major-mode ibuffer-help-buffer-modes)
+      font-lock-comment-face)
+     (35
+      (derived-mode-p
+       (quote dired-mode))
+      font-lock-function-name-face)
+     (0 1 term-blue))))
+ '(ibuffer-help-buffer-modes
+   (quote
+    (help-mode helpful-mode apropos-mode Info-mode Info-edit-mode)))
  '(indent-tabs-mode nil)
  '(mail-setup-with-from t)
  '(make-backup-files t)

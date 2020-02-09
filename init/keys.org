@@ -277,7 +277,6 @@ Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in e
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_A1DB0752-B232-4FA8-BF33-3CE313E5306C
 #+begin_src emacs-lisp
 (bind-key "M-g" 'goto-line)             ; one of the oldest binds
-
 #+end_src
 ** Hyper key bindings
 :PROPERTIES:
@@ -309,6 +308,9 @@ Note that the Aquamacs binding does not fit through bind-keys
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_E5C06415-F04E-4599-A173-414139F0F13B
 #+begin_src emacs-lisp
 (bind-key "A-b" 'ivy-switch-buffer)
+(bind-key "A-k" 'bjm/kill-this-buffer)
+;; (bind-key (kbd "A-u") 'revert-buffer-no-confirm)
+(bind-key "A-M-u" 'ediff-revision)
 (bind-key "A-/" 'comment-or-uncomment-region-or-line)
 (bind-key "A-<kp-add>" 'zoom-font)
 (bind-key "A-<kp-subtract>" 'zoom-font-out)

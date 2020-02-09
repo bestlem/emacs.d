@@ -169,13 +169,13 @@ Well not really lisp but much can be converted to it
 :END:
 From [[https://github.com/abo-abo/hydra/wiki/Macro][Hydra wiki]] and [[https://github.com/edil3ra/emacs_save/blob/master/settings.org][another init file]] but not the latter seems to have some odd entries as well so an edit of the two
 	  #+begin_src emacs-lisp
-(defhydra keyboard-macros (:hint nil :color pink :pre
-                                 (progn
-                                   (elmacro-mode 1)
-                                   (elmacro-mode-on)
-                                   (when defining-kbd-macro
-                                     (kmacro-end-macro 1))))
-  ("
+(defhydra hydra-keyboard-macros (:hint nil :color pink :pre
+				       (progn
+					 (elmacro-mode 1)
+					 (elmacro-mode-on)
+					 (when defining-kbd-macro
+					   (kmacro-end-macro 1))))
+  "
               ^Create-Cycle^         ^Basic^          ^Insert^        ^Save^         ^Edit^
             ╭─────────────────────────────────────────────────────────────────────────╯
                     ^_p_^           [_e_] execute    [_i_] insert    [_b_] name      [_'_] previous
@@ -184,7 +184,7 @@ From [[https://github.com/abo-abo/hydra/wiki/Macro][Hydra wiki]] and [[https://g
                     ^^↓^^           [_r_] region     [_f_] format    [_B_] defun     [_v_] view
                     ^_k_^           [_m_] step                                   [_l_] prev lisp
                    ^^   ^^          [_s_] swap                                   [_L_] commands
-            ")
+	    "
   ("<f3>" kmacro-start-macro :color blue)
   ("e" kmacro-end-or-call-macro-repeat)
   ("E" kmacro-end-or-call-macro-repeat :color blue)
@@ -217,6 +217,5 @@ From [[https://github.com/abo-abo/hydra/wiki/Macro][Hydra wiki]] and [[https://g
   ("L" elmacro-show-last-commands)
   ("q" nil :color blue))
 
-(bind-key "<f3>" 'keyboard-macros/body)
-
+(bind-key "<f3>" 'hydra-keyboard-macros/body)
 	  #+end_src

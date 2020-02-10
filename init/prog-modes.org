@@ -337,15 +337,12 @@ I want a key to send current buffer, especial in OrgSrc mode to REPL.
   (setq mwb-repl-region-key "<f6>"))
 #+END_SRC
 *** emacs - ielm
-<<<<<<< HEAD
 :PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:145FFE4A-96E9-4274-83C9-7713D5C26575
+:ID:       org_mark_2020-02-10T11-53-11+00-00_mini12:DF45202A-884C-4B11-866F-526417609CF2
 :END:
-This is simple and works
-#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_50DBBC02-BB0B-43D7-8FD2-6ECB453AF222
-=======
 This is simple and works. Extended by me to send whole buffer and not switch on key but mode.
->>>>>>> 4c20df9... Have working base function
+Have working base function
+#+NAME: org_mark_2020-02-10T11-53-11+00-00_mini12_F4F528CB-9078-4C05-B2A0-23ADCA372044
 #+BEGIN_SRC emacs-lisp
 (use-package  eval-in-repl-ielm
   :config

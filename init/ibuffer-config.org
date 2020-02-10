@@ -147,6 +147,33 @@ and special ones sepatarely."
 		 mwb-ibuffer-filters-bottom)))
 #+end_src
 
+* Filters
+:PROPERTIES:
+:ID:       org_mark_2020-02-10T08-46-26+00-00_mini12:7EFD5A3F-159C-418B-A8B6-6DD72CCC9743
+:END:
+
+** Listing unsaved buffers
+:PROPERTIES:
+:ID:       org_mark_2020-02-10T08-46-26+00-00_mini12:D24605A6-BAD3-42F0-9CB2-C80BFB59E7E8
+:END:
+From [[https://www.reddit.com/r/emacs/comments/6w1kqi/listing_unsaved_buffers/][reddit]]
+#+NAME: org_mark_2020-02-10T08-46-26+00-00_mini12_DC932783-059D-4E60-9460-AA996EAC7573
+#+begin_src emacs-lisp
+(define-ibuffer-filter unsaved-file-buffers
+    "Toggle current view to buffers whose file is unsaved."
+  (:description "file is unsaved")
+  (ignore qualifier)
+  (and (buffer-local-value 'buffer-file-name buf)
+       (buffer-modified-p buf)))
+#+end_src
+
+Set the key in the map but also add the hydra at the end which shadows the /
+#+NAME: org_mark_2020-02-10T08-46-26+00-00_mini12_97D12CF3-9F04-4EAE-9312-740A7F65F81E
+#+begin_src emacs-lisp
+(define-key ibuffer-mode-map (kbd "/ u")
+  #'ibuffer-filter-by-unsaved-file-buffers)
+#+end_src
+
 * Wraparound Cursor Movementand down
 :PROPERTIES:
 :ID:       org_mark_2020-02-10T08-46-26+00-00_mini12:BC2CF73A-8A15-4A2F-BB4B-04F47A94A1EF
@@ -220,7 +247,7 @@ With this improvement you do not need to hard code the line numbers, you just ne
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:7CD44DD7-1332-4C1C-8819-136859BF8AA8
 :END:
-   From [[https://github.com/abo-abo/hydra/wiki/Ibuffer][Hydra Wiki]] mode hydra
+   From [[https://github.com/abo-abo/hydra/wiki/Ibuffer][Hydra Wiki]] mode hydra but with name changed to work as major mode hydra
    #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_A6D8D69A-A7A1-431C-BC16-A34732A92A60
    #+begin_src emacs-lisp
 (defhydra major-mode-hydras/ibuffer-mode (:color red :hint nil)
@@ -319,6 +346,7 @@ With this improvement you do not need to hard code the line numbers, you just ne
   ("c" ibuffer-filter-by-content "content")
   ("e" ibuffer-filter-by-predicate "predicate")
   ("d" ibuffer-filter-by-dir "dir")
+  ("u" ibuffer-filter-by-unsaved-file-buffers "unsaved")
   ("f" ibuffer-filter-by-filename "filename")
   (">" ibuffer-filter-by-size-gt "size")
   ("<" ibuffer-filter-by-size-lt "size")

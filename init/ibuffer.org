@@ -25,14 +25,16 @@ However much of the same code appears in many places so I don't know the real so
    #+begin_src emacs-lisp
 (use-package ibuffer
   :bind (("C-x C-b" . ibuffer)
-	 ("A-M-b" . ibuffer)
-	 :map ibuffer-mode-map
-	 ("?" . major-mode-hydras/ibuffer-mode/body))
+         ("A-M-b" . ibuffer)
+         :map ibuffer-mode-map
+         ("?" . major-mode-hydras/ibuffer-mode/body))
   :init
   (setq ibuffer-expert t
-	ibuffer-show-empty-filter-groups nil
-	ibuffer-default-sorting-mode 'filename/process)
+        ibuffer-show-empty-filter-groups nil
+        ibuffer-default-sorting-mode 'filename/process)
   :config
+  (use-package ibuffer-vc :ensure t)   ; need as some config code depends on this
+  (require 'ibuf-ext)                  ; fiddle the mess to get an internal variable setup
   (mwb-init-load "init/ibuffer-config")
   :hook (ibuffer . major-mode-hydras/ibuffer-mode/body))
    #+end_src

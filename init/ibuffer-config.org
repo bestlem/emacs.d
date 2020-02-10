@@ -4,35 +4,24 @@
 
 This file is loaded sureing use-package :config ie after ibuffer loaded
 
-* Extra modes used by other stuff in :config
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:78230D42-5550-4C41-9A10-B216AC3755B4
-:END:
-  This speeds up the load time
-  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_168F152C-4EAF-41D2-9110-55B1751912AA
-  #+begin_src emacs-lisp
-  (use-package ibuffer-vc :ensure t) ; need as some config code depends on this
-  (require 'ibuf-ext) ; fiddle the mess to get an internal variable setup
-  #+end_src
-
-* Unused Filters
+** Unused Filters
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:DDF85788-36D7-495C-B224-6405A6F7F45E
 :END:
 
-** A filter not certain if used
+*** A filter not certain if used
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:F7C1B140-AF61-4E91-AD84-FD0A1525E79D
 :END:
   #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_A5A7543E-5271-488C-A83B-F274165EB383
   #+begin_src emacs-lisp
-  (define-ibuffer-filter name-not
-      "Negated buffer name match."
-	(:description "buffer name not"
-	 :reader (read-from-minibuffer "Exclude buffers (regexp): "))
-	(not (string-match qualifier (buffer-name buf))))
-#+end_src
-** Unknown
+(define-ibuffer-filter name-not
+    "Negated buffer name match."
+  (:description "buffer name not"
+		:reader (read-from-minibuffer "Exclude buffers (regexp): "))
+  (not (string-match qualifier (buffer-name buf))))
+  #+end_src
+* Directory
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:A49F17AB-2E17-4E3C-AA96-934B536B6D7F
 :END:
@@ -44,11 +33,11 @@ This file is loaded sureing use-package :config ie after ibuffer loaded
   (ibuffer-awhen (buffer-file-name buf)
 	(string= qualifier (file-name-directory it))))
 #+end_src
-* Filters
+* Groups
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:76AC61C6-D8F7-4A47-84F3-C3EEDAA9AF21
 :END:
-** Filter before vc and directories
+** Special groups before vc and directories
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:24E37B2D-EE33-4348-8C79-3F89D7837917
 :END:
@@ -107,7 +96,7 @@ This file is loaded sureing use-package :config ie after ibuffer loaded
     )
   "Fixed filter definitions for ibuffer up front")
 #+end_src
-** Filter for what is left
+** Group for what is left
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:6DFA2B47-6ABC-421E-A9BE-010DF7D95B41
 :END:
@@ -124,7 +113,7 @@ This file is loaded sureing use-package :config ie after ibuffer loaded
 	 (mode . eww-mode)))
   "Fixed filter definitions for ibuffer.")
 #+end_src
-** Generate by directory
+** Group by directory
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:44444A37-2F58-4EA6-B3B8-15B997CA76FA
 :END:
@@ -140,7 +129,7 @@ This file is loaded sureing use-package :config ie after ibuffer loaded
 	(mapcar (lambda (dir) (cons (concat "Directory: " dir) `((dir . ,dir)))) dirs)))
 #+end_src
 
-** Put the buffer together
+** Put the buffer group  together
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:20ACDF50-A967-4095-8541-923E518371C1
 :END:
@@ -157,7 +146,7 @@ and special ones sepatarely."
 		 (gk-ibuffer-generate-filter-groups-by-dir)
 		 mwb-ibuffer-filters-bottom)))
 #+end_src
-** Hydra
+* Hydra
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:7CD44DD7-1332-4C1C-8819-136859BF8AA8
 :END:
@@ -245,7 +234,13 @@ and special ones sepatarely."
   ("f" ibuffer-do-sort-by-filename/process "filename")
   ("m" ibuffer-do-sort-by-major-mode "mode")
   ("b" major-mode-hydras/ibuffer-mode/body "back" :color blue))
-
+#+end_src
+** Filter
+:PROPERTIES:
+:ID:       org_mark_2020-02-10T08-46-26+00-00_mini12:496BF7A7-340B-43E7-9CA9-EE69A7559C80
+:END:
+#+NAME: org_mark_2020-02-10T08-46-26+00-00_mini12_F34400B5-1325-4089-9D4F-CA89B9B64557
+#+begin_src emacs-lisp
 (defhydra hydra-ibuffer-filter (:color amaranth :columns 4)
   "Filter"
   ("m" ibuffer-filter-by-used-mode "mode")
@@ -253,6 +248,7 @@ and special ones sepatarely."
   ("n" ibuffer-filter-by-name "name")
   ("c" ibuffer-filter-by-content "content")
   ("e" ibuffer-filter-by-predicate "predicate")
+  ("d" ibuffer-filter-by-dir "dir")
   ("f" ibuffer-filter-by-filename "filename")
   (">" ibuffer-filter-by-size-gt "size")
   ("<" ibuffer-filter-by-size-lt "size")

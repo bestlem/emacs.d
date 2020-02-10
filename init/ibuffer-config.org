@@ -146,6 +146,76 @@ and special ones sepatarely."
 		 (gk-ibuffer-generate-filter-groups-by-dir)
 		 mwb-ibuffer-filters-bottom)))
 #+end_src
+
+* Wraparound Cursor Movementand down
+:PROPERTIES:
+:ID:       org_mark_2020-02-10T08-46-26+00-00_mini12:BC2CF73A-8A15-4A2F-BB4B-04F47A94A1EF
+:END:
+From [[https://www.emacswiki.org/emacs/IbufferMode#toc13][Emacs wiki]]
+
+With this improvement you do not need to hard code the line numbers, you just need copy, compile and run. Moreover, the keys ‘up’ and ‘down’ do the same thing but they skip the names of the filtered groups, and you can move to the beginning or the end of a group with ‘left’ and ‘right’.
+
+#+NAME: org_mark_2020-02-10T08-46-26+00-00_mini12_A537B07D-1F71-49A4-A4EC-4A90F741B1AF
+#+begin_src emacs-lisp
+(defun ibuffer-advance-motion (direction)
+  (forward-line direction)
+  (beginning-of-line)
+  (if (not (get-text-property (point) 'ibuffer-filter-group-name))
+      t
+    (ibuffer-skip-properties '(ibuffer-filter-group-name)
+			     direction)
+    nil))
+
+(defun ibuffer-previous-line (&optional arg)
+  "Move backwards ARG lines, wrapping around the list if necessary."
+  (interactive "P")
+  (or arg (setq arg 1))
+  (let (err1 err2)
+    (while (> arg 0)
+      (cl-decf arg)
+      (setq err1 (ibuffer-advance-motion -1)
+	    err2 (if (not (get-text-property (point) 'ibuffer-title))
+		     t
+		   (goto-char (point-max))
+		   (beginning-of-line)
+		   (ibuffer-skip-properties '(ibuffer-summary
+					      ibuffer-filter-group-name)
+					    -1)
+		   nil)))
+    (and err1 err2)))
+
+(defun ibuffer-next-line (&optional arg)
+  "Move forward ARG lines, wrapping around the list if necessary."
+  (interactive "P")
+  (or arg (setq arg 1))
+  (let (err1 err2)
+    (while (> arg 0)
+      (cl-decf arg)
+      (setq err1 (ibuffer-advance-motion 1)
+	    err2 (if (not (get-text-property (point) 'ibuffer-summary))
+		     t
+		   (goto-char (point-min))
+		   (beginning-of-line)
+		   (ibuffer-skip-properties '(ibuffer-summary
+					      ibuffer-filter-group-name
+					      ibuffer-title)
+					    1)
+		   nil)))
+    (and err1 err2)))
+
+(defun brust/ibuffer-next-header ()
+  (interactive)
+  (while (ibuffer-next-line)))
+
+(defun brust/ibuffer-previous-header ()
+  (interactive)
+  (while (ibuffer-previous-line)))
+
+(bind-key  (kbd "<up>") 'ibuffer-previous-line ibuffer-mode-map)
+(bind-key  (kbd "<down>") 'ibuffer-next-line ibuffer-mode-map)
+(bind-key  (kbd "<right>") 'ibuffer-previous-header ibuffer-mode-map)
+(bind-key  (kbd "<left>") 'ibuffer-next-header ibuffer-mode-map)
+#+end_src
 * Hydra
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:7CD44DD7-1332-4C1C-8819-136859BF8AA8

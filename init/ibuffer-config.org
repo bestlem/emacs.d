@@ -4,23 +4,6 @@
 
 This file is loaded sureing use-package :config ie after ibuffer loaded
 
-** Unused Filters
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:DDF85788-36D7-495C-B224-6405A6F7F45E
-:END:
-
-*** A filter not certain if used
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:F7C1B140-AF61-4E91-AD84-FD0A1525E79D
-:END:
-  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_A5A7543E-5271-488C-A83B-F274165EB383
-  #+begin_src emacs-lisp
-(define-ibuffer-filter name-not
-    "Negated buffer name match."
-  (:description "buffer name not"
-                :reader (read-from-minibuffer "Exclude buffers (regexp): "))
-  (not (string-match qualifier (buffer-name buf))))
-  #+end_src
 * Directory
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:A49F17AB-2E17-4E3C-AA96-934B536B6D7F
@@ -174,7 +157,24 @@ Set the key in the map but also add the hydra at the end which shadows the /
   #'ibuffer-filter-by-unsaved-file-buffers)
 #+end_src
 
-* Wraparound Cursor Movementand down
+** Unused Filters
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:DDF85788-36D7-495C-B224-6405A6F7F45E
+:END:
+
+*** A filter not certain if used
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:F7C1B140-AF61-4E91-AD84-FD0A1525E79D
+:END:
+  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_A5A7543E-5271-488C-A83B-F274165EB383
+  #+begin_src emacs-lisp
+(define-ibuffer-filter name-not
+    "Negated buffer name match."
+  (:description "buffer name not"
+                :reader (read-from-minibuffer "Exclude buffers (regexp): "))
+  (not (string-match qualifier (buffer-name buf))))
+  #+end_src
+* Wraparound Cursor Movement
 :PROPERTIES:
 :ID:       org_mark_2020-02-10T08-46-26+00-00_mini12:BC2CF73A-8A15-4A2F-BB4B-04F47A94A1EF
 :END:
@@ -249,6 +249,11 @@ With this improvement you do not need to hard code the line numbers, you just ne
 :END:
    From [[https://github.com/abo-abo/hydra/wiki/Ibuffer][Hydra Wiki]] mode hydra but with name changed to work as major mode hydra
    #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_A6D8D69A-A7A1-431C-BC16-A34732A92A60
+** Major mode
+:PROPERTIES:
+:ID:       org_mark_2020-02-10T08-46-26+00-00_mini12:64ECA435-EE5E-4D4A-BC96-EE92C1E8DB13
+:END:
+   #+NAME: org_mark_2020-02-10T08-46-26+00-00_mini12_5EB10EFD-EB06-471A-848E-CCE05C98E47A
    #+begin_src emacs-lisp
 (defhydra major-mode-hydras/ibuffer-mode (:color red :hint nil)
   "
@@ -283,7 +288,13 @@ With this improvement you do not need to hard code the line numbers, you just ne
   ("o" ibuffer-visit-buffer-other-window :color blue)
   ("q" (lambda () (interactive) (quit-window 4)) :color blue)
   ("." nil :color blue))
-
+#+end_src
+** Mark
+:PROPERTIES:
+:ID:       org_mark_2020-02-10T08-46-26+00-00_mini12:5DEB442D-7398-412A-800C-BF969C24DC50
+:END:
+#+NAME: org_mark_2020-02-10T08-46-26+00-00_mini12_EB4BAFA7-BA96-4E70-AC01-202C409AB5FE
+#+begin_src emacs-lisp
 (defhydra hydra-ibuffer-mark (:color teal :columns 5
 				     :after-exit (major-mode-hydras/ibuffer-mode/body))
   "Mark"
@@ -298,7 +309,13 @@ With this improvement you do not need to hard code the line numbers, you just ne
   ("h" ibuffer-mark-help-buffers "help")
   ("z" ibuffer-mark-compressed-file-buffers "compressed")
   ("b" major-mode-hydras/ibuffer-mode/body "back" :color blue))
-
+#+end_src
+** Actions
+:PROPERTIES:
+:ID:       org_mark_2020-02-10T08-46-26+00-00_mini12:FD88EC7A-4B95-476A-9070-06E90F4D8B16
+:END:
+#+NAME: org_mark_2020-02-10T08-46-26+00-00_mini12_ABE7078B-1D1C-4BAB-80C0-EB20A2965531
+#+begin_src emacs-lisp
 (defhydra hydra-ibuffer-action (:color teal :columns 4
                                        :after-exit
                                        (if (eq major-mode 'ibuffer-mode)
@@ -321,7 +338,13 @@ With this improvement you do not need to hard code the line numbers, you just ne
   ("W" ibuffer-do-view-and-eval "view-and-eval")
   ("X" ibuffer-do-shell-command-pipe "shell-command-pipe")
   ("b" nil "back"))
-
+#+end_src
+** Sort
+:PROPERTIES:
+:ID:       org_mark_2020-02-10T08-46-26+00-00_mini12:2093F427-F562-4EAA-A31F-3582ED7CF3E7
+:END:
+#+NAME: org_mark_2020-02-10T08-46-26+00-00_mini12_8FC92A00-0F76-41D6-8183-D160916C7C90
+#+begin_src emacs-lisp
 (defhydra hydra-ibuffer-sort (:color amaranth :columns 3)
   "Sort"
   ("i" ibuffer-invert-sorting "invert")

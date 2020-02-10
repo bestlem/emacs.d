@@ -361,18 +361,23 @@ With this improvement you do not need to hard code the line numbers, you just ne
 :END:
 #+NAME: org_mark_2020-02-10T08-46-26+00-00_mini12_F34400B5-1325-4089-9D4F-CA89B9B64557
 #+begin_src emacs-lisp
-(defhydra hydra-ibuffer-filter (:color amaranth :columns 4)
-  "Filter"
-  ("m" ibuffer-filter-by-used-mode "mode")
-  ("M" ibuffer-filter-by-derived-mode "derived mode")
-  ("n" ibuffer-filter-by-name "name")
-  ("c" ibuffer-filter-by-content "content")
-  ("e" ibuffer-filter-by-predicate "predicate")
-  ("d" ibuffer-filter-by-dir "dir")
-  ("u" ibuffer-filter-by-unsaved-file-buffers "unsaved")
-  ("f" ibuffer-filter-by-filename "filename")
-  (">" ibuffer-filter-by-size-gt "size")
-  ("<" ibuffer-filter-by-size-lt "size")
-  ("/" ibuffer-filter-disable "disable")
-  ("b" major-mode-hydras/ibuffer-mode/body "back" :color blue))
+(pretty-hydra-define hydra-ibuffer-filter
+  (:color amaranth
+          :quit-key "q"
+          :title (with-mode-icon major-mode "Filter" 1 -0.05))
+  ("Name"
+   (("m" ibuffer-filter-by-used-mode "mode")
+    ("M" ibuffer-filter-by-derived-mode "derived mode")
+    ("n" ibuffer-filter-by-name "name")
+    ("d" ibuffer-filter-by-dir "dir")
+    ("f" ibuffer-filter-by-filename "filename")
+    ("e" ibuffer-filter-by-predicate "predicate"))
+   "Buffer Properties"
+   (("u" ibuffer-filter-by-unsaved-file-buffers "unsaved")
+    ("c" ibuffer-filter-by-content "content")
+    (">" ibuffer-filter-by-size-gt "size")
+    ("<" ibuffer-filter-by-size-lt "size"))
+   "Back"
+   (("/" ibuffer-filter-disable "disable")
+    ("b" major-mode-hydras/ibuffer-mode/body "back" :color blue))))
    #+end_src

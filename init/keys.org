@@ -17,6 +17,12 @@ This [[https://stackoverflow.com/a/27441815/151019][Stack Overlow answer]] sugge
 
 ALso see [[https://github.com/noctuid/general.el][General package]] but see [[https://github.com/noctuid/general.el/issues/10][comparison]] with bind-key from use package so stick to bind
 
+*** Key representation
+:PROPERTIES:
+:ID:       org_mark_2020-02-09T19-36-52+00-00_mini12:AB151351-1B6E-4D39-AF9D-74CDDA7DB10E
+:END:
+There is a difference between bind and general in how they report the bindings. general always puts the string through kbd bind does not. The difference is in getting the description. Aquamacs is patched to show the Apple key symbols but bind only shows them if the string is passed through kbd. This can be patched. However Aquamacs is not fully patched, if an of the key is in <> e.g. <f1> then it does not try to reformat the string.
+
 *** TODO Replace the key definition functions with a mwb one that can switch between global-key and the Aquamacs way
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:8C7E2431-4A95-4BA4-B084-93325BB68F14

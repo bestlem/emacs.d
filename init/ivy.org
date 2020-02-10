@@ -114,8 +114,8 @@ Replace isearch
 (use-package swiper
   :after ivy
   :ensure t
-  :bind (("C-s" . swiper)
-		 ("C-r" . swiper))
+  :bind (("C-s" . swiper-isearch)
+		 ("C-r" . swiper-isearch-backward))
   )
 #+end_src
 

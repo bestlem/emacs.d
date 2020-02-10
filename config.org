@@ -337,7 +337,7 @@ Need key setting menus.
 #+begin_src emacs-lisp
 (use-package major-mode-hydra
   :ensure t
-:demand
+  :demand
   :bind
   ("H-a" . major-mode-hydra)
   :config

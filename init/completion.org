@@ -29,7 +29,7 @@ Add some from jweigley
         ;; Don't take too much time searching for matches.
         company-dabbrev-code-time-limit .0005
         company-dabbrev-time-limit .0005)
-  (setq company-show-numbers t)
+  (setq company-show-numbers nil)
   (setq company-lighter-base "/"
         company-tooltip-align-annotations t
         company-echo-delay 1

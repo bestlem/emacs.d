@@ -83,7 +83,7 @@ It assumes things like clojure
 :END:
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_A1D3F036-E658-45F3-9B01-5935D19F8637
 #+begin_src emacs-lisp
-(mwb-init-load "init/prog-modes/emacs-lisp")
+(mwb-init-load "init/prog-modes/lisp_emacs")
 #+end_src
 ** Racket
 :PROPERTIES:
@@ -91,5 +91,5 @@ It assumes things like clojure
 :END:
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_D755144E-F3ED-4895-9DC9-B42A557F20BF
 #+begin_src emacs-lisp
-(mwb-init-load "init/prog-modes/racket")
+(mwb-init-load "init/prog-modes/lisp_racket")
 #+end_src

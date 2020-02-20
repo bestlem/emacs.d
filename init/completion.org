@@ -140,7 +140,7 @@ I suspect that emacs's inbuilt skeleton can do what I need but there are more ex
   :config
   (setq yas-snippet-dirs (list (mwb-user-emacs-file "data/snippets")))
   ;; Use define key as :bind needs a function but don't use as don't auto expand
-  (define-key yas-minor-mode-map (kbd "SPC") yas-maybe-expand)
+  ;;(define-key yas-minor-mode-map (kbd "SPC") yas-maybe-expand)
 
   ;; (use-package yasnippet-snippets
   ;;   :config (yasnippet-snippets-initialize)

@@ -87,7 +87,7 @@ I haven't used before but might try with hydra from [[https://sriramkswamy.githu
   I have had crashes with helpful where emacs has to be killed. Looks like a recursive stack error but also see comment re garbage collection So let's try
   Note this causes a gc when minibuffer ends - perhaps not the best time
   #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_6D1AA0E9-63E0-4D18-81AE-142094A987CE
-  #+begin_src emacs-lisp
+  #+begin_src emacs-lisp :tangle no
   (defun my-minibuffer-setup-hook ()
 	(setq gc-cons-threshold 8000000))
 
@@ -406,10 +406,9 @@ midnight-mode purges buffers which haven’t been displayed in 3 days. We config
 #+begin_src emacs-lisp
 (use-package midnight
   :defer 1000
-  :init
-  (setq midnight-delay 3600 * 6.5)
   :config
   (setq midnight-period 7200)
+  (midnight-delay-set 'midnight-delay "6:15am")
   (defun add-to-clean-buffer-regex (str)
     (add-to-list 'clean-buffer-list-kill-regexps
                  (rx-to-string `(seq line-start "*" ,str " "))))

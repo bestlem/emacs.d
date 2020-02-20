@@ -37,7 +37,7 @@ As everything is after loading of org dump in a config section after the rest.
 :END:
 org-mode is a pain as we need a newer than aquamacs supplies and also there are recommendations to use an even later version. Also re packaging emacs package.el reads already built stuff others e.g. straight.el don't and that could be a problem with org-mode. There are reasons not to use the org repo but Elpa - [[https://www.reddit.com/r/emacs/comments/5sx7j0/how_do_i_get_usepackage_to_ignore_the_bundled/ddix2ta/?utm_source=share&utm_medium=web2x][from Reddit]] basically possible security issues so I am with ELPA and missing org-contrib.
 
-Aug 2019 got an error in cut subtree so revert to org mode with Aquamacs nad lose formatting of code blocks. (and will get namne changes in links in generated files)
+Aug 2019 got an error in cut subtree so revert to org mode with Aquamacs nad lose formatting of code blocks. (and will get name changes in links in generated files) but seems OK now.
 ** The use package setup
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:411C4ABA-EFFC-4E73-9C0F-5E936AC5B73B
@@ -59,13 +59,15 @@ Note Hydra is not really used after just a couple of weeks.
     <<org-mode-hooks>>
     <<org-mode-hooks-wrapping>>
 <<org-mode-hydrae>>
-<<org-mode-hydrae-code>>
-<<org-mode-hydrae-refile>>
+;;<<org-mode-hydrae-code>>
 :config
+<<org-mode-hydrae-refile>>
+
 <<org-grettke>>
+
     )
   #+end_src
-*** Key bindings
+e*** Key bindings
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:7CFDEDFE-FB36-47D9-8D94-0CDC83AF71CC
 :END:
@@ -287,7 +289,7 @@ Display system info.
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:F13213F6-AD98-4F71-AC18-D1139D5ED9D1
 :END:
-*** Literate Programming
+**** Literate Programming
   :PROPERTIES:
   :ID:       orgmode:gcr:vela:8510C876-F644-4804-9F87-54A0B44DBA6A
   :END:
@@ -336,7 +338,7 @@ another activity.
     source blocks can be replaced by their result value. This gives a kind of
     template system. More details [[eval][here]]
 
-*** Helper Functions
+**** Helper Functions
    :PROPERTIES:
    :ID:       orgmode:gcr:vela:B14776FD-6835-4D1D-BCD3-50D56555423C
    :END:
@@ -467,7 +469,7 @@ This is a copy and paste. Additional languages would warrant a refactor."
   (insert "\n"))
 #+END_SRC
 
-*** Identity
+**** Identity
 :PROPERTIES:
 :ID:       orgmode:gcr:vela:25F4226F-2EB2-48EC-A4D5-56DD5CCC753E
 :END:
@@ -507,7 +509,7 @@ Make sure that =ID= is always unique, portable, and easy to maintain by
 (setq org-id-method 'uuid)
 #+END_SRC
 
-*** Tangling
+**** Tangling
    :PROPERTIES:
    :ID:       orgmode:gcr:vela:267EEDED-1367-405F-807C-B3C489045704
    :END:
@@ -556,7 +558,7 @@ as their origin document.
 (add-hook 'org-babel-post-tangle-hook #'help/org-babel-post-tangle-hook-fn)
 #+END_SRC
 
-**** comments
+***** comments
     :PROPERTIES:
     :ID:       orgmode:gcr:vela:49787FC5-CAA7-466B-B742-0F38973E070B
     :END:
@@ -573,7 +575,7 @@ origin artifact.
 (help/set-org-babel-default-header-args :comments "noweb")
 #+END_SRC
 
-**** mkdirp
+***** mkdirp
     :PROPERTIES:
     :ID:       orgmode:gcr:vela:B0F9A321-3B69-46BB-B512-0AF3C663A4C0
     :END:
@@ -587,7 +589,7 @@ Toggle creation of parent directories of target files during tangling
 (help/set-org-babel-default-header-args :mkdirp "yes")
 #+END_SRC
 
-**** no-expand
+***** no-expand
     :PROPERTIES:
     :ID:       orgmode:gcr:vela:90170E6A-AA1A-44EA-9BF8-1A6AA38FD224
     :END:
@@ -598,7 +600,7 @@ Turn off variable assignment and noweb expansion during tangling
 
 {{{lp-configure-each-sb}}}
 
-**** noweb
+***** noweb
     :PROPERTIES:
     :ID:       orgmode:gcr:vela:E12B48AB-68E8-4515-89E3-30A16FB6FD22
     :END:
@@ -624,7 +626,7 @@ ought to refer to the generated document.
 (help/set-org-babel-default-header-args :noweb "no-export")
 #+END_SRC
 
-**** noweb-ref
+***** noweb-ref
     :PROPERTIES:
     :ID:       orgmode:gcr:vela:2836D0AA-5DBA-48AC-A338-B47002DE8D7F
     :END:
@@ -635,7 +637,7 @@ Specify block's noweb reference resolution target
 
 {{{lp-configure-each-sb}}}
 
-**** noweb-sep
+***** noweb-sep
     :PROPERTIES:
     :ID:       orgmode:gcr:vela:B1A57D15-6BBF-4E78-A0D9-0B02C283C6B0
     :END:
@@ -646,7 +648,7 @@ String used to separate noweb references
 
 {{{lp-configure-each-sb}}}
 
-**** padline
+***** padline
     :PROPERTIES:
     :ID:       orgmode:gcr:vela:DDE727A6-DDF7-4B61-9063-549614B135F0
     :END:
@@ -668,7 +670,7 @@ Control insertion of padding lines in tangled code files
 (help/set-org-babel-default-header-args :padline "yes")
 #+END_SRC
 
-**** session
+***** session
     :PROPERTIES:
     :ID:       orgmode:gcr:vela:8219A42A-E90F-418A-8EF0-EB150CF6D730
     :END:
@@ -682,7 +684,7 @@ Preserve the state of code evaluation
 For some situations, this may be the same for every source block for a
 particular language. R is a good example.
 
-**** shebang
+***** shebang
     :PROPERTIES:
     :ID:       orgmode:gcr:vela:542185DD-4FD6-459A-B422-DA7B546FB292
     :END:
@@ -693,7 +695,7 @@ Make tangled files executable
 
 {{{lp-configure-each-sb}}}
 
-**** tangle
+***** tangle
     :PROPERTIES:
     :ID:       orgmode:gcr:vela:EA716FC9-4A90-4F3E-ABD0-31FEA575C969
     :END:
@@ -707,7 +709,7 @@ Toggle tangling and specify file name
 (help/set-org-babel-default-header-args :tangle "no")
 #+END_SRC
 
-**** tangle-mode
+***** tangle-mode
     :PROPERTIES:
     :ID:       orgmode:gcr:vela:5F0B7157-2DC8-4AFD-8F26-4B21025A5ECE
     :END:
@@ -718,7 +720,7 @@ Set permission of tangled files
 
 {{{lp-configure-each-sb}}}
 
-*** Evaluating
+**** Evaluating
    :PROPERTIES:
    :ID:       orgmode:gcr:vela:ED23FF0B-1F90-435C-9B56-ACA06C1ACAE0
    :END:
@@ -745,7 +747,7 @@ Org-Mode may use all of the listed languages.
    (makefile . t)
    (shell . t)))
 #+END_SRC
-**** cache
+***** cache
     :PROPERTIES:
     :ID:       orgmode:gcr:vela:49B8BFE9-643B-450F-A8A1-20CE3079E215
     :END:
@@ -758,7 +760,7 @@ Avoid re-evaluating unchanged code blocks
 
 Default =no= is correct for nearly every scenario.
 
-**** colnames
+***** colnames
     :PROPERTIES:
     :ID:       orgmode:gcr:vela:4D683007-14AE-4A7D-A506-E2301FD32E82
     :END:
@@ -769,7 +771,7 @@ Handle column names in tables
 
 {{{lp-configure-each-sb}}}
 
-**** dir
+***** dir
     :PROPERTIES:
     :ID:       orgmode:gcr:vela:CD1494F1-0A2A-44D0-9955-0D0501AF1539
     :END:
@@ -780,7 +782,7 @@ Specify the default (possibly remote) directory for code block execution
 
 {{{lp-configure-each-sb}}}
 
-**** epilogue
+***** epilogue
     :PROPERTIES:
     :ID:       orgmode:gcr:vela:CA7F5086-9D4B-4847-9449-3231CE027804
     :END:
@@ -791,7 +793,7 @@ Text to append to code block body
 
 See Prologue.
 
-**** eval
+***** eval
     :PROPERTIES:
     :ID:       orgmode:gcr:vela:0329BACE-2C99-4BB3-A7A5-7C800EF53FAD
     :END:
@@ -864,7 +866,7 @@ inline source blocks were setup to replace.
 (setq org-export-use-babel t)
 #+END_SRC
 
-**** file
+***** file
     :PROPERTIES:
     :ID:       orgmode:gcr:vela:80824708-62AF-4337-A517-828DA22D1FCA
     :END:
@@ -875,7 +877,7 @@ Specify a path for file output
 
 {{{lp-configure-each-sb}}}
 
-**** file-desc
+***** file-desc
     :PROPERTIES:
     :ID:       orgmode:gcr:vela:6F9A2745-7118-469E-9FDB-4B327C02E5FA
     :END:
@@ -886,7 +888,7 @@ Specify a description for file results
 
 {{{lp-configure-each-sb}}}
 
-**** file-ext
+***** file-ext
     :PROPERTIES:
     :ID:       orgmode:gcr:vela:0716A48E-9227-44FD-B1FA-185DF6545E91
     :END:
@@ -897,7 +899,7 @@ Specify an extension for file output
 
 {{{lp-configure-each-sb}}}
 
-**** hlines
+***** hlines
     :PROPERTIES:
     :ID:       orgmode:gcr:vela:721F4E5E-A343-4D7C-A3A3-12A544B3A273
     :END:
@@ -908,7 +910,7 @@ Handle horizontal lines in tables
 
 {{{lp-configure-each-sb}}}
 
-**** output-dir
+***** output-dir
     :PROPERTIES:
     :ID:       orgmode:gcr:vela:D0DDFE88-1B41-4A67-A5F4-88B1B35A7513
     :END:
@@ -922,7 +924,7 @@ Specify a directory to write file output to
 One example is a System where *all* intermediate results are stored to individual
 files.
 
-**** post
+***** post
     :PROPERTIES:
     :ID:       orgmode:gcr:vela:1A4DEC98-C735-4D88-8261-6AD13C495EF2
     :END:
@@ -933,7 +935,7 @@ Post processing of code block results
 
 {{{lp-configure-each-sb}}}
 
-**** prologue
+***** prologue
     :PROPERTIES:
     :ID:       orgmode:gcr:vela:3D1780E0-2E6D-428C-916D-BFB10E79C76F
     :END:
@@ -955,7 +957,7 @@ to ~rm(list = ls())~.
 
 Epilgue works hand-in-hand with this.
 
-**** results
+***** results
     :PROPERTIES:
     :ID:       orgmode:gcr:vela:2755571E-113B-436E-9EEC-26618A55A27E
     :END:
@@ -1013,7 +1015,7 @@ functionality.
 (help/set-org-babel-default-inline-header-args :results help/org-isb-results-cfg)
 #+END_SRC
 
-**** rownames
+***** rownames
     :PROPERTIES:
     :ID:       orgmode:gcr:vela:B184A507-1B03-4096-A4D8-E50A1DA047DB
     :END:
@@ -1024,7 +1026,7 @@ Handle row names in tables
 
 {{{lp-configure-each-sb}}}
 
-**** sep
+***** sep
     :PROPERTIES:
     :ID:       orgmode:gcr:vela:F1336AAA-68EF-4E87-B253-458103B6FF2F
     :END:
@@ -1035,7 +1037,7 @@ Delimiter for writing tabular results outside Org
 
 {{{lp-configure-each-sb}}}
 
-**** var
+***** var
     :PROPERTIES:
     :ID:       orgmode:gcr:vela:3B4D638C-82EE-47F3-835C-52B2F03620A0
     :END:
@@ -1053,7 +1055,7 @@ Pass arguments to code blocks
 - Idexable variable values
 - Emacs Lisp evaluation of variables
 
-*** Weaving
+**** Weaving
    :PROPERTIES:
    :ID:       orgmode:gcr:vela:F71DD8BA-B853-4903-A348-400E13C0E6F8
    :END:
@@ -1129,7 +1131,7 @@ Disable element caching because it might break weaves via [[https://lists.gnu.or
 (setq org-element-use-cache nil)
 #+END_SRC
 
-**** exports
+***** exports
     :PROPERTIES:
     :ID:       orgmode:gcr:vela:57B3786B-017F-4F6E-89F9-05642304F3B6
     :END:
@@ -1157,7 +1159,7 @@ when combined with ~org-sbe~.
 (help/set-org-babel-default-inline-header-args :exports "results")
 #+END_SRC
 
-**** wrap
+***** wrap
     :PROPERTIES:
     :ID:       orgmode:gcr:vela:94D6B3BE-5DA1-499A-B5C7-A6B71710A1EA
     :END:
@@ -1177,8 +1179,6 @@ results need to be visibly noticeably different for the reader by making them
 #+END_SRC
 
 Diagramming languages require =RESULTS= output for exporting.
-
-
 
 
 ** Prettify
@@ -1263,23 +1263,6 @@ From [[http://www.howardism.org/Technical/Emacs/orgmode-wordprocessor.html][here
     (org-mode . visual-line-mode)
     (org-mode . variable-pitch-mode)
   #+end_src
-** TODO Hydras for tangling
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:86D6B50E-05CF-42F6-9EAA-CD95402C178C
-:END:
-The template one is broken by org-mode version  - I suspect I need to learn yasnippet
-In practice I don't use that.
- #+NAME: org_mark_2020-01-23T20-21-34+00-00_mini12_3F68EBB4-7C46-461D-8A8D-0EB339E7489C
- #+begin_src emacs-lisp
- (defhydra mwb-hydra-org-code
-   (:color teal)
-   ""
-   ("e" org-edit-special "Edit the code")
-   ("i" hydra-org-template/body "Insert code") ; FIXME
-   ("t" org-babel-tangle "Tangle buffer")
-   ("q" nil "cancel"))
-
- #+end_src
 ** Agenda
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:E8D53E27-7D3B-403A-9179-D415A9B2581A
@@ -1332,20 +1315,24 @@ Again from jerrypnz
 #+NAME: org_mark_2020-01-23T20-21-34+00-00_mini12_951A79B2-540A-4A60-B3FA-7EEA9F02A656
 #+begin_src emacs-lisp
 (use-package org-capture
-  :after (org)
+  ;; :after (org)
   :commands (org-capture)
-  :bind ("<f13>" . org-capture)
+  :bind (("<f13>" . org-capture)
+         ("C-<f13>" . open-org-notes))
+  :preface
+  (defun open-org-notes ()
+    (interactive)
+    (find-file org-default-notes-file))
   :config
-  (progn
-    (setq org-capture-templates
-          `(("t" "TODO" entry (file org-default-notes-file)
-             "* TODO %?\n%u\n")
-            ("p" "Project" entry (file org-default-notes-file)
-             "* %? [%] :PROJECT:\n%u\n")
-            ("m" "Meeting" entry (file org-default-notes-file)
-             "* Meeting notes for %? :MEETING:\n%t" :clock-in t :clock-resume t)
-            ("n" "Notes" entry (file org-default-notes-file)
-             "* %? \n%t")))))
+  (setq org-capture-templates
+        `(("t" "TODO" entry (file org-default-notes-file)
+           "* TODO %?\n%u\n")
+          ("p" "Project" entry (file org-default-notes-file)
+           "* %? [%] :PROJECT:\n%u\n")
+          ("m" "Meeting" entry (file org-default-notes-file)
+           "* Meeting notes for %? :MEETING:\n%t" :clock-in t :clock-resume t)
+          ("n" "Notes" entry (file org-default-notes-file)
+           "* %? \n%t"))))
 #+end_src
 ** Mode Hydras
 :PROPERTIES:
@@ -1379,7 +1366,8 @@ Using new pretty mode hydra but with #+setupfile: from the matcha
   "Org"
   (("a" org-agenda "Agenda")
    ("c" org-capture "Capture")
-   ("r" org-refile "Refile")
+   ("R" org-refile "Refile Hydra")
+   ("r" hydra-org-refile/body "Refile")
    ("t" org-todo "Todo"))
   "Links"
   (("l" org-store-link "Store")
@@ -1388,6 +1376,7 @@ Using new pretty mode hydra but with #+setupfile: from the matcha
 #+end_src
 *** Refile
 :PROPERTIES:
+:header-args: :noweb-ref  org-mode-hydrae-refile
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:B74FA3DA-C2DF-4A3E-8122-A95BCA29C592
 :END:
 Based off https://mollermara.com/blog/Fast-refiling-in-org-mode-with-hydras/ to refile to separate files. No doubt will extend in future and follow the later bits.
@@ -1397,10 +1386,9 @@ Based off https://mollermara.com/blog/Fast-refiling-in-org-mode-with-hydras/ to 
 :END:
 #+NAME: org-mode-hydrae-code
 #+begin_src emacs-lisp :tangle no
-:config
 (defun my/refile (file headline &optional arg)
   (let ((pos (save-excursion
-               (find-file file)
+               (find-file (expand-file-name file org-directory))
                (org-find-exact-headline-in-buffer headline))))
     (org-refile arg nil (list headline file nil pos)))
   (switch-to-buffer (current-buffer)))
@@ -1410,14 +1398,18 @@ Based off https://mollermara.com/blog/Fast-refiling-in-org-mode-with-hydras/ to 
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:57EFAC1C-E2F3-49FC-AAC4-5D152747D36E
 :END:
-#+NAME: org-mode-hydrae-refile
+I am not certain how ro add a name in the use-package so use plain macro in :config
+#+NAME: org_mark_2020-02-13T09-56-02+00-00_mini12_EF3743C9-57EA-438C-97A4-5EBA94AA7A89
 #+begin_src emacs-lisp :tangle no
-:pretty-hydra
-((  :color pink :quit-key "q")
- ( "Shopping"
-   ( ("g" (my/refile Groceries
-                     "shopping.org" "Groceries")  "Groceries")
-     ("s" (my/refile "shopping.org" "Other" ) "Other shopping"))
+(pretty-hydra-define hydra-org-refile
+  (:color pink :quit-key "q")
+  ("Shopping"
+   (("g" (my/refile "shopping.org" "Groceries") "Groceries")
+    ("s" (my/refile "shopping.org" "Other") "Other shopping"))
    "computer"
-   ( ("e"  (my/refile "todo.org" "Emacs" "Emacs tasks")))))
+   (("e" (my/refile "dev_todo.org" "Emacs") "Emacs tasks")
+    ("p" (my/refile "dev_todo.org" "programming") "Prog tasks")
+    ("r" (my/refile "dev_todo.org" "racket") "Racket tasks"))
+   "Other"
+   (("w" (my/refile "dev_todo.org" "racket") "Web"))))
 #+end_src

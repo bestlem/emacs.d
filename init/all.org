@@ -7,8 +7,9 @@
 :END:
 Now minimally useful
 This adds the real use.
-The order hear does not matter much.
+The order here does not matter much.
 In future this file should really just be a list of mwb-init-load and each one can fail. All structure could be here.
+
 
 * After initialisation
 :PROPERTIES:
@@ -20,7 +21,7 @@ Although see starter kit where they run after init.
   (add-hook 'after-init-hook
 			`(lambda ()
 			   (setq file-name-handler-alist file-name-handler-alist-old
-					 gc-cons-threshold 800000
+					 gc-cons-threshold mwb/gc-cons-threshold
 					 gc-cons-percentage 0.1)
 			   (garbage-collect)
 			   (message "Emacs init-time %s" (emacs-init-time))) t)

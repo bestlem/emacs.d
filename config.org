@@ -265,6 +265,14 @@ So add :mwb-load-path as a new key to use-package
 (setq use-package-keywords
       (mwb-insert-before-element :load-path :mwb-load-path  use-package-keywords))
 #+end_src
+** Various constants
+:PROPERTIES:
+:ID:       org_mark_2020-02-20T21-36-43+00-00_mini12.local:EC43B9AE-44B4-4FBB-9E63-AC26BB45592E
+:END:
+#+NAME: org_mark_2020-02-20T21-36-43+00-00_mini12.local_D4825A59-A326-47EB-9BD5-EE4E8E6045A5
+#+begin_src emacs-lisp
+(setq mwb/gc-cons-threshold 800000)
+#+end_src
 ** Org Mode base setup
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:D93E7BE4-C5B1-419E-B03F-B2D4980DAF02

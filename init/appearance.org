@@ -225,3 +225,19 @@ I think I now want mainly one window and have splits but tabs are useful.
  (one-buffer-one-frame-mode -1)
  (setq  special-display-regexps nil)
  #+end_src
+
+** Fonts
+:PROPERTIES:
+:ID:       org_mark_2020-02-10T11-53-11+00-00_mini12:0A89487A-9396-43C4-9F45-0B2DBEBD41FE
+:END:
+*** Buffer face
+:PROPERTIES:
+:ID:       org_mark_2020-02-10T11-53-11+00-00_mini12:8BD8443B-8175-4615-9E81-4327864CB523
+:END:
+Remove from mode line
+#+NAME: org_mark_2020-02-10T11-53-11+00-00_mini12_FF91EEFC-2D6E-4E05-9F12-2F30E53177D4
+#+begin_src emacs-lisp
+;; Remove BufFace from mode line
+(eval-after-load "face-remap"
+  '(diminish 'buffer-face-mode))
+  #+end_src

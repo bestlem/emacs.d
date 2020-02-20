@@ -36,7 +36,9 @@
 ** grettke
  - path :: ~/src/ThirdParty/emacs-init/grettke
 * Racket
-** realm
+** my realm
  - path :: ~/src/Racket/realm
+** realm book
+ - path :: ~/src/Racket/realm.source
 ** Coursera Programming languages
  - path :: ~/src/coursera/ProgrammingLanguages

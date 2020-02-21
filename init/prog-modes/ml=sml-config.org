@@ -40,7 +40,7 @@ Run the file - the main action for sml
 Setup smartparens to allow insert of comments
  #+NAME: org_mark_2020-02-10T11-53-11+00-00_mini12_67B0138B-D586-41FE-9E48-9AA1D41C2C54
  #+begin_src emacs-lisp
-(sp-with-modes '(sml-mode)
+(sp-with-modes 'sml-mode
   (sp-local-pair "(*" "*)" ))
 #+end_src
 * REPL

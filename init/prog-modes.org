@@ -257,6 +257,16 @@ This also takes time to load. Need to sort out config entries and gradele-mode n
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:2C96FB68-3664-43DA-9CD7-8CD203ED8F36
 :END:
+*** Spellcheck comments
+:PROPERTIES:
+:ID:       org_mark_2020-02-20T21-36-43+00-00_mini12.local:7E554ECD-7BE8-4EF1-9457-E647D71308F8
+:END:
+From [[https://www.emacswiki.org/emacs/FlySpell#toc2][Emacs Wiki]]
+#+NAME: org_mark_2020-02-20T21-36-43+00-00_mini12.local_CB61AE09-7A2C-4981-BC94-851FB7C67E5A
+#+begin_src emacs-lisp
+(add-hook 'prog-mode-hook
+          #'flyspell-prog-mode)
+#+end_src
 *** TODO Flymake
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:6D225364-60B5-4C41-A802-CFBE5E7E6F2A

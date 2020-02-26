@@ -28,6 +28,6 @@ sml-mode from elpa - documentation on sml/nj is old
   (setq sml-abbrev-skeletons nil
         sml-config-file "~/.config/.smlproc.sml"
 	sml-electric-pipe-mode nil)
-  :config (mwb-init-load "init/prog-modes/ml=sml-config")
+  :config (mwb-init-load "init/prog-modes/ml_sml-config")
   )
 #+end_src

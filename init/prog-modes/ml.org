@@ -22,14 +22,12 @@ sml-mode from elpa - documentation on sml/nj is old
               ("<f5>" . mwb-sml-run-file))
   :hook ((sml-mode . aggressive-indent-mode)
          (sml-mode . prettify-symbols-mode)
-	 (sml-mode . smartparens-mode)
-         )
+	 (sml-mode . smartparens-mode))
   :init                                 ; remove from customise for easier control
   (setq sml-abbrev-skeletons nil
         sml-config-file "~/.config/.smlproc.sml"
 	sml-electric-pipe-mode nil)
-  :config (mwb-init-load "init/prog-modes/ml_sml-config")
-  )
+  :config (mwb-init-load "init/prog-modes/ml_sml-config"))
 
 
 

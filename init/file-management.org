@@ -176,6 +176,29 @@ So take from projectile
   (setq projectile-completion-system 'ivy)
   (projectile-global-mode))
 #+end_src
+*** File saving
+:PROPERTIES:
+:ID:       org_mark_2020-03-02T07-49-31+00-00_mini12.local:AA45827A-2D69-4702-9D2D-F48D20F1A2AB
+:END:
+projectile-save-project-buffers is nice but save-buffer does not make a backup. I have mwb/mac-key-save-buffer-force-backup ( to force a save. I need to integrate these
+#+NAME: org_mark_2020-03-02T07-49-31+00-00_mini12.local_EAB2D4CD-DF1F-4845-87F8-EF1531AFB411
+#+begin_src emacs-lisp
+(defun mwb-projectile-save-project-buffers ()
+  "Save all project buffers."
+  (interactive)
+  (let* ((project (projectile-ensure-project (projectile-project-root)))
+	 (project-name (projectile-project-name project))
+	 (modified-buffers (cl-remove-if-not (lambda (buf)
+					       (and (buffer-file-name buf)
+						    (buffer-modified-p buf)))
+					     (projectile-project-buffers project))))
+    (if (null modified-buffers)
+	(message "[%s] No buffers need saving mwb" project-name)
+      (dolist (buf modified-buffers)
+	(with-current-buffer buf
+	  (save-buffer 16)))
+      (message "[%s] Saved %d buffers mwb" project-name (length modified-buffers)))))
+#+end_src
 *** Hydra
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:ABDFEF9C-A337-466D-859C-D186DBE3A9ED

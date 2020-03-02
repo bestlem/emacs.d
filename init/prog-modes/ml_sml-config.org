@@ -46,7 +46,7 @@ Run the file - the main action for sml
 
   (save-window-excursion
     (mwb-sml--kill-sml-repl)
-    (projectile-save-project-buffers))
+    (mwb-projectile-save-project-buffers))
   (sml-run sml-program-name file))
   #+end_src
 
@@ -70,6 +70,8 @@ Various variables need to be set to use polyml
 	;; sml-error-regexp  sml-poly-ml-error-regexp
 	;; sml-error-parser  'sml-poly-ml-error-parser
 	))
+
+(mwb-sml-set-polyml)
 #+end_src
 
 ** Error search

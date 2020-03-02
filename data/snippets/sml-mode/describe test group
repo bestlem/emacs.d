@@ -2,7 +2,6 @@
 # key : describe
 # contributor : Mark Bestley
 # --
-${1:,}describe "$2"
-[
+${1:,}describe "$2" [
 $0
 ]

@@ -18,8 +18,11 @@ Most from [[https://github.com/jojojames/matcha][matcha]]
   :defer 6)
 #+end_src
 
-
-* Formatter
+* Formatting
+:PROPERTIES:
+:ID:       org_mark_2020-03-02T07-49-31+00-00_mini12.local:B2DA6147-D1C4-4D09-9702-371808CB3424
+:END:
+** Formatter
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:0C004AE2-22C4-4307-9D4D-57777C260EC0
 :END:
@@ -31,6 +34,15 @@ Most from [[https://github.com/jojojames/matcha][matcha]]
       :defer 10
       :ensure t)
     #+end_src
+** Filling
+:PROPERTIES:
+:ID:       org_mark_2020-03-02T07-49-31+00-00_mini12.local:E19FC44E-6C80-4DD8-BBFA-99156DD9884D
+:END:
+We want to wrap comments.
+#+NAME: org_mark_2020-03-02T07-49-31+00-00_mini12.local_40B17E22-5242-4E2A-86DA-FBA14F107693
+#+begin_src emacs-lisp
+(add-hook 'emacs-lisp-mode-hook 'mwb-prog-auto-fill)
+#+end_src
 * See macros
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:87193D42-251A-408C-80B7-839BF6CFCE81

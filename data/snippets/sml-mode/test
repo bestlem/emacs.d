@@ -1,5 +1,5 @@
 # name : a test case
 # key : test
-# contributor : Mark Bestle1y
+# contributor : Mark Bestley
 # --
-${1:,}test "$2" (fn _ => $0 |> Expect.equalTo {$3:expected})
+${1:,}test "$2" (fn _ => $0 |> Expect.equalTo ${3:expected})

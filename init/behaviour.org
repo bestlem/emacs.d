@@ -80,23 +80,43 @@ I haven't used before but might try with hydra from [[https://sriramkswamy.githu
 
 
 #+end_src
-* Minibuffer memory
+* memory
+:PROPERTIES:
+:ID:       org_mark_2020-03-02T07-49-31+00-00_mini12.local:F19DE0CC-B946-4885-808E-36CB21A4AF3D
+:END:
+** minibuffer
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:FFDA0E37-D169-4605-81D5-6286FB7C08B4
 :END:
   I have had crashes with helpful where emacs has to be killed. Looks like a recursive stack error but also see comment re garbage collection So let's try
   Note this causes a gc when minibuffer ends - perhaps not the best time
+After crashes this has been turned off
   #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_6D1AA0E9-63E0-4D18-81AE-142094A987CE
   #+begin_src emacs-lisp :tangle no
-  (defun my-minibuffer-setup-hook ()
-	(setq gc-cons-threshold 8000000))
+(defun my-minibuffer-setup-hook ()
+  (setq gc-cons-threshold 8000000))
 
-  (defun my-minibuffer-exit-hook ()
-	(setq gc-cons-threshold 800000))
+(defun my-minibuffer-exit-hook ()
+  (setq gc-cons-threshold 800000))
 
-  (add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
-  (add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
+;; (add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
+;; (add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
   #+end_src
+** At useful times
+:PROPERTIES:
+:ID:       org_mark_2020-03-02T07-49-31+00-00_mini12.local:E84E64AE-0AE9-47B6-B5AE-1E29C11FC9D6
+:END:
+If Emacs is doing nothing then might as well gc
+Taken from [[https://www.reddit.com/r/emacs/comments/bqu69o/making_emacs_snappier_i_need_a_second_opinion/][Reddit]] but not on kill-buffer
+#+NAME: org_mark_2020-03-02T07-49-31+00-00_mini12.local_8B85D421-DEE1-4971-B1CB-CBD7C5678E5F
+#+begin_src emacs-lisp
+(add-hook 'after-save-hook       #'garbage-collect)
+(add-hook 'focus-out-hook        #'garbage-collect)
+(add-hook 'minibuffer-exit-hook  #'garbage-collect)
+(add-hook 'minibuffer-setup-hook #'garbage-collect)
+(add-hook 'suspend-hook          #'garbage-collect)
+
+#+end_src
 * Help
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:BA8FE03C-5430-4984-9CD3-7E5971925F68

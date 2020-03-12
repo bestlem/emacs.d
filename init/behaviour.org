@@ -435,3 +435,41 @@ midnight-mode purges buffers which haven’t been displayed in 3 days. We config
   (add-to-clean-buffer-regex "helpful")
   (midnight-mode 1))
 #+end_src
+* Minibuffer
+:PROPERTIES:
+:ID:       org_mark_2020-03-06T13-08-35+00-00_mini12.local:3D34B982-AF06-4809-ACCC-E206FFCAC10A
+:END:
+Kill it from anywhere from blog with-Emacs but take version from [[https://www.reddit.com/r/emacs/comments/ffbser/withemacs_quit_current_context/][Reddit]]
+#+NAME: org_mark_2020-03-06T13-08-35+00-00_mini12.local_983EF586-334E-442B-B675-D73D0165A612
+#+begin_src emacs-lisp
+(defun keyboard-quit-context+ ()
+  "Quit current context.
+
+    This function is a combination of `keyboard-quit' and
+    `keyboard-escape-quit' with some parts omitted and some custom
+    behavior added."
+  (interactive)
+  (cond ((region-active-p)
+         ;; Avoid adding the region to the window selection.
+         (setq saved-region-selection nil)
+         (let (select-active-regions)
+           (deactivate-mark)))
+        ((eq last-command 'mode-exited) nil)
+        (current-prefix-arg
+         nil)
+        (defining-kbd-macro
+          (message
+           (substitute-command-keys
+            "Quit is ignored during macro defintion, use \\[kmacro-end-macro] if you want to stop macro definition"))
+          (cancel-kbd-macro-events))
+        ((active-minibuffer-window)
+         (when (get-buffer-window "*Completions*")
+           ;; hide completions first so point stays in active window when
+           ;; outside the minibuffer
+           (minibuffer-hide-completions))
+         (abort-recursive-edit))
+        (t
+         (keyboard-quit))))
+
+(bind-key "H-k" 'keyboard-quit-context+)
+#+end_src

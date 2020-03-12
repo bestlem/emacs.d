@@ -86,8 +86,8 @@
  '(minibuffer-prompt-properties
    (quote
     (read-only t cursor-intangible t face minibuffer-prompt cursor-intangible t)))
- '(ns-right-alternate-modifier (quote super))
- '(ns-right-command-modifier (quote control))
+ '(ns-right-alternate-modifier nil)
+ '(ns-right-command-modifier (quote super))
  '(ns-tool-bar-display-mode (quote both) t)
  '(ns-tool-bar-size-mode nil t)
  '(nxml-slash-auto-complete-flag t)

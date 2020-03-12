@@ -104,9 +104,14 @@ So hyper-A is now a mode hydra key and I have started defining a hydra on that,
 :END:
 We have fn available so have it as hyper and then use Karabiner  (try iCue later) to map Caps Lock and Window key to hyper. Super is used sometimes so I think is confusing and as noted sequence of keys (emacs key-chord and hydra) is better.
 I don't use the right hand modifier keys so not set separately.
+Things got changed on one run so set here and remove from customisation
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_47DFBF48-A6BD-4CFA-925B-811981A1E92B
 #+begin_src emacs-lisp
-	 (setq ns-function-modifier 'hyper)
+(setq ns-function-modifier 'hyper
+      ns-alternate-modifier 'meta
+      ns-right-alternate-modifier nil
+      ns-right-command-modifier 'super
+      )
 #+end_src
 *** Display in help and menus
 :PROPERTIES:
@@ -327,7 +332,25 @@ Note that the Aquamacs binding does not fit through bind-keys
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:69EED50E-06AD-4068-A0FA-34186BCC8E7D
 :END:
    From [[https://github.com/abo-abo/hydra/wiki/Emacs][Hydra wiki - Find file with xf]]
+   Not really working as elisp well lispy messes it up and I use Mac bindings so ^x rarer.
+   #+NAME: org_mark_2020-03-06T13-08-35+00-00_mini12.local_BE42E0D7-506F-4778-89F9-E4DC4B14493E
+   #+begin_src emacs-lisp
+(defun x-hydra-pre ()
+  (insert "x")
+  (let ((timer (timer-create)))
+    (timer-set-time timer (timer-relative-time (current-time) 0.5))
+    (timer-set-function timer 'hydra-keyboard-quit)
+    (timer-activate timer)))
 
+(defhydra x-hydra (:body-pre x-hydra-pre
+			     :color blue
+			     :hint nil)
+  ("b" (progn (zap-to-char -1 ?x) (ivy-switch-buffer)))
+  ("f" (progn (zap-to-char -1 ?x) (counsel-find-file)))
+  ("r" (progn (zap-to-char -1 ?x) (counsel-recentf))))
+
+(bind-key "x" #'x-hydra/body)
+#+end_src
 * Hydra
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:A41389A4-CD6E-44AD-A79A-C170F7936D9D

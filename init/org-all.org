@@ -61,13 +61,14 @@ Note Hydra is not really used after just a couple of weeks.
 <<org-mode-hydrae>>
 ;;<<org-mode-hydrae-code>>
 :config
+<<org-config>>
 <<org-mode-hydrae-refile>>
 
 <<org-grettke>>
 
     )
   #+end_src
-e*** Key bindings
+*** Key bindings
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:7CFDEDFE-FB36-47D9-8D94-0CDC83AF71CC
 :END:
@@ -1179,6 +1180,16 @@ results need to be visibly noticeably different for the reader by making them
 
 Diagramming languages require =RESULTS= output for exporting.
 
+** Footnotes
+:PROPERTIES:
+:ID:       org_mark_2020-03-06T13-08-35+00-00_mini12.local:31819091-6339-413D-9DD1-C248C5F6520B
+:END:
+Need to set up an auto-sort
+#+NAME: org_mark_2020-03-06T13-08-35+00-00_mini12.local_632B9653-A2FD-4226-A130-A0260FCD9B66
+#+begin_src emacs-lisp :noweb-ref org-config :tangle no
+(setq org-footnote-auto-adjust t)
+#+end_src
+
 
 ** Prettify
 :PROPERTIES:
@@ -1370,7 +1381,8 @@ Using new pretty mode hydra but with #+setupfile: from the matcha
    ("t" org-todo "Todo"))
   "Links"
   (("l" org-store-link "Store")
-   ("i" org-insert-link "Insert"))))
+   ("i" org-insert-link "Insert")
+   ("f" org-footnote-action "Footnote"))))
 
 #+end_src
 *** Refile

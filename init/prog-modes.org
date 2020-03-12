@@ -60,16 +60,38 @@ However only want to fill modes where there ios line based comments e.g. Emacs l
 ;; use by setting in the actual program mode
 ;;(add-hook 'prog-mode-hook 'mwb-prog-auto-fill)
 #+end_src
-*** Aggressive indent
+
+*** Structure editing
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:C05CF80F-DBBB-4FE8-9E8B-55BED989218B
+:END:
+**** Smartparens
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:838D12E0-E4AA-4DD0-8F6E-56CDA89B5F0E
+:END:
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_A84231FF-A68D-44B0-9010-3CD91C8B2DA4
+#+begin_src emacs-lisp
+(use-package smartparens
+  :ensure t
+  :config
+  (setq sp-show-pair-from-inside nil)
+  (require 'smartparens-config)
+  :diminish smartparens-mode)
+#+end_src
+**** Aggressive indent
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:25EEAB16-473F-4321-B9CD-085BD4B97CB5
 :END:
  Indent as you type. Only for emacs lisp or racket at the moment. https://github.com/Malabarba/aggressive-indent-mode
  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_9DFEE1E2-3416-4ACF-9B5F-44C23CA8722F
  #+begin_src emacs-lisp
- (use-package aggressive-indent
-   :ensure t
-   :hook ((racket-mode emacs-lisp-mode) . aggressive-indent-mode))
+(use-package aggressive-indent
+  :ensure t
+  :after smartparens
+  :config
+  (dolist (el sp-lisp-modes)
+    (add-hook el 'aggressive-indent-mode))
+  )
  #+end_src
 ** Clean up whitespace
 :PROPERTIES:
@@ -399,23 +421,6 @@ However I can't use that for a send to buffer as the map from mode to function i
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_64A36B3D-104D-47BA-A2A1-91E1844F7121
 #+begin_src emacs-lisp
 (mwb-init-load "init/prog-modes/git")
-#+end_src
-** Structure editing
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:C05CF80F-DBBB-4FE8-9E8B-55BED989218B
-:END:
-*** Smartparens
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:838D12E0-E4AA-4DD0-8F6E-56CDA89B5F0E
-:END:
-#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_A84231FF-A68D-44B0-9010-3CD91C8B2DA4
-#+begin_src emacs-lisp
-(use-package smartparens
-  :ensure t
-  :config
-  (setq sp-show-pair-from-inside nil)
-  (require 'smartparens-config)
-  :diminish smartparens-mode)
 #+end_src
 * Specific groups
 :PROPERTIES:

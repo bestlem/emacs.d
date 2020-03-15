@@ -42,3 +42,5 @@
  - path :: ~/src/Racket/realm.source
 ** Coursera Programming languages
  - path :: ~/src/coursera/ProgrammingLanguages
+** SML unit test
+ - path :: ~/src/sml/unit_test

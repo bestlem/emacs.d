@@ -6,105 +6,6 @@
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:1C20958B-CC40-4D69-B34D-3F34D5C8699A
 :END:
 Change from lispy to paredit. The delete-selection issue is too much. I keep typing on a selected region
-** Paredit
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:584E5EE1-6D19-448F-9425-6972980A18F5
-:END:
-*** Paredit mode
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:59FC068F-2044-4EFC-B440-2BB09575A662
-:END:
-Setup from racket mode docs
-#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_EBAC031A-97F7-48E8-AA77-E35E586F583A
-#+begin_src emacs-lisp
-(use-package paredit
-  :ensure t
-  :diminish
-
-  :config
-  ;;   ;; making paredit work with delete-selection-mode
-
-  (put 'paredit-forward-delete 'delete-selection 'supersede)
-  (put 'paredit-backward-delete 'delete-selection 'supersede)
-  (put 'paredit-open-round 'delete-selection t)
-  (put 'paredit-open-square 'delete-selection t)
-  (put 'paredit-doublequote 'delete-selection t)
-  (put 'paredit-newline 'delete-selection t)
-
-  ;; (dolist (m '(
-  ;;              racket-mode-hook
-  ;;              racket-repl-mode-hook))
-  ;; (add-hook m #'paredit-mode)
-  :bind (:map paredit-mode-map
-              ("{" . paredit-open-curly)
-              ("}" . paredit-close-curly)
-              ("M-[" . paredit-wrap-square)
-              ("M-{" . paredit-wrap-curly)))
-;; (bind-keys)
-;; (unless terminal-frame
-;;   (bind-keys :map paredit-mode-map
-;;              ("M-[" . paredit-wrap-square)
-;;              ("M-{" . paredit-wrap-curly))b
-#+end_src
-*** Paxedit
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:98C943CA-434C-4213-9895-4A72E24384BA
-:END:
-#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_87E13193-E70D-40DE-9F64-4A17687DDF7E
-#+begin_src emacs-lisp
-(use-package paxedit
-  :diminish
-  :ensure t
-  :commands (paxedit-mode)
-  :bind
-  ("M-<right>" . paxedit-transpose-forward)
-  ("M-<left>"  . paxedit-transpose-backward)
-  ("M-<up>"    . paxedit-backward-up)
-  ("M-<down>"  . paxedit-backward-end)
-  ("M-b"       . paxedit-previous-symbol)
-  ("M-f"       . paxedit-next-symbol)
-  ("C-%"       . paxedit-copy)
-  ("C-&"       . paxedit-kill)
-  ("C-*"       . paxedit-delete)
-  ("C-^"       . paxedit-sexp-raise)
-  ("M-u"       . paxedit-symbol-change-case)
-  ("C-@"       . paxedit-symbol-copy)
-  ("C-#"       . paxedit-symbol-kill))
-#+end_src
-*** Hydra
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:3BCD67FA-8AC4-4E24-9156-3E8674033262
-:END:
-From https://github.com/otijhuis/emacs.d/blob/master/config/hydra-settings.el
-#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_DBB78B2B-758D-4E9D-8584-3D6A5CFBC57A
-#+begin_src emacs-lisp
-(defhydra hydra-paredit (:color pink
-                                :columns 3
-                                :idle 1.0)
-  "Paredit"
-  ("(" paredit-wrap-round "Wrap round")
-  ("[" paredit-wrap-square "Wrap square")
-  ("]" paredit-wrap-square "Wrap square")
-  ("{" paredit-wrap-curly "Wrap curly")
-  ("s" paredit-splice-sexp "Splice")
-  ("bs" cljr-splice-sexp-killing-backward "Splice kill backward")
-  ("fs" cljr-splice-sexp-killing-forward "Splice kill forward")
-  ("S" paredit-split-sexp "Split")
-  ("j" paredit-join-sexps "Join")
-  ("J" paredit-join-with-next-list "Join next list")
-  ("M-J" paredit-join-with-previous-list "Join prev list")
-  ("C" paredit-convolute-sexp "Convolute")
-  ("M-c" paredit-copy-as-kill "Copy as kill")
-  ("r" paredit-raise-sexp "Raise s-expression")
-  ("R" cljr-raise-sexp "Raise s-expression (cljr)")
-  ("c" paxedit-copy "Copy explicit expression, implicit expression, or comment")
-  ("d" paxedit-delete "Delete expression")
-  ("tb" paxedit-transpose-backward "Transpose backward")
-  ("tf" paxedit-transpose-forward "Transpose forward")
-  ("k" paxedit-kill "Kill explicit expression, implicit expression, or comment")
-  (";" paxedit-wrap-comment "Wrap with comment")
-  ("q" nil "cancel"))
-#+end_src
 ** Racket mode
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:5D2738AD-C2C9-4913-8A9A-AE669A142269
@@ -120,20 +21,21 @@ From https://github.com/otijhuis/emacs.d/blob/master/config/hydra-settings.el
               ("S-<f5>" . racket-mwb-raco-all-tests)
               ("<f1> <f1>" . racket-describe)
               ("M-l" . racket-insert-lambda)
-              ;("H-A" . hydra-paredit/body)
+					;("H-A" . hydra-paredit/body)
               :map racket-repl-mode-map
               ("<f5>" . racket-run))
   :config (setq racket-program "/Applications/Racket v7.5/bin/racket"
                 tab-always-indent 'complete
-                key-chord-mode 1 ; unknown how it was turned off
+		key-chord-mode 1        ; unknown how it was turned off
                 )
   (use-package racket-support
                                         ;:mwb-load-path "site-lisp/lisp"
     )
+
   :hook ((racket-mode racket-repl-mode) . racket-unicode-input-method-enable)
   ((racket-mode racket-repl-mode) . racket-smart-open-bracket-mode)
-  ((racket-mode racket-repl-mode) . paredit-mode)
-  ((racket-mode racket-repl-mode) . paxedit-mode))
+
+  )
       #+end_src
 *** Hydra
 :PROPERTIES:

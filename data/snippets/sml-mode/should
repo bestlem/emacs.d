@@ -1,0 +1,11 @@
+# name : should test case
+# key : should
+# contributor : Mark Bestley
+# --
+${1:,}should( "$2",
+	      fn () =>
+	      expect ($3)
+	      ${4:toEqualInt}
+	      $5
+	      )
+$0

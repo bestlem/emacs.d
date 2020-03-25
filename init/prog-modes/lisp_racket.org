@@ -21,21 +21,19 @@ Change from lispy to paredit. The delete-selection issue is too much. I keep typ
               ("S-<f5>" . racket-mwb-raco-all-tests)
               ("<f1> <f1>" . racket-describe)
               ("M-l" . racket-insert-lambda)
-					;("H-A" . hydra-paredit/body)
+                                        ;("H-A" . hydra-paredit/body)
               :map racket-repl-mode-map
               ("<f5>" . racket-run))
-  :config (setq racket-program "/Applications/Racket v7.5/bin/racket"
+  :config (setq racket-program "/Applications/Racket v7.6/bin/racket"
                 tab-always-indent 'complete
-		key-chord-mode 1        ; unknown how it was turned off
+                key-chord-mode 1        ; unknown how it was turned off
                 )
   (use-package racket-support
                                         ;:mwb-load-path "site-lisp/lisp"
     )
 
   :hook ((racket-mode racket-repl-mode) . racket-unicode-input-method-enable)
-  ((racket-mode racket-repl-mode) . racket-smart-open-bracket-mode)
-
-  )
+  ((racket-mode racket-repl-mode) . racket-smart-open-bracket-mode))
       #+end_src
 *** Hydra
 :PROPERTIES:

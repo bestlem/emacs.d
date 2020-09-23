@@ -35,6 +35,7 @@ Although that should be in prog mode
        :bind (:map lispy-mode-map
                    ("<backspace>" . lispy-delete-backward)
                    ("<kp-delete>" . lispy-delete))
+       :custom (lispy-eval-display-style "overlay")
        :config (setq lispy-compat (quote (edebug macrostep))
                      lispy-safe-paste t)
        (add-hook 'lispy-mode-hook #'turn-off-smartparens-mode))

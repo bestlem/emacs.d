@@ -35,7 +35,7 @@
  '(fringe-mode (quote (16 . 0)) nil (fringe))
  '(global-hl-line-mode t)
  '(gnus-directory "~/Library/Preferences/Aquamacs Emacs/News")
- '(gnus-group-sort-function (quote (gnus-group-sort-by-rank)) t)
+ '(gnus-group-sort-function (quote (gnus-group-sort-by-rank)))
  '(gnus-kill-save-kill-file t)
  '(gnus-score-mimic-keymap nil)
  '(gnus-server-browse-in-group-buffer t)
@@ -103,7 +103,7 @@
  '(org-todo-keywords (quote ((sequence "TODO" "|" "DONE" "LEAVE(@)"))))
  '(package-selected-packages
    (quote
-    (smartparens smartparens-config all-the-icons major-mode-hydra eval-in-repl xr yasnippet-snippets outshine expand-region json-navigator yasnippet mwim mwin mosey ivy-prescient prescient fish-mode sml-mode paxedit use-package-chords paredit dashboard org clojure-mode lispy racket-mode cmake-mode swiper ivy transient cask-mode flycheck undo-tree deadgrep eros macrostep helpful ibuffer-vc counsel ivy-rich ivy-hydra org-indent xah-elisp-mode validate hardhat hydra projectile beacon ripgrep gitignore-mode gitconfig-mode nov manual matcha use-package-hydra backup-each-save esup org-bullets which-key company elmacro ws-butlerz helm elisp-format origami comment-dwim-2 smex discover-my-major json-mode treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ranger dired-toggle aggressive-indent rainbow-delimiters gradle-mode groovy-imports groovy-mode ws-butler highlight-indent-guides diminish key-chord use-package)))
+    (which-key racket-mode elmacro lispy rainbow-delimiters flycheck smartparens highlight-indent-guides nov treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ibuffer-vc projectile deadgrep ivy-prescient prescient counsel swiper ivy-rich ivy-hydra ivy yasnippet company helpful org smartparens-config all-the-icons major-mode-hydra eval-in-repl xr yasnippet-snippets outshine expand-region json-navigator mwim mwin mosey fish-mode sml-mode use-package-chords paredit dashboard clojure-mode cmake-mode cask-mode eros macrostep org-indent xah-elisp-mode validate hardhat beacon ripgrep gitignore-mode gitconfig-mode manual matcha use-package-hydra backup-each-save esup org-bullets ws-butlerz helm elisp-format origami comment-dwim-2 smex discover-my-major json-mode ranger dired-toggle aggressive-indent gradle-mode groovy-imports groovy-mode ws-butler diminish key-chord)))
  '(python-shell-interpreter "python")
  '(tabbar-mode nil nil (tabbar))
  '(text-mode-hook (quote (turn-on-flyspell set-word-wrap)))

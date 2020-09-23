@@ -195,40 +195,9 @@
   ("S" lispy-edebug-stop "stop")
   ("d" lispy-describe "describe"))
 
-(setq lispy-eval-display-style 'overlay)
-(defun mwb-lispy-eval (arg)
-  "Eval last sexp.
-When ARG is 2, insert the result as a comment.
-Add if not message the eros display"
-  (interactive "p")
-  (cond ((eq arg 2)
-         (lispy-eval-and-comment))
-        ((and (looking-at lispy-outline)
-              (looking-at lispy-outline-header))
-         (lispy-eval-outline))
-        (t
-         (let ((handler (cdr (assoc major-mode lispy-eval-alist)))
-               result)
-           (if handler
-               (progn
-                 (when (cadr handler)
-                   (require (cadr handler)))
-                 (setq result (funcall (car handler) (eq arg 3))))
-             (setq result (lispy--eval-default)))
-           (cond ((eq lispy-eval-display-style 'message)
-                  (lispy-message result))
-                 ((or (fboundp 'cider--display-interactive-eval-result)
-                      (require 'cider nil t))
-                  (cider--display-interactive-eval-result result
-                                                          (cdr (lispy--bounds-dwim))))
-                 (t (eros--eval-overlay
-					 result
-					 (cdr (lispy--bounds-dwim)))
-					))))))
-
 (defhydra hydra-lispy-eval (:color blue)
   "Lispy eval"
-  ("e" mwb-lispy-eval "eval")
+  ("e" lispy-eval "eval")
   ("r" lispy-eval-and-replace "replace" :color red)
   ("o" lispy-eval-other-window "other window")
   ("i" lispy-eval-and-insert "insert")
@@ -332,9 +301,10 @@ Add if not message the eros display"
 ;; a-z
 
 (lispy-define-key lispy-mnemonic-mode-map (kbd "a") 'hydra-lispy-ace/body)
-(lispy-define-key lispy-mnemonic-mode-map (kbd "e") 'mwb-lispy-eval)
+;; (lispy-define-key lispy-mnemonic-mode-map (kbd "e") 'mwb-lispy-eval) ; noe
+;; in lispy
 ;; (lispy-define-key lispy-mnemonic-mode-map (kbd "e") 'hydra-lispy-eval/body)
-(lispy-define-key lispy-mnemonic-mode-map (kbd "g") 'hydra-lispy-goto/body)
+;; (lispy-define-key lispy-mnemonic-mode-map (kbd "g") 'hydra-lispy-goto/body)
 ;; (lispy-define-key lispy-mnemonic-mode-map (kbd "m") 'hydra-lispy-mark/body)
 (lispy-define-key lispy-mnemonic-mode-map (kbd "x") 'hydra-lispy-x/body)
 ;; (lispy-define-key lispy-mnemonic-mode-map (kbd ">") 'hydra-lispy-slurp/body)

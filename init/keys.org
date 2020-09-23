@@ -319,7 +319,8 @@ Note that the Aquamacs binding does not fit through bind-keys
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_E5C06415-F04E-4599-A173-414139F0F13B
 #+begin_src emacs-lisp
 (bind-key "A-b" 'ivy-switch-buffer)
-(bind-key "A-k" 'bjm/kill-this-buffer)
+(bind-key "A-M-k" 'bjm/kill-this-buffer)
+(bind-key "A-k" 'bury-buffer)
 ;; (bind-key (kbd "A-u") 'revert-buffer-no-confirm)
 (bind-key "A-M-u" 'ediff-revision)
 (bind-key "A-/" 'comment-or-uncomment-region-or-line)
@@ -333,6 +334,7 @@ Note that the Aquamacs binding does not fit through bind-keys
 :END:
    From [[https://github.com/abo-abo/hydra/wiki/Emacs][Hydra wiki - Find file with xf]]
    Not really working as elisp well lispy messes it up and I use Mac bindings so ^x rarer.
+   It does work except lispy
    #+NAME: org_mark_2020-03-06T13-08-35+00-00_mini12.local_BE42E0D7-506F-4778-89F9-E4DC4B14493E
    #+begin_src emacs-lisp
 (defun x-hydra-pre ()
@@ -349,8 +351,22 @@ Note that the Aquamacs binding does not fit through bind-keys
   ("f" (progn (zap-to-char -1 ?x) (counsel-find-file)))
   ("r" (progn (zap-to-char -1 ?x) (counsel-recentf))))
 
-(bind-key "x" #'x-hydra/body)
+(defhydra x-hydra-readonly ( :color blue
+                            :timeout 2)
+  ("b" ivy-switch-buffer "switch buffer")
+  ("f" counsel-find-file "find-file")
+  ("r" counsel-recentf "recentf")
+  ("x" nil "cancel"))
+
+(defun mwb-x-key ()
+  (interactive)
+  (if buffer-read-only
+      (x-hydra-readonly/body)
+    (x-hydra/body)))
+
+(bind-key "x" #'mwb-x-key)
 #+end_src
+
 * Hydra
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:A41389A4-CD6E-44AD-A79A-C170F7936D9D

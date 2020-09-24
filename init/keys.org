@@ -356,7 +356,7 @@ Note that the Aquamacs binding does not fit through bind-keys
   ("b" ivy-switch-buffer "switch buffer")
   ("f" counsel-find-file "find-file")
   ("r" counsel-recentf "recentf")
-  ("x" nil "cancel"))
+  ("x" nil "cancel" :color blue))
 
 (defun mwb-x-key ()
   (interactive)

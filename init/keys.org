@@ -7,6 +7,8 @@
 This file manages my global  key bindings excpet in Aquamacs they are not global.
 Other files might have defined global keys e.g. to start particular modes,  but in general we want them here.
 
+It is debateable wether we put bindings here or next to the functions
+
 ** How to bind
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:D8A384B2-3A02-4CDA-9A56-AC71DA2150F9
@@ -316,12 +318,25 @@ Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in e
 :END:
 These should be mac based adding to Aquamacs but some I do not used.
 Note that the Aquamacs binding does not fit through bind-keys
-#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_E5C06415-F04E-4599-A173-414139F0F13B
+*** Buffer related
+:PROPERTIES:
+:ID:       org_mark_2020-09-24T21-45-16+01-00_mini12.local:6D014266-E049-4521-A263-7154358EAD5D
+:END:
+#+NAME: org_mark_2020-09-24T21-45-16+01-00_mini12.local_427A6531-52EE-4F7E-A5E8-B2841C9B166A
 #+begin_src emacs-lisp
 (bind-key "A-b" 'ivy-switch-buffer)
 (bind-key "A-M-k" 'bjm/kill-this-buffer)
+(bind-key "C-x k" 'bjm/kill-this-buffer)
 (bind-key "A-k" 'bury-buffer)
-;; (bind-key (kbd "A-u") 'revert-buffer-no-confirm)
+(bind-chord "kk" #'er-switch-to-previous-buffer)
+(bind-key  "A-u" 'revert-buffer-no-confirm)
+#+end_src
+*** Other
+:PROPERTIES:
+:ID:       org_mark_2020-09-24T21-45-16+01-00_mini12.local:5850CC8F-7956-45D4-8CDA-2CB4C152A34C
+:END:
+#+NAME: org_mark_2020-09-24T21-45-16+01-00_mini12.local_AF417D0A-EE73-4B8C-9B57-B7DFFFB19E40
+#+begin_src emacs-lisp
 (bind-key "A-M-u" 'ediff-revision)
 (bind-key "A-/" 'comment-or-uncomment-region-or-line)
 (bind-key "A-<kp-add>" 'zoom-font)

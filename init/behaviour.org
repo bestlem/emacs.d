@@ -374,7 +374,6 @@ Switch to last buffer on one key. From https://emacsredux.com/blog/2013/04/28/sw
 Repeated invocations toggle between the two most recently open buffers."
   (interactive)
   (switch-to-buffer (other-buffer (current-buffer) 1)))
-(bind-chord "zz" #'er-switch-to-previous-buffer)
 #+end_src
 ** Buffer removal
 :PROPERTIES:
@@ -392,8 +391,6 @@ By default C-x k runs the command kill-buffer which prompts you for which buffer
   "Kill the current buffer."
   (interactive)
   (kill-buffer (current-buffer)))
-
-(bind-key "C-x k" 'bjm/kill-this-buffer)
 #+end_src
 *** Deal with subprocesses
 :PROPERTIES:
@@ -415,7 +412,6 @@ I don't want to confirm https://emacs.stackexchange.com/a/10349/9874 The key bin
 (defun revert-buffer-no-confirm ()
   "Revert buffer without confirmation."
   (interactive) (revert-buffer t t))
-(bind-key (kbd "A-u") 'revert-buffer-no-confirm)
 #+end_src
 ** Kill old buffers
 :PROPERTIES:

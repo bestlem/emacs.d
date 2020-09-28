@@ -115,7 +115,8 @@ Replace isearch
   :after ivy
   :ensure t
   :bind (("C-s" . swiper-isearch)
-		 ("C-r" . swiper-isearch-backward))
+         ("C-r" . swiper-isearch-backward))
+  :config (setq swiper-stay-on-quit t) ; https://emacs.stackexchange.com/questions/55675/escape-swiper-even-when-match-is-required
   )
 #+end_src
 

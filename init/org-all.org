@@ -76,14 +76,16 @@ Put the bind bit in noweb
 #+NAME: key-binds
 #+begin_src emacs-lisp :tangle no
 (
-  ("H-s" . org-babel-tangle-jump-to-org)
- ("H-S-s" . org-babel-detangle)           ; actually update but can't deal with weave
+ ("H-s" . org-babel-tangle-jump-to-org)
+ ("H-S-s" . org-babel-detangle)     ; actually update but can't deal with weave
  :map org-mode-map
  ("H-s" . org-edit-special)
  ("<f5>" . org-ctrl-c-ctrl-c)
  :map org-src-mode-map
  ("H-s" . org-edit-src-exit)
- ("A-s" . org-edit-src-save)            ; I press by mistake but it makes sensenowsavenotsaveandexit
+ ("A-s" . org-edit-src-save)            ; I press by mistake but it makes
+                                        ; sense now save not save and exit
+ ("H-k". org-edit-src-abort)
  ;; :map org-capture-mode-map
  ;; ("<f12>" . org-capture-finalize)
  )
@@ -1376,8 +1378,8 @@ Using new pretty mode hydra but with #+setupfile: from the matcha
   "Org"
   (("a" org-agenda "Agenda")
    ("c" org-capture "Capture")
-   ("R" org-refile "Refile Hydra")
-   ("r" hydra-org-refile/body "Refile")
+   ("R" org-refile "Refile")
+   ("r" hydra-org-refile/body "Refile Hydra")
    ("t" org-todo "Todo"))
   "Links"
   (("l" org-store-link "Store")

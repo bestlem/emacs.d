@@ -24,7 +24,7 @@ Change from lispy to paredit. The delete-selection issue is too much. I keep typ
                                         ;("H-A" . hydra-paredit/body)
               :map racket-repl-mode-map
               ("<f5>" . racket-run))
-  :config (setq racket-program "/Applications/Racket v7.6/bin/racket"
+  :config (setq racket-program "/Applications/Racket v7.8/bin/racket"
                 tab-always-indent 'complete
                 key-chord-mode 1        ; unknown how it was turned off
                 )

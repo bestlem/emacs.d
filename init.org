@@ -192,13 +192,16 @@ From  aquamacs-get-custom-file-dotemacs-warning
 ;; Consider moving your startup settings to the Preferences.el file, which
 ;; is loaded after `custom-file':
 
-* Implement init environment (init.el)
+* Implement init preload
 :PROPERTIES:
-  :header-args:    :tangle init.el :comments link
-  :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:026AF0E8-C6EC-470F-906D-602EF7F08477
-  :END:
-All this is tangled into init.el which is also under git.
-*** Startup
+:header-args:    :tangle early-init.el :comments link
+:ID:       org_mark_2020-09-28T01-08-28+01-00_mini12.local:0952DED1-1095-4176-8826-251CEE37BDB2
+:END:
+
+Emacs 27 introduces early-init.el to go stuff before the graphics - basically package and some gui suppression
+This is taken from https://github.com/MatthewZMD/.emacs.d/blob/master/early-init.el and https://gitlab.com/protesilaos/dotfiles/blob/master/emacs/.emacs.d/emacs-init.org but many see the same
+
+** TODO Startup
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:B524CE3C-6A8D-49DA-85A5-8504DC43F0D6
 :END:
@@ -208,58 +211,65 @@ All this is tangled into init.el which is also under git.
  The time is probably not that useful - build on Aquamacs instead and there is an emacs profiler. I did get the Aquamacs nightly and that is much slower and displaying menus is an issue. I have changed accessibility in System Preferences->Privacy so we will see. Probably wait until emacs 27 is out and use a plain emacs and see about spell checking
  The file-name-handler-alist is probably needed as some of the hooks slow things heavily
 
- This is from [[ https://github.com/jwiegley/dot-emacs/blob/master/init.el#L1013][John Wiegley]]
+ This is from [[ https://github.com/jwiegley/dot-emacs/blob/master/init.el#L1013][John Wiegley]] It might make sense more in early-init.el but also needed for Emacs < 27
  #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_EC7FD451-253D-4F87-90DC-AD484305487F
  #+begin_src emacs-lisp
  (defconst emacs-start-time (current-time))
 
  (defvar file-name-handler-alist-old file-name-handler-alist)
 
- (setq package-enable-at-startup nil
-	   file-name-handler-alist nil
+ (setq file-name-handler-alist nil
 	   message-log-max 16384
 	   gc-cons-threshold 402653184
 	   gc-cons-percentage 0.6
 	   auto-window-vscroll nil)
  #+end_src
 
-*** package
+** Package
 :PROPERTIES:
-:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:A5028037-4023-4BE2-AFD4-68CCEDF2F249
+:ID:       org_mark_2020-09-28T01-08-28+01-00_mini12.local:D069442D-B7AF-4771-800A-87C4F3376AF0
 :END:
-As this is now ~/.emacs.d/init.el and not in ~/Library/Preferences Emacs sees this as startup and adds the package-initialise. SO need to add here to stop init.el changing and being see in github
-#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_B623E658-A6AA-46DF-AD9C-6EAC3BDC1BEE
+Package initialize occurs automatically, before `user-init-file' is loaded, but after `early-init-file'. emacs handles package initialization, so we must prevent Emacs from doing it early!
+#+NAME: org_mark_2020-09-28T01-08-28+01-00_mini12.local_407877DD-DF72-4900-9475-7723E8D855A2
 #+begin_src emacs-lisp
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
-;(package-initialize)
+(setq package-enable-at-startup nil)
 #+end_src
-*** Debug flag
+Set the path to packages
+#+NAME: org_mark_2020-09-28T01-08-28+01-00_mini12.local_0E90CFE6-BBAC-4DA3-8461-12811764098F
+#+begin_src emacs-lisp
+(setq package-user-dir
+                 (expand-file-name
+                  (format "elpa/%s/elpa"
+                          (concat emacs-version (when (getenv "MELPA_STABLE") "-stable"))) user-emacs-directory))
+#+end_src
+** Graphical suppression
 :PROPERTIES:
-:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:20E9D7CA-52FB-4C0D-94B7-380665846841
+:ID:       org_mark_2020-09-28T01-08-28+01-00_mini12.local:11552906-7CE1-4A2D-90DF-111015341ACB
 :END:
-	 #+begin_src emacs-lisp
-(setq init-file-debug nil)
-	 #+end_src
+Fiddle with suppressing graphics. I do want some of these
+#+NAME: org_mark_2020-09-28T01-08-28+01-00_mini12.local_19B4CE88-E1D4-4E44-91B7-AD3D8E74C2D3
+#+begin_src emacs-lisp
+;;(menu-bar-mode -1)
+(unless (and (display-graphic-p) (eq system-type 'darwin))
+  (push '(menu-bar-lines . 0) default-frame-alist))
+(push '(tool-bar-lines . 0) default-frame-alist)
+;;(push '(vertical-scroll-bars) default-frame-alist)
+#+end_src
 
-*** Code to do loading
+
+* Implement init environment (init.el)
 :PROPERTIES:
-:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:3A4B05D6-A440-46F1-8A2F-1AFF3B0CAA2D
-:END:
-  Need to get the correct directory
+  :header-args:    :tangle init.el :comments link
+  :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:026AF0E8-C6EC-470F-906D-602EF7F08477
+  :END:
+All this is tangled into init.el which is also under git.
 
-  Function to load the code for this part of the init.
-  Currently it just loads the .el of that name so could just be (load "mwb-init-load"). I now tangle all org-mode buffers on save. Eventually it will get the data from mwb-init-load.org and tangle it and use that.
-
-*** Helper functions
+** Where the files are
 :PROPERTIES:
-:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:438D5698-5B55-4E44-8E21-3F2F1FDC8DBF
+:ID:       org_mark_2020-09-28T01-08-28+01-00_mini12.local:EC710A48-6A42-4CEE-BF2B-BBA63EA929B1
 :END:
-Thse are required elisp for initialisation
-
-**** Set where the init file is
+We need to sort out paths - ideally after init timers etc but we also need them to load early-init so timer is less accurate but then it is wrong for aquamacs anyway
+*** Set where the init file is
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:5F44E496-0565-4D23-9D8B-128A663B9280
 :END:
@@ -273,7 +283,8 @@ Thse are required elisp for initialisation
  (defconst mwb-user-emacs-directory (mwb-get-directory-of-current-file))
 	  #+end_src
 
-**** Where my init code is
+
+*** Where my init code is
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:F550A4FA-B16B-4FD2-B11F-9F7DB4F82859
 :END:
@@ -286,6 +297,52 @@ Thse are required elisp for initialisation
   Main reason to use is so that I can put init under version control and the rest go elsewhere."
 	(expand-file-name name mwb-user-emacs-directory))
   #+end_src
+
+** Early init
+:PROPERTIES:
+:ID:       org_mark_2020-09-28T01-08-28+01-00_mini12.local:4AA8B45F-675E-4673-91C4-D60292B1B349
+:END:
+For Emacs < 27 we need early -init
+#+NAME: org_mark_2020-09-28T01-08-28+01-00_mini12.local_E7D671F1-9D29-4FF6-A8E5-8884826E6E4B
+#+begin_src emacs-lisp
+(when (version< emacs-version "27")
+      (load (mwb-user-emacs-file "early-init")))
+#+end_src
+** package
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:A5028037-4023-4BE2-AFD4-68CCEDF2F249
+:END:
+As this is now ~/.emacs.d/init.el and not in ~/Library/Preferences Emacs sees this as startup and adds the package-initialise. SO need to add here to stop init.el changing and being see in github
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_B623E658-A6AA-46DF-AD9C-6EAC3BDC1BEE
+#+begin_src emacs-lisp
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+;(package-initialize)
+#+end_src
+** Debug flag
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:20E9D7CA-52FB-4C0D-94B7-380665846841
+:END:
+	 #+begin_src emacs-lisp
+(setq init-file-debug nil)
+	 #+end_src
+
+** Code to do loading
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:3A4B05D6-A440-46F1-8A2F-1AFF3B0CAA2D
+:END:
+  Need to get the correct directory
+
+  Function to load the code for this part of the init.
+  Currently it just loads the .el of that name so could just be (load "mwb-init-load"). I now tangle all org-mode buffers on save. Eventually it will get the data from mwb-init-load.org and tangle it and use that.
+
+*** Helper functions
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:438D5698-5B55-4E44-8E21-3F2F1FDC8DBF
+:END:
+Thse are required elisp for initialisation
 
 **** Non org mode expander
 :PROPERTIES:

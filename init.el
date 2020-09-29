@@ -1,29 +1,4 @@
-;; [[file:~/src/env/emacs.d/init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_EC7FD451-253D-4F87-90DC-AD484305487F][org_mark_2020-01-23T20-40-42+00-00_mini12_EC7FD451-253D-4F87-90DC-AD484305487F]]
-(defconst emacs-start-time (current-time))
-
-(defvar file-name-handler-alist-old file-name-handler-alist)
-
-(setq package-enable-at-startup nil
-      file-name-handler-alist nil
-      message-log-max 16384
-      gc-cons-threshold 402653184
-      gc-cons-percentage 0.6
-      auto-window-vscroll nil)
-;; org_mark_2020-01-23T20-40-42+00-00_mini12_EC7FD451-253D-4F87-90DC-AD484305487F ends here
-
-;; [[file:~/src/env/emacs.d/init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_B623E658-A6AA-46DF-AD9C-6EAC3BDC1BEE][org_mark_2020-01-23T20-40-42+00-00_mini12_B623E658-A6AA-46DF-AD9C-6EAC3BDC1BEE]]
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
-                                        ;(package-initialize)
-;; org_mark_2020-01-23T20-40-42+00-00_mini12_B623E658-A6AA-46DF-AD9C-6EAC3BDC1BEE ends here
-
-;; [[file:~/src/env/emacs.d/init.org::*Debug flag][Debug flag:1]]
-(setq init-file-debug nil)
-;; Debug flag:1 ends here
-
-;; [[file:~/src/env/emacs.d/init.org::*Set where the init file is][Set where the init file is:1]]
+;; [[file:init.org::*Set where the init file is][Set where the init file is:1]]
 ;; Need the directory from here.
 (defun mwb-get-directory-of-current-file ()
   "Return the full directory path of the caller's file location."
@@ -32,7 +7,7 @@
 (defconst mwb-user-emacs-directory (mwb-get-directory-of-current-file))
 ;; Set where the init file is:1 ends here
 
-;; [[file:~/src/env/emacs.d/init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_86BD52C1-8055-4BB2-834D-2F088719C835][org_mark_2020-01-23T20-40-42+00-00_mini12_86BD52C1-8055-4BB2-834D-2F088719C835]]
+;; [[file:init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_86BD52C1-8055-4BB2-834D-2F088719C835][org_mark_2020-01-23T20-40-42+00-00_mini12_86BD52C1-8055-4BB2-834D-2F088719C835]]
 (defun mwb-user-emacs-file (name)
   "Return an absolute per-user Emacs-specific file name around where the init file is.
   It is basically locate-user-emacs-file but I have followed Aquiamacs is setting that not where my init.el file is.
@@ -40,7 +15,24 @@
   (expand-file-name name mwb-user-emacs-directory))
 ;; org_mark_2020-01-23T20-40-42+00-00_mini12_86BD52C1-8055-4BB2-834D-2F088719C835 ends here
 
-;; [[file:~/src/env/emacs.d/init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_315EE687-FC28-4D41-810D-4FF19AA66CD4][org_mark_2020-01-23T20-40-42+00-00_mini12_315EE687-FC28-4D41-810D-4FF19AA66CD4]]
+;; [[file:init.org::org_mark_2020-09-28T01-08-28+01-00_mini12.local_E7D671F1-9D29-4FF6-A8E5-8884826E6E4B][org_mark_2020-09-28T01-08-28+01-00_mini12.local_E7D671F1-9D29-4FF6-A8E5-8884826E6E4B]]
+(when (version< emacs-version "27")
+  (load (mwb-user-emacs-file "early-init")))
+;; org_mark_2020-09-28T01-08-28+01-00_mini12.local_E7D671F1-9D29-4FF6-A8E5-8884826E6E4B ends here
+
+;; [[file:init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_B623E658-A6AA-46DF-AD9C-6EAC3BDC1BEE][org_mark_2020-01-23T20-40-42+00-00_mini12_B623E658-A6AA-46DF-AD9C-6EAC3BDC1BEE]]
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+                                        ;(package-initialize)
+;; org_mark_2020-01-23T20-40-42+00-00_mini12_B623E658-A6AA-46DF-AD9C-6EAC3BDC1BEE ends here
+
+;; [[file:init.org::*Debug flag][Debug flag:1]]
+(setq init-file-debug nil)
+;; Debug flag:1 ends here
+
+;; [[file:init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_315EE687-FC28-4D41-810D-4FF19AA66CD4][org_mark_2020-01-23T20-40-42+00-00_mini12_315EE687-FC28-4D41-810D-4FF19AA66CD4]]
 (defun nullman/org-babel-generate-elisp-file (file &optional byte-compile force)
   "Generate an emacs-lisp file from an org-babel FILE.
 
@@ -132,7 +124,7 @@ is non-nil."
     ))
 ;; org_mark_2020-01-23T20-40-42+00-00_mini12_315EE687-FC28-4D41-810D-4FF19AA66CD4 ends here
 
-;; [[file:~/src/env/emacs.d/init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_A039068A-5F9B-4C02-A1C9-156C79F14A5B][org_mark_2020-01-23T20-40-42+00-00_mini12_A039068A-5F9B-4C02-A1C9-156C79F14A5B]]
+;; [[file:init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_A039068A-5F9B-4C02-A1C9-156C79F14A5B][org_mark_2020-01-23T20-40-42+00-00_mini12_A039068A-5F9B-4C02-A1C9-156C79F14A5B]]
 (defun mwb-init-load (file-root &optional no-org)
   "Load the relevant code.
         Look for <file-root>.org and <file-root>.el files.
@@ -166,6 +158,6 @@ is non-nil."
              nil))))
 ;; org_mark_2020-01-23T20-40-42+00-00_mini12_A039068A-5F9B-4C02-A1C9-156C79F14A5B ends here
 
-;; [[file:~/src/env/emacs.d/init.org::*The Load][The Load:1]]
+;; [[file:init.org::*The Load][The Load:1]]
 (mwb-init-load "config" "no-org")
 ;; The Load:1 ends here

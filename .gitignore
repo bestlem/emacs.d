@@ -5,3 +5,4 @@ SessionDesktop.el
 elpa
 data/abbrev.el
 
+package-quickstart.el

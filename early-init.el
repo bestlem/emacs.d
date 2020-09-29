@@ -27,4 +27,5 @@
 ;;   (push '(menu-bar-lines . 0) default-frame-alist))
 ;; (push '(tool-bar-lines . 0) default-frame-alist)
 ;;(push '(vertical-scroll-bars) default-frame-alist)
+(setq tool-bar-mode nil)
 ;; org_mark_2020-09-28T01-08-28+01-00_mini12.local_19B4CE88-E1D4-4E44-91B7-AD3D8E74C2D3 ends here

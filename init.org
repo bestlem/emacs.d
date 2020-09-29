@@ -254,6 +254,7 @@ Fiddle with suppressing graphics. I do want some of these
 ;;   (push '(menu-bar-lines . 0) default-frame-alist))
 ;; (push '(tool-bar-lines . 0) default-frame-alist)
 ;;(push '(vertical-scroll-bars) default-frame-alist)
+(setq tool-bar-mode nil)
 #+end_src
 
 

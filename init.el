@@ -160,4 +160,5 @@ is non-nil."
 
 ;; [[file:init.org::*The Load][The Load:1]]
 (mwb-init-load "config" "no-org")
+(message "Last linie in init")
 ;; The Load:1 ends here

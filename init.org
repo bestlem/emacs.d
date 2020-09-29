@@ -250,9 +250,9 @@ Fiddle with suppressing graphics. I do want some of these
 #+NAME: org_mark_2020-09-28T01-08-28+01-00_mini12.local_19B4CE88-E1D4-4E44-91B7-AD3D8E74C2D3
 #+begin_src emacs-lisp
 ;;(menu-bar-mode -1)
-(unless (and (display-graphic-p) (eq system-type 'darwin))
-  (push '(menu-bar-lines . 0) default-frame-alist))
-(push '(tool-bar-lines . 0) default-frame-alist)
+;; (unless (and (display-graphic-p) (eq system-type 'darwin))
+;;   (push '(menu-bar-lines . 0) default-frame-alist))
+;; (push '(tool-bar-lines . 0) default-frame-alist)
 ;;(push '(vertical-scroll-bars) default-frame-alist)
 #+end_src
 
@@ -488,5 +488,6 @@ This fails for config.org so that needs to be in version control.
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:97D3202A-5B42-411F-9312-331821931E25
 :END:
 	 #+begin_src emacs-lisp
-	 (mwb-init-load "config" "no-org")
+(mwb-init-load "config" "no-org")
+(message "Last linie in init")
 	 #+end_src

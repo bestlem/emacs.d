@@ -34,8 +34,9 @@ There are somethings that Aquamacs does that I want to undo.
 e.g. key bindings that they do to stop modes changing them.
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_AD89749B-35DE-4103-925B-3420D46D933F
 #+begin_src emacs-lisp
-(unbind-key "<end>" osx-key-mode-map)
-(unbind-key "<home>" osx-key-mode-map)
+(when *aquamacs*
+  (unbind-key "<end>" osx-key-mode-map)
+  (unbind-key "<home>" osx-key-mode-map))
 #+end_src
 ** Startup screen
 :PROPERTIES:

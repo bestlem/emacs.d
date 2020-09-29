@@ -131,11 +131,11 @@ Note that you can control what the screen displays A for Alt or ⌥. Emacs is no
  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_4281835C-7CD8-4FE9-B6A7-EBB5B2B0ED08
  #+begin_src emacs-lisp
  ;;(define-key osx-key-mode-map [C-end] 'end-of-buffer )
- (bind-key [C-home] 'beginning-of-buffer osx-key-mode-map)
- (bind-key [C-kp-end] 'end-of-buffer osx-key-mode-map)
- (bind-key [C-kp-home] 'beginning-of-buffer osx-key-mode-map)
- (bind-key [S-kp-next] 'scroll-other-window-down osx-key-mode-map)
- (bind-key [S-kp-prior] 'scroll-other-window osx-key-mode-map)
+ (bind-key [C-home] 'beginning-of-buffer)
+ (bind-key [C-kp-end] 'end-of-buffer)
+ (bind-key [C-kp-home] 'beginning-of-buffer)
+ (bind-key [S-kp-next] 'scroll-other-window-down)
+ (bind-key [S-kp-prior] 'scroll-other-window)
 
  ;; Apple
  ;; Aquamacs thinks the insert key is <help>

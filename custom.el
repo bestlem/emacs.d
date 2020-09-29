@@ -34,7 +34,7 @@
  '(fringe-mode '(16 . 0) nil (fringe))
  '(global-hl-line-mode t)
  '(gnus-directory "~/Library/Preferences/Aquamacs Emacs/News")
- '(gnus-group-sort-function '(gnus-group-sort-by-rank))
+ '(gnus-group-sort-function '(gnus-group-sort-by-rank) t)
  '(gnus-kill-save-kill-file t)
  '(gnus-score-mimic-keymap nil)
  '(gnus-server-browse-in-group-buffer t)
@@ -44,7 +44,7 @@
    '("~\\'" "\\.lock\\'" "\\.ix\\'" "\\`test\\.out\\'" "-autoloads\\.el\\'" "\\`Desktop\\.ini\\'" "\\`META\\.yml\\'" "\\`MYMETA\\.yml\\'" "\\`TAGS\\'" "\\`Thumbs\\.db\\'" "\\`\\.dropbox\\'" "\\`\\.dropbox\\.cache\\'" "\\`\\.emacs\\.desktop\\'" "\\`\\.emacs\\.desktop\\.lock\\'" "\\.orig\\'" "\\.rej\\'" "\\.el\\.gz$"))
  '(hardhat-fullpath-protected-regexps
    '("~/\\.emacs\\.d/elpa/" "~/\\.cpan/" "~/\\.cabal/" "~/perl5/perlbrew/" "~/\\.npm/" "~/\\.virtualenv/" "~/\\.virthualenv/" "~/\\.rvm/" "/[._]build/" "/\\.bzr/" "/\\.coverage/" "/\\.git/" "/\\.hg/" "/\\.rspec/" "/\\.sass-cache/" "/\\.svn/" "/_MTN/" "/_darcs/" "/CVS/" "/pm_to_blib/" "/RCS/" "/SCCS/" "/blib/" "/test_output/" "~/\\.emacs\\.d/\\.cask/" "~/\\.cask/" "/Applications/" "~/Library/Preferences/Aquamacs Emacs/Packages" "~/src/ThirdParty/"))
- '(ibuffer-expert t)
+ '(ibuffer-expert t t)
  '(ibuffer-fontification-alist
    '((999
       (and buffer-file-name
@@ -79,8 +79,8 @@
  '(make-backup-files t)
  '(minibuffer-prompt-properties
    '(read-only t cursor-intangible t face minibuffer-prompt cursor-intangible t))
- '(ns-right-alternate-modifier nil)
- '(ns-right-command-modifier 'super)
+ '(ns-right-alternate-modifier nil t)
+ '(ns-right-command-modifier 'super t)
  '(ns-tool-bar-display-mode 'both t)
  '(ns-tool-bar-size-mode nil t)
  '(nxml-slash-auto-complete-flag t)
@@ -105,7 +105,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-  '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight bold :height 120 :width normal :foundry "nil" :family "Fira Code"))))
+ '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight bold :height 120 :width normal :foundry "nil" :family "Fira Code"))))
  '(aquamacs-variable-width ((t (:stipple nil :strike-through nil :underline nil :slant normal :weight normal :height 120 :width normal :family "Times New Roman"))))
  '(bold-italic ((t (:underline t :slant italic :weight bold :family "Menlo"))))
  '(echo-area ((t (:inherit default :strike-through nil :underline nil :slant normal :weight normal :width normal))))

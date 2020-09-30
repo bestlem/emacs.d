@@ -173,6 +173,7 @@ But this is working so don;t need to chnage until an actual bug + my org-mode se
 
 ;; common code
 ;;  package-archives is an assoc so dups don't matter just look at the front
+(setq package-archives '())
 (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 

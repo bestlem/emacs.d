@@ -490,5 +490,4 @@ This fails for config.org so that needs to be in version control.
 :END:
 	 #+begin_src emacs-lisp
 (mwb-init-load "config" "no-org")
-(message "Last linie in init")
 	 #+end_src

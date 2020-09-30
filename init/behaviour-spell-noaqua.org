@@ -13,36 +13,33 @@ This is mainly taken from [[https://github.com/howardabrams/dot-files][Howard Ab
    [[https://www.gnu.org/software/ispell/][ispell]].   The [[http://aspell.net][ASpell]] project is better supported than ISpell, and
    it seems to be better than Hunspell for programming modes.
 
-   #+NAME: org_mark_2020-09-29T11-53-58+01-00_mini12.local_84F2B95A-C15F-4D60-943F-216914499EB6
-   #+BEGIN_SRC shell
-     brew install aspell
-   #+END_SRC
+
 
    Start for all text modes (but not for log files):
 
    #+NAME: org_mark_2020-09-29T11-53-58+01-00_mini12.local_495114A0-DDED-47C8-95EB-92DD64E002A0
-   #+BEGIN_SRC elisp
-     (use-package flyspell
-       :ensure t
-       :diminish flyspell-mode
-       :init
-       (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+   #+BEGIN_SRC emacs-lisp
+(use-package flyspell
+  :ensure t
+  :diminish flyspell-mode
+  :init
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
-       (dolist (hook '(text-mode-hook org-mode-hook))
-         (add-hook hook (lambda () (flyspell-mode 1))))
+  (dolist (hook '(text-mode-hook org-mode-hook))
+    (add-hook hook (lambda () (flyspell-mode 1))))
 
-       (dolist (hook '(change-log-mode-hook log-edit-mode-hook org-agenda-mode-hook))
-         (add-hook hook (lambda () (flyspell-mode -1))))
+  (dolist (hook '(change-log-mode-hook log-edit-mode-hook org-agenda-mode-hook))
+    (add-hook hook (lambda () (flyspell-mode -1))))
 
-       :config
-       (setq ispell-program-name "/usr/local/bin/aspell"
-             ispell-local-dictionary "en_US"
-             ispell-dictionary "american" ; better for aspell
-             ispell-extra-args '("--sug-mode=ultra" "--lang=en_US")
-             ispell-list-command "--list"
-             ispell-local-dictionary-alist '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "['‘’]"
-                                           t ; Many other characters
-                                           ("-d" "en_US") nil utf-8))))
+  :config
+  (setq ispell-program-name "/opt/local/bin/aspell"
+        ispell-local-dictionary "en_GB"
+        ispell-dictionary "american"    ; better for aspell
+        ispell-extra-args '("--sug-mode=ultra" "--lang=en_GB")
+        ispell-list-command "--list"
+        ispell-local-dictionary-alist '(("en_GB" "[[:alpha:]]" "[^[:alpha:]]" "['‘’]"
+                                         t ; Many other characters
+                                         ("-d" "en_GB-ize") nil utf-8))))
    #+END_SRC
 
    ASpell automatically configures a personal dictionary
@@ -54,43 +51,43 @@ This is mainly taken from [[https://github.com/howardabrams/dot-files][Howard Ab
 
    #+NAME: org_mark_2020-09-29T11-53-58+01-00_mini12.local_357FFC4C-00B4-4492-9C55-C4316FFDB897
    #+BEGIN_SRC elisp
-     (use-package flyspell
-       :config
-       (defun flyspell-detect-ispell-args (&optional run-together)
-         "if RUN-TOGETHER is true, spell check the CamelCase words."
-         (let (args)
-           (setq args (list "--sug-mode=ultra" "--lang=en_US"))
-           (if run-together
-               (setq args (append args '("--run-together" "--run-together-limit=5" "--run-together-min=2"))))
-           args))
+(use-package flyspell
+  :config
+  (defun flyspell-detect-ispell-args (&optional run-together)
+    "if RUN-TOGETHER is true, spell check the CamelCase words."
+    (let (args)
+      (setq args (list "--sug-mode=ultra" "--lang=en_GB"))
+      (if run-together
+          (setq args (append args '("--run-together" "--run-together-limit=5" "--run-together-min=2"))))
+      args))
 
-       ;; ispell-cmd-args is useless, it's the list of *extra* arguments we will append to the ispell process when "ispell-word" is called.
-       ;; ispell-extra-args is the command arguments which will *always* be used when start ispell process
-       (setq-default ispell-extra-args (flyspell-detect-ispell-args t))
+  ;; ispell-cmd-args is useless, it's the list of *extra* arguments we will append to the ispell process when "ispell-word" is called.
+  ;; ispell-extra-args is the command arguments which will *always* be used when start ispell process
+  (setq-default ispell-extra-args (flyspell-detect-ispell-args t))
 
-       (defadvice ispell-word (around my-ispell-word activate)
-         (let ((old-ispell-extra-args ispell-extra-args))
-           (ispell-kill-ispell t)
-           (setq ispell-extra-args (flyspell-detect-ispell-args))
-           ad-do-it
-           (setq ispell-extra-args old-ispell-extra-args)
-           (ispell-kill-ispell t)))
+  (defadvice ispell-word (around my-ispell-word activate)
+    (let ((old-ispell-extra-args ispell-extra-args))
+      (ispell-kill-ispell t)
+      (setq ispell-extra-args (flyspell-detect-ispell-args))
+      ad-do-it
+      (setq ispell-extra-args old-ispell-extra-args)
+      (ispell-kill-ispell t)))
 
-       (defadvice flyspell-auto-correct-word (around my-flyspell-auto-correct-word activate)
-         (let ((old-ispell-extra-args ispell-extra-args))
-           (ispell-kill-ispell t)
-           ;; use emacs original arguments
-           (setq ispell-extra-args (flyspell-detect-ispell-args))
-           ad-do-it
-           ;; restore our own ispell arguments
-           (setq ispell-extra-args old-ispell-extra-args)
-           (ispell-kill-ispell t)))
+  (defadvice flyspell-auto-correct-word (around my-flyspell-auto-correct-word activate)
+    (let ((old-ispell-extra-args ispell-extra-args))
+      (ispell-kill-ispell t)
+      ;; use emacs original arguments
+      (setq ispell-extra-args (flyspell-detect-ispell-args))
+      ad-do-it
+      ;; restore our own ispell arguments
+      (setq ispell-extra-args old-ispell-extra-args)
+      (ispell-kill-ispell t)))
 
-       (defun text-mode-hook-setup ()
-         ;; Turn off RUN-TOGETHER option when spell check text-mode
-         (setq-local ispell-extra-args (flyspell-detect-ispell-args)))
+  (defun text-mode-hook-setup ()
+    ;; Turn off RUN-TOGETHER option when spell check text-mode
+    (setq-local ispell-extra-args (flyspell-detect-ispell-args)))
 
-       (add-hook 'text-mode-hook 'text-mode-hook-setup))
+  (add-hook 'text-mode-hook 'text-mode-hook-setup))
    #+END_SRC
 
    According to [[http://pragmaticemacs.com/emacs/jump-back-to-previous-typo/][this essay]], we can make a =flyspell-goto-previous-error=

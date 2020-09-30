@@ -169,7 +169,7 @@ But this is working so don;t need to chnage until an actual bug + my org-mode se
 (require 'package)
 (if (< emacs-major-version 27)
     (setq package-enable-at-startup nil)
-  (setq package-quickstart t))
+  (setq package-quickstart nil))
 
 ;; common code
 ;;  package-archives is an assoc so dups don't matter just look at the front

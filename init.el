@@ -150,10 +150,11 @@ is non-nil."
 
     (condition-case err
         (load el-file)
-      (error (warn "Error loading %s: \"%s\""
-                   file-root
-                   (error-message-string err))
-             nil))))
+      (error (let ((msg (format-message "Error loading %s: \"%s\""
+                                        file-root
+                                        (error-message-string err))))
+               (warn msg)
+               (message msg))))))
 ;; org_mark_2020-01-23T20-40-42+00-00_mini12_A039068A-5F9B-4C02-A1C9-156C79F14A5B ends here
 
 ;; [[file:init.org::*The Load][The Load:1]]

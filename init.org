@@ -477,10 +477,11 @@ This fails for config.org so that needs to be in version control.
 
     (condition-case err
         (load el-file)
-      (error (warn "Error loading %s: \"%s\""
-                   file-root
-                   (error-message-string err))
-             nil))))
+      (error (let ((msg (format-message "Error loading %s: \"%s\""
+                                        file-root
+                                        (error-message-string err))))
+               (warn msg)
+               (message msg))))))
       #+end_src
 *** The Load
 :PROPERTIES:

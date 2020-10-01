@@ -11,11 +11,16 @@ This covers what emacs looks like and how windows/frames/menus behave
 Aquamacs is stuck with old color themes not the cusomisable ones
 #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_31D76745-657A-4FFE-A6AB-1077D1192D80
 #+begin_src emacs-lisp
-(require 'color-theme)
-(eval-after-load "color-theme"
-  '(progn
-     (color-theme-initialize)
-     (color-theme-high-contrast)))
+(if (< emacs-major-version 26)
+    (progn (require 'color-theme)
+           (eval-after-load "color-theme"
+             '(progn
+                (color-theme-initialize)
+                (color-theme-high-contrast))))
+  (use-package color-theme-modern
+    :ensure t
+    :init (load-theme 'high-contrast t t)
+    (enable-theme 'high-contrast)))
 #+end_src
 
 * Show icons

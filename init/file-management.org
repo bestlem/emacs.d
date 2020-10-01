@@ -15,29 +15,6 @@ Need also to exclude some files - basically only iof you edit them
 #+begin_src emacs-lisp
 #+end_src
 
-* TODO Compressed files
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:D8E61D05-2A53-45CF-A59D-EC1D1883BAC5
-:END:
-#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_0D6F8AAE-7969-4A3F-BF32-C60F266749AB
-#+begin_src emacs-lisp
-;; Transparently open compressed files
-(auto-compression-mode t)
-
-;; Old commented out code - need to review
-
-;;  --- uncompress *.Z and *.gz files when visiting ---
-;;
-;; (autoload 'uncompress-while-visiting "uncompress"
-;;   "Temporary \"major mode\" used for .Z and .gz files, to uncompress them.")
-;; (setq auto-mode-alist
-;; 	  (cons '("\\.Z$" . uncompress-while-visiting) auto-mode-alist))
-;; (setq auto-mode-alist
-;; 	  (cons '("\\.gz$" . uncompress-while-visiting) auto-mode-alist))
-;; (setq auto-mode-alist
-;;       (cons '("\\.tgz$" . uncompress-while-visiting) auto-mode-alist))
-
-#+end_src
 * Backups
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:64531695-B8F1-4AF7-8D8A-7893541FBD6C
@@ -94,7 +71,7 @@ Aquamacs seems to turn this off sometimes in customization so need to investigat
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:0A3506D6-DE37-44F4-A990-C06C1D567023
 :END:
 There are some modes that have special save actions e.g. *Abbrev* which is a buffer with no file name. I force a save using a dialog box but this should be call the special call - stick with ^x^s
-** TODO Recent Files
+** Recent Files
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:F7A7B04A-465B-4E07-B218-96A10C71D481
 :END:
@@ -105,12 +82,29 @@ There are some modes that have special save actions e.g. *Abbrev* which is a buf
  ;; Problem is this is set after the recent files are set https://emacs.stackexchange.com/questions/48784/recent-files-in-aquamacs
  ;;  Seems to be OK
 
- (setq recentf-exclude (append recentf-exclude
-							   '("^/var/folders\\.*"
-								 "COMMIT_EDITMSG\\'"
-								 ".*-autoloads\\.el\\'"
-								 "[/\\]\\.elpa/"
-								 )))
+
+(setq recentf-exclude '("COMMIT_MSG" "COMMIT_EDITMSG" "github.*txt$"
+                        "^/var/folders\\.*"
+                        "COMMIT_EDITMSG\\'"
+                        ".recentf"
+                        "~$"  ".~/" ; Emacs (and others) backup.
+                        ".*-autoloads\\.el\\'"
+                        "[/\\]\\.elpa/"
+                        ".*png$" ".*cache$"))
+(use-package recentf
+  :unless *aquamacs*
+  :defer 10
+  :commands (recentf-mode
+             recentf-add-file
+             recentf-apply-filename-handlers)
+  :config
+  (setq recentf-filename-handlers '(abbreviate-file-name)
+        recentf-auto-cleanup 'never
+        recentf-keep '(file-remote-p file-readable-p)
+        recentf-max-saved-items 100
+        recentf-max-menu-items 25)
+  :init
+  (recentf-mode 1))
   #+end_src
 * Files
 :PROPERTIES:
@@ -129,6 +123,48 @@ There are some modes that have special save actions e.g. *Abbrev* which is a buf
 	 :commands sunrise
 	 :config (require 'sunrise-x-buttons))
    #+end_src
+
+** ls
+:PROPERTIES:
+:ID:       org_mark_2020-09-29T11-53-58+01-00_mini12.local:4529B01B-7464-4099-AD76-43AD7970A977
+:END:
+
+  From Howard Abrams but using MacPorts
+  Since the default ls for the Mac isn't so good, I always have the
+  GNU ls version available in =/opt/local/bin/gls=.
+
+  #+NAME: org_mark_2020-09-29T11-53-58+01-00_mini12.local_9DEAAB07-8C5F-4986-8DC0-D64A59C4DF65
+  #+BEGIN_SRC elisp
+(require 'ls-lisp)
+(setq ls-lisp-use-insert-directory-program t)
+(setq insert-directory-program "/opt/local/bin/gls")
+  #+END_SRC
+
+** TODO Compressed files
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:D8E61D05-2A53-45CF-A59D-EC1D1883BAC5
+:END:
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_0D6F8AAE-7969-4A3F-BF32-C60F266749AB
+From original not certain how used now.
+#+NAME: org_mark_2020-10-01T11-27-32+01-00_mini12.local_CD86B2AF-5CC6-4C90-AFED-8A52D571E7A2
+#+begin_src emacs-lisp
+;; Transparently open compressed files
+(auto-compression-mode t)
+
+;; Old commented out code - need to review
+
+;;  --- uncompress *.Z and *.gz files when visiting ---
+;;
+;; (autoload 'uncompress-while-visiting "uncompress"
+;;   "Temporary \"major mode\" used for .Z and .gz files, to uncompress them.")
+;; (setq auto-mode-alist
+;; 	  (cons '("\\.Z$" . uncompress-while-visiting) auto-mode-alist))
+;; (setq auto-mode-alist
+;; 	  (cons '("\\.gz$" . uncompress-while-visiting) auto-mode-alist))
+;; (setq auto-mode-alist
+;;       (cons '("\\.tgz$" . uncompress-while-visiting) auto-mode-alist))
+
+#+end_src
 * Project management
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:D3D03019-395E-4091-A21C-5639C985398E
@@ -308,9 +344,10 @@ This is the visual
    :ensure t
    :config (treemacs-icons-dired-mode))
 
- (use-package treemacs-magit
-   :after treemacs magit
-   :ensure t)
+(use-package treemacs-magit
+  :disabled                             ; Emacs 27 did not like this
+  :after treemacs magit
+  :ensure t)
 
 
   #+end_src

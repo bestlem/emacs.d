@@ -131,18 +131,16 @@ is non-nil."
         If org and no el or org file is newer
         then retangle the org file if noorg is not nil then use nullmans expand
         then load <file-root>.el "
-
   (let* ((org-file
           (concat (expand-file-name file-root mwb-user-emacs-directory) ".org"))
          (el-file
           (concat (expand-file-name file-root mwb-user-emacs-directory) ".el")))
 
     (when (file-newer-than-file-p org-file el-file)
-
       (cond (no-org
              (message "tangle <%s> to <%s> using regex replacement not org mode"
                       org-file el-file)
-             ( nullman/org-babel-generate-elisp-file org-file el-file))
+             (nullman/org-babel-generate-elisp-file org-file el-file))
             (t
              (require 'org)
              (message "This loaded an org mode but from the system - best to restart")

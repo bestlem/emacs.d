@@ -452,37 +452,35 @@ is non-nil."
 This fails for config.org so that needs to be in version control.
    #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_A039068A-5F9B-4C02-A1C9-156C79F14A5B
    #+begin_src emacs-lisp
-   (defun mwb-init-load (file-root &optional no-org)
-     "Load the relevant code.
+(defun mwb-init-load (file-root &optional no-org)
+  "Load the relevant code.
         Look for <file-root>.org and <file-root>.el files.
         If org and no el or org file is newer
         then retangle the org file if noorg is not nil then use nullmans expand
         then load <file-root>.el "
+  (let* ((org-file
+          (concat (expand-file-name file-root mwb-user-emacs-directory) ".org"))
+         (el-file
+          (concat (expand-file-name file-root mwb-user-emacs-directory) ".el")))
 
-     (let* ((org-file
-             (concat (expand-file-name file-root mwb-user-emacs-directory) ".org"))
-            (el-file
-             (concat (expand-file-name file-root mwb-user-emacs-directory) ".el")))
+    (when (file-newer-than-file-p org-file el-file)
+      (cond (no-org
+             (message "tangle <%s> to <%s> using regex replacement not org mode"
+                      org-file el-file)
+             (nullman/org-babel-generate-elisp-file org-file el-file))
+            (t
+             (require 'org)
+             (message "This loaded an org mode but from the system - best to restart")
+             (message "tangle <%s> to <%s> using org version %s"
+                      org-file el-file org-version)
+             (org-babel-tangle-file org-file el-file))))
 
-       (when (file-newer-than-file-p org-file el-file)
-
-         (cond (no-org
-                (message "tangle <%s> to <%s> using regex replacement not org mode"
-                         org-file el-file)
-                ( nullman/org-babel-generate-elisp-file org-file el-file))
-               (t
-                (require 'org)
-                (message "This loaded an org mode but from the system - best to restart")
-                (message "tangle <%s> to <%s> using org version %s"
-                         org-file el-file org-version)
-                (org-babel-tangle-file org-file el-file))))
-
-       (condition-case err
-           (load el-file)
-         (error (warn "Error loading %s: \"%s\""
-                      file-root
-                      (error-message-string err))
-                nil))))
+    (condition-case err
+        (load el-file)
+      (error (warn "Error loading %s: \"%s\""
+                   file-root
+                   (error-message-string err))
+             nil))))
       #+end_src
 *** The Load
 :PROPERTIES:

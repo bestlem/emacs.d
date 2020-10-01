@@ -227,8 +227,9 @@ I think I now want mainly one window and have splits but tabs are useful.
  It is an aquamacs setting see [[https://www.emacswiki.org/emacs/AquamacsFAQ#toc19][FAQ]]
  #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_48EF73E1-936C-4BEA-810D-AC96FDD92B40
  #+begin_src emacs-lisp
- (one-buffer-one-frame-mode -1)
- (setq  special-display-regexps nil)
+(when *aquamacs*
+  (one-buffer-one-frame-mode -1)
+  (setq  special-display-regexps nil))
  #+end_src
 
 ** Fonts

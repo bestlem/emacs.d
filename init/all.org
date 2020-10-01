@@ -106,6 +106,17 @@ Note that if a subdirectory is just for one thinmg then use keyword mwb-load-pat
 #+begin_src emacs-lisp
 (add-to-list 'load-path (mwb-user-emacs-file "site-lisp"))
 #+end_src
+*** Where things are put
+:PROPERTIES:
+:ID:       org_mark_2020-09-29T11-53-58+01-00_mini12.local:63AB1DE7-5C65-415D-96D0-7DAF0E0BC2BA
+:END:
+Aquamacs puts a lot in ~/Library/Preferences/Emacs but Emacs 27 does not know that so we want to keep some of the crap out of .Emacs.d So try no littering
+#+NAME: org_mark_2020-09-29T11-53-58+01-00_mini12.local_1F694F93-C501-4512-BA63-CA34560F68CE
+#+begin_src emacs-lisp
+(use-package no-littering
+  :ensure t
+  :unless *aquamacs*)
+#+end_src
 
 ** Setting variables with a check on type
 :PROPERTIES:
@@ -118,12 +129,12 @@ Note should check on defconst
 (use-package validate
   :ensure t)
 #+end_src
-
 * Emacs server
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:605AC9D7-C3F1-495D-872C-C5B901A553BB
 :END:
  This is a simple server start - to allow emacsclient from Terminal. There are more complex starters.
+
  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_922BC8C2-56FC-46E7-B506-2CB94F2BB86A
  #+begin_src emacs-lisp
 (use-package server

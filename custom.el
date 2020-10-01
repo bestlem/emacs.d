@@ -44,7 +44,7 @@
    '("~\\'" "\\.lock\\'" "\\.ix\\'" "\\`test\\.out\\'" "-autoloads\\.el\\'" "\\`Desktop\\.ini\\'" "\\`META\\.yml\\'" "\\`MYMETA\\.yml\\'" "\\`TAGS\\'" "\\`Thumbs\\.db\\'" "\\`\\.dropbox\\'" "\\`\\.dropbox\\.cache\\'" "\\`\\.emacs\\.desktop\\'" "\\`\\.emacs\\.desktop\\.lock\\'" "\\.orig\\'" "\\.rej\\'" "\\.el\\.gz$"))
  '(hardhat-fullpath-protected-regexps
    '("~/\\.emacs\\.d/elpa/" "~/\\.cpan/" "~/\\.cabal/" "~/perl5/perlbrew/" "~/\\.npm/" "~/\\.virtualenv/" "~/\\.virthualenv/" "~/\\.rvm/" "/[._]build/" "/\\.bzr/" "/\\.coverage/" "/\\.git/" "/\\.hg/" "/\\.rspec/" "/\\.sass-cache/" "/\\.svn/" "/_MTN/" "/_darcs/" "/CVS/" "/pm_to_blib/" "/RCS/" "/SCCS/" "/blib/" "/test_output/" "~/\\.emacs\\.d/\\.cask/" "~/\\.cask/" "/Applications/" "~/Library/Preferences/Aquamacs Emacs/Packages" "~/src/ThirdParty/"))
- '(ibuffer-expert t t)
+ '(ibuffer-expert t)
  '(ibuffer-fontification-alist
    '((999
       (and buffer-file-name
@@ -79,8 +79,8 @@
  '(make-backup-files t)
  '(minibuffer-prompt-properties
    '(read-only t cursor-intangible t face minibuffer-prompt cursor-intangible t))
- '(ns-right-alternate-modifier nil t)
- '(ns-right-command-modifier 'super t)
+ '(ns-right-alternate-modifier nil)
+ '(ns-right-command-modifier 'super)
  '(ns-tool-bar-display-mode 'both t)
  '(ns-tool-bar-size-mode nil t)
  '(nxml-slash-auto-complete-flag t)
@@ -88,13 +88,12 @@
  '(org-bullets-bullet-list '("⦿" "◉" "◎" "○" "●"))
  '(org-datetree-add-timestamp 'active t)
  '(org-log-done 'time)
- '(org-modules
-   '(org-crypt org-gnus org-id org-info org-irc org-mouse org-tempo))
+ '(org-modules '(org-crypt org-tempo org-id org-mouse))
  '(org-src-ask-before-returning-to-edit-buffer nil)
  '(org-src-window-setup 'current-window)
  '(org-todo-keywords '((sequence "TODO" "|" "DONE" "LEAVE(@)")))
  '(package-selected-packages
-   '(hydra s dash use-package which-key racket-mode elmacro lispy rainbow-delimiters flycheck smartparens highlight-indent-guides nov treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ibuffer-vc projectile deadgrep ivy-prescient prescient counsel swiper ivy-rich ivy-hydra ivy yasnippet company helpful org smartparens-config all-the-icons major-mode-hydra eval-in-repl xr yasnippet-snippets outshine expand-region json-navigator mwim mwin mosey fish-mode sml-mode use-package-chords paredit dashboard clojure-mode cmake-mode cask-mode eros macrostep org-indent xah-elisp-mode validate hardhat beacon ripgrep gitignore-mode gitconfig-mode manual matcha use-package-hydra backup-each-save esup org-bullets ws-butlerz helm elisp-format origami comment-dwim-2 smex discover-my-major json-mode ranger dired-toggle aggressive-indent gradle-mode groovy-imports groovy-mode ws-butler diminish key-chord))
+   '(no-littering hydra s dash use-package which-key racket-mode elmacro lispy rainbow-delimiters flycheck smartparens highlight-indent-guides nov treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ibuffer-vc projectile deadgrep ivy-prescient prescient counsel swiper ivy-rich ivy-hydra ivy yasnippet company helpful org smartparens-config all-the-icons major-mode-hydra eval-in-repl xr yasnippet-snippets outshine expand-region json-navigator mwim mwin mosey fish-mode sml-mode use-package-chords paredit dashboard clojure-mode cmake-mode cask-mode eros macrostep org-indent xah-elisp-mode validate hardhat beacon ripgrep gitignore-mode gitconfig-mode manual matcha use-package-hydra backup-each-save esup org-bullets ws-butlerz helm elisp-format origami comment-dwim-2 smex discover-my-major json-mode ranger dired-toggle aggressive-indent gradle-mode groovy-imports groovy-mode ws-butler diminish key-chord))
  '(python-shell-interpreter "python")
  '(text-mode-hook '(turn-on-flyspell set-word-wrap))
  '(undo-limit 800000)

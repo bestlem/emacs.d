@@ -197,7 +197,7 @@ See http://endlessparentheses.com/ispell-and-abbrev-the-perfect-auto-correct.htm
 #+NAME: org_mark_2020-09-29T11-53-58+01-00_mini12.local_C107F37F-7EE4-4A6E-B97C-C3CEB3BA7A7C
 #+begin_src emacs-lisp
 (unless *aquamacs*
-  (mwb-init-load "init/behaviour-spell-noaqua"))
+  (mwb-init-load "init/behaviour_spell_noaqua"))
 #+end_src
 * Navigation
 :PROPERTIES:

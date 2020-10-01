@@ -391,6 +391,36 @@ This needs the full expansion
 #+begin_src emacs-lisp
 (mwb-init-load "init/org-all")
 #+end_src
+** Non aquamacs
+:PROPERTIES:
+:ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:E9328D54-1280-43B6-9DA6-D921C7A3AFF9
+:END:
+This config was written using Aquamacs whioch adds things.
+Some are just too embedded
+*** set-word-wrap
+:PROPERTIES:
+:ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:9DB3DB85-AFC6-483E-8D3D-AB11217FB071
+:END:
+This gets set in customize for all modes. Copy from Aquamacs
+#+NAME: org_mark_2020-10-01T11-27-32+01-00_mini12.local_0DFCC3B0-BDFE-4A98-87D3-46866915E99E
+#+begin_src emacs-lisp
+(unless *aquamacs*
+  (defun turn-off-longlines ()
+  "Unconditionally turn off Longlines mode."
+  (interactive)
+  (and (boundp 'longlines-mode)
+       (longlines-mode -1)))
+  (defun set-word-wrap ()
+    "Turn on Word Wrap mode in current buffer.
+This function sets `auto-fill-mode', `truncate-lines' and `visual-line-mode'."
+    (interactive)
+    (turn-on-visual-line-mode)          ; let it save settings first
+    (turn-off-longlines)
+    (turn-off-auto-fill)
+    (setq truncate-lines nil)
+    (if (interactive-p)
+        (message "Line wrapping set to Word Wrap mode in this buffer."))))
+#+end_src
 ** The rest
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:35D80650-3C0F-4147-8B3A-3BC84158367B

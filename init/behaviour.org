@@ -1,5 +1,49 @@
 #+TITLE Emacs configuration How emacs reacts
 #+PROPERTY:header-args :cache yes :tangle yes :comments link
+
+* Key bindings
+:PROPERTIES:
+:ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:0EFA9EE3-5983-433A-854A-8A72FEB39FFC
+:END:
+These differ. Even on my Mac the home key is <home> on Aquamacs and <H-left> on Carbon emacs and <home> on Plain Emacs + also terminal + MS-windows.
+SO I want to set my own values to use as bindings occur.
+First need to set the environment as Aquamacs has already done this
+
+** Set bindings
+:PROPERTIES:
+:ID:       org_mark_2020-10-01T14-52-55+01-00_mini12.local:E7A35B8E-8937-4EA2-939A-CDEAE681B190
+:END:
+Deal with stuff done by Aquamacs
+#+NAME: org_mark_2020-10-01T14-52-55+01-00_mini12.local_2D8F5C87-38BB-47E2-A162-03E5E42630F4
+#+begin_src emacs-lisp
+(unless *aquamacs*
+  (mwb-init-load "init/keys_noaqua"))
+#+end_src
+
+** Name keys
+:PROPERTIES:
+:ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:069F9DA8-F579-40AF-86F2-ECE349FF6181
+:END:
+#+NAME: org_mark_2020-10-01T11-27-32+01-00_mini12.local_956A48EE-5DDA-4C11-B931-C857DED78CEB
+#+begin_src emacs-lisp
+;; Set best default names - begin with aquamacs and NS emacs
+(setq mwbkey-home "<home>"
+      mwbkey-end "<end>"
+      mwbkey-page-up "<prior>"
+      mwbkey-page-down "<next>"
+      mwbkey-insert "<f18>"             ; This was a karabinier bind as insert
+                                        ; on Aquamacs is help- it really should
+                                        ; be fn
+      mwbkey-delete "<kp-delete>")
+
+(if *macport*
+    (setq mwbkey-home "H-<left>"
+          mwbkey-end "H-<right>"
+          mwbkey-page-up "H-<up>"
+          mwbkey-page-down "H-<down>"
+          mwbkey-insert "<f18>"
+          mwbkey-delete "<H-backspace>"))
+#+end_src
 * File Handling
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:7F0DB7D1-63CC-4002-BF3B-FC8F529B24EB
@@ -80,6 +124,16 @@ I haven't used before but might try with hydra from [[https://sriramkswamy.githu
 
 
 #+end_src
+*** Yes or no
+:PROPERTIES:
+:ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:3F1F190C-6747-4CF2-939E-14386756F579
+:END:
+  Does anyone type =yes= anymore?
+   #+NAME: org_mark_2020-10-01T11-27-32+01-00_mini12.local_B854EC7F-0938-4897-9815-3D77C26F2E4B
+   #+BEGIN_SRC elisp
+(unless *aquamacs*
+  (fset 'yes-or-no-p 'y-or-n-p))
+   #+END_SRC
 * memory
 :PROPERTIES:
 :ID:       org_mark_2020-03-02T07-49-31+00-00_mini12.local:F19DE0CC-B946-4885-808E-36CB21A4AF3D
@@ -286,8 +340,11 @@ mwin might have mode aware
 #+begin_src emacs-lisp
 (use-package mwim
   :ensure t
-  :bind ("<home>" . 'mwim-beginning)    ; comment for testing
-  ("<end>" . 'mwim-end))
+  :demand                               ; Need to get binds to work
+  :commands (mwim-beginning mwim-end)
+  :config
+  (bind-key mwbkey-home 'mwim-beginning)
+  (bind-key mwbkey-end 'mwim-end))
 #+end_src
 * TODO General old stuff
 :PROPERTIES:

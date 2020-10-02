@@ -1,0 +1,17 @@
+#+PROPERTY:header-args :cache yes :tangle yes :comments link
+
+This all assumes macOs and the mac port
+
+* Mass load
+:PROPERTIES:
+:ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:EFD98A8B-3C44-4920-AD77-F61C967DF953
+:END:
+There is a [[https://github.com/joaotavora/mac-key-mode][Mac key mode]] which works like aquamacs adding a new key map
+#+NAME: org_mark_2020-10-01T11-27-32+01-00_mini12.local_E819AFBC-27AB-4CDE-9EC4-8BA8E90CAAA1
+#+begin_src emacs-lisp
+(use-package redo+
+  :mwb-load-path "site-lisp/Emacs_wiki")
+(use-package mac-key-mode
+  :mwb-load-path "site-lisp/Emacs_wiki"
+  :config (mac-key-mode 1))
+#+end_src

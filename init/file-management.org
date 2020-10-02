@@ -62,9 +62,6 @@ Aquamacs seems to turn this off sometimes in customization so need to investigat
 	   (save-buffer 16)
 	 (mac-key-save-file-as)))
 
-(when *aquamacs*
-  (define-key osx-key-mode-map [remap mac-key-save-file] 'mwb/mac-key-save-buffer-force-backup)
-  (define-key osx-key-mode-map [remap save-buffer] 'mwb/mac-key-save-buffer-force-backup))
  #+end_src
 **** TODO save special buffers
 :PROPERTIES:

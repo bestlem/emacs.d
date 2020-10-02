@@ -80,6 +80,8 @@ What type of Emacs and system do we have
 #+begin_src emacs-lisp
 (defconst *aquamacs* (featurep 'aquamacs)
   "True iff we are in aquamacs")
+(defconst *macport* (boundp 'mac-carbon-version-string)
+  "True iff we are in Mitsuharu Yamamoto's port")
 #+end_src
 ** Customisation file
 :PROPERTIES:
@@ -395,7 +397,7 @@ This needs the full expansion
 :PROPERTIES:
 :ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:E9328D54-1280-43B6-9DA6-D921C7A3AFF9
 :END:
-This config was written using Aquamacs whioch adds things.
+This config was written using Aquamacs which adds things.
 Some are just too embedded
 *** set-word-wrap
 :PROPERTIES:

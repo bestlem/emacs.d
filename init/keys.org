@@ -123,14 +123,27 @@ Things got changed on one run so set here and remove from customisation
         )
   )
 #+end_src
+
+*** Choose mode map.
+:PROPERTIES:
+:ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:27CB584A-8AD0-44AD-B508-D9765EBFD3A4
+:END:
+Both Aquamacs and mac-keys-mode introduce a map for macOS keys. Unfortunately it is not the same one. So lets add indirection.
+#+NAME: org_mark_2020-10-01T11-27-32+01-00_mini12.local_EDE062E4-8660-4455-B106-B376CA99E96C
+#+begin_src emacs-lisp
+(setq macos-key-map (if *aquamacs*
+                        'osx-key-mode-map
+                      'mac-key-mode-map))
+#+end_src
 *** Display in help and menus
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:07E735E7-F73B-475D-96E1-7D24627B32DF
 :END:
-Note that you can control what the screen displays A for Alt or ⌥. Emacs is not that clever and looks at what it is told and not what appears on the key but I am back to the normal bindings so does not matter. Although hydra seems to object. Set the value to non=nil to use Mac symbols.
+Note that you can control what the screen displays A for Alt or ⌥. Emacs is not that clever and looks at what it is told and not what appears on the key but I am back to the normal bindings so does not matter. Although hydra seems to object, now fixed. Set the value to non=nil to use Mac symbols.
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_8B14E763-46C4-4ADC-ABE3-F119293CCF15
 #+begin_src emacs-lisp
-	(setq ns-use-mac-modifier-symbols  t)
+(when *aquamacs*
+  (setq ns-use-mac-modifier-symbols  t))
 #+end_src
 *** Home/End/Paging
 :PROPERTIES:
@@ -138,13 +151,25 @@ Note that you can control what the screen displays A for Alt or ⌥. Emacs is no
 :END:
  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_4281835C-7CD8-4FE9-B6A7-EBB5B2B0ED08
  #+begin_src emacs-lisp
- ;;(define-key osx-key-mode-map [C-end] 'end-of-buffer )
- (bind-key [C-home] 'beginning-of-buffer)
- (bind-key [C-kp-end] 'end-of-buffer)
- (bind-key [C-kp-home] 'beginning-of-buffer)
- (bind-key [S-kp-next] 'scroll-other-window-down)
- (bind-key [S-kp-prior] 'scroll-other-window)
+ ;;(define-key osx-key-mode-map [C-end] 'end-of-buffer ) ; seems to be there by default
+(bind-key [C-home] 'beginning-of-buffer macos-key-map)
+(when *macport*
+  (bind-key [C-H-left] 'beginning-of-buffer macos-key-map)
+  (bind-key [C-H-right] 'end-of-buffer macos-key-map))
 
+
+;;  From old Windows/Next/Unix
+(bind-key [C-kp-end] 'end-of-buffer)
+(bind-key [C-kp-home] 'beginning-of-buffer)
+(bind-key [S-kp-next] 'scroll-other-window-down)
+(bind-key [S-kp-prior] 'scroll-other-window)
+#+end_src
+*** Cua bindings
+:PROPERTIES:
+:ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:D0079FD5-B3EE-47A0-8279-5448DF4CE51F
+:END:
+#+NAME: org_mark_2020-10-01T11-27-32+01-00_mini12.local_A4D766AC-9C2C-4FA6-BE37-7E4D822DA0E7
+#+begin_src emacs-lisp
 ;; Apple and cua bindings
 (when *aquamacs*
   ;; Aquamacs thinks the insert key is <help>
@@ -161,11 +186,21 @@ Note that you can control what the screen displays A for Alt or ⌥. Emacs is no
  ;; Unknown
  (bind-key [C-kp-end] 'end-of-buffer )
  (bind-key [C-kp-home] 'beginning-of-buffer )
- (bind-key [S-kp-next] 'scroll-other-window-down )
- (bind-key [S-kp-prior] 'scroll-other-window )
-
-                                        ;(bind-key [s-left] 'scroll-left)
- ;(bind-key [s-right] 'scroll-right)
+#+end_src
+*** Scrolling
+:PROPERTIES:
+:ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:859480D6-54DB-4B10-BF93-05372385B89F
+:END:
+I suspect not touched since before ages. But need for macport
+#+NAME: org_mark_2020-10-01T11-27-32+01-00_mini12.local_8782706E-463C-4A10-906A-3E3E2AF91C93
+#+begin_src emacs-lisp
+(bind-key [S-kp-next] 'scroll-other-window-down )
+(bind-key [S-kp-prior] 'scroll-other-window )
+;; (bind-key [s-left] 'scroll-left)
+;; (bind-key [s-right] 'scroll-right)
+;;(bind-key [?\M-left] 'scroll-left )
+(bind-key "H-<up>" 'scroll-up macos-key-map)
+(bind-key "H-<down>" 'scroll-down macos-key-map)
 #+end_src
 
 ** Deleting and return
@@ -175,10 +210,11 @@ Note that you can control what the screen displays A for Alt or ⌥. Emacs is no
   #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_DD9F56DD-C914-46B4-B26D-131CC2ABAD7F
   #+begin_src emacs-lisp
   ;; (bind-key [C-return] 'newline-and-indent )
-  ;;(bind-key [?\M-left] 'scroll-left )
   ;;(bind-key [C-backspace] 'backward-delete-char-untabify )
-  (bind-key "<kp-delete>" 'delete-char )
-  (bind-key "<backspace>" 'backward-delete-char-untabify)
+(bind-key "<kp-delete>" 'delete-char)
+(bind-key "H-<backspace>" 'delete-char) ; macport
+(bind-key "<backspace>" 'backward-delete-char-untabify)
+
   ;;(bind-key [?\A-backspace] 'undo )
   #+end_src
 ** Let search continue with arrows
@@ -291,14 +327,6 @@ Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in e
 (bind-key [S-f8] 'previous-error)
 #+end_src
 
-** Meta/alt key bindings
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:3F4F065D-FF4D-4D2B-BA34-42AEA1DE2043
-:END:
-#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_A1DB0752-B232-4FA8-BF33-3CE313E5306C
-#+begin_src emacs-lisp
-(bind-key "M-g" 'goto-line)             ; one of the oldest binds
-#+end_src
 ** Hyper key bindings
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:47F25520-0E9A-4872-B519-59399D80D775
@@ -323,6 +351,16 @@ Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in e
 :END:
 These should be mac based adding to Aquamacs but some I do not used.
 Note that the Aquamacs binding does not fit through bind-keys
+*** File actions
+:PROPERTIES:
+:ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:72150B6F-1352-4EC2-AD0F-B5B273269885
+:END:
+This is the override of save etc to the mode maps
+#+NAME: org_mark_2020-10-01T11-27-32+01-00_mini12.local_1707CDE5-818A-4399-863A-F81E8653D8F6
+#+begin_src emacs-lisp
+(bind-key [remap mac-key-save-file] 'mwb/mac-key-save-buffer-force-backup macos-key-map)
+(bind-key [remap save-buffer] 'mwb/mac-key-save-buffer-force-backup macos-key-map)
+#+end_src
 *** Buffer related
 :PROPERTIES:
 :ID:       org_mark_2020-09-24T21-45-16+01-00_mini12.local:6D014266-E049-4521-A263-7154358EAD5D
@@ -334,7 +372,17 @@ Note that the Aquamacs binding does not fit through bind-keys
 (bind-key "C-x k" 'bjm/kill-this-buffer)
 (bind-key "A-k" 'bury-buffer)
 (bind-chord "kk" #'er-switch-to-previous-buffer)
-(bind-key  "A-u" 'revert-buffer-no-confirm)
+;; macport makes A-u µ
+(bind-key  "A-u" 'revert-buffer-no-confirm macos-key-map)
+#+end_src
+
+*** Goto
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:3F4F065D-FF4D-4D2B-BA34-42AEA1DE2043
+:END:
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_A1DB0752-B232-4FA8-BF33-3CE313E5306C
+#+begin_src emacs-lisp
+(bind-key "M-g" 'goto-line)             ; one of the oldest binds
 #+end_src
 *** Other
 :PROPERTIES:
@@ -342,8 +390,8 @@ Note that the Aquamacs binding does not fit through bind-keys
 :END:
 #+NAME: org_mark_2020-09-24T21-45-16+01-00_mini12.local_AF417D0A-EE73-4B8C-9B57-B7DFFFB19E40
 #+begin_src emacs-lisp
-(bind-key "A-M-u" 'ediff-revision)
-(bind-key "A-/" 'comment-or-uncomment-region-or-line)
+(bind-key "A-M-u" 'ediff-revision macos-key-map)
+(bind-key "A-/" 'comment-or-uncomment-region-or-line macos-key-map)
 (bind-key "A-<kp-add>" 'zoom-font)
 (bind-key "A-<kp-subtract>" 'zoom-font-out)
 #+end_src

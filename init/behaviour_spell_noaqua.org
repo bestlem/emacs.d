@@ -34,7 +34,7 @@ This is mainly taken from [[https://github.com/howardabrams/dot-files][Howard Ab
   :config
   (setq ispell-program-name "/opt/local/bin/aspell"
         ispell-local-dictionary "en_GB"
-        ispell-dictionary "american"    ; better for aspell
+        ispell-dictionary "english"
         ispell-extra-args '("--sug-mode=ultra" "--lang=en_GB")
         ispell-list-command "--list"
         ispell-local-dictionary-alist '(("en_GB" "[[:alpha:]]" "[^[:alpha:]]" "['‘’]"

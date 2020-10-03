@@ -13,5 +13,6 @@ There is a [[https://github.com/joaotavora/mac-key-mode][Mac key mode]] which wo
   :mwb-load-path "site-lisp/Emacs_wiki")
 (use-package mac-key-mode
   :mwb-load-path "site-lisp/Emacs_wiki"
+  :diminish
   :config (mac-key-mode 1))
 #+end_src

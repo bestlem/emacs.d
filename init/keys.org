@@ -199,8 +199,8 @@ I suspect not touched since before ages. But need for macport
 ;; (bind-key [s-left] 'scroll-left)
 ;; (bind-key [s-right] 'scroll-right)
 ;;(bind-key [?\M-left] 'scroll-left )
-(bind-key "H-<up>" 'scroll-up macos-key-map)
-(bind-key "H-<down>" 'scroll-down macos-key-map)
+(bind-key "H-<up>" 'scroll-down macos-key-map)
+(bind-key "H-<down>" 'scroll-up macos-key-map)
 #+end_src
 
 ** Deleting and return

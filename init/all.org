@@ -46,7 +46,12 @@ e.g. key bindings that they do to stop modes changing them.
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:2116C663-621B-43B2-8E69-B86CB71BA9BC
 :END:
-This saves the state perhaps I need to see how it works. Then also add midnight to kill old buffers
+This saves the state perhaps I need to see how it works.
+#+NAME: org_mark_2020-10-03T11-41-17+01-00_mini12.local_DC2C7645-A251-449C-AC77-40AD4B76D5B4
+#+begin_src emacs-lisp
+(unless *aquamacs*
+  (desktop-save-mode 1))
+#+end_src
 *** Dashboard
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:047865CE-76CF-4835-98C6-1B1313B9544C
@@ -69,6 +74,14 @@ This seemed interesting but seemed to messup lispy
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:0904FB99-90C7-4D22-8B26-846E12DE3921
 :END:
+**** Start up screen
+:PROPERTIES:
+:ID:       org_mark_2020-10-02T16-49-16+01-00_mini12.local:294D6FCC-B100-40FF-B990-AF7935145EB2
+:END:
+#+NAME: org_mark_2020-10-02T16-49-16+01-00_mini12.local_EDC6964F-B7A5-410E-819C-097B0E219B49
+#+begin_src emacs-lisp
+(setq inhibit-splash-screen t)
+#+end_src
 **** Scratch buffer
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:A300832E-1253-4E83-A0C3-3DAAEE99F20D
@@ -92,6 +105,7 @@ I want two windows in a frame and treemacs
              (pop-to-buffer "*Messages*" 'other-window)
              (treemacs)))
 #+end_src
+
 ** Environment
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:C615E483-7CA9-42EA-9AEB-E0B541771836
@@ -135,13 +149,15 @@ Note should check on defconst
 :END:
  This is a simple server start - to allow emacsclient from Terminal. There are more complex starters.
 
+ Unfortunately macport seems not to have a working one. and NS Emacs is not that good.
+ Then again I don't use it
  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_922BC8C2-56FC-46E7-B506-2CB94F2BB86A
  #+begin_src emacs-lisp
 (use-package server
+  :if *aquamacs*
   :ensure nil
   :hook (after-init . server-mode))
  #+end_src
-
 * Emacs settings
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:0EBF0016-296F-41EA-8DC3-96CE752F9E9A

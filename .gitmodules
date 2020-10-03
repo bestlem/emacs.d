@@ -1,12 +1,3 @@
-[submodule "fork/sunrise-commander"]
-	path = fork/sunrise-commander
-	url = https://github.com/escherdragon/sunrise-commander
-[submodule "fork/lispy"]
-	path = fork/lispy
-	url = https://github.com/bestlem/lispy.git
-[submodule "fork/xonsh-mode"]
-	path = fork/xonsh-mode
-	url = https://github.com/seanfarley/xonsh-mode.git
 [submodule "fork/ob-sml"]
 	path = fork/ob-sml
 	url = https://github.com/dmgerman/ob-sml

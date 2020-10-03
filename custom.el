@@ -93,7 +93,7 @@
  '(org-src-window-setup 'current-window)
  '(org-todo-keywords '((sequence "TODO" "|" "DONE" "LEAVE(@)")))
  '(package-selected-packages
-   '(no-littering hydra s dash use-package which-key racket-mode elmacro lispy rainbow-delimiters flycheck smartparens highlight-indent-guides nov treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ibuffer-vc projectile deadgrep ivy-prescient prescient counsel swiper ivy-rich ivy-hydra ivy yasnippet company helpful org smartparens-config all-the-icons major-mode-hydra eval-in-repl xr yasnippet-snippets outshine expand-region json-navigator mwim mwin mosey fish-mode sml-mode use-package-chords paredit dashboard clojure-mode cmake-mode cask-mode eros macrostep org-indent xah-elisp-mode validate hardhat beacon ripgrep gitignore-mode gitconfig-mode manual matcha use-package-hydra backup-each-save esup org-bullets ws-butlerz helm elisp-format origami comment-dwim-2 smex discover-my-major json-mode ranger dired-toggle aggressive-indent gradle-mode groovy-imports groovy-mode ws-butler diminish key-chord))
+   '(mac-key-mode no-littering hydra s dash use-package which-key racket-mode elmacro lispy rainbow-delimiters flycheck smartparens highlight-indent-guides nov treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ibuffer-vc projectile deadgrep ivy-prescient prescient counsel swiper ivy-rich ivy-hydra ivy yasnippet company helpful org smartparens-config all-the-icons major-mode-hydra eval-in-repl xr yasnippet-snippets outshine expand-region json-navigator mwim mwin mosey fish-mode sml-mode use-package-chords paredit dashboard clojure-mode cmake-mode cask-mode eros macrostep org-indent xah-elisp-mode validate hardhat beacon ripgrep gitignore-mode gitconfig-mode manual matcha use-package-hydra backup-each-save esup org-bullets ws-butlerz helm elisp-format origami comment-dwim-2 smex discover-my-major json-mode ranger dired-toggle aggressive-indent gradle-mode groovy-imports groovy-mode ws-butler diminish key-chord))
  '(python-shell-interpreter "python")
  '(text-mode-hook '(turn-on-flyspell set-word-wrap))
  '(undo-limit 800000)
@@ -104,13 +104,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight bold :height 120 :width normal :foundry "nil" :family "Fira Code"))))
+ '(default ((t (:inherit nil :extend nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "Fira Code"))))
  '(aquamacs-variable-width ((t (:stipple nil :strike-through nil :underline nil :slant normal :weight normal :height 120 :width normal :family "Times New Roman"))))
  '(bold-italic ((t (:underline t :slant italic :weight bold :family "Menlo"))))
  '(echo-area ((t (:inherit default :strike-through nil :underline nil :slant normal :weight normal :width normal))))
  '(highlight ((t (:background "black" :foreground "white"))))
  '(italic ((t (:underline t :slant italic))))
- '(org-block ((t (:inherit shadow :background "lemon chiffon" :foreground "black" :height 0.8 :family "Fira Code"))))
+ '(org-block ((t (:inherit shadow :extend t :background "lemon chiffon" :foreground "black" :family "Fira Code"))))
  '(org-block-begin-line ((t (:inherit org-meta-line :foreground "blue" :weight normal))))
  '(org-block-end-line ((t (:inherit org-block-begin-line :foreground "blue"))))
  '(org-document-title ((t (:inherit variable-pitch :weight regular :foreground "black" :font "Gill Sans" :height 2.0 :underline nil))))
@@ -122,4 +122,6 @@
  '(org-level-6 ((t (:inherit variable-pitch :weight regular :foreground "black" :font "Gill Sans"))))
  '(org-level-7 ((t (:inherit variable-pitch :weight regular :foreground "black" :font "Gill Sans"))))
  '(org-level-8 ((t (:inherit variable-pitch :weight regular :foreground "black" :font "Gill Sans"))))
+ '(org-todo ((t (:background "#FFE6E4" :foreground "dark magenta" :box (:line-width 1 :color "#D8ABA7") :weight bold))))
+ '(region ((t (:extend t :background "deep pink" :foreground "white" :weight bold))))
  '(variable-pitch ((t (:weight normal :height 1.2 :family "Times New Roman")))))

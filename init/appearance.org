@@ -17,12 +17,40 @@ Aquamacs is stuck with old color themes not the cusomisable ones
              '(progn
                 (color-theme-initialize)
                 (color-theme-high-contrast))))
+
   (use-package color-theme-modern
     :ensure t
     :init (load-theme 'high-contrast t t)
-    (enable-theme 'high-contrast)))
+    (load-theme 'leuven t t)
+    (enable-theme 'leuven)))
 #+end_src
 
+
+* Fonts
+:PROPERTIES:
+:ID:       org_mark_2020-02-10T11-53-11+00-00_mini12:0A89487A-9396-43C4-9F45-0B2DBEBD41FE
+:END:
+*** Buffer face
+:PROPERTIES:
+:ID:       org_mark_2020-02-10T11-53-11+00-00_mini12:8BD8443B-8175-4615-9E81-4327864CB523
+:END:
+Remove from mode line
+#+NAME: org_mark_2020-02-10T11-53-11+00-00_mini12_FF91EEFC-2D6E-4E05-9F12-2F30E53177D4
+#+begin_src emacs-lisp
+;; Remove BufFace from mode line
+(eval-after-load "face-remap"
+  '(diminish 'buffer-face-mode))
+  #+end_src
+*** Ligatures
+:PROPERTIES:
+:ID:       org_mark_2020-10-03T11-41-17+01-00_mini12.local:B6D6F861-4367-42CD-B6BB-D49FFC135F7D
+:END:
+I seem only to do this for macport
+#+NAME: org_mark_2020-10-03T11-41-17+01-00_mini12.local_7F1CA278-5EFF-4B83-BB74-2E3F161154E8
+#+begin_src emacs-lisp
+(when *macport*
+  (mac-auto-operator-composition-mode))
+#+end_src
 * Show icons
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:57CD663C-DDAD-43AD-AFFF-FE62F18F88D2
@@ -232,18 +260,3 @@ I think I now want mainly one window and have splits but tabs are useful.
   (setq  special-display-regexps nil))
  #+end_src
 
-** Fonts
-:PROPERTIES:
-:ID:       org_mark_2020-02-10T11-53-11+00-00_mini12:0A89487A-9396-43C4-9F45-0B2DBEBD41FE
-:END:
-*** Buffer face
-:PROPERTIES:
-:ID:       org_mark_2020-02-10T11-53-11+00-00_mini12:8BD8443B-8175-4615-9E81-4327864CB523
-:END:
-Remove from mode line
-#+NAME: org_mark_2020-02-10T11-53-11+00-00_mini12_FF91EEFC-2D6E-4E05-9F12-2F30E53177D4
-#+begin_src emacs-lisp
-;; Remove BufFace from mode line
-(eval-after-load "face-remap"
-  '(diminish 'buffer-face-mode))
-  #+end_src

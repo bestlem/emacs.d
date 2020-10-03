@@ -27,7 +27,7 @@ One fix might be to just detangle the current block.
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:111E7DB2-5383-4E1F-9B6E-EE14CBFE8671
 :END:
-This seems one of the most complete literate programming setups and he does have weave but no examples with links. He does saya few things so lets try.
+This seems one of the most complete literate programming setups and he does have weave but no examples with links. He does say a few things so lets try.
 As everything is after loading of org dump in a config section after the rest.
 
 
@@ -53,8 +53,9 @@ Note Hydra is not really used after just a couple of weeks.
     (setq org-datetree-add-timestamp (quote active)
           org-default-notes-file "~/SyncServices/Dropbox/Docs/org/notes.org"
           org-directory "/Users/mark/SyncServices/Dropbox/Docs/org"
-;;          org-use-speed-commands t
-)
+          org-support-shift-select t
+          ;;          org-use-speed-commands t
+          )
     :hook
     <<org-mode-hooks>>
     <<org-mode-hooks-wrapping>>

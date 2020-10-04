@@ -9,6 +9,19 @@ These differ. Even on my Mac the home key is <home> on Aquamacs and <H-left> on 
 SO I want to set my own values to use as bindings occur.
 First need to set the environment as Aquamacs has already done this
 
+
+** Aquamacs problem
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:628BE0A1-2280-4914-98A9-12830F84FEF8
+:END:
+There are somethings that Aquamacs does that I want to undo.
+e.g. key bindings that they do to stop modes changing them.
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_AD89749B-35DE-4103-925B-3420D46D933F
+#+begin_src emacs-lisp
+(when *aquamacs*
+  (unbind-key "<end>" osx-key-mode-map)
+  (unbind-key "<home>" osx-key-mode-map))
+#+end_src
 ** Set bindings
 :PROPERTIES:
 :ID:       org_mark_2020-10-01T14-52-55+01-00_mini12.local:E7A35B8E-8937-4EA2-939A-CDEAE681B190
@@ -17,7 +30,12 @@ Deal with stuff done by Aquamacs
 #+NAME: org_mark_2020-10-01T14-52-55+01-00_mini12.local_2D8F5C87-38BB-47E2-A162-03E5E42630F4
 #+begin_src emacs-lisp
 (unless *aquamacs*
-  (mwb-init-load "init/keys_noaqua"))
+  (use-package redo+
+  :mwb-load-path "site-lisp/Emacs_wiki")
+(use-package mac-key-mode
+  :mwb-load-path "site-lisp/Emacs_wiki"
+  :diminish
+  :config (mac-key-mode 1)))
 #+end_src
 
 ** Name keys
@@ -31,7 +49,7 @@ Deal with stuff done by Aquamacs
       mwbkey-end "<end>"
       mwbkey-page-up "<prior>"
       mwbkey-page-down "<next>"
-      mwbkey-insert "<f18>"             ; This was a karabinier bind as insert
+      mwbkey-insert "<f18>"             ; This is a karabinier bind as insert
                                         ; on Aquamacs is help- it really should
                                         ; be fn
       mwbkey-delete "<kp-delete>")

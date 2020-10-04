@@ -44,7 +44,7 @@ Aquamacs seems to turn this off sometimes in customization so need to investigat
  #+begin_src emacs-lisp
  (setq make-backup-files t)
  #+end_src
-*** Backup on save
+*** TODO Backup on save
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:EBBF14AB-888E-4043-8ADB-8DE11ACDBC46
 :END:
@@ -60,6 +60,7 @@ Aquamacs seems to turn this off sometimes in customization so need to investigat
    "Save buffer. If needed, select file by dialog"
    (if buffer-file-name
 	   (save-buffer 16)
+     ;; This is not defined in non aquamacs
 	 (mac-key-save-file-as)))
 
  #+end_src

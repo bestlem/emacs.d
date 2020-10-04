@@ -12,11 +12,11 @@ These are for all () languages but could extend to more as manythings are for al
 :END:
 Although that should be in prog mode
 	#+begin_src emacs-lisp
-    (use-package
-      rainbow-delimiters
-      :ensure t
-      :delight rainbow-delimiters-mode
-      :hook (prog-mode . rainbow-delimiters-mode))
+(use-package
+  rainbow-delimiters
+  :ensure t
+  :delight rainbow-delimiters-mode
+  :hook (prog-mode . rainbow-delimiters-mode))
 	#+end_src
 
 ** Add lisp interaction mode

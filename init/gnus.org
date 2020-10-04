@@ -46,6 +46,12 @@ Well turn them off
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:362C07A4-045F-4987-84D2-6D8E61BD5558
 :END:
   #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_B2356EEF-66A7-45A4-8287-C9E84A56E33A
+
+** nntp
+:PROPERTIES:
+:ID:       org_mark_2020-10-04T16-13-47+01-00_mini12.local:D0B3DA7F-6653-4FF1-B1FE-EFAE8B93E16B
+:END:
+  #+NAME: org_mark_2020-10-04T16-13-47+01-00_mini12.local_1BF43E07-3359-4A4B-ADC1-9E5E2F15053A
   #+begin_src emacs-lisp
   (setq auth-source-debug 'trivia)
   (setq gnus-read-active-file 'some)
@@ -53,6 +59,29 @@ Well turn them off
                                         (nntp "bar.baen.com")))
   (setq gnus-select-method '(nntp "news.eternal-september.org"))
   #+end_src
+
+** Fastmail
+:PROPERTIES:
+:ID:       org_mark_2020-10-03T14-51-52+01-00_mini12.local:BA02593B-B929-41AE-92D3-EAD8E740172D
+:END:
+Try reading email basic set up https://gnus.ding.narkive.com/8d6BbA6o/gnus-with-fastmail-fm-account
+#+NAME: org_mark_2020-10-03T14-51-52+01-00_mini12.local_09D28CC8-C58C-4D23-ABB3-AA0DC1F53B0F
+#+begin_src emacs-lisp :tangle no
+(add-to-list 'gnus-secondary-select-methods
+             '(nnimap "Fastmail"
+                      (nnimap-address "imap.fastmail.com")
+                      (nnimap-server-port 993)
+                      (nnimap-authenticator login)
+                      (nnimap-record-commands)
+                      (nnimap-expunge-on-close 'ask)
+                      (nnimap-stream ssl)))
+
+ ;; Sending via Fastmail's SMTP
+(require 'smtpmail)
+(setq send-mail-function 'smtpmail-send-it
+      message-send-mail-function 'smtpmail-send-it
+      smtpmail-smtp-server "smtp.fastmail.com")
+#+end_src
 * Group buffer
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:69B84509-B2E9-488C-AA74-7AC740464640
@@ -169,7 +198,8 @@ From [[http://doc.rix.si/cce/cce-gnus.html][Here]]
 #+begin_src emacs-lisp
 (use-package gnus-sum
   :bind (:map gnus-summary-mode-map
-              ("H-a" . hydra-gnus-summary/body))
+              ("H-a" . hydra-gnus-summary/body)
+              )
   :hydra( hydra-gnus-summary (:color blue)
   "
 [_s_] Show thread   [_F_] Forward (C-c C-f)

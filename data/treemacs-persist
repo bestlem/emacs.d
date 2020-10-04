@@ -5,36 +5,14 @@
  - path :: ~/src/env/dotfiles
 ** Org
  - path :: ~/SyncServices/Dropbox/Docs/org
-** jerrypnz_major_hydra
- - path :: ~/src/ThirdParty/emacs-init/jerrypnz_major_hydra
-** jojojames
- - path :: ~/src/ThirdParty/emacs-init/jojojames
 ** Aquamacs Application
  - path :: /Applications/Aquamacs.app/Contents/Resources/lisp/aquamacs
 ** aquamacs-emacs code
  - path :: ~/src/ThirdParty/aquamacs-emacs
-**  howardabrams
- - path :: ~/src/ThirdParty/emacs-init/howardabrams
-** jwiegley
- - path :: ~/src/ThirdParty/emacs-init/jwiegley
-** emacs-leuven
- - path :: ~/src/ThirdParty/emacs-init/emacs-leuven
-** emacs24-starter-kit
- - path :: ~/src/ThirdParty/emacs-init/emacs24-starter-kit
-** odds
- - path :: ~/src/ThirdParty/emacs-init/odds
-** zzamboni
- - path :: ~/src/ThirdParty/emacs-init/zzamboni
-** castlemacs
- - path :: ~/src/ThirdParty/emacs-init/castlemacs
-** oremacs
- - path :: ~/src/ThirdParty/emacs-init/oremacs
-** otijhuis
- - path :: ~/src/ThirdParty/emacs-init/otijhuis
-** ejmr
- - path :: ~/src/ThirdParty/emacs-init/ejmr
-** grettke
- - path :: ~/src/ThirdParty/emacs-init/grettke
+** emacs-init
+ - path :: ~/src/ThirdParty/emacs-init
+** emacs-mac
+ - path :: ~/src/ThirdParty/emacs-mac
 * Racket
 ** my realm
  - path :: ~/src/Racket/realm
@@ -44,3 +22,6 @@
  - path :: ~/src/coursera/ProgrammingLanguages
 ** SML unit test
  - path :: ~/src/sml/unit_test
+* No Perspective
+** emacs.d
+ - path :: ~/src/env/emacs.d

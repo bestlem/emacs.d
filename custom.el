@@ -14,7 +14,7 @@
  '(canlock-password "8ac28fef8ff386f996bee4f20f8b3c40bd1829d4")
  '(comment-auto-fill-only-comments t)
  '(cua-enable-cua-keys nil)
- '(cursor-type 'hollow)
+ '(cursor-type 'box)
  '(custom-enabled-themes nil)
  '(delete-old-versions "keep them all")
  '(explicit-shell-file-name "/opt/local/bin/fish")
@@ -34,7 +34,7 @@
  '(fringe-mode '(16 . 0) nil (fringe))
  '(global-hl-line-mode t)
  '(gnus-directory "~/Library/Preferences/Aquamacs Emacs/News")
- '(gnus-group-sort-function '(gnus-group-sort-by-rank) t)
+ '(gnus-group-sort-function '(gnus-group-sort-by-rank))
  '(gnus-kill-save-kill-file t)
  '(gnus-score-mimic-keymap nil)
  '(gnus-server-browse-in-group-buffer t)
@@ -93,7 +93,7 @@
  '(org-src-window-setup 'current-window)
  '(org-todo-keywords '((sequence "TODO" "|" "DONE" "LEAVE(@)")))
  '(package-selected-packages
-   '(mac-key-mode no-littering hydra s dash use-package which-key racket-mode elmacro lispy rainbow-delimiters flycheck smartparens highlight-indent-guides nov treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ibuffer-vc projectile deadgrep ivy-prescient prescient counsel swiper ivy-rich ivy-hydra ivy yasnippet company helpful org smartparens-config all-the-icons major-mode-hydra eval-in-repl xr yasnippet-snippets outshine expand-region json-navigator mwim mwin mosey fish-mode sml-mode use-package-chords paredit dashboard clojure-mode cmake-mode cask-mode eros macrostep org-indent xah-elisp-mode validate hardhat beacon ripgrep gitignore-mode gitconfig-mode manual matcha use-package-hydra backup-each-save esup org-bullets ws-butlerz helm elisp-format origami comment-dwim-2 smex discover-my-major json-mode ranger dired-toggle aggressive-indent gradle-mode groovy-imports groovy-mode ws-butler diminish key-chord))
+   '(treemacs-persp mac-key-mode no-littering hydra s dash use-package which-key racket-mode elmacro lispy rainbow-delimiters flycheck smartparens highlight-indent-guides nov treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ibuffer-vc projectile deadgrep ivy-prescient prescient counsel swiper ivy-rich ivy-hydra ivy yasnippet company helpful org smartparens-config all-the-icons major-mode-hydra eval-in-repl xr yasnippet-snippets outshine expand-region json-navigator mwim mwin mosey fish-mode sml-mode use-package-chords paredit dashboard clojure-mode cmake-mode cask-mode eros macrostep org-indent xah-elisp-mode validate hardhat beacon ripgrep gitignore-mode gitconfig-mode manual matcha use-package-hydra backup-each-save esup org-bullets ws-butlerz helm elisp-format origami comment-dwim-2 smex discover-my-major json-mode ranger dired-toggle aggressive-indent gradle-mode groovy-imports groovy-mode ws-butler diminish key-chord))
  '(python-shell-interpreter "python")
  '(text-mode-hook '(turn-on-flyspell set-word-wrap))
  '(undo-limit 800000)
@@ -104,7 +104,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :extend nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "Fira Code"))))
+ '(default ((t (:inherit nil :extend nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "Fira Code"))))
  '(aquamacs-variable-width ((t (:stipple nil :strike-through nil :underline nil :slant normal :weight normal :height 120 :width normal :family "Times New Roman"))))
  '(bold-italic ((t (:underline t :slant italic :weight bold :family "Menlo"))))
  '(echo-area ((t (:inherit default :strike-through nil :underline nil :slant normal :weight normal :width normal))))

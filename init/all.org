@@ -37,8 +37,12 @@ Although see starter kit where they run after init.
 This saves the state perhaps I need to see how it works.
 #+NAME: org_mark_2020-10-03T11-41-17+01-00_mini12.local_DC2C7645-A251-449C-AC77-40AD4B76D5B4
 #+begin_src emacs-lisp
-(unless *aquamacs*
-  (desktop-save-mode 1))
+(use-package desktop
+  :unless *aquamacs*
+  :config
+  (desktop-save-mode 1)
+  (push '(company-posframe-mode . nil)
+      desktop-minor-mode-table))
 #+end_src
 *** Dashboard
 :PROPERTIES:

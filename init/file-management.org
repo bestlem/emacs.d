@@ -180,10 +180,13 @@ Started as file management but actually deals with files and what is in them/ Tr
 	This provides a cover for ripgrep.
 	#+begin_src emacs-lisp
 	(use-package deadgrep
-	  :ensure t
-	  :bind ("<f4>" . deadgrep)
-	  :config (unless (executable-find "ripgrep")
-				(alert "Please install ripgrep snap...")))
+      :ensure t
+      :bind (("<f4>" . deadgrep)
+             :map deadgrep-mode-map
+             ("<mouse-1>" . deadgrep-visit-result-other-window)
+             ("<mouse-3>" . deadgrep-toggle-file-results))
+      :config (unless (executable-find "ripgrep")
+                (alert "Please install ripgrep snap...")))
 	#+end_src
 ** Projectile
 :PROPERTIES:

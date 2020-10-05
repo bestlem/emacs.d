@@ -29,16 +29,16 @@ Although that should be in prog mode
 :END:
 	 Set compat so that the keys for these modes work. But macrostep does not - see its hydra
 	 #+begin_src emacs-lisp
-     (use-package lispy
-       :ensure t
-       ;;:mwb-load-path "fork/lispy"
-       :bind (:map lispy-mode-map
-                   ("<backspace>" . lispy-delete-backward)
-                   ("<kp-delete>" . lispy-delete))
-       :custom (lispy-eval-display-style "overlay")
-       :config (setq lispy-compat (quote (edebug macrostep))
-                     lispy-safe-paste t)
-       (add-hook 'lispy-mode-hook #'turn-off-smartparens-mode))
+(use-package lispy
+  :ensure t
+  ;;:mwb-load-path "fork/lispy"
+  :bind (:map lispy-mode-map
+              ("<backspace>" . lispy-delete-backward))
+  :custom (lispy-eval-display-style "overlay")
+  :config (setq lispy-compat '(edebug macrostep)
+                lispy-safe-paste t)
+  (bind-key mwbkey-delete 'lispy-delete lispy-mode-map)
+  (add-hook 'lispy-mode-hook #'turn-off-smartparens-mode))
 	 #+end_src
 *** Get lispy test working
 :PROPERTIES:

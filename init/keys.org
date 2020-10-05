@@ -367,11 +367,11 @@ This is the override of save etc to the mode maps
 :END:
 #+NAME: org_mark_2020-09-24T21-45-16+01-00_mini12.local_427A6531-52EE-4F7E-A5E8-B2841C9B166A
 #+begin_src emacs-lisp
-(bind-key "A-b" 'ivy-switch-buffer)
-(bind-key "A-M-k" 'bjm/kill-this-buffer)
-(bind-key "C-x k" 'bjm/kill-this-buffer)
-(bind-key "A-k" 'bury-buffer)
-(bind-chord "kk" #'er-switch-to-previous-buffer)
+(bind-key "A-b" 'ivy-switch-buffer macos-key-map)
+(bind-key "A-M-k" 'bjm/kill-this-buffer macos-key-map)
+(bind-key "C-x k" 'bjm/kill-this-buffer macos-key-map)
+(bind-key "A-k" 'bury-buffer macos-key-map)
+(bind-chord "kk" #'er-switch-to-previous-buffer macos-key-map)
 ;; macport makes A-u µ
 (bind-key  "A-u" 'revert-buffer-no-confirm macos-key-map)
 #+end_src
@@ -392,8 +392,8 @@ This is the override of save etc to the mode maps
 #+begin_src emacs-lisp
 (bind-key "A-M-u" 'ediff-revision macos-key-map)
 (bind-key "A-/" 'comment-or-uncomment-region-or-line macos-key-map)
-(bind-key "A-<kp-add>" 'zoom-font)
-(bind-key "A-<kp-subtract>" 'zoom-font-out)
+(bind-key "A-<kp-add>" 'zoom-font macos-key-map)
+(bind-key "A-<kp-subtract>" 'zoom-font-out macos-key-map)
 #+end_src
 
 ** Control x binding

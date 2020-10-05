@@ -32,7 +32,7 @@ The minimum setup needed to load the rest.
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:802F10D5-7A50-432F-99F2-F1D27EB3525D
 :END:
-***** Debugging
+*** Debugging
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:62080F1E-8D8F-4EBB-8ACE-9C2D6DCA14A9
 :END:
@@ -41,13 +41,26 @@ The minimum setup needed to load the rest.
 
       #+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_B6CC1317-E222-4867-9C34-C0396275139E
       #+begin_src emacs-lisp
-      ;;  setting to nil turns them off
-      (add-hook 'after-init-hook
-                (lambda () (setq debug-on-error nil)))
-      (setq debug-on-error 1)
-      (setq debug-on-quit nil)
+;;  setting to nil turns them off
+(add-hook 'after-init-hook
+          (lambda () (setq debug-on-error nil)))
+(setq debug-on-error nil)
+(setq debug-on-quit nil)
+
+;; Trace some function
+;; (require 'trace)
+;; (untrace-all)
+;; (trace-function-foreground 'iso-transl-define-keys)
+
+
+(with-eval-after-load 'iso-transl
+  (warning "loading \"iso-trransl\"")
+  (dolist (transl-char iso-transl-char-map)
+    (let ((vec (vconcat (car transl-char))))
+      (aset vec 0 (logior (aref vec 0) ?\A-\^@))
+      (define-key key-translation-map vec nil))))
      #+end_src
-***** Use source where newer
+*** Use source where newer
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:D13FB268-3059-4AEC-9A25-50AD765F26C5
 :END:

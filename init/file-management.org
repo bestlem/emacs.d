@@ -62,7 +62,6 @@ Aquamacs seems to turn this off sometimes in customization so need to investigat
 	   (save-buffer 16)
      ;; This is not defined in non aquamacs
 	 (mac-key-save-file-as)))
-
  #+end_src
 **** TODO save special buffers
 :PROPERTIES:

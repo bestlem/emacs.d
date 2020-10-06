@@ -4,7 +4,7 @@
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:A2A04D70-D20C-4D64-8C03-FE52D779E97B
 :END:
-This file manages my global  key bindings excpet in Aquamacs they are not global.
+This file manages my global  key bindings except in Aquamacs they are not global.
 Other files might have defined global keys e.g. to start particular modes,  but in general we want them here.
 
 It is debateable wether we put bindings here or next to the functions
@@ -17,8 +17,16 @@ The obvious is global key but......Aquamacs has added a map or two mainly to pro
 
 This [[https://stackoverflow.com/a/27441815/151019][Stack Overlow answer]] suggests use of bind-key  if we do not want to be overridden.
 
-ALso see [[https://github.com/noctuid/general.el][General package]] but see [[https://github.com/noctuid/general.el/issues/10][comparison]] with bind-key from use package so stick to bind
+Also see [[https://github.com/noctuid/general.el][General package]] but see [[https://github.com/noctuid/general.el/issues/10][comparison]] with bind-key from use package so stick to bind.
 
+I use mac-key-code for non Aquamacs Mac. I then noticed two issues A-s fails in Org src and the some keys randomly became odd chars
+e.g. A-c becomes ¢ well not exactly that . which-key shows the correct key. This required learning a lot of rubbish I can forget now. First is due to order of keymaps and second is iso-transl which messes the key translation..
+
+There is a general idea as in the SO answer quoted above as to put your keys into a minor mode map that you can turn and off. Aquamacs comment for osx-map-mode suggests the same. But there is a mix here as I want to be able to override my keys. As there is no real use of Alt key in Emacs it is an independent map (except for the iso-transl mess)/
+
+Aquamacs works with the A-s issue as it loads osx-mode-map early. I loaded mac-kep-map quite early but it is after org-mode so I can't override that key. In both cases visual-line-mode is loaded first then Aquamacs has tabbar and keyboard emulation and mac-key-mode has isearch and then outline and org modes. Note that Aquamacs does at start of osxkey-mode mess with isearch (ah does that affect swiper)
+
+So quick hack is put mac-key-mode before org-mode, so has to be in config which is better than behaviour logically - and the org setup for keybindings is simple so does not need org mode.
 *** Key representation
 :PROPERTIES:
 :ID:       org_mark_2020-02-09T19-36-52+00-00_mini12:AB151351-1B6E-4D39-AF9D-74CDDA7DB10E
@@ -30,6 +38,8 @@ There is a difference between bind and general in how they report the bindings. 
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:8C7E2431-4A95-4BA4-B084-93325BB68F14
 :END:
 Use bond-key
+
+??? Oct 2020 I don't understand
 ** Keyboard Thoughts
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:68EED975-E28B-4FD7-8E78-BA5A8E260CD1

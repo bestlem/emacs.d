@@ -2,7 +2,7 @@
 #+PROPERTY:header-args :cache yes :tangle yes :comments link
 
 This is completion for text in buffer
-** Semantic based
+* Semantic based
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:98A7F8D2-8847-4551-B366-4440CD34703C
 :END:
@@ -10,7 +10,10 @@ This looks at the current code and prompts for variables etc
 I need something and company seems to be the current one.
 Understandin the order is a bit confusing and this [[https://emacs.stackexchange.com/a/15251/9874][Stackexchnage]] answer helps. Basically test one at a time
 Add some from jweigley
-
+** Company
+:PROPERTIES:
+:ID:       org_mark_2020-10-05T18-36-08+01-00_mini12.local:B1FF068E-6489-4EB1-8990-DA1D3E6262D2
+:END:
  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_0A6134EA-DC55-4651-ACC8-B1478B5A38F3
  #+begin_src emacs-lisp
 (use-package company
@@ -27,14 +30,14 @@ Add some from jweigley
         ;; Only search same major mode buffers.
         company-dabbrev-other-buffers t
         ;; Don't take too much time searching for matches.
-        company-dabbrev-code-time-limit .0005
-        company-dabbrev-time-limit .0005)
+        company-dabbrev-code-time-limit 0.0005
+        company-dabbrev-time-limit 0.0005)
   (setq company-show-numbers nil)
   (setq company-lighter-base "/"
         company-tooltip-align-annotations t
         company-echo-delay 1
         company-selection-wrap-around t
-        company-idle-delay .05
+        company-idle-delay 0.05
         company-minimum-prefix-length 1)
   (global-company-mode t)               ; don't put in after-init hook
                                         ; as we are deferred
@@ -47,6 +50,9 @@ Add some from jweigley
     (use-package company-posframe
       :ensure t
       :config (company-posframe-mode 1)))
+  (use-package company-prescient
+    :ensure t :config (company-prescient-mode 1))
+
   :init
   ;; jojojames to add a backend with yasnippet in a :with
   (defun j|company-backend-in-backends (b)
@@ -109,7 +115,7 @@ CLOSED: [2020-02-08 Sat 00:21]
 :END:
 j Add| methods from jojojames being generalisation of common yasnippet. Provides a function rather than the code used in yasnippet. Would be useful if adding other backends after yasnippet (as shown before I committed the change I need to see the issue to understand his code)
 
-** Text expansion
+* Text expansion
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:15548A48-9E39-4C39-9010-C4B94096DA80
 :END:

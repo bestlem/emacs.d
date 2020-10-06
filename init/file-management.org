@@ -94,13 +94,13 @@ There are some modes that have special save actions e.g. *Abbrev* which is a buf
   :commands (recentf-mode
              recentf-add-file
              recentf-apply-filename-handlers)
-  :config
+  :init
   (setq recentf-filename-handlers '(abbreviate-file-name)
         recentf-auto-cleanup 'never
         recentf-keep '(file-remote-p file-readable-p)
         recentf-max-saved-items 100
         recentf-max-menu-items 25)
-  :init
+  :config
   (recentf-mode 1))
   #+end_src
 * Files

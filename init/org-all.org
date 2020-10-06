@@ -86,7 +86,7 @@ Put the bind bit in noweb
  ("H-s" . org-edit-src-exit)
  ("A-s" . org-edit-src-save)            ; I press by mistake but it makes
                                         ; sense now save not save and exit
- ("H-k". org-edit-src-abort)
+ ("A-k". org-edit-src-abort)
  ;; :map org-capture-mode-map
  ;; ("<f12>" . org-capture-finalize)
  )

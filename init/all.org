@@ -38,6 +38,7 @@ This saves the state perhaps I need to see how it works.
 #+NAME: org_mark_2020-10-03T11-41-17+01-00_mini12.local_DC2C7645-A251-449C-AC77-40AD4B76D5B4
 #+begin_src emacs-lisp
 (use-package desktop
+  :disabled
   :unless *aquamacs*
   :config
   (desktop-save-mode 1)
@@ -89,13 +90,16 @@ This seemed interesting but seemed to messup lispy
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:E5DA693A-871D-4201-B814-758C4738654A
 :END:
 I want two windows in a frame and treemacs
+
+Emacs 27 seems toim have a timing issue pop to buffer seems not to see the spare window unless after treemacs
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_60953FEE-7E07-48DE-AD1C-66D90DAE2D5A
 #+begin_src emacs-lisp
 (add-hook 'window-setup-hook
           '(lambda ()
              (split-window-horizontally)
-             (pop-to-buffer "*Messages*" 'other-window)
-             (treemacs)))
+             (treemacs)
+             (pop-to-buffer "*Messages*")
+             ))
 #+end_src
 
 ** Environment

@@ -263,20 +263,19 @@ See http://endlessparentheses.com/ispell-and-abbrev-the-perfect-auto-correct.htm
      ( ("." er/expand-region "Expand Region" :exit nil)
        ("<f2>" er/expand-region "Expand Region" :exit nil)
        ("," er/contract-region "Contract Region" :exit nil)))))
-
 #+end_src
 ** Begin end line
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:79C47FC8-B71F-40B4-84F3-DB78319B9E33
 :END:
 There are several ways to make begin go to first non whitespace  then to begin lin, some will then make next press go to defun or buffer.
-Note home and end are in Aquamacs osx-mode-map makes life more complex.. Perhaps I will have to unset them to allow modes to do their thingsThese include crux, [[https://github.com/alezost/mwim.el][mwin]] and ergoemacs,  [[https://github.com/alphapapa/mosey.el][mosey]] + snippets on web.
+Note home and end are in Aquamacs osx-mode-map makes life more complex (actually not as moses override it unless you deactivate and reactivate it). Perhaps I will have to unset them to allow modes to do their things These include crux, [[https://github.com/alezost/mwim.el][mwin]] and ergoemacs,  [[https://github.com/alphapapa/mosey.el][mosey]] + snippets on web.
 Note that lispy also does this but not back a form
 *** Mosey
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:7A6F1A54-B69B-4674-8B4B-1B404D40B67D
 :END:
-Try mosey as it has the back function - NB can use paredit, unfortunately does not seem to work with shift and as others do try another.
+Try mosey as it has the back function - NB can use smartparens, unfortunately does not seem to work with shift and as others do try another.
 #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_D167236A-A698-4694-A38A-C0A02B3D0153
 #+begin_src emacs-lisp
 (use-package mosey

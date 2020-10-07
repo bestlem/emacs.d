@@ -68,12 +68,25 @@ Aquamacs seems to turn this off sometimes in customization so need to investigat
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:0A3506D6-DE37-44F4-A990-C06C1D567023
 :END:
 There are some modes that have special save actions e.g. *Abbrev* which is a buffer with no file name. I force a save using a dialog box but this should be call the special call - stick with ^x^s
+* Files
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:86DB2C97-15D2-4ADA-8AFA-13397998FDC8
+:END:
+
 ** Recent Files
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:F7A7B04A-465B-4E07-B218-96A10C71D481
 :END:
- Should be a customise but Aquamacs sets it so keeps adding to it pr does it need to check
  Exclusion regexes from [[https://www.reddit.com/r/emacs/comments/3g468d/stop_recent_files_showing_elpa_packages/][reddit]]
+
+ Issue is that recentf-exclude is used by passing the expanded filename(which makes senss)  and the file list uses the shortened name which also makes sense at least in the file as then is independent of ~
+
+ The save in file is done by the set of abbreviate-file-name to recentf-filename-handlers which means that the name is expanded and then replaced by ~. Unfortunately the regexes are done on just the expanded file name. But all expansion is done the same way so all should work
+
+ Cleanup does seem to normalize file names
+
+ The problem is that we have regexq
+
  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_8950A078-0D0D-4B58-90E9-2E103AB4934D
  #+begin_src emacs-lisp
  ;; Problem is this is set after the recent files are set https://emacs.stackexchange.com/questions/48784/recent-files-in-aquamacs
@@ -84,29 +97,30 @@ There are some modes that have special save actions e.g. *Abbrev* which is a buf
                         "^/var/folders\\.*"
                         "COMMIT_EDITMSG\\'"
                         ".recentf"
-                        "~$"  ".~/" ; Emacs (and others) backup.
+                        "~$" ".~/"      ; Emacs (and others) backup.
                         ".*-autoloads\\.el\\'"
-                        "[/\\]\\.elpa/"
-                        ".*png$" ".*cache$"))
+                        "[/\\]emacs.d/elpa/"
+                        ".*png$" ".*cache$"
+                        "~/\\.emacs\\.d/\\.*/*\\.el"
+                        "~/src/env/emacs\\.d/.*/.*\\.el"
+                        "SessionDesktop\\.el"
+                        "treemacs-persist"))
+;; (setq recentf-exclude '())
 (use-package recentf
   :unless *aquamacs*
-  :defer 10
   :commands (recentf-mode
              recentf-add-file
-             recentf-apply-filename-handlers)
+             recentf-apply-filename-handlers
+             recentf-save-list)
   :init
   (setq recentf-filename-handlers '(abbreviate-file-name)
-        recentf-auto-cleanup 'never
+        recentf-auto-cleanup (* 3600 2) ; 2 hours
         recentf-keep '(file-remote-p file-readable-p)
         recentf-max-saved-items 100
         recentf-max-menu-items 25)
   :config
   (recentf-mode 1))
   #+end_src
-* Files
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:86DB2C97-15D2-4ADA-8AFA-13397998FDC8
-:END:
 ** Sunshine commander
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:FBD40752-F440-43A7-A059-2FE49F568F52

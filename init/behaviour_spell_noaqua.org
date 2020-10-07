@@ -31,15 +31,10 @@ This is mainly taken from [[https://github.com/howardabrams/dot-files][Howard Ab
   (dolist (hook '(change-log-mode-hook log-edit-mode-hook org-agenda-mode-hook))
     (add-hook hook (lambda () (flyspell-mode -1))))
 
-  :config
+  :preface
   (setq ispell-program-name "/opt/local/bin/aspell"
-        ispell-local-dictionary "en_GB-ize"
-        ispell-dictionary "british"
-        ispell-extra-args '("--sug-mode=ultra" "--lang=en_GB-ize")
-        ispell-list-command "--list"
-        ispell-local-dictionary-alist '(("en_GB" "[[:alpha:]]" "[^[:alpha:]]" "['‘’]"
-                                         t ; Many other characters
-                                         ("-d" "en_GB-ize") nil utf-8))))
+        ispell-dictionary "british-ize"
+        ispell-extra-args '("--sug-mode=normal")))
    #+END_SRC
 
    ASpell automatically configures a personal dictionary

@@ -26,6 +26,32 @@ Although see starter kit where they run after init.
 			   (garbage-collect)
 			   (message "Emacs init-time %s" (emacs-init-time))) t)
   #+end_src
+** Environment
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:C615E483-7CA9-42EA-9AEB-E0B541771836
+:END:
+*** load-path
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:BBB5C272-C2B4-4F38-948C-ED758D56E6A4
+:END:
+. Setup for elisp  used by notmal load not org tangle
+Note that if a subdirectory is just for one thinmg then use keyword mwb-load-path in use-package.
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_CC0BEB6F-84DC-4320-9455-9906069CD4C9
+#+begin_src emacs-lisp
+(add-to-list 'load-path (mwb-user-emacs-file "site-lisp"))
+#+end_src
+*** Where things are put
+:PROPERTIES:
+:ID:       org_mark_2020-09-29T11-53-58+01-00_mini12.local:63AB1DE7-5C65-415D-96D0-7DAF0E0BC2BA
+:END:
+Aquamacs puts a lot in ~/Library/Preferences/Emacs but Emacs 27 does not know that so we want to keep some of the crap out of .Emacs.d So try no littering
+#+NAME: org_mark_2020-09-29T11-53-58+01-00_mini12.local_1F694F93-C501-4512-BA63-CA34560F68CE
+#+begin_src emacs-lisp
+(use-package no-littering
+  :ensure t
+  :unless *aquamacs*)
+#+end_src
+
 ** Startup screen
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:CE114471-A55C-4C32-B1DF-C83AFE265D4C
@@ -82,8 +108,16 @@ This seemed interesting but seemed to messup lispy
   Need to control how it is restarted. Aquamacs saves it
   #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_7CE610E6-5D87-43CE-9EF8-5D9112E28EF0
   #+begin_src emacs-lisp
-  (setq initial-major-mode 'emacs-lisp-mode)
-  (setq initial-scratch-message nil)
+(setq initial-major-mode 'org-mode)
+(setq initial-scratch-message nil)
+(unless *aquamacs*
+  (use-package persistent-scratch
+    :ensure t
+    :init
+    (setq persistent-scratch-save-file (no-littering-expand-var-file-name "persistent-scratch"))
+    :config
+    (persistent-scratch-setup-default)))
+
    #+end_src
 **** Windows
 :PROPERTIES:
@@ -100,32 +134,6 @@ Emacs 27 seems toim have a timing issue pop to buffer seems not to see the spare
              (treemacs)
              (pop-to-buffer "*Messages*")
              ))
-#+end_src
-
-** Environment
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:C615E483-7CA9-42EA-9AEB-E0B541771836
-:END:
-*** load-path
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:BBB5C272-C2B4-4F38-948C-ED758D56E6A4
-:END:
-. Setup for elisp  used by notmal load not org tangle
-Note that if a subdirectory is just for one thinmg then use keyword mwb-load-path in use-package.
-#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_CC0BEB6F-84DC-4320-9455-9906069CD4C9
-#+begin_src emacs-lisp
-(add-to-list 'load-path (mwb-user-emacs-file "site-lisp"))
-#+end_src
-*** Where things are put
-:PROPERTIES:
-:ID:       org_mark_2020-09-29T11-53-58+01-00_mini12.local:63AB1DE7-5C65-415D-96D0-7DAF0E0BC2BA
-:END:
-Aquamacs puts a lot in ~/Library/Preferences/Emacs but Emacs 27 does not know that so we want to keep some of the crap out of .Emacs.d So try no littering
-#+NAME: org_mark_2020-09-29T11-53-58+01-00_mini12.local_1F694F93-C501-4512-BA63-CA34560F68CE
-#+begin_src emacs-lisp
-(use-package no-littering
-  :ensure t
-  :unless *aquamacs*)
 #+end_src
 
 ** Setting variables with a check on type

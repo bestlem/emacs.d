@@ -22,7 +22,7 @@ Also see [[https://github.com/noctuid/general.el][General package]] but see [[ht
 I use mac-key-code for non Aquamacs Mac. I then noticed two issues A-s fails in Org src and the some keys randomly became odd chars
 e.g. A-c becomes ¢ well not exactly that . which-key shows the correct key. This required learning a lot of rubbish I can forget now. First is due to order of keymaps and second is iso-transl which messes the key translation..
 
-There is a general idea as in the SO answer quoted above as to put your keys into a minor mode map that you can turn and off. Aquamacs comment for osx-map-mode suggests the same. But there is a mix here as I want to be able to override my keys. As there is no real use of Alt key in Emacs it is an independent map (except for the iso-transl mess)/
+There is a general idea as in the SO answer quoted above as to put your keys into a minor mode map that you can turn and off. Aquamacs comment for osx-map-mode suggests the same. But there is a mix here as I want to be able to override my keyz``s. As there is no real use of Alt key in Emacs it is an independent map (except for the iso-transl mess)/
 
 Aquamacs works with the A-s issue as it loads osx-mode-map early. I loaded mac-kep-map quite early but it is after org-mode so I can't override that key. In both cases visual-line-mode is loaded first then Aquamacs has tabbar and keyboard emulation and mac-key-mode has isearch and then outline and org modes. Note that Aquamacs does at start of osxkey-mode mess with isearch (ah does that affect swiper)
 
@@ -103,19 +103,19 @@ So hyper-A is now a mode hydra key and I have started defining a hydra on that,
   :ensure t
   :defer 5
   :config
-  (which-key-setup-side-window-right-bottom)
   (setq which-key-sort-order 'which-key-key-order-alpha
         which-key-side-window-max-width 0.33
-        which-key-idle-delay 0.1)
+        which-key-idle-delay 1)
   (which-key-mode)
-  (when (>= emacs-major-version 27)
-    (use-package which-key-posframe
-      :ensure t
-      :config
-      (which-key-posframe-mode 1)))
+  (if (>= emacs-major-version 27)
+      (use-package which-key-posframe
+        :ensure t
+        :config
+        (which-key-posframe-mode 1))
+    (which-key-setup-side-window-right-bottom))
   :diminish which-key-mode)
    #+end_src
-*** Display in help and menus
+** Display keys in help and menus
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:07E735E7-F73B-475D-96E1-7D24627B32DF
 :END:
@@ -125,7 +125,7 @@ Note that you can control what the screen displays A for Alt or ⌥. Emacs is no
 (when *aquamacs*
   (setq ns-use-mac-modifier-symbols  t))
 #+end_src
-*** Home/End/Paging
+** Home/End/Paging
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:B05228E7-9F92-462C-95B3-D0C74C4A9F46
 :END:
@@ -144,7 +144,7 @@ Note that you can control what the screen displays A for Alt or ⌥. Emacs is no
 (bind-key [S-kp-next] 'scroll-other-window-down)
 (bind-key [S-kp-prior] 'scroll-other-window)
 #+end_src
-*** Cua bindings
+** Cua bindings
 :PROPERTIES:
 :ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:D0079FD5-B3EE-47A0-8279-5448DF4CE51F
 :END:
@@ -167,7 +167,7 @@ Note that you can control what the screen displays A for Alt or ⌥. Emacs is no
  (bind-key [C-kp-end] 'end-of-buffer )
  (bind-key [C-kp-home] 'beginning-of-buffer )
 #+end_src
-*** Scrolling
+** Scrolling
 :PROPERTIES:
 :ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:859480D6-54DB-4B10-BF93-05372385B89F
 :END:
@@ -235,35 +235,6 @@ These will be old NeXT Pizza bindings
 	 ;(global-set-key "\M-q" 'query-replace)
 	 ;(global-set-key "\M-r" 'replace-string)
 	 ;(global-set-key "\M-i" 'indent-region)
-*** Matcha
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:4E3587EA-6CD0-4B4D-B039-CFE7E970811F
-:END:
-Global hydra from [[https://github.com/jojojames/matcha][Matcha github]] but no idea how good. I didn't want it all but that was the easiest.
-Also see [[https://github.com/jerrypnz/major-mode-hydra.el][Major mode hydra]] for similar but grabs a major mode hydra from somewhere. Actually it is more like my H-a but automated it looks for
-
-Major mode was missing the last line - I suspect due to echo area or possibly this bug https://github.com/abo-abo/hydra/issues/331
-
-So ended up with matcha again and transient
-
-And that works - I do need to edit the matcha files etc.
-But transient needs a actual function that exists hydra can lazy load.
-But hydra allows lambdas and often not defined functions (although pretty hydra requires the function to be loaded.)
-
-And I killed it off
-**** Matcha space the root matcha
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:DB24DAF7-FE9D-4A2F-B20B-603A451FD43E
-:END:
-***** Note on unused or other changes
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:513E7AF5-24A0-4C37-80D6-9E95FF9BD8FC
-:END:
-   #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_E1A3E913-3BF3-47B9-BAAF-99E67FB56CA3
-   #+begin_src emacs-lisp
-   ;(bind-key "H-d" 'matcha-run-mode-command)
-   ;(bind-key "H-`" 'matcha-me-space)
-   #+end_src
 ** quickrun
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:B9F7371A-DC41-4527-9DFD-EE27FB91DFF5
@@ -371,8 +342,13 @@ This is the override of save etc to the mode maps
 #+begin_src emacs-lisp
 (bind-key "A-M-u" 'ediff-revision macos-key-map)
 (bind-key "A-/" 'comment-or-uncomment-region-or-line macos-key-map)
-(bind-key "A-<kp-add>" 'zoom-font macos-key-map)
-(bind-key "A-<kp-subtract>" 'zoom-font-out macos-key-map)
+(if *aquamacs*
+    (progn
+      (bind-key "A-<kp-add>" 'zoom-font macos-key-map)
+      (bind-key "A-<kp-subtract>" 'zoom-font-out macos-key-map))
+  (progn
+    (bind-key "A-<kp-add>" 'text-scale-increase macos-key-map)
+    (bind-key "A-<kp-subtract>" 'text-scale-decrease macos-key-map)))
 #+end_src
 
 ** Control x binding

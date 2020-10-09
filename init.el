@@ -10,7 +10,7 @@
 ;; [[file:init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_86BD52C1-8055-4BB2-834D-2F088719C835][org_mark_2020-01-23T20-40-42+00-00_mini12_86BD52C1-8055-4BB2-834D-2F088719C835]]
 (defun mwb-user-emacs-file (name)
   "Return an absolute per-user Emacs-specific file name around where the init file is.
-  It is basically locate-user-emacs-file but I have followed Aquiamacs is setting that not where my init.el file is.
+  It is basically locate-user-emacs-file but I have followed Aquamacs is setting that not where my init.el file is.
   Main reason to use is so that I can put init under version control and the rest go elsewhere."
   (expand-file-name name mwb-user-emacs-directory))
 ;; org_mark_2020-01-23T20-40-42+00-00_mini12_86BD52C1-8055-4BB2-834D-2F088719C835 ends here

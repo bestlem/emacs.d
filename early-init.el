@@ -4,10 +4,10 @@
 (defvar file-name-handler-alist-old file-name-handler-alist)
 
 (setq file-name-handler-alist nil
-      message-log-max 16384
-      gc-cons-threshold 402653184
-      gc-cons-percentage 0.6
-      auto-window-vscroll nil)
+	  message-log-max 16384
+	  gc-cons-threshold 402653184
+	  gc-cons-percentage 0.6
+	  auto-window-vscroll nil)
 ;; org_mark_2020-01-23T20-40-42+00-00_mini12_EC7FD451-253D-4F87-90DC-AD484305487F ends here
 
 ;; [[file:init.org::org_mark_2020-09-28T01-08-28+01-00_mini12.local_407877DD-DF72-4900-9475-7723E8D855A2][org_mark_2020-09-28T01-08-28+01-00_mini12.local_407877DD-DF72-4900-9475-7723E8D855A2]]
@@ -23,9 +23,9 @@
 
 ;; [[file:init.org::org_mark_2020-09-28T01-08-28+01-00_mini12.local_19B4CE88-E1D4-4E44-91B7-AD3D8E74C2D3][org_mark_2020-09-28T01-08-28+01-00_mini12.local_19B4CE88-E1D4-4E44-91B7-AD3D8E74C2D3]]
 ;;(menu-bar-mode -1)
-;; (unless (and (display-graphic-p) (eq system-type 'darwin))
-;;   (push '(menu-bar-lines . 0) default-frame-alist))
-;; (push '(tool-bar-lines . 0) default-frame-alist)
+(unless (and (display-graphic-p) (eq system-type 'darwin))
+  (push '(menu-bar-lines . 0) default-frame-alist))
+(push '(tool-bar-lines . 0) default-frame-alist)
 ;;(push '(vertical-scroll-bars) default-frame-alist)
 (setq tool-bar-mode nil)
 ;; org_mark_2020-09-28T01-08-28+01-00_mini12.local_19B4CE88-E1D4-4E44-91B7-AD3D8E74C2D3 ends here

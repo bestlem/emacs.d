@@ -18,11 +18,16 @@ Aquamacs is stuck with old color themes not the cusomisable ones
                 (color-theme-initialize)
                 (color-theme-high-contrast))))
 
-  (use-package color-theme-modern
-    :ensure t
-    :init (load-theme 'high-contrast t t)
+  (progn
+    (setq custom-theme-directory (mwb-user-emacs-file "data/themes"))
+
+    ;;  Hack themes by commenting
+    ;;  these are themes I have saved and modified
+    ;; (load-theme 'high-contrast t t)
     (load-theme 'leuven t t)
     (enable-theme 'leuven)))
+
+
 #+end_src
 
 

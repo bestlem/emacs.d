@@ -37,6 +37,7 @@ Although that should be in prog mode
   :custom (lispy-eval-display-style "overlay")
   :config (setq lispy-compat '(edebug macrostep)
                 lispy-safe-paste t)
+  (diminish 'eldoc)
   (bind-key mwbkey-delete 'lispy-delete lispy-mode-map)
   (add-hook 'lispy-mode-hook #'turn-off-smartparens-mode))
 	 #+end_src

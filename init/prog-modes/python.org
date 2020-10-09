@@ -46,7 +46,9 @@ There is now a xonsh mode
   #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_59880E6F-AD42-47DF-B04B-957600115D5D
   #+begin_src emacs-lisp
   (use-package xonsh-mode
-    :mwb-load-path "fork/xonsh-mode"
+    :disabled
+    :mwb-load-path "fork/xonsh-mode" ; can make this normal ensure try fromn
+                                     ; start again
     :mode "\\.xsh\\'"
     )
   #+end_src

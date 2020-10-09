@@ -276,7 +276,14 @@
 ;;     (define-key lispy-mnemonic-mode-map (kbd "[") 'racket-lispy-smart-open-bracket)
 ;;   (define-key lispy-mnemonic-mode-map (kbd "[") 'lispy-brackets))
 
-(define-key lispy-mnemonic-mode-map (kbd "[") 'lispy-brackets)
+;;  stop having to use shift
+
+(define-key lispy-mnemonic-mode-map (kbd "(") 'lispy-brackets)
+(define-key lispy-mnemonic-mode-map (kbd "[") 'lispy-parens)
+;;  need to map keypad separately
+;; (define-key lispy-mnemonic-mode-map (kbd "9") 'lispy-parens)
+
+;; (define-key lispy-mnemonic-mode-map (kbd "[") 'lispy-brackets)
 (define-key lispy-mnemonic-mode-map (kbd "H-d") 'hydra-lispy-debug/body)
 (define-key lispy-mnemonic-mode-map (kbd "H-m") 'hydra-lispy-mark/body)
 (define-key lispy-mnemonic-mode-map (kbd "H-x") 'hydra-lispy-x/body)

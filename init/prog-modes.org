@@ -139,19 +139,19 @@ _k_: kill        _s_: split                   _{_: wrap with { }
 
 (bind-key "H-["  'ptrv/smartparens/body)
 #+end_src
-**** Aggressive indent
+**** [[https://github.com/Malabarba/aggressive-indent-mode][Aggressive indent]]
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:25EEAB16-473F-4321-B9CD-085BD4B97CB5
 :END:
- Indent as you type. Only for emacs lisp or racket at the moment. https://github.com/Malabarba/aggressive-indent-mode
+ Indent as you type. Only for emacs lisp or racket at the moment. But that failed so back to global - If want to exclude then set (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+ https://github.com/Malabarba/aggressive-indent-mode
  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_9DFEE1E2-3416-4ACF-9B5F-44C23CA8722F
  #+begin_src emacs-lisp
 (use-package aggressive-indent
   :ensure t
   :after smartparens
   :config
-  (dolist (el sp-lisp-modes)
-    (add-hook el 'aggressive-indent-mode))
+  (global-aggressive-indent-mode 1)
   )
  #+end_src
 ** Clean up whitespace
@@ -159,21 +159,17 @@ _k_: kill        _s_: split                   _{_: wrap with { }
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:5CBAA3C9-A6AD-4881-BACC-D2A3099D294A
 :END:
  Only do it on my edits
-*** Whitespace at end of line
+*** Whitespace at end of line uses [[https://github.com/lewang/ws-butler][ws-butler]]
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:7F269BB3-F95F-4F6D-944B-252975923B43
 :END:
   #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_668C51A9-4FC2-4A35-A424-9FC9C270DACF
   #+begin_src emacs-lisp
-   (use-package ws-butler
-	 :ensure t
-	 :diminish ws-butler-mode
-	 :hook ((prog-mode org-mode) . ws-butler-mode ))
+(use-package ws-butler
+  :ensure t
+  :diminish ws-butler-mode
+  :hook ((prog-mode org-mode) . ws-butler-mode ))
  #+end_src
-*** TODO Need to look at this more
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:4BDAD971-0F7D-4343-8290-50205E8A77A9
-:END:
 ** iMenu in all buffers
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:7BFB1B10-9C15-4630-8415-FFFF2BC88161
@@ -185,7 +181,7 @@ _k_: kill        _s_: split                   _{_: wrap with { }
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:1928599E-6243-4314-835D-B5D932F7E372
 :END:
-Keeps changing - the issue is with comments before functions I want to collapse the lot. Plu with racket and ml comments are not in fits column so some (outshine) do not spot it.
+Keeps changing - the issue is with comments before functions I want to collapse the lot. Plus with racket and ml comments are not in firts column so some (outshine) do not spot it.
 Current work to get org mode working better. see send to REPL.
 *** Hide show
 :PROPERTIES:
@@ -197,7 +193,7 @@ Let us set it up
 (use-package hideshow
   :hook (prog-mode . hs-minor-mode))
 #+end_src
-Put markers in the fringe
+Put markers in the fringe which messed up lispy
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_C0B47E60-5C02-4FCD-AE13-ABA380EA4866
 #+begin_src emacs-lisp
 (use-package hideshowvis

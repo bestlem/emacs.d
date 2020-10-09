@@ -35,7 +35,7 @@ Although see starter kit where they run after init.
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:BBB5C272-C2B4-4F38-948C-ED758D56E6A4
 :END:
 . Setup for elisp  used by notmal load not org tangle
-Note that if a subdirectory is just for one thinmg then use keyword mwb-load-path in use-package.
+Note that if a subdirectory is just for one thing then use keyword mwb-load-path in use-package. Non Aquamacs does not set all sub-directories on load path.
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_CC0BEB6F-84DC-4320-9455-9906069CD4C9
 #+begin_src emacs-lisp
 (add-to-list 'load-path (mwb-user-emacs-file "site-lisp"))
@@ -64,12 +64,38 @@ This saves the state perhaps I need to see how it works.
 #+NAME: org_mark_2020-10-03T11-41-17+01-00_mini12.local_DC2C7645-A251-449C-AC77-40AD4B76D5B4
 #+begin_src emacs-lisp
 (use-package desktop
-  :disabled
   :unless *aquamacs*
   :config
   (desktop-save-mode 1)
   (push '(company-posframe-mode . nil)
-      desktop-minor-mode-table))
+        desktop-minor-mode-table))
+#+end_src
+*** Revive
+:PROPERTIES:
+:ID:       org_mark_2020-10-09T10-33-48+01-00_mini12.local:1D167408-BEC8-460C-8644-B56A690E583E
+:END:
+This is what Aquamacs used - version copied from there.
+Odd editing I can't edit the file lispy decides it needs to comment everything. So better just override
+However decided to use more recent updated workspace2 first
+#+NAME: org_mark_2020-10-09T10-33-48+01-00_mini12.local_28EE6DA2-AFFB-4773-9037-6E5E3898046D
+#+begin_src emacs-lisp
+
+#+end_src
+*** [[https://github.com/pashinin/workgroups2][Workgroups2]]
+:PROPERTIES:
+:ID:       org_mark_2020-10-09T10-33-48+01-00_mini12.local:71A81A40-89B6-47C1-B00A-83532367D9B7
+:END:
+Seems one of few in development and on github
+Well tried and treemacs screwed up
+#+NAME: org_mark_2020-10-09T10-33-48+01-00_mini12.local_3B37CB96-2AF0-4558-8B03-007D832A3898
+#+begin_src emacs-lisp
+(use-package workgroups2
+  :ensure t
+  :disabled
+  :config (workgroups-mode 1)
+  (setq wg-session-load-on-start t
+        wg-session-file (no-littering-expand-var-file-name "workgroups2")
+        ))
 #+end_src
 *** Dashboard
 :PROPERTIES:

@@ -34,7 +34,11 @@ This is mainly taken from [[https://github.com/howardabrams/dot-files][Howard Ab
   :preface
   (setq ispell-program-name "/opt/local/bin/aspell"
         ispell-dictionary "british-ize"
-        ispell-extra-args '("--sug-mode=normal")))
+        ispell-extra-args '("--sug-mode=normal"))
+  :config
+  ;; Popup window for spellchecking
+  (use-package flyspell-correct :ensure t)
+  (use-package flyspell-correct-popup :ensure t))
    #+END_SRC
 
    ASpell automatically configures a personal dictionary
@@ -44,8 +48,10 @@ This is mainly taken from [[https://github.com/howardabrams/dot-files][Howard Ab
    individual words in CamelCase that is used extensively in some
    code (for details, see [[http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html][this article]]).
 
+   But I don't do camel case :)
+
    #+NAME: org_mark_2020-09-29T11-53-58+01-00_mini12.local_357FFC4C-00B4-4492-9C55-C4316FFDB897
-   #+BEGIN_SRC elisp
+   #+BEGIN_SRC elisp :tangle no
 (use-package flyspell
   :config
   (defun flyspell-detect-ispell-args (&optional run-together)

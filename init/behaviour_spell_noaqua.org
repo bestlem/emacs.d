@@ -21,24 +21,23 @@ This is mainly taken from [[https://github.com/howardabrams/dot-files][Howard Ab
    #+BEGIN_SRC emacs-lisp
 (use-package flyspell
   :ensure t
+  :defer 10
   :diminish flyspell-mode
-  :init
-  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
-
-  (dolist (hook '(text-mode-hook org-mode-hook))
-    (add-hook hook (lambda () (flyspell-mode 1))))
-
-  (dolist (hook '(change-log-mode-hook log-edit-mode-hook org-agenda-mode-hook))
-    (add-hook hook (lambda () (flyspell-mode -1))))
 
   :preface
   (setq ispell-program-name "/opt/local/bin/aspell"
         ispell-dictionary "british-ize"
         ispell-extra-args '("--sug-mode=normal"))
+
   :config
-  ;; Popup window for spellchecking
-  (use-package flyspell-correct :ensure t)
-  (use-package flyspell-correct-popup :ensure t))
+  ;; Popup window for spellchecking  (use-package flyspell-correct :ensure t)
+  (use-package flyspell-correct-popup :ensure t)
+
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+  (dolist (hook '(text-mode-hook org-mode-hook))
+    (add-hook hook (lambda () (flyspell-mode 1))))
+  (dolist (hook '(change-log-mode-hook log-edit-mode-hook org-agenda-mode-hook))
+    (add-hook hook (lambda () (flyspell-mode -1)))))
    #+END_SRC
 
    ASpell automatically configures a personal dictionary

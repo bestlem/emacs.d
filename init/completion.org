@@ -20,7 +20,7 @@ Add some from jweigley
   :ensure t
   :defer 2
   :diminish
-  :commands (company-mode company-indent-or-complete-common)
+  :commands (company-mode company-indent-or-complete-common company-complete)
 
   :config
   (setq company-dabbrev-ignore-case t
@@ -32,12 +32,13 @@ Add some from jweigley
         ;; Don't take too much time searching for matches.
         company-dabbrev-code-time-limit 0.0005
         company-dabbrev-time-limit 0.0005)
-  (setq company-show-numbers nil)
+  (setq company-show-numbers t)
   (setq company-lighter-base "/"
         company-tooltip-align-annotations t
         company-echo-delay 1
         company-selection-wrap-around t
         company-idle-delay 0.05
+        company-tooltip-minimum-width 30
         company-minimum-prefix-length 1)
   (global-company-mode t)               ; don't put in after-init hook
                                         ; as we are deferred
@@ -47,11 +48,8 @@ Add some from jweigley
                           (when (check-expansion)
                             #'company-complete-common))))
   (when (>= emacs-major-version 27)
-    (use-package company-posframe
-      :ensure t
-      :config (company-posframe-mode 1)))
-  (use-package company-prescient
-    :ensure t :config (company-prescient-mode 1))
+    (use-package company-posframe :ensure t :diminish :config (company-posframe-mode 1)))
+  (use-package company-prescient :ensure t :diminish :config (company-prescient-mode 1))
 
   :init
   ;; jojojames to add a backend with yasnippet in a :with
@@ -105,8 +103,7 @@ Merging `company-yasnippet' to `company-capf' will yield
     (interactive)
     (merge-backend-with-company-backends 'company-yasnippet)
     (merge-backend-with-company-backends 'company-dabbrev-code)
-    )
-  )
+    ))
 #+end_src
 *** DONE Add generic methods
 CLOSED: [2020-02-08 Sat 00:21]

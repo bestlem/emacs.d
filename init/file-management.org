@@ -116,11 +116,13 @@ There are some modes that have special save actions e.g. *Abbrev* which is a buf
   (setq recentf-filename-handlers '(abbreviate-file-name)
         recentf-auto-cleanup (* 3600 2) ; 2 hours
         recentf-keep '(file-remote-p file-readable-p)
+        recentf-save-file (mwb-user-emacs-file "var/recentf-save.el")
         recentf-max-saved-items 100
         recentf-max-menu-items 25)
   :config
   (recentf-mode 1))
   #+end_src
+
 ** Sunshine commander
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:FBD40752-F440-43A7-A059-2FE49F568F52

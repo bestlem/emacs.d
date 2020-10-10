@@ -77,6 +77,11 @@ This saves the state perhaps I need to see how it works.
 (use-package desktop
   :unless *aquamacs*
   :config
+  (setq desktop-dirname (mwb-user-emacs-file "var/desktop/"))
+  (setq desktop-path (list desktop-dirname))
+  (setq desktop-base-file-name "desktop-save.el")
+  (setq desktop-base-lock-name "desktop-save.el.lock")
+
   (desktop-save-mode 1)
   (push '(company-posframe-mode . nil)
         desktop-minor-mode-table))
@@ -239,10 +244,10 @@ Note headers have tangle command in to suppress one or other
   #+end_quote
   #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_6410B3FD-5B0A-4478-ADC4-007FCA2F3D9C
   #+begin_src emacs-lisp
-	(use-package smex
-	  :ensure t
-	  :config
-	  (smex-initialize))
+(use-package smex
+  :ensure t
+  :config
+  (smex-initialize))
   #+end_src
 *** Ivy
 :PROPERTIES:

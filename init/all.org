@@ -49,7 +49,18 @@ Aquamacs puts a lot in ~/Library/Preferences/Emacs but Emacs 27 does not know th
 #+begin_src emacs-lisp
 (use-package no-littering
   :ensure t
+  :disabled
   :unless *aquamacs*)
+#+end_src
+**** Use Aquamacs hack and put user-Emacs-directory elsewhere
+:PROPERTIES:
+:ID:       org_mark_2020-10-10T14-59-33+01-00_mini12.local:0A357D06-99EB-4ACF-8F3E-646665D1053F
+:END:
+In this case var and overlap no-littering
+#+NAME: org_mark_2020-10-10T14-59-33+01-00_mini12.local_DB515763-D42A-4AC9-B13B-49CCF27056D8
+#+begin_src emacs-lisp
+(unless *aquamacs*
+  (setq user-emacs-directory (mwb-user-emacs-file "var")))
 #+end_src
 
 ** Startup screen
@@ -140,10 +151,9 @@ This seemed interesting but seemed to messup lispy
   (use-package persistent-scratch
     :ensure t
     :init
-    (setq persistent-scratch-save-file (no-littering-expand-var-file-name "persistent-scratch"))
+    (setq persistent-scratch-save-file (mwb-user-emacs-file "var/persistent-scratch"))
     :config
     (persistent-scratch-setup-default)))
-
    #+end_src
 **** Windows
 :PROPERTIES:

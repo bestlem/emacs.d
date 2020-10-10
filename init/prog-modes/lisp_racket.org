@@ -18,20 +18,33 @@ Change from lispy to paredit. The delete-selection issue is too much. I keep typ
   :bind (:map racket-mode-map
               ("<f5>" . racket-test)
               ("<C-f5>" . racket-run)
-              ("S-<f5>" . racket-mwb-raco-all-tests)
+              ("A-<f5>" . racket-mwb-raco-all-tests)
               ("<f1> <f1>" . racket-describe)
               ("M-l" . racket-insert-lambda)
                                         ;("H-A" . hydra-paredit/body)
               :map racket-repl-mode-map
               ("<f5>" . racket-run))
-  :config (setq racket-program "/Applications/Racket v7.8/bin/racket"
-                tab-always-indent 'complete
-                key-chord-mode 1        ; unknown how it was turned off
-                )
-  (use-package racket-support)
+  :init
+  (setq racket-program "/Applications/Racket v7.8/bin/racket"
+        racket-images-inline t)
 
-  :hook ((racket-mode racket-repl-mode) . racket-unicode-input-method-enable)
-  ((racket-mode racket-repl-mode) . racket-smart-open-bracket-mode))
+  ;; From   https://stackoverflow.com/questions/37571164/emacs-company-mode-completion-not-working
+  (defun my-racket-mode-hook ()
+    (my-all-racket-mode-hook)
+    (racket-xp-mode)
+    )
+  (defun my-all-racket-mode-hook ()
+    (set (make-local-variable 'company-backends)
+         '((company-capf :with company-yasnippet)))
+    ;; (company-mode 1)
+    (racket-unicode-input-method-enable)
+    (racket-smart-open-bracket-mode))
+
+  :config
+  (require 'racket-support)
+  (diminish 'racket-smart-open-bracket-mode)
+  :hook (racket-mode . my-racket-mode-hook)
+  (racket-repl-mode . my-all-racket-mode-hook))
       #+end_src
 *** Hydra
 :PROPERTIES:

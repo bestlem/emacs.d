@@ -376,21 +376,24 @@ From [[https://www.emacswiki.org/emacs/FlySpell#toc2][Emacs Wiki]]
 :END:
 	 I have seen comments that for emacs <26 this is definitely better
 	 #+begin_src emacs-lisp
-     (use-package flycheck
-       :ensure t
-       :defer 2
-       :diminish
-       ;; :init (global-flycheck-mode) ; for all
+(use-package flycheck
+  :ensure t
+  :defer 2
+  :disabled
+  :diminish
+  ;; :init (global-flycheck-mode) ; for all
 
-       ;; I don't like `global-flycheck-mode', some mode, such as elisp mode don't need.
-       :hook (racket-mode . flycheck-mode )
+  ;; I don't like `global-flycheck-mode', some mode, such as elisp mode
+  ;; don't need.
+  ;;  racket seems to have issues with this and company
+  :hook (racket-mode . flycheck-mode )
 
-       :custom
-       (flycheck-display-errors-delay 0.3))
+  :custom
+  (flycheck-display-errors-delay 0.3))
      #+end_src
 **** Hydra to control
 :PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:48CD7AF6-DA56-471F-98EF-51C816A565FF
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:48CD7AF6-DA56-471F-98EF-51C816A565FFy
 :END:
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_689B92C3-4B81-4F06-A09F-C9947FA18B54
 #+begin_src emacs-lisp

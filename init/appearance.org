@@ -24,8 +24,13 @@ Aquamacs is stuck with old color themes not the cusomisable ones
     ;;  Hack themes by commenting
     ;;  these are themes I have saved and modified
     ;; (load-theme 'high-contrast t t)
-    (load-theme 'leuven t t)
-    (enable-theme 'leuven)))
+    ;; (load-theme 'leuven t t)
+    ;; (enable-theme 'leuven)
+    (use-package modus-operandi-theme
+      :ensure t
+      :config
+      (load-theme 'modus-operandi t ))
+    ))
 
 
 #+end_src

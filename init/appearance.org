@@ -8,7 +8,8 @@ This covers what emacs looks like and how windows/frames/menus behave
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:CD3D232B-6BDA-4CBC-BADF-BCEA9B8EBEC4
 :END:
-Aquamacs is stuck with old color themes not the cusomisable ones
+Aquamacs is stuck with old color themes not the cusomisable ones.
+So put the choice here
 #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_31D76745-657A-4FFE-A6AB-1077D1192D80
 #+begin_src emacs-lisp
 (if (< emacs-major-version 26)
@@ -76,31 +77,15 @@ Remove from mode line
 :ID:       org_mark_2020-10-03T11-41-17+01-00_mini12.local:B6D6F861-4367-42CD-B6BB-D49FFC135F7D
 :END:
 I seem only to do this for macport
-Or better from howardabrams
+Or better from fira code https://github.com/tonsky/FiraCode/wiki/Emacs-instructions#using-prettify-symbols
 #+NAME: org_mark_2020-10-03T11-41-17+01-00_mini12.local_7F1CA278-5EFF-4B83-BB74-2E3F161154E8
 #+begin_src emacs-lisp
 (if (fboundp 'mac-auto-operator-composition-mode)
     (mac-auto-operator-composition-mode)
-  (let ((alist '((33 . ".\\(?:\\(?:==\\)\\|[!=]\\)")
-                 (35 . ".\\(?:[(?[_{]\\)")
-                 (38 . ".\\(?:\\(?:&&\\)\\|&\\)")
-                 (43 . ".\\(?:\\(?:\\+\\+\\)\\|\\+\\)")
-                 (45 . ".\\(?:\\(?:-[>-]\\|<<\\|>>\\)\\|[<>}~-]\\)")
-                 (47 . ".\\(?:\\(?:\\*\\*\\|//\\|==\\)\\|[*/=>]\\)")
-                 (58 . ".\\(?:[:=]\\)")
-                 (59 . ".\\(?:;\\)")
-                 (60 . ".\\(?:\\(?:!--\\)\\|\\(?:\\$>\\|\\*>\\|\\+>\\|--\\|<[<=-]\\|=[<=>]\\||>\\)\\|[/<=>|-]\\)")
-                 (61 . ".\\(?:\\(?:/=\\|:=\\|<<\\|=[=>]\\|>>\\)\\|[<=>~]\\)")
-                 (62 . ".\\(?:\\(?:=>\\|>[=>-]\\)\\|[=>-]\\)")
-                 (63 . ".\\(?:[:=?]\\)")
-                 (92 . ".\\(?:\\(?:\\\\\\\\\\)\\|\\\\\\)")
-                 (94 . ".\\(?:=\\)")
-                 (123 . ".\\(?:-\\)")
-                 (124 . ".\\(?:\\(?:|[=|]\\)\\|[=>|]\\)")
-                 (126 . ".\\(?:[=@~-]\\)"))))
-    (dolist (char-regexp alist)
-      (set-char-table-range composition-function-table (car char-regexp)
-                            `([,(cdr char-regexp) 0 font-shape-gstring])))))
+  (use-package fira-code-mode
+    :ensure t
+    :custom (fira-code-mode-disabled-ligatures '("[]" "x")) ; ligatures you don't want
+    :hook prog-mode))
 #+end_src
 * Structure
 :PROPERTIES:
@@ -124,9 +109,11 @@ These are set by Aquamacs but might as well reinforce
 #+begin_src emacs-lisp
 (use-package all-the-icons
   :ensure t
-  :demand
-  :config
-
+  :commands (all-the-icons-faicon
+             all-the-icons-fileicon
+             all-the-icons-octicon
+             all-the-icons-icon-for-mode)
+  :preface
   (defun with-faicon (icon str &optional height v-adjust)
     (s-concat (all-the-icons-faicon icon :v-adjust (or v-adjust 0) :height (or height 1)) " " str))
 

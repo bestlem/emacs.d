@@ -3,6 +3,6 @@
 # key: srcn
 # --
 #+name: $1
-#+begin_src ${2:emacs-lisp}
+#+begin_src ${2:emacs-lisp} :tangle ${3:$$(yas-choose-value '("no" "yes"))}
 $0
 #+end_src

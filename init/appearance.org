@@ -36,26 +36,57 @@ So put the choice here
 
 ** New themes subpart
 :PROPERTIES:
-:ID:       org_mark_2020-10-11T17-50-37+01-00_mini12.local:FE3D5D61-FC64-4068-A1D7-BFC94EE7EDE6
+:ID:       org_mark_2020-10-11T17-50-37+01-00_mini12.local:D56F4F99-A4AF-4CB6-8ADC-D28AF2FA6D38
+:header-args: :noweb-ref theme-25
 :END:
-Theme switcher from https://www.brautaset.org/articles/2017/hydra-theme-switcher.html
-#+name: theme-25
+
+It turns out Emacs supports multiple themes being active at the same time, which I’m sure is convenient sometimes but becomes a right nuisance when attempting to switch themes IMO. Add a utility function to disable all currently enabled themes first.
+
+#+NAME: org_mark_2020-10-13T18-22-15+01-00_mini12.local_76567F98-E4B9-425F-8683-FF8850619A08
 #+begin_src emacs-lisp :tangle no
 (setq custom-theme-directory (mwb-user-emacs-file "data/themes"))
+(defvar quick-switch-themes
+  (let ((themes-list (list 'leuven
+                           'high-contrast
+                           'modus-operandi
 
+                           )))
+    (nconc themes-list themes-list))
+  "A circular list of themes to keep switching between.
+Make sure that the currently enabled theme is at the head of this
+list always.
 
-;;  Hack themes by commenting
-;;  these are themes I have saved and modified
-;; (load-theme 'high-contrast t t)
-(progn
-  (load-theme 'leuven t t)
-  (enable-theme 'leuven)
-  )
+A nil value implies no custom theme should be enabled.")
+
+(defun quick-switch-themes* ()
+  "Switch between to commonly used faces in Emacs.
+One for writing code and the other for reading articles."
+  (interactive)
+  (if-let* ((next-theme (cadr quick-switch-themes)))
+      (progn (when-let* ((current-theme (car quick-switch-themes)))
+               (disable-theme (car quick-switch-themes)))
+             (if (custom-theme-p next-theme)
+                 (enable-theme next-theme)
+               (load-theme next-theme t t))
+             (message "Loaded theme: %s" next-theme))
+
+    )
+  (setq quick-switch-themes (cdr quick-switch-themes)))
+
+;; From emacs or local
+(load-theme 'leuven t t)
+
+(use-package color-theme-modern
+  :ensure t
+  :config
+  (load-theme 'high-contrast t t))
+
 (use-package modus-operandi-theme
-  :disabled
   :ensure t
   :config
   (load-theme 'modus-operandi t ))
+
+(enable-theme 'leuven) # first in list
 #+end_src
 * Fonts
 :PROPERTIES:
@@ -208,6 +239,8 @@ I think I now want mainly one window and have splits but tabs are useful.
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:C6F53E38-7C41-4BC5-9A6C-A0A32AA5CFFC
 :END:
  Try hydra from [[https://www.reddit.com/r/emacs/comments/8of6tx/tip_how_to_be_a_beast_with_hydra/][reddit]] but note user is a vi user for movements so will be messed around with. But a few minutes playing does not add much so use first from [[https://github.com/abo-abo/hydra/wiki/Window-Management][Hydra wiki]] Needs winner mode for some functions to save window state.
+ The hydra is now a mix of all sorts of Window frame, theme and other apperance functions
+
  #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_AFC382E3-9D15-496B-9A90-B0B4838ADD31
  #+begin_src emacs-lisp
 (use-package winner
@@ -216,43 +249,74 @@ I think I now want mainly one window and have splits but tabs are useful.
   :config
   (winner-mode)
   (require 'windmove)
+<<win-hydra-fns>>
+<<win-hydra>>
 
-  (defun hydra-move-splitter-left (arg)
-    "Move window splitter left."
-    (interactive "p")
-    (if (let ((windmove-wrap-around))
-          (windmove-find-other-window 'right))
-        (shrink-window-horizontally arg)
-      (enlarge-window-horizontally arg)))
+  :commands (winner-undo winner-redo)
+  :bind ("H-w"  . hydra-jp-window/body)
+  )
 
-  (defun hydra-move-splitter-right (arg)
-    "Move window splitter right."
-    (interactive "p")
-    (if (let ((windmove-wrap-around))
-          (windmove-find-other-window 'right))
-        (enlarge-window-horizontally arg)
-      (shrink-window-horizontally arg)))
+#+end_src
 
-  (defun hydra-move-splitter-up (arg)
-    "Move window splitter up."
-    (interactive "p")
-    (if (let ((windmove-wrap-around))
-          (windmove-find-other-window 'up))
-        (enlarge-window arg)
-      (shrink-window arg)))
+*** Support functions
+:PROPERTIES:
+:ID:       org_mark_2020-10-11T17-50-37+01-00_mini12.local:B75BD9C4-76AD-406A-9A76-1B658CA511C5
+:END:
+#+name: win-hydra-fns
+#+begin_src emacs-lisp :tangle no
+(defun hydra-move-splitter-left (arg)
+  "Move window splitter left."
+  (interactive "p")
+  (if (let ((windmove-wrap-around))
+        (windmove-find-other-window 'right))
+      (shrink-window-horizontally arg)
+    (enlarge-window-horizontally arg)))
 
-  (defun hydra-move-splitter-down (arg)
-    "Move window splitter down."
-    (interactive "p")
-    (if (let ((windmove-wrap-around))
-          (windmove-find-other-window 'up))
-        (shrink-window arg)
-      (enlarge-window arg)))
+(defun hydra-move-splitter-right (arg)
+  "Move window splitter right."
+  (interactive "p")
+  (if (let ((windmove-wrap-around))
+        (windmove-find-other-window 'right))
+      (enlarge-window-horizontally arg)
+    (shrink-window-horizontally arg)))
 
-  :commands (winner-undo winner-redo))
+(defun hydra-move-splitter-up (arg)
+  "Move window splitter up."
+  (interactive "p")
+  (if (let ((windmove-wrap-around))
+        (windmove-find-other-window 'up))
+      (enlarge-window arg)
+    (shrink-window arg)))
 
+(defun hydra-move-splitter-down (arg)
+  "Move window splitter down."
+  (interactive "p")
+  (if (let ((windmove-wrap-around))
+        (windmove-find-other-window 'up))
+      (shrink-window arg)
+    (enlarge-window arg)))
+
+(use-package default-text-scale
+  :disabled
+  :ensure t
+  :hook (after-init . default-text-scale-mode)
+  :commands default-text-scale-mode
+  )
+
+(use-package zoom-frm :demand)
+
+(defun jp-zoom-default ()
+  "Reset text scale."
+  (interactive)
+  (zoom-in/out 0))
+#+end_src
+*** Hydra
+:PROPERTIES:
+:ID:       org_mark_2020-10-11T17-50-37+01-00_mini12.local:FCCE3A72-78A7-4BEB-B392-A7A2E80638DE
+:END:
+#+name: win-hydra
+#+begin_src emacs-lisp :tangle no
 (defvar jp-window--title (with-faicon "windows" "Window Management" 1 -0.05))
-
 (pretty-hydra-define hydra-jp-window (:foreign-keys warn :title jp-window--title :quit-key "q")
   ("Actions"
    (("TAB" other-window "switch")
@@ -274,64 +338,17 @@ I think I now want mainly one window and have splits but tabs are useful.
     ("|" split-window-right "horizontally")
     ("B" split-window-horizontally-instead "horizontally instead")
     ("v" split-window-below "vertically")
-    ("V" split-window-vertically-instead "vertically instead"))
+    ("-" split-window-below "vertically")
+    ("V" split-window-vertically-instead "vertically instead")
+    ("u" (progn
+           (winner-undo)
+           (setq this-command 'winner-undo))))
 
-   "Zoom"
-   (("+" zoom-in "in")
-    ("=" zoom-in)
-    ("-" zoom-out "out")
-    ("0" jp-zoom-default "reset"))))
-(defhydra hydra-window ()
-  ""
-  ("h" windmove-left)
-  ("j" windmove-down)
-  ("k" windmove-up)
-  ("l" windmove-right)
-  ("|" (lambda ()
-         (interactive)
-         (split-window-right)
-         (windmove-right)))
-  ("-" (lambda ()
-         (interactive)
-         (split-window-below)
-         (windmove-down)))
-  ("u" (progn
-         (winner-undo)
-         (setq this-command 'winner-undo)))
-  ("r" winner-redo)
-  ("b" ivy-switch-buffer)
-  ("f" counsel-find-file)
-  ("a" (lambda ()
-         (interactive)
-         (ace-window 1)
-         (add-hook 'ace-window-end-once-hook
-                   'hydra-window/body)))
-  ("s" (lambda ()
-         (interactive)
-         (ace-swap-window)
-         (add-hook 'ace-window-end-once-hook
-                   'hydra-window/body)))
-  ("<left>" hydra-move-splitter-left)
-  ("<down>" hydra-move-splitter-down)
-  ("<up>" hydra-move-splitter-up)
-  ("<right>" hydra-move-splitter-right)
-  ("M" delete-other-windows)
-  ("d" delete-window)
+   "Other"
+   ( ("0" jp-zoom-default "reset zoom")
+     ("t"  quick-switch-themes* "cycle themes" ))))
 
-  ;; ("K" ace-delete-other-windows)
-  ;; ("S" save-buffer)
-  ;; ("d" delete-window)
-  ;; ("D" (lambda ()
-  ;;        (interactive)
-  ;;        (ace-delete-window)
-  ;;        (add-hook 'ace-window-end-once-hook
-  ;;                  'hydra-window/body))
-  ;;  )
 
-  ("x" counsel-M-x)
-  ("q" nil))
-
-(bind-key "H-w" 'hydra-jp-window/body)
  #+end_src
 
 ** Stop special buffers opening in new window

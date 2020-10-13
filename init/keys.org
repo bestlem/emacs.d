@@ -348,9 +348,8 @@ This is the override of save etc to the mode maps
       (bind-key "A-/" 'comment-or-uncomment-region-or-line macos-key-map))
 
   (progn
-    (bind-key "A-<kp-add>" 'text-scale-increase macos-key-map)
-    (bind-key "A-<kp-subtract>" 'text-scale-decrease macos-key-map)
-    (bind-key "A-/" 'comment-dwim-2 macos-key-map)))
+    (bind-key "A-<kp-add>" 'zoom-in macos-key-map)
+    (bind-key "A-<kp-subtract>" 'zoom-out macos-key-map)))
 #+end_src
 
 ** Control x binding

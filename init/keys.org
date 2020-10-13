@@ -341,14 +341,16 @@ This is the override of save etc to the mode maps
 #+NAME: org_mark_2020-09-24T21-45-16+01-00_mini12.local_AF417D0A-EE73-4B8C-9B57-B7DFFFB19E40
 #+begin_src emacs-lisp
 (bind-key "A-M-u" 'ediff-revision macos-key-map)
-(bind-key "A-/" 'comment-or-uncomment-region-or-line macos-key-map)
 (if *aquamacs*
     (progn
       (bind-key "A-<kp-add>" 'zoom-font macos-key-map)
-      (bind-key "A-<kp-subtract>" 'zoom-font-out macos-key-map))
+      (bind-key "A-<kp-subtract>" 'zoom-font-out macos-key-map)
+      (bind-key "A-/" 'comment-or-uncomment-region-or-line macos-key-map))
+
   (progn
     (bind-key "A-<kp-add>" 'text-scale-increase macos-key-map)
-    (bind-key "A-<kp-subtract>" 'text-scale-decrease macos-key-map)))
+    (bind-key "A-<kp-subtract>" 'text-scale-decrease macos-key-map)
+    (bind-key "A-/" 'comment-dwim-2 macos-key-map)))
 #+end_src
 
 ** Control x binding

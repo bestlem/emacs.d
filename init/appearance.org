@@ -331,7 +331,7 @@ I think I now want mainly one window and have splits but tabs are useful.
     ("<up>" hydra-move-splitter-up "↑")
     ("<right>" hydra-move-splitter-right "→")
     ("n" balance-windows "balance")
-    ("f" toggle-frame-fullscreen "toggle fullscreen"))
+    )
 
    "Split"
    (("b" split-window-right "horizontally")
@@ -346,9 +346,9 @@ I think I now want mainly one window and have splits but tabs are useful.
 
    "Other"
    ( ("0" jp-zoom-default "reset zoom")
-     ("t"  quick-switch-themes* "cycle themes" ))))
-
-
+     ("t"  quick-switch-themes* "cycle themes" )
+     ("f" other-frame "Switch Frame")
+     ("F" toggle-frame-fullscreen "toggle fullscreen"))))
  #+end_src
 
 ** Stop special buffers opening in new window

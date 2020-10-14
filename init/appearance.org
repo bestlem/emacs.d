@@ -86,7 +86,7 @@ One for writing code and the other for reading articles."
   :config
   (load-theme 'modus-operandi t ))
 
-(enable-theme 'leuven) # first in list
+(enable-theme 'leuven) ; first in list
 #+end_src
 * Fonts
 :PROPERTIES:

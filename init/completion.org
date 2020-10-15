@@ -26,7 +26,7 @@ Add some from jweigley
   (setq company-dabbrev-ignore-case t
         company-dabbrev-ignore-case 'keep-prefix
         ;; Dabbrev all code buffers together.
-        company-dabbrev-code-other-buffers 'code
+        company-dabbrev-code-other-buffers t
         ;; Only search same major mode buffers.
         company-dabbrev-other-buffers t
         ;; Don't take too much time searching for matches.
@@ -47,6 +47,7 @@ Add some from jweigley
                 :filter (lambda (&optional _)
                           (when (check-expansion)
                             #'company-complete-common))))
+  (bind-key "`" 'company-abort company-active-map)
   (when (>= emacs-major-version 27)
     (use-package company-posframe :ensure t :diminish :config (company-posframe-mode 1)))
   (use-package company-prescient :ensure t :diminish :config (company-prescient-mode 1))
@@ -102,8 +103,7 @@ Merging `company-yasnippet' to `company-capf' will yield
     "Merge common backends."
     (interactive)
     (merge-backend-with-company-backends 'company-yasnippet)
-    (merge-backend-with-company-backends 'company-dabbrev-code)
-    ))
+    (merge-backend-with-company-backends 'company-dabbrev-code)))
 #+end_src
 *** DONE Add generic methods
 CLOSED: [2020-02-08 Sat 00:21]

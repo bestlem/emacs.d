@@ -26,17 +26,18 @@ Look at smart-tabs-insinuate but aggressive indent means not needed, although if
 
   #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_E4106683-C45F-422A-9DBC-6265837B502D
   #+begin_src emacs-lisp
-  (use-package highlight-indent-guides
-    :ensure t
-    :diminish highlight-indent-guides-mode
-    :config
-    (setq highlight-indent-guides-method 'fill)
-    ;; Indent character samples: ┃| ┆ ┊
-    (setq highlight-indent-guides-character ?\┃)
-    (setq highlight-indent-guides-auto-odd-face-perc 50)
-    (setq highlight-indent-guides-auto-even-face-perc 20)
-    (setq highlight-indent-guides-auto-character-face-perc 20)
-    :hook (prog-mode . highlight-indent-guides-mode))
+(use-package highlight-indent-guides
+  :ensure t
+  :diminish highlight-indent-guides-mode
+  :config
+  (setq highlight-indent-guides-method 'fill)
+  ;; Indent character samples: ┃| ┆ ┊
+  (setq highlight-indent-guides-character ?\┃)
+  (setq highlight-indent-guides-auto-odd-face-perc 50)
+  (setq highlight-indent-guides-auto-even-face-perc 20)
+  (setq highlight-indent-guides-auto-character-face-perc 20)
+
+  :hook (prog-mode . highlight-indent-guides-mode))
  #+end_src
 *** Fill column
 :PROPERTIES:
@@ -48,7 +49,7 @@ Where to wrap the line iff too long. Set locally in prog-modes and differ in com
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:2D7FD607-5E36-49DB-8F1A-7C7E1C7CADE6
 :END:
 This is from [[https://www.emacswiki.org/emacs/AutoFillMode][emacs wiki]]
-However only want to fill modes where there ios line based comments e.g. Emacs lisp. If there is a block comment then don't fill
+However only want to fill modes where there are line based comments e.g. Emacs lisp. If there is a block comment then don't fill
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_9B7EA331-7A72-4DCE-9798-9D3B378A8C1B
 #+begin_src emacs-lisp
 (defun mwb-prog-auto-fill ()
@@ -154,6 +155,15 @@ _k_: kill        _s_: split                   _{_: wrap with { }
   (global-aggressive-indent-mode 1)
   )
  #+end_src
+** Refactor
+:PROPERTIES:
+:ID:       org_mark_2020-10-14T11-05-37+01-00_mini12.local:A69F6693-E4CF-4C02-B645-5D83516AFE64
+:END:
+From https://github.com/Wilfred/emacs-refactor
+#+NAME: org_mark_2020-10-14T11-05-37+01-00_mini12.local_D19502C6-D155-4612-B223-E1B3D318935B
+#+begin_src emacs-lisp
+
+#+end_src
 ** Comint
 :PROPERTIES:
 :ID:       org_mark_2020-10-11T00-40-32+01-00_mini12.local:94ACA493-0B43-4754-B711-8F75275EE9B1

@@ -26,14 +26,24 @@ Most from [[https://github.com/jojojames/matcha][matcha]]
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:0C004AE2-22C4-4307-9D4D-57777C260EC0
 :END:
-	I am not certain this is needed now as other things do this
+	I am not certain this is needed now as other things do this. Aggressive indent forexample
     #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_371FFD2B-49E8-4C8D-BD20-E974C39BA8E2
     #+begin_src  emacs-lisp
-    (use-package elisp-format
-      :disabled
-      :defer 10
-      :ensure t)
+(use-package elisp-format
+  :disabled
+  :defer 10
+  :ensure t)
     #+end_src
+** Extra font lock
+:PROPERTIES:
+:ID:       org_mark_2020-10-14T11-05-37+01-00_mini12.local:88799E8A-FACD-4227-BF70-7FFD40FC2CF1
+:END:
+#+NAME: org_mark_2020-10-14T11-05-37+01-00_mini12.local_FA432C27-28F7-4E01-B4C3-A28516C3DFB4
+#+begin_src emacs-lisp
+(use-package lisp-extra-font-lock
+  :ensure t
+  :hook (emacs-lisp-mode . lisp-extra-font-lock-mode))
+#+end_src
 ** Filling
 :PROPERTIES:
 :ID:       org_mark_2020-03-02T07-49-31+00-00_mini12.local:E19FC44E-6C80-4DD8-BBFA-99156DD9884D
@@ -83,20 +93,6 @@ and the hydra is from https://sriramkswamy.github.io/dotemacs/ . Note it expands
 	#+begin_src emacs-lisp
 	(use-package edebug-x :disabled :ensure t)
 	#+end_src
-* Completion
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:9FE88329-B2B7-4BB0-A9D7-9AD07B006AC0
-:END:
-Add company backend from John Widgley
-#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_93ECF6C2-B264-4EF0-8130-093F2212EF65
-#+begin_src emacs-lisp
-(use-package company-elisp
-  :after company
-  :disabled                             ; because capf now does this
-  :config
-  (j|company-push-backend 'company-elisp)
-  )
-#+end_src
 * Cask
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:A7E444B1-B2D1-477A-A3E2-A7518E90193E
@@ -117,10 +113,10 @@ Add company backend from John Widgley
 	 This does more formatting and has useful abbreviations but I don't know if will work with lispy
      #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_93A1C8F8-DA67-4EF7-BA47-905CC3187347
      #+begin_src emacs-lisp
-	 (use-package xah-elisp-mode
-	   :ensure t
-	   :disabled
-	   :hook emacs-lisp-mode)
+(use-package xah-elisp-mode
+  :ensure t
+  :disabled
+  :hook emacs-lisp-mode)
      #+end_src
 
 * Regular expressions

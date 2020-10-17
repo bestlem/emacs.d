@@ -49,7 +49,7 @@ It turns out Emacs supports multiple themes being active at the same time, which
   (let ((themes-list (list 'leuven
                            'high-contrast
                            'modus-operandi
-
+                           'mwbtheme-leuven
                            )))
     (nconc themes-list themes-list))
   "A circular list of themes to keep switching between.
@@ -75,6 +75,7 @@ One for writing code and the other for reading articles."
 
 ;; From emacs or local
 (load-theme 'leuven t t)
+(load-theme 'mwbtheme-leuven t t)
 
 (use-package color-theme-modern
   :ensure t

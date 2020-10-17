@@ -1,6 +1,8 @@
-;;; leuven-theme.el --- Awesome Emacs color theme on white background
+;;; mwbtheme-leuven-theme.el --- Awesome Emacs color theme on white background
 
 ;; Copyright (C) 2003-2020 Free Software Foundation, Inc.
+
+;; Modified by Mark Bestley
 
 ;; Author: Fabrice Niessen <(concat "fniessen" at-sign "pirilampo.org")>
 ;; URL: https://github.com/fniessen/emacs-leuven-theme
@@ -35,7 +37,7 @@
 
 ;;; Code:
 
-(deftheme leuven
+(deftheme mwbtheme-leuven
   "Face colors with a light background.
 Basic, Font Lock, Isearch, Gnus, Message, Diff, Ediff, Flyspell,
 Semantic, and Ansi-Color faces are included -- and much more...")
@@ -85,7 +87,7 @@ Semantic, and Ansi-Color faces are included -- and much more...")
       (vc-branch '(:box (:line-width 1 :color "#00CC33") :foreground "black" :background "#AAFFAA")))
 
   (custom-theme-set-faces
-   'leuven
+   'mwbtheme-leuven
    `(default ((,class (:foreground "#333333" :background "#FFFFFF"))))
    `(bold ((,class (:weight bold :foreground "black"))))
    `(bold-italic ((,class (:weight bold :slant italic :foreground "black"))))
@@ -127,7 +129,7 @@ Semantic, and Ansi-Color faces are included -- and much more...")
    ;; Font lock faces
    `(font-lock-builtin-face ((,class (:foreground "#006FE0"))))
    `(font-lock-comment-delimiter-face ((,class (:foreground "#8D8D84")))) ; #696969
-   `(font-lock-comment-face ((,class (:slant italic :foreground "#8D8D84")))) ; #696969
+   `(font-lock-comment-face ((,class (:slant italic :foreground "#696969")))) ; #696969
    `(font-lock-constant-face ((,class (:foreground "#D0372D"))))
    `(font-lock-doc-face ((,class (:foreground "#036A07"))))
    ;; `(font-lock-doc-string-face ((,class (:foreground "#008000")))) ; XEmacs only, but is used for HTML exports from org2html (and not interactively)
@@ -254,11 +256,11 @@ Semantic, and Ansi-Color faces are included -- and much more...")
    `(ediff-odd-diff-B ((,class (:foreground "black" :background "light grey"))))
 
    ;; Flyspell
-;; (when (version< emacs-version "24.XXX")
+   ;; (when (version< emacs-version "24.XXX")
    `(flyspell-duplicate ((,class (:underline "#008000" :inherit nil))))
    `(flyspell-incorrect ((,class (:underline "red" :inherit nil))))
-;; `(flyspell-duplicate ((,class (:underline (:style wave :color "#008000") :inherit nil))))
-;; `(flyspell-incorrect ((,class (:underline (:style wave :color "red") :inherit nil))))
+   ;; `(flyspell-duplicate ((,class (:underline (:style wave :color "#008000") :inherit nil))))
+   ;; `(flyspell-incorrect ((,class (:underline (:style wave :color "red") :inherit nil))))
 
    ;; ;; Semantic faces
    ;; `(semantic-decoration-on-includes ((,class (:underline ,cham-4))))
@@ -687,13 +689,13 @@ Semantic, and Ansi-Color faces are included -- and much more...")
    `(yas/field-highlight-face ((,class (:background "DarkSeaGreen1"))))
    ))
 
-(custom-theme-set-variables 'leuven
- '(ansi-color-faces-vector
-   [default default default italic underline success warning error])
- '(ansi-color-names-vector
-   ["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue" "gray50"])
+(custom-theme-set-variables 'mwbtheme-leuven
+                            '(ansi-color-faces-vector
+                              [default default default italic underline success warning error])
+                            '(ansi-color-names-vector
+                              ["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue" "gray50"])
                                         ; colors used in Shell mode
- )
+                            )
 
 ;;;###autoload
 (when (and (boundp 'custom-theme-load-path)
@@ -702,7 +704,7 @@ Semantic, and Ansi-Color faces are included -- and much more...")
   (add-to-list 'custom-theme-load-path
                (file-name-as-directory (file-name-directory load-file-name))))
 
-(provide-theme 'leuven)
+(provide-theme 'mwbtheme-leuven)
 
 ;; Local Variables:
 ;; time-stamp-format: "%:y%02m%02d.%02H%02M"
@@ -710,4 +712,4 @@ Semantic, and Ansi-Color faces are included -- and much more...")
 ;; time-stamp-end: "$"
 ;; End:
 
-;;; leuven-theme.el ends here
+;;; mwbtheme-leuven-theme.el ends here

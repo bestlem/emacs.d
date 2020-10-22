@@ -6,7 +6,11 @@
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:E97B88C8-A249-4DEC-BAE3-41153EA01D6C
 :END:
 These are for all () languages but could extend to more as manythings are for all structured ASTs or simply brackets
-** Make parentheses pretty
+** Parentheses
+:PROPERTIES:
+:ID:       org_mark_2020-10-11T00-40-32+01-00_mini12.local:27461EE9-1768-4943-B3AE-65E50E8F41C7
+:END:
+*** Make parentheses pretty
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:9CBA29B7-2EB3-42F5-80C7-C3F7507D141B
 :END:
@@ -18,6 +22,20 @@ Although that should be in prog mode
   :delight rainbow-delimiters-mode
   :hook (prog-mode . rainbow-delimiters-mode))
 	#+end_src
+*** And hidden
+:PROPERTIES:
+:ID:       org_mark_2020-10-11T00-40-32+01-00_mini12.local:E13260FF-71E9-49D7-8F3B-C3A27D36CD65
+:END:
+#+NAME: org_mark_2020-10-11T00-40-32+01-00_mini12.local_066E9D01-BBA2-4788-B4FD-743EED689771
+#+begin_src emacs-lisp
+(use-package paren-face
+  :ensure t
+  :config
+  (setq paren-face-regexp (rx (any "()[]{}")))
+  (add-to-list 'paren-face-modes 'racket-mode)
+  (add-to-list 'paren-face-modes 'racket-repl-mode)
+  (global-paren-face-mode))
+#+end_src
 
 ** Add lisp interaction mode
 :PROPERTIES:

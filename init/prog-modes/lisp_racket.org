@@ -37,6 +37,7 @@ Change from lispy to paredit. The delete-selection issue is too much. I keep typ
     (set (make-local-variable 'company-backends)
          '((company-capf :with company-yasnippet)))
     ;; (company-mode 1)
+    (smartparens-strict-mode 1)
     (racket-unicode-input-method-enable)
     (racket-smart-open-bracket-mode))
 

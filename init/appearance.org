@@ -40,17 +40,16 @@ So put the choice here
 :header-args: :noweb-ref theme-25
 :END:
 
-It turns out Emacs supports multiple themes being active at the same time, which I’m sure is convenient sometimes but becomes a right nuisance when attempting to switch themes IMO. Add a utility function to disable all currently enabled themes first.
+It turns out Emacs supports multiple themes being active at the same time, which I’m sure is convenient sometimes but becomes a right nuisance when attempting to switch themes IMO. Add a utility function to disable all currently enabled themes first. gfdgdfg
 
 #+NAME: org_mark_2020-10-13T18-22-15+01-00_mini12.local_76567F98-E4B9-425F-8683-FF8850619A08
 #+begin_src emacs-lisp :tangle no
 (setq custom-theme-directory (mwb-user-emacs-file "data/themes"))
 (defvar quick-switch-themes
-  (let ((themes-list (list 'leuven
+  (let ((themes-list (list 'mwbtheme-leuven
+                           'leuven
                            'high-contrast
-                           'modus-operandi
-                           'mwbtheme-leuven
-                           )))
+                           'modus-operandi)))
     (nconc themes-list themes-list))
   "A circular list of themes to keep switching between.
 Make sure that the currently enabled theme is at the head of this
@@ -79,15 +78,17 @@ One for writing code and the other for reading articles."
 
 (use-package color-theme-modern
   :ensure t
+  :defer 10
   :config
   (load-theme 'high-contrast t t))
 
 (use-package modus-operandi-theme
   :ensure t
+  :defer 10
   :config
-  (load-theme 'modus-operandi t ))
+  (load-theme 'modus-operandi t t))
 
-(enable-theme 'leuven) ; first in list
+(enable-theme (car quick-switch-themes)) ; first in list
 #+end_src
 * Fonts
 :PROPERTIES:

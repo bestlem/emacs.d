@@ -18,7 +18,6 @@ Add some from jweigley
  #+begin_src emacs-lisp
 (use-package company
   :ensure t
-  :defer 2
   :diminish
   :commands (company-mode company-indent-or-complete-common company-complete)
 
@@ -202,7 +201,6 @@ Also run the script from https://www.emacswiki.org/emacs/autocorrection_abbrev_d
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_9B504DE4-BB8F-491A-83E8-60EC58B1D93C
 #+BEGIN_SRC emacs-lisp
 (use-package abbrev
-  :defer 5
   :diminish
   :hook
   ((text-mode prog-mode erc-mode LaTeX-mode) . abbrev-mode)

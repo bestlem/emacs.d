@@ -101,7 +101,7 @@ So hyper-A is now a mode hydra key and I have started defining a hydra on that,
    #+begin_src emacs-lisp
 (use-package which-key
   :ensure t
-  :defer 5
+  :defer 10
   :config
   (setq which-key-sort-order 'which-key-key-order-alpha
         which-key-side-window-max-width 0.33
@@ -390,6 +390,26 @@ This is the override of save etc to the mode maps
 
 (bind-key "x" #'mwb-x-key)
 #+end_src
+
+* Mouse
+:PROPERTIES:
+:ID:       org_mark_2020-10-17T19-55-57+01-00_mini12.local:6D65DE51-07D2-4306-9156-B8E684BC67C3
+:END:
+This is a problem. I have used several mice with emacs. The best is the old 3 button Sun mouse or Logitech trackball, this makes mouse-2 easy to use. However we now have scroll wheels so mouse-2 is uncomfortable and not easy to control.
+macOS has its own standards so mouse-3 does its own thing.
+There are several things we want mouse-3 to do:
+1. If on a word and it is misspelt then show alternatives and ability to save.
+2. If on a region show cut and paste, other actions on a region
+3. Thing at point (if region or not) search for region or word in google
+4. Show menus from main menu - e.g. mode specific and imenu.
+
+Aquamacs has the best support. But it hacks flyspell heavily mainly to get macOS dictionary (the main benefit of Aquamacs) but also to show the corrections etc. Then it adds to the flyspell menu the rest of cut and past, google etc.  help:flyspell-emacs-popup and help:aquamacs-popup-context-menu
+Emacs has a couple of maps mouse3-noregion-popup-entries etc
+mac-key-mode has a simple one [[help:mac-key-context-menu]]
+mouse3+ has a more complex setup including if selected a region or not see help:mouse3-popup-menu
+
+I think start with Aquamacs copy using non Aquamacs functions and then try to put flyspell on.
+
 
 * Hydra
 :PROPERTIES:

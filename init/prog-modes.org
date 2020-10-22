@@ -291,7 +291,6 @@ This also takes time to load. Need to sort out config entries and gradele-mode n
    :disabled
 
    :ensure t
-   :defer 10
    :mode ("\.groovy$" "\.gradle$")
    :interpreter ("gradle" "groovy")
    :init

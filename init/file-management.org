@@ -129,12 +129,11 @@ There are some modes that have special save actions e.g. *Abbrev* which is a buf
 :END:
    #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_39F4B0A8-282D-413C-818C-83EE88C7D15A
    #+begin_src emacs-lisp
-   (setq mwb-sunrise-commander-path (mwb-user-emacs-file "fork/sunrise-commander"))
-   (use-package sunrise-commander
-	 :defer t
-	 :load-path mwb-sunrise-commander-path
-	 :commands sunrise
-	 :config (require 'sunrise-x-buttons))
+(setq mwb-sunrise-commander-path (mwb-user-emacs-file "fork/sunrise-commander"))
+(use-package sunrise-commander
+  :load-path mwb-sunrise-commander-path
+  :commands sunrise
+  :config (require 'sunrise-x-buttons))
    #+end_src
 
 ** ls
@@ -143,8 +142,7 @@ There are some modes that have special save actions e.g. *Abbrev* which is a buf
 :END:
 
   From Howard Abrams but using MacPorts
-  Since the default ls for the Mac isn't so good, I always have the
-  GNU ls version available in =/opt/local/bin/gls=.
+  Since the default ls for the Mac isn't so good, I always have the GNU ls version available in =/opt/local/bin/gls=.
 
   #+NAME: org_mark_2020-09-29T11-53-58+01-00_mini12.local_9DEAAB07-8C5F-4986-8DC0-D64A59C4DF65
   #+BEGIN_SRC elisp
@@ -177,6 +175,18 @@ From original not certain how used now.
 ;; (setq auto-mode-alist
 ;;       (cons '("\\.tgz$" . uncompress-while-visiting) auto-mode-alist))
 
+#+end_src
+
+*** Dired
+:PROPERTIES:
+:ID:       org_mark_2020-10-19T10-12-58+01-00_mini12.local:DB259300-B567-4C97-8731-C56AAFDC5074
+:END:
+Need to allow more to expand - especially for macports
+#+NAME: org_mark_2020-10-19T10-12-58+01-00_mini12.local_6D5339D7-14C1-4CC7-A8DA-9615DE298096
+#+begin_src emacs-lisp :tangle no
+(add-to-list 'dired-compress-file-suffixes
+             '("\\.tbz2\\'" ".tar" "bunzip2")
+             )
 #+end_src
 * Project management
 :PROPERTIES:
@@ -213,7 +223,6 @@ So take from projectile
 #+begin_src emacs-lisp
 (use-package projectile
   :ensure t
-  :defer 5
   :diminish
   ;; :bind* (
   ;;         ("H-P" . (lambda () (interactive)
@@ -304,52 +313,52 @@ projectile-save-project-buffers is nice but save-buffer does not make a backup. 
 This is the visual
  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_55CB1D47-BC33-40F8-BC2A-12D014C6B18D
  #+begin_src emacs-lisp
- ;; Treemacs
- ;;  first pass has all defaults even if not needed
- (use-package treemacs
-   :ensure t
-   :defer t
-   :init
-   (with-eval-after-load 'winum
-     (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
-   :config
-   (progn
-     (setq hydra-key-regex "\\[\\|]\\|[-\\[:alnum:] ~.,;:/|?<>={}*+#%@!&^⇧⌘⌥↑↓←→⌫⌦⏎'`()\"$]+?") ; add Mac key symbols
+;; Treemacs
+;;  first pass has all defaults even if not needed
+(use-package treemacs
+  :ensure t
+  :init
+  (with-eval-after-load 'winum
+    (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
+  :commands (treemacs)
+  :config
+  (progn
+    (setq hydra-key-regex "\\[\\|]\\|[-\\[:alnum:] ~.,;:/|?<>={}*+#%@!&^⇧⌘⌥↑↓←→⌫⌦⏎'`()\"$]+?") ; add Mac key symbols
 
-     (setq treemacs-silent-refresh t
-           treemacs-persist-file (mwb-user-emacs-file "data/treemacs-persist"))
-     (with-eval-after-load 'treemacs
-       (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?))
+    (setq treemacs-silent-refresh t
+          treemacs-persist-file (mwb-user-emacs-file "data/treemacs-persist"))
+    (with-eval-after-load 'treemacs
+      (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?))
 
-     ;; The default width and height of the icons is 22 pixels. If you are
-     ;; using a Hi-DPI display, uncomment this to double the icon size.
-     ;;(treemacs-resize-icons 44)
+    ;; The default width and height of the icons is 22 pixels. If you are
+    ;; using a Hi-DPI display, uncomment this to double the icon size.
+    ;;(treemacs-resize-icons 44)
 
-     (treemacs-follow-mode t)
-     (treemacs-filewatch-mode t)
-     (treemacs-fringe-indicator-mode t)
-     (pcase (cons (not (null (executable-find "git")))
-                  (not (null treemacs-python-executable )))
-       (`(t . t)
-        (treemacs-git-mode 'deferred))
-       (`(t . _)
-        (treemacs-git-mode 'simple))))
-   :mode-hydra
-   (treemacs-mode
-    ("Project"
-     ( ("p" matcha-projectile/body "Projectile")
-       ("c" treemacs-add-project-to-workspace "Create Project")
-       ("d" treemacs-remove-project-from-workspace "Delete Project")
-       ("q" nil "Quit"))
-     "Workspace"
-     (("s" treemacs-switch-workspace "Switch" )
-      ("e" treemacs-edit-workspaces "Edit" ))))
+    (treemacs-follow-mode t)
+    (treemacs-filewatch-mode t)
+    (treemacs-fringe-indicator-mode t)
+    (pcase (cons (not (null (executable-find "git")))
+                 (not (null treemacs-python-executable )))
+      (`(t . t)
+       (treemacs-git-mode 'deferred))
+      (`(t . _)
+       (treemacs-git-mode 'simple))))
+  :mode-hydra
+  (treemacs-mode
+   ("Project"
+    ( ("p" matcha-projectile/body "Projectile")
+      ("c" treemacs-add-project-to-workspace "Create Project")
+      ("d" treemacs-remove-project-from-workspace "Delete Project")
+      ("q" nil "Quit"))
+    "Workspace"
+    (("s" treemacs-switch-workspace "Switch" )
+     ("e" treemacs-edit-workspaces "Edit" ))))
 
-   :bind ( :map treemacs-mode-map
-                ("<mouse-5>" . treemacs-rightclick-menu)
-                ("<mouse-4>" . treemacs-rightclick-menu)
-                ("<f5>" . treemacs-switch-workspace)
-                ("<C-f5>" . treemacs-edit-workspaces)))
+  :bind ( :map treemacs-mode-map
+               ("<mouse-5>" . treemacs-rightclick-menu)
+               ("<mouse-4>" . treemacs-rightclick-menu)
+               ("<f5>" . treemacs-switch-workspace)
+               ("<C-f5>" . treemacs-edit-workspaces)))
 
  (use-package treemacs-projectile
    :after treemacs projectile

@@ -101,9 +101,7 @@ and the hydra is from https://sriramkswamy.github.io/dotemacs/ . Note it expands
 
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_9EC9B695-2F8B-4E9B-B42A-199CF68F6E58
 #+begin_src emacs-lisp
-(use-package cask-mode
-    :ensure t
-    :defer 5)
+(use-package cask-mode :ensure t)
 #+end_src
 
 * xah mode

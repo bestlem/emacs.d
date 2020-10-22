@@ -5,12 +5,12 @@
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:7F0DB7D1-63CC-4002-BF3B-FC8F529B24EB
 :END:
-** Trash
+** TODO Trash
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:B8245402-918E-4781-B89F-2B7BC3A27C0A
 :END:
 Well I was going to include [[https://github.com/lunaryorn/osx-trash.el][osx trash]] which uses the trash executable or an applescript to do the proper trash. But realised I don't want to trash files - just those I delete by hand so the patching of the emacs delete is not a good idea. By default emacs does not delete by moving to trash. It is customisable so set to to never.
-Think of editing dired
+Think of editing dired and treemacs
    #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_FA0C03FD-BE8F-4AD2-9BB9-7CBFAB65F9DA
    #+begin_src emacs-lisp
    (setq delete-by-moving-to-trash nil)

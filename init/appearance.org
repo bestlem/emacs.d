@@ -78,13 +78,11 @@ One for writing code and the other for reading articles."
 
 (use-package color-theme-modern
   :ensure t
-  :defer 10
   :config
   (load-theme 'high-contrast t t))
 
 (use-package modus-operandi-theme
   :ensure t
-  :defer 10
   :config
   (load-theme 'modus-operandi t t))
 
@@ -192,7 +190,6 @@ but does not seem to work well
 #+begin_src emacs-lisp
 (use-package beacon
   :ensure t
-  :defer t
   :custom (beacon-blink-when-focused t)
   :init (eval-when-compile
           ;; Silence missing function warnings
@@ -247,7 +244,6 @@ I think I now want mainly one window and have splits but tabs are useful.
  #+begin_src emacs-lisp
 (use-package winner
   :unless noninteractive
-  :defer 5
   :config
   (winner-mode)
   (require 'windmove)

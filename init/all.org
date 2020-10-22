@@ -7,7 +7,7 @@
 :END:
 Now minimally useful
 This adds the real use.
-The order here does not matter much.
+The order here does not matter much. On second thoughts especially with desktop it does. We need the environment set up befoire we load files. Apperance and keys are later. Moset things are on :defer t so only start when needed. :defer with time is also problematoic as it makes :after fail; which is why some :config have use-package in them.
 In future this file should really just be a list of mwb-init-load and each one can fail. All structure could be here.
 
 
@@ -63,120 +63,6 @@ In this case var and overlap no-littering
   (setq user-emacs-directory (mwb-user-emacs-file "var")))
 #+end_src
 
-** Startup screen
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:CE114471-A55C-4C32-B1DF-C83AFE265D4C
-:END:
-*** Desktop
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:2116C663-621B-43B2-8E69-B86CB71BA9BC
-:END:
-This saves the state perhaps I need to see how it works.
-#+NAME: org_mark_2020-10-03T11-41-17+01-00_mini12.local_DC2C7645-A251-449C-AC77-40AD4B76D5B4
-#+begin_src emacs-lisp
-(use-package desktop
-  :unless *aquamacs*
-  :config
-  (setq desktop-dirname (mwb-user-emacs-file "var/desktop/"))
-  (setq desktop-path (list desktop-dirname))
-  (setq desktop-base-file-name "desktop-save.el")
-  (setq desktop-base-lock-name "desktop-save.el.lock")
-
-  (desktop-save-mode 1)
-  (push '(company-posframe-mode . nil)
-        desktop-minor-mode-table))
-#+end_src
-*** Revive
-:PROPERTIES:
-:ID:       org_mark_2020-10-09T10-33-48+01-00_mini12.local:1D167408-BEC8-460C-8644-B56A690E583E
-:END:
-This is what Aquamacs used - version copied from there.
-Odd editing I can't edit the file lispy decides it needs to comment everything. So better just override
-However decided to use more recent updated workspace2 first
-#+NAME: org_mark_2020-10-09T10-33-48+01-00_mini12.local_28EE6DA2-AFFB-4773-9037-6E5E3898046D
-#+begin_src emacs-lisp
-
-#+end_src
-*** [[https://github.com/pashinin/workgroups2][Workgroups2]]
-:PROPERTIES:
-:ID:       org_mark_2020-10-09T10-33-48+01-00_mini12.local:71A81A40-89B6-47C1-B00A-83532367D9B7
-:END:
-Seems one of few in development and on github
-Well tried and treemacs screwed up
-#+NAME: org_mark_2020-10-09T10-33-48+01-00_mini12.local_3B37CB96-2AF0-4558-8B03-007D832A3898
-#+begin_src emacs-lisp
-(use-package workgroups2
-  :ensure t
-  :disabled
-  :config (workgroups-mode 1)
-  (setq wg-session-load-on-start t
-        wg-session-file (no-littering-expand-var-file-name "workgroups2")
-        ))
-#+end_src
-*** Dashboard
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:047865CE-76CF-4835-98C6-1B1313B9544C
-:END:
-This seemed interesting but seemed to messup lispy
-    #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_36B9271A-376B-404D-AC09-6460A21BCBBF
-    #+begin_src emacs-lisp
-    (use-package dashboard
-:disabled
-      :ensure t
-      :config
-      (dashboard-setup-startup-hook)
-      (setq dashboard-items '((recents . 5)
-                              (bookmarks . 5)
-                              (projects . 5)
-                              (agenda . 5)
-                              (registers . 5))))
-    #+end_src
-*** Current startup settings
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:0904FB99-90C7-4D22-8B26-846E12DE3921
-:END:
-**** Start up screen
-:PROPERTIES:
-:ID:       org_mark_2020-10-02T16-49-16+01-00_mini12.local:294D6FCC-B100-40FF-B990-AF7935145EB2
-:END:
-#+NAME: org_mark_2020-10-02T16-49-16+01-00_mini12.local_EDC6964F-B7A5-410E-819C-097B0E219B49
-#+begin_src emacs-lisp
-(setq inhibit-splash-screen t)
-#+end_src
-**** Scratch buffer
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:A300832E-1253-4E83-A0C3-3DAAEE99F20D
-:END:
-  Need to control how it is restarted. Aquamacs saves it
-  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_7CE610E6-5D87-43CE-9EF8-5D9112E28EF0
-  #+begin_src emacs-lisp
-(setq initial-major-mode 'org-mode)
-(setq initial-scratch-message nil)
-(unless *aquamacs*
-  (use-package persistent-scratch
-    :ensure t
-    :init
-    (setq persistent-scratch-save-file (mwb-user-emacs-file "var/persistent-scratch"))
-    :config
-    (persistent-scratch-setup-default)))
-   #+end_src
-**** Windows
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:E5DA693A-871D-4201-B814-758C4738654A
-:END:
-I want two windows in a frame and treemacs
-
-Emacs 27 seems toim have a timing issue pop to buffer seems not to see the spare window unless after treemacs
-#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_60953FEE-7E07-48DE-AD1C-66D90DAE2D5A
-#+begin_src emacs-lisp
-(add-hook 'window-setup-hook
-          '(lambda ()
-             (split-window-horizontally)
-             (treemacs)
-             (pop-to-buffer "*Messages*")
-             ))
-#+end_src
-
 ** Setting variables with a check on type
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:86E6A7B5-5C85-4429-AE49-FA5AE7AEF73D
@@ -207,15 +93,6 @@ Note should check on defconst
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:0EBF0016-296F-41EA-8DC3-96CE752F9E9A
 :END:
-** Appearance
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:4E2542DC-19A8-480A-A0B2-EF1C192A77FB
-:END:
-   #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_FDEBBB87-4E2F-4E81-87B0-349A09B8D866
-   #+begin_src emacs-lisp
-   (mwb-init-load  "init/appearance")
-   #+end_src
-
 ** Emacs behaviour
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:EB57B856-C1F8-4E5E-82AF-2F8E154DBCA4
@@ -330,3 +207,130 @@ Includes structured data
   #+begin_src emacs-lisp
   (mwb-init-load "init/keys")
   #+end_src
+
+* Startup data
+:PROPERTIES:
+:ID:       org_mark_2020-10-22T09-50-00+01-00_mini12.local:CAF18BDF-1B4E-49DD-B4CE-F0A18829FDDC
+:END:
+The data that emacs works on.
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:CE114471-A55C-4C32-B1DF-C83AFE265D4C
+:END:
+** Desktop
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:2116C663-621B-43B2-8E69-B86CB71BA9BC
+:END:
+This saves the state perhaps I need to see how it works.
+#+NAME: org_mark_2020-10-03T11-41-17+01-00_mini12.local_DC2C7645-A251-449C-AC77-40AD4B76D5B4
+#+begin_src emacs-lisp
+(use-package desktop
+  :unless *aquamacs*
+  :config
+  (setq desktop-dirname (mwb-user-emacs-file "var/desktop/"))
+  (setq desktop-path (list desktop-dirname))
+  (setq desktop-base-file-name "desktop-save.el")
+  (setq desktop-base-lock-name "desktop-save.el.lock")
+
+  (desktop-save-mode 1)
+  (push '(company-posframe-mode . nil)
+        desktop-minor-mode-table))
+#+end_src
+** Revive
+:PROPERTIES:
+:ID:       org_mark_2020-10-09T10-33-48+01-00_mini12.local:1D167408-BEC8-460C-8644-B56A690E583E
+:END:
+This is what Aquamacs used - version copied from there.
+Odd editing I can't edit the file lispy decides it needs to comment everything. So better just override
+However decided to use more recent updated workspace2 first
+#+NAME: org_mark_2020-10-09T10-33-48+01-00_mini12.local_28EE6DA2-AFFB-4773-9037-6E5E3898046D
+#+begin_src emacs-lisp
+
+#+end_src
+** [[https://github.com/pashinin/workgroups2][Workgroups2]]
+:PROPERTIES:
+:ID:       org_mark_2020-10-09T10-33-48+01-00_mini12.local:71A81A40-89B6-47C1-B00A-83532367D9B7
+:END:
+Seems one of few in development and on github
+Well tried and treemacs screwed up
+#+NAME: org_mark_2020-10-09T10-33-48+01-00_mini12.local_3B37CB96-2AF0-4558-8B03-007D832A3898
+#+begin_src emacs-lisp
+(use-package workgroups2
+  :ensure t
+  :disabled
+  :config (workgroups-mode 1)
+  (setq wg-session-load-on-start t
+        wg-session-file (no-littering-expand-var-file-name "workgroups2")
+        ))
+#+end_src
+** Dashboard
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:047865CE-76CF-4835-98C6-1B1313B9544C
+:END:
+This seemed interesting but seemed to messup lispy
+    #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_36B9271A-376B-404D-AC09-6460A21BCBBF
+    #+begin_src emacs-lisp
+    (use-package dashboard
+:disabled
+      :ensure t
+      :config
+      (dashboard-setup-startup-hook)
+      (setq dashboard-items '((recents . 5)
+                              (bookmarks . 5)
+                              (projects . 5)
+                              (agenda . 5)
+                              (registers . 5))))
+    #+end_src
+** Current startup settings
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:0904FB99-90C7-4D22-8B26-846E12DE3921
+:END:
+*** Start up screen
+:PROPERTIES:
+:ID:       org_mark_2020-10-02T16-49-16+01-00_mini12.local:294D6FCC-B100-40FF-B990-AF7935145EB2
+:END:
+#+NAME: org_mark_2020-10-02T16-49-16+01-00_mini12.local_EDC6964F-B7A5-410E-819C-097B0E219B49
+#+begin_src emacs-lisp
+(setq inhibit-splash-screen t)
+#+end_src
+*** Scratch buffer
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:A300832E-1253-4E83-A0C3-3DAAEE99F20D
+:END:
+  Need to control how it is restarted. Aquamacs saves it
+  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_7CE610E6-5D87-43CE-9EF8-5D9112E28EF0
+  #+begin_src emacs-lisp
+(setq initial-major-mode 'org-mode)
+(setq initial-scratch-message nil)
+(unless *aquamacs*
+  (use-package persistent-scratch
+    :ensure t
+    :init
+    (setq persistent-scratch-save-file (mwb-user-emacs-file "var/persistent-scratch"))
+    :config
+    (persistent-scratch-setup-default)))
+   #+end_src
+*** Windows
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:E5DA693A-871D-4201-B814-758C4738654A
+:END:
+I want two windows in a frame and treemacs
+
+Emacs 27 seems to have a timing issue pop to buffer seems not to see the spare window unless after treemacs
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_60953FEE-7E07-48DE-AD1C-66D90DAE2D5A
+#+begin_src emacs-lisp
+(add-hook 'window-setup-hook
+          '(lambda ()
+             (split-window-horizontally)
+             (treemacs)
+             (pop-to-buffer "*Messages*")
+             ))
+#+end_src
+
+* Appearance
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:4E2542DC-19A8-480A-A0B2-EF1C192A77FB
+:END:
+   #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_FDEBBB87-4E2F-4E81-87B0-349A09B8D866
+   #+begin_src emacs-lisp
+   (mwb-init-load  "init/appearance")
+   #+end_src

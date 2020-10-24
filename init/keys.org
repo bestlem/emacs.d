@@ -349,7 +349,8 @@ This is the override of save etc to the mode maps
 
   (progn
     (bind-key "A-<kp-add>" 'zoom-in macos-key-map)
-    (bind-key "A-<kp-subtract>" 'zoom-out macos-key-map)))
+    (bind-key "A-<kp-subtract>" 'zoom-out macos-key-map)
+    (bind-key "A-/" 'comment-dwim-2 macos-key-map)))
 #+end_src
 
 ** Control x binding
@@ -548,48 +549,7 @@ _<_ beginning of buffer _>_ end of buffer _m_: set mark _/_: jump to mark
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:CC787E0F-CFB8-47FE-8112-E4646044C2C5
 :END:
-** Toggle Hydra
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:B057214C-A937-4D14-A4BC-D5285F7F3749
-:END:
-This is from jerrypnz with extras for treemacs
-#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_E94F36C2-B325-4D91-B7B4-36474F1F6296
-#+begin_src emacs-lisp
-(when *aquamacs*
-  (defvar jp-toggles--title (with-faicon "toggle-on" "Toggles" 1 -0.05))
-
-  (bind-key
-   "H-t"
-   (pretty-hydra-define jp-toggles
-     (:color amaranth :quit-key "q" :title jp-toggles--title)
-     ("Basic"
-      (("n" linum-mode "line number" :toggle t)
-       ("w" whitespace-mode "whitespace" :toggle t)
-       ("W" whitespace-cleanup-mode "whitespace cleanup" :toggle t)
-       ("r" rainbow-mode "rainbow" :toggle t)
-       ("L" page-break-lines-mode "page break lines" :toggle t)
-       )
-      "Highlight"
-      (("s" symbol-overlay-mode "symbol" :toggle t)
-       ("l" hl-line-mode "line" :toggle t)
-       ("x" highlight-sexp-mode "sexp" :toggle t)
-       ("d" hl-todo-mode "todo" :toggle t))
-      "UI"
-      (("t" treemacs "Treemacs" :toggle t)
-       ("f" auto-fill-mode "fill" :toggle t)
-       ("T" toggle-truncate-lines "truncate" :toggle t))
-      "Coding"
-      (("p" smartparens-mode "smartparens" :toggle t)
-       ("P" smartparens-strict-mode "smartparens strict" :toggle t)
-       ("S" show-smartparens-mode "show smartparens" :toggle t)
-       ("F" flycheck-mode "flycheck" :toggle t))
-      "Emacs"
-      (("h" hydra-verbose "Show errors in defhydra" :toggle t)
-       ("D" toggle-debug-on-error "debug on error" :toggle (default-value 'debug-on-error))
-       ("X" toggle-debug-on-quit "debug on quit" :toggle (default-value 'debug-on-quit)))))
-   ))
-#+end_src
-*** Toggle treemode as needed often
+** Toggle treemode as needed often
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:E96CD5B5-8DFE-489A-BBF2-B969886F2607
 :END:

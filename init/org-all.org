@@ -1,6 +1,48 @@
 #+TITLE Emacs configuration org Mode - all the complete things
 #+PROPERTY:header-args :cache yes :tangle yes :comments noweb
 #+STARTUP: content
+* Table of Contents                                                     :TOC_4:
+:PROPERTIES:
+:ID:       org_mark_2020-10-24T15-08-22+01-00_mini12.local:8844FA08-DB9D-44FB-AE4D-189DDA7A2EAA
+:END:
+- [[#start-using-org-mode][Start using org mode]]
+  - [[#use-package-issues][use package issues]]
+  - [[#noweb-issues][Noweb issues]]
+  - [[#grettke][Grettke]]
+- [[#load-and-setup-org-mode][Load and setup org mode]]
+  - [[#the-use-package-setup][The use package setup]]
+    - [[#key-bindings][Key bindings]]
+    - [[#hack-around][Hack around]]
+      - [[#org-capture][Org capture]]
+    - [[#save-org-files-saved-in-dropbox-dir-automatically-nb-not-emacs-autosave][Save org files saved in dropbox dir automatically (NB not emacs autosave)]]
+    - [[#tangle-on-save][Tangle on save]]
+  - [[#setup-outside-use-package][Setup outside use-package]]
+    - [[#imenu-to-provide-info-for-treemacs-and-contextual-menu][Imenu to provide info for treemacs and contextual menu]]
+  - [[#babel-initialisation][Babel initialisation]]
+    - [[#grettke-babel][Grettke babel]]
+      - [[#minimal-config][Minimal config]]
+      - [[#fundamentals][Fundamentals]]
+      - [[#literate-programming][Literate Programming]]
+      - [[#helper-functions][Helper Functions]]
+      - [[#identity][Identity]]
+      - [[#tangling][Tangling]]
+      - [[#evaluating][Evaluating]]
+      - [[#weaving][Weaving]]
+  - [[#footnotes][Footnotes]]
+  - [[#prettify][Prettify]]
+    - [[#circular-bullets][Circular bullets]]
+    - [[#set-fonts-for-headers][Set fonts for headers]]
+    - [[#indent-other-text][Indent other text]]
+    - [[#line-wrapping][Line wrapping]]
+  - [[#agenda][Agenda]]
+  - [[#capture][Capture]]
+  - [[#mode-hydras][Mode Hydras]]
+    - [[#main-mode][Main mode]]
+    - [[#refile][Refile]]
+      - [[#code][Code]]
+      - [[#hydra][Hydra]]
+- [[#table-of-contents-setup][Table of Contents setup]]
+
 * Start using org mode
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:6810C5AF-469D-4E0E-BD24-8F6301313A91
@@ -37,12 +79,16 @@ As everything is after loading of org dump in a config section after the rest.
 :END:
 org-mode is a pain as we need a newer than aquamacs supplies and also there are recommendations to use an even later version. Also re packaging emacs package.el reads already built stuff others e.g. straight.el don't and that could be a problem with org-mode. There are reasons not to use the org repo but Elpa - [[https://www.reddit.com/r/emacs/comments/5sx7j0/how_do_i_get_usepackage_to_ignore_the_bundled/ddix2ta/?utm_source=share&utm_medium=web2x][from Reddit]] basically possible security issues so I am with ELPA and missing org-contrib.
 
-Aug 2019 got an error in cut subtree so revert to org mode with Aquamacs nad lose formatting of code blocks. (and will get name changes in links in generated files) but seems OK now.
+Aug 2019 got an error in cut subtree so revert to org mode with Aquamacs and lost formatting of code blocks. (and will get name changes in links in generated files) but seems OK now.
+
+Now back to back to src issues. They go back to the code block that contains the noweb <<>> Not the named block
 ** The use package setup
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:411C4ABA-EFFC-4E73-9C0F-5E936AC5B73B
 :END:
 Note Hydra is not really used after just a couple of weeks.
+
+It is now for subtree todo refile and links
   #+NAME: org_mark_2020-01-23T20-21-34+00-00_mini12_72F56F5E-3D65-491F-B68F-CDCFF334FFB6
   #+begin_src emacs-lisp :noweb tangle
   (use-package org
@@ -144,6 +190,7 @@ See https://www.reddit.com/r/emacs/comments/9e5h4f/is_there_a_way_to_autosave_or
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:42D6E858-998F-48DE-8D73-799C228FF91E
 :END:
 This code is unreadable the consts would make more sense not being there as they would then match the documentation
+I have removed this from the noweb weave as it makes use of other files a pain but put back as this needs more. Including the noweb bit picks up several bits
 #+NAME: org-mode-hooks
 	#+begin_src emacs-lisp :tangle no
 (org-mode . (lambda ()
@@ -1410,10 +1457,11 @@ Based off https://mollermara.com/blog/Fast-refiling-in-org-mode-with-hydras/ to 
 
 **** Hydra
 :PROPERTIES:
-:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:57EFAC1C-E2F3-49FC-AAC4-5D152747D36E
+:ID:       org_mark_2020-10-24T15-08-22+01-00_mini12.local:D4DA8CE4-DA9A-43D9-AE41-F2A5040BBDCB
 :END:
-I am not certain how ro add a name in the use-package so use plain macro in :config
-#+NAME: org_mark_2020-02-13T09-56-02+00-00_mini12_EF3743C9-57EA-438C-97A4-5EBA94AA7A89
+
+I am not certain how to add a name in the use-package so use plain macro in :config
+#+NAME: org_mark_2020-10-24T15-08-22+01-00_mini12.local_FD030CF2-2800-4F9B-A6DF-3E850A864309
 #+begin_src emacs-lisp :tangle no
 (pretty-hydra-define hydra-org-refile
   (:color pink :quit-key "q")
@@ -1426,4 +1474,18 @@ I am not certain how ro add a name in the use-package so use plain macro in :con
     ("r" (my/refile "dev_todo.org" "racket") "Racket tasks"))
    "Other"
    (("w" (my/refile "dev_todo.org" "racket") "Web"))))
+#+end_src
+
+* Table of Contents setup
+:PROPERTIES:
+:ID:       org_mark_2020-10-24T15-08-22+01-00_mini12.local:22E4475E-BC4D-4C25-8B48-2F5E01060BDA
+:END:
+This package [[https://github.com/snosov1/toc-org][toc-org]] seems it might be useful
+
+I think using treemacs is nearer what I need.
+#+NAME: org_mark_2020-10-24T15-08-22+01-00_mini12.local_E0715861-9815-4AA9-8E93-095091F21C56
+#+begin_src emacs-lisp
+(use-package toc-org
+  :ensure t
+  :hook (org-mode . toc-org-mode))
 #+end_src

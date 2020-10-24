@@ -10,6 +10,8 @@
  '(aquamacs-tool-bar-user-customization nil t)
  '(auto-fill-function nil t)
  '(auto-word-wrap-default-function nil)
+ '(awesome-tray-mode-line-active-color "#0031a9")
+ '(awesome-tray-mode-line-inactive-color "#d7d7d7")
  '(backup-directory-alist (quote (("." . ".~"))))
  '(canlock-password "8ac28fef8ff386f996bee4f20f8b3c40bd1829d4")
  '(comment-auto-fill-only-comments t)
@@ -23,6 +25,11 @@
  '(desktop-file-name-format (quote tilde))
  '(explicit-shell-file-name "/opt/local/bin/fish")
  '(fill-nobreak-predicate (quote (fill-single-char-nobreak-p)))
+ '(flymake-error-bitmap
+   (quote
+    (flymake-double-exclamation-mark modus-theme-fringe-red)))
+ '(flymake-note-bitmap (quote (exclamation-mark modus-theme-fringe-cyan)))
+ '(flymake-warning-bitmap (quote (exclamation-mark modus-theme-fringe-yellow)))
  '(fringe-indicator-alist
    (quote
     ((continuation nil nil)
@@ -51,39 +58,60 @@
  '(hardhat-fullpath-protected-regexps
    (quote
     ("~/\\.emacs\\.d/elpa/" "~/\\.cpan/" "~/\\.cabal/" "~/perl5/perlbrew/" "~/\\.npm/" "~/\\.virtualenv/" "~/\\.virthualenv/" "~/\\.rvm/" "/[._]build/" "/\\.bzr/" "/\\.coverage/" "/\\.git/" "/\\.hg/" "/\\.rspec/" "/\\.sass-cache/" "/\\.svn/" "/_MTN/" "/_darcs/" "/CVS/" "/pm_to_blib/" "/RCS/" "/SCCS/" "/blib/" "/test_output/" "~/\\.emacs\\.d/\\.cask/" "~/\\.cask/" "/Applications/" "~/Library/Preferences/Aquamacs Emacs/Packages" "~/src/ThirdParty/")))
+ '(highlight-tail-colors (quote (("#aecf90" . 0) ("#c0efff" . 20))))
+ '(hl-todo-keyword-faces
+   (quote
+    (("HOLD" . "#70480f")
+     ("TODO" . "#721045")
+     ("NEXT" . "#5317ac")
+     ("THEM" . "#8f0075")
+     ("PROG" . "#00538b")
+     ("OKAY" . "#30517f")
+     ("DONT" . "#315b00")
+     ("FAIL" . "#a60000")
+     ("BUG" . "#a60000")
+     ("DONE" . "#005e00")
+     ("NOTE" . "#863927")
+     ("KLUDGE" . "#813e00")
+     ("HACK" . "#813e00")
+     ("TEMP" . "#5f0000")
+     ("FIXME" . "#a0132f")
+     ("XXX+" . "#972500")
+     ("REVIEW" . "#005a5f")
+     ("DEPRECATED" . "#201f55"))))
  '(ibuffer-expert t)
  '(ibuffer-fontification-alist
    (quote
-    ((999
+    ((5
       (and buffer-file-name
            (buffer-modified-p))
-      term-cyanbg)
-     (10 buffer-read-only default)
+      font-lock-warning-face)
+     (10 buffer-read-only font-lock-string-face)
      (15
       (and buffer-file-name
            (string-match ibuffer-compressed-file-name-regexp buffer-file-name))
       font-lock-doc-face)
-     (20
-      (string-match "^*"
-                    (buffer-name))
-      font-lock-keyword-face)
      (25
       (and
        (string-match "^ "
                      (buffer-name))
        (null buffer-file-name))
       italic)
-     (30
-      (memq major-mode ibuffer-help-buffer-modes)
-      font-lock-comment-face)
      (35
       (derived-mode-p
        (quote dired-mode))
       font-lock-function-name-face)
-     (0 1 term-blue))))
+     (40
+      (and
+       (boundp
+        (quote emacs-lock-mode))
+       emacs-lock-mode)
+      ibuffer-locked-buffer))))
  '(ibuffer-help-buffer-modes
    (quote
     (help-mode helpful-mode apropos-mode Info-mode Info-edit-mode)))
+
+
  '(indent-tabs-mode nil)
  '(mail-setup-with-from t)
  '(make-backup-files t)
@@ -105,12 +133,45 @@
  '(org-todo-keywords (quote ((sequence "TODO" "|" "DONE" "LEAVE(@)"))))
  '(package-selected-packages
    (quote
-    (fira-code-mode paren-face flyspell-correct-popup company-prescient company-posframe which-key-posframe which-key-posframe-mode mac-key-mode hydra s dash use-package which-key racket-mode elmacro lispy rainbow-delimiters flycheck smartparens highlight-indent-guides nov treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ibuffer-vc projectile deadgrep ivy-prescient prescient counsel swiper ivy-rich ivy-hydra ivy yasnippet company helpful org smartparens-config all-the-icons major-mode-hydra eval-in-repl xr yasnippet-snippets outshine expand-region json-navigator mwim fish-mode sml-mode use-package-chords cmake-mode cask-mode eros macrostep org-indent validate hardhat beacon gitignore-mode gitconfig-mode manual use-package-hydra backup-each-save org-bullets ws-butlerz helm elisp-format comment-dwim-2 smex discover-my-major json-mode dired-toggle aggressive-indent gradle-mode groovy-imports groovy-mode ws-butler diminish key-chord)))
+    (toc-org lisp-extra-font-lock fira-code-mode paren-face flyspell-correct-popup company-prescient company-posframe which-key-posframe which-key-posframe-mode mac-key-mode hydra s dash use-package which-key racket-mode elmacro lispy rainbow-delimiters flycheck smartparens highlight-indent-guides nov treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ibuffer-vc projectile deadgrep ivy-prescient prescient counsel swiper ivy-rich ivy-hydra ivy yasnippet company helpful org smartparens-config all-the-icons major-mode-hydra eval-in-repl xr yasnippet-snippets outshine expand-region json-navigator mwim fish-mode sml-mode use-package-chords cmake-mode cask-mode eros macrostep org-indent validate hardhat beacon gitignore-mode gitconfig-mode manual use-package-hydra backup-each-save org-bullets ws-butlerz helm elisp-format comment-dwim-2 smex discover-my-major json-mode dired-toggle aggressive-indent gradle-mode groovy-imports groovy-mode ws-butler diminish key-chord)))
  '(python-shell-interpreter "python")
+ '(safe-local-variable-values
+   (quote
+    ((eval add-hook
+           (quote before-save-hook)
+           (quote time-stamp))
+     (require-final-newline . t))))
  '(text-mode-hook (quote (set-word-wrap)))
  '(undo-limit 800000)
+ '(vc-annotate-background nil)
+ '(vc-annotate-background-mode nil)
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#a60000")
+     (40 . "#721045")
+     (60 . "#8f0075")
+     (80 . "#972500")
+     (100 . "#813e00")
+     (120 . "#70480f")
+     (140 . "#5d3026")
+     (160 . "#184034")
+     (180 . "#005e00")
+     (200 . "#315b00")
+     (220 . "#005a5f")
+     (240 . "#30517f")
+     (260 . "#00538b")
+     (280 . "#093060")
+     (300 . "#0031a9")
+     (320 . "#2544bb")
+     (340 . "#0000c0")
+     (360 . "#5317ac"))))
+ '(vc-annotate-very-old-color nil)
  '(visual-line-mode t t)
- '(word-wrap t))
+ '(word-wrap t)
+ '(xterm-color-names
+   ["#000000" "#a60000" "#005e00" "#813e00" "#0031a9" "#721045" "#00538b" "#f0f0f0"])
+ '(xterm-color-names-bright
+   ["#505050" "#972500" "#315b00" "#70480f" "#2544bb" "#8f0075" "#30517f" "#ffffff"]))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

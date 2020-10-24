@@ -22,6 +22,8 @@
  - path :: ~/src/coursera/ProgrammingLanguages
 ** SML unit test
  - path :: ~/src/sml/unit_test
+** simutrans
+ - path :: ~/src/cpp/simutrans
 * No Perspective
 ** emacs.d
  - path :: ~/src/env/emacs.d

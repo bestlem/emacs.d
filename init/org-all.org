@@ -16,6 +16,7 @@
       - [[#org-capture][Org capture]]
     - [[#save-org-files-saved-in-dropbox-dir-automatically-nb-not-emacs-autosave][Save org files saved in dropbox dir automatically (NB not emacs autosave)]]
     - [[#tangle-on-save][Tangle on save]]
+  - [[#folding-visibility][Folding visibility]]
   - [[#setup-outside-use-package][Setup outside use-package]]
     - [[#imenu-to-provide-info-for-treemacs-and-contextual-menu][Imenu to provide info for treemacs and contextual menu]]
   - [[#babel-initialisation][Babel initialisation]]
@@ -91,29 +92,31 @@ Note Hydra is not really used after just a couple of weeks.
 It is now for subtree todo refile and links
   #+NAME: org_mark_2020-01-23T20-21-34+00-00_mini12_72F56F5E-3D65-491F-B68F-CDCFF334FFB6
   #+begin_src emacs-lisp :noweb tangle
-  (use-package org
-    :ensure t
-    :bind
-    <<key-binds>>
-    :config
-    (setq org-datetree-add-timestamp (quote active)
-          org-default-notes-file "~/SyncServices/Dropbox/Docs/org/notes.org"
-          org-directory "/Users/mark/SyncServices/Dropbox/Docs/org"
-          org-support-shift-select t
-          ;;          org-use-speed-commands t
-          )
-    :hook
-    <<org-mode-hooks>>
-    <<org-mode-hooks-wrapping>>
-<<org-mode-hydrae>>
-;;<<org-mode-hydrae-code>>
-:config
-<<org-config>>
-<<org-mode-hydrae-refile>>
+(use-package org
+  :ensure t
+  :bind
+  <<key-binds>>
+  :config
+  (setq org-datetree-add-timestamp (quote active)
+        org-default-notes-file "~/SyncServices/Dropbox/Docs/org/notes.org"
+        org-directory "/Users/mark/SyncServices/Dropbox/Docs/org"
+        org-support-shift-select t
+        ;;          org-use-speed-commands t
+        )
+  :hook
+  <<org-mode-hooks>>
+  <<org-mode-hooks-wrapping>>
+  <<org-mode-hydrae>>
+  ;;<<org-mode-hydrae-code>>
+  :config
+  <<org-config>>
+  <<org-mode-hydrae-refile>>
 
-<<org-grettke>>
+  <<org-grettke>>
 
-    )
+  :custom
+  <<org-custom>>
+  )
   #+end_src
 *** Key bindings
 :PROPERTIES:
@@ -200,6 +203,15 @@ I have removed this from the noweb weave as it makes use of other files a pain b
                'run-at-end
                'only-in-org-mode)))
 	#+end_src
+** Folding visibility
+:PROPERTIES:
+:ID:       org_mark_2020-10-25T11-37-05+00-00_mini12.local:B48F7EEE-0A50-4EC9-8416-C09AC65B509B
+:END:
+This describes how the org file is shown I think 9.4 altered this
+#+name: org-custom
+#+begin_src emacs-lisp :tangle no
+(org-startup-folded 'fold)
+#+end_src
 ** Setup outside use-package
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:2DC0229D-C398-4D28-B321-23AFDA2DA87A
@@ -1255,10 +1267,11 @@ Basically set to variable pitch font but note Aquamacs has a way (different of c
 From [[http://www.howardism.org/Technical/Emacs/orgmode-wordprocessor.html][here]]
  #+NAME: org_mark_2020-01-23T20-21-34+00-00_mini12_BD3DD793-C3F1-46EE-A7C2-72CA21C5066E
  #+begin_src emacs-lisp
- (use-package org-bullets
-   :ensure t
-   :init (add-hook 'org-mode-hook 'org-bullets-mode))
+(use-package org-bullets
+  :ensure t
+  :hook (org-mode . org-bullets-mode))
  #+end_src
+
 	#+begin_src emacs-lisp
     (font-lock-add-keywords
      'org-mode

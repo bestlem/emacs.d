@@ -82,21 +82,22 @@ This is from  [[https://www.reddit.com/r/emacs/comments/64kr02/emacs_workflow_so
 :END:
  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_77968D6B-1BBA-4161-B6E1-B81A674421AD
  #+begin_src emacs-lisp
-(defvar gk-ibuffer-collapsed-groups
-  (list
-   "Special buffers"
-   "Dired"
-   "Emacs"
-   "Aquamacs"
-   "Emacs Documentation"
-   "Help"
-   "GNUs"
-   "Magit"
-   "Custom"
-   "Helm"
-   ;; "Special buffers"
-   "EWW Reading"
-   "VC"))
+(setq gk-ibuffer-collapsed-groups
+      (list
+       "Special buffers"
+       "Dired"
+       "Emacs internal"
+       "EmacsMac"
+       "Aquamacs"
+       "Emacs Documentation"
+       "Help"
+       "GNUs"
+       "Magit"
+       "Custom"
+       "Helm"
+       ;; "Special buffers"
+       "EWW Reading"
+       "VC"))
 #+end_src
 *** Do the collapsing
 :PROPERTIES:

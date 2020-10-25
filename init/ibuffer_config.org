@@ -30,8 +30,8 @@ This file is loaded sureing use-package :config ie after ibuffer loaded
   '(("Aquamacs" (or
                  (filename . "^/Applications/Aquamacs")
                  (filename . "/Library/Preferences/Aquamacs Emacs/Packages/elpa")))
-    ("Dired" (mode . dired-mode))
-    ("Emacs" (or
+    ;; ("Dired" (mode . dired-mode))
+    ("Emacs internal" (or
               (name . "^\\*dashboard\\*$")
               (name . "^\\*scratch\\*$")
               (name . "^\\*Messages\\*$")

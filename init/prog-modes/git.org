@@ -1,7 +1,11 @@
 #+TITLE Emacs configuration org Git configuration0
 #+PROPERTY:header-args :cache yes :tangle yes :comments link
-
-#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_567EC3D0-68E6-4AE2-876E-99B3A4EFD421
+* Ediff
+:PROPERTIES:
+:ID:       org_mark_2020-10-25T17-28-25+00-00_mini12.local:9C579DD9-846E-4311-B3DA-BFDC51BEFE8C
+:END:
+This was originally all for gnus now I want to play with it
+#+NAME: org_mark_2020-10-25T17-28-25+00-00_mini12.local_587F425F-D07A-4E6C-9D67-0FD960007DC2
 #+begin_src emacs-lisp
 
 ;; set up git mainly for ediff use from git
@@ -40,6 +44,14 @@
 (add-hook 'ediff-before-setup-hook 'local-ediff-before-setup-hook)
 (add-hook 'ediff-quit-hook 'local-ediff-quit-hook 'append)
 (add-hook 'ediff-suspend-hook 'local-ediff-suspend-hook 'append)
+
+#+end_src
+* Git specific
+:PROPERTIES:
+:ID:       org_mark_2020-10-25T17-28-25+00-00_mini12.local:0391A972-12D1-4EBD-B56F-D1581C2C44A7
+:END:
+#+NAME: org_mark_2020-10-25T17-28-25+00-00_mini12.local_A6020E60-25AF-4494-A18F-D6531B1F0607
+#+begin_src emacs-lisp
 
 ;; Useful for ediff merge from emacsclient.
 (defun git-mergetool-emacsclient-ediff (local remote base merged)

@@ -30,6 +30,7 @@ Although that should be in prog mode
 #+begin_src emacs-lisp
 (use-package paren-face
   :ensure t
+  :disabled
   :config
   (setq paren-face-regexp (rx (any "()[]{}")))
   (add-to-list 'paren-face-modes 'racket-mode)

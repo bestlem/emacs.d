@@ -18,6 +18,7 @@ Add some from jweigley
  #+begin_src emacs-lisp
 (use-package company
   :ensure t
+  :demand
   :diminish
   :commands (company-mode company-indent-or-complete-common company-complete)
 

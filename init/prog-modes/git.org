@@ -1,27 +1,43 @@
 #+TITLE Emacs configuration org Git configuration0
-#+PROPERTY:header-args :cache yes :tangle yes :comments link
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
 * Ediff
 :PROPERTIES:
 :ID:       org_mark_2020-10-25T17-28-25+00-00_mini12.local:9C579DD9-846E-4311-B3DA-BFDC51BEFE8C
 :END:
-This was originally all for gnus now I want to play with it
+This was originally all for git now I want to play with it
+Now kill it all and startq
+It is all from different places thus use weaving
+
+Might be useful for this [[https://stackoverflow.com/a/29757750/151019][SO answer]] when we have merge conflicts Note the other answer re keybinding
+
 #+NAME: org_mark_2020-10-25T17-28-25+00-00_mini12.local_587F425F-D07A-4E6C-9D67-0FD960007DC2
 #+begin_src emacs-lisp
+(use-package ediff
+  <<ediff-frame>>
+  )
 
-;; set up git mainly for ediff use from git
 
-;;
-;; Setup for ediff.
-;;
-(require 'ediff)
+#+end_src
+** Separate Frame
+:PROPERTIES:
+:ID:       org_mark_2020-10-25T17-28-25+00-00_mini12.local:FCB51941-6C0D-489C-9A86-69F191D35401
+:END:
+Try it all in a new frame from https://emacs.stackexchange.com/a/60601/9874
+However all the save frame and window is from my old diff (no idea where that came from)
+#+NAME: org_mark_2020-10-25T21-37-40+00-00_mini12.local_59BC122D-3C25-472C-98CB-C8025DB70166
+#+begin_src emacs-lisp :tangle no :noweb-ref ediff-frame
+:init
+(defun leo-ediff-before-setup ()
+  (select-frame (make-frame)))
 
+
+:preface
 (defvar ediff-after-quit-hooks nil
   "* Hooks to run after ediff or emerge is quit.")
 
 (defadvice ediff-quit (after edit-after-quit-hooks activate)
   (run-hooks 'ediff-after-quit-hooks))
 
-(setq git-mergetool-emacsclient-ediff-active nil)
 
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 (setq ediff-split-window-function 'split-window-horizontally)
@@ -29,9 +45,10 @@ This was originally all for gnus now I want to play with it
 (defun local-ediff-before-setup-hook ()
   (setq local-ediff-saved-frame-configuration (current-frame-configuration))
   (setq local-ediff-saved-window-configuration (current-window-configuration))
+  (select-frame (make-frame))
   ;; (local-ediff-frame-maximize)
-  (if git-mergetool-emacsclient-ediff-active
-      (raise-frame)))
+  )
+
 
 (defun local-ediff-quit-hook ()
   (set-frame-configuration local-ediff-saved-frame-configuration)
@@ -41,46 +58,28 @@ This was originally all for gnus now I want to play with it
   (set-frame-configuration local-ediff-saved-frame-configuration)
   (set-window-configuration local-ediff-saved-window-configuration))
 
+;; (defun local-ediff-after-control-hook ()
+;;   (message "in ediff helkp toggle")
+;;   (ediff-toggle-help))
+
 (add-hook 'ediff-before-setup-hook 'local-ediff-before-setup-hook)
 (add-hook 'ediff-quit-hook 'local-ediff-quit-hook 'append)
 (add-hook 'ediff-suspend-hook 'local-ediff-suspend-hook 'append)
+;; (add-hook 'ediff-after-setup-control-frame-hook 'local-ediff-after-control-hook)
 
 #+end_src
-* Git specific
+** Set control panel larger
 :PROPERTIES:
-:ID:       org_mark_2020-10-25T17-28-25+00-00_mini12.local:0391A972-12D1-4EBD-B56F-D1581C2C44A7
+:ID:       org_mark_2020-10-25T21-37-40+00-00_mini12.local:3E50C51F-3B98-40FF-AEE6-A33BF30538C9
 :END:
-#+NAME: org_mark_2020-10-25T17-28-25+00-00_mini12.local_A6020E60-25AF-4494-A18F-D6531B1F0607
-#+begin_src emacs-lisp
+From Emacs wiki
+#+NAME: org_mark_2020-10-25T21-37-40+00-00_mini12.local_A65CB2C2-2A77-4367-9C18-B426D4C32A42
+#+begin_src emacs-lisp :tangle no :noweb-ref ediff-framex
+:hook (ediff-startup . ediff-mwb-startup-control-hook)
 
-;; Useful for ediff merge from emacsclient.
-(defun git-mergetool-emacsclient-ediff (local remote base merged)
-(interactive)
-  (setq git-mergetool-emacsclient-ediff-active t)
-(message "In  git-mergetool-emacsclient-ediff")
-  (if (file-readable-p base)
-      (ediff-merge-files-with-ancestor local remote base nil merged)
-    (ediff-merge-files local remote nil merged))
-  (recursive-edit))
-
-(defun git-mergetool-emacsclient-ediff-after-quit-hook ()
-  (exit-recursive-edit))
-
-(add-hook 'ediff-after-quit-hooks 'git-mergetool-emacsclient-ediff-after-quit-hook 'append)
-
-;; ; Changed for latest version 
-;; ;; git://github.com/tsgates/git-emacs.git
-
-
-;; Old setup
-;; ;(require 'vc-git)
-;; ;; (when (featurep 'vc-git) (add--list 'vc-handled-backends 'git))
-;; ; (autoload 'git-blame-mode "git-blame"
-;; ;           "Minor mode for incremental blame for Git." t);; git
-;; ;; git://github.com/tsgates/git-emacs.git
-;; (add-to-list 'load-path "/Users/mark/src/third_party/git-emacs")
-;; (require 'git-emacs)
-
-;; ;; http://zagadka.vm.bytemark.co.uk/magit/magit.html
-;; ;(autoload 'magit-status "magit" nil t)
+:init
+(defun ediff-mwb-startup-control-hook ()
+  (select-frame-by-name "Ediff")
+  (set-frame-size(selected-frame) 40 10))
 #+end_src
+

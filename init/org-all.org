@@ -66,6 +66,10 @@ See in future noweb see https://raw.githubusercontent.com/zzamboni/dot-emacs/mas
 noweb allows me to totally reorder the org file so better reading so support code can be in an appendix etc.
 However org-babel-detangle cannot deal with detangling as it looks for the whole file and tries to do a block at a time - which does not work with embedded blocks. After days debugging this (well several attempts until it clicked) I found confirmation https://news.ycombinator.com/item?id=17653473
 One fix might be to just detangle the current block.
+
+Ok detangle does not work
+org-babel-tangle-jump-to-org does mainly if :comments noweb is in the org :Properties: and the blockas have unique names
+
 ** Grettke
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:111E7DB2-5383-4E1F-9B6E-EE14CBFE8671

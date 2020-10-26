@@ -190,12 +190,14 @@ buffer you are working in though, you want to go back and read something. So alt
 	#+begin_src emacs-lisp
 	(add-hook 'prog-mode-hook (lambda () (imenu-add-to-menubar "Imenu")))
 	#+end_src
-** Folding
+** TODO Folding
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:1928599E-6243-4314-835D-B5D932F7E372
 :END:
 Keeps changing - the issue is with comments before functions I want to collapse the lot. Plus with racket and ml comments are not in firts column so some (outshine) do not spot it.
 Current work to get org mode working better. see send to REPL.
+
+Also see this answer for an addition to highlight indent mode https://stackoverflow.com/a/4459159/151019
 *** Hide show
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:E10913D4-7B93-4357-B95F-FA5044D80C3C

@@ -569,6 +569,7 @@ Make sure that =ID= is always unique, portable, and easy to maintain by
 - Include the current domain
 - Use a UUID
 
+  Note that this is setr once so if you don't  shut down emacs it is not much use
 #+NAME: org_gcr_2017-05-12_mara_8F2F5DAE-40B9-490D-8523-BABCAA913A71
 #+BEGIN_SRC emacs-lisp
 (setq org-id-prefix (concat "org_" (user-real-login-name) "_" (help/get-timestamp-no-colons) "_" (system-name)))

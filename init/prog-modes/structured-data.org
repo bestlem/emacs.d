@@ -75,33 +75,50 @@ URL: `https://stackoverflow.com/questions/12648388/emacs-yaml-editing'"
 URL: `https://stackoverflow.com/questions/12648388/emacs-yaml-editing'"
     (interactive)
     (search-backward-regexp ": *"))
-  (defhydra help/hydra/yaml (:color blue
-                                    :hint nil)
-    "
-YAML: (q to quit)
- _i_ indent line
-  _n_ narrow to block literal
-   _c_ fill paragraph
-"
-    ("i" yaml-indent-line)
-    ("n" yaml-narrow-to-block-literal)
-    ("c" yaml-fill-paragraph)
-    ("q" nil))
   (defun help/yaml-mode-hook-fn ()
     ;; (turn-off-auto-capitalize-mode)
     (turn-off-auto-fill)
     (setq flycheck-checker 'yaml-yamllint))
-  (add-hook 'yaml-mode-hook #'help/yaml-mode-hook-fn)
-  (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-  (define-key yaml-mode-map (kbd "<backspace>") nil)
-  (define-key yaml-mode-map (kbd "<backspace>") #'sp-backward-delete-char)
-  (define-key yaml-mode-map (kbd "A-j") #'yaml-next-field)
-  (define-key yaml-mode-map (kbd "A-k") #'yaml-prev-field)
-  (key-chord-define yaml-mode-map "hh" #'help/hydra/yaml/body)
-  (use-package flycheck-yamllint
-    :ensure t
-    :config
-    (with-eval-after-load "flycheck"
-      (add-hook 'flycheck-mode-hook 'flycheck-yamllint-setup))
-    (setq flycheck-yaml-yamllint-executable "/Users/gcr/yamllint/env/bin/yamllint")))
+
+  :mode-hydra
+  ("Navigate"
+   (("<next>" yaml-next-field "Next Field")
+    ("<prior>" yaml-prev-field "Previous Field")
+    ("H-<down>" yaml-next-field "Next Field")
+    ("H-<up>" yaml-prev-field "Previous Field"))
+   "Other"
+   (("i" yaml-indent-line "Indent-line")
+    ("n" yaml-narrow-to-block-literal "Narrow")
+    ("c" yaml-fill-paragraph "Fill paragraph")))
+
+  :hook (yaml-mode . help/yaml-mode-hook-fn)
+
+  :mode "\\.yml\\'"
+
+  :bind (:map yaml-mode-map
+              ("<backspace>" . sp-backward-delete-char )))
 #+END_SRC
+
+** lint the yaml
+:PROPERTIES:
+:ID:       org_mark_2020-10-26T12-58-28+00-00_mini12.local:AFFF64BD-F09E-4EA7-BE6F-29A32D33237C
+:END:
+But there is no easy installable version of the executable - wait till I use more
+
+#+NAME: org_mark_2020-10-26T12-58-28+00-00_mini12.local_1AFAF3D8-0DA1-42A1-8D46-1549F325CC57
+#+begin_src emacs-lisp
+(use-package flycheck-yamllint
+  :ensure t
+  :disabled
+  :after (yaml-mode flycheck-mode)
+  :hook (flycheck-mode . flycheck-yamllint-setup )
+  :config
+  ;;  executable is python from https://github.com/adrienverge/yamllint
+  (setq flycheck-yaml-yamllint-executable "/Users/gcr/yamllint/env/bin/yamllint"))
+#+END_SRC
+
+** Other yaml support
+:PROPERTIES:
+:ID:       org_mark_2020-10-26T12-58-28+00-00_mini12.local:55CFB090-054E-4113-A1A3-602134C24F42
+:END:
+https://github.com/RadekMolenda/yaml-tomato to get the path from point

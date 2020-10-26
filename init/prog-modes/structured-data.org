@@ -51,3 +51,57 @@ This is the standard mode
 	   :after json
 	   :ensure t)
   #+end_src
+
+
+* YAML
+:PROPERTIES:
+:ID:       org_mark_2020-10-26T12-58-28+00-00_mini12.local:C1D50559-7C96-4DBB-83CB-456585037991
+:END:
+Setup From grettke Mode from https://github.com/yoshiki/yaml-mode
+#+NAME: org_mark_2020-10-26T12-58-28+00-00_mini12.local_7834085F-27FE-48FF-A1FC-BE8B8E52F59F
+#+BEGIN_SRC emacs-lisp
+(use-package yaml-mode
+  :ensure t
+  :config
+  (defun yaml-next-field ()
+    "Jump to next yaml field.
+
+URL: `https://stackoverflow.com/questions/12648388/emacs-yaml-editing'"
+    (interactive)
+    (search-forward-regexp ": *"))
+  (defun yaml-prev-field ()
+    "Jump to next yaml field.
+
+URL: `https://stackoverflow.com/questions/12648388/emacs-yaml-editing'"
+    (interactive)
+    (search-backward-regexp ": *"))
+  (defhydra help/hydra/yaml (:color blue
+                                    :hint nil)
+    "
+YAML: (q to quit)
+ _i_ indent line
+  _n_ narrow to block literal
+   _c_ fill paragraph
+"
+    ("i" yaml-indent-line)
+    ("n" yaml-narrow-to-block-literal)
+    ("c" yaml-fill-paragraph)
+    ("q" nil))
+  (defun help/yaml-mode-hook-fn ()
+    ;; (turn-off-auto-capitalize-mode)
+    (turn-off-auto-fill)
+    (setq flycheck-checker 'yaml-yamllint))
+  (add-hook 'yaml-mode-hook #'help/yaml-mode-hook-fn)
+  (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+  (define-key yaml-mode-map (kbd "<backspace>") nil)
+  (define-key yaml-mode-map (kbd "<backspace>") #'sp-backward-delete-char)
+  (define-key yaml-mode-map (kbd "A-j") #'yaml-next-field)
+  (define-key yaml-mode-map (kbd "A-k") #'yaml-prev-field)
+  (key-chord-define yaml-mode-map "hh" #'help/hydra/yaml/body)
+  (use-package flycheck-yamllint
+    :ensure t
+    :config
+    (with-eval-after-load "flycheck"
+      (add-hook 'flycheck-mode-hook 'flycheck-yamllint-setup))
+    (setq flycheck-yaml-yamllint-executable "/Users/gcr/yamllint/env/bin/yamllint")))
+#+END_SRC

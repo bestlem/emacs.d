@@ -491,6 +491,8 @@ However I can't use that for a send to buffer as the map from mode to function i
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:6E33F21B-8867-46F3-8346-5E54A6E9AAD9
 :END:
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_64A36B3D-104D-47BA-A2A1-91E1844F7121
+Well actually ediff only now - perhaps rename to vcs
+#+NAME: org_mark_2020-10-26T12-24-30+00-00_mini12.local_04381D8D-3A41-4E9C-8300-DF7E06217A65
 #+begin_src emacs-lisp
 (mwb-init-load "init/prog-modes/git")
 #+end_src
@@ -527,59 +529,12 @@ Really need to start from scratch
 #+end_src
 ** Structured data
 :PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:68308652-6F47-4337-B69A-5CCEAE8AE06E
+:ID:       org_mark_2020-10-26T12-24-30+00-00_mini12.local:E63521F7-F02B-4CD2-B453-050E715AC25B
 :END:
-Do inline
-*** XML
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:6E22A9D3-1EB0-4FD1-A3F6-53C488E929A1
-:END:
-This has been there for a long time (actually only after retirement I suppose I had XML-spy at work)
-Just a pretty print
-From http://blog.bookworm.at/2007/03/pretty-print-xml-with-emacs.html
- #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_2D695AD2-8485-4365-A27F-FF3E95FAB69B
- #+begin_src emacs-lisp
-(defun nxml-pretty-print-xml-region (begin end)
-  "Pretty format XML markup in region. You need to have nxml-mode
-http://www.emacswiki.org/cgi-bin/wiki/NxmlMode installed to do
-this.  The function inserts linebreaks to separate tags that have
-nothing but whitespace between them.  It then indents the markup
-by using nxml's indentation rules."
-  (interactive "r")
-  (save-excursion
-      (nxml-mode)
-      (goto-char begin)
-      (while (search-forward-regexp "\>[ \\t]*\<" nil t)
-        (backward-char) (insert "\n"))
-      (indent-region begin end))
-  (message "Ah, much better!"))
- #+end_src
-*** Json
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:BB5E4DA3-3168-4AA7-9B08-6B3E11930CB2
-:END:
-**** Editing
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:2D11F928-4739-4268-9A5B-91F6FEB2D9A6
-:END:
-This is the standard mode
-  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_61706197-9647-456A-9F2C-0A91722F017C
-  #+begin_src emacs-lisp
- (use-package json-mode
-   :ensure t
-   :mode "\\.json$")
-  #+end_src
-**** Visualisation
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:1F9A0E96-B7A9-45BC-BFC4-A1BD0B149E7A
-:END:
-	 See as a tree.
-     #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_15E789B8-CDC5-4AEF-97F8-40F5C631D5D8
-     #+begin_src emacs-lisp
-	 (use-package json-navigator
-	   :after json
-	   :ensure t)
-  #+end_src
+#+NAME: org_mark_2020-10-26T12-24-30+00-00_mini12.local_334547DD-FEB4-45C1-9EE2-97C2D93FADC6
+#+begin_src emacs-lisp
+(mwb-init-load "init/prog-modes/structured-data")
+#+end_src
 ** SQL
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:FA08DE52-A532-4D20-AB12-A3B358E3FC56

@@ -1,0 +1,53 @@
+#+TITLE Emacs configuration org structured data modes
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+
+* XML
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:6E22A9D3-1EB0-4FD1-A3F6-53C488E929A1
+:END:
+This has been there for a long time (actually only after retirement I suppose I had XML-spy at work)
+Just a pretty print
+From http://blog.bookworm.at/2007/03/pretty-print-xml-with-emacs.html
+ #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_2D695AD2-8485-4365-A27F-FF3E95FAB69B
+ #+begin_src emacs-lisp
+(defun nxml-pretty-print-xml-region (begin end)
+  "Pretty format XML markup in region. You need to have nxml-mode
+http://www.emacswiki.org/cgi-bin/wiki/NxmlMode installed to do
+this.  The function inserts linebreaks to separate tags that have
+nothing but whitespace between them.  It then indents the markup
+by using nxml's indentation rules."
+  (interactive "r")
+  (save-excursion
+      (nxml-mode)
+      (goto-char begin)
+      (while (search-forward-regexp "\>[ \\t]*\<" nil t)
+        (backward-char) (insert "\n"))
+      (indent-region begin end))
+  (message "Ah, much better!"))
+ #+end_src
+* Json
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:BB5E4DA3-3168-4AA7-9B08-6B3E11930CB2
+:END:
+** Editing
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:2D11F928-4739-4268-9A5B-91F6FEB2D9A6
+:END:
+This is the standard mode
+  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_61706197-9647-456A-9F2C-0A91722F017C
+  #+begin_src emacs-lisp
+ (use-package json-mode
+   :ensure t
+   :mode "\\.json$")
+  #+end_src
+** Visualisation
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:1F9A0E96-B7A9-45BC-BFC4-A1BD0B149E7A
+:END:
+	 See as a tree.
+     #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_15E789B8-CDC5-4AEF-97F8-40F5C631D5D8
+     #+begin_src emacs-lisp
+	 (use-package json-navigator
+	   :after json
+	   :ensure t)
+  #+end_src

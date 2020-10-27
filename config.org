@@ -343,11 +343,47 @@ Not much documentation So copy from the only 2 jwigeley and https://github.com/d
 :PROPERTIES:
 :ID:       org_mark_2020-10-25T21-37-40+00-00_mini12.local:A3A72481-AFA1-4481-94CA-E40E8D4BAA23
 :END:
-#+NAME: org_mark_2020-10-25T21-37-40+00-00_mini12.local_78512C27-74F8-49CE-96B1-2C70CEF33394
+#+NAME: org_mark_2020-10-27T17-11-46+00-00_mini12.local_70B8AC35-681E-4DCC-BB95-1D3FED32E2A7
 #+begin_src emacs-lisp
+(setq elhome-settings-file-regexp (rx-to-string '(seq any "settings.el" eol)))
+(defun mwb-init-customize-directory-files ()
+  (directory-files mwb-init-customize-directory t
+                   elhome-settings-file-regexp))
+
 (--map (load it)
-       (directory-files mwb-init-customize-directory t
-                        (rx-to-string '(seq any "settings.el" eol))))
+       (mwb-init-customize-directory-files))
+#+end_src
+*** Add dynamic customization.
+:PROPERTIES:
+:ID:       org_mark_2020-10-27T17-11-46+00-00_mini12.local:E45389E9-39EB-4242-9CA0-08690EE161DD
+:END:
+Create the file the use the prefix to get the rest
+#+NAME: org_mark_2020-10-27T17-11-46+00-00_mini12.local_FF7BF482-78EC-4294-8B9A-614BBF768E7D
+#+begin_src emacs-lisp :tangle no
+(defun elhome-dynamic-customizations-alist ()
+  "Return a list of (PATTERN, FILENAME) pairs that, when added to
+`initsplit-customizations-alist', treats all the *-settings.el
+files in `elhome-settings-directory' as initsplit customization
+files.
+
+A file with the name \"foobar-settings.el\" will store all the
+customizations whose name begins with \"foobar-\".  Note: depends
+on initsplit!"
+  (let* ((settings-files
+          (remove-if-not
+           (lambda (s) (string-match-p elhome-settings-file-regexp s))
+
+           (mwb-init-customize-directory-files)))
+
+         ;; sort by decreasing length allows org-settings.el and
+         ;; org-attach-settings.el to coexist peacefully --- the
+         ;; longer (thus more-specific) match will be made first
+         (sorted-files (sort settings-files
+                             (lambda (x y) (> (length x) (length y))))))
+    sorted-files
+    ))
+
+(add-to-list 'initsplit-dynamic-customizations-alist 'elhome-dynamic-customizations-alist)
 #+end_src
 ** Key bindings
 :PROPERTIES:

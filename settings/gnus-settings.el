@@ -4,10 +4,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(gnus-directory "~/Library/Preferences/Aquamacs Emacs/News")
+ '(gnus-dribble-directory "~/tmp")
  '(gnus-group-sort-function
-   (quote
-    (gnus-group-sort-by-rank))
-   t)
+   '(gnus-group-sort-by-rank))
  '(gnus-kill-save-kill-file t)
  '(gnus-score-mimic-keymap nil)
  '(gnus-server-browse-in-group-buffer t)

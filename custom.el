@@ -7,11 +7,6 @@
    [default default default italic underline success warning error])
  '(ansi-color-names-vector
    ["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue" "gray50"])
- '(aquamacs-additional-fontsets nil t)
- '(aquamacs-autoface-mode nil)
- '(aquamacs-customization-version-id 311 t)
- '(aquamacs-save-options-on-quit t)
- '(aquamacs-tool-bar-user-customization nil t)
  '(auto-fill-function nil t)
  '(auto-word-wrap-default-function nil)
  '(awesome-tray-mode-line-active-color "#0031a9")
@@ -54,10 +49,6 @@
    nil
    (fringe))
  '(global-hl-line-mode t)
- '(hardhat-basename-protected-regexps
-   '("~\\'" "\\.lock\\'" "\\.ix\\'" "\\`test\\.out\\'" "-autoloads\\.el\\'" "\\`Desktop\\.ini\\'" "\\`META\\.yml\\'" "\\`MYMETA\\.yml\\'" "\\`TAGS\\'" "\\`Thumbs\\.db\\'" "\\`\\.dropbox\\'" "\\`\\.dropbox\\.cache\\'" "\\`\\.emacs\\.desktop\\'" "\\`\\.emacs\\.desktop\\.lock\\'" "\\.orig\\'" "\\.rej\\'" "\\.el\\.gz$"))
- '(hardhat-fullpath-protected-regexps
-   '("~/\\.emacs\\.d/elpa/" "~/\\.cpan/" "~/\\.cabal/" "~/perl5/perlbrew/" "~/\\.npm/" "~/\\.virtualenv/" "~/\\.virthualenv/" "~/\\.rvm/" "/[._]build/" "/\\.bzr/" "/\\.coverage/" "/\\.git/" "/\\.hg/" "/\\.rspec/" "/\\.sass-cache/" "/\\.svn/" "/_MTN/" "/_darcs/" "/CVS/" "/pm_to_blib/" "/RCS/" "/SCCS/" "/blib/" "/test_output/" "~/\\.emacs\\.d/\\.cask/" "~/\\.cask/" "/Applications/" "~/Library/Preferences/Aquamacs Emacs/Packages" "~/src/ThirdParty/" "~/src/env/emacs\\.d/elpa/"))
  '(highlight-tail-colors
    '(("#aecf90" . 0)
      ("#c0efff" . 20)))
@@ -111,7 +102,8 @@
  '(initsplit-customizations-alist
    '(("\\`\\(gnus\\|nn\\|message\\|mail\\|mm-\\|smtp\\|send-mail\\|check-mail\\|spam\\|sc-\\)" "gnus-settings.el" nil t)
      ("\\`\\(jobhours-\\|org-\\|deft-\\|cfw:\\)" "org-settings.el" nil t)
-     ("\\`\\(aquamacs-\\)" "aquamacs-settings.el" nil nil)))
+     ("\\`\\(aquamacs-\\)" "aquamacs-settings.el" nil t)
+     ("\\`\\(hardhat-\\)" "hardhat-settings.el" nil t)))
  '(make-backup-files t)
  '(minibuffer-prompt-properties
    '(read-only t cursor-intangible t face minibuffer-prompt cursor-intangible t))
@@ -120,20 +112,6 @@
  '(ns-tool-bar-display-mode 'both t)
  '(ns-tool-bar-size-mode nil t)
  '(nxml-slash-auto-complete-flag t)
- '(org-babel-python-mode 'python-mode)
- '(org-bullets-bullet-list
-   '("⦿" "◉" "◎" "○" "●"))
- '(org-cycle-global-at-bob t)
- '(org-datetree-add-timestamp 'active t)
- '(org-hide-block-startup nil)
- '(org-log-done 'time)
- '(org-modules
-   '(org-crypt org-tempo org-id org-mouse))
- '(org-src-ask-before-returning-to-edit-buffer nil)
- '(org-src-window-setup 'current-window)
- '(org-todo-keywords
-   '((sequence "TODO" "|" "DONE" "LEAVE(@)")))
- '(org-yank-adjusted-subtrees t)
  '(package-selected-packages
    '(flycheck-yamllint yaml-mode toc-org lisp-extra-font-lock fira-code-mode paren-face flyspell-correct-popup company-prescient company-posframe which-key-posframe which-key-posframe-mode mac-key-mode hydra s dash use-package which-key racket-mode elmacro lispy rainbow-delimiters flycheck smartparens highlight-indent-guides nov treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ibuffer-vc projectile deadgrep ivy-prescient prescient counsel swiper ivy-rich ivy-hydra ivy yasnippet company helpful org smartparens-config all-the-icons major-mode-hydra eval-in-repl xr yasnippet-snippets outshine expand-region json-navigator mwim fish-mode sml-mode use-package-chords cmake-mode cask-mode eros macrostep org-indent validate hardhat beacon gitignore-mode gitconfig-mode manual use-package-hydra backup-each-save org-bullets ws-butlerz helm elisp-format comment-dwim-2 smex discover-my-major json-mode dired-toggle aggressive-indent gradle-mode groovy-imports groovy-mode ws-butler diminish key-chord))
  '(python-shell-interpreter "python")
@@ -181,9 +159,6 @@
  '(default
     ((t
       (:inherit nil :extend nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "Fira Code"))))
- '(aquamacs-variable-width
-   ((t
-     (:stipple nil :strike-through nil :underline nil :slant normal :weight normal :height 120 :width normal :family "Times New Roman"))))
  '(bold-italic
    ((t
      (:underline t :slant italic :weight bold :family "Menlo"))))
@@ -196,47 +171,6 @@
  '(italic
    ((t
      (:underline t :slant italic))))
- '(org-block
-   ((t
-     (:inherit shadow :extend t :background "lemon chiffon" :foreground "black" :family "Fira Code"))))
- '(org-block-begin-line
-   ((t
-     (:inherit org-meta-line :foreground "blue" :weight normal))))
- '(org-block-end-line
-   ((t
-     (:inherit org-block-begin-line :foreground "blue"))))
- '(org-document-title
-   ((t
-     (:inherit variable-pitch :weight regular :foreground "black" :font "Gill Sans" :height 2.0 :underline nil))))
- '(org-level-1
-   ((t
-     (:inherit variable-pitch :weight regular :foreground "black" :font "Gill Sans" :height 1.75))))
- '(org-level-2
-   ((t
-     (:inherit variable-pitch :weight regular :foreground "black" :font "Gill Sans" :height 1.5))))
- '(org-level-3
-   ((t
-     (:inherit variable-pitch :weight regular :foreground "black" :font "Gill Sans" :height 1.25))))
- '(org-level-4
-   ((t
-     (:inherit variable-pitch :weight regular :foreground "black" :font "Gill Sans" :height 1.1))))
- '(org-level-5
-   ((t
-     (:inherit variable-pitch :weight regular :foreground "black" :font "Gill Sans"))))
- '(org-level-6
-   ((t
-     (:inherit variable-pitch :weight regular :foreground "black" :font "Gill Sans"))))
- '(org-level-7
-   ((t
-     (:inherit variable-pitch :weight regular :foreground "black" :font "Gill Sans"))))
- '(org-level-8
-   ((t
-     (:inherit variable-pitch :weight regular :foreground "black" :font "Gill Sans"))))
- '(org-todo
-   ((t
-     (:background "#FFE6E4" :foreground "dark magenta" :box
-                  (:line-width 1 :color "#D8ABA7")
-                  :weight bold))))
  '(region
    ((t
      (:extend t :background "deep pink" :foreground "white" :weight bold))))

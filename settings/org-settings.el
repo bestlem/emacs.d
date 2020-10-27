@@ -3,27 +3,19 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-babel-python-mode
-   (quote python-mode))
+ '(org-babel-python-mode 'python-mode)
  '(org-bullets-bullet-list
-   (quote
-    ("⦿" "◉" "◎" "○" "●")))
+   '("⦿" "◉" "◎" "○" "●"))
  '(org-cycle-global-at-bob t)
- '(org-datetree-add-timestamp
-   (quote active)
-   t)
+ '(org-datetree-add-timestamp 'active t)
  '(org-hide-block-startup nil)
- '(org-log-done
-   (quote time))
+ '(org-log-done 'time)
  '(org-modules
-   (quote
-    (org-crypt org-tempo org-id org-mouse)))
+   '(org-crypt org-tempo org-id org-mouse))
  '(org-src-ask-before-returning-to-edit-buffer nil)
- '(org-src-window-setup
-   (quote current-window))
+ '(org-src-window-setup 'current-window)
  '(org-todo-keywords
-   (quote
-    ((sequence "TODO" "|" "DONE" "LEAVE(@)"))))
+   '((sequence "TODO" "|" "DONE" "LEAVE(@)")))
  '(org-yank-adjusted-subtrees t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

@@ -96,17 +96,6 @@ What type of Emacs and system do we have
 (defconst *macport* (boundp 'mac-carbon-version-string)
   "True iff we are in Mitsuharu Yamamoto's port")
 #+end_src
-** Customisation file
-:PROPERTIES:
-:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:A28603F3-9100-4C41-855A-5D202E7ACFE3
-:END:
- Yes Aquamacs does this but in a directory with a space. So put with code so can be under source code control and user-emacs-directory is not.
- Needs to have initsplit added so can seperate out customization files.
- #+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_7793EC73-CA93-4000-A86E-57B709FF37CE
- #+begin_src emacs-lisp
- (setq custom-file (mwb-user-emacs-file "custom.el"))
- (load custom-file 'noerror)
- #+end_src
 ** Packaging
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:9ACB4F21-BFAB-4D2F-A271-1D8D9B9625FB
@@ -313,6 +302,53 @@ Note that this is making the addition explicit so for example the aquamacs path 
       (mwb-insert-before-element :load-path :mwb-load-path  use-package-keywords))
 #+end_src
 
+** Customisation file
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:A28603F3-9100-4C41-855A-5D202E7ACFE3
+:END:
+ Yes Aquamacs does this but in a directory with a space. So put with code so can be under source code control and user-emacs-directory is not.
+ Needs to have initsplit added so can seperate out customization files.
+
+*** Set the customise Directory
+:PROPERTIES:
+:ID:       org_mark_2020-10-26T12-58-28+00-00_mini12.local:D165DFFB-4E7B-4091-AE48-8C856E1EEBBE
+:END:
+#+NAME: org_mark_2020-10-26T12-58-28+00-00_mini12.local_5C04392C-E9A6-4460-A6F8-EA73352395E5
+#+begin_src emacs-lisp
+(setq mwb-init-customize-directory (mwb-user-emacs-file "settings/"))
+#+end_src
+*** Initsplit
+:PROPERTIES:
+:ID:       org_mark_2020-10-26T12-58-28+00-00_mini12.local:580A4C5E-69EE-4AA7-922A-626A5290FDA9
+:END:
+Not much documentation So copy from the only 2 jwigeley and https://github.com/dabrahams/dotemacs
+#+NAME: org_mark_2020-10-26T12-58-28+00-00_mini12.local_8B3133BA-A6E1-4CC7-B9B3-A4D300FB58CB
+#+begin_src emacs-lisp
+(use-package initsplit
+  :ensure t
+  :init
+  (setq initsplit-pretty-print t)
+  (setq initsplit-default-directory mwb-init-customize-directory))
+#+end_src
+*** Load the main custom file
+:PROPERTIES:
+:ID:       org_mark_2020-10-26T12-58-28+00-00_mini12.local:A6265F12-4BAF-49FD-9576-6F8734A5EF50
+:END:
+ #+NAME: org_mark_2020-10-26T12-58-28+00-00_mini12.local_4193D052-7CCE-4F3E-A98F-7D958AB4E692
+ #+begin_src emacs-lisp
+ (setq custom-file (mwb-user-emacs-file "custom.el"))
+ (load custom-file 'noerror)
+ #+end_src
+*** Load the others
+:PROPERTIES:
+:ID:       org_mark_2020-10-25T21-37-40+00-00_mini12.local:A3A72481-AFA1-4481-94CA-E40E8D4BAA23
+:END:
+#+NAME: org_mark_2020-10-25T21-37-40+00-00_mini12.local_78512C27-74F8-49CE-96B1-2C70CEF33394
+#+begin_src emacs-lisp
+(--map (load it)
+       (directory-files mwb-init-customize-directory t
+                        (rx-to-string '(seq any "settings.el" eol))))
+#+end_src
 ** Key bindings
 :PROPERTIES:
 :ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:0EFA9EE3-5983-433A-854A-8A72FEB39FFC

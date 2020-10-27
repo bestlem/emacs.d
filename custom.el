@@ -60,16 +60,6 @@
    nil
    (fringe))
  '(global-hl-line-mode t)
- '(gnus-directory "~/Library/Preferences/Aquamacs Emacs/News")
- '(gnus-group-sort-function
-   (quote
-    (gnus-group-sort-by-rank))
-   t)
- '(gnus-kill-save-kill-file t)
- '(gnus-score-mimic-keymap nil)
- '(gnus-server-browse-in-group-buffer t)
- '(gnus-show-all-headers nil)
- '(gnus-verbose 10)
  '(hardhat-basename-protected-regexps
    (quote
     ("~\\'" "\\.lock\\'" "\\.ix\\'" "\\`test\\.out\\'" "-autoloads\\.el\\'" "\\`Desktop\\.ini\\'" "\\`META\\.yml\\'" "\\`MYMETA\\.yml\\'" "\\`TAGS\\'" "\\`Thumbs\\.db\\'" "\\`\\.dropbox\\'" "\\`\\.dropbox\\.cache\\'" "\\`\\.emacs\\.desktop\\'" "\\`\\.emacs\\.desktop\\.lock\\'" "\\.orig\\'" "\\.rej\\'" "\\.el\\.gz$")))
@@ -132,7 +122,10 @@
    (quote
     (help-mode helpful-mode apropos-mode Info-mode Info-edit-mode)))
  '(indent-tabs-mode nil)
- '(mail-setup-with-from t)
+ '(initsplit-customizations-alist
+   (quote
+    (("\\`\\(gnus\\|nn\\|message\\|mail\\|mm-\\|smtp\\|send-mail\\|check-mail\\|spam\\|sc-\\)" "gnus-settings.el" nil t)
+     ("\\`\\(jobhours-\\|org-\\|deft-\\|cfw:\\)" "org-settings.el" nil t))))
  '(make-backup-files t)
  '(minibuffer-prompt-properties
    (quote
@@ -145,28 +138,6 @@
    t)
  '(ns-tool-bar-size-mode nil t)
  '(nxml-slash-auto-complete-flag t)
- '(org-babel-python-mode
-   (quote python-mode))
- '(org-bullets-bullet-list
-   (quote
-    ("⦿" "◉" "◎" "○" "●")))
- '(org-cycle-global-at-bob t)
- '(org-datetree-add-timestamp
-   (quote active)
-   t)
- '(org-hide-block-startup nil)
- '(org-log-done
-   (quote time))
- '(org-modules
-   (quote
-    (org-crypt org-tempo org-id org-mouse)))
- '(org-src-ask-before-returning-to-edit-buffer nil)
- '(org-src-window-setup
-   (quote current-window))
- '(org-todo-keywords
-   (quote
-    ((sequence "TODO" "|" "DONE" "LEAVE(@)"))))
- '(org-yank-adjusted-subtrees t)
  '(package-selected-packages
    (quote
     (flycheck-yamllint yaml-mode toc-org lisp-extra-font-lock fira-code-mode paren-face flyspell-correct-popup company-prescient company-posframe which-key-posframe which-key-posframe-mode mac-key-mode hydra s dash use-package which-key racket-mode elmacro lispy rainbow-delimiters flycheck smartparens highlight-indent-guides nov treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ibuffer-vc projectile deadgrep ivy-prescient prescient counsel swiper ivy-rich ivy-hydra ivy yasnippet company helpful org smartparens-config all-the-icons major-mode-hydra eval-in-repl xr yasnippet-snippets outshine expand-region json-navigator mwim fish-mode sml-mode use-package-chords cmake-mode cask-mode eros macrostep org-indent validate hardhat beacon gitignore-mode gitconfig-mode manual use-package-hydra backup-each-save org-bullets ws-butlerz helm elisp-format comment-dwim-2 smex discover-my-major json-mode dired-toggle aggressive-indent gradle-mode groovy-imports groovy-mode ws-butler diminish key-chord)))
@@ -177,6 +148,8 @@
            (quote before-save-hook)
            (quote time-stamp))
      (require-final-newline . t))))
+ '(tabbar-mode t nil
+               (tabbar))
  '(text-mode-hook
    (quote
     (set-word-wrap)))
@@ -234,47 +207,6 @@
  '(italic
    ((t
      (:underline t :slant italic))))
- '(org-block
-   ((t
-     (:inherit shadow :extend t :background "lemon chiffon" :foreground "black" :family "Fira Code"))))
- '(org-block-begin-line
-   ((t
-     (:inherit org-meta-line :foreground "blue" :weight normal))))
- '(org-block-end-line
-   ((t
-     (:inherit org-block-begin-line :foreground "blue"))))
- '(org-document-title
-   ((t
-     (:inherit variable-pitch :weight regular :foreground "black" :font "Gill Sans" :height 2.0 :underline nil))))
- '(org-level-1
-   ((t
-     (:inherit variable-pitch :weight regular :foreground "black" :font "Gill Sans" :height 1.75))))
- '(org-level-2
-   ((t
-     (:inherit variable-pitch :weight regular :foreground "black" :font "Gill Sans" :height 1.5))))
- '(org-level-3
-   ((t
-     (:inherit variable-pitch :weight regular :foreground "black" :font "Gill Sans" :height 1.25))))
- '(org-level-4
-   ((t
-     (:inherit variable-pitch :weight regular :foreground "black" :font "Gill Sans" :height 1.1))))
- '(org-level-5
-   ((t
-     (:inherit variable-pitch :weight regular :foreground "black" :font "Gill Sans"))))
- '(org-level-6
-   ((t
-     (:inherit variable-pitch :weight regular :foreground "black" :font "Gill Sans"))))
- '(org-level-7
-   ((t
-     (:inherit variable-pitch :weight regular :foreground "black" :font "Gill Sans"))))
- '(org-level-8
-   ((t
-     (:inherit variable-pitch :weight regular :foreground "black" :font "Gill Sans"))))
- '(org-todo
-   ((t
-     (:background "#FFE6E4" :foreground "dark magenta" :box
-                  (:line-width 1 :color "#D8ABA7")
-                  :weight bold))))
  '(region
    ((t
      (:extend t :background "deep pink" :foreground "white" :weight bold))))

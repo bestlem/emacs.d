@@ -448,7 +448,8 @@ I don't want to confirm https://emacs.stackexchange.com/a/10349/9874 The key bin
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:5AA14D72-6BE5-4361-B619-AA006DFD2D32
 :END:
-midnight-mode purges buffers which haven’t been displayed in 3 days. We configure the period so that the cleanup happens every 2 hours (7200 seconds).
+midnight-mode purges buffers which haven’t been displayed in 3 days.
+
 #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_06A63EF4-FFB6-4C44-BDC8-23241BDE625C
 #+begin_src emacs-lisp
 (use-package midnight
@@ -460,7 +461,9 @@ midnight-mode purges buffers which haven’t been displayed in 3 days. We config
                  (rx-to-string `(seq line-start "*" ,str " "))))
   (add-to-clean-buffer-regex "deadgrep")
   (add-to-clean-buffer-regex "helpful")
-  (midnight-mode 1))
+  (midnight-mode 1)
+  :init (add-hook 'midnight-hook  'garbage-collect 99) ;; at end
+  )
 #+end_src
 * Minibuffer
 :PROPERTIES:

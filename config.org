@@ -324,6 +324,9 @@ Note that this is making the addition explicit so for example the aquamacs path 
 Not much documentation So copy from the only 2 jwigeley and https://github.com/dabrahams/dotemacs
 #+NAME: org_mark_2020-10-26T12-58-28+00-00_mini12.local_8B3133BA-A6E1-4CC7-B9B3-A4D300FB58CB
 #+begin_src emacs-lisp
+(use-package cus-edit
+  ;; aquamacs has already done this
+  :demand)
 (use-package initsplit
   :mwb-load-path "site-lisp"
   :after cus-edit

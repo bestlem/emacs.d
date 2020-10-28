@@ -329,7 +329,7 @@ As this is now ~/.emacs.d/init.el and not in ~/Library/Preferences Emacs sees th
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:20E9D7CA-52FB-4C0D-94B7-380665846841
 :END:
 	 #+begin_src emacs-lisp
-(setq init-file-debug nil)
+(setq init-file-debug t)
 	 #+end_src
 
 ** Code to do loading

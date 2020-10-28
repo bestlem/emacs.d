@@ -29,7 +29,7 @@
 ;; org_mark_2020-01-23T20-40-42+00-00_mini12_B623E658-A6AA-46DF-AD9C-6EAC3BDC1BEE ends here
 
 ;; [[file:init.org::*Debug flag][Debug flag:1]]
-(setq init-file-debug nil)
+(setq init-file-debug t)
 ;; Debug flag:1 ends here
 
 ;; [[file:init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_315EE687-FC28-4D41-810D-4FF19AA66CD4][org_mark_2020-01-23T20-40-42+00-00_mini12_315EE687-FC28-4D41-810D-4FF19AA66CD4]]

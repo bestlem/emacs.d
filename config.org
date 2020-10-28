@@ -342,19 +342,32 @@ Not much documentation So copy from the only 2 jwigeley and https://github.com/d
  (setq custom-file (mwb-user-emacs-file "custom.el"))
  (load custom-file 'noerror)
  #+end_src
+*** Get the regexp for files in settings
+:PROPERTIES:
+:ID:       org_mark_2020-10-28T14-09-54+00-00_mini12.local:31706694-3B07-43B3-9257-579C34E14655
+:END:
+Not we want the prefix e.g. in org-settings.el to be ably to extract org
+#+NAME: org_mark_2020-10-28T14-09-54+00-00_mini12.local_FC80650B-1920-4585-8114-B5E1E8F57945
+#+begin_src emacs-lisp
+(setq elhome-settings-file-regexp
+      (rx-to-string '(seq bos
+                          (group
+                           (one-or-more nonl))
+                          "-settings.el"
+                          eos)))
+#+end_src
 *** Load the others
 :PROPERTIES:
 :ID:       org_mark_2020-10-25T21-37-40+00-00_mini12.local:A3A72481-AFA1-4481-94CA-E40E8D4BAA23
 :END:
 #+NAME: org_mark_2020-10-27T17-11-46+00-00_mini12.local_70B8AC35-681E-4DCC-BB95-1D3FED32E2A7
 #+begin_src emacs-lisp
-(setq elhome-settings-file-regexp (rx-to-string '(seq any "settings.el" eol)))
-(defun mwb-init-customize-directory-files ()
-  (directory-files mwb-init-customize-directory t
+(defun mwb-init-customize-directory-files (&optional fullpath)
+  (directory-files mwb-init-customize-directory fullpath
                    elhome-settings-file-regexp))
 
-(--map (load it)
-       (mwb-init-customize-directory-files))
+(--map (load (expand-file-name it ))
+       (mwb-init-customize-directory-files "fullpath"))
 #+end_src
 *** Add dynamic customization.
 :PROPERTIES:
@@ -362,7 +375,7 @@ Not much documentation So copy from the only 2 jwigeley and https://github.com/d
 :END:
 Create the file the use the prefix to get the rest
 #+NAME: org_mark_2020-10-27T17-11-46+00-00_mini12.local_FF7BF482-78EC-4294-8B9A-614BBF768E7D
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 (defun elhome-dynamic-customizations-alist ()
   "Return a list of (PATTERN, FILENAME) pairs that, when added to
 `initsplit-customizations-alist', treats all the *-settings.el
@@ -383,10 +396,17 @@ on initsplit!"
          ;; longer (thus more-specific) match will be made first
          (sorted-files (sort settings-files
                              (lambda (x y) (> (length x) (length y))))))
-    sorted-files
-    ))
+    ;; Add elements to the effective customizations alist used by
+    ;; the advice `initsplit-custom-save-all'.
+    (mapcar (lambda (f)
+              `(,(progn (string-match elhome-settings-file-regexp f)
+                        (concat "\\`" (regexp-quote (match-string 1 f)) "-"))
+                ,(expand-file-name f mwb-init-customize-directory) nil nil))
+            sorted-files)))
 
 (add-to-list 'initsplit-dynamic-customizations-alist 'elhome-dynamic-customizations-alist)
+
+;; (elhome-dynamic-customizations-alist)
 #+end_src
 ** Key bindings
 :PROPERTIES:

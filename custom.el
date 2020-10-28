@@ -58,12 +58,6 @@
    nil
    (fringe))
  '(global-hl-line-mode t)
- '(hardhat-basename-protected-regexps
-   (quote
-    ("~\\'" "\\.lock\\'" "\\.ix\\'" "\\`test\\.out\\'" "-autoloads\\.el\\'" "\\`Desktop\\.ini\\'" "\\`META\\.yml\\'" "\\`MYMETA\\.yml\\'" "\\`TAGS\\'" "\\`Thumbs\\.db\\'" "\\`\\.dropbox\\'" "\\`\\.dropbox\\.cache\\'" "\\`\\.emacs\\.desktop\\'" "\\`\\.emacs\\.desktop\\.lock\\'" "\\.orig\\'" "\\.rej\\'" "\\.el\\.gz$")))
- '(hardhat-fullpath-protected-regexps
-   (quote
-    ("~/\\.emacs\\.d/elpa/" "~/\\.cpan/" "~/\\.cabal/" "~/perl5/perlbrew/" "~/\\.npm/" "~/\\.virtualenv/" "~/\\.virthualenv/" "~/\\.rvm/" "/[._]build/" "/\\.bzr/" "/\\.coverage/" "/\\.git/" "/\\.hg/" "/\\.rspec/" "/\\.sass-cache/" "/\\.svn/" "/_MTN/" "/_darcs/" "/CVS/" "/pm_to_blib/" "/RCS/" "/SCCS/" "/blib/" "/test_output/" "~/\\.emacs\\.d/\\.cask/" "~/\\.cask/" "/Applications/" "~/Library/Preferences/Aquamacs Emacs/Packages" "~/src/ThirdParty/" "~/src/env/emacs\\.d/elpa/")))
  '(highlight-tail-colors
    (quote
     (("#aecf90" . 0)
@@ -88,38 +82,6 @@
      ("XXX+" . "#972500")
      ("REVIEW" . "#005a5f")
      ("DEPRECATED" . "#201f55"))))
- '(ibuffer-expert t)
- '(ibuffer-fontification-alist
-   (quote
-    ((5
-      (and buffer-file-name
-           (buffer-modified-p))
-      font-lock-warning-face)
-     (10 buffer-read-only font-lock-string-face)
-     (15
-      (and buffer-file-name
-           (string-match ibuffer-compressed-file-name-regexp buffer-file-name))
-      font-lock-doc-face)
-     (25
-      (and
-       (string-match "^ "
-                     (buffer-name))
-       (null buffer-file-name))
-      italic)
-     (35
-      (derived-mode-p
-       (quote dired-mode))
-      font-lock-function-name-face)
-     (40
-      (and
-       (boundp
-        (quote emacs-lock-mode))
-       emacs-lock-mode)
-      ibuffer-locked-buffer))))
- '(ibuffer-help-buffer-modes
-   (quote
-    (help-mode helpful-mode apropos-mode Info-mode Info-edit-mode)))
- '(ibuffer-old-time 24)
  '(indent-tabs-mode nil)
  '(initsplit-customizations-alist
    (quote

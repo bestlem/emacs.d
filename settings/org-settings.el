@@ -3,6 +3,26 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(hl-todo-keyword-faces
+   (quote
+    (("HOLD" . "#70480f")
+     ("TODO" . "#721045")
+     ("NEXT" . "#5317ac")
+     ("THEM" . "#8f0075")
+     ("PROG" . "#00538b")
+     ("OKAY" . "#30517f")
+     ("DONT" . "#315b00")
+     ("FAIL" . "#a60000")
+     ("BUG" . "#a60000")
+     ("DONE" . "#005e00")
+     ("NOTE" . "#863927")
+     ("KLUDGE" . "#813e00")
+     ("HACK" . "#813e00")
+     ("TEMP" . "#5f0000")
+     ("FIXME" . "#a0132f")
+     ("XXX+" . "#972500")
+     ("REVIEW" . "#005a5f")
+     ("DEPRECATED" . "#201f55"))))
  '(org-babel-python-mode
    (quote python-mode))
  '(org-bullets-bullet-list

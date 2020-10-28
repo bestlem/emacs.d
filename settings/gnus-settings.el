@@ -6,8 +6,7 @@
  '(gnus-directory "~/Library/Preferences/Aquamacs Emacs/News")
  '(gnus-dribble-directory "~/tmp")
  '(gnus-group-sort-function
-   (quote
-    (gnus-group-sort-by-rank))
+   (quote gnus-group-sort-by-rank)
    t)
  '(gnus-kill-save-kill-file t)
  '(gnus-score-mimic-keymap nil)

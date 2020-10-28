@@ -377,6 +377,7 @@ Not we want the prefix e.g. in org-settings.el to be ably to extract org
 :ID:       org_mark_2020-10-27T17-11-46+00-00_mini12.local:E45389E9-39EB-4242-9CA0-08690EE161DD
 :END:
 Create the file the use the prefix to get the rest
+Note you have to actually save something to move to the file. Best load saved customisations and then save the page - or if small the just its page.
 #+NAME: org_mark_2020-10-27T17-11-46+00-00_mini12.local_FF7BF482-78EC-4294-8B9A-614BBF768E7D
 #+begin_src emacs-lisp
 (defun elhome-dynamic-customizations-alist ()

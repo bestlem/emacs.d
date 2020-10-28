@@ -29,15 +29,6 @@
  '(fill-nobreak-predicate
    (quote
     (fill-single-char-nobreak-p)))
- '(flymake-error-bitmap
-   (quote
-    (flymake-double-exclamation-mark modus-theme-fringe-red)))
- '(flymake-note-bitmap
-   (quote
-    (exclamation-mark modus-theme-fringe-cyan)))
- '(flymake-warning-bitmap
-   (quote
-    (exclamation-mark modus-theme-fringe-yellow)))
  '(fringe-indicator-alist
    (quote
     ((continuation nil nil)
@@ -62,48 +53,18 @@
    (quote
     (("#aecf90" . 0)
      ("#c0efff" . 20))))
- '(hl-todo-keyword-faces
-   (quote
-    (("HOLD" . "#70480f")
-     ("TODO" . "#721045")
-     ("NEXT" . "#5317ac")
-     ("THEM" . "#8f0075")
-     ("PROG" . "#00538b")
-     ("OKAY" . "#30517f")
-     ("DONT" . "#315b00")
-     ("FAIL" . "#a60000")
-     ("BUG" . "#a60000")
-     ("DONE" . "#005e00")
-     ("NOTE" . "#863927")
-     ("KLUDGE" . "#813e00")
-     ("HACK" . "#813e00")
-     ("TEMP" . "#5f0000")
-     ("FIXME" . "#a0132f")
-     ("XXX+" . "#972500")
-     ("REVIEW" . "#005a5f")
-     ("DEPRECATED" . "#201f55"))))
  '(indent-tabs-mode nil)
  '(initsplit-customizations-alist
    (quote
     (("\\`\\(gnus\\|nn\\|message\\|mail\\|mm-\\|smtp\\|send-mail\\|check-mail\\|spam\\|sc-\\)" "gnus-settings.el" nil t)
-     ("\\`\\(jobhours-\\|org-\\|deft-\\|cfw:\\)" "org-settings.el" nil t)
-     ("\\`\\(aquamacs-\\)" "aquamacs-settings.el" nil t))))
+     ("\\`\\(org-\\|hl-todo-\\|deft-\\|cfw:\\)" "org-settings.el" nil t)
+     ("\\`\\(aquamacs-\\)" "aquamacs-settings.el" nil t)
+     ("\\`\\(flymake-\\|flycheck-\\)" "flymake-settings.el" nil t))))
  '(make-backup-files t)
  '(minibuffer-prompt-properties
    (quote
     (read-only t cursor-intangible t face minibuffer-prompt cursor-intangible t)))
- '(ns-right-alternate-modifier nil)
- '(ns-right-command-modifier
-   (quote super))
- '(ns-tool-bar-display-mode
-   (quote both)
-   t)
- '(ns-tool-bar-size-mode nil t)
  '(nxml-slash-auto-complete-flag t)
- '(package-selected-packages
-   (quote
-    (flycheck-yamllint yaml-mode toc-org lisp-extra-font-lock fira-code-mode paren-face flyspell-correct-popup company-prescient company-posframe which-key-posframe which-key-posframe-mode mac-key-mode hydra s dash use-package which-key racket-mode elmacro lispy rainbow-delimiters flycheck smartparens highlight-indent-guides nov treemacs-magit treemacs-icons-dired treemacs-projectile treemacs ibuffer-vc projectile deadgrep ivy-prescient prescient counsel swiper ivy-rich ivy-hydra ivy yasnippet company helpful org smartparens-config all-the-icons major-mode-hydra eval-in-repl xr yasnippet-snippets outshine expand-region json-navigator mwim fish-mode sml-mode use-package-chords cmake-mode cask-mode eros macrostep org-indent validate hardhat beacon gitignore-mode gitconfig-mode manual use-package-hydra backup-each-save org-bullets ws-butlerz helm elisp-format comment-dwim-2 smex discover-my-major json-mode dired-toggle aggressive-indent gradle-mode groovy-imports groovy-mode ws-butler diminish key-chord)))
- '(python-shell-interpreter "python")
  '(safe-local-variable-values
    (quote
     ((eval add-hook
@@ -116,29 +77,6 @@
     (set-word-wrap)))
  '(tool-bar-mode nil)
  '(undo-limit 800000)
- '(vc-annotate-background nil)
- '(vc-annotate-background-mode nil)
- '(vc-annotate-color-map
-   (quote
-    ((20 . "#a60000")
-     (40 . "#721045")
-     (60 . "#8f0075")
-     (80 . "#972500")
-     (100 . "#813e00")
-     (120 . "#70480f")
-     (140 . "#5d3026")
-     (160 . "#184034")
-     (180 . "#005e00")
-     (200 . "#315b00")
-     (220 . "#005a5f")
-     (240 . "#30517f")
-     (260 . "#00538b")
-     (280 . "#093060")
-     (300 . "#0031a9")
-     (320 . "#2544bb")
-     (340 . "#0000c0")
-     (360 . "#5317ac"))))
- '(vc-annotate-very-old-color nil)
  '(visual-line-mode t t)
  '(word-wrap t)
  '(xterm-color-names

@@ -11,8 +11,7 @@
  '(auto-word-wrap-default-function nil)
  '(awesome-tray-mode-line-active-color "#0031a9")
  '(awesome-tray-mode-line-inactive-color "#d7d7d7")
- '(backup-directory-alist
-   '(("." . ".~")))
+ '(backup-directory-alist '(("." . ".~")))
  '(canlock-password "8ac28fef8ff386f996bee4f20f8b3c40bd1829d4")
  '(comment-auto-fill-only-comments t)
  '(cua-enable-cua-keys nil)
@@ -22,15 +21,10 @@
    '("d4a89e8d54783f8d45c2c68cc6641ea2427f563405fde1f083191b10746fe59f" default))
  '(delete-old-versions "keep them all")
  '(desktop-file-name-format 'tilde)
- '(explicit-shell-file-name "/opt/local/bin/fish")
- '(fill-nobreak-predicate
-   '(fill-single-char-nobreak-p))
- '(flymake-error-bitmap
-   '(flymake-double-exclamation-mark modus-theme-fringe-red))
- '(flymake-note-bitmap
-   '(exclamation-mark modus-theme-fringe-cyan))
- '(flymake-warning-bitmap
-   '(exclamation-mark modus-theme-fringe-yellow))
+ '(fill-nobreak-predicate '(fill-single-char-nobreak-p))
+ '(flymake-error-bitmap '(flymake-double-exclamation-mark modus-theme-fringe-red))
+ '(flymake-note-bitmap '(exclamation-mark modus-theme-fringe-cyan))
+ '(flymake-warning-bitmap '(exclamation-mark modus-theme-fringe-yellow))
  '(fringe-indicator-alist
    '((continuation nil nil)
      (truncation left-truncation right-truncation)
@@ -42,16 +36,14 @@
      (bottom bottom-left-angle bottom-right-angle top-right-angle top-left-angle)
      (top-bottom left-bracket right-bracket top-right-angle top-left-angle)
      (empty-line . empty-line)
-     (unknown . question-mark))
-   t)
- '(fringe-mode
-   '(16 . 0)
-   nil
-   (fringe))
+     (unknown . question-mark)) t)
+ '(fringe-mode '(16 . 0) nil (fringe))
  '(global-hl-line-mode t)
- '(highlight-tail-colors
-   '(("#aecf90" . 0)
-     ("#c0efff" . 20)))
+ '(hardhat-basename-protected-regexps
+   '("~\\'" "\\.lock\\'" "\\.ix\\'" "\\`test\\.out\\'" "-autoloads\\.el\\'" "\\`Desktop\\.ini\\'" "\\`META\\.yml\\'" "\\`MYMETA\\.yml\\'" "\\`TAGS\\'" "\\`Thumbs\\.db\\'" "\\`\\.dropbox\\'" "\\`\\.dropbox\\.cache\\'" "\\`\\.emacs\\.desktop\\'" "\\`\\.emacs\\.desktop\\.lock\\'" "\\.orig\\'" "\\.rej\\'" "\\.el\\.gz$"))
+ '(hardhat-fullpath-protected-regexps
+   '("~/\\.emacs\\.d/elpa/" "~/\\.cpan/" "~/\\.cabal/" "~/perl5/perlbrew/" "~/\\.npm/" "~/\\.virtualenv/" "~/\\.virthualenv/" "~/\\.rvm/" "/[._]build/" "/\\.bzr/" "/\\.coverage/" "/\\.git/" "/\\.hg/" "/\\.rspec/" "/\\.sass-cache/" "/\\.svn/" "/_MTN/" "/_darcs/" "/CVS/" "/pm_to_blib/" "/RCS/" "/SCCS/" "/blib/" "/test_output/" "~/\\.emacs\\.d/\\.cask/" "~/\\.cask/" "/Applications/" "~/Library/Preferences/Aquamacs Emacs/Packages" "~/src/ThirdParty/" "~/src/env/emacs\\.d/elpa/"))
+ '(highlight-tail-colors '(("#aecf90" . 0) ("#c0efff" . 20)))
  '(hl-todo-keyword-faces
    '(("HOLD" . "#70480f")
      ("TODO" . "#721045")
@@ -98,12 +90,12 @@
       ibuffer-locked-buffer)))
  '(ibuffer-help-buffer-modes
    '(help-mode helpful-mode apropos-mode Info-mode Info-edit-mode))
+ '(ibuffer-old-time 48)
  '(indent-tabs-mode nil)
  '(initsplit-customizations-alist
    '(("\\`\\(gnus\\|nn\\|message\\|mail\\|mm-\\|smtp\\|send-mail\\|check-mail\\|spam\\|sc-\\)" "gnus-settings.el" nil t)
      ("\\`\\(jobhours-\\|org-\\|deft-\\|cfw:\\)" "org-settings.el" nil t)
-     ("\\`\\(aquamacs-\\)" "aquamacs-settings.el" nil t)
-     ("\\`\\(hardhat-\\)" "hardhat-settings.el" nil t)))
+     ("\\`\\(aquamacs-\\)" "aquamacs-settings.el" nil t)))
  '(make-backup-files t)
  '(minibuffer-prompt-properties
    '(read-only t cursor-intangible t face minibuffer-prompt cursor-intangible t))
@@ -119,8 +111,7 @@
    '((eval add-hook 'before-save-hook 'time-stamp)
      (require-final-newline . t)))
  '(show-paren-mode t)
- '(text-mode-hook
-   '(set-word-wrap))
+ '(text-mode-hook '(set-word-wrap))
  '(tool-bar-mode nil)
  '(undo-limit 800000)
  '(vc-annotate-background nil)
@@ -156,24 +147,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default
-    ((t
-      (:inherit nil :extend nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "Fira Code"))))
- '(bold-italic
-   ((t
-     (:underline t :slant italic :weight bold :family "Menlo"))))
- '(echo-area
-   ((t
-     (:inherit default :strike-through nil :underline nil :slant normal :weight normal :width normal))))
- '(highlight
-   ((t
-     (:background "black" :foreground "white"))))
- '(italic
-   ((t
-     (:underline t :slant italic))))
- '(region
-   ((t
-     (:extend t :background "deep pink" :foreground "white" :weight bold))))
- '(variable-pitch
-   ((t
-     (:weight normal :height 1.2 :family "Times New Roman")))))
+ '(default ((t (:inherit nil :extend nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "Fira Code"))))
+ '(bold-italic ((t (:underline t :slant italic :weight bold :family "Menlo"))))
+ '(echo-area ((t (:inherit default :strike-through nil :underline nil :slant normal :weight normal :width normal))))
+ '(highlight ((t (:background "black" :foreground "white"))))
+ '(italic ((t (:underline t :slant italic))))
+ '(region ((t (:extend t :background "deep pink" :foreground "white" :weight bold))))
+ '(variable-pitch ((t (:weight normal :height 1.2 :family "Times New Roman")))))

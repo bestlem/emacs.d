@@ -325,10 +325,13 @@ Not much documentation So copy from the only 2 jwigeley and https://github.com/d
 #+NAME: org_mark_2020-10-26T12-58-28+00-00_mini12.local_8B3133BA-A6E1-4CC7-B9B3-A4D300FB58CB
 #+begin_src emacs-lisp
 (use-package initsplit
-  :ensure t
+  :mwb-load-path "site-lisp"
+  :after cus-edit
   :init
   (setq initsplit-pretty-print t)
-  (setq initsplit-default-directory mwb-init-customize-directory))
+  (setq initsplit-default-directory mwb-init-customize-directory)
+  :config
+  (message "in initsplit config"))
 #+end_src
 *** Load the main custom file
 :PROPERTIES:

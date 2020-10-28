@@ -4,7 +4,7 @@
 
 Emacs lisp specific extras
 
-Note all loaded immediately as n could be called anytime.
+Note all loaded immediately as could be called anytime.
 
 * Hydra
 :PROPERTIES:
@@ -89,10 +89,146 @@ and the hydra is from https://sriramkswamy.github.io/dotemacs/ . Note it expands
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:89E63DE0-5A33-4D24-B08B-F0957A1D5311
 :END:
-	Seen but not used yet [[https://github.com/ScottyB/edebug-x][edebug-x]]
+** edebug-x
+:PROPERTIES:
+:ID:       org_mark_2020-10-28T08-11-21+00-00_mini12.local:BBEFF5C5-1FED-4CAE-9EC0-E6FC2491C367
+:END:
+Seen but not used yet [[https://github.com/ScottyB/edebug-x][edebug-x]]
 	#+begin_src emacs-lisp
 	(use-package edebug-x :disabled :ensure t)
 	#+end_src
+** Kaushal Modi edebug hydra
+:PROPERTIES:
+:ID:       org_mark_2020-10-28T08-11-21+00-00_mini12.local:983EA75B-7D8E-4372-845B-D7CA7ED40D99
+:END:
+[[https://github.com/kaushalmodi/.emacs.d][His init]]
+#+NAME: org_mark_2020-10-28T08-11-21+00-00_mini12.local_CF761341-0D79-4D5B-8D8C-D955F8B346AF
+#+begin_src emacs-lisp
+;;  mainly from setup-elisp.el
+
+
+;; Solution to toggle debug on a function whether it is defined inside or
+;; outside a `use-package' wrapper
+;; http://emacs.stackexchange.com/q/7643/115
+
+;; Edebug a defun or defmacro
+(defvar modi/fns-in-edebug nil
+  "List of functions for which `edebug' is instrumented.")
+
+(defconst modi/fns-regexp (concat "([[:blank:]]*"
+                                  "\\(cl-\\)*"
+                                  "\\(defun\\|defmacro\\|defsubst\\)"
+                                  "\\**"
+                                  "[[:blank:]]+"
+                                  "\\(?1:\\(\\w\\|\\s_\\)+\\)\\_>") ; word or symbol char
+  "Regexp to find defun or defmacro definition.")
+
+(defun modi/toggle-edebug ()
+  (interactive)
+  (save-excursion
+    (re-search-backward modi/fns-regexp)
+    (let ((start (point))
+          (fn (match-string 1))
+          end
+          selection)
+      ;; (message "Parsed: %s fns-in-edebug: %s" fn modi/fns-in-edebug)
+      (forward-sexp 1)
+      (setq end (point))
+      (if (member fn modi/fns-in-edebug)
+          ;; If the function is already being edebugged, uninstrument it
+          (progn
+            (setq modi/fns-in-edebug (delete fn modi/fns-in-edebug))
+            (eval-buffer)
+            (setq-default eval-expression-print-length 12)
+            (setq-default eval-expression-print-level  4)
+            (message "Edebug disabled: %s" fn))
+        ;; If the function is not being edebugged, instrument it
+        (save-restriction
+          (narrow-to-region start end)
+          (add-to-list 'modi/fns-in-edebug fn)
+          (setq-default eval-expression-print-length nil)
+          (setq-default eval-expression-print-level  nil)
+          (edebug-defun)
+          (message "Edebug: %s" fn))))))
+
+(defhydra hydra-edebug (:color amaranth
+                               :hint  nil)
+  "
+    EDEBUG MODE
+^^_<SPC>_ step             ^^_f_ forward sexp         _b_reakpoint set                previous _r_esult      _w_here                    ^^_d_ebug backtrace
+^^_n_ext                   ^^goto _h_ere              _u_nset breakpoint              _e_val expression      bounce _p_oint             _q_ top level (_Q_ nonstop)
+_g_o (_G_ nonstop)         ^^_I_nstrument callee      next _B_reakpoint               _E_val list            _v_iew outside             ^^_a_bort recursive edit
+_t_race (_T_ fast)         step _i_n/_o_ut            _x_ conditional breakpoint      eval _l_ast sexp       toggle save _W_indows      ^^_S_top
+_c_ontinue (_C_ fast)      ^^^^                       _X_ global breakpoint
+"
+  ("<SPC>" edebug-step-mode)
+  ("n"     edebug-next-mode)
+  ("g"     edebug-go-mode)
+  ("G"     edebug-Go-nonstop-mode)
+  ("t"     edebug-trace-mode)
+  ("T"     edebug-Trace-fast-mode)
+  ("c"     edebug-continue-mode)
+  ("C"     edebug-Continue-fast-mode)
+
+  ("f"     edebug-forward-sexp)
+  ("h"     edebug-goto-here)
+  ("I"     edebug-instrument-callee)
+  ("i"     edebug-step-in)
+  ("o"     edebug-step-out)
+
+  ;; breakpoints
+  ("b"     edebug-set-breakpoint)
+  ("u"     edebug-unset-breakpoint)
+  ("B"     edebug-next-breakpoint)
+  ("x"     edebug-set-conditional-breakpoint)
+  ("X"     edebug-set-global-break-condition)
+
+  ;; evaluation
+  ("r"     edebug-previous-result)
+  ("e"     edebug-eval-expression)
+  ("l"     edebug-eval-last-sexp)
+  ("E"     edebug-visit-eval-list)
+
+  ;; views
+  ("w"     edebug-where)
+  ("p"     edebug-bounce-point)
+  ("v"     edebug-view-outside) ; maybe obsolete??
+  ("P"     edebug-view-outside) ; same as v
+  ("W"     edebug-toggle-save-windows)
+
+  ("d"     edebug-backtrace)
+
+  ;; quitting and stopping
+  ("q"     top-level :color blue)
+  ("Q"     edebug-top-level-nonstop :color blue)
+  ("a"     abort-recursive-edit :color blue)
+  ("S"     edebug-stop :color blue))
+(with-eval-after-load 'edebug
+  (bind-key "?" #'hydra-edebug/body edebug-mode-map))
+
+;; Debug on entry
+(defvar modi/fns-in-debug nil
+  "List of functions for which `debug-on-entry' is instrumented.")
+
+(defun modi/toggle-debug ()
+  (interactive)
+  (let (fn)
+    (save-excursion
+      (re-search-backward modi/fns-regexp)
+      (setq fn (match-string 1)))
+    (if (member fn modi/fns-in-debug)
+        ;; If the function is already being debugged, cancel its debug on entry
+        (progn
+          (setq modi/fns-in-debug (delete fn modi/fns-in-debug))
+          (cancel-debug-on-entry (intern fn))
+          (message "Debug-on-entry disabled: %s" fn))
+      ;; If the function is not being debugged, debug it on entry
+      (progn
+        (add-to-list 'modi/fns-in-debug fn)
+        (debug-on-entry (intern fn))
+        (message "Debug-on-entry: %s" fn)))))
+
+#+end_src
 * Cask
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:A7E444B1-B2D1-477A-A3E2-A7518E90193E
@@ -141,6 +277,18 @@ And this is the reverse
 #+begin_src emacs-lisp
 (use-package xr
   :ensure t)
+#+end_src
+** TODO Rebuilder
+:PROPERTIES:
+:ID:       org_mark_2020-10-25T21-37-40+00-00_mini12.local:C249F91B-5718-46E8-996C-33C52996FC3B
+:END:
+Construct them visually
+Needs a hydra
+#+NAME: org_mark_2020-10-25T21-37-40+00-00_mini12.local_92CA5AF7-601D-4F23-87CA-0CFD95B24FE6
+#+begin_src emacs-lisp
+(use-package re-builder
+  :config
+  (setq reb-re-syntax 'rx))
 #+end_src
 * Keyboard Macros
 :PROPERTIES:

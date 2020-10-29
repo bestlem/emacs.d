@@ -3,10 +3,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default default default italic underline success warning error])
- '(ansi-color-names-vector
-   ["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue" "gray50"])
  '(auto-fill-function nil t)
  '(auto-word-wrap-default-function nil)
  '(awesome-tray-mode-line-active-color "#0031a9")
@@ -17,8 +13,7 @@
  '(canlock-password "8ac28fef8ff386f996bee4f20f8b3c40bd1829d4")
  '(comment-auto-fill-only-comments t)
  '(cua-enable-cua-keys nil)
- '(cursor-type
-   (quote box))
+ '(cursor-type t)
  '(custom-enabled-themes nil)
  '(custom-safe-themes
    (quote
@@ -59,7 +54,10 @@
     (("\\`\\(gnus\\|nn\\|message\\|mail\\|mm-\\|smtp\\|send-mail\\|check-mail\\|spam\\|sc-\\)" "gnus-settings.el" nil t)
      ("\\`\\(org-\\|hl-todo-\\|deft-\\|cfw:\\)" "org-settings.el" nil t)
      ("\\`\\(aquamacs-\\)" "aquamacs-settings.el" nil t)
-     ("\\`\\(flymake-\\|flycheck-\\)" "flymake-settings.el" nil t))))
+     ("\\`\\(flymake-\\|flycheck-\\)" "flymake-settings.el" nil t)
+     ("\\`\\(company-\\|yas-\\)" "completion-settings.el" nil t)
+     ("\\'\\(cua-\\)" "os-related-settings.el" nil nil)
+     ("\\`\\(ansi-color\\|xterm-color\\)" "odd-colours.el" nil t))))
  '(make-backup-files t)
  '(minibuffer-prompt-properties
    (quote
@@ -78,11 +76,7 @@
  '(tool-bar-mode nil)
  '(undo-limit 800000)
  '(visual-line-mode t t)
- '(word-wrap t)
- '(xterm-color-names
-   ["#000000" "#a60000" "#005e00" "#813e00" "#0031a9" "#721045" "#00538b" "#f0f0f0"])
- '(xterm-color-names-bright
-   ["#505050" "#972500" "#315b00" "#70480f" "#2544bb" "#8f0075" "#30517f" "#ffffff"]))
+ '(word-wrap t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

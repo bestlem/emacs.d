@@ -109,6 +109,7 @@ Remove from mode line
 :END:
 I seem only to do this for macport
 Or better from fira code https://github.com/tonsky/FiraCode/wiki/Emacs-instructions#using-prettify-symbols
+emacs-27 has another way
 #+NAME: org_mark_2020-10-03T11-41-17+01-00_mini12.local_7F1CA278-5EFF-4B83-BB74-2E3F161154E8
 #+begin_src emacs-lisp
 (if (fboundp 'mac-auto-operator-composition-mode)

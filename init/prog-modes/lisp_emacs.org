@@ -44,6 +44,17 @@ Most from [[https://github.com/jojojames/matcha][matcha]]
   :ensure t
   :hook (emacs-lisp-mode . lisp-extra-font-lock-mode))
 #+end_src
+*** Dash
+:PROPERTIES:
+:ID:       org_mark_2020-10-29T09-11-06+00-00_mini12.local:2C300411-AD27-461C-B62B-224662A46DCA
+:END:
+Dash is already loaded
+#+NAME: org_mark_2020-10-29T09-11-06+00-00_mini12.local_C6E5CE7F-0B4E-435B-8072-43FE25C44C6A
+#+begin_src emacs-lisp
+(use-package dash
+  :config
+  (dash-enable-font-lock))
+#+end_src
 ** Filling
 :PROPERTIES:
 :ID:       org_mark_2020-03-02T07-49-31+00-00_mini12.local:E19FC44E-6C80-4DD8-BBFA-99156DD9884D
@@ -287,6 +298,8 @@ Needs a hydra
 #+NAME: org_mark_2020-10-25T21-37-40+00-00_mini12.local_92CA5AF7-601D-4F23-87CA-0CFD95B24FE6
 #+begin_src emacs-lisp
 (use-package re-builder
+  :defer t
+  :commands (re-builder)
   :config
   (setq reb-re-syntax 'rx))
 #+end_src

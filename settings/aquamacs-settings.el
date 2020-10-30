@@ -6,7 +6,8 @@
  '(aquamacs-additional-fontsets nil t)
  '(aquamacs-autoface-mode nil)
  '(aquamacs-customization-version-id 311 t)
- '(aquamacs-save-options-on-quit t)
+ '(aquamacs-save-options-on-quit
+   (quote ask))
  '(aquamacs-tool-bar-user-customization nil t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

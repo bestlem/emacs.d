@@ -12,8 +12,8 @@
     (("." . ".~"))))
  '(canlock-password "8ac28fef8ff386f996bee4f20f8b3c40bd1829d4")
  '(comment-auto-fill-only-comments t)
- '(cua-enable-cua-keys nil)
- '(cursor-type t)
+ '(cursor-type
+   (quote box))
  '(custom-enabled-themes nil)
  '(custom-safe-themes
    (quote
@@ -56,8 +56,8 @@
      ("\\`\\(aquamacs-\\)" "aquamacs-settings.el" nil t)
      ("\\`\\(flymake-\\|flycheck-\\)" "flymake-settings.el" nil t)
      ("\\`\\(company-\\|yas-\\)" "completion-settings.el" nil t)
-     ("\\'\\(cua-\\)" "os-related-settings.el" nil nil)
-     ("\\`\\(ansi-color\\|xterm-color\\)" "odd-colours.el" nil t))))
+     ("\\`\\(ansi-color\\|xterm-color\\)" "odd-colours.el" nil t)
+     ("\\`\\(cua-\\)" "os-related-settings.el" nil t))))
  '(make-backup-files t)
  '(minibuffer-prompt-properties
    (quote

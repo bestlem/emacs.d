@@ -317,16 +317,44 @@ Note that this is making the addition explicit so for example the aquamacs path 
 #+begin_src emacs-lisp
 (setq mwb-init-customize-directory (mwb-user-emacs-file "settings/"))
 #+end_src
-*** Initsplit
+*** Customization
 :PROPERTIES:
 :ID:       org_mark_2020-10-26T12-58-28+00-00_mini12.local:580A4C5E-69EE-4AA7-922A-626A5290FDA9
 :END:
+I like to make commits see what they are anbout. The customization file is just a dump. Initsplit can split it up but seemed buggy, basically if you get a regex wrong it blows up.
 Not much documentation So copy from the only 2 jwigeley and https://github.com/dabrahams/dotemacs
-#+NAME: org_mark_2020-10-26T12-58-28+00-00_mini12.local_8B3133BA-A6E1-4CC7-B9B3-A4D300FB58CB
+ALso while we are here let's improve cusomisation fully.
+**** cus-edit
+:PROPERTIES:
+:ID:       org_mark_2020-10-29T09-11-06+00-00_mini12.local:8903AD91-0364-4F47-8611-7D993C6A40D5
+:END:
+The emacs baseic version. Need it for dependency use
+#+NAME: org_mark_2020-10-29T09-11-06+00-00_mini12.local_87F0132E-8CB1-4665-BADC-9CAF45256776
 #+begin_src emacs-lisp
 (use-package cus-edit
   ;; aquamacs has already done this
   :demand)
+#+end_src
+**** cus-edit+
+:PROPERTIES:
+:ID:       org_mark_2020-10-29T09-11-06+00-00_mini12.local:77206F44-BCA1-43A4-B903-DE073068E4EC
+:END:
+More Drew Adams https://www.emacswiki.org/emacs/CustomizingAndSaving#CustomizePlus
+#+NAME: org_mark_2020-10-29T09-11-06+00-00_mini12.local_D3E6606B-7E85-4FD1-BA2D-3B40885ED97B
+#+begin_src emacs-lisp
+(use-package cus-edit+
+  :disabled ; messes up switch-to-buffers advice
+  :after cus-edit
+  :mwb-load-path "site-lisp/emacs_wiki")
+#+end_src
+
+**** Initsplit
+:PROPERTIES:
+:ID:       org_mark_2020-10-28T22-44-31+00-00_mini12.local:F570566C-F55D-4BBF-B7B9-16917621FC82
+:END:
+Now initsplit
+#+NAME: org_mark_2020-10-29T09-11-06+00-00_mini12.local_04FB6D16-A43C-4D7C-9767-4C79FC0FABDD
+#+begin_src emacs-lisp
 (use-package initsplit
   :mwb-load-path "site-lisp"
   :after cus-edit

@@ -48,7 +48,8 @@
      ("\\`\\(company-\\|yas-\\)" "completion-settings.el" nil t)
      ("\\`\\(ansi-color\\|xterm-color\\)" "odd-colours.el" nil t)
      ("\\`\\(cua-\\)" "os-related-settings.el" nil t)
-     ("\\`\\(auto-\\|comment-auto\\|cursor-type\\|delete-\\|fill-\\|global-hl-line-mode\\)" "emacs-base-settings.el" nil t))))
+     ("\\`\\(auto-\\|comment-auto\\|cursor-type\\|delete-\\|fill-\\|global-hl-line-mode\\)" "emacs-base-settings.el" nil t)
+     ("\\`\\(word-wrap\\)" "emacs-base-settings.el" nil t))))
  '(make-backup-files t)
  '(minibuffer-prompt-properties
    (quote
@@ -66,8 +67,7 @@
     (set-word-wrap)))
  '(tool-bar-mode nil)
  '(undo-limit 800000)
- '(visual-line-mode t t)
- '(word-wrap t))
+ '(visual-line-mode t t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

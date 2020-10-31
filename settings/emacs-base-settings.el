@@ -12,4 +12,5 @@
  '(fill-nobreak-predicate
    (quote
     (fill-single-char-nobreak-p)))
- '(global-hl-line-mode t))
+ '(global-hl-line-mode t)
+ '(word-wrap t))

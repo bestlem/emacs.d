@@ -15,41 +15,11 @@
     ("d4a89e8d54783f8d45c2c68cc6641ea2427f563405fde1f083191b10746fe59f" default)))
  '(desktop-file-name-format
    (quote tilde))
- '(fringe-indicator-alist
-   (quote
-    ((continuation nil nil)
-     (truncation left-truncation right-truncation)
-     (continuation left-continuation right-continuation)
-     (overlay-arrow . right-triangle)
-     (up . up-arrow)
-     (down . down-arrow)
-     (top top-left-angle top-right-angle)
-     (bottom bottom-left-angle bottom-right-angle top-right-angle top-left-angle)
-     (top-bottom left-bracket right-bracket top-right-angle top-left-angle)
-     (empty-line . empty-line)
-     (unknown . question-mark)))
-   t)
- '(fringe-mode
-   (quote
-    (16 . 0))
-   nil
-   (fringe))
  '(highlight-tail-colors
    (quote
     (("#aecf90" . 0)
      ("#c0efff" . 20))))
  '(indent-tabs-mode nil)
- '(initsplit-customizations-alist
-   (quote
-    (("\\`\\(gnus\\|nn\\|message\\|mail\\|mm-\\|smtp\\|send-mail\\|check-mail\\|spam\\|sc-\\)" "gnus-settings.el" nil t)
-     ("\\`\\(org-\\|hl-todo-\\|deft-\\|cfw:\\)" "org-settings.el" nil t)
-     ("\\`\\(aquamacs-\\)" "aquamacs-settings.el" nil t)
-     ("\\`\\(flymake-\\|flycheck-\\)" "flymake-settings.el" nil t)
-     ("\\`\\(company-\\|yas-\\)" "completion-settings.el" nil t)
-     ("\\`\\(ansi-color\\|xterm-color\\)" "odd-colours.el" nil t)
-     ("\\`\\(cua-\\)" "os-related-settings.el" nil t)
-     ("\\`\\(auto-\\|comment-auto\\|cursor-type\\|delete-\\|fill-\\|global-hl-line-mode\\)" "emacs-base-settings.el" nil t)
-     ("\\`\\(word-wrap\\)" "emacs-base-settings.el" nil t))))
  '(make-backup-files t)
  '(minibuffer-prompt-properties
    (quote

@@ -3,6 +3,8 @@
 ;; Copyright (C) 2000, 2001 John Wiegley
 ;; Copyright (C) 2010, 2011 Dave Abrahams
 ;; Copyright (C) 2011       Mat Marcus
+;; Copyright (C) 2020       Mark Bestley
+
 
 ;; Author: John Wiegley <johnw@gnu.org>, Dave Abrahams <dave@boostpro.com>
 ;; Created:  8 Feb 2000
@@ -64,8 +66,9 @@
 (require 'find-func)
 (require 'simple) ;; for delete-blank-lines
 (require 'cus-edit)
+(require 'rx)
 
-(defconst initsplit-version "1.8"
+(defconst initsplit-version "1.8.9"
   "This version of initsplit.")
 
 (defgroup initsplit nil
@@ -77,6 +80,17 @@
 (defcustom initsplit-load-hook nil
   "*A hook that gets run after \"initsplit.el\" has been loaded."
   :type 'hook
+  :group 'initsplit)
+
+(defcustom initsplit-simple-customizations
+  nil
+  "*A list of simple customizations.
+Each entry consists of a NAME that will be expanded to a NAME-settings.el in the \"initsplit-default-directory\"
+A List of PREFIX where each prefix is the beginning of a symbol that should be named in the NAMEd file."
+  :type '(repeat (list
+                  (string :tag "file prefix name")
+                  (repeat (string :tag "variable prefix"))
+                  ))
   :group 'initsplit)
 
 (defcustom initsplit-customizations-alist nil
@@ -127,6 +141,18 @@ that cover only the actual changes."
 ;;; User Functions:
 
 ;;; Helper Functions:
+
+
+(defun initsplit-simple-customizations-add ()
+  "Return a list in customizations-alist format expanding the simple customizations"
+  (mapcar
+   (lambda (e) (let ((filepart (car e))
+                (prefixes (cadr e)))
+            (list
+             (rx-to-string `(seq bos (or ,@prefixes) any))
+             (format "%s-settings.el" filepart)
+             '() 't)))
+   initsplit-simple-customizations))
 
 (defun initsplit-filter (list pred)
   "Return the subset of LIST that satisfies PRED"

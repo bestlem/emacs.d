@@ -11,13 +11,9 @@
    (quote
     (("\\`\\(gnus\\|nn\\|message\\|mail\\|mm-\\|smtp\\|send-mail\\|check-mail\\|spam\\|sc-\\)" "gnus-settings.el" nil t)
      ("\\`\\(org-\\|hl-todo-\\|deft-\\|cfw:\\)" "org-settings.el" nil t)
-     ("\\`\\(aquamacs-\\)" "aquamacs-settings.el" nil t)
-     ("\\`\\(flymake-\\|flycheck-\\)" "flymake-settings.el" nil t)
      ("\\`\\(company-\\|yas-\\)" "completion-settings.el" nil t)
      ("\\`\\(ansi-color\\|xterm-color\\)" "odd-colours.el" nil t)
-     ("\\`\\(cua-\\)" "os-related-settings.el" nil t)
-     ("\\`\\(auto-\\|comment-auto\\|cursor-type\\|delete-\\|fill-\\|global-hl-line-mode\\)" "emacs-base-settings.el" nil t)
-     ("\\`\\(word-wrap\\)" "emacs-base-settings.el" nil t))))
+     ("\\`\\(cua-\\)" "os-related-settings.el" nil t))))
  '(initsplit-simple-customizations
    (quote
     (("aquamacs"

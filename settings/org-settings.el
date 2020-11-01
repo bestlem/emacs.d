@@ -30,7 +30,8 @@
     ("⦿" "◉" "◎" "○" "●")))
  '(org-cycle-global-at-bob t)
  '(org-datetree-add-timestamp
-   (quote active))
+   (quote active)
+   t)
  '(org-hide-block-startup nil)
  '(org-log-done
    (quote time))

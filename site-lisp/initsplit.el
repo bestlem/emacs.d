@@ -154,6 +154,9 @@ that cover only the actual changes."
              '() 't)))
    initsplit-simple-customizations))
 
+
+(add-to-list 'initsplit-dynamic-customizations-alist 'initsplit-simple-customizations-add)
+
 (defun initsplit-filter (list pred)
   "Return the subset of LIST that satisfies PRED"
   (cl-reduce (lambda (elt lst) (if (funcall pred elt) (cons elt lst) lst))

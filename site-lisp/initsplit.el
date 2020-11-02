@@ -149,7 +149,7 @@ that cover only the actual changes."
    (lambda (e) (let ((filepart (car e))
                 (prefixes (cadr e)))
             (list
-             (rx-to-string `(seq bos (or ,@prefixes) any))
+             (rx-to-string `(seq bos (or ,@prefixes)))
              (format "%s-settings.el" filepart)
              '() 't)))
    initsplit-simple-customizations))

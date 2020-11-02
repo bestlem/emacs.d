@@ -10,15 +10,4 @@
  '(initsplit-customizations-alist
    (quote
     (("\\`\\(gnus\\|nn\\|message\\|mail\\|mm-\\|smtp\\|send-mail\\|check-mail\\|spam\\|sc-\\)" "gnus-settings.el" nil t)
-     ("\\`\\(org-\\|hl-todo-\\|deft-\\|cfw:\\)" "org-settings.el" nil t)
-     ("\\`\\(company-\\|yas-\\)" "completion-settings.el" nil t)
-     ("\\`\\(ansi-color\\|xterm-color\\)" "odd-colours.el" nil t)
-     ("\\`\\(cua-\\)" "os-related-settings.el" nil t))))
- '(initsplit-simple-customizations
-   (quote
-    (("aquamacs"
-      ("aquamacs-"))
-     ("initsplit"
-      ("initsplit-"))
-     ("fringe"
-      ("fringe-"))))))
+     ("\\`\\(org-\\|hl-todo-\\|deft-\\|cfw:\\)" "org-settings.el" nil t)))))

@@ -225,6 +225,7 @@ This saves the state perhaps I need to see how it works.
 #+begin_src emacs-lisp
 (use-package desktop
   :unless *aquamacs*
+  :disabled
   :config
   (setq desktop-dirname (mwb-user-emacs-file "var/desktop/"))
   (setq desktop-path (list desktop-dirname))

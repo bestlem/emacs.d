@@ -79,32 +79,32 @@ There are some modes that have special save actions e.g. *Abbrev* which is a buf
 :END:
  Exclusion regexes from [[https://www.reddit.com/r/emacs/comments/3g468d/stop_recent_files_showing_elpa_packages/][reddit]]
 
- Issue is that recentf-exclude is used by passing the expanded filename(which makes senss)  and the file list uses the shortened name which also makes sense at least in the file as then is independent of ~
+ Issue is that recentf-exclude is used by passing the expanded filename(which makes sense)  and the file list uses the shortened name which also makes sense at least in the file as then is independent of ~
 
  The save in file is done by the set of abbreviate-file-name to recentf-filename-handlers which means that the name is expanded and then replaced by ~. Unfortunately the regexes are done on just the expanded file name. But all expansion is done the same way so all should work
 
  Cleanup does seem to normalize file names
 
- The problem is that we have regexq
+ The problem is that we have regex
 
  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_8950A078-0D0D-4B58-90E9-2E103AB4934D
  #+begin_src emacs-lisp
- ;; Problem is this is set after the recent files are set https://emacs.stackexchange.com/questions/48784/recent-files-in-aquamacs
- ;;  Seems to be OK
+;; Problem is this is set after the recent files are set https://emacs.stackexchange.com/questions/48784/recent-files-in-aquamacs
+;;  Seems to be OK
 
 
-(setq recentf-exclude '("COMMIT_MSG" "COMMIT_EDITMSG" "github.*txt$"
-                        "^/var/folders\\.*"
-                        "COMMIT_EDITMSG\\'"
-                        ".recentf"
-                        "~$" ".~/"      ; Emacs (and others) backup.
-                        ".*-autoloads\\.el\\'"
-                        "[/\\]emacs.d/elpa/"
-                        ".*png$" ".*cache$"
-                        "~/\\.emacs\\.d/\\.*/*\\.el"
-                        "~/src/env/emacs\\.d/.*/.*\\.el"
-                        "SessionDesktop\\.el"
-                        "treemacs-persist"))
+;; (setq recentf-exclude '("COMMIT_MSG" "COMMIT_EDITMSG" "github.*txt$"
+;;                         "^/var/folders\\.*"
+;;                         "COMMIT_EDITMSG\\'"
+;;                         ".recentf"
+;;                         "~$" ".~/"      ; Emacs (and others) backup.
+;;                         ".*-autoloads\\.el\\'"
+;;                         "[/\\]emacs.d/elpa/"
+;;                         ".*png$" ".*cache$"
+;;                         "~/\\.emacs\\.d/\\.*/*\\.el"
+;;                         "~/src/env/emacs\\.d/.*/.*\\.el"
+;;                         "SessionDesktop\\.el"
+;;                         "treemacs-persist"))
 ;; (setq recentf-exclude '())
 (use-package recentf
   :unless *aquamacs*
@@ -117,7 +117,7 @@ There are some modes that have special save actions e.g. *Abbrev* which is a buf
         recentf-auto-cleanup (* 3600 2) ; 2 hours
         recentf-keep '(file-remote-p file-readable-p)
         recentf-save-file (mwb-user-emacs-file "var/recentf-save.el")
-        recentf-max-saved-items 100
+        ;; recentf-max-saved-items 100
         recentf-max-menu-items 25)
   :config
   (recentf-mode 1))

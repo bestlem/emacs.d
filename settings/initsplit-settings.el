@@ -8,4 +8,35 @@
       ("fringe-" "awesome"))))
  '(initsplit-customizations-alist
    '(("\\`\\(gnus\\|nn\\|message\\|mail\\|mm-\\|smtp\\|send-mail\\|check-mail\\|spam\\|sc-\\)" "gnus-settings.el" nil t)
-     ("\\`\\(org-\\|hl-todo-\\|deft-\\|cfw:\\)" "org-settings.el" nil t))))
+     ("\\`\\(org-\\|hl-todo-\\|deft-\\|cfw:\\)" "org-settings.el" nil t)))
+ '(initsplit-simple-customizations
+   '(("unknown"
+      ("awesome-" "highlight-tails" "ansi-color" "xterm-color" "highlight-tail"))
+     ("aquamacs"
+      ("aquamacs-" "tabbar-"))
+     ("completion"
+      ("company-" "yas-"))
+     ("mac-based"
+      ("ns-" "mac-" "cua-"))
+     ("files"
+      ("recentf-"))
+     ("flymake"
+      ("flymake-" "flycheck-"))
+     ("fringe"
+      ("fringe-"))
+     ("hardhat"
+      ("hardhat-"))
+     ("ibuffer"
+      ("ibuffer-"))
+     ("initsplit"
+      ("initsplit-"))
+     ("package"
+      ("package-"))
+     ("python"
+      ("python"))
+     ("structured-data"
+      ("nxml-"))
+     ("vc"
+      ("vc-" "magit-" "ediff-"))
+     ("emacs-base"
+      ("make-backup" "indent-tabs" "minibuffer-" "auto-fill-" "auto-word-wrap" "comment-auto" "word-wrap" "fill-" "visual-line-mode" "show-paren-mode" "global-h" "cursor-type" "tool-bar-mode" "delete-old-" "safe-local-variable" "custom-" "undo-limit" "desktop-")))))

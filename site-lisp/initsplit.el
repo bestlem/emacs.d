@@ -9,7 +9,7 @@
 ;; Author: John Wiegley <johnw@gnu.org>, Dave Abrahams <dave@boostpro.com>
 ;; Created:  8 Feb 2000
 ;; Updated:  18 Mar 2015
-;; Version: 1.8
+;; Version: 1.9
 ;; Keywords: lisp
 ;; X-URL: http://www.gci-net.com/users/j/johnw/emacs.html
 
@@ -68,7 +68,7 @@
 (require 'cus-edit)
 (require 'rx)
 
-(defconst initsplit-version "1.8.9"
+(defconst initsplit-version "1.9"
   "This version of initsplit.")
 
 (defgroup initsplit nil

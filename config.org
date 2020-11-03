@@ -306,9 +306,11 @@ Note that this is making the addition explicit so for example the aquamacs path 
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:A28603F3-9100-4C41-855A-5D202E7ACFE3
 :END:
- Yes Aquamacs does this but in a directory with a space. So put with code so can be under source code control and user-emacs-directory is not.
- Needs to have initsplit added so can seperate out customization files.
+Yes Aquamacs does this but in a directory with a space. So put with code so can be under source code control and user-emacs-directory is not.
 
+I like to make commits see what they are about. The customization file is just a dump. Initsplit can split it up but seemed buggy, basically if you get a regex wrong it blows up.
+Not much documentation So copy from the only 2 jwigeley and https://github.com/dabrahams/dotemacs
+Also while we are here let's improve customisation fully.
 *** Set the customise Directory
 :PROPERTIES:
 :ID:       org_mark_2020-10-26T12-58-28+00-00_mini12.local:D165DFFB-4E7B-4091-AE48-8C856E1EEBBE
@@ -317,25 +319,29 @@ Note that this is making the addition explicit so for example the aquamacs path 
 #+begin_src emacs-lisp
 (setq mwb-init-customize-directory (mwb-user-emacs-file "settings/"))
 #+end_src
-*** Customization
+*** Load the main custom file
 :PROPERTIES:
-:ID:       org_mark_2020-10-26T12-58-28+00-00_mini12.local:580A4C5E-69EE-4AA7-922A-626A5290FDA9
+:ID:       org_mark_2020-10-26T12-58-28+00-00_mini12.local:A6265F12-4BAF-49FD-9576-6F8734A5EF50
 :END:
-I like to make commits see what they are anbout. The customization file is just a dump. Initsplit can split it up but seemed buggy, basically if you get a regex wrong it blows up.
-Not much documentation So copy from the only 2 jwigeley and https://github.com/dabrahams/dotemacs
-ALso while we are here let's improve cusomisation fully.
-**** cus-edit
+ #+NAME: org_mark_2020-10-26T12-58-28+00-00_mini12.local_4193D052-7CCE-4F3E-A98F-7D958AB4E692
+ Note initsplit needs to be in here or we load it twice. Twice is OK depending if there are no other things needed to be in early load.
+ #+NAME: org_mark_2020-11-03T11-29-59+00-00_mini12.local_91DE0DF5-1D10-4E57-A864-CC60F44BFC5B
+ #+begin_src emacs-lisp
+ (setq custom-file (mwb-user-emacs-file "custom.el"))
+ (load custom-file 'noerror)
+ #+end_src
+*** cus-edit
 :PROPERTIES:
 :ID:       org_mark_2020-10-29T09-11-06+00-00_mini12.local:8903AD91-0364-4F47-8611-7D993C6A40D5
 :END:
-The emacs baseic version. Need it for dependency use
+The emacs basic version. Need it for dependency load use by initsplit
 #+NAME: org_mark_2020-10-29T09-11-06+00-00_mini12.local_87F0132E-8CB1-4665-BADC-9CAF45256776
 #+begin_src emacs-lisp
 (use-package cus-edit
   ;; aquamacs has already done this
   :demand)
 #+end_src
-**** cus-edit+
+*** cus-edit+
 :PROPERTIES:
 :ID:       org_mark_2020-10-29T09-11-06+00-00_mini12.local:77206F44-BCA1-43A4-B903-DE073068E4EC
 :END:
@@ -348,7 +354,7 @@ More Drew Adams https://www.emacswiki.org/emacs/CustomizingAndSaving#CustomizePl
   :mwb-load-path "site-lisp/emacs_wiki")
 #+end_src
 
-**** Initsplit
+*** Initsplit
 :PROPERTIES:
 :ID:       org_mark_2020-10-28T22-44-31+00-00_mini12.local:F570566C-F55D-4BBF-B7B9-16917621FC82
 :END:
@@ -388,17 +394,16 @@ Now initsplit
             "safe-local-variable"
             "custom-" "undo-limit"
             "desktop-"))))
-  )
+  (setq initsplit-load-function 'initsplit-load-if-exists-and-does-not-match)
+
+  :custom
+  ;; Set here and not in custom as the values need evaluation of the running environment
+  (initsplit-ignore-prefixes
+   (list
+    (unless *aquamacs* "aquamacs")
+    (unless (string-equal system-type "darwin") "mac")
+    (unless (string-equal system-type "windows") "Windows"))))
 #+end_src
-*** Load the main custom file
-:PROPERTIES:
-:ID:       org_mark_2020-10-26T12-58-28+00-00_mini12.local:A6265F12-4BAF-49FD-9576-6F8734A5EF50
-:END:
- #+NAME: org_mark_2020-10-26T12-58-28+00-00_mini12.local_4193D052-7CCE-4F3E-A98F-7D958AB4E692
- #+begin_src emacs-lisp
- (setq custom-file (mwb-user-emacs-file "custom.el"))
- (load custom-file 'noerror)
- #+end_src
 *** Get the regexp for files in settings
 :PROPERTIES:
 :ID:       org_mark_2020-10-28T14-09-54+00-00_mini12.local:31706694-3B07-43B3-9257-579C34E14655
@@ -418,13 +423,16 @@ Not we want the prefix e.g. in org-settings.el to be ably to extract org
 :ID:       org_mark_2020-10-25T21-37-40+00-00_mini12.local:A3A72481-AFA1-4481-94CA-E40E8D4BAA23
 :END:
 #+NAME: org_mark_2020-10-27T17-11-46+00-00_mini12.local_70B8AC35-681E-4DCC-BB95-1D3FED32E2A7
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (defun mwb-init-customize-directory-files (&optional fullpath)
   (directory-files mwb-init-customize-directory fullpath
                    elhome-settings-file-regexp))
 
 (--map (load (expand-file-name it ))
        (mwb-init-customize-directory-files "fullpath"))
+
+
+
 #+end_src
 *** Add dynamic customization.
 :PROPERTIES:

@@ -138,6 +138,24 @@ that cover only the actual changes."
   :group 'initsplit
   :type 'boolean)
 
+(defcustom initsplit-ignore-prefixes '()
+  "*Variable to list tests mto exclude settings files from loading.
+Don't edit in customise as it depends on evaluating the lines.
+This allows OS dependent and other control, e.g. Aquamacs variables won't be loaded in non Aquamacs"
+  :type '(repeat (sexp :tag "expression to evaluate"))
+  :set #'(lambda (sym val)
+           ;; (message "In initsplit-ignore-prefixes")
+           (custom-set-default sym val)
+           (let ((filtered-list (-non-nil val)))
+             (setq initsplit--ignore-prefix-regexp
+                   (if filtered-list
+                       (rx-to-string `(seq bos ,(file-truename mwb-init-customize-directory)
+                                           (or ,@filtered-list)
+                                           "-settings"))
+                     nil))))            ; Refresh to get new binding.
+  :initialize #'custom-initialize-reset
+  :group 'initsplit)
+
 ;;; User Functions:
 
 ;;; Helper Functions:
@@ -145,13 +163,14 @@ that cover only the actual changes."
 
 (defun initsplit-simple-customizations-add ()
   "Return a list in customizations-alist format expanding the simple customizations"
+  (message "In initsplit-simple-customizations-add")
   (mapcar
    (lambda (e) (let ((filepart (car e))
-                (prefixes (cadr e)))
-            (list
-             (rx-to-string `(seq bos (or ,@prefixes)))
-             (format "%s-settings.el" filepart)
-             '() 't)))
+                     (prefixes (cadr e)))
+                 (list
+                  (rx-to-string `(seq bos (or ,@prefixes)))
+                  (format "%s-settings.el" filepart)
+                  '() 't)))
    initsplit-simple-customizations))
 
 
@@ -236,7 +255,18 @@ might contain customizations we haven't seen yet."
 
 (defun initsplit-load-if-exists (file)
   "Load the given file if it exists."
-  (load file 'ignore-non-existent-file))
+  ;; (message "In load initsplit-load-if-exists for %s"
+  ;;          file)
+  (load file 'ignore-non-existent-file)
+  )
+
+(defun initsplit-load-if-exists-and-does-not-match (file)
+  "Load the given file if it exists and npt one of the exceptions."
+  ;; (message "In load initsplit-load-if-exists-and-does-not-match for %s"
+  ;;          file)
+  ;; (message "Regex %s" initsplit--ignore-prefix-regexp)
+  (unless (string-match-p initsplit--ignore-prefix-regexp file )
+    (load file)))
 
 (defvar initsplit-load-function 'initsplit-load-if-exists
   "The function that's actually used by initsplit to load
@@ -456,9 +486,20 @@ multiple files per (initsplit-custom-alist)"
 
 ;; Ensure customization files marked pre-load have been loaded
 ;; already.
-(dolist (s (initsplit-unknown-file-alist))
-  (when (initsplit-preload-p s)
-    (initsplit-load s)))
+(defun initsplit-load-unloaded-preload ()
+  ;; (message "Known config files length %d - \n %S"
+  ;;          (length (initsplit-known-file-alist))
+  ;;          (initsplit-known-file-alist))
+  (dolist (s (initsplit-unknown-file-alist))
+    ;; (message "Loading %d unloaded config files"
+    ;;          (length (initsplit-unknown-file-alist)))
+    (when (initsplit-preload-p s)
+      (initsplit-load s))))
+
+;;  Yes run twice as the first load could have initsplit variables
+(initsplit-load-unloaded-preload)
+(initsplit-load-unloaded-preload)
+
 
 (run-hooks 'initsplit-load-hook)
 

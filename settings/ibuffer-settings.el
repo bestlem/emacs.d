@@ -5,8 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(ibuffer-expert t)
  '(ibuffer-fontification-alist
-   (quote
-    ((5
+   '((5
       (and buffer-file-name
            (buffer-modified-p))
       font-lock-warning-face)
@@ -22,16 +21,13 @@
        (null buffer-file-name))
       italic)
      (35
-      (derived-mode-p
-       (quote dired-mode))
+      (derived-mode-p 'dired-mode)
       font-lock-function-name-face)
      (40
       (and
-       (boundp
-        (quote emacs-lock-mode))
+       (boundp 'emacs-lock-mode)
        emacs-lock-mode)
-      ibuffer-locked-buffer))))
+      ibuffer-locked-buffer)))
  '(ibuffer-help-buffer-modes
-   (quote
-    (help-mode helpful-mode apropos-mode Info-mode Info-edit-mode)))
+   '(help-mode helpful-mode apropos-mode Info-mode Info-edit-mode))
  '(ibuffer-old-time 48))

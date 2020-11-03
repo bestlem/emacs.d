@@ -4,10 +4,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(initsplit--mwb-simple-customizations
-   (quote
-    (("fringe"
-      ("fringe-" "awesome")))))
+   '(("fringe"
+      ("fringe-" "awesome"))))
  '(initsplit-customizations-alist
-   (quote
-    (("\\`\\(gnus\\|nn\\|message\\|mail\\|mm-\\|smtp\\|send-mail\\|check-mail\\|spam\\|sc-\\)" "gnus-settings.el" nil t)
-     ("\\`\\(org-\\|hl-todo-\\|deft-\\|cfw:\\)" "org-settings.el" nil t)))))
+   '(("\\`\\(gnus\\|nn\\|message\\|mail\\|mm-\\|smtp\\|send-mail\\|check-mail\\|spam\\|sc-\\)" "gnus-settings.el" nil t)
+     ("\\`\\(org-\\|hl-todo-\\|deft-\\|cfw:\\)" "org-settings.el" nil t))))

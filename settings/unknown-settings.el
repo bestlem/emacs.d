@@ -10,9 +10,8 @@
  '(awesome-tray-mode-line-active-color "#0031a9")
  '(awesome-tray-mode-line-inactive-color "#d7d7d7")
  '(highlight-tail-colors
-   (quote
-    (("#aecf90" . 0)
-     ("#c0efff" . 20))))
+   '(("#aecf90" . 0)
+     ("#c0efff" . 20)))
  '(xterm-color-names
    ["#000000" "#a60000" "#005e00" "#813e00" "#0031a9" "#721045" "#00538b" "#f0f0f0"])
  '(xterm-color-names-bright

@@ -6,8 +6,7 @@
  '(vc-annotate-background nil)
  '(vc-annotate-background-mode nil)
  '(vc-annotate-color-map
-   (quote
-    ((20 . "#a60000")
+   '((20 . "#a60000")
      (40 . "#721045")
      (60 . "#8f0075")
      (80 . "#972500")
@@ -24,5 +23,5 @@
      (300 . "#0031a9")
      (320 . "#2544bb")
      (340 . "#0000c0")
-     (360 . "#5317ac"))))
+     (360 . "#5317ac")))
  '(vc-annotate-very-old-color nil))

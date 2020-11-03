@@ -4,8 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(hl-todo-keyword-faces
-   (quote
-    (("HOLD" . "#70480f")
+   '(("HOLD" . "#70480f")
      ("TODO" . "#721045")
      ("NEXT" . "#5317ac")
      ("THEM" . "#8f0075")
@@ -22,28 +21,20 @@
      ("FIXME" . "#a0132f")
      ("XXX+" . "#972500")
      ("REVIEW" . "#005a5f")
-     ("DEPRECATED" . "#201f55"))))
- '(org-babel-python-mode
-   (quote python-mode))
+     ("DEPRECATED" . "#201f55")))
+ '(org-babel-python-mode 'python-mode)
  '(org-bullets-bullet-list
-   (quote
-    ("⦿" "◉" "◎" "○" "●")))
+   '("⦿" "◉" "◎" "○" "●"))
  '(org-cycle-global-at-bob t)
- '(org-datetree-add-timestamp
-   (quote active)
-   t)
+ '(org-datetree-add-timestamp 'active t)
  '(org-hide-block-startup nil)
- '(org-log-done
-   (quote time))
+ '(org-log-done 'time)
  '(org-modules
-   (quote
-    (org-crypt org-tempo org-id org-mouse)))
+   '(org-crypt org-tempo org-id org-mouse))
  '(org-src-ask-before-returning-to-edit-buffer nil)
- '(org-src-window-setup
-   (quote current-window))
+ '(org-src-window-setup 'current-window)
  '(org-todo-keywords
-   (quote
-    ((sequence "TODO" "|" "DONE" "LEAVE(@)"))))
+   '((sequence "TODO" "|" "DONE" "LEAVE(@)")))
  '(org-yank-adjusted-subtrees t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

@@ -3,7 +3,7 @@
 ;; Copyright (C) 2019 James Nguyen
 
 ;; Author: James Nguyen <james@jojojames.com>
-;; Hwac=vily modified Mark Bestley
+;; Heavily modified Mark Bestley
 ;; Version: 0.0.2
 ;; Package-Requires: ((emacs "25.1"))
 ;; Keywords: hydra, emacs
@@ -66,46 +66,13 @@ Requires smartparens because all movement is done using `sp-forward-symbol'."
       (sp-forward-symbol)
       (call-interactively 'eval-last-sexp))))
 
-;; https://github.com/jwiegley/use-package/issues/152
-;; Edebug a defun or defmacro
-(defvar matcha-fns-in-edebug nil
-  "List of functions for which `edebug' is instrumented.")
-(defconst matcha-elisp-fns-regexp
-  (concat "(\\s-*"
-          "\\(defun\\|defmacro\\)\\s-+"
-          "\\(?1:\\(\\w\\|\\s_\\)+\\)\\_>")
-  "Regexp to find defun or defmacro definition.")
-
-(defun matcha-elisp-toggle-edebug-defun ()
-  (interactive)
-  (let (fn)
-    (save-mark-and-excursion
-     (search-backward-regexp matcha-elisp-fns-regexp)
-     (setq fn (match-string 1))
-     (mark-sexp)
-     (narrow-to-region (point) (mark))
-     (if (member fn matcha-fns-in-edebug)
-         ;; If the function is already being edebugged, uninstrument it
-         (progn
-           (setq matcha-fns-in-edebug (delete fn matcha-fns-in-edebug))
-           (eval-region (point) (mark))
-           (setq-default eval-expression-print-length 12)
-           (setq-default eval-expression-print-level  4)
-           (message "Edebug disabled: %s" fn))
-       ;; If the function is not being edebugged, instrument it
-       (progn
-         (add-to-list 'matcha-fns-in-edebug fn)
-         (setq-default eval-expression-print-length nil)
-         (setq-default eval-expression-print-level  nil)
-         (edebug-defun)
-         (message "Edebug: %s" fn)))
-     (widen))))
 
 (major-mode-hydra-define emacs-lisp-mode nil
   ("Eval"
    (("b" eval-buffer "buffer")
-    ("e" eval-defun "defun")
-    ("r" eval-region "region"))
+    ("d" eval-defun "defun [well top level form]")
+    ("r" eval-region "region")
+    ("f" matcha-elisp-eval-current-form-sp "form" ))
    "REPL"
    (("I" ielm "ielm")
     ("x" matcha-goto-scratch "*Scratch*"))
@@ -116,9 +83,10 @@ Requires smartparens because all movement is done using `sp-forward-symbol'."
 
    "Debug"
    (("m" sk/hydra-macro-step/body "Macrostep...")
-    ("d" matcha-elisp-toggle-edebug-defun "Debug")
+    ("e"  modi/toggle-edebug "Toggle edebug")
+    ("E" hydra-edebug "edebug hydra")
     ("q" cancel-debug-on-entry "Cancel Debug on Entry")
-    ("f" debug-on-entry "Debug on Entry"))
+    ("D" debug-on-entry "Debug on Entry"))
    ;; ["Watch"
    ;;  ("w" debug-watch "Watch")
    ;;  ("W" cancel-debug-watch  "Cancel Watch")]

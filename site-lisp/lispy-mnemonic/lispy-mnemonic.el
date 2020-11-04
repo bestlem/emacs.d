@@ -286,7 +286,7 @@
 ;; (define-key lispy-mnemonic-mode-map (kbd "[") 'lispy-brackets)
 (define-key lispy-mnemonic-mode-map (kbd "H-d") 'hydra-lispy-debug/body)
 (define-key lispy-mnemonic-mode-map (kbd "H-m") 'hydra-lispy-mark/body)
-(define-key lispy-mnemonic-mode-map (kbd "H-x") 'hydra-lispy-x/body)
+(define-key lispy-mnemonqqic-mode-map (kbd "H-x") 'hydra-lispy-x/body)
 (define-key lispy-mnemonic-mode-map (kbd "C-(") 'lispy-arglist-inline)
 (define-key lispy-mnemonic-mode-map (kbd "C-)") 'lispy-arglist-inline)
 (define-key lispy-mnemonic-mode-map (kbd "C-;") 'lispy-describe-inline)
@@ -308,6 +308,7 @@
 ;; a-z
 
 (lispy-define-key lispy-mnemonic-mode-map (kbd "a") 'hydra-lispy-ace/body)
+
 ;; (lispy-define-key lispy-mnemonic-mode-map (kbd "e") 'mwb-lispy-eval) ; noe
 ;; in lispy
 ;; (lispy-define-key lispy-mnemonic-mode-map (kbd "e") 'hydra-lispy-eval/body)

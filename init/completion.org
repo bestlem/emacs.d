@@ -37,7 +37,7 @@ Add some from jweigley
         company-tooltip-align-annotations t
         company-echo-delay 1
         company-selection-wrap-around t
-        company-idle-delay 0.5;; company-idle-delay 0.05
+        company-idle-delay 0.05;; company-idle-delay 0.05
         company-tooltip-minimum-width 30
         company-minimum-prefix-length 1)
   (global-company-mode t)               ; don't put in after-init hook

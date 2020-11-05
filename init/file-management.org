@@ -322,27 +322,32 @@ This is the visual
     (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
   :commands (treemacs)
   :config
-  (progn
-    (setq hydra-key-regex "\\[\\|]\\|[-\\[:alnum:] ~.,;:/|?<>={}*+#%@!&^⇧⌘⌥↑↓←→⌫⌦⏎'`()\"$]+?") ; add Mac key symbols
+  (defsubst treemacs-get-from-shadow-index (key)
+    "Get node with KEY, if any."
+    (--if-let (ht-get treemacs-shadow-index key)
+        it
+      (treemacs-log "Node for key [%s] missing in shadow index" key)))
 
-    (setq treemacs-silent-refresh t
-          treemacs-persist-file (mwb-user-emacs-file "data/treemacs-persist"))
-    (with-eval-after-load 'treemacs
-      (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?))
+  (setq hydra-key-regex "\\[\\|]\\|[-\\[:alnum:] ~.,;:/|?<>={}*+#%@!&^⇧⌘⌥↑↓←→⌫⌦⏎'`()\"$]+?") ; add Mac key symbols
 
-    ;; The default width and height of the icons is 22 pixels. If you are
-    ;; using a Hi-DPI display, uncomment this to double the icon size.
-    ;;(treemacs-resize-icons 44)
+  (setq treemacs-silent-refresh t
+        treemacs-persist-file (mwb-user-emacs-file "data/treemacs-persist"))
+  (with-eval-after-load 'treemacs
+    (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?))
 
-    (treemacs-follow-mode t)
-    (treemacs-filewatch-mode t)
-    (treemacs-fringe-indicator-mode t)
-    (pcase (cons (not (null (executable-find "git")))
-                 (not (null treemacs-python-executable )))
-      (`(t . t)
-       (treemacs-git-mode 'deferred))
-      (`(t . _)
-       (treemacs-git-mode 'simple))))
+  ;; The default width and height of the icons is 22 pixels. If you are
+  ;; using a Hi-DPI display, uncomment this to double the icon size.
+  ;;(treemacs-resize-icons 44)
+
+  (treemacs-follow-mode t)
+  (treemacs-filewatch-mode t)
+  (treemacs-fringe-indicator-mode t)
+  (pcase (cons (not (null (executable-find "git")))
+               (not (null treemacs-python-executable )))
+    (`(t . t)
+     (treemacs-git-mode 'deferred))
+    (`(t . _)
+     (treemacs-git-mode 'simple)))
   :mode-hydra
   (treemacs-mode
    ("Project"
@@ -373,6 +378,7 @@ This is the visual
   :disabled                             ; Emacs 27 did not like this
   :after treemacs magit
   :ensure t)
+
 
 
   #+end_src

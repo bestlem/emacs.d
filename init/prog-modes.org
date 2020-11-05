@@ -402,13 +402,11 @@ From [[https://www.emacswiki.org/emacs/FlySpell#toc2][Emacs Wiki]]
   Need to start from scratch. I do have it for emacs but as code in org mode not an elisp file a bit of a waste
   #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_57ABBF6F-52E5-4B09-81FB-4B71119DE3DC
   #+begin_src emacs-lisp
-
-	;;;; flymake - syntax checking
-	(use-package flymake
-	  :disabled
-	  :diminish
-	  :hook ((sh-mode json-mode nxml-mode python-mode emacs-lisp-mode lisp-interaction-mode) . flymake-mode-on)
-	  :config (flymake-mode-on))
+(use-package flymake
+  :unless (version< emacs-version "26.1")
+  :diminish
+  :hook ((sh-mode json-mode nxml-mode python-mode emacs-lisp-mode lisp-interaction-mode) . flymake-mode-on)
+  :config (flymake-mode-on))
   #+end_src
 *** Flycheck
 :PROPERTIES:
@@ -418,16 +416,18 @@ From [[https://www.emacswiki.org/emacs/FlySpell#toc2][Emacs Wiki]]
 	 #+begin_src emacs-lisp
 (use-package flycheck
   :ensure t
-  :defer 2
-  :disabled
+  :when (version< emacs-version "26.1")
   :diminish
-  ;; :init (global-flycheck-mode) ; for all
+  :init (global-flycheck-mode) ; for all
 
   ;; I don't like `global-flycheck-mode', some mode, such as elisp mode
   ;; don't need.
   ;;  racket seems to have issues with this and company
-  :hook (racket-mode . flycheck-mode )
 
+  ;; :hook (racket-mode . flycheck-mode )
+  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
+  :config
+  <<flycheck-hydra>>
   :custom
   (flycheck-display-errors-delay 0.3))
      #+end_src
@@ -435,8 +435,8 @@ From [[https://www.emacswiki.org/emacs/FlySpell#toc2][Emacs Wiki]]
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:48CD7AF6-DA56-471F-98EF-51C816A565FFy
 :END:
-#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_689B92C3-4B81-4F06-A09F-C9947FA18B54
-#+begin_src emacs-lisp
+#+NAME: flycheck-hydra
+#+begin_src emacs-lisp :tangle no
 (defhydra hydra-flycheck (:color blue)
   "
   ^

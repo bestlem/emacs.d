@@ -385,5 +385,6 @@ This is hardcoded. See all.org anmd desktop for other ways. Aquamacs just restor
 #+NAME: org_mark_2020-11-05T09-18-27+00-00_mini12.local_000987D2-DC8C-4944-AA63-B8D987C1FD5D
 #+begin_src emacs-lisp
 (when (and window-system (not *aquamacs*))
-  (set-frame-size (selected-frame) 230 50)) ; in characters
+  (set-frame-size (selected-frame) 230 50) ; in characters
+  (set-frame-position (selected-frame) 132 132))
 #+end_src

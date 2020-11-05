@@ -44,17 +44,6 @@ Most from [[https://github.com/jojojames/matcha][matcha]]
   :ensure t
   :hook (emacs-lisp-mode . lisp-extra-font-lock-mode))
 #+end_src
-*** Dash
-:PROPERTIES:
-:ID:       org_mark_2020-10-29T09-11-06+00-00_mini12.local:2C300411-AD27-461C-B62B-224662A46DCA
-:END:
-Dash is already loaded
-#+NAME: org_mark_2020-10-29T09-11-06+00-00_mini12.local_C6E5CE7F-0B4E-435B-8072-43FE25C44C6A
-#+begin_src emacs-lisp
-(use-package dash
-  :config
-  (dash-enable-font-lock))
-#+end_src
 ** Filling
 :PROPERTIES:
 :ID:       org_mark_2020-03-02T07-49-31+00-00_mini12.local:E19FC44E-6C80-4DD8-BBFA-99156DD9884D
@@ -270,15 +259,6 @@ _c_ontinue (_C_ fast)      ^^^^                       _X_ global breakpoint
 :END:
 They are not understanable so these help
 
-** Rx
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:F417CBEB-06A8-4880-9D6A-3228FBA4E202
-:END:
-Convert a set of function calls to an RE. (it is part of emacs.
-#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_DBA0912A-D800-4F0D-AB99-78A1399152D5
-#+BEGIN_SRC emacs-lisp
-(use-package rx)
-#+END_SRC
 ** Xr
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:A6466B59-FC11-4679-8AA9-5CED7A0479C6

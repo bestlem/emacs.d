@@ -96,21 +96,6 @@ It assumes things like clojure
    #+END_SRC
 * Lisps
 :PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:D87611BD-797A-49B9-861B-51483685098D
+:ID:       org_mark_2020-11-05T12-42-05+00-00_mini12.local:B524681A-4769-4945-91E7-B1FA7A9F84C6
 :END:
-** Emacs Lisp
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:CB46FF23-7772-49D0-9B71-AEE2AA81F516
-:END:
-#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_A1D3F036-E658-45F3-9B01-5935D19F8637
-#+begin_src emacs-lisp
-(mwb-init-load "init/prog-modes/lisp_emacs")
-#+end_src
-** Racket
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:CD17CCA0-A285-4BD3-A2D1-E394D00EEEEA
-:END:
-#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_D755144E-F3ED-4895-9DC9-B42A557F20BF
-#+begin_src emacs-lisp
-(mwb-init-load "init/prog-modes/lisp_racket")
-#+end_src
+Just make them lisp_* to run after

@@ -1,11 +1,13 @@
 #+TITLE Emacs configuration org Programming ml
 #+PROPERTY:header-args :cache yes :tangle yes  :comments link
 
-* ML
+* TODO ML
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:512872E0-BF29-4E7B-8851-BBE972462A28
 :END:
 Setup ML language family
+
+Perhaps not needed just separate files - sml section should be in other file
 
 Start with SML for coursera but this is where ocaml and f# should be
 
@@ -19,16 +21,15 @@ sml-mode from elpa - documentation on sml/nj is old
 (use-package sml-mode
   :ensure t
   :bind (:map sml-mode-map
-	      ("<f5>" . mwb-sml-run-file)
-	      :map inferior-sml-mode-map
-	      ("<f5>" . mwb-sml-run-file))
+              ("<f5>" . mwb-sml-run-file)
+              :map inferior-sml-mode-map
+              ("<f5>" . mwb-sml-run-file))
   :hook (
-	 ;; (sml-mode . aggressive-indent-mode)
-	 (sml-mode . prettify-symbols-mode)
-	 (sml-mode . smartparens-mode))
-  :init                                 ; remove from customise for easier control
+         ;; (sml-mode . aggressive-indent-mode)
+         (sml-mode . prettify-symbols-mode)
+         (sml-mode . smartparens-mode))
+  :init                              ; remove from customise for easier control
   (setq sml-abbrev-skeletons nil
-	sml-config-file "~/.config/.smlproc.sml"
-	sml-electric-pipe-mode nil)
-  :config (mwb-init-load "init/prog-modes/ml_sml-config"))
+        sml-config-file "~/.config/.smlproc.sml"
+        sml-electric-pipe-mode nil))
 #+end_src

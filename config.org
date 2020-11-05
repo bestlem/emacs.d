@@ -228,16 +228,32 @@ Override bind-keys othat
   (use-package diminish   :ensure t   :demand t)
   #+end_src
 
-**** Improve elisp
+**** Emacs lisp additions
 :PROPERTIES:
-:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:7CFEB4E3-CCEE-4116-8D5C-2B7059905251
+:ID:       org_mark_2020-11-05T13-04-24+00-00_mini12.local:8B285FB0-8B33-4187-AC49-3CDC90FCCA9B
 :END:
-Add more functional methods.
-#+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_554AB0FA-40AA-4E6D-A787-46C695874E4C
+These are needed as might be in my code
+***** Dash
+:PROPERTIES:
+:ID:       org_mark_2020-11-05T13-04-24+00-00_mini12.local:E429BF67-CB7F-4368-AC12-9B7F50F264DB
+:END:
+Functional programming
+#+NAME: org_mark_2020-11-05T13-04-24+00-00_mini12.local_586F9C8C-30DC-441E-85EE-1A67DA609030
 #+begin_src emacs-lisp
-(use-package dash  :ensure t)
-(use-package s  :ensure t)
+(use-package dash
+  :config
+  (dash-enable-font-lock))
 #+end_src
+***** Rx
+:PROPERTIES:
+:ID:       org_mark_2020-11-05T13-04-24+00-00_mini12.local:67FA0648-E483-44F4-91B6-0A44F2D09008
+:END:
+Convert a set of function calls to an RE. (it is part of emacs.
+#+NAME: org_mark_2020-11-05T13-04-24+00-00_mini12.local_B657936A-CBB7-4CE2-8BD9-8B2216C68A90
+#+BEGIN_SRC emacs-lisp
+(use-package rx)
+#+END_SRC
+
 **** Elisp code
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:8A9FE4DD-E2ED-4457-B819-F32FF65A28A9
@@ -301,7 +317,6 @@ Note that this is making the addition explicit so for example the aquamacs path 
 (setq use-package-keywords
       (mwb-insert-before-element :load-path :mwb-load-path  use-package-keywords))
 #+end_src
-
 ** Customisation file
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:A28603F3-9100-4C41-855A-5D202E7ACFE3

@@ -514,55 +514,25 @@ However I can't use that for a send to buffer as the map from mode to function i
 
 
 #+end_src
-** Git
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:6E33F21B-8867-46F3-8346-5E54A6E9AAD9
-:END:
-#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_64A36B3D-104D-47BA-A2A1-91E1844F7121
-Well actually ediff only now - perhaps rename to vcs
-#+NAME: org_mark_2020-10-26T12-24-30+00-00_mini12.local_04381D8D-3A41-4E9C-8300-DF7E06217A65
-#+begin_src emacs-lisp
-(mwb-init-load "init/prog-modes/git")
-#+end_src
 * Specific groups
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:3CC4E87A-CFCC-442A-8E6C-35D2C41916EC
 :END:
 Where there is common put them together. This part is really why I have separate files so I can deal with one thing at a time
 
-** Lisp
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:4D3C308D-416D-482E-8220-38569239AAD6
-:END:
- #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_221FF9C4-8058-4BC7-8E32-05A9A77C88CF
- #+begin_src emacs-lisp
-   (mwb-init-load "init/prog-modes/lisp")
-#+end_src
-** ML
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:3FE1A2FC-78F4-4656-9E6D-EE2F13D8D324
-:END:
-#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_95999B02-8BAE-4A08-873B-799E1F3F9612
+Lets just load them not explicitly - everything in prog-modes (a better name would be modes or config However leave as this breaks git history)
+#+NAME: org_mark_2020-11-05T10-37-03+00-00_mini12.local_8504E6E2-7344-4462-9C3B-F52C34EA1387
 #+begin_src emacs-lisp
-   (mwb-init-load "init/prog-modes/ml")
+(dolist (f (directory-files
+            (expand-file-name "init/prog-modes" mwb-user-emacs-directory)
+            nil
+            (rx-to-string '(seq  any ".org" eol)
+                          ;; might need to add sort by length here - stops the
+                          ;; choice of word splitter - or _ issue
+                          )))
+  (mwb-init-load (concat "init/prog-modes/" (file-name-sans-extension f))))
 #+end_src
-** Python
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:CCDCBB6B-6D02-4E28-86FE-9F7EC6811786
-:END:
-Really need to start from scratch
-#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_31F0418B-C499-4833-BB7B-328F6331C36D
-#+begin_src emacs-lisp
-(mwb-init-load "init/prog-modes/python")
-#+end_src
-** Structured data
-:PROPERTIES:
-:ID:       org_mark_2020-10-26T12-24-30+00-00_mini12.local:E63521F7-F02B-4CD2-B453-050E715AC25B
-:END:
-#+NAME: org_mark_2020-10-26T12-24-30+00-00_mini12.local_334547DD-FEB4-45C1-9EE2-97C2D93FADC6
-#+begin_src emacs-lisp
-(mwb-init-load "init/prog-modes/structured-data")
-#+end_src
+
 ** SQL
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:FA08DE52-A532-4D20-AB12-A3B358E3FC56
@@ -570,11 +540,7 @@ Really need to start from scratch
 Not worth separating out.
 Note this is not the internal mode. It is from Emacs wiki as I like the interaction buffer better. Emacs' ones gave too many. Probably was my most used mode at work. As Java was Eclipse.
 Now I have no idea if it works
-*** TODO Need to put in use-package
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:9406F1EB-163A-4FD8-BC4F-8EBCC5A51263
-:END:
-#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_5052A586-FB4D-4315-B0D8-2D81C60A5E29
+#+NAME: org_mark_2020-11-05T12-42-05+00-00_mini12.local_CBD5D985-056C-4F30-B876-4311EB15D93A
 #+begin_src emacs-lisp
 (use-package sql-mode
   :mwb-load-path "site-lisp/sql")

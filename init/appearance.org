@@ -364,14 +364,26 @@ I think I now want mainly one window and have splits but tabs are useful.
 
 
 
-** Context help
+** TODO Context help
 :PROPERTIES:
 :ID:       org_mark_2020-10-09T10-33-48+01-00_mini12.local:4FC3755A-A7F5-45B0-BD0D-8DCBFEC5D4CC
 :END:
 Emacs has a way of showing help. It seems to write to echo area thus overwriting what I want.
 
 So lets try in popup
+Still occurs in minibuffer
 #+NAME: org_mark_2020-10-09T10-33-48+01-00_mini12.local_F3337078-A807-4F76-AD91-93BE3B6DF2C3
 #+begin_src emacs-lisp
 (tooltip-mode nil)
+#+end_src
+
+** Set size
+:PROPERTIES:
+:ID:       org_mark_2020-11-05T09-18-27+00-00_mini12.local:2DB4E6E9-344A-45B9-B67E-C021EC6EC9DB
+:END:
+This is hardcoded. See all.org anmd desktop for other ways. Aquamacs just restores frames using revive.
+#+NAME: org_mark_2020-11-05T09-18-27+00-00_mini12.local_000987D2-DC8C-4944-AA63-B8D987C1FD5D
+#+begin_src emacs-lisp
+(when (and window-system (not *aquamacs*))
+  (set-frame-size (selected-frame) 230 50)) ; in characters
 #+end_src

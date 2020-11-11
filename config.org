@@ -620,6 +620,7 @@ occur before loading Org-Mode. *Never* remove this from a submitted ECM.
 #+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_450E5072-6040-468E-843F-E62E4CB34FA7
 #+begin_src emacs-lisp
 (use-package org
+  :defer t
   :ensure t)
 #+end_src
 * The rest

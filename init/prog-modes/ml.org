@@ -33,3 +33,15 @@ sml-mode from elpa - documentation on sml/nj is old
         sml-config-file "~/.config/.smlproc.sml"
         sml-electric-pipe-mode nil))
 #+end_src
+
+** Org mode helper
+:PROPERTIES:
+:ID:       org_mark_2020-11-10T11-48-28+00-00_mini12.local:668BE38D-3E38-4D0B-A8F1-CCB4CE0AF979
+:END:
+Separated out
+#+NAME: org_mark_2020-11-10T11-48-28+00-00_mini12.local_8FC71439-07B8-480C-A285-3C0F6AA4192C
+#+begin_src emacs-lisp
+(use-package ob-sml
+  :after (sml-mode)
+  :mwb-load-path "fork/ob-sml")
+#+end_src

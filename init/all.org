@@ -1,15 +1,16 @@
 #+TITLE Emacs configuration after org
 #+PROPERTY:header-args :cache yes :tangle yes :comments link
 #+STARTUP: content
-* Emacs environment
+* Main Load
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:5A4CBEFD-074A-4547-815A-F5E0A16E4BA1
 :END:
-Now minimally useful
+Org mode and packaging have been loaded. Code here can use anything including  complex weaving
 This adds the real use.
-The order here does not matter much. On second thoughts especially with desktop it does. We need the environment set up befoire we load files. Apperance and keys are later. Moset things are on :defer t so only start when needed. :defer with time is also problematoic as it makes :after fail; which is why some :config have use-package in them.
-In future this file should really just be a list of mwb-init-load and each one can fail. All structure could be here.
 
+The order here matter. Anything that is independentish - like major modes can go in prog-modes (historic naming) and get loaded  from *.org
+*
+We need the environment set up before we load files. Appearance and keys are later. Most things are on :defer t so only start when needed. :defer with time is also problematic as it makes :after fail; which is why some :config have use-package in them.
 
 * After initialisation
 :PROPERTIES:
@@ -44,7 +45,8 @@ Note that if a subdirectory is just for one thing then use keyword mwb-load-path
 :PROPERTIES:
 :ID:       org_mark_2020-09-29T11-53-58+01-00_mini12.local:63AB1DE7-5C65-415D-96D0-7DAF0E0BC2BA
 :END:
-Aquamacs puts a lot in ~/Library/Preferences/Emacs but Emacs 27 does not know that so we want to keep some of the crap out of .Emacs.d So try no littering
+Aquamacs puts a lot in ~/Library/Preferences/Emacs but Emacs 27 does not know that so we want to keep some of the crap out of .Emacs.d So try no littering.
+We gave up as it is just a set of people adding modes to it. There are not enough to be worth it. Do it myself. But use var as the default directory
 #+NAME: org_mark_2020-09-29T11-53-58+01-00_mini12.local_1F694F93-C501-4512-BA63-CA34560F68CE
 #+begin_src emacs-lisp
 (use-package no-littering
@@ -102,7 +104,7 @@ Note should check on defconst
   #+begin_src emacs-lisp
   (mwb-init-load  "init/behaviour"); odds mainly variables
   (mwb-init-load  "init/completion")
-  (mwb-init-load  "init/ibuffer")
+  (mwb-init-load  "init/ibuffer")  ;; could go to prog-modes
   #+end_src
 ** Command completion
 :PROPERTIES:
@@ -133,6 +135,59 @@ Note headers have tangle command in to suppress one or other
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_AE80986F-5F2A-4603-A292-6FB20CB43A9C
 #+begin_src emacs-lisp
 (mwb-init-load "init/ivy")
+#+end_src
+** Shell variables
+:PROPERTIES:
+:ID:       org_mark_2020-11-05T13-13-44+00-00_mini12.local:C99A151C-9456-41BC-8872-1C8227529551
+:END:
+I have not really run shell so not often needed. But the Aquamacs does it - it actually copies all env variables from login shell - it uses bash. If I want to keep fish I suspect I ought to modify the Aquamacs code, but then on other platforms the environment might be OK - In essence so we throw away the starting environment. Some like DISPLAY might really matter.
+
+Arg it is not nice.
+
+I use fish shell and can make M-x shell run that by setting explicit-shell-file-name
+However things inside Emacs might use shell for other things and they expect a POSIX shell.
+OK what POSIX shell. MacOS is now zsh (which I have not set up yet) and bash is old and a security risk. Iif they call sh then there will be a mess.
+What is missing is getting the environment variables.
+*** Aquamacs
+:PROPERTIES:
+:ID:       org_mark_2020-11-05T13-13-44+00-00_mini12.local:0D944CF7-686E-4CCF-B006-6B0C4FF5F5CA
+:END:
+Aquamacs does this but uses shell-file-name - which is set in C - originally /bin/sh but some code changes this to /bin/bash guess at getenv("SHELL") and looks for csh or sh based shells.
+*** Other
+:PROPERTIES:
+:ID:       org_mark_2020-11-05T13-13-44+00-00_mini12.local:A87E0049-2F9A-4D2E-898D-E0C1BD5BDAEC
+:END:
+ exec-path-from-shell does work with more shells including fish - but requires you to name variables needed - which might be OK
+ It calls the shell in exec-path-from-shell-shell-name otherwise shell-file-name otherwise (getenv "SHELL"). Then calls sh from fish so printf works.
+*** TODO Conclusion
+:PROPERTIES:
+:ID:       org_mark_2020-11-05T13-13-44+00-00_mini12.local:80FFD29A-D2AE-4C6D-8C49-D805314C5A1C
+:END:
+So tends to imply I need to change my Mac to be zsh - fish does not set SHELL to be more confusing and/or mod Aquamacs code for fish or keep exec.... and look at which variables get used. exec is OK until I have non simple characters
+Fun will occur with other OS.
+There are other things to be set `exec-path' and eshell-path-env - Aquamacs sort of does the former only.
+Also see https://wiki.archlinux.org/index.php/Fish for making bash as default then run fish
+*** Coding notes
+:PROPERTIES:
+:ID:       org_mark_2020-11-05T13-13-44+00-00_mini12.local:D8635697-570C-4F9E-A0C5-235C1694EDAB
+:END:
+Aquamacs uses shell-file-name and prints using printenv to a file and plays with that
+exec... uses printf
+Now I remember writing my own printenv as env|sort - looking at man page printenv is older but env is POSIX. printf is later but might not work with UTF-8
+
+#+NAME: org_mark_2020-11-05T13-13-44+00-00_mini12.local_7998E803-3782-4B60-89EB-BAEF197DDBD9
+#+begin_src emacs-lisp
+(setq explicit-shell-file-name "/opt/local/bin/fish")
+(setq exec-path-from-shell-shell-name "/opt/local/bin/fish")
+(setq exec-path-from-shell-debug nil)
+
+(use-package exec-path-from-shell
+  :when  (memq window-system '(mac ns x))
+  :ensure t
+  :init
+  (setq exec-path-from-shell-variables '("PATH" "MANPATH" "CONDA_PREFIX"))
+  :config
+  (exec-path-from-shell-initialize))
 #+end_src
 * Applications
 :PROPERTIES:
@@ -300,7 +355,7 @@ This seemed interesting but seemed to messup lispy
   Need to control how it is restarted. Aquamacs saves it
   #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_7CE610E6-5D87-43CE-9EF8-5D9112E28EF0
   #+begin_src emacs-lisp
-(setq initial-major-mode 'org-mode)
+(setq initial-major-mode 'emacs-lisp-mode)
 (setq initial-scratch-message nil)
 (unless *aquamacs*
   (use-package persistent-scratch

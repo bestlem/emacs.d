@@ -1,29 +1,55 @@
 #+TITLE Emacs configuration org python configuration
 #+PROPERTY:header-args :cache yes :tangle yes  :comments link
 
+This is a minimal setup as not doing any real work.
+
+Look at howardabrams for a more detailed setup.
+Can't choose between elpy and jedi etc.
+
+Now I used python's python mode not the one in emacs. The latter has been improved and so perhaps I could chnage
+
+The problem is conda uses pythonic which has a require 'python and so always loads the emacs one.
+
+So it is a mess
+
+No idea if works.
+
+When really use python then start from elpy or similar.
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_26CAE374-0A00-4CBD-A31D-D465AE7AD800
 #+begin_src emacs-lisp
-;; python from use-package maintainer https://github.com/jwiegley/dot-emacs/blob/master/init.el#L1013
 (use-package python-mode
-  :mode "\\.py\\'"
-  :interpreter "python"
+  :ensure t
+  ;;  add as multiple python-modes so need to force a bit
+  :mode ("\\.py\\'" . python-mode)
+  :interpreter ("python" . python-mode)
   :bind (:map python-mode-map
 			  ("C-c c")
 			  ("C-c C-z" . python-shell))
   :init
-  (setq py--imenu-create-index-p t))
+  (setq py--imenu-create-index-p t)
+  :config
+
+  (setq-default python-indent 4)
+  (setq-default python-indent-offset 4)
+  (add-hook 'python-mode-hook           ;why it is OK elsewhere
+            (lambda ()
+              (setq tab-width 4)))
+  (setq-default pdb-command-name "python3 -m pdb")
+  (setq-default python-shell-interpreter "python3")
+  )
 #+end_src
 * Conda
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:4BA83964-C235-4AA4-8490-70CCC9C25C6D
 :END:
-Fails as I think in the middle of changes. Error is not loading pythonic
+Might be better in elpy etc as for the pythonic issue.
   #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_D22A3A48-A2D2-493C-B891-0645341FE000
   #+begin_src emacs-lisp
 (use-package conda
   :ensure t
+  :after python-mode
   :init
-  (setq conda-anaconda-home (expand-file-name "~/minconda3"))
+  (setq conda-anaconda-home (getenv "CONDA_PREFIX"))
   :config
   ;; If you want interactive shell support, include:
   (conda-env-initialize-interactive-shells)
@@ -35,9 +61,15 @@ Fails as I think in the middle of changes. Error is not loading pythonic
   ;; Via M-x conda-env-activate RET analyticd-pysystemtrade
   ;; or
   ;; (conda-env-activate "analyticd-pysystemtrade")
+  (conda-env-activate (getenv "CONDA_DEFAULT_ENV"))
   (setq-default mode-line-format (cons mode-line-format '(:exec conda-env-current-name)))
   )
   #+end_src
+* TODO Org mode
+:PROPERTIES:
+:ID:       org_mark_2020-11-11T11-24-14+00-00_mini12.local:9705EACE-A73F-41E3-A5AB-8FD2BAB849B5
+:END:
+Need to set up execute (here or at start)
 * Xonsh
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:62195329-D8AA-4CC1-B7F4-4570BBDCF3A8

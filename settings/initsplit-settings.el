@@ -33,10 +33,12 @@
      ("package"
       ("package-"))
      ("python"
-      ("python"))
+      ("python" "py-"))
+     ("shell"
+      ("exec-path-" "explicit-shell-file-name"))
      ("structured-data"
       ("nxml-"))
      ("vc"
       ("vc-" "magit-" "ediff-"))
      ("emacs-base"
-      ("make-backup" "indent-tabs" "minibuffer-" "auto-fill-" "auto-word-wrap" "comment-auto" "word-wrap" "fill-" "visual-line-mode" "show-paren-mode" "global-h" "cursor-type" "tool-bar-mode" "delete-old-" "safe-local-variable" "custom-" "undo-limit" "desktop-")))))
+      ("make-backup" "indent-tabs" "minibuffer-" "auto-fill-" "auto-word-wrap" "comment-auto" "word-wrap" "fill-" "visual-line-mode" "show-paren-mode" "global-h" "cursor-type" "tool-bar-mode" "delete-old-" "safe-local-variable" "custom-" "undo-limit" "desktop-" "customize-")))))

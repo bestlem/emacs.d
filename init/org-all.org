@@ -248,6 +248,7 @@ Code block behaviour - but also see customization for appearance
       :header-args: :noweb-ref org-grettke :tangle no
       :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:547FD263-C9C1-4384-850B-989B61F4E03D
       :END:
+ This is not tangled in place but picked up by weaving
 **** Minimal config
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:4AF845AD-16BB-4C99-B8BB-AA29A91E8D84
@@ -793,12 +794,8 @@ Set permission of tangled files
    :END:
 
 Load the required languages
-#+NAME: org_mark_2020-01-24T12-49-05+00-00_mini12_FEAA4B06-655F-4F20-ACE9-24DEFBBC209A
-#+begin_src emacs-lisp
-(use-package ob-sml
-  :mwb-load-path "fork/ob-sml")
-#+end_src
-Org-Mode may use all of the listed languages.
+
+Org-Mode may use all of the listed languages. But do not load them
 
 #+NAME: org_gcr_2017-05-12_mara_54FEB960-2B87-41E3-A4E4-6DE9DED9B1BD
 #+BEGIN_SRC emacs-lisp
@@ -806,10 +803,10 @@ Org-Mode may use all of the listed languages.
  'org-babel-load-languages
  '((emacs-lisp . t)
    (org . t)
-   (sml . t)
+   ;; (sml . t)
    ;;
    (C . t)
-   (python . t)
+   ;; (python . t)
    ;;
    (makefile . t)
    (shell . t)))
@@ -1326,10 +1323,10 @@ From [[http://www.howardism.org/Technical/Emacs/orgmode-wordprocessor.html][here
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:E1789BA1-AF3F-441B-95B6-1FD7ADABD862
 :END:
 	#+begin_src emacs-lisp
-	(use-package org-indent
-	  :defer 10
-	  :ensure nil
-	  :diminish)
+(use-package org-indent
+  :after (org)
+  :ensure nil
+  :diminish)
 	#+end_src
 *** Line wrapping
 :PROPERTIES:

@@ -1,0 +1,16 @@
+#+TITLE Emacs configuration org Programming and structured data modes
+#+PROPERTY:header-args :cache yes :tangle yes  :comments link
+
+* Shell and other small things
+:PROPERTIES:
+:ID:       org_mark_2020-11-05T13-13-44+00-00_mini12.local:B661F84D-5F87-4871-93DB-179BC50DE92F
+:END:
+** Fish
+:PROPERTIES:
+:ID:       org_mark_2020-11-05T13-13-44+00-00_mini12.local:AE8E3E65-76F0-47BC-9279-11F940D93C4E
+:END:
+#+NAME: org_mark_2020-11-05T13-13-44+00-00_mini12.local_1A77F6D2-CC9A-4B2A-A141-75F9F7A6307A
+#+begin_src emacs-lisp
+(use-package fish-mode
+  :ensure t)
+#+end_src

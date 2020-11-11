@@ -177,9 +177,9 @@ _k_: kill        _s_: split                   _{_: wrap with { }
 (use-package aggressive-indent
   :ensure t
   :after smartparens
-  :config
-  (global-aggressive-indent-mode 1)
-  )
+  :hook
+  (prog-mode . aggressive-indent-mode)
+  (python-mode . (lambda () (aggressive-indent-mode -1))))
  #+end_src
 ** Refactor
 :PROPERTIES:
@@ -525,17 +525,4 @@ Possibly lost as I did have cperl at one time but from comments that might have 
    ;;   (setq perldb-command-name "/run/pd/packages/perl/5.003/bin/perl")
    ;; )
    ;; (add-hook 'perldb-mode-hook 'my-perldb-mode-hook)
-#+end_src
-** Shell and other small things
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:4509E67E-09ED-4C66-855C-BF44B0DC79A9
-:END:
-*** Fish
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:9451EAD0-4CD9-4CAA-AF85-BC358DA8B9F6
-:END:
-#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_7FB73B6F-73A3-4823-9DC1-F220484A074F
-#+begin_src emacs-lisp
-(use-package fish-mode
-  :ensure t)
 #+end_src

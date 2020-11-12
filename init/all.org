@@ -62,7 +62,7 @@ In this case var and overlap no-littering
 #+NAME: org_mark_2020-10-10T14-59-33+01-00_mini12.local_DB515763-D42A-4AC9-B13B-49CCF27056D8
 #+begin_src emacs-lisp
 (unless *aquamacs*
-  (setq user-emacs-directory (mwb-user-emacs-file "var")))
+  (setq user-emacs-directory (mwb-user-emacs-file "var/")))
 #+end_src
 
 ** Setting variables with a check on type

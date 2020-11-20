@@ -1,9 +1,62 @@
 #+TITLE Emacs configuration org sml config
 #+PROPERTY:header-args :cache yes :tangle yes  :comments link
 
+
 All this runs in the config section so not loaded until needed.
 A separate file for documentation ie comments
 
+
+* SML
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:2FA3F9DB-2E93-49A3-8CF4-653482E10D47
+:END:
+sml-mode from elpa - documentation on sml/nj is old
+
+Make this one file as loading is now all files.
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_06AB4FFF-E369-48A3-BAED-2DC818FB3C7C
+#+begin_src emacs-lisp
+(use-package sml-mode
+  :ensure t
+  :bind (:map sml-mode-map
+              ("<f5>" . mwb-sml-run-file)
+              :map inferior-sml-mode-map
+              ("<f5>" . mwb-sml-run-file))
+  :hook (
+         ;; (sml-mode . aggressive-indent-mode)
+         (sml-mode . prettify-symbols-mode)
+         (sml-mode . smartparens-mode))
+  :init                              ; remove from customise for easier control
+  (setq sml-abbrev-skeletons nil
+        sml-config-file "~/.config/.smlproc.sml"
+        sml-electric-pipe-mode nil)
+  :config
+  <<sml-config>>
+  )
+#+end_src
+
+** Org mode helper
+:PROPERTIES:
+:ID:       org_mark_2020-11-10T11-48-28+00-00_mini12.local:668BE38D-3E38-4D0B-A8F1-CCB4CE0AF979
+:END:
+Separated out
+#+NAME: org_mark_2020-11-10T11-48-28+00-00_mini12.local_8FC71439-07B8-480C-A285-3C0F6AA4192C
+#+begin_src emacs-lisp
+(use-package ob-sml
+  :after (sml-mode)
+  :mwb-load-path "fork/ob-sml")
+#+end_src
+
+** Config
+:PROPERTIES:
+:header-args: :noweb-ref  sml-config
+:ID:       org_mark_2020-11-12T14-28-56+00-00_mini12.local:BEB80221-3122-4A7D-81E3-FFD3F7291FDC
+:END:
+All these are tangled together
+
+*** Kill subprocess
+:PROPERTIES:
+:ID:       org_mark_2020-11-12T14-28-56+00-00_mini12.local:65F43092-52F2-4494-B4A7-E90CAD827903
+:END:
 
 #+NAME: org_mark_2020-02-10T11-53-11+00-00_mini12_C11A8481-74E0-4DDE-AC2E-1E4666BD903C
 #+begin_src emacs-lisp
@@ -34,6 +87,10 @@ but on next read only the killing using comint functions seems better"
       (kill-buffer sml-buffer))))
 #+end_src
 
+**** Run
+:PROPERTIES:
+:ID:       org_mark_2020-11-12T14-28-56+00-00_mini12.local:30C0D9F1-C4BF-430E-BB3D-2BED9EAF61B6
+:END:
 Run the file - the main action for sml
 #+NAME: org_mark_2020-02-10T11-53-11+00-00_mini12_B8DBE76D-CEA3-4D61-9344-D0885064B7BE
 #+begin_src emacs-lisp
@@ -50,7 +107,7 @@ Run the file - the main action for sml
   (sml-run sml-program-name file))
   #+end_src
 
-* Polyml setup
+*** Polyml setup
 :PROPERTIES:
 :ID:       org_mark_2020-02-24T14-59-33+00-00_mini12.local:87878122-BFDC-4A05-B7C4-27253725B7E7
 :END:
@@ -74,7 +131,7 @@ Various variables need to be set to use polyml
 (mwb-sml-set-polyml)
 #+end_src
 
-** Error search
+**** Error search
 :PROPERTIES:
 :ID:       org_mark_2020-02-24T14-59-33+00-00_mini12.local:FBBDC8BF-0F91-4D49-9046-D87AA2D3EBE9
 :END:
@@ -131,7 +188,7 @@ Well this is fun
 	 5 (6 . 8) (7 . 9) (3 . 4) 1))
       )
 #+end_src
-* Smartparens
+*** Smartparens
 :PROPERTIES:
 :ID:       org_mark_2020-02-24T14-59-33+00-00_mini12.local:E9595AFD-17D5-4511-B97A-587E9BA7F9C7
 :END:
@@ -151,6 +208,7 @@ Hmm prob OK for the code, but my tests ar a large thing not one expr + you need 
 #+BEGIN_SRC emacs-lisp
 (use-package eval-in-repl-sml
   :demand t
+:after (sml-mode)
   :config
   ;; Evaluate expression in the current buffer.
   :bind (:map sml-mode-map ("<f6>" . eir-eval-in-sml)

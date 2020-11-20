@@ -19,13 +19,13 @@ We need the environment set up before we load files. Appearance and keys are lat
 Although see starter kit where they run after init.
   #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_6BFB6DB1-D7D7-4A49-895F-C5D06CACED2F
   #+begin_src emacs-lisp
-  (add-hook 'after-init-hook
-			`(lambda ()
-			   (setq file-name-handler-alist file-name-handler-alist-old
-					 gc-cons-threshold mwb/gc-cons-threshold
-					 gc-cons-percentage 0.1)
-			   (garbage-collect)
-			   (message "Emacs init-time %s" (emacs-init-time))) t)
+(add-hook 'after-init-hook
+		  `(lambda ()
+			 (setq file-name-handler-alist file-name-handler-alist-old
+				   gc-cons-threshold mwb/gc-cons-threshold
+				   gc-cons-percentage 0.1)
+			 (garbage-collect)
+			 (message "Emacs init-time %s" (emacs-init-time))) t)
   #+end_src
 ** Environment
 :PROPERTIES:
@@ -182,7 +182,7 @@ Now I remember writing my own printenv as env|sort - looking at man page printen
 (setq exec-path-from-shell-debug nil)
 
 (use-package exec-path-from-shell
-  :when  (memq window-system '(mac ns x))
+  :when  (and (not *aquamacs*) (memq window-system '(mac ns x)))
   :ensure t
   :init
   (setq exec-path-from-shell-variables '("PATH" "MANPATH" "CONDA_PREFIX"))
@@ -198,7 +198,10 @@ Now I remember writing my own printenv as env|sort - looking at man page printen
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:B28959EB-4497-40E8-B194-998A9D7C783B
 :END:
 	 #+begin_src emacs-lisp
-	 (mwb-init-load "init/gnus")
+(use-package gnus
+  :commands (gnus)
+  :config
+  (mwb-init-load "init/gnus"))
 	 #+end_src
 * Major modes
 :PROPERTIES:
@@ -233,13 +236,14 @@ Interfacing with the operating system
 		   (face-remap-add-relative 'variable-pitch :family "Times New Roman" :height 1.5)
 		   :hook (nov-mode . my-nov-setup)))
 	   #+end_src
-**** Web display
+*** Web display
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:F2507988-AE2D-4676-9002-0FDC2DF2DBCB
 :END:
 	   Make contrast higher from steckemacs
 	   #+begin_src emacs-lisp
 	   (use-package shr
+         :disabled
 		 :custom
 		 ;; increase contrast between similar colors
 		 (shr-color-visible-luminance-min 60))

@@ -30,6 +30,9 @@
 
 ;; [[file:init.org::*Debug flag][Debug flag:1]]
 (setq init-file-debug t)
+;; (require 'profiler)
+;; (profiler-start 'cpu+mem)
+;; (add-hook-lambda after-init-hook (profiler-stop))
 ;; Debug flag:1 ends here
 
 ;; [[file:init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_315EE687-FC28-4D41-810D-4FF19AA66CD4][org_mark_2020-01-23T20-40-42+00-00_mini12_315EE687-FC28-4D41-810D-4FF19AA66CD4]]
@@ -125,6 +128,8 @@ is non-nil."
 ;; org_mark_2020-01-23T20-40-42+00-00_mini12_315EE687-FC28-4D41-810D-4FF19AA66CD4 ends here
 
 ;; [[file:init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_A039068A-5F9B-4C02-A1C9-156C79F14A5B][org_mark_2020-01-23T20-40-42+00-00_mini12_A039068A-5F9B-4C02-A1C9-156C79F14A5B]]
+(setq mwb-esup-depth 1)
+
 (defun mwb-init-load (file-root &optional no-org)
   "Load the relevant code.
         Look for <file-root>.org and <file-root>.el files.
@@ -135,7 +140,9 @@ is non-nil."
           (concat (expand-file-name file-root mwb-user-emacs-directory) ".org"))
          (el-file
           (concat (expand-file-name file-root mwb-user-emacs-directory) ".el")))
-
+    (setq esup-depth mwb-esup-depth )
+    ;; (setq esup-child-max-depth mwb-esup-depth )
+    (setq esup-child-current-depth 0)
     (when (file-newer-than-file-p org-file el-file)
       (cond (no-org
              (message "tangle <%s> to <%s> using regex replacement not org mode"

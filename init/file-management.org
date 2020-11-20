@@ -236,7 +236,9 @@ So take from projectile
 									:compile "make setup"
 									:test "make test")
   (setq projectile-completion-system 'ivy)
-  (projectile-global-mode))
+  (projectile-global-mode)
+  <<projectile-hydra>>
+  )
 #+end_src
 *** File saving
 :PROPERTIES:
@@ -267,7 +269,7 @@ projectile-save-project-buffers is nice but save-buffer does not make a backup. 
 :END:
  I really do not want all but for ease just do it from [[https://github.com/jojojames/matcha][Matcha]] but that is too much as is the Hydra wiki So lets try from [[http://doc.rix.si/cce/cce-code-core.html][Ryan Rix]], also he uses rg (bbatsov has a complex one as well)
  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_01B9A5FA-87F9-4520-A7A0-E0C04BA45AD9
- #+begin_src emacs-lisp
+ #+begin_src emacs-lisp :noweb-ref projectile-hydra
  (defhydra hydra-projectile-other-window (:color teal)
    "projectile-other-window"
    ("f"  projectile-find-file-other-window        "file")
@@ -382,3 +384,18 @@ This is the visual
 
 
   #+end_src
+*** Debug
+:PROPERTIES:
+:ID:       org_mark_2020-11-14T12-12-03+00-00_mini12.local:4F9B14A7-978B-4BF7-A64E-41B8EE921099
+:END:
+I get
+Error running timer ‘treemacs--process-file-events’: (wrong-type-argument sequencep t)
+So from https://github.com/Alexander-Miller/treemacs/issues/168
+#+NAME: org_mark_2020-11-14T12-12-03+00-00_mini12.local_470AEA78-DD08-44F4-9DCE-B416FD307AD0
+#+begin_src emacs-lisp
+(defsubst treemacs-get-from-shadow-index (key)
+  "Get node with KEY, if any."
+  (--if-let (ht-get treemacs-shadow-index key)
+      it
+    (treemacs-log "Node for key [%s] missing in shadow index" key)))
+#+end_src

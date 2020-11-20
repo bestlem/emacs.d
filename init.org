@@ -203,6 +203,7 @@ From  aquamacs-get-custom-file-dotemacs-warning
 Emacs 27 introduces early-init.el to go stuff before the graphics - basically package and some gui suppression
 This is taken from https://github.com/MatthewZMD/.emacs.d/blob/master/early-init.el and https://gitlab.com/protesilaos/dotfiles/blob/master/emacs/.emacs.d/emacs-init.org but many see the same
 
+
 ** TODO Startup
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:B524CE3C-6A8D-49DA-85A5-8504DC43F0D6
@@ -216,7 +217,7 @@ This is taken from https://github.com/MatthewZMD/.emacs.d/blob/master/early-init
  This is from [[ https://github.com/jwiegley/dot-emacs/blob/master/init.el#L1013][John Wiegley]] It might make sense more in early-init.el but also needed for Emacs < 27
  #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_EC7FD451-253D-4F87-90DC-AD484305487F
  #+begin_src emacs-lisp
- (defconst emacs-start-time (current-time))
+ ;;(defconst emacs-start-time (current-time))
 
  (defvar file-name-handler-alist-old file-name-handler-alist)
 
@@ -260,6 +261,19 @@ Fiddle with suppressing graphics. I do want some of these
 #+end_src
 
 
+** Elisp code for use in all
+:PROPERTIES:
+:ID:       org_mark_2020-11-13T08-54-14+00-00_mini12.local:5DDEB242-A0B0-4733-BCA1-7C5602A55762
+:END:
+
+For some useful macros [[https://github.com/waymondo/hemacs][hemacs]]
+
+#+NAME: org_mark_2020-11-13T08-54-14+00-00_mini12.local_B13702B5-689F-4646-85F2-FD570054EAC4
+#+begin_src emacs-lisp
+(defmacro add-hook-lambda (hook &rest body)
+  (declare (indent 1) (debug t))
+  `(add-hook ,hook (lambda () ,@body)))
+#+end_src
 * Implement init environment (init.el)
 :PROPERTIES:
   :header-args:    :tangle init.el :comments link
@@ -309,7 +323,7 @@ For Emacs < 27 we need early -init
 #+NAME: org_mark_2020-09-28T01-08-28+01-00_mini12.local_E7D671F1-9D29-4FF6-A8E5-8884826E6E4B
 #+begin_src emacs-lisp
 (when (version< emacs-version "27")
-      (load (mwb-user-emacs-file "early-init")))
+  (load (mwb-user-emacs-file "early-init")))
 #+end_src
 ** package
 :PROPERTIES:
@@ -330,6 +344,9 @@ As this is now ~/.emacs.d/init.el and not in ~/Library/Preferences Emacs sees th
 :END:
 	 #+begin_src emacs-lisp
 (setq init-file-debug t)
+;; (require 'profiler)
+;; (profiler-start 'cpu+mem)
+;; (add-hook-lambda after-init-hook (profiler-stop))
 	 #+end_src
 
 ** Code to do loading
@@ -454,6 +471,8 @@ is non-nil."
 This fails for config.org so that needs to be in version control.
    #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_A039068A-5F9B-4C02-A1C9-156C79F14A5B
    #+begin_src emacs-lisp
+(setq mwb-esup-depth 1)
+
 (defun mwb-init-load (file-root &optional no-org)
   "Load the relevant code.
         Look for <file-root>.org and <file-root>.el files.
@@ -464,7 +483,9 @@ This fails for config.org so that needs to be in version control.
           (concat (expand-file-name file-root mwb-user-emacs-directory) ".org"))
          (el-file
           (concat (expand-file-name file-root mwb-user-emacs-directory) ".el")))
-
+    (setq esup-depth mwb-esup-depth )
+    ;; (setq esup-child-max-depth mwb-esup-depth )
+    (setq esup-child-current-depth 0)
     (when (file-newer-than-file-p org-file el-file)
       (cond (no-org
              (message "tangle <%s> to <%s> using regex replacement not org mode"

@@ -46,8 +46,8 @@ It turns out Emacs supports multiple themes being active at the same time, which
 #+begin_src emacs-lisp :tangle no
 (setq custom-theme-directory (mwb-user-emacs-file "data/themes"))
 (defvar quick-switch-themes
-  (let ((themes-list (list 'mwbtheme-leuven
-                           'leuven
+  (let ((themes-list (list 'modus-vivendi
+                           'mwbtheme-leuven
                            'high-contrast
                            'modus-operandi)))
     (nconc themes-list themes-list))
@@ -73,7 +73,7 @@ One for writing code and the other for reading articles."
   (setq quick-switch-themes (cdr quick-switch-themes)))
 
 ;; From emacs or local
-(load-theme 'leuven t t)
+;; (load-theme 'leuven t t)
 (load-theme 'mwbtheme-leuven t t)
 
 (use-package color-theme-modern
@@ -85,6 +85,10 @@ One for writing code and the other for reading articles."
   :ensure t
   :config
   (load-theme 'modus-operandi t t))
+(use-package modus-vivendi-theme
+  :ensure t
+  :config
+  (load-theme 'modus-vivendi t t))
 
 (enable-theme (car quick-switch-themes)) ; first in list
 #+end_src
@@ -113,7 +117,7 @@ emacs-27 has another way
 #+NAME: org_mark_2020-10-03T11-41-17+01-00_mini12.local_7F1CA278-5EFF-4B83-BB74-2E3F161154E8
 #+begin_src emacs-lisp
 (if (fboundp 'mac-auto-operator-composition-mode)
-    (mac-auto-operator-composition-mode)
+    (mac-auto-operator-composition-mode 1)
   (use-package fira-code-mode
     :ensure t
     :custom (fira-code-mode-disabled-ligatures '("[]" "x")) ; ligatures you don't want

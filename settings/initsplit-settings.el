@@ -38,6 +38,8 @@
       ("exec-path-" "explicit-shell-file-name"))
      ("structured-data"
       ("nxml-"))
+     ("modus"
+      ("modus-"))
      ("vc"
       ("vc-" "magit-" "ediff-"))
      ("emacs-base"

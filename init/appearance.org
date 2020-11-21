@@ -123,6 +123,16 @@ emacs-27 has another way
     :custom (fira-code-mode-disabled-ligatures '("[]" "x")) ; ligatures you don't want
     :hook prog-mode))
 #+end_src
+*** Prettify Symbols
+:PROPERTIES:
+:ID:       org_mark_2020-11-21T10-10-49+00-00_mini12.local:3AC8A96E-3DDF-464E-B426-DBF7DD4F6739
+:END:
+This is not the same as ligatures - or at least shows a symbol instead of a word.. The obvious example is lambda get shown as λ This is mode specific
+There is also more a mode called pretty-mode but not looked into that yet - for an  [[http://www.modernemacs.com/post/prettify-mode/][overview]]
+#+NAME: org_mark_2020-11-21T10-10-49+00-00_mini12.local_3FBB9B67-C979-4999-BF9C-3600555103A5
+#+begin_src emacs-lisp
+(global-prettify-symbols-mode 1)
+#+end_src
 * Structure
 :PROPERTIES:
 :ID:       org_mark_2020-10-03T14-51-52+01-00_mini12.local:2E4982D0-8D77-435D-8651-A796B057CCD7
@@ -227,7 +237,7 @@ but the answer below has an interesting suggestion
   (setq hl-line-range-function #'my-hl-line-range-function)
 
   :config
-  (set-face-attribute 'hl-line nil :inherit nil :background "gray")
+  ;; (set-face-attribute 'hl-line nil :inherit nil :background "gray")
   (setq global-hl-line-sticky-flag t)
   (global-hl-line-mode 1)
   )

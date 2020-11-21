@@ -3,7 +3,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ibuffer-deletion-face 'modus-theme-mark-del)
  '(ibuffer-expert t)
+ '(ibuffer-filter-group-name-face 'modus-theme-mark-symbol)
  '(ibuffer-fontification-alist
    '((5
       (and buffer-file-name
@@ -30,4 +32,6 @@
       ibuffer-locked-buffer)))
  '(ibuffer-help-buffer-modes
    '(help-mode helpful-mode apropos-mode Info-mode Info-edit-mode))
- '(ibuffer-old-time 48))
+ '(ibuffer-marked-face 'modus-theme-mark-sel)
+ '(ibuffer-old-time 48)
+ '(ibuffer-title-face 'modus-theme-pseudo-header))

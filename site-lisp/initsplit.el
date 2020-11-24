@@ -497,7 +497,8 @@ multiple files per (initsplit-custom-alist)"
       (initsplit-load s))))
 
 ;;  Yes run twice as the first load could have initsplit variables
-(initsplit-load-unloaded-preload)
+;;  Now put as setq in init
+;; (initsplit-load-unloaded-preload)
 (initsplit-load-unloaded-preload)
 
 

@@ -244,7 +244,7 @@ So use separate PRIMARY and CLIPBOARD
 :PROPERTIES:
 :ID:       org_mark_2020-10-11T00-40-32+01-00_mini12.local:D368B1BE-8B1A-4ED3-B447-077ED18711A3
 :END:
-This is from grephendershot
+This is from greghendershot
 #+NAME: org_mark_2020-10-11T00-40-32+01-00_mini12.local_BF7FA9EE-AC6E-46D8-863C-7E632C9D8B2A
 #+begin_src emacs-lisp
 ;; Show trailing whitespace in certain modes.
@@ -291,6 +291,8 @@ Single Capitals as you type. "
   (if dubcaps-mode
 	  (add-hook 'post-self-insert-hook #'dcaps-to-scaps nil 'local)
 	(remove-hook 'post-self-insert-hook #'dcaps-to-scaps 'local)))
+(dubcaps-mode 1)
+
 #+end_src
 ** Misspelling correction
 :PROPERTIES:

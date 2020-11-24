@@ -13,6 +13,7 @@ Might be useful for this [[https://stackoverflow.com/a/29757750/151019][SO answe
 #+NAME: org_mark_2020-10-25T17-28-25+00-00_mini12.local_587F425F-D07A-4E6C-9D67-0FD960007DC2
 #+begin_src emacs-lisp
 (use-package ediff
+  :defer
   <<ediff-frame>>
   )
 
@@ -26,11 +27,6 @@ Try it all in a new frame from https://emacs.stackexchange.com/a/60601/9874
 However all the save frame and window is from my old diff (no idea where that came from)
 #+NAME: org_mark_2020-10-25T21-37-40+00-00_mini12.local_59BC122D-3C25-472C-98CB-C8025DB70166
 #+begin_src emacs-lisp :tangle no :noweb-ref ediff-frame
-:init
-(defun leo-ediff-before-setup ()
-  (select-frame (make-frame)))
-
-
 :preface
 (defvar ediff-after-quit-hooks nil
   "* Hooks to run after ediff or emerge is quit.")

@@ -49,7 +49,7 @@ Might be better in elpy etc as for the pythonic issue.
   :ensure t
   :after python-mode
   :init
-  (setq conda-anaconda-home (getenv "CONDA_PREFIX"))
+  (setq conda-anaconda-home "~/miniconda3/bin")
   :config
   ;; If you want interactive shell support, include:
   (conda-env-initialize-interactive-shells)
@@ -61,9 +61,8 @@ Might be better in elpy etc as for the pythonic issue.
   ;; Via M-x conda-env-activate RET analyticd-pysystemtrade
   ;; or
   ;; (conda-env-activate "analyticd-pysystemtrade")
-  (conda-env-activate (getenv "CONDA_DEFAULT_ENV"))
-  (setq-default mode-line-format (cons mode-line-format '(:exec conda-env-current-name)))
-  )
+  (conda-env-activate "base")
+  (setq-default mode-line-format (cons mode-line-format '(:exec conda-env-current-name))))
   #+end_src
 * TODO Org mode
 :PROPERTIES:

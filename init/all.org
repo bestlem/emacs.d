@@ -167,6 +167,8 @@ So tends to imply I need to change my Mac to be zsh - fish does not set SHELL to
 Fun will occur with other OS.
 There are other things to be set `exec-path' and eshell-path-env - Aquamacs sort of does the former only.
 Also see https://wiki.archlinux.org/index.php/Fish for making bash as default then run fish
+
+Oh give up and hard code where needed
 *** Coding notes
 :PROPERTIES:
 :ID:       org_mark_2020-11-05T13-13-44+00-00_mini12.local:D8635697-570C-4F9E-A0C5-235C1694EDAB
@@ -182,6 +184,7 @@ Now I remember writing my own printenv as env|sort - looking at man page printen
 (setq exec-path-from-shell-debug nil)
 
 (use-package exec-path-from-shell
+  :disabled
   :when  (and (not *aquamacs*) (memq window-system '(mac ns x)))
   :ensure t
   :init

@@ -6,6 +6,34 @@
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:6E22A9D3-1EB0-4FD1-A3F6-53C488E929A1
 :END:
 This has been there for a long time (actually only after retirement I suppose I had XML-spy at work)
+But I seem to have lost all the mode associations
+So from jweigley
+#+NAME: org_mark_2020-11-23T16-09-29+00-00_mini12.local_891BF4BB-0615-4FC6-8454-E8519C3B009E
+#+begin_src emacs-lisp
+(use-package nxml-mode
+  :commands nxml-mode
+  :bind (:map nxml-mode-map
+              ("<return>" . newline-and-indent)
+              ("C-c M-h"  . tidy-xml-buffer))
+  :preface
+  (defun tidy-xml-buffer ()
+    (interactive)
+    (save-excursion
+      (call-process-region (point-min) (point-max) "tidy" t t nil
+                           "-xml" "-i" "-wrap" "0" "-omit" "-q" "-utf8")))
+  :init
+  (defalias 'xml-mode 'nxml-mode)
+  :config
+  (setq nxml-slash-auto-complete-flag t) ; my one liner
+  (autoload 'sgml-skip-tag-forward "sgml-mode")
+  (add-to-list 'hs-special-modes-alist
+               '(nxml-mode
+                 "<!--\\|<[^/>]*[^/]>"
+                 "-->\\|</[^/>]*[^/]>"
+                 "<!--"
+                 sgml-skip-tag-forward
+                 nil)))
+#+end_src
 Just a pretty print
 From http://blog.bookworm.at/2007/03/pretty-print-xml-with-emacs.html
  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_2D695AD2-8485-4365-A27F-FF3E95FAB69B

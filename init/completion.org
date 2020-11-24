@@ -141,7 +141,8 @@ I suspect that emacs's inbuilt skeleton can do what I need but there are more ex
   ;; :bind (:map yas-minor-mode-map
   ;; ("SPC" . mwb-yas-expand)
 
-  ;; :preface
+  :preface
+  (setq yas-alias-to-yas/prefix-p nil)  ; force it
   ;; (defun mwb-yas-expand ()
   ;;   (eval yas-maybe-expand))
   :config

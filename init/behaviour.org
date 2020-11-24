@@ -25,7 +25,55 @@ On reading more this is only if passed to delete functions so might not be too m
 #+begin_src emacs-lisp
 (use-package hardhat                    ; Protect user-writable files
   :ensure t
-  :init (global-hardhat-mode)
+  :init (setq hardhat-basename-protected-regexps
+              '("~\\'"
+                "\\.lock\\'"
+                "\\.ix\\'"
+                "\\`test\\.out\\'"
+                "-autoloads\\.el\\'"
+                "\\`Desktop\\.ini\\'"
+                "\\`META\\.yml\\'"
+                "\\`MYMETA\\.yml\\'"
+                "\\`TAGS\\'"
+                "\\`Thumbs\\.db\\'"
+                "\\`\\.dropbox\\'"
+                "\\`\\.dropbox\\.cache\\'"
+                "\\`\\.emacs\\.desktop\\'"
+                "\\`\\.emacs\\.desktop\\.lock\\'"
+                "\\.orig\\'"
+                "\\.rej\\'"
+                "\\.el\\.gz$"))
+  (setq hardhat-fullpath-protected-regexps
+        '("~/\\.emacs\\.d/elpa/"
+          "~/\\.cpan/"
+          "~/\\.cabal/"
+          "~/perl5/perlbrew/"
+          "~/\\.npm/"
+          "~/\\.virtualenv/"
+          "~/\\.virthualenv/"
+          "~/\\.rvm/"
+          "/[._]build/"
+          "/\\.bzr/"
+          "/\\.coverage/"
+          "/\\.git/"
+          "/\\.hg/"
+          "/\\.rspec/"
+          "/\\.sass-cache/"
+          "/\\.svn/"
+          "/_MTN/"
+          "/_darcs/" "/CVS/"
+          "/pm_to_blib/"
+          "/RCS/"
+          "/SCCS/"
+          "/blib/"
+          "/test_output/"
+          "~/\\.emacs\\.d/\\.cask/"
+          "~/\\.cask/"
+          "/Applications/"
+          "~/Library/Preferences/Aquamacs Emacs/Packages"
+          "~/src/ThirdParty/"
+          "~/src/env/emacs\\.d/elpa/"))
+  (global-hardhat-mode)
   :config (validate-setq hardhat-mode-lighter "Ⓗ"))
 #+end_src
 * Emacs internals

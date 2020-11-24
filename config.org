@@ -219,21 +219,20 @@ Basically use-package and helpers - strictly some of these can be left to later.
  include use-package setup from <https://github.com/CachesToCaches/getting_started_with_use_package/blob/master/init-use-package.el>
  #+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_77FB1165-1A41-4244-818F-7BFAF0F191FB
  #+begin_src emacs-lisp
- (unless (package-installed-p 'use-package)
-   (package-refresh-contents)
-   (package-install 'use-package))
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 
- ;; Enable use-package
- (eval-when-compile
-   (require 'use-package)
-   (if init-file-debug
-       (setq use-package-verbose t
-             use-package-expand-minimally nil
-             use-package-compute-statistics t
-             )
-     (setq use-package-verbose nil
-           use-package-expand-minimally t
-           bind-key-describe-special-forms t)))
+;; Enable use-package
+(eval-when-compile
+  (require 'use-package)
+  (setq bind-key-describe-special-forms t)
+  (if init-file-debug
+      (setq use-package-verbose t
+            use-package-expand-minimally nil
+            use-package-compute-statistics t)
+    (setq use-package-verbose nil
+          use-package-expand-minimally t)))
  #+end_src
 Override bind-keys othat
 *** Profile init

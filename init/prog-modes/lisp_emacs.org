@@ -24,16 +24,35 @@ Most from [[https://github.com/jojojames/matcha][matcha]]
 :END:
 ** Formatter
 :PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:0C004AE2-22C4-4307-9D4D-57777C260EC0
+:ID:       org_mark_2020-11-24T18-08-50+00-00_mini12.local:94566E0B-CB36-4CFF-84ED-8E1C9460ABB5
 :END:
-	I am not certain this is needed now as other things do this. Aggressive indent forexample
+I am not certain this is needed now as other things do this. Aggressive indent for example
+However I had a lot of strings so tried.
+*** elisp formatter
+:PROPERTIES:
+:ID:       org_mark_2020-11-24T18-08-50+00-00_mini12.local:254245E4-B413-4094-9DB5-555CC09FAC81
+:END:
+    After a use not that good
     #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_371FFD2B-49E8-4C8D-BD20-E974C39BA8E2
-    #+begin_src  emacs-lisp
+    #+begin_src  emacs-lisp :tangle no
 (use-package elisp-format
   :disabled
   :defer 10
   :ensure t)
     #+end_src
+*** [[https://github.com/tuhdo/semantic-refactor][Semantic Refactor]]
+:PROPERTIES:
+:ID:       org_mark_2020-11-24T18-08-50+00-00_mini12.local:CB649654-2804-4D51-8437-55D5DC0A68F6
+:END:
+Just for lisp But seems no better
+Plus the lisp formatting is not autoloaded
+#+NAME: org_mark_2020-11-24T18-08-50+00-00_mini12.local_BA7E1106-4E0E-4D38-B512-2C59194F3F4D
+#+begin_src emacs-lisp :tangle no
+(use-package srefactor
+  :disabled
+  :ensure t
+  :init (use-package srefactor-lisp))
+#+end_src
 ** Extra font lock
 :PROPERTIES:
 :ID:       org_mark_2020-10-14T11-05-37+01-00_mini12.local:88799E8A-FACD-4227-BF70-7FFD40FC2CF1

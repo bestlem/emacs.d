@@ -43,7 +43,7 @@ Look at smart-tabs-insinuate but aggressive indent means not needed, although if
   ;; (setq highlight-indent-guides-auto-even-face-perc 30)
   ;; (setq highlight-indent-guides-auto-character-face-perc 40)
 
-  :hook (prog-mode . highlight-indent-guides-mode))
+  :hook ((prog-mode yaml-mode nxml-mode json-mode ) . highlight-indent-guides-mode))
  #+end_src
 **** TODO Highlight indent to do
 :PROPERTIES:

@@ -120,8 +120,7 @@ URL: `https://stackoverflow.com/questions/12648388/emacs-yaml-editing'"
     ("c" yaml-fill-paragraph "Fill paragraph")))
 
   :hook (yaml-mode . help/yaml-mode-hook-fn)
-
-  :mode "\\.yml\\'"
+  :mode "\\(.ya?ml\\|.condarc\\)\\'"
 
   :bind (:map yaml-mode-map
               ("<backspace>" . sp-backward-delete-char )))

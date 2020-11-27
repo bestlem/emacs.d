@@ -9,16 +9,24 @@ Can't choose between elpy and jedi etc.
 Now I used python's python mode not the one in emacs. The latter has been improved and so perhaps I could chnage
 
 The problem is conda uses pythonic which has a require 'python and so always loads the emacs one.
+And xonsh mode uses python.el as well
 
 So it is a mess
 
-No idea if works.
 
-When really use python then start from elpy or similar.
+
+When really use python then start from elpy or similar. - well maybe not
+
+* Python mode
+:PROPERTIES:
+:ID:       org_mark_2020-11-24T21-22-09+00-00_mini12.local:F61D3DCD-D95F-45D0-8D2C-DC2C01096167
+:END:
+Full dancing one from python
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_26CAE374-0A00-4CBD-A31D-D465AE7AD800
 #+begin_src emacs-lisp
 (use-package python-mode
   :ensure t
+  :disabled
   ;;  add as multiple python-modes so need to force a bit
   :mode ("\\.py\\'" . python-mode)
   :interpreter ("python" . python-mode)
@@ -38,7 +46,35 @@ When really use python then start from elpy or similar.
   (setq-default python-shell-interpreter "python3")
   )
 #+end_src
-* Conda
+
+* Python.el
+:PROPERTIES:
+:ID:       org_mark_2020-11-24T21-22-09+00-00_mini12.local:5313A1ED-609C-49B1-9C6B-C6A1279D4873
+:END:
+One in emacs and has things built on it
+#+NAME: org_mark_2020-11-24T21-22-09+00-00_mini12.local_D8E951D0-C15C-4B10-AAC8-8DAF8382B214
+#+begin_src emacs-lisp
+(use-package python
+  :mode ("\\.py\\'" . python-mode)
+  ("\\.wsgi$" . python-mode)
+  :interpreter ("python" . python-mode)
+
+  :bind ("<f5>" . python-shell-send-buffer )
+  :init
+  (setq-default indent-tabs-mode nil)
+
+  :config
+  (setq python-indent-offset 4)
+  (add-hook 'python-mode-hook 'smartparens-mode)
+  ;; (add-hook 'python-mode-hook 'color-identifiers-mode)
+  (add-hook 'python-mode-hook           ;why it is OK elsewhere
+            (lambda ()
+              (setq tab-width 4)))
+  )
+
+  #+END_SRC
+#+end_src
+** Conda
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:4BA83964-C235-4AA4-8490-70CCC9C25C6D
 :END:
@@ -47,7 +83,7 @@ Might be better in elpy etc as for the pythonic issue.
   #+begin_src emacs-lisp
 (use-package conda
   :ensure t
-  :after python-mode
+
   :init
   (setq conda-anaconda-home "~/miniconda3/bin")
   :config
@@ -61,25 +97,23 @@ Might be better in elpy etc as for the pythonic issue.
   ;; Via M-x conda-env-activate RET analyticd-pysystemtrade
   ;; or
   ;; (conda-env-activate "analyticd-pysystemtrade")
-  (conda-env-activate "base")
+  ;; (conda-env-activate "base")
   (setq-default mode-line-format (cons mode-line-format '(:exec conda-env-current-name))))
   #+end_src
-* TODO Org mode
+** TODO Org mode
 :PROPERTIES:
 :ID:       org_mark_2020-11-11T11-24-14+00-00_mini12.local:9705EACE-A73F-41E3-A5AB-8FD2BAB849B5
 :END:
 Need to set up execute (here or at start)
-* Xonsh
+** Xonsh
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:62195329-D8AA-4CC1-B7F4-4570BBDCF3A8
 :END:
 There is now a xonsh mode
   #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_59880E6F-AD42-47DF-B04B-957600115D5D
   #+begin_src emacs-lisp
-  (use-package xonsh-mode
-    :disabled
-    :mwb-load-path "fork/xonsh-mode" ; can make this normal ensure try fromn
-                                     ; start again
-    :mode "\\.xsh\\'"
-    )
+(use-package xonsh-mode
+  :ensure t
+  :mode
+  "\\.xsh\\'")
   #+end_src

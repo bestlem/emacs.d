@@ -444,8 +444,8 @@ But hack an load it directly
            ("awesome-" "highlight-tails" "ansi-color" "xterm-color" "highlight-tail"))
           ("aquamacs"
            ("aquamacs-" "tabbar-"))
-          ("completion"
-           ("company-" "yas-"))
+          ;; ("completion"
+          ;;  ("company-" "yas-"))
           ("mac-based"
            ("ns-" "mac-" "cua-"))
           ("files"
@@ -454,20 +454,20 @@ But hack an load it directly
            ("flymake-" "flycheck-"))
           ("fringe"
            ("fringe-"))
-          ("hardhat"
-           ("hardhat-"))
+          ;; ("hardhat"
+          ;;  ("hardhat-"))
           ("ibuffer"
            ("ibuffer-"))
-          ("initsplit"
-           ("initsplit-"))
+          ;; ("initsplit"
+          ;;  ("initsplit-"))
           ("package"
            ("package-"))
-          ("python"
-           ("python" "py-"))
-          ("shell"
-           ("exec-path-" "explicit-shell-file-name"))
-          ("structured-data"
-           ("nxml-"))
+          ;; ("python"
+          ;;  ("python" "py-"))
+          ;; ("shell"
+          ;;  ("exec-path-" "explicit-shell-file-name"))
+          ;; ("structured-data"
+          ;;  ("nxml-"))
           ("modus"
            ("modus-"))
           ("vc"

@@ -5,7 +5,7 @@
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:1C20958B-CC40-4D69-B34D-3F34D5C8699A
 :END:
-Change from lispy to paredit. The delete-selection issue is too much. I keep typing on a selected region
+Change from lispy to smartparens. The delete-selection issue is too much. I keep typing on a selected region
 ** Racket mode
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:5D2738AD-C2C9-4913-8A9A-AE669A142269
@@ -25,7 +25,7 @@ Change from lispy to paredit. The delete-selection issue is too much. I keep typ
               :map racket-repl-mode-map
               ("<f5>" . racket-run))
   :init
-  (setq racket-program "/Applications/Racket v7.8/bin/racket"
+  (setq racket-program "/Applications/Racket v7.9/bin/racket"
         racket-images-inline t)
 
   ;; From   https://stackoverflow.com/questions/37571164/emacs-company-mode-completion-not-working

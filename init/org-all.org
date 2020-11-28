@@ -260,13 +260,16 @@ Grettke has two set ups
 :ID:       org_gcr_2018-03-16_mara:BC16A47E-FC4E-4F12-8813-583BF4C3EF5A
 :END:
 Standardize timestamps.
-
+Reduce the legth so the ids do not wrap on the screen.
 #+name: org_gcr_2018-03-16_mara_24B486D3-AF94-44E7-99F6-AEB7A53FD0E6
+org_2020-11-27T22-41-01+00-00_451D7528-BB66-48C2-82FD-A2FC371DED3B
+#+NAME: org_2020-11-27T22-41-01+00-00_055BDDEC-DC97-4652-AD82-8CC8EB9EF841
 #+begin_src emacs-lisp
 (defun help/get-timestamp ()
-  "Produces a full ISO 8601 format timestamp."
+  "Produces a full ISO 8601 format timestamp.
+mwb - Well remove the time"
   (interactive)
-  (let* ((timestamp-without-timezone (format-time-string "%Y-%m-%dT%T"))
+  (let* ((timestamp-without-timezone (format-time-string "%Y-%m-%d"))
          (timezone-name-in-numeric-form (format-time-string "%z"))
          (timezone-utf-offset
           (concat (substring timezone-name-in-numeric-form 0 3)
@@ -573,7 +576,9 @@ Make sure that =ID= is always unique, portable, and easy to maintain by
   Note that this is setr once so if you don't  shut down emacs it is not much use
 #+NAME: org_gcr_2017-05-12_mara_8F2F5DAE-40B9-490D-8523-BABCAA913A71
 #+BEGIN_SRC emacs-lisp
-(setq org-id-prefix (concat "org_" (user-real-login-name) "_" (help/get-timestamp-no-colons) "_" (system-name)))
+(setq org-id-prefix (concat "org_" ;; (user-real-login-name) "_"
+                            (help/get-timestamp-no-colons) ;; "_" (system-name)
+                            ))
 (setq org-id-method 'uuid)
 #+END_SRC
 

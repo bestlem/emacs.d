@@ -177,11 +177,177 @@ From original not certain how used now.
 
 #+end_src
 
-*** Dired
+** Dired
 :PROPERTIES:
 :ID:       org_mark_2020-10-19T10-12-58+01-00_mini12.local:DB259300-B567-4C97-8731-C56AAFDC5074
 :END:
 Need to allow more to expand - especially for macports
+
+Take from jweigley then find a hydra and prettify it.
+#+NAME: org_mark_2020-11-27T01-10-38+00-00_mini12.local_8A575AE6-49B6-4503-835E-19A6739AB60C
+#+begin_src emacs-lisp
+(use-package dired
+  :bind ("C-c j" . dired-two-pane)
+  :bind (:map dired-mode-map
+              ("j"     . dired)
+              ("z"     . pop-window-configuration)
+              ("e"     . ora-ediff-files)
+              ("l"     . dired-up-directory)
+              ("q"     . pop-window-configuration)
+              ("Y"     . ora-dired-rsync)
+              ("M-!"   . async-shell-command)
+              ("<tab>" . dired-next-window)
+              ("M-G")
+              ("M-s f"))
+  :diminish dired-omit-mode
+  :hook (dired-mode . dired-hide-details-mode)
+  :hook (dired-mode . dired-omit-mode)
+  :preface
+  (defvar saved-window-configuration nil)
+
+  (defun push-window-configuration ()
+    (interactive)
+    (push (current-window-configuration) saved-window-configuration))
+
+  (defun pop-window-configuration ()
+    (interactive)
+    (let ((config (pop saved-window-configuration)))
+      (if config
+          (set-window-configuration config)
+        (if (> (length (window-list)) 1)
+            (delete-window)
+          (bury-buffer)))))
+
+  (defun dired-two-pane ()
+    (interactive)
+    (push-window-configuration)
+    (let ((here default-directory))
+      (delete-other-windows)
+      (dired "~/Downloads")
+      (split-window-horizontally)
+      (dired here)))
+
+  (defun dired-next-window ()
+    (interactive)
+    (let ((next (car (cl-remove-if-not #'(lambda (wind)
+                                           (with-current-buffer (window-buffer wind)
+                                             (eq major-mode 'dired-mode)))
+                                       (cdr (window-list))))))
+      (when next
+        (select-window next))))
+
+  (defvar mark-files-cache (make-hash-table :test #'equal))
+
+  (defun mark-similar-versions (name)
+    (let ((pat name))
+      (if (string-match "^\\(.+?\\)-[0-9._-]+$" pat)
+          (setq pat (match-string 1 pat)))
+      (or (gethash pat mark-files-cache)
+          (ignore (puthash pat t mark-files-cache)))))
+
+  (defun dired-mark-similar-version ()
+    (interactive)
+    (setq mark-files-cache (make-hash-table :test #'equal))
+    (dired-mark-sexp '(mark-similar-versions name)))
+
+  (defun ora-dired-rsync (dest)
+    (interactive
+     (list
+      (expand-file-name
+       (read-file-name "Rsync to: " (dired-dwim-target-directory)))))
+    (let ((files (dired-get-marked-files
+                  nil current-prefix-arg))
+          (tmtxt/rsync-command "rsync -aP "))
+      (dolist (file files)
+        (setq tmtxt/rsync-command
+              (concat tmtxt/rsync-command
+                      (shell-quote-argument file)
+                      " ")))
+      (setq tmtxt/rsync-command
+            (concat tmtxt/rsync-command
+                    (shell-quote-argument dest)))
+      (async-shell-command tmtxt/rsync-command "*rsync*")
+      (other-window 1)))
+
+  (defun ora-ediff-files ()
+    (interactive)
+    (let ((files (dired-get-marked-files))
+          (wnd (current-window-configuration)))
+      (if (<= (length files) 2)
+          (let ((file1 (car files))
+                (file2 (if (cdr files)
+                           (cadr files)
+                         (read-file-name
+                          "file: "
+                          (dired-dwim-target-directory)))))
+            (if (file-newer-than-file-p file1 file2)
+                (ediff-files file2 file1)
+              (ediff-files file1 file2))
+            (add-hook 'ediff-after-quit-hook-internal
+                      `(lambda ()
+                         (setq ediff-after-quit-hook-internal nil)
+                         (set-window-configuration ,wnd))))
+        (error "no more than 2 files should be marked"))))
+
+  :config
+  (add-hook 'dired-mode-hook
+            #'(lambda () (bind-key "M-G" #'switch-to-gnus dired-mode-map))))
+#+end_src
+
+** Dired-x
+:PROPERTIES:
+:ID:       org_mark_2020-11-27T01-10-38+00-00_mini12.local:2838D467-BDF1-4220-9E50-2DD22E2C9544
+:END:
+Part of emacs but not loaded
+#+NAME: org_mark_2020-11-27T01-10-38+00-00_mini12.local_CA35C2DA-DA84-43A8-8E14-9DDCADEF692C
+#+begin_src emacs-lisp
+(use-package dired-x
+  :after dired
+  :config
+  (defvar dired-omit-regexp-orig (symbol-function 'dired-omit-regexp))
+
+  ;; Omit files that Git would ignore
+  (defun dired-omit-regexp ()
+    (let ((file (expand-file-name ".git"))
+          parent-dir)
+      (while (and (not (file-exists-p file))
+                  (progn
+                    (setq parent-dir
+                          (file-name-directory
+                           (directory-file-name
+                            (file-name-directory file))))
+                    ;; Give up if we are already at the root dir.
+                    (not (string= (file-name-directory file)
+                                  parent-dir))))
+        ;; Move up to the parent dir and try again.
+        (setq file (expand-file-name ".git" parent-dir)))
+      ;; If we found a change log in a parent, use that.
+      (if (file-exists-p file)
+          (let ((regexp (funcall dired-omit-regexp-orig))
+                (omitted-files
+                 (shell-command-to-string "git clean -d -x -n")))
+            (if (= 0 (length omitted-files))
+                regexp
+              (concat
+               regexp
+               (if (> (length regexp) 0)
+                   "\\|" "")
+               "\\("
+               (mapconcat
+                #'(lambda (str)
+                    (concat
+                     "^"
+                     (regexp-quote
+                      (substring str 13
+                                 (if (= ?/ (aref str (1- (length str))))
+                                     (1- (length str))
+                                   nil)))
+                     "$"))
+                (split-string omitted-files "\n" t)
+                "\\|")
+               "\\)")))
+        (funcall dired-omit-regexp-orig)))))
+#+end_src
 #+NAME: org_mark_2020-10-19T10-12-58+01-00_mini12.local_6D5339D7-14C1-4CC7-A8DA-9615DE298096
 #+begin_src emacs-lisp :tangle no
 (add-to-list 'dired-compress-file-suffixes

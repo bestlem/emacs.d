@@ -319,6 +319,7 @@ Need to alter list
 #+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_38580E30-B5CF-45B3-850B-07E27178252F
 #+begin_src emacs-lisp
 (use-package use-package-chords
+  :disabled
   :ensure t
   :config (key-chord-mode 1))
 #+end_src

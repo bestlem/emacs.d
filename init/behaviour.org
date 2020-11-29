@@ -207,6 +207,7 @@ Let's use [[https://github.com/Wilfred/helpful][Helpful]]
 #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_CAA5ED48-7C06-4625-A839-267E09964133
 #+begin_src emacs-lisp
 (use-package key-chord
+  :disabled
   :ensure t
   :config (key-chord-mode 1))
 #+end_src
@@ -439,6 +440,12 @@ mwin might have mode aware
 		 ("C-h M-m" . discover-my-mode)))
 
 #+end_src
+
+#+RESULTS[d1e37b2dff4c9b40e852cbc762b099a9b5227a7a]: org_mark_2020-01-23T20-40-42+00-00_mini12_FA715CDB-338C-473F-8511-91E6966446EB
+#+begin_EXAMPLE
+discover-my-mode
+#+end_EXAMPLE
+
 * Buffers
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:2C7F2E45-19AE-43EC-8536-C7A69744CCC2

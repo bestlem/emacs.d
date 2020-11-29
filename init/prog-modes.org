@@ -45,32 +45,6 @@ Look at smart-tabs-insinuate but aggressive indent means not needed, although if
 
   :hook ((prog-mode yaml-mode nxml-mode json-mode ) . highlight-indent-guides-mode))
  #+end_src
-**** TODO Highlight indent to do
-:PROPERTIES:
-:ID:       org_mark_2020-10-25T21-37-40+00-00_mini12.local:752DE764-8FA0-4D15-902E-7315095BB4A4
-:END:
-***** TODO yaml modeSome modes are not based on prog-mode
-:PROPERTIES:
-:ID:       org_mark_2020-10-25T21-37-40+00-00_mini12.local:6706AD1B-5D51-4430-8641-B55C84A0F619
-:END:
-***** TODO Character
-:PROPERTIES:
-:ID:       org_mark_2020-10-25T21-37-40+00-00_mini12.local:1B6BF57A-410F-4CC0-990E-9231FDCF4CF2
-:END:
-Look at character as seen comment
-#+NAME: org_mark_2020-10-25T21-37-40+00-00_mini12.local_B805CC87-6C83-4782-8A51-64A00A65E021
-#+begin_src emacs-lisp
-(use-package highlight-indent-guides
-  :disabled
-  :ensure t
-  :delight highlight-indent-guides-mode
-  :init
-  (setq highlight-indent-guides-method 'character
-        ;; default is \x2502 but it is very slow on Mac
-        highlight-indent-guides-character ?\xFFE8
-        highlight-indent-guides-responsive 'top))
-
-#+end_src
 *** Fill column
 :PROPERTIES:
 :ID:       org_mark_2020-02-24T14-59-33+00-00_mini12.local:573326D1-BD3B-4F5B-A721-E49A096DE72B
@@ -94,11 +68,7 @@ However only want to fill modes where there are line based comments e.g. Emacs l
 ;;(add-hook 'prog-mode-hook 'mwb-prog-auto-fill)
 #+end_src
 
-*** Structure editing
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:C05CF80F-DBBB-4FE8-9E8B-55BED989218B
-:END:
-**** Smartparens
+*** Smartparens
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:838D12E0-E4AA-4DD0-8F6E-56CDA89B5F0E
 :END:
@@ -172,7 +142,7 @@ _k_: kill        _s_: split                   _{_: wrap with { }
 
 (bind-key "H-["  'ptrv/smartparens/body)
 #+end_src
-**** [[https://github.com/Malabarba/aggressive-indent-mode][Aggressive indent]]
+*** [[https://github.com/Malabarba/aggressive-indent-mode][Aggressive indent]]
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:25EEAB16-473F-4321-B9CD-085BD4B97CB5
 :END:
@@ -185,7 +155,8 @@ _k_: kill        _s_: split                   _{_: wrap with { }
   :after smartparens
   :hook
   (prog-mode . aggressive-indent-mode)
-  (python-mode . (lambda () (aggressive-indent-mode -1))))
+  ;;(python-mode . (lambda () (aggressive-indent-mode -1)))
+)
  #+end_src
 ** Refactor
 :PROPERTIES:

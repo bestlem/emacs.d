@@ -55,7 +55,8 @@ One in emacs and has things built on it
 #+NAME: org_mark_2020-11-24T21-22-09+00-00_mini12.local_D8E951D0-C15C-4B10-AAC8-8DAF8382B214
 #+begin_src emacs-lisp
 (use-package python
-  :mode ("\\.py\\'" . python-mode)
+  :mode
+  ("\\.py\\'" . python-mode)
   ("\\.wsgi$" . python-mode)
   :interpreter ("python" . python-mode)
 
@@ -63,15 +64,16 @@ One in emacs and has things built on it
   :init
   (setq-default indent-tabs-mode nil)
 
+  (defun python-hook-mwb ()
+    (setq tab-width 4)
+    (aggressive-indent-mode -1) )
   :config
   (setq python-indent-offset 4)
   (add-hook 'python-mode-hook 'smartparens-mode)
   ;; (add-hook 'python-mode-hook 'color-identifiers-mode)
-  (add-hook 'python-mode-hook           ;why it is OK elsewhere
-            (lambda ()
-              (setq tab-width 4)))
+  (add-hook 'python-mode-hook 'python-hook-mwb)
+  (add-hook 'python-mode-hook 'mwb-prog-auto-fill)
   )
-
   #+END_SRC
 #+end_src
 ** Conda
@@ -83,7 +85,7 @@ Might be better in elpy etc as for the pythonic issue.
   #+begin_src emacs-lisp
 (use-package conda
   :ensure t
-
+  :defer t
   :init
   (setq conda-anaconda-home "~/miniconda3/bin")
   :config

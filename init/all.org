@@ -155,8 +155,11 @@ Now I remember writing my own printenv as env|sort - looking at man page printen
 
 #+NAME: org_mark_2020-11-05T13-13-44+00-00_mini12.local_7998E803-3782-4B60-89EB-BAEF197DDBD9
 #+begin_src emacs-lisp
-(setq explicit-shell-file-name "/opt/local/bin/fish")
-(setq exec-path-from-shell-shell-name "/opt/local/bin/fish")
+(let ((my-shell "/Users/mark/miniconda3/envs/xonsh/bin/xonsh")
+      ;; (my-shell "/opt/local/bin/fish" )
+      )
+  (setq explicit-shell-file-name my-shell)
+  (setq exec-path-from-shell-shell-name my-shell))
 (setq exec-path-from-shell-debug nil)
 
 (use-package exec-path-from-shell

@@ -106,36 +106,6 @@ Note should check on defconst
   (mwb-init-load  "init/completion")
   (mwb-init-load  "init/ibuffer")  ;; could go to prog-modes
   #+end_src
-** Command completion
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:B8539BA6-84DE-4075-80AF-0B37BE1CBA52
-:END:
-This is completion for emacs commands. Choice is ido, ivy helm.
-I'll try ivy.
-Note headers have tangle command in to suppress one or other
-*** Find M-x commands
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:2B101998-0D34-4143-95AF-769C4001D58C
-:END:
-  This is [[https://www.emacswiki.org/emacs/Smex][smex]] buy ivy replaces it actually it uses it - Something changed :(
-  #+begin_quote
-  Smex is a M-x enhancement for Emacs. Built on top of IDO, it provides a convenient interface to your recently and most frequently used commands. And to all the other commands, too.
-  #+end_quote
-  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_6410B3FD-5B0A-4478-ADC4-007FCA2F3D9C
-  #+begin_src emacs-lisp
-(use-package smex
-  :ensure t
-  :config
-  (smex-initialize))
-  #+end_src
-*** Ivy
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:DF80C3BB-D098-429D-A993-3DB810603205
-:END:
-#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_AE80986F-5F2A-4603-A292-6FB20CB43A9C
-#+begin_src emacs-lisp
-(mwb-init-load "init/ivy")
-#+end_src
 ** Shell variables
 :PROPERTIES:
 :ID:       org_mark_2020-11-05T13-13-44+00-00_mini12.local:C99A151C-9456-41BC-8872-1C8227529551
@@ -153,6 +123,12 @@ What is missing is getting the environment variables.
 :ID:       org_mark_2020-11-05T13-13-44+00-00_mini12.local:0D944CF7-686E-4CCF-B006-6B0C4FF5F5CA
 :END:
 Aquamacs does this but uses shell-file-name - which is set in C - originally /bin/sh but some code changes this to /bin/bash guess at getenv("SHELL") and looks for csh or sh based shells.
+
+But seems to time out as can't find file so try again
+#+NAME: org_2020-11-30+00-00_B553F58A-AA4F-4CD6-9808-657494C3D2EC
+#+begin_src emacs-lisp
+(when *aquamacs* (mac-read-environment-vars-from-shell-2))
+#+end_src
 *** Other
 :PROPERTIES:
 :ID:       org_mark_2020-11-05T13-13-44+00-00_mini12.local:A87E0049-2F9A-4D2E-898D-E0C1BD5BDAEC
@@ -260,6 +236,35 @@ Includes structured data
 #+begin_src emacs-lisp
 (mwb-init-load "init/prog-modes")
  #+end_src
+
+* Command completion
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:B8539BA6-84DE-4075-80AF-0B37BE1CBA52
+:END:
+This is completion for emacs commands. Choice is ido, ivy helm.
+I'll try ivy.
+Note headers have tangle command in to suppress one or other
+*** Find M-x commands
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:2B101998-0D34-4143-95AF-769C4001D58C
+:END:
+#+begin_quote
+Smex is a M-x enhancement for Emacs. Built on top of IDO, it provides a convenient interface to your recently and most frequently used commands. And to all the other commands, too.
+#+end_quote
+
+However smex seems not to be maintained so try amx
+#+NAME: org_2020-11-30+00-00_28F3664A-77DF-4D77-8554-E9F37CB1815E
+#+begin_src emacs-lisp
+(use-package amx :ensure t)
+#+end_src
+*** Ivy
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:DF80C3BB-D098-429D-A993-3DB810603205
+:END:
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_AE80986F-5F2A-4603-A292-6FB20CB43A9C
+#+begin_src emacs-lisp
+(mwb-init-load "init/ivy")
+#+end_src
 * Key binding
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:BF4F840D-AE27-4C9B-B83E-CCFAC0C0E8DB

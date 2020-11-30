@@ -8,7 +8,7 @@
 ** Aquamacs Application
  - path :: /Applications/Aquamacs.app/Contents/Resources/lisp/aquamacs
 ** aquamacs-emacs code
- - path :: ~/src/ThirdParty/aquamacs-emacs
+ - path :: ~/src/objc/aquamacs-emacs
 ** emacs-init
  - path :: ~/src/ThirdParty/emacs-init
 ** emacs-mac

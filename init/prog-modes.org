@@ -420,13 +420,24 @@ We have the best discussion at https://www.emacswiki.org/emacs/TabsAreEvil
 So try smart-tabs - later
 First issue is we need to switch as many people use spaces so we need to guess indent levewls - python.el does this automatically. There is the [[https://www.emacswiki.org/emacs/GuessStyle][GuessStyle]]but it is old and not maintained. [[https://github.com/jscheid/dtrt-indent][dtrt-indent]] seems more modern and has a maintainer but.... and comments on python worry - but is does tans mode things
 and dtrt-indent can't deal well with files that mix hard tabs with spaces for indentation. Which is the case I really want but seems OK - however need to then think on what to do for (un)tabify
+*** Guess indentation
+:PROPERTIES:
+:ID:       org_2020-11-30+00-00:DB587002-CCA1-4A79-8F32-4E389CEE1126
+:END:
 #+NAME: org_2020-11-29+00-00_5DF7AA9A-5AD2-4C8E-8FFE-5D878310646D
 #+begin_src emacs-lisp
 (use-package dtrt-indent
   :ensure t
   :hook (prog-mode . dtrt-indent-mode))
 #+end_src
-
+*** Tab can complete
+:PROPERTIES:
+:ID:       org_2020-11-30+00-00:EE7B6EBD-B2B6-4B79-9A24-65CFCB314BAE
+:END:
+#+NAME: org_2020-11-30+00-00_ABE0660B-27FC-4AC0-B441-5232EFDE64D3
+#+begin_src emacs-lisp
+(setq tab-always-indent 'complete)
+#+end_src
 * Specific groups
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:3CC4E87A-CFCC-442A-8E6C-35D2C41916EC

@@ -233,9 +233,10 @@ This is taken from https://github.com/MatthewZMD/.emacs.d/blob/master/early-init
 :ID:       org_mark_2020-09-28T01-08-28+01-00_mini12.local:D069442D-B7AF-4771-800A-87C4F3376AF0
 :END:
 Package initialize occurs automatically, before `user-init-file' is loaded, but after `early-init-file'. emacs handles package initialization, so we must prevent Emacs from doing it early!
+But if using package we do want it done - early-init turn off is for straight.el etc
 #+NAME: org_mark_2020-09-28T01-08-28+01-00_mini12.local_407877DD-DF72-4900-9475-7723E8D855A2
 #+begin_src emacs-lisp
-(setq package-enable-at-startup nil)
+;;(setq package-enable-at-startup nil)
 #+end_src
 Set the path to packages
 #+NAME: org_mark_2020-09-28T01-08-28+01-00_mini12.local_0E90CFE6-BBAC-4DA3-8461-12811764098F

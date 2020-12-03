@@ -74,6 +74,30 @@ Note takes time to load
       (apply 'ivy-completing-read args))))
 #+end_src
 
+* Ivy posframe
+:PROPERTIES:
+:ID:       org_2020-12-02+00-00:9671A889-905C-45B8-9B40-F40DE02B9925
+:END:
+#+NAME: org_2020-12-02+00-00_36E0112E-FDE9-4FEB-87E9-19EF7B62A776
+#+begin_src emacs-lisp
+;; Show ivy frame using posframe
+(use-package ivy-posframe
+  :when (>= emacs-major-version 27)
+  :disabled
+  :custom
+  (ivy-display-function #'ivy-posframe-display-at-frame-center)
+  ;; (ivy-posframe-width 130)
+  ;; (ivy-posframe-height 11)
+  (ivy-posframe-parameters
+   '((left-fringe . 5)
+     (right-fringe . 5)))
+  :custom-face
+  (ivy-posframe ((t (:background "#282a36"))))
+  (ivy-posframe-border ((t (:background "#6272a4"))))
+  (ivy-posframe-cursor ((t (:background "#61bfff"))))
+  :hook
+  (ivy-mode . ivy-posframe-enable))
+#+end_src
 * Ivy hydra
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:6826257A-FB43-4551-9B23-C99DA1A1947C
@@ -142,7 +166,9 @@ Need to integrate with command FG etc (note thet are separate to C-s) although h
 :END:
 Improve many emacs functions
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_B21800D8-545E-465D-9D90-154F944E30F5
-#+begin_src emacs-lisp :
+
+#+NAME: org_2020-12-02+00-00_437D6838-DCA0-4F08-B895-A55F6C21021B
+#+begin_src emacs-lisp
 (use-package counsel
   :ensure t
   :after ivy

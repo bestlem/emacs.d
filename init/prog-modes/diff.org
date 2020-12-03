@@ -4,9 +4,6 @@
 :PROPERTIES:
 :ID:       org_mark_2020-10-25T17-28-25+00-00_mini12.local:9C579DD9-846E-4311-B3DA-BFDC51BEFE8C
 :END:
-This was originally all for git now I want to play with it
-Now kill it all and startq
-It is all from different places thus use weaving
 
 Might be useful for this [[https://stackoverflow.com/a/29757750/151019][SO answer]] when we have merge conflicts Note the other answer re keybinding
 
@@ -16,8 +13,6 @@ Might be useful for this [[https://stackoverflow.com/a/29757750/151019][SO answe
   :defer
   <<ediff-frame>>
   )
-
-
 #+end_src
 ** Separate Frame
 :PROPERTIES:
@@ -45,7 +40,6 @@ However all the save frame and window is from my old diff (no idea where that ca
   ;; (local-ediff-frame-maximize)
   )
 
-
 (defun local-ediff-quit-hook ()
   (set-frame-configuration local-ediff-saved-frame-configuration)
   (set-window-configuration local-ediff-saved-window-configuration))
@@ -55,7 +49,7 @@ However all the save frame and window is from my old diff (no idea where that ca
   (set-window-configuration local-ediff-saved-window-configuration))
 
 ;; (defun local-ediff-after-control-hook ()
-;;   (message "in ediff helkp toggle")
+;;   (message "in ediff help toggle")
 ;;   (ediff-toggle-help))
 
 (add-hook 'ediff-before-setup-hook 'local-ediff-before-setup-hook)

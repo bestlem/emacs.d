@@ -560,3 +560,20 @@ Kill it from anywhere from blog with-Emacs but take version from [[https://www.r
 
 (bind-key "H-k" 'keyboard-quit-context+)
 #+end_src
+* Extra functions
+:PROPERTIES:
+:ID:       org_2020-12-03+00-00:AB87CBD3-5CFD-4403-ADEA-6FB14B104FF7
+:END:
+** Frames
+:PROPERTIES:
+:ID:       org_2020-12-03+00-00:1B23DC2B-5C55-4813-92A9-04D1291698B2
+:END:
+Make a new popup frame
+#+NAME: org_2020-12-03+00-00_76F8853D-BB00-4F70-9F82-0AC74BA7B9A5
+#+begin_src emacs-lisp
+(defun mwb-new-frame (buffer_name &optional go-to-end)
+  (interactive)
+  (select-frame (make-frame))
+  (switch-to-buffer buffer_name)
+  (unless go-to-end (goto-char (point-max))))
+#+end_src

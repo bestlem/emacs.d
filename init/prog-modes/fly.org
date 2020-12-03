@@ -15,6 +15,11 @@ From [[https://www.emacswiki.org/emacs/FlySpell#toc2][Emacs Wiki]]
 (add-hook 'prog-mode-hook
           #'flyspell-prog-mode)
 #+end_src
+*** TODO keys etc
+:PROPERTIES:
+:ID:       org_2020-12-02+00-00:9303336C-3D74-4225-9A72-98D5AF250F76
+:END:
+Look at https://github.com/IvanMalison/dotfiles/tree/master/dotfiles/emacs.d
 ** TODO Flymake
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:6D225364-60B5-4C41-A802-CFBE5E7E6F2A

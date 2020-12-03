@@ -248,6 +248,19 @@ _c_ontinue (_C_ fast)      ^^^^                       _X_ global breakpoint
         (message "Debug-on-entry: %s" fn)))))
 
 #+end_src
+* Flycheck
+:PROPERTIES:
+:ID:       org_2020-12-02+00-00:8AED05A2-E475-45E7-9FE1-2D0C6CBC3F2E
+:END:
+Partially disabled from https://github.com/IvanMalison/dotfiles/tree/master/dotfiles/emacs.d
+Original just stops check for all the package and documentation heading. Need to make it not check for undefined in *xxx* buffers
+#+NAME: org_2020-12-02+00-00_7F1FCFB3-782A-4154-AF60-ABEDAAD3F4C5
+#+begin_src emacs-lisp
+(defun imalison:maybe-remove-flycheck-checkdoc-checker ()
+  (when (s-starts-with? "*" (buffer-name))
+    (flycheck-disable-checker 'emacs-lisp-checkdoc)))
+(add-hook 'flycheck-mode-hook 'imalison:maybe-remove-flycheck-checkdoc-checker)
+#+end_src
 * Cask
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:A7E444B1-B2D1-477A-A3E2-A7518E90193E

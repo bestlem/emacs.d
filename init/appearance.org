@@ -31,18 +31,32 @@ So put the choice here
 (eval-after-load "color-theme"
   '(progn
      (color-theme-initialize)
-     (color-theme-high-contrast)
+     (color-theme-jsc-dark)
+     (set-face-attribute 'font-lock-keyword-face nil  :background 'unspecified)
      (custom-set-faces
       '(org-block
         ((t
-          (:inherit shadow :extend t :background "lemon chiffon" :foreground "black" :family "Fira Code"))))
+          (:inherit shadow :extend t :background "midnight blue" :foreground "white" :family "Fira Code"))))
       '(org-block-begin-line
         ((t
-          (:inherit org-meta-line :foreground "blue" :weight normal))))
+          (:inherit org-meta-line :foreground "cyan" :weight normal))))
       '(org-block-end-line
         ((t
-          (:inherit org-block-begin-line :foreground "blue"))))
-      )))
+          (:inherit org-block-begin-line :foreground "cyan"))))
+      )
+     ;; (color-theme-high-contrast)
+     ;; (custom-set-faces
+     ;;  '(org-block
+     ;;    ((t
+     ;;      (:inherit shadow :extend t :background "lemon chiffon" :foreground "black" :family "Fira Code"))))
+     ;;  '(org-block-begin-line
+     ;;    ((t
+     ;;      (:inherit org-meta-line :foreground "blue" :weight normal))))
+     ;;  '(org-block-end-line
+     ;;    ((t
+     ;;      (:inherit org-block-begin-line :foreground "blue"))))
+     ;;  )
+     ))
 
 #+end_src
 
@@ -52,7 +66,7 @@ So put the choice here
 :header-args: :noweb-ref theme-25
 :END:
 
-It turns out Emacs supports multiple themes being active at the same time, which I’m sure is convenient sometimes but becomes a right nuisance when attempting to switch themes IMO. Add a utility function to disable all currently enabled themes first. gfdgdfg
+It turns out Emacs supports multiple themes being active at the same time, which I’m sure is convenient sometimes but becomes a right nuisance when attempting to switch themes IMO. Add a utility function to disable all currently enabled themes first.
 
 #+NAME: org_mark_2020-10-13T18-22-15+01-00_mini12.local_76567F98-E4B9-425F-8683-FF8850619A08
 #+begin_src emacs-lisp :tangle no
@@ -288,7 +302,7 @@ I think I now want mainly one window and have splits but tabs are useful.
 :ID:       org_mark_2020-10-11T17-50-37+01-00_mini12.local:B75BD9C4-76AD-406A-9A76-1B658CA511C5
 :END:
 #+name: win-hydra-fns
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 (defun hydra-move-splitter-left (arg)
   "Move window splitter left."
   (interactive "p")
@@ -348,7 +362,7 @@ It is now a more general do anything one off hydra
    (("TAB" other-window "switch")
     ("ax" ace-delete-window "delete")
     ("am" ace-delete-other-windows "maximize")
-    ("as" ace-swap-window "swap")
+    ("s" ace-swap-window "swap" :exit t)
     ("aa" ace-select-window "select"))
 
    "Resize"
@@ -370,14 +384,13 @@ It is now a more general do anything one off hydra
            (setq this-command 'winner-undo))))
 
    "New Frames"
-   (("m" (mwb-new-frame ("*Messages*"))  :exit t))
+   (("f" other-frame "Switch Frame")
+    ("m" (mwb-new-frame "*Messages*") "Messages" :exit t))
 
    "Other"
    (("0" jp-zoom-default "reset zoom")
     ("t" quick-switch-themes* "cycle themes")
-    ("p" package-quickstart-refresh "refresh quickstart packages" :exit t)
-    ("f" other-frame "Switch Frame")
-    ("F" toggle-frame-fullscreen "toggle fullscreen" :exit t))))
+    ("p" package-quickstart-refresh "refresh quickstart packages" :exit t))))
  #+end_src
 
 ** Stop special buffers opening in new window

@@ -18,10 +18,12 @@ Note all loaded immediately as could be called anytime.
    (("b" eval-buffer "buffer")
     ("d" eval-defun "defun [well top level form]")
     ("r" eval-region "region")
-    ("f" matcha-elisp-eval-current-form-sp "form"))
+    ;; ("f" matcha-elisp-eval-current-form-sp "form")
+    )
    "REPL"
    (("I" ielm "ielm")
-    ("x" matcha-goto-scratch "*Scratch*"))
+    ;; ("x" matcha-goto-scratch "*Scratch*")
+    )
    "Test"
    (("t" ert "prompt")
     ("T" (ert t) "all")

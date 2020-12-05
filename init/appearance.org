@@ -360,10 +360,10 @@ It is now a more general do anything one off hydra
 (pretty-hydra-define hydra-jp-window (:foreign-keys warn :title jp-window--title :quit-key "q")
   ("Actions"
    (("TAB" other-window "switch")
-    ("ax" ace-delete-window "delete")
-    ("am" ace-delete-other-windows "maximize")
+    ("x" ace-delete-window "delete")
+    ("m" ace-delete-other-windows "maximize")
     ("s" ace-swap-window "swap" :exit t)
-    ("aa" ace-select-window "select"))
+    ("a" ace-select-window "select"))
 
    "Resize"
    (("<left>" hydra-move-splitter-left "←")
@@ -390,7 +390,7 @@ It is now a more general do anything one off hydra
    "Other"
    (("0" jp-zoom-default "reset zoom")
     ("t" quick-switch-themes* "cycle themes")
-    ("p" package-quickstart-refresh "refresh quickstart packages" :exit t))))
+    )))
  #+end_src
 
 ** Stop special buffers opening in new window

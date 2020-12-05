@@ -502,8 +502,8 @@ _<_ beginning of buffer _>_ end of buffer _m_: set mark _/_: jump to mark
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:F42353DF-4D49-4E20-92C2-7C637E5483A8
 :END:
 	#+begin_src emacs-lisp
-	(defhydra goto (:color blue :hint nil)
-	  "
+(defhydra hydra-goto (:color blue :hint nil)
+  "
 	Goto:
 	^Char^              ^Word^                ^search^
 	^^^^^^^^--------------------------------------------------
@@ -515,43 +515,65 @@ _<_ beginning of buffer _>_ end of buffer _m_: set mark _/_: jump to mark
 	_n_: Navigate       _._: mark position    _/_: jump to mark
 	----------------------------------------------------------
 	"
-	  ("c" avy-goto-char-2)
-	  ("C" avy-goto-char)
-	  ("L" avy-goto-char-in-line)
-	  ("w" avy-goto-word-1)
-	  ;; jump to beginning of some word
-	  ("W" avy-goto-word-0)
-	  ;; jump to subword starting with a char
-	  ("s" avy-goto-subword-1)
-	  ;; jump to some subword
-	  ("S" avy-goto-subword-0)
+  ("c" avy-goto-char-2)
+  ("C" avy-goto-char)
+  ("L" avy-goto-char-in-line)
+  ("w" avy-goto-word-1)
+  ;; jump to beginning of some word
+  ("W" avy-goto-word-0)
+  ;; jump to subword starting with a char
+  ("s" avy-goto-subword-1)
+  ;; jump to some subword
+  ("S" avy-goto-subword-0)
 
-	  ("l" avy-goto-line)
-	  ("i" ace-window)
+  ("l" avy-goto-line)
+  ("i" ace-window)
 
-	  ;; ("h" helm-org-headlines)
-	  ;; ("a" helm-org-agenda-files-headings)
-	  ;; ("q" helm-multi-swoop-org)
+  ;; ("h" helm-org-headlines)
+  ;; ("a" helm-org-agenda-files-headings)
+  ;; ("q" helm-multi-swoop-org)
 
-	  ;; ("o" helm-occur)
-	  ;; ("p" swiper-helm)
+  ;; ("o" helm-occur)
+  ;; ("p" swiper-helm)
 
-	  ("f" isearch-forward)
-	  ("b" isearch-backward)
+  ("f" isearch-forward)
+  ("b" isearch-backward)
 
-	  ("." org-mark-ring-push :color red)
-	  ("/" org-mark-ring-goto :color blue)
-	  ("B" ibuffer)
-	  ;; ("m" helm-mini)
-	  ("R" counsel-recentf)
-	  ("n" hydra-navigate/body))
+  ("." org-mark-ring-push :color red)
+  ("/" org-mark-ring-goto :color blue)
+  ("B" ibuffer)
+  ;; ("m" helm-mini)
+  ("R" counsel-recentf)
+  ("n" hydra-navigate/body))
 
-	(bind-key "H-g" 'goto/body)
+(bind-key "H-g" 'hydra-goto/body)
 	#+end_src
 ** Global hydra
 :PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:CC787E0F-CFB8-47FE-8112-E4646044C2C5
+:ID:       org_2020-12-05+00-00:A17FFF67-3F29-454D-91D2-DA54007D07E2
 :END:
+Odd things needed
+#+NAME: org_2020-12-05+00-00_94E1455C-7F91-48B1-BF7B-EA3753E7BDCB
+#+begin_src emacs-lisp
+(use-package emacs
+  :defer 10
+  :pretty-hydra
+  (hydra-global-tools
+   (:foreign-keys warn :title (with-octicon "tools" "Global tools" 1 -0.05) :color teal :quit-key "q")
+   ("Hydrae"
+    (("t" hydra-transpose/body "Transpose")
+     ("n" hydra-navigate/body "Navigate")
+     ("g" hydra-goto/body "Goto"))
+    "Visual"
+    (("f" other-frame "Switch Frame")
+     ("m" (mwb-new-frame "*Messages*") "Messages")
+     ("w" hydra-jp-window/body "Window Management")
+     ("c" (what-cursor-position 'detail) "Character at POS"))
+    "Other"
+    (("p" package-quickstart-refresh "refresh quickstart packages"))))
+  :bind ("H-q" . hydra-global-tools/body))
+#+end_src
+
 ** Toggle treemode as needed often
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:E96CD5B5-8DFE-489A-BBF2-B969886F2607

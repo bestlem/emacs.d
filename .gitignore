@@ -4,7 +4,5 @@ init/**/*.el
 SessionDesktop.el
 elpa
 data/abbrev.el
-
-package-quickstart.el
 var
 .org-id-locations

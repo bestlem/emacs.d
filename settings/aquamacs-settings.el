@@ -14,8 +14,7 @@
  '(aquamacs-additional-fontsets nil t)
  '(aquamacs-autoface-mode t)
  '(aquamacs-customization-version-id 311 t)
- '(aquamacs-save-options-on-quit
-   (quote ask))
+ '(aquamacs-save-options-on-quit 'ask)
  '(aquamacs-tool-bar-user-customization nil t)
- '(tabbar-mode t nil
+ '(tabbar-mode nil nil
                (tabbar)))

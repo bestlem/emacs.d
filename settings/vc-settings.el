@@ -24,4 +24,4 @@
      (320 . "#2544bb")
      (340 . "#0000c0")
      (360 . "#5317ac")))
- '(vc-annotate-very-old-color nil))
+ '(vc-annotate-very-old-color "#0046FF" t))

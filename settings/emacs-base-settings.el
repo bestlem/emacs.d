@@ -19,10 +19,6 @@
  '(make-backup-files t)
  '(minibuffer-prompt-properties
    '(read-only t cursor-intangible t face minibuffer-prompt cursor-intangible t))
- '(safe-local-variable-values
-   '((eval add-hook 'before-save-hook 'time-stamp)
-     (require-final-newline . t)))
- '(show-paren-mode t)
  '(tool-bar-mode nil)
  '(undo-limit 800000)
  '(visual-line-mode t t)

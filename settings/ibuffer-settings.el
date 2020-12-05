@@ -33,5 +33,4 @@
  '(ibuffer-help-buffer-modes
    '(help-mode helpful-mode apropos-mode Info-mode Info-edit-mode))
  '(ibuffer-marked-face 'modus-theme-mark-sel)
- '(ibuffer-old-time 48)
- '(ibuffer-title-face 'modus-theme-pseudo-header))
+ '(ibuffer-old-time 48))

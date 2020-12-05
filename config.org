@@ -427,6 +427,20 @@ More Drew Adams https://www.emacswiki.org/emacs/CustomizingAndSaving#CustomizePl
   :config
   (customize-toggle-outside-change-updates 99))
 #+end_src
+*** Quoting format
+:PROPERTIES:
+:ID:       org_2020-12-03+00-00:79A02A64-E7EF-4DC0-80C1-73C792302866
+:END:
+Emacs 27 uses a different format from 25(Aquamacs) so patch it - or is it the Mac Port
+Solution from [[https://emacs.stackexchange.com/a/3657/9874][Emacs SX]]
+#+NAME: org_2020-12-03+00-00_23C17B69-4464-4E75-9F44-82B3DFE37B79
+#+begin_src emacs-lisp
+(when *aquamacs*
+  (advice-add 'custom-save-all :around
+              (lambda (orig)
+                (let ((print-quoted t))
+                  (funcall orig)))))
+#+end_src
 
 *** Initsplit
 :PROPERTIES:
@@ -480,7 +494,7 @@ But hack an load it directly
           ;; ("structured-data"
           ;;  ("nxml-"))
           ("modus"
-           ("modus-"))
+           ("modus-" "ibuffer-title-face"))
           ("vc"
            ("vc-" "magit-" "ediff-"))
           ("emacs-base"
@@ -495,7 +509,8 @@ But hack an load it directly
    (list
     (unless *aquamacs* "aquamacs")
     (unless (string-equal system-type "darwin") "mac")
-    (unless (string-equal system-type "windows") "Windows"))))
+    (unless (>= emacs-major-version 26) "modus")
+    (unless (string-equal system-type "windows") "MSWindows"))))
 #+end_src
 ** Key bindings
 :PROPERTIES:

@@ -30,6 +30,7 @@ However much of the same code appears in many places so I don't know the real so
          ("?" . major-mode-hydras/ibuffer-mode/body))
   :init
   (setq ibuffer-expert t
+        ibuffer-old-time 48
         ibuffer-show-empty-filter-groups nil
         ibuffer-default-sorting-mode 'filename/process)
   :config
@@ -128,19 +129,3 @@ This is from  [[https://www.reddit.com/r/emacs/comments/64kr02/emacs_workflow_so
 (add-hook 'ibuffer-hook 'gk-ibuffer-hook)
 	#+end_src
 
-* Put cursor on most recent buffer
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:1E688E4D-5D72-4CA0-9E65-A71F8DA4FDDE
-:END:
-   Switching to ibuffer puts the cursor on the most recent buffer and where advices go with use-package to be found out.
-
-   #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_07D7442D-D957-4B3A-9BB2-41582476445B
-   #+begin_src emacs-lisp
-   (defadvice ibuffer (around ibuffer-point-to-most-recent) ()
-	 "Open ibuffer with cursor pointed to most recent buffer name"
-	 (let ((recent-buffer-name (buffer-name)))
-	   ad-do-it
-	   (ibuffer-jump-to-buffer recent-buffer-name)))
-
-   (ad-activate 'ibuffer)
-   #+end_src

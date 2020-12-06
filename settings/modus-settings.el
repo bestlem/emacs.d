@@ -23,7 +23,13 @@
  '(modus-vivendi-theme-slanted-constructs t)
  '(modus-vivendi-theme-syntax 'alt-syntax)
  '(modus-vivendi-theme-variable-pitch-headings t)
- '(modus-vivendi-theme-visible-fringes t))
+ '(modus-vivendi-theme-visible-fringes t)
+ '(flymake-error-bitmap
+   '(flymake-double-exclamation-mark modus-theme-fringe-red))
+ '(flymake-note-bitmap
+   '(exclamation-mark modus-theme-fringe-cyan))
+ '(flymake-warning-bitmap
+   '(exclamation-mark modus-theme-fringe-yellow)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

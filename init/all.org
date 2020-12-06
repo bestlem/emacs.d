@@ -149,8 +149,7 @@ Oh give up and hard code where needed
 :PROPERTIES:
 :ID:       org_mark_2020-11-05T13-13-44+00-00_mini12.local:D8635697-570C-4F9E-A0C5-235C1694EDAB
 :END:
-Aquamacs uses shell-file-name and prints using printenv to a file and plays with that
-exec... uses printf
+Aquamacs uses shell-file-name and prints using printenv to a file and plays with that exec... uses printf
 Now I remember writing my own printenv as env|sort - looking at man page printenv is older but env is POSIX. printf is later but might not work with UTF-8
 
 #+NAME: org_mark_2020-11-05T13-13-44+00-00_mini12.local_7998E803-3782-4B60-89EB-BAEF197DDBD9

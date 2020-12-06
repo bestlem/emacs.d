@@ -173,6 +173,38 @@ Set the key in the map but also add the hydra at the end which shadows the /
 		:reader (read-from-minibuffer "Exclude buffers (regexp): "))
   (not (string-match qualifier (buffer-name buf))))
   #+end_src
+
+* Fontification
+:PROPERTIES:
+:ID:       org_2020-12-05+00-00:DE79B3FA-81CF-4FA4-B23E-D4FD1ACD8B09
+:END:
+#+NAME: org_2020-12-05+00-00_62864897-3AFE-4608-8125-7B831B5ED025
+#+begin_src emacs-lisp
+(setq ibuffer-fontification-alist
+      '((5
+         (and buffer-file-name
+              (buffer-modified-p))
+         font-lock-warning-face)
+        (10 buffer-read-only font-lock-string-face)
+        (15
+         (and buffer-file-name
+              (string-match ibuffer-compressed-file-name-regexp buffer-file-name))
+         font-lock-doc-face)
+        (25
+         (and
+          (string-match "^ "
+                        (buffer-name))
+          (null buffer-file-name))
+         italic)
+        (35
+         (derived-mode-p 'dired-mode)
+         font-lock-function-name-face)
+        (40
+         (and
+          (boundp 'emacs-lock-mode)
+          emacs-lock-mode)
+         ibuffer-locked-buffer)))
+#+end_src
 * Wraparound Cursor Movement
 :PROPERTIES:
 :ID:       org_mark_2020-02-10T08-46-26+00-00_mini12:BC2CF73A-8A15-4A2F-BB4B-04F47A94A1EF

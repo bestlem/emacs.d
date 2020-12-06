@@ -571,7 +571,7 @@ Odd things needed
      ("c" (what-cursor-position 'detail) "Character at POS"))
     "Other"
     (("p" package-quickstart-refresh "refresh quickstart packages"))))
-  :bind ("H-q" . hydra-global-tools/body))
+  :bind ("H-`" . hydra-global-tools/body))
 #+end_src
 
 ** Toggle treemode as needed often

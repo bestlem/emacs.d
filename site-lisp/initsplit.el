@@ -261,7 +261,7 @@ might contain customizations we haven't seen yet."
   )
 
 (defun initsplit-load-if-exists-and-does-not-match (file)
-  "Load the given file if it exists and npt one of the exceptions."
+  "Load the given file if it exists and not one of the exceptions."
   ;; (message "In load initsplit-load-if-exists-and-does-not-match for %s"
   ;;          file)
   ;; (message "Regex %s" initsplit--ignore-prefix-regexp)

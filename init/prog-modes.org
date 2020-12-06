@@ -45,29 +45,6 @@ Look at smart-tabs-insinuate but aggressive indent means not needed, although if
 
   :hook ((prog-mode yaml-mode nxml-mode json-mode ) . highlight-indent-guides-mode))
  #+end_src
-*** Fill column
-:PROPERTIES:
-:ID:       org_mark_2020-02-24T14-59-33+00-00_mini12.local:573326D1-BD3B-4F5B-A721-E49A096DE72B
-:END:
-Where to wrap the line iff too long. Set locally in prog-modes and differ in comment
-
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:2D7FD607-5E36-49DB-8F1A-7C7E1C7CADE6
-:END:
-This is from [[https://www.emacswiki.org/emacs/AutoFillMode][emacs wiki]]
-However only want to fill modes where there are line based comments e.g. Emacs lisp. If there is a block comment then don't fill
-#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_9B7EA331-7A72-4DCE-9798-9D3B378A8C1B
-#+begin_src emacs-lisp
-(defun mwb-prog-auto-fill ()
-  (setq-local comment-auto-fill-only-comments t)
-  (setq-local fill-column 79)
-  (setq-local comment-fill-column 79)
-  (auto-fill-mode 1))
-
-;; use by setting in the actual program mode
-;;(add-hook 'prog-mode-hook 'mwb-prog-auto-fill)
-#+end_src
-
 *** Smartparens
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:838D12E0-E4AA-4DD0-8F6E-56CDA89B5F0E
@@ -418,8 +395,7 @@ Well I like them as being sensibles others do not.
 We have the best discussion at https://www.emacswiki.org/emacs/TabsAreEvil
 
 So try smart-tabs - later
-First issue is we need to switch as many people use spaces so we need to guess indent levewls - python.el does this automatically. There is the [[https://www.emacswiki.org/emacs/GuessStyle][GuessStyle]]but it is old and not maintained. [[https://github.com/jscheid/dtrt-indent][dtrt-indent]] seems more modern and has a maintainer but.... and comments on python worry - but is does tans mode things
-and dtrt-indent can't deal well with files that mix hard tabs with spaces for indentation. Which is the case I really want but seems OK - however need to then think on what to do for (un)tabify
+First issue is we need to switch as many people use spaces so we need to guess indent levewls - python.el does this automatically. There is the [[https://www.emacswiki.org/emacs/GuessStyle][GuessStyle ]]but it is old and not maintained. [[https://github.com/jscheid/dtrt-indent][dtrt-indent]] seems more modern and has a maintainer but.... and comments on python worry - but is does tabs mode things and dtrt-indent can't deal well with files that mix hard tabs with spaces for indentation. Which is the case I really want but seems OK - however need to then think on what to do for (un)tabify
 *** Guess indentation
 :PROPERTIES:
 :ID:       org_2020-11-30+00-00:DB587002-CCA1-4A79-8F32-4E389CEE1126

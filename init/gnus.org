@@ -5,6 +5,12 @@
 
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_B5711DCA-2D01-4ADE-A4FF-CB3E2E6A583E
 #+begin_src emacs-lisp
+(setq gnus-directory "~/Library/Preferences/Aquamacs Emacs/News")
+(setq gnus-dribble-directory "~/tmp")
+(setq gnus-kill-save-kill-file t)
+(setq gnus-score-mimic-keymap nil)
+(setq gnus-server-browse-in-group-buffer t)
+(setq gnus-verbose 10)
 (setq gnus-read-active-file nil)
 (setq gnus-use-adaptive-scoring t)
 (setq gnus-default-adaptive-score-alist
@@ -232,8 +238,9 @@ From [[http://doc.rix.si/cce/cce-gnus.html][Here]]
 :END:
   #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_2D9464DC-D14F-4AF0-830B-935B15693080
   #+begin_src emacs-lisp
-  (setq gnus-single-article-buffer t
-		mm-text-html-renderer 'shr)
+(setq gnus-single-article-buffer t
+      mm-text-html-renderer 'shr)
+(setq gnus-show-all-headers nil)
   #+end_src
 From same place as above
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_E6250F15-2AC9-4CCC-8AC3-CFE8494CAD37

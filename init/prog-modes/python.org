@@ -72,7 +72,7 @@ One in emacs and has things built on it
   (add-hook 'python-mode-hook 'smartparens-mode)
   ;; (add-hook 'python-mode-hook 'color-identifiers-mode)
   (add-hook 'python-mode-hook 'python-hook-mwb)
-  (add-hook 'python-mode-hook 'mwb-prog-auto-fill)
+  (add-hook 'python-mode-hook 'mwb-prog-auto-fill-80)
   )
   #+END_SRC
 #+end_src

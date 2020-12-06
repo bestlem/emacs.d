@@ -188,11 +188,12 @@ But this is working so don;t need to chnage until an actual bug + my org-mode se
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:1FAA7B31-FA5B-4485-B186-B85EDF3E5426
 :END:
-	  Initialize packages immediately and not after init.el is read post startup
-	  Note that Aquuamacs set these repositories.
-	  Don't need package-initialize as use package does it all? per https://www.youtube.com/watch?v=2TSKxxYEbII but see this [[https://emacs.stackexchange.com/a/16832/9874][Emacs SE]] saying you might want to add a t parameter to that but then takes little tome so just put it in.
-      This needs altering for Emacs 27 some go to early init others here.
-	   #+begin_src emacs-lisp
+Initialize packages immediately and not after init.el is read post startup
+Note that Aquuamacs set these repositories.
+Don't need package-initialize as use package does it all? per https://www.youtube.com/watch?v=2TSKxxYEbII but see this [[https://emacs.stackexchange.com/a/16832/9874][Emacs SE]] saying you might want to add a t parameter to that but then takes little tome so just put it in.
+This needs altering for Emacs 27 some go to early init others here.
+#+NAME: org_2020-12-05+00-00_785404EE-EF1F-48D8-AE5B-B2B3C4088D5E
+#+begin_src emacs-lisp
 (require 'package)
 
 ;; Defined in Emacs 27 and above.
@@ -204,8 +205,7 @@ But this is working so don;t need to chnage until an actual bug + my org-mode se
 (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
-
-                                        ; Activate all packages (in particular autoloads).
+;; Activate all packages (in particular autoloads).
 ;; Use `package-quickstart' feature in Emacs 27 so we only need to
 ;; `package-initialize' if on Emacs 26 and below.
 ;; Take a look at $EMACS_CODEBASE/lisp/startup.el to refresh your memory.
@@ -213,9 +213,9 @@ But this is working so don;t need to chnage until an actual bug + my org-mode se
 ;; reads `package-quickstart'.
 (if (>= emacs-major-version 27)
     (setq package-quickstart t)
-  (package-initialize))
-	   #+end_src
-
+  (package-initialize)
+  (message "Packages initialised"))
+#+end_src
 
 ** Macros to set up how modes are set up
 :PROPERTIES:
@@ -464,25 +464,28 @@ But hack an load it directly
   ;; (load (expand-file-name "initsplit-settings.el"
   ;; mwb-init-customize-directory))
   ;; set here so no need to load twice
+  ;;  initsplit-known-p will not save to files that have not been loaded and exist
   (setq initsplit-simple-customizations
         '(("unknown"
            ("awesome-" "highlight-tails" "ansi-color" "xterm-color" "highlight-tail"))
           ("aquamacs"
-           ("aquamacs-" "tabbar-"))
+           ("aquamacs-" "tabbar-" "auto-word-wrap-default-function" ))
+          ("modus"
+           ("modus-" "ibuffer-title-face" "ibuffer-marked-face" "ibuffer-deletion-face"))
           ;; ("completion"
           ;;  ("company-" "yas-"))
           ("mac-based"
            ("ns-" "mac-" "cua-"))
           ("files"
            ("recentf-"))
-          ("flymake"
-           ("flymake-" "flycheck-"))
+          ;; ("flymake"
+          ;;  ("flymake-" "flycheck-"))
           ("fringe"
            ("fringe-"))
           ;; ("hardhat"
           ;;  ("hardhat-"))
-          ("ibuffer"
-           ("ibuffer-"))
+          ;; ("ibuffer"
+          ;;  ("ibuffer-"))
           ;; ("initsplit"
           ;;  ("initsplit-"))
           ("package"
@@ -493,12 +496,12 @@ But hack an load it directly
           ;;  ("exec-path-" "explicit-shell-file-name"))
           ;; ("structured-data"
           ;;  ("nxml-"))
-          ("modus"
-           ("modus-" "ibuffer-title-face"))
+
           ("vc"
            ("vc-" "magit-" "ediff-"))
-          ("emacs-base"
-           ("make-backup" "indent-tabs" "minibuffer-" "auto-fill-" "auto-word-wrap" "comment-auto" "word-wrap" "fill-" "visual-line-mode" "show-paren-mode" "global-h" "cursor-type" "tool-bar-mode" "delete-old-" "safe-local-variable" "custom-" "undo-limit" "desktop-" "customize-"))))
+          ;; ("emacs-base"
+          ;;  ("make-backup" "minibuffer-"   "global-h" "cursor-type" "tool-bar-mode" "delete-old-"  "custom-" "undo-limit" "desktop-" "customize-"))
+          ))
   (setq initsplit-customizations-alist
         '(
           ("\\`\\(gnus\\|nn\\|message\\|mail\\|mm-\\|smtp\\|send-mail\\|check-mail\\|spam\\|sc-\\)" "gnus-settings.el" nil t)
@@ -677,7 +680,7 @@ This all can be written using latest org mode allowing weaving etc.
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:913C5D29-620D-4FB7-9D2E-31D3FE538503
 :END:
 
-This file is the only one that using noweb weaving so must be loaded via a proper org babel
+This file (org-all) uses noweb weaving so must be loaded via a proper org babel
 
 But has requirements like hydra
 *** Hydra
@@ -700,8 +703,7 @@ Need key setting menus.
 (use-package major-mode-hydra
   :ensure t
   :demand
-  :bind
-  ("H-a" . major-mode-hydra)
+  :bind ("H-a" . major-mode-hydra)
   :config
   (progn
     (setq major-mode-hydra-invisible-quit-key "q")
@@ -721,37 +723,7 @@ This needs the full expansion
 #+begin_src emacs-lisp
 (mwb-init-load "init/org-all")
 #+end_src
-** Non aquamacs
-:PROPERTIES:
-:ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:E9328D54-1280-43B6-9DA6-D921C7A3AFF9
-:END:
-This config was written using Aquamacs which adds things.
-Some are just too embedded
-*** set-word-wrap
-:PROPERTIES:
-:ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:9DB3DB85-AFC6-483E-8D3D-AB11217FB071
-:END:
-This gets set in customize for all modes. Copy from Aquamacs
-#+NAME: org_mark_2020-10-01T11-27-32+01-00_mini12.local_0DFCC3B0-BDFE-4A98-87D3-46866915E99E
-#+begin_src emacs-lisp
-(unless *aquamacs*
-  (defun turn-off-longlines ()
-  "Unconditionally turn off Longlines mode."
-  (interactive)
-  (and (boundp 'longlines-mode)
-       (longlines-mode -1)))
-  (defun set-word-wrap ()
-    "Turn on Word Wrap mode in current buffer.
-This function sets `auto-fill-mode', `truncate-lines' and `visual-line-mode'."
-    (interactive)
-    (turn-on-visual-line-mode)          ; let it save settings first
-    (turn-off-longlines)
-    (turn-off-auto-fill)
-    (setq truncate-lines nil)
-    (if (interactive-p)
-        (message "Line wrapping set to Word Wrap mode in this buffer."))))
-#+end_src
-** The rest
+** The remaining setup with complete org file processing
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:35D80650-3C0F-4147-8B3A-3BC84158367B
 :END:

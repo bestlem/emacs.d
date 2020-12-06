@@ -71,6 +71,9 @@ It turns out Emacs supports multiple themes being active at the same time, which
 #+NAME: org_mark_2020-10-13T18-22-15+01-00_mini12.local_76567F98-E4B9-425F-8683-FF8850619A08
 #+begin_src emacs-lisp :tangle no
 (setq custom-theme-directory (mwb-user-emacs-file "data/themes"))
+(setq custom-enabled-themes nil)
+(setq custom-safe-themes
+      '("d4a89e8d54783f8d45c2c68cc6641ea2427f563405fde1f083191b10746fe59f" default))
 (defvar quick-switch-themes
   (let ((themes-list (list 'modus-vivendi
                            'mwbtheme-leuven
@@ -122,7 +125,7 @@ One for writing code and the other for reading articles."
 :PROPERTIES:
 :ID:       org_mark_2020-02-10T11-53-11+00-00_mini12:0A89487A-9396-43C4-9F45-0B2DBEBD41FE
 :END:
-*** Buffer face
+** Buffer face
 :PROPERTIES:
 :ID:       org_mark_2020-02-10T11-53-11+00-00_mini12:8BD8443B-8175-4615-9E81-4327864CB523
 :END:
@@ -133,7 +136,7 @@ Remove from mode line
 (eval-after-load "face-remap"
   '(diminish 'buffer-face-mode))
   #+end_src
-*** Ligatures
+** Ligatures
 :PROPERTIES:
 :ID:       org_mark_2020-10-03T11-41-17+01-00_mini12.local:B6D6F861-4367-42CD-B6BB-D49FFC135F7D
 :END:
@@ -149,7 +152,7 @@ emacs-27 has another way
     :custom (fira-code-mode-disabled-ligatures '("[]" "x")) ; ligatures you don't want
     :hook prog-mode))
 #+end_src
-*** Prettify Symbols
+** Prettify Symbols
 :PROPERTIES:
 :ID:       org_mark_2020-11-21T10-10-49+00-00_mini12.local:3AC8A96E-3DDF-464E-B426-DBF7DD4F6739
 :END:
@@ -207,20 +210,18 @@ These are set by Aquamacs but might as well reinforce
                    icon)))
       (s-concat icon (if nospace "" " ") str))))
 #+end_src
-* Remove toolbar
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:2173AD74-D123-45A9-B0B1-8B40D1840823
-:END:
-#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_5CB800C6-67BA-443E-B65B-FA0247AA6723
-#+begin_src emacs-lisp
-(tool-bar-mode 0)
-#+end_src
-
-* TODO Show line for errors etc
+* Show current line for errors etc
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:D9CBE07A-A1B7-48CB-A163-039F8E86A954
 :END:
-
+**  Show in all windows
+:PROPERTIES:
+:ID:       org_2020-12-06+00-00:DEF922FC-C688-4566-B30F-A0C3950B9EE7
+:END:
+#+NAME: org_2020-12-06+00-00_ED76EDBB-36A7-42DC-AD9E-331015F74649
+#+begin_src emacs-lisp
+(global-hl-line-mode 1)
+#+end_src
 ** Beacon mode
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:B70958EE-3BEB-441D-9544-871501B5EF25
@@ -268,6 +269,14 @@ but the answer below has an interesting suggestion
   (global-hl-line-mode 1)
   )
 #+end_src
+** Cursor
+:PROPERTIES:
+:ID:       org_2020-12-06+00-00:EDE96684-EE33-40DE-A91E-562828DC1942
+:END:
+#+NAME: org_2020-12-06+00-00_C6FEED37-790D-4D9A-A322-BB50D7DAB9CA
+#+begin_src emacs-lisp
+(setq cursor-type 'box)
+#+end_src
 * Windows
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:2DFC202B-3FB4-41C4-BFE6-9718ECD07F63
@@ -288,6 +297,7 @@ I think I now want mainly one window and have splits but tabs are useful.
   :config
   (winner-mode)
   (require 'windmove)
+  :init
 <<win-hydra-fns>>
 <<win-hydra>>
 
@@ -424,7 +434,7 @@ Still occurs in minibuffer
 :PROPERTIES:
 :ID:       org_mark_2020-11-05T09-18-27+00-00_mini12.local:2DB4E6E9-344A-45B9-B67E-C021EC6EC9DB
 :END:
-This is hardcoded. See all.org anmd desktop for other ways. Aquamacs just restores frames using revive.
+This is hardcoded. See all.org and desktop for other ways. Aquamacs just restores frames using revive.
 #+NAME: org_mark_2020-11-05T09-18-27+00-00_mini12.local_000987D2-DC8C-4944-AA63-B8D987C1FD5D
 #+begin_src emacs-lisp
 (when (and window-system (not *aquamacs*))

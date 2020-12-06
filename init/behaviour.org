@@ -76,11 +76,30 @@ On reading more this is only if passed to delete functions so might not be too m
   (global-hardhat-mode)
   :config (validate-setq hardhat-mode-lighter "Ⓗ"))
 #+end_src
+** Backups
+:PROPERTIES:
+:ID:       org_2020-12-06+00-00:A4750F2D-10FD-495C-ABDC-E28A3E0B16B3
+:END:
+#+NAME: org_2020-12-06+00-00_EC0FE1B5-679F-4B79-9F7E-004BF38E5E4D
+#+begin_src emacs-lisp
+(setq delete-old-versions "keep them all")
+(setq make-backup-files t)
+(setq backup-directory-alist
+      '(("." . ".~")))
+#+end_src
 * Emacs internals
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:3D94393D-BCFC-4C55-844D-42D2DCF4FC95
 :END:
-*** Sessions
+** Undo
+:PROPERTIES:
+:ID:       org_2020-12-06+00-00:BB0C42D6-AA66-4E9F-8F30-E30F9DA016FB
+:END:
+#+NAME: org_2020-12-06+00-00_D742B5F4-E383-4802-B407-EED83363E7D4
+#+begin_src emacs-lisp
+(setq undo-limit 800000)
+#+end_src
+** Sessions
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:F59E76F4-B802-4ADA-81C2-AE06603587BD
 :END:
@@ -102,7 +121,7 @@ On reading more this is only if passed to delete functions so might not be too m
   (setq savehist-file (locate-user-emacs-file "savehist.el"))
   (savehist-mode 1))
  #+end_src
-*** Registers
+** Registers
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:BB78D792-D0B1-443F-80B7-9633B1AD3B09
 :END:
@@ -132,7 +151,7 @@ I haven't used before but might try with hydra from [[https://sriramkswamy.githu
 
 
 #+end_src
-*** Yes or no
+** Yes or no
 :PROPERTIES:
 :ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:3F1F190C-6747-4CF2-939E-14386756F579
 :END:
@@ -259,8 +278,8 @@ This is from greghendershot
 (dolist (hook '(magit-mode-hook))
   (add-hook hook #'gh/show-trailing-whitespace-no 'append))
 
-(setq safe-local-variable-values
-      '((require-final-newline . t)))
+(add-to-list 'safe-local-variable-values
+             '(require-final-newline . t))
 
 ;; Show empty lines at buffer end.
 (set-default 'indicate-empty-lines t)
@@ -309,7 +328,7 @@ See http://endlessparentheses.com/ispell-and-abbrev-the-perfect-auto-correct.htm
 :PROPERTIES:
 :ID:       org_mark_2020-10-11T00-40-32+01-00_mini12.local:C282C8DC-D435-4A82-9997-64BE982AB24E
 :END:
-Aquamacs does its own binding
+Aquamacs does its own binding to comment and uncomment region.
 #+NAME: org_mark_2020-10-11T00-40-32+01-00_mini12.local_E984CC0C-A028-4666-9ED5-F24B9BDFC6A8
 #+begin_src emacs-lisp
 (use-package comment-dwim-2
@@ -326,7 +345,7 @@ Aquamacs does its own binding
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:CF24C2F4-0089-45C0-A3CE-72AAFBE47D97
 :END:
-The hydra does not add anything. Just keep hitting f2
+The hydra did not add anything. Just keep hitting f2
 #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_95AB0DCA-FC55-45BB-A888-847322BD6CA0
 #+begin_src emacs-lisp
 (use-package expand-region
@@ -340,9 +359,10 @@ The hydra does not add anything. Just keep hitting f2
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:79C47FC8-B71F-40B4-84F3-DB78319B9E33
 :END:
-There are several ways to make begin go to first non whitespace  then to begin lin, some will then make next press go to defun or buffer.
-Note home and end are in Aquamacs osx-mode-map makes life more complex (actually not as moses override it unless you deactivate and reactivate it). Perhaps I will have to unset them to allow modes to do their things These include crux, [[https://github.com/alezost/mwim.el][mwin]] and ergoemacs,  [[https://github.com/alphapapa/mosey.el][mosey]] + snippets on web.
-Note that lispy also does this but not back a form
+There are several ways to make begin go to first non whitespace  then to begin line, some will then make next press go to defun or buffer.
+Note home and end are in Aquamacs osx-mode-map makes life more complex (actually not as mosey overrides it unless you deactivate and reactivate it). Perhaps I will have to unset them to allow modes to do their things These include crux, [[https://github.com/alezost/mwim.el][mwin]] and ergoemacs,  [[https://github.com/alphapapa/mosey.el][mosey]] + snippets on web.
+Note that lispy also does this but not back a form.
+mwin seems the current winner
 *** Mosey
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:7A6F1A54-B69B-4674-8B4B-1B404D40B67D
@@ -406,11 +426,23 @@ mwin might have mode aware
 ;
 (setq track-eol t)
 (setq truncate-lines t)
-
-;; tabs
+#+end_src
+**  tabs
+:PROPERTIES:
+:ID:       org_2020-12-05+00-00:2067C531-01D2-4988-98A8-1A6A7BE16371
+:END:
+#+NAME: org_2020-12-05+00-00_EA04789D-7F1B-4CB5-BBF4-4D476DB57D6E
+#+begin_src emacs-lisp
 (setq-default tab-width 4)
 (setq-default tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100))
-
+(setq indent-tabs-mode 't)
+#+end_src
+** Rest
+:PROPERTIES:
+:ID:       org_2020-12-05+00-00:D912E5B5-F6B5-4BBF-9FCF-A8F276FA3A38
+:END:
+#+NAME: org_2020-12-05+00-00_2605732D-5417-4FDC-8DAA-A9A7C2A83CB4
+#+begin_src emacs-lisp
 ;; from http://ergoemacs.org/emacs/emacs_make_modern.html but some are in aquamacs
 ;; and https://github.com/anschwa/emacs.d
 
@@ -440,11 +472,6 @@ mwin might have mode aware
 		 ("C-h M-m" . discover-my-mode)))
 
 #+end_src
-
-#+RESULTS[d1e37b2dff4c9b40e852cbc762b099a9b5227a7a]: org_mark_2020-01-23T20-40-42+00-00_mini12_FA715CDB-338C-473F-8511-91E6966446EB
-#+begin_EXAMPLE
-discover-my-mode
-#+end_EXAMPLE
 
 * Buffers
 :PROPERTIES:
@@ -526,6 +553,19 @@ midnight-mode purges buffers which haven’t been displayed in 3 days.
 :PROPERTIES:
 :ID:       org_mark_2020-03-06T13-08-35+00-00_mini12.local:3D34B982-AF06-4809-ACCC-E206FFCAC10A
 :END:
+** Faces
+:PROPERTIES:
+:ID:       org_2020-12-06+00-00:1F4101B0-7C06-4F8F-857A-A8B25A034CF2
+:END:
+#+NAME: org_2020-12-06+00-00_55BEC998-6943-4AEF-8ED3-4ED6611B0625
+#+begin_src emacs-lisp
+(setq minibuffer-prompt-properties
+   '(read-only t cursor-intangible t face minibuffer-prompt cursor-intangible t))
+#+end_src
+** Kill it
+:PROPERTIES:
+:ID:       org_2020-12-06+00-00:DDCA46D9-A278-4657-A77D-2A95B5BCF660
+:END:
 Kill it from anywhere from blog with-Emacs but take version from [[https://www.reddit.com/r/emacs/comments/ffbser/withemacs_quit_current_context/][Reddit]]
 #+NAME: org_mark_2020-03-06T13-08-35+00-00_mini12.local_983EF586-334E-442B-B675-D73D0165A612
 #+begin_src emacs-lisp
@@ -558,7 +598,91 @@ Kill it from anywhere from blog with-Emacs but take version from [[https://www.r
         (t
          (keyboard-quit))))
 
-(bind-key "H-k" 'keyboard-quit-context+)
+(bind-key "H-q" 'keyboard-quit-context+)
+#+end_src
+* Fill and wrap
+:PROPERTIES:
+:ID:       org_2020-12-05+00-00:7B38E572-7C2E-4BC1-B03E-FD4E4396CB6E
+:END:
+Lets put these in one place
+Fill is use hard returns. Wrap keeps the line in one in the file
+** Non aquamacs
+:PROPERTIES:
+:ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:E9328D54-1280-43B6-9DA6-D921C7A3AFF9
+:END:
+This config was written using Aquamacs which adds things.
+Some are just too embedded
+*** set-word-wrap
+:PROPERTIES:
+:ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:9DB3DB85-AFC6-483E-8D3D-AB11217FB071
+:END:
+This gets set in customize for all modes. Copy from Aquamacs
+#+NAME: org_mark_2020-10-01T11-27-32+01-00_mini12.local_0DFCC3B0-BDFE-4A98-87D3-46866915E99E
+#+begin_src emacs-lisp
+(unless *aquamacs*
+  (defun turn-off-longlines ()
+  "Unconditionally turn off Longlines mode."
+  (interactive)
+  (and (boundp 'longlines-mode)
+       (longlines-mode -1)))
+  (defun set-word-wrap ()
+    "Turn on Word Wrap mode in current buffer.
+This function sets `auto-fill-mode', `truncate-lines' and `visual-line-mode'."
+    (interactive)
+    (turn-on-visual-line-mode)          ; let it save settings first
+    (turn-off-longlines)
+    (turn-off-auto-fill)
+    (setq truncate-lines nil)
+    (if (interactive-p)
+        (message "Line wrapping set to Word Wrap mode in this buffer."))))
+#+end_src
+
+** Fill column in code
+:PROPERTIES:
+:ID:       org_mark_2020-02-24T14-59-33+00-00_mini12.local:573326D1-BD3B-4F5B-A721-E49A096DE72B
+:END:
+Where to wrap the line iff too long. Set locally in prog-modes and differ in comment
+
+This is from [[https://www.emacswiki.org/emacs/AutoFillMode][emacs wiki]]
+However only want to fill modes where there are line based comments e.g. Emacs lisp. If there is a block comment then don't fill
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_9B7EA331-7A72-4DCE-9798-9D3B378A8C1B
+#+begin_src emacs-lisp
+(setq-default comment-auto-fill-only-comments t)
+(defun _mwb-prog-auto-fill (max-column)
+  (setq-local comment-auto-fill-only-comments t)
+  (setq-local fill-column max-column)
+  (setq-local comment-fill-column max-column)
+  (auto-fill-mode 1))
+
+;; use by setting in the actual program mode
+;;(add-hook 'prog-mode-hook 'mwb-prog-auto-fill)
+(defun mwb-prog-auto-fill-80 ()
+  "Fill for 80 column screen - I only use where standards are enforced"
+  (_mwb-prog-auto-fill 79))
+
+(defun mwb-prog-auto-fill-120 ()
+  "Fill for 120 column screen - \"I only use where standards are enforced\"s to be my current screen"
+  (_mwb-prog-auto-fill 119))
+#+end_src
+
+** Fill unfill region
+:PROPERTIES:
+:ID:       org_2020-12-05+00-00:294E3107-DC95-404D-B72F-9EDC09C6F4C8
+:END:
+Look at aquamacs-editing.el
+
+** Set defaults
+:PROPERTIES:
+:ID:       org_2020-12-05+00-00:A67E0CAF-C655-434D-A9EE-99510387828D
+:END:
+This is in text mode
+#+NAME: org_2020-12-05+00-00_A13E1BED-9FD1-4F87-91FA-B180A313487C
+#+begin_src emacs-lisp
+(setq text-mode-hook '(abbrev-mode set-word-wrap))
+(setq-default auto-fill-function nil)
+(setq fill-nobreak-predicate
+   '(fill-single-word-nobreak-p fill-single-char-nobreak-p))
+(visual-line-mode 1)
 #+end_src
 * Extra functions
 :PROPERTIES:

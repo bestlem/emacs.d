@@ -197,10 +197,16 @@ Take from jweigley then find a hydra and prettify it.
               ("Y"     . ora-dired-rsync)
               ("M-!"   . async-shell-command)
               ("<tab>" . dired-next-window)
+              (")" . dired-hide-details-mode)
+              ("(" . dired-hide-details-mode)
+              ("C-M-u" . dired-subtree-up)
+              ("C-M-d" . dired-subtree-down)
+              ("C-M-p" . dired-subtree-previous-sibling)
+              ("C-M-n" . dired-subtree-next-sibling)
               ("M-G")
               ("M-s f"))
   :diminish dired-omit-mode
-  :hook (dired-mode . dired-hide-details-mode)
+  ;; :hook (dired-mode . dired-hide-details-mode)
   :hook (dired-mode . dired-omit-mode)
   :preface
   (defvar saved-window-configuration nil)
@@ -294,7 +300,7 @@ Take from jweigley then find a hydra and prettify it.
             #'(lambda () (bind-key "M-G" #'switch-to-gnus dired-mode-map))))
 #+end_src
 
-** Dired-x
+*** Dired-x
 :PROPERTIES:
 :ID:       org_mark_2020-11-27T01-10-38+00-00_mini12.local:2838D467-BDF1-4220-9E50-2DD22E2C9544
 :END:
@@ -353,6 +359,38 @@ Part of emacs but not loaded
 (add-to-list 'dired-compress-file-suffixes
              '("\\.tbz2\\'" ".tar" "bunzip2")
              )
+#+end_src
+
+*** Icons
+:PROPERTIES:
+:ID:       org_2020-11-30+00-00:9D16D081-3299-4F23-ACBD-BA3919DBC70E
+:END:
+
+**** All the icons
+:PROPERTIES:
+:ID:       org_2020-12-06+00-00:F61E2069-E55F-4A4E-AB78-147D022F698C
+:END:
+From Greg Hendershott
+But treemacs gets prettier coloured icons
+#+NAME: org_2020-11-30+00-00_6A809D36-52F1-4E8A-9634-2A75404F6CEC
+#+begin_src emacs-lisp
+(use-package all-the-icons-dired
+  :disabled
+  :ensure t
+  :hook (dired-mode . all-the-icons-dired-mode))
+#+end_src
+
+**** Treemacs
+:PROPERTIES:
+:ID:       org_2020-12-06+00-00:10976CEB-1382-4621-BB2A-57B5E73226DB
+:END:
+Use icons from treemacs
+#+NAME: org_2020-12-06+00-00_C748F245-1E25-4A85-BE27-BD671864B180
+#+begin_src emacs-lisp
+(use-package treemacs-icons-dired
+   :after treemacs dired
+   :ensure t
+   :config (treemacs-icons-dired-mode))
 #+end_src
 * Project management
 :PROPERTIES:
@@ -536,11 +574,6 @@ This is the visual
  (use-package treemacs-projectile
    :after treemacs projectile
    :ensure t)
-
- (use-package treemacs-icons-dired
-   :after treemacs dired
-   :ensure t
-   :config (treemacs-icons-dired-mode))
 
 (use-package treemacs-magit
   :disabled                             ; Emacs 27 did not like this

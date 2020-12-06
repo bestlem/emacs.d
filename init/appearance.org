@@ -120,6 +120,16 @@ One for writing code and the other for reading articles."
 :PROPERTIES:
 :ID:       org_mark_2020-02-10T11-53-11+00-00_mini12:0A89487A-9396-43C4-9F45-0B2DBEBD41FE
 :END:
+** Fonts
+:PROPERTIES:
+:ID:       org_2020-12-06+00-00:BAB32FAA-EF85-4768-8261-261141C1BCFF
+:END:
+Set the actual fonts to be used
+#+NAME: org_2020-12-06+00-00_87B9331B-36CE-4ED5-B82C-E637E0A4BE9A
+#+begin_src emacs-lisp
+(set-face-font 'default "Jetbrains Mono")
+(set-face-font 'variable-pitch "Georgia")
+#+end_src
 ** Buffer face
 :PROPERTIES:
 :ID:       org_mark_2020-02-10T11-53-11+00-00_mini12:8BD8443B-8175-4615-9E81-4327864CB523

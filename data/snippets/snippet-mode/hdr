@@ -1,6 +1,6 @@
 # name : Snippet header
 # expand-env : ()
-# contributor : joaotavora
+# contributor : Mark Bestley
 # key: hdr
 # --
 # name : $1${2:
@@ -9,4 +9,6 @@
 # contributor : `user-full-name` 
 # --
 $0
+
+
 

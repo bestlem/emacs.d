@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Source Code block named for use with weave
+# key: srcw
+# --
+
+#+begin_src ${1:emacs-lisp} :tangle no :noweb-ref $2
+$0
+#+end_src

@@ -516,23 +516,17 @@ projectile-save-project-buffers is nice but save-buffer does not make a backup. 
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:22044AD2-EC4A-4C3B-B3D2-7F994D4BB958
 :END:
-This is the visual
+This is the visual tree to manage files etc
  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_55CB1D47-BC33-40F8-BC2A-12D014C6B18D
  #+begin_src emacs-lisp
-;; Treemacs
-;;  first pass has all defaults even if not needed
 (use-package treemacs
   :ensure t
   :init
   (with-eval-after-load 'winum
     (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
+  (setq treemacs-width 50)
   :commands (treemacs)
   :config
-  (defsubst treemacs-get-from-shadow-index (key)
-    "Get node with KEY, if any."
-    (--if-let (ht-get treemacs-shadow-index key)
-        it
-      (treemacs-log "Node for key [%s] missing in shadow index" key)))
 
   (setq hydra-key-regex "\\[\\|]\\|[-\\[:alnum:] ~.,;:/|?<>={}*+#%@!&^⇧⌘⌥↑↓←→⌫⌦⏎'`()\"$]+?") ; add Mac key symbols
 
@@ -557,13 +551,16 @@ This is the visual
   :mode-hydra
   (treemacs-mode
    ("Project"
-    ( ("p" matcha-projectile/body "Projectile")
-      ("c" treemacs-add-project-to-workspace "Create Project")
-      ("d" treemacs-remove-project-from-workspace "Delete Project")
-      ("q" nil "Quit"))
+    (
+     ;; ("p" matcha-projectile/body "Projectile")
+     ("c" treemacs-add-project-to-workspace "Create Project")
+     ("d" treemacs-remove-project-from-workspace "Delete Project")
+     )
     "Workspace"
     (("s" treemacs-switch-workspace "Switch" )
-     ("e" treemacs-edit-workspaces "Edit" ))))
+     ("e" treemacs-edit-workspaces "Edit" ))
+    "Width"
+    (("w" treemacs-toggle-fixed-width "Toggle variable width" ))))
 
   :bind ( :map treemacs-mode-map
                ("<mouse-5>" . treemacs-rightclick-menu)
@@ -597,4 +594,27 @@ So from https://github.com/Alexander-Miller/treemacs/issues/168
   (--if-let (ht-get treemacs-shadow-index key)
       it
     (treemacs-log "Node for key [%s] missing in shadow index" key)))
+#+end_src
+**** My error
+:PROPERTIES:
+:ID:       org_2020-12-07+00-00:295CBD82-FEAD-49CF-A08A-01830ED8AEA7
+:END:
+I get Error running timer ‘treemacs--process-file-events’: (wrong-type-argument sequencep t) ]
+So lets add messaging
+#+NAME: org_2020-12-07+00-00_2731AC2F-F381-4BEA-B43D-2BDC25D3F6DD
+#+begin_src emacs-lisp
+(defun treemacs--process-file-events ()
+  "Process the file events that have been collected.
+Stop watching deleted dirs and refresh all the buffers that need updating."
+  (setf treemacs--refresh-timer nil)
+  (message "In treemacs--process-file-events treemacs--in-this-buffer is %s "
+           treemacs--in-this-buffer)
+  (treemacs-without-following
+   (if (eq treemacs--in-this-buffer t)
+       (treemacs--do-process-file-events)
+     ;; need to save excursion here because an update when the treemacs window is not visible
+     ;; will actually move point in the current buffer
+     ;; TODO(2019/07/18): check if this is still necessary after granular filewatch is done
+     (save-excursion
+       (treemacs--do-process-file-events)))))
 #+end_src

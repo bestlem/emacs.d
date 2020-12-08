@@ -353,7 +353,8 @@ The hydra did not add anything. Just keep hitting f2
   :bind ("C-=" . er/expand-region)
   ("<f2>" . er/expand-region)
   ("<S-f2>" . er/contract-region)
-  ("<C-f2>" . er/contract-region))
+  ("<C-f2>" . er/contract-region)
+  :custom (expand-region-show-usage-message nil))
 #+end_src
 ** Begin end line
 :PROPERTIES:

@@ -404,6 +404,7 @@ First issue is we need to switch as many people use spaces so we need to guess i
 #+begin_src emacs-lisp
 (use-package dtrt-indent
   :ensure t
+  :diminish
   :hook (prog-mode . dtrt-indent-mode))
 #+end_src
 *** Tab can complete

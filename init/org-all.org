@@ -5,20 +5,23 @@
 :PROPERTIES:
 :ID:       org_mark_2020-10-24T15-08-22+01-00_mini12.local:8844FA08-DB9D-44FB-AE4D-189DDA7A2EAA
 :END:
-- [[#start-using-org-mode][Start using org mode]]
+- [[#start-using-org-mode-notes][Start using org mode notes]]
   - [[#use-package-issues][use package issues]]
   - [[#noweb-issues][Noweb issues]]
   - [[#grettke][Grettke]]
-- [[#load-and-setup-org-mode][Load and setup org mode]]
-  - [[#the-use-package-setup][The use package setup]]
-    - [[#key-bindings][Key bindings]]
-    - [[#hack-around][Hack around]]
-      - [[#org-capture][Org capture]]
-    - [[#save-org-files-saved-in-dropbox-dir-automatically-nb-not-emacs-autosave][Save org files saved in dropbox dir automatically (NB not emacs autosave)]]
-    - [[#tangle-on-save][Tangle on save]]
+  - [[#save-org-files-saved-in-dropbox-dir-automatically-nb-not-emacs-autosave][Save org files saved in dropbox dir automatically (NB not emacs autosave)]]
+  - [[#load-and-setup-org-mode][Load and setup org mode]]
+- [[#the-use-package-setup][The use package setup]]
+  - [[#key-bindings][Key bindings]]
+  - [[#hack-around][Hack around]]
+    - [[#org-capture][Org capture]]
+  - [[#tangle-on-save][Tangle on save]]
+  - [[#line-wrapping][Line wrapping]]
   - [[#folding-visibility][Folding visibility]]
-  - [[#setup-outside-use-package][Setup outside use-package]]
-    - [[#imenu-to-provide-info-for-treemacs-and-contextual-menu][Imenu to provide info for treemacs and contextual menu]]
+  - [[#footnotes][Footnotes]]
+  - [[#main-mode-hydra][Main mode hydra]]
+- [[#setup-outside-use-package][Setup outside use-package]]
+  - [[#imenu-to-provide-info-for-treemacs-and-contextual-menu][Imenu to provide info for treemacs and contextual menu]]
   - [[#babel-initialisation][Babel initialisation]]
     - [[#grettke-babel][Grettke babel]]
       - [[#minimal-config][Minimal config]]
@@ -29,22 +32,18 @@
       - [[#tangling][Tangling]]
       - [[#evaluating][Evaluating]]
       - [[#weaving][Weaving]]
-  - [[#footnotes][Footnotes]]
   - [[#prettify][Prettify]]
     - [[#circular-bullets][Circular bullets]]
     - [[#set-fonts-for-headers][Set fonts for headers]]
     - [[#indent-other-text][Indent other text]]
-    - [[#line-wrapping][Line wrapping]]
-  - [[#agenda][Agenda]]
+  - [[#table-of-contents-setup][Table of Contents setup]]
+  - [[#refile][Refile]]
+    - [[#code][Code]]
+    - [[#hydra][Hydra]]
   - [[#capture][Capture]]
-  - [[#mode-hydras][Mode Hydras]]
-    - [[#main-mode][Main mode]]
-    - [[#refile][Refile]]
-      - [[#code][Code]]
-      - [[#hydra][Hydra]]
-- [[#table-of-contents-setup][Table of Contents setup]]
+  - [[#agenda][Agenda]]
 
-* Start using org mode
+* Start using org mode notes
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:6810C5AF-469D-4E0E-BD24-8F6301313A91
 :END:
@@ -68,7 +67,7 @@ However org-babel-detangle cannot deal with detangling as it looks for the whole
 One fix might be to just detangle the current block.
 
 Ok detangle does not work
-org-babel-tangle-jump-to-org does mainly if :comments noweb is in the org :Properties: and the blockas have unique names
+org-babel-tangle-jump-to-org does mainly if :comments noweb is in the org :Properties: and the blocks have unique names but :noweb-ref names don't work as they produce a different link formar and reverse-search is not 100% see its info.
 
 ** Grettke
 :PROPERTIES:
@@ -78,7 +77,13 @@ This seems one of the most complete literate programming setups and he does have
 As everything is after loading of org dump in a config section after the rest.
 
 
-* Load and setup org mode
+
+** TODO Save org files saved in dropbox dir automatically (NB not emacs autosave)
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:8A5AC122-42AB-4B05-BEEE-ED6A16F5A966
+:END:
+See https://www.reddit.com/r/emacs/comments/9e5h4f/is_there_a_way_to_autosave_org_note_buffers/ and real-auto-save-mode and the hook
+** Load and setup org mode
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:DA0B129D-3E54-4C67-94D2-B9D303434BAF
 :END:
@@ -86,13 +91,14 @@ org-mode is a pain as we need a newer than aquamacs supplies and also there are 
 
 Aug 2019 got an error in cut subtree so revert to org mode with Aquamacs and lost formatting of code blocks. (and will get name changes in links in generated files) but seems OK now.
 
-Now back to back to src issues. They go back to the code block that contains the noweb <<>> Not the named block
-** The use package setup
+Now jump to back to src issues. They go back to the code block that contains the noweb <<>> Not the named block
+
+* The use package setup
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:411C4ABA-EFFC-4E73-9C0F-5E936AC5B73B
 :END:
+This is the main setup that includes other things
 Note Hydra is not really used after just a couple of weeks.
-
 It is now for subtree todo refile and links
   #+NAME: org_mark_2020-01-23T20-21-34+00-00_mini12_72F56F5E-3D65-491F-B68F-CDCFF334FFB6
   #+begin_src emacs-lisp :noweb tangle
@@ -120,9 +126,12 @@ It is now for subtree todo refile and links
 
   :custom
   <<org-custom>>
+
+  :config
+  <<org-extras>>
   )
   #+end_src
-*** Key bindings
+** Key bindings
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:7CFDEDFE-FB36-47D9-8D94-0CDC83AF71CC
 :END:
@@ -145,12 +154,12 @@ Put the bind bit in noweb
  )
 #+end_src
 
-*** Hack around
+** Hack around
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:163000D5-C193-4FB4-A502-C78FD1FB08AB
 :END:
 basically can't edit the above as tangle - this is ironically the best suggestion for wring in code with outshine and not org mode
-**** Org capture
+*** Org capture
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:3D4D14AB-E281-45E0-A18E-0590E25E74A4
 :END:
@@ -187,12 +196,7 @@ From http://doc.norang.ca/org-mode.html#Capture
         ))
 #+end_src
 
-*** TODO Save org files saved in dropbox dir automatically (NB not emacs autosave)
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:8A5AC122-42AB-4B05-BEEE-ED6A16F5A966
-:END:
-See https://www.reddit.com/r/emacs/comments/9e5h4f/is_there_a_way_to_autosave_org_note_buffers/ and real-auto-save-mode and the hook
-*** TODO Tangle on save
+** TODO Tangle on save
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:42D6E858-998F-48DE-8D73-799C228FF91E
 :END:
@@ -207,6 +211,17 @@ I have removed this from the noweb weave as it makes use of other files a pain b
                'run-at-end
                'only-in-org-mode)))
 	#+end_src
+
+** Line wrapping
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:EE29BA62-13AD-4C22-9ABB-AF723DCA7950
+:END:
+ Setting up =visual-line-mode= and making all my paragraphs one single line, so that the lines wrap around nicely in the window according to their proportional-font size, instead of at a fixed character count, which does not work so nicely when characters have varying widths. I set up a hook that automatically enables =visual-line-mode= and =variable-pitch-mode= when entering org-mode. From [[https://raw.githubusercontent.com/zzamboni/dot-emacs/master/init.org][zzamboni]]
+ #+NAME: org-mode-hooks-wrapping
+ #+begin_src emacs-lisp :tangle no
+    (org-mode . visual-line-mode)
+    (org-mode . variable-pitch-mode)
+  #+end_src
 ** Folding visibility
 :PROPERTIES:
 :ID:       org_mark_2020-10-25T11-37-05+00-00_mini12.local:B48F7EEE-0A50-4EC9-8416-C09AC65B509B
@@ -216,11 +231,64 @@ This describes how the org file is shown I think 9.4 altered this
 #+begin_src emacs-lisp :tangle no
 (org-startup-folded 'fold)
 #+end_src
-** Setup outside use-package
+
+** Footnotes
+:PROPERTIES:
+:ID:       org_mark_2020-03-06T13-08-35+00-00_mini12.local:31819091-6339-413D-9DD1-C248C5F6520B
+:END:
+Need to set up an auto-sort
+#+NAME: org_mark_2020-03-06T13-08-35+00-00_mini12.local_632B9653-A2FD-4226-A130-A0260FCD9B66
+#+begin_src emacs-lisp :noweb-ref org-config :tangle no
+(setq org-footnote-auto-adjust t)
+#+end_src
+
+
+** Main mode hydra
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:D4058350-C97F-4A1D-858C-70008D09A2FF
+:END:
+Using new pretty mode hydra but with #+setupfile: from the matcha
+
+#+NAME: org_2020-12-07+00-00_005A3AAF-4168-444A-8AD4-BCA80924C59A
+#+begin_src emacs-lisp :tangle no :noweb-ref org-config
+(major-mode-hydra-define org-mode (:idle 1.0)
+  ("Edit Subtree"
+   (("x" org-cut-subtree "Cut")
+    ("w" org-copy-subtree "Copy")
+    ("y" org-paste-subtree "Paste")
+    ("Y" org-yank "Yank")
+    ("W" org-clone-subtree-with-time-shift "Clone"))
+   "Visibility"
+   (("va" outline-show-all "All"))
+   "Babel"
+   (("e" org-babel-execute-src-block "Execute Source Block")
+    ("'" org-edit-src-code "Edit Source")
+    ("b" org-babel-tangle "Tangle"))
+   "Insert"
+   (("m" org-meta-return "Heading")
+    ("M" org-insert-heading-respect-content "Heading Under")
+
+    ("T" org-insert-todo-heading-respect-content "Todo Under"))
+   "Org"
+   (("a" org-agenda "Agenda")
+    ("c" org-capture "Capture")
+    ("R" org-refile "Refile")
+    ("r" hydra-org-refile/body "Refile Hydra")
+    ("t" org-todo "Todo"))
+   "Links"
+   (("l" org-store-link "Store")
+    ("i" org-insert-link "Insert")
+    ("f" org-footnote-action "Footnote"))))
+
+#+end_src
+* Setup outside use-package
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:2DC0229D-C398-4D28-B321-23AFDA2DA87A
 :END:
-*** Imenu to provide info for treemacs and contextual menu
+This is after org-mode has been loaded and set up
+Not :after does not work as org-mode has been loaded early. SO just rely on file order
+Possibly all this could go in a config control by properties
+** Imenu to provide info for treemacs and contextual menu
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:793DB60B-CF8D-4A9B-8AA1-1A16077CBCB1
 :END:
@@ -262,8 +330,6 @@ Grettke has two set ups
 Standardize timestamps.
 Reduce the legth so the ids do not wrap on the screen.
 #+name: org_gcr_2018-03-16_mara_24B486D3-AF94-44E7-99F6-AEB7A53FD0E6
-org_2020-11-27T22-41-01+00-00_451D7528-BB66-48C2-82FD-A2FC371DED3B
-#+NAME: org_2020-11-27T22-41-01+00-00_055BDDEC-DC97-4652-AD82-8CC8EB9EF841
 #+begin_src emacs-lisp
 (defun help/get-timestamp ()
   "Produces a full ISO 8601 format timestamp.
@@ -1249,17 +1315,6 @@ results need to be visibly noticeably different for the reader by making them
 
 Diagramming languages require =RESULTS= output for exporting.
 
-** Footnotes
-:PROPERTIES:
-:ID:       org_mark_2020-03-06T13-08-35+00-00_mini12.local:31819091-6339-413D-9DD1-C248C5F6520B
-:END:
-Need to set up an auto-sort
-#+NAME: org_mark_2020-03-06T13-08-35+00-00_mini12.local_632B9653-A2FD-4226-A130-A0260FCD9B66
-#+begin_src emacs-lisp :noweb-ref org-config :tangle no
-(setq org-footnote-auto-adjust t)
-#+end_src
-
-
 ** Prettify
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:722CBA7A-79F6-4695-B710-ACF8F3C1F219
@@ -1333,16 +1388,89 @@ From [[http://www.howardism.org/Technical/Emacs/orgmode-wordprocessor.html][here
   :ensure nil
   :diminish)
 	#+end_src
-*** Line wrapping
+** Table of Contents setup
 :PROPERTIES:
-:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:EE29BA62-13AD-4C22-9ABB-AF723DCA7950
+:ID:       org_mark_2020-10-24T15-08-22+01-00_mini12.local:22E4475E-BC4D-4C25-8B48-2F5E01060BDA
 :END:
- Setting up =visual-line-mode= and making all my paragraphs one single line, so that the lines wrap around nicely in the window according to their proportional-font size, instead of at a fixed character count, which does not work so nicely when characters have varying widths. I set up a hook that automatically enables =visual-line-mode= and =variable-pitch-mode= when entering org-mode. From [[https://raw.githubusercontent.com/zzamboni/dot-emacs/master/init.org][zzamboni]]
- #+NAME: org-mode-hooks-wrapping
- #+begin_src emacs-lisp :tangle no
-    (org-mode . visual-line-mode)
-    (org-mode . variable-pitch-mode)
-  #+end_src
+This package [[https://github.com/snosov1/toc-org][toc-org]] seems it might be useful
+
+I think using treemacs is nearer what I need as puts menu in other window - although length matters
+#+NAME: org_mark_2020-10-24T15-08-22+01-00_mini12.local_E0715861-9815-4AA9-8E93-095091F21C56
+#+begin_src emacs-lisp
+(use-package toc-org
+  :ensure t
+  :hook (org-mode . toc-org-mode))
+#+end_src
+
+** Refile
+:PROPERTIES:
+:ID:       org_2020-12-07+00-00:8823DE6D-7329-4D19-BF21-8438FE1A7CED
+:END:
+
+Based off https://mollermara.com/blog/Fast-refiling-in-org-mode-with-hydras/ to refile to separate files. No doubt will extend in future and follow the later bits.
+*** Code
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:F95400D0-B750-4B14-A1F5-78BF1E070185
+:END:
+#+NAME: org_2020-12-07+00-00_51802C21-7B36-41FE-A88F-FC25E7EB96C1
+#+begin_src emacs-lisp
+(defun my/refile (file headline &optional arg)
+  (let ((pos (save-excursion
+               (find-file (expand-file-name file org-directory))
+               (org-find-exact-headline-in-buffer headline))))
+    (org-refile arg nil (list headline file nil pos)))
+  (switch-to-buffer (current-buffer)))
+#+end_src
+
+*** Hydra
+:PROPERTIES:
+:ID:       org_2020-12-07+00-00:5419E547-16A1-40F2-9B8A-6A5B504454F2
+:END:
+I am not certain how to add a name in the use-package so use plain macro in :config Also easier to create if legal elisp
+#+NAME: org_2020-12-07+00-00_B84C6815-0FA6-43AA-8D0E-121C3C3E77BC
+#+begin_src emacs-lisp
+(pretty-hydra-define hydra-org-refile
+  (:color pink :quit-key "q")
+  ("Shopping"
+   (("g" (my/refile "shopping.org" "Groceries") "Groceries")
+    ("s" (my/refile "shopping.org" "Other") "Other shopping"))
+   "computer"
+   (("e" (my/refile "dev_todo.org" "Emacs") "Emacs tasks")
+    ("p" (my/refile "dev_todo.org" "programming") "Prog tasks")
+    ("r" (my/refile "dev_todo.org" "racket") "Racket tasks"))
+   "Other"
+   (("w" (my/refile "dev_todo.org" "racket") "Web"))))
+#+end_src
+
+** Capture
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:A1CCBFF3-51A3-4B75-9EED-179DB3DD0940
+:END:
+I should start using this
+Again from jerrypnz
+#+NAME: org_mark_2020-01-23T20-21-34+00-00_mini12_951A79B2-540A-4A60-B3FA-7EEA9F02A656
+#+begin_src emacs-lisp
+(use-package org-capture
+  ;; :after (org)
+  :commands (org-capture)
+  :bind (("<f13>" . org-capture)
+         ("C-<f13>" . open-org-notes))
+  :preface
+  (defun open-org-notes ()
+    (interactive)
+    (find-file org-default-notes-file))
+  :config
+  (setq org-capture-templates
+        `(("t" "TODO" entry (file org-default-notes-file)
+           "* TODO %?\n%u\n")
+          ("p" "Project" entry (file org-default-notes-file)
+           "* %? [%] :PROJECT:\n%u\n")
+          ("m" "Meeting" entry (file org-default-notes-file)
+           "* Meeting notes for %? :MEETING:\n%t" :clock-in t :clock-resume t)
+          ("n" "Notes" entry (file org-default-notes-file)
+           "* %? \n%t"))))
+#+end_src
+
 ** Agenda
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:E8D53E27-7D3B-403A-9179-D415A9B2581A
@@ -1385,127 +1513,4 @@ I don't use but the hook is there. Main setup from Jerry Peng, needed as in org 
             (todo category-keep timestamp-down)
             (tags category-keep timestamp-down)
             (search category-keep)))))
-#+end_src
-** Capture
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:A1CCBFF3-51A3-4B75-9EED-179DB3DD0940
-:END:
-I should start using this
-Again from jerrypnz
-#+NAME: org_mark_2020-01-23T20-21-34+00-00_mini12_951A79B2-540A-4A60-B3FA-7EEA9F02A656
-#+begin_src emacs-lisp
-(use-package org-capture
-  ;; :after (org)
-  :commands (org-capture)
-  :bind (("<f13>" . org-capture)
-         ("C-<f13>" . open-org-notes))
-  :preface
-  (defun open-org-notes ()
-    (interactive)
-    (find-file org-default-notes-file))
-  :config
-  (setq org-capture-templates
-        `(("t" "TODO" entry (file org-default-notes-file)
-           "* TODO %?\n%u\n")
-          ("p" "Project" entry (file org-default-notes-file)
-           "* %? [%] :PROJECT:\n%u\n")
-          ("m" "Meeting" entry (file org-default-notes-file)
-           "* Meeting notes for %? :MEETING:\n%t" :clock-in t :clock-resume t)
-          ("n" "Notes" entry (file org-default-notes-file)
-           "* %? \n%t"))))
-#+end_src
-** Mode Hydras
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:BD042FBD-8A86-4528-8410-A0403E313F56
-:END:
-*** Main mode
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:D4058350-C97F-4A1D-858C-70008D09A2FF
-:END:
-Using new pretty mode hydra but with #+setupfile: from the matcha
-
-#+NAME: org-mode-hydrae
-#+begin_src emacs-lisp :tangle no
-:mode-hydra
-(org-mode
- ("Edit Subtree"
-  (("x" org-cut-subtree "Cut")
-   ("w" org-copy-subtree "Copy")
-   ("y" org-paste-subtree "Paste")
-   ("Y" org-yank "Yank")
-   ("W" org-clone-subtree-with-time-shift "Clone"))
-  "Babel"
-  (("e" org-babel-execute-src-block "Execute Source Block")
-   ("'" org-edit-src-code "Edit Source")
-   ("b" org-babel-tangle "Tangle"))
-  "Insert"
-  (("m" org-meta-return "Heading")
-   ("M" org-insert-heading-respect-content "Heading Under")
-
-   ("T" org-insert-todo-heading-respect-content "Todo Under"))
-  "Org"
-  (("a" org-agenda "Agenda")
-   ("c" org-capture "Capture")
-   ("R" org-refile "Refile")
-   ("r" hydra-org-refile/body "Refile Hydra")
-   ("t" org-todo "Todo"))
-  "Links"
-  (("l" org-store-link "Store")
-   ("i" org-insert-link "Insert")
-   ("f" org-footnote-action "Footnote"))))
-
-#+end_src
-*** Refile
-:PROPERTIES:
-:header-args: :noweb-ref  org-mode-hydrae-refile
-:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:B74FA3DA-C2DF-4A3E-8122-A95BCA29C592
-:END:
-Based off https://mollermara.com/blog/Fast-refiling-in-org-mode-with-hydras/ to refile to separate files. No doubt will extend in future and follow the later bits.
-**** Code
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:F95400D0-B750-4B14-A1F5-78BF1E070185
-:END:
-#+NAME: org-mode-hydrae-code
-#+begin_src emacs-lisp :tangle no
-(defun my/refile (file headline &optional arg)
-  (let ((pos (save-excursion
-               (find-file (expand-file-name file org-directory))
-               (org-find-exact-headline-in-buffer headline))))
-    (org-refile arg nil (list headline file nil pos)))
-  (switch-to-buffer (current-buffer)))
-#+end_src
-
-**** Hydra
-:PROPERTIES:
-:ID:       org_mark_2020-10-24T15-08-22+01-00_mini12.local:D4DA8CE4-DA9A-43D9-AE41-F2A5040BBDCB
-:END:
-
-I am not certain how to add a name in the use-package so use plain macro in :config
-#+NAME: org_mark_2020-10-24T15-08-22+01-00_mini12.local_FD030CF2-2800-4F9B-A6DF-3E850A864309
-#+begin_src emacs-lisp :tangle no
-(pretty-hydra-define hydra-org-refile
-  (:color pink :quit-key "q")
-  ("Shopping"
-   (("g" (my/refile "shopping.org" "Groceries") "Groceries")
-    ("s" (my/refile "shopping.org" "Other") "Other shopping"))
-   "computer"
-   (("e" (my/refile "dev_todo.org" "Emacs") "Emacs tasks")
-    ("p" (my/refile "dev_todo.org" "programming") "Prog tasks")
-    ("r" (my/refile "dev_todo.org" "racket") "Racket tasks"))
-   "Other"
-   (("w" (my/refile "dev_todo.org" "racket") "Web"))))
-#+end_src
-
-* Table of Contents setup
-:PROPERTIES:
-:ID:       org_mark_2020-10-24T15-08-22+01-00_mini12.local:22E4475E-BC4D-4C25-8B48-2F5E01060BDA
-:END:
-This package [[https://github.com/snosov1/toc-org][toc-org]] seems it might be useful
-
-I think using treemacs is nearer what I need.
-#+NAME: org_mark_2020-10-24T15-08-22+01-00_mini12.local_E0715861-9815-4AA9-8E93-095091F21C56
-#+begin_src emacs-lisp
-(use-package toc-org
-  :ensure t
-  :hook (org-mode . toc-org-mode))
 #+end_src

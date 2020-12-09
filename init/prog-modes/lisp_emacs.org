@@ -99,6 +99,15 @@ We want to wrap comments.
 #+begin_src emacs-lisp
 (add-hook 'emacs-lisp-mode-hook 'mwb-prog-auto-fill-80)
 #+end_src
+** Indentation
+:PROPERTIES:
+:ID:       org_2020-12-08+00-00:EDF64D9A-1F1B-4159-A7F8-F7376886A48E
+:END:
+I don't like plist formatting so from this [[https://stackoverflow.com/questions/22166895/customize-elisp-plist-indentation][SO question]] I chose the simple common lisp
+#+NAME: org_2020-12-08+00-00_67C53BD2-DAF3-4B25-80DB-ADB3958F1820
+#+begin_src emacs-lisp
+(setq lisp-indent-function 'common-lisp-indent-function)
+#+end_src
 * See macros
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:87193D42-251A-408C-80B7-839BF6CFCE81

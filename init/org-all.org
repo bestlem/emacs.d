@@ -12,6 +12,7 @@
   - [[#save-org-files-saved-in-dropbox-dir-automatically-nb-not-emacs-autosave][Save org files saved in dropbox dir automatically (NB not emacs autosave)]]
   - [[#load-and-setup-org-mode][Load and setup org mode]]
 - [[#the-use-package-setup][The use package setup]]
+  - [[#use-package][use-package]]
   - [[#key-bindings][Key bindings]]
   - [[#hack-around][Hack around]]
     - [[#org-capture][Org capture]]
@@ -19,9 +20,6 @@
   - [[#line-wrapping][Line wrapping]]
   - [[#folding-visibility][Folding visibility]]
   - [[#footnotes][Footnotes]]
-  - [[#main-mode-hydra][Main mode hydra]]
-- [[#setup-outside-use-package][Setup outside use-package]]
-  - [[#imenu-to-provide-info-for-treemacs-and-contextual-menu][Imenu to provide info for treemacs and contextual menu]]
   - [[#babel-initialisation][Babel initialisation]]
     - [[#grettke-babel][Grettke babel]]
       - [[#minimal-config][Minimal config]]
@@ -32,6 +30,10 @@
       - [[#tangling][Tangling]]
       - [[#evaluating][Evaluating]]
       - [[#weaving][Weaving]]
+  - [[#archive][Archive]]
+  - [[#main-mode-hydra][Main mode hydra]]
+- [[#setup-outside-use-package][Setup outside use-package]]
+  - [[#imenu-to-provide-info-for-treemacs-and-contextual-menu][Imenu to provide info for treemacs and contextual menu]]
   - [[#prettify][Prettify]]
     - [[#circular-bullets][Circular bullets]]
     - [[#set-fonts-for-headers][Set fonts for headers]]
@@ -100,6 +102,11 @@ Now jump to back to src issues. They go back to the code block that contains the
 This is the main setup that includes other things
 Note Hydra is not really used after just a couple of weeks.
 It is now for subtree todo refile and links
+
+** use-package
+:PROPERTIES:
+:ID:       org_2020-12-08+00-00:D690B0FD-0E4B-44ED-A01E-7FEC29D8E7F4
+:END:
   #+NAME: org_mark_2020-01-23T20-21-34+00-00_mini12_72F56F5E-3D65-491F-B68F-CDCFF334FFB6
   #+begin_src emacs-lisp :noweb tangle
 (use-package org
@@ -243,68 +250,14 @@ Need to set up an auto-sort
 #+end_src
 
 
-** Main mode hydra
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:D4058350-C97F-4A1D-858C-70008D09A2FF
-:END:
-Using new pretty mode hydra but with #+setupfile: from the matcha
 
-#+NAME: org_2020-12-07+00-00_005A3AAF-4168-444A-8AD4-BCA80924C59A
-#+begin_src emacs-lisp :tangle no :noweb-ref org-config
-(major-mode-hydra-define org-mode (:idle 1.0)
-  ("Edit Subtree"
-   (("x" org-cut-subtree "Cut")
-    ("w" org-copy-subtree "Copy")
-    ("y" org-paste-subtree "Paste")
-    ("Y" org-yank "Yank")
-    ("W" org-clone-subtree-with-time-shift "Clone"))
-   "Visibility"
-   (("va" outline-show-all "All"))
-   "Babel"
-   (("e" org-babel-execute-src-block "Execute Source Block")
-    ("'" org-edit-src-code "Edit Source")
-    ("b" org-babel-tangle "Tangle"))
-   "Insert"
-   (("m" org-meta-return "Heading")
-    ("M" org-insert-heading-respect-content "Heading Under")
-
-    ("T" org-insert-todo-heading-respect-content "Todo Under"))
-   "Org"
-   (("a" org-agenda "Agenda")
-    ("c" org-capture "Capture")
-    ("R" org-refile "Refile")
-    ("r" hydra-org-refile/body "Refile Hydra")
-    ("t" org-todo "Todo"))
-   "Links"
-   (("l" org-store-link "Store")
-    ("i" org-insert-link "Insert")
-    ("f" org-footnote-action "Footnote"))))
-
-#+end_src
-* Setup outside use-package
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:2DC0229D-C398-4D28-B321-23AFDA2DA87A
-:END:
-This is after org-mode has been loaded and set up
-Not :after does not work as org-mode has been loaded early. SO just rely on file order
-Possibly all this could go in a config control by properties
-** Imenu to provide info for treemacs and contextual menu
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:793DB60B-CF8D-4A9B-8AA1-1A16077CBCB1
-:END:
-  #+NAME: org_mark_2020-01-23T20-21-34+00-00_mini12_12513515-1117-4C44-86E5-C9E98808513C
-  #+begin_src emacs-lisp
-  (add-hook 'org-mode-hook
-			(lambda () (imenu-add-to-menubar "Imenu")))
-  (setq org-imenu-depth 6)
-  #+end_src
 ** Babel initialisation
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:1972881C-34EE-46DE-BB07-8C34C8CC0094
 :END:
 Code block behaviour - but also see customization for appearance
  #+NAME: org_mark_2020-01-23T20-21-34+00-00_mini12_F0D54908-6A04-45A1-BF64-E082C9DE207E
- #+begin_src emacs-lisp
+ #+begin_src emacs-lisp :tangle no :noweb-ref org-config
  (setq org-src-fontify-natively t
 	   org-src-tab-acts-natively t
 	   org-confirm-babel-evaluate nil
@@ -1315,6 +1268,117 @@ results need to be visibly noticeably different for the reader by making them
 
 Diagramming languages require =RESULTS= output for exporting.
 
+** Archive
+:PROPERTIES:
+:ID:       org_2020-12-08+00-00:C0A61800-DCE8-4C03-96B8-944F662CBA2A
+:END:
+I want separate archive files with the same structure as original
+All google seems to point via the gist quoted in [[https://emacs.stackexchange.com/questions/49079/issue-archiving-when-maintaining-org-mode-subtree-structure][SO]] but [[https://fuco1.github.io/2017-04-20-Archive-subtrees-under-the-same-hierarchy-as-original-in-the-archive-files.html][Fuco1's]] looks simpler
+But org mode keepos changing and functions go missing so does not work but a fix [[https://github.com/daviderestivo/galactic-emacs/blob/master/lisp/org-archive-subtree.el][Here]]
+#+NAME: org_2020-12-08+00-00_2D87F4C9-46F1-403B-A758-2FF8DAADA668
+#+begin_src emacs-lisp :tangle no :noweb-ref org-extras
+;;
+;; Archive subtrees under the same hierarchy as the original org file.
+;; Link: https://gist.github.com/Fuco1/e86fb5e0a5bb71ceafccedb5ca22fcfb
+;;
+(require 'dash)
+
+(defadvice org-archive-subtree (around fix-hierarchy activate)
+  (let* ((fix-archive-p (and (not current-prefix-arg)
+                             (not (use-region-p))))
+         (afile  (car (org-archive--compute-location
+		               (or (org-entry-get nil "ARCHIVE" 'inherit) org-archive-location))))
+         (buffer (or (find-buffer-visiting afile) (find-file-noselect afile))))
+    ad-do-it
+    (when fix-archive-p
+      (with-current-buffer buffer
+        (goto-char (point-max))
+        (while (org-up-heading-safe))
+        (let* ((olpath (org-entry-get (point) "ARCHIVE_OLPATH"))
+               (path (and olpath (split-string olpath "/")))
+               (level 1)
+               tree-text)
+          (when olpath
+            (org-mark-subtree)
+            (setq tree-text (buffer-substring (region-beginning) (region-end)))
+            (let (this-command) (org-cut-subtree))
+            (goto-char (point-min))
+            (save-restriction
+              (widen)
+              (-each path
+                (lambda (heading)
+                  (if (re-search-forward
+                       (rx-to-string
+                        `(: bol (repeat ,level "*") (1+ " ") ,heading)) nil t)
+                      (org-narrow-to-subtree)
+                    (goto-char (point-max))
+                    (unless (looking-at "^")
+                      (insert "\n"))
+                    (insert (make-string level ?*)
+                            " "
+                            heading
+                            "\n"))
+                  (cl-incf level)))
+              (widen)
+              (org-end-of-subtree t t)
+              (org-paste-subtree level tree-text))))))))
+
+#+end_src
+** Main mode hydra
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:D4058350-C97F-4A1D-858C-70008D09A2FF
+:END:
+Using new pretty mode hydra but with #+setupfile: from the matcha
+
+#+NAME: org_2020-12-07+00-00_005A3AAF-4168-444A-8AD4-BCA80924C59A
+#+begin_src emacs-lisp :tangle no :noweb-ref org-config
+(major-mode-hydra-define org-mode (:idle 1.0)
+  ("Edit Subtree"
+   (("x" org-cut-subtree "Cut")
+    ("w" org-copy-subtree "Copy")
+    ("y" org-paste-subtree "Paste")
+    ("Y" org-yank "Yank")
+    ("W" org-clone-subtree-with-time-shift "Clone"))
+   "Visibility"
+   (("va" outline-show-all "All"))
+   "Babel"
+   (("e" org-babel-execute-src-block "Execute Source Block")
+    ("'" org-edit-src-code "Edit Source")
+    ("b" org-babel-tangle "Tangle"))
+   "Insert"
+   (("m" org-meta-return "Heading")
+    ("M" org-insert-heading-respect-content "Heading Under")
+
+    ("T" org-insert-todo-heading-respect-content "Todo Under"))
+   "Org"
+   (("a" org-archive-subtree "Archive subtree")
+    ("c" org-capture "Capture")
+    ("R" org-refile "Refile")
+    ("r" hydra-org-refile/body "Refile Hydra")
+    ("t" org-todo "Todo"))
+   "Links"
+   (("l" org-store-link "Store")
+    ("i" org-insert-link "Insert")
+    ("f" org-footnote-action "Footnote"))))
+
+#+end_src
+* Setup outside use-package
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:2DC0229D-C398-4D28-B321-23AFDA2DA87A
+:END:
+This is after org-mode has been loaded and set up
+Not :after does not work as org-mode has been loaded early. So just rely on file order
+Possibly all this could go in a config control by properties
+** Imenu to provide info for treemacs and contextual menu
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:793DB60B-CF8D-4A9B-8AA1-1A16077CBCB1
+:END:
+  #+NAME: org_mark_2020-01-23T20-21-34+00-00_mini12_12513515-1117-4C44-86E5-C9E98808513C
+  #+begin_src emacs-lisp
+  (add-hook 'org-mode-hook
+			(lambda () (imenu-add-to-menubar "Imenu")))
+  (setq org-imenu-depth 6)
+  #+end_src
 ** Prettify
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:722CBA7A-79F6-4695-B710-ACF8F3C1F219
@@ -1431,15 +1495,19 @@ I am not certain how to add a name in the use-package so use plain macro in :con
 #+begin_src emacs-lisp
 (pretty-hydra-define hydra-org-refile
   (:color pink :quit-key "q")
-  ("Shopping"
+  ("Archive"
+   ( ("a" org-archive-subtree "Archive subtree"))
+   "Shopping"
    (("g" (my/refile "shopping.org" "Groceries") "Groceries")
     ("s" (my/refile "shopping.org" "Other") "Other shopping"))
    "computer"
    (("e" (my/refile "dev_todo.org" "Emacs") "Emacs tasks")
-    ("p" (my/refile "dev_todo.org" "programming") "Prog tasks")
-    ("r" (my/refile "dev_todo.org" "racket") "Racket tasks"))
+    ("p" (my/refile "dev_todo.org" "Programming") "Prog tasks")
+    ("r" (my/refile "dev_todo.org" "Racket") "Racket tasks"))
    "Other"
-   (("w" (my/refile "dev_todo.org" "racket") "Web"))))
+   (("b" (my/refile "bookmarks.org" "General") "Bookmarks")
+    ("f" (my/refile "bookmarks.org" "Fiction") "Fiction")
+    )))
 #+end_src
 
 ** Capture

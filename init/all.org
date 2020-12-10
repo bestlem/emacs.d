@@ -272,6 +272,7 @@ However smex seems not to be maintained so try amx
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:BF4F840D-AE27-4C9B-B83E-CCFAC0C0E8DB
 :END:
   No comments as just open the files.
+  But can be added later
   #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_FEA89BFB-F2A3-4C2C-8B2D-944D09F1D38D
   #+begin_src emacs-lisp
   (mwb-init-load "init/keys")

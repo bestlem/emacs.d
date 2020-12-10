@@ -81,22 +81,25 @@ Note takes time to load
 #+NAME: org_2020-12-02+00-00_36E0112E-FDE9-4FEB-87E9-19EF7B62A776
 #+begin_src emacs-lisp
 ;; Show ivy frame using posframe
-(use-package ivy-posframe
-  :when (>= emacs-major-version 27)
-  :disabled
-  :custom
-  (ivy-display-function #'ivy-posframe-display-at-frame-center)
-  ;; (ivy-posframe-width 130)
-  ;; (ivy-posframe-height 11)
-  (ivy-posframe-parameters
-   '((left-fringe . 5)
-     (right-fringe . 5)))
-  :custom-face
-  (ivy-posframe ((t (:background "#282a36"))))
-  (ivy-posframe-border ((t (:background "#6272a4"))))
-  (ivy-posframe-cursor ((t (:background "#61bfff"))))
-  :hook
-  (ivy-mode . ivy-posframe-enable))
+(when (>= emacs-major-version 27)
+  (use-package ivy-posframe
+      :ensure t
+      :demand
+      :init
+      (setq ivy-posframe-display-functions-alist
+            '((swiper . ivy-display-function-fallback)
+              (swiper-isearch . ivy-display-function-fallback)
+              ;; (complete-symbol . ivy-posframe-display-at-point)
+              (t . ivy-posframe-display)))
+      ;; (ivy-posframe-mode 1)
+      :custom
+      ;; (ivy-posframe-width 130)
+      ;; (ivy-posframe-height 11)
+      (ivy-posframe-parameters
+       '((left-fringe . 5)
+         (right-fringe . 5)))
+      :config
+      (ivy-posframe-mode)))
 #+end_src
 * Ivy hydra
 :PROPERTIES:

@@ -79,7 +79,6 @@ This seems one of the most complete literate programming setups and he does have
 As everything is after loading of org dump in a config section after the rest.
 
 
-
 ** TODO Save org files saved in dropbox dir automatically (NB not emacs autosave)
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:8A5AC122-42AB-4B05-BEEE-ED6A16F5A966
@@ -147,12 +146,15 @@ Put the bind bit in noweb
 #+begin_src emacs-lisp :tangle no
 (
  ("H-s" . org-babel-tangle-jump-to-org)
- ("H-S-s" . org-babel-detangle)     ; actually update but can't deal with weave
+ ("H-S-s" . org-babel-detangle) ;; actually update but can't deal with weave
  :map org-mode-map
  ("H-s" . org-edit-special)
+ ("<f19> s" . org-edit-special)
+
  ("<f5>" . org-ctrl-c-ctrl-c)
  :map org-src-mode-map
  ("H-s" . org-edit-src-exit)
+ ("<f19> s" . org-edit-src-exit)
  ("A-s" . org-edit-src-save)            ; I press by mistake but it makes
                                         ; sense now save not save and exit
  ("A-k". org-edit-src-abort)

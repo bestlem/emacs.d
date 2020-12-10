@@ -32,58 +32,6 @@ Make emacs message when it gcs.
 #+begin_src emacs-lisp
 (setq garbage-collection-messages 't)
 #+end_src
-** minibuffer
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:FFDA0E37-D169-4605-81D5-6286FB7C08B4
-:END:
-  I have had crashes with helpful where emacs has to be killed. Looks like a recursive stack error but also see comment re garbage collection So let's try
-  Note this causes a gc when minibuffer ends - perhaps not the best time
-After crashes this has been turned off
-  #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_6D1AA0E9-63E0-4D18-81AE-142094A987CE
-  #+begin_src emacs-lisp :tangle no
-(defun my-minibuffer-setup-hook ()
-  (setq gc-cons-threshold 8000000))
-
-(defun my-minibuffer-exit-hook ()
-  (setq gc-cons-threshold 800000))
-
-;; (add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
-;; (add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
-  #+end_src
-** At useful times
-:PROPERTIES:
-:ID:       org_mark_2020-03-02T07-49-31+00-00_mini12.local:E84E64AE-0AE9-47B6-B5AE-1E29C11FC9D6
-:HEADER-ARGS: :tangle no
-:END:
-Not needed with gcmh
-
-If Emacs is doing nothing then might as well gc
-Taken from [[https://www.reddit.com/r/emacs/comments/bqu69o/making_emacs_snappier_i_need_a_second_opinion/][Reddit]] but not on kill-buffer
-*** Hooks
-:PROPERTIES:
-:ID:       org_2020-12-08+00-00:A878C0A9-BBC9-40AB-8973-B13EC43511A0
-:END:
-But did not seem to be OK as focus out hook does not work
-#+NAME: org_mark_2020-03-02T07-49-31+00-00_mini12.local_8B85D421-DEE1-4971-B1CB-CBD7C5678E5F
-#+begin_src emacs-lisp
-(add-hook 'after-save-hook       'garbage-collect 99) ; after all
-;; (add-hook 'focus-out-hook        #'garbage-collect)
-;; (add-hook 'minibuffer-exit-hook  #'garbage-collect)
-(add-hook 'minibuffer-setup-hook #'garbage-collect)
-(add-hook 'suspend-hook          #'garbage-collect 'run-at-end)
-#+end_src
-*** Idle
-:PROPERTIES:
-:ID:       org_2020-12-08+00-00:E95E52C2-A7E4-4F66-8381-DEAE792C715D
-:END:
-Having read help for `run-with-idle-timer` this seems better
-#begin_quote
-Perform an action the next time Emacs is idle for SECS seconds.
-#end_quote
-#+NAME: org_2020-12-08+00-00_C06726FA-D422-4216-92D1-CF3BA3B36A88
-#+begin_src emacs-lisp :tangle no
-(run-with-idle-timer 30 't #'garbage-collect)
-#+end_src
 * File Handling
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:7F0DB7D1-63CC-4002-BF3B-FC8F529B24EB

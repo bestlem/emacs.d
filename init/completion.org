@@ -105,12 +105,28 @@ Merging `company-yasnippet' to `company-capf' will yield
     (merge-backend-with-company-backends 'company-yasnippet)
     (merge-backend-with-company-backends 'company-dabbrev-code)))
 #+end_src
-*** DONE Add generic methods
-CLOSED: [2020-02-08 Sat 00:21]
+
+** auto-complete
 :PROPERTIES:
-:ID:       org_mark_2020-02-07T11-15-13+00-00_mini12:0017C0B5-B14B-4581-A36B-2B54CCBDDF39
+:ID:       org_2020-12-02+00-00:D77DB643-7779-4D51-8E6E-9DC259EA4483
 :END:
-j Add| methods from jojojames being generalisation of common yasnippet. Provides a function rather than the code used in yasnippet. Would be useful if adding other backends after yasnippet (as shown before I committed the change I need to see the issue to understand his code)
+
+I don’t use auto-complete at all, so I have set up a hook to automatically disable it whenever it is enabled to avoid creating conflicting popups when company is activated. From https://github.com/IvanMalison/dotfiles/tree/master/dotfiles/emacs.d
+#+NAME: org_2020-12-02+00-00_B89125D1-4255-4372-B72B-70822BC69702
+#+begin_src emacs-lisp
+(use-package auto-complete
+:disabled
+  :preface
+  (progn
+    (defun imalison:auto-complete-hook ()
+      (debug)
+      (warn "auto-complete-mode was activated, but is being automatically disabled.")
+      (let ((auto-complete-mode-hook nil))
+	(auto-complete-mode -1))))
+  :config
+  (progn
+    (add-hook 'auto-complete-mode-hook 'imalison:auto-complete-hook)))
+#+end_src
 
 * Text expansion
 :PROPERTIES:

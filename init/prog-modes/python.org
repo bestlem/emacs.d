@@ -85,7 +85,7 @@ Might be better in elpy etc as for the pythonic issue.
   #+begin_src emacs-lisp
 (use-package conda
   :ensure t
-  :defer t
+  :after (python)
   :init
   (setq conda-anaconda-home "~/miniconda3/bin")
   :config

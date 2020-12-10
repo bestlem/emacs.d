@@ -322,43 +322,10 @@ mwb - Well remove the time"
   (interactive)
   (insert (format-time-string "%F")))
 #+end_src
-***** Garbage collection
+***** Display system info.
 :PROPERTIES:
-:ID:       org_gcr_2017-07-30_mara:D9207828-3783-4599-BA48-A6EB2C3FCAE4
+:ID:       org_2020-12-10+00-00:28CB7CC9-F76D-4EFF-A30C-5F16446482FD
 :END:
-Clear memory and disable garbage collection or return garbage collection to
-normal.
-
-#+NAME: org_gcr_2017-07-29_mara_3F459DF6-EA6A-4D48-BB0A-3670FCB25713
-#+BEGIN_SRC emacs-lisp
-(defun help/set-gc-cons-threshold (&optional multiplier notify)
-  "Set `gc-cons-threshold' either to its default value or a
-   `multiplier' thereof."
-  (let* ((new-multiplier (or multiplier 1))
-         (new-threshold (* mwb/gc-cons-threshold
-                           new-multiplier)))
-    (setq gc-cons-threshold new-threshold)
-    (when notify (message "Setting `gc-cons-threshold' to %s" new-threshold))))
-#+END_SRC
-Helper doubles available memory.
-
-#+NAME: org_gcr_2017-08-02_mara_92B4C3CB-6CE3-4211-8A18-C7BE905BFBC2
-#+BEGIN_SRC emacs-lisp
-(defun help/double-gc-cons-threshold () "Double `gc-cons-threshold'." (help/set-gc-cons-threshold 2))
-#+END_SRC
-
-Double garbage collection during tangling. Instead of storing this in the
-primary Org-Mode Literate Programming configuration I want it here so that it
-is always available.
-
-#+NAME: org_gcr_2017-08-02_mara_DAC6E558-E49D-4551-8789-2B3FB88F6CE7
-#+BEGIN_SRC emacs-lisp
-(add-hook 'org-babel-pre-tangle-hook #'help/double-gc-cons-threshold)
-(add-hook 'org-babel-post-tangle-hook #'help/set-gc-cons-threshold)
-#+END_SRC
-
-Display system info.
-
 #+NAME: org_gcr_2017-05-12_mara_901541A6-1DB6-4EA2-8688-9C888C41902A
 #+BEGIN_SRC emacs-lisp
 (defun help/display-system-info ()

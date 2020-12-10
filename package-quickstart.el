@@ -253,6 +253,153 @@ See `ws-butler-mode' for more information on Ws-Butler mode.
 
 
 )
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/posframe-20201201.659/posframe-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/posframe-20201201.659/posframe-autoloads.el") (car load-path))))
+
+
+
+(autoload 'posframe-workable-p "posframe" "\
+Test posframe workable status." nil nil)
+
+(autoload 'posframe-show "posframe" "\
+Pop up a posframe and show STRING at POSITION.
+
+POSITION can be:
+1. An integer, meaning point position.
+2. A cons of two integers, meaning absolute X and Y coordinates.
+3. Other type, in which case the corresponding POSHANDLER should be
+   provided.
+
+POSHANDLER is a function of one argument returning an actual
+position.  Its argument is a plist of the following form:
+
+  (:position xxx
+   :position-info xxx
+   :poshandler xxx
+   :font-height xxx
+   :font-width xxx
+   :posframe xxx
+   :posframe-width xxx
+   :posframe-height xxx
+   :posframe-buffer xxx
+   :parent-frame xxx
+   :parent-window-left xxx
+   :parent-window-top xxx
+   :parent-frame-width xxx
+   :parent-frame-height xxx
+   :parent-window xxx
+   :parent-window-width  xxx
+   :parent-window-height xxx
+   :minibuffer-height xxx
+   :mode-line-height  xxx
+   :header-line-height xxx
+   :tab-line-height xxx
+   :x-pixel-offset xxx
+   :y-pixel-offset xxx)
+
+By default, poshandler is auto-selected based on the type of POSITION,
+but the selection can be overridden using the POSHANDLER argument.
+The builtin poshandler functions are listed below:
+
+1.  `posframe-poshandler-frame-center'
+2.  `posframe-poshandler-frame-top-center'
+3.  `posframe-poshandler-frame-top-left-corner'
+4.  `posframe-poshandler-frame-top-right-corner'
+5.  `posframe-poshandler-frame-bottom-center'
+6.  `posframe-poshandler-frame-bottom-left-corner'
+7.  `posframe-poshandler-frame-bottom-right-corner'
+8.  `posframe-poshandler-window-center'
+9.  `posframe-poshandler-window-top-center'
+10. `posframe-poshandler-window-top-left-corner'
+11. `posframe-poshandler-window-top-right-corner'
+12. `posframe-poshandler-window-bottom-center'
+13. `posframe-poshandler-window-bottom-left-corner'
+14. `posframe-poshandler-window-bottom-right-corner'
+15. `posframe-poshandler-point-top-left-corner'
+16. `posframe-poshandler-point-bottom-left-corner'
+17. `posframe-poshandler-point-bottom-left-corner-upward'
+
+This posframe's buffer is BUFFER-OR-NAME, which can be a buffer
+or a name of a (possibly nonexistent) buffer.
+
+If NO-PROPERTIES is non-nil, The STRING's properties will
+be removed before being shown in posframe.
+
+WIDTH, MIN-WIDTH, HEIGHT and MIN-HEIGHT, specify bounds on the
+new total size of posframe.  MIN-HEIGHT and MIN-WIDTH default to
+the values of ‘window-min-height’ and ‘window-min-width’
+respectively.  These arguments are specified in the canonical
+character width and height of posframe.
+
+If LEFT-FRINGE or RIGHT-FRINGE is a number, left fringe or
+right fringe with be shown with the specified width.
+
+By default, posframe shows no borders, but users can specify
+borders by setting INTERNAL-BORDER-WIDTH to a positive number.
+Border color can be specified by INTERNAL-BORDER-COLOR
+or via the ‘internal-border’ face.
+
+Posframe's font as well as foreground and background colors are
+derived from the current frame by default, but can be overridden
+using the FONT, FOREGROUND-COLOR and BACKGROUND-COLOR arguments,
+respectively.
+
+By default, posframe will display no header-line, mode-line and
+tab-line.  In case a header-line, mode-line or tab-line is
+desired, users can set RESPECT-HEADER-LINE and RESPECT-MODE-LINE
+to t.
+
+INITIALIZE is a function with no argument.  It will run when
+posframe buffer is first selected with `with-current-buffer'
+in `posframe-show', and only run once (for performance reasons).
+
+If LINES-TRUNCATE is non-nil, then lines will truncate in the
+posframe instead of wrap.
+
+OVERRIDE-PARAMETERS is very powful, *all* the frame parameters
+used by posframe's frame can be overridden by it.
+
+TIMEOUT can specify the number of seconds after which the posframe
+will auto-hide.
+
+If REFRESH is a number, posframe's frame-size will be re-adjusted
+every REFRESH seconds.
+
+When ACCEPT-FOCUS is non-nil, posframe will accept focus.
+be careful, you may face some bugs when set it to non-nil.
+
+HIDEHANDLER is a function, when it return t, posframe will be
+hide when `post-command-hook' is executed, this function has a
+plist argument:
+
+  (:posframe-buffer xxx
+   :posframe-parent-buffer xxx)
+
+The builtin hidehandler functions are listed below:
+
+1. `posframe-hidehandler-when-buffer-switch'
+
+
+You can use `posframe-delete-all' to delete all posframes.
+
+\(fn BUFFER-OR-NAME &key STRING POSITION POSHANDLER WIDTH HEIGHT MIN-WIDTH MIN-HEIGHT X-PIXEL-OFFSET Y-PIXEL-OFFSET LEFT-FRINGE RIGHT-FRINGE INTERNAL-BORDER-WIDTH INTERNAL-BORDER-COLOR FONT FOREGROUND-COLOR BACKGROUND-COLOR RESPECT-HEADER-LINE RESPECT-MODE-LINE INITIALIZE NO-PROPERTIES KEEP-RATIO LINES-TRUNCATE OVERRIDE-PARAMETERS TIMEOUT REFRESH ACCEPT-FOCUS HIDEHANDLER &allow-other-keys)" nil nil)
+
+(autoload 'posframe-hide-all "posframe" "\
+Hide all posframe frames." t nil)
+
+(autoload 'posframe-delete-all "posframe" "\
+Delete all posframe frames and buffers." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "posframe" '("posframe-")))
+
+
+
+
+
+)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/which-key-20200908.2301/which-key-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -455,6 +602,44 @@ is selected interactively by mode in `minor-mode-map-alist'." t nil)
 
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "which-key" '("which-key-")))
+
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/which-key-posframe-20190427.1103/which-key-posframe-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/which-key-posframe-20190427.1103/which-key-posframe-autoloads.el") (car load-path))))
+
+
+
+(autoload 'which-key-posframe-enable "which-key-posframe" "\
+Enable which-key-posframe." t nil)
+
+(defvar which-key-posframe-mode nil "\
+Non-nil if Which-Key-Posframe mode is enabled.
+See the `which-key-posframe-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `which-key-posframe-mode'.")
+
+(custom-autoload 'which-key-posframe-mode "which-key-posframe" nil)
+
+(autoload 'which-key-posframe-mode "which-key-posframe" "\
+Toggle which key posframe mode on of off.
+
+If called interactively, enable Which-Key-Posframe mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "which-key-posframe" '("which-key-")))
 
 
 
@@ -1029,10 +1214,582 @@ version.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/projectile-20201204.954/projectile-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/projectile-20201204.954/projectile-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile-autoloads.el") (car load-path))))
+
+
+
+(autoload 'projectile-version "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Get the Projectile version as string.
+
+If called interactively or if SHOW-VERSION is non-nil, show the
+version in the echo area and the messages buffer.
+
+The returned string includes both, the version from package.el
+and the library version, if both a present and different.
+
+If the version number could not be determined, signal an error,
+if called interactively, or if SHOW-VERSION is non-nil, otherwise
+just return nil.
+
+\(fn &optional SHOW-VERSION)" t nil)
+
+(autoload 'projectile-invalidate-cache "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Remove the current project's files from `projectile-projects-cache'.
+
+With a prefix argument PROMPT prompts for the name of the project whose cache
+to invalidate.
+
+\(fn PROMPT)" t nil)
+
+(autoload 'projectile-purge-file-from-cache "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Purge FILE from the cache of the current project.
+
+\(fn FILE)" t nil)
+
+(autoload 'projectile-purge-dir-from-cache "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Purge DIR from the cache of the current project.
+
+\(fn DIR)" t nil)
+
+(autoload 'projectile-cache-current-file "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Add the currently visited file to the cache." t nil)
+
+(autoload 'projectile-discover-projects-in-directory "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Discover any projects in DIRECTORY and add them to the projectile cache.
+This function is not recursive and only adds projects with roots
+at the top level of DIRECTORY.
+
+\(fn DIRECTORY)" t nil)
+
+(autoload 'projectile-discover-projects-in-search-path "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Discover projects in `projectile-project-search-path'.
+Invoked automatically when `projectile-mode' is enabled." t nil)
+
+(autoload 'projectile-switch-to-buffer "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Switch to a project buffer." t nil)
+
+(autoload 'projectile-switch-to-buffer-other-window "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Switch to a project buffer and show it in another window." t nil)
+
+(autoload 'projectile-switch-to-buffer-other-frame "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Switch to a project buffer and show it in another frame." t nil)
+
+(autoload 'projectile-display-buffer "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Display a project buffer in another window without selecting it." t nil)
+
+(autoload 'projectile-project-buffers-other-buffer "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Switch to the most recently selected buffer project buffer.
+Only buffers not visible in windows are returned." t nil)
+
+(autoload 'projectile-multi-occur "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Do a `multi-occur' in the project's buffers.
+With a prefix argument, show NLINES of context.
+
+\(fn &optional NLINES)" t nil)
+
+(autoload 'projectile-find-other-file "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Switch between files with the same name but different extensions.
+With FLEX-MATCHING, match any file that contains the base name of current file.
+Other file extensions can be customized with the variable `projectile-other-file-alist'.
+
+\(fn &optional FLEX-MATCHING)" t nil)
+
+(autoload 'projectile-find-other-file-other-window "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Switch between files with the same name but different extensions in other window.
+With FLEX-MATCHING, match any file that contains the base name of current file.
+Other file extensions can be customized with the variable `projectile-other-file-alist'.
+
+\(fn &optional FLEX-MATCHING)" t nil)
+
+(autoload 'projectile-find-other-file-other-frame "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Switch between files with the same name but different extensions in other frame.
+With FLEX-MATCHING, match any file that contains the base name of current file.
+Other file extensions can be customized with the variable `projectile-other-file-alist'.
+
+\(fn &optional FLEX-MATCHING)" t nil)
+
+(autoload 'projectile-find-file-dwim "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Jump to a project's files using completion based on context.
+
+With a prefix arg INVALIDATE-CACHE invalidates the cache first.
+
+If point is on a filename, Projectile first tries to search for that
+file in project:
+
+- If it finds just a file, it switches to that file instantly.  This works even
+if the filename is incomplete, but there's only a single file in the current project
+that matches the filename at point.  For example, if there's only a single file named
+\"projectile/projectile.el\" but the current filename is \"projectile/proj\" (incomplete),
+`projectile-find-file-dwim' still switches to \"projectile/projectile.el\" immediately
+ because this is the only filename that matches.
+
+- If it finds a list of files, the list is displayed for selecting.  A list of
+files is displayed when a filename appears more than one in the project or the
+filename at point is a prefix of more than two files in a project.  For example,
+if `projectile-find-file-dwim' is executed on a filepath like \"projectile/\", it lists
+the content of that directory.  If it is executed on a partial filename like
+ \"projectile/a\", a list of files with character 'a' in that directory is presented.
+
+- If it finds nothing, display a list of all files in project for selecting.
+
+\(fn &optional INVALIDATE-CACHE)" t nil)
+
+(autoload 'projectile-find-file-dwim-other-window "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Jump to a project's files using completion based on context in other window.
+
+With a prefix arg INVALIDATE-CACHE invalidates the cache first.
+
+If point is on a filename, Projectile first tries to search for that
+file in project:
+
+- If it finds just a file, it switches to that file instantly.  This works even
+if the filename is incomplete, but there's only a single file in the current project
+that matches the filename at point.  For example, if there's only a single file named
+\"projectile/projectile.el\" but the current filename is \"projectile/proj\" (incomplete),
+`projectile-find-file-dwim-other-window' still switches to \"projectile/projectile.el\"
+immediately because this is the only filename that matches.
+
+- If it finds a list of files, the list is displayed for selecting.  A list of
+files is displayed when a filename appears more than one in the project or the
+filename at point is a prefix of more than two files in a project.  For example,
+if `projectile-find-file-dwim-other-window' is executed on a filepath like \"projectile/\", it lists
+the content of that directory.  If it is executed on a partial filename
+like \"projectile/a\", a list of files with character 'a' in that directory
+is presented.
+
+- If it finds nothing, display a list of all files in project for selecting.
+
+\(fn &optional INVALIDATE-CACHE)" t nil)
+
+(autoload 'projectile-find-file-dwim-other-frame "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Jump to a project's files using completion based on context in other frame.
+
+With a prefix arg INVALIDATE-CACHE invalidates the cache first.
+
+If point is on a filename, Projectile first tries to search for that
+file in project:
+
+- If it finds just a file, it switches to that file instantly.  This works even
+if the filename is incomplete, but there's only a single file in the current project
+that matches the filename at point.  For example, if there's only a single file named
+\"projectile/projectile.el\" but the current filename is \"projectile/proj\" (incomplete),
+`projectile-find-file-dwim-other-frame' still switches to \"projectile/projectile.el\"
+immediately because this is the only filename that matches.
+
+- If it finds a list of files, the list is displayed for selecting.  A list of
+files is displayed when a filename appears more than one in the project or the
+filename at point is a prefix of more than two files in a project.  For example,
+if `projectile-find-file-dwim-other-frame' is executed on a filepath like \"projectile/\", it lists
+the content of that directory.  If it is executed on a partial filename
+like \"projectile/a\", a list of files with character 'a' in that directory
+is presented.
+
+- If it finds nothing, display a list of all files in project for selecting.
+
+\(fn &optional INVALIDATE-CACHE)" t nil)
+
+(autoload 'projectile-find-file "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Jump to a project's file using completion.
+With a prefix arg INVALIDATE-CACHE invalidates the cache first.
+
+\(fn &optional INVALIDATE-CACHE)" t nil)
+
+(autoload 'projectile-find-file-other-window "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Jump to a project's file using completion and show it in another window.
+
+With a prefix arg INVALIDATE-CACHE invalidates the cache first.
+
+\(fn &optional INVALIDATE-CACHE)" t nil)
+
+(autoload 'projectile-find-file-other-frame "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Jump to a project's file using completion and show it in another frame.
+
+With a prefix arg INVALIDATE-CACHE invalidates the cache first.
+
+\(fn &optional INVALIDATE-CACHE)" t nil)
+
+(autoload 'projectile-toggle-project-read-only "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Toggle project read only." t nil)
+
+(autoload 'projectile-find-dir "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Jump to a project's directory using completion.
+
+With a prefix arg INVALIDATE-CACHE invalidates the cache first.
+
+\(fn &optional INVALIDATE-CACHE)" t nil)
+
+(autoload 'projectile-find-dir-other-window "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Jump to a project's directory in other window using completion.
+
+With a prefix arg INVALIDATE-CACHE invalidates the cache first.
+
+\(fn &optional INVALIDATE-CACHE)" t nil)
+
+(autoload 'projectile-find-dir-other-frame "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Jump to a project's directory in other frame using completion.
+
+With a prefix arg INVALIDATE-CACHE invalidates the cache first.
+
+\(fn &optional INVALIDATE-CACHE)" t nil)
+
+(autoload 'projectile-find-test-file "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Jump to a project's test file using completion.
+
+With a prefix arg INVALIDATE-CACHE invalidates the cache first.
+
+\(fn &optional INVALIDATE-CACHE)" t nil)
+
+(autoload 'projectile-find-related-file-other-window "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Open related file in other window." t nil)
+
+(autoload 'projectile-find-related-file-other-frame "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Open related file in other frame." t nil)
+
+(autoload 'projectile-find-related-file "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Open related file." t nil)
+
+(autoload 'projectile-related-files-fn-groups "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Generate a related-files-fn which relates as KIND for files in each of GROUPS.
+
+\(fn KIND GROUPS)" nil nil)
+
+(autoload 'projectile-related-files-fn-extensions "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Generate a related-files-fn which relates as KIND for files having EXTENSIONS.
+
+\(fn KIND EXTENSIONS)" nil nil)
+
+(autoload 'projectile-related-files-fn-test-with-prefix "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Generate a related-files-fn which relates tests and impl for files with EXTENSION based on TEST-PREFIX.
+
+\(fn EXTENSION TEST-PREFIX)" nil nil)
+
+(autoload 'projectile-related-files-fn-test-with-suffix "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Generate a related-files-fn which relates tests and impl for files with EXTENSION based on TEST-SUFFIX.
+
+\(fn EXTENSION TEST-SUFFIX)" nil nil)
+
+(autoload 'projectile-project-info "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Display info for current project." t nil)
+
+(autoload 'projectile-find-implementation-or-test-other-window "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Open matching implementation or test file in other window." t nil)
+
+(autoload 'projectile-find-implementation-or-test-other-frame "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Open matching implementation or test file in other frame." t nil)
+
+(autoload 'projectile-toggle-between-implementation-and-test "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Toggle between an implementation file and its test file." t nil)
+
+(autoload 'projectile-grep "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Perform rgrep in the project.
+
+With a prefix ARG asks for files (globbing-aware) which to grep in.
+With prefix ARG of `-' (such as `M--'), default the files (without prompt),
+to `projectile-grep-default-files'.
+
+With REGEXP given, don't query the user for a regexp.
+
+\(fn &optional REGEXP ARG)" t nil)
+
+(autoload 'projectile-ag "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Run an ag search with SEARCH-TERM in the project.
+
+With an optional prefix argument ARG SEARCH-TERM is interpreted as a
+regular expression.
+
+\(fn SEARCH-TERM &optional ARG)" t nil)
+
+(autoload 'projectile-ripgrep "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Run a Ripgrep search with `SEARCH-TERM' at current project root.
+
+With an optional prefix argument ARG SEARCH-TERM is interpreted as a
+regular expression.
+
+\(fn SEARCH-TERM &optional ARG)" t nil)
+
+(autoload 'projectile-regenerate-tags "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Regenerate the project's [e|g]tags." t nil)
+
+(autoload 'projectile-find-tag "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Find tag in project." t nil)
+
+(autoload 'projectile-run-command-in-root "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Invoke `execute-extended-command' in the project's root." t nil)
+
+(autoload 'projectile-run-shell-command-in-root "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Invoke `shell-command' in the project's root." t nil)
+
+(autoload 'projectile-run-async-shell-command-in-root "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Invoke `async-shell-command' in the project's root." t nil)
+
+(autoload 'projectile-run-gdb "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Invoke `gdb' in the project's root." t nil)
+
+(autoload 'projectile-run-shell "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Invoke `shell' in the project's root.
+
+Switch to the project specific shell buffer if it already exists.
+
+Use a prefix argument ARG to indicate creation of a new process instead.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'projectile-run-eshell "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Invoke `eshell' in the project's root.
+
+Switch to the project specific eshell buffer if it already exists.
+
+Use a prefix argument ARG to indicate creation of a new process instead.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'projectile-run-ielm "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Invoke `ielm' in the project's root.
+
+Switch to the project specific ielm buffer if it already exists.
+
+Use a prefix argument ARG to indicate creation of a new process instead.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'projectile-run-term "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Invoke `term' in the project's root.
+
+Switch to the project specific term buffer if it already exists.
+
+Use a prefix argument ARG to indicate creation of a new process instead.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'projectile-run-vterm "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Invoke `vterm' in the project's root.
+
+Switch to the project specific term buffer if it already exists.
+
+Use a prefix argument ARG to indicate creation of a new process instead.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'projectile-replace "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Replace literal string in project using non-regexp `tags-query-replace'.
+
+With a prefix argument ARG prompts you for a directory on which
+to run the replacement.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'projectile-replace-regexp "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Replace a regexp in the project using `tags-query-replace'.
+
+With a prefix argument ARG prompts you for a directory on which
+to run the replacement.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'projectile-kill-buffers "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Kill project buffers.
+
+The buffer are killed according to the value of
+`projectile-kill-buffers-filter'." t nil)
+
+(autoload 'projectile-save-project-buffers "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Save all project buffers." t nil)
+
+(autoload 'projectile-dired "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Open `dired' at the root of the project." t nil)
+
+(autoload 'projectile-dired-other-window "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Open `dired'  at the root of the project in another window." t nil)
+
+(autoload 'projectile-dired-other-frame "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Open `dired' at the root of the project in another frame." t nil)
+
+(autoload 'projectile-vc "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Open `vc-dir' at the root of the project.
+
+For git projects `magit-status-internal' is used if available.
+For hg projects `monky-status' is used if available.
+
+If PROJECT-ROOT is given, it is opened instead of the project
+root directory of the current buffer file.  If interactively
+called with a prefix argument, the user is prompted for a project
+directory to open.
+
+\(fn &optional PROJECT-ROOT)" t nil)
+
+(autoload 'projectile-recentf "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Show a list of recently visited files in a project." t nil)
+
+(autoload 'projectile-configure-project "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Run project configure command.
+
+Normally you'll be prompted for a compilation command, unless
+variable `compilation-read-command'.  You can force the prompt
+with a prefix ARG.
+
+\(fn ARG)" t nil)
+
+(autoload 'projectile-compile-project "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Run project compilation command.
+
+Normally you'll be prompted for a compilation command, unless
+variable `compilation-read-command'.  You can force the prompt
+with a prefix ARG.
+
+\(fn ARG)" t nil)
+
+(autoload 'projectile-test-project "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Run project test command.
+
+Normally you'll be prompted for a compilation command, unless
+variable `compilation-read-command'.  You can force the prompt
+with a prefix ARG.
+
+\(fn ARG)" t nil)
+
+(autoload 'projectile-install-project "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Run project install command.
+
+Normally you'll be prompted for a compilation command, unless
+variable `compilation-read-command'.  You can force the prompt
+with a prefix ARG.
+
+\(fn ARG)" t nil)
+
+(autoload 'projectile-package-project "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Run project package command.
+
+Normally you'll be prompted for a compilation command, unless
+variable `compilation-read-command'.  You can force the prompt
+with a prefix ARG.
+
+\(fn ARG)" t nil)
+
+(autoload 'projectile-run-project "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Run project run command.
+
+Normally you'll be prompted for a compilation command, unless
+variable `compilation-read-command'.  You can force the prompt
+with a prefix ARG.
+
+\(fn ARG)" t nil)
+
+(autoload 'projectile-repeat-last-command "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Run last projectile external command.
+
+External commands are: `projectile-configure-project',
+`projectile-compile-project', `projectile-test-project',
+`projectile-install-project', `projectile-package-project',
+and `projectile-run-project'.
+
+If the prefix argument SHOW_PROMPT is non nil, the command can be edited.
+
+\(fn SHOW-PROMPT)" t nil)
+
+(autoload 'projectile-switch-project "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Switch to a project we have visited before.
+Invokes the command referenced by `projectile-switch-project-action' on switch.
+With a prefix ARG invokes `projectile-commander' instead of
+`projectile-switch-project-action.'
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'projectile-switch-open-project "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Switch to a project we have currently opened.
+Invokes the command referenced by `projectile-switch-project-action' on switch.
+With a prefix ARG invokes `projectile-commander' instead of
+`projectile-switch-project-action.'
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'projectile-find-file-in-directory "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Jump to a file in a (maybe regular) DIRECTORY.
+
+This command will first prompt for the directory the file is in.
+
+\(fn &optional DIRECTORY)" t nil)
+
+(autoload 'projectile-find-file-in-known-projects "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Jump to a file in any of the known projects." t nil)
+
+(autoload 'projectile-cleanup-known-projects "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Remove known projects that don't exist anymore." t nil)
+
+(autoload 'projectile-clear-known-projects "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Clear both `projectile-known-projects' and `projectile-known-projects-file'." t nil)
+
+(autoload 'projectile-remove-known-project "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Remove PROJECT from the list of known projects.
+
+\(fn &optional PROJECT)" t nil)
+
+(autoload 'projectile-remove-current-project-from-known-projects "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Remove the current project from the list of known projects." t nil)
+
+(autoload 'projectile-add-known-project "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Add PROJECT-ROOT to the list of known projects.
+
+\(fn PROJECT-ROOT)" t nil)
+
+(autoload 'projectile-ibuffer "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Open an IBuffer window showing all buffers in the current project.
+
+Let user choose another project when PROMPT-FOR-PROJECT is supplied.
+
+\(fn PROMPT-FOR-PROJECT)" t nil)
+
+(autoload 'projectile-commander "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Execute a Projectile command with a single letter.
+The user is prompted for a single character indicating the action to invoke.
+The `?' character describes then
+available actions.
+
+See `def-projectile-commander-method' for defining new methods." t nil)
+
+(autoload 'projectile-browse-dirty-projects "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Browse dirty version controlled projects.
+
+With a prefix argument, or if CACHED is non-nil, try to use the cached
+dirty project list.
+
+\(fn &optional CACHED)" t nil)
+
+(autoload 'projectile-edit-dir-locals "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Edit or create a .dir-locals.el file of the project." t nil)
+
+(defvar projectile-mode nil "\
+Non-nil if Projectile mode is enabled.
+See the `projectile-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `projectile-mode'.")
+
+(custom-autoload 'projectile-mode "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" nil)
+
+(autoload 'projectile-mode "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" "\
+Minor mode to assist project management and navigation.
+
+When called interactively, toggle `projectile-mode'.  With prefix
+ARG, enable `projectile-mode' if ARG is positive, otherwise disable
+it.
+
+When called from Lisp, enable `projectile-mode' if ARG is omitted,
+nil or positive.  If ARG is `toggle', toggle `projectile-mode'.
+Otherwise behave as if called interactively.
+
+\\{projectile-mode-map}
+
+\(fn &optional ARG)" t nil)
+
+(define-obsolete-function-alias 'projectile-global-mode 'projectile-mode "1.0")
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/projectile-20201210.927/projectile" '("??" "compilation-find-file-projectile-find-compilation-buffer" "def-projectile-commander-method" "delete-file-projectile-remove-from-cache" "projectile-")))
+
 
 
 
@@ -2605,10 +3362,52 @@ Switch to another buffer in another window." t nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/swiper-20201023.1053/swiper-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/swiper-20201208.1419/swiper-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/swiper-20201023.1053/swiper-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/swiper-20201208.1419/swiper-autoloads.el") (car load-path))))
+
+
+
+(autoload 'swiper-avy "../../../../../src/env/emacs.d/elpa/27.1/elpa/swiper-20201208.1419/swiper" "\
+Jump to one of the current swiper candidates." t nil)
+
+(autoload 'swiper-backward "../../../../../src/env/emacs.d/elpa/27.1/elpa/swiper-20201208.1419/swiper" "\
+`isearch-backward' with an overview.
+When non-nil, INITIAL-INPUT is the initial search pattern.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'swiper-thing-at-point "../../../../../src/env/emacs.d/elpa/27.1/elpa/swiper-20201208.1419/swiper" "\
+`swiper' with `ivy-thing-at-point'." t nil)
+
+(autoload 'swiper-all-thing-at-point "../../../../../src/env/emacs.d/elpa/27.1/elpa/swiper-20201208.1419/swiper" "\
+`swiper-all' with `ivy-thing-at-point'." t nil)
+
+(autoload 'swiper "../../../../../src/env/emacs.d/elpa/27.1/elpa/swiper-20201208.1419/swiper" "\
+`isearch-forward' with an overview.
+When non-nil, INITIAL-INPUT is the initial search pattern.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'swiper-all "../../../../../src/env/emacs.d/elpa/27.1/elpa/swiper-20201208.1419/swiper" "\
+Run `swiper' for all open buffers.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'swiper-isearch "../../../../../src/env/emacs.d/elpa/27.1/elpa/swiper-20201208.1419/swiper" "\
+A `swiper' that's not line-based.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'swiper-isearch-backward "../../../../../src/env/emacs.d/elpa/27.1/elpa/swiper-20201208.1419/swiper" "\
+Like `swiper-isearch' but the first result is before the point.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/swiper-20201208.1419/swiper" '("swiper-")))
+
 
 
 
@@ -3117,10 +3916,528 @@ Disable `rainbow-delimiters-mode'." nil nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20201123.1623/racket-mode-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20201123.1623/racket-mode-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-mode-autoloads.el") (car load-path))))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-browse-url" '("racket-browse-url")))
+
+
+
+(autoload 'racket-bug-report "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-bug-report" "\
+Fill a buffer with data to make a Racket Mode bug report." t nil)
+
+
+
+(autoload 'racket-start-back-end "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-cmd" "\
+Start the back end process used by Racket Mode.
+
+If the process is already started, this command will stop and restart it." t nil)
+
+(autoload 'racket-stop-back-end "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-cmd" "\
+Stop the back end process used by Racket Mode.
+
+If the process is not already started, this does nothing." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-cmd" '("racket-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-collection" '("racket-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-common" '("racket-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-complete" '("racket--")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-custom" '("defface-racket" "racket-")))
+
+
+
+(autoload 'racket--debug-send-definition "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-debug" "\
+
+
+\(fn BEG END)" nil nil)
+
+(autoload 'racket--debug-on-break "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-debug" "\
+
+
+\(fn RESPONSE)" nil nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-debug" '("racket-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-describe" '("racket-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-doc" '("racket--")))
+
+
+
+(add-to-list 'hs-special-modes-alist '(racket-mode "(" ")" ";" nil nil))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-edit" '("racket-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-eldoc" '("racket--do-eldoc")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-font-lock" '("racket-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-imenu" '("racket-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-indent" '("racket-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-keywords-and-builtins" '("racket-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-logger" '("racket-")))
+
+
+
+(autoload 'racket-mode "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-mode" "\
+Major mode for editing Racket source files.
+
+\\{racket-mode-map}
+
+\(fn)" t nil)
+
+(add-to-list 'auto-mode-alist '("\\.rkt\\'" . racket-mode))
+
+(add-to-list 'auto-mode-alist '("\\.rktd\\'" . racket-mode))
+
+(add-to-list 'auto-mode-alist '("\\.rktl\\'" . racket-mode))
+
+(modify-coding-system-alist 'file "\\.rkt[dl]?\\'" 'utf-8)
+
+(add-to-list 'interpreter-mode-alist '("racket" . racket-mode))
+
+(autoload 'racket-mode-start-faster "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-mode" "\
+Compile Racket Mode's .rkt files for faster startup.
+
+Racket Mode is implemented as an Emacs Lisp \"front end\" that
+talks to a Racket process \"back end\". Because Racket Mode is
+delivered as an Emacs package instead of a Racket package,
+installing it does not do the `raco setup` that is normally done
+for Racket packages.
+
+This command will do a `raco make` of Racket Mode's .rkt files,
+creating bytecode files in `compiled/` subdirectories. As a
+result, when a `racket-run' or `racket-repl' command must start
+the Racket process, it will start faster.
+
+If you run this command, ever, you should run it again after:
+
+- Installing an updated version of Racket Mode. Otherwise, you
+  might lose some of the speed-up.
+
+- Installing a new version of Racket and/or changing the value of
+  the variable `racket-program'. Otherwise, you might get an
+  error message due to the bytecode being different versions." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-mode" '("racket-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-parens" '("racket-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-ppss" '("racket--ppss-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-profile" '("racket-")))
+
+
+
+(autoload 'racket-repl "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-repl" "\
+Show a Racket REPL buffer in some window.
+
+*IMPORTANT*
+
+The main, intended use of Racket Mode's REPL is that you
+`find-file' some specific .rkt file, then `racket-run' it. The
+REPL will then match that file.
+
+If the REPL isn't running, and you want to start it for no file
+in particular? Then you could use this command. But the resulting
+REPL will have a minimal \"#lang racket/base\" namespace. You
+could enter \"(require racket)\" if you want the equivalent of
+\"#lang racket\". You could also \"(require racket/enter)\" if
+you want things like \"enter!\". But in some sense you'd be
+\"using it wrong\". If you really don't want to use Racket Mode's
+REPL as intended, then you might as well use a plain Emacs shell
+buffer to run command-line Racket.
+
+\(fn &optional NOSELECT)" t nil)
+
+(autoload 'racket-run "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-repl" "\
+Save the buffer in REPL and run your program.
+
+As well as evaluating the outermost, file module, automatically
+runs the submodules specified by the customization variable
+`racket-submodules-to-run'.
+
+See also `racket-run-module-at-point', which runs just the
+specific module at point.
+
+With \\[universal-argument] uses errortrace for improved stack traces.
+Otherwise follows the `racket-error-context' setting.
+
+With \\[universal-argument] \\[universal-argument] instruments
+code for step debugging. See `racket-debug-mode' and the variable
+`racket-debuggable-files'.
+
+Each run occurs within a Racket custodian. Any prior run's
+custodian is shut down, releasing resources like threads and
+ports. Each run's evaluation environment is reset to the contents
+of the source file. In other words, like Dr Racket, this provides
+the benefit that your source file is the \"single source of
+truth\". At the same time, the run gives you a REPL inside the
+namespace of the module, giving you the ability to explore it
+interactively. Any explorations are temporary, unless you also
+make them to your source file, they will be lost on the next run.
+
+See also `racket-run-and-switch-to-repl', which is even more like
+Dr Racket's Run command because it selects the REPL window after
+running.
+
+In the `racket-repl-mode' buffer, output that describes a file
+and position is automatically \"linkified\". Examples of such
+text include:
+
+- Racket error messages.
+- rackunit test failure location messages.
+- print representation of path objects.
+
+To visit these locations, move point there and press RET or mouse
+click. Or, use the standard `next-error' and `previous-error'
+commands.
+
+\(fn &optional PREFIX)" t nil)
+
+(autoload 'racket-run-module-at-point "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-repl" "\
+Save the buffer and run the module at point.
+
+Like `racket-run' but runs the innermost module around point,
+which is determined textually by looking for \"module\",
+\"module*\", or \"module+\" forms nested to any depth, else
+simply the outermost, file module.
+
+\(fn &optional PREFIX)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-repl" '("racket-" "with-racket-repl-buffer")))
+
+
+
+
+(autoload 'racket-repl-buffer-name-shared "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-repl-buffer-name" "\
+All `racket-mode' edit buffers share one `racket-repl-mode' buffer.
+
+A value for the variable `racket-repl-buffer-name-function'." t nil)
+
+(autoload 'racket-repl-buffer-name-unique "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-repl-buffer-name" "\
+Each `racket-mode' edit buffer gets its own `racket-repl-mode' buffer.
+
+A value for the variable `racket-repl-buffer-name-function'." t nil)
+
+(autoload 'racket-repl-buffer-name-project "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-repl-buffer-name" "\
+All `racket-mode' buffers in a project share a `racket-repl-mode' buffer.
+
+A value for the variable `racket-repl-buffer-name-function'.
+
+The \"project\" is determined by `racket-project-root'." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-repl-buffer-name" '("racket-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-show" '("racket-")))
+
+
+
+(autoload 'racket-smart-open-bracket-mode "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-smart-open" "\
+Minor mode to let you always type `[`' to insert `(` or `[` automatically.
+
+If called interactively, enable Racket-Smart-Open-Bracket mode if
+ARG is positive, and disable it if ARG is zero or negative.
+If called from Lisp, also enable the mode if ARG is omitted or
+nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
+
+Behaves like the \"Automatically adjust opening square brackets\"
+feature in Dr. Racket.
+
+By default, inserts a `(`. Inserts a `[` in the following cases:
+
+  - `let`-like bindings -- forms with `let` in the name as well
+    as things like `parameterize`, `with-handlers`, and
+    `with-syntax`.
+
+  - `case`, `cond`, `match`, `syntax-case`, `syntax-parse`, and
+    `syntax-rules` clauses.
+
+  - `for`-like bindings and `for/fold` accumulators.
+
+  - `class` declaration syntax, such as `init` and `inherit`.
+
+When the previous s-expression in a sequence is a compound
+expression, uses the same kind of delimiter.
+
+To force insert `[`, use `quoted-insert'.
+
+Combined with `racket-insert-closing' this means that you can
+press the unshifted `[` and `]` keys to get whatever delimiters
+follow the Racket conventions for these forms. When something
+like `electric-pair-mode' or `paredit-mode' is active, you need
+not even press `]`.
+
+Tip: When also using `paredit-mode', enable that first so that
+the binding for the `[`' key in the map for
+`racket-smart-open-bracket-mode' has higher priority. See also
+the variable `minor-mode-map-alist'.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-smart-open" '("racket-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-stepper" '("racket-")))
+
+
+
+(autoload 'racket-unicode-input-method-enable "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-unicode-input-method" "\
+Set input method to racket-unicode.
+
+The racket-unicode input method lets you easily type various
+Unicode symbols that might be useful when writing Racket code.
+
+To automatically enable the racket-unicode input method in
+racket-mode and racket-repl-mode buffers, put the following code
+in your Emacs init file:
+
+#+BEGIN_SRC elisp
+    (add-hook 'racket-mode-hook #'racket-unicode-input-method-enable)
+    (add-hook 'racket-repl-mode-hook #'racket-unicode-input-method-enable)
+#+END_SRC
+
+To temporarily enable this input method for a single buffer you
+can use \"M-x racket-unicode-input-method-enable\".
+
+Use the standard Emacs key C-\\ to toggle the input method.
+
+When the racket-unicode input method is active, you can for
+example type \"All\" and it is immediately replaced with \"∀\". A
+few other examples:
+
+| omega     | ω                        |
+| x_1       | x₁                       |
+| x^1       | x¹                       |
+| A         | 𝔸                        |
+| test-->>E | test-->>∃ (racket/redex) |
+| vdash     | ⊢                        |
+
+To see a table of all key sequences use \"M-x
+describe-input-method <RET> racket-unicode\".
+
+If you want to add your own mappings to the \"racket-unicode\"
+input method, you may add code like the following example in your
+Emacs init file:
+
+#+BEGIN_SRC elisp
+    ;; Either (require 'racket-mode) here, or, if you use
+    ;; use-package, put the code below in the :config section.
+    (with-temp-buffer
+      (racket-unicode-input-method-enable)
+      (set-input-method \"racket-unicode\")
+      (let ((quail-current-package (assoc \"racket-unicode\"
+                                          quail-package-alist)))
+        (quail-define-rules ((append . t))
+                            (\"^o\" [\"ᵒ\"]))))
+#+END_SRC
+
+If you don’t like the highlighting of partially matching tokens you
+can turn it off by setting `input-method-highlight-flag' to nil." t nil)
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-util" '("racket-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-visit" '("racket--")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-wsl" '("racket-")))
+
+
+
+(autoload 'racket-xp-mode "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-xp" "\
+A minor mode that analyzes expanded code to explain and explore.
+
+If called interactively, enable Racket-Xp mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+This minor mode is an optional enhancement to `racket-mode' edit
+buffers. Like any minor mode, you can turn it on or off for a
+specific buffer. If you always want to use it, put the following
+code in your Emacs init file:
+
+#+BEGIN_SRC elisp
+    (require 'racket-xp)
+    (add-hook 'racket-mode-hook #'racket-xp-mode)
+#+END_SRC
+
+Note: This mode won't do anything unless/until the Racket Mode
+back end is running. It will try to start the back end
+automatically. You do /not/ need to `racket-run' the buffer you
+are editing.
+
+This mode uses the drracket/check-syntax package to analyze
+fully-expanded programs, without needing to evaluate a.k.a.
+\"run\" them. The resulting analysis provides information for:
+
+- Visually annotating bindings -- local or imported definitions
+  and references to them.
+
+- Completion candidates.
+
+- Defintions' source and documentation.
+
+When point is on a definition or use, related items are
+highlighted using `racket-xp-def-face' and `racket-xp-use-face'
+-- instead of drawing arrows as in Dr Racket. Information is
+displayed using the function(s) in the hook variable
+`racket-show-functions'; it is also available when hovering the
+mouse cursor.
+
+Note: If you find these point-motion features too distracting
+and/or slow, in your `racket-xp-mode-hook' you may disable them:
+
+#+BEGIN_SRC elisp
+  (require 'racket-xp)
+  (add-hook 'racket-xp-mode-hook
+            (lambda ()
+              (remove-hook 'pre-redisplay-functions
+                           #'racket-xp-pre-redisplay
+                           t)))
+#+END_SRC
+
+The remaining features discussed below will still work.
+
+You may also use commands to navigate among a definition and its
+uses, or to rename a local definitions and all its uses.
+
+In the following little example, not only does
+drracket/check-syntax distinguish the various \"x\" bindings, it
+understands the two different imports of \"define\":
+
+#+BEGIN_SRC racket
+  #lang racket/base
+  (define x 1)
+  x
+  (let ([x x])
+    (+ x 1))
+  (module m typed/racket/base
+    (define x 2)
+    x)
+#+END_SRC
+
+The function `racket-xp-complete-at-point' is added to the
+variable `completion-at-point-functions'. Note that in this case,
+it is not smart about submodules; identifiers are assumed to be
+definitions from the file's module or its imports. In addition to
+supplying completion candidates, it supports the
+\":company-location\" property to inspect the definition of a
+candidate and the \":company-doc-buffer\" property to view its
+documentation.
+
+When you edit the buffer, existing annotations are retained;
+their positions are updated to reflect the edit. Annotations for
+new or deleted text are not requested until after
+`racket-xp-after-change-refresh-delay' seconds. The request is
+made asynchronously so that Emacs will not block -- for
+moderately complex source files, it can take some seconds simply
+to fully expand them, as well as a little more time for the
+drracket/check-syntax analysis. When the results are ready, all
+annotations for the buffer are completely refreshed.
+
+You may also set `racket-xp-after-change-refresh-delay' to nil
+and use the `racket-xp-annotate' command manually.
+
+The mode line changes to reflect the current status of
+annotations, and whether or not you had a syntax error.
+
+If you have one or more syntax errors, `racket-xp-next-error' and
+`racket-xp-previous-error' to navigate among them. Although most
+languages will stop after the first syntax error, some like Typed
+Racket will try to collect and report multiple errors.
+
+You may use `xref-find-definitions' \\[xref-find-definitions],
+`xref-pop-marker-stack' \\[xref-pop-marker-stack], and
+`xref-find-references': `racket-xp-mode' adds a backend to the
+variable `xref-backend-functions'. This backend uses information
+from the drracket/check-syntax static analysis. Its ability to
+find references is limited to the current file; when it finds
+none it will try the default xref backend implementation which is
+grep-based.
+
+Tip: This mode follows the convention that a minor mode may only
+use a prefix key consisting of \"C-c\" followed by a punctuation
+key. As a result, `racket-xp-control-c-hash-keymap' is bound to
+\"C-c #\" by default. Although you might find this awkward to
+type, remember that as an Emacs user, you are free to bind this
+map to a more convenient prefix, and/or bind any individual
+commands directly to whatever keys you prefer.
+
+\\{racket-xp-mode-map}
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-xp" '("racket-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942/racket-xp-complete" '("racket-")))
 
 
 
@@ -3392,9 +4709,10 @@ The \"project\" is determined by `racket-project-root'." t nil)
 Minor mode to let you always type `[`' to insert `(` or `[` automatically.
 
 If called interactively, enable Racket-Smart-Open-Bracket mode if
-ARG is positive, and disable it if ARG is zero or negative.  If
-called from Lisp, also enable the mode if ARG is omitted or nil,
-and toggle it if ARG is `toggle'; disable the mode otherwise.
+ARG is positive, and disable it if ARG is zero or negative.
+If called from Lisp, also enable the mode if ARG is omitted or
+nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
 
 Behaves like the \"Automatically adjust opening square brackets\"
 feature in Dr. Racket.
@@ -3765,153 +5083,6 @@ Radio is considered on when STATUS is non-nil, otherwise off.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/posframe-20201201.659/posframe-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/posframe-20201201.659/posframe-autoloads.el") (car load-path))))
-
-
-
-(autoload 'posframe-workable-p "posframe" "\
-Test posframe workable status." nil nil)
-
-(autoload 'posframe-show "posframe" "\
-Pop up a posframe and show STRING at POSITION.
-
-POSITION can be:
-1. An integer, meaning point position.
-2. A cons of two integers, meaning absolute X and Y coordinates.
-3. Other type, in which case the corresponding POSHANDLER should be
-   provided.
-
-POSHANDLER is a function of one argument returning an actual
-position.  Its argument is a plist of the following form:
-
-  (:position xxx
-   :position-info xxx
-   :poshandler xxx
-   :font-height xxx
-   :font-width xxx
-   :posframe xxx
-   :posframe-width xxx
-   :posframe-height xxx
-   :posframe-buffer xxx
-   :parent-frame xxx
-   :parent-window-left xxx
-   :parent-window-top xxx
-   :parent-frame-width xxx
-   :parent-frame-height xxx
-   :parent-window xxx
-   :parent-window-width  xxx
-   :parent-window-height xxx
-   :minibuffer-height xxx
-   :mode-line-height  xxx
-   :header-line-height xxx
-   :tab-line-height xxx
-   :x-pixel-offset xxx
-   :y-pixel-offset xxx)
-
-By default, poshandler is auto-selected based on the type of POSITION,
-but the selection can be overridden using the POSHANDLER argument.
-The builtin poshandler functions are listed below:
-
-1.  `posframe-poshandler-frame-center'
-2.  `posframe-poshandler-frame-top-center'
-3.  `posframe-poshandler-frame-top-left-corner'
-4.  `posframe-poshandler-frame-top-right-corner'
-5.  `posframe-poshandler-frame-bottom-center'
-6.  `posframe-poshandler-frame-bottom-left-corner'
-7.  `posframe-poshandler-frame-bottom-right-corner'
-8.  `posframe-poshandler-window-center'
-9.  `posframe-poshandler-window-top-center'
-10. `posframe-poshandler-window-top-left-corner'
-11. `posframe-poshandler-window-top-right-corner'
-12. `posframe-poshandler-window-bottom-center'
-13. `posframe-poshandler-window-bottom-left-corner'
-14. `posframe-poshandler-window-bottom-right-corner'
-15. `posframe-poshandler-point-top-left-corner'
-16. `posframe-poshandler-point-bottom-left-corner'
-17. `posframe-poshandler-point-bottom-left-corner-upward'
-
-This posframe's buffer is BUFFER-OR-NAME, which can be a buffer
-or a name of a (possibly nonexistent) buffer.
-
-If NO-PROPERTIES is non-nil, The STRING's properties will
-be removed before being shown in posframe.
-
-WIDTH, MIN-WIDTH, HEIGHT and MIN-HEIGHT, specify bounds on the
-new total size of posframe.  MIN-HEIGHT and MIN-WIDTH default to
-the values of ‘window-min-height’ and ‘window-min-width’
-respectively.  These arguments are specified in the canonical
-character width and height of posframe.
-
-If LEFT-FRINGE or RIGHT-FRINGE is a number, left fringe or
-right fringe with be shown with the specified width.
-
-By default, posframe shows no borders, but users can specify
-borders by setting INTERNAL-BORDER-WIDTH to a positive number.
-Border color can be specified by INTERNAL-BORDER-COLOR
-or via the ‘internal-border’ face.
-
-Posframe's font as well as foreground and background colors are
-derived from the current frame by default, but can be overridden
-using the FONT, FOREGROUND-COLOR and BACKGROUND-COLOR arguments,
-respectively.
-
-By default, posframe will display no header-line, mode-line and
-tab-line.  In case a header-line, mode-line or tab-line is
-desired, users can set RESPECT-HEADER-LINE and RESPECT-MODE-LINE
-to t.
-
-INITIALIZE is a function with no argument.  It will run when
-posframe buffer is first selected with `with-current-buffer'
-in `posframe-show', and only run once (for performance reasons).
-
-If LINES-TRUNCATE is non-nil, then lines will truncate in the
-posframe instead of wrap.
-
-OVERRIDE-PARAMETERS is very powful, *all* the frame parameters
-used by posframe's frame can be overridden by it.
-
-TIMEOUT can specify the number of seconds after which the posframe
-will auto-hide.
-
-If REFRESH is a number, posframe's frame-size will be re-adjusted
-every REFRESH seconds.
-
-When ACCEPT-FOCUS is non-nil, posframe will accept focus.
-be careful, you may face some bugs when set it to non-nil.
-
-HIDEHANDLER is a function, when it return t, posframe will be
-hide when `post-command-hook' is executed, this function has a
-plist argument:
-
-  (:posframe-buffer xxx
-   :posframe-parent-buffer xxx)
-
-The builtin hidehandler functions are listed below:
-
-1. `posframe-hidehandler-when-buffer-switch'
-
-
-You can use `posframe-delete-all' to delete all posframes.
-
-\(fn BUFFER-OR-NAME &key STRING POSITION POSHANDLER WIDTH HEIGHT MIN-WIDTH MIN-HEIGHT X-PIXEL-OFFSET Y-PIXEL-OFFSET LEFT-FRINGE RIGHT-FRINGE INTERNAL-BORDER-WIDTH INTERNAL-BORDER-COLOR FONT FOREGROUND-COLOR BACKGROUND-COLOR RESPECT-HEADER-LINE RESPECT-MODE-LINE INITIALIZE NO-PROPERTIES KEEP-RATIO LINES-TRUNCATE OVERRIDE-PARAMETERS TIMEOUT REFRESH ACCEPT-FOCUS HIDEHANDLER &allow-other-keys)" nil nil)
-
-(autoload 'posframe-hide-all "posframe" "\
-Hide all posframe frames." t nil)
-
-(autoload 'posframe-delete-all "posframe" "\
-Delete all posframe frames and buffers." t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "posframe" '("posframe-")))
-
-
-
-
-
-)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/popup-20200610.317/popup-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -4134,6 +5305,96 @@ Turn on pseudo-structural editing of Lisp code." t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "paredit" '("?\\" "disable-paredit-mode" "paredit-")))
 
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/paradox-20191011.1111/paradox-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/paradox-20191011.1111/paradox-autoloads.el") (car load-path))))
+
+
+
+(autoload 'paradox-list-packages "paradox" "\
+Improved version of `package-list-packages'.  The heart of Paradox.
+Function is equivalent to `package-list-packages' (including the
+prefix NO-FETCH), but the resulting Package Menu is improved in
+several ways.
+
+Among them:
+
+1. Uses `paradox-menu-mode', which has more functionality and
+keybinds than `package-menu-mode'.
+
+2. Uses some font-locking to improve readability.
+
+3. Optionally shows the number GitHub stars and Melpa downloads
+for packages.
+
+4. Adds useful information in the mode-line.
+
+\(fn NO-FETCH)" t nil)
+
+(autoload 'paradox-upgrade-packages "paradox" "\
+Upgrade all packages.  No questions asked.
+This function is equivalent to `list-packages', followed by a
+`package-menu-mark-upgrades' and a `package-menu-execute'.  Except
+the user isn't asked to confirm deletion of packages.
+
+If `paradox-execute-asynchronously' is non-nil, part of this
+operation may be performed in the background.
+
+The NO-FETCH prefix argument is passed to `list-packages'.  It
+prevents re-download of information about new versions.  It does
+not prevent downloading the actual packages (obviously).
+
+\(fn &optional NO-FETCH)" t nil)
+
+(autoload 'paradox-enable "paradox" "\
+Enable paradox, overriding the default package-menu." t nil)
+
+(autoload 'paradox-require "paradox" "\
+Like `require', but also install FEATURE if it is absent.
+FILENAME is passed to `require'.
+If NOERROR is non-nil, don't complain if the feature couldn't be
+installed, just return nil.
+
+- If FEATURE is present, `require' it and return t.
+
+- If FEATURE is not present, install PACKAGE with `package-install'.
+If PACKAGE is nil, assume FEATURE is the package name.
+After installation, `require' FEATURE.
+
+By default, the current package database is only updated if it is
+empty.  Passing a non-nil REFRESH argument forces this update.
+
+\(fn FEATURE &optional FILENAME NOERROR PACKAGE REFRESH)" nil nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "paradox" '("paradox-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "paradox-commit-list" '("paradox-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "paradox-core" '("paradox-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "paradox-execute" '("paradox-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "paradox-github" '("paradox-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "paradox-menu" '("paradox-")))
 
 
 
@@ -4765,10 +6026,21 @@ Inserted by installing Org or when a release is made." nil nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/nov-20201128.926/nov-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/nov-20201207.3/nov-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/nov-20201128.926/nov-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/nov-20201207.3/nov-autoloads.el") (car load-path))))
+
+
+
+(autoload 'nov-mode "../../../../../src/env/emacs.d/elpa/27.1/elpa/nov-20201207.3/nov" "\
+Major mode for reading EPUB documents
+
+\(fn)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/nov-20201207.3/nov" '("nov-")))
+
 
 
 
@@ -4853,18 +6125,68 @@ contrast ratio between new and existing colors.")
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20201205.1910/modus-themes-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20201209.1407/modus-themes-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20201205.1910/modus-themes-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20201209.1407/modus-themes-autoloads.el") (car load-path))))
 
 
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/modus-themes-20201209.1407/modus-operandi-theme" '("modus-operandi")))
+
+
+
+(autoload 'modus-themes-contrast "../../../../../src/env/emacs.d/elpa/27.1/elpa/modus-themes-20201209.1407/modus-themes" "\
+Measure WCAG contrast ratio between C1 and C2.
+C1 and C2 are color values written in hexadecimal RGB.
+
+\(fn C1 C2)" nil nil)
+
+(autoload 'modus-themes-color "../../../../../src/env/emacs.d/elpa/27.1/elpa/modus-themes-20201209.1407/modus-themes" "\
+Return color value for KEY.
+The KEY is the car of each cons cell in the alists
+`modus-themes-colors-operandi', `modus-themes-colors-vivendi'.
+
+\(fn KEY)" nil nil)
+
+(autoload 'modus-themes-color-alts "../../../../../src/env/emacs.d/elpa/27.1/elpa/modus-themes-20201209.1407/modus-themes" "\
+Return color value for KEY-LIGHT and KEY-DARK.
+Both arguments must reference the car of a cons cell in
+`modus-themes-colors-operandi', `modus-themes-colors-vivendi'.
+
+\(fn KEY-LIGHT KEY-DARK)" nil nil)
+
+(autoload 'modus-themes-load-operandi "../../../../../src/env/emacs.d/elpa/27.1/elpa/modus-themes-20201209.1407/modus-themes" "\
+Load `modus-operandi' and disable `modus-vivendi'.
+Also run `modus-themes-after-load-theme-hook'." nil nil)
+
+(autoload 'modus-themes-load-vivendi "../../../../../src/env/emacs.d/elpa/27.1/elpa/modus-themes-20201209.1407/modus-themes" "\
+Load `modus-vivendi' and disable `modus-operandi'.
+Also run `modus-themes-after-load-theme-hook'." nil nil)
+
+(autoload 'modus-themes-toggle "../../../../../src/env/emacs.d/elpa/27.1/elpa/modus-themes-20201209.1407/modus-themes" "\
+Toggle between `modus-operandi' and `modus-vivendi' themes.
+Also runs `modus-themes-after-load-theme-hook' by virtue of
+calling the internal `modus-themes-load-operandi' and
+`modus-themes-load-vivendi' functions." t nil)
 
 (when (and (boundp 'custom-theme-load-path) load-file-name) (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
 
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "modus-operandi-theme" '("modus-operandi")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/modus-themes-20201209.1407/modus-themes" '("modus-themes-")))
 
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/modus-themes-20201209.1407/modus-themes-core" '("modus-themes-core-theme")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/modus-themes-20201209.1407/modus-vivendi-theme" '("modus-vivendi")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "modus-operandi-theme" '("modus-operandi")))
 
 
 
@@ -4901,6 +6223,8 @@ Toggle between `modus-operandi' and `modus-vivendi' themes.
 Also runs `modus-themes-after-load-theme-hook' by virtue of
 calling the internal `modus-themes-load-operandi' and
 `modus-themes-load-vivendi' functions." t nil)
+
+(when (and (boundp 'custom-theme-load-path) load-file-name) (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
 
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "modus-themes" '("modus-themes-")))
@@ -4912,11 +6236,7 @@ calling the internal `modus-themes-load-operandi' and
 
 
 
-(when (and (boundp 'custom-theme-load-path) load-file-name) (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
-
-
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "modus-vivendi-theme" '("modus-vivendi")))
-
 
 
 
@@ -5195,10 +6515,512 @@ Commands:
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/counsel-20201205.1008/counsel-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/counsel-20201205.1008/counsel-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel-autoloads.el") (car load-path))))
+
+
+
+(autoload 'counsel-company "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Complete using `company-candidates'." t nil)
+
+(autoload 'counsel-irony "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Inline C/C++ completion using Irony." t nil)
+
+(autoload 'counsel-describe-variable "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Forward to `describe-variable'.
+
+Variables declared using `defcustom' are highlighted according to
+`ivy-highlight-face'." t nil)
+
+(autoload 'counsel-describe-function "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Forward to `describe-function'.
+
+Interactive functions (i.e., commands) are highlighted according
+to `ivy-highlight-face'." t nil)
+
+(autoload 'counsel-describe-symbol "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Forward to `describe-symbol'." t nil)
+
+(autoload 'counsel-set-variable "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Set a variable SYM, with completion.
+
+When the selected variable is a `defcustom' with the type boolean
+or radio, offer completion of all possible values.
+
+Otherwise, offer a variant of `eval-expression', with the initial
+input corresponding to the chosen variable.
+
+With a prefix arg, restrict list to variables defined using
+`defcustom'.
+
+\(fn SYM)" t nil)
+
+(autoload 'counsel-apropos "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Show all matching symbols.
+See `apropos' for further information on what is considered
+a symbol and how to search for them." t nil)
+
+(autoload 'counsel-info-lookup-symbol "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Forward SYMBOL to `info-lookup-symbol' with ivy completion.
+With prefix arg MODE a query for the symbol help mode is offered.
+
+\(fn SYMBOL &optional MODE)" t nil)
+
+(autoload 'counsel-M-x "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Ivy version of `execute-extended-command'.
+Optional INITIAL-INPUT is the initial input in the minibuffer.
+This function integrates with either the `amx' or `smex' package
+when available, in that order of precedence.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-command-history "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Show the history of commands." t nil)
+
+(autoload 'counsel-load-library "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Load a selected the Emacs Lisp library.
+The libraries are offered from `load-path'." t nil)
+
+(autoload 'counsel-find-library "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Visit a selected the Emacs Lisp library.
+The libraries are offered from `load-path'." t nil)
+
+(autoload 'counsel-load-theme "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Forward to `load-theme'.
+Usable with `ivy-resume', `ivy-next-line-and-call' and
+`ivy-previous-line-and-call'." t nil)
+
+(autoload 'counsel-descbinds "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Show a list of all defined keys and their definitions.
+If non-nil, show only bindings that start with PREFIX.
+BUFFER defaults to the current one.
+
+\(fn &optional PREFIX BUFFER)" t nil)
+
+(autoload 'counsel-describe-face "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Completion for `describe-face'." t nil)
+
+(autoload 'counsel-faces "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Complete faces with preview.
+Actions are provided by default for describing or customizing the
+selected face." t nil)
+
+(autoload 'counsel-git "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Find file in the current Git repository.
+INITIAL-INPUT can be given as the initial minibuffer input.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-git-grep "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Grep for a string in the current Git repository.
+INITIAL-INPUT can be given as the initial minibuffer input.
+INITIAL-DIRECTORY, if non-nil, is used as the root directory for search.
+When CMD is a string, use it as a \"git grep\" command.
+When CMD is non-nil, prompt for a specific \"git grep\" command.
+
+\(fn &optional INITIAL-INPUT INITIAL-DIRECTORY CMD)" t nil)
+
+(autoload 'counsel-git-stash "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Search through all available git stashes." t nil)
+
+(autoload 'counsel-git-change-worktree "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Find the file corresponding to the current buffer on a different worktree." t nil)
+
+(autoload 'counsel-git-checkout "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Call the \"git checkout\" command." t nil)
+
+(autoload 'counsel-git-log "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Call the \"git log --grep\" shell command." t nil)
+
+(autoload 'counsel-find-file "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Forward to `find-file'.
+When INITIAL-INPUT is non-nil, use it in the minibuffer during completion.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-dired "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Forward to `dired'.
+When INITIAL-INPUT is non-nil, use it in the minibuffer during completion.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-recentf "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Find a file on `recentf-list'." t nil)
+
+(autoload 'counsel-buffer-or-recentf "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Find a buffer visiting a file or file on `recentf-list'." t nil)
+
+(autoload 'counsel-bookmark "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Forward to `bookmark-jump' or `bookmark-set' if bookmark doesn't exist." t nil)
+
+(autoload 'counsel-bookmarked-directory "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Ivy interface for bookmarked directories.
+
+With a prefix argument, this command creates a new bookmark which points to the
+current value of `default-directory'." t nil)
+
+(autoload 'counsel-file-register "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Search file in register.
+
+You cannot use Emacs' normal register commands to create file
+registers.  Instead you must use the `set-register' function like
+so: `(set-register ?i \"/home/eric/.emacs.d/init.el\")'.  Now you
+can use `C-x r j i' to open that file." t nil)
+
+(autoload 'counsel-locate-action-extern "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Pass X to `xdg-open' or equivalent command via the shell.
+
+\(fn X)" t nil)
+
+(autoload 'counsel-locate "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Call the \"locate\" shell command.
+INITIAL-INPUT can be given as the initial minibuffer input.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-tracker "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" nil t nil)
+
+(autoload 'counsel-fzf "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Open a file using the fzf shell command.
+INITIAL-INPUT can be given as the initial minibuffer input.
+INITIAL-DIRECTORY, if non-nil, is used as the root directory for search.
+FZF-PROMPT, if non-nil, is passed as `ivy-read' prompt argument.
+
+\(fn &optional INITIAL-INPUT INITIAL-DIRECTORY FZF-PROMPT)" t nil)
+
+(autoload 'counsel-dpkg "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Call the \"dpkg\" shell command." t nil)
+
+(autoload 'counsel-rpm "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Call the \"rpm\" shell command." t nil)
+
+(autoload 'counsel-file-jump "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Jump to a file below the current directory.
+List all files within the current directory or any of its sub-directories.
+INITIAL-INPUT can be given as the initial minibuffer input.
+INITIAL-DIRECTORY, if non-nil, is used as the root directory for search.
+
+\(fn &optional INITIAL-INPUT INITIAL-DIRECTORY)" t nil)
+
+(autoload 'counsel-dired-jump "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Jump to a directory (see `dired-jump') below the current directory.
+List all sub-directories within the current directory.
+INITIAL-INPUT can be given as the initial minibuffer input.
+INITIAL-DIRECTORY, if non-nil, is used as the root directory for search.
+
+\(fn &optional INITIAL-INPUT INITIAL-DIRECTORY)" t nil)
+
+(autoload 'counsel-ag "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Grep for a string in a root directory using ag.
+
+By default, the root directory is the first directory containing a .git subdirectory.
+
+INITIAL-INPUT can be given as the initial minibuffer input.
+INITIAL-DIRECTORY, if non-nil, is used as the root directory for search.
+EXTRA-AG-ARGS, if non-nil, is appended to `counsel-ag-base-command'.
+AG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument.
+CALLER is passed to `ivy-read'.
+
+With a `\\[universal-argument]' prefix argument, prompt for INITIAL-DIRECTORY.
+With a `\\[universal-argument] \\[universal-argument]' prefix argument, prompt additionally for EXTRA-AG-ARGS.
+
+\(fn &optional INITIAL-INPUT INITIAL-DIRECTORY EXTRA-AG-ARGS AG-PROMPT &key CALLER)" t nil)
+
+(autoload 'counsel-pt "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Grep for a string in the current directory using pt.
+INITIAL-INPUT can be given as the initial minibuffer input.
+This uses `counsel-ag' with `counsel-pt-base-command' instead of
+`counsel-ag-base-command'.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-ack "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Grep for a string in the current directory using ack.
+INITIAL-INPUT can be given as the initial minibuffer input.
+This uses `counsel-ag' with `counsel-ack-base-command' replacing
+`counsel-ag-base-command'.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-rg "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Grep for a string in the current directory using rg.
+INITIAL-INPUT can be given as the initial minibuffer input.
+INITIAL-DIRECTORY, if non-nil, is used as the root directory for search.
+EXTRA-RG-ARGS string, if non-nil, is appended to `counsel-rg-base-command'.
+RG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument.
+
+Example input with inclusion and exclusion file patterns:
+    require i -- -g*.el
+
+\(fn &optional INITIAL-INPUT INITIAL-DIRECTORY EXTRA-RG-ARGS RG-PROMPT)" t nil)
+
+(autoload 'counsel-grep "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Grep for a string in the file visited by the current buffer.
+When non-nil, INITIAL-INPUT is the initial search pattern.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-grep-backward "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Grep for a string in the file visited by the current buffer going
+backward similar to `swiper-backward'. When non-nil, INITIAL-INPUT is
+the initial search pattern.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-grep-or-swiper "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Call `swiper' for small buffers and `counsel-grep' for large ones.
+When non-nil, INITIAL-INPUT is the initial search pattern.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-grep-or-swiper-backward "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Call `swiper-backward' for small buffers and `counsel-grep-backward' for
+large ones.  When non-nil, INITIAL-INPUT is the initial search pattern.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-recoll "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Search for a string in the recoll database.
+You'll be given a list of files that match.
+Selecting a file will launch `swiper' for that file.
+INITIAL-INPUT can be given as the initial minibuffer input.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel--org-get-tags "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" nil nil nil)
+
+(autoload 'counsel-org-tag "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Add or remove tags in `org-mode'." t nil)
+
+(autoload 'counsel-org-tag-agenda "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Set tags for the current agenda item." t nil)
+
+(defalias 'counsel-org-goto #'counsel-outline)
+
+(autoload 'counsel-org-goto-all "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Go to a different location in any org file." t nil)
+
+(autoload 'counsel-org-file "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Browse all attachments for current Org file." t nil)
+
+(autoload 'counsel-org-entity "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Complete Org entities using Ivy." t nil)
+
+(autoload 'counsel-org-capture "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Capture something." t nil)
+
+(autoload 'counsel-org-agenda-headlines "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Choose from headers of `org-mode' files in the agenda." t nil)
+
+(autoload 'counsel-org-link "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Insert a link to an headline with completion." t nil)
+
+(autoload 'counsel-mark-ring "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Browse `mark-ring' interactively.
+Obeys `widen-automatically', which see." t nil)
+
+(autoload 'counsel-evil-marks "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Ivy replacement for `evil-show-marks'.
+By default, this function respects `counsel-evil-marks-exclude-registers'.
+When ARG is non-nil, display all active evil registers.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'counsel-package "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Install or delete packages.
+
+Packages not currently installed are prefixed with \"+\", and
+selecting one of these will try to install it.
+Packages currently installed are prefixed with \"-\", and
+selecting one of these will try to delete it.
+
+Additional actions:\\<ivy-minibuffer-map>
+
+  \\[ivy-dispatching-done] d: Describe package
+  \\[ivy-dispatching-done] h: Visit package's homepage" t nil)
+
+(autoload 'counsel-tmm "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Text-mode emulation of looking and choosing from a menu bar." t nil)
+
+(autoload 'counsel-yank-pop "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Ivy replacement for `yank-pop'.
+With a plain prefix argument (\\[universal-argument]),
+temporarily toggle the value of `counsel-yank-pop-after-point'.
+Any other value of ARG has the same meaning as in `yank-pop', but
+`counsel-yank-pop-preselect-last' determines its default value.
+See also `counsel-yank-pop-filter' for how to filter candidates.
+
+Note: Duplicate elements of `kill-ring' are always deleted.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'counsel-register "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Interactively choose a register." t nil)
+
+(autoload 'counsel-evil-registers "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Ivy replacement for `evil-show-registers'." t nil)
+
+(autoload 'counsel-imenu "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Jump to a buffer position indexed by imenu." t nil)
+
+(autoload 'counsel-list-processes "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Offer completion for `process-list'.
+The default action deletes the selected process.
+An extra action allows to switch to the process buffer." t nil)
+
+(autoload 'counsel-minibuffer-history "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Browse minibuffer history." t nil)
+
+(autoload 'counsel-esh-history "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Browse Eshell history." t nil)
+
+(autoload 'counsel-shell-history "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Browse shell history." t nil)
+
+(autoload 'counsel-slime-repl-history "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Browse Slime REPL history." t nil)
+
+(autoload 'counsel-hydra-heads "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Call a head of the current/last hydra." t nil)
+
+(autoload 'counsel-semantic "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Jump to a semantic tag in the current buffer." t nil)
+
+(autoload 'counsel-semantic-or-imenu "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" nil t nil)
+
+(autoload 'counsel-outline "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Jump to an outline heading with completion." t nil)
+
+(autoload 'counsel-ibuffer "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Use ibuffer to switch to another buffer.
+NAME specifies the name of the buffer (defaults to \"*Ibuffer*\").
+
+\(fn &optional NAME)" t nil)
+
+(autoload 'counsel-switch-to-shell-buffer "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Switch to a shell buffer, or create one." t nil)
+
+(autoload 'counsel-unicode-char "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Insert COUNT copies of a Unicode character at point.
+COUNT defaults to 1.
+
+\(fn &optional COUNT)" t nil)
+
+(autoload 'counsel-colors-emacs "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Show a list of all supported colors for a particular frame.
+
+You can insert or kill the name or hexadecimal RGB value of the
+selected color." t nil)
+
+(autoload 'counsel-colors-web "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Show a list of all W3C web colors for use in CSS.
+
+You can insert or kill the name or hexadecimal RGB value of the
+selected color." t nil)
+
+(autoload 'counsel-fonts "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Show a list of all supported font families for a particular frame.
+
+You can insert or kill the name of the selected font." t nil)
+
+(autoload 'counsel-kmacro "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Interactively choose and run a keyboard macro.
+
+With prefix argument, run macro that many times.
+
+Macros are run using the current value of `kmacro-counter-value'
+and their respective counter format. Displayed next to each macro is
+the counter's format and initial value.
+
+One can use actions to copy the counter format or initial counter
+value of a macro, using them for a new macro." t nil)
+
+(autoload 'counsel-geiser-doc-look-up-manual "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Search Scheme documentation." t nil)
+
+(autoload 'counsel-rhythmbox "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Choose a song from the Rhythmbox library to play or enqueue.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'counsel-linux-app "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Launch a Linux desktop application, similar to Alt-<F2>.
+When ARG is non-nil, ignore NoDisplay property in *.desktop files.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'counsel-wmctrl "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Select a desktop window using wmctrl." t nil)
+
+(autoload 'counsel-switch-buffer "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Switch to another buffer.
+Display a preview of the selected ivy completion candidate buffer
+in the current window." t nil)
+
+(autoload 'counsel-switch-buffer-other-window "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Switch to another buffer in another window.
+Display a preview of the selected ivy completion candidate buffer
+in the current window." t nil)
+
+(autoload 'counsel-compile "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Call `compile' completing with smart suggestions, optionally for DIR.
+
+Additional actions:
+
+\\{counsel-compile-map}
+
+\(fn &optional DIR)" t nil)
+
+(autoload 'counsel-compile-env "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Update `counsel-compile-env' interactively." t nil)
+
+(autoload 'counsel-minor "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Enable or disable minor mode.
+
+Disabled minor modes are prefixed with \"+\", and
+selecting one of these will enable it.
+Enabled minor modes are prefixed with \"-\", and
+selecting one of these will enable it.
+
+Additional actions:\\<ivy-minibuffer-map>
+
+  \\[ivy-dispatching-done] d: Go to minor mode definition
+  \\[ivy-dispatching-done] h: Describe minor mode" t nil)
+
+(autoload 'counsel-major "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" nil t nil)
+
+(autoload 'counsel-compilation-errors "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Compilation errors." t nil)
+
+(autoload 'counsel-flycheck "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Flycheck errors." t nil)
+
+(defvar counsel-mode nil "\
+Non-nil if Counsel mode is enabled.
+See the `counsel-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `counsel-mode'.")
+
+(custom-autoload 'counsel-mode "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" nil)
+
+(autoload 'counsel-mode "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" "\
+Toggle Counsel mode on or off.
+Turn Counsel mode on if ARG is positive, off otherwise. Counsel
+mode remaps built-in emacs functions that have counsel
+replacements.
+
+Local bindings (`counsel-mode-map'):
+\\{counsel-mode-map}
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/counsel-20201208.1022/counsel" '("counsel-" "ivy-function-called-at-point" "tmm-km-list")))
+
 
 
 
@@ -6049,6 +7871,41 @@ toggle it if ARG is `toggle'; disable the mode otherwise.
 
 
 )
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-posframe-20201124.404/ivy-posframe-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-posframe-20201124.404/ivy-posframe-autoloads.el") (car load-path))))
+
+
+
+(defvar ivy-posframe-mode nil "\
+Non-nil if Ivy-Posframe mode is enabled.
+See the `ivy-posframe-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `ivy-posframe-mode'.")
+
+(custom-autoload 'ivy-posframe-mode "ivy-posframe" nil)
+
+(autoload 'ivy-posframe-mode "ivy-posframe" "\
+Display ivy via posframe.
+
+If called interactively, enable Ivy-Posframe mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ivy-posframe" '("ivy-posframe-")))
+
+
+
+
+
+)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-hydra-20200608.1010/ivy-hydra-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -6372,6 +8229,41 @@ ARG is omitted or nil.
 Echo the `hardhat-mode' status of the current buffer." t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "hardhat" '("global-hardhat-mode" "hardhat-")))
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/gcmh-20201116.2251/gcmh-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/gcmh-20201116.2251/gcmh-autoloads.el") (car load-path))))
+
+
+
+(defvar gcmh-mode nil "\
+Non-nil if Gcmh mode is enabled.
+See the `gcmh-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `gcmh-mode'.")
+
+(custom-autoload 'gcmh-mode "gcmh" nil)
+
+(autoload 'gcmh-mode "gcmh" "\
+Minor mode to tweak Garbage Collection strategy.
+
+If called interactively, enable Gcmh mode if ARG is positive, and
+disable it if ARG is zero or negative.  If called from Lisp, also
+enable the mode if ARG is omitted or nil, and toggle it if ARG is
+`toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "gcmh" '("gcmh-")))
+
+
+
 
 
 )
@@ -7329,10 +9221,68 @@ Format LIBRARY.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/dtrt-indent-20200430.1023/dtrt-indent-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/dtrt-indent-20201208.1925/dtrt-indent-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/dtrt-indent-20200430.1023/dtrt-indent-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/dtrt-indent-20201208.1925/dtrt-indent-autoloads.el") (car load-path))))
+
+
+
+(autoload 'dtrt-indent-mode "../../../../../src/env/emacs.d/elpa/27.1/elpa/dtrt-indent-20201208.1925/dtrt-indent" "\
+Toggle dtrt-indent mode.
+With no argument, this command toggles the mode.  Non-null prefix
+argument turns on the mode.  Null prefix argument turns off the
+mode.
+
+If called interactively, enable Dtrt-Indent mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+When dtrt-indent mode is enabled, the proper indentation offset
+and `indent-tabs-mode' will be guessed for newly opened files and
+adjusted transparently.
+
+\(fn &optional ARG)" t nil)
+
+(put 'dtrt-indent-global-mode 'globalized-minor-mode t)
+
+(defvar dtrt-indent-global-mode nil "\
+Non-nil if Dtrt-Indent-Global mode is enabled.
+See the `dtrt-indent-global-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `dtrt-indent-global-mode'.")
+
+(custom-autoload 'dtrt-indent-global-mode "../../../../../src/env/emacs.d/elpa/27.1/elpa/dtrt-indent-20201208.1925/dtrt-indent" nil)
+
+(autoload 'dtrt-indent-global-mode "../../../../../src/env/emacs.d/elpa/27.1/elpa/dtrt-indent-20201208.1925/dtrt-indent" "\
+Toggle Dtrt-Indent mode in all buffers.
+With prefix ARG, enable Dtrt-Indent-Global mode if ARG is positive;
+otherwise, disable it.  If called from Lisp, enable the mode if
+ARG is omitted or nil.
+
+Dtrt-Indent mode is enabled in all buffers where
+`(lambda nil (when (derived-mode-p 'prog-mode 'text-mode) (dtrt-indent-mode)))' would do it.
+See `dtrt-indent-mode' for more information on Dtrt-Indent mode.
+
+\(fn &optional ARG)" t nil)
+
+(defvar dtrt-indent-mode nil "\
+Toggle adaptive indentation mode.
+Setting this variable directly does not take effect;
+use either \\[customize] or the function `dtrt-indent-mode'.")
+
+(custom-autoload 'dtrt-indent-mode "../../../../../src/env/emacs.d/elpa/27.1/elpa/dtrt-indent-20201208.1925/dtrt-indent" nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/dtrt-indent-20201208.1925/dtrt-indent" '("dtrt-indent-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/dtrt-indent-20201208.1925/dtrt-indent-diag" '("dtrt-indent-" "save-buffer-state")))
 
 
 
@@ -8926,10 +10876,54 @@ See `color-identifiers-mode' for more information on Color-Identifiers mode.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/cmake-mode-20201119.1544/cmake-mode-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/cmake-mode-20201210.1159/cmake-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/cmake-mode-20201119.1544/cmake-mode-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/cmake-mode-20201210.1159/cmake-mode-autoloads.el") (car load-path))))
+
+
+
+(autoload 'cmake-mode "../../../../../src/env/emacs.d/elpa/27.1/elpa/cmake-mode-20201210.1159/cmake-mode" "\
+Major mode for editing CMake source files.
+
+\(fn)" t nil)
+
+(autoload 'cmake-command-run "../../../../../src/env/emacs.d/elpa/27.1/elpa/cmake-mode-20201210.1159/cmake-mode" "\
+Runs the command cmake with the arguments specified.  The
+optional argument topic will be appended to the argument list.
+
+\(fn TYPE &optional TOPIC BUFFER)" t nil)
+
+(autoload 'cmake-command-run-help "../../../../../src/env/emacs.d/elpa/27.1/elpa/cmake-mode-20201210.1159/cmake-mode" "\
+`cmake-command-run' but rendered in `rst-mode'.
+
+\(fn TYPE &optional TOPIC BUFFER)" t nil)
+
+(autoload 'cmake-help-list-commands "../../../../../src/env/emacs.d/elpa/27.1/elpa/cmake-mode-20201210.1159/cmake-mode" "\
+Prints out a list of the cmake commands." t nil)
+
+(autoload 'cmake-help-command "../../../../../src/env/emacs.d/elpa/27.1/elpa/cmake-mode-20201210.1159/cmake-mode" "\
+Prints out the help message for the command the cursor is on." t nil)
+
+(autoload 'cmake-help-module "../../../../../src/env/emacs.d/elpa/27.1/elpa/cmake-mode-20201210.1159/cmake-mode" "\
+Prints out the help message for the module the cursor is on." t nil)
+
+(autoload 'cmake-help-variable "../../../../../src/env/emacs.d/elpa/27.1/elpa/cmake-mode-20201210.1159/cmake-mode" "\
+Prints out the help message for the variable the cursor is on." t nil)
+
+(autoload 'cmake-help-property "../../../../../src/env/emacs.d/elpa/27.1/elpa/cmake-mode-20201210.1159/cmake-mode" "\
+Prints out the help message for the property the cursor is on." t nil)
+
+(autoload 'cmake-help "../../../../../src/env/emacs.d/elpa/27.1/elpa/cmake-mode-20201210.1159/cmake-mode" "\
+Queries for any of the four available help topics and prints out the appropriate page." t nil)
+
+(add-to-list 'auto-mode-alist '("CMakeLists\\.txt\\'" . cmake-mode))
+
+(add-to-list 'auto-mode-alist '("\\.cmake\\'" . cmake-mode))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/cmake-mode-20201210.1159/cmake-mode" '("cmake-")))
+
 
 
 
@@ -8941,6 +10935,11 @@ Major mode for editing CMake source files.
 (autoload 'cmake-command-run "cmake-mode" "\
 Runs the command cmake with the arguments specified.  The
 optional argument topic will be appended to the argument list.
+
+\(fn TYPE &optional TOPIC BUFFER)" t nil)
+
+(autoload 'cmake-command-run-help "cmake-mode" "\
+`cmake-command-run' but rendered in `rst-mode'.
 
 \(fn TYPE &optional TOPIC BUFFER)" t nil)
 
@@ -9034,6 +11033,331 @@ ARG is `toggle'; disable the mode otherwise.
 \(fn &optional ARG)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "beacon" '("beacon-")))
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/async-20200809.501/async-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/async-20200809.501/async-autoloads.el") (car load-path))))
+
+
+
+(autoload 'async-start-process "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/async" "\
+Start the executable PROGRAM asynchronously named NAME.  See `async-start'.
+PROGRAM is passed PROGRAM-ARGS, calling FINISH-FUNC with the
+process object when done.  If FINISH-FUNC is nil, the future
+object will return the process object when the program is
+finished.  Set DEFAULT-DIRECTORY to change PROGRAM's current
+working directory.
+
+\(fn NAME PROGRAM FINISH-FUNC &rest PROGRAM-ARGS)" nil nil)
+
+(autoload 'async-start "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/async" "\
+Execute START-FUNC (often a lambda) in a subordinate Emacs process.
+When done, the return value is passed to FINISH-FUNC.  Example:
+
+    (async-start
+       ;; What to do in the child process
+       (lambda ()
+         (message \"This is a test\")
+         (sleep-for 3)
+         222)
+
+       ;; What to do when it finishes
+       (lambda (result)
+         (message \"Async process done, result should be 222: %s\"
+                  result)))
+
+If FINISH-FUNC is nil or missing, a future is returned that can
+be inspected using `async-get', blocking until the value is
+ready.  Example:
+
+    (let ((proc (async-start
+                   ;; What to do in the child process
+                   (lambda ()
+                     (message \"This is a test\")
+                     (sleep-for 3)
+                     222))))
+
+        (message \"I'm going to do some work here\") ;; ....
+
+        (message \"Waiting on async process, result should be 222: %s\"
+                 (async-get proc)))
+
+If you don't want to use a callback, and you don't care about any
+return value from the child process, pass the `ignore' symbol as
+the second argument (if you don't, and never call `async-get', it
+will leave *emacs* process buffers hanging around):
+
+    (async-start
+     (lambda ()
+       (delete-file \"a remote file on a slow link\" nil))
+     'ignore)
+
+Note: Even when FINISH-FUNC is present, a future is still
+returned except that it yields no value (since the value is
+passed to FINISH-FUNC).  Call `async-get' on such a future always
+returns nil.  It can still be useful, however, as an argument to
+`async-ready' or `async-wait'.
+
+\(fn START-FUNC &optional FINISH-FUNC)" nil nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/async" '("async-")))
+
+
+
+
+(autoload 'async-byte-recompile-directory "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/async-bytecomp" "\
+Compile all *.el files in DIRECTORY asynchronously.
+All *.elc files are systematically deleted before proceeding.
+
+\(fn DIRECTORY &optional QUIET)" nil nil)
+
+(defvar async-bytecomp-package-mode nil "\
+Non-nil if Async-Bytecomp-Package mode is enabled.
+See the `async-bytecomp-package-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `async-bytecomp-package-mode'.")
+
+(custom-autoload 'async-bytecomp-package-mode "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/async-bytecomp" nil)
+
+(autoload 'async-bytecomp-package-mode "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/async-bytecomp" "\
+Byte compile asynchronously packages installed with package.el.
+Async compilation of packages can be controlled by
+`async-bytecomp-allowed-packages'.
+
+If called interactively, enable Async-Bytecomp-Package mode if
+ARG is positive, and disable it if ARG is zero or negative.
+If called from Lisp, also enable the mode if ARG is omitted or
+nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'async-byte-compile-file "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/async-bytecomp" "\
+Byte compile Lisp code FILE asynchronously.
+
+Same as `byte-compile-file' but asynchronous.
+
+\(fn FILE)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/async-bytecomp" '("async-byte")))
+
+
+
+
+(defvar dired-async-mode nil "\
+Non-nil if Dired-Async mode is enabled.
+See the `dired-async-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `dired-async-mode'.")
+
+(custom-autoload 'dired-async-mode "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/dired-async" nil)
+
+(autoload 'dired-async-mode "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/dired-async" "\
+Do dired actions asynchronously.
+
+If called interactively, enable Dired-Async mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'dired-async-do-copy "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/dired-async" "\
+Run ‘dired-do-copy’ asynchronously.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'dired-async-do-symlink "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/dired-async" "\
+Run ‘dired-do-symlink’ asynchronously.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'dired-async-do-hardlink "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/dired-async" "\
+Run ‘dired-do-hardlink’ asynchronously.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'dired-async-do-rename "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/dired-async" "\
+Run ‘dired-do-rename’ asynchronously.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/dired-async" '("dired-async-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/smtpmail-async" '("async-smtpmail-")))
+
+
+
+(autoload 'async-start-process "async" "\
+Start the executable PROGRAM asynchronously named NAME.  See `async-start'.
+PROGRAM is passed PROGRAM-ARGS, calling FINISH-FUNC with the
+process object when done.  If FINISH-FUNC is nil, the future
+object will return the process object when the program is
+finished.  Set DEFAULT-DIRECTORY to change PROGRAM's current
+working directory.
+
+\(fn NAME PROGRAM FINISH-FUNC &rest PROGRAM-ARGS)" nil nil)
+
+(autoload 'async-start "async" "\
+Execute START-FUNC (often a lambda) in a subordinate Emacs process.
+When done, the return value is passed to FINISH-FUNC.  Example:
+
+    (async-start
+       ;; What to do in the child process
+       (lambda ()
+         (message \"This is a test\")
+         (sleep-for 3)
+         222)
+
+       ;; What to do when it finishes
+       (lambda (result)
+         (message \"Async process done, result should be 222: %s\"
+                  result)))
+
+If FINISH-FUNC is nil or missing, a future is returned that can
+be inspected using `async-get', blocking until the value is
+ready.  Example:
+
+    (let ((proc (async-start
+                   ;; What to do in the child process
+                   (lambda ()
+                     (message \"This is a test\")
+                     (sleep-for 3)
+                     222))))
+
+        (message \"I'm going to do some work here\") ;; ....
+
+        (message \"Waiting on async process, result should be 222: %s\"
+                 (async-get proc)))
+
+If you don't want to use a callback, and you don't care about any
+return value from the child process, pass the `ignore' symbol as
+the second argument (if you don't, and never call `async-get', it
+will leave *emacs* process buffers hanging around):
+
+    (async-start
+     (lambda ()
+       (delete-file \"a remote file on a slow link\" nil))
+     'ignore)
+
+Note: Even when FINISH-FUNC is present, a future is still
+returned except that it yields no value (since the value is
+passed to FINISH-FUNC).  Call `async-get' on such a future always
+returns nil.  It can still be useful, however, as an argument to
+`async-ready' or `async-wait'.
+
+\(fn START-FUNC &optional FINISH-FUNC)" nil nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "async" '("async-")))
+
+
+
+
+(autoload 'async-byte-recompile-directory "async-bytecomp" "\
+Compile all *.el files in DIRECTORY asynchronously.
+All *.elc files are systematically deleted before proceeding.
+
+\(fn DIRECTORY &optional QUIET)" nil nil)
+
+(defvar async-bytecomp-package-mode nil "\
+Non-nil if Async-Bytecomp-Package mode is enabled.
+See the `async-bytecomp-package-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `async-bytecomp-package-mode'.")
+
+(custom-autoload 'async-bytecomp-package-mode "async-bytecomp" nil)
+
+(autoload 'async-bytecomp-package-mode "async-bytecomp" "\
+Byte compile asynchronously packages installed with package.el.
+Async compilation of packages can be controlled by
+`async-bytecomp-allowed-packages'.
+
+If called interactively, enable Async-Bytecomp-Package mode if
+ARG is positive, and disable it if ARG is zero or negative.
+If called from Lisp, also enable the mode if ARG is omitted or
+nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'async-byte-compile-file "async-bytecomp" "\
+Byte compile Lisp code FILE asynchronously.
+
+Same as `byte-compile-file' but asynchronous.
+
+\(fn FILE)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "async-bytecomp" '("async-byte")))
+
+
+
+
+(defvar dired-async-mode nil "\
+Non-nil if Dired-Async mode is enabled.
+See the `dired-async-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `dired-async-mode'.")
+
+(custom-autoload 'dired-async-mode "dired-async" nil)
+
+(autoload 'dired-async-mode "dired-async" "\
+Do dired actions asynchronously.
+
+If called interactively, enable Dired-Async mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'dired-async-do-copy "dired-async" "\
+Run ‘dired-do-copy’ asynchronously.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'dired-async-do-symlink "dired-async" "\
+Run ‘dired-do-symlink’ asynchronously.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'dired-async-do-hardlink "dired-async" "\
+Run ‘dired-do-hardlink’ asynchronously.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'dired-async-do-rename "dired-async" "\
+Run ‘dired-do-rename’ asynchronously.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dired-async" '("dired-async-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smtpmail-async" '("async-smtpmail-")))
+
+
 
 
 )
@@ -9249,14 +11573,14 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
 )
 (setq package-activated-list
       (append
-       '(zoutline yasnippet yaml-mode xr xonsh-mode ws-butler which-key validate bind-key use-package use-package-hydra key-chord bind-chord use-package-chords epl pkg-info projectile dash s f avy ace-window pfuture lv hydra ht treemacs treemacs-projectile treemacs-icons-dired toc-org ivy swiper srefactor spinner sml-mode smartparens rainbow-delimiters pos-tip racket-mode pythonic dash-functional pretty-hydra prescient posframe popup persistent-scratch paren-face paredit outorg outshine org-bullets org esxml nov mwim modus-vivendi-theme modus-themes modus-operandi-theme memoize makey major-mode-hydra macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat flyspell-correct flyspell-correct-popup flycheck flycheck-yamllint fish-mode expand-region eval-in-repl eros elmacro elisp-format dtrt-indent discover-my-major diminish deadgrep conda company company-prescient company-posframe comment-dwim-2 color-theme-modern color-identifiers-mode cmake-mode cask-mode beacon amx all-the-icons all-the-icons-dired aggressive-indent)
+       '(zoutline yasnippet yaml-mode xr xonsh-mode ws-butler posframe which-key which-key-posframe validate bind-key use-package use-package-hydra key-chord bind-chord use-package-chords epl pkg-info projectile dash s f avy ace-window pfuture lv hydra ht treemacs treemacs-projectile treemacs-icons-dired toc-org ivy swiper srefactor spinner sml-mode smartparens rainbow-delimiters pos-tip racket-mode pythonic dash-functional pretty-hydra prescient popup persistent-scratch paren-face paredit paradox outorg outshine org-bullets org esxml nov mwim modus-vivendi-theme modus-themes modus-operandi-theme memoize makey major-mode-hydra macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat gcmh flyspell-correct flyspell-correct-popup flycheck flycheck-yamllint fish-mode expand-region eval-in-repl eros elmacro elisp-format dtrt-indent discover-my-major diminish deadgrep conda company company-prescient company-posframe comment-dwim-2 color-theme-modern color-identifiers-mode cmake-mode cask-mode beacon async amx all-the-icons all-the-icons-dired aggressive-indent)
        package-activated-list))
 (progn
   (require 'info)
   (info-initialize)
   (setq Info-directory-list
         (append
-         '("/Users/mark/.emacs.d/elpa/27.1/elpa/modus-operandi-theme-20201114.729" "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20201205.1910" "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-vivendi-theme-20201114.729" "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20201123.1623" "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20201110.1021" "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20200803.1520" "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20201110.2133")
+         '("/Users/mark/.emacs.d/elpa/27.1/elpa/modus-operandi-theme-20201114.729" "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20201209.1407" "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-vivendi-theme-20201114.729" "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942" "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20201110.1021" "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20200803.1520" "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20201110.2133")
          Info-directory-list)))
 
 ;; Local Variables:

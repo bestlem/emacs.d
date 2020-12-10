@@ -1,6 +1,89 @@
 #+TITLE Emacs configuration How emacs reacts
 #+PROPERTY:header-args :cache yes :tangle yes :comments link
 
+* memory
+:PROPERTIES:
+:ID:       org_mark_2020-03-02T07-49-31+00-00_mini12.local:F19DE0CC-B946-4885-808E-36CB21A4AF3D
+:END:
+
+** [[https://github.com/emacsmirror/gcmh][GCMH - the Garbage Collector Magic Hack]]
+:PROPERTIES:
+:ID:       org_2020-12-08+00-00:9CBD1225-1938-4671-8260-E362EA08EE86
+:END:
+This seems to be a more consistent way so can replace other bits
+The only bit to stay is after-init
+Note that gcmh cannot explicitly reduce the memory it does this when it gcs, which might be wrong - it assumes you do not gc during a process
+#+NAME: org_2020-12-08+00-00_C06FD610-2FD2-4E60-94B2-33A789850588
+#+begin_src emacs-lisp
+(use-package gcmh
+    :ensure t
+    :diminish
+    :config
+    (setq gcmh-verbose 't)
+    (gcmh-mode 1))
+#+end_src
+
+** Instrument emacs
+:PROPERTIES:
+:ID:       org_2020-12-08+00-00:C8118A2B-2B63-4B30-BDA2-3A412B508657
+:END:
+Make emacs message when it gcs.
+#+NAME: org_2020-12-08+00-00_85933DF6-3CB1-4DBC-8EFD-F4E56D10934E
+#+begin_src emacs-lisp
+(setq garbage-collection-messages 't)
+#+end_src
+** minibuffer
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:FFDA0E37-D169-4605-81D5-6286FB7C08B4
+:END:
+  I have had crashes with helpful where emacs has to be killed. Looks like a recursive stack error but also see comment re garbage collection So let's try
+  Note this causes a gc when minibuffer ends - perhaps not the best time
+After crashes this has been turned off
+  #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_6D1AA0E9-63E0-4D18-81AE-142094A987CE
+  #+begin_src emacs-lisp :tangle no
+(defun my-minibuffer-setup-hook ()
+  (setq gc-cons-threshold 8000000))
+
+(defun my-minibuffer-exit-hook ()
+  (setq gc-cons-threshold 800000))
+
+;; (add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
+;; (add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
+  #+end_src
+** At useful times
+:PROPERTIES:
+:ID:       org_mark_2020-03-02T07-49-31+00-00_mini12.local:E84E64AE-0AE9-47B6-B5AE-1E29C11FC9D6
+:HEADER-ARGS: :tangle no
+:END:
+Not needed with gcmh
+
+If Emacs is doing nothing then might as well gc
+Taken from [[https://www.reddit.com/r/emacs/comments/bqu69o/making_emacs_snappier_i_need_a_second_opinion/][Reddit]] but not on kill-buffer
+*** Hooks
+:PROPERTIES:
+:ID:       org_2020-12-08+00-00:A878C0A9-BBC9-40AB-8973-B13EC43511A0
+:END:
+But did not seem to be OK as focus out hook does not work
+#+NAME: org_mark_2020-03-02T07-49-31+00-00_mini12.local_8B85D421-DEE1-4971-B1CB-CBD7C5678E5F
+#+begin_src emacs-lisp
+(add-hook 'after-save-hook       'garbage-collect 99) ; after all
+;; (add-hook 'focus-out-hook        #'garbage-collect)
+;; (add-hook 'minibuffer-exit-hook  #'garbage-collect)
+(add-hook 'minibuffer-setup-hook #'garbage-collect)
+(add-hook 'suspend-hook          #'garbage-collect 'run-at-end)
+#+end_src
+*** Idle
+:PROPERTIES:
+:ID:       org_2020-12-08+00-00:E95E52C2-A7E4-4F66-8381-DEAE792C715D
+:END:
+Having read help for `run-with-idle-timer` this seems better
+#begin_quote
+Perform an action the next time Emacs is idle for SECS seconds.
+#end_quote
+#+NAME: org_2020-12-08+00-00_C06726FA-D422-4216-92D1-CF3BA3B36A88
+#+begin_src emacs-lisp :tangle no
+(run-with-idle-timer 30 't #'garbage-collect)
+#+end_src
 * File Handling
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:7F0DB7D1-63CC-4002-BF3B-FC8F529B24EB
@@ -161,43 +244,6 @@ I haven't used before but might try with hydra from [[https://sriramkswamy.githu
 (unless *aquamacs*
   (fset 'yes-or-no-p 'y-or-n-p))
    #+END_SRC
-* memory
-:PROPERTIES:
-:ID:       org_mark_2020-03-02T07-49-31+00-00_mini12.local:F19DE0CC-B946-4885-808E-36CB21A4AF3D
-:END:
-** minibuffer
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:FFDA0E37-D169-4605-81D5-6286FB7C08B4
-:END:
-  I have had crashes with helpful where emacs has to be killed. Looks like a recursive stack error but also see comment re garbage collection So let's try
-  Note this causes a gc when minibuffer ends - perhaps not the best time
-After crashes this has been turned off
-  #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_6D1AA0E9-63E0-4D18-81AE-142094A987CE
-  #+begin_src emacs-lisp :tangle no
-(defun my-minibuffer-setup-hook ()
-  (setq gc-cons-threshold 8000000))
-
-(defun my-minibuffer-exit-hook ()
-  (setq gc-cons-threshold 800000))
-
-;; (add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
-;; (add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
-  #+end_src
-** At useful times
-:PROPERTIES:
-:ID:       org_mark_2020-03-02T07-49-31+00-00_mini12.local:E84E64AE-0AE9-47B6-B5AE-1E29C11FC9D6
-:END:
-If Emacs is doing nothing then might as well gc
-Taken from [[https://www.reddit.com/r/emacs/comments/bqu69o/making_emacs_snappier_i_need_a_second_opinion/][Reddit]] but not on kill-buffer
-#+NAME: org_mark_2020-03-02T07-49-31+00-00_mini12.local_8B85D421-DEE1-4971-B1CB-CBD7C5678E5F
-#+begin_src emacs-lisp
-(add-hook 'after-save-hook       #'garbage-collect)
-(add-hook 'focus-out-hook        #'garbage-collect)
-(add-hook 'minibuffer-exit-hook  #'garbage-collect)
-(add-hook 'minibuffer-setup-hook #'garbage-collect)
-(add-hook 'suspend-hook          #'garbage-collect)
-
-#+end_src
 * Help
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:BA8FE03C-5430-4984-9CD3-7E5971925F68
@@ -235,8 +281,10 @@ Let's use [[https://github.com/Wilfred/helpful][Helpful]]
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:1093B961-57F6-4B74-9CCD-F155EEDA2E87
 :END:
 Also see [[https://www.emacswiki.org/emacs/DeleteSelectionMode][EmacsWiki]] (and my old init) but cua should do this. Possibly because minor modes are toggles
-Issue is lispy removes this as lispy is vi based. Actually my understanding was wrong the issue is select with mouse puts things into system clipboard.
-So use separate PRIMARY and CLIPBOARD
+Issue is lispy removes this as lispy is vi based. I am OK with override if in position but not with region selected except pairs.
+
+Separate issue - forgotten what-  my understanding was wrong the issue is select with mouse puts things into system clipboard.
+So use separate PRIMARY and CLIPBOARD - hmm
   #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_D91D1B0C-20B5-4AEF-8E53-7056B6CE706F
   #+begin_src emacs-lisp
   (delete-selection-mode 1)
@@ -253,13 +301,17 @@ So use separate PRIMARY and CLIPBOARD
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:7F269BB3-F95F-4F6D-944B-252975923B43
 :END:
-  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_668C51A9-4FC2-4A35-A424-9FC9C270DACF
-  #+begin_src emacs-lisp
+#+begin_quote
+ Only lines touched get trimmed. If the white space at end of buffer is changed, then blank lines at the end of buffer are truncated respecting require-final-newline.
+ Trimming only happens when saving.
+#+end_quote
+#+NAME: org_2020-12-08+00-00_3CD0E180-0745-4B05-9BCE-0FB50626F9F9
+#+begin_src emacs-lisp
 (use-package ws-butler
   :ensure t
   :diminish ws-butler-mode
   :hook ((prog-mode org-mode) . ws-butler-mode ))
- #+end_src
+#+end_src
 ** Others
 :PROPERTIES:
 :ID:       org_mark_2020-10-11T00-40-32+01-00_mini12.local:D368B1BE-8B1A-4ED3-B447-077ED18711A3

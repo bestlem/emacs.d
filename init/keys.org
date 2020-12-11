@@ -144,20 +144,20 @@ This section covers packages and functions to help use and discovery of keys
    #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_E1F20E36-2E4C-47E8-B20E-F08B7B7F9C77
    #+begin_src emacs-lisp
 (use-package which-key
-  :ensure t
-  :defer 20
-  :config
-  (setq which-key-sort-order 'which-key-key-order-alpha
-        which-key-side-window-max-width 0.33
-        which-key-idle-delay 1)
-  (which-key-mode)
-  (if (>= emacs-major-version 27)
-      (use-package which-key-posframe
-        :ensure t
-        :config
-        (which-key-posframe-mode 1))
-    (which-key-setup-side-window-right-bottom))
-  :diminish which-key-mode)
+    :ensure t
+    :defer 20
+    :config
+    (setq which-key-sort-order 'which-key-key-order-alpha
+          which-key-side-window-max-width 0.33
+          which-key-idle-delay 1)
+    (which-key-mode)
+    (if (>= emacs-major-version 27)
+        (use-package which-key-posframe
+            :ensure t
+            :config
+            (which-key-posframe-mode 1))
+      (which-key-setup-side-window-right-bottom))
+    :diminish which-key-mode)
    #+end_src
 ** Display keys in help and menus
 :PROPERTIES:
@@ -415,6 +415,7 @@ Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in e
    From [[https://github.com/abo-abo/hydra/wiki/Emacs][Hydra wiki - Find file with xf]]
    Not really working as elisp well lispy messes it up and I use Mac bindings so ^x rarer.
    It does work except lispy
+   Make the x readonly more as it can replace C-x with f19 leader
    #+NAME: org_mark_2020-03-06T13-08-35+00-00_mini12.local_BE42E0D7-506F-4778-89F9-E4DC4B14493E
    #+begin_src emacs-lisp
 (defun x-hydra-pre ()
@@ -436,6 +437,7 @@ Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in e
   ("b" ivy-switch-buffer "switch buffer")
   ("f" counsel-find-file "find-file")
   ("r" counsel-recentf "recentf")
+  ("w" write-file "write file" )
   ("x" nil "cancel" :color blue))
 
 (defun mwb-x-key ()
@@ -481,7 +483,7 @@ Replace Hyper key combination with a leader key - eventually this will be caps l
 Odd things needed
 #+NAME: org_2020-12-05+00-00_94E1455C-7F91-48B1-BF7B-EA3753E7BDCB
 #+begin_src emacs-lisp
-(pretty-hydra-define hydra-kl
+(pretty-hydra-define hydra-kl ; short name for which-key
     (global-map "<f19>"
      :foreign-keys warn
      :title (with-octicon "tools" "Global tools" 1 -0.05)
@@ -494,9 +496,11 @@ Odd things needed
     ("n" hydra-navigate/body "Navigate")
     ("P" rojectile/body "projectile")
     ("t" hydra-transpose/body "Transpose")
+    ("x" x-hydra-readonly "C-X fns")
     ("<f19>" major-mode-hydra "Major mode"))
    "Visual"
    (("f" other-frame "Switch Frame")
+    ("l" linum-mode "line number" :toggle t)
     ("m" (mwb-new-frame "*Messages*") "Messages")
     ("w" hydra-jp-window/body "Window Management")
     ("c" (what-cursor-position 'detail) "Character at POS"))
@@ -507,7 +511,7 @@ Odd things needed
     ("s" org-babel-tangle-jump-to-org "Back to org")
     ("S" org-babel-detangle "Detangle")
     ("[" ptrv/smartparens/body "Smartparens"))))
-(bind-key "H-`"  'hydra-key-leader/body)
+(bind-key "H-`"  'hydra-kl/body)
 ;; (bind-key "<f19>"  'hydra-key-leader/body)
 #+end_src
 

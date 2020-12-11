@@ -317,6 +317,7 @@ but does not seem to work well
 #+begin_src emacs-lisp
 (use-package beacon
   :ensure t
+  :diminish beacon-mode
   :custom (beacon-blink-when-focused t)
   :init (eval-when-compile
           ;; Silence missing function warnings

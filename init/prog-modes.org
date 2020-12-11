@@ -186,16 +186,16 @@ Let us set it up
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_E36E2091-3DAD-46AC-8634-EC11B5E795C7
 #+begin_src emacs-lisp
 (use-package hideshow
-  :hook (prog-mode . hs-minor-mode))
+    :diminish  hs-minor-mode
+    :hook (prog-mode . hs-minor-mode))
 #+end_src
 Put markers in the fringe which messed up lispy
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_C0B47E60-5C02-4FCD-AE13-ABA380EA4866
 #+begin_src emacs-lisp
 (use-package hideshowvis
-  :disabled
-  :mwb-load-path "site-lisp/hideshowvis"
-  :hook (prog-mode . hideshowvis-enable)
-  :config (hideshowvis-symbols))
+    :mwb-load-path "site-lisp/hideshowvis"
+    :hook (prog-mode . hideshowvis-enable)
+    :config (hideshowvis-symbols))
 #+end_src
 
 Use a hydra so don't need the odd keybindings

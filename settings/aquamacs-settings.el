@@ -17,4 +17,4 @@
  '(aquamacs-tool-bar-user-customization nil t)
  '(auto-word-wrap-default-function nil)
  '(tabbar-mode nil nil
-               (tabbar)))
+   (tabbar)))

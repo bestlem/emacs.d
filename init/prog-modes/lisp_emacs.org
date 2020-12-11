@@ -13,36 +13,36 @@ Note all loaded immediately as could be called anytime.
 #+NAME: org_2020-12-03+00-00_644A7537-C980-48C1-894E-D92826418F53
 #+begin_src emacs-lisp
 (use-package emacs-lisp-mode
-  :mode-hydra
-  ("Eval"
-   (("b" eval-buffer "buffer")
-    ("d" eval-defun "defun [well top level form]")
-    ("r" eval-region "region")
-    ;; ("f" matcha-elisp-eval-current-form-sp "form")
-    )
-   "REPL"
-   (("I" ielm "ielm")
-    ;; ("x" matcha-goto-scratch "*Scratch*")
-    )
-   "Test"
-   (("t" ert "prompt")
-    ("T" (ert t) "all")
-    ("F" (ert :failed) "failed"))
+    :mode-hydra ((:idle 0.5)
+                 ("Eval"
+                  (("b" eval-buffer "buffer")
+                   ("d" eval-defun "defun [well top level form]")
+                   ("r" eval-region "region")
+                   ;; ("f" matcha-elisp-eval-current-form-sp "form")
+                   )
+                  "REPL"
+                  (("I" ielm "ielm")
+                   ;; ("x" matcha-goto-scratch "*Scratch*")
+                   )
+                  "Test"
+                  (("t" ert "prompt")
+                   ("T" (ert t) "all")
+                   ("F" (ert :failed) "failed"))
 
-   "Debug"
-   (("m" sk/hydra-macro-step/body "Macrostep...")
-    ("e" modi/toggle-edebug "Toggle edebug")
-    ("E" hydra-edebug "edebug hydra")
-    ("q" cancel-debug-on-entry "Cancel Debug on Entry")
-    ("D" debug-on-entry "Debug on Entry"))
-   ;; ["Watch"
-   ;;  ("w" debug-watch "Watch")
-   ;;  ("W" cancel-debug-watch  "Cancel Watch")]
-   "Compile"
-   (("c" emacs-lisp-byte-compile "Compile")
-    ("l" emacs-lisp-byte-compile-and-load "Compile and Load")
-    ("r" byte-recompile-directory "Byte Recompile Directory")
-    ("x" disassemble "Disassemble"))))
+                  "Debug"
+                  (("m" sk/hydra-macro-step/body "Macrostep...")
+                   ("e" modi/toggle-edebug "Toggle edebug")
+                   ("E" hydra-edebug "edebug hydra")
+                   ("q" cancel-debug-on-entry "Cancel Debug on Entry")
+                   ("D" debug-on-entry "Debug on Entry"))
+                  ;; ["Watch"
+                  ;;  ("w" debug-watch "Watch")
+                  ;;  ("W" cancel-debug-watch  "Cancel Watch")]
+                  "Compile"
+                  (("c" emacs-lisp-byte-compile "Compile")
+                   ("l" emacs-lisp-byte-compile-and-load "Compile and Load")
+                   ("r" byte-recompile-directory "Byte Recompile Directory")
+                   ("x" disassemble "Disassemble")))))
 #+end_src
 
 * Formatting

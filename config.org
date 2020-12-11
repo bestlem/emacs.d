@@ -32,12 +32,12 @@ The minimum setup needed to load the rest.
 ;; (trace-function-foreground 'iso-transl-define-keys)
 
 
-(with-eval-after-load 'iso-transl
-  (warning "loading \"iso-trransl\"")
-  (dolist (transl-char iso-transl-char-map)
-    (let ((vec (vconcat (car transl-char))))
-      (aset vec 0 (logior (aref vec 0) ?\A-\^@))
-      (define-key key-translation-map vec nil))))
+;; (with-eval-after-load 'iso-transl
+;;   (warning "loading \"iso-trransl\"")
+;;   (dolist (transl-char iso-transl-char-map)
+;;     (let ((vec (vconcat (car transl-char))))
+;;       (aset vec 0 (logior (aref vec 0) ?\A-\^@))
+;;       (define-key key-translation-map vec nil))))
      #+end_src
 **** Message
 :PROPERTIES:

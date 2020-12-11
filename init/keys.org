@@ -8,6 +8,7 @@
   - [[#how-to-bind][How to bind]]
   - [[#keyboard-thoughts][Keyboard Thoughts]]
 - [[#key-based-code][Key based code]]
+  - [[#iso-transl][iso-transl]]
   - [[#which-key][Which Key]]
   - [[#display-keys-in-help-and-menus][Display keys in help and menus]]
   - [[#improve-on-help][Improve on help]]
@@ -134,6 +135,29 @@ This seems bound to <help> - shades of NeXT
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:0464FD58-5332-45BB-8772-A45A4ABD0B20
 :END:
 This section covers packages and functions to help use and discovery of keys
+
+** iso-transl
+:PROPERTIES:
+:ID:       org_2020-12-10+00-00:304665E1-9D39-4752-8195-F6A48D215B59
+:END:
+This inbuilt emacs package provides bindings for odd characters using a C-x 8 map - but it also biunds them to Alt key which wrechis things like A-C which is now ¢
+
+Aquamacs patched iso-transl.el so it is now a mode and can be turned on and off.
+
+I am not the only one to suffer see [[https://emacs.stackexchange.com/q/17508/9874][Emacs SX question]] and also [[https://emacs.stackexchange.com/q/61415/9874][my question]]
+
+So lets try to patch iso-transl. I copied the Aquamacs one and then merged with macport emacs 27.1, now try to load first
+
+#+NAME: org_2020-12-11+00-00_CC01A657-95E4-4A31-8FCC-B45CCB63A851
+#+begin_src emacs-lisp
+(unless *aquamacs*
+  (use-package iso-transl
+      :mwb-load-path "site-lisp/aquamacs"
+      :config
+      (iso-transl-mode -1)))
+#+end_src
+
+
 ** Which Key
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:CF1562A8-8457-4393-ADE7-E36762C1ED47
@@ -496,7 +520,7 @@ Odd things needed
     ("n" hydra-navigate/body "Navigate")
     ("P" rojectile/body "projectile")
     ("t" hydra-transpose/body "Transpose")
-    ("x" x-hydra-readonly "C-X fns")
+    ("x" x-hydra-readonly/body "C-X fns")
     ("<f19>" major-mode-hydra "Major mode"))
    "Visual"
    (("f" other-frame "Switch Frame")

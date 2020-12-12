@@ -5,7 +5,7 @@
 :PROPERTIES:
 :ID:       org_mark_2020-10-24T15-08-22+01-00_mini12.local:8844FA08-DB9D-44FB-AE4D-189DDA7A2EAA
 :END:
-- [[#start-using-org-mode-notes][Start using org mode notes]]
+- [[#notes-on-using-org-mode][Notes on using org mode]]
   - [[#use-package-issues][use package issues]]
   - [[#noweb-issues][Noweb issues]]
   - [[#grettke][Grettke]]
@@ -45,7 +45,7 @@
   - [[#capture][Capture]]
   - [[#agenda][Agenda]]
 
-* Start using org mode notes
+* Notes on using org mode
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:6810C5AF-469D-4E0E-BD24-8F6301313A91
 :END:
@@ -116,7 +116,7 @@ It is now for subtree todo refile and links
   (setq org-datetree-add-timestamp (quote active)
         org-default-notes-file "~/SyncServices/Dropbox/Docs/org/notes.org"
         org-directory "/Users/mark/SyncServices/Dropbox/Docs/org"
-        org-support-shift-select t
+        org-support-shift-select 'always
         ;;          org-use-speed-commands t
         )
   :hook
@@ -562,12 +562,13 @@ Make sure that =ID= is always unique, portable, and easy to maintain by
 - Use a UUID
 
   Note that this is setr once so if you don't  shut down emacs it is not much use
-#+NAME: org_gcr_2017-05-12_mara_8F2F5DAE-40B9-490D-8523-BABCAA913A71
+#+NAME: org_mark_mini12.local_20201212T213459.563695
 #+BEGIN_SRC emacs-lisp
-(setq org-id-prefix (concat "org_" ;; (user-real-login-name) "_"
-                            (help/get-timestamp-no-colons) ;; "_" (system-name)
+(setq org-id-prefix (concat "org_" (user-real-login-name)
+                            ;; "_" (help/get-timestamp-no-colons)
+                            "_" (system-name)
                             ))
-(setq org-id-method 'uuid)
+(setq org-id-method 'ts)
 #+END_SRC
 
 **** Tangling

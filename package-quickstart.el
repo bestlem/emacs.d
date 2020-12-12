@@ -6097,92 +6097,10 @@ Interactively, with prefix argument, move to the previous position.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-vivendi-theme-20201114.729/modus-vivendi-theme-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20201212.724/modus-themes-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-vivendi-theme-20201114.729/modus-vivendi-theme-autoloads.el") (car load-path))))
-
-
-
-(defvar modus-vivendi-theme-override-colors-alist 'nil "\
-Association list of palette color overrides.
-Values can be mapped to variables, using the same syntax as the
-one present in `modus-vivendi-theme-default-colors-alist'.
-
-This is only meant for do-it-yourself usage, with the
-understanding that the user is responsible for the resulting
-contrast ratio between new and existing colors.")
-
-(custom-autoload 'modus-vivendi-theme-override-colors-alist "modus-vivendi-theme" t)
-
-(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "modus-vivendi-theme" '("modus-vivendi")))
-
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20201209.1407/modus-themes-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20201209.1407/modus-themes-autoloads.el") (car load-path))))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/modus-themes-20201209.1407/modus-operandi-theme" '("modus-operandi")))
-
-
-
-(autoload 'modus-themes-contrast "../../../../../src/env/emacs.d/elpa/27.1/elpa/modus-themes-20201209.1407/modus-themes" "\
-Measure WCAG contrast ratio between C1 and C2.
-C1 and C2 are color values written in hexadecimal RGB.
-
-\(fn C1 C2)" nil nil)
-
-(autoload 'modus-themes-color "../../../../../src/env/emacs.d/elpa/27.1/elpa/modus-themes-20201209.1407/modus-themes" "\
-Return color value for KEY.
-The KEY is the car of each cons cell in the alists
-`modus-themes-colors-operandi', `modus-themes-colors-vivendi'.
-
-\(fn KEY)" nil nil)
-
-(autoload 'modus-themes-color-alts "../../../../../src/env/emacs.d/elpa/27.1/elpa/modus-themes-20201209.1407/modus-themes" "\
-Return color value for KEY-LIGHT and KEY-DARK.
-Both arguments must reference the car of a cons cell in
-`modus-themes-colors-operandi', `modus-themes-colors-vivendi'.
-
-\(fn KEY-LIGHT KEY-DARK)" nil nil)
-
-(autoload 'modus-themes-load-operandi "../../../../../src/env/emacs.d/elpa/27.1/elpa/modus-themes-20201209.1407/modus-themes" "\
-Load `modus-operandi' and disable `modus-vivendi'.
-Also run `modus-themes-after-load-theme-hook'." nil nil)
-
-(autoload 'modus-themes-load-vivendi "../../../../../src/env/emacs.d/elpa/27.1/elpa/modus-themes-20201209.1407/modus-themes" "\
-Load `modus-vivendi' and disable `modus-operandi'.
-Also run `modus-themes-after-load-theme-hook'." nil nil)
-
-(autoload 'modus-themes-toggle "../../../../../src/env/emacs.d/elpa/27.1/elpa/modus-themes-20201209.1407/modus-themes" "\
-Toggle between `modus-operandi' and `modus-vivendi' themes.
-Also runs `modus-themes-after-load-theme-hook' by virtue of
-calling the internal `modus-themes-load-operandi' and
-`modus-themes-load-vivendi' functions." t nil)
-
-(when (and (boundp 'custom-theme-load-path) load-file-name) (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/modus-themes-20201209.1407/modus-themes" '("modus-themes-")))
-
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/modus-themes-20201209.1407/modus-themes-core" '("modus-themes-core-theme")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/modus-themes-20201209.1407/modus-vivendi-theme" '("modus-vivendi")))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20201212.724/modus-themes-autoloads.el") (car load-path))))
 
 
 
@@ -6237,34 +6155,6 @@ calling the internal `modus-themes-load-operandi' and
 
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "modus-vivendi-theme" '("modus-vivendi")))
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-operandi-theme-20201114.729/modus-operandi-theme-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-operandi-theme-20201114.729/modus-operandi-theme-autoloads.el") (car load-path))))
-
-
-
-(defvar modus-operandi-theme-override-colors-alist 'nil "\
-Association list of palette color overrides.
-Values can be mapped to variables, using the same syntax as the
-one present in `modus-operandi-theme-default-colors-alist'.
-
-This is only meant for do-it-yourself usage, with the
-understanding that the user is responsible for the resulting
-contrast ratio between new and existing colors.")
-
-(custom-autoload 'modus-operandi-theme-override-colors-alist "modus-operandi-theme" t)
-
-(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "modus-operandi-theme" '("modus-operandi")))
-
 
 
 
@@ -11573,14 +11463,14 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
 )
 (setq package-activated-list
       (append
-       '(zoutline yasnippet yaml-mode xr xonsh-mode ws-butler posframe which-key which-key-posframe validate bind-key use-package use-package-hydra key-chord bind-chord use-package-chords epl pkg-info projectile dash s f avy ace-window pfuture lv hydra ht treemacs treemacs-projectile treemacs-icons-dired toc-org ivy swiper srefactor spinner sml-mode smartparens rainbow-delimiters pos-tip racket-mode pythonic dash-functional pretty-hydra prescient popup persistent-scratch paren-face paredit paradox outorg outshine org-bullets org esxml nov mwim modus-vivendi-theme modus-themes modus-operandi-theme memoize makey major-mode-hydra macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat gcmh flyspell-correct flyspell-correct-popup flycheck flycheck-yamllint fish-mode expand-region eval-in-repl eros elmacro elisp-format dtrt-indent discover-my-major diminish deadgrep conda company company-prescient company-posframe comment-dwim-2 color-theme-modern color-identifiers-mode cmake-mode cask-mode beacon async amx all-the-icons all-the-icons-dired aggressive-indent)
+       '(zoutline yasnippet yaml-mode xr xonsh-mode ws-butler posframe which-key which-key-posframe validate bind-key use-package use-package-hydra key-chord bind-chord use-package-chords epl pkg-info projectile dash s f avy ace-window pfuture lv hydra ht treemacs treemacs-projectile treemacs-icons-dired toc-org ivy swiper srefactor spinner sml-mode smartparens rainbow-delimiters pos-tip racket-mode pythonic dash-functional pretty-hydra prescient popup persistent-scratch paren-face paredit paradox outorg outshine org-bullets org esxml nov mwim modus-themes memoize makey major-mode-hydra macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat gcmh flyspell-correct flyspell-correct-popup flycheck flycheck-yamllint fish-mode expand-region eval-in-repl eros elmacro elisp-format dtrt-indent discover-my-major diminish deadgrep conda company company-prescient company-posframe comment-dwim-2 color-theme-modern color-identifiers-mode cmake-mode cask-mode beacon async amx all-the-icons all-the-icons-dired aggressive-indent)
        package-activated-list))
 (progn
   (require 'info)
   (info-initialize)
   (setq Info-directory-list
         (append
-         '("/Users/mark/.emacs.d/elpa/27.1/elpa/modus-operandi-theme-20201114.729" "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20201209.1407" "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-vivendi-theme-20201114.729" "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942" "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20201110.1021" "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20200803.1520" "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20201110.2133")
+         '("/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20201212.724" "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20201209.1942" "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20201110.1021" "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20200803.1520" "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20201110.2133")
          Info-directory-list)))
 
 ;; Local Variables:

@@ -23,10 +23,12 @@ So put the choice here - comment out one of last two
       )
   (progn
     (setq custom-enabled-themes nil)
-    (setq custom-safe-themes
-          '("d4a89e8d54783f8d45c2c68cc6641ea2427f563405fde1f083191b10746fe59f" default))
+    ;; (setq custom-safe-themes
+    ;;       '("d4a89e8d54783f8d45c2c68cc6641ea2427f563405fde1f083191b10746fe59f" default))
+
     ;;<<theme-25>>
     <<theme-modus>>
+
     ))
 #+end_src
 
@@ -134,43 +136,47 @@ vivendi is dark
 #+NAME: org_2020-12-06+00-00_0A5F5673-C8F4-4FCE-869B-205BC1B9DAF5
 #+begin_src emacs-lisp :tangle no :noweb-ref theme-modus
 (use-package modus-themes
-  :ensure t                      ; As modus is in emacs always need some ensure
-  :init
-  ;; Add all your customizations prior to loading the themes
-  (setq modus-themes-slanted-constructs t
-        modus-themes-bold-constructs nil)
-  ;;  This is lists of lists so set here not custom
-  (setq modus-themes-headings
-        '((t . rainbow-section)))
+    :ensure t                    ; As modus is in emacs always need some ensure
+    ;; :mwb-load-path "fork/modus-themes"
+    :demand
+    :init
+    ;; Add all your customizations prior to loading the themes
+    (setq modus-themes-slanted-constructs t
+          modus-themes-bold-constructs nil)
+    ;;  This is lists of lists so set here not custom
+    (setq modus-themes-headings
+          '((t . rainbow-section)))
 
-  (setq modus-themes-region 'nil)       ; the default
+    (setq modus-themes-region 'nil)     ; the default
 
-  :config
-  ;; Load the theme of your choice
-  (modus-themes-load-vivendi)
-  ;; ;; OR
-  ;; (load-theme 'modus-operandi t)
+    ;; Enable the theme files only as local
+    ;; (use-package modus-operandi-theme)
+    ;; (use-package modus-vivendi-theme)
 
-  ;; Match my earlier code as this is called by a hydra
-  (defun quick-switch-themes* ()
-    (my-demo-modus-themes-toggle))
+    :config
+    ;; Load the theme of your choice
+    (modus-themes-load-vivendi)
 
-  ;;  Allow different set for different theme https://protesilaos.com/modus-themes/#h:a897b302-8e10-4a26-beab-3caaee1e1193
-  (defun my-demo-modus-operandi ()
-    (interactive)
-    (setq modus-themes-bold-constructs t) ; ENABLE bold
-    (modus-themes-load-operandi))
+    ;; Match my earlier code as this is called by a hydra
+    (defun quick-switch-themes* ()
+      (my-demo-modus-themes-toggle))
 
-  (defun my-demo-modus-vivendi ()
-    (interactive)
-    (setq modus-themes-bold-constructs nil) ; DISABLE bold
-    (modus-themes-load-vivendi))
+    ;;  Allow different set for different theme https://protesilaos.com/modus-themes/#h:a897b302-8e10-4a26-beab-3caaee1e1193
+    (defun my-demo-modus-operandi ()
+      (interactive)
+      (setq modus-themes-bold-constructs t) ; ENABLE bold
+      (modus-themes-load-operandi))
 
-  (defun my-demo-modus-themes-toggle ()
-    (if (eq (car custom-enabled-themes) 'modus-operandi)
-        (my-demo-modus-vivendi)
-      (my-demo-modus-operandi)))
-  )
+    (defun my-demo-modus-vivendi ()
+      (interactive)
+      (setq modus-themes-bold-constructs nil) ; DISABLE bold
+      (modus-themes-load-vivendi))
+
+    (defun my-demo-modus-themes-toggle ()
+      (if (eq (car custom-enabled-themes) 'modus-operandi)
+          (my-demo-modus-vivendi)
+        (my-demo-modus-operandi)))
+    )
 #+end_src
 * Fonts
 :PROPERTIES:

@@ -23,7 +23,7 @@ So put the choice here - comment out one of last two
       )
   (progn
     (setq custom-enabled-themes nil)
-    ;; (setq custom-safe-themes
+     (setq custom-safe-themes t) ; nochecks
     ;;       '("d4a89e8d54783f8d45c2c68cc6641ea2427f563405fde1f083191b10746fe59f" default))
 
     ;;<<theme-25>>

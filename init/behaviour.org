@@ -138,19 +138,20 @@ On reading more this is only if passed to delete functions so might not be too m
  #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_F7D6DF89-CC2E-4307-991E-2534CFA83732
  #+begin_src emacs-lisp
 (use-package savehist
-  :unless *aquamacs*
-  :config
-  (setq savehist-additional-variables
-		'(kill-ring
-		  search-ring
-		  regexp-search-ring
-		  last-kbd-macro
-		  kmacro-ring
-		  shell-command-history
-		  Info-history-list
-		  register-alist))
-  (setq savehist-file (locate-user-emacs-file "savehist.el"))
-  (savehist-mode 1))
+    :unless *aquamacs*
+    :config
+    (setq savehist-additional-variables
+		  '(kill-ring
+		    search-ring
+		    regexp-search-ring
+		    last-kbd-macro
+		    kmacro-ring
+		    shell-command-history
+            bookmark-alist
+		    Info-history-list
+		    register-alist))
+    (setq savehist-file (locate-user-emacs-file "savehist.el"))
+    (savehist-mode 1))
  #+end_src
 ** Registers
 :PROPERTIES:

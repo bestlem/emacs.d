@@ -469,7 +469,8 @@ But hack an load it directly
             ;; ("unknown"
             ;;  ("awesome-" "highlight-tails" "ansi-color" "xterm-color" "highlight-tail"))
             ("aquamacs"
-             ("aquamacs-" "tabbar-" "auto-word-wrap-default-function" ))
+             ("aquamacs-" "tabbar-" "auto-word-wrap-default-function"
+              "global-hi-line-mode" "toolbar-mode" "visual-line-mode"))
             ("modus"
              ("modus-" "ibuffer-title-face" "ibuffer-marked-face" "ibuffer-deletion-face"))
             ;; ("completion"

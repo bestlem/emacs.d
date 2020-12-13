@@ -13,5 +13,5 @@
  '(modus-themes-prompts 'intense)
  '(modus-themes-scale-headings t)
  '(modus-themes-slanted-constructs t)
- '(modus-themes-syntax 'alt-syntax-yellow-comments)
+ '(modus-themes-syntax 'yellow-comments)
  '(modus-themes-variable-pitch-headings t))

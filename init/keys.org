@@ -171,9 +171,11 @@ So lets try to patch iso-transl. I copied the Aquamacs one and then merged with 
     :ensure t
     :defer 20
     :config
-    (setq which-key-sort-order 'which-key-key-order-alpha
-          which-key-side-window-max-width 0.33
-          which-key-idle-delay 1)
+    (setq ;; which-key-sort-order 'which-key-key-order-alpha
+     which-key-sort-order 'which-key-description-order
+     which-key-side-window-max-width 0.33
+     which-key-idle-delay 1)
+    ;; (setq which-key-popup-type 'frame) ; fails to f19-f19 otherwise interesting
     (which-key-mode)
     (if (>= emacs-major-version 27)
         (use-package which-key-posframe
@@ -498,11 +500,13 @@ I think start with Aquamacs copy using non Aquamacs functions and then try to pu
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:A41389A4-CD6E-44AD-A79A-C170F7936D9D
 :END:
 
-** Leader keys
+** TODO Leader keys
 :PROPERTIES:
 :ID:       org_2020-12-08+00-00:8916E17A-D941-4F9E-B5B6-2F32476DF3C0
 :END:
 Replace Hyper key combination with a leader key - eventually this will be caps lock
+
+As this has to be a leader map so no hydra H-s is the issue as in some org-mode maps then mighty be better to use which-key-add-keymap-based-replacements to set pretty names for which key
 
 Odd things needed
 #+NAME: org_2020-12-05+00-00_94E1455C-7F91-48B1-BF7B-EA3753E7BDCB

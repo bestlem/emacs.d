@@ -41,33 +41,33 @@ So put the choice here - comment out one of last two
 (require 'color-theme)
 (eval-after-load "color-theme"
   '(progn
-     (color-theme-initialize)
-     (color-theme-jsc-dark)
-     (set-face-attribute 'font-lock-keyword-face nil  :background 'unspecified)
-     (custom-set-faces
-      '(org-block
-        ((t
-          (:inherit shadow :extend t :background "midnight blue" :foreground "white" :family "Fira Code"))))
-      '(org-block-begin-line
-        ((t
-          (:inherit org-meta-line :foreground "cyan" :weight normal))))
-      '(org-block-end-line
-        ((t
-          (:inherit org-block-begin-line :foreground "cyan"))))
-      )
-     ;; (color-theme-high-contrast)
-     ;; (custom-set-faces
-     ;;  '(org-block
-     ;;    ((t
-     ;;      (:inherit shadow :extend t :background "lemon chiffon" :foreground "black" :family "Fira Code"))))
-     ;;  '(org-block-begin-line
-     ;;    ((t
-     ;;      (:inherit org-meta-line :foreground "blue" :weight normal))))
-     ;;  '(org-block-end-line
-     ;;    ((t
-     ;;      (:inherit org-block-begin-line :foreground "blue"))))
-     ;;  )
-     ))
+    (color-theme-initialize)
+    (color-theme-jsc-dark)
+    (set-face-attribute 'font-lock-keyword-face nil  :background 'unspecified)
+    (custom-set-faces
+     '(org-block
+       ((t
+         (:inherit shadow :extend t :background "midnight blue" :foreground "white" :family "Fira Code"))))
+     '(org-block-begin-line
+       ((t
+         (:inherit org-meta-line :foreground "cyan" :weight normal))))
+     '(org-block-end-line
+       ((t
+         (:inherit org-block-begin-line :foreground "cyan"))))
+     )
+    ;; (color-theme-high-contrast)
+    ;; (custom-set-faces
+    ;;  '(org-block
+    ;;    ((t
+    ;;      (:inherit shadow :extend t :background "lemon chiffon" :foreground "black" :family "Fira Code"))))
+    ;;  '(org-block-begin-line
+    ;;    ((t
+    ;;      (:inherit org-meta-line :foreground "blue" :weight normal))))
+    ;;  '(org-block-end-line
+    ;;    ((t
+    ;;      (:inherit org-block-begin-line :foreground "blue"))))
+    ;;  )
+    ))
 
 #+end_src
 

@@ -4,180 +4,6 @@
 
 This covers what emacs looks like and how windows/frames/menus behave
 
-* Colour theme
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:CD3D232B-6BDA-4CBC-BADF-BCEA9B8EBEC4
-:END:
-Aquamacs is stuck with old color themes not the cusomisable ones.
-
-** Control my way of choosing
-:PROPERTIES:
-:ID:       org_2020-12-06+00-00:326043C3-12B2-4F79-988D-93708CA4B055
-:END:
-So put the choice here - comment out one of last two
-#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_31D76745-657A-4FFE-A6AB-1077D1192D80
-#+begin_src emacs-lisp
-(if (< emacs-major-version 26)
-    (progn
-      <<theme-old>>
-      )
-  (progn
-    (setq custom-enabled-themes nil)
-     (setq custom-safe-themes t) ; nochecks
-    ;;       '("d4a89e8d54783f8d45c2c68cc6641ea2427f563405fde1f083191b10746fe59f" default))
-
-    ;;<<theme-25>>
-    <<theme-modus>>
-
-    ))
-#+end_src
-
-** Aquamacs Theme subpart
-:PROPERTIES:
-:ID:       org_mark_2020-10-11T17-50-37+01-00_mini12.local:1BFA8790-4910-4422-A0B6-0425767328AD
-:END:
-#+name: theme-old
-#+begin_src emacs-lisp :tangle no
-(require 'color-theme)
-(eval-after-load "color-theme"
-  '(progn
-    (color-theme-initialize)
-    (color-theme-jsc-dark)
-    (set-face-attribute 'font-lock-keyword-face nil  :background 'unspecified)
-    (custom-set-faces
-     '(org-block
-       ((t
-         (:inherit shadow :extend t :background "midnight blue" :foreground "white" :family "Fira Code"))))
-     '(org-block-begin-line
-       ((t
-         (:inherit org-meta-line :foreground "cyan" :weight normal))))
-     '(org-block-end-line
-       ((t
-         (:inherit org-block-begin-line :foreground "cyan"))))
-     )
-    ;; (color-theme-high-contrast)
-    ;; (custom-set-faces
-    ;;  '(org-block
-    ;;    ((t
-    ;;      (:inherit shadow :extend t :background "lemon chiffon" :foreground "black" :family "Fira Code"))))
-    ;;  '(org-block-begin-line
-    ;;    ((t
-    ;;      (:inherit org-meta-line :foreground "blue" :weight normal))))
-    ;;  '(org-block-end-line
-    ;;    ((t
-    ;;      (:inherit org-block-begin-line :foreground "blue"))))
-    ;;  )
-    ))
-
-#+end_src
-
-** New themes subpart
-:PROPERTIES:
-:ID:       org_2020-12-06+00-00:2DE8AEF4-0339-4B2E-885A-627140CF1894
-:END:
-
-The new way seems to be the only supported one but one theme can mess up another e.g. changing background incompletely. SO lets have choice of general and also do the documented modus only way
-*** General
-:PROPERTIES:
-:ID:       org_2020-12-06+00-00:1E62F0F5-3E08-4D41-906B-B6807657A157
-:END:
-
-It turns out Emacs supports multiple themes being active at the same time, which I’m sure is convenient sometimes but becomes a right nuisance when attempting to switch themes IMO. Add a utility function to disable all currently enabled themes first.
-
-#+NAME: org_mark_2020-10-13T18-22-15+01-00_mini12.local_76567F98-E4B9-425F-8683-FF8850619A08
-#+begin_src emacs-lisp :tangle no :noweb-ref theme-25
-(defvar quick-switch-themes
-  (let ((themes-list (list 'modus-vivendi
-                           'mwbtheme-leuven
-                           'high-contrast
-                           'modus-operandi)))
-    (nconc themes-list themes-list))
-  "A circular list of themes to keep switching between.
-Make sure that the currently enabled theme is at the head of this
-list always.
-
-A nil value implies no custom theme should be enabled.")
-
-(defun quick-switch-themes* ()
-  "Switch between to commonly used faces in Emacs.
-One for writing code and the other for reading articles."
-  (interactive)
-  (if-let* ((next-theme (cadr quick-switch-themes)))
-      (progn (when-let* ((current-theme (car quick-switch-themes)))
-               (disable-theme (car quick-switch-themes)))
-             (if (custom-theme-p next-theme)
-                 (enable-theme next-theme)
-               (load-theme next-theme t t))
-             (message "Loaded theme: %s" next-theme))
-
-    )
-  (setq quick-switch-themes (cdr quick-switch-themes)))
-
-;; From emacs or local
-;; (load-theme 'leuven t t)
-(load-theme 'mwbtheme-leuven t t)
-
-(use-package color-theme-modern
-  :ensure t
-  :config
-  (load-theme 'high-contrast t t))
-
-(use-package modus-themes
-  :config
-  (load-theme 'modus-operandi t t)
-  (load-theme 'modus-vivendi t t))
-(enable-theme (car quick-switch-themes)) ; first in list
-#+end_src
-*** Modus setup
-:PROPERTIES:
-:ID:       org_2020-12-06+00-00:031AC435-9F4F-46D3-931F-5A79F7EF033F
-:END:
-vivendi is dark
-#+NAME: org_2020-12-06+00-00_0A5F5673-C8F4-4FCE-869B-205BC1B9DAF5
-#+begin_src emacs-lisp :tangle no :noweb-ref theme-modus
-(use-package modus-themes
-    :ensure t                    ; As modus is in emacs always need some ensure
-    ;; :mwb-load-path "fork/modus-themes"
-    :demand
-    :init
-    ;; Add all your customizations prior to loading the themes
-    (setq modus-themes-slanted-constructs t
-          modus-themes-bold-constructs nil)
-    ;;  This is lists of lists so set here not custom
-    (setq modus-themes-headings
-          '((t . rainbow-section)))
-
-    (setq modus-themes-region 'nil)     ; the default
-
-    ;; Enable the theme files only as local
-    ;; (use-package modus-operandi-theme)
-    ;; (use-package modus-vivendi-theme)
-
-    :config
-    ;; Load the theme of your choice
-    (modus-themes-load-vivendi)
-
-    ;; Match my earlier code as this is called by a hydra
-    (defun quick-switch-themes* ()
-      (my-demo-modus-themes-toggle))
-
-    ;;  Allow different set for different theme https://protesilaos.com/modus-themes/#h:a897b302-8e10-4a26-beab-3caaee1e1193
-    (defun my-demo-modus-operandi ()
-      (interactive)
-      (setq modus-themes-bold-constructs t) ; ENABLE bold
-      (modus-themes-load-operandi))
-
-    (defun my-demo-modus-vivendi ()
-      (interactive)
-      (setq modus-themes-bold-constructs nil) ; DISABLE bold
-      (modus-themes-load-vivendi))
-
-    (defun my-demo-modus-themes-toggle ()
-      (if (eq (car custom-enabled-themes) 'modus-operandi)
-          (my-demo-modus-vivendi)
-        (my-demo-modus-operandi)))
-    )
-#+end_src
 * Fonts
 :PROPERTIES:
 :ID:       org_mark_2020-02-10T11-53-11+00-00_mini12:0A89487A-9396-43C4-9F45-0B2DBEBD41FE
@@ -532,4 +358,179 @@ This is hardcoded. See all.org and desktop for other ways. Aquamacs just restore
 (when (and window-system (not *aquamacs*))
   (set-frame-size (selected-frame) 230 50) ; in characters
   (set-frame-position (selected-frame) 132 132))
+#+end_src
+
+** Colour theme
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:CD3D232B-6BDA-4CBC-BADF-BCEA9B8EBEC4
+:END:
+Aquamacs is stuck with old color themes not the cusomisable ones.
+
+*** Control my way of choosing
+:PROPERTIES:
+:ID:       org_2020-12-06+00-00:326043C3-12B2-4F79-988D-93708CA4B055
+:END:
+So put the choice here - comment out one of last two
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_31D76745-657A-4FFE-A6AB-1077D1192D80
+#+begin_src emacs-lisp
+(if (< emacs-major-version 26)
+    (progn
+      <<theme-old>>
+      )
+  (progn
+    (setq custom-enabled-themes nil)
+     (setq custom-safe-themes t) ; nochecks
+    ;;       '("d4a89e8d54783f8d45c2c68cc6641ea2427f563405fde1f083191b10746fe59f" default))
+
+    ;;<<theme-25>>
+    <<theme-modus>>
+
+    ))
+#+end_src
+
+*** Aquamacs Theme subpart
+:PROPERTIES:
+:ID:       org_mark_2020-10-11T17-50-37+01-00_mini12.local:1BFA8790-4910-4422-A0B6-0425767328AD
+:END:
+#+name: theme-old
+#+begin_src emacs-lisp :tangle no
+(require 'color-theme)
+(eval-after-load "color-theme"
+  '(progn
+    (color-theme-initialize)
+    (color-theme-jsc-dark)
+    (set-face-attribute 'font-lock-keyword-face nil  :background 'unspecified)
+    (custom-set-faces
+     '(org-block
+       ((t
+         (:inherit shadow :extend t :background "midnight blue" :foreground "white" :family "Fira Code"))))
+     '(org-block-begin-line
+       ((t
+         (:inherit org-meta-line :foreground "cyan" :weight normal))))
+     '(org-block-end-line
+       ((t
+         (:inherit org-block-begin-line :foreground "cyan"))))
+     )
+    ;; (color-theme-high-contrast)
+    ;; (custom-set-faces
+    ;;  '(org-block
+    ;;    ((t
+    ;;      (:inherit shadow :extend t :background "lemon chiffon" :foreground "black" :family "Fira Code"))))
+    ;;  '(org-block-begin-line
+    ;;    ((t
+    ;;      (:inherit org-meta-line :foreground "blue" :weight normal))))
+    ;;  '(org-block-end-line
+    ;;    ((t
+    ;;      (:inherit org-block-begin-line :foreground "blue"))))
+    ;;  )
+    ))
+
+#+end_src
+
+*** New themes subpart
+:PROPERTIES:
+:ID:       org_2020-12-06+00-00:2DE8AEF4-0339-4B2E-885A-627140CF1894
+:END:
+
+The new way seems to be the only supported one but one theme can mess up another e.g. changing background incompletely. SO lets have choice of general and also do the documented modus only way
+**** General
+:PROPERTIES:
+:ID:       org_2020-12-06+00-00:1E62F0F5-3E08-4D41-906B-B6807657A157
+:END:
+
+It turns out Emacs supports multiple themes being active at the same time, which I’m sure is convenient sometimes but becomes a right nuisance when attempting to switch themes IMO. Add a utility function to disable all currently enabled themes first.
+
+#+NAME: org_mark_2020-10-13T18-22-15+01-00_mini12.local_76567F98-E4B9-425F-8683-FF8850619A08
+#+begin_src emacs-lisp :tangle no :noweb-ref theme-25
+(defvar quick-switch-themes
+  (let ((themes-list (list 'modus-vivendi
+                           'mwbtheme-leuven
+                           'high-contrast
+                           'modus-operandi)))
+    (nconc themes-list themes-list))
+  "A circular list of themes to keep switching between.
+Make sure that the currently enabled theme is at the head of this
+list always.
+
+A nil value implies no custom theme should be enabled.")
+
+(defun quick-switch-themes* ()
+  "Switch between to commonly used faces in Emacs.
+One for writing code and the other for reading articles."
+  (interactive)
+  (if-let* ((next-theme (cadr quick-switch-themes)))
+      (progn (when-let* ((current-theme (car quick-switch-themes)))
+               (disable-theme (car quick-switch-themes)))
+             (if (custom-theme-p next-theme)
+                 (enable-theme next-theme)
+               (load-theme next-theme t t))
+             (message "Loaded theme: %s" next-theme))
+
+    )
+  (setq quick-switch-themes (cdr quick-switch-themes)))
+
+;; From emacs or local
+;; (load-theme 'leuven t t)
+(load-theme 'mwbtheme-leuven t t)
+
+(use-package color-theme-modern
+  :ensure t
+  :config
+  (load-theme 'high-contrast t t))
+
+(use-package modus-themes
+  :config
+  (load-theme 'modus-operandi t t)
+  (load-theme 'modus-vivendi t t))
+(enable-theme (car quick-switch-themes)) ; first in list
+#+end_src
+**** Modus setup
+:PROPERTIES:
+:ID:       org_2020-12-06+00-00:031AC435-9F4F-46D3-931F-5A79F7EF033F
+:END:
+vivendi is dark
+#+NAME: org_2020-12-06+00-00_0A5F5673-C8F4-4FCE-869B-205BC1B9DAF5
+#+begin_src emacs-lisp :tangle no :noweb-ref theme-modus
+(use-package modus-themes
+    :ensure t                    ; As modus is in emacs always need some ensure
+    ;; :mwb-load-path "fork/modus-themes"
+    :demand
+    :init
+    ;; Add all your customizations prior to loading the themes
+    (setq modus-themes-slanted-constructs t
+          modus-themes-bold-constructs nil)
+    ;;  This is lists of lists so set here not custom
+    (setq modus-themes-headings
+          '((t . rainbow-section)))
+
+    (setq modus-themes-region 'nil)     ; the default
+
+    ;; Enable the theme files only as local
+    ;; (use-package modus-operandi-theme)
+    ;; (use-package modus-vivendi-theme)
+
+    :config
+    ;; Load the theme of your choice
+    (modus-themes-load-vivendi)
+
+    ;; Match my earlier code as this is called by a hydra
+    (defun quick-switch-themes* ()
+      (my-demo-modus-themes-toggle))
+
+    ;;  Allow different set for different theme https://protesilaos.com/modus-themes/#h:a897b302-8e10-4a26-beab-3caaee1e1193
+    (defun my-demo-modus-operandi ()
+      (interactive)
+      (setq modus-themes-bold-constructs t) ; ENABLE bold
+      (modus-themes-load-operandi))
+
+    (defun my-demo-modus-vivendi ()
+      (interactive)
+      (setq modus-themes-bold-constructs nil) ; DISABLE bold
+      (modus-themes-load-vivendi))
+
+    (defun my-demo-modus-themes-toggle ()
+      (if (eq (car custom-enabled-themes) 'modus-operandi)
+          (my-demo-modus-vivendi)
+        (my-demo-modus-operandi)))
+    )
 #+end_src

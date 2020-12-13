@@ -7,6 +7,7 @@
 - [[#global-key-bindings-musings][Global key bindings musings]]
   - [[#how-to-bind][How to bind]]
   - [[#keyboard-thoughts][Keyboard Thoughts]]
+  - [[#mac-modifier-key-bindings][Mac modifier key Bindings]]
 - [[#key-based-code][Key based code]]
   - [[#iso-transl][iso-transl]]
   - [[#which-key][Which Key]]
@@ -129,6 +130,32 @@ And as per Yah Lee it might be better to not use chords - ie two key presses e.g
 :ID:       org_2020-12-08+00-00:FAFCEE81-16FC-42C8-AC69-6DED2AE1C468
 :END:
 This seems bound to <help> - shades of NeXT
+
+
+** Mac modifier key Bindings
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201213T170849.967233
+:END:
+We have fn available so have it as hyper and then use Karabiner  (try iCue later) to map Caps Lock and Window key to hyper. Super is used sometimes so I think is confusing and as noted sequence of keys (emacs key-chord and hydra) is better.
+I don't use the right hand modifier keys so not set separately.
+Things got changed on one run so set here and remove from customisation
+
+#+NAME: org_mark_mini12.local_20201213T170849.929562
+#+begin_src emacs-lisp
+(if *aquamacs*
+    (setq ns-function-modifier 'hyper
+          ns-alternate-modifier 'meta
+          ns-right-alternate-modifier nil
+          ns-right-command-modifier 'super
+          )
+  (setq mac-function-modifier 'hyper
+        mac-option-modifier 'meta
+        mac-command-modifier 'alt
+        mac-right-option-modifier nil
+        mac-right-command-modifier 'super
+        )
+  )
+#+end_src
 
 * Key based code
 :PROPERTIES:
@@ -494,7 +521,18 @@ mouse3+ has a more complex setup including if selected a region or not see help:
 
 I think start with Aquamacs copy using non Aquamacs functions and then try to put flyspell on.
 
-
+*** Mouse 3
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201213T170631.398434
+:END:
+Try with an enhanced one but test to mouse-4 which might have issues with treemacs but I think the order is OK
+#+NAME: org_mark_mini12.local_20201213T170631.361457
+#+begin_src emacs-lisp
+(unless *aquamacs*
+  (use-package "mouse3"
+    :mwb-load-path "site-lisp/Emacs_wiki"
+    :bind ("<mouse-4>" . 'mouse3-action-wo-save-then-kill)))
+#+end_src
 * Hydra
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:A41389A4-CD6E-44AD-A79A-C170F7936D9D

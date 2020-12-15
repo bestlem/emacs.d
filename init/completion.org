@@ -17,93 +17,94 @@ Add some from jweigley
  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_0A6134EA-DC55-4651-ACC8-B1478B5A38F3
  #+begin_src emacs-lisp
 (use-package company
-  :ensure t
-  :defer 5
-  :diminish
-  :commands (company-mode company-indent-or-complete-common company-complete)
+    :ensure t
+    :defer 5
+    :diminish
+    :commands (company-mode company-indent-or-complete-common company-complete)
 
-  :config
-  (setq company-dabbrev-ignore-case t
-        company-dabbrev-ignore-case 'keep-prefix
-        ;; Dabbrev all code buffers together.
-        company-dabbrev-code-other-buffers t
-        ;; Only search same major mode buffers.
-        company-dabbrev-other-buffers t
-        ;; Don't take too much time searching for matches.
-        company-dabbrev-code-time-limit 0.0005
-        company-dabbrev-time-limit 0.0005)
-  (setq company-show-numbers t)
-  (setq company-lighter-base "/"
-        company-tooltip-align-annotations t
-        company-echo-delay 1
-        company-selection-wrap-around t
-        company-idle-delay 0.05;; company-idle-delay 0.05
-        company-tooltip-minimum-width 30
-        company-minimum-prefix-length 1)
-  (global-company-mode t)               ; don't put in after-init hook
+    :config
+    (setq company-dabbrev-ignore-case t
+          company-dabbrev-ignore-case 'keep-prefix
+          ;; Dabbrev all code buffers together.
+          company-dabbrev-code-other-buffers t
+          ;; Only search same major mode buffers.
+          company-dabbrev-other-buffers t
+          ;; Don't take too much time searching for matches.
+          company-dabbrev-code-time-limit 0.0005
+          company-dabbrev-time-limit 0.0005)
+    (setq company-show-numbers t)
+    (setq company-lighter-base "/"
+          company-tooltip-align-annotations t
+          company-echo-delay 1
+          company-selection-wrap-around t
+          company-idle-delay 0.05 ;; company-idle-delay 0.05
+          company-tooltip-minimum-width 30
+          company-minimum-prefix-length 1)
+    (global-company-mode t)  ; don't put in after-init hook
                                         ; as we are deferred
-  ;; (define-key company-mode-map [tab]
-  ;;   '(menu-item "maybe-company-expand" nil
-  ;;               :filter (lambda (&optional _)
-  ;;                         (when (check-expansion)
-  ;;                           #'company-complete-common))))
-  (bind-key "`" 'company-abort company-active-map)
-  (when (>= emacs-major-version 27)
-    (use-package company-posframe :ensure t :diminish :config (company-posframe-mode 1)))
-  (use-package company-prescient :ensure t :diminish :config (company-prescient-mode 1))
+    ;; (define-key company-mode-map [tab]
+    ;;   '(menu-item "maybe-company-expand" nil
+    ;;               :filter (lambda (&optional _)
+    ;;                         (when (check-expansion)
+    ;;                           #'company-complete-common))))
+    (bind-key "<tab>" #'company-indent-or-complete-common)
+    (bind-key "`" 'company-abort company-active-map)
+    (when (>= emacs-major-version 27)
+      (use-package company-posframe :ensure t :diminish :config (company-posframe-mode 1)))
+    (use-package company-prescient :ensure t :diminish :config (company-prescient-mode 1))
 
-  :init
-  ;; jojojames to add a backend with yasnippet in a :with
-  (defun j|company-backend-in-backends (b)
-    "Check if backend B is already in `company-backends'."
-    (if (member b company-backends)
-        t
-      (let ((in-backend nil))
-        (dolist (backend company-backends)
-          (when (and
-                 (consp backend)
-                 (member b backend))
-            (setq in-backend t)))
-        in-backend)))
+    :init
+    ;; jojojames to add a backend with yasnippet in a :with
+    (defun j|company-backend-in-backends (b)
+      "Check if backend B is already in `company-backends'."
+      (if (member b company-backends)
+          t
+        (let ((in-backend nil))
+          (dolist (backend company-backends)
+            (when (and
+                   (consp backend)
+                   (member b backend))
+              (setq in-backend t)))
+          in-backend)))
 
-  (defun j|company-push-backend (backend &optional local append)
-    "Adds backend BACKEND to company mode if it's not already in the list of backends.
+    (defun j|company-push-backend (backend &optional local append)
+      "Adds backend BACKEND to company mode if it's not already in the list of backends.
 IF APPEND, add to end of list."
-    (when local
-      (make-local-variable 'company-backends))
-    (unless (j|company-backend-in-backends backend)
-      (if append
-          (setcdr (last company-backends) (list backend))
-        (push backend company-backends))
-      (j|company-merge-backends)))
+      (when local
+        (make-local-variable 'company-backends))
+      (unless (j|company-backend-in-backends backend)
+        (if append
+            (setcdr (last company-backends) (list backend))
+          (push backend company-backends))
+        (j|company-merge-backends)))
 
-  (defun merge-backend-with-company-backends (backend-to-merge)
-    "Merges a backend with every backend in company-backends.
+    (defun merge-backend-with-company-backends (backend-to-merge)
+      "Merges a backend with every backend in company-backends.
 BACKEND-TO_MERGE will only be merged if it's not already in the current backend.
 
 Merging `company-yasnippet' to `company-capf' will yield
 '\(company-capf :with company-yasnippet\)."
-    (setq company-backends
-          (mapcar (lambda (backend)
-                    (cond
-                     ((and (listp backend)
-                           (member backend-to-merge backend))
-                      backend)
-                     (:else
-                      (append (if (consp backend)
-                                  backend
-                                (list backend))
-                              (if (and (listp backend)
-                                       (member :with backend))
-                                  `(,backend-to-merge)
-                                `(:with ,backend-to-merge))))))
-                  company-backends)))
+      (setq company-backends
+            (mapcar (lambda (backend)
+                      (cond
+                        ((and (listp backend)
+                              (member backend-to-merge backend))
+                         backend)
+                        (:else
+                         (append (if (consp backend)
+                                     backend
+                                   (list backend))
+                                 (if (and (listp backend)
+                                          (member :with backend))
+                                     `(,backend-to-merge)
+                                   `(:with ,backend-to-merge))))))
+                    company-backends)))
 
-  (defun j|company-merge-backends ()
-    "Merge common backends."
-    (interactive)
-    (merge-backend-with-company-backends 'company-yasnippet)
-    (merge-backend-with-company-backends 'company-dabbrev-code)))
+    (defun j|company-merge-backends ()
+      "Merge common backends."
+      (interactive)
+      (merge-backend-with-company-backends 'company-yasnippet)
+      (merge-backend-with-company-backends 'company-dabbrev-code)))
 #+end_src
 
 ** auto-complete

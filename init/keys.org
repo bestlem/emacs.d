@@ -551,7 +551,7 @@ Odd things needed
 #+begin_src emacs-lisp
 (pretty-hydra-define hydra-kl ; short name for which-key
     (global-map "<f19>"
-     :foreign-keys warn
+     ;; :foreign-keys warn
      :title (with-octicon "tools" "Global tools" 1 -0.05)
      :color teal
      :idle 0.5)
@@ -560,7 +560,7 @@ Odd things needed
     ("C" hydra-flycheck/body "Flycheck")
     ("g" hydra-goto/body "Goto")
     ("n" hydra-navigate/body "Navigate")
-    ("P" rojectile/body "projectile")
+    ("P" hydra-projectile/body "projectile")
     ("t" hydra-transpose/body "Transpose")
     ("x" x-hydra-readonly/body "C-X fns")
     ("<f19>" major-mode-hydra "Major mode")
@@ -571,12 +571,16 @@ Odd things needed
     ("m" (mwb-new-frame "*Messages*") "Messages")
     ("w" hydra-jp-window/body "Window Management")
     ("c" (what-cursor-position 'detail) "Character at POS")
+    ("0" delete-window "Delete Window")
+    ("|"  split-window-right "horizontally")
     )
    "Actions"
-   ( ("p" package-quickstart-refresh "refresh quickstart packages")
-     ("q" keyboard-quit-context+ "Quit minibuffer etc")
-     ("S" org-babel-detangle "Detangle")
-     ("[" ptrv/smartparens/body "Smartparens"))
+   (("d" toggle-debug-on-error "debug on error"
+         :toggle (default-value 'debug-on-error))
+    ("p" package-quickstart-refresh "refresh quickstart packages")
+    ("q" keyboard-quit-context+ "Quit minibuffer etc")
+    ("S" org-babel-detangle "Detangle")
+    ("[" ptrv/smartparens/body "Smartparens"))
    "Change Buffers"
    (("b" ivy-switch-buffer "Switch Buffer")
     ("B" counsel-bookmark "Jump to bookmark")

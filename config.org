@@ -234,6 +234,7 @@ Basically use-package and helpers - strictly some of these can be left to later.
 
 ;; Enable use-package
 (eval-when-compile
+  (setq use-package-enable-imenu-support t)
   (require 'use-package)
   (setq bind-key-describe-special-forms t)
   (if init-file-debug

@@ -203,7 +203,6 @@ From  aquamacs-get-custom-file-dotemacs-warning
 Emacs 27 introduces early-init.el to go stuff before the graphics - basically package and some gui suppression
 This is taken from https://github.com/MatthewZMD/.emacs.d/blob/master/early-init.el and https://gitlab.com/protesilaos/dotfiles/blob/master/emacs/.emacs.d/emacs-init.org but many see the same
 
-
 ** TODO Startup
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:B524CE3C-6A8D-49DA-85A5-8504DC43F0D6
@@ -260,8 +259,6 @@ Fiddle with suppressing graphics. I do want some of these
 ;;(push '(vertical-scroll-bars) default-frame-alist)
 (setq tool-bar-mode nil)
 #+end_src
-
-
 ** Elisp code for use in all
 :PROPERTIES:
 :ID:       org_mark_2020-11-13T08-54-14+00-00_mini12.local:5DDEB242-A0B0-4733-BCA1-7C5602A55762
@@ -300,8 +297,6 @@ We need to sort out paths - ideally after init timers etc but we also need them 
    )
  (defconst mwb-user-emacs-directory (mwb-get-directory-of-current-file))
 	  #+end_src
-
-
 *** Where my init code is
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:F550A4FA-B16B-4FD2-B11F-9F7DB4F82859
@@ -511,6 +506,10 @@ This fails for config.org so that needs to be in version control.
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:97D3202A-5B42-411F-9312-331821931E25
 :END:
-	 #+begin_src emacs-lisp
+Also switch between an alternate setup - ideally should be driven from command line but.....
+
+#+NAME: org_mark_mini12.local_20201213T195905.304356
+#+begin_src emacs-lisp
 (mwb-init-load "config" "no-org")
-	 #+end_src
+;; (load (concat (expand-file-name "alt/alt_init" mwb-user-emacs-directory) ".el"))
+#+end_src

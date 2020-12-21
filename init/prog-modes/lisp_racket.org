@@ -6,15 +6,32 @@
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:1C20958B-CC40-4D69-B34D-3F34D5C8699A
 :END:
 Change from lispy to smartparens. The delete-selection issue is too much. I keep typing on a selected region
-** Racket mode
+** Issues
 :PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:5D2738AD-C2C9-4913-8A9A-AE669A142269
+:ID:       org_mark_mini12.local:20201221T122900.930444
 :END:
- Tried hook for racket-unicode-input-method-enable but this conflicks with lispy.
+*** racket-unicode-input-method-enable
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201221T122900.928787
+:END:
+Tried hook for racket-unicode-input-method-enable but this conflicks with lispy.
 
- Got odd behaviour on completion last letter underlined and stuff in echo area, it took me a long time to see it was all greek - it was quail - used for racket-unicode-input-method-enable to allow you to enter Greek letters
-
- Ok I lose the :with of having yasnippet and racket mode completions but get one or the other which is acceptable. In effect yasnippet if not in a form and racket elsewhere. (Strictly racket first then if none yasnippet )
+Got odd behaviour on completion last letter underlined and stuff in echo area, it took me a long time to see it was all greek - it was quail - used for racket-unicode-input-method-enable to allow you to enter Greek letters
+*** TODO Unicode
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201213T235255.178814
+:END:
+The racket-mode version seems to invoke quail which confused me - it mightn stop company but I am not sure
+Also see [[https://github.com/david-christiansen/dr-racket-like-unicode/blob/master/dr-racket-like-unicode.el][this mode]] that can do a completion - also look at abbrev
+*** Completions
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201221T122900.927064
+:END:
+Ok I lose the :with of having yasnippet and racket mode completions but get one or the other which is acceptable. In effect yasnippet if not in a form and racket elsewhere. (Strictly racket first then if none yasnippet )
+** racket mode
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201221T122900.924619
+:END:
 #+NAME: org_mark_mini12.local_20201213T220930.519021
 #+begin_src emacs-lisp
 (use-package racket-mode
@@ -50,14 +67,7 @@ Change from lispy to smartparens. The delete-selection issue is too much. I keep
     (diminish 'racket-smart-open-bracket-mode)
     :hook (racket-mode . my-racket-mode-hook)
     (racket-repl-mode . my-all-racket-mode-hook))
-      #+end_src
-*** TODO Unicode
-:PROPERTIES:
-:ID:       org_mark_mini12.local:20201213T235255.178814
-:END:
-The racket-mode version seems to invoke quail which confused me - it mightn stop company but I am not sure
-Also see [[https://github.com/david-christiansen/dr-racket-like-unicode/blob/master/dr-racket-like-unicode.el][this mode]] that can do a completion - also look at abbrev
-
+    #+end_src
 *** Hydra
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:869AF7A1-ADC9-42C0-A04D-5C9629407813

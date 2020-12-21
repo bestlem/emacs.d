@@ -6,14 +6,12 @@ This is a minimal setup as not doing any real work.
 Look at howardabrams for a more detailed setup.
 Can't choose between elpy and jedi etc.
 
-Now I used python's python mode not the one in emacs. The latter has been improved and so perhaps I could chnage
+Now I used python's python mode not the one in emacs. The latter has been improved and so perhaps I could change
 
 The problem is conda uses pythonic which has a require 'python and so always loads the emacs one.
 And xonsh mode uses python.el as well
 
 So it is a mess
-
-
 
 When really use python then start from elpy or similar. - well maybe not
 
@@ -74,7 +72,6 @@ One in emacs and has things built on it
   (add-hook 'python-mode-hook 'python-hook-mwb)
   (add-hook 'python-mode-hook 'mwb-prog-auto-fill-80)
   )
-  #+END_SRC
 #+end_src
 ** Conda
 :PROPERTIES:
@@ -84,23 +81,29 @@ Might be better in elpy etc as for the pythonic issue.
   #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_D22A3A48-A2D2-493C-B891-0645341FE000
   #+begin_src emacs-lisp
 (use-package conda
-  :ensure t
-  :after (python)
-  :init
-  (setq conda-anaconda-home "~/miniconda3/bin")
-  :config
-  ;; If you want interactive shell support, include:
-  (conda-env-initialize-interactive-shells)
-  ;; If you want eshell support, include:
+    :ensure t
+    :after (python)
+    :init
+    (setq conda-anaconda-home "~/miniconda3/bin")
+    :config
+    ;; If you want interactive shell support, include:
+    (conda-env-initialize-interactive-shells)
+    ;; If you want eshell support, include:
                                         ;(conda-env-initialize-eshell)
-  ;; If you want auto-activation, include:
-  (conda-env-autoactivate-mode t)
-  ;; Activate the project/virtual env you want to use.
-  ;; Via M-x conda-env-activate RET analyticd-pysystemtrade
-  ;; or
-  ;; (conda-env-activate "analyticd-pysystemtrade")
-  ;; (conda-env-activate "base")
-  (setq-default mode-line-format (cons mode-line-format '(:exec conda-env-current-name))))
+
+    ;; In effect no as dirs are not a 1-1 match for envs
+    ;; If you want auto-activation, include:
+    ;; (conda-env-autoactivate-mode t)
+
+    ;; Activate the project/virtual env you want to use.
+    ;; Via M-x conda-env-activate RET analyticd-pysystemtrade
+    ;; or
+    ;; (conda-env-activate "analyticd-pysystemtrade")
+    ;; (conda-env-activate "base")
+
+    ;; we need a setup - e.g. code-snippets
+    (conda-env-activate "base")
+    (setq-default mode-line-format (cons mode-line-format '(:exec conda-env-current-name))))
   #+end_src
 ** TODO Org mode
 :PROPERTIES:

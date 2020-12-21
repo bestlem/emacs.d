@@ -10,43 +10,54 @@ Change from lispy to smartparens. The delete-selection issue is too much. I keep
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:5D2738AD-C2C9-4913-8A9A-AE669A142269
 :END:
-    Tried hook for racket-unicode-input-method-enable but this conflicks with lispy.
-       #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_D3137514-0D9E-4ED0-BFB0-313837334926
-       #+begin_src emacs-lisp
+ Tried hook for racket-unicode-input-method-enable but this conflicks with lispy.
+
+ Got odd behaviour on completion last letter underlined and stuff in echo area, it took me a long time to see it was all greek - it was quail - used for racket-unicode-input-method-enable to allow you to enter Greek letters
+
+ Ok I lose the :with of having yasnippet and racket mode completions but get one or the other which is acceptable. In effect yasnippet if not in a form and racket elsewhere. (Strictly racket first then if none yasnippet )
+#+NAME: org_mark_mini12.local_20201213T220930.519021
+#+begin_src emacs-lisp
 (use-package racket-mode
-  :ensure t
-  :bind (:map racket-mode-map
-              ("<f5>" . racket-test)
-              ("<C-f5>" . racket-run)
-              ("A-<f5>" . racket-mwb-raco-all-tests)
-              ("<f1> <f1>" . racket-describe)
-              ("M-l" . racket-insert-lambda)
+    :ensure t
+    :bind (:map racket-mode-map
+                ("<f5>" . racket-test)
+                ("<C-f5>" . racket-run)
+                ("A-<f5>" . racket-mwb-raco-all-tests)
+                ("<f1> <f1>" . racket-describe)
+                ("M-l" . racket-insert-lambda)
                                         ;("H-A" . hydra-paredit/body)
-              :map racket-repl-mode-map
-              ("<f5>" . racket-run))
-  :init
-  (setq racket-program "/Applications/Racket v7.9/bin/racket"
-        racket-images-inline t)
+                :map racket-repl-mode-map
+                ("<f5>" . racket-run))
+    :init
+    (setq racket-program "/Applications/Racket v7.9/bin/racket"
+          racket-images-inline t)
 
-  ;; From   https://stackoverflow.com/questions/37571164/emacs-company-mode-completion-not-working
-  (defun my-racket-mode-hook ()
-    (my-all-racket-mode-hook)
-    (racket-xp-mode)
-    )
-  (defun my-all-racket-mode-hook ()
-    (set (make-local-variable 'company-backends)
-         '((company-capf :with company-yasnippet)))
-    ;; (company-mode 1)
-    (smartparens-strict-mode 1)
-    (racket-unicode-input-method-enable)
-    (racket-smart-open-bracket-mode))
+    ;; From   https://stackoverflow.com/questions/37571164/emacs-company-mode-completion-not-working
+    (defun my-racket-mode-hook ()
+      (my-all-racket-mode-hook)
+      (racket-xp-mode)
+      )
+    (defun my-all-racket-mode-hook ()
+      (set (make-local-variable 'company-backends)
+           '((company-capf company-yasnippet)))
+      (company-mode 1)
+      (smartparens-strict-mode 1)
+      ;;(racket-unicode-input-method-enable)
+      (racket-smart-open-bracket-mode))
 
-  :config
-  (require 'racket-support)
-  (diminish 'racket-smart-open-bracket-mode)
-  :hook (racket-mode . my-racket-mode-hook)
-  (racket-repl-mode . my-all-racket-mode-hook))
+    :config
+    (require 'racket-support)
+    (diminish 'racket-smart-open-bracket-mode)
+    :hook (racket-mode . my-racket-mode-hook)
+    (racket-repl-mode . my-all-racket-mode-hook))
       #+end_src
+*** TODO Unicode
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201213T235255.178814
+:END:
+The racket-mode version seems to invoke quail which confused me - it mightn stop company but I am not sure
+Also see [[https://github.com/david-christiansen/dr-racket-like-unicode/blob/master/dr-racket-like-unicode.el][this mode]] that can do a completion - also look at abbrev
+
 *** Hydra
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:869AF7A1-ADC9-42C0-A04D-5C9629407813

@@ -117,6 +117,7 @@ It is now for subtree todo refile and links
         org-default-notes-file "~/SyncServices/Dropbox/Docs/org/notes.org"
         org-directory "/Users/mark/SyncServices/Dropbox/Docs/org"
         org-support-shift-select 'always
+        org-catch-invisible-edits 't
         ;;          org-use-speed-commands t
         )
   :hook

@@ -157,10 +157,14 @@ Seen but not used yet [[https://github.com/ScottyB/edebug-x][edebug-x]]
 :ID:       org_mark_2020-10-28T08-11-21+00-00_mini12.local:983EA75B-7D8E-4372-845B-D7CA7ED40D99
 :END:
 [[https://github.com/kaushalmodi/.emacs.d][His init]] but getting errors so try another
-#+NAME: org_mark_2020-10-28T08-11-21+00-00_mini12.local_CF761341-0D79-4D5B-8D8C-D955F8B346AF
-#+begin_src emacs-lisp :tangle no
+But add his functions as called from top level
+*** Functions
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201218T062750.205110
+:END:
+#+NAME: org_mark_mini12.local_20201218T062750.172372
+#+begin_src emacs-lisp
 ;;  mainly from setup-elisp.el
-
 
 ;; Solution to toggle debug on a function whether it is defined inside or
 ;; outside a `use-package' wrapper
@@ -205,6 +209,15 @@ Seen but not used yet [[https://github.com/ScottyB/edebug-x][edebug-x]]
           (setq-default eval-expression-print-level  nil)
           (edebug-defun)
           (message "Edebug: %s" fn))))))
+
+#+end_src
+*** Hydra
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201218T062750.198857
+:END:
+Not used as gets error
+#+NAME: org_mark_mini12.local_20201218T062750.173480
+#+begin_src emacs-lisp :tangle no
 
 (defhydra hydra-edebug (:color amaranth
                                :hint  nil)

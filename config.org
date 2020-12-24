@@ -1,6 +1,7 @@
-#+TITLE Emacs configuration where no .el is in got
+#+TITLE Emacs configuration setup
 #+PROPERTY:header-args :cache yes :tangle yes :comments link
 #+STARTUP: content
+This file has no complex weaving and so can be tangled without using org-mode.
 * Init environment
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:714AABB4-0858-48B3-BFDB-0F9D17A40C40
@@ -245,7 +246,7 @@ Basically use-package and helpers - strictly some of these can be left to later.
           use-package-expand-minimally t)))
  #+end_src
 Override bind-keys othat
-*** Profile init
+*** Profile/Benchmark init
 :PROPERTIES:
 :ID:       org_mark_2020-11-12T14-43-30+00-00_mini12.local:CCEFA537-D499-4E55-8B0C-62DA4221E19B
 :END:
@@ -293,12 +294,21 @@ Functional programming
 #+NAME: org_mark_2020-11-05T13-04-24+00-00_mini12.local_586F9C8C-30DC-441E-85EE-1A67DA609030
 #+begin_src emacs-lisp
 (use-package dash
-  :ensure t
-  :demand
-  :config
-  (dash-enable-font-lock))
+    :ensure t
+    :demand
+    :config
+    (global-dash-fontify-mode)
+    (dash-enable-font-lock))
 #+end_src
-
+***** Hash maps
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201223T233131.626783
+:END:
+Cover functions [[https://github.com/Wilfred/ht.el][ht]]
+#+NAME: org_mark_mini12.local_20201223T233131.592735
+#+begin_src emacs-lisp
+(use-package ht :ensure t :demand )
+#+end_src
 ***** Rx
 :PROPERTIES:
 :ID:       org_mark_2020-11-05T13-04-24+00-00_mini12.local:67FA0648-E483-44F4-91B6-0A44F2D09008
@@ -656,6 +666,10 @@ But has requirements like hydra
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:F4B80C2A-6E55-4DAA-A894-CEAAF485CEEB
 :END:
 Need key setting menus.
+**** Original
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201224T121457.227057
+:END:
 #+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_4EC591E8-D02C-4F21-97C1-80F28A75490F
 #+begin_src emacs-lisp
 (use-package hydra :ensure t
@@ -681,6 +695,43 @@ Need key setting menus.
                                    'face '(:weight bold :height 1.1))
                        1.1))
     (setq major-mode-hydra-title-generator #'jp-major-mode-hydra-title-generator)))
+#+end_src
+
+**** Show icons
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201224T121457.223827
+:END:
+The functions are from jerrypnz for use in pretty hydra headers.
+Treemacs icons are better but they are purely keyed off file extensions. All the icons has a look up from mode to icon, treemacs does not.
+#+NAME: org_mark_mini12.local_20201224T121457.192342
+#+begin_src emacs-lisp
+(use-package all-the-icons
+  :ensure t
+  :commands (all-the-icons-faicon
+             all-the-icons-fileicon
+             all-the-icons-octicon
+             all-the-icons-icon-for-mode)
+  :preface
+  (defun with-faicon (icon str &optional height v-adjust)
+    (s-concat (all-the-icons-faicon icon :v-adjust (or v-adjust 0) :height (or height 1)) " " str))
+
+  (defun with-fileicon (icon str &optional height v-adjust)
+    (s-concat (all-the-icons-fileicon icon :v-adjust (or v-adjust 0) :height (or height 1)) " " str))
+
+  (defun with-octicon (icon str &optional height v-adjust)
+    (s-concat (all-the-icons-octicon icon :v-adjust (or v-adjust 0) :height (or height 1)) " " str))
+
+  (defun with-mode-icon (mode str &optional height nospace)
+    (let* ((v-adjust (if (eq major-mode 'emacs-lisp-mode) -0.1 0.05))
+           (icon (all-the-icons-icon-for-mode mode
+                                              :height (or height 1)
+                                              :v-adjust v-adjust))
+           (icon (if (symbolp icon)
+                     (all-the-icons-icon-for-mode 'fundamental-mode
+                                                  :height (or height 1)
+                                                  :v-adjust v-adjust)
+                   icon)))
+      (s-concat icon (if nospace "" " ") str))))
 #+end_src
 *** Remainder of org
 :PROPERTIES:

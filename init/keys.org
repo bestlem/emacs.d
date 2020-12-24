@@ -558,7 +558,8 @@ Odd things needed
   ("Hydrae"
    (("a" major-mode-hydra "Major mode")
     ("C" hydra-flycheck/body "Flycheck")
-    ("g" hydra-goto/body "Goto")
+    ("G" hydra-goto/body "Goto")
+    ("g" jp-git/body "git...")
     ("n" hydra-navigate/body "Navigate")
     ("P" hydra-projectile/body "projectile")
     ("t" hydra-transpose/body "Transpose")

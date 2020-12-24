@@ -47,7 +47,7 @@ Add some from jweigley
     ;;               :filter (lambda (&optional _)
     ;;                         (when (check-expansion)
     ;;                           #'company-complete-common))))
-    (bind-key "<tab>" #'company-indent-or-complete-common)
+    (bind-key "TAB" #'company-indent-or-complete-common)
     (bind-key "`" 'company-abort company-active-map)
     (when (>= emacs-major-version 27)
       (use-package company-posframe :ensure t :diminish :config (company-posframe-mode 1)))

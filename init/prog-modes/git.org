@@ -1,0 +1,111 @@
+#+TITLE Emacs configuration git
+#+PROPERTY:header-args :cache yes :tangle yes  :comments link
+
+#+STARTUP: content
+* Git
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201222T214721.129884
+:END:
+Taken from  [[https://github.com/jerrypnz/.emacs.d][Jerry Peng]] This is basically jp-magit.el with bits removed
+** Pretty hydra setup
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201224T001534.667034
+:END:
+** Magit
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201222T214721.127535
+:END:
+#+NAME: org_mark_mini12.local_20201222T214721.115179
+#+begin_src emacs-lisp
+;;; jp-magit.el --- An awesome elisp package -*- lexical-binding: t; -*-
+;; Copyright (C) 2017 Jerry Peng
+;; Author: Jerry Peng <pr2jerry@gmail.com>
+;; magit
+
+(progn
+  (use-package-ensure-elpa 'magit
+                           '(t)
+                           'nil)
+  (unless
+      (fboundp 'magit-diff-buffer-file)
+    (autoload
+        (function magit-diff-buffer-file)
+        "magit" nil t))
+  (unless
+      (fboundp 'magit-blame-addition)
+    (autoload
+        (function magit-blame-addition)
+        "magit" nil t))
+  (unless
+      (fboundp 'magit-log-current)
+    (autoload
+        (function magit-log-current)
+        "magit" nil t))
+  (unless
+      (fboundp 'magit-log-buffer-file)
+    (autoload
+        (function magit-log-buffer-file)
+        "magit" nil t))
+  (unless
+      (fboundp 'magit-status)
+    (autoload
+        (function magit-status)
+        "magit" nil t))
+  (eval-after-load 'magit
+    '(progn
+      (setq magit-repository-directories
+       '(("~/src/" . 2)
+         (org-directory . 0)))
+      (setq magit-completing-read-function 'ivy-completing-read)
+      (transient-bind-q-to-quit)
+      t))
+  (pretty-hydra-define+ jp-git
+      (:color teal :quit-key "q" :title
+       (mwb-icon-string "git" "Git")
+       :hint nil)
+    ("Magit"
+     (("s" magit-status "magit status")
+      ("l" magit-log-buffer-file "commit log (current file)")
+      ("L" magit-log-current "commit log (project)")
+      ("b" magit-blame-addition "blame"))
+     "Diff"
+     (("d" magit-diff-buffer-file "diff buffer")))))
+#+end_src
+** Git timemachine
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201222T214721.121908
+:END:
+I think works with other vcs
+#+NAME: org_mark_mini12.local_20201223T212747.790111
+#+begin_src emacs-lisp
+(use-package git-timemachine
+    :ensure t
+    :after magit
+    :pretty-hydra
+    (jp-git
+     ("Other"
+      (("t" git-timemachine "time machine"))))
+    :commands (git-timemachine))
+  #+end_src
+* Show changes since last checkin
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201223T212427.542343
+:END:
+[[https://github.com/dgutov/diff-hl][diff-hl]]
+#+NAME: org_mark_mini12.local_20201223T212427.538014
+#+begin_src emacs-lisp
+(use-package diff-hl
+    :ensure t
+    :after magit
+    :commands (diff-hl-next-hunk diff-hl-previous-hunk diff-hl-revert-hunk )
+    :pretty-hydra (jp-git
+                   ("Diff"
+                    (("n" diff-hl-next-hunk "next hunk" :exit nil)
+                     ("p" diff-hl-previous-hunk "previous hunk" :exit nil)
+                     ("u" diff-hl-revert-hunk "revert hunk" :exit nil))))
+    :config
+    (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+    (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
+    (global-diff-hl-mode)
+    (diff-hl-flydiff-mode))
+#+end_src

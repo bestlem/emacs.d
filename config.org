@@ -672,8 +672,17 @@ Need key setting menus.
 :END:
 #+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_4EC591E8-D02C-4F21-97C1-80F28A75490F
 #+begin_src emacs-lisp
-(use-package hydra :ensure t
-  :config (setq hydra-look-for-remap t))
+(use-package hydra
+    :ensure t
+    :config (setq hydra-look-for-remap t
+                  lv-use-padding t)
+    (defun lv--pad-to-center (str width)
+      "Pad STR with spaces on the left to be centered to WIDTH."
+      (let* ((strs (split-string str "\n"))
+             (padding (make-string
+                       (/ (- width (apply 'max (mapcar 'length strs))) 2)
+                       ?\ )))
+        (mapconcat (lambda (s) (concat padding s)) strs "\n"))))
 (use-package use-package-hydra :ensure t)
 #+end_src
 **** major mode hydra

@@ -24,6 +24,8 @@
  - path :: ~/src/sml/unit_test
 ** simutrans
  - path :: ~/src/cpp/simutrans
+** RacketProgrammingtheFunWay
+ - path :: ~/src/Racket/RacketProgrammingtheFunWay
 * No Perspective
 ** emacs.d
  - path :: ~/src/env/emacs.d

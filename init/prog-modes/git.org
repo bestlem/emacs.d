@@ -7,10 +7,20 @@
 :ID:       org_mark_mini12.local:20201222T214721.129884
 :END:
 Taken from  [[https://github.com/jerrypnz/.emacs.d][Jerry Peng]] This is basically jp-magit.el with bits removed
-** Pretty hydra setup
+** Commit editor
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20201224T001534.667034
 :END:
+This is [[https://github.com/magit/with-editor][with-editor]] Magit calls it - only exposed so I can play with keys
+#+NAME: org_mark_mini12.local_20201224T204932.248625
+#+begin_src emacs-lisp
+(use-package with-editor
+    :ensure t
+    :bind (:map with-editor-mode-map
+                ("A-k" . with-editor-cancel)
+                ("A-s" . with-editor-finish)
+                ))
+#+end_src
 ** Magit
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20201222T214721.127535
@@ -22,54 +32,25 @@ Taken from  [[https://github.com/jerrypnz/.emacs.d][Jerry Peng]] This is basical
 ;; Author: Jerry Peng <pr2jerry@gmail.com>
 ;; magit
 
-(progn
-  (use-package-ensure-elpa 'magit
-                           '(t)
-                           'nil)
-  (unless
-      (fboundp 'magit-diff-buffer-file)
-    (autoload
-        (function magit-diff-buffer-file)
-        "magit" nil t))
-  (unless
-      (fboundp 'magit-blame-addition)
-    (autoload
-        (function magit-blame-addition)
-        "magit" nil t))
-  (unless
-      (fboundp 'magit-log-current)
-    (autoload
-        (function magit-log-current)
-        "magit" nil t))
-  (unless
-      (fboundp 'magit-log-buffer-file)
-    (autoload
-        (function magit-log-buffer-file)
-        "magit" nil t))
-  (unless
-      (fboundp 'magit-status)
-    (autoload
-        (function magit-status)
-        "magit" nil t))
-  (eval-after-load 'magit
-    '(progn
-      (setq magit-repository-directories
-       '(("~/src/" . 2)
-         (org-directory . 0)))
-      (setq magit-completing-read-function 'ivy-completing-read)
-      (transient-bind-q-to-quit)
-      t))
-  (pretty-hydra-define+ jp-git
-      (:color teal :quit-key "q" :title
-       (mwb-icon-string "git" "Git")
-       :hint nil)
-    ("Magit"
-     (("s" magit-status "magit status")
-      ("l" magit-log-buffer-file "commit log (current file)")
-      ("L" magit-log-current "commit log (project)")
-      ("b" magit-blame-addition "blame"))
-     "Diff"
-     (("d" magit-diff-buffer-file "diff buffer")))))
+(use-package magit
+    :ensure t
+    :config
+    (setq magit-repository-directories
+          '(("~/src/" . 2)
+            (org-directory . 0)))
+    (setq magit-completing-read-function 'ivy-completing-read)
+    (transient-bind-q-to-quit)
+
+    (pretty-hydra-define+ jp-git
+        (:color teal :quit-key "q"
+         :title (mwb-icon-string "git" "Git"))
+      ("Magit"
+       (("s" magit-status "magit status")
+        ("l" magit-log-buffer-file "commit log (current file)")
+        ("L" magit-log-current "commit log (project)")
+        ("b" magit-blame-addition "blame"))
+       "Diff"
+       (("d" magit-diff-buffer-file "diff buffer")))))
 #+end_src
 ** Git timemachine
 :PROPERTIES:

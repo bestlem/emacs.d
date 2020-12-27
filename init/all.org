@@ -170,19 +170,6 @@ Now I remember writing my own printenv as env|sort - looking at man page printen
   :config
   (exec-path-from-shell-initialize))
 #+end_src
-* Applications
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:632E759A-7D25-41F9-9349-1F9C7C5D7FE7
-:END:
-** Gnus
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:B28959EB-4497-40E8-B194-998A9D7C783B
-:END:
-Put it back to immediately load as the directory needs to be set first
-#+NAME: org_mark_mini12.local_20201222T222219.735035
-#+begin_src emacs-lisp
-(mwb-init-load "init/gnus")
- #+end_src
 * Major modes
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:0E3CCAD4-14DB-4481-8235-F04F840DF4AD

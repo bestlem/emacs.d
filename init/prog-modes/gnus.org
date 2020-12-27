@@ -1,6 +1,5 @@
 #+TITLE Emacs configuration gnus
 #+PROPERTY:header-args :cache yes :tangle yes  :comments link
-
 #+STARTUP: content
 
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_B5711DCA-2D01-4ADE-A4FF-CB3E2E6A583E

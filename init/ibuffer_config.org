@@ -393,9 +393,9 @@ With this improvement you do not need to hard code the line numbers, you just ne
 #+NAME: org_mark_2020-02-10T08-46-26+00-00_mini12_F34400B5-1325-4089-9D4F-CA89B9B64557
 #+begin_src emacs-lisp
 (pretty-hydra-define hydra-ibuffer-filter
-  (:color amaranth
-	  :quit-key "q"
-	  :title (with-mode-icon major-mode "Filter" 1 -0.05))
+    (:color pink
+	 :quit-key "q"
+	 :title (with-mode-icon major-mode "Filter" 1 -0.05))
   ("Name"
    (("m" ibuffer-filter-by-used-mode "mode")
     ("M" ibuffer-filter-by-derived-mode "derived mode")

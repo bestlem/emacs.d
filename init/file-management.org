@@ -207,7 +207,7 @@ Take from jweigley then find a hydra and prettify it.
               ("M-s f"))
   :diminish dired-omit-mode
   ;; :hook (dired-mode . dired-hide-details-mode)
-  :hook (dired-mode . dired-omit-mode)
+  ;;:hook (dired-mode . dired-omit-mode)
   :preface
   (defvar saved-window-configuration nil)
 

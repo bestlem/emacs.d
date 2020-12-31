@@ -48,7 +48,7 @@ Separated out
 
 ** Config
 :PROPERTIES:
-:header-args: :noweb-ref  sml-config
+:header-args: :noweb-ref  sml-config :tangle no
 :ID:       org_mark_2020-11-12T14-28-56+00-00_mini12.local:BEB80221-3122-4A7D-81E3-FFD3F7291FDC
 :END:
 All these are tangled together

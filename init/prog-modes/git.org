@@ -34,6 +34,7 @@ This is [[https://github.com/magit/with-editor][with-editor]] Magit calls it - o
 
 (use-package magit
     :ensure t
+    :defer 2
     :config
     (setq magit-repository-directories
           '(("~/src/" . 2)

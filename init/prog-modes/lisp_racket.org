@@ -38,10 +38,12 @@ Ok I lose the :with of having yasnippet and racket mode completions but get one 
     :ensure t
     :bind (:map racket-mode-map
                 ("<f5>" . racket-test)
-                ("<C-f5>" . racket-run)
+                ("<C-f5>" . racket-mwb-run)
                 ("A-<f5>" . racket-mwb-raco-all-tests)
-                ("<f1> <f1>" . racket-describe)
+                ("<f1> <f1>" . racket-xp-describe)
                 ("M-l" . racket-insert-lambda)
+                ("<C-return>" . eir-eval-in-racket )
+                ("<f6>" . eir-eval-in-racket )
                                         ;("H-A" . hydra-paredit/body)
                 :map racket-repl-mode-map
                 ("<f5>" . racket-run))
@@ -65,6 +67,8 @@ Ok I lose the :with of having yasnippet and racket mode completions but get one 
     :config
     (require 'racket-support)
     (diminish 'racket-smart-open-bracket-mode)
+    (require 'eval-in-repl-racket)
+    <<major_mode_hydra>>
     :hook (racket-mode . my-racket-mode-hook)
     (racket-repl-mode . my-all-racket-mode-hook))
     #+end_src
@@ -72,12 +76,14 @@ Ok I lose the :with of having yasnippet and racket mode completions but get one 
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:869AF7A1-ADC9-42C0-A04D-5C9629407813
 :END:
-	 #+begin_src emacs-lisp
+#+NAME: org_mark_mini12.local_20201224T232651.703385
+#+begin_src emacs-lisp :tangle no :noweb-ref major_mode_hydra
 (major-mode-hydra-define racket-mode nil
   ("Run"
    (("b" racket-run "run")
     ("B" racket-run-and-switch-to-repl "run and REPL")
     ("r" racket-send-region "Region to REPL")
+    ("s" racket-send-last-sexp "sexp to REPL")
     ("R" (lambda () (interactive) (racket-run 4)) "Run with errortrace")
     ("i" (lambda () (interactive) (racket-run 16)) "Instrument for debug"))
    "Test"
@@ -85,6 +91,9 @@ Ok I lose the :with of having yasnippet and racket mode completions but get one 
     ("a" racket-mwb-raco-all-tests "All Tests")
     ("c" racket-check-syntax-mode "Check syntax"))
    "Fold"
-   (("h" racket-fold-all-tests "Hide tests")
-    ("s" racket-unfold-all-tests "Show tests"))))
-	 #+end_src
+   (("ht" racket-fold-all-tests "Hide tests")
+    ("hs" racket-unfold-all-tests "Show tests")
+    ("hh" hydra-hs/body "Hide-show..."))
+   "Navigate"
+   (("[" ptrv/smartparens/body "Smartparens..."))))
+#+end_src

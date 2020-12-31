@@ -52,12 +52,28 @@ Look at smart-tabs-insinuate but aggressive indent means not needed, although if
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_A84231FF-A68D-44B0-9010-3CD91C8B2DA4
 #+begin_src emacs-lisp
 (use-package smartparens
-  :ensure t
-  :diminish smartparens-mode
-  :config
-  (setq sp-show-pair-from-inside nil)
-  (require 'smartparens-config)
-  (smartparens-global-mode))
+    :ensure t
+    :diminish smartparens-mode
+    :bind (:map smartparens-mode-map
+                ("M-(" . sp-wrap-round)
+                ("M-[" . sp-wrap-square)
+                ("M-{" . sp-wrap-curly)
+                ("H-M-<backspace>" . sp-unwrap-sexp)  ;; in macporst this is
+                ;; what the M-delete maps to
+                ("M-<backspace>" . sp-backward-unwrap-sexp)
+                ;; from jp-smartparens
+                ("M-<right>" . sp-forward-slurp-sexp)
+                ("M-<left>" . sp-forward-barf-sexp)
+                ("M-S-<right>" . sp-backward-slurp-sexp)
+                ("M-S-<left>" . sp-backward-slurp-sexp)
+                ("M-<up>" . sp-raise-sexp)
+                ("C-k" . sp-kill-hybrid-sexp)
+                ("C-M-f" . sp-forward-sexp)
+                ("C-M-b" . sp-backward-sexp))
+    :config
+    (setq sp-show-pair-from-inside nil)
+    (require 'smartparens-config)
+    (smartparens-global-mode))
 #+end_src
 **** Hydra
 :PROPERTIES:
@@ -67,7 +83,7 @@ From https://gist.githubusercontent.com/ptrv/7e27e0e18ae37d3f80aff7b9da749321/ra
 #+NAME: org_mark_2020-03-30T15-04-16+01-00_mini12.local_A1FA269E-859C-44DB-866A-C136AFD05F51
 #+begin_src emacs-lisp
 (defhydra ptrv/smartparens (:hint nil)
-    "
+  "
 Sexps (quit with _q_)
 ^Nav^            ^Barf/Slurp^                 ^Depth^
 ^---^------------^----------^-----------------^-----^-----------------
@@ -84,38 +100,39 @@ _k_: kill        _s_: split                   _{_: wrap with { }
 ^^               _t_: transpose               _'_: wrap with ' '
 ^^               _c_: convolute               _\"_: wrap with \" \"
 ^^               _i_: indent defun"
-    ("q" nil)
-    ;; Wrapping
-    ("(" (lambda (_) (interactive "P") (sp-wrap-with-pair "(")))
-    ("{" (lambda (_) (interactive "P") (sp-wrap-with-pair "{")))
-    ("'" (lambda (_) (interactive "P") (sp-wrap-with-pair "'")))
-    ("\"" (lambda (_) (interactive "P") (sp-wrap-with-pair "\"")))
-    ;; Navigation
-    ("f" sp-forward-sexp )
-    ("b" sp-backward-sexp)
-    ("u" sp-backward-up-sexp)
-    ("d" sp-down-sexp)
-    ("p" sp-backward-down-sexp)
-    ("n" sp-up-sexp)
-    ;; Kill/copy
-    ("w" sp-copy-sexp)
-    ("k" sp-kill-sexp)
-    ;; Misc
-    ("t" sp-transpose-sexp)
-    ("j" sp-join-sexp)
-    ("s" sp-split-sexp)
-    ("c" sp-convolute-sexp)
-    ("i" sp-indent-defun)
-    ;; Depth changing
-    ("R" sp-splice-sexp)
-    ("r" sp-splice-sexp-killing-around)
-    ("<up>" sp-splice-sexp-killing-backward)
-    ("<down>" sp-splice-sexp-killing-forward)
-    ;; Barfing/slurping
-    ("<right>" sp-forward-slurp-sexp)
-    ("<left>" sp-forward-barf-sexp)
-    ("C-<left>" sp-backward-barf-sexp)
-    ("C-<right>" sp-backward-slurp-sexp))
+  ("q" nil)
+  ;; Wrapping
+  ("(" (lambda (_) (interactive "P") (sp-wrap-with-pair "(")))
+  ("{" (lambda (_) (interactive "P") (sp-wrap-with-pair "{")))
+  ("[" (lambda (_) (interactive "P") (sp-wrap-with-pair "[")))
+  ("'" (lambda (_) (interactive "P") (sp-wrap-with-pair "'")))
+  ("\"" (lambda (_) (interactive "P") (sp-wrap-with-pair "\"")))
+  ;; Navigation
+  ("f" sp-forward-sexp )
+  ("b" sp-backward-sexp)
+  ("u" sp-backward-up-sexp)
+  ("d" sp-down-sexp)
+  ("p" sp-backward-down-sexp)
+  ("n" sp-up-sexp)
+  ;; Kill/copy
+  ("w" sp-copy-sexp)
+  ("k" sp-kill-sexp)
+  ;; Misc
+  ("t" sp-transpose-sexp)
+  ("j" sp-join-sexp)
+  ("s" sp-split-sexp)
+  ("c" sp-convolute-sexp)
+  ("i" sp-indent-defun)
+  ;; Depth changing
+  ("R" sp-splice-sexp)
+  ("r" sp-splice-sexp-killing-around)
+  ("<up>" sp-splice-sexp-killing-backward)
+  ("<down>" sp-splice-sexp-killing-forward)
+  ;; Barfing/slurping
+  ("<right>" sp-forward-slurp-sexp)
+  ("<left>" sp-forward-barf-sexp)
+  ("C-<left>" sp-backward-barf-sexp)
+  ("C-<right>" sp-backward-slurp-sexp))
 
 (bind-key "H-["  'ptrv/smartparens/body)
 #+end_src
@@ -357,6 +374,7 @@ I want a key to send current buffer, especial in OrgSrc mode to REPL.
 :END:
 This is simple and works. Extended by me to send whole buffer and not switch on key but mode.
 Have working base function
+BUT the propblem is that if does selection of method by the keymap in each mode so each mode has to be bound. Better if it called one function that decided via a alist what to do. ALso need to set up send buffer, or defun or line or sexp. Might also have an issue it is too low level - e.g.
 #+NAME: org_mark_2020-02-10T11-53-11+00-00_mini12_F4F528CB-9078-4C05-B2A0-23ADCA372044
 #+BEGIN_SRC emacs-lisp
 (use-package  eval-in-repl-ielm

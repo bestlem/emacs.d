@@ -11,4 +11,10 @@
            " -l raco test --drdr "
            (projectile-project-root))))
 
+(defun racket-mwb-run ()
+  "Run the current buffer as per racket-run but save other buffers in project first"
+  (interactive)
+  (projectile-save-project-buffers)
+  (racket-run))
+
 (provide 'racket-support)

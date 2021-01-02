@@ -18,6 +18,7 @@
   - [[#cua-bindings][Cua bindings]]
   - [[#scrolling][Scrolling]]
   - [[#deleting-and-return][Deleting and return]]
+  - [[#undo][undo]]
   - [[#let-search-continue-with-arrows][Let search continue with arrows]]
   - [[#old-bindings][Old bindings]]
   - [[#quickrun][quickrun]]
@@ -309,6 +310,21 @@ I suspect not touched since before ages. But need for macport
 
   ;;(bind-key [?\A-backspace] 'undo )
   #+end_src
+
+** undo
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20210102T015452.201351
+:END:
+Use Aquamacs'
+#+NAME: org_mark_mini12.local_20210102T131152.591658
+#+begin_src emacs-lisp
+(use-package aquamacs-redo
+    :unless *aquamacs*
+    :demand t
+    :bind ("A-z" . aquamacs-undo)
+    )
+#+end_src
+
 ** Let search continue with arrows
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:9C6C52F9-BD9C-4A80-856B-6D5620E5C9A7
@@ -578,6 +594,8 @@ Odd things needed
    "Actions"
    (("d" toggle-debug-on-error "debug on error"
          :toggle (default-value 'debug-on-error))
+    ("M" toggle-mwb-message-timestamp
+         :toggle mwb-message-timestamp)
     ("p" package-quickstart-refresh "refresh quickstart packages")
     ("q" keyboard-quit-context+ "Quit minibuffer etc")
     ("S" org-babel-detangle "Detangle")

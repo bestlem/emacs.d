@@ -6056,6 +6056,23 @@ calling the internal `modus-themes-load-operandi' and
 
 
 )
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/math-symbol-lists-20200131.2333/math-symbol-lists-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/math-symbol-lists-20200131.2333/math-symbol-lists-autoloads.el") (car load-path))))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "math-symbol-lists" '("math-symbol-list-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "msl-build" '("msl-")))
+
+
+
+
+)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/makey-20131231.1430/makey-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -11845,6 +11862,46 @@ toggle it if ARG is `toggle'; disable the mode otherwise.
 
 
 )
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/company-math-20200131.2337/company-math-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/company-math-20200131.2337/company-math-autoloads.el") (car load-path))))
+
+
+
+(autoload 'company-latex-commands "company-math" "\
+Company backend for latex commands.
+COMMAND and ARG is as required by company backends.
+
+\(fn COMMAND &optional ARG &rest IGNORED)" t nil)
+
+(autoload 'company-math-symbols-latex "company-math" "\
+Company backend for LaTeX mathematical symbols.
+COMMAND and ARG is as required by company backends.
+
+\(fn COMMAND &optional ARG &rest IGNORED)" t nil)
+
+(autoload 'company-math-symbols-unicode "company-math" "\
+Company backend for insertion of Unicode mathematical symbols.
+COMMAND and ARG is as required by company backends.
+See the unicode-math page [1] for a list of fonts that have a
+good support for mathematical symbols. Unicode provides only a
+limited range of sub(super)scripts; see the wikipedia page [2]
+for details.
+
+ [1] http://ftp.snt.utwente.nl/pub/software/tex/help/Catalogue/entries/unicode-math.html
+ [2] https://en.wikipedia.org/wiki/Unicode_subscripts_and_superscripts
+
+\(fn COMMAND &optional ARG &rest IGNORED)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-math" '("company-math-")))
+
+
+
+
+
+)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/comment-dwim-2-20201024.828/comment-dwim-2-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -13452,7 +13509,7 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
 )
 (setq package-activated-list
       (append
-       '(zoutline yasnippet yaml-mode xr xonsh-mode ws-butler async with-editor posframe which-key which-key-posframe vlf validate bind-key use-package use-package-hydra key-chord bind-chord use-package-chords epl pkg-info projectile dash s f avy ace-window pfuture lv hydra ht treemacs treemacs-projectile treemacs-icons-dired transient toc-org test-simple ivy swiper srefactor spinner sml-mode smartparens load-relative loc-changes realgud rainbow-delimiters pos-tip racket-mode pythonic dash-functional pretty-hydra prescient popup persistent-scratch paren-face paredit paradox outorg outshine org-bullets org esxml nov mwim modus-themes memoize makey major-mode-hydra git-commit magit macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine gcmh flyspell-correct flyspell-correct-popup flycheck flycheck-yamllint fish-mode expand-region eval-in-repl eros elmacro elisp-format dtrt-indent discover-my-major diminish diff-hl deadgrep conda company company-prescient company-posframe comment-dwim-2 color-theme-modern color-identifiers-mode cmake-mode cask-mode beacon auctex amx all-the-icons all-the-icons-dired aggressive-indent)
+       '(zoutline yasnippet yaml-mode xr xonsh-mode ws-butler async with-editor posframe which-key which-key-posframe vlf validate bind-key use-package use-package-hydra key-chord bind-chord use-package-chords epl pkg-info projectile dash s f avy ace-window pfuture lv hydra ht treemacs treemacs-projectile treemacs-icons-dired transient toc-org test-simple ivy swiper srefactor spinner sml-mode smartparens load-relative loc-changes realgud rainbow-delimiters pos-tip racket-mode pythonic dash-functional pretty-hydra prescient popup persistent-scratch paren-face paredit paradox outorg outshine org-bullets org esxml nov mwim modus-themes memoize math-symbol-lists makey major-mode-hydra git-commit magit macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine gcmh flyspell-correct flyspell-correct-popup flycheck flycheck-yamllint fish-mode expand-region eval-in-repl eros elmacro elisp-format dtrt-indent discover-my-major diminish diff-hl deadgrep conda company company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-identifiers-mode cmake-mode cask-mode beacon auctex amx all-the-icons all-the-icons-dired aggressive-indent)
        package-activated-list))
 (progn
   (require 'info)

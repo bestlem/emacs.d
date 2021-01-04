@@ -576,9 +576,6 @@ This is the visual tree to manage files etc
   :disabled                             ; Emacs 27 did not like this
   :after treemacs magit
   :ensure t)
-
-
-
   #+end_src
 *** Debug
 :PROPERTIES:
@@ -587,84 +584,3 @@ This is the visual tree to manage files etc
 I get
 Error running timer ‘treemacs--process-file-events’: (wrong-type-argument sequencep t)
 So from https://github.com/Alexander-Miller/treemacs/issues/168
-#+NAME: org_mark_2020-11-14T12-12-03+00-00_mini12.local_470AEA78-DD08-44F4-9DCE-B416FD307AD0
-#+begin_src emacs-lisp
-
-(use-package treemacs
-    :config
-  (defsubst treemacs-get-from-shadow-index (key)
-    "Get node with KEY, if any."
-    (--if-let (ht-get treemacs-shadow-index key)
-        it
-      (treemacs-log "Node for key [%s] missing in shadow index" key)))
-
-  (defun treemacs--recursive-refresh-descent (node project)
-    "The recursive descent implementation of `treemacs--recursive-refresh'.
-If NODE under PROJECT is marked for refresh and in an open state (since it could
-have been collapsed in the meantime) it will simply be collapsed and
-re-expanded.  If NODE is ndode marked its children will be recursively
-investigated instead.
-Additionally all the refreshed nodes are collected and returned so their
-parents' git status can be updated."
-    (let ((recurse t)
-          (refreshed-nodes nil))
-      (-when-let (change-list (treemacs-dom-node->refresh-flag node))
-        (treemacs-log "Change List %s %s" (treemacs-dom-node->key node) change-list)
-        (setf (treemacs-dom-node->refresh-flag node) nil)
-        (push node refreshed-nodes)
-        (if (> (length change-list) 8)
-            (progn
-              (setf recurse nil)
-              (if (null (treemacs-dom-node->parent node))
-                  (treemacs-project->refresh! project)
-                (treemacs--refresh-dir (treemacs-dom-node->key node) project)))
-          (dolist (change change-list)
-            (-let [(path . type) change]
-              (pcase type
-                ('deleted
-                 (treemacs-do-delete-single-node path project))
-                ('changed
-                 (treemacs-do-update-node path)
-                 (when (memq treemacs-git-mode '(extended deferred))
-                   (treemacs-update-single-file-git-state path)))
-                ('created
-                 (treemacs-do-insert-single-node path (treemacs-dom-node->key node)))
-                (_
-                 ;; Renaming is handled as a combination of delete+create, so
-                 ;; this case should never be taken
-                 (treemacs-log-failure "Unknown change event: %s" change)
-                 (setf recurse nil)
-                 (if (null (treemacs-dom-node->parent node))
-                     (treemacs-project->refresh! project)
-                   (treemacs--refresh-dir (treemacs-dom-node->key node) project))))))))
-      (when recurse
-        (dolist (child (treemacs-dom-node->children node))
-          (setq refreshed-nodes
-                (nconc refreshed-nodes
-                       (treemacs--recursive-refresh-descent child project)))))
-      ;; TODO(2019/07/30): add as little as possible
-      refreshed-nodes)) )
-#+end_src
-**** My error
-:PROPERTIES:
-:ID:       org_2020-12-07+00-00:295CBD82-FEAD-49CF-A08A-01830ED8AEA7
-:END:
-I get Error running timer ‘treemacs--process-file-events’: (wrong-type-argument sequencep t) ]
-So lets add messaging
-#+NAME: org_2020-12-07+00-00_2731AC2F-F381-4BEA-B43D-2BDC25D3F6DD
-#+begin_src emacs-lisp
-(defun treemacs--process-file-events ()
-  "Process the file events that have been collected.
-Stop watching deleted dirs and refresh all the buffers that need updating."
-  (setf treemacs--refresh-timer nil)
-  (message "In treemacs--process-file-events treemacs--in-this-buffer is %s "
-           treemacs--in-this-buffer)
-  (treemacs-without-following
-   (if (eq treemacs--in-this-buffer t)
-       (treemacs--do-process-file-events)
-     ;; need to save excursion here because an update when the treemacs window is not visible
-     ;; will actually move point in the current buffer
-     ;; TODO(2019/07/18): check if this is still necessary after granular filewatch is done
-     (save-excursion
-       (treemacs--do-process-file-events)))))
-#+end_src

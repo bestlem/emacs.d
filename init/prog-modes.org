@@ -49,10 +49,13 @@ Look at smart-tabs-insinuate but aggressive indent means not needed, although if
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:838D12E0-E4AA-4DD0-8F6E-56CDA89B5F0E
 :END:
+I have lispy working in racket
+Also its global mode messes up org-mode so disable
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_A84231FF-A68D-44B0-9010-3CD91C8B2DA4
 #+begin_src emacs-lisp
 (use-package smartparens
     :ensure t
+    :disabled
     :diminish smartparens-mode
     :bind (:map smartparens-mode-map
                 ("M-(" . sp-wrap-round)
@@ -361,6 +364,13 @@ Yes you think of lisp, smalltalk but also Swift python, ML, Haskell. I never got
 
 I want a key to send current buffer, especial in OrgSrc mode to REPL.
 [[https://github.com/kaz-yos/eval-in-repl][Eval in Repl]] seems a base but it in effect uses the keymap as to how to choose what to run. Ideally I would want f5 to do this in orgsrc mode, but a full send in normal mode.
+
+As it does the wkr by giving different functions to attach to a key not much use when package provide the correct dispatch
+
+Much more useful if you globally bound the key and a functions worked out what to do.
+
+As racket is broken and sml had oddities with ; and emacs really does not need it as you have **scratch* and immediate eval then .....
+
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_A713576B-1958-4B3A-B268-DC65DC07499C
 #+BEGIN_SRC emacs-lisp
 (use-package eval-in-repl

@@ -8,7 +8,8 @@ This is completion for text in buffer
 :END:
 This looks at the current code and prompts for variables etc
 I need something and company seems to be the current one.
-Understandin the order is a bit confusing and this [[https://emacs.stackexchange.com/a/15251/9874][Stackexchnage]] answer helps. Basically test one at a time
+Understandin the order is a bit confusing and this [[https://emacs.stackexchange.com/a/15251/9874][Stackexchnage]] answer helps. Basically test one at a time. 9it really helps to read especially at the end.
+After use in racket I am not sure with helps in code
 Add some from jweigley
 ** Company
 :PROPERTIES:
@@ -31,7 +32,9 @@ Add some from jweigley
           company-dabbrev-other-buffers t
           ;; Don't take too much time searching for matches.
           company-dabbrev-code-time-limit 0.0005
-          company-dabbrev-time-limit 0.0005)
+          company-dabbrev-time-limit 0.0005
+          company-dabbrev-char-regexp "\\sw\\|\\s_")
+
     (setq company-show-numbers t)
     (setq company-lighter-base "/"
           company-tooltip-align-annotations t
@@ -105,28 +108,6 @@ Merging `company-yasnippet' to `company-capf' will yield
       (interactive)
       (merge-backend-with-company-backends 'company-yasnippet)
       (merge-backend-with-company-backends 'company-dabbrev-code)))
-#+end_src
-
-** auto-complete
-:PROPERTIES:
-:ID:       org_2020-12-02+00-00:D77DB643-7779-4D51-8E6E-9DC259EA4483
-:END:
-
-I don’t use auto-complete at all, so I have set up a hook to automatically disable it whenever it is enabled to avoid creating conflicting popups when company is activated. From https://github.com/IvanMalison/dotfiles/tree/master/dotfiles/emacs.d
-#+NAME: org_2020-12-02+00-00_B89125D1-4255-4372-B72B-70822BC69702
-#+begin_src emacs-lisp
-(use-package auto-complete
-:disabled
-  :preface
-  (progn
-    (defun imalison:auto-complete-hook ()
-      (debug)
-      (warn "auto-complete-mode was activated, but is being automatically disabled.")
-      (let ((auto-complete-mode-hook nil))
-	(auto-complete-mode -1))))
-  :config
-  (progn
-    (add-hook 'auto-complete-mode-hook 'imalison:auto-complete-hook)))
 #+end_src
 
 * Text expansion
@@ -247,3 +228,16 @@ This is another basic emacs thing.
    :bind (("M-/"   . hippie-expand)
           ("C-M-/" . dabbrev-completion)))
  #+END_SRC
+** Company math
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20210102T223321.240481
+:END:
+For Unicode
+#+NAME: org_mark_mini12.local_20210102T223321.222299
+#+begin_src emacs-lisp
+(use-package company-math
+    :ensure t
+    :init
+    (setq company-math-symbol-prefix "//")
+    :after (company))
+#+end_src

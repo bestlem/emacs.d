@@ -23,6 +23,7 @@ Got odd behaviour on completion last letter underlined and stuff in echo area, i
 :END:
 The racket-mode version seems to invoke quail which confused me - it mightn stop company but I am not sure
 Also see [[https://github.com/david-christiansen/dr-racket-like-unicode/blob/master/dr-racket-like-unicode.el][this mode]] that can do a completion - also look at abbrev
+Trying company math
 *** Completions
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20201221T122900.927064
@@ -40,10 +41,13 @@ Ok I lose the :with of having yasnippet and racket mode completions but get one 
                 ("<f5>" . racket-test)
                 ("<C-f5>" . racket-mwb-run)
                 ("A-<f5>" . racket-mwb-raco-all-tests)
+                ("S-<f5>" . racket-mwb-raco-test)
                 ("<f1> <f1>" . racket-xp-describe)
                 ("M-l" . racket-insert-lambda)
-                ("<C-return>" . eir-eval-in-racket )
-                ("<f6>" . eir-eval-in-racket )
+                ("M-`" . racket-insert-lambda)
+                ;; ("<C-return>" . eir-eval-in-racket)
+                ("<f6>" . racket-send-definition)
+                ("<C-return>" . racket-mwb-send-to-repl)
                                         ;("H-A" . hydra-paredit/body)
                 :map racket-repl-mode-map
                 ("<f5>" . racket-run))
@@ -54,46 +58,29 @@ Ok I lose the :with of having yasnippet and racket mode completions but get one 
     ;; From   https://stackoverflow.com/questions/37571164/emacs-company-mode-completion-not-working
     (defun my-racket-mode-hook ()
       (my-all-racket-mode-hook)
-      (racket-xp-mode)
-      )
+      (racket-xp-mode))
     (defun my-all-racket-mode-hook ()
       (set (make-local-variable 'company-backends)
-           '((company-capf company-yasnippet)))
+           '((company-capf
+              company-math-symbols-unicode
+              company-dabbrev
+              company-yasnippet)))      ; each looks for a prefix
       (company-mode 1)
-      (smartparens-strict-mode 1)
+      ;;(smartparens-strict-mode 1)
       ;;(racket-unicode-input-method-enable)
-      (racket-smart-open-bracket-mode))
+      (racket-mwb-smart-open-bracket-mode))
 
+    (defun racket-mwb-send-to-repl ()
+      "Send region or last sexp"
+      (if (region-active-p)
+          (racket-send-region)
+        (racket-send-last-sexp)))
     :config
     (require 'racket-support)
-    (diminish 'racket-smart-open-bracket-mode)
-    (require 'eval-in-repl-racket)
-    <<major_mode_hydra>>
+    ;; (diminish 'racket-smart-open-bracket-mode)
+                                        ; This is broken as it used racket internals - maybe racket itself
+    ;;(require 'eval-in-repl-racket)
+    (require 'racket-mwb-smart-open)
     :hook (racket-mode . my-racket-mode-hook)
     (racket-repl-mode . my-all-racket-mode-hook))
     #+end_src
-*** Hydra
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:869AF7A1-ADC9-42C0-A04D-5C9629407813
-:END:
-#+NAME: org_mark_mini12.local_20201224T232651.703385
-#+begin_src emacs-lisp :tangle no :noweb-ref major_mode_hydra
-(major-mode-hydra-define racket-mode nil
-  ("Run"
-   (("b" racket-run "run")
-    ("B" racket-run-and-switch-to-repl "run and REPL")
-    ("r" racket-send-region "Region to REPL")
-    ("s" racket-send-last-sexp "sexp to REPL")
-    ("R" (lambda () (interactive) (racket-run 4)) "Run with errortrace")
-    ("i" (lambda () (interactive) (racket-run 16)) "Instrument for debug"))
-   "Test"
-   (("t" racket-test "Test")
-    ("a" racket-mwb-raco-all-tests "All Tests")
-    ("c" racket-check-syntax-mode "Check syntax"))
-   "Fold"
-   (("ht" racket-fold-all-tests "Hide tests")
-    ("hs" racket-unfold-all-tests "Show tests")
-    ("hh" hydra-hs/body "Hide-show..."))
-   "Navigate"
-   (("[" ptrv/smartparens/body "Smartparens..."))))
-#+end_src

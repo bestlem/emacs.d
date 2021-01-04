@@ -17,4 +17,34 @@
   (projectile-save-project-buffers)
   (racket-run))
 
+(defun racket-mwb-raco-test ()
+  "Run current buffer through raco test but save buffers first"
+  (interactive)
+  (projectile-save-project-buffers)
+  (racket-raco-test))
+
+(major-mode-hydra-define racket-mode nil
+  ("Run"
+   (("b" racket-run "run")
+    ("B" racket-run-and-switch-to-repl "run and REPL")
+    ("sr" racket-send-region "Region to REPL")
+    ("ss" racket-send-last-sexp "sexp to REPL")
+    ("R" (lambda () (interactive) (racket-run 4)) "Run with errortrace")
+    ("i" (lambda () (interactive) (racket-run 16)) "Instrument for debug"))
+   "Edit"
+   (("a" hydra-lispy-mwb-alter/body "Alter...")
+    ("r" hydra-lispy-mwb-mark/body "Region...")
+    ("g" hydra-lispy-mwb-goto/body "Goto..."))
+"Test"
+   (("T" racket-test "Test")
+    ("t" racket-mwb-raco-test "Raco Test")
+    ("p" racket-mwb-raco-all-tests "All Tests in project")
+    ("c" racket-check-syntax-mode "Check syntax"))
+   "Fold"
+   (("ht" racket-fold-all-tests "Hide tests")
+    ("hs" racket-unfold-all-tests "Show tests")
+    ("hh" hydra-hs/body "Hide-show..."))
+   "Navigate"
+   (("[" ptrv/smartparens/body "Smartparens..."))))
+
 (provide 'racket-support)

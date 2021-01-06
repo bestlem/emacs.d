@@ -223,14 +223,17 @@ See `racket-smart-open-bracket-mode'."
                          racket--smart-open-bracket-data)
                 (racket--open-paren #'backward-sexp)
                 ?\()))
-    (cond ((fboundp 'racket--paredit-aware-open)
-           (racket--paredit-aware-open prefix ch))
-          ((bound-and-true-p 'lispy-mode)
-           ((if (eq ch ?\()
-                (lispy-parens)
-              (lispy-brackets))))
-          (t
-           (racket--self-insert ch)))
+    (cond ;; ((fboundp 'racket--paredit-aware-open)
+      ;;  (message "found paredit")
+      ;;  (racket--paredit-aware-open prefix ch))
+      ((fboundp 'lispy-mode)
+       (message "found lispy")
+       (if (eq ch ?\()
+           (lispy-parens prefix)
+         (lispy-brackets prefix)))
+      (t
+       (message "oops")
+       (racket--self-insert ch)))
     ))
 
 ;; mwb - lispy does not do delete-selection

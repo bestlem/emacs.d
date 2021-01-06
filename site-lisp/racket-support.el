@@ -29,12 +29,13 @@
     ("B" racket-run-and-switch-to-repl "run and REPL")
     ("sr" racket-send-region "Region to REPL")
     ("ss" racket-send-last-sexp "sexp to REPL")
-    ("R" (lambda () (interactive) (racket-run 4)) "Run with errortrace")
-    ("i" (lambda () (interactive) (racket-run 16)) "Instrument for debug"))
+    ("rr" (lambda () (interactive) (racket-run 4)) "Run with errortrace")
+    ("re" (lambda () (interactive) (racket-run 2)) "Run with errortrace @")
+    ("ri" (lambda () (interactive) (racket-run 16)) "Instrument for debug"))
    "Edit"
-   (("a" hydra-lispy-mwb-alter/body "Alter...")
-    ("r" hydra-lispy-mwb-mark/body "Region...")
-    ("g" hydra-lispy-mwb-goto/body "Goto..."))
+   (("ea" hydra-lispy-mwb-alter/body "Alter...")
+    ("er" hydra-lispy-mwb-mark/body "Region...")
+    ("eg" hydra-lispy-mwb-goto/body "Goto..."))
 "Test"
    (("T" racket-test "Test")
     ("t" racket-mwb-raco-test "Raco Test")

@@ -64,7 +64,7 @@ Ok I lose the :with of having yasnippet and racket mode completions but get one 
            '((company-capf
               company-math-symbols-unicode
               company-dabbrev
-              company-yasnippet)))      ; each looks for a prefix
+              company-yasnippet)))      ; each looks for its own prefix
       (company-mode 1)
       ;;(smartparens-strict-mode 1)
       ;;(racket-unicode-input-method-enable)
@@ -80,7 +80,18 @@ Ok I lose the :with of having yasnippet and racket mode completions but get one 
     ;; (diminish 'racket-smart-open-bracket-mode)
                                         ; This is broken as it used racket internals - maybe racket itself
     ;;(require 'eval-in-repl-racket)
-    (require 'racket-mwb-smart-open)
+    ;(require 'racket-mwb-smart-open)
     :hook (racket-mode . my-racket-mode-hook)
     (racket-repl-mode . my-all-racket-mode-hook))
     #+end_src
+*** racket smart open bracket
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20210104T233820.588011
+:END:
+Modified to deal with lispy - lispy does not quite do it e.g. [ on a region does not leave space after (
+#+NAME: org_mark_mini12.local_20210104T233820.572671
+#+begin_src emacs-lisp
+(use-package racket-mwb-smart-open-bracket-mode
+    :after racket
+    :diminish)
+#+end_src

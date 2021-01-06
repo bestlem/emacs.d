@@ -537,6 +537,16 @@ mouse3+ has a more complex setup including if selected a region or not see help:
 
 I think start with Aquamacs copy using non Aquamacs functions and then try to put flyspell on.
 
+*** Macos mouse
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20210104T224325.845039
+:END:
+Well Aquamacs at least - and possibly others does an emulate # button mouse which stops c-mouse! (and alt)
+#+NAME: org_mark_mini12.local_20210104T224325.807058
+#+begin_src emacs-lisp
+(when *aquamacs*
+  (setq ns-emulate-three-button-mouse 'nil))
+#+end_src
 *** Mouse 3
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20201213T170631.398434
@@ -582,14 +592,17 @@ Odd things needed
     ("x" x-hydra-readonly/body "C-X fns")
     ("<f19>" major-mode-hydra "Major mode")
     ("?" hydra-kl/body "this as a hydra"))
-   "Visual"
+   "Windows"
    (("f" other-frame "Switch Frame")
-    ("l" linum-mode "line number" :toggle t)
     ("m" (mwb-new-frame "*Messages*") "Messages")
     ("w" hydra-jp-window/body "Window Management")
-    ("c" (what-cursor-position 'detail) "Character at POS")
     ("0" delete-window "Delete Window")
     ("|"  split-window-right "horizontally")
+    )
+   "Current window"
+   (("l" linum-mode "line number" :toggle t)
+    ("c" (what-cursor-position 'detail) "Character at POS")
+    ("TAB" hs-toggle-hiding "Toggle hide-show")
     )
    "Actions"
    (("d" toggle-debug-on-error "debug on error"
@@ -600,6 +613,7 @@ Odd things needed
     ("q" keyboard-quit-context+ "Quit minibuffer etc")
     ("S" org-babel-detangle "Detangle")
     ("[" ptrv/smartparens/body "Smartparens"))
+
    "Change Buffers"
    (("b" ivy-switch-buffer "Switch Buffer")
     ("B" counsel-bookmark "Jump to bookmark")

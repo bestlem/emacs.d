@@ -557,7 +557,7 @@ Also the bindings are less and the menu is less so might be best to copy oskeys.
 
 Mouse3 might also give a more interesting menu + the extra bit of standard Emacs mouse extend selection plus I want a different menu for say treemacs.
 
-*** Aquamacs problem
+*** Aquamacs unbind
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:628BE0A1-2280-4914-98A9-12830F84FEF8
 :END:
@@ -569,6 +569,17 @@ e.g. key bindings that they do to stop modes changing them.
   (unbind-key "<end>" osx-key-mode-map)
   (unbind-key "<home>" osx-key-mode-map))
 #+end_src
+
+*** Emacs unbind
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20210104T232217.148653
+:END:
+C-down-mouse-1 gets bound to a menu
+#+NAME: org_mark_mini12.local_20210104T232217.110040
+#+begin_src emacs-lisp
+(unless *aquamacs*
+  (unbind-key "<C-down-mouse-1>"))
+#+end_src
 *** Set bindings
 :PROPERTIES:
 :ID:       org_mark_2020-10-01T14-52-55+01-00_mini12.local:E7A35B8E-8937-4EA2-939A-CDEAE681B190
@@ -578,10 +589,11 @@ Deal with stuff done by Aquamacs
 #+begin_src emacs-lisp
 (unless *aquamacs*
   (use-package redo+
-    :mwb-load-path "site-lisp/Emacs_wiki")
+      :mwb-load-path "site-lisp/Emacs_wiki")
   (use-package mac-key-mode
-    :diminish
-    :config (mac-key-mode 1)))
+      :diminish
+    :config (mac-key-mode 1)
+    (unbind-key "<C-down-mouse-1>" mac-key-mode-map)))
 #+end_src
 
 *** Name keys

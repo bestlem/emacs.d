@@ -1,6 +1,5 @@
 #+TITLE Emacs configuration - file management
 #+PROPERTY:header-args :cache yes :tangle yes :comments link
-
 #+STARTUP: content
 * TODO Trash
 :PROPERTIES:
@@ -11,10 +10,13 @@ Perhaps only if in dired or other user controlled file
 See [[https://github.com/lunaryorn/osx-trash.el][osx-trash]] but might need to find /opt/local/bin/trash
 Or better patch Aquamacs to have this C code - perhaps done?
 Need also to exclude some files - basically only iof you edit them
-#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_D0BCB9D9-2886-4431-8036-97F0EB10C82D
+Well I was going to include [[https://github.com/lunaryorn/osx-trash.el][osx trash]] which uses the trash executable or an applescript to do the proper trash. But realised I don't want to trash files - just those I delete by hand so the patching of the emacs delete is not a good idea. By default emacs does not delete by moving to trash. It is customisable so set to to never.
+Think of editing dired and treemacs
+On reading more this is only if passed to delete functions so might not be too much trash.
+#+NAME: org_mark_mini12.local_20210105T204218.519535
 #+begin_src emacs-lisp
+(setq delete-by-moving-to-trash t)
 #+end_src
-
 * Backups
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:64531695-B8F1-4AF7-8D8A-7893541FBD6C
@@ -35,6 +37,7 @@ The best inits I found for this were [[http://pragmaticemacs.com/emacs/auto-save
  vc-make-backup-files t) ; backup version controlled files
 
 #+end_src
+
 ** Do the backups
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:98AE04BC-CDDA-49C0-B0A2-A8152C7E5571
@@ -44,7 +47,20 @@ Aquamacs seems to turn this off sometimes in customization so need to investigat
  #+begin_src emacs-lisp
  (setq make-backup-files t)
  #+end_src
-*** TODO Backup on save
+** Where
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20210105T204218.554567
+:END:
+The default is the ~ on end of file.
+All the google searches say put in one directory
+But the GNU manual gives the best - in a subdirectory of where you are - OK Tramp and other machines and NFS etc might be different
+#+NAME: org_mark_mini12.local_20210105T204218.521153
+#+begin_src emacs-lisp
+(setq backup-directory-alist
+      '(("." . ".~")))
+#+end_src
+
+** TODO Backup on save
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:EBBF14AB-888E-4043-8ADB-8DE11ACDBC46
 :END:
@@ -63,7 +79,7 @@ Aquamacs seems to turn this off sometimes in customization so need to investigat
      ;; This is not defined in non aquamacs
 	 (mac-key-save-file-as)))
  #+end_src
-**** TODO save special buffers
+*** TODO save special buffers
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:0A3506D6-DE37-44F4-A990-C06C1D567023
 :END:
@@ -122,19 +138,6 @@ There are some modes that have special save actions e.g. *Abbrev* which is a buf
   :config
   (recentf-mode 1))
   #+end_src
-
-** Sunshine commander
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:FBD40752-F440-43A7-A059-2FE49F568F52
-:END:
-   #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_39F4B0A8-282D-413C-818C-83EE88C7D15A
-   #+begin_src emacs-lisp
-(setq mwb-sunrise-commander-path (mwb-user-emacs-file "fork/sunrise-commander"))
-(use-package sunrise-commander
-  :load-path mwb-sunrise-commander-path
-  :commands sunrise
-  :config (require 'sunrise-x-buttons))
-   #+end_src
 
 ** ls
 :PROPERTIES:

@@ -33,92 +33,6 @@ Make emacs message when it gcs.
 #+begin_src emacs-lisp
 (setq garbage-collection-messages 't)
 #+end_src
-* File Handling
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:7F0DB7D1-63CC-4002-BF3B-FC8F529B24EB
-:END:
-** TODO Trash
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:B8245402-918E-4781-B89F-2B7BC3A27C0A
-:END:
-Well I was going to include [[https://github.com/lunaryorn/osx-trash.el][osx trash]] which uses the trash executable or an applescript to do the proper trash. But realised I don't want to trash files - just those I delete by hand so the patching of the emacs delete is not a good idea. By default emacs does not delete by moving to trash. It is customisable so set to to never.
-Think of editing dired and treemacs
-On reading more this is only if passed to delete functions so might not be too much trash.
-   #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_FA0C03FD-BE8F-4AD2-9BB9-7CBFAB65F9DA
-   #+begin_src emacs-lisp
-(setq delete-by-moving-to-trash t)
-   #+end_src
-** Protect library and other files
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:04EFE611-1F9B-479D-A3BB-0C428F8EBA20
-:END:
-[[https://github.com/rolandwalker/hardhat][Hardhat]] provides an extra layer of protection in your work. If you visit a file which looks unsafe to edit, Emacs will make the buffer read-only -- even when the underlying file is writable.
-#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_5C4ABBCE-2400-4CD9-8740-96E9FD163C43
-#+begin_src emacs-lisp
-(use-package hardhat                    ; Protect user-writable files
-  :ensure t
-  :init (setq hardhat-basename-protected-regexps
-              '("~\\'"
-                "\\.lock\\'"
-                "\\.ix\\'"
-                "\\`test\\.out\\'"
-                "-autoloads\\.el\\'"
-                "\\`Desktop\\.ini\\'"
-                "\\`META\\.yml\\'"
-                "\\`MYMETA\\.yml\\'"
-                "\\`TAGS\\'"
-                "\\`Thumbs\\.db\\'"
-                "\\`\\.dropbox\\'"
-                "\\`\\.dropbox\\.cache\\'"
-                "\\`\\.emacs\\.desktop\\'"
-                "\\`\\.emacs\\.desktop\\.lock\\'"
-                "\\.orig\\'"
-                "\\.rej\\'"
-                "\\.el\\.gz$"))
-  (setq hardhat-fullpath-protected-regexps
-        '("~/\\.emacs\\.d/elpa/"
-          "~/\\.cpan/"
-          "~/\\.cabal/"
-          "~/perl5/perlbrew/"
-          "~/\\.npm/"
-          "~/\\.virtualenv/"
-          "~/\\.virthualenv/"
-          "~/\\.rvm/"
-          "/[._]build/"
-          "/\\.bzr/"
-          "/\\.coverage/"
-          "/\\.git/"
-          "/\\.hg/"
-          "/\\.rspec/"
-          "/\\.sass-cache/"
-          "/\\.svn/"
-          "/_MTN/"
-          "/_darcs/" "/CVS/"
-          "/pm_to_blib/"
-          "/RCS/"
-          "/SCCS/"
-          "/blib/"
-          "/test_output/"
-          "~/\\.emacs\\.d/\\.cask/"
-          "~/\\.cask/"
-          "/Applications/"
-          "~/Library/Preferences/Aquamacs Emacs/Packages"
-          "~/src/ThirdParty/"
-          "~/src/env/emacs\\.d/elpa/"))
-  (global-hardhat-mode)
-  :config (validate-setq hardhat-mode-lighter "Ⓗ"))
-#+end_src
-** Backups
-:PROPERTIES:
-:ID:       org_2020-12-06+00-00:A4750F2D-10FD-495C-ABDC-E28A3E0B16B3
-:END:
-#+NAME: org_2020-12-06+00-00_EC0FE1B5-679F-4B79-9F7E-004BF38E5E4D
-#+begin_src emacs-lisp
-(setq delete-old-versions "keep them all")
-(setq make-backup-files t)
-(setq backup-directory-alist
-      '(("." . ".~")))
-#+end_src
 * Emacs internals
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:3D94393D-BCFC-4C55-844D-42D2DCF4FC95
@@ -480,6 +394,66 @@ mwin might have mode aware
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:2C7F2E45-19AE-43EC-8536-C7A69744CCC2
 :END:
+** Protect library and other files
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:04EFE611-1F9B-479D-A3BB-0C428F8EBA20
+:END:
+[[https://github.com/rolandwalker/hardhat][Hardhat]] provides an extra layer of protection in your work. If you visit a file which looks unsafe to edit, Emacs will make the buffer read-only -- even when the underlying file is writable.
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_5C4ABBCE-2400-4CD9-8740-96E9FD163C43
+#+begin_src emacs-lisp
+(use-package hardhat                    ; Protect user-writable files
+  :ensure t
+  :init (setq hardhat-basename-protected-regexps
+              '("~\\'"
+                "\\.lock\\'"
+                "\\.ix\\'"
+                "\\`test\\.out\\'"
+                "-autoloads\\.el\\'"
+                "\\`Desktop\\.ini\\'"
+                "\\`META\\.yml\\'"
+                "\\`MYMETA\\.yml\\'"
+                "\\`TAGS\\'"
+                "\\`Thumbs\\.db\\'"
+                "\\`\\.dropbox\\'"
+                "\\`\\.dropbox\\.cache\\'"
+                "\\`\\.emacs\\.desktop\\'"
+                "\\`\\.emacs\\.desktop\\.lock\\'"
+                "\\.orig\\'"
+                "\\.rej\\'"
+                "\\.el\\.gz$"))
+  (setq hardhat-fullpath-protected-regexps
+        '("~/\\.emacs\\.d/elpa/"
+          "~/\\.cpan/"
+          "~/\\.cabal/"
+          "~/perl5/perlbrew/"
+          "~/\\.npm/"
+          "~/\\.virtualenv/"
+          "~/\\.virthualenv/"
+          "~/\\.rvm/"
+          "/[._]build/"
+          "/\\.bzr/"
+          "/\\.coverage/"
+          "/\\.git/"
+          "/\\.hg/"
+          "/\\.rspec/"
+          "/\\.sass-cache/"
+          "/\\.svn/"
+          "/_MTN/"
+          "/_darcs/" "/CVS/"
+          "/pm_to_blib/"
+          "/RCS/"
+          "/SCCS/"
+          "/blib/"
+          "/test_output/"
+          "~/\\.emacs\\.d/\\.cask/"
+          "~/\\.cask/"
+          "/Applications/"
+          "~/Library/Preferences/Aquamacs Emacs/Packages"
+          "~/src/ThirdParty/"
+          "~/src/env/emacs\\.d/elpa/"))
+  (global-hardhat-mode)
+  :config (validate-setq hardhat-mode-lighter "Ⓗ"))
+#+end_src
 ** Buffer switch
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:4551A020-6DAB-4E1D-A70F-60DF7729834F
@@ -542,7 +516,7 @@ midnight-mode purges buffers which haven’t been displayed in 3 days.
 (use-package midnight
   :defer 1000
   :config
-  (midnight-delay-set 'midnight-delay "6:15am")
+  (midnight-delay-set 'midnight-delay "3:15am")
   (defun add-to-clean-buffer-regex (str)
     (add-to-list 'clean-buffer-list-kill-regexps
                  (rx-to-string `(seq line-start "*" ,str " "))))

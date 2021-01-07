@@ -669,10 +669,10 @@ else like the former.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/posframe-20201201.659/posframe-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/posframe-20201224.2318/posframe-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/posframe-20201201.659/posframe-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/posframe-20201224.2318/posframe-autoloads.el") (car load-path))))
 
 
 
@@ -1463,64 +1463,84 @@ ARGS, REST, and STATE are prepared by `use-package-normalize/:hydra'.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/key-chord-20160227.1238/key-chord-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/key-chord-20201222.2030/key-chord-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/key-chord-20160227.1238/key-chord-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/key-chord-20201222.2030/key-chord-autoloads.el") (car load-path))))
 
 
 
+(defvar key-chord-mode nil "\
+Non-nil if Key-Chord mode is enabled.
+See the `key-chord-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `key-chord-mode'.")
+
+(custom-autoload 'key-chord-mode "key-chord" nil)
+
 (autoload 'key-chord-mode "key-chord" "\
-Toggle key chord mode.
-With positive ARG enable the mode. With zero or negative arg disable the mode.
-A key chord is two keys that are pressed simultaneously, or one key quickly
-pressed twice.
+Map pairs of simultaneously pressed keys to commands.
 
-See functions `key-chord-define-global', `key-chord-define-local', and
-`key-chord-define' and variables `key-chord-two-keys-delay' and
-`key-chord-one-key-delay'.
+If called interactively, enable Key-Chord mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
 
-\(fn ARG)" t nil)
+See functions `key-chord-define-global', `key-chord-define-local',
+and `key-chord-define' and variables `key-chord-two-keys-delay'
+and `key-chord-one-key-delay'.
+
+\(fn &optional ARG)" t nil)
 
 (autoload 'key-chord-define-global "key-chord" "\
 Define a key-chord of the two keys in KEYS starting a COMMAND.
 
-KEYS can be a string or a vector of two elements. Currently only elements
-that corresponds to ascii codes in the range 32 to 126 can be used.
+KEYS can be a string or a vector of two elements. Currently only
+elements that corresponds to ascii codes in the range 32 to 126
+can be used.
 
 COMMAND can be an interactive function, a string, or nil.
 If COMMAND is nil, the key-chord is removed.
 
-Note that KEYS defined locally in the current buffer will have precedence.
+Note that KEYS defined locally in the current buffer will have
+precedence.
 
 \(fn KEYS COMMAND)" t nil)
 
 (autoload 'key-chord-define-local "key-chord" "\
 Locally define a key-chord of the two keys in KEYS starting a COMMAND.
 
-KEYS can be a string or a vector of two elements. Currently only elements
-that corresponds to ascii codes in the range 32 to 126 can be used.
+KEYS can be a string or a vector of two elements. Currently only
+elements that corresponds to ascii codes in the range 32 to 126
+can be used.
 
 COMMAND can be an interactive function, a string, or nil.
 If COMMAND is nil, the key-chord is removed.
 
-The binding goes in the current buffer's local map,
-which in most cases is shared with all other buffers in the same major mode.
+The binding goes in the current buffer's local map, which in most
+cases is shared with all other buffers in the same major mode.
 
 \(fn KEYS COMMAND)" t nil)
 
 (autoload 'key-chord-define "key-chord" "\
 Define in KEYMAP, a key-chord of the two keys in KEYS starting a COMMAND.
 
-KEYS can be a string or a vector of two elements. Currently only elements
-that corresponds to ascii codes in the range 32 to 126 can be used.
+KEYS can be a string or a vector of two elements. Currently only
+elements that corresponds to ascii codes in the range 32 to 126
+can be used.
 
 COMMAND can be an interactive function, a string, or nil.
 If COMMAND is nil, the key-chord is removed.
 
 \(fn KEYMAP KEYS COMMAND)" nil nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "key-chord" '("key-chord-")))
+
+
+
 
 
 )
@@ -1700,10 +1720,10 @@ version.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/projectile-20201222.1649/projectile-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/projectile-20210104.1216/projectile-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/projectile-20201222.1649/projectile-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/projectile-20210104.1216/projectile-autoloads.el") (car load-path))))
 
 
 
@@ -2832,10 +2852,30 @@ result of `defhydra'.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/treemacs-20201218.652/treemacs-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/cfrs-20210103.1202/cfrs-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/treemacs-20201218.652/treemacs-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/cfrs-20210103.1202/cfrs-autoloads.el") (car load-path))))
+
+
+
+(autoload 'cfrs-read "cfrs" "\
+Read a string using a pos-frame with given PROMPT and INITIAL-INPUT.
+
+\(fn PROMPT &optional INITIAL-INPUT)" nil nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "cfrs" '("cfrs-")))
+
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/treemacs-20210106.1417/treemacs-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/treemacs-20210106.1417/treemacs-autoloads.el") (car load-path))))
 
 
 
@@ -2971,6 +3011,32 @@ treemacs node is pointing to a valid buffer position." t nil)
 
 
 
+(autoload 'treemacs-common-helpful-hydra "treemacs-hydras" "\
+Summon a helpful hydra to show you the treemacs keymap.
+
+This hydra will show the most commonly used keybinds for treemacs.  For the more
+advanced (probably rarely used keybinds) see `treemacs-advanced-helpful-hydra'.
+
+The keybinds shown in this hydra are not static, but reflect the actual
+keybindings currently in use (including evil mode).  If the hydra is unable to
+find the key a command is bound to it will show a blank instead." t nil)
+
+(autoload 'treemacs-advanced-helpful-hydra "treemacs-hydras" "\
+Summon a helpful hydra to show you the treemacs keymap.
+
+This hydra will show the more advanced (rarely used) keybinds for treemacs.  For
+the more commonly used keybinds see `treemacs-common-helpful-hydra'.
+
+The keybinds shown in this hydra are not static, but reflect the actual
+keybindings currently in use (including evil mode).  If the hydra is unable to
+find the key a command is bound to it will show a blank instead." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-hydras" '("treemacs-helpful-hydra")))
+
+
+
+
 (autoload 'treemacs-resize-icons "treemacs-icons" "\
 Resize the current theme's icons to the given SIZE.
 
@@ -3037,10 +3103,54 @@ A major mode for displaying the file system in a tree layout.
 \(fn)" t nil)
 
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-mode" '("treemacs-")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-mode" '("treemacs--")))
 
 
 
+
+(autoload 'treemacs-leftclick-action "treemacs-mouse-interface" "\
+Move focus to the clicked line.
+Must be bound to a mouse click, or EVENT will not be supplied.
+
+\(fn EVENT)" t nil)
+
+(autoload 'treemacs-doubleclick-action "treemacs-mouse-interface" "\
+Run the appropriate double-click action for the current node.
+In the default configuration this means to do the same as `treemacs-RET-action'.
+
+This function's exact configuration is stored in
+`treemacs-doubleclick-actions-config'.
+
+Must be bound to a mouse click, or EVENT will not be supplied.
+
+\(fn EVENT)" t nil)
+
+(autoload 'treemacs-single-click-expand-action "treemacs-mouse-interface" "\
+A modified single-leftclick action that expands the clicked nodes.
+Can be bound to <mouse1> if you prefer to expand nodes with a single click
+instead of a double click.  Either way it must be bound to a mouse click, or
+EVENT will not be supplied.
+
+Clicking on icons will expand a file's tags, just like
+`treemacs-leftclick-action'.
+
+\(fn EVENT)" t nil)
+
+(autoload 'treemacs-dragleftclick-action "treemacs-mouse-interface" "\
+Drag a file/dir node to be opened in a window.
+Must be bound to a mouse click, or EVENT will not be supplied.
+
+\(fn EVENT)" t nil)
+
+(autoload 'treemacs-define-doubleclick-action "treemacs-mouse-interface" "\
+Define the behaviour of `treemacs-doubleclick-action'.
+Determines that a button with a given STATE should lead to the execution of
+ACTION.
+
+The list of possible states can be found in `treemacs-valid-button-states'.
+ACTION should be one of the `treemacs-visit-node-*' commands.
+
+\(fn STATE ACTION)" nil nil)
 
 (autoload 'treemacs-node-buffer-and-position "treemacs-mouse-interface" "\
 Return source buffer or list of buffer and position for the current node.
@@ -3048,9 +3158,14 @@ This information can be used for future display.  Stay in the selected window
 and ignore any prefix argument.
 
 \(fn &optional _)" t nil)
+
+(autoload 'treemacs-rightclick-menu "treemacs-mouse-interface" "\
+Show a contextual right click menu based on click EVENT.
+
+\(fn EVENT)" t nil)
 
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-mouse-interface" '("treemacs-")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-mouse-interface" '("treemacs--")))
 
 
 
@@ -3067,11 +3182,108 @@ and ignore any prefix argument.
 
 
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-tag-follow-mode" '("treemacs-")))
+(defvar treemacs-tag-follow-mode nil "\
+Non-nil if Treemacs-Tag-Follow mode is enabled.
+See the `treemacs-tag-follow-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `treemacs-tag-follow-mode'.")
+
+(custom-autoload 'treemacs-tag-follow-mode "treemacs-tag-follow-mode" nil)
+
+(autoload 'treemacs-tag-follow-mode "treemacs-tag-follow-mode" "\
+Toggle `treemacs-tag-follow-mode'.
+
+If called interactively, enable Treemacs-Tag-Follow mode if ARG
+is positive, and disable it if ARG is zero or negative.
+If called from Lisp, also enable the mode if ARG is omitted or
+nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
+
+This acts as more fine-grained alternative to `treemacs-follow-mode' and will
+thus disable `treemacs-follow-mode' on activation. When enabled treemacs will
+focus not only the file of the current buffer, but also the tag at point.
+
+The follow action is attached to Emacs' idle timer and will run
+`treemacs-tag-follow-delay' seconds of idle time. The delay value is not an
+integer, meaning it accepts floating point values like 1.5.
+
+Every time a tag is followed a rescan of the imenu index is forced by
+temporarily setting `imenu-auto-rescan' to t (though a cache is applied as long
+as the buffer is unmodified). This is necessary to assure that creation or
+deletion of tags does not lead to errors and guarantees an always up-to-date tag
+view.
+
+Note that in order to move to a tag in treemacs the treemacs buffer's window
+needs to be temporarily selected, which will reset `blink-cursor-mode's timer if
+it is enabled. This will result in the cursor blinking seemingly pausing for a
+short time and giving the appereance of the tag follow action lasting much
+longer than it really does.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-tag-follow-mode" '("treemacs--")))
+
 
 
 
+(autoload 'treemacs--expand-file-node "treemacs-tags" "\
+Open tag items for file BTN.
+Recursively open all tags below BTN when RECURSIVE is non-nil.
+
+\(fn BTN &optional RECURSIVE)" nil nil)
+
+(autoload 'treemacs--collapse-file-node "treemacs-tags" "\
+Close node given by BTN.
+Remove all open tag entries under BTN when RECURSIVE.
+
+\(fn BTN &optional RECURSIVE)" nil nil)
+
+(autoload 'treemacs--visit-or-expand/collapse-tag-node "treemacs-tags" "\
+Visit tag section BTN if possible, expand or collapse it otherwise.
+Pass prefix ARG on to either visit or toggle action.
+
+FIND-WINDOW is a special provision depending on this function's invocation
+context and decides whether to find the window to display in (if the tag is
+visited instead of the node being expanded).
+
+On the one hand it can be called based on `treemacs-RET-actions-config' (or
+TAB).  The functions in these configs are expected to find the windows they need
+to display in themselves, so FIND-WINDOW must be t. On the other hand this
+function is also called from the top level vist-node functions like
+`treemacs-visit-node-vertical-split' which delegates to the
+`treemacs--execute-button-action' macro which includes the determination of
+the display window.
+
+\(fn BTN ARG FIND-WINDOW)" nil nil)
+
+(autoload 'treemacs--expand-tag-node "treemacs-tags" "\
+Open tags node items for BTN.
+Open all tag section under BTN when call is RECURSIVE.
+
+\(fn BTN &optional RECURSIVE)" nil nil)
+
+(autoload 'treemacs--collapse-tag-node "treemacs-tags" "\
+Close tags node at BTN.
+Remove all open tag entries under BTN when RECURSIVE.
+
+\(fn BTN &optional RECURSIVE)" nil nil)
+
+(autoload 'treemacs--goto-tag "treemacs-tags" "\
+Go to the tag at BTN.
+
+\(fn BTN)" nil nil)
+
+(autoload 'treemacs--create-imenu-index-function "treemacs-tags" "\
+The `imenu-create-index-function' for treemacs buffers." nil nil)
+
+(function-put 'treemacs--create-imenu-index-function 'side-effect-free 't)
+
+
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-tags" '("treemacs--")))
+
 
 
 
@@ -3146,10 +3358,10 @@ and toggle it if ARG is `toggle'; disable the mode otherwise.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20201220.1911/transient-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20210103.1546/transient-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20201220.1911/transient-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20210103.1546/transient-autoloads.el") (car load-path))))
 
 
 
@@ -3281,10 +3493,10 @@ Calling this function interactively, COMMAND-LINE-FORMATS is set above.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20201218.1222/ivy-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210105.2002/ivy-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20201218.1222/ivy-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210105.2002/ivy-autoloads.el") (car load-path))))
 
 
 
@@ -3677,10 +3889,10 @@ Major Mode for editing ML-Yacc files.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/smartparens-20201217.1033/smartparens-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/smartparens-20201229.1937/smartparens-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/smartparens-20201217.1033/smartparens-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/smartparens-20201229.1937/smartparens-autoloads.el") (car load-path))))
 
 
 
@@ -3913,7 +4125,7 @@ Turn off `show-smartparens-mode'." t nil)
 
 
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-python" '("sp-python-fix-tripple-quotes")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-python" '("sp-python-")))
 
 
 
@@ -4673,10 +4885,10 @@ Deactivate python virtual environment." t nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-functional-20201215.40/dash-functional-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-functional-20210103.1524/dash-functional-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-functional-20201215.40/dash-functional-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-functional-20210103.1524/dash-functional-autoloads.el") (car load-path))))
 
 
 
@@ -4761,10 +4973,10 @@ Radio is considered on when STATUS is non-nil, otherwise off.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/prescient-20201214.230/prescient-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/prescient-20210101.2227/prescient-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/prescient-20201214.230/prescient-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/prescient-20210101.2227/prescient-autoloads.el") (car load-path))))
 
 
 
@@ -5176,10 +5388,10 @@ toggle it if ARG is `toggle'; disable the mode otherwise.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4.3/org-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4.4/org-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4.3/org-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4.4/org-autoloads.el") (car load-path))))
 
 
 
@@ -5665,7 +5877,278 @@ Call the customize function with org as argument." t nil)
 
 
 
+(autoload 'org-toggle-sticky-agenda "org-agenda" "\
+Toggle `org-agenda-sticky'.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'org-agenda "org-agenda" "\
+Dispatch agenda commands to collect entries to the agenda buffer.
+Prompts for a command to execute.  Any prefix arg will be passed
+on to the selected command.  The default selections are:
+
+a     Call `org-agenda-list' to display the agenda for current day or week.
+t     Call `org-todo-list' to display the global todo list.
+T     Call `org-todo-list' to display the global todo list, select only
+      entries with a specific TODO keyword (the user gets a prompt).
+m     Call `org-tags-view' to display headlines with tags matching
+      a condition  (the user is prompted for the condition).
+M     Like `m', but select only TODO entries, no ordinary headlines.
+e     Export views to associated files.
+s     Search entries for keywords.
+S     Search entries for keywords, only with TODO keywords.
+/     Multi occur across all agenda files and also files listed
+      in `org-agenda-text-search-extra-files'.
+<     Restrict agenda commands to buffer, subtree, or region.
+      Press several times to get the desired effect.
+>     Remove a previous restriction.
+#     List \"stuck\" projects.
+!     Configure what \"stuck\" means.
+C     Configure custom agenda commands.
+
+More commands can be added by configuring the variable
+`org-agenda-custom-commands'.  In particular, specific tags and TODO keyword
+searches can be pre-defined in this way.
+
+If the current buffer is in Org mode and visiting a file, you can also
+first press `<' once to indicate that the agenda should be temporarily
+\(until the next use of `\\[org-agenda]') restricted to the current file.
+Pressing `<' twice means to restrict to the current subtree or region
+\(if active).
+
+\(fn &optional ARG ORG-KEYS RESTRICTION)" t nil)
+
+(autoload 'org-batch-agenda "org-agenda" "\
+Run an agenda command in batch mode and send the result to STDOUT.
+If CMD-KEY is a string of length 1, it is used as a key in
+`org-agenda-custom-commands' and triggers this command.  If it is a
+longer string it is used as a tags/todo match string.
+Parameters are alternating variable names and values that will be bound
+before running the agenda command.
+
+\(fn CMD-KEY &rest PARAMETERS)" nil t)
+
+(autoload 'org-batch-agenda-csv "org-agenda" "\
+Run an agenda command in batch mode and send the result to STDOUT.
+If CMD-KEY is a string of length 1, it is used as a key in
+`org-agenda-custom-commands' and triggers this command.  If it is a
+longer string it is used as a tags/todo match string.
+Parameters are alternating variable names and values that will be bound
+before running the agenda command.
+
+The output gives a line for each selected agenda item.  Each
+item is a list of comma-separated values, like this:
+
+category,head,type,todo,tags,date,time,extra,priority-l,priority-n
+
+category     The category of the item
+head         The headline, without TODO kwd, TAGS and PRIORITY
+type         The type of the agenda entry, can be
+                todo               selected in TODO match
+                tagsmatch          selected in tags match
+                diary              imported from diary
+                deadline           a deadline on given date
+                scheduled          scheduled on given date
+                timestamp          entry has timestamp on given date
+                closed             entry was closed on given date
+                upcoming-deadline  warning about deadline
+                past-scheduled     forwarded scheduled item
+                block              entry has date block including g. date
+todo         The todo keyword, if any
+tags         All tags including inherited ones, separated by colons
+date         The relevant date, like 2007-2-14
+time         The time, like 15:00-16:50
+extra        String with extra planning info
+priority-l   The priority letter if any was given
+priority-n   The computed numerical priority
+agenda-day   The day in the agenda where this is listed
+
+\(fn CMD-KEY &rest PARAMETERS)" nil t)
+
+(autoload 'org-store-agenda-views "org-agenda" "\
+Store agenda views.
+
+\(fn &rest PARAMETERS)" t nil)
+
+(autoload 'org-batch-store-agenda-views "org-agenda" "\
+Run all custom agenda commands that have a file argument.
+
+\(fn &rest PARAMETERS)" nil t)
+
+(autoload 'org-agenda-list "org-agenda" "\
+Produce a daily/weekly view from all files in variable `org-agenda-files'.
+The view will be for the current day or week, but from the overview buffer
+you will be able to go to other days/weeks.
+
+With a numeric prefix argument in an interactive call, the agenda will
+span ARG days.  Lisp programs should instead specify SPAN to change
+the number of days.  SPAN defaults to `org-agenda-span'.
+
+START-DAY defaults to TODAY, or to the most recent match for the weekday
+given in `org-agenda-start-on-weekday'.
+
+When WITH-HOUR is non-nil, only include scheduled and deadline
+items if they have an hour specification like [h]h:mm.
+
+\(fn &optional ARG START-DAY SPAN WITH-HOUR)" t nil)
+
+(autoload 'org-search-view "org-agenda" "\
+Show all entries that contain a phrase or words or regular expressions.
+
+With optional prefix argument TODO-ONLY, only consider entries that are
+TODO entries.  The argument STRING can be used to pass a default search
+string into this function.  If EDIT-AT is non-nil, it means that the
+user should get a chance to edit this string, with cursor at position
+EDIT-AT.
+
+The search string can be viewed either as a phrase that should be found as
+is, or it can be broken into a number of snippets, each of which must match
+in a Boolean way to select an entry.  The default depends on the variable
+`org-agenda-search-view-always-boolean'.
+Even if this is turned off (the default) you can always switch to
+Boolean search dynamically by preceding the first word with  \"+\" or \"-\".
+
+The default is a direct search of the whole phrase, where each space in
+the search string can expand to an arbitrary amount of whitespace,
+including newlines.
+
+If using a Boolean search, the search string is split on whitespace and
+each snippet is searched separately, with logical AND to select an entry.
+Words prefixed with a minus must *not* occur in the entry.  Words without
+a prefix or prefixed with a plus must occur in the entry.  Matching is
+case-insensitive.  Words are enclosed by word delimiters (i.e. they must
+match whole words, not parts of a word) if
+`org-agenda-search-view-force-full-words' is set (default is nil).
+
+Boolean search snippets enclosed by curly braces are interpreted as
+regular expressions that must or (when preceded with \"-\") must not
+match in the entry.  Snippets enclosed into double quotes will be taken
+as a whole, to include whitespace.
+
+- If the search string starts with an asterisk, search only in headlines.
+- If (possibly after the leading star) the search string starts with an
+  exclamation mark, this also means to look at TODO entries only, an effect
+  that can also be achieved with a prefix argument.
+- If (possibly after star and exclamation mark) the search string starts
+  with a colon, this will mean that the (non-regexp) snippets of the
+  Boolean search must match as full words.
+
+This command searches the agenda files, and in addition the files
+listed in `org-agenda-text-search-extra-files' unless a restriction lock
+is active.
+
+\(fn &optional TODO-ONLY STRING EDIT-AT)" t nil)
+
+(autoload 'org-todo-list "org-agenda" "\
+Show all (not done) TODO entries from all agenda file in a single list.
+The prefix arg can be used to select a specific TODO keyword and limit
+the list to these.  When using `\\[universal-argument]', you will be prompted
+for a keyword.  A numeric prefix directly selects the Nth keyword in
+`org-todo-keywords-1'.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'org-tags-view "org-agenda" "\
+Show all headlines for all `org-agenda-files' matching a TAGS criterion.
+The prefix arg TODO-ONLY limits the search to TODO entries.
+
+\(fn &optional TODO-ONLY MATCH)" t nil)
+
+(autoload 'org-agenda-list-stuck-projects "org-agenda" "\
+Create agenda view for projects that are stuck.
+Stuck projects are project that have no next actions.  For the definitions
+of what a project is and how to check if it stuck, customize the variable
+`org-stuck-projects'.
+
+\(fn &rest IGNORE)" t nil)
+
+(autoload 'org-diary "org-agenda" "\
+Return diary information from org files.
+This function can be used in a \"sexp\" diary entry in the Emacs calendar.
+It accesses org files and extracts information from those files to be
+listed in the diary.  The function accepts arguments specifying what
+items should be listed.  For a list of arguments allowed here, see the
+variable `org-agenda-entry-types'.
+
+The call in the diary file should look like this:
+
+   &%%(org-diary) ~/path/to/some/orgfile.org
+
+Use a separate line for each org file to check.  Or, if you omit the file name,
+all files listed in `org-agenda-files' will be checked automatically:
+
+   &%%(org-diary)
+
+If you don't give any arguments (as in the example above), the default value
+of `org-agenda-entry-types' is used: (:deadline :scheduled :timestamp :sexp).
+So the example above may also be written as
+
+   &%%(org-diary :deadline :timestamp :sexp :scheduled)
+
+The function expects the lisp variables `entry' and `date' to be provided
+by the caller, because this is how the calendar works.  Don't use this
+function from a program - use `org-agenda-get-day-entries' instead.
+
+\(fn &rest ARGS)" nil nil)
+
+(autoload 'org-agenda-check-for-timestamp-as-reason-to-ignore-todo-item "org-agenda" "\
+Do we have a reason to ignore this TODO entry because it has a time stamp?
+
+\(fn &optional END)" nil nil)
+
+(autoload 'org-agenda-set-restriction-lock "org-agenda" "\
+Set restriction lock for agenda to current subtree or file.
+When in a restricted subtree, remove it.
+
+The restriction will span over the entire file if TYPE is `file',
+or if type is '(4), or if the cursor is before the first headline
+in the file. Otherwise, only apply the restriction to the current
+subtree.
+
+\(fn &optional TYPE)" t nil)
+
+(autoload 'org-calendar-goto-agenda "org-agenda" "\
+Compute the Org agenda for the calendar date displayed at the cursor.
+This is a command that has to be installed in `calendar-mode-map'." t nil)
+
+(autoload 'org-agenda-to-appt "org-agenda" "\
+Activate appointments found in `org-agenda-files'.
+
+With a `\\[universal-argument]' prefix, refresh the list of appointments.
+
+If FILTER is t, interactively prompt the user for a regular
+expression, and filter out entries that don't match it.
+
+If FILTER is a string, use this string as a regular expression
+for filtering entries out.
+
+If FILTER is a function, filter out entries against which
+calling the function returns nil.  This function takes one
+argument: an entry from `org-agenda-get-day-entries'.
+
+FILTER can also be an alist with the car of each cell being
+either `headline' or `category'.  For example:
+
+  \\='((headline \"IMPORTANT\")
+    (category \"Work\"))
+
+will only add headlines containing IMPORTANT or headlines
+belonging to the \"Work\" category.
+
+ARGS are symbols indicating what kind of entries to consider.
+By default `org-agenda-to-appt' will use :deadline*, :scheduled*
+\(i.e., deadlines and scheduled items with a hh:mm specification)
+and :timestamp entries.  See the docstring of `org-diary' for
+details and examples.
+
+If an entry has a APPT_WARNTIME property, its value will be used
+to override `appt-message-warning-time'.
+
+\(fn &optional REFRESH FILTER &rest ARGS)" t nil)
+
+
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-agenda" '("org-")))
+
 
 
 
@@ -5681,7 +6164,48 @@ Call the customize function with org as argument." t nil)
 
 
 
+(autoload 'org-capture-string "org-capture" "\
+Capture STRING with the template selected by KEYS.
+
+\(fn STRING &optional KEYS)" t nil)
+
+(autoload 'org-capture "org-capture" "\
+Capture something.
+\\<org-capture-mode-map>
+This will let you select a template from `org-capture-templates', and
+then file the newly captured information.  The text is immediately
+inserted at the target location, and an indirect buffer is shown where
+you can edit it.  Pressing `\\[org-capture-finalize]' brings you back to the previous
+state of Emacs, so that you can continue your work.
+
+When called interactively with a `\\[universal-argument]' prefix argument GOTO, don't
+capture anything, just go to the file/headline where the selected
+template stores its notes.
+
+With a `\\[universal-argument] \\[universal-argument]' prefix argument, go to the last note stored.
+
+When called with a `C-0' (zero) prefix, insert a template at point.
+
+When called with a `C-1' (one) prefix, force prompting for a date when
+a datetree entry is made.
+
+ELisp programs can set KEYS to a string associated with a template
+in `org-capture-templates'.  In this case, interactive selection
+will be bypassed.
+
+If `org-capture-use-agenda-date' is non-nil, capturing from the
+agenda will use the date at point as the default date.  Then, a
+`C-1' prefix will tell the capture process to use the HH:MM time
+of the day at point (if any) or the current HH:MM time.
+
+\(fn &optional GOTO KEYS)" t nil)
+
+(autoload 'org-capture-import-remember-templates "org-capture" "\
+Set `org-capture-templates' to be similar to `org-remember-templates'." t nil)
+
+
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-capture" '("org-capture-")))
+
 
 
 
@@ -5894,10 +6418,10 @@ Inserted by installing Org or when a release is made." nil nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/esxml-20201130.809/esxml-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/esxml-20201226.2146/esxml-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/esxml-20201130.809/esxml-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/esxml-20201226.2146/esxml-autoloads.el") (car load-path))))
 
 
 
@@ -5982,10 +6506,10 @@ Interactively, with prefix argument, move to the previous position.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20201221.827/modus-themes-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210106.748/modus-themes-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20201221.827/modus-themes-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210106.748/modus-themes-autoloads.el") (car load-path))))
 
 
 
@@ -6000,18 +6524,20 @@ C1 and C2 are color values written in hexadecimal RGB.
 \(fn C1 C2)" nil nil)
 
 (autoload 'modus-themes-color "modus-themes" "\
-Return color value for KEY.
-The KEY is the car of each cons cell in the alists
-`modus-themes-colors-operandi', `modus-themes-colors-vivendi'.
+Return color value for COLOR from current palette.
+COLOR is a key in `modus-themes-operandi-colors' or
+`modus-themes-vivendi-colors'.
 
-\(fn KEY)" nil nil)
+\(fn COLOR)" nil nil)
 
 (autoload 'modus-themes-color-alts "modus-themes" "\
-Return color value for KEY-LIGHT and KEY-DARK.
-Both arguments must reference the car of a cons cell in
-`modus-themes-colors-operandi', `modus-themes-colors-vivendi'.
+Return color value from current palette.
+When Modus Operandi is enabled, return color value for color
+LIGHT-COLOR.  When Modus Vivendi is enabled, return color value
+for DARK-COLOR.  LIGHT-COLOR and DARK-COLOR are keys in
+`modus-themes-operandi-colors' or `modus-themes-vivendi-colors'.
 
-\(fn KEY-LIGHT KEY-DARK)" nil nil)
+\(fn LIGHT-COLOR DARK-COLOR)" nil nil)
 
 (autoload 'modus-themes-load-operandi "modus-themes" "\
 Load `modus-operandi' and disable `modus-vivendi'.
@@ -6023,8 +6549,8 @@ Also run `modus-themes-after-load-theme-hook'." nil nil)
 
 (autoload 'modus-themes-toggle "modus-themes" "\
 Toggle between `modus-operandi' and `modus-vivendi' themes.
-Also runs `modus-themes-after-load-theme-hook' by virtue of
-calling the internal `modus-themes-load-operandi' and
+Also runs `modus-themes-after-load-theme-hook' at its last stage
+by virtue of calling either of `modus-themes-load-operandi' and
 `modus-themes-load-vivendi' functions." t nil)
 
 (when (and (boundp 'custom-theme-load-path) load-file-name) (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
@@ -6032,10 +6558,6 @@ calling the internal `modus-themes-load-operandi' and
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "modus-themes" '("modus-themes-")))
 
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "modus-themes-core" '("modus-themes-core-theme")))
 
 
 
@@ -6197,10 +6719,10 @@ toggle it if ARG is `toggle'; disable the mode otherwise.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20201222.1527/magit-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210105.1030/magit-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20201222.1527/magit-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210105.1030/magit-autoloads.el") (car load-path))))
 
 
 
@@ -6398,8 +6920,8 @@ See `auto-revert-mode' for more information on Auto-Revert mode.
 Start a bisect session.
 
 Bisecting a bug means to find the commit that introduced it.
-This command starts such a bisect session by asking for a know
-good and a bad commit.  To move the session forward use the
+This command starts such a bisect session by asking for a known
+good and a known bad commit.  To move the session forward use the
 other actions from the bisect transient command (\\<magit-status-mode-map>\\[magit-bisect]).
 
 \(fn BAD GOOD ARGS)" t nil)
@@ -6416,6 +6938,15 @@ the bug in question." t nil)
 While bisecting, mark the current commit as bad.
 Use this after you have asserted that the commit does contain the
 bug in question." t nil)
+
+(autoload 'magit-bisect-mark "magit-bisect" "\
+While bisecting, mark the current commit with a bisect term.
+During a bisect using alternate terms, commits can still be
+marked with `magit-bisect-good' and `magit-bisect-bad', as those
+commands map to the correct term (\"good\" to --term-old's value
+and \"bad\" to --term-new's).  However, in some cases, it can be
+difficult to keep that mapping straight in your head; this
+command provides an interface that exposes the underlying terms." t nil)
 
 (autoload 'magit-bisect-skip "magit-bisect" "\
 While bisecting, skip the current commit.
@@ -8661,10 +9192,10 @@ behaviors.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/iedit-20201125.342/iedit-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/iedit-20210106.334/iedit-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/iedit-20201125.342/iedit-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/iedit-20210106.334/iedit-autoloads.el") (car load-path))))
 
 
 
@@ -9270,10 +9801,10 @@ Local bindings (`counsel-mode-map'):
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/lispy-20201109.1728/lispy-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/lispy-20201226.1746/lispy-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/lispy-20201109.1728/lispy-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/lispy-20201226.1746/lispy-autoloads.el") (car load-path))))
 
 
 
@@ -9541,10 +10072,10 @@ Beautify / pretty-print the active region (or the entire buffer if no active reg
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-rich-20201222.511/ivy-rich-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-rich-20201224.4/ivy-rich-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-rich-20201222.511/ivy-rich-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-rich-20201224.4/ivy-rich-autoloads.el") (car load-path))))
 
 
 
@@ -9569,6 +10100,27 @@ ARG is `toggle'; disable the mode otherwise.
 \(fn &optional ARG)" t nil)
 
 (autoload 'ivy-rich-reload "ivy-rich" nil nil nil)
+
+(defvar ivy-rich-project-root-cache-mode nil "\
+Non-nil if Ivy-Rich-Project-Root-Cache mode is enabled.
+See the `ivy-rich-project-root-cache-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `ivy-rich-project-root-cache-mode'.")
+
+(custom-autoload 'ivy-rich-project-root-cache-mode "ivy-rich" nil)
+
+(autoload 'ivy-rich-project-root-cache-mode "ivy-rich" "\
+Toggle ivy-rich-root-cache-mode globally.
+
+If called interactively, enable Ivy-Rich-Project-Root-Cache mode
+if ARG is positive, and disable it if ARG is zero or negative.
+If called from Lisp, also enable the mode if ARG is omitted or
+nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
+
+\(fn &optional ARG)" t nil)
 
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ivy-rich" '("ivy-rich-")))
@@ -10142,10 +10694,10 @@ of (command, word) to be used by `flyspell-do-correct'.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/flycheck-20201222.1808/flycheck-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/flycheck-20201228.2104/flycheck-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/flycheck-20201222.1808/flycheck-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/flycheck-20201228.2104/flycheck-autoloads.el") (car load-path))))
 
 
 
@@ -13509,14 +14061,14 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
 )
 (setq package-activated-list
       (append
-       '(zoutline yasnippet yaml-mode xr xonsh-mode ws-butler async with-editor posframe which-key which-key-posframe vlf validate bind-key use-package use-package-hydra key-chord bind-chord use-package-chords epl pkg-info projectile dash s f avy ace-window pfuture lv hydra ht treemacs treemacs-projectile treemacs-icons-dired transient toc-org test-simple ivy swiper srefactor spinner sml-mode smartparens load-relative loc-changes realgud rainbow-delimiters pos-tip racket-mode pythonic dash-functional pretty-hydra prescient popup persistent-scratch paren-face paredit paradox outorg outshine org-bullets org esxml nov mwim modus-themes memoize math-symbol-lists makey major-mode-hydra git-commit magit macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine gcmh flyspell-correct flyspell-correct-popup flycheck flycheck-yamllint fish-mode expand-region eval-in-repl eros elmacro elisp-format dtrt-indent discover-my-major diminish diff-hl deadgrep conda company company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-identifiers-mode cmake-mode cask-mode beacon auctex amx all-the-icons all-the-icons-dired aggressive-indent)
+       '(zoutline yasnippet yaml-mode xr xonsh-mode ws-butler async with-editor posframe which-key which-key-posframe vlf validate bind-key use-package use-package-hydra key-chord bind-chord use-package-chords epl pkg-info projectile dash s f avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile treemacs-icons-dired transient toc-org test-simple ivy swiper srefactor spinner sml-mode smartparens load-relative loc-changes realgud rainbow-delimiters pos-tip racket-mode pythonic dash-functional pretty-hydra prescient popup persistent-scratch paren-face paredit paradox outorg outshine org-bullets org esxml nov mwim modus-themes memoize math-symbol-lists makey major-mode-hydra git-commit magit macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine gcmh flyspell-correct flyspell-correct-popup flycheck flycheck-yamllint fish-mode expand-region eval-in-repl eros elmacro elisp-format dtrt-indent discover-my-major diminish diff-hl deadgrep conda company company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-identifiers-mode cmake-mode cask-mode beacon auctex amx all-the-icons all-the-icons-dired aggressive-indent)
        package-activated-list))
 (progn
   (require 'info)
   (info-initialize)
   (setq Info-directory-list
         (append
-         '("/Users/mark/.emacs.d/elpa/27.1/elpa/auctex-12.3.1" "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20201222.1527" "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20201221.827" "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20201220.1343" "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20201218.1222" "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20201220.1911" "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20201218.1237" "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20201110.2133" "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20201030.1232")
+         '("/Users/mark/.emacs.d/elpa/27.1/elpa/auctex-12.3.1" "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210105.1030" "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210106.748" "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20201220.1343" "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210105.2002" "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20210103.1546" "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20201218.1237" "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20201110.2133" "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20201030.1232")
          Info-directory-list)))
 
 ;; Local Variables:

@@ -602,7 +602,8 @@ Odd things needed
    "Current window"
    (("l" linum-mode "line number" :toggle t)
     ("c" (what-cursor-position 'detail) "Character at POS")
-    ("TAB" hs-toggle-hiding "Toggle hide-show")
+    ("TAB" hs-mwb-show-one-level "show one level")
+    ("C-<tab>" hs-toggle-hiding "Toggle hide-show")
     )
    "Actions"
    (("d" toggle-debug-on-error "debug on error"

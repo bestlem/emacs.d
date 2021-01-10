@@ -514,7 +514,7 @@ midnight-mode purges buffers which haven’t been displayed in 3 days.
 #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_06A63EF4-FFB6-4C44-BDC8-23241BDE625C
 #+begin_src emacs-lisp
 (use-package midnight
-  :defer 1000
+  :defer 10
   :config
   (midnight-delay-set 'midnight-delay "3:15am")
   (defun add-to-clean-buffer-regex (str)

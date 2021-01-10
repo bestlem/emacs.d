@@ -30,7 +30,7 @@
     ("sr" racket-send-region "Region to REPL")
     ("ss" racket-send-last-sexp "sexp to REPL")
     ("rr" (lambda () (interactive) (racket-run 4)) "Run with errortrace")
-    ("re" (lambda () (interactive) (racket-run 2)) "Run with errortrace @")
+    ("re" (lambda () (interactive) (racket-run 2)) "Run with errortrace 2")
     ("ri" (lambda () (interactive) (racket-run 16)) "Instrument for debug"))
    "Edit"
    (("ea" hydra-lispy-mwb-alter/body "Alter...")

@@ -27,6 +27,7 @@ Note takes time to load
               ("C-r" . ivy-previous-line-or-history)
               ("M-r" . ivy-reverse-i-search) ; emacs complains about this]
               ("<C-return>" . ivy-immediate-done)
+              ("C-<f18>" . ivy-next-line) ;c-ins
               ("<ESC>" . minibuffer-keyboard-quit))
   :bind (:map ivy-switch-buffer-map
               ("C-k" . ivy-switch-buffer-kill))
@@ -179,31 +180,33 @@ Improve many emacs functions
     :ensure t
     :diminish
     :after ivy
-    ;;;  Using mode means these aren't needed?
+;;;  Using mode means these aren't needed?
     :bind (("M-x" . counsel-M-x)
-		   ("C-x C-f" . counsel-find-file)
-		   ("C-x C-r" . counsel-recentf)
-		   ("<f1> f" . counsel-describe-function)
-		   ("<f1> v" . counsel-describe-variable)
-		   ("<f1> l" . counsel-find-library)
-										; ("<f2> i" . counsel-info-lookup-symbol)
-										; ("<f2> u" . counsel-unicode-char)
-		   ("M-i" . counsel-imenu)
-		   ("C-c g" . counsel-git-grep)
-		   ("C-c j" . counsel-git)
-										;("C-c k" . counsel-ag)
-		   ("C-c r" . counsel-rg)
-		   ("C-x l" . counsel-locate)
-		   :map minibuffer-local-map
-		   ("C-r" . counsel-minibuffer-add))
+           ("C-x C-f" . counsel-find-file)
+           ("C-x C-r" . counsel-recentf)
+           ("<f1> f" . counsel-describe-function)
+           ("<f1> v" . counsel-describe-variable)
+           ("<f1> l" . counsel-find-library)
+           ("C-<f18>" . counsel-yank-pop) ; C-ins
+                                        ; ("<f2> i" . counsel-info-lookup-symbol)
+                                        ; ("<f2> u" . counsel-unicode-char)
+           ("M-i" . counsel-imenu)
+           ("C-c g" . counsel-git-grep) ; well deadgrep does that
+           ("C-c j" . counsel-git)
+                                        ;("C-c k" . counsel-ag)
+           ;; ("C-c r" . counsel-rg) ; deadgrep much better
+           ("C-x l" . counsel-locate)
+           :map minibuffer-local-map
+           ("C-r" . counsel-minibuffer-add))
     :config
-    (if (executable-find "rg")
-	    ;; use ripgrep instead of grep because it's way faster
-	    (setq counsel-grep-base-command
-			  "rg -i -M 120 --no-heading --line-number --color never '%s' %s"
-			  counsel-rg-base-command
-			  "rg -i -M 120 --no-heading --line-number --color never %s .")
-	  (warn "\nWARNING: Could not find the ripgrep executable. It is recommended you install ripgrep."))
+    ;; (if (executable-find "rg")
+    ;;     ;; use ripgrep instead of grep because it's way faster
+    ;;     (setq counsel-grep-base-command
+    ;; 		  "rg -i -M 120 --no-heading --line-number --color never '%s' %s"
+    ;; 		  counsel-rg-base-command
+    ;; 		  "rg -i -M 120 --no-heading --line-number --color never %s .")
+    ;;   (warn "\nWARNING: Could not find the ripgrep executable. It is recommended you i
+    ;; nstall ripgrep."))
     (setq counsel-find-file-at-point t)
     :config
     (counsel-mode 1))

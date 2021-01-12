@@ -606,8 +606,9 @@ Odd things needed
     ("C-<tab>" hs-toggle-hiding "Toggle hide-show")
     )
    "Actions"
-   (("d" toggle-debug-on-error "debug on error"
+   (("D" toggle-debug-on-error "debug on error"
          :toggle (default-value 'debug-on-error))
+    ("d" hyd-dired-common/body "Open dired frame")
     ("M" toggle-mwb-message-timestamp
          :toggle mwb-message-timestamp)
     ("p" package-quickstart-refresh "refresh quickstart packages")
@@ -619,6 +620,7 @@ Odd things needed
    (("b" ivy-switch-buffer "Switch Buffer")
     ("B" counsel-bookmark "Jump to bookmark")
     ("s" org-babel-tangle-jump-to-org "Back to org")
+    ("j" dired-jump "Dired jump")
     )))
 (bind-key "H-`"  'hydra-kl/body)
 ;; (bind-key "<f19>"  'hydra-key-leader/body)

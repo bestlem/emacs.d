@@ -11692,6 +11692,128 @@ Create a makey popup listing all MODE keys with their description.
 
 
 )
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/dired-hacks-utils-20201005.2318/dired-hacks-utils-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/dired-hacks-utils-20201005.2318/dired-hacks-utils-autoloads.el") (car load-path))))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dired-hacks-utils" '("dired-")))
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/dired-subtree-20210105.1127/dired-subtree-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/dired-subtree-20210105.1127/dired-subtree-autoloads.el") (car load-path))))
+
+
+
+(autoload 'dired-subtree-narrow "dired-subtree" "\
+Narrow the buffer to this subtree." t nil)
+
+(autoload 'dired-subtree-up "dired-subtree" "\
+Jump up one directory.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'dired-subtree-down "dired-subtree" "\
+Jump down one directory.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'dired-subtree-next-sibling "dired-subtree" "\
+Go to the next sibling.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'dired-subtree-previous-sibling "dired-subtree" "\
+Go to the previous sibling.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'dired-subtree-beginning "dired-subtree" "\
+Go to the first file in this subtree." t nil)
+
+(autoload 'dired-subtree-end "dired-subtree" "\
+Go to the first file in this subtree." t nil)
+
+(autoload 'dired-subtree-mark-subtree "dired-subtree" "\
+Mark all files in this subtree.
+
+With prefix argument mark all the files in subdirectories
+recursively.
+
+\(fn &optional ALL)" t nil)
+
+(autoload 'dired-subtree-unmark-subtree "dired-subtree" "\
+Unmark all files in this subtree.
+
+With prefix argument unmark all the files in subdirectories
+recursively.
+
+\(fn &optional ALL)" t nil)
+
+(autoload 'dired-subtree-revert "dired-subtree" "\
+Revert the subtree.
+
+This means reinserting the content of this subtree and all its
+children." t nil)
+
+(autoload 'dired-subtree-insert "dired-subtree" "\
+Insert subtree under this directory." t nil)
+
+(autoload 'dired-subtree-remove "dired-subtree" "\
+Remove subtree at point." t nil)
+
+(autoload 'dired-subtree-toggle "dired-subtree" "\
+Insert subtree at point or remove it if it was not present." t nil)
+
+(autoload 'dired-subtree-cycle "dired-subtree" "\
+Org-mode like cycle visibility:
+
+1) Show subtree
+2) Show subtree recursively (if previous command was cycle)
+3) Remove subtree
+
+Numeric prefix will set max depth
+
+\(fn &optional MAX-DEPTH)" t nil)
+
+(autoload 'dired-subtree-only-this-file "dired-subtree" "\
+Remove all the siblings on the route from this file to the top-most directory.
+
+With ARG non-nil, do not remove expanded directories in parents.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'dired-subtree-only-this-directory "dired-subtree" "\
+Remove all the siblings on the route from this directory to the top-most directory.
+
+With ARG non-nil, do not remove expanded directories in parents.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'dired-subtree-apply-filter "dired-subtree" "\
+Push a local filter for this subtree.
+
+This depends on `dired-filter' package.
+
+It works exactly the same as global dired filters, only
+restricted to a subtree.  The global filter is also applied to
+the subtree.  The filter action is read from `dired-filter-map'." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dired-subtree" '("dired-")))
+
+
+
+
+
+)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/diminish-20191127.1326/diminish-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -14061,7 +14183,7 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
 )
 (setq package-activated-list
       (append
-       '(zoutline yasnippet yaml-mode xr xonsh-mode ws-butler async with-editor posframe which-key which-key-posframe vlf validate bind-key use-package use-package-hydra key-chord bind-chord use-package-chords epl pkg-info projectile dash s f avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile treemacs-icons-dired transient toc-org test-simple ivy swiper srefactor spinner sml-mode smartparens load-relative loc-changes realgud rainbow-delimiters pos-tip racket-mode pythonic dash-functional pretty-hydra prescient popup persistent-scratch paren-face paredit paradox outorg outshine org-bullets org esxml nov mwim modus-themes memoize math-symbol-lists makey major-mode-hydra git-commit magit macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine gcmh flyspell-correct flyspell-correct-popup flycheck flycheck-yamllint fish-mode expand-region eval-in-repl eros elmacro elisp-format dtrt-indent discover-my-major diminish diff-hl deadgrep conda company company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-identifiers-mode cmake-mode cask-mode beacon auctex amx all-the-icons all-the-icons-dired aggressive-indent)
+       '(zoutline yasnippet yaml-mode xr xonsh-mode ws-butler async with-editor posframe which-key which-key-posframe vlf validate bind-key use-package use-package-hydra key-chord bind-chord use-package-chords epl pkg-info projectile dash s f avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile treemacs-icons-dired transient toc-org test-simple ivy swiper srefactor spinner sml-mode smartparens load-relative loc-changes realgud rainbow-delimiters pos-tip racket-mode pythonic dash-functional pretty-hydra prescient popup persistent-scratch paren-face paredit paradox outorg outshine org-bullets org esxml nov mwim modus-themes memoize math-symbol-lists makey major-mode-hydra git-commit magit macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine gcmh flyspell-correct flyspell-correct-popup flycheck flycheck-yamllint fish-mode expand-region eval-in-repl eros elmacro elisp-format dtrt-indent discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep conda company company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-identifiers-mode cmake-mode cask-mode beacon auctex amx all-the-icons all-the-icons-dired aggressive-indent)
        package-activated-list))
 (progn
   (require 'info)

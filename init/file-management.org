@@ -84,6 +84,17 @@ But the GNU manual gives the best - in a subdirectory of where you are - OK Tram
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:0A3506D6-DE37-44F4-A990-C06C1D567023
 :END:
 There are some modes that have special save actions e.g. *Abbrev* which is a buffer with no file name. I force a save using a dialog box but this should be call the special call - stick with ^x^s
+** Turn off backup
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20210111T173758.270995
+:END:
+This will turn backup off for current buffer.
+Comes from gnus setup
+#+NAME: org_mark_mini12.local_20210111T173758.246257
+#+begin_src emacs-lisp
+(defun turn-off-backup-for-current-buffer ()
+  (set (make-local-variable 'backup-inhibited) t))
+#+end_src
 * Files
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:86DB2C97-15D2-4ADA-8AFA-13397998FDC8

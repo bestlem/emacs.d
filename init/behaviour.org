@@ -516,7 +516,7 @@ midnight-mode purges buffers which haven’t been displayed in 3 days.
 (use-package midnight
   :defer 10
   :config
-  (midnight-delay-set 'midnight-delay "3:15am")
+  (midnight-delay-set 'midnight-delay "3:00am")
   (defun add-to-clean-buffer-regex (str)
     (add-to-list 'clean-buffer-list-kill-regexps
                  (rx-to-string `(seq line-start "*" ,str " "))))
@@ -636,6 +636,10 @@ However only want to fill modes where there are line based comments e.g. Emacs l
 (defun mwb-prog-auto-fill-80 ()
   "Fill for 80 column screen - I only use where standards are enforced"
   (_mwb-prog-auto-fill 79))
+
+(defun mwb-auto-fill-80 ()
+  "Fill for 80 column screen "
+  (_mwb-prog-auto-fill 76))
 
 (defun mwb-prog-auto-fill-120 ()
   "Fill for 120 column screen - \"I only use where standards are enforced\"s to be my current screen"

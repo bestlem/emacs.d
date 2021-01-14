@@ -578,10 +578,10 @@ Run ‘dired-do-rename’ asynchronously.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20201030.1232/with-editor-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20210110.1545/with-editor-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20201030.1232/with-editor-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20210110.1545/with-editor-autoloads.el") (car load-path))))
 
 
 
@@ -669,10 +669,10 @@ else like the former.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/posframe-20201224.2318/posframe-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/posframe-20210113.314/posframe-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/posframe-20201224.2318/posframe-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/posframe-20210113.314/posframe-autoloads.el") (car load-path))))
 
 
 
@@ -1238,10 +1238,10 @@ Display all the personal keybindings defined by `bind-key'." t nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20201110.2133/use-package-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20210106.2145/use-package-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20201110.2133/use-package-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20210106.2145/use-package-autoloads.el") (car load-path))))
 
 
 
@@ -2301,10 +2301,10 @@ Otherwise behave as if called interactively.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20201218.1237/dash-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210111.1247/dash-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20201218.1237/dash-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210111.1247/dash-autoloads.el") (car load-path))))
 
 
 
@@ -2351,6 +2351,10 @@ Dash-Fontify mode is enabled in all buffers where
 See `dash-fontify-mode' for more information on Dash-Fontify mode.
 
 \(fn &optional ARG)" t nil)
+
+(autoload 'dash-register-info-lookup "dash" "\
+Register the Dash Info manual with `info-lookup-symbol'.
+This allows Dash symbols to be looked up with \\[info-lookup-symbol]." t nil)
 
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dash" '("!cdr" "!cons" "--" "->" "-a" "-butlast" "-c" "-d" "-e" "-f" "-gr" "-i" "-keep" "-l" "-m" "-non" "-only-some" "-p" "-r" "-s" "-t" "-u" "-value-to-list" "-when-let" "-zip" "dash-")))
@@ -2839,10 +2843,10 @@ result of `defhydra'.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/ht-20201119.518/ht-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/ht-20210113.822/ht-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/ht-20201119.518/ht-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/ht-20210113.822/ht-autoloads.el") (car load-path))))
 
 
 
@@ -2872,10 +2876,10 @@ Read a string using a pos-frame with given PROMPT and INITIAL-INPUT.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/treemacs-20210106.1417/treemacs-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/treemacs-20210108.1145/treemacs-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/treemacs-20210106.1417/treemacs-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/treemacs-20210108.1145/treemacs-autoloads.el") (car load-path))))
 
 
 
@@ -3301,10 +3305,10 @@ The `imenu-create-index-function' for treemacs buffers." nil nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/treemacs-projectile-20200530.2129/treemacs-projectile-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/treemacs-projectile-20210107.1251/treemacs-projectile-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/treemacs-projectile-20200530.2129/treemacs-projectile-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/treemacs-projectile-20210107.1251/treemacs-projectile-autoloads.el") (car load-path))))
 
 
 
@@ -3323,10 +3327,10 @@ the project's root directory.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/treemacs-icons-dired-20201005.1309/treemacs-icons-dired-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/treemacs-icons-dired-20210107.1251/treemacs-icons-dired-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/treemacs-icons-dired-20201005.1309/treemacs-icons-dired-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/treemacs-icons-dired-20210107.1251/treemacs-icons-dired-autoloads.el") (car load-path))))
 
 
 
@@ -3344,9 +3348,10 @@ or call the function `treemacs-icons-dired-mode'.")
 Display treemacs icons for each file in a dired buffer.
 
 If called interactively, enable Treemacs-Icons-Dired mode if ARG
-is positive, and disable it if ARG is zero or negative.  If
-called from Lisp, also enable the mode if ARG is omitted or nil,
-and toggle it if ARG is `toggle'; disable the mode otherwise.
+is positive, and disable it if ARG is zero or negative.
+If called from Lisp, also enable the mode if ARG is omitted or
+nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
 
 \(fn &optional ARG)" t nil)
 
@@ -3493,10 +3498,10 @@ Calling this function interactively, COMMAND-LINE-FORMATS is set above.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210105.2002/ivy-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210109.1619/ivy-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210105.2002/ivy-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210109.1619/ivy-autoloads.el") (car load-path))))
 
 
 
@@ -4335,10 +4340,10 @@ Disable `rainbow-delimiters-mode'." nil nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20201220.1343/racket-mode-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210110.1607/racket-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20201220.1343/racket-mode-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210110.1607/racket-mode-autoloads.el") (car load-path))))
 
 
 
@@ -4986,14 +4991,16 @@ Radio is considered on when STATUS is non-nil, otherwise off.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/popup-20200610.317/popup-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/popup-20210108.1821/popup-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/popup-20200610.317/popup-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/popup-20210108.1821/popup-autoloads.el") (car load-path))))
 
 
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "popup" '("popup-")))
+
+
 
 
 )
@@ -6506,10 +6513,10 @@ Interactively, with prefix argument, move to the previous position.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210106.748/modus-themes-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210113.2030/modus-themes-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210106.748/modus-themes-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210113.2030/modus-themes-autoloads.el") (car load-path))))
 
 
 
@@ -6538,6 +6545,17 @@ for DARK-COLOR.  LIGHT-COLOR and DARK-COLOR are keys in
 `modus-themes-operandi-colors' or `modus-themes-vivendi-colors'.
 
 \(fn LIGHT-COLOR DARK-COLOR)" nil nil)
+
+(autoload 'modus-themes-load-themes "modus-themes" "\
+Ensure that the Modus themes are in `custom-enabled-themes'.
+
+This function is intended for use in package declarations such as
+those defined with the help of `use-package'. The idea is to add
+this function to the `:init' stage of the package's loading, so
+that subsequent calls that assume the presence of a loaded theme,
+like `modus-themes-toggle' or `modus-themes-load-operandi', will
+continue to work as intended even if they are lazy-loaded (such
+as when they are declared in the `:config' phase)." nil nil)
 
 (autoload 'modus-themes-load-operandi "modus-themes" "\
 Load `modus-operandi' and disable `modus-vivendi'.
@@ -6674,10 +6692,10 @@ Show the hydra for the current major mode." t nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/git-commit-20201222.1527/git-commit-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/git-commit-20210102.1242/git-commit-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/git-commit-20201222.1527/git-commit-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/git-commit-20210102.1242/git-commit-autoloads.el") (car load-path))))
 
 
 
@@ -9192,10 +9210,10 @@ behaviors.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/iedit-20210106.334/iedit-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/iedit-20210111.1147/iedit-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/iedit-20210106.334/iedit-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/iedit-20210111.1147/iedit-autoloads.el") (car load-path))))
 
 
 
@@ -9290,10 +9308,10 @@ Commands:
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/counsel-20201218.1218/counsel-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/counsel-20210109.1641/counsel-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/counsel-20201218.1218/counsel-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/counsel-20210109.1641/counsel-autoloads.el") (car load-path))))
 
 
 
@@ -9413,7 +9431,7 @@ Call the \"git log --grep\" shell command." t nil)
 Forward to `find-file'.
 When INITIAL-INPUT is non-nil, use it in the minibuffer during completion.
 
-\(fn &optional INITIAL-INPUT)" t nil)
+\(fn &optional INITIAL-INPUT INITIAL-DIRECTORY)" t nil)
 
 (autoload 'counsel-dired "counsel" "\
 Forward to `dired'.
@@ -10213,20 +10231,20 @@ toggle it if ARG is `toggle'; disable the mode otherwise.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/ignoramus-20160414.1409/ignoramus-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/ignoramus-20210108.2026/ignoramus-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/ignoramus-20160414.1409/ignoramus-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/ignoramus-20210108.2026/ignoramus-autoloads.el") (car load-path))))
 
 
 
-(define-obsolete-variable-alias 'ignoramus-file-endings 'ignoramus-file-basename-endings)
+(define-obsolete-variable-alias 'ignoramus-file-endings 'ignoramus-file-basename-endings "0.6.0")
 
-(define-obsolete-variable-alias 'ignoramus-file-beginnings 'ignoramus-file-basename-beginnings)
+(define-obsolete-variable-alias 'ignoramus-file-beginnings 'ignoramus-file-basename-beginnings "0.6.0")
 
-(define-obsolete-variable-alias 'ignoramus-file-exact-names 'ignoramus-file-basename-exact-names)
+(define-obsolete-variable-alias 'ignoramus-file-exact-names 'ignoramus-file-basename-exact-names "0.6.0")
 
-(define-obsolete-variable-alias 'ignoramus-file-regexps 'ignoramus-file-basename-regexps)
+(define-obsolete-variable-alias 'ignoramus-file-regexps 'ignoramus-file-basename-regexps "0.6.0")
 
 (let ((loads (get 'ignoramus 'custom-loads))) (if (member '"ignoramus" loads) nil (put 'ignoramus 'custom-loads (cons '"ignoramus" loads))))
 
@@ -10292,8 +10310,12 @@ If ACTIONS contains 'all, turn on ignoring files for all
 actions in `ignoramus-known-actions'.
 
 \(fn &optional ACTIONS)" nil nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ignoramus" '("ignoramus-")))
+
+
+
 
 
 )
@@ -11863,10 +11885,10 @@ what diminished modes would be on the mode-line if they were still minor." t nil
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/diff-hl-20201220.1006/diff-hl-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/diff-hl-20210113.1930/diff-hl-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/diff-hl-20201220.1006/diff-hl-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/diff-hl-20210113.1930/diff-hl-autoloads.el") (car load-path))))
 
 
 
@@ -11885,6 +11907,29 @@ Turn on `diff-hl-mode' or `diff-hl-dir-mode' in a buffer if appropriate." nil ni
 
 (autoload 'diff-hl--global-turn-on "diff-hl" "\
 Call `turn-on-diff-hl-mode' if the current major mode is applicable." nil nil)
+
+(autoload 'diff-hl-set-reference-rev "diff-hl" "\
+Set the reference revision globally to REV.
+When called interactively, REV is get from contexts:
+
+- In a log view buffer, it uses the revision of current entry.
+Call `vc-print-log' or `vc-print-root-log' first to open a log
+view buffer.
+- In a VC annotate buffer, it uses the revision of current line.
+- In other situations, get the revision name at point.
+
+Notice that this sets the reference revision globally, so in
+files from other repositories, `diff-hl-mode' will not highlight
+changes correctly, until you run `diff-hl-reset-reference-rev'.
+
+Also notice that this will disable `diff-hl-amend-mode' in
+buffers that enables it, since `diff-hl-amend-mode' overrides its
+effect.
+
+\(fn &optional REV)" t nil)
+
+(autoload 'diff-hl-reset-reference-rev "diff-hl" "\
+Reset the reference revision globally to the most recent one." t nil)
 
 (put 'global-diff-hl-mode 'globalized-minor-mode t)
 
@@ -12032,10 +12077,10 @@ toggle it if ARG is `toggle'; disable the mode otherwise.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/deadgrep-20201012.619/deadgrep-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/deadgrep-20210113.829/deadgrep-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/deadgrep-20201012.619/deadgrep-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/deadgrep-20210113.829/deadgrep-autoloads.el") (car load-path))))
 
 
 
@@ -14190,7 +14235,7 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
   (info-initialize)
   (setq Info-directory-list
         (append
-         '("/Users/mark/.emacs.d/elpa/27.1/elpa/auctex-12.3.1" "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210105.1030" "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210106.748" "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20201220.1343" "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210105.2002" "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20210103.1546" "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20201218.1237" "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20201110.2133" "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20201030.1232")
+         '("/Users/mark/.emacs.d/elpa/27.1/elpa/auctex-12.3.1" "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210105.1030" "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210113.2030" "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210110.1607" "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210109.1619" "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20210103.1546" "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210111.1247" "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20210106.2145" "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20210110.1545")
          Info-directory-list)))
 
 ;; Local Variables:

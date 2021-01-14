@@ -13,7 +13,7 @@ Not valid lisp
 #+NAME: org_mark_mini12.local_20210110T204217.428432
 #+begin_src emacs-lisp
 (use-package gnus
-    :command gnus
+    :commands gnus
     :preface
 <<gnus-preface>>
     :init

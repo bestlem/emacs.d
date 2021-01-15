@@ -84,10 +84,11 @@ Note should check on defconst
 
  Unfortunately macport seems not to have a working one. and NS Emacs is not that good.
  Then again I don't use it
+ Try macport now as on arm
  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_922BC8C2-56FC-46E7-B506-2CB94F2BB86A
  #+begin_src emacs-lisp
 (use-package server
-  :if *aquamacs*
+  :unless *aquamacs*
   :ensure nil
   :hook (after-init . server-mode))
  #+end_src

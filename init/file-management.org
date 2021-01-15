@@ -198,8 +198,8 @@ Started as file management but actually deals with files and what is in them/ Tr
              :map deadgrep-mode-map
              ("<double-mouse-1>" . deadgrep-visit-result-other-window)
              ("<mouse-3>" . deadgrep-toggle-file-results))
-      :config (unless (executable-find "ripgrep")
-                (alert "Please install ripgrep snap...")))
+      :config (unless (executable-find "rg")
+                (warning "Please install ripgrep snap...")))
 	#+end_src
 ** Projectile
 :PROPERTIES:

@@ -354,6 +354,15 @@ mwin might have mode aware
 (setq-default tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100))
 (setq indent-tabs-mode 't)
 #+end_src
+*** Making Backspace Properly Delete Tabs
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210115T193538.630184
+:END:
+From https://dougie.io/emacs/indentation/#tldr-the-full-configuration
+#+NAME: org_mark_mini20.local_20210115T193538.606987
+#+begin_src emacs-lisp
+(setq backward-delete-char-untabify-method 'hungry)
+#+end_src
 ** Rest
 :PROPERTIES:
 :ID:       org_2020-12-05+00-00:D912E5B5-F6B5-4BBF-9FCF-A8F276FA3A38

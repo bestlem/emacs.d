@@ -53,6 +53,19 @@ This is [[https://github.com/magit/with-editor][with-editor]] Magit calls it - o
        "Diff"
        (("d" magit-diff-buffer-file "diff buffer")))))
 #+end_src
+*** posframe
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210115T132445.517593
+:END:
+Show choices in posframe
+#+NAME: org_mark_mini20.local_20210115T132445.501529
+#+begin_src emacs-lisp
+(unless (version< emacs-version "26.0")
+  (use-package transient-posframe
+      :ensure t
+      :config
+      (transient-posframe-mode)))
+#+end_src
 ** Git timemachine
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20201222T214721.121908

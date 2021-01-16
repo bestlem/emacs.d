@@ -19,7 +19,7 @@ Note that gcmh cannot explicitly reduce the memory it does this when it gcs, whi
     :ensure t
     :diminish
     :config
-    (setq gcmh-high-cons-threshold (* 5 1024 1024)) ; reduces as I got a 10G monster
+    (setq gcmh-high-cons-threshold (* 128 1024 1024)) ; reduces as I got a 10G monster
     (setq gcmh-verbose 't)
     (gcmh-mode 1))
 #+end_src
@@ -525,7 +525,7 @@ midnight-mode purges buffers which haven’t been displayed in 3 days.
 (use-package midnight
   :defer 10
   :config
-  (midnight-delay-set 'midnight-delay "3:00am")
+  (midnight-delay-set 'midnight-delay "6:00am")
   (defun add-to-clean-buffer-regex (str)
     (add-to-list 'clean-buffer-list-kill-regexps
                  (rx-to-string `(seq line-start "*" ,str " "))))

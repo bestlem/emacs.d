@@ -1720,10 +1720,10 @@ version.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/projectile-20210104.1216/projectile-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/projectile-20210115.1359/projectile-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/projectile-20210104.1216/projectile-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/projectile-20210115.1359/projectile-autoloads.el") (car load-path))))
 
 
 
@@ -2292,19 +2292,15 @@ Otherwise behave as if called interactively.
 \(fn &optional ARG)" t nil)
 
 (define-obsolete-function-alias 'projectile-global-mode 'projectile-mode "1.0")
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "projectile" '("??" "compilation-find-file-projectile-find-compilation-buffer" "def-projectile-commander-method" "delete-file-projectile-remove-from-cache" "projectile-")))
 
-
-
-
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210111.1247/dash-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210114.2017/dash-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210111.1247/dash-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210114.2017/dash-autoloads.el") (car load-path))))
 
 
 
@@ -2355,10 +2351,8 @@ See `dash-fontify-mode' for more information on Dash-Fontify mode.
 (autoload 'dash-register-info-lookup "dash" "\
 Register the Dash Info manual with `info-lookup-symbol'.
 This allows Dash symbols to be looked up with \\[info-lookup-symbol]." t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dash" '("!cdr" "!cons" "--" "->" "-a" "-butlast" "-c" "-d" "-e" "-f" "-gr" "-i" "-keep" "-l" "-m" "-non" "-only-some" "-p" "-r" "-s" "-t" "-u" "-value-to-list" "-when-let" "-zip" "dash-")))
-
 
 
 
@@ -2386,10 +2380,10 @@ This allows Dash symbols to be looked up with \\[info-lookup-symbol]." t nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/avy-20200624.1148/avy-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/avy-20201226.1734/avy-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/avy-20200624.1148/avy-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/avy-20201226.1734/avy-autoloads.el") (car load-path))))
 
 
 
@@ -2642,12 +2636,11 @@ Read one or many consecutive chars and jump to the first one.
 The window scope is determined by `avy-all-windows' (ARG negates it).
 
 \(fn &optional ARG)" t nil)
-
+
+(autoload 'avy-transpose-lines-in-region "avy" "\
+Transpose lines in the active region." t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "avy" '("avy-")))
-
-
-
 
 
 )
@@ -2856,10 +2849,10 @@ result of `defhydra'.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/cfrs-20210103.1202/cfrs-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/cfrs-20210108.1152/cfrs-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/cfrs-20210103.1202/cfrs-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/cfrs-20210108.1152/cfrs-autoloads.el") (car load-path))))
 
 
 
@@ -2867,19 +2860,15 @@ result of `defhydra'.
 Read a string using a pos-frame with given PROMPT and INITIAL-INPUT.
 
 \(fn PROMPT &optional INITIAL-INPUT)" nil nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "cfrs" '("cfrs-")))
 
-
-
-
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/treemacs-20210108.1145/treemacs-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/treemacs-20210110.2030/treemacs-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/treemacs-20210108.1145/treemacs-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/treemacs-20210110.2030/treemacs-autoloads.el") (car load-path))))
 
 
 
@@ -2937,10 +2926,8 @@ The project is determined first by projectile (if treemacs-projectile is
 installed), then by project.el.
 If the project is already registered with treemacs just move point to its root.
 An error message is displayed if the current buffer is not part of any project." t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs" '("treemacs-version")))
-
 
 
 
@@ -2968,10 +2955,8 @@ Add the current node to Emacs' list of bookmarks.
 For file and directory nodes their absolute path is saved.  Tag nodes
 additionally also save the tag's position.  A tag can only be bookmarked if the
 treemacs node is pointing to a valid buffer position." t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-bookmarks" '("treemacs--")))
-
 
 
 
@@ -3034,10 +3019,8 @@ the more commonly used keybinds see `treemacs-common-helpful-hydra'.
 The keybinds shown in this hydra are not static, but reflect the actual
 keybindings currently in use (including evil mode).  If the hydra is unable to
 find the key a command is bound to it will show a blank instead." t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-hydras" '("treemacs-helpful-hydra")))
-
 
 
 
@@ -3082,10 +3065,8 @@ be assigned which treemacs icon, for example
   (c++-mode . treemacs-icon-cpp))
 
 \(fn EXTENSIONS MODE-ICON-ALIST)" nil nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-icons" '("treemacs-")))
-
 
 
 
@@ -3105,10 +3086,8 @@ be assigned which treemacs icon, for example
 A major mode for displaying the file system in a tree layout.
 
 \(fn)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-mode" '("treemacs--")))
-
 
 
 
@@ -3167,10 +3146,8 @@ and ignore any prefix argument.
 Show a contextual right click menu based on click EVENT.
 
 \(fn EVENT)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-mouse-interface" '("treemacs--")))
-
 
 
 
@@ -3200,10 +3177,9 @@ or call the function `treemacs-tag-follow-mode'.")
 Toggle `treemacs-tag-follow-mode'.
 
 If called interactively, enable Treemacs-Tag-Follow mode if ARG
-is positive, and disable it if ARG is zero or negative.
-If called from Lisp, also enable the mode if ARG is omitted or
-nil, and toggle it if ARG is `toggle'; disable the
-mode otherwise.
+is positive, and disable it if ARG is zero or negative.  If
+called from Lisp, also enable the mode if ARG is omitted or nil,
+and toggle it if ARG is `toggle'; disable the mode otherwise.
 
 This acts as more fine-grained alternative to `treemacs-follow-mode' and will
 thus disable `treemacs-follow-mode' on activation. When enabled treemacs will
@@ -3226,10 +3202,8 @@ short time and giving the appereance of the tag follow action lasting much
 longer than it really does.
 
 \(fn &optional ARG)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-tag-follow-mode" '("treemacs--")))
-
 
 
 
@@ -3284,10 +3258,8 @@ Go to the tag at BTN.
 The `imenu-create-index-function' for treemacs buffers." nil nil)
 
 (function-put 'treemacs--create-imenu-index-function 'side-effect-free 't)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-tags" '("treemacs--")))
-
 
 
 
@@ -3533,10 +3505,10 @@ Calling this function interactively, COMMAND-LINE-FORMATS is set above.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210109.1619/ivy-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210114.1859/ivy-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210109.1619/ivy-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210114.1859/ivy-autoloads.el") (car load-path))))
 
 
 
@@ -3668,10 +3640,8 @@ Switch to one of the window views stored by `ivy-push-view'." t nil)
 
 (autoload 'ivy-switch-buffer-other-window "ivy" "\
 Switch to another buffer in another window." t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ivy" '("ivy-" "with-ivy-window")))
-
 
 
 
@@ -6548,10 +6518,10 @@ Interactively, with prefix argument, move to the previous position.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210113.2030/modus-themes-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210114.1245/modus-themes-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210113.2030/modus-themes-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210114.1245/modus-themes-autoloads.el") (car load-path))))
 
 
 
@@ -6585,7 +6555,7 @@ for DARK-COLOR.  LIGHT-COLOR and DARK-COLOR are keys in
 Ensure that the Modus themes are in `custom-enabled-themes'.
 
 This function is intended for use in package declarations such as
-those defined with the help of `use-package'. The idea is to add
+those defined with the help of `use-package'.  The idea is to add
 this function to the `:init' stage of the package's loading, so
 that subsequent calls that assume the presence of a loaded theme,
 like `modus-themes-toggle' or `modus-themes-load-operandi', will
@@ -6607,10 +6577,8 @@ by virtue of calling either of `modus-themes-load-operandi' and
 `modus-themes-load-vivendi' functions." t nil)
 
 (when (and (boundp 'custom-theme-load-path) load-file-name) (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "modus-themes" '("modus-themes-")))
-
 
 
 
@@ -9245,10 +9213,10 @@ behaviors.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/iedit-20210111.1147/iedit-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/iedit-20210114.1621/iedit-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/iedit-20210111.1147/iedit-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/iedit-20210114.1621/iedit-autoloads.el") (car load-path))))
 
 
 
@@ -9312,10 +9280,8 @@ Keymap used within overlays:
 
 (autoload 'iedit-mode-toggle-on-function "iedit" "\
 Toggle Iedit mode on current function." t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "iedit" '("iedit-")))
-
 
 
 
@@ -9334,10 +9300,8 @@ Commands:
 \\{iedit-rect-keymap}
 
 \(fn &optional BEG END)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "iedit-rect" '("iedit-rect")))
-
 
 
 
@@ -12134,10 +12098,10 @@ don't actually start the search.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/conda-20200818.1614/conda-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/conda-20210114.123/conda-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/conda-20200818.1614/conda-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/conda-20210114.123/conda-autoloads.el") (car load-path))))
 
 
 
@@ -12202,19 +12166,15 @@ This mode automatically tries to activate a conda environment for the current
 buffer.
 
 \(fn &optional ARG)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "conda" '("conda-")))
 
-
-
-
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/company-20201214.1620/company-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/company-20210114.35/company-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/company-20201214.1620/company-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/company-20210114.35/company-autoloads.el") (car load-path))))
 
 
 
@@ -12284,10 +12244,8 @@ Insert the common part of all candidates or the current selection.
 The first time this is called, the common part is inserted, the second
 time, or when the selection has been changed, the selected candidate is
 inserted." t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company" '("company-")))
-
 
 
 
@@ -12295,10 +12253,8 @@ inserted." t nil)
 `company-mode' completion backend for abbrev.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-abbrev" '("company-abbrev-insert")))
-
 
 
 
@@ -12306,10 +12262,8 @@ inserted." t nil)
 `company-mode' completion backend for BBDB.
 
 \(fn COMMAND &optional ARG &rest IGNORE)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-bbdb" '("company-bbdb-")))
-
 
 
 
@@ -12329,10 +12283,8 @@ inserted." t nil)
 `company-mode' completion backend for `css-mode'.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-css" '("company-css-")))
-
 
 
 
@@ -12340,10 +12292,8 @@ inserted." t nil)
 dabbrev-like `company-mode' completion backend.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-dabbrev" '("company-dabbrev-")))
-
 
 
 
@@ -12353,10 +12303,8 @@ The backend looks for all symbols in the current buffer that aren't in
 comments or strings.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-dabbrev-code" '("company-dabbrev-code-")))
-
 
 
 
@@ -12364,10 +12312,8 @@ comments or strings.
 `company-mode' completion backend for Emacs Lisp.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-elisp" '("company-elisp-")))
-
 
 
 
@@ -12375,10 +12321,8 @@ comments or strings.
 `company-mode' completion backend for etags.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-etags" '("company-etags-")))
-
 
 
 
@@ -12388,10 +12332,8 @@ Completions works for proper absolute and relative files paths.
 File paths with spaces are only supported inside strings.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-files" '("company-file")))
-
 
 
 
@@ -12399,10 +12341,8 @@ File paths with spaces are only supported inside strings.
 `company-mode' completion backend for GNU Global.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-gtags" '("company-gtags-")))
-
 
 
 
@@ -12410,10 +12350,8 @@ File paths with spaces are only supported inside strings.
 `company-mode' completion backend using Ispell.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-ispell" '("company-ispell-")))
-
 
 
 
@@ -12421,10 +12359,8 @@ File paths with spaces are only supported inside strings.
 `company-mode' backend for programming language keywords.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-keywords" '("company-keywords-")))
-
 
 
 
@@ -12432,10 +12368,8 @@ File paths with spaces are only supported inside strings.
 `company-mode' completion backend for `nxml-mode'.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-nxml" '("company-nxml-")))
-
 
 
 
@@ -12443,10 +12377,8 @@ File paths with spaces are only supported inside strings.
 `company-mode' completion backend for `oddmuse-mode'.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-oddmuse" '("company-oddmuse-")))
-
 
 
 
@@ -12454,10 +12386,8 @@ File paths with spaces are only supported inside strings.
 `company-mode' completion backend using CEDET Semantic.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-semantic" '("company-semantic-")))
-
 
 
 
@@ -12469,10 +12399,8 @@ File paths with spaces are only supported inside strings.
 `company-mode' completion backend for tempo.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-tempo" '("company-tempo-")))
-
 
 
 
@@ -12506,10 +12434,8 @@ from Lisp, also enable the mode if ARG is omitted or nil, and
 toggle it if ARG is `toggle'; disable the mode otherwise.
 
 \(fn &optional ARG)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-tng" '("company-tng-")))
-
 
 
 
@@ -12523,24 +12449,22 @@ shadow backends that come after it.  Recommended usages:
 * In a buffer-local value of `company-backends', grouped with a backend or
   several that provide actual text completions.
 
-  (add-hook 'js-mode-hook
+  (add-hook \\='js-mode-hook
             (lambda ()
-              (set (make-local-variable 'company-backends)
-                   '((company-dabbrev-code company-yasnippet)))))
+              (set (make-local-variable \\='company-backends)
+                   \\='((company-dabbrev-code company-yasnippet)))))
 
 * After keyword `:with', grouped with other backends.
 
-  (push '(company-semantic :with company-yasnippet) company-backends)
+  (push \\='(company-semantic :with company-yasnippet) company-backends)
 
 * Not in `company-backends', just bound to a key.
 
-  (global-set-key (kbd \"C-c y\") 'company-yasnippet)
+  (global-set-key (kbd \"C-c y\") \\='company-yasnippet)
 
 \(fn COMMAND &optional ARG &rest IGNORE)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-yasnippet" '("company-yasnippet-")))
-
 
 
 
@@ -12656,10 +12580,10 @@ for details.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/comment-dwim-2-20201024.828/comment-dwim-2-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/comment-dwim-2-20210101.1820/comment-dwim-2-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/comment-dwim-2-20201024.828/comment-dwim-2-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/comment-dwim-2-20210101.1820/comment-dwim-2-autoloads.el") (car load-path))))
 
 
 
@@ -12684,12 +12608,8 @@ You can also switch behaviors of (1) and (2) by setting
 Call `comment-dwim-2' inside source blocks. Else, fallback to `org-toggle-comment'.
 
 \(fn &optional ARG)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "comment-dwim-2" '("cd2/" "comment-dwim-2--inline-comment-behavior")))
-
-
-
 
 
 )
@@ -13607,10 +13527,10 @@ See `color-identifiers-mode' for more information on Color-Identifiers mode.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/cmake-mode-20201217.1410/cmake-mode-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/cmake-mode-20210104.1831/cmake-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/cmake-mode-20201217.1410/cmake-mode-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/cmake-mode-20210104.1831/cmake-mode-autoloads.el") (car load-path))))
 
 
 
@@ -13651,12 +13571,8 @@ Queries for any of the four available help topics and prints out the appropriate
 (add-to-list 'auto-mode-alist '("CMakeLists\\.txt\\'" . cmake-mode))
 
 (add-to-list 'auto-mode-alist '("\\.cmake\\'" . cmake-mode))
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "cmake-mode" '("cmake-")))
-
-
-
 
 
 )
@@ -13723,10 +13639,10 @@ ARG is `toggle'; disable the mode otherwise.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/auctex-12.3.1/auctex-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/auctex-13.0.3/auctex-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/auctex-12.3.1/auctex-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/auctex-13.0.3/auctex-autoloads.el") (car load-path))))
 
 
 
@@ -13943,7 +13859,7 @@ If you don't have setup sending mail from (X)Emacs, please copy the
 output buffer into your mail program, as it gives us important
 information about your AUCTeX version and AUCTeX configuration." t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex" '("Bib" "ConTeXt-" "LaTeX-" "TeX-" "VirTeX-common-initialization" "docTeX-default-extension" "ispell-tex-" "plain-TeX-auto-regexp-list" "tex-")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex" '("Bib" "ConTeXt-" "LaTeX-" "TeX-" "VirTeX-common-initialization" "docTeX-default-extension" "ispell-tex-major-modes" "plain-TeX-auto-regexp-list" "tex-")))
 
 
 
@@ -13957,7 +13873,7 @@ Install toolbar buttons for LaTeX mode." t nil)
 
 
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex-buf" '("LaTeX-" "TeX-" "compilation-in-progress")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex-buf" '("LaTeX-" "TeX-")))
 
 
 
@@ -14051,10 +13967,10 @@ Limit searched to BOUND.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/amx-20200701.2108/amx-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/amx-20210101.1921/amx-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/amx-20200701.2108/amx-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/amx-20210101.1921/amx-autoloads.el") (car load-path))))
 
 
 
@@ -14099,19 +14015,15 @@ be re-run. Interactively, reinitialize when a prefix arg is
 provided.
 
 \(fn &optional REINIT)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "amx" '("amx-")))
 
-
-
-
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/all-the-icons-20200923.1339/all-the-icons-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/all-the-icons-20210114.1520/all-the-icons-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/all-the-icons-20200923.1339/all-the-icons-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/all-the-icons-20210114.1520/all-the-icons-autoloads.el") (car load-path))))
 
 
 
@@ -14269,9 +14181,9 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
   (require 'info)
   (info-initialize)
   (setq Info-directory-list
-        (append
-         '("/Users/mark/.emacs.d/elpa/27.1/elpa/auctex-12.3.1" "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210105.1030" "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210113.2030" "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210110.1607" "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210109.1619" "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20210103.1546" "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210111.1247" "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20210106.2145" "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20210110.1545")
-         Info-directory-list)))
+	(append
+	 '("/Users/mark/.emacs.d/elpa/27.1/elpa/auctex-13.0.3" "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210105.1030" "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210114.1245" "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210110.1607" "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210114.1859" "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20210103.1546" "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210114.2017" "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20210106.2145" "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20210110.1545")
+	 Info-directory-list)))
 
 ;; Local Variables:
 ;; version-control: never

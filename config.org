@@ -705,10 +705,11 @@ Need key setting menus.
     (defun lv--pad-to-center (str width)
       "Pad STR with spaces on the left to be centered to WIDTH."
       (let* ((strs (split-string str "\n"))
-             (padding (make-string
-                       (/ (- width (apply 'max (mapcar 'length strs))) 2)
-                       ?\ )))
-        (mapconcat (lambda (s) (concat padding s)) strs "\n"))))
+             (padding-length (/ (- width (apply 'max (mapcar 'length strs))) 2)))
+        (if (> padding-length  0)
+            (mapconcat (lambda (s)
+                         (concat (make-string padding-length ?\ ) s)) strs "\n")
+          str))))
 (use-package use-package-hydra :ensure t)
 #+end_src
 **** major mode hydra

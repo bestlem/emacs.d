@@ -58,6 +58,12 @@ Cover method for gnus to create new frame
 #+NAME: org_mark_mini12.local_20210110T211235.365791
 #+begin_src emacs-lisp :tangle no :noweb-ref gnus-init
 (setq gnus-directory "~/Library/Preferences/Aquamacs Emacs/News")
+(setq message-directory "~/.emacs.d/data/mail/")
+(setq nnfolder-directory "~/.emacs.d/data/mail/archive")
+(setq nndraft-directory "~/.emacs.d/datamail/drafts/")
+(setcdr (assoc 'nndraft-directory
+               (nnoo-variables 'nndraft))
+        nndraft-directory)
 (setq gnus-dribble-directory "~/tmp")
 (setq gnus-kill-save-kill-file t)
 (setq gnus-server-browse-in-group-buffer t)
@@ -179,26 +185,25 @@ Add a hydra https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blo
 #+begin_src emacs-lisp
 (use-package gnus-group
     :after gnus
-  :bind (:map gnus-group-mode-map
-              ("H-a" . hydra-gnus-group/body))
-  :hydra (hydra-gnus-group (:color blue)
-                           "
-[_A_] Remote groups (A A) [_g_] Refresh          [_S_] Sort by level
-[_L_] Local groups        [_\\^_] List servers   [_s_] Set level
-[_c_] Mark all read       [_m_] Compose new mail
-[_G_] Search mails (G G)  [_#_] Mark mail
-"
-                           ("A" gnus-group-list-active)
-                           ("L" gnus-group-list-all-groups)
-                           ("c" gnus-topic-catchup-articles)
-                           ("G" dianyou-group-make-nnir-group)
-                           ("g" gnus-group-get-new-news)
-                           ("^" gnus-group-enter-server-mode)
-                           ("m" gnus-group-new-mail)
-                           ("#" gnus-topic-mark-topic)
-                           ("S" gnus-group-sort-by-level)
-                           ("s" (lambda () (interactive) (gnus-group-set-current-level)))
-                           ("q" nil)))
+
+    :mode-hydra (gnus-group-mode
+                 (:color pink)
+                 ("List groups"
+                  (("a" gnus-group-list-active "All")
+                   ("L" gnus-group-list-all-groups "Subscribed")
+                   ("l" gnus-group-list-groups "Unread"))
+                  "One Group"
+                  (("c" gnus-topic-catchup-current "Mark all Read")
+                   ("#" gnus-topic-mark-topic "Mark topic"))
+                  "All"
+                  (;; ("G" dianyou-group-make-nnir-group)
+                   ("g" gnus-group-get-new-news "Refresh")
+                   ("^" gnus-group-enter-server-mode "Servers")
+                   ;; ("m" gnus-group-new-mail )
+                   ("x" gnus-group-exit "Exit" :exit t ))
+                  "Levels"
+                  (("S" gnus-group-sort-by-level)
+                   ("s" (lambda () (interactive) (gnus-group-set-current-level)))))))
 #+end_src
 * Summary buffer
 :PROPERTIES:

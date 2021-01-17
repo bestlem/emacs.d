@@ -42,7 +42,7 @@ Add some from jweigley
           company-selection-wrap-around t
           company-idle-delay 0.05 ;; company-idle-delay 0.05
           company-tooltip-minimum-width 30
-          company-minimum-prefix-length 1)
+          company-minimum-prefix-length 2)
     (global-company-mode t)  ; don't put in after-init hook
                                         ; as we are deferred
     ;; (define-key company-mode-map [tab]

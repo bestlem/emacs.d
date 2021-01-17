@@ -19,7 +19,10 @@ Note that gcmh cannot explicitly reduce the memory it does this when it gcs, whi
     :ensure t
     :diminish
     :config
-    (setq gcmh-high-cons-threshold (* 128 1024 1024)) ; reduces as I got a 10G monster
+    (setq gcmh-high-cons-threshold (* 128 1024 1024)) ; reduces as I got a 10G
+                                        ; monster
+    (setq gcmh-low-cons-threshold (* 1024 1024)) ; originally 800000 - increas
+                                        ; because of gnus
     (setq gcmh-verbose 't)
     (gcmh-mode 1))
 #+end_src

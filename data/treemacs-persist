@@ -1,8 +1,8 @@
 * Default Workspace
 ** Aquamacs Emacs My init .emacs.d
- - path :: ~/SyncServices/Dropbox/src/emacs.d
+ - path :: ~/SyncServices/Dropbox/env/emacs.d
 ** dotfiles
- - path :: ~/SyncServices/Dropbox/src/dotfiles
+ - path :: ~/SyncServices/Dropbox/env/dotfiles
 ** Org
  - path :: ~/SyncServices/Dropbox/Docs/org
 ** Aquamacs Application
@@ -18,11 +18,17 @@
  - path :: ~/src/Racket/realm
 ** realm book
  - path :: ~/src/Racket/realm.source
-** Coursera Programming languages
- - path :: ~/src/coursera/ProgrammingLanguages
-** SML unit test
- - path :: ~/src/sml/unit_test
-** simutrans
- - path :: ~/src/cpp/simutrans
 ** RacketProgrammingtheFunWay
  - path :: ~/src/Racket/RacketProgrammingtheFunWay
+* C based
+** rftg-0.9.4
+ - path :: ~/src/ThirdParty/rftg-0.9.4
+** simutrans
+ - path :: ~/src/cpp/simutrans
+** ports
+ - path :: ~/src/ports
+* Odds
+** SML unit test
+ - path :: ~/src/sml/unit_test
+** Coursera Programming languages
+ - path :: ~/src/coursera/ProgrammingLanguages

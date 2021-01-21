@@ -597,6 +597,7 @@ Odd things needed
     ("m" (mwb-new-frame "*Messages*") "Messages")
     ("w" hydra-jp-window/body "Window Management")
     ("0" delete-window "Delete Window")
+    (")" delete-window "Delete Window")
     ("|"  split-window-right "horizontally")
     )
    "Current window"

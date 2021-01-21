@@ -471,15 +471,13 @@ This fails for config.org so that needs to be in version control.
 
 (defun mwb-init-load (file-root &optional no-org)
   "Load the relevant code.
-        Look for <file-root>.org and <file-root>.el files.
-        If org and no el or org file is newer
-        then retangle the org file if noorg is not nil then use nullmans expand
-        then load <file-root>.el "
+Look for <file-root>.org and <file-root>.el files.
+If org and no el or org file is newer then retangle the org file if noorg is not nil then use nullmans expand then load <file-root>.el "
   (let* ((org-file
           (concat (expand-file-name file-root mwb-user-emacs-directory) ".org"))
          (el-file
           (concat (expand-file-name file-root mwb-user-emacs-directory) ".el")))
-    (setq esup-depth mwb-esup-depth )
+    (setq esup-depth mwb-esup-depth)
     ;; (setq esup-child-max-depth mwb-esup-depth )
     (setq esup-child-current-depth 0)
     (when (file-newer-than-file-p org-file el-file)

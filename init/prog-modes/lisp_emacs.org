@@ -32,7 +32,8 @@ Note all loaded immediately as could be called anytime.
                   "Edit"
                   (("a" hydra-lispy-mwb-alter/body "Alter...")
                    ("r" hydra-lispy-mwb-mark/body "Region...")
-                   ("g" hydra-lispy-mwb-goto/body "Goto..."))
+                   ("g" hydra-lispy-mwb-goto/body "Goto...")
+                   ("f" srefactor-lisp-format-sexp "srefactor sexp"))
                   "Debug"
                   (("m" sk/hydra-macro-step/body "Macrostep...")
                    ("E" modi/toggle-edebug "Toggle edebug")
@@ -80,7 +81,6 @@ Plus the lisp formatting is not autoloaded
 #+NAME: org_mark_2020-11-24T18-08-50+00-00_mini12.local_BA7E1106-4E0E-4D38-B512-2C59194F3F4D
 #+begin_src emacs-lisp :tangle no
 (use-package srefactor
-  :disabled
   :ensure t
   :init (use-package srefactor-lisp))
 #+end_src

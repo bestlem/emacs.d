@@ -56,14 +56,16 @@ Cover method for gnus to create new frame
 :ID:       org_mark_mini12.local:20210110T211235.407871
 :END:
 #+NAME: org_mark_mini12.local_20210110T211235.365791
-#+begin_src emacs-lisp :tangle no :noweb-ref gnus-init
-(setq gnus-directory "~/Library/Preferences/Aquamacs Emacs/News")
-(setq message-directory "~/.emacs.d/data/mail/")
-(setq nnfolder-directory "~/.emacs.d/data/mail/archive")
-(setq nndraft-directory "~/.emacs.d/datamail/drafts/")
-(setcdr (assoc 'nndraft-directory
-               (nnoo-variables 'nndraft))
-        nndraft-directory)
+#+begin_src emacs-lisp :tangle no :noweb-ref gnus-preface
+;(setq gnus-directory "~/Library/Preferences/Aquamacs Emacs/News")
+(setq message-directory "~/.emacs.d/var/mail/") ; set as well as custom as the
+										; nnfolder-directory can't be and seems
+										; to use this
+(setq nnfolder-directory "~/.emacs.d/var/mail/archive")
+;; (setq nndraft-directory "~/.emacs.d/data/mail/drafts/")
+;; (setcdr (assoc 'nndraft-directory
+;;                (nnoo-variables 'nndraft))
+;;         nndraft-directory)
 (setq gnus-dribble-directory "~/tmp")
 (setq gnus-kill-save-kill-file t)
 (setq gnus-server-browse-in-group-buffer t)

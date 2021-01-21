@@ -21,10 +21,16 @@ On reading more this is only if passed to delete functions so might not be too m
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:64531695-B8F1-4AF7-8D8A-7893541FBD6C
 :END:
+Emacs defaults are crap. Backups do not occur on each save and auto-save is odd.
+First attempt is add special save so when I save a file it makes a backup see =mwb/mac-key-save-buffer-force-backup=
+But note that =projectile-save-project-buffers= does a direct save-buffer as does super-save-mode (The former I noted before but had not actually used 🤔
+
 Literate programming suggests each setq should be in a separate block - see later but EOL comment changes where closing parenthesis is maybe better copy code iif we had a macro to do this.
+
 This set of variables is from [[https://www.emacswiki.org/emacs/ForceBackups][Emacs Wiki - Force Backup]] but that is not the best explanation. The version numbers are explained better elsewhere
 
-Need to look in customisation as some things are easier to edit there . e,g, the list for where backup files are. Currently I do to the current directory/.~ which no one's init files seem to have but then found ity in Emacs manual: 🤣😳
+Need to look in customisation as some things are easier to edit there . e,g, the list for where backup files are. Currently I do to the current directory/.~ which no one's init files seem to have but then found it in Emacs manual: 🤣😳
+
 The best inits I found for this were [[http://pragmaticemacs.com/emacs/auto-save-and-backup-every-save/][Pragmatic Emacs]] and [[https://github.com/jwiegley/dot-emacs/blob/master/init.el][developer of use package]]  which build on [[https://www.emacswiki.org/emacs/ForceBackup][Emacs Wiki Force Backups]]
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_9DCF5D76-D3FC-41D2-A9E6-FF186AAB1FEB
 #+begin_src emacs-lisp
@@ -64,10 +70,13 @@ But the GNU manual gives the best - in a subdirectory of where you are - OK Tram
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:EBBF14AB-888E-4043-8ADB-8DE11ACDBC46
 :END:
- Emacs is odd backups are started when loaded in a session and then not again (I suppose that is what auto save is for) but really we want a copy taken when saved as well.
- All the logs are very clever but what I want is the version number to increase so just see [[https://stackoverflow.com/a/9452080/151019][this SO answer]] I have modified it so that only saves on m,ac save ie when you manually save - possibly not good on emacs exit.
+Emacs is odd backups are started when loaded in a session and then not again (I suppose that is what auto save is for) but really we want a copy taken when saved as well.
+
+All the logs are very clever but what I want is the version number to increase so just see [[https://stackoverflow.com/a/9452080/151019][this SO answer]] I have modified it so that only saves on mac save ie when you manually save - possibly not good on emacs exit.
+
  Note need to change
  Filters are interesting for other reasons
+
 
  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_2B3B6826-1AF6-4ABC-B4F7-4AEE52B62E50
  #+begin_src emacs-lisp
@@ -84,7 +93,7 @@ But the GNU manual gives the best - in a subdirectory of where you are - OK Tram
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:0A3506D6-DE37-44F4-A990-C06C1D567023
 :END:
 There are some modes that have special save actions e.g. *Abbrev* which is a buffer with no file name. I force a save using a dialog box but this should be call the special call - stick with ^x^s
-** Turn off backup
+** Turn off backup current buffer
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20210111T173758.270995
 :END:
@@ -94,6 +103,132 @@ Comes from gnus setup
 #+begin_src emacs-lisp
 (defun turn-off-backup-for-current-buffer ()
   (set (make-local-variable 'backup-inhibited) t))
+#+end_src
+** Super save
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210120T104054.760044
+:END:
+Save as often as possible - don't need auto-save
+
+However only saves and not make a backup copy. Also note [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Auto-Save-Files.html][Emacs manual]]
+#+begin_quote
+Auto-saving does not normally save in the files that you visited, because it can be very undesirable to save a change that you did not want to make permanent. Instead, auto-saving is done in a different file called the auto-save file, and the visited file is changed only when you request saving explicitly (such as with C-x C-s).
+#+end_quote
+
+From [[https://github.com/bbatsov/super-save][Github readme]]
+
+#+begin_quote
+Sometimes you might want to exclude specific files from super-save. You can achieve this via super-save-exclude, for example:
+
+(setq super-save-exclude '(".gpg"))
+#+end_quote
+
+#+NAME: org_mark_mini20.local_20210120T104054.741884
+#+begin_src emacs-lisp :tangle no
+(use-package super-save
+    :ensure t
+    :disabled
+    :diminish
+    :commands super-save-mode
+    :config
+    (setq super-save-auto-save-when-idle t)
+    :init (super-save-mode +1)
+    :preface (setq auto-save-default nil)
+    )
+#+end_src
+** Auto saves
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210120T104054.759177
+:END:
+Taken from jweigley and expanded
+But then note super-save
+Also odds/main.org
+#+NAME: org_mark_mini20.local_20210120T014441.002252
+#+begin_src emacs-lisp
+
+
+;; Auto-save
+(defvar auto-save-directory
+  (expand-file-name "auto-save-list" user-emacs-directory)
+  "Directory the auto-save bits go in")
+(setq auto-save-file-name-transforms `((".*" ,auto-save-directory t)))
+
+(when (not (file-exists-p auto-save-directory))
+  (make-directory auto-save-directory t))
+
+(setq auto-save-interval 64
+      auto-save-list-file-prefix  (expand-file-name "auto-save-list/.saves-" user-emacs-directory)
+      auto-save-timeout 2
+      auto-save-default 't)
+#+end_src
+*** Turn off auto-save and backups
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210120T104054.758295
+:END:
+From leuven but earlier https://anirudhsasikumar.net/blog/2005.01.21.html
+Disable backups and auto-save only in the current buffer with
+~M-x sensitive-mode~:
+
+#+NAME: org_mark_mini20.local_20210120T104054.742450
+#+begin_src emacs-lisp
+(define-minor-mode sensitive-mode
+    "For sensitive files like password lists.
+  It disables backup creation and auto saving in the current buffer.
+
+  With no argument, this command toggles the mode.  Non-null prefix argument
+  turns on the mode.  Null prefix argument turns off the mode."
+  nil                                   ; Initial value.
+  " Sensitive"                          ; Indicator for the mode line.
+  nil                                   ; Minor mode bindings.
+  (if (symbol-value sensitive-mode)
+      (progn
+        ;; Disable backups.
+        (set (make-local-variable 'backup-inhibited) t)
+        ;; Disable auto-save.
+        (if auto-save-default
+            (auto-save-mode -1)))
+    ;; Resort to default value of backup-inhibited.
+    (kill-local-variable 'backup-inhibited)
+    ;; Resort to default auto save setting.
+    (if auto-save-default
+        (auto-save-mode 1))))
+#+end_src
+
+You should enable it for all =.vcf= and =.gpg= files.
+
+
+*** Make those with auto-save more obvious
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210120T104054.757121
+:END:
+From leuven and I assume dired based.
+Make the message "/FILENAME has auto save data/" unmissable:
+#+NAME: org_mark_mini20.local_20210120T104054.742797
+#+begin_src emacs-lisp
+(defface recover-this-file
+    '((t (:weight bold :background "#FF3F3F")))
+  "Face for buffers visiting files with auto save data."
+  :group 'files)
+
+(defvar leuven--recover-this-file nil
+  "If non-nil, an overlay indicating that the visited file has auto save data.")
+
+(defun leuven--recover-this-file ()
+  (let ((warn (not buffer-read-only)))
+    (when (and warn
+               ;; No need to warn if buffer is auto-saved under the name of
+               ;; the visited file.
+               (not (and buffer-file-name
+                         auto-save-visited-file-name))
+               (file-newer-than-file-p (or buffer-auto-save-file-name
+                                           (make-auto-save-file-name))
+                                       buffer-file-name))
+      (set (make-local-variable 'leuven--recover-this-file)
+           (make-overlay (point-min) (point-max)))
+      (overlay-put leuven--recover-this-file
+                   'face 'recover-this-file))))
+
+(add-hook 'find-file-hook #'leuven--recover-this-file)
 #+end_src
 * Files
 :PROPERTIES:
@@ -304,53 +439,54 @@ This is the visual tree to manage files etc
  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_55CB1D47-BC33-40F8-BC2A-12D014C6B18D
  #+begin_src emacs-lisp
 (use-package treemacs
-  :ensure t
-  :init
-  (with-eval-after-load 'winum
-    (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
-  (setq treemacs-width 50)
-  :commands (treemacs)
-  :config
+    :ensure t
+    :init
+    (with-eval-after-load 'winum
+      (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
+    (setq treemacs-width 50)
+    :commands (treemacs)
+    :config
 
-  (setq hydra-key-regex "\\[\\|]\\|[-\\[:alnum:] ~.,;:/|?<>={}*+#%@!&^⇧⌘⌥↑↓←→⌫⌦⏎'`()\"$]+?") ; add Mac key symbols
+    (setq hydra-key-regex "\\[\\|]\\|[-\\[:alnum:] ~.,;:/|?<>={}*+#%@!&^⇧⌘⌥↑↓←→⌫⌦⏎'`()\"$]+?") ; add Mac key symbols
 
-  (setq treemacs-silent-refresh t
-        treemacs-persist-file (mwb-user-emacs-file "data/treemacs-persist"))
-  (with-eval-after-load 'treemacs
-    (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?))
+    (setq treemacs-silent-refresh t
+          treemacs-persist-file (mwb-user-emacs-file "data/treemacs-persist"))
+    (with-eval-after-load 'treemacs
+      (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?))
 
-  ;; The default width and height of the icons is 22 pixels. If you are
-  ;; using a Hi-DPI display, uncomment this to double the icon size.
-  ;;(treemacs-resize-icons 44)
+    ;; The default width and height of the icons is 22 pixels. If you are
+    ;; using a Hi-DPI display, uncomment this to double the icon size.
+    ;;(treemacs-resize-icons 44)
 
-  (treemacs-follow-mode t)
-  (treemacs-filewatch-mode t)
-  (treemacs-fringe-indicator-mode t)
-  (pcase (cons (not (null (executable-find "git")))
-               (not (null treemacs-python-executable )))
-    (`(t . t)
-     (treemacs-git-mode 'deferred))
-    (`(t . _)
-     (treemacs-git-mode 'simple)))
-  :mode-hydra
-  (treemacs-mode
-   ("Project"
-    (
-     ;; ("p" matcha-projectile/body "Projectile")
-     ("c" treemacs-add-project-to-workspace "Create Project")
-     ("d" treemacs-remove-project-from-workspace "Delete Project")
-     )
-    "Workspace"
-    (("s" treemacs-switch-workspace "Switch" )
-     ("e" treemacs-edit-workspaces "Edit" ))
-    "Width"
-    (("w" treemacs-toggle-fixed-width "Toggle variable width" ))))
+    (treemacs-follow-mode t)
+    (setq treemacs-silent-filewatch t)
+    (treemacs-filewatch-mode t)
+    (treemacs-fringe-indicator-mode t)
+    (pcase (cons (not (null (executable-find "git")))
+                 (not (null treemacs-python-executable )))
+      (`(t . t)
+        (treemacs-git-mode 'deferred))
+      (`(t . _)
+        (treemacs-git-mode 'simple)))
+    :mode-hydra
+    (treemacs-mode
+     ("Project"
+      (
+       ;; ("p" matcha-projectile/body "Projectile")
+       ("c" treemacs-add-project-to-workspace "Create Project")
+       ("d" treemacs-remove-project-from-workspace "Delete Project")
+       )
+      "Workspace"
+      (("s" treemacs-switch-workspace "Switch" )
+       ("e" treemacs-edit-workspaces "Edit" ))
+      "Width"
+      (("w" treemacs-toggle-fixed-width "Toggle variable width" ))))
 
-  :bind ( :map treemacs-mode-map
-               ("<mouse-5>" . treemacs-rightclick-menu)
-               ("<mouse-4>" . treemacs-rightclick-menu)
-               ("<f5>" . treemacs-switch-workspace)
-               ("<C-f5>" . treemacs-edit-workspaces)))
+    :bind ( :map treemacs-mode-map
+                 ("<mouse-5>" . treemacs-rightclick-menu)
+                 ("<mouse-4>" . treemacs-rightclick-menu)
+                 ("<f5>" . treemacs-switch-workspace)
+                 ("<C-f5>" . treemacs-edit-workspaces)))
 
  (use-package treemacs-projectile
    :after treemacs projectile

@@ -3744,6 +3744,41 @@ Like `swiper-isearch' but the first result is before the point.
 
 
 )
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/super-save-20200930.1634/super-save-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/super-save-20200930.1634/super-save-autoloads.el") (car load-path))))
+
+
+
+(defvar super-save-mode nil "\
+Non-nil if Super-Save mode is enabled.
+See the `super-save-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `super-save-mode'.")
+
+(custom-autoload 'super-save-mode "super-save" nil)
+
+(autoload 'super-save-mode "super-save" "\
+A minor mode that saves your Emacs buffers when they lose focus.
+
+If called interactively, enable Super-Save mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "super-save" '("super-save-")))
+
+
+
+
+
+)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/srefactor-20180703.1810/srefactor-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -14175,15 +14210,15 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
 )
 (setq package-activated-list
       (append
-       '(zoutline yasnippet yaml-mode xr xonsh-mode ws-butler async with-editor posframe which-key which-key-posframe vlf validate bind-key use-package use-package-hydra key-chord bind-chord use-package-chords epl pkg-info projectile dash s f avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile treemacs-icons-dired transient transient-posframe toc-org test-simple ivy swiper srefactor spinner sml-mode smartparens load-relative loc-changes realgud rainbow-delimiters pos-tip racket-mode pythonic dash-functional pretty-hydra prescient popup persistent-scratch paren-face paredit paradox outorg outshine org-bullets org esxml nov mwim modus-themes memoize math-symbol-lists makey major-mode-hydra git-commit magit macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine gcmh flyspell-correct flyspell-correct-popup flycheck flycheck-yamllint fish-mode expand-region eval-in-repl eros elmacro elisp-format dtrt-indent discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep conda company company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-identifiers-mode cmake-mode cask-mode beacon auctex amx all-the-icons all-the-icons-dired aggressive-indent)
+       '(zoutline yasnippet yaml-mode xr xonsh-mode ws-butler async with-editor posframe which-key which-key-posframe vlf validate bind-key use-package use-package-hydra key-chord bind-chord use-package-chords epl pkg-info projectile dash s f avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile treemacs-icons-dired transient transient-posframe toc-org test-simple ivy swiper super-save srefactor spinner sml-mode smartparens load-relative loc-changes realgud rainbow-delimiters pos-tip racket-mode pythonic dash-functional pretty-hydra prescient popup persistent-scratch paren-face paredit paradox outorg outshine org-bullets org esxml nov mwim modus-themes memoize math-symbol-lists makey major-mode-hydra git-commit magit macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine gcmh flyspell-correct flyspell-correct-popup flycheck flycheck-yamllint fish-mode expand-region eval-in-repl eros elmacro elisp-format dtrt-indent discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep conda company company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-identifiers-mode cmake-mode cask-mode beacon auctex amx all-the-icons all-the-icons-dired aggressive-indent)
        package-activated-list))
 (progn
   (require 'info)
   (info-initialize)
   (setq Info-directory-list
-	(append
-	 '("/Users/mark/.emacs.d/elpa/27.1/elpa/auctex-13.0.3" "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210105.1030" "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210114.1245" "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210110.1607" "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210114.1859" "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20210103.1546" "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210114.2017" "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20210106.2145" "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20210110.1545")
-	 Info-directory-list)))
+        (append
+         '("/Users/mark/.emacs.d/elpa/27.1/elpa/auctex-13.0.3" "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210105.1030" "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210114.1245" "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210110.1607" "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210114.1859" "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20210103.1546" "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210114.2017" "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20210106.2145" "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20210110.1545")
+         Info-directory-list)))
 
 ;; Local Variables:
 ;; version-control: never

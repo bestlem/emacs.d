@@ -5,7 +5,7 @@
   "Do \"raco test --drdr .\" in a shell buffer to run the
   \"test\" submodules of all in the current directory."
   (interactive)
-  (projectile-save-project-buffers)
+  (mwb-projectile-save-project-buffers)
   (racket--shell
    (concat (shell-quote-argument racket-program)
            " -l raco test --drdr "
@@ -14,13 +14,13 @@
 (defun racket-mwb-run ()
   "Run the current buffer as per racket-run but save other buffers in project first"
   (interactive)
-  (projectile-save-project-buffers)
+  (mwb-projectile-save-project-buffers)
   (racket-run))
 
 (defun racket-mwb-raco-test ()
   "Run current buffer through raco test but save buffers first"
   (interactive)
-  (projectile-save-project-buffers)
+  (mwb-projectile-save-project-buffers)
   (racket-raco-test))
 
 (major-mode-hydra-define racket-mode nil

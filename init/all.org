@@ -117,8 +117,8 @@ Arg it is not nice.
 
 I use fish shell and can make M-x shell run that by setting explicit-shell-file-name
 However things inside Emacs might use shell for other things and they expect a POSIX shell.
-OK what POSIX shell. MacOS is now zsh (which I have not set up yet) and bash is old and a security risk. Iif they call sh then there will be a mess.
 What is missing is getting the environment variables.
+Another issue is that xonsh does not understand escaped spaces which shell-command does it needs the windows treatment. (and as not using a GPL shgell or OS Emacs won't fix that)
 *** Aquamacs
 :PROPERTIES:
 :ID:       org_mark_2020-11-05T13-13-44+00-00_mini12.local:0D944CF7-686E-4CCF-B006-6B0C4FF5F5CA
@@ -152,17 +152,29 @@ Oh give up and hard code where needed
 :END:
 Aquamacs uses shell-file-name and prints using printenv to a file and plays with that exec... uses printf
 Now I remember writing my own printenv as env|sort - looking at man page printenv is older but env is POSIX. printf is later but might not work with UTF-8
-
-#+NAME: org_mark_2020-11-05T13-13-44+00-00_mini12.local_7998E803-3782-4B60-89EB-BAEF197DDBD9
+**** Set shell
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210122T193718.270790
+:END:
+#+NAME: org_mark_mini20.local_20210122T193718.254522
 #+begin_src emacs-lisp
-(let (;; (my-shell "/Users/mark/miniconda3/envs/xonsh/bin/xonsh")
+(let ((my-shell "/Users/mark/miniconda3/envs/xonsh/bin/xonsh")
       ;; (my-shell "/opt/local/bin/fish" )
-      (my-shell "/bin/zsh")
+      ;; (my-shell "/bin/zsh")
       )
   (setq explicit-shell-file-name my-shell)
   (setq exec-path-from-shell-shell-name my-shell))
-(setq exec-path-from-shell-debug nil)
 
+#+end_src
+
+**** Get environment - exec-path-from-shell
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210122T193718.269509
+:END:
+As noted the aquamacs way might be better
+#+NAME: org_mark_mini20.local_20210122T193718.254955
+#+begin_src emacs-lisp
+(setq exec-path-from-shell-debug nil)
 (use-package exec-path-from-shell
   :disabled
   :when  (and (not *aquamacs*) (memq window-system '(mac ns x)))

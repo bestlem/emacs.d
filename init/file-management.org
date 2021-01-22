@@ -63,9 +63,19 @@ But the GNU manual gives the best - in a subdirectory of where you are - OK Tram
 #+NAME: org_mark_mini12.local_20210105T204218.521153
 #+begin_src emacs-lisp
 (setq backup-directory-alist
-      '(("." . ".~")))
-#+end_src
+      `((,(rx (or "recentf"
+                  "Recent Files"
+                  "drafts"
+                  "archive/sent"
+                  ".newsrc"
+                  (seq "emacs.d/init/" (one-or-more anything) ".el" eos )
+                  )) . "/tmp/emacs_unwanted")
+        ;; (".*" . "~/.cache/emacs/backups")
+        ("." . ".~")))
 
+;; (setq tramp-backup-directory-alist `((,(rx (zero-or-more anything))
+;;                                        . my/tramp-backup-directory)))
+#+end_src
 ** TODO Backup on save
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:EBBF14AB-888E-4043-8ADB-8DE11ACDBC46

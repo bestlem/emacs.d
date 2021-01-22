@@ -57,6 +57,15 @@ Add some from jweigley
     (use-package company-prescient :ensure t :diminish :config (company-prescient-mode 1))
 
     :init
+    ;; Set the backends - I don't like files and a few oters are unlikely
+    (setq company-backends
+          '(company-semantic company-cmake
+            company-capf
+            company-clang
+            ;; company-files
+            (company-dabbrev-code company-gtags company-etags company-keywords)
+            ;; company-oddmuse
+            company-dabbrev))
     ;; jojojames to add a backend with yasnippet in a :with
     (defun j|company-backend-in-backends (b)
       "Check if backend B is already in `company-backends'."

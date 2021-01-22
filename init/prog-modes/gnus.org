@@ -215,22 +215,31 @@ Add a hydra https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blo
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:02EDEFDB-B154-47E0-AB5B-13EEA6B01F29
 :END:
+*** On entry
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210122T112028.127642
+:END:
    Collapse threads when entering a group
-   #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_7F32243E-4A25-4935-883B-EE7FC54AA1C8
-   #+begin_src emacs-lisp
-   (add-hook 'gnus-summary-prepared-hook 'gnus-summary-hide-all-threads)
-   #+end_src
-   #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_AD216EFA-5702-4A33-A1D7-EEB41DB0EA34
-   #+begin_src emacs-lisp
-   (setq gnus-fetch-old-headers 'some               ; Try to connect threads with the minimum number of old headers
-		 gnus-build-sparse-threads 'some            ; Include not-received articles too with References:
-		 gnus-summary-gather-subject-limit 'fuzzy   ; Use a smart fuzzy Subject-matcher
-		 gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references ; Use the References: header to thread root by dummy-article-creation
-		 gnus-treat-display-smileys nil             ; Urgh. You must be joking.
-		 gnus-thread-ignore-subject t               ; Ignore Subject: changes
+#+NAME: org_mark_mini20.local_20210122T112028.106666
+#+begin_src emacs-lisp
+(add-hook 'gnus-summary-prepared-hook 'gnus-summary-hide-all-threads)
+#+end_src
+*** Structure
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210122T112028.126712
+:END:
+How to put the thread together
+#+NAME: org_mark_mini20.local_20210122T112028.107626
+#+begin_src emacs-lisp
+(setq gnus-fetch-old-headers 'some               ; Try to connect threads with the minimum number of old headers
+	  gnus-build-sparse-threads 'some            ; Include not-received articles too with References:
+	  gnus-summary-gather-subject-limit 'fuzzy   ; Use a smart fuzzy Subject-matcher
+	  gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references ; Use the References: header to thread root by dummy-article-creation
+	  gnus-treat-display-smileys t
+	  gnus-thread-ignore-subject t               ; Ignore Subject: changes
 
-		 gnus-thread-hide-killed t)                 ; Hiding propagates to subtrees
-   #+end_src
+	  gnus-thread-hide-killed t)                 ; Hiding propagates to subtrees
+#+end_src
 ** Sort Order
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:D1C6B89C-0CE1-4FC7-B29A-3420DEC97802
@@ -247,39 +256,71 @@ Add a hydra https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blo
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:757C714E-BC96-4925-8FF9-B1A6E74A677E
 :END:
+*** Tree buffer
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210122T120850.139717
+:END:
+Now removed
  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_3D80CD27-96E0-4735-9EB5-AA2B404C2B71
  #+begin_src emacs-lisp
- (setq gnus-use-trees t
-	   gnus-generate-tree-function 'gnus-generate-horizontal-tree
-	   gnus-tree-minimize-window nil)
- (gnus-add-configuration
-  '(article
-	(vertical 1.0
-			  (horizontal 0.25
-						  (summary 0.75 point)
-						  (tree 1.0))
-			  (article 1.0))))
+(setq gnus-use-trees nil)
 
- (setq gnus-thread-hide-subtree
-	   '(or gnus-article-unread-p
-			gnus-article-unseen-p))
+;; (setq gnus-use-trees t
+;; 	  gnus-generate-tree-function 'gnus-generate-horizontal-tree
+;; 	  gnus-tree-minimize-window nil)
+;; (gnus-add-configuration
+;;  '(article
+;;    (vertical 1.0
+;;    		  (horizontal 0.25
+;;    					  (summary 0.75 point)
+;;    					  (tree 1.0))
+;;    		  (article 1.0))))
+
  #+end_src
+*** Display article in summary
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210122T120850.138449
+:END:
+Make it so only the first article in thread is shown
+#+NAME: org_mark_mini20.local_20210122T120850.123169
+#+begin_src emacs-lisp
+(setq gnus-thread-hide-subtree
+	  '(or gnus-article-unread-p
+		gnus-article-unseen-p))
+#+end_src
 ** Prettify tree
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:A58333F7-FF23-4C0A-8F27-2D97E8ED92C5
 :END:
 From [[http://doc.rix.si/cce/cce-gnus.html][Here]]
+*** Format of line
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210122T112028.125725
+:END:
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_C487340F-0BAB-4B52-984E-41534760ABBD
 #+begin_src emacs-lisp
-(setq gnus-summary-line-format "%*%U%R%z%3t%4i %4V %(%&user-date; %-15,15f  %B%s%)\n"
-
-	  gnus-sum-thread-tree-false-root ""
+;; (setq gnus-summary-line-format "%*%U%R%z%3t%4i %4V %(%&user-date; %-15,15f  %B%s%)\n"
+;; (setq gnus-summary-line-format
+;; 	  "%U%R%z%I%(%[%4L: %-23,23f%]%) %s\\n" )
+(setq gnus-summary-line-format
+	  "%U %20,20&user-date; %30,30s%B %f \n" )
+#+end_src
+*** Threading
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210122T112028.124592
+:END:
+Show nice characters for structure
+#+NAME: org_mark_mini20.local_20210122T112028.108810
+#+begin_src emacs-lisp
+(setq gnus-sum-thread-tree-false-root ""
 	  gnus-sum-thread-tree-indent " "
 	  gnus-sum-thread-tree-leaf-with-other "├► "
 	  gnus-sum-thread-tree-root ""
 	  gnus-sum-thread-tree-single-leaf "╰► "
 	  gnus-sum-thread-tree-vertical "│"
-	  gnus-user-date-format-alist '((t . "%d %b %Y %H:%M")))
+	  ;; gnus-user-date-format-alist '((t . "%d %b %Y %H:%M"))
+	  )
+
 #+end_src
 ** Hydra
 :PROPERTIES:
@@ -338,7 +379,7 @@ From same place as above
     ;; ("v" w3mext-open-with-mplayer)
     ;; ("d" w3mext-download-rss-stream)
     ;; ("b" w3mext-open-link-or-image-or-url)
-    ("b" gnus-article-browse-html-article "Brows in web")
+    ("b" gnus-article-browse-html-article "Browse in web")
     ;; ("g" w3m-lnum-goto)
     )) )
 

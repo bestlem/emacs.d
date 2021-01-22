@@ -81,8 +81,10 @@ Plus the lisp formatting is not autoloaded
 #+NAME: org_mark_2020-11-24T18-08-50+00-00_mini12.local_BA7E1106-4E0E-4D38-B512-2C59194F3F4D
 #+begin_src emacs-lisp :tangle no
 (use-package srefactor
-  :ensure t
-  :init (use-package srefactor-lisp))
+    :ensure t
+    :demand                             ; need as not enough exposed to autoload
+    :commands srefactor-lisp-format-sexp
+    :config (use-package srefactor-lisp))
 #+end_src
 ** Extra font lock
 :PROPERTIES:

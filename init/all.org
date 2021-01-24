@@ -163,7 +163,8 @@ Now I remember writing my own printenv as env|sort - looking at man page printen
       ;; (my-shell "/bin/zsh")
       )
   (setq explicit-shell-file-name my-shell)
-  (setq exec-path-from-shell-shell-name my-shell))
+  (setq exec-path-from-shell-shell-name my-shell)
+  (setq shell-file-name my-shell))
 
 #+end_src
 

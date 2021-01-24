@@ -528,7 +528,7 @@ midnight-mode purges buffers which haven’t been displayed in 3 days.
 (use-package midnight
   :defer 10
   :config
-  (midnight-delay-set 'midnight-delay "6:00am")
+  (midnight-delay-set 'midnight-delay "6:15am")
   (defun add-to-clean-buffer-regex (str)
     (add-to-list 'clean-buffer-list-kill-regexps
                  (rx-to-string `(seq line-start "*" ,str " "))))

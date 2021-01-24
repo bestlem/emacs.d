@@ -4,3 +4,4 @@
 [submodule "fork/conda.el"]
 	path = fork/conda.el
 	url = git@github.com:bestlem/conda.el.git
+	branch = conda-activation-work

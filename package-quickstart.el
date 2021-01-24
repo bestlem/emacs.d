@@ -253,335 +253,10 @@ See `ws-butler-mode' for more information on Ws-Butler mode.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/async-20200809.501/async-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20210117.2008/with-editor-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/async-20200809.501/async-autoloads.el") (car load-path))))
-
-
-
-(autoload 'async-start-process "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/async" "\
-Start the executable PROGRAM asynchronously named NAME.  See `async-start'.
-PROGRAM is passed PROGRAM-ARGS, calling FINISH-FUNC with the
-process object when done.  If FINISH-FUNC is nil, the future
-object will return the process object when the program is
-finished.  Set DEFAULT-DIRECTORY to change PROGRAM's current
-working directory.
-
-\(fn NAME PROGRAM FINISH-FUNC &rest PROGRAM-ARGS)" nil nil)
-
-(autoload 'async-start "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/async" "\
-Execute START-FUNC (often a lambda) in a subordinate Emacs process.
-When done, the return value is passed to FINISH-FUNC.  Example:
-
-    (async-start
-       ;; What to do in the child process
-       (lambda ()
-         (message \"This is a test\")
-         (sleep-for 3)
-         222)
-
-       ;; What to do when it finishes
-       (lambda (result)
-         (message \"Async process done, result should be 222: %s\"
-                  result)))
-
-If FINISH-FUNC is nil or missing, a future is returned that can
-be inspected using `async-get', blocking until the value is
-ready.  Example:
-
-    (let ((proc (async-start
-                   ;; What to do in the child process
-                   (lambda ()
-                     (message \"This is a test\")
-                     (sleep-for 3)
-                     222))))
-
-        (message \"I'm going to do some work here\") ;; ....
-
-        (message \"Waiting on async process, result should be 222: %s\"
-                 (async-get proc)))
-
-If you don't want to use a callback, and you don't care about any
-return value from the child process, pass the `ignore' symbol as
-the second argument (if you don't, and never call `async-get', it
-will leave *emacs* process buffers hanging around):
-
-    (async-start
-     (lambda ()
-       (delete-file \"a remote file on a slow link\" nil))
-     'ignore)
-
-Note: Even when FINISH-FUNC is present, a future is still
-returned except that it yields no value (since the value is
-passed to FINISH-FUNC).  Call `async-get' on such a future always
-returns nil.  It can still be useful, however, as an argument to
-`async-ready' or `async-wait'.
-
-\(fn START-FUNC &optional FINISH-FUNC)" nil nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/async" '("async-")))
-
-
-
-
-(autoload 'async-byte-recompile-directory "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/async-bytecomp" "\
-Compile all *.el files in DIRECTORY asynchronously.
-All *.elc files are systematically deleted before proceeding.
-
-\(fn DIRECTORY &optional QUIET)" nil nil)
-
-(defvar async-bytecomp-package-mode nil "\
-Non-nil if Async-Bytecomp-Package mode is enabled.
-See the `async-bytecomp-package-mode' command
-for a description of this minor mode.
-Setting this variable directly does not take effect;
-either customize it (see the info node `Easy Customization')
-or call the function `async-bytecomp-package-mode'.")
-
-(custom-autoload 'async-bytecomp-package-mode "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/async-bytecomp" nil)
-
-(autoload 'async-bytecomp-package-mode "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/async-bytecomp" "\
-Byte compile asynchronously packages installed with package.el.
-Async compilation of packages can be controlled by
-`async-bytecomp-allowed-packages'.
-
-If called interactively, enable Async-Bytecomp-Package mode if
-ARG is positive, and disable it if ARG is zero or negative.
-If called from Lisp, also enable the mode if ARG is omitted or
-nil, and toggle it if ARG is `toggle'; disable the
-mode otherwise.
-
-\(fn &optional ARG)" t nil)
-
-(autoload 'async-byte-compile-file "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/async-bytecomp" "\
-Byte compile Lisp code FILE asynchronously.
-
-Same as `byte-compile-file' but asynchronous.
-
-\(fn FILE)" t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/async-bytecomp" '("async-byte")))
-
-
-
-
-(defvar dired-async-mode nil "\
-Non-nil if Dired-Async mode is enabled.
-See the `dired-async-mode' command
-for a description of this minor mode.
-Setting this variable directly does not take effect;
-either customize it (see the info node `Easy Customization')
-or call the function `dired-async-mode'.")
-
-(custom-autoload 'dired-async-mode "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/dired-async" nil)
-
-(autoload 'dired-async-mode "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/dired-async" "\
-Do dired actions asynchronously.
-
-If called interactively, enable Dired-Async mode if ARG is
-positive, and disable it if ARG is zero or negative.  If called
-from Lisp, also enable the mode if ARG is omitted or nil, and
-toggle it if ARG is `toggle'; disable the mode otherwise.
-
-\(fn &optional ARG)" t nil)
-
-(autoload 'dired-async-do-copy "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/dired-async" "\
-Run ‘dired-do-copy’ asynchronously.
-
-\(fn &optional ARG)" t nil)
-
-(autoload 'dired-async-do-symlink "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/dired-async" "\
-Run ‘dired-do-symlink’ asynchronously.
-
-\(fn &optional ARG)" t nil)
-
-(autoload 'dired-async-do-hardlink "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/dired-async" "\
-Run ‘dired-do-hardlink’ asynchronously.
-
-\(fn &optional ARG)" t nil)
-
-(autoload 'dired-async-do-rename "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/dired-async" "\
-Run ‘dired-do-rename’ asynchronously.
-
-\(fn &optional ARG)" t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/dired-async" '("dired-async-")))
-
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/async-20200809.501/smtpmail-async" '("async-smtpmail-")))
-
-
-
-(autoload 'async-start-process "async" "\
-Start the executable PROGRAM asynchronously named NAME.  See `async-start'.
-PROGRAM is passed PROGRAM-ARGS, calling FINISH-FUNC with the
-process object when done.  If FINISH-FUNC is nil, the future
-object will return the process object when the program is
-finished.  Set DEFAULT-DIRECTORY to change PROGRAM's current
-working directory.
-
-\(fn NAME PROGRAM FINISH-FUNC &rest PROGRAM-ARGS)" nil nil)
-
-(autoload 'async-start "async" "\
-Execute START-FUNC (often a lambda) in a subordinate Emacs process.
-When done, the return value is passed to FINISH-FUNC.  Example:
-
-    (async-start
-       ;; What to do in the child process
-       (lambda ()
-         (message \"This is a test\")
-         (sleep-for 3)
-         222)
-
-       ;; What to do when it finishes
-       (lambda (result)
-         (message \"Async process done, result should be 222: %s\"
-                  result)))
-
-If FINISH-FUNC is nil or missing, a future is returned that can
-be inspected using `async-get', blocking until the value is
-ready.  Example:
-
-    (let ((proc (async-start
-                   ;; What to do in the child process
-                   (lambda ()
-                     (message \"This is a test\")
-                     (sleep-for 3)
-                     222))))
-
-        (message \"I'm going to do some work here\") ;; ....
-
-        (message \"Waiting on async process, result should be 222: %s\"
-                 (async-get proc)))
-
-If you don't want to use a callback, and you don't care about any
-return value from the child process, pass the `ignore' symbol as
-the second argument (if you don't, and never call `async-get', it
-will leave *emacs* process buffers hanging around):
-
-    (async-start
-     (lambda ()
-       (delete-file \"a remote file on a slow link\" nil))
-     'ignore)
-
-Note: Even when FINISH-FUNC is present, a future is still
-returned except that it yields no value (since the value is
-passed to FINISH-FUNC).  Call `async-get' on such a future always
-returns nil.  It can still be useful, however, as an argument to
-`async-ready' or `async-wait'.
-
-\(fn START-FUNC &optional FINISH-FUNC)" nil nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "async" '("async-")))
-
-
-
-
-(autoload 'async-byte-recompile-directory "async-bytecomp" "\
-Compile all *.el files in DIRECTORY asynchronously.
-All *.elc files are systematically deleted before proceeding.
-
-\(fn DIRECTORY &optional QUIET)" nil nil)
-
-(defvar async-bytecomp-package-mode nil "\
-Non-nil if Async-Bytecomp-Package mode is enabled.
-See the `async-bytecomp-package-mode' command
-for a description of this minor mode.
-Setting this variable directly does not take effect;
-either customize it (see the info node `Easy Customization')
-or call the function `async-bytecomp-package-mode'.")
-
-(custom-autoload 'async-bytecomp-package-mode "async-bytecomp" nil)
-
-(autoload 'async-bytecomp-package-mode "async-bytecomp" "\
-Byte compile asynchronously packages installed with package.el.
-Async compilation of packages can be controlled by
-`async-bytecomp-allowed-packages'.
-
-If called interactively, enable Async-Bytecomp-Package mode if
-ARG is positive, and disable it if ARG is zero or negative.
-If called from Lisp, also enable the mode if ARG is omitted or
-nil, and toggle it if ARG is `toggle'; disable the
-mode otherwise.
-
-\(fn &optional ARG)" t nil)
-
-(autoload 'async-byte-compile-file "async-bytecomp" "\
-Byte compile Lisp code FILE asynchronously.
-
-Same as `byte-compile-file' but asynchronous.
-
-\(fn FILE)" t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "async-bytecomp" '("async-byte")))
-
-
-
-
-(defvar dired-async-mode nil "\
-Non-nil if Dired-Async mode is enabled.
-See the `dired-async-mode' command
-for a description of this minor mode.
-Setting this variable directly does not take effect;
-either customize it (see the info node `Easy Customization')
-or call the function `dired-async-mode'.")
-
-(custom-autoload 'dired-async-mode "dired-async" nil)
-
-(autoload 'dired-async-mode "dired-async" "\
-Do dired actions asynchronously.
-
-If called interactively, enable Dired-Async mode if ARG is
-positive, and disable it if ARG is zero or negative.  If called
-from Lisp, also enable the mode if ARG is omitted or nil, and
-toggle it if ARG is `toggle'; disable the mode otherwise.
-
-\(fn &optional ARG)" t nil)
-
-(autoload 'dired-async-do-copy "dired-async" "\
-Run ‘dired-do-copy’ asynchronously.
-
-\(fn &optional ARG)" t nil)
-
-(autoload 'dired-async-do-symlink "dired-async" "\
-Run ‘dired-do-symlink’ asynchronously.
-
-\(fn &optional ARG)" t nil)
-
-(autoload 'dired-async-do-hardlink "dired-async" "\
-Run ‘dired-do-hardlink’ asynchronously.
-
-\(fn &optional ARG)" t nil)
-
-(autoload 'dired-async-do-rename "dired-async" "\
-Run ‘dired-do-rename’ asynchronously.
-
-\(fn &optional ARG)" t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dired-async" '("dired-async-")))
-
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smtpmail-async" '("async-smtpmail-")))
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20210110.1545/with-editor-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20210110.1545/with-editor-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20210117.2008/with-editor-autoloads.el") (car load-path))))
 
 
 
@@ -669,10 +344,10 @@ else like the former.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/posframe-20210113.314/posframe-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/posframe-20210118.42/posframe-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/posframe-20210113.314/posframe-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/posframe-20210118.42/posframe-autoloads.el") (car load-path))))
 
 
 
@@ -1720,10 +1395,10 @@ version.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/projectile-20210115.1359/projectile-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/projectile-20210117.1224/projectile-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/projectile-20210115.1359/projectile-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/projectile-20210117.1224/projectile-autoloads.el") (car load-path))))
 
 
 
@@ -2292,15 +1967,19 @@ Otherwise behave as if called interactively.
 \(fn &optional ARG)" t nil)
 
 (define-obsolete-function-alias 'projectile-global-mode 'projectile-mode "1.0")
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "projectile" '("??" "compilation-find-file-projectile-find-compilation-buffer" "def-projectile-commander-method" "delete-file-projectile-remove-from-cache" "projectile-")))
 
+
+
+
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210114.2017/dash-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210123.1222/dash-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210114.2017/dash-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210123.1222/dash-autoloads.el") (car load-path))))
 
 
 
@@ -2351,8 +2030,10 @@ See `dash-fontify-mode' for more information on Dash-Fontify mode.
 (autoload 'dash-register-info-lookup "dash" "\
 Register the Dash Info manual with `info-lookup-symbol'.
 This allows Dash symbols to be looked up with \\[info-lookup-symbol]." t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dash" '("!cdr" "!cons" "--" "->" "-a" "-butlast" "-c" "-d" "-e" "-f" "-gr" "-i" "-keep" "-l" "-m" "-non" "-only-some" "-p" "-r" "-s" "-t" "-u" "-value-to-list" "-when-let" "-zip" "dash-")))
+
 
 
 
@@ -2836,10 +2517,10 @@ result of `defhydra'.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/ht-20210113.822/ht-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/ht-20210119.741/ht-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/ht-20210113.822/ht-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/ht-20210119.741/ht-autoloads.el") (car load-path))))
 
 
 
@@ -2849,10 +2530,10 @@ result of `defhydra'.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/cfrs-20210108.1152/cfrs-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/cfrs-20210121.2007/cfrs-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/cfrs-20210108.1152/cfrs-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/cfrs-20210121.2007/cfrs-autoloads.el") (car load-path))))
 
 
 
@@ -2860,15 +2541,19 @@ result of `defhydra'.
 Read a string using a pos-frame with given PROMPT and INITIAL-INPUT.
 
 \(fn PROMPT &optional INITIAL-INPUT)" nil nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "cfrs" '("cfrs-")))
 
+
+
+
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/treemacs-20210110.2030/treemacs-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/treemacs-20210118.1552/treemacs-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/treemacs-20210110.2030/treemacs-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/treemacs-20210118.1552/treemacs-autoloads.el") (car load-path))))
 
 
 
@@ -2926,8 +2611,10 @@ The project is determined first by projectile (if treemacs-projectile is
 installed), then by project.el.
 If the project is already registered with treemacs just move point to its root.
 An error message is displayed if the current buffer is not part of any project." t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs" '("treemacs-version")))
+
 
 
 
@@ -2955,8 +2642,10 @@ Add the current node to Emacs' list of bookmarks.
 For file and directory nodes their absolute path is saved.  Tag nodes
 additionally also save the tag's position.  A tag can only be bookmarked if the
 treemacs node is pointing to a valid buffer position." t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-bookmarks" '("treemacs--")))
+
 
 
 
@@ -3019,8 +2708,10 @@ the more commonly used keybinds see `treemacs-common-helpful-hydra'.
 The keybinds shown in this hydra are not static, but reflect the actual
 keybindings currently in use (including evil mode).  If the hydra is unable to
 find the key a command is bound to it will show a blank instead." t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-hydras" '("treemacs-helpful-hydra")))
+
 
 
 
@@ -3065,8 +2756,10 @@ be assigned which treemacs icon, for example
   (c++-mode . treemacs-icon-cpp))
 
 \(fn EXTENSIONS MODE-ICON-ALIST)" nil nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-icons" '("treemacs-")))
+
 
 
 
@@ -3086,8 +2779,10 @@ be assigned which treemacs icon, for example
 A major mode for displaying the file system in a tree layout.
 
 \(fn)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-mode" '("treemacs--")))
+
 
 
 
@@ -3146,8 +2841,10 @@ and ignore any prefix argument.
 Show a contextual right click menu based on click EVENT.
 
 \(fn EVENT)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-mouse-interface" '("treemacs--")))
+
 
 
 
@@ -3177,9 +2874,10 @@ or call the function `treemacs-tag-follow-mode'.")
 Toggle `treemacs-tag-follow-mode'.
 
 If called interactively, enable Treemacs-Tag-Follow mode if ARG
-is positive, and disable it if ARG is zero or negative.  If
-called from Lisp, also enable the mode if ARG is omitted or nil,
-and toggle it if ARG is `toggle'; disable the mode otherwise.
+is positive, and disable it if ARG is zero or negative.
+If called from Lisp, also enable the mode if ARG is omitted or
+nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
 
 This acts as more fine-grained alternative to `treemacs-follow-mode' and will
 thus disable `treemacs-follow-mode' on activation. When enabled treemacs will
@@ -3202,8 +2900,10 @@ short time and giving the appereance of the tag follow action lasting much
 longer than it really does.
 
 \(fn &optional ARG)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-tag-follow-mode" '("treemacs--")))
+
 
 
 
@@ -3258,8 +2958,10 @@ Go to the tag at BTN.
 The `imenu-create-index-function' for treemacs buffers." nil nil)
 
 (function-put 'treemacs--create-imenu-index-function 'side-effect-free 't)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-tags" '("treemacs--")))
+
 
 
 
@@ -3335,10 +3037,10 @@ mode otherwise.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20210103.1546/transient-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20210117.2008/transient-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20210103.1546/transient-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20210117.2008/transient-autoloads.el") (car load-path))))
 
 
 
@@ -4380,10 +4082,10 @@ Disable `rainbow-delimiters-mode'." nil nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210110.1607/racket-mode-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210122.1421/racket-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210110.1607/racket-mode-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210122.1421/racket-mode-autoloads.el") (car load-path))))
 
 
 
@@ -4801,6 +4503,10 @@ fully-expanded programs, without needing to evaluate a.k.a.
 - Visually annotating bindings -- local or imported definitions
   and references to them.
 
+- Visually annotating expressions in a tail position, as well as
+  the enclosing expression with respect to which they are in a
+  tail position.
+
 - Completion candidates.
 
 - Defintions' source and documentation.
@@ -4843,6 +4549,17 @@ understands the two different imports of \"define\":
     (define x 2)
     x)
 #+END_SRC
+
+The opening parenthesis of an expression in tail position is
+highlighted using the face `racket-xp-tail-position-face' and has
+a tooltip annotation, \"tail\". The opening parenthesis of an
+enclosing expression with the same continuation as one or more
+expressions in tail position is highlighted using the face
+`racket-xp-tail-target-face' and has a tooltip annotation,
+\"head\". Furthermore, all the immediately related expressions
+are highlighted: The target and its tail(s) are all highlighted,
+when point is on any of them. Use `racket-xp-tail-target' to
+jump from a tail expression to the enclosing target expression.
 
 The function `racket-xp-complete-at-point' is added to the
 variable `completion-at-point-functions'. Note that in this case,
@@ -4907,10 +4624,10 @@ commands directly to whatever keys you prefer.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/pythonic-20200806.434/pythonic-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/pythonic-20210122.1247/pythonic-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/pythonic-20200806.434/pythonic-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/pythonic-20210122.1247/pythonic-autoloads.el") (car load-path))))
 
 
 
@@ -6553,10 +6270,10 @@ Interactively, with prefix argument, move to the previous position.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210114.1245/modus-themes-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210123.1318/modus-themes-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210114.1245/modus-themes-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210123.1318/modus-themes-autoloads.el") (car load-path))))
 
 
 
@@ -6612,8 +6329,10 @@ by virtue of calling either of `modus-themes-load-operandi' and
 `modus-themes-load-vivendi' functions." t nil)
 
 (when (and (boundp 'custom-theme-load-path) load-file-name) (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "modus-themes" '("modus-themes-")))
+
 
 
 
@@ -6730,10 +6449,10 @@ Show the hydra for the current major mode." t nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/git-commit-20210102.1242/git-commit-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/git-commit-20210115.2345/git-commit-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/git-commit-20210102.1242/git-commit-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/git-commit-20210115.2345/git-commit-autoloads.el") (car load-path))))
 
 
 
@@ -6775,10 +6494,10 @@ toggle it if ARG is `toggle'; disable the mode otherwise.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210105.1030/magit-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210123.446/magit-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210105.1030/magit-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210123.446/magit-autoloads.el") (car load-path))))
 
 
 
@@ -9248,10 +8967,10 @@ behaviors.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/iedit-20210114.1621/iedit-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/iedit-20210116.603/iedit-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/iedit-20210114.1621/iedit-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/iedit-20210116.603/iedit-autoloads.el") (car load-path))))
 
 
 
@@ -9315,8 +9034,10 @@ Keymap used within overlays:
 
 (autoload 'iedit-mode-toggle-on-function "iedit" "\
 Toggle Iedit mode on current function." t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "iedit" '("iedit-")))
+
 
 
 
@@ -9335,17 +9056,19 @@ Commands:
 \\{iedit-rect-keymap}
 
 \(fn &optional BEG END)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "iedit-rect" '("iedit-rect")))
+
 
 
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/counsel-20210109.1641/counsel-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/counsel-20210117.2229/counsel-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/counsel-20210109.1641/counsel-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/counsel-20210117.2229/counsel-autoloads.el") (car load-path))))
 
 
 
@@ -9853,10 +9576,10 @@ Local bindings (`counsel-mode-map'):
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/lispy-20201226.1746/lispy-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/lispy-20210121.926/lispy-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/lispy-20201226.1746/lispy-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/lispy-20210121.926/lispy-autoloads.el") (car load-path))))
 
 
 
@@ -10217,10 +9940,10 @@ toggle it if ARG is `toggle'; disable the mode otherwise.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-posframe-20201215.39/ivy-posframe-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-posframe-20210122.45/ivy-posframe-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-posframe-20201215.39/ivy-posframe-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-posframe-20210122.45/ivy-posframe-autoloads.el") (car load-path))))
 
 
 
@@ -11919,10 +11642,10 @@ what diminished modes would be on the mode-line if they were still minor." t nil
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/diff-hl-20210113.1930/diff-hl-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/diff-hl-20210121.218/diff-hl-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/diff-hl-20210113.1930/diff-hl-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/diff-hl-20210121.218/diff-hl-autoloads.el") (car load-path))))
 
 
 
@@ -12133,83 +11856,10 @@ don't actually start the search.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/conda-20210114.123/conda-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/company-20210122.2314/company-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/conda-20210114.123/conda-autoloads.el") (car load-path))))
-
-
-
-(autoload 'conda-env-deactivate "conda" "\
-Deactivate the current conda env." t nil)
-
-(autoload 'conda-env-activate "conda" "\
-Switch to environment NAME, prompting if called interactively.
-
-\(fn &optional NAME)" t nil)
-
-(autoload 'conda-env-activate-path "conda" "\
-Switch to environment PATH, prompting if called interactively.
-
-\(fn &optional PATH)" t nil)
-
-(autoload 'conda-env-list "conda" "\
-List all available conda environments in a temp buffer." t nil)
-
-(autoload 'conda-with-env-shell-command "conda" "\
-With environment NAME active, execute the shell string COMMAND.
-
-\(fn NAME COMMAND)" nil nil)
-
-(autoload 'conda-env-shell-init "conda" "\
-Activate the current env in a newly opened shell PROCESS.
-
-\(fn PROCESS)" nil nil)
-
-(autoload 'conda-env-initialize-interactive-shells "conda" "\
-Configure interactive shells for use with conda.el." nil nil)
-
-(autoload 'conda-env-initialize-eshell "conda" "\
-Configure eshell for use with conda.el." nil nil)
-
-(autoload 'conda-env-activate-for-buffer "conda" "\
-Activate the conda environment implied by the current buffer.
-
-This can be set by a buffer-local or project-local variable (e.g. a
-`.dir-locals.el` that defines `conda-project-env-path`), or inferred from an
-`environment.yml` or similar at the project level." t nil)
-
-(defvar conda-env-autoactivate-mode nil "\
-Non-nil if Conda-Env-Autoactivate mode is enabled.
-See the `conda-env-autoactivate-mode' command
-for a description of this minor mode.
-Setting this variable directly does not take effect;
-either customize it (see the info node `Easy Customization')
-or call the function `conda-env-autoactivate-mode'.")
-
-(custom-autoload 'conda-env-autoactivate-mode "conda" nil)
-
-(autoload 'conda-env-autoactivate-mode "conda" "\
-Toggle conda-env-autoactivate mode.
-
-If called interactively, enable Conda-Env-Autoactivate mode if
-ARG is positive, and disable it if ARG is zero or negative.  If
-called from Lisp, also enable the mode if ARG is omitted or nil,
-and toggle it if ARG is `toggle'; disable the mode otherwise.
-
-This mode automatically tries to activate a conda environment for the current
-buffer.
-
-\(fn &optional ARG)" t nil)
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "conda" '("conda-")))
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/company-20210114.35/company-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/company-20210114.35/company-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/company-20210122.2314/company-autoloads.el") (car load-path))))
 
 
 
@@ -12279,8 +11929,10 @@ Insert the common part of all candidates or the current selection.
 The first time this is called, the common part is inserted, the second
 time, or when the selection has been changed, the selected candidate is
 inserted." t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company" '("company-")))
+
 
 
 
@@ -12288,8 +11940,10 @@ inserted." t nil)
 `company-mode' completion backend for abbrev.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-abbrev" '("company-abbrev-insert")))
+
 
 
 
@@ -12297,8 +11951,10 @@ inserted." t nil)
 `company-mode' completion backend for BBDB.
 
 \(fn COMMAND &optional ARG &rest IGNORE)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-bbdb" '("company-bbdb-")))
+
 
 
 
@@ -12318,8 +11974,10 @@ inserted." t nil)
 `company-mode' completion backend for `css-mode'.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-css" '("company-css-")))
+
 
 
 
@@ -12327,8 +11985,10 @@ inserted." t nil)
 dabbrev-like `company-mode' completion backend.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-dabbrev" '("company-dabbrev-")))
+
 
 
 
@@ -12338,8 +11998,10 @@ The backend looks for all symbols in the current buffer that aren't in
 comments or strings.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-dabbrev-code" '("company-dabbrev-code-")))
+
 
 
 
@@ -12347,8 +12009,10 @@ comments or strings.
 `company-mode' completion backend for Emacs Lisp.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-elisp" '("company-elisp-")))
+
 
 
 
@@ -12356,8 +12020,10 @@ comments or strings.
 `company-mode' completion backend for etags.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-etags" '("company-etags-")))
+
 
 
 
@@ -12367,8 +12033,10 @@ Completions works for proper absolute and relative files paths.
 File paths with spaces are only supported inside strings.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-files" '("company-file")))
+
 
 
 
@@ -12376,8 +12044,10 @@ File paths with spaces are only supported inside strings.
 `company-mode' completion backend for GNU Global.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-gtags" '("company-gtags-")))
+
 
 
 
@@ -12385,8 +12055,10 @@ File paths with spaces are only supported inside strings.
 `company-mode' completion backend using Ispell.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-ispell" '("company-ispell-")))
+
 
 
 
@@ -12394,8 +12066,10 @@ File paths with spaces are only supported inside strings.
 `company-mode' backend for programming language keywords.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-keywords" '("company-keywords-")))
+
 
 
 
@@ -12403,8 +12077,10 @@ File paths with spaces are only supported inside strings.
 `company-mode' completion backend for `nxml-mode'.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-nxml" '("company-nxml-")))
+
 
 
 
@@ -12412,8 +12088,10 @@ File paths with spaces are only supported inside strings.
 `company-mode' completion backend for `oddmuse-mode'.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-oddmuse" '("company-oddmuse-")))
+
 
 
 
@@ -12421,8 +12099,10 @@ File paths with spaces are only supported inside strings.
 `company-mode' completion backend using CEDET Semantic.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-semantic" '("company-semantic-")))
+
 
 
 
@@ -12434,8 +12114,10 @@ File paths with spaces are only supported inside strings.
 `company-mode' completion backend for tempo.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-tempo" '("company-tempo-")))
+
 
 
 
@@ -12469,8 +12151,10 @@ from Lisp, also enable the mode if ARG is omitted or nil, and
 toggle it if ARG is `toggle'; disable the mode otherwise.
 
 \(fn &optional ARG)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-tng" '("company-tng-")))
+
 
 
 
@@ -12498,8 +12182,10 @@ shadow backends that come after it.  Recommended usages:
   (global-set-key (kbd \"C-c y\") \\='company-yasnippet)
 
 \(fn COMMAND &optional ARG &rest IGNORE)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-yasnippet" '("company-yasnippet-")))
+
 
 
 
@@ -13674,10 +13360,10 @@ ARG is `toggle'; disable the mode otherwise.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/auctex-13.0.3/auctex-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/auctex-13.0.4/auctex-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/auctex-13.0.3/auctex-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/auctex-13.0.4/auctex-autoloads.el") (car load-path))))
 
 
 
@@ -13691,8 +13377,10 @@ runs bib-find, and [mouse-3] runs bib-display.
 
 (autoload 'turn-on-bib-cite "bib-cite" "\
 Unconditionally turn on Bib Cite mode." nil nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "bib-cite" '("LaTeX-" "bib-" "create-alist-from-list" "member-cis" "psg-" "search-directory-tree")))
+
 
 
 
@@ -13707,8 +13395,10 @@ Special commands:
 Entering `context-mode' calls the value of `text-mode-hook',
 then the value of `TeX-mode-hook', and then the value
 of ConTeXt-mode-hook." t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "context" '("ConTeXt-" "TeX-ConTeXt-sentinel" "context-guess-current-interface")))
+
 
 
 
@@ -13721,8 +13411,10 @@ Special commands:
 Entering `context-mode' calls the value of `text-mode-hook',
 then the value of TeX-mode-hook, and then the value
 of context-mode-hook." t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "context-en" '("ConTeXt-")))
+
 
 
 
@@ -13735,15 +13427,19 @@ Special commands:
 Entering `context-mode' calls the value of `text-mode-hook',
 then the value of TeX-mode-hook, and then the value
 of context-mode-hook." t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "context-nl" '("ConTeXt-")))
+
 
 
 
 (autoload 'font-latex-setup "font-latex" "\
 Setup this buffer for LaTeX font-lock.  Usually called from a hook." nil nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "font-latex" '("font-latex-")))
+
 
 
 
@@ -13776,8 +13472,10 @@ runs the hooks in `docTeX-mode-hook'.
 \(fn)" t nil)
 
 (defalias 'TeX-doctex-mode 'docTeX-mode)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "latex" '("Bib" "LaTeX-" "TeX-" "docTeX-" "latex-math-mode")))
+
 
 
 
@@ -13808,8 +13506,10 @@ DEF, and INHERIT-INPUT-METHOD.
 The return value is the string as entered in the minibuffer.
 
 \(fn PROMPT TABLE &optional PREDICATE REQUIRE-MATCH INITIAL-INPUT HIST DEF INHERIT-INPUT-METHOD)" nil nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "multi-prompt" '("multi-prompt-")))
+
 
 
 
@@ -13834,8 +13534,10 @@ Special commands:
 Entering `ams-tex-mode' calls the value of `text-mode-hook',
 then the value of `TeX-mode-hook', and then the value
 of `AmS-TeX-mode-hook'." t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "plain-tex" '("AmS" "plain-TeX-")))
+
 
 
 
@@ -13859,8 +13561,10 @@ to add the preview functionality." nil nil)
 
 (autoload 'preview-report-bug "preview" "\
 Report a bug in the preview-latex package." t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "preview" '("TeX-" "desktop-buffer-preview" "preview-")))
+
 
 
 
@@ -13893,8 +13597,10 @@ Don't hesitate to report any problems or inaccurate documentation.
 If you don't have setup sending mail from (X)Emacs, please copy the
 output buffer into your mail program, as it gives us important
 information about your AUCTeX version and AUCTeX configuration." t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex" '("Bib" "ConTeXt-" "LaTeX-" "TeX-" "VirTeX-common-initialization" "docTeX-default-extension" "ispell-tex-major-modes" "plain-TeX-auto-regexp-list" "tex-")))
+
 
 
 
@@ -13903,8 +13609,10 @@ Install toolbar buttons for TeX mode." t nil)
 
 (autoload 'LaTeX-install-toolbar "tex-bar" "\
 Install toolbar buttons for LaTeX mode." t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex-bar" '("TeX-bar-")))
+
 
 
 
@@ -13922,15 +13630,19 @@ With zero or negative ARG turn mode off.
 \(fn &optional ARG)" t nil)
 
 (defalias 'tex-fold-mode 'TeX-fold-mode)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex-fold" '("TeX-fold-")))
+
 
 
 
 (autoload 'tex-font-setup "tex-font" "\
 Setup font lock support for TeX." nil nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex-font" '("tex-")))
+
 
 
 
@@ -13944,8 +13656,10 @@ Special commands:
 
 Entering Texinfo mode calls the value of `text-mode-hook'  and then the
 value of `Texinfo-mode-hook'." t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex-info" '("Texinfo-" "texinfo-environment-regexp")))
+
 
 
 
@@ -13960,13 +13674,17 @@ Set `japanese-TeX-mode' to t, and enter `TeX-plain-tex-mode'." t nil)
 (autoload 'japanese-latex-mode "tex-jp" "\
 Major mode in AUCTeX for editing Japanese LaTeX files.
 Set `japanese-TeX-mode' to t, and enter `TeX-latex-mode'." t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex-jp" '("TeX-" "japanese-")))
 
+
 
  (require 'tex-site)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex-site" '("AUCTeX-" "TeX-" "preview-TeX-style-dir")))
+
 
 
 
@@ -13990,13 +13708,184 @@ Search backward for any of the math switches.
 Limit searched to BOUND.
 
 \(fn BOUND)" nil nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "texmathp" '("texmathp-")))
 
+
 
  (autoload 'toolbarx-install-toolbar "toolbar-x")
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "toolbar-x" '("toolbarx-")))
+
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/async-20210117.718/async-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/async-20210117.718/async-autoloads.el") (car load-path))))
+
+
+
+(autoload 'async-start-process "async" "\
+Start the executable PROGRAM asynchronously named NAME.  See `async-start'.
+PROGRAM is passed PROGRAM-ARGS, calling FINISH-FUNC with the
+process object when done.  If FINISH-FUNC is nil, the future
+object will return the process object when the program is
+finished.  Set DEFAULT-DIRECTORY to change PROGRAM's current
+working directory.
+
+\(fn NAME PROGRAM FINISH-FUNC &rest PROGRAM-ARGS)" nil nil)
+
+(autoload 'async-start "async" "\
+Execute START-FUNC (often a lambda) in a subordinate Emacs process.
+When done, the return value is passed to FINISH-FUNC.  Example:
+
+    (async-start
+       ;; What to do in the child process
+       (lambda ()
+         (message \"This is a test\")
+         (sleep-for 3)
+         222)
+
+       ;; What to do when it finishes
+       (lambda (result)
+         (message \"Async process done, result should be 222: %s\"
+                  result)))
+
+If FINISH-FUNC is nil or missing, a future is returned that can
+be inspected using `async-get', blocking until the value is
+ready.  Example:
+
+    (let ((proc (async-start
+                   ;; What to do in the child process
+                   (lambda ()
+                     (message \"This is a test\")
+                     (sleep-for 3)
+                     222))))
+
+        (message \"I'm going to do some work here\") ;; ....
+
+        (message \"Waiting on async process, result should be 222: %s\"
+                 (async-get proc)))
+
+If you don't want to use a callback, and you don't care about any
+return value from the child process, pass the `ignore' symbol as
+the second argument (if you don't, and never call `async-get', it
+will leave *emacs* process buffers hanging around):
+
+    (async-start
+     (lambda ()
+       (delete-file \"a remote file on a slow link\" nil))
+     'ignore)
+
+Note: Even when FINISH-FUNC is present, a future is still
+returned except that it yields no value (since the value is
+passed to FINISH-FUNC).  Call `async-get' on such a future always
+returns nil.  It can still be useful, however, as an argument to
+`async-ready' or `async-wait'.
+
+\(fn START-FUNC &optional FINISH-FUNC)" nil nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "async" '("async-")))
+
+
+
+
+(autoload 'async-byte-recompile-directory "async-bytecomp" "\
+Compile all *.el files in DIRECTORY asynchronously.
+All *.elc files are systematically deleted before proceeding.
+
+\(fn DIRECTORY &optional QUIET)" nil nil)
+
+(defvar async-bytecomp-package-mode nil "\
+Non-nil if Async-Bytecomp-Package mode is enabled.
+See the `async-bytecomp-package-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `async-bytecomp-package-mode'.")
+
+(custom-autoload 'async-bytecomp-package-mode "async-bytecomp" nil)
+
+(autoload 'async-bytecomp-package-mode "async-bytecomp" "\
+Byte compile asynchronously packages installed with package.el.
+Async compilation of packages can be controlled by
+`async-bytecomp-allowed-packages'.
+
+If called interactively, enable Async-Bytecomp-Package mode if
+ARG is positive, and disable it if ARG is zero or negative.
+If called from Lisp, also enable the mode if ARG is omitted or
+nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'async-byte-compile-file "async-bytecomp" "\
+Byte compile Lisp code FILE asynchronously.
+
+Same as `byte-compile-file' but asynchronous.
+
+\(fn FILE)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "async-bytecomp" '("async-byte")))
+
+
+
+
+(defvar dired-async-mode nil "\
+Non-nil if Dired-Async mode is enabled.
+See the `dired-async-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `dired-async-mode'.")
+
+(custom-autoload 'dired-async-mode "dired-async" nil)
+
+(autoload 'dired-async-mode "dired-async" "\
+Do dired actions asynchronously.
+
+If called interactively, enable Dired-Async mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'dired-async-do-copy "dired-async" "\
+Run ‘dired-do-copy’ asynchronously.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'dired-async-do-symlink "dired-async" "\
+Run ‘dired-do-symlink’ asynchronously.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'dired-async-do-hardlink "dired-async" "\
+Run ‘dired-do-hardlink’ asynchronously.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'dired-async-do-rename "dired-async" "\
+Run ‘dired-do-rename’ asynchronously.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dired-async" '("dired-async-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smtpmail-async" '("async-smtpmail-")))
 
 
 
@@ -14055,10 +13944,10 @@ provided.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/all-the-icons-20210114.1520/all-the-icons-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/all-the-icons-20210119.2136/all-the-icons-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/all-the-icons-20210114.1520/all-the-icons-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/all-the-icons-20210119.2136/all-the-icons-autoloads.el") (car load-path))))
 
 
 
@@ -14109,8 +13998,10 @@ When Prefix ARG is non-nil, insert the propertized icon.
 When FAMILY is non-nil, limit the candidates to the icon set matching it.
 
 \(fn &optional ARG FAMILY)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "all-the-icons" '("all-the-icons-")))
+
 
 
 
@@ -14210,14 +14101,14 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
 )
 (setq package-activated-list
       (append
-       '(zoutline yasnippet yaml-mode xr xonsh-mode ws-butler async with-editor posframe which-key which-key-posframe vlf validate bind-key use-package use-package-hydra key-chord bind-chord use-package-chords epl pkg-info projectile dash s f avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile treemacs-icons-dired transient transient-posframe toc-org test-simple ivy swiper super-save srefactor spinner sml-mode smartparens load-relative loc-changes realgud rainbow-delimiters pos-tip racket-mode pythonic dash-functional pretty-hydra prescient popup persistent-scratch paren-face paredit paradox outorg outshine org-bullets org esxml nov mwim modus-themes memoize math-symbol-lists makey major-mode-hydra git-commit magit macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine gcmh flyspell-correct flyspell-correct-popup flycheck flycheck-yamllint fish-mode expand-region eval-in-repl eros elmacro elisp-format dtrt-indent discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep conda company company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-identifiers-mode cmake-mode cask-mode beacon auctex amx all-the-icons all-the-icons-dired aggressive-indent)
+       '(zoutline yasnippet yaml-mode xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe vlf validate bind-key use-package use-package-hydra key-chord bind-chord use-package-chords epl pkg-info projectile dash s f avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile treemacs-icons-dired transient transient-posframe toc-org test-simple ivy swiper super-save srefactor spinner sml-mode smartparens load-relative loc-changes realgud rainbow-delimiters pos-tip racket-mode pythonic dash-functional pretty-hydra prescient popup persistent-scratch paren-face paredit paradox outorg outshine org-bullets org esxml nov mwim modus-themes memoize math-symbol-lists makey major-mode-hydra git-commit magit macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine gcmh flyspell-correct flyspell-correct-popup flycheck flycheck-yamllint fish-mode expand-region eval-in-repl eros elmacro elisp-format dtrt-indent discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep company company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-identifiers-mode cmake-mode cask-mode beacon auctex async amx all-the-icons all-the-icons-dired aggressive-indent)
        package-activated-list))
 (progn
   (require 'info)
   (info-initialize)
   (setq Info-directory-list
         (append
-         '("/Users/mark/.emacs.d/elpa/27.1/elpa/auctex-13.0.3" "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210105.1030" "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210114.1245" "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210110.1607" "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210114.1859" "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20210103.1546" "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210114.2017" "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20210106.2145" "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20210110.1545")
+         '("/Users/mark/.emacs.d/elpa/27.1/elpa/auctex-13.0.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210123.446" "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210123.1318" "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210122.1421" "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210114.1859" "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20210117.2008" "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210123.1222" "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20210106.2145" "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20210117.2008")
          Info-directory-list)))
 
 ;; Local Variables:

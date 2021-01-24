@@ -56,22 +56,24 @@ One in emacs and has things built on it
   :mode
   ("\\.py\\'" . python-mode)
   ("\\.wsgi$" . python-mode)
+
   :interpreter ("python" . python-mode)
 
-  :bind ("<f5>" . python-shell-send-buffer )
+  :bind ("<f5>" . python-shell-send-buffer)
   :init
   (setq-default indent-tabs-mode nil)
 
+
   (defun python-hook-mwb ()
     (setq tab-width 4)
-    (aggressive-indent-mode -1) )
+    (aggressive-indent-mode -1))
   :config
   (setq python-indent-offset 4)
+  (setq python-indent-guess-indent-offset nil)
   (add-hook 'python-mode-hook 'smartparens-mode)
   ;; (add-hook 'python-mode-hook 'color-identifiers-mode)
   (add-hook 'python-mode-hook 'python-hook-mwb)
-  (add-hook 'python-mode-hook 'mwb-prog-auto-fill-80)
-  )
+  (add-hook 'python-mode-hook 'mwb-prog-auto-fill-80))
 #+end_src
 ** Conda
 :PROPERTIES:
@@ -81,56 +83,38 @@ Might be better in elpy etc as for the pythonic issue.
   #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_D22A3A48-A2D2-493C-B891-0645341FE000
   #+begin_src emacs-lisp
 (use-package conda
-    :ensure t
-    :after (python)
-    :init
-    (setq conda-anaconda-home "~/miniconda3/")
+  :mwb-load-path "fork/conda.el"
+  :after (python)
+  :init
+  (setq conda-anaconda-home "~/miniconda3/")
 
-    :config
-    (fmakunbound 'conda--get-path-prefix)
-    (defun conda--get-path-prefix (env-dir)
-      "Get a platform-specific path string to utilize the conda env in ENV-DIR.
-It's platform specific in that it uses the platform's native path separator."
-      (s-trim
-       (with-output-to-string
-         (with-current-buffer standard-output
-           (let* ((conda-executable-path
-                   (expand-file-name (concat (file-name-as-directory conda-anaconda-home)
-                                             (file-name-as-directory conda-env-executables-dir)
-                                             "conda")))
-                  (command-format-string "\"%s\" ..activate \"%s\" \"%s\"")
-                  (executor (if (eq system-type 'windows-nt) "cmd.exe" "bash"))
-                  (command (format command-format-string
-                                   conda-executable-path
-                                   executor
-                                   env-dir))
-                  (return-code (process-file shell-file-name nil '(t nil) nil shell-command-switch command)))
-             (unless (= 0 return-code)
-               (error (format "Error: executing command \"%s\" produced error code %d" command return-code))))))))
-    ;; If you want interactive shell support, include:
+  :config
 
-    ;; MWB well no as it messes up xonsh
-    ;; (conda-env-initialize-interactive-shells)
 
-    ;; If you want eshell support, include:
+  ;; If you want interactive shell support, include:
+
+  ;; MWB well no as it messes up xonsh
+  ;; (conda-env-initialize-interactive-shells)
+
+  ;; If you want eshell support, include:
                                         ;(conda-env-initialize-eshell)
 
-    ;; In effect no as dirs are not a 1-1 match for envs
-    ;; If you want auto-activation, include:
-    ;; (conda-env-autoactivate-mode t)
+  ;; In effect no as dirs are not a 1-1 match for envs
+  ;; If you want auto-activation, include:
+  ;; (conda-env-autoactivate-mode t)
 
-    ;; Activate the project/virtual env you want to use.
-    ;; Via M-x conda-env-activate RET analyticd-pysystemtrade
-    ;; or
-    ;; (conda-env-activate "analyticd-pysystemtrade")
-    ;; (conda-env-activate "base")
+  ;; Activate the project/virtual env you want to use.
+  ;; Via M-x conda-env-activate RET analyticd-pysystemtrade
+  ;; or
+  ;; (conda-env-activate "analyticd-pysystemtrade")
+  ;; (conda-env-activate "base")
 
-    ;; we need a setup - e.g. code-snippets
-    (conda-env-activate (if (equalp (file-name-nondirectory  explicit-shell-file-name)
-                                    "xonsh")
-                            "xonsh"
-                          "base"))
-    (setq-default mode-line-format (cons mode-line-format '(:exec conda-env-current-name))))
+  ;; we need a setup - e.g. code-snippets
+  (conda-env-activate (if (equalp (file-name-nondirectory explicit-shell-file-name)
+                                  "xonsh")
+                          "xonsh"
+                        "base"))
+  (setq-default mode-line-format (cons mode-line-format '(:exec conda-env-current-name))))
   #+end_src
 ** TODO Org mode
 :PROPERTIES:

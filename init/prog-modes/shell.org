@@ -3,6 +3,11 @@
 
 * Shell and other small things
 :PROPERTIES:
+:ID:       org_mark_mini20.local:20210124T181527.439309
+:END:
+This is programming shells.
+Shell setup and use is in all.oeg
+:PROPERTIES:
 :ID:       org_mark_2020-11-05T13-13-44+00-00_mini12.local:B661F84D-5F87-4871-93DB-179BC50DE92F
 :END:
 ** Fish

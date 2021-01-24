@@ -101,6 +101,81 @@ Simple mode to edit YAML.
 
 
 )
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/xterm-color-20200605.2017/xterm-color-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/xterm-color-20200605.2017/xterm-color-autoloads.el") (car load-path))))
+
+
+
+(autoload 'xterm-color-filter-strip "xterm-color" "\
+Translate ANSI color sequences in STRING into text properties.
+Return new STRING with text properties applied.
+
+In order to get maximum performance, this function strips text properties
+if they are present in STRING.
+
+\(fn STRING)" nil nil)
+
+(autoload 'xterm-color-filter "xterm-color" "\
+Translate ANSI color sequences in STRING into text properties.
+Return new STRING with text properties applied.
+
+This function checks if `xterm-color-preserve-properties' is non-nil
+and only calls `xterm-color-filter-strip' on substrings that do not
+have text properties applied (passing through the rest unmodified).
+Preserving properties in this fashion is not very robust as there may
+be situations where text properties are applied on ANSI data, which
+will desync the state machine.
+
+Preserving properties works ok with and is really meant for eshell.
+
+This can be inserted into `comint-preoutput-filter-functions'.
+
+\(fn STRING)" nil nil)
+
+(autoload 'xterm-color-256 "xterm-color" "\
+
+
+\(fn COLOR)" nil nil)
+
+(autoload 'xterm-color-colorize-buffer "xterm-color" "\
+Apply `xterm-color-filter' to current buffer, and replace its contents.
+Colors are applied using 'face, unless font-lock-mode is active, in
+which case 'font-lock-face is used. Operation with font-lock mode active
+is not recommended.
+
+If USE-OVERLAYS is non-nil, colors are applied to the buffer using overlays
+instead of text properties. A C-u prefix arg causes overlays to be used.
+
+\(fn &optional USE-OVERLAYS)" t nil)
+
+(autoload 'xterm-color-clear-cache "xterm-color" "\
+Clear xterm color face attribute cache.
+You may want to call this if you change `xterm-color-names' or
+`xterm-color-names-bright' at runtime and you want to see the changes
+take place in a pre-existing buffer that has had xterm-color initialized.
+
+Since the cache is buffer-local and created on-demand when needed, this has no
+effect when called from a buffer that does not have a cache." t nil)
+
+(autoload 'xterm-color-test "xterm-color" "\
+Create, display and render a new buffer containing ANSI control sequences." t nil)
+
+(autoload 'xterm-color-test-raw "xterm-color" "\
+Create and display a new buffer containing ANSI SGR control sequences.
+ANSI sequences are not processed. One can use a different Emacs package,
+such as ansi-color.el to do so. This is really meant to be used for easy
+comparisons/benchmarks with libraries that offer similar functionality." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "xterm-color" '("+xterm-color--table-256+" "xterm-color-")))
+
+
+
+
+
+)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/xr-1.20/xr-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -14101,7 +14176,7 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
 )
 (setq package-activated-list
       (append
-       '(zoutline yasnippet yaml-mode xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe vlf validate bind-key use-package use-package-hydra key-chord bind-chord use-package-chords epl pkg-info projectile dash s f avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile treemacs-icons-dired transient transient-posframe toc-org test-simple ivy swiper super-save srefactor spinner sml-mode smartparens load-relative loc-changes realgud rainbow-delimiters pos-tip racket-mode pythonic dash-functional pretty-hydra prescient popup persistent-scratch paren-face paredit paradox outorg outshine org-bullets org esxml nov mwim modus-themes memoize math-symbol-lists makey major-mode-hydra git-commit magit macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine gcmh flyspell-correct flyspell-correct-popup flycheck flycheck-yamllint fish-mode expand-region eval-in-repl eros elmacro elisp-format dtrt-indent discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep company company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-identifiers-mode cmake-mode cask-mode beacon auctex async amx all-the-icons all-the-icons-dired aggressive-indent)
+       '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe vlf validate bind-key use-package use-package-hydra key-chord bind-chord use-package-chords epl pkg-info projectile dash s f avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile treemacs-icons-dired transient transient-posframe toc-org test-simple ivy swiper super-save srefactor spinner sml-mode smartparens load-relative loc-changes realgud rainbow-delimiters pos-tip racket-mode pythonic dash-functional pretty-hydra prescient popup persistent-scratch paren-face paredit paradox outorg outshine org-bullets org esxml nov mwim modus-themes memoize math-symbol-lists makey major-mode-hydra git-commit magit macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine gcmh flyspell-correct flyspell-correct-popup flycheck flycheck-yamllint fish-mode expand-region eval-in-repl eros elmacro elisp-format dtrt-indent discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep company company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-identifiers-mode cmake-mode cask-mode beacon auctex async amx all-the-icons all-the-icons-dired aggressive-indent)
        package-activated-list))
 (progn
   (require 'info)

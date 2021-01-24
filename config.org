@@ -123,12 +123,73 @@ Fiddling in org-all - perhaps best to remove
 :ID:       org_mark_2020-09-29T11-53-58+01-00_mini12.local:433ED4F4-38B0-44D9-8067-0EF36DB709FB
 :END:
 What type of Emacs and system do we have
-#+NAME: org_mark_2020-09-29T11-53-58+01-00_mini12.local_4D64DDBE-8A53-4B07-8BD4-39512F444777
+The ** names are not emacs standard so told should use -p instead.
+Add more based on [[https://github.com/seagle0128/.emacs.d][Centaur Emacs]]
+#+NAME: org_mark_mini20.local_20210124T194254.507579
 #+begin_src emacs-lisp
 (defconst *aquamacs* (featurep 'aquamacs)
   "True iff we are in aquamacs")
 (defconst *macport* (boundp 'mac-carbon-version-string)
   "True iff we are in Mitsuharu Yamamoto's port")
+
+(defconst *sys/win32p*
+  (eq system-type 'windows-nt)
+  "Are we running on a WinTel system?")
+
+(defconst *sys/linuxp*
+  (eq system-type 'gnu/linux)
+  "Are we running on a GNU/Linux system?")
+
+(defconst *sys/macp*
+  (eq system-type 'darwin)
+  "Are we running on a Mac system?")
+
+(defconst *emacs/mac-x-p*
+  (and (display-graphic-p) *sys/macp*)
+  "Are we running under X on a Mac system?")
+
+(defconst *emacs/mac-ns-p*
+  (eq window-system 'ns)
+  "Are we running on a GNUstep or Macintosh Cocoa display?")
+
+(defconst *emacs/mac-cocoa-p*
+  (featurep 'cocoa)
+  "Are we running with Cocoa on a Mac system?")
+
+(defconst *emacs/mac-port-p*
+  (eq window-system 'mac)
+  "Are we running a macport build on a Mac system?")
+
+(defconst *emacs/linux-x-p*
+  (and (display-graphic-p) *sys/linuxp*)
+  "Are we running under X on a GNU/Linux system?")
+
+(defconst *sys/cygwinp*
+  (eq system-type 'cygwin)
+  "Are we running on a Cygwin system?")
+
+(defconst *sys/rootp*
+  (string-equal "root" (getenv "USER"))
+  "Are you using ROOT user?")
+
+(defconst *emacs/>=25p*
+  (>= emacs-major-version 25)
+  "Emacs is 25 or above.")
+
+(defconst *emacs/>=26p*
+  (>= emacs-major-version 26)
+  "Emacs is 26 or above.")
+
+(defconst *emacs/>=27p*
+  (>= emacs-major-version 27)
+  "Emacs is 27 or above.")
+
+;;  well this is true for all installed one
+(defconst *emacs/>=25.3p*
+  (or *emacs/>=26p*
+      (and (= emacs-major-version 25) (>= emacs-minor-version 3)))
+  "Emacs is 25.3 or above.")
+
 #+end_src
 ** Packaging
 :PROPERTIES:

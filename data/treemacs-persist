@@ -22,13 +22,13 @@
  - path :: ~/src/Racket/RacketProgrammingtheFunWay
 * C based
 ** rftg-0.9.4
- - path :: ~/src/ThirdParty/rftg-0.9.4
+ - path :: ~/src/cpp/rftg
 ** simutrans
  - path :: ~/src/cpp/simutrans
 ** ports
  - path :: ~/src/ports
 * Odds
 ** SML unit test
- - path :: ~/src/sml/unit_test
+ - path :: ~/old_src/sml/unit_test
 ** Coursera Programming languages
- - path :: ~/src/coursera/ProgrammingLanguages
+ - path :: ~/old_src/coursera/ProgrammingLanguages

@@ -517,27 +517,6 @@ I don't want to confirm https://emacs.stackexchange.com/a/10349/9874 The key bin
   "Revert buffer without confirmation."
   (interactive) (revert-buffer t t))
 #+end_src
-** Kill old buffers
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:5AA14D72-6BE5-4361-B619-AA006DFD2D32
-:END:
-midnight-mode purges buffers which haven’t been displayed in 3 days.
-
-#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_06A63EF4-FFB6-4C44-BDC8-23241BDE625C
-#+begin_src emacs-lisp
-(use-package midnight
-  :defer 10
-  :config
-  (midnight-delay-set 'midnight-delay "6:15am")
-  (defun add-to-clean-buffer-regex (str)
-    (add-to-list 'clean-buffer-list-kill-regexps
-                 (rx-to-string `(seq line-start "*" ,str " "))))
-  (add-to-clean-buffer-regex "deadgrep")
-  (add-to-clean-buffer-regex "helpful")
-  (midnight-mode 1)
-  :init (add-hook 'midnight-hook  'garbage-collect 99) ;; at end
-  )
-#+end_src
 * Minibuffer
 :PROPERTIES:
 :ID:       org_mark_2020-03-06T13-08-35+00-00_mini12.local:3D34B982-AF06-4809-ACCC-E206FFCAC10A

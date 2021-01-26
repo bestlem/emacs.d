@@ -1470,10 +1470,10 @@ version.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/projectile-20210117.1224/projectile-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/projectile-20210125.726/projectile-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/projectile-20210117.1224/projectile-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/projectile-20210125.726/projectile-autoloads.el") (car load-path))))
 
 
 
@@ -2051,10 +2051,10 @@ Otherwise behave as if called interactively.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210123.1222/dash-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210124.1524/dash-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210123.1222/dash-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210124.1524/dash-autoloads.el") (car load-path))))
 
 
 
@@ -4157,10 +4157,10 @@ Disable `rainbow-delimiters-mode'." nil nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210122.1421/racket-mode-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210125.1937/racket-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210122.1421/racket-mode-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210125.1937/racket-mode-autoloads.el") (car load-path))))
 
 
 
@@ -6345,10 +6345,10 @@ Interactively, with prefix argument, move to the previous position.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210123.1318/modus-themes-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210125.801/modus-themes-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210123.1318/modus-themes-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210125.801/modus-themes-autoloads.el") (car load-path))))
 
 
 
@@ -6524,10 +6524,10 @@ Show the hydra for the current major mode." t nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/git-commit-20210115.2345/git-commit-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/git-commit-20210124.1829/git-commit-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/git-commit-20210115.2345/git-commit-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/git-commit-20210124.1829/git-commit-autoloads.el") (car load-path))))
 
 
 
@@ -6569,10 +6569,10 @@ toggle it if ARG is `toggle'; disable the mode otherwise.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210123.446/magit-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210124.2150/magit-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210123.446/magit-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210124.2150/magit-autoloads.el") (car load-path))))
 
 
 
@@ -9922,10 +9922,10 @@ Beautify / pretty-print the active region (or the entire buffer if no active reg
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-rich-20201224.4/ivy-rich-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-rich-20210125.19/ivy-rich-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-rich-20201224.4/ivy-rich-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-rich-20210125.19/ivy-rich-autoloads.el") (car load-path))))
 
 
 
@@ -10441,10 +10441,10 @@ enable the mode if ARG is omitted or nil, and toggle it if ARG is
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/flyspell-correct-20200904.526/flyspell-correct-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/flyspell-correct-20210124.1143/flyspell-correct-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/flyspell-correct-20200904.526/flyspell-correct-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/flyspell-correct-20210124.1143/flyspell-correct-autoloads.el") (car load-path))))
 
 
 
@@ -10497,9 +10497,10 @@ until all errors in buffer have been addressed.
 Minor mode for automatically correcting word at point.
 
 If called interactively, enable Flyspell-Correct-Auto mode if ARG
-is positive, and disable it if ARG is zero or negative.  If
-called from Lisp, also enable the mode if ARG is omitted or nil,
-and toggle it if ARG is `toggle'; disable the mode otherwise.
+is positive, and disable it if ARG is zero or negative.
+If called from Lisp, also enable the mode if ARG is omitted or
+nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
 
 Take my advice and don't use this functionality unless you find
 `flyspell-correct-previous' function useless for your purposes.
@@ -10510,8 +10511,10 @@ more info in comment[1].
 https://github.com/syl20bnr/spacemacs/issues/6209#issuecomment-274320376
 
 \(fn &optional ARG)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "flyspell-correct" '("flyspell-correct-")))
+
 
 
 
@@ -10529,10 +10532,10 @@ of (command, word) to be used by `flyspell-do-correct'.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/flyspell-correct-popup-20200828.629/flyspell-correct-popup-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/flyspell-correct-popup-20210124.1143/flyspell-correct-popup-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/flyspell-correct-popup-20200828.629/flyspell-correct-popup-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/flyspell-correct-popup-20210124.1143/flyspell-correct-popup-autoloads.el") (car load-path))))
 
 
 
@@ -10545,6 +10548,8 @@ Return a selected word to use as a replacement or a tuple
 of (command, word) to be used by `flyspell-do-correct'.
 
 \(fn CANDIDATES WORD)" nil nil)
+
+
 
 
 )
@@ -14183,7 +14188,7 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
   (info-initialize)
   (setq Info-directory-list
         (append
-         '("/Users/mark/.emacs.d/elpa/27.1/elpa/auctex-13.0.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210123.446" "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210123.1318" "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210122.1421" "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210114.1859" "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20210117.2008" "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210123.1222" "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20210106.2145" "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20210117.2008")
+         '("/Users/mark/.emacs.d/elpa/27.1/elpa/auctex-13.0.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210124.2150" "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210125.801" "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210125.1937" "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210114.1859" "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20210117.2008" "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210124.1524" "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20210106.2145" "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20210117.2008")
          Info-directory-list)))
 
 ;; Local Variables:

@@ -460,23 +460,16 @@ First issue is we need to switch as many people use spaces so we need to guess i
 #+begin_src emacs-lisp
 (setq tab-always-indent 'complete)
 #+end_src
-* Specific groups
+* General groups
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:3CC4E87A-CFCC-442A-8E6C-35D2C41916EC
 :END:
 Where there is common put them together. This part is really why I have separate files so I can deal with one thing at a time
 
 Lets just load them not explicitly - everything in prog-modes (a better name would be modes or config However leave as this breaks git history)
-#+NAME: org_mark_2020-11-05T10-37-03+00-00_mini12.local_8504E6E2-7344-4462-9C3B-F52C34EA1387
+#+NAME: org_mark_mini20.local_20210126T225208.743497
 #+begin_src emacs-lisp
-(dolist (f (directory-files
-            (expand-file-name "init/prog-modes" mwb-user-emacs-directory)
-            nil
-            (rx-to-string '(seq  any ".org" eol)
-                          ;; might need to add sort by length here - stops the
-                          ;; choice of word splitter - or _ issue
-                          )))
-  (mwb-init-load (concat "init/prog-modes/" (file-name-sans-extension f))))
+(mwb-init-load-directory "init/prog-modes/")
 #+end_src
 
 ** SQL

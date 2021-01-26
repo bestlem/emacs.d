@@ -464,19 +464,25 @@ is non-nil."
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:E5C792B6-CEE6-49E0-BB4B-F0C9636159E8
 :END:
  Actually load the init files, protect is aquamacs macro to carch errors also see [[https://emacs.stackexchange.com/a/671/9874][Stack Exchange answer]]
-This fails for config.org so that needs to be in version control.
-   #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_A039068A-5F9B-4C02-A1C9-156C79F14A5B
-   #+begin_src emacs-lisp
-(setq mwb-esup-depth 1)
+***** Internal loader function
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210126T224850.541695
+:END:
+Does the actual work
 
-(defun mwb-init-load (file-root &optional no-org)
+#+NAME: org_mark_mini20.local_20210126T224850.526804
+#+begin_src emacs-lisp
+(setq mwb-esup-depth 1)                 ; Some attempt at benchmarking
+
+(defun mwb-init--load (file-root-abs &optional no-org)
   "Load the relevant code.
+<file-root> is an absolute file root
 Look for <file-root>.org and <file-root>.el files.
 If org and no el or org file is newer then retangle the org file if noorg is not nil then use nullmans expand then load <file-root>.el "
   (let* ((org-file
-          (concat (expand-file-name file-root mwb-user-emacs-directory) ".org"))
+          (concat file-root-abs ".org"))
          (el-file
-          (concat (expand-file-name file-root mwb-user-emacs-directory) ".el")))
+          (concat file-root-abs ".el")))
     (setq esup-depth mwb-esup-depth)
     ;; (setq esup-child-max-depth mwb-esup-depth )
     (setq esup-child-current-depth 0)
@@ -495,12 +501,40 @@ If org and no el or org file is newer then retangle the org file if noorg is not
     (condition-case err
         (load el-file)
       (error (let ((msg (format-message "Error loading %s: \"%s\""
-                                        file-root
+                                        el-file
                                         (error-message-string err))))
                (warn msg)
                (message msg))))))
-      #+end_src
-*** The Load
+#+end_src
+***** Load one file
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210126T224850.540945
+:END:
+Use in the main init
+#+NAME: org_mark_mini20.local_20210126T224850.527570
+#+begin_src emacs-lisp
+(defun mwb-init-load (file-root &optional no-org)
+  (mwb-init--load (expand-file-name file-root mwb-user-emacs-directory) no-org))
+#+end_src
+***** Load all the files from a directory.
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210126T224850.539290
+:END:
+Perhaps might need to sort by length as - is before . so lisp.org loads after lisp-emacs.org. Currently use _ as separator.
+#+NAME: org_mark_mini20.local_20210126T224850.527835
+#+begin_src emacs-lisp
+(defun mwb-init-load-directory (rel-dir-name)
+  "Load up all the files using the init loaded from a directory"
+  (let* ((directory-name (expand-file-name rel-dir-name mwb-user-emacs-directory))
+         (files (directory-files
+                 directory-name
+                 nil
+                 (rx-to-string '(seq any ".org" eol)))))
+
+    (dolist (f files)
+      (mwb-init--load (expand-file-name (file-name-sans-extension f) directory-name)))))
+#+end_src
+** The Load
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:97D3202A-5B42-411F-9312-331821931E25
 :END:

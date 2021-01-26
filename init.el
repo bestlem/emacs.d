@@ -70,74 +70,75 @@ is non-nil."
               (end-comment ""))
           (while (not (eobp))
             (cond
-              ;; comment heading
-              ((let ((case-fold-search nil))
-                 (looking-at heading-comment-regexp))
-               (setq level (/ (- (match-end 0) (line-beginning-position) 8) 2))
-               (when (or (zerop comment-level)
-                         (< level comment-level))
-                 (setq comment-level level))
-               (delete-region (line-beginning-position) (progn (forward-line) (point))))
-              ;; normal heading
-              ((looking-at heading-regexp)
-               (setq level (/ (- (match-end 0) (line-beginning-position)) 2))
-               (when (or (zerop comment-level)
-                         (<= level comment-level))
-                 (setq comment-level 0)
-                 (if (assoc level headings-counts)
-                     (setf (cdr (assoc level headings-counts))
-                           (cons (buffer-substring-no-properties (match-end 0) (line-end-position)) 1))
-                   (setq headings-counts (append headings-counts (list (cons level (cons "No heading" 1)))))))
-               (delete-region (line-beginning-position) (progn (forward-line) (point))))
-              ;; start of tangled source block
-              ((and (looking-at begin-regexp)
-                    (zerop comment-level)
-                    (not (looking-at begin-tangle-regexp))) ; skip blocks with their own tangle directive
-               (let* ((heading-count (cdr (assoc level headings-counts)))
-                      (heading (car heading-count))
-                      (count (cdr heading-count)))
-                 (delete-region (line-beginning-position) (progn (forward-line) (point)))
-                 (unless (bobp)
-                   (newline))
-                 (when (fboundp 'org-link-escape)
-                   (insert (format ";; [[file:%s::*%s][%s:%s]]\n" file-org (org-link-escape heading) heading count))
-                   (setq end-comment (format ";; %s:%s ends here\n" heading count))
-                   (cl-incf (cddr (assoc level headings-counts))))
-                 (setq code t)))
-              ;; end of tangled source block
-              ((and code
-                    (looking-at end-regexp))
-               (delete-region (line-beginning-position) (progn (forward-line) (point)))
-               (insert end-comment)
-               (setq code nil
-                     end-comment ""))
-              ;; inside tangled source block
-              (code
-               (when (looking-at indent-regexp)
-                 (delete-char (if (boundp 'org-edit-src-content-indentation)
-                                  org-edit-src-content-indentation
-                                2)))
-               (forward-line))
-              ;; outside tangled source block
-              (t
-               (delete-region (line-beginning-position) (progn (forward-line) (point))))))
+             ;; comment heading
+             ((let ((case-fold-search nil))
+                (looking-at heading-comment-regexp))
+              (setq level (/ (- (match-end 0) (line-beginning-position) 8) 2))
+              (when (or (zerop comment-level)
+                        (< level comment-level))
+                (setq comment-level level))
+              (delete-region (line-beginning-position) (progn (forward-line) (point))))
+             ;; normal heading
+             ((looking-at heading-regexp)
+              (setq level (/ (- (match-end 0) (line-beginning-position)) 2))
+              (when (or (zerop comment-level)
+                        (<= level comment-level))
+                (setq comment-level 0)
+                (if (assoc level headings-counts)
+                    (setf (cdr (assoc level headings-counts))
+                          (cons (buffer-substring-no-properties (match-end 0) (line-end-position)) 1))
+                  (setq headings-counts (append headings-counts (list (cons level (cons "No heading" 1)))))))
+              (delete-region (line-beginning-position) (progn (forward-line) (point))))
+             ;; start of tangled source block
+             ((and (looking-at begin-regexp)
+                   (zerop comment-level)
+                   (not (looking-at begin-tangle-regexp))) ; skip blocks with their own tangle directive
+              (let* ((heading-count (cdr (assoc level headings-counts)))
+                     (heading (car heading-count))
+                     (count (cdr heading-count)))
+                (delete-region (line-beginning-position) (progn (forward-line) (point)))
+                (unless (bobp)
+                  (newline))
+                (when (fboundp 'org-link-escape)
+                  (insert (format ";; [[file:%s::*%s][%s:%s]]\n" file-org (org-link-escape heading) heading count))
+                  (setq end-comment (format ";; %s:%s ends here\n" heading count))
+                  (cl-incf (cddr (assoc level headings-counts))))
+                (setq code t)))
+             ;; end of tangled source block
+             ((and code
+                   (looking-at end-regexp))
+              (delete-region (line-beginning-position) (progn (forward-line) (point)))
+              (insert end-comment)
+              (setq code nil
+                    end-comment ""))
+             ;; inside tangled source block
+             (code
+              (when (looking-at indent-regexp)
+                (delete-char (if (boundp 'org-edit-src-content-indentation)
+                                 org-edit-src-content-indentation
+                               2)))
+              (forward-line))
+             ;; outside tangled source block
+             (t
+              (delete-region (line-beginning-position) (progn (forward-line) (point))))))
           (time-stamp))
         (message "Nullman Wrote %s..." file-elisp)))
 
     ))
 ;; org_mark_2020-01-23T20-40-42+00-00_mini12_315EE687-FC28-4D41-810D-4FF19AA66CD4 ends here
 
-;; [[file:init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_A039068A-5F9B-4C02-A1C9-156C79F14A5B][org_mark_2020-01-23T20-40-42+00-00_mini12_A039068A-5F9B-4C02-A1C9-156C79F14A5B]]
-(setq mwb-esup-depth 1)
+;; [[file:init.org::org_mark_mini20.local_20210126T224850.526804][org_mark_mini20.local_20210126T224850.526804]]
+(setq mwb-esup-depth 1)                 ; Some attempt at benchmarking
 
-(defun mwb-init-load (file-root &optional no-org)
+(defun mwb-init--load (file-root-abs &optional no-org)
   "Load the relevant code.
+<file-root> is an absolute file root
 Look for <file-root>.org and <file-root>.el files.
 If org and no el or org file is newer then retangle the org file if noorg is not nil then use nullmans expand then load <file-root>.el "
   (let* ((org-file
-          (concat (expand-file-name file-root mwb-user-emacs-directory) ".org"))
+          (concat file-root-abs ".org"))
          (el-file
-          (concat (expand-file-name file-root mwb-user-emacs-directory) ".el")))
+          (concat file-root-abs ".el")))
     (setq esup-depth mwb-esup-depth)
     ;; (setq esup-child-max-depth mwb-esup-depth )
     (setq esup-child-current-depth 0)
@@ -156,11 +157,29 @@ If org and no el or org file is newer then retangle the org file if noorg is not
     (condition-case err
         (load el-file)
       (error (let ((msg (format-message "Error loading %s: \"%s\""
-                                        file-root
+                                        el-file
                                         (error-message-string err))))
                (warn msg)
                (message msg))))))
-;; org_mark_2020-01-23T20-40-42+00-00_mini12_A039068A-5F9B-4C02-A1C9-156C79F14A5B ends here
+;; org_mark_mini20.local_20210126T224850.526804 ends here
+
+;; [[file:init.org::org_mark_mini20.local_20210126T224850.527570][org_mark_mini20.local_20210126T224850.527570]]
+(defun mwb-init-load (file-root &optional no-org)
+  (mwb-init--load (expand-file-name file-root mwb-user-emacs-directory) no-org))
+;; org_mark_mini20.local_20210126T224850.527570 ends here
+
+;; [[file:init.org::org_mark_mini20.local_20210126T224850.527835][org_mark_mini20.local_20210126T224850.527835]]
+(defun mwb-init-load-directory (rel-dir-name)
+  "Load up all the files using the init loaded from a directory"
+  (let* ((directory-name (expand-file-name rel-dir-name mwb-user-emacs-directory))
+         (files (directory-files
+                 directory-name
+                 nil
+                 (rx-to-string '(seq any ".org" eol)))))
+
+    (dolist (f files)
+      (mwb-init--load (expand-file-name (file-name-sans-extension f) directory-name)))))
+;; org_mark_mini20.local_20210126T224850.527835 ends here
 
 ;; [[file:init.org::org_mark_mini12.local_20201213T195905.304356][org_mark_mini12.local_20201213T195905.304356]]
 (mwb-init-load "config" "no-org")

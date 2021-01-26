@@ -1,0 +1,30 @@
+#+TITLE:  Midnight
+#+AUTHOR: Mark Bestley
+#+EMAIL:  emacs@bestley.co.uk
+#+DATE:   26 Jan 2021
+#+TAGS:
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+STARTUP: content
+
+
+* Midnight mode
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210126T142916.732019
+:END:
+midnight-mode purges buffers which haven’t been displayed in 3 days.
+
+#+NAME: org_mark_mini20.local_20210126T142916.726975
+#+begin_src emacs-lisp
+(use-package midnight
+  :defer 10
+  :config
+  (midnight-delay-set 'midnight-delay "6:15am")
+  (defun add-to-clean-buffer-regex (str)
+    (add-to-list 'clean-buffer-list-kill-regexps
+                 (rx-to-string `(seq line-start "*" ,str " "))))
+  (add-to-clean-buffer-regex "deadgrep")
+  (add-to-clean-buffer-regex "helpful")
+  (midnight-mode 1)
+  :init (add-hook 'midnight-hook  'garbage-collect 99) ;; at end
+  )
+#+end_src

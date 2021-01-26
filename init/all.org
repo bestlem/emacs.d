@@ -8,8 +8,8 @@
 Org mode and packaging have been loaded. Code here can use anything including  complex weaving
 This adds the real use.
 
-The order here matter. Anything that is independentish - like major modes can go in prog-modes (historic naming) and get loaded  from *.org
-*
+The order here matters.  Anything that is independentish - like major modes can go in prog-modes (historic naming) and get loaded  from *.org
+
 We need the environment set up before we load files. Appearance and keys are later. Most things are on :defer t so only start when needed. :defer with time is also problematic as it makes :after fail; which is why some :config have use-package in them.
 
 * After initialisation
@@ -103,16 +103,17 @@ Note should check on defconst
  General emacs stuff - not common-setup used to have this but separate file might not make sense
   #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_C4B91741-F3AE-4F6A-908F-6FD97A7F65C0
   #+begin_src emacs-lisp
-  (mwb-init-load  "init/behaviour"); odds mainly variables
-  (mwb-init-load  "init/completion")
-  (mwb-init-load  "init/ibuffer")  ;; could go to prog-modes
+(mwb-init-load  "init/behaviour"); odds mainly variables
+(mwb-init-load-directory "init/behaviours")
+(mwb-init-load "init/completion")
+(mwb-init-load  "init/ibuffer")  ;; could go to prog-modes
   #+end_src
 ** Shell
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210124T201155.667580
 :END:
 Shells are required for 3 things
-1) Comunication with processes - need the environment
+1) Communication with processes - need the environment
 2) Compilation buffer
 3) Shell - which I do not often use
 *** Shell variables
@@ -200,7 +201,7 @@ It is dealing with bashism - see makem.sh for some.
       )
   (setq explicit-shell-file-name my-shell)
   (setq exec-path-from-shell-shell-name my-shell)
-  (setq shell-file-name my-shell))
+  (setq shell-file-name "/bin/dash"))
 #+end_src
 
 *** Display the shell
@@ -318,7 +319,7 @@ Add a treemacs icon to the front - needs to be after file management
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:3C0D8B60-3C14-4F89-84AB-6D54D08C2C36
 :END:
-Includes structured data
+Includes structured data and now anything that does not have dependency order
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_1F6B0C11-DD95-4A88-9772-8DD2C2B8950B
 #+begin_src emacs-lisp
 (mwb-init-load "init/prog-modes")

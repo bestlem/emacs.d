@@ -1,0 +1,49 @@
+#+TITLE:  Python_Conda
+#+AUTHOR: Mark Bestley
+#+EMAIL:  emacs@bestley.co.uk
+#+DATE:   27 Jan 2021
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+STARTUP: overview
+
+* Conda
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210127T110448.829285
+:END:
+Might be better in elpy etc as for the pythonic issue.
+  #+NAME: org_mark_mini20.local_20210127T110448.825291
+  #+begin_src emacs-lisp
+(use-package conda
+  :mwb-load-path "fork/conda.el"
+  :after (python)
+  :commands conda-env-activate
+  :init
+  (setq conda-anaconda-home (expand-file-name "~/miniconda3/"))
+
+  :config
+
+
+  ;; If you want interactive shell support, include:
+
+  ;; MWB well no as it messes up xonsh
+  ;; (conda-env-initialize-interactive-shells)
+
+  ;; If you want eshell support, include:
+                                        ;(conda-env-initialize-eshell)
+
+  ;; In effect no as dirs are not a 1-1 match for envs
+  ;; If you want auto-activation, include:
+  ;; (conda-env-autoactivate-mode t)
+
+  ;; Activate the project/virtual env you want to use.
+  ;; Via M-x conda-env-activate RET analyticd-pysystemtrade
+  ;; or
+  ;; (conda-env-activate "analyticd-pysystemtrade")
+  ;; (conda-env-activate "base")
+
+  ;; we need a setup - e.g. code-snippets
+  (conda-env-activate (if (equal (file-name-nondirectory explicit-shell-file-name)
+                                 "xonsh")
+                          "xonsh"
+                        "base"))
+  (setq-default mode-line-format (cons mode-line-format '(:exec conda-env-current-name))))
+  #+end_src

@@ -21,12 +21,16 @@
 ** RacketProgrammingtheFunWay
  - path :: ~/src/Racket/RacketProgrammingtheFunWay
 * C based
-** rftg-0.9.4
+** rftg
  - path :: ~/src/cpp/rftg
 ** simutrans
  - path :: ~/src/cpp/simutrans
 ** ports
  - path :: ~/src/ports
+** test_gtk
+ - path :: ~/src/cpp/test_gtk
+** macports-ports
+ - path :: ~/src/cpp/macports-ports
 * Odds
 ** SML unit test
  - path :: ~/old_src/sml/unit_test

@@ -257,7 +257,9 @@ It is now a more general do anything one off hydra
     ("x" ace-delete-window "delete")
     ("m" ace-delete-other-windows "maximize")
     ("s" ace-swap-window "swap" :exit t)
-    ("a" ace-select-window "select"))
+    ("a" ace-select-window "select")
+    (")" delete-window "Delete Window")
+    )
 
    "Resize"
    (("<left>" hydra-move-splitter-left "←")

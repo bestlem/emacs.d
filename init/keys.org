@@ -1,8 +1,13 @@
-#+PROPERTY:header-args :cache yes :tangle yes :comments link
+#+TITLE:  Keys
+#+AUTHOR: Mark Bestley
+#+EMAIL:  emacs@bestley.co.uk
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+STARTUP: overview
 
 * Table of Contents                                                   :TOC:3:
 :PROPERTIES:
 :ID:       org_2020-12-08+00-00:43A5679B-7627-4459-9E27-050BEFAB7B84
+:VISIBILITY: all
 :END:
 - [[#global-key-bindings-musings][Global key bindings musings]]
   - [[#how-to-bind][How to bind]]
@@ -30,7 +35,8 @@
   - [[#hyper-key-bindings][Hyper key bindings]]
   - [[#other][Other]]
   - [[#control-x-binding][Control x binding]]
-  - [[#mouse][Mouse]]
+- [[#mouse][Mouse]]
+  - [[#imenu][iMenu]]
 - [[#hydra][Hydra]]
   - [[#leader-keys][Leader keys]]
   - [[#hydra-transpose][Hydra transpose]]
@@ -518,7 +524,7 @@ Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in e
 (bind-key "x" #'mwb-x-key)
 #+end_src
 
-** Mouse
+* Mouse
 :PROPERTIES:
 :ID:       org_mark_2020-10-17T19-55-57+01-00_mini12.local:6D65DE51-07D2-4306-9156-B8E684BC67C3
 :END:
@@ -537,6 +543,15 @@ mouse3+ has a more complex setup including if selected a region or not see help:
 
 I think start with Aquamacs copy using non Aquamacs functions and then try to put flyspell on.
 
+** iMenu
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210204T124122.808094
+:END:
+Sort the imenu found options in the mouse menu
+#+NAME: org_mark_mini20.local_20210204T124122.783791
+#+begin_src emacs-lisp
+(setq imenu-sort-function 'imenu--sort-by-name)
+#+end_src
 *** Macos mouse
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20210104T224325.845039

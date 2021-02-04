@@ -177,5 +177,5 @@ buffer you are working in though, you want to go back and read something. So alt
 (setq comint-scroll-to-bottom-on-output 'others)
 (setq comint-move-point-for-output 'others)
 (setq comint-scroll-show-maximum-output t)
-(setq comint-prompt-read-only nil)
+(setq comint-prompt-read-only t)
 #+end_src

@@ -61,12 +61,13 @@ One in emacs and has things built on it
 
   :bind ("<f5>" . python-shell-send-buffer)
   :init
-  (setq-default indent-tabs-mode nil)
-
+  (setq-default indent-tabs-mode 't)
+  (setq org-babel-python-mode 'python-mode)
 
   (defun python-hook-mwb ()
-    (setq tab-width 4)
-    (aggressive-indent-mode -1))
+	(setq tab-width 4)
+	(aggressive-indent-mode -1)
+	(setq-local indent-tabs-mode 't))
   :config
   (setq python-indent-offset 4)
   (setq python-indent-guess-indent-offset nil)

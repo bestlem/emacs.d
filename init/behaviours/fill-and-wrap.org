@@ -80,7 +80,7 @@ However only want to fill modes where there are line based comments e.g. Emacs l
 :END:
 Look at aquamacs-editing.el
 
-** Set defaults
+** Set defaults text mode
 :PROPERTIES:
 :ID:       org_2020-12-05+00-00:A67E0CAF-C655-434D-A9EE-99510387828D
 :END:
@@ -93,3 +93,11 @@ This is in text mode
    '(fill-single-word-nobreak-p fill-single-char-nobreak-p))
 (visual-line-mode 1)
 #+end_src
+
+** Message mode
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210212T194748.541737
+:END:
+Well if text only want to fill if HTML then don't
+
+End up setting refill-mode - on a key f19-f

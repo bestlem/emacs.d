@@ -419,10 +419,10 @@ else like the former.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/posframe-20210203.817/posframe-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/posframe-20210208.229/posframe-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/posframe-20210203.817/posframe-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/posframe-20210208.229/posframe-autoloads.el") (car load-path))))
 
 
 
@@ -487,6 +487,15 @@ The builtin poshandler functions are listed below:
 16. `posframe-poshandler-point-bottom-left-corner'
 17. `posframe-poshandler-point-bottom-left-corner-upward'
 18. `posframe-poshandler-point-window-center'
+
+by the way, poshandler can be used by other packages easily
+\(for example: mini-frame) with the help of function
+`posframe-poshandler-argbuilder'. like:
+
+   (let* ((info (posframe-poshandler-argbuilder child-frame))
+          (posn (posframe-poshandler-window-center info)))
+     `((left . ,(car posn))
+       (top . ,(cdr posn))))
 
 This posframe's buffer is BUFFER-OR-NAME, which can be a buffer
 or a name of a (possibly nonexistent) buffer.
@@ -564,12 +573,8 @@ Hide all posframe frames." t nil)
 
 (autoload 'posframe-delete-all "posframe" "\
 Delete all posframe frames and buffers." t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "posframe" '("posframe-")))
-
-
-
 
 
 )
@@ -922,10 +927,10 @@ Mark SYMBOL as a safe local if its custom type is obeyed.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/bind-key-20200805.1727/bind-key-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/bind-key-20210210.1609/bind-key-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/bind-key-20200805.1727/bind-key-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/bind-key-20210210.1609/bind-key-autoloads.el") (car load-path))))
 
 
 
@@ -995,10 +1000,10 @@ Display all the personal keybindings defined by `bind-key'." t nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20210201.1739/use-package-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20210207.1926/use-package-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20210201.1739/use-package-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20210207.1926/use-package-autoloads.el") (car load-path))))
 
 
 
@@ -1047,10 +1052,8 @@ deferred until the prefix key sequence is pressed.
 
 
 \(fn NAME KEYWORD ARG REST STATE)" nil nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "use-package-bind-key" '("use-package-handler/:bind*")))
-
 
 
 
@@ -1117,10 +1120,8 @@ this file.  Usage:
 \(fn NAME &rest ARGS)" nil t)
 
 (function-put 'use-package 'lisp-indent-function '1)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "use-package-core" '("use-package-")))
-
 
 
 
@@ -1133,10 +1134,8 @@ Normalize arguments to delight.
 
 
 \(fn NAME KEYWORD ARGS REST STATE)" nil nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "use-package-delight" '("use-package-normalize-delight")))
-
 
 
 
@@ -1149,10 +1148,8 @@ Normalize arguments to delight.
 
 
 \(fn NAME KEYWORD ARG REST STATE)" nil nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "use-package-diminish" '("use-package-normalize-diminish")))
-
 
 
 
@@ -1165,10 +1162,8 @@ Normalize arguments to delight.
 
 
 \(fn NAME KEYWORD ENSURE REST STATE)" nil nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "use-package-ensure" '("use-package-")))
-
 
 
 
@@ -1180,10 +1175,8 @@ function will jump to the file that originally required PACKAGE
 instead.
 
 \(fn PACKAGE)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "use-package-jump" '("use-package-find-require")))
-
 
 
 
@@ -1191,10 +1184,8 @@ instead.
 Check for errors in use-package declarations.
 For example, if the module's `:if' condition is met, but even
 with the specified `:load-path' the module cannot be found." t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "use-package-lint" '("use-package-lint-declaration")))
-
 
 
 
@@ -2058,10 +2049,10 @@ Otherwise behave as if called interactively.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210202.1153/dash-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210210.1427/dash-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210202.1153/dash-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210210.1427/dash-autoloads.el") (car load-path))))
 
 
 
@@ -2112,10 +2103,8 @@ See `dash-fontify-mode' for more information on Dash-Fontify mode.
 (autoload 'dash-register-info-lookup "dash" "\
 Register the Dash Info manual with `info-lookup-symbol'.
 This allows Dash symbols to be looked up with \\[info-lookup-symbol]." t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dash" '("!cdr" "!cons" "--" "->" "-a" "-butlast" "-c" "-d" "-e" "-f" "-gr" "-i" "-keep" "-l" "-m" "-non" "-only-some" "-p" "-r" "-s" "-t" "-u" "-value-to-list" "-when-let" "-zip" "dash-")))
-
 
 
 
@@ -4124,10 +4113,10 @@ Disable `rainbow-delimiters-mode'." nil nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210202.2145/racket-mode-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210211.1321/racket-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210202.2145/racket-mode-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210211.1321/racket-mode-autoloads.el") (car load-path))))
 
 
 
@@ -4149,10 +4138,8 @@ If the process is already started, this command will stop and restart it." t nil
 Stop the back end process used by Racket Mode.
 
 If the process is not already started, this does nothing." t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-cmd" '("racket-")))
-
 
 
 
@@ -4181,10 +4168,8 @@ If the process is not already started, this does nothing." t nil)
 
 
 \(fn RESPONSE)" nil nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-debug" '("racket-")))
-
 
 
 
@@ -4197,10 +4182,8 @@ If the process is not already started, this does nothing." t nil)
 
 
 (add-to-list 'hs-special-modes-alist '(racket-mode "(" ")" ";" nil nil))
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-edit" '("racket-")))
-
 
 
 
@@ -4267,10 +4250,8 @@ If you run this command, ever, you should run it again after:
 - Installing a new version of Racket and/or changing the value of
   the variable `racket-program'. Otherwise, you might get an
   error message due to the bytecode being different versions." t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-mode" '("racket-")))
-
 
 
 
@@ -4361,10 +4342,8 @@ which is determined textually by looking for \"module\",
 simply the outermost, file module.
 
 \(fn &optional PREFIX)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-repl" '("racket-" "with-racket-repl-buffer")))
-
 
 
 
@@ -4384,10 +4363,8 @@ All `racket-mode' buffers in a project share a `racket-repl-mode' buffer.
 A value for the variable `racket-repl-buffer-name-function'.
 
 The \"project\" is determined by `racket-project-root'." t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-repl-buffer-name" '("racket-")))
-
 
 
 
@@ -4399,10 +4376,9 @@ The \"project\" is determined by `racket-project-root'." t nil)
 Minor mode to let you always type `[`' to insert `(` or `[` automatically.
 
 If called interactively, enable Racket-Smart-Open-Bracket mode if
-ARG is positive, and disable it if ARG is zero or negative.
-If called from Lisp, also enable the mode if ARG is omitted or
-nil, and toggle it if ARG is `toggle'; disable the
-mode otherwise.
+ARG is positive, and disable it if ARG is zero or negative.  If
+called from Lisp, also enable the mode if ARG is omitted or nil,
+and toggle it if ARG is `toggle'; disable the mode otherwise.
 
 Behaves like the \"Automatically adjust opening square brackets\"
 feature in Dr. Racket.
@@ -4437,10 +4413,8 @@ the binding for the `[`' key in the map for
 the variable `minor-mode-map-alist'.
 
 \(fn &optional ARG)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-smart-open" '("racket-")))
-
 
 
 
@@ -4653,10 +4627,8 @@ commands directly to whatever keys you prefer.
 \\{racket-xp-mode-map}
 
 \(fn &optional ARG)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-xp" '("racket-")))
-
 
 
 
@@ -4689,16 +4661,14 @@ Deactivate python virtual environment." t nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-functional-20210103.1524/dash-functional-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-functional-20210206.1519/dash-functional-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-functional-20210103.1524/dash-functional-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-functional-20210206.1519/dash-functional-autoloads.el") (car load-path))))
 
 
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dash-functional" '("-a" "-c" "-f" "-iteratefn" "-juxt" "-not" "-o" "-prodfn" "-rpartial")))
-
-
 
 
 )
@@ -6312,10 +6282,10 @@ Interactively, with prefix argument, move to the previous position.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210202.2024/modus-themes-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210211.923/modus-themes-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210202.2024/modus-themes-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210211.923/modus-themes-autoloads.el") (car load-path))))
 
 
 
@@ -6371,10 +6341,8 @@ by virtue of calling either of `modus-themes-load-operandi' and
 `modus-themes-load-vivendi' functions." t nil)
 
 (when (and (boundp 'custom-theme-load-path) load-file-name) (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "modus-themes" '("modus-themes-")))
-
 
 
 
@@ -6491,55 +6459,21 @@ Show the hydra for the current major mode." t nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/git-commit-20210124.1829/git-commit-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/git-commit-20210206.2245/git-commit-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/git-commit-20210124.1829/git-commit-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/git-commit-20210206.2245/git-commit-autoloads.el") (car load-path))))
 
 
 
-(defvar global-git-commit-mode t "\
-Non-nil if Global Git-Commit mode is enabled.
-See the `global-git-commit-mode' command
-for a description of this minor mode.
-Setting this variable directly does not take effect;
-either customize it (see the info node `Easy Customization')
-or call the function `global-git-commit-mode'.")
-
-(custom-autoload 'global-git-commit-mode "git-commit" nil)
-
-(autoload 'global-git-commit-mode "git-commit" "\
-Edit Git commit messages.
-This global mode arranges for `git-commit-setup' to be called
-when a Git commit message file is opened.  That usually happens
-when Git uses the Emacsclient as $GIT_EDITOR to have the user
-provide such a commit message.
-
-If called interactively, enable Global Git-Commit mode if ARG is
-positive, and disable it if ARG is zero or negative.  If called
-from Lisp, also enable the mode if ARG is omitted or nil, and
-toggle it if ARG is `toggle'; disable the mode otherwise.
-
-\(fn &optional ARG)" t nil)
-
-(defconst git-commit-filename-regexp "/\\(\\(\\(COMMIT\\|NOTES\\|PULLREQ\\|MERGEREQ\\|TAG\\)_EDIT\\|MERGE_\\|\\)MSG\\|\\(BRANCH\\|EDIT\\)_DESCRIPTION\\)\\'")
-
-(autoload 'git-commit-setup-check-buffer "git-commit" nil nil nil)
-
-(autoload 'git-commit-setup "git-commit" nil nil nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "git-commit" '("git-commit-")))
-
-
-
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "git-commit" '("git-commit-" "global-git-commit-mode")))
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210203.1158/magit-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210209.1110/magit-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210203.1158/magit-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210209.1110/magit-autoloads.el") (car load-path))))
 
 
 
@@ -6561,10 +6495,8 @@ running 'man git-rebase' at the command line) for details.
 (defconst git-rebase-filename-regexp "/git-rebase-todo\\'")
 
 (add-to-list 'auto-mode-alist (cons git-rebase-filename-regexp 'git-rebase-mode))
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "git-rebase" '("git-rebase-")))
-
 
 
 
@@ -6661,10 +6593,8 @@ a prefix argument), also print the used versions of Magit, Git,
 and Emacs to it.
 
 \(fn &optional PRINT-DEST)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit" '("magit-")))
-
 
 
 
@@ -6695,10 +6625,8 @@ without requiring confirmation.
 
 (autoload 'magit-unstage-all "magit-apply" "\
 Remove all changes from the staging area." t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-apply" '("magit-")))
-
 
 
 
@@ -6725,10 +6653,8 @@ Auto-Revert mode is enabled in all buffers where
 See `auto-revert-mode' for more information on Auto-Revert mode.
 
 \(fn &optional ARG)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-autorevert" '("auto-revert-buffer" "magit-")))
-
 
 
  (autoload 'magit-bisect "magit-bisect" nil t)
@@ -6778,10 +6704,8 @@ begun.  In that case it behaves like `git bisect start; git
 bisect run'.
 
 \(fn CMDLINE &optional BAD GOOD ARGS)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-bisect" '("magit-")))
-
 
 
  (autoload 'magit-blame-echo "magit-blame" nil t)
@@ -6789,10 +6713,8 @@ bisect run'.
  (autoload 'magit-blame-removal "magit-blame" nil t)
  (autoload 'magit-blame-reverse "magit-blame" nil t)
  (autoload 'magit-blame "magit-blame" nil t)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-blame" '("magit-")))
-
 
 
 
@@ -6803,10 +6725,8 @@ with the variables' values as arguments, which were recorded by
 `magit--make-bookmark'.  Ignore `magit-display-buffer-function'.
 
 \(fn BOOKMARK)" nil nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-bookmark" '("magit--make-bookmark")))
-
 
 
  (autoload 'magit-branch "magit" nil t)
@@ -6968,10 +6888,8 @@ and also rename the respective reflog file.
 
 \(fn BRANCH)" t nil)
  (autoload 'magit-branch-configure "magit-branch" nil t)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-branch" '("magit-")))
-
 
 
  (autoload 'magit-clone "magit-clone" nil t)
@@ -7017,10 +6935,8 @@ Create a mirror of REPOSITORY in DIRECTORY.
 Then show the status buffer for the new repository.
 
 \(fn REPOSITORY DIRECTORY ARGS)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-clone" '("magit-clone-")))
-
 
 
  (autoload 'magit-commit "magit-commit" nil t)
@@ -7119,10 +7035,8 @@ Spread modified modules across recent commits.
 \(fn PHASE COMMIT)" t nil)
  (autoload 'magit-commit-absorb "magit-commit" nil t)
  (autoload 'magit-commit-autofixup "magit-commit" nil t)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-commit" '("magit-")))
-
 
 
  (autoload 'magit-diff "magit-diff" nil t)
@@ -7200,10 +7114,8 @@ If there is no revision at point or with a prefix argument prompt
 for a revision.
 
 \(fn REV &optional ARGS FILES MODULE)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-diff" '("magit-")))
-
 
 
  (autoload 'magit-ediff "magit-ediff" nil)
@@ -7287,10 +7199,8 @@ three-buffer Ediff is used in order to distinguish changes in the
 stash that were staged.
 
 \(fn STASH)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-ediff" '("magit-ediff-")))
-
 
 
 
@@ -7538,10 +7448,8 @@ abbreviated revision to the `kill-ring' and the
 Abort current operation.
 Depending on the context, this will abort a merge, a rebase, a
 patch application, a cherry-pick, a revert, or a bisect." t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-extras" '("magit-")))
-
 
 
  (autoload 'magit-fetch "magit-fetch" nil t)
@@ -7585,10 +7493,8 @@ because `git-fetch' does not support not doing that.  With a
 prefix argument fetch all remotes.
 
 \(fn &optional ALL)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-fetch" '("magit-")))
-
 
 
 
@@ -7629,10 +7535,8 @@ the same location in the respective file in the working tree." t nil)
 Checkout FILE from REV.
 
 \(fn REV FILE)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-files" '("magit-")))
-
 
 
 
@@ -7688,10 +7592,8 @@ Call \"git update-index --assume-unchanged -- FILE\".
 Call \"git update-index --no-assume-unchanged -- FILE\".
 
 \(fn FILE)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-gitignore" '("magit-")))
-
 
 
 
@@ -7775,10 +7677,8 @@ Return imenu name for line at point.
 This function is used as a value for
 `imenu-extract-index-name-function'.  Point should be at the
 beginning of the line." nil nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-imenu" '("magit-imenu--index-function")))
-
 
 
  (autoload 'magit-log "magit-log" nil t)
@@ -7876,10 +7776,8 @@ Show a history summary for commit or range REV-OR-RANGE.
 Show commits in a branch that are not merged in the upstream branch.
 
 \(fn HEAD UPSTREAM)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-log" '("magit-")))
-
 
 
 
@@ -7959,10 +7857,8 @@ Preview result of merging REV into the current branch.
 Abort the current merge operation.
 
 \(git merge --abort)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-merge" '("magit-")))
-
 
 
 
@@ -7970,10 +7866,8 @@ Abort the current merge operation.
 
 
  (autoload 'magit-notes "magit" nil t)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-notes" '("magit-notes-")))
-
 
 
 
@@ -8018,10 +7912,8 @@ END is the last commit, usually a branch name, which upstream
 is asked to pull.  START has to be reachable from that commit.
 
 \(fn URL START END)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-patch" '("magit-")))
-
 
 
 
@@ -8036,10 +7928,8 @@ is asked to pull.  START has to be reachable from that commit.
 Pull from a branch read in the minibuffer.
 
 \(fn SOURCE ARGS)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-pull" '("magit-pull-")))
-
 
 
  (autoload 'magit-push "magit-push" nil t)
@@ -8104,10 +7994,8 @@ these Git variables: `push.default', `remote.pushDefault',
 `branch.<branch>.merge', and `remote.<remote>.push'.
 
 \(fn REMOTE ARGS)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-push" '("magit-")))
-
 
 
 
@@ -8122,10 +8010,8 @@ Display the reflog of a branch or another ref.
 
 (autoload 'magit-reflog-head "magit-reflog" "\
 Display the `HEAD' reflog." t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-reflog" '("magit-reflog-")))
-
 
 
  (autoload 'magit-show-refs "magit-refs" nil t)
@@ -8147,10 +8033,8 @@ List and compare references in a dedicated buffer.
 Compared with a branch read from the user.
 
 \(fn &optional REF ARGS)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-refs" '("magit-")))
-
 
 
  (autoload 'magit-remote "magit-remote" nil t)
@@ -8206,10 +8090,8 @@ Delete the symbolic-ref \"refs/remotes/<remote>/HEAD\".
 
 \(fn REMOTE)" t nil)
  (autoload 'magit-remote-configure "magit-remote" nil t)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-remote" '("magit-")))
-
 
 
 
@@ -8218,10 +8100,8 @@ Display a list of repositories.
 
 Use the options `magit-repository-directories' to control which
 repositories are displayed." t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-repos" '("magit-")))
-
 
 
  (autoload 'magit-reset "magit" nil t)
@@ -8276,10 +8156,8 @@ With a prefix argument reset the working tree otherwise don't.
 \(git reset --mixed|--hard COMMIT)
 
 \(fn COMMIT &optional HARD)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-reset" '("magit-reset-")))
-
 
 
 
@@ -8441,10 +8319,8 @@ Edit the todo list of the current rebase operation." t nil)
 
 (autoload 'magit-rebase-abort "magit-sequence" "\
 Abort the current rebase operation, restoring the original branch." t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-sequence" '("magit-")))
-
 
 
  (autoload 'magit-stash "magit-stash" nil t)
@@ -8544,10 +8420,8 @@ List all stashes in a buffer." t nil)
 Show all diffs of a stash in a buffer.
 
 \(fn STASH &optional ARGS FILES)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-stash" '("magit-")))
-
 
 
 
@@ -8613,10 +8487,8 @@ Like `magit-status' but with non-nil `magit-status-goto-file-position'." t nil)
 
 
 \(fn &optional DIRECTORY)" nil nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-status" '("magit-")))
-
 
 
  (autoload 'magit-submodule "magit-submodule" nil t)
@@ -8677,10 +8549,8 @@ These sections can be expanded to show the respective commits." nil nil)
 
 (autoload 'magit-list-submodules "magit-submodule" "\
 Display a list of the current repository's submodules." t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-submodule" '("magit-")))
-
 
 
  (autoload 'magit-subtree "magit-subtree" nil t)
@@ -8716,10 +8586,8 @@ Extract the history of the subtree PREFIX and push it to REF on REPOSITORY.
 Extract the history of the subtree PREFIX.
 
 \(fn PREFIX COMMIT ARGS)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-subtree" '("magit-")))
-
 
 
  (autoload 'magit-tag "magit" nil t)
@@ -8765,10 +8633,8 @@ example, a TAG \"v1.2.3\" and a repository located at something
 like \"/path/to/foo-bar\".
 
 \(fn TAG MSG &optional ARGS)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-tag" '("magit-")))
-
 
 
 
@@ -8793,10 +8659,8 @@ See info node `(magit)Debugging Tools' for more information." t nil)
 \(fn FN LINK DESCRIPTION FORMAT)" nil nil)
 
 (advice-add 'org-man-export :around 'org-man-export--magit-gitman)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-utils" '("magit-")))
-
 
 
 
@@ -8864,10 +8728,9 @@ for a description of this minor mode.")
 Commit to work-in-progress refs.
 
 If called interactively, enable Magit-Wip-After-Apply mode if ARG
-is positive, and disable it if ARG is zero or negative.
-If called from Lisp, also enable the mode if ARG is omitted or
-nil, and toggle it if ARG is `toggle'; disable the
-mode otherwise.
+is positive, and disable it if ARG is zero or negative.  If
+called from Lisp, also enable the mode if ARG is omitted or nil,
+and toggle it if ARG is `toggle'; disable the mode otherwise.
 
 After applying a change using any \"apply variant\"
 command (apply, stage, unstage, discard, and reverse) commit the
@@ -8889,10 +8752,9 @@ for a description of this minor mode.")
 Commit to work-in-progress refs before certain destructive changes.
 
 If called interactively, enable Magit-Wip-Before-Change mode if
-ARG is positive, and disable it if ARG is zero or negative.
-If called from Lisp, also enable the mode if ARG is omitted or
-nil, and toggle it if ARG is `toggle'; disable the
-mode otherwise.
+ARG is positive, and disable it if ARG is zero or negative.  If
+called from Lisp, also enable the mode if ARG is omitted or nil,
+and toggle it if ARG is `toggle'; disable the mode otherwise.
 
 Before invoking a revert command or an \"apply variant\"
 command (apply, stage, unstage, discard, and reverse) commit the
@@ -8921,10 +8783,8 @@ This function ignores the variables that affect `backup-buffer'
 and can be used along-side that function, which is recommended
 because this function only backs up files that are tracked in
 a Git repository." nil nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-wip" '("magit-")))
-
 
 
  (autoload 'magit-worktree "magit-worktree" nil t)
@@ -8943,10 +8803,8 @@ Create a new BRANCH and check it out in a new worktree at PATH.
 Move WORKTREE to PATH.
 
 \(fn WORKTREE PATH)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-worktree" '("magit-")))
-
 
 
 
@@ -10347,6 +10205,70 @@ Echo the `hardhat-mode' status of the current buffer." t nil)
 
 
 )
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/gnus-alias-20150316.42/gnus-alias-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/gnus-alias-20150316.42/gnus-alias-autoloads.el") (car load-path))))
+
+
+
+(autoload 'gnus-alias-init "gnus-alias" "\
+Add gnus-alias call to message mode hook." t nil)
+
+(autoload 'gnus-alias-select-identity "gnus-alias" "\
+Prompt user for an identity and use it." t nil)
+
+(autoload 'gnus-alias-use-identity "gnus-alias" "\
+Use an Identity defined in `gnus-alias-identity-alist'.
+
+IDENTITY must be a valid entry in `gnus-alias-identity-alist',
+otherwise an error will occur (NOTE: this behavior has changed
+significantly from that found in 'gnus-pers').
+
+If called interactively with no identity, user will be prompted for
+one.
+
+\(fn &optional IDENTITY)" t nil)
+
+(autoload 'gnus-alias-determine-identity "gnus-alias" "\
+Function that chooses a Identity based on message headers.
+
+See `gnus-alias-identity-rules' for more information.  Optional
+LOOKUP-ONLY is a boolean that, when non-nil, says to determine the
+Identity, but don't actually use it (just return it)
+
+\(fn &optional LOOKUP-ONLY)" nil nil)
+
+(autoload 'gnus-alias-message-x-completion "gnus-alias" "\
+Can be used to select identifies in new mail after tab-completion.
+
+WHICH-HEADER should be set to the header that completion was just
+performed on.
+
+When tab-completion is performed in the To: header, a new identity
+will be selected according to the rules set up in
+`gnus-alias-identity-alist' (which see).
+
+This particular function expects an argument, and as such should only
+be used with the `message-x-after-completion-functions'hook:
+
+  (add-hook 'message-x-after-completion-functions
+            'gnus-alias-message-x-completion)
+
+This should be place in the `message-load-hook' (see gnus-alias file
+for details).  If such an argument is not needed in the current
+context, `gnus-alias-determine-identity' may be used directly in a hook.
+
+\(fn WHICH-HEADER)" nil nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "gnus-alias" '("gnus-alias-")))
+
+
+
+
+
+)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/git-timemachine-20200603.701/git-timemachine-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -11367,68 +11289,10 @@ Format LIBRARY.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/dtrt-indent-20201208.1925/dtrt-indent-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/dtrt-indent-20210205.1727/dtrt-indent-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/dtrt-indent-20201208.1925/dtrt-indent-autoloads.el") (car load-path))))
-
-
-
-(autoload 'dtrt-indent-mode "../../../../../src/env/emacs.d/elpa/27.1/elpa/dtrt-indent-20201208.1925/dtrt-indent" "\
-Toggle dtrt-indent mode.
-With no argument, this command toggles the mode.  Non-null prefix
-argument turns on the mode.  Null prefix argument turns off the
-mode.
-
-If called interactively, enable Dtrt-Indent mode if ARG is
-positive, and disable it if ARG is zero or negative.  If called
-from Lisp, also enable the mode if ARG is omitted or nil, and
-toggle it if ARG is `toggle'; disable the mode otherwise.
-
-When dtrt-indent mode is enabled, the proper indentation offset
-and `indent-tabs-mode' will be guessed for newly opened files and
-adjusted transparently.
-
-\(fn &optional ARG)" t nil)
-
-(put 'dtrt-indent-global-mode 'globalized-minor-mode t)
-
-(defvar dtrt-indent-global-mode nil "\
-Non-nil if Dtrt-Indent-Global mode is enabled.
-See the `dtrt-indent-global-mode' command
-for a description of this minor mode.
-Setting this variable directly does not take effect;
-either customize it (see the info node `Easy Customization')
-or call the function `dtrt-indent-global-mode'.")
-
-(custom-autoload 'dtrt-indent-global-mode "../../../../../src/env/emacs.d/elpa/27.1/elpa/dtrt-indent-20201208.1925/dtrt-indent" nil)
-
-(autoload 'dtrt-indent-global-mode "../../../../../src/env/emacs.d/elpa/27.1/elpa/dtrt-indent-20201208.1925/dtrt-indent" "\
-Toggle Dtrt-Indent mode in all buffers.
-With prefix ARG, enable Dtrt-Indent-Global mode if ARG is positive;
-otherwise, disable it.  If called from Lisp, enable the mode if
-ARG is omitted or nil.
-
-Dtrt-Indent mode is enabled in all buffers where
-`(lambda nil (when (derived-mode-p 'prog-mode 'text-mode) (dtrt-indent-mode)))' would do it.
-See `dtrt-indent-mode' for more information on Dtrt-Indent mode.
-
-\(fn &optional ARG)" t nil)
-
-(defvar dtrt-indent-mode nil "\
-Toggle adaptive indentation mode.
-Setting this variable directly does not take effect;
-use either \\[customize] or the function `dtrt-indent-mode'.")
-
-(custom-autoload 'dtrt-indent-mode "../../../../../src/env/emacs.d/elpa/27.1/elpa/dtrt-indent-20201208.1925/dtrt-indent" nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/dtrt-indent-20201208.1925/dtrt-indent" '("dtrt-indent-")))
-
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/dtrt-indent-20201208.1925/dtrt-indent-diag" '("dtrt-indent-" "save-buffer-state")))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/dtrt-indent-20210205.1727/dtrt-indent-autoloads.el") (car load-path))))
 
 
 
@@ -11468,7 +11332,7 @@ otherwise, disable it.  If called from Lisp, enable the mode if
 ARG is omitted or nil.
 
 Dtrt-Indent mode is enabled in all buffers where
-`(lambda nil (when (derived-mode-p 'prog-mode 'text-mode) (dtrt-indent-mode)))' would do it.
+`(lambda nil (when (derived-mode-p 'prog-mode 'text-mode 'javascript-mode) (dtrt-indent-mode)))' would do it.
 See `dtrt-indent-mode' for more information on Dtrt-Indent mode.
 
 \(fn &optional ARG)" t nil)
@@ -11479,10 +11343,8 @@ Setting this variable directly does not take effect;
 use either \\[customize] or the function `dtrt-indent-mode'.")
 
 (custom-autoload 'dtrt-indent-mode "dtrt-indent" nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dtrt-indent" '("dtrt-indent-")))
-
 
 
 
@@ -13991,10 +13853,10 @@ provided.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/all-the-icons-20210131.2015/all-the-icons-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/all-the-icons-20210208.0/all-the-icons-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/all-the-icons-20210131.2015/all-the-icons-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/all-the-icons-20210208.0/all-the-icons-autoloads.el") (car load-path))))
 
 
 
@@ -14045,10 +13907,8 @@ When Prefix ARG is non-nil, insert the propertized icon.
 When FAMILY is non-nil, limit the candidates to the icon set matching it.
 
 \(fn &optional ARG FAMILY)" t nil)
-
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "all-the-icons" '("all-the-icons-")))
-
 
 
 
@@ -14147,16 +14007,16 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
 
 )
 (setq package-activated-list
-      (append
-       '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe vlf validate bind-key use-package use-package-hydra key-chord bind-chord use-package-chords epl pkg-info projectile dash s f avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile treemacs-icons-dired transient transient-posframe toc-org test-simple ivy swiper super-save srefactor spinner sml-mode smartparens load-relative loc-changes realgud rainbow-delimiters pos-tip racket-mode pythonic dash-functional pretty-hydra prescient popup persistent-scratch paren-face paredit paradox outorg outshine org-bullets org esxml nov mwim modus-themes memoize math-symbol-lists makey major-mode-hydra git-commit magit macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine gcmh flyspell-correct flyspell-correct-popup flycheck flycheck-yamllint fish-mode expand-region eval-in-repl eros elmacro elisp-format dtrt-indent discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep company company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-identifiers-mode cmake-mode cask-mode beacon auctex async amx all-the-icons all-the-icons-dired aggressive-indent)
-       package-activated-list))
+	  (append
+	   '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key ...)
+	   package-activated-list))
 (progn
   (require 'info)
   (info-initialize)
   (setq Info-directory-list
-        (append
-         '("/Users/mark/.emacs.d/elpa/27.1/elpa/auctex-13.0.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210203.1158" "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210202.2024" "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210202.2145" "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210202.1423" "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20210117.2008" "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210202.1153" "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20210201.1739" "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20210117.2008")
-         Info-directory-list)))
+		(append
+		 '("/Users/mark/.emacs.d/elpa/27.1/elpa/auctex-13.0.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210209.1110" "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210211.923" "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210211.1321" "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210202.1423" "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20210117.2008" "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210210.1427" "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20210207.1926" "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20210117.2008")
+		 Info-directory-list)))
 
 ;; Local Variables:
 ;; version-control: never

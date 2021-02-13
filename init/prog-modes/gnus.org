@@ -500,3 +500,10 @@ Bin it
 
 
 #+end_src
+* Aliases
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210212T092352.713712
+:END:
+As I use different emails in different places I need this for gnus as well so use [[https://www.emacswiki.org/emacs/gnus-alias.el][gnus-alias]] but from the version in melpa which is slightly newer
+
+However reading EmacsWiki the in built posting styles is all I need now as I just want to change per newsgroup

@@ -96,8 +96,11 @@ This is in text mode
 
 ** Message mode
 :PROPERTIES:
-:ID:       org_mark_mini20.local:20210212T194748.541737
+:ID:       org_mark_mini20.local:20210213T120515.517115
 :END:
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210212T194748.541737
+:END:s
 Well if text only want to fill if HTML then don't
 
 End up setting refill-mode - on a key f19-f

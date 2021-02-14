@@ -52,7 +52,7 @@ Ok I lose the :with of having yasnippet and racket mode completions but get one 
                 :map racket-repl-mode-map
                 ("<f5>" . racket-run))
     :init
-    (setq racket-program "/Applications/Racket v8.0.0.1/bin/racket"
+    (setq racket-program "/Applications/Racket v8.0/bin/racket"
           racket-images-inline t)
 
     ;; From   https://stackoverflow.com/questions/37571164/emacs-company-mode-completion-not-working

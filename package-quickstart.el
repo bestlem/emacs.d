@@ -4113,10 +4113,10 @@ Disable `rainbow-delimiters-mode'." nil nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210211.1321/racket-mode-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210213.24/racket-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210211.1321/racket-mode-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210213.24/racket-mode-autoloads.el") (car load-path))))
 
 
 
@@ -4129,17 +4129,24 @@ Fill a buffer with data to make a Racket Mode bug report." t nil)
 
 
 
+(defvar racket-start-back-end-hook nil "\
+Hook run after `racket-start-back-end'.")
+
 (autoload 'racket-start-back-end "racket-cmd" "\
 Start the back end process used by Racket Mode.
 
-If the process is already started, this command will stop and restart it." t nil)
+If the process is already started, this command will stop and restart it.
+
+As the final step, runs the hook `racket-start-back-end-hook'." t nil)
 
 (autoload 'racket-stop-back-end "racket-cmd" "\
 Stop the back end process used by Racket Mode.
 
 If the process is not already started, this does nothing." t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-cmd" '("racket-")))
+
 
 
 
@@ -4168,8 +4175,10 @@ If the process is not already started, this does nothing." t nil)
 
 
 \(fn RESPONSE)" nil nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-debug" '("racket-")))
+
 
 
 
@@ -4182,8 +4191,10 @@ If the process is not already started, this does nothing." t nil)
 
 
 (add-to-list 'hs-special-modes-alist '(racket-mode "(" ")" ";" nil nil))
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-edit" '("racket-")))
+
 
 
 
@@ -4239,19 +4250,28 @@ for Racket packages.
 
 This command will do a `raco make` of Racket Mode's .rkt files,
 creating bytecode files in `compiled/` subdirectories. As a
-result, when a `racket-run' or `racket-repl' command must start
-the Racket process, it will start faster.
+result, when a command must start the Racket process, it will
+start somewhat faster.
 
-If you run this command, ever, you should run it again after:
+On many computers, the resulting speed up is negligible, and
+might not be worth the complication.
+
+If you run this command, ever, you will need to run it again
+after:
 
 - Installing an updated version of Racket Mode. Otherwise, you
   might lose some of the speed-up.
 
 - Installing a new version of Racket and/or changing the value of
   the variable `racket-program'. Otherwise, you might get an
-  error message due to the bytecode being different versions." t nil)
+  error message due to the bytecode being different versions.
+
+To revert to compiling on startup, use
+`racket-mode-start-slower'. " t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-mode" '("racket-")))
+
 
 
 
@@ -4342,8 +4362,10 @@ which is determined textually by looking for \"module\",
 simply the outermost, file module.
 
 \(fn &optional PREFIX)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-repl" '("racket-" "with-racket-repl-buffer")))
+
 
 
 
@@ -4363,8 +4385,10 @@ All `racket-mode' buffers in a project share a `racket-repl-mode' buffer.
 A value for the variable `racket-repl-buffer-name-function'.
 
 The \"project\" is determined by `racket-project-root'." t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-repl-buffer-name" '("racket-")))
+
 
 
 
@@ -4376,9 +4400,10 @@ The \"project\" is determined by `racket-project-root'." t nil)
 Minor mode to let you always type `[`' to insert `(` or `[` automatically.
 
 If called interactively, enable Racket-Smart-Open-Bracket mode if
-ARG is positive, and disable it if ARG is zero or negative.  If
-called from Lisp, also enable the mode if ARG is omitted or nil,
-and toggle it if ARG is `toggle'; disable the mode otherwise.
+ARG is positive, and disable it if ARG is zero or negative.
+If called from Lisp, also enable the mode if ARG is omitted or
+nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
 
 Behaves like the \"Automatically adjust opening square brackets\"
 feature in Dr. Racket.
@@ -4413,8 +4438,10 @@ the binding for the `[`' key in the map for
 the variable `minor-mode-map-alist'.
 
 \(fn &optional ARG)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-smart-open" '("racket-")))
+
 
 
 
@@ -4549,7 +4576,12 @@ and/or slow, in your `racket-xp-mode-hook' you may disable them:
 The remaining features discussed below will still work.
 
 You may also use commands to navigate among a definition and its
-uses, or to rename a local definitions and all its uses.
+uses, or to rename a local definitions and all its uses:
+
+  - `racket-xp-next-definition'
+  - `racket-xp-previous-definition'
+  - `racket-xp-next-use'
+  - `racket-xp-previous-use'
 
 In the following little example, not only does
 drracket/check-syntax distinguish the various \"x\" bindings, it
@@ -4566,16 +4598,25 @@ understands the two different imports of \"define\":
     x)
 #+END_SRC
 
-The opening parenthesis of an expression in tail position is
-highlighted using the face `racket-xp-tail-position-face' and has
-a tooltip annotation, \"tail\". The opening parenthesis of an
-enclosing expression with the same continuation as one or more
-expressions in tail position is highlighted using the face
+When point is on the opening parenthesis of an expression in tail
+position, it is highlighted using the face
+`racket-xp-tail-position-face' and has a tooltip annotation,
+\"tail\".
+
+When point is on the opening parenthesis of an enclosing
+expression with respect to which one or more expressions are in
+tail position, it is highlighted using the face
 `racket-xp-tail-target-face' and has a tooltip annotation,
-\"head\". Furthermore, all the immediately related expressions
-are highlighted: The target and its tail(s) are all highlighted,
-when point is on any of them. Use `racket-xp-tail-target' to
-jump from a tail expression to the enclosing target expression.
+\"⟦tail⟧\".
+
+Furthermore, when point is on the opening parenthesis of either
+kind of expression, all of the immediately related expressions
+are also highlighted. Various commands to move among them:
+
+  - `racket-xp-tail-up'
+  - `racket-xp-tail-down'
+  - `racket-xp-tail-next-sibling'
+  - `racket-xp-tail-previous-sibling'
 
 The function `racket-xp-complete-at-point' is added to the
 variable `completion-at-point-functions'. Note that in this case,
@@ -4603,7 +4644,7 @@ The mode line changes to reflect the current status of
 annotations, and whether or not you had a syntax error.
 
 If you have one or more syntax errors, `racket-xp-next-error' and
-`racket-xp-previous-error' to navigate among them. Although most
+`racket-xp-previous-error' navigate among them. Although most
 languages will stop after the first syntax error, some like Typed
 Racket will try to collect and report multiple errors.
 
@@ -4627,8 +4668,10 @@ commands directly to whatever keys you prefer.
 \\{racket-xp-mode-map}
 
 \(fn &optional ARG)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-xp" '("racket-")))
+
 
 
 
@@ -10772,6 +10815,61 @@ Major mode for editing fish shell files.
 
 
 )
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/fira-code-mode-20201005.1607/fira-code-mode-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/fira-code-mode-20201005.1607/fira-code-mode-autoloads.el") (car load-path))))
+
+
+
+(autoload 'fira-code-mode "fira-code-mode" "\
+Fira Code ligatures minor mode
+
+If called interactively, enable Fira-Code mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+(put 'global-fira-code-mode 'globalized-minor-mode t)
+
+(defvar global-fira-code-mode nil "\
+Non-nil if Global Fira-Code mode is enabled.
+See the `global-fira-code-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `global-fira-code-mode'.")
+
+(custom-autoload 'global-fira-code-mode "fira-code-mode" nil)
+
+(autoload 'global-fira-code-mode "fira-code-mode" "\
+Toggle Fira-Code mode in all buffers.
+With prefix ARG, enable Global Fira-Code mode if ARG is positive;
+otherwise, disable it.  If called from Lisp, enable the mode if
+ARG is omitted or nil.
+
+Fira-Code mode is enabled in all buffers where
+`fira-code-mode' would do it.
+See `fira-code-mode' for more information on Fira-Code mode.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'fira-code-mode-install-fonts "fira-code-mode" "\
+Helper function to download and install the latests fonts based on OS.
+When PFX is non-nil, ignore the prompt and just install
+
+\(fn &optional PFX)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "fira-code-mode" '("fira-code-mode-")))
+
+
+
+
+
+)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/expand-region-20200304.1839/expand-region-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -14015,7 +14113,7 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
   (info-initialize)
   (setq Info-directory-list
 		(append
-		 '("/Users/mark/.emacs.d/elpa/27.1/elpa/auctex-13.0.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210209.1110" "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210211.923" "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210211.1321" "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210202.1423" "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20210117.2008" "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210210.1427" "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20210207.1926" "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20210117.2008")
+		 '("/Users/mark/.emacs.d/elpa/27.1/elpa/auctex-13.0.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210209.1110" "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210211.923" "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210213.24" "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210202.1423" "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20210117.2008" "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210210.1427" "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20210207.1926" "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20210117.2008")
 		 Info-directory-list)))
 
 ;; Local Variables:

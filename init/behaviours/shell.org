@@ -75,6 +75,19 @@ exec-path-from-shell does work with more shells including fish - but requires yo
 It calls the shell in exec-path-from-shell-shell-name otherwise shell-file-name otherwise (getenv "SHELL"). Then calls sh from fish so printf works.
 Now I remember writing my own printenv as env|sort - looking at man page printenv is older but env is POSIX. printf is later but might not work with UTF-8
 
+
+*** Spaces in command line
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210214T131312.687097
+:END:
+emacs shell-command or something like that assumes a posix shell and escapes spaces by using \  xonsh does not like that and want the caller to enclose the whole string in quotes.  Annoyingly emacs does do this for Windows
+
+*** xonsh lack of reading startup files
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210214T131312.685125
+:END:
+It does not read files unless you are actually typing
+
 *** TODO Conclusion
 :PROPERTIES:
 :ID:       org_mark_2020-11-05T13-13-44+00-00_mini12.local:80FFD29A-D2AE-4C6D-8C49-D805314C5A1C
@@ -91,6 +104,8 @@ Oh give up and hard code where needed
 
 And drifted back to xonsh to give more control - and bite the bullet and debug all issues.
 I think that eventually  xonsh for interactive and dash for simple including compilation - compile
+Spacesand xonsh lack of reading startup files  put me back to a POSIX shell for running non interactive shells.- unfortunately Apple makes sh a link to bash - not dash. So I will use zsh
+
 * Set shell
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210124T201155.666279
@@ -103,12 +118,12 @@ It is dealing with bashism - see makem.sh for some.
 :END:
 #+NAME: org_mark_mini20.local_20210122T193718.254522
 #+begin_src emacs-lisp
-(let ((my-shell "/Users/mark/miniconda3/envs/xonsh/bin/xonsh")
+(let (;; (my-shell "/Users/mark/miniconda3/envs/xonsh/bin/xonsh")
       ;; (my-shell "/opt/local/bin/fish" )
-      ;; (my-shell "/bin/zsh")
+      (my-shell "/bin/zsh")
       ;; (my-shell "/bin/dash")
       )
-  (setq explicit-shell-file-name my-shell)
+  (setq explicit-shell-file-name "/Users/mark/miniconda3/envs/xonsh/bin/xonsh")
   (setq exec-path-from-shell-shell-name my-shell)
   (setq shell-file-name my-shell))
 #+end_src

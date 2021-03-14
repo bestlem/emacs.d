@@ -20,6 +20,8 @@
  - path :: ~/src/Racket/realm.source
 ** RacketProgrammingtheFunWay
  - path :: ~/src/Racket/RacketProgrammingtheFunWay
+** mandlebrot
+ - path :: ~/src/Racket/mandlebrot
 * C based
 ** rftg
  - path :: ~/src/cpp/rftg

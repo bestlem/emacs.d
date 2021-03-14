@@ -143,11 +143,12 @@ Well the compilation buffer does not do much but there are ways for it to recogn
   :functions (compilation-filter my-advice-compilation-filter)
   :init
   ;; For shell and interpreters
-  (setenv "TERM" "xterm-256color")
   (setq comint-output-filter-functions
         (remove 'ansi-color-process-output comint-output-filter-functions))
+  (setq comint-terminfo-terminal "xterm-256color")
   (add-hook 'comint-preoutput-filter-functions 'xterm-color-filter)
   (defun my-xterm-shell-hook-function ()
+    (setenv "TERM" "xterm-256color")
     ;; Disable font-locking to improve performance
     (font-lock-mode -1)
     ;; Prevent font-locking from being re-enabled

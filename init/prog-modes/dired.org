@@ -332,7 +332,7 @@ Use tab to show/hide
 From Greg Hendershott
 But treemacs gets prettier coloured icons
 #+NAME: org_2020-11-30+00-00_6A809D36-52F1-4E8A-9634-2A75404F6CEC
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package all-the-icons-dired
   :disabled
   :ensure t

@@ -14105,16 +14105,16 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
 
 )
 (setq package-activated-list
-	  (append
-	   '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key ...)
-	   package-activated-list))
+      (append
+       '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe vlf validate bind-key use-package use-package-hydra key-chord bind-chord use-package-chords epl pkg-info projectile dash s f avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile treemacs-icons-dired transient transient-posframe toc-org test-simple ivy swiper super-save srefactor spinner sml-mode smartparens load-relative loc-changes realgud rainbow-delimiters pos-tip racket-mode pythonic dash-functional pretty-hydra prescient popup persistent-scratch paren-face paredit paradox outorg outshine org-bullets org esxml nov mwim modus-themes memoize math-symbol-lists makey major-mode-hydra git-commit magit macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat gnus-alias git-timemachine gcmh flyspell-correct flyspell-correct-popup flycheck flycheck-yamllint fish-mode fira-code-mode expand-region eval-in-repl eros elmacro elisp-format dtrt-indent discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep company company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-identifiers-mode cmake-mode cask-mode beacon auctex async amx all-the-icons all-the-icons-dired aggressive-indent)
+       package-activated-list))
 (progn
   (require 'info)
   (info-initialize)
   (setq Info-directory-list
-		(append
-		 '("/Users/mark/.emacs.d/elpa/27.1/elpa/auctex-13.0.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210209.1110" "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210211.923" "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210213.24" "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210202.1423" "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20210117.2008" "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210210.1427" "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20210207.1926" "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20210117.2008")
-		 Info-directory-list)))
+	(append
+	 '("/Users/mark/.emacs.d/elpa/27.1/elpa/auctex-13.0.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210209.1110" "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210211.923" "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210213.24" "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210202.1423" "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20210117.2008" "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210210.1427" "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20210207.1926" "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20210117.2008")
+	 Info-directory-list)))
 
 ;; Local Variables:
 ;; version-control: never

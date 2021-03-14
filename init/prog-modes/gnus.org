@@ -303,7 +303,7 @@ From [[http://doc.rix.si/cce/cce-gnus.html][Here]]
 ;; (setq gnus-summary-line-format
 ;; 	  "%U%R%z%I%(%[%4L: %-23,23f%]%) %s\\n" )
 (setq gnus-summary-line-format
-	  "%U %20,20&user-date; %30,30s%B %f \n" )
+	  "%U %20,20&user-date; %-40,40s%B %f \n" )
 #+end_src
 *** Threading
 :PROPERTIES:

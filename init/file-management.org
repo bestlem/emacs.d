@@ -155,11 +155,8 @@ But then note super-save
 Also odds/main.org
 #+NAME: org_mark_mini20.local_20210120T014441.002252
 #+begin_src emacs-lisp
-
-
-;; Auto-save
 (defvar auto-save-directory
-  (expand-file-name "auto-save-list" user-emacs-directory)
+  (expand-file-name "auto-save-dir/" user-emacs-directory)
   "Directory the auto-save bits go in")
 (setq auto-save-file-name-transforms `((".*" ,auto-save-directory t)))
 

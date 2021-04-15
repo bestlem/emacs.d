@@ -301,8 +301,8 @@
 
 
 ;; swap
-(bind-key "(" 'lispy-brackets lispy-mnemonic-mode-map)
-(bind-key "[" 'lispy-parens lispy-mnemonic-mode-map)
+(bind-key "[" 'lispy-brackets lispy-mnemonic-mode-map)
+(bind-key "(" 'lispy-parens lispy-mnemonic-mode-map)
 ;; (bind-key "H-d" 'hydra-lispy-debug/body lispy-mnemonic-mode-map)
 ;; (bind-key "H-m" 'hydra-lispy-mark/body lispy-mnemonic-mode-map)
 ;; (bind-key "H-x" 'hydra-lispy-x/body lispy-mnemonic-mode-map)
@@ -313,8 +313,8 @@
 (bind-key "M-<delete>" 'lispy-kill-at-point lispy-mnemonic-mode-map)
 (bind-key "H-M-<backspace>" 'lispy-kill-at-point lispy-mnemonic-mode-map) ;well M-<delete
 (bind-key "C-1" 'lispy-string-oneline lispy-mnemonic-mode-map)
-(bind-key "M-n" 'lispy-forward lispy-mnemonic-mode-map)
-(bind-key "M-p" 'lispy-backward lispy-mnemonic-mode-map)
+;; (bind-key "M-n" 'lispy-forward lispy-mnemonic-mode-map)
+;; (bind-key "M-p" 'lispy-backward lispy-mnemonic-mode-map)
 (bind-key "M-o" 'lispy-parens-down lispy-mnemonic-mode-map)
 ;; (bind-key "H-i" 'lispy-iedit lispy-mnemonic-mode-map)
 ;; (bind-key "H-j" 'lispy-join lispy-mnemonic-mode-map)

@@ -6,6 +6,7 @@
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:1C20958B-CC40-4D69-B34D-3F34D5C8699A
 :END:
 Change from lispy to smartparens. The delete-selection issue is too much. I keep typing on a selected region
+And back again: 😤
 ** Issues
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20201221T122900.930444
@@ -36,53 +37,54 @@ Ok I lose the :with of having yasnippet and racket mode completions but get one 
 #+NAME: org_mark_mini12.local_20201213T220930.519021
 #+begin_src emacs-lisp
 (use-package racket-mode
-    :ensure t
-    :bind (:map racket-mode-map
-                ("<f5>" . racket-test)
-                ("<C-f5>" . racket-mwb-run)
-                ("A-<f5>" . racket-mwb-raco-all-tests)
-                ("S-<f5>" . racket-mwb-raco-test)
-                ("<f1> <f1>" . racket-xp-describe)
-                ("M-l" . racket-insert-lambda)
-                ("M-`" . racket-insert-lambda)
-                ;; ("<C-return>" . eir-eval-in-racket)
-                ("<f6>" . racket-send-definition)
-                ("<C-return>" . racket-mwb-send-to-repl)
+  :ensure t
+  :bind (:map racket-mode-map
+              ("<f5>" . racket-test)
+              ("<C-f5>" . racket-mwb-run)
+              ("A-<f5>" . racket-mwb-raco-all-tests)
+              ("S-<f5>" . racket-mwb-raco-test)
+              ("<f1> <f1>" . racket-xp-describe)
+              ("M-l" . racket-insert-lambda)
+              ("M-`" . racket-insert-lambda)
+              ;; ("<C-return>" . eir-eval-in-racket)
+              ("<f6>" . racket-send-definition)
+              ("<C-return>" . racket-mwb-send-to-repl)
                                         ;("H-A" . hydra-paredit/body)
-                :map racket-repl-mode-map
-                ("<f5>" . racket-run))
-    :init
-    (setq racket-program "/Applications/Racket v8.0/bin/racket"
-          racket-images-inline t)
+              :map racket-repl-mode-map
+              ("<f5>" . racket-run))
+  :mode (rx (seq ".racket" string-end))
+  :init
+  (setq racket-program "/Applications/Racket v8.0/bin/racket"
+        racket-images-inline t)
 
-    ;; From   https://stackoverflow.com/questions/37571164/emacs-company-mode-completion-not-working
-    (defun my-racket-mode-hook ()
-      (my-all-racket-mode-hook)
-      (racket-xp-mode))
-    (defun my-all-racket-mode-hook ()
-      (set (make-local-variable 'company-backends)
-           '((company-capf
-              company-math-symbols-unicode
-              company-dabbrev
-              company-yasnippet)))      ; each looks for its own prefix
-      (company-mode 1)
-      ;;(smartparens-strict-mode 1)
-      ;;(racket-unicode-input-method-enable)
-      (racket-mwb-smart-open-bracket-mode))
+  ;; From   https://stackoverflow.com/questions/37571164/emacs-company-mode-completion-not-working
+  (defun my-racket-mode-hook ()
+    (my-all-racket-mode-hook)
+    (racket-xp-mode))
+  (defun my-all-racket-mode-hook ()
+    (set (make-local-variable 'company-backends)
+         '((company-capf
+            company-math-symbols-unicode
+            company-dabbrev
+            company-yasnippet)))        ; each looks for its own prefix
+    (company-mode 1)
+    ;;(smartparens-strict-mode 1)
+    ;;(racket-unicode-input-method-enable)
+    (racket-mwb-smart-open-bracket-mode))
 
-    (defun racket-mwb-send-to-repl ()
-      "Send region or last sexp"
-      (if (region-active-p)
-          (racket-send-region)
-        (racket-send-last-sexp)))
-    :config
-    (require 'racket-support)
-    ;; (diminish 'racket-smart-open-bracket-mode)
+  (defun racket-mwb-send-to-repl ()
+    "Send region or last sexp"
+    (if (region-active-p)
+        (racket-send-region)
+      (racket-send-last-sexp)))
+  :config
+  (require 'racket-support)
+  ;; (diminish 'racket-smart-open-bracket-mode)
                                         ; This is broken as it used racket internals - maybe racket itself
-    ;;(require 'eval-in-repl-racket)
-    ;(require 'racket-mwb-smart-open)
-    :hook (racket-mode . my-racket-mode-hook)
-    (racket-repl-mode . my-all-racket-mode-hook))
+  ;;(require 'eval-in-repl-racket)
+                                        ;(require 'racket-mwb-smart-open)
+  :hook (racket-mode . my-racket-mode-hook)
+  (racket-repl-mode . my-all-racket-mode-hook))
     #+end_src
 *** racket smart open bracket
 :PROPERTIES:

@@ -8,7 +8,7 @@
 ** Aquamacs Application
  - path :: /Applications/Aquamacs.app/Contents/Resources/lisp/aquamacs
 ** aquamacs-emacs code
- - path :: ~/src/objc/aquamacs-emacs
+ - path :: ~/src/macos/aquamacs-emacs
 ** emacs-init
  - path :: ~/src/ThirdParty/emacs-init
 ** emacs-mac
@@ -33,6 +33,10 @@
  - path :: ~/src/cpp/test_gtk
 ** macports-ports
  - path :: ~/src/cpp/macports-ports
+** trash
+ - path :: ~/src/cpp/trash
+** S01E22-command-line-tools-with-swift
+ - path :: ~/src/macos/S01E22-command-line-tools-with-swift
 * Odds
 ** SML unit test
  - path :: ~/old_src/sml/unit_test

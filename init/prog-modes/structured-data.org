@@ -15,6 +15,7 @@ So from jweigley
   :bind (:map nxml-mode-map
               ("<return>" . newline-and-indent)
               ("C-c M-h"  . tidy-xml-buffer))
+  :mode (rx (seq ".opml" string-end))
   :preface
   (defun tidy-xml-buffer ()
     (interactive)

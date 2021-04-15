@@ -176,10 +176,10 @@ comparisons/benchmarks with libraries that offer similar functionality." t nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/xr-1.20/xr-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/xr-1.21/xr-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/xr-1.20/xr-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/xr-1.21/xr-autoloads.el") (car load-path))))
 
 
 
@@ -280,6 +280,23 @@ Major mode for xonsh, derived from Python mode.
 
 
 )
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/xcode-project-20200810.2010/xcode-project-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/xcode-project-20200810.2010/xcode-project-autoloads.el") (car load-path))))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "xcode-parser" '("xcode-parser-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "xcode-project" '("xcode-project-")))
+
+
+
+
+)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/ws-butler-20201117.1528/ws-butler-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -328,10 +345,10 @@ See `ws-butler-mode' for more information on Ws-Butler mode.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20210117.2008/with-editor-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20210319.1930/with-editor-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20210117.2008/with-editor-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20210319.1930/with-editor-autoloads.el") (car load-path))))
 
 
 
@@ -419,10 +436,10 @@ else like the former.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/posframe-20210208.229/posframe-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/posframe-20210331.324/posframe-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/posframe-20210208.229/posframe-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/posframe-20210331.324/posframe-autoloads.el") (car load-path))))
 
 
 
@@ -497,6 +514,10 @@ by the way, poshandler can be used by other packages easily
      `((left . ,(car posn))
        (top . ,(cdr posn))))
 
+POSHANDLER-EXTRA-INFO is a plist, which will prepend to the
+argument of poshandler function: 'info', it will *OVERRIDE* the
+exist key in 'info'.
+
 This posframe's buffer is BUFFER-OR-NAME, which can be a buffer
 or a name of a (possibly nonexistent) buffer.
 
@@ -566,22 +587,224 @@ The builtin hidehandler functions are listed below:
 
 You can use `posframe-delete-all' to delete all posframes.
 
-\(fn BUFFER-OR-NAME &key STRING POSITION POSHANDLER WIDTH HEIGHT MIN-WIDTH MIN-HEIGHT X-PIXEL-OFFSET Y-PIXEL-OFFSET LEFT-FRINGE RIGHT-FRINGE BORDER-WIDTH BORDER-COLOR INTERNAL-BORDER-WIDTH INTERNAL-BORDER-COLOR FONT FOREGROUND-COLOR BACKGROUND-COLOR RESPECT-HEADER-LINE RESPECT-MODE-LINE INITIALIZE NO-PROPERTIES KEEP-RATIO LINES-TRUNCATE OVERRIDE-PARAMETERS TIMEOUT REFRESH ACCEPT-FOCUS HIDEHANDLER &allow-other-keys)" nil nil)
+\(fn BUFFER-OR-NAME &key STRING POSITION POSHANDLER POSHANDLER-EXTRA-INFO WIDTH HEIGHT MIN-WIDTH MIN-HEIGHT X-PIXEL-OFFSET Y-PIXEL-OFFSET LEFT-FRINGE RIGHT-FRINGE BORDER-WIDTH BORDER-COLOR INTERNAL-BORDER-WIDTH INTERNAL-BORDER-COLOR FONT FOREGROUND-COLOR BACKGROUND-COLOR RESPECT-HEADER-LINE RESPECT-MODE-LINE INITIALIZE NO-PROPERTIES KEEP-RATIO LINES-TRUNCATE OVERRIDE-PARAMETERS TIMEOUT REFRESH ACCEPT-FOCUS HIDEHANDLER &allow-other-keys)" nil nil)
 
 (autoload 'posframe-hide-all "posframe" "\
 Hide all posframe frames." t nil)
 
 (autoload 'posframe-delete-all "posframe" "\
 Delete all posframe frames and buffers." t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "posframe" '("posframe-")))
 
+
+
+
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/which-key-20210131.1837/which-key-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/which-key-20210324.1821/which-key-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/which-key-20210131.1837/which-key-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/which-key-20210324.1821/which-key-autoloads.el") (car load-path))))
+
+
+
+(defvar which-key-mode nil "\
+Non-nil if Which-Key mode is enabled.
+See the `which-key-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `which-key-mode'.")
+
+(custom-autoload 'which-key-mode "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/which-key-20210324.1821/which-key" nil)
+
+(autoload 'which-key-mode "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/which-key-20210324.1821/which-key" "\
+Toggle which-key-mode.
+
+If called interactively, enable Which-Key mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'which-key-setup-side-window-right "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/which-key-20210324.1821/which-key" "\
+Apply suggested settings for side-window that opens on right." t nil)
+
+(autoload 'which-key-setup-side-window-right-bottom "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/which-key-20210324.1821/which-key" "\
+Apply suggested settings for side-window that opens on right
+if there is space and the bottom otherwise." t nil)
+
+(autoload 'which-key-setup-side-window-bottom "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/which-key-20210324.1821/which-key" "\
+Apply suggested settings for side-window that opens on
+bottom." t nil)
+
+(autoload 'which-key-setup-minibuffer "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/which-key-20210324.1821/which-key" "\
+Apply suggested settings for minibuffer.
+Do not use this setup if you use the paging commands. Instead use
+`which-key-setup-side-window-bottom', which is nearly identical
+but more functional." t nil)
+
+(autoload 'which-key-add-keymap-based-replacements "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/which-key-20210324.1821/which-key" "\
+Replace the description of KEY using REPLACEMENT in KEYMAP.
+KEY should take a format suitable for use in
+`kbd'. REPLACEMENT is the string to use to describe the
+command associated with KEY in the KEYMAP. You may also use a
+cons cell of the form (STRING . COMMAND) for each REPLACEMENT,
+where STRING is the replacement string and COMMAND is a symbol
+corresponding to the intended command to be replaced. In the
+latter case, which-key will verify the intended command before
+performing the replacement. COMMAND should be nil if the binding
+corresponds to a key prefix. For example,
+
+\(which-key-add-keymap-based-replacements global-map
+  \"C-x w\" \"Save as\")
+
+and
+
+\(which-key-add-keymap-based-replacements global-map
+  \"C-x w\" '(\"Save as\" . write-file))
+
+both have the same effect for the \"C-x C-w\" key binding, but
+the latter causes which-key to verify that the key sequence is
+actually bound to write-file before performing the replacement.
+
+\(fn KEYMAP KEY REPLACEMENT &rest MORE)" nil nil)
+
+(autoload 'which-key-add-key-based-replacements "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/which-key-20210324.1821/which-key" "\
+Replace the description of KEY-SEQUENCE with REPLACEMENT.
+KEY-SEQUENCE is a string suitable for use in `kbd'. REPLACEMENT
+may either be a string, as in
+
+\(which-key-add-key-based-replacements \"C-x 1\" \"maximize\")
+
+a cons of two strings as in
+
+\(which-key-add-key-based-replacements \"C-x 8\"
+                                        '(\"unicode\" . \"Unicode keys\"))
+
+or a function that takes a (KEY . BINDING) cons and returns a
+replacement.
+
+In the second case, the second string is used to provide a longer
+name for the keys under a prefix.
+
+MORE allows you to specifcy additional KEY REPLACEMENT pairs.  All
+replacements are added to `which-key-replacement-alist'.
+
+\(fn KEY-SEQUENCE REPLACEMENT &rest MORE)" nil nil)
+
+(autoload 'which-key-add-major-mode-key-based-replacements "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/which-key-20210324.1821/which-key" "\
+Functions like `which-key-add-key-based-replacements'.
+The difference is that MODE specifies the `major-mode' that must
+be active for KEY-SEQUENCE and REPLACEMENT (MORE contains
+addition KEY-SEQUENCE REPLACEMENT pairs) to apply.
+
+\(fn MODE KEY-SEQUENCE REPLACEMENT &rest MORE)" nil nil)
+
+(autoload 'which-key-reload-key-sequence "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/which-key-20210324.1821/which-key" "\
+Simulate entering the key sequence KEY-SEQ.
+KEY-SEQ should be a list of events as produced by
+`listify-key-sequence'. If nil, KEY-SEQ defaults to
+`which-key--current-key-list'. Any prefix arguments that were
+used are reapplied to the new key sequence.
+
+\(fn &optional KEY-SEQ)" nil nil)
+
+(autoload 'which-key-show-standard-help "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/which-key-20210324.1821/which-key" "\
+Call the command in `which-key--prefix-help-cmd-backup'.
+Usually this is `describe-prefix-bindings'.
+
+\(fn &optional _)" t nil)
+
+(autoload 'which-key-show-next-page-no-cycle "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/which-key-20210324.1821/which-key" "\
+Show next page of keys unless on the last page, in which case
+call `which-key-show-standard-help'." t nil)
+
+(autoload 'which-key-show-previous-page-no-cycle "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/which-key-20210324.1821/which-key" "\
+Show previous page of keys unless on the first page, in which
+case do nothing." t nil)
+
+(autoload 'which-key-show-next-page-cycle "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/which-key-20210324.1821/which-key" "\
+Show the next page of keys, cycling from end to beginning
+after last page.
+
+\(fn &optional _)" t nil)
+
+(autoload 'which-key-show-previous-page-cycle "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/which-key-20210324.1821/which-key" "\
+Show the previous page of keys, cycling from beginning to end
+after first page.
+
+\(fn &optional _)" t nil)
+
+(autoload 'which-key-show-top-level "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/which-key-20210324.1821/which-key" "\
+Show top-level bindings.
+
+\(fn &optional _)" t nil)
+
+(autoload 'which-key-show-major-mode "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/which-key-20210324.1821/which-key" "\
+Show top-level bindings in the map of the current major mode.
+
+This function will also detect evil bindings made using
+`evil-define-key' in this map. These bindings will depend on the
+current evil state. 
+
+\(fn &optional ALL)" t nil)
+
+(autoload 'which-key-show-full-major-mode "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/which-key-20210324.1821/which-key" "\
+Show all bindings in the map of the current major mode.
+
+This function will also detect evil bindings made using
+`evil-define-key' in this map. These bindings will depend on the
+current evil state. " t nil)
+
+(autoload 'which-key-dump-bindings "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/which-key-20210324.1821/which-key" "\
+Dump bindings from PREFIX into buffer named BUFFER-NAME.
+
+PREFIX should be a string suitable for `kbd'.
+
+\(fn PREFIX BUFFER-NAME)" t nil)
+
+(autoload 'which-key-undo-key "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/which-key-20210324.1821/which-key" "\
+Undo last keypress and force which-key update.
+
+\(fn &optional _)" t nil)
+
+(autoload 'which-key-C-h-dispatch "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/which-key-20210324.1821/which-key" "\
+Dispatch C-h commands by looking up key in
+`which-key-C-h-map'. This command is always accessible (from any
+prefix) if `which-key-use-C-h-commands' is non nil." t nil)
+
+(autoload 'which-key-show-keymap "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/which-key-20210324.1821/which-key" "\
+Show the top-level bindings in KEYMAP using which-key. KEYMAP
+is selected interactively from all available keymaps.
+
+If NO-PAGING is non-nil, which-key will not intercept subsequent
+keypresses for the paging functionality.
+
+\(fn KEYMAP &optional NO-PAGING)" t nil)
+
+(autoload 'which-key-show-full-keymap "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/which-key-20210324.1821/which-key" "\
+Show all bindings in KEYMAP using which-key. KEYMAP is
+selected interactively from all available keymaps.
+
+\(fn KEYMAP)" t nil)
+
+(autoload 'which-key-show-minor-mode-keymap "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/which-key-20210324.1821/which-key" "\
+Show the top-level bindings in KEYMAP using which-key. KEYMAP
+is selected interactively by mode in `minor-mode-map-alist'.
+
+\(fn &optional ALL)" t nil)
+
+(autoload 'which-key-show-full-minor-mode-keymap "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/which-key-20210324.1821/which-key" "\
+Show all bindings in KEYMAP using which-key. KEYMAP
+is selected interactively by mode in `minor-mode-map-alist'." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/which-key-20210324.1821/which-key" '("which-key-")))
+
 
 
 
@@ -667,8 +890,7 @@ In the second case, the second string is used to provide a longer
 name for the keys under a prefix.
 
 MORE allows you to specifcy additional KEY REPLACEMENT pairs.  All
-replacements are added to
-`which-key-key-based-description-replacement-alist'.
+replacements are added to `which-key-replacement-alist'.
 
 \(fn KEY-SEQUENCE REPLACEMENT &rest MORE)" nil nil)
 
@@ -819,76 +1041,6 @@ toggle it if ARG is `toggle'; disable the mode otherwise.
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "which-key-posframe" '("which-key-")))
 
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/vlf-20191126.2250/vlf-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/vlf-20191126.2250/vlf-autoloads.el") (car load-path))))
-
-
-
-(autoload 'vlf "vlf" "\
-View Large FILE in batches.  When MINIMAL load just a few bytes.
-You can customize number of bytes displayed by customizing
-`vlf-batch-size'.
-Return newly created buffer.
-
-\(fn FILE &optional MINIMAL)" t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "vlf" '("vlf-")))
-
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "vlf-base" '("vlf-")))
-
-
-
-(autoload 'vlf-ediff-files "vlf-ediff" "\
-Run batch by batch ediff over FILE-A and FILE-B.
-Files are processed with VLF with BATCH-SIZE chunks.
-Requesting next or previous difference at the end or beginning
-respectively of difference list, runs ediff over the adjacent chunks.
-
-\(fn FILE-A FILE-B BATCH-SIZE)" t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "vlf-ediff" '("vlf-")))
-
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "vlf-follow" '("vlf-")))
-
-
-
-(autoload 'vlf-occur-load "vlf-occur" "\
-Load serialized `vlf-occur' results from current buffer." t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "vlf-occur" '("vlf-")))
-
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "vlf-search" '("vlf-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "vlf-setup" '("dired-vlf" "vlf-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "vlf-tune" '("vlf-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "vlf-write" '("vlf-")))
 
 
 
@@ -1468,10 +1620,10 @@ version.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/projectile-20210125.726/projectile-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/projectile-20210309.722/projectile-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/projectile-20210125.726/projectile-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/projectile-20210309.722/projectile-autoloads.el") (car load-path))))
 
 
 
@@ -2049,10 +2201,10 @@ Otherwise behave as if called interactively.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210210.1427/dash-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210330.1544/dash-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210210.1427/dash-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210330.1544/dash-autoloads.el") (car load-path))))
 
 
 
@@ -2103,8 +2255,10 @@ See `dash-fontify-mode' for more information on Dash-Fontify mode.
 (autoload 'dash-register-info-lookup "dash" "\
 Register the Dash Info manual with `info-lookup-symbol'.
 This allows Dash symbols to be looked up with \\[info-lookup-symbol]." t nil)
+
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dash" '("!cdr" "!cons" "--" "->" "-a" "-butlast" "-c" "-d" "-e" "-f" "-gr" "-i" "-keep" "-l" "-m" "-non" "-only-some" "-p" "-r" "-s" "-t" "-u" "-value-to-list" "-when-let" "-zip" "dash-")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dash" '("!cdr" "!cons" "--" "->" "-a" "-butlast" "-c" "-d" "-e" "-f" "-gr" "-i" "-juxt" "-keep" "-l" "-m" "-no" "-o" "-p" "-r" "-s" "-t" "-u" "-value-to-list" "-when-let" "-zip" "dash-")))
+
 
 
 
@@ -2118,17 +2272,6 @@ This allows Dash symbols to be looked up with \\[info-lookup-symbol]." t nil)
 
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "s" '("s-")))
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/f-20191110.1357/f-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/f-20191110.1357/f-autoloads.el") (car load-path))))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "f" '("f-")))
 
 
 )
@@ -2601,10 +2744,10 @@ result of `defhydra'.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/cfrs-20210121.2007/cfrs-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/cfrs-20210217.1848/cfrs-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/cfrs-20210121.2007/cfrs-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/cfrs-20210217.1848/cfrs-autoloads.el") (car load-path))))
 
 
 
@@ -2621,10 +2764,10 @@ Read a string using a pos-frame with given PROMPT and INITIAL-INPUT.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/treemacs-20210201.1800/treemacs-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/treemacs-20210331.1948/treemacs-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/treemacs-20210201.1800/treemacs-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/treemacs-20210331.1948/treemacs-autoloads.el") (car load-path))))
 
 
 
@@ -2816,6 +2959,14 @@ Additionally FILE-EXTENSIONS are also not case sensitive and will be stored in a
 down-cased state.
 
 \(fn ICON &rest FILE-EXTENSIONS)" nil nil)
+
+(autoload 'treemacs-define-custom-image-icon "treemacs-icons" "\
+Same as `treemacs-define-custom-icon' but for image icons instead of strings.
+FILE is the path to an icon image (and not the actual icon string).
+FILE-EXTENSIONS are all the (not case-sensitive) file extensions the icon
+should be used for.
+
+\(fn FILE &rest FILE-EXTENSIONS)" nil nil)
 
 (autoload 'treemacs-map-icons-with-auto-mode-alist "treemacs-icons" "\
 Remaps icons for EXTENSIONS according to `auto-mode-alist'.
@@ -3108,10 +3259,10 @@ mode otherwise.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20210117.2008/transient-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20210315.1902/transient-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20210117.2008/transient-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20210315.1902/transient-autoloads.el") (car load-path))))
 
 
 
@@ -3212,10 +3363,10 @@ toggle it if ARG is `toggle'; disable the mode otherwise.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/toc-org-20201105.826/toc-org-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/toc-org-20210323.1256/toc-org-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/toc-org-20201105.826/toc-org-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/toc-org-20210323.1256/toc-org-autoloads.el") (car load-path))))
 
 
 
@@ -3240,48 +3391,10 @@ ARG is `toggle'; disable the mode otherwise.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/test-simple-20200722.1121/test-simple-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210311.1638/ivy-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/test-simple-20200722.1121/test-simple-autoloads.el") (car load-path))))
-
-
-
-(autoload 'test-simple-start "test-simple" "\
-
-
-\(fn &optional TEST-START-MSG)" nil t)
-
-(autoload 'test-simple-clear "test-simple" "\
-Initialize and reset everything to run tests.
-You should run this before running any assertions.  Running more than once
-clears out information from the previous run.
-
-\(fn &optional TEST-INFO TEST-START-MSG)" t nil)
-
-(autoload 'test-simple-run "test-simple" "\
-Register command line to run tests non-interactively and bind key to run test.
-After calling this function, you can run test by key specified by `test-simple-runner-key'.
-
-It is preferable to write at the first line of test files as a comment, e.g,
-;;;; (test-simple-run \"emacs -batch -L %s -l %s\" (file-name-directory (locate-library \"test-simple.elc\")) buffer-file-name)
-
-Calling this function interactively, COMMAND-LINE-FORMATS is set above.
-
-\(fn &rest COMMAND-LINE-FORMATS)" t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "test-simple" '("assert-" "end-tests" "note" "test-simple-")))
-
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210202.1423/ivy-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210202.1423/ivy-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210311.1638/ivy-autoloads.el") (car load-path))))
 
 
 
@@ -3426,10 +3539,10 @@ Switch to another buffer in another window." t nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/swiper-20210202.2312/swiper-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/swiper-20210310.1230/swiper-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/swiper-20210202.2312/swiper-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/swiper-20210310.1230/swiper-autoloads.el") (car load-path))))
 
 
 
@@ -3477,67 +3590,468 @@ Like `swiper-isearch' but the first result is before the point.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/super-save-20200930.1634/super-save-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/swift-playground-mode-20190730.1707/swift-playground-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/super-save-20200930.1634/super-save-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/swift-playground-mode-20190730.1707/swift-playground-mode-autoloads.el") (car load-path))))
 
 
 
-(defvar super-save-mode nil "\
-Non-nil if Super-Save mode is enabled.
-See the `super-save-mode' command
+(autoload 'swift-playground-close-buffer "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-playground-mode-20190730.1707/swift-playground-mode" "\
+Close the current playground buffer if it is being displayed." nil nil)
+
+(autoload 'swift-playground-current-buffer-playground-p "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-playground-mode-20190730.1707/swift-playground-mode" "\
+Return non-nil if the current swift buffer is a playground." nil nil)
+
+(autoload 'swift-playground-run "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-playground-mode-20190730.1707/swift-playground-mode" "\
+Run the current swift buffer as a playground." t nil)
+
+(autoload 'swift-playground-preview-image "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-playground-mode-20190730.1707/swift-playground-mode" "\
+Preview an image rendered from the current cursor position." t nil)
+
+(autoload 'swift-playground-mode "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-playground-mode-20190730.1707/swift-playground-mode" "\
+Minor mode for editing/running Swift playgrounds.
+
+  \\{swift-playground-mode-map}
+
+When called interactively, toggle `swift-playground-mode'. With
+prefix ARG, enable `swift-playground-mode' if ARG is positive,
+otherwise disable it.
+
+When called from Lisp, enable `swift-playground-mode' if ARG is
+omitted, nil or positive. If ARG is `toggle', toggle
+`swift-playground-mode'. Otherwise behave as if called
+interactively.
+
+\(fn &optional ARG)" t nil)
+
+(put 'swift-playground-global-mode 'globalized-minor-mode t)
+
+(defvar swift-playground-global-mode nil "\
+Non-nil if Swift-Playground-Global mode is enabled.
+See the `swift-playground-global-mode' command
 for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
-or call the function `super-save-mode'.")
+or call the function `swift-playground-global-mode'.")
 
-(custom-autoload 'super-save-mode "super-save" nil)
+(custom-autoload 'swift-playground-global-mode "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-playground-mode-20190730.1707/swift-playground-mode" nil)
 
-(autoload 'super-save-mode "super-save" "\
-A minor mode that saves your Emacs buffers when they lose focus.
+(autoload 'swift-playground-global-mode "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-playground-mode-20190730.1707/swift-playground-mode" "\
+Toggle Swift-Playground mode in all buffers.
+With prefix ARG, enable Swift-Playground-Global mode if ARG is positive;
+otherwise, disable it.  If called from Lisp, enable the mode if
+ARG is omitted or nil.
 
-If called interactively, enable Super-Save mode if ARG is
-positive, and disable it if ARG is zero or negative.  If called
-from Lisp, also enable the mode if ARG is omitted or nil, and
-toggle it if ARG is `toggle'; disable the mode otherwise.
+Swift-Playground mode is enabled in all buffers where
+`(lambda nil (when (swift-playground-current-buffer-playground-p) (swift-playground-mode t)))' would do it.
+See `swift-playground-mode' for more information on Swift-Playground mode.
 
 \(fn &optional ARG)" t nil)
 
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "super-save" '("super-save-")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-playground-mode-20190730.1707/swift-playground-mode" '("swift-playground-")))
+
+
+
+
+(autoload 'swift-playground-close-buffer "swift-playground-mode" "\
+Close the current playground buffer if it is being displayed." nil nil)
+
+(autoload 'swift-playground-current-buffer-playground-p "swift-playground-mode" "\
+Return non-nil if the current swift buffer is a playground." nil nil)
+
+(autoload 'swift-playground-run "swift-playground-mode" "\
+Run the current swift buffer as a playground." t nil)
+
+(autoload 'swift-playground-preview-image "swift-playground-mode" "\
+Preview an image rendered from the current cursor position." t nil)
+
+(autoload 'swift-playground-mode "swift-playground-mode" "\
+Minor mode for editing/running Swift playgrounds.
+
+  \\{swift-playground-mode-map}
+
+When called interactively, toggle `swift-playground-mode'. With
+prefix ARG, enable `swift-playground-mode' if ARG is positive,
+otherwise disable it.
+
+When called from Lisp, enable `swift-playground-mode' if ARG is
+omitted, nil or positive. If ARG is `toggle', toggle
+`swift-playground-mode'. Otherwise behave as if called
+interactively.
+
+\(fn &optional ARG)" t nil)
+
+(put 'swift-playground-global-mode 'globalized-minor-mode t)
+
+(defvar swift-playground-global-mode nil "\
+Non-nil if Swift-Playground-Global mode is enabled.
+See the `swift-playground-global-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `swift-playground-global-mode'.")
+
+(custom-autoload 'swift-playground-global-mode "swift-playground-mode" nil)
+
+(autoload 'swift-playground-global-mode "swift-playground-mode" "\
+Toggle Swift-Playground mode in all buffers.
+With prefix ARG, enable Swift-Playground-Global mode if ARG is positive;
+otherwise, disable it.  If called from Lisp, enable the mode if
+ARG is omitted or nil.
+
+Swift-Playground mode is enabled in all buffers where
+`(lambda nil (when (swift-playground-current-buffer-playground-p) (swift-playground-mode t)))' would do it.
+See `swift-playground-mode' for more information on Swift-Playground mode.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "swift-playground-mode" '("swift-playground-")))
 
 
 
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/srefactor-20180703.1810/srefactor-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/swift-mode-20201231.1204/swift-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/srefactor-20180703.1810/srefactor-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/swift-mode-20201231.1204/swift-mode-autoloads.el") (car load-path))))
 
 
 
-(autoload 'srefactor-refactor-at-point "srefactor" "\
-Offer contextual menu with actions based on current tag in scope.
+(let ((loads (get 'swift 'custom-loads))) (if (member '"../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-mode-20201231.1204/swift-mode" loads) nil (put 'swift 'custom-loads (cons '"../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-mode-20201231.1204/swift-mode" loads))))
+ (custom-add-load 'languages 'swift-mode)
+ (with-eval-after-load 'cus-load
+  (custom-add-load 'languages 'swift-mode))
 
-Each menu item added returns a token for what type of refactoring
-to perform." t nil)
+(defsubst swift-mode:add-supported-extension-for-speedbar nil "\
+Register .swfit to speedbar." (if (fboundp 'speedbar-add-supported-extension) (speedbar-add-supported-extension ".swift") (add-hook 'speedbar-load-hook (lambda nil (speedbar-add-supported-extension ".swift")))))
+
+(autoload 'swift-mode "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-mode-20201231.1204/swift-mode" "\
+Major mode for editing Swift code.
+
+\\{swift-mode-map}
+
+\(fn)" t nil)
+ (add-to-list 'auto-mode-alist '("\\.swift\\'" . swift-mode))
+ (swift-mode:add-supported-extension-for-speedbar)
 
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "srefactor" '("srefactor-")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-mode-20201231.1204/swift-mode" '("swift-mode")))
 
 
 
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "srefactor-lisp" '("comment-" "cur-buf" "first-token" "format-type" "ignore-num" "lexemes" "next-token" "orig-format-type" "recursive-p" "second-token" "srefactor-" "tok")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-mode-20201231.1204/swift-mode-beginning-of-defun" '("swift-mode:")))
 
 
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "srefactor-ui" '("srefactor-ui-")))
+(let ((loads (get 'swift-mode:faces 'custom-loads))) (if (member '"../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-mode-20201231.1204/swift-mode-font-lock" loads) nil (put 'swift-mode:faces 'custom-loads (cons '"../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-mode-20201231.1204/swift-mode-font-lock" loads))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-mode-20201231.1204/swift-mode-font-lock" '("swift-mode:")))
+
 
 
+
+(let ((loads (get 'swift-mode:imenu 'custom-loads))) (if (member '"../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-mode-20201231.1204/swift-mode-imenu" loads) nil (put 'swift-mode:imenu 'custom-loads (cons '"../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-mode-20201231.1204/swift-mode-imenu" loads))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-mode-20201231.1204/swift-mode-imenu" '("swift-mode:")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-mode-20201231.1204/swift-mode-indent" '("swift-mode:")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-mode-20201231.1204/swift-mode-lexer" '("swift-mode:")))
+
+
+
+(let ((loads (get 'swift-mode:repl 'custom-loads))) (if (member '"../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-mode-20201231.1204/swift-mode-repl" loads) nil (put 'swift-mode:repl 'custom-loads (cons '"../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-mode-20201231.1204/swift-mode-repl" loads))))
+
+(autoload 'swift-mode:run-repl "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-mode-20201231.1204/swift-mode-repl" "\
+Run a Swift REPL process.
+
+This function input and output via buffer `*CMD*' where CMD is replaced with
+the CMD given.
+If there is a process already running in `*CMD*', and DONT-SWITCH is nil,
+switch to that buffer.
+CMD is a string or a list, interpreted as a command line.  The default value is
+`swift-mode:repl-executable'.  This function updates the buffer local variable
+`swift-mode:repl-executable' with the given CMD if KEEP-DEFAULT is nil,
+so it will be used as the default value for the next invocation in the current
+buffer.
+If KEEP-DEFAULT is non-nil, the `swift-mode:repl-executable' and the global
+variable `swift-mode:repl-buffer' are not updated.  The buffer local variable
+`swift-mode:repl-buffer' is always updated.
+Runs the hook `swift-repl-mode-hook' (after the `comint-mode-hook' is run).
+\(Type \\[describe-mode] in the process buffer for a list of commands.)
+
+\(fn CMD &optional DONT-SWITCH KEEP-DEFAULT)" t nil)
+
+(defalias 'run-swift 'swift-mode:run-repl)
+
+(autoload 'swift-mode:send-region "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-mode-20201231.1204/swift-mode-repl" "\
+Send the current region to the inferior swift process.
+
+START and END define region within current buffer
+
+\(fn START END)" t nil)
+
+(autoload 'swift-mode:send-buffer "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-mode-20201231.1204/swift-mode-repl" "\
+Send the buffer to the Swift REPL process." t nil)
+
+(autoload 'swift-mode:build-swift-module "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-mode-20201231.1204/swift-mode-repl" "\
+Build a Swift module in the PROJECT-DIRECTORY.
+
+If PROJECT-DIRECTORY is nil or omitted, it is searched from `default-directory'
+or its ancestors.
+An list ARGS are appended for builder command line arguments.
+
+\(fn &optional PROJECT-DIRECTORY ARGS)" t nil)
+
+(autoload 'swift-mode:build-ios-app "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-mode-20201231.1204/swift-mode-repl" "\
+Build an iOS app in the PROJECT-DIRECTORY.
+Build it for iOS device DEVICE-IDENTIFIER for the given SCHEME.
+If PROJECT-DIRECTORY is nil or omitted, it is searched from `default-directory'
+or its ancestors.
+DEVICE-IDENTIFIER is the device identifier of the iOS simulator.  If it is nil
+or omitted, the value of `swift-mode:ios-device-identifier' is used.  If it is
+equal to `swift-mode:ios-local-device-identifier', a local device is used via
+`ios-deploy' instead.
+SCHEME is the name of the project scheme in Xcode.  If it is nil or omitted,
+the value of `swift-mode:ios-project-scheme' is used.
+
+\(fn &optional PROJECT-DIRECTORY DEVICE-IDENTIFIER SCHEME)" t nil)
+
+(autoload 'swift-mode:debug-swift-module "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-mode-20201231.1204/swift-mode-repl" "\
+Run debugger on a Swift module in the PROJECT-DIRECTORY.
+
+If PROJECT-DIRECTORY is nil or omitted, it is searched from `default-directory'
+or its ancestors.
+
+\(fn &optional PROJECT-DIRECTORY)" t nil)
+
+(autoload 'swift-mode:debug-ios-app-on-device "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-mode-20201231.1204/swift-mode-repl" "\
+Run debugger on an iOS app in the PROJECT-DIRECTORY.
+Run it for the iOS local device DEVICE-IDENTIFIER for the given SCHEME.
+CODESIGNING-FOLDER-PATH is the path of the codesigning folder in Xcode
+build settings.
+
+\(fn PROJECT-DIRECTORY SCHEME CODESIGNING-FOLDER-PATH)" nil nil)
+
+(autoload 'swift-mode:debug-ios-app-on-simulator "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-mode-20201231.1204/swift-mode-repl" "\
+Run debugger on an iOS app in the PROJECT-DIRECTORY.
+Run it for the iOS simulator DEVICE-IDENTIFIER for the given SCHEME.
+DEVICE-IDENTIFIER is the device identifier of the iOS simulator.
+SCHEME is the name of the project scheme in Xcode.
+CODESIGNING-FOLDER-PATH is the path of the codesigning folder used in Xcode
+build settings.
+PRODUCT-BUNDLE-IDENTIFIER is the name of the product bundle identifier used
+in Xcode build settings.
+
+\(fn PROJECT-DIRECTORY DEVICE-IDENTIFIER SCHEME CODESIGNING-FOLDER-PATH PRODUCT-BUNDLE-IDENTIFIER)" nil nil)
+
+(autoload 'swift-mode:debug-ios-app "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-mode-20201231.1204/swift-mode-repl" "\
+Run debugger on an iOS app in the PROJECT-DIRECTORY.
+Run it for the iOS simulator device DEVICE-IDENTIFIER for the given SCHEME.
+If PROJECT-DIRECTORY is nil or omitted, it is searched from `default-directory'
+or its ancestors.
+DEVICE-IDENTIFIER is the device identifier of the iOS simulator.  If it is
+nil or omitted, the value of `swift-mode:ios-device-identifier' is used.  If
+it is equal to `swift-mode:ios-local-device-identifier', a local build via
+`ios-deploy' is generated instead.
+SCHEME is the name of the project scheme in Xcode.  If it is nil or omitted,
+the value of `swift-mode:ios-project-scheme' is used.
+
+\(fn &optional PROJECT-DIRECTORY DEVICE-IDENTIFIER SCHEME)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-mode-20201231.1204/swift-mode-repl" '("swift-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-mode-20201231.1204/swift-mode-standard-types" '("swift-mode:")))
+
+
+
+(let ((loads (get 'swift 'custom-loads))) (if (member '"swift-mode" loads) nil (put 'swift 'custom-loads (cons '"swift-mode" loads))))
+ (custom-add-load 'languages 'swift-mode)
+ (with-eval-after-load 'cus-load
+  (custom-add-load 'languages 'swift-mode))
+
+(defsubst swift-mode:add-supported-extension-for-speedbar nil "\
+Register .swfit to speedbar." (if (fboundp 'speedbar-add-supported-extension) (speedbar-add-supported-extension ".swift") (add-hook 'speedbar-load-hook (lambda nil (speedbar-add-supported-extension ".swift")))))
+
+(autoload 'swift-mode "swift-mode" "\
+Major mode for editing Swift code.
+
+\\{swift-mode-map}
+
+\(fn)" t nil)
+ (add-to-list 'auto-mode-alist '("\\.swift\\'" . swift-mode))
+ (swift-mode:add-supported-extension-for-speedbar)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "swift-mode" '("swift-mode")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "swift-mode-beginning-of-defun" '("swift-mode:")))
+
+
+
+(let ((loads (get 'swift-mode:faces 'custom-loads))) (if (member '"swift-mode-font-lock" loads) nil (put 'swift-mode:faces 'custom-loads (cons '"swift-mode-font-lock" loads))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "swift-mode-font-lock" '("swift-mode:")))
+
+
+
+
+(let ((loads (get 'swift-mode:imenu 'custom-loads))) (if (member '"swift-mode-imenu" loads) nil (put 'swift-mode:imenu 'custom-loads (cons '"swift-mode-imenu" loads))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "swift-mode-imenu" '("swift-mode:")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "swift-mode-indent" '("swift-mode:")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "swift-mode-lexer" '("swift-mode:")))
+
+
+
+(let ((loads (get 'swift-mode:repl 'custom-loads))) (if (member '"swift-mode-repl" loads) nil (put 'swift-mode:repl 'custom-loads (cons '"swift-mode-repl" loads))))
+
+(autoload 'swift-mode:run-repl "swift-mode-repl" "\
+Run a Swift REPL process.
+
+This function input and output via buffer `*CMD*' where CMD is replaced with
+the CMD given.
+If there is a process already running in `*CMD*', and DONT-SWITCH is nil,
+switch to that buffer.
+CMD is a string or a list, interpreted as a command line.  The default value is
+`swift-mode:repl-executable'.  This function updates the buffer local variable
+`swift-mode:repl-executable' with the given CMD if KEEP-DEFAULT is nil,
+so it will be used as the default value for the next invocation in the current
+buffer.
+If KEEP-DEFAULT is non-nil, the `swift-mode:repl-executable' and the global
+variable `swift-mode:repl-buffer' are not updated.  The buffer local variable
+`swift-mode:repl-buffer' is always updated.
+Runs the hook `swift-repl-mode-hook' (after the `comint-mode-hook' is run).
+\(Type \\[describe-mode] in the process buffer for a list of commands.)
+
+\(fn CMD &optional DONT-SWITCH KEEP-DEFAULT)" t nil)
+
+(defalias 'run-swift 'swift-mode:run-repl)
+
+(autoload 'swift-mode:send-region "swift-mode-repl" "\
+Send the current region to the inferior swift process.
+
+START and END define region within current buffer
+
+\(fn START END)" t nil)
+
+(autoload 'swift-mode:send-buffer "swift-mode-repl" "\
+Send the buffer to the Swift REPL process." t nil)
+
+(autoload 'swift-mode:build-swift-module "swift-mode-repl" "\
+Build a Swift module in the PROJECT-DIRECTORY.
+
+If PROJECT-DIRECTORY is nil or omitted, it is searched from `default-directory'
+or its ancestors.
+An list ARGS are appended for builder command line arguments.
+
+\(fn &optional PROJECT-DIRECTORY ARGS)" t nil)
+
+(autoload 'swift-mode:build-ios-app "swift-mode-repl" "\
+Build an iOS app in the PROJECT-DIRECTORY.
+Build it for iOS device DEVICE-IDENTIFIER for the given SCHEME.
+If PROJECT-DIRECTORY is nil or omitted, it is searched from `default-directory'
+or its ancestors.
+DEVICE-IDENTIFIER is the device identifier of the iOS simulator.  If it is nil
+or omitted, the value of `swift-mode:ios-device-identifier' is used.  If it is
+equal to `swift-mode:ios-local-device-identifier', a local device is used via
+`ios-deploy' instead.
+SCHEME is the name of the project scheme in Xcode.  If it is nil or omitted,
+the value of `swift-mode:ios-project-scheme' is used.
+
+\(fn &optional PROJECT-DIRECTORY DEVICE-IDENTIFIER SCHEME)" t nil)
+
+(autoload 'swift-mode:debug-swift-module "swift-mode-repl" "\
+Run debugger on a Swift module in the PROJECT-DIRECTORY.
+
+If PROJECT-DIRECTORY is nil or omitted, it is searched from `default-directory'
+or its ancestors.
+
+\(fn &optional PROJECT-DIRECTORY)" t nil)
+
+(autoload 'swift-mode:debug-ios-app-on-device "swift-mode-repl" "\
+Run debugger on an iOS app in the PROJECT-DIRECTORY.
+Run it for the iOS local device DEVICE-IDENTIFIER for the given SCHEME.
+CODESIGNING-FOLDER-PATH is the path of the codesigning folder in Xcode
+build settings.
+
+\(fn PROJECT-DIRECTORY SCHEME CODESIGNING-FOLDER-PATH)" nil nil)
+
+(autoload 'swift-mode:debug-ios-app-on-simulator "swift-mode-repl" "\
+Run debugger on an iOS app in the PROJECT-DIRECTORY.
+Run it for the iOS simulator DEVICE-IDENTIFIER for the given SCHEME.
+DEVICE-IDENTIFIER is the device identifier of the iOS simulator.
+SCHEME is the name of the project scheme in Xcode.
+CODESIGNING-FOLDER-PATH is the path of the codesigning folder used in Xcode
+build settings.
+PRODUCT-BUNDLE-IDENTIFIER is the name of the product bundle identifier used
+in Xcode build settings.
+
+\(fn PROJECT-DIRECTORY DEVICE-IDENTIFIER SCHEME CODESIGNING-FOLDER-PATH PRODUCT-BUNDLE-IDENTIFIER)" nil nil)
+
+(autoload 'swift-mode:debug-ios-app "swift-mode-repl" "\
+Run debugger on an iOS app in the PROJECT-DIRECTORY.
+Run it for the iOS simulator device DEVICE-IDENTIFIER for the given SCHEME.
+If PROJECT-DIRECTORY is nil or omitted, it is searched from `default-directory'
+or its ancestors.
+DEVICE-IDENTIFIER is the device identifier of the iOS simulator.  If it is
+nil or omitted, the value of `swift-mode:ios-device-identifier' is used.  If
+it is equal to `swift-mode:ios-local-device-identifier', a local build via
+`ios-deploy' is generated instead.
+SCHEME is the name of the project scheme in Xcode.  If it is nil or omitted,
+the value of `swift-mode:ios-project-scheme' is used.
+
+\(fn &optional PROJECT-DIRECTORY DEVICE-IDENTIFIER SCHEME)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "swift-mode-repl" '("swift-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "swift-mode-standard-types" '("swift-mode:")))
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/f-20191110.1357/f-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/f-20191110.1357/f-autoloads.el") (car load-path))))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "f" '("f-")))
 
 
 )
@@ -3607,6 +4121,665 @@ this time, in which case it won't display at all.
 
 
 )
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/markdown-mode-20210220.1301/markdown-mode-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/markdown-mode-20210220.1301/markdown-mode-autoloads.el") (car load-path))))
+
+
+
+(autoload 'markdown-mode "markdown-mode" "\
+Major mode for editing Markdown files.
+
+\(fn)" t nil)
+
+(add-to-list 'auto-mode-alist '("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . markdown-mode))
+
+(autoload 'gfm-mode "markdown-mode" "\
+Major mode for editing GitHub Flavored Markdown files.
+
+\(fn)" t nil)
+
+(autoload 'markdown-view-mode "markdown-mode" "\
+Major mode for viewing Markdown content.
+
+\(fn)" t nil)
+
+(autoload 'gfm-view-mode "markdown-mode" "\
+Major mode for viewing GitHub Flavored Markdown content.
+
+\(fn)" t nil)
+
+(autoload 'markdown-live-preview-mode "markdown-mode" "\
+Toggle native previewing on save for a specific markdown file.
+
+If called interactively, enable Markdown-Live-Preview mode if ARG
+is positive, and disable it if ARG is zero or negative.  If
+called from Lisp, also enable the mode if ARG is omitted or nil,
+and toggle it if ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "markdown-mode" '("defun-markdown-" "gfm-" "markdown")))
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/lsp-mode-20210330.1510/lsp-mode-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/lsp-mode-20210330.1510/lsp-mode-autoloads.el") (car load-path))))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-actionscript" '("lsp-actionscript-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-ada" '("lsp-ada-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-angular" '("lsp-client")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-bash" '("lsp-bash-")))
+
+
+
+(autoload 'lsp-cpp-flycheck-clang-tidy-error-explainer "lsp-clangd" "\
+Explain a clang-tidy ERROR by scraping documentation from llvm.org.
+
+\(fn ERROR)" nil nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-clangd" '("lsp-c")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-clojure" '("lsp-clojure-")))
+
+
+
+(define-obsolete-variable-alias 'lsp-prefer-capf 'lsp-completion-provider "lsp-mode 7.0.1")
+
+(define-obsolete-variable-alias 'lsp-enable-completion-at-point 'lsp-completion-enable "lsp-mode 7.0.1")
+
+(autoload 'lsp-completion-at-point "lsp-completion" "\
+Get lsp completions." nil nil)
+
+(autoload 'lsp-completion--enable "lsp-completion" "\
+Enable LSP completion support." nil nil)
+
+(autoload 'lsp-completion-mode "lsp-completion" "\
+Toggle LSP completion support.
+
+If called interactively, enable Lsp-Completion mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+(add-hook 'lsp-configure-hook (lambda nil (when (and lsp-auto-configure lsp-completion-enable) (lsp-completion--enable))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-completion" '("lsp-completion-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-crystal" '("lsp-clients-crystal-executable")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-csharp" '("lsp-csharp-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-css" '("lsp-css-")))
+
+
+
+(define-obsolete-variable-alias 'lsp-diagnostic-package 'lsp-diagnostics-provider "lsp-mode 7.0.1")
+
+(define-obsolete-variable-alias 'lsp-flycheck-default-level 'lsp-diagnostics-flycheck-default-level "lsp-mode 7.0.1")
+
+(autoload 'lsp-diagnostics--enable "lsp-diagnostics" "\
+Enable LSP checker support." nil nil)
+
+(autoload 'lsp-diagnostics-mode "lsp-diagnostics" "\
+Toggle LSP diagnostics integration.
+
+If called interactively, enable Lsp-Diagnostics mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+(add-hook 'lsp-configure-hook (lambda nil (when lsp-auto-configure (lsp-diagnostics--enable))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-diagnostics" '("lsp-diagnostics-")))
+
+
+
+
+(defvar lsp-dired-mode nil "\
+Non-nil if Lsp-Dired mode is enabled.
+See the `lsp-dired-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `lsp-dired-mode'.")
+
+(custom-autoload 'lsp-dired-mode "lsp-dired" nil)
+
+(autoload 'lsp-dired-mode "lsp-dired" "\
+Display `lsp-mode' icons for each file in a dired buffer.
+
+If called interactively, enable Lsp-Dired mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-dired" '("lsp-dired-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-dockerfile" '("lsp-dockerfile-language-server-command")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-elixir" '("lsp-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-elm" '("lsp-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-erlang" '("lsp-erlang-server-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-eslint" '("lsp-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-fortran" '("lsp-clients-")))
+
+
+
+(autoload 'lsp-fsharp--workspace-load "lsp-fsharp" "\
+Load all of the provided PROJECTS.
+
+\(fn PROJECTS)" nil nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-fsharp" '("lsp-fsharp-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-gdscript" '("lsp-gdscript-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-go" '("lsp-go-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-groovy" '("lsp-groovy-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-hack" '("lsp-clients-hack-command")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-haxe" '("lsp-")))
+
+
+
+(autoload 'lsp-headerline-breadcrumb-mode "lsp-headerline" "\
+Toggle breadcrumb on headerline.
+
+If called interactively, enable Lsp-Headerline-Breadcrumb mode if
+ARG is positive, and disable it if ARG is zero or negative.
+If called from Lisp, also enable the mode if ARG is omitted or
+nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'lsp-breadcrumb-go-to-symbol "lsp-headerline" "\
+Go to the symbol on breadcrumb at SYMBOL-POSITION.
+
+\(fn SYMBOL-POSITION)" t nil)
+
+(autoload 'lsp-breadcrumb-narrow-to-symbol "lsp-headerline" "\
+Narrow to the symbol range on breadcrumb at SYMBOL-POSITION.
+
+\(fn SYMBOL-POSITION)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-headerline" '("lsp-headerline-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-html" '("lsp-html-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-icons" '("lsp-")))
+
+
+
+(autoload 'lsp-ido-workspace-symbol "lsp-ido" "\
+`ido' for lsp workspace/symbol.
+When called with prefix ARG the default selection will be symbol at point.
+
+\(fn ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-ido" '("lsp-ido-")))
+
+
+
+
+(autoload 'lsp-iedit-highlights "lsp-iedit" "\
+Start an `iedit' operation on the documentHighlights at point.
+This can be used as a primitive `lsp-rename' replacement if the
+language server doesn't support renaming.
+
+See also `lsp-enable-symbol-highlighting'." t nil)
+
+(autoload 'lsp-evil-multiedit-highlights "lsp-iedit" "\
+Start an `evil-multiedit' operation on the documentHighlights at point.
+This can be used as a primitive `lsp-rename' replacement if the
+language server doesn't support renaming.
+
+See also `lsp-enable-symbol-highlighting'." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-iedit" '("lsp-iedit--on-ranges")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-javascript" '("lsp-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-json" '("lsp-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-kotlin" '("lsp-")))
+
+
+
+(autoload 'lsp-lens--enable "lsp-lens" "\
+Enable lens mode." nil nil)
+
+(autoload 'lsp-lens-show "lsp-lens" "\
+Display lenses in the buffer." t nil)
+
+(autoload 'lsp-lens-hide "lsp-lens" "\
+Delete all lenses." t nil)
+
+(autoload 'lsp-lens-mode "lsp-lens" "\
+Toggle code-lens overlays.
+
+If called interactively, enable Lsp-Lens mode if ARG is positive,
+and disable it if ARG is zero or negative.  If called from Lisp,
+also enable the mode if ARG is omitted or nil, and toggle it if
+ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'lsp-avy-lens "lsp-lens" "\
+Click lsp lens using `avy' package." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-lens" '("lsp-lens-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-lua" '("lsp-")))
+
+
+(put 'lsp-enable-file-watchers 'safe-local-variable #'booleanp)
+(put 'lsp-file-watch-threshold 'safe-local-variable (lambda (i) (or (numberp i) (not i))))
+
+(autoload 'lsp "lsp-mode" "\
+Entry point for the server startup.
+When ARG is t the lsp mode will start new language server even if
+there is language server which can handle current language. When
+ARG is nil current file will be opened in multi folder language
+server if there is such. When `lsp' is called with prefix
+argument ask the user to select which language server to start.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'lsp-deferred "lsp-mode" "\
+Entry point that defers server startup until buffer is visible.
+`lsp-deferred' will wait until the buffer is visible before invoking `lsp'.
+This avoids overloading the server with many files when starting Emacs." nil nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-mode" '("lsp-" "make-lsp-client" "when-lsp-workspace" "with-lsp-workspace")))
+
+
+
+
+(define-obsolete-variable-alias 'lsp-diagnostics-modeline-scope 'lsp-modeline-diagnostics-scope "lsp-mode 7.0.1")
+
+(autoload 'lsp-modeline-code-actions-mode "lsp-modeline" "\
+Toggle code actions on modeline.
+
+If called interactively, enable Lsp-Modeline-Code-Actions mode if
+ARG is positive, and disable it if ARG is zero or negative.
+If called from Lisp, also enable the mode if ARG is omitted or
+nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+(define-obsolete-function-alias 'lsp-diagnostics-modeline-mode 'lsp-modeline-diagnostics-mode "lsp-mode 7.0.1")
+
+(autoload 'lsp-modeline-diagnostics-mode "lsp-modeline" "\
+Toggle diagnostics modeline.
+
+If called interactively, enable Lsp-Modeline-Diagnostics mode if
+ARG is positive, and disable it if ARG is zero or negative.
+If called from Lisp, also enable the mode if ARG is omitted or
+nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'lsp-modeline-workspace-status-mode "lsp-modeline" "\
+Toggle workspace status on modeline.
+
+If called interactively, enable Lsp-Modeline-Workspace-Status
+mode if ARG is positive, and disable it if ARG is zero or
+negative.  If called from Lisp, also enable the mode if ARG is
+omitted or nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-modeline" '("lsp-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-nix" '("lsp-nix-server-path")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-ocaml" '("lsp-ocaml-l")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-perl" '("lsp-perl-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-php" '("lsp-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-prolog" '("lsp-prolog-server-command")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-protocol" '("dash-expand:&RangeToPoint" "lsp")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-purescript" '("lsp-purescript-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-pwsh" '("lsp-pwsh-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-pyls" '("lsp-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-r" '("lsp-clients-r-server-command")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-racket" '("lsp-racket-lang")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-rf" '("expand-start-command" "lsp-rf-language-server-" "parse-rf-language-server-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-rust" '("lsp-")))
+
+
+
+(autoload 'lsp--semantic-tokens-initialize-buffer "lsp-semantic-tokens" "\
+Initialize the buffer for semantic tokens.
+IS-RANGE-PROVIDER is non-nil when server supports range requests.
+
+\(fn IS-RANGE-PROVIDER)" nil nil)
+
+(autoload 'lsp--semantic-tokens-initialize-workspace "lsp-semantic-tokens" "\
+Initialize semantic tokens for WORKSPACE.
+
+\(fn WORKSPACE)" nil nil)
+
+(autoload 'lsp-semantic-tokens--warn-about-deprecated-setting "lsp-semantic-tokens" "\
+Warn about deprecated semantic highlighting variable." nil nil)
+
+(autoload 'lsp-semantic-tokens--enable "lsp-semantic-tokens" "\
+Enable semantic tokens mode." nil nil)
+
+(autoload 'lsp-semantic-tokens-mode "lsp-semantic-tokens" "\
+Toggle semantic-tokens support.
+
+If called interactively, enable Lsp-Semantic-Tokens mode if ARG
+is positive, and disable it if ARG is zero or negative.
+If called from Lisp, also enable the mode if ARG is omitted or
+nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-semantic-tokens" '("lsp-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-solargraph" '("lsp-solargraph-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-sorbet" '("lsp-sorbet-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-sqls" '("lsp-sql")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-steep" '("lsp-steep-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-svelte" '("lsp-svelte-plugin-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-terraform" '("lsp-terraform-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-tex" '("lsp-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-vala" '("lsp-clients-vala-ls-executable")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-verilog" '("lsp-clients-verilog-executable")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-vetur" '("lsp-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-vhdl" '("ghdl-ls-bin-name" "hdl-checker-bin-name" "lsp-vhdl-" "vhdl-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-vimscript" '("lsp-clients-vim-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-xml" '("lsp-xml-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-yaml" '("lsp-yaml-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lsp-zig" '("lsp-zig-zls-executable")))
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/swift-helpful-20201031.1654/swift-helpful-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/swift-helpful-20201031.1654/swift-helpful-autoloads.el") (car load-path))))
+
+
+
+(autoload 'swift-helpful "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-helpful-20201031.1654/swift-helpful" "\
+Open a panel with information about a Swift token at point.
+Information comes from different configurable sources: Language
+Server Protocol (LSP), the Swift reference manuals, or the
+standard library source code (if locally available and
+accessible)." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-helpful-20201031.1654/swift-helpful" '("swift-helpful-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/swift-helpful-20201031.1654/swift-helpful-regex" '("swift-helpful--")))
+
+
+
+(autoload 'swift-helpful "swift-helpful" "\
+Open a panel with information about a Swift token at point.
+Information comes from different configurable sources: Language
+Server Protocol (LSP), the Swift reference manuals, or the
+standard library source code (if locally available and
+accessible)." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "swift-helpful" '("swift-helpful-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "swift-helpful-regex" '("swift-helpful--")))
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/super-save-20200930.1634/super-save-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/super-save-20200930.1634/super-save-autoloads.el") (car load-path))))
+
+
+
+(defvar super-save-mode nil "\
+Non-nil if Super-Save mode is enabled.
+See the `super-save-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `super-save-mode'.")
+
+(custom-autoload 'super-save-mode "super-save" nil)
+
+(autoload 'super-save-mode "super-save" "\
+A minor mode that saves your Emacs buffers when they lose focus.
+
+If called interactively, enable Super-Save mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "super-save" '("super-save-")))
+
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/srefactor-20180703.1810/srefactor-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/srefactor-20180703.1810/srefactor-autoloads.el") (car load-path))))
+
+
+
+(autoload 'srefactor-refactor-at-point "srefactor" "\
+Offer contextual menu with actions based on current tag in scope.
+
+Each menu item added returns a token for what type of refactoring
+to perform." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "srefactor" '("srefactor-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "srefactor-lisp" '("comment-" "cur-buf" "first-token" "format-type" "ignore-num" "lexemes" "next-token" "orig-format-type" "recursive-p" "second-token" "srefactor-" "tok")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "srefactor-ui" '("srefactor-ui-")))
+
+
+
+
+)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/sml-mode-6.10/sml-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -3667,10 +4840,10 @@ Major Mode for editing ML-Yacc files.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/smartparens-20201229.1937/smartparens-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/smartparens-20210330.850/smartparens-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/smartparens-20201229.1937/smartparens-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/smartparens-20210330.850/smartparens-autoloads.el") (car load-path))))
 
 
 
@@ -3933,142 +5106,6 @@ Turn off `show-smartparens-mode'." t nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/load-relative-20201130.2202/load-relative-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/load-relative-20201130.2202/load-relative-autoloads.el") (car load-path))))
-
-
-
-(autoload '__FILE__ "load-relative" "\
-Return the string name of file/buffer that is currently begin executed.
-
-The first approach for getting this information is perhaps the
-most pervasive and reliable.  But it the most low-level and not
-part of a public API, so it might change in future
-implementations.  This method uses the name that is recorded by
-readevalloop of `lread.c' as the car of variable
-`current-load-list'.
-
-Failing that, we use `load-file-name' which should work in some
-subset of the same places that the first method works.  However
-`load-file-name' will be nil for code that is eval'd.  To cover
-those cases, we try function `buffer-file-name' which is initially
-correct, for eval'd code, but will change and may be wrong if the
-code sets or switches buffers after the initial execution.
-
-As a last resort, you can pass in SYMBOL which should be some
-symbol that has been previously defined if none of the above
-methods work we will use the file-name value find via
-`symbol-file'.
-
-\(fn &optional SYMBOL)" nil nil)
-
-(autoload 'find-file-noselect-relative "load-relative" "\
-Read relative FILENAME into a buffer and return the buffer.
-If a buffer exists visiting FILENAME, return that one, but
-verify that the file has not changed since visited or saved.
-The buffer is not selected, just returned to the caller.
-Optional second arg NOWARN non-nil means suppress any warning messages.
-Optional third arg RAWFILE non-nil means the file is read literally.
-Optional fourth arg WILDCARDS non-nil means do wildcard processing
-and visit all the matching files.  When wildcards are actually
-used and expanded, return a list of buffers that are visiting
-the various files.
-
-\(fn FILENAME &optional NOWARN RAWFILE WILDCARDS)" nil nil)
-
-(autoload 'with-relative-file "load-relative" "\
-Read the relative FILE into a temporary buffer and evaluate BODY
-in this buffer.
-
-\(fn FILE &rest BODY)" nil t)
-
-(function-put 'with-relative-file 'lisp-indent-function '1)
-
-(autoload 'load-relative "load-relative" "\
-Load an Emacs Lisp file relative to Emacs Lisp code that is in
-the process of being loaded or eval'd.
-
-FILE-OR-LIST is either a string or a list of strings containing
-files that you want to loaded.  If SYMBOL is given, the location of
-of the file of where that was defined (as given by `symbol-file' is used
-if other methods of finding __FILE__ don't work.
-
-\(fn FILE-OR-LIST &optional SYMBOL)" nil nil)
-
-(autoload 'require-relative "load-relative" "\
-Run `require' on an Emacs Lisp file relative to the Emacs Lisp code
-that is in the process of being loaded or eval'd.  The symbol used in require
-is the base file name (without directory or file extension) treated as a
-symbol.
-
-WARNING: it is best to to run this function before any
-buffer-setting or buffer changing operations.
-
-\(fn RELATIVE-FILE &optional OPT-FILE OPT-PREFIX)" nil nil)
-
-(autoload 'require-relative-list "load-relative" "\
-Run `require-relative' on each name in LIST which should be a list of
-strings, each string being the relative name of file you want to run.
-
-\(fn LIST &optional OPT-PREFIX)" nil t)
-
-(autoload 'provide-me "load-relative" "\
-Call `provide' with the feature's symbol name made from
-source-code's file basename sans extension.  For example if you
-write (provide-me) inside file ~/lisp/foo.el, this is the same as
-writing: (provide \\='foo).
-
-With a prefix, that prefix is prepended to the `provide' So in
-the previous example, if you write (provide-me \"bar-\") this is the
-same as writing (provide \\='bar-foo).
-
-\(fn &optional PREFIX)" nil t)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "load-relative" '("autoload-relative")))
-
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/loc-changes-20200722.1111/loc-changes-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/loc-changes-20200722.1111/loc-changes-autoloads.el") (car load-path))))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "loc-changes" '("loc-changes")))
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/realgud-20201221.1435/realgud-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/realgud-20201221.1435/realgud-autoloads.el") (car load-path))))
-
-
-
-(defconst realgud--recursive-autoloads-file-name "realgud-recursive-autoloads.el" "\
-Where to store autoloads for subdirectory contents.")
-
-(defconst realgud--recursive-autoloads-base-directory (file-name-directory (if load-in-progress load-file-name buffer-file-name)))
-
-(with-demoted-errors "Error in RealGUD's autoloads: %s" (load (expand-file-name realgud--recursive-autoloads-file-name realgud--recursive-autoloads-base-directory) t t))
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "realgud" '("realgud--rebuild-recursive-autoloads")))
-
-
-
-
-
-)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/rainbow-delimiters-20200827.321/rainbow-delimiters-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -4113,10 +5150,567 @@ Disable `rainbow-delimiters-mode'." nil nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210213.24/racket-mode-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210213.24/racket-mode-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-mode-autoloads.el") (car load-path))))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-browse-url" '("racket-browse-url")))
+
+
+
+(autoload 'racket-bug-report "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-bug-report" "\
+Fill a buffer with data to make a Racket Mode bug report." t nil)
+
+
+
+(defvar racket-start-back-end-hook nil "\
+Hook run after `racket-start-back-end'.")
+
+(autoload 'racket-start-back-end "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-cmd" "\
+Start the back end process used by Racket Mode.
+
+If the process is already started, this command will stop and restart it.
+
+As the final step, runs the hook `racket-start-back-end-hook'." t nil)
+
+(autoload 'racket-stop-back-end "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-cmd" "\
+Stop the back end process used by Racket Mode.
+
+If the process is not already started, this does nothing." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-cmd" '("racket-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-collection" '("racket-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-common" '("racket-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-complete" '("racket--")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-custom" '("defface-racket" "racket-")))
+
+
+
+(autoload 'racket--debug-send-definition "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-debug" "\
+
+
+\(fn BEG END)" nil nil)
+
+(autoload 'racket--debug-on-break "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-debug" "\
+
+
+\(fn RESPONSE)" nil nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-debug" '("racket-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-describe" '("racket-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-doc" '("racket--")))
+
+
+
+(add-to-list 'hs-special-modes-alist '(racket-mode "(" ")" ";" nil nil))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-edit" '("racket-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-eldoc" '("racket--do-eldoc")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-font-lock" '("racket-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-imenu" '("racket-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-indent" '("racket-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-keywords-and-builtins" '("racket-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-logger" '("racket-")))
+
+
+
+(autoload 'racket-mode "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-mode" "\
+Major mode for editing Racket source files.
+
+\\{racket-mode-map}
+
+\(fn)" t nil)
+
+(add-to-list 'auto-mode-alist '("\\.rkt\\'" . racket-mode))
+
+(add-to-list 'auto-mode-alist '("\\.rktd\\'" . racket-mode))
+
+(add-to-list 'auto-mode-alist '("\\.rktl\\'" . racket-mode))
+
+(modify-coding-system-alist 'file "\\.rkt[dl]?\\'" 'utf-8)
+
+(add-to-list 'interpreter-mode-alist '("racket" . racket-mode))
+
+(autoload 'racket-mode-start-faster "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-mode" "\
+Compile Racket Mode's .rkt files for faster startup.
+
+Racket Mode is implemented as an Emacs Lisp \"front end\" that
+talks to a Racket process \"back end\". Because Racket Mode is
+delivered as an Emacs package instead of a Racket package,
+installing it does not do the `raco setup` that is normally done
+for Racket packages.
+
+This command will do a `raco make` of Racket Mode's .rkt files,
+creating bytecode files in `compiled/` subdirectories. As a
+result, when a command must start the Racket process, it will
+start somewhat faster.
+
+On many computers, the resulting speed up is negligible, and
+might not be worth the complication.
+
+If you run this command, ever, you will need to run it again
+after:
+
+- Installing an updated version of Racket Mode. Otherwise, you
+  might lose some of the speed-up.
+
+- Installing a new version of Racket and/or changing the value of
+  the variable `racket-program'. Otherwise, you might get an
+  error message due to the bytecode being different versions.
+
+To revert to compiling on startup, use
+`racket-mode-start-slower'. " t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-mode" '("racket-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-parens" '("racket-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-ppss" '("racket--ppss-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-profile" '("racket-")))
+
+
+
+(autoload 'racket-repl "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-repl" "\
+Show a Racket REPL buffer in some window.
+
+*IMPORTANT*
+
+The main, intended use of Racket Mode's REPL is that you
+`find-file' some specific .rkt file, then `racket-run' it. The
+REPL will then match that file.
+
+If the REPL isn't running, and you want to start it for no file
+in particular? Then you could use this command. But the resulting
+REPL will have a minimal \"#lang racket/base\" namespace. You
+could enter \"(require racket)\" if you want the equivalent of
+\"#lang racket\". You could also \"(require racket/enter)\" if
+you want things like \"enter!\". But in some sense you'd be
+\"using it wrong\". If you really don't want to use Racket Mode's
+REPL as intended, then you might as well use a plain Emacs shell
+buffer to run command-line Racket.
+
+\(fn &optional NOSELECT)" t nil)
+
+(autoload 'racket-run "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-repl" "\
+Save the buffer in REPL and run your program.
+
+As well as evaluating the outermost, file module, automatically
+runs the submodules specified by the customization variable
+`racket-submodules-to-run'.
+
+See also `racket-run-module-at-point', which runs just the
+specific module at point.
+
+With \\[universal-argument] uses errortrace for improved stack traces.
+Otherwise follows the `racket-error-context' setting.
+
+With \\[universal-argument] \\[universal-argument] instruments
+code for step debugging. See `racket-debug-mode' and the variable
+`racket-debuggable-files'.
+
+Each run occurs within a Racket custodian. Any prior run's
+custodian is shut down, releasing resources like threads and
+ports. Each run's evaluation environment is reset to the contents
+of the source file. In other words, like Dr Racket, this provides
+the benefit that your source file is the \"single source of
+truth\". At the same time, the run gives you a REPL inside the
+namespace of the module, giving you the ability to explore it
+interactively. Any explorations are temporary, unless you also
+make them to your source file, they will be lost on the next run.
+
+See also `racket-run-and-switch-to-repl', which is even more like
+Dr Racket's Run command because it selects the REPL window after
+running.
+
+In the `racket-repl-mode' buffer, output that describes a file
+and position is automatically \"linkified\". Examples of such
+text include:
+
+- Racket error messages.
+- rackunit test failure location messages.
+- print representation of path objects.
+
+To visit these locations, move point there and press RET or mouse
+click. Or, use the standard `next-error' and `previous-error'
+commands.
+
+\(fn &optional PREFIX)" t nil)
+
+(autoload 'racket-run-module-at-point "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-repl" "\
+Save the buffer and run the module at point.
+
+Like `racket-run' but runs the innermost module around point,
+which is determined textually by looking for \"module\",
+\"module*\", or \"module+\" forms nested to any depth, else
+simply the outermost, file module.
+
+\(fn &optional PREFIX)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-repl" '("racket-" "with-racket-repl-buffer")))
+
+
+
+
+(autoload 'racket-repl-buffer-name-shared "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-repl-buffer-name" "\
+All `racket-mode' edit buffers share one `racket-repl-mode' buffer.
+
+A value for the variable `racket-repl-buffer-name-function'." t nil)
+
+(autoload 'racket-repl-buffer-name-unique "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-repl-buffer-name" "\
+Each `racket-mode' edit buffer gets its own `racket-repl-mode' buffer.
+
+A value for the variable `racket-repl-buffer-name-function'." t nil)
+
+(autoload 'racket-repl-buffer-name-project "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-repl-buffer-name" "\
+All `racket-mode' buffers in a project share a `racket-repl-mode' buffer.
+
+A value for the variable `racket-repl-buffer-name-function'.
+
+The \"project\" is determined by `racket-project-root'." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-repl-buffer-name" '("racket-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-show" '("racket-")))
+
+
+
+(autoload 'racket-smart-open-bracket-mode "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-smart-open" "\
+Minor mode to let you always type `[`' to insert `(` or `[` automatically.
+
+If called interactively, enable Racket-Smart-Open-Bracket mode if
+ARG is positive, and disable it if ARG is zero or negative.
+If called from Lisp, also enable the mode if ARG is omitted or
+nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
+
+Behaves like the \"Automatically adjust opening square brackets\"
+feature in Dr. Racket.
+
+By default, inserts a `(`. Inserts a `[` in the following cases:
+
+  - `let`-like bindings -- forms with `let` in the name as well
+    as things like `parameterize`, `with-handlers`, and
+    `with-syntax`.
+
+  - `case`, `cond`, `match`, `syntax-case`, `syntax-parse`, and
+    `syntax-rules` clauses.
+
+  - `for`-like bindings and `for/fold` accumulators.
+
+  - `class` declaration syntax, such as `init` and `inherit`.
+
+When the previous s-expression in a sequence is a compound
+expression, uses the same kind of delimiter.
+
+To force insert `[`, use `quoted-insert'.
+
+Combined with `racket-insert-closing' this means that you can
+press the unshifted `[` and `]` keys to get whatever delimiters
+follow the Racket conventions for these forms. When something
+like `electric-pair-mode' or `paredit-mode' is active, you need
+not even press `]`.
+
+Tip: When also using `paredit-mode', enable that first so that
+the binding for the `[`' key in the map for
+`racket-smart-open-bracket-mode' has higher priority. See also
+the variable `minor-mode-map-alist'.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-smart-open" '("racket-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-stepper" '("racket-")))
+
+
+
+(autoload 'racket-unicode-input-method-enable "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-unicode-input-method" "\
+Set input method to racket-unicode.
+
+The racket-unicode input method lets you easily type various
+Unicode symbols that might be useful when writing Racket code.
+
+To automatically enable the racket-unicode input method in
+racket-mode and racket-repl-mode buffers, put the following code
+in your Emacs init file:
+
+#+BEGIN_SRC elisp
+    (add-hook 'racket-mode-hook #'racket-unicode-input-method-enable)
+    (add-hook 'racket-repl-mode-hook #'racket-unicode-input-method-enable)
+#+END_SRC
+
+To temporarily enable this input method for a single buffer you
+can use \"M-x racket-unicode-input-method-enable\".
+
+Use the standard Emacs key C-\\ to toggle the input method.
+
+When the racket-unicode input method is active, you can for
+example type \"All\" and it is immediately replaced with \"∀\". A
+few other examples:
+
+| omega     | ω                        |
+| x_1       | x₁                       |
+| x^1       | x¹                       |
+| A         | 𝔸                        |
+| test-->>E | test-->>∃ (racket/redex) |
+| vdash     | ⊢                        |
+
+To see a table of all key sequences use \"M-x
+describe-input-method <RET> racket-unicode\".
+
+If you want to add your own mappings to the \"racket-unicode\"
+input method, you may add code like the following example in your
+Emacs init file:
+
+#+BEGIN_SRC elisp
+    ;; Either (require 'racket-mode) here, or, if you use
+    ;; use-package, put the code below in the :config section.
+    (with-temp-buffer
+      (racket-unicode-input-method-enable)
+      (set-input-method \"racket-unicode\")
+      (let ((quail-current-package (assoc \"racket-unicode\"
+                                          quail-package-alist)))
+        (quail-define-rules ((append . t))
+                            (\"^o\" [\"ᵒ\"]))))
+#+END_SRC
+
+If you don’t like the highlighting of partially matching tokens you
+can turn it off by setting `input-method-highlight-flag' to nil." t nil)
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-util" '("racket-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-visit" '("racket--")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-wsl" '("racket-")))
+
+
+
+(autoload 'racket-xp-mode "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-xp" "\
+A minor mode that analyzes expanded code to explain and explore.
+
+If called interactively, enable Racket-Xp mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+This minor mode is an optional enhancement to `racket-mode' edit
+buffers. Like any minor mode, you can turn it on or off for a
+specific buffer. If you always want to use it, put the following
+code in your Emacs init file:
+
+#+BEGIN_SRC elisp
+    (require 'racket-xp)
+    (add-hook 'racket-mode-hook #'racket-xp-mode)
+#+END_SRC
+
+Note: This mode won't do anything unless/until the Racket Mode
+back end is running. It will try to start the back end
+automatically. You do /not/ need to `racket-run' the buffer you
+are editing.
+
+This mode uses the drracket/check-syntax package to analyze
+fully-expanded programs, without needing to evaluate a.k.a.
+\"run\" them. The resulting analysis provides information for:
+
+- Visually annotating bindings -- local or imported definitions
+  and references to them.
+
+- Visually annotating expressions in a tail position, as well as
+  the enclosing expression with respect to which they are in a
+  tail position.
+
+- Completion candidates.
+
+- Defintions' source and documentation.
+
+When point is on a definition or use, related items are
+highlighted using `racket-xp-def-face' and `racket-xp-use-face'
+-- instead of drawing arrows as in Dr Racket. Information is
+displayed using the function(s) in the hook variable
+`racket-show-functions'; it is also available when hovering the
+mouse cursor.
+
+Note: If you find these point-motion features too distracting
+and/or slow, in your `racket-xp-mode-hook' you may disable them:
+
+#+BEGIN_SRC elisp
+  (require 'racket-xp)
+  (add-hook 'racket-xp-mode-hook
+            (lambda ()
+              (remove-hook 'pre-redisplay-functions
+                           #'racket-xp-pre-redisplay
+                           t)))
+#+END_SRC
+
+The remaining features discussed below will still work.
+
+You may also use commands to navigate among a definition and its
+uses, or to rename a local definitions and all its uses:
+
+  - `racket-xp-next-definition'
+  - `racket-xp-previous-definition'
+  - `racket-xp-next-use'
+  - `racket-xp-previous-use'
+
+In the following little example, not only does
+drracket/check-syntax distinguish the various \"x\" bindings, it
+understands the two different imports of \"define\":
+
+#+BEGIN_SRC racket
+  #lang racket/base
+  (define x 1)
+  x
+  (let ([x x])
+    (+ x 1))
+  (module m typed/racket/base
+    (define x 2)
+    x)
+#+END_SRC
+
+When point is on the opening parenthesis of an expression in tail
+position, it is highlighted using the face
+`racket-xp-tail-position-face'.
+
+When point is on the opening parenthesis of an enclosing
+expression with respect to which one or more expressions are in
+tail position, it is highlighted using the face
+`racket-xp-tail-target-face'.
+
+Furthermore, when point is on the opening parenthesis of either
+kind of expression, all of the immediately related expressions
+are also highlighted. Various commands move among them:
+
+  - `racket-xp-tail-up'
+  - `racket-xp-tail-down'
+  - `racket-xp-tail-next-sibling'
+  - `racket-xp-tail-previous-sibling'
+
+The function `racket-xp-complete-at-point' is added to the
+variable `completion-at-point-functions'. Note that in this case,
+it is not smart about submodules; identifiers are assumed to be
+definitions from the file's module or its imports. In addition to
+supplying completion candidates, it supports the
+\":company-location\" property to inspect the definition of a
+candidate and the \":company-doc-buffer\" property to view its
+documentation.
+
+When you edit the buffer, existing annotations are retained;
+their positions are updated to reflect the edit. Annotations for
+new or deleted text are not requested until after
+`racket-xp-after-change-refresh-delay' seconds. The request is
+made asynchronously so that Emacs will not block -- for
+moderately complex source files, it can take some seconds simply
+to fully expand them, as well as a little more time for the
+drracket/check-syntax analysis. When the results are ready, all
+annotations for the buffer are completely refreshed.
+
+You may also set `racket-xp-after-change-refresh-delay' to nil
+and use the `racket-xp-annotate' command manually.
+
+The mode line changes to reflect the current status of
+annotations, and whether or not you had a syntax error.
+
+If you have one or more syntax errors, `racket-xp-next-error' and
+`racket-xp-previous-error' navigate among them. Although most
+languages will stop after the first syntax error, some like Typed
+Racket will try to collect and report multiple errors.
+
+You may use `xref-find-definitions' \\[xref-find-definitions],
+`xref-pop-marker-stack' \\[xref-pop-marker-stack], and
+`xref-find-references': `racket-xp-mode' adds a backend to the
+variable `xref-backend-functions'. This backend uses information
+from the drracket/check-syntax static analysis. Its ability to
+find references is limited to the current file; when it finds
+none it will try the default xref backend implementation which is
+grep-based.
+
+Tip: This mode follows the convention that a minor mode may only
+use a prefix key consisting of \"C-c\" followed by a punctuation
+key. As a result, `racket-xp-control-c-hash-keymap' is bound to
+\"C-c #\" by default. Although you might find this awkward to
+type, remember that as an Emacs user, you are free to bind this
+map to a more convenient prefix, and/or bind any individual
+commands directly to whatever keys you prefer.
+
+\\{racket-xp-mode-map}
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-xp" '("racket-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038/racket-xp-complete" '("racket-")))
 
 
 
@@ -4600,18 +6194,16 @@ understands the two different imports of \"define\":
 
 When point is on the opening parenthesis of an expression in tail
 position, it is highlighted using the face
-`racket-xp-tail-position-face' and has a tooltip annotation,
-\"tail\".
+`racket-xp-tail-position-face'.
 
 When point is on the opening parenthesis of an enclosing
 expression with respect to which one or more expressions are in
 tail position, it is highlighted using the face
-`racket-xp-tail-target-face' and has a tooltip annotation,
-\"⟦tail⟧\".
+`racket-xp-tail-target-face'.
 
 Furthermore, when point is on the opening parenthesis of either
 kind of expression, all of the immediately related expressions
-are also highlighted. Various commands to move among them:
+are also highlighted. Various commands move among them:
 
   - `racket-xp-tail-up'
   - `racket-xp-tail-down'
@@ -4681,44 +6273,10 @@ commands directly to whatever keys you prefer.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/pythonic-20210122.1247/pythonic-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/pretty-hydra-20210221.834/pretty-hydra-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/pythonic-20210122.1247/pythonic-autoloads.el") (car load-path))))
-
-
-
-(autoload 'pythonic-activate "pythonic" "\
-Activate python VIRTUALENV.
-
-\(fn VIRTUALENV)" t nil)
-
-(autoload 'pythonic-deactivate "pythonic" "\
-Deactivate python virtual environment." t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "pythonic" '("pythonic-")))
-
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-functional-20210206.1519/dash-functional-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-functional-20210206.1519/dash-functional-autoloads.el") (car load-path))))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dash-functional" '("-a" "-c" "-f" "-iteratefn" "-juxt" "-not" "-o" "-prodfn" "-rpartial")))
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/pretty-hydra-20190930.2106/pretty-hydra-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/pretty-hydra-20190930.2106/pretty-hydra-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/pretty-hydra-20210221.834/pretty-hydra-autoloads.el") (car load-path))))
 
 
 
@@ -4785,15 +6343,19 @@ Create a dynamic hint that look like a radio button with given NAME.
 Radio is considered on when STATUS is non-nil, otherwise off.
 
 \(fn NAME STATUS)" nil nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "pretty-hydra" '("pretty-hydra-")))
 
+
+
+
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/prescient-20210101.2227/prescient-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/prescient-20210227.600/prescient-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/prescient-20210101.2227/prescient-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/prescient-20210227.600/prescient-autoloads.el") (car load-path))))
 
 
 
@@ -4803,10 +6365,10 @@ Radio is considered on when STATUS is non-nil, otherwise off.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/popup-20210108.1821/popup-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/popup-20210317.138/popup-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/popup-20210108.1821/popup-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/popup-20210317.138/popup-autoloads.el") (car load-path))))
 
 
 
@@ -5207,10 +6769,1031 @@ toggle it if ARG is `toggle'; disable the mode otherwise.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4.4/org-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4.5/org-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4.4/org-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4.5/org-autoloads.el") (car load-path))))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-C" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-J" '("obj-" "org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-R" '("ob-R-" "org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-abc" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-asymptote" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-awk" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-calc" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-clojure" '("ob-clojure-" "org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-comint" '("org-babel-comint-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-coq" '("coq-program-name" "org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-core" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-css" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-ditaa" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-dot" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-ebnf" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-emacs-lisp" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-eshell" '("ob-eshell-session-live-p" "org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-eval" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-exp" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-forth" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-fortran" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-gnuplot" '("*org-babel-gnuplot-" "org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-groovy" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-haskell" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-hledger" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-io" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-java" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-js" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-latex" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-ledger" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-lilypond" '("lilypond-mode" "org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-lisp" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-lob" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-lua" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-makefile" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-maxima" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-mscgen" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-ocaml" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-octave" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-org" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-perl" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-picolisp" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-plantuml" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-processing" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-python" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-ref" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-ruby" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-sass" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-scheme" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-screen" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-sed" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-shell" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-shen" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-sql" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-sqlite" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-stan" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-table" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-tangle" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ob-vala" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ol" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ol-bbdb" '("org-bbdb-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ol-bibtex" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ol-docview" '("org-docview-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ol-eshell" '("org-eshell-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ol-eww" '("org-eww-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ol-gnus" '("org-gnus-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ol-info" '("org-info-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ol-irc" '("org-irc-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ol-mhe" '("org-mhe-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ol-rmail" '("org-rmail-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ol-w3m" '("org-w3m-")))
+
+
+
+(autoload 'org-babel-do-load-languages "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org" "\
+Load the languages defined in `org-babel-load-languages'.
+
+\(fn SYM VALUE)" nil nil)
+
+(autoload 'org-babel-load-file "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org" "\
+Load Emacs Lisp source code blocks in the Org FILE.
+This function exports the source code using `org-babel-tangle'
+and then loads the resulting file using `load-file'.  With
+optional prefix argument COMPILE, the tangled Emacs Lisp file is
+byte-compiled before it is loaded.
+
+\(fn FILE &optional COMPILE)" t nil)
+
+(autoload 'org-version "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org" "\
+Show the Org version.
+Interactively, or when MESSAGE is non-nil, show it in echo area.
+With prefix argument, or when HERE is non-nil, insert it at point.
+In non-interactive uses, a reduced version string is output unless
+FULL is given.
+
+\(fn &optional HERE FULL MESSAGE)" t nil)
+
+(autoload 'org-load-modules-maybe "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org" "\
+Load all extensions listed in `org-modules'.
+
+\(fn &optional FORCE)" nil nil)
+
+(autoload 'org-clock-persistence-insinuate "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org" "\
+Set up hooks for clock persistence." nil nil)
+
+(autoload 'org-mode "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org" "\
+Outline-based notes management and organizer, alias
+\"Carsten's outline-mode for keeping track of everything.\"
+
+Org mode develops organizational tasks around a NOTES file which
+contains information about projects as plain text.  Org mode is
+implemented on top of Outline mode, which is ideal to keep the content
+of large files well structured.  It supports ToDo items, deadlines and
+time stamps, which magically appear in the diary listing of the Emacs
+calendar.  Tables are easily created with a built-in table editor.
+Plain text URL-like links connect to websites, emails (VM), Usenet
+messages (Gnus), BBDB entries, and any files related to the project.
+For printing and sharing of notes, an Org file (or a part of it)
+can be exported as a structured ASCII or HTML file.
+
+The following commands are available:
+
+\\{org-mode-map}
+
+\(fn)" t nil)
+
+(autoload 'org-cycle "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org" "\
+TAB-action and visibility cycling for Org mode.
+
+This is the command invoked in Org mode by the `TAB' key.  Its main
+purpose is outline visibility cycling, but it also invokes other actions
+in special contexts.
+
+When this function is called with a `\\[universal-argument]' prefix, rotate the entire
+buffer through 3 states (global cycling)
+  1. OVERVIEW: Show only top-level headlines.
+  2. CONTENTS: Show all headlines of all levels, but no body text.
+  3. SHOW ALL: Show everything.
+
+With a `\\[universal-argument] \\[universal-argument]' prefix argument, switch to the startup visibility,
+determined by the variable `org-startup-folded', and by any VISIBILITY
+properties in the buffer.
+
+With a `\\[universal-argument] \\[universal-argument] \\[universal-argument]' prefix argument, show the entire buffer, including
+any drawers.
+
+When inside a table, re-align the table and move to the next field.
+
+When point is at the beginning of a headline, rotate the subtree started
+by this line through 3 different states (local cycling)
+  1. FOLDED:   Only the main headline is shown.
+  2. CHILDREN: The main headline and the direct children are shown.
+               From this state, you can move to one of the children
+               and zoom in further.
+  3. SUBTREE:  Show the entire subtree, including body text.
+If there is no subtree, switch directly from CHILDREN to FOLDED.
+
+When point is at the beginning of an empty headline and the variable
+`org-cycle-level-after-item/entry-creation' is set, cycle the level
+of the headline by demoting and promoting it to likely levels.  This
+speeds up creation document structure by pressing `TAB' once or several
+times right after creating a new headline.
+
+When there is a numeric prefix, go up to a heading with level ARG, do
+a `show-subtree' and return to the previous cursor position.  If ARG
+is negative, go up that many levels.
+
+When point is not at the beginning of a headline, execute the global
+binding for `TAB', which is re-indenting the line.  See the option
+`org-cycle-emulate-tab' for details.
+
+As a special case, if point is at the very beginning of the buffer, if
+there is no headline there, and if the variable `org-cycle-global-at-bob'
+is non-nil, this function acts as if called with prefix argument (`\\[universal-argument] TAB',
+same as `S-TAB') also when called without prefix argument.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'org-global-cycle "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org" "\
+Cycle the global visibility.  For details see `org-cycle'.
+With `\\[universal-argument]' prefix ARG, switch to startup visibility.
+With a numeric prefix, show all headlines up to that level.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'org-run-like-in-org-mode "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org" "\
+Run a command, pretending that the current buffer is in Org mode.
+This will temporarily bind local variables that are typically bound in
+Org mode to the values they have in Org mode, and then interactively
+call CMD.
+
+\(fn CMD)" nil nil)
+
+(autoload 'org-open-file "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org" "\
+Open the file at PATH.
+First, this expands any special file name abbreviations.  Then the
+configuration variable `org-file-apps' is checked if it contains an
+entry for this file type, and if yes, the corresponding command is launched.
+
+If no application is found, Emacs simply visits the file.
+
+With optional prefix argument IN-EMACS, Emacs will visit the file.
+With a double \\[universal-argument] \\[universal-argument] prefix arg, Org tries to avoid opening in Emacs
+and to use an external application to visit the file.
+
+Optional LINE specifies a line to go to, optional SEARCH a string
+to search for.  If LINE or SEARCH is given, the file will be
+opened in Emacs, unless an entry from `org-file-apps' that makes
+use of groups in a regexp matches.
+
+If you want to change the way frames are used when following a
+link, please customize `org-link-frame-setup'.
+
+If the file does not exist, throw an error.
+
+\(fn PATH &optional IN-EMACS LINE SEARCH)" nil nil)
+
+(autoload 'org-open-at-point-global "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org" "\
+Follow a link or a time-stamp like Org mode does.
+Also follow links and emails as seen by `thing-at-point'.
+This command can be called in any mode to follow an external
+link or a time-stamp that has Org mode syntax.  Its behavior
+is undefined when called on internal links like fuzzy links.
+Raise a user error when there is nothing to follow." t nil)
+
+(autoload 'org-offer-links-in-entry "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org" "\
+Offer links in the current entry and return the selected link.
+If there is only one link, return it.
+If NTH is an integer, return the NTH link found.
+If ZERO is a string, check also this string for a link, and if
+there is one, return it.
+
+\(fn BUFFER MARKER &optional NTH ZERO)" nil nil)
+
+(autoload 'org-switchb "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org" "\
+Switch between Org buffers.
+
+With `\\[universal-argument]' prefix, restrict available buffers to files.
+
+With `\\[universal-argument] \\[universal-argument]' prefix, restrict available buffers to agenda files.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'org-cycle-agenda-files "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org" "\
+Cycle through the files in `org-agenda-files'.
+If the current buffer visits an agenda file, find the next one in the list.
+If the current buffer does not, find the first agenda file." t nil)
+
+(autoload 'org-submit-bug-report "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org" "\
+Submit a bug report on Org via mail.
+
+Don't hesitate to report any problems or inaccurate documentation.
+
+If you don't have setup sending mail from (X)Emacs, please copy the
+output buffer into your mail program, as it gives us important
+information about your Org version and configuration." t nil)
+
+(autoload 'org-reload "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org" "\
+Reload all Org Lisp files.
+With prefix arg UNCOMPILED, load the uncompiled versions.
+
+\(fn &optional UNCOMPILED)" t nil)
+
+(autoload 'org-customize "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org" "\
+Call the customize function with org as argument." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org" '("org-" "turn-on-org-cdlatex")))
+
+
+
+
+(autoload 'org-toggle-sticky-agenda "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-agenda" "\
+Toggle `org-agenda-sticky'.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'org-agenda "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-agenda" "\
+Dispatch agenda commands to collect entries to the agenda buffer.
+Prompts for a command to execute.  Any prefix arg will be passed
+on to the selected command.  The default selections are:
+
+a     Call `org-agenda-list' to display the agenda for current day or week.
+t     Call `org-todo-list' to display the global todo list.
+T     Call `org-todo-list' to display the global todo list, select only
+      entries with a specific TODO keyword (the user gets a prompt).
+m     Call `org-tags-view' to display headlines with tags matching
+      a condition  (the user is prompted for the condition).
+M     Like `m', but select only TODO entries, no ordinary headlines.
+e     Export views to associated files.
+s     Search entries for keywords.
+S     Search entries for keywords, only with TODO keywords.
+/     Multi occur across all agenda files and also files listed
+      in `org-agenda-text-search-extra-files'.
+<     Restrict agenda commands to buffer, subtree, or region.
+      Press several times to get the desired effect.
+>     Remove a previous restriction.
+#     List \"stuck\" projects.
+!     Configure what \"stuck\" means.
+C     Configure custom agenda commands.
+
+More commands can be added by configuring the variable
+`org-agenda-custom-commands'.  In particular, specific tags and TODO keyword
+searches can be pre-defined in this way.
+
+If the current buffer is in Org mode and visiting a file, you can also
+first press `<' once to indicate that the agenda should be temporarily
+\(until the next use of `\\[org-agenda]') restricted to the current file.
+Pressing `<' twice means to restrict to the current subtree or region
+\(if active).
+
+\(fn &optional ARG ORG-KEYS RESTRICTION)" t nil)
+
+(autoload 'org-batch-agenda "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-agenda" "\
+Run an agenda command in batch mode and send the result to STDOUT.
+If CMD-KEY is a string of length 1, it is used as a key in
+`org-agenda-custom-commands' and triggers this command.  If it is a
+longer string it is used as a tags/todo match string.
+Parameters are alternating variable names and values that will be bound
+before running the agenda command.
+
+\(fn CMD-KEY &rest PARAMETERS)" nil t)
+
+(autoload 'org-batch-agenda-csv "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-agenda" "\
+Run an agenda command in batch mode and send the result to STDOUT.
+If CMD-KEY is a string of length 1, it is used as a key in
+`org-agenda-custom-commands' and triggers this command.  If it is a
+longer string it is used as a tags/todo match string.
+Parameters are alternating variable names and values that will be bound
+before running the agenda command.
+
+The output gives a line for each selected agenda item.  Each
+item is a list of comma-separated values, like this:
+
+category,head,type,todo,tags,date,time,extra,priority-l,priority-n
+
+category     The category of the item
+head         The headline, without TODO kwd, TAGS and PRIORITY
+type         The type of the agenda entry, can be
+                todo               selected in TODO match
+                tagsmatch          selected in tags match
+                diary              imported from diary
+                deadline           a deadline on given date
+                scheduled          scheduled on given date
+                timestamp          entry has timestamp on given date
+                closed             entry was closed on given date
+                upcoming-deadline  warning about deadline
+                past-scheduled     forwarded scheduled item
+                block              entry has date block including g. date
+todo         The todo keyword, if any
+tags         All tags including inherited ones, separated by colons
+date         The relevant date, like 2007-2-14
+time         The time, like 15:00-16:50
+extra        String with extra planning info
+priority-l   The priority letter if any was given
+priority-n   The computed numerical priority
+agenda-day   The day in the agenda where this is listed
+
+\(fn CMD-KEY &rest PARAMETERS)" nil t)
+
+(autoload 'org-store-agenda-views "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-agenda" "\
+Store agenda views.
+
+\(fn &rest PARAMETERS)" t nil)
+
+(autoload 'org-batch-store-agenda-views "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-agenda" "\
+Run all custom agenda commands that have a file argument.
+
+\(fn &rest PARAMETERS)" nil t)
+
+(autoload 'org-agenda-list "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-agenda" "\
+Produce a daily/weekly view from all files in variable `org-agenda-files'.
+The view will be for the current day or week, but from the overview buffer
+you will be able to go to other days/weeks.
+
+With a numeric prefix argument in an interactive call, the agenda will
+span ARG days.  Lisp programs should instead specify SPAN to change
+the number of days.  SPAN defaults to `org-agenda-span'.
+
+START-DAY defaults to TODAY, or to the most recent match for the weekday
+given in `org-agenda-start-on-weekday'.
+
+When WITH-HOUR is non-nil, only include scheduled and deadline
+items if they have an hour specification like [h]h:mm.
+
+\(fn &optional ARG START-DAY SPAN WITH-HOUR)" t nil)
+
+(autoload 'org-search-view "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-agenda" "\
+Show all entries that contain a phrase or words or regular expressions.
+
+With optional prefix argument TODO-ONLY, only consider entries that are
+TODO entries.  The argument STRING can be used to pass a default search
+string into this function.  If EDIT-AT is non-nil, it means that the
+user should get a chance to edit this string, with cursor at position
+EDIT-AT.
+
+The search string can be viewed either as a phrase that should be found as
+is, or it can be broken into a number of snippets, each of which must match
+in a Boolean way to select an entry.  The default depends on the variable
+`org-agenda-search-view-always-boolean'.
+Even if this is turned off (the default) you can always switch to
+Boolean search dynamically by preceding the first word with  \"+\" or \"-\".
+
+The default is a direct search of the whole phrase, where each space in
+the search string can expand to an arbitrary amount of whitespace,
+including newlines.
+
+If using a Boolean search, the search string is split on whitespace and
+each snippet is searched separately, with logical AND to select an entry.
+Words prefixed with a minus must *not* occur in the entry.  Words without
+a prefix or prefixed with a plus must occur in the entry.  Matching is
+case-insensitive.  Words are enclosed by word delimiters (i.e. they must
+match whole words, not parts of a word) if
+`org-agenda-search-view-force-full-words' is set (default is nil).
+
+Boolean search snippets enclosed by curly braces are interpreted as
+regular expressions that must or (when preceded with \"-\") must not
+match in the entry.  Snippets enclosed into double quotes will be taken
+as a whole, to include whitespace.
+
+- If the search string starts with an asterisk, search only in headlines.
+- If (possibly after the leading star) the search string starts with an
+  exclamation mark, this also means to look at TODO entries only, an effect
+  that can also be achieved with a prefix argument.
+- If (possibly after star and exclamation mark) the search string starts
+  with a colon, this will mean that the (non-regexp) snippets of the
+  Boolean search must match as full words.
+
+This command searches the agenda files, and in addition the files
+listed in `org-agenda-text-search-extra-files' unless a restriction lock
+is active.
+
+\(fn &optional TODO-ONLY STRING EDIT-AT)" t nil)
+
+(autoload 'org-todo-list "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-agenda" "\
+Show all (not done) TODO entries from all agenda file in a single list.
+The prefix arg can be used to select a specific TODO keyword and limit
+the list to these.  When using `\\[universal-argument]', you will be prompted
+for a keyword.  A numeric prefix directly selects the Nth keyword in
+`org-todo-keywords-1'.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'org-tags-view "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-agenda" "\
+Show all headlines for all `org-agenda-files' matching a TAGS criterion.
+The prefix arg TODO-ONLY limits the search to TODO entries.
+
+\(fn &optional TODO-ONLY MATCH)" t nil)
+
+(autoload 'org-agenda-list-stuck-projects "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-agenda" "\
+Create agenda view for projects that are stuck.
+Stuck projects are project that have no next actions.  For the definitions
+of what a project is and how to check if it stuck, customize the variable
+`org-stuck-projects'.
+
+\(fn &rest IGNORE)" t nil)
+
+(autoload 'org-diary "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-agenda" "\
+Return diary information from org files.
+This function can be used in a \"sexp\" diary entry in the Emacs calendar.
+It accesses org files and extracts information from those files to be
+listed in the diary.  The function accepts arguments specifying what
+items should be listed.  For a list of arguments allowed here, see the
+variable `org-agenda-entry-types'.
+
+The call in the diary file should look like this:
+
+   &%%(org-diary) ~/path/to/some/orgfile.org
+
+Use a separate line for each org file to check.  Or, if you omit the file name,
+all files listed in `org-agenda-files' will be checked automatically:
+
+   &%%(org-diary)
+
+If you don't give any arguments (as in the example above), the default value
+of `org-agenda-entry-types' is used: (:deadline :scheduled :timestamp :sexp).
+So the example above may also be written as
+
+   &%%(org-diary :deadline :timestamp :sexp :scheduled)
+
+The function expects the lisp variables `entry' and `date' to be provided
+by the caller, because this is how the calendar works.  Don't use this
+function from a program - use `org-agenda-get-day-entries' instead.
+
+\(fn &rest ARGS)" nil nil)
+
+(autoload 'org-agenda-check-for-timestamp-as-reason-to-ignore-todo-item "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-agenda" "\
+Do we have a reason to ignore this TODO entry because it has a time stamp?
+
+\(fn &optional END)" nil nil)
+
+(autoload 'org-agenda-set-restriction-lock "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-agenda" "\
+Set restriction lock for agenda to current subtree or file.
+When in a restricted subtree, remove it.
+
+The restriction will span over the entire file if TYPE is `file',
+or if type is '(4), or if the cursor is before the first headline
+in the file. Otherwise, only apply the restriction to the current
+subtree.
+
+\(fn &optional TYPE)" t nil)
+
+(autoload 'org-calendar-goto-agenda "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-agenda" "\
+Compute the Org agenda for the calendar date displayed at the cursor.
+This is a command that has to be installed in `calendar-mode-map'." t nil)
+
+(autoload 'org-agenda-to-appt "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-agenda" "\
+Activate appointments found in `org-agenda-files'.
+
+With a `\\[universal-argument]' prefix, refresh the list of appointments.
+
+If FILTER is t, interactively prompt the user for a regular
+expression, and filter out entries that don't match it.
+
+If FILTER is a string, use this string as a regular expression
+for filtering entries out.
+
+If FILTER is a function, filter out entries against which
+calling the function returns nil.  This function takes one
+argument: an entry from `org-agenda-get-day-entries'.
+
+FILTER can also be an alist with the car of each cell being
+either `headline' or `category'.  For example:
+
+  \\='((headline \"IMPORTANT\")
+    (category \"Work\"))
+
+will only add headlines containing IMPORTANT or headlines
+belonging to the \"Work\" category.
+
+ARGS are symbols indicating what kind of entries to consider.
+By default `org-agenda-to-appt' will use :deadline*, :scheduled*
+\(i.e., deadlines and scheduled items with a hh:mm specification)
+and :timestamp entries.  See the docstring of `org-diary' for
+details and examples.
+
+If an entry has a APPT_WARNTIME property, its value will be used
+to override `appt-message-warning-time'.
+
+\(fn &optional REFRESH FILTER &rest ARGS)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-agenda" '("org-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-archive" '("org-a")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-attach" '("org-attach-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-attach-git" '("org-attach-git-")))
+
+
+
+(autoload 'org-capture-string "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-capture" "\
+Capture STRING with the template selected by KEYS.
+
+\(fn STRING &optional KEYS)" t nil)
+
+(autoload 'org-capture "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-capture" "\
+Capture something.
+\\<org-capture-mode-map>
+This will let you select a template from `org-capture-templates', and
+then file the newly captured information.  The text is immediately
+inserted at the target location, and an indirect buffer is shown where
+you can edit it.  Pressing `\\[org-capture-finalize]' brings you back to the previous
+state of Emacs, so that you can continue your work.
+
+When called interactively with a `\\[universal-argument]' prefix argument GOTO, don't
+capture anything, just go to the file/headline where the selected
+template stores its notes.
+
+With a `\\[universal-argument] \\[universal-argument]' prefix argument, go to the last note stored.
+
+When called with a `C-0' (zero) prefix, insert a template at point.
+
+When called with a `C-1' (one) prefix, force prompting for a date when
+a datetree entry is made.
+
+ELisp programs can set KEYS to a string associated with a template
+in `org-capture-templates'.  In this case, interactive selection
+will be bypassed.
+
+If `org-capture-use-agenda-date' is non-nil, capturing from the
+agenda will use the date at point as the default date.  Then, a
+`C-1' prefix will tell the capture process to use the HH:MM time
+of the day at point (if any) or the current HH:MM time.
+
+\(fn &optional GOTO KEYS)" t nil)
+
+(autoload 'org-capture-import-remember-templates "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-capture" "\
+Set `org-capture-templates' to be similar to `org-remember-templates'." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-capture" '("org-capture-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-clock" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-colview" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-compat" '("org-")))
+
+
+
+(autoload 'org-encrypt-entry "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-crypt" "\
+Encrypt the content of the current headline." t nil)
+
+(autoload 'org-decrypt-entry "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-crypt" "\
+Decrypt the content of the current headline." t nil)
+
+(autoload 'org-encrypt-entries "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-crypt" "\
+Encrypt all top-level entries in the current buffer." t nil)
+
+(autoload 'org-decrypt-entries "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-crypt" "\
+Decrypt all entries in the current buffer." t nil)
+
+(autoload 'org-crypt-use-before-save-magic "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-crypt" "\
+Add a hook to automatically encrypt entries before a file is saved to disk." nil nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-crypt" '("org-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-ctags" '("org-ctags-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-datetree" '("org-datetree-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-duration" '("org-duration-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-element" '("org-element-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-entities" '("org-entit")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-faces" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-feed" '("org-feed-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-footnote" '("org-footnote-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-goto" '("org-goto-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-habit" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-id" '("org-id-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-indent" '("org-indent-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-inlinetask" '("org-inlinetask-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-keys" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-lint" '("org-lint-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-list" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-macro" '("org-macro-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-macs" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-mobile" '("org-mobile-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-mouse" '("org-mouse-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-num" '("org-num-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-pcomplete" '("org-" "pcomplete/org-mode/")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-plot" '("org-plot")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-protocol" '("org-protocol-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-refile" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-src" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-table" '("org")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-tempo" '("org-tempo-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-timer" '("org-timer-")))
+
+
+
+(autoload 'org-release "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-version" "\
+The release version of Org.
+Inserted by installing Org mode or when a release is made." nil nil)
+
+(autoload 'org-git-version "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/org-version" "\
+The Git version of Org mode.
+Inserted by installing Org or when a release is made." nil nil)
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ox" '("org-export-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ox-ascii" '("org-ascii-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ox-beamer" '("org-beamer-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ox-html" '("org-html-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ox-icalendar" '("org-icalendar-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ox-latex" '("org-latex-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ox-man" '("org-man-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ox-md" '("org-md-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ox-odt" '("org-odt-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ox-org" '("org-org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ox-publish" '("org-publish-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/org-9.4.5/ox-texinfo" '("org-texinfo-")))
 
 
 
@@ -6237,10 +8820,40 @@ Inserted by installing Org or when a release is made." nil nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/esxml-20201226.2146/esxml-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/ob-swift-20170921.1325/ob-swift-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/esxml-20201226.2146/esxml-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/ob-swift-20170921.1325/ob-swift-autoloads.el") (car load-path))))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/ob-swift-20170921.1325/ob-swift" '("ob-swift-" "org-babel-execute:swift")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-swift" '("ob-swift-" "org-babel-execute:swift")))
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/kv-20140108.1534/kv-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/kv-20140108.1534/kv-autoloads.el") (car load-path))))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "kv" '("dotass" "keyword->symbol" "map-bind")))
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/esxml-20210323.1102/esxml-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/esxml-20210323.1102/esxml-autoloads.el") (car load-path))))
 
 
 
@@ -6254,21 +8867,10 @@ Inserted by installing Org or when a release is made." nil nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/nov-20201207.3/nov-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/nov-20210323.1105/nov-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/nov-20201207.3/nov-autoloads.el") (car load-path))))
-
-
-
-(autoload 'nov-mode "../../../../../src/env/emacs.d/elpa/27.1/elpa/nov-20201207.3/nov" "\
-Major mode for reading EPUB documents
-
-\(fn)" t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../src/env/emacs.d/elpa/27.1/elpa/nov-20201207.3/nov" '("nov-")))
-
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/nov-20210323.1105/nov-autoloads.el") (car load-path))))
 
 
 
@@ -6276,6 +8878,13 @@ Major mode for reading EPUB documents
 Major mode for reading EPUB documents
 
 \(fn)" t nil)
+
+(autoload 'nov-bookmark-jump-handler "nov" "\
+The bookmark handler-function interface for bookmark BMK.
+
+See also `nov-bookmark-make-record'.
+
+\(fn BMK)" nil nil)
 
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "nov" '("nov-")))
@@ -6325,10 +8934,10 @@ Interactively, with prefix argument, move to the previous position.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210211.923/modus-themes-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210331.1458/modus-themes-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210211.923/modus-themes-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210331.1458/modus-themes-autoloads.el") (car load-path))))
 
 
 
@@ -6383,26 +8992,17 @@ Also runs `modus-themes-after-load-theme-hook' at its last stage
 by virtue of calling either of `modus-themes-load-operandi' and
 `modus-themes-load-vivendi' functions." t nil)
 
-(when (and (boundp 'custom-theme-load-path) load-file-name) (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+(when load-file-name (let ((dir (file-name-directory load-file-name))) (unless (equal dir (expand-file-name "themes/" data-directory)) (add-to-list 'custom-theme-load-path dir))))
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "modus-themes" '("modus-themes-")))
+
 
 
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "modus-vivendi-theme" '("modus-vivendi")))
 
 
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/memoize-20200103.2036/memoize-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/memoize-20200103.2036/memoize-autoloads.el") (car load-path))))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "memoize" '("defmemoize" "memoize")))
 
 
 )
@@ -6443,10 +9043,10 @@ Initializes KEY-GROUP and creates all the relevant interactive commands.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/major-mode-hydra-20191030.2354/major-mode-hydra-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/major-mode-hydra-20210221.834/major-mode-hydra-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/major-mode-hydra-20191030.2354/major-mode-hydra-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/major-mode-hydra-20210221.834/major-mode-hydra-autoloads.el") (car load-path))))
 
 
 
@@ -6497,26 +9097,2470 @@ exactly the same structure as that in `pretty-hydra-define' or
 
 (autoload 'major-mode-hydra "major-mode-hydra" "\
 Show the hydra for the current major mode." t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "major-mode-hydra" '("major-mode-hydra-")))
 
+
+
+
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/git-commit-20210206.2245/git-commit-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/git-commit-20210328.1730/git-commit-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/git-commit-20210206.2245/git-commit-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/git-commit-20210328.1730/git-commit-autoloads.el") (car load-path))))
 
+
+(put 'git-commit-major-mode 'safe-local-variable
+    (lambda (val)
+      (memq val '(text-mode
+                  markdown-mode
+                  org-mode
+                  fundamental-mode
+                  git-commit-elisp-text-mode))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/git-commit-20210328.1730/git-commit" '("git-commit-" "global-git-commit-mode")))
+
+
+
+(put 'git-commit-major-mode 'safe-local-variable
+    (lambda (val)
+      (memq val '(text-mode
+                  markdown-mode
+                  org-mode
+                  fundamental-mode
+                  git-commit-elisp-text-mode))))
 
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "git-commit" '("git-commit-" "global-git-commit-mode")))
 
+
+
+
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210209.1110/magit-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210209.1110/magit-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-autoloads.el") (car load-path))))
+
+
+
+(autoload 'git-rebase-current-line "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/git-rebase" "\
+Parse current line into a `git-rebase-action' instance.
+If the current line isn't recognized as a rebase line, an
+instance with all nil values is returned." nil nil)
+
+(autoload 'git-rebase-mode "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/git-rebase" "\
+Major mode for editing of a Git rebase file.
+
+Rebase files are generated when you run 'git rebase -i' or run
+`magit-interactive-rebase'.  They describe how Git should perform
+the rebase.  See the documentation for git-rebase (e.g., by
+running 'man git-rebase' at the command line) for details.
+
+\(fn)" t nil)
+
+(defconst git-rebase-filename-regexp "/git-rebase-todo\\'")
+
+(add-to-list 'auto-mode-alist (cons git-rebase-filename-regexp 'git-rebase-mode))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/git-rebase" '("git-rebase-")))
+
+
+
+
+(define-obsolete-variable-alias 'global-magit-file-mode 'magit-define-global-key-bindings "Magit 3.0.0")
+
+(defvar magit-define-global-key-bindings t "\
+Whether to bind some Magit commands in the global keymap.
+
+If this variable is non-nil, then the following bindings may
+be added to the global keymap.  The default is t.
+
+key             binding
+---             -------
+C-x g           magit-status
+C-x M-g         magit-dispatch
+C-c M-g         magit-file-dispatch
+
+These bindings may be added when `after-init-hook' is called.
+Each binding is added if and only if at that time no other key
+is bound to the same command and no other command is bound to
+the same key.  In other words we try to avoid adding bindings
+that are unnecessary, as well as bindings that conflict with
+other bindings.
+
+Adding the above bindings is delayed until `after-init-hook'
+is called to allow users to set the variable anywhere in their
+init file (without having to make sure to do so before `magit'
+is loaded or autoloaded) and to increase the likelihood that
+all the potentially conflicting user bindings have already
+been added.
+
+Setting this variable after the hook has already been called
+has no effect.
+
+We recommend that you bind \"C-c g\" instead of \"C-c M-g\" to
+`magit-file-dispatch'.  The former is a much better binding
+but the \"C-c <letter>\" namespace is strictly reserved for
+users; preventing Magit from using it by default.
+
+Also see info node `(magit)Commands for Buffers Visiting Files'.")
+
+(custom-autoload 'magit-define-global-key-bindings "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit" t)
+
+(defun magit-maybe-define-global-key-bindings nil (when magit-define-global-key-bindings (let ((map (current-global-map))) (dolist (elt '(("C-x g" . magit-status) ("C-x M-g" . magit-dispatch) ("C-c M-g" . magit-file-dispatch))) (let ((key (kbd (car elt))) (def (cdr elt))) (unless (or (lookup-key map key) (where-is-internal def (make-sparse-keymap) t)) (define-key map key def)))))))
+
+(if after-init-time (magit-maybe-define-global-key-bindings) (add-hook 'after-init-hook 'magit-maybe-define-global-key-bindings t))
+ (autoload 'magit-dispatch "magit" nil t)
+ (autoload 'magit-run "magit" nil t)
+
+(autoload 'magit-git-command "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit" "\
+Execute COMMAND asynchronously; display output.
+
+Interactively, prompt for COMMAND in the minibuffer. \"git \" is
+used as initial input, but can be deleted to run another command.
+
+With a prefix argument COMMAND is run in the top-level directory
+of the current working tree, otherwise in `default-directory'.
+
+\(fn COMMAND)" t nil)
+
+(autoload 'magit-git-command-topdir "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit" "\
+Execute COMMAND asynchronously; display output.
+
+Interactively, prompt for COMMAND in the minibuffer. \"git \" is
+used as initial input, but can be deleted to run another command.
+
+COMMAND is run in the top-level directory of the current
+working tree.
+
+\(fn COMMAND)" t nil)
+
+(autoload 'magit-shell-command "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit" "\
+Execute COMMAND asynchronously; display output.
+
+Interactively, prompt for COMMAND in the minibuffer.  With a
+prefix argument COMMAND is run in the top-level directory of
+the current working tree, otherwise in `default-directory'.
+
+\(fn COMMAND)" t nil)
+
+(autoload 'magit-shell-command-topdir "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit" "\
+Execute COMMAND asynchronously; display output.
+
+Interactively, prompt for COMMAND in the minibuffer.  COMMAND
+is run in the top-level directory of the current working tree.
+
+\(fn COMMAND)" t nil)
+
+(autoload 'magit-version "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit" "\
+Return the version of Magit currently in use.
+If optional argument PRINT-DEST is non-nil, output
+stream (interactively, the echo area, or the current buffer with
+a prefix argument), also print the used versions of Magit, Git,
+and Emacs to it.
+
+\(fn &optional PRINT-DEST)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit" '("magit-")))
+
+
+
+
+(autoload 'magit-stage-file "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-apply" "\
+Stage all changes to FILE.
+With a prefix argument or when there is no file at point ask for
+the file to be staged.  Otherwise stage the file at point without
+requiring confirmation.
+
+\(fn FILE)" t nil)
+
+(autoload 'magit-stage-modified "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-apply" "\
+Stage all changes to files modified in the worktree.
+Stage all new content of tracked files and remove tracked files
+that no longer exist in the working tree from the index also.
+With a prefix argument also stage previously untracked (but not
+ignored) files.
+
+\(fn &optional ALL)" t nil)
+
+(autoload 'magit-unstage-file "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-apply" "\
+Unstage all changes to FILE.
+With a prefix argument or when there is no file at point ask for
+the file to be unstaged.  Otherwise unstage the file at point
+without requiring confirmation.
+
+\(fn FILE)" t nil)
+
+(autoload 'magit-unstage-all "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-apply" "\
+Remove all changes from the staging area." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-apply" '("magit-")))
+
+
+
+
+(put 'magit-auto-revert-mode 'globalized-minor-mode t)
+
+(defvar magit-auto-revert-mode (not (or global-auto-revert-mode noninteractive)) "\
+Non-nil if Magit-Auto-Revert mode is enabled.
+See the `magit-auto-revert-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `magit-auto-revert-mode'.")
+
+(custom-autoload 'magit-auto-revert-mode "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-autorevert" nil)
+
+(autoload 'magit-auto-revert-mode "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-autorevert" "\
+Toggle Auto-Revert mode in all buffers.
+With prefix ARG, enable Magit-Auto-Revert mode if ARG is positive;
+otherwise, disable it.  If called from Lisp, enable the mode if
+ARG is omitted or nil.
+
+Auto-Revert mode is enabled in all buffers where
+`magit-turn-on-auto-revert-mode-if-desired' would do it.
+See `auto-revert-mode' for more information on Auto-Revert mode.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-autorevert" '("auto-revert-buffer" "magit-")))
+
+
+
+ (autoload 'magit-bisect "magit-bisect" nil t)
+
+(autoload 'magit-bisect-start "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-bisect" "\
+Start a bisect session.
+
+Bisecting a bug means to find the commit that introduced it.
+This command starts such a bisect session by asking for a known
+good and a known bad commit.  To move the session forward use the
+other actions from the bisect transient command (\\<magit-status-mode-map>\\[magit-bisect]).
+
+\(fn BAD GOOD ARGS)" t nil)
+
+(autoload 'magit-bisect-reset "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-bisect" "\
+After bisecting, cleanup bisection state and return to original `HEAD'." t nil)
+
+(autoload 'magit-bisect-good "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-bisect" "\
+While bisecting, mark the current commit as good.
+Use this after you have asserted that the commit does not contain
+the bug in question." t nil)
+
+(autoload 'magit-bisect-bad "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-bisect" "\
+While bisecting, mark the current commit as bad.
+Use this after you have asserted that the commit does contain the
+bug in question." t nil)
+
+(autoload 'magit-bisect-mark "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-bisect" "\
+While bisecting, mark the current commit with a bisect term.
+During a bisect using alternate terms, commits can still be
+marked with `magit-bisect-good' and `magit-bisect-bad', as those
+commands map to the correct term (\"good\" to --term-old's value
+and \"bad\" to --term-new's).  However, in some cases, it can be
+difficult to keep that mapping straight in your head; this
+command provides an interface that exposes the underlying terms." t nil)
+
+(autoload 'magit-bisect-skip "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-bisect" "\
+While bisecting, skip the current commit.
+Use this if for some reason the current commit is not a good one
+to test.  This command lets Git choose a different one." t nil)
+
+(autoload 'magit-bisect-run "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-bisect" "\
+Bisect automatically by running commands after each step.
+
+Unlike `git bisect run' this can be used before bisecting has
+begun.  In that case it behaves like `git bisect start; git
+bisect run'.
+
+\(fn CMDLINE &optional BAD GOOD ARGS)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-bisect" '("magit-")))
+
+
+
+ (autoload 'magit-blame-echo "magit-blame" nil t)
+ (autoload 'magit-blame-addition "magit-blame" nil t)
+ (autoload 'magit-blame-removal "magit-blame" nil t)
+ (autoload 'magit-blame-reverse "magit-blame" nil t)
+ (autoload 'magit-blame "magit-blame" nil t)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-blame" '("magit-")))
+
+
+
+
+(autoload 'magit--handle-bookmark "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-bookmark" "\
+Open a bookmark created by `magit--make-bookmark'.
+Call the `magit-*-setup-buffer' function of the the major-mode
+with the variables' values as arguments, which were recorded by
+`magit--make-bookmark'.  Ignore `magit-display-buffer-function'.
+
+\(fn BOOKMARK)" nil nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-bookmark" '("magit--make-bookmark")))
+
+
+
+ (autoload 'magit-branch "magit" nil t)
+
+(autoload 'magit-checkout "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-branch" "\
+Checkout REVISION, updating the index and the working tree.
+If REVISION is a local branch, then that becomes the current
+branch.  If it is something else, then `HEAD' becomes detached.
+Checkout fails if the working tree or the staging area contain
+changes.
+
+\(git checkout REVISION).
+
+\(fn REVISION &optional ARGS)" t nil)
+
+(autoload 'magit-branch-create "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-branch" "\
+Create BRANCH at branch or revision START-POINT.
+
+\(fn BRANCH START-POINT)" t nil)
+
+(autoload 'magit-branch-and-checkout "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-branch" "\
+Create and checkout BRANCH at branch or revision START-POINT.
+
+\(fn BRANCH START-POINT &optional ARGS)" t nil)
+
+(autoload 'magit-branch-or-checkout "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-branch" "\
+Hybrid between `magit-checkout' and `magit-branch-and-checkout'.
+
+Ask the user for an existing branch or revision.  If the user
+input actually can be resolved as a branch or revision, then
+check that out, just like `magit-checkout' would.
+
+Otherwise create and checkout a new branch using the input as
+its name.  Before doing so read the starting-point for the new
+branch.  This is similar to what `magit-branch-and-checkout'
+does.
+
+\(fn ARG &optional START-POINT)" t nil)
+
+(autoload 'magit-branch-checkout "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-branch" "\
+Checkout an existing or new local branch.
+
+Read a branch name from the user offering all local branches and
+a subset of remote branches as candidates.  Omit remote branches
+for which a local branch by the same name exists from the list
+of candidates.  The user can also enter a completely new branch
+name.
+
+- If the user selects an existing local branch, then check that
+  out.
+
+- If the user selects a remote branch, then create and checkout
+  a new local branch with the same name.  Configure the selected
+  remote branch as push target.
+
+- If the user enters a new branch name, then create and check
+  that out, after also reading the starting-point from the user.
+
+In the latter two cases the upstream is also set.  Whether it is
+set to the chosen START-POINT or something else depends on the
+value of `magit-branch-adjust-remote-upstream-alist', just like
+when using `magit-branch-and-checkout'.
+
+\(fn BRANCH &optional START-POINT)" t nil)
+
+(autoload 'magit-branch-orphan "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-branch" "\
+Create and checkout an orphan BRANCH with contents from revision START-POINT.
+
+\(fn BRANCH START-POINT)" t nil)
+
+(autoload 'magit-branch-spinout "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-branch" "\
+Create new branch from the unpushed commits.
+Like `magit-branch-spinoff' but remain on the current branch.
+If there are any uncommitted changes, then behave exactly like
+`magit-branch-spinoff'.
+
+\(fn BRANCH &optional FROM)" t nil)
+
+(autoload 'magit-branch-spinoff "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-branch" "\
+Create new branch from the unpushed commits.
+
+Create and checkout a new branch starting at and tracking the
+current branch.  That branch in turn is reset to the last commit
+it shares with its upstream.  If the current branch has no
+upstream or no unpushed commits, then the new branch is created
+anyway and the previously current branch is not touched.
+
+This is useful to create a feature branch after work has already
+began on the old branch (likely but not necessarily \"master\").
+
+If the current branch is a member of the value of option
+`magit-branch-prefer-remote-upstream' (which see), then the
+current branch will be used as the starting point as usual, but
+the upstream of the starting-point may be used as the upstream
+of the new branch, instead of the starting-point itself.
+
+If optional FROM is non-nil, then the source branch is reset
+to `FROM~', instead of to the last commit it shares with its
+upstream.  Interactively, FROM is only ever non-nil, if the
+region selects some commits, and among those commits, FROM is
+the commit that is the fewest commits ahead of the source
+branch.
+
+The commit at the other end of the selection actually does not
+matter, all commits between FROM and `HEAD' are moved to the new
+branch.  If FROM is not reachable from `HEAD' or is reachable
+from the source branch's upstream, then an error is raised.
+
+\(fn BRANCH &optional FROM)" t nil)
+
+(autoload 'magit-branch-reset "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-branch" "\
+Reset a branch to the tip of another branch or any other commit.
+
+When the branch being reset is the current branch, then do a
+hard reset.  If there are any uncommitted changes, then the user
+has to confirm the reset because those changes would be lost.
+
+This is useful when you have started work on a feature branch but
+realize it's all crap and want to start over.
+
+When resetting to another branch and a prefix argument is used,
+then also set the target branch as the upstream of the branch
+that is being reset.
+
+\(fn BRANCH TO &optional SET-UPSTREAM)" t nil)
+
+(autoload 'magit-branch-delete "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-branch" "\
+Delete one or multiple branches.
+If the region marks multiple branches, then offer to delete
+those, otherwise prompt for a single branch to be deleted,
+defaulting to the branch at point.
+
+\(fn BRANCHES &optional FORCE)" t nil)
+
+(autoload 'magit-branch-rename "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-branch" "\
+Rename the branch named OLD to NEW.
+
+With a prefix argument FORCE, rename even if a branch named NEW
+already exists.
+
+If `branch.OLD.pushRemote' is set, then unset it.  Depending on
+the value of `magit-branch-rename-push-target' (which see) maybe
+set `branch.NEW.pushRemote' and maybe rename the push-target on
+the remote.
+
+\(fn OLD NEW &optional FORCE)" t nil)
+
+(autoload 'magit-branch-shelve "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-branch" "\
+Shelve a BRANCH.
+Rename \"refs/heads/BRANCH\" to \"refs/shelved/BRANCH\",
+and also rename the respective reflog file.
+
+\(fn BRANCH)" t nil)
+
+(autoload 'magit-branch-unshelve "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-branch" "\
+Unshelve a BRANCH
+Rename \"refs/shelved/BRANCH\" to \"refs/heads/BRANCH\",
+and also rename the respective reflog file.
+
+\(fn BRANCH)" t nil)
+ (autoload 'magit-branch-configure "magit-branch" nil t)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-branch" '("magit-")))
+
+
+
+ (autoload 'magit-clone "magit-clone" nil t)
+
+(autoload 'magit-clone-regular "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-clone" "\
+Create a clone of REPOSITORY in DIRECTORY.
+Then show the status buffer for the new repository.
+
+\(fn REPOSITORY DIRECTORY ARGS)" t nil)
+
+(autoload 'magit-clone-shallow "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-clone" "\
+Create a shallow clone of REPOSITORY in DIRECTORY.
+Then show the status buffer for the new repository.
+With a prefix argument read the DEPTH of the clone;
+otherwise use 1.
+
+\(fn REPOSITORY DIRECTORY ARGS DEPTH)" t nil)
+
+(autoload 'magit-clone-shallow-since "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-clone" "\
+Create a shallow clone of REPOSITORY in DIRECTORY.
+Then show the status buffer for the new repository.
+Exclude commits before DATE, which is read from the
+user.
+
+\(fn REPOSITORY DIRECTORY ARGS DATE)" t nil)
+
+(autoload 'magit-clone-shallow-exclude "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-clone" "\
+Create a shallow clone of REPOSITORY in DIRECTORY.
+Then show the status buffer for the new repository.
+Exclude commits reachable from EXCLUDE, which is a
+branch or tag read from the user.
+
+\(fn REPOSITORY DIRECTORY ARGS EXCLUDE)" t nil)
+
+(autoload 'magit-clone-bare "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-clone" "\
+Create a bare clone of REPOSITORY in DIRECTORY.
+Then show the status buffer for the new repository.
+
+\(fn REPOSITORY DIRECTORY ARGS)" t nil)
+
+(autoload 'magit-clone-mirror "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-clone" "\
+Create a mirror of REPOSITORY in DIRECTORY.
+Then show the status buffer for the new repository.
+
+\(fn REPOSITORY DIRECTORY ARGS)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-clone" '("magit-clone-")))
+
+
+
+ (autoload 'magit-commit "magit-commit" nil t)
+
+(autoload 'magit-commit-create "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-commit" "\
+Create a new commit on `HEAD'.
+With a prefix argument, amend to the commit at `HEAD' instead.
+
+\(git commit [--amend] ARGS)
+
+\(fn &optional ARGS)" t nil)
+
+(autoload 'magit-commit-amend "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-commit" "\
+Amend the last commit.
+
+\(git commit --amend ARGS)
+
+\(fn &optional ARGS)" t nil)
+
+(autoload 'magit-commit-extend "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-commit" "\
+Amend the last commit, without editing the message.
+
+With a prefix argument keep the committer date, otherwise change
+it.  The option `magit-commit-extend-override-date' can be used
+to inverse the meaning of the prefix argument.  
+\(git commit
+--amend --no-edit)
+
+\(fn &optional ARGS OVERRIDE-DATE)" t nil)
+
+(autoload 'magit-commit-reword "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-commit" "\
+Reword the last commit, ignoring staged changes.
+
+With a prefix argument keep the committer date, otherwise change
+it.  The option `magit-commit-reword-override-date' can be used
+to inverse the meaning of the prefix argument.
+
+Non-interactively respect the optional OVERRIDE-DATE argument
+and ignore the option.
+
+\(git commit --amend --only)
+
+\(fn &optional ARGS OVERRIDE-DATE)" t nil)
+
+(autoload 'magit-commit-fixup "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-commit" "\
+Create a fixup commit.
+
+With a prefix argument the target COMMIT has to be confirmed.
+Otherwise the commit at point may be used without confirmation
+depending on the value of option `magit-commit-squash-confirm'.
+
+\(fn &optional COMMIT ARGS)" t nil)
+
+(autoload 'magit-commit-squash "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-commit" "\
+Create a squash commit, without editing the squash message.
+
+With a prefix argument the target COMMIT has to be confirmed.
+Otherwise the commit at point may be used without confirmation
+depending on the value of option `magit-commit-squash-confirm'.
+
+\(fn &optional COMMIT ARGS)" t nil)
+
+(autoload 'magit-commit-augment "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-commit" "\
+Create a squash commit, editing the squash message.
+
+With a prefix argument the target COMMIT has to be confirmed.
+Otherwise the commit at point may be used without confirmation
+depending on the value of option `magit-commit-squash-confirm'.
+
+\(fn &optional COMMIT ARGS)" t nil)
+
+(autoload 'magit-commit-instant-fixup "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-commit" "\
+Create a fixup commit targeting COMMIT and instantly rebase.
+
+\(fn &optional COMMIT ARGS)" t nil)
+
+(autoload 'magit-commit-instant-squash "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-commit" "\
+Create a squash commit targeting COMMIT and instantly rebase.
+
+\(fn &optional COMMIT ARGS)" t nil)
+
+(autoload 'magit-commit-reshelve "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-commit" "\
+Change the committer date and possibly the author date of `HEAD'.
+
+The current time is used as the initial minibuffer input and the
+original author or committer date is available as the previous
+history element.
+
+Both the author and the committer dates are changes, unless one
+of the following is true, in which case only the committer date
+is updated:
+- You are not the author of the commit that is being reshelved.
+- The command was invoked with a prefix argument.
+- Non-interactively if UPDATE-AUTHOR is nil.
+
+\(fn DATE UPDATE-AUTHOR &optional ARGS)" t nil)
+
+(autoload 'magit-commit-absorb-modules "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-commit" "\
+Spread modified modules across recent commits.
+
+\(fn PHASE COMMIT)" t nil)
+ (autoload 'magit-commit-absorb "magit-commit" nil t)
+ (autoload 'magit-commit-autofixup "magit-commit" nil t)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-commit" '("magit-")))
+
+
+
+ (autoload 'magit-diff "magit-diff" nil t)
+ (autoload 'magit-diff-refresh "magit-diff" nil t)
+
+(autoload 'magit-diff-dwim "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-diff" "\
+Show changes for the thing at point.
+
+\(fn &optional ARGS FILES)" t nil)
+
+(autoload 'magit-diff-range "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-diff" "\
+Show differences between two commits.
+
+REV-OR-RANGE should be a range or a single revision.  If it is a
+revision, then show changes in the working tree relative to that
+revision.  If it is a range, but one side is omitted, then show
+changes relative to `HEAD'.
+
+If the region is active, use the revisions on the first and last
+line of the region as the two sides of the range.  With a prefix
+argument, instead of diffing the revisions, choose a revision to
+view changes along, starting at the common ancestor of both
+revisions (i.e., use a \"...\" range).
+
+\(fn REV-OR-RANGE &optional ARGS FILES)" t nil)
+
+(autoload 'magit-diff-working-tree "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-diff" "\
+Show changes between the current working tree and the `HEAD' commit.
+With a prefix argument show changes between the working tree and
+a commit read from the minibuffer.
+
+\(fn &optional REV ARGS FILES)" t nil)
+
+(autoload 'magit-diff-staged "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-diff" "\
+Show changes between the index and the `HEAD' commit.
+With a prefix argument show changes between the index and
+a commit read from the minibuffer.
+
+\(fn &optional REV ARGS FILES)" t nil)
+
+(autoload 'magit-diff-unstaged "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-diff" "\
+Show changes between the working tree and the index.
+
+\(fn &optional ARGS FILES)" t nil)
+
+(autoload 'magit-diff-unmerged "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-diff" "\
+Show changes that are being merged.
+
+\(fn &optional ARGS FILES)" t nil)
+
+(autoload 'magit-diff-while-committing "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-diff" "\
+While committing, show the changes that are about to be committed.
+While amending, invoking the command again toggles between
+showing just the new changes or all the changes that will
+be committed.
+
+\(fn &optional ARGS)" t nil)
+
+(autoload 'magit-diff-buffer-file "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-diff" "\
+Show diff for the blob or file visited in the current buffer.
+
+When the buffer visits a blob, then show the respective commit.
+When the buffer visits a file, then show the differenced between
+`HEAD' and the working tree.  In both cases limit the diff to
+the file or blob." t nil)
+
+(autoload 'magit-diff-paths "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-diff" "\
+Show changes between any two files on disk.
+
+\(fn A B)" t nil)
+
+(autoload 'magit-show-commit "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-diff" "\
+Visit the revision at point in another buffer.
+If there is no revision at point or with a prefix argument prompt
+for a revision.
+
+\(fn REV &optional ARGS FILES MODULE)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-diff" '("magit-")))
+
+
+
+ (autoload 'magit-ediff "magit-ediff" nil)
+
+(autoload 'magit-ediff-resolve "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-ediff" "\
+Resolve outstanding conflicts in FILE using Ediff.
+FILE has to be relative to the top directory of the repository.
+
+In the rare event that you want to manually resolve all
+conflicts, including those already resolved by Git, use
+`ediff-merge-revisions-with-ancestor'.
+
+\(fn FILE)" t nil)
+
+(autoload 'magit-ediff-stage "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-ediff" "\
+Stage and unstage changes to FILE using Ediff.
+FILE has to be relative to the top directory of the repository.
+
+\(fn FILE)" t nil)
+
+(autoload 'magit-ediff-compare "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-ediff" "\
+Compare REVA:FILEA with REVB:FILEB using Ediff.
+
+FILEA and FILEB have to be relative to the top directory of the
+repository.  If REVA or REVB is nil, then this stands for the
+working tree state.
+
+If the region is active, use the revisions on the first and last
+line of the region.  With a prefix argument, instead of diffing
+the revisions, choose a revision to view changes along, starting
+at the common ancestor of both revisions (i.e., use a \"...\"
+range).
+
+\(fn REVA REVB FILEA FILEB)" t nil)
+
+(autoload 'magit-ediff-dwim "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-ediff" "\
+Compare, stage, or resolve using Ediff.
+This command tries to guess what file, and what commit or range
+the user wants to compare, stage, or resolve using Ediff.  It
+might only be able to guess either the file, or range or commit,
+in which case the user is asked about the other.  It might not
+always guess right, in which case the appropriate `magit-ediff-*'
+command has to be used explicitly.  If it cannot read the user's
+mind at all, then it asks the user for a command to run." t nil)
+
+(autoload 'magit-ediff-show-staged "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-ediff" "\
+Show staged changes using Ediff.
+
+This only allows looking at the changes; to stage, unstage,
+and discard changes using Ediff, use `magit-ediff-stage'.
+
+FILE must be relative to the top directory of the repository.
+
+\(fn FILE)" t nil)
+
+(autoload 'magit-ediff-show-unstaged "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-ediff" "\
+Show unstaged changes using Ediff.
+
+This only allows looking at the changes; to stage, unstage,
+and discard changes using Ediff, use `magit-ediff-stage'.
+
+FILE must be relative to the top directory of the repository.
+
+\(fn FILE)" t nil)
+
+(autoload 'magit-ediff-show-working-tree "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-ediff" "\
+Show changes between `HEAD' and working tree using Ediff.
+FILE must be relative to the top directory of the repository.
+
+\(fn FILE)" t nil)
+
+(autoload 'magit-ediff-show-commit "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-ediff" "\
+Show changes introduced by COMMIT using Ediff.
+
+\(fn COMMIT)" t nil)
+
+(autoload 'magit-ediff-show-stash "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-ediff" "\
+Show changes introduced by STASH using Ediff.
+`magit-ediff-show-stash-with-index' controls whether a
+three-buffer Ediff is used in order to distinguish changes in the
+stash that were staged.
+
+\(fn STASH)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-ediff" '("magit-ediff-")))
+
+
+
+
+(autoload 'magit-run-git-gui "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-extras" "\
+Run `git gui' for the current git repository." t nil)
+
+(autoload 'magit-run-git-gui-blame "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-extras" "\
+Run `git gui blame' on the given FILENAME and COMMIT.
+Interactively run it for the current file and the `HEAD', with a
+prefix or when the current file cannot be determined let the user
+choose.  When the current buffer is visiting FILENAME instruct
+blame to center around the line point is on.
+
+\(fn COMMIT FILENAME &optional LINENUM)" t nil)
+
+(autoload 'magit-run-gitk "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-extras" "\
+Run `gitk' in the current repository." t nil)
+
+(autoload 'magit-run-gitk-branches "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-extras" "\
+Run `gitk --branches' in the current repository." t nil)
+
+(autoload 'magit-run-gitk-all "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-extras" "\
+Run `gitk --all' in the current repository." t nil)
+
+(autoload 'ido-enter-magit-status "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-extras" "\
+Drop into `magit-status' from file switching.
+
+This command does not work in Emacs 26.1.
+See https://github.com/magit/magit/issues/3634
+and https://debbugs.gnu.org/cgi/bugreport.cgi?bug=31707.
+
+To make this command available use something like:
+
+  (add-hook \\='ido-setup-hook
+            (lambda ()
+              (define-key ido-completion-map
+                (kbd \"C-x g\") \\='ido-enter-magit-status)))
+
+Starting with Emacs 25.1 the Ido keymaps are defined just once
+instead of every time Ido is invoked, so now you can modify it
+like pretty much every other keymap:
+
+  (define-key ido-common-completion-map
+    (kbd \"C-x g\") \\='ido-enter-magit-status)" t nil)
+
+(autoload 'magit-project-status "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-extras" "\
+Run `magit-status' in the current project's root." t nil)
+
+(autoload 'magit-dired-jump "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-extras" "\
+Visit file at point using Dired.
+With a prefix argument, visit in another window.  If there
+is no file at point, then instead visit `default-directory'.
+
+\(fn &optional OTHER-WINDOW)" t nil)
+
+(autoload 'magit-dired-log "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-extras" "\
+Show log for all marked files, or the current file.
+
+\(fn &optional FOLLOW)" t nil)
+
+(autoload 'magit-do-async-shell-command "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-extras" "\
+Open FILE with `dired-do-async-shell-command'.
+Interactively, open the file at point.
+
+\(fn FILE)" t nil)
+
+(autoload 'magit-previous-line "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-extras" "\
+Like `previous-line' but with Magit-specific shift-selection.
+
+Magit's selection mechanism is based on the region but selects an
+area that is larger than the region.  This causes `previous-line'
+when invoked while holding the shift key to move up one line and
+thereby select two lines.  When invoked inside a hunk body this
+command does not move point on the first invocation and thereby
+it only selects a single line.  Which inconsistency you prefer
+is a matter of preference.
+
+\(fn &optional ARG TRY-VSCROLL)" t nil)
+
+(function-put 'magit-previous-line 'interactive-only '"use `forward-line' with negative argument instead.")
+
+(autoload 'magit-next-line "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-extras" "\
+Like `next-line' but with Magit-specific shift-selection.
+
+Magit's selection mechanism is based on the region but selects
+an area that is larger than the region.  This causes `next-line'
+when invoked while holding the shift key to move down one line
+and thereby select two lines.  When invoked inside a hunk body
+this command does not move point on the first invocation and
+thereby it only selects a single line.  Which inconsistency you
+prefer is a matter of preference.
+
+\(fn &optional ARG TRY-VSCROLL)" t nil)
+
+(function-put 'magit-next-line 'interactive-only 'forward-line)
+
+(autoload 'magit-clean "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-extras" "\
+Remove untracked files from the working tree.
+With a prefix argument also remove ignored files,
+with two prefix arguments remove ignored files only.
+
+\(git clean -f -d [-x|-X])
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'magit-add-change-log-entry "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-extras" "\
+Find change log file and add date entry and item for current change.
+This differs from `add-change-log-entry' (which see) in that
+it acts on the current hunk in a Magit buffer instead of on
+a position in a file-visiting buffer.
+
+\(fn &optional WHOAMI FILE-NAME OTHER-WINDOW)" t nil)
+
+(autoload 'magit-add-change-log-entry-other-window "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-extras" "\
+Find change log file in other window and add entry and item.
+This differs from `add-change-log-entry-other-window' (which see)
+in that it acts on the current hunk in a Magit buffer instead of
+on a position in a file-visiting buffer.
+
+\(fn &optional WHOAMI FILE-NAME)" t nil)
+
+(autoload 'magit-edit-line-commit "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-extras" "\
+Edit the commit that added the current line.
+
+With a prefix argument edit the commit that removes the line,
+if any.  The commit is determined using `git blame' and made
+editable using `git rebase --interactive' if it is reachable
+from `HEAD', or by checking out the commit (or a branch that
+points at it) otherwise.
+
+\(fn &optional TYPE)" t nil)
+
+(autoload 'magit-diff-edit-hunk-commit "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-extras" "\
+From a hunk, edit the respective commit and visit the file.
+
+First visit the file being modified by the hunk at the correct
+location using `magit-diff-visit-file'.  This actually visits a
+blob.  When point is on a diff header, not within an individual
+hunk, then this visits the blob the first hunk is about.
+
+Then invoke `magit-edit-line-commit', which uses an interactive
+rebase to make the commit editable, or if that is not possible
+because the commit is not reachable from `HEAD' by checking out
+that commit directly.  This also causes the actual worktree file
+to be visited.
+
+Neither the blob nor the file buffer are killed when finishing
+the rebase.  If that is undesirable, then it might be better to
+use `magit-rebase-edit-command' instead of this command.
+
+\(fn FILE)" t nil)
+
+(autoload 'magit-reshelve-since "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-extras" "\
+Change the author and committer dates of the commits since REV.
+
+Ask the user for the first reachable commit whose dates should
+be changed.  Then read the new date for that commit.  The initial
+minibuffer input and the previous history element offer good
+values.  The next commit will be created one minute later and so
+on.
+
+This command is only intended for interactive use and should only
+be used on highly rearranged and unpublished history.
+
+If KEYID is non-nil, then use that to sign all reshelved commits.
+Interactively use the value of the \"--gpg-sign\" option in the
+list returned by `magit-rebase-arguments'.
+
+\(fn REV KEYID)" t nil)
+
+(autoload 'magit-pop-revision-stack "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-extras" "\
+Insert a representation of a revision into the current buffer.
+
+Pop a revision from the `magit-revision-stack' and insert it into
+the current buffer according to `magit-pop-revision-stack-format'.
+Revisions can be put on the stack using `magit-copy-section-value'
+and `magit-copy-buffer-revision'.
+
+If the stack is empty or with a prefix argument, instead read a
+revision in the minibuffer.  By using the minibuffer history this
+allows selecting an item which was popped earlier or to insert an
+arbitrary reference or revision without first pushing it onto the
+stack.
+
+When reading the revision from the minibuffer, then it might not
+be possible to guess the correct repository.  When this command
+is called inside a repository (e.g. while composing a commit
+message), then that repository is used.  Otherwise (e.g. while
+composing an email) then the repository recorded for the top
+element of the stack is used (even though we insert another
+revision).  If not called inside a repository and with an empty
+stack, or with two prefix arguments, then read the repository in
+the minibuffer too.
+
+\(fn REV TOPLEVEL)" t nil)
+
+(autoload 'magit-copy-section-value "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-extras" "\
+Save the value of the current section for later use.
+
+Save the section value to the `kill-ring', and, provided that
+the current section is a commit, branch, or tag section, push
+the (referenced) revision to the `magit-revision-stack' for use
+with `magit-pop-revision-stack'.
+
+When `magit-copy-revision-abbreviated' is non-nil, save the
+abbreviated revision to the `kill-ring' and the
+`magit-revision-stack'.
+
+When the current section is a branch or a tag, and a prefix
+argument is used, then save the revision at its tip to the
+`kill-ring' instead of the reference name.
+
+When the region is active, then save that to the `kill-ring',
+like `kill-ring-save' would, instead of behaving as described
+above.  If a prefix argument is used and the region is within
+a hunk, then strip the diff marker column and keep only either
+the added or removed lines, depending on the sign of the prefix
+argument.
+
+\(fn ARG)" t nil)
+
+(autoload 'magit-copy-buffer-revision "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-extras" "\
+Save the revision of the current buffer for later use.
+
+Save the revision shown in the current buffer to the `kill-ring'
+and push it to the `magit-revision-stack'.
+
+This command is mainly intended for use in `magit-revision-mode'
+buffers, the only buffers where it is always unambiguous exactly
+which revision should be saved.
+
+Most other Magit buffers usually show more than one revision, in
+some way or another, so this command has to select one of them,
+and that choice might not always be the one you think would have
+been the best pick.
+
+In such buffers it is often more useful to save the value of
+the current section instead, using `magit-copy-section-value'.
+
+When the region is active, then save that to the `kill-ring',
+like `kill-ring-save' would, instead of behaving as described
+above.
+
+When `magit-copy-revision-abbreviated' is non-nil, save the
+abbreviated revision to the `kill-ring' and the
+`magit-revision-stack'." t nil)
+
+(autoload 'magit-abort-dwim "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-extras" "\
+Abort current operation.
+Depending on the context, this will abort a merge, a rebase, a
+patch application, a cherry-pick, a revert, or a bisect." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-extras" '("magit-")))
+
+
+
+ (autoload 'magit-fetch "magit-fetch" nil t)
+ (autoload 'magit-fetch-from-pushremote "magit-fetch" nil t)
+ (autoload 'magit-fetch-from-upstream "magit-fetch" nil t)
+
+(autoload 'magit-fetch-other "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-fetch" "\
+Fetch from another repository.
+
+\(fn REMOTE ARGS)" t nil)
+
+(autoload 'magit-fetch-branch "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-fetch" "\
+Fetch a BRANCH from a REMOTE.
+
+\(fn REMOTE BRANCH ARGS)" t nil)
+
+(autoload 'magit-fetch-refspec "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-fetch" "\
+Fetch a REFSPEC from a REMOTE.
+
+\(fn REMOTE REFSPEC ARGS)" t nil)
+
+(autoload 'magit-fetch-all "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-fetch" "\
+Fetch from all remotes.
+
+\(fn ARGS)" t nil)
+
+(autoload 'magit-fetch-all-prune "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-fetch" "\
+Fetch from all remotes, and prune.
+Prune remote tracking branches for branches that have been
+removed on the respective remote." t nil)
+
+(autoload 'magit-fetch-all-no-prune "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-fetch" "\
+Fetch from all remotes." t nil)
+
+(autoload 'magit-fetch-modules "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-fetch" "\
+Fetch all submodules.
+
+Option `magit-fetch-modules-jobs' controls how many submodules
+are being fetched in parallel.  Also fetch the super-repository,
+because `git-fetch' does not support not doing that.  With a
+prefix argument fetch all remotes.
+
+\(fn &optional ALL)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-fetch" '("magit-")))
+
+
+
+
+(autoload 'magit-find-file "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-files" "\
+View FILE from REV.
+Switch to a buffer visiting blob REV:FILE, creating one if none
+already exists.  If prior to calling this command the current
+buffer and/or cursor position is about the same file, then go
+to the line and column corresponding to that location.
+
+\(fn REV FILE)" t nil)
+
+(autoload 'magit-find-file-other-window "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-files" "\
+View FILE from REV, in another window.
+Switch to a buffer visiting blob REV:FILE, creating one if none
+already exists.  If prior to calling this command the current
+buffer and/or cursor position is about the same file, then go to
+the line and column corresponding to that location.
+
+\(fn REV FILE)" t nil)
+
+(autoload 'magit-find-file-other-frame "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-files" "\
+View FILE from REV, in another frame.
+Switch to a buffer visiting blob REV:FILE, creating one if none
+already exists.  If prior to calling this command the current
+buffer and/or cursor position is about the same file, then go to
+the line and column corresponding to that location.
+
+\(fn REV FILE)" t nil)
+ (autoload 'magit-file-dispatch "magit" nil t)
+
+(autoload 'magit-blob-visit-file "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-files" "\
+View the file from the worktree corresponding to the current blob.
+When visiting a blob or the version from the index, then go to
+the same location in the respective file in the working tree." t nil)
+
+(autoload 'magit-file-checkout "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-files" "\
+Checkout FILE from REV.
+
+\(fn REV FILE)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-files" '("magit-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-git" '("magit-")))
+
+
+ (autoload 'magit-gitignore "magit-gitignore" nil t)
+
+(autoload 'magit-gitignore-in-topdir "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-gitignore" "\
+Add the Git ignore RULE to the top-level \".gitignore\" file.
+Since this file is tracked, it is shared with other clones of the
+repository.  Also stage the file.
+
+\(fn RULE)" t nil)
+
+(autoload 'magit-gitignore-in-subdir "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-gitignore" "\
+Add the Git ignore RULE to a \".gitignore\" file in DIRECTORY.
+Prompt the user for a directory and add the rule to the
+\".gitignore\" file in that directory.  Since such files are
+tracked, they are shared with other clones of the repository.
+Also stage the file.
+
+\(fn RULE DIRECTORY)" t nil)
+
+(autoload 'magit-gitignore-in-gitdir "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-gitignore" "\
+Add the Git ignore RULE to \"$GIT_DIR/info/exclude\".
+Rules in that file only affects this clone of the repository.
+
+\(fn RULE)" t nil)
+
+(autoload 'magit-gitignore-on-system "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-gitignore" "\
+Add the Git ignore RULE to the file specified by `core.excludesFile'.
+Rules that are defined in that file affect all local repositories.
+
+\(fn RULE)" t nil)
+
+(autoload 'magit-skip-worktree "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-gitignore" "\
+Call \"git update-index --skip-worktree -- FILE\".
+
+\(fn FILE)" t nil)
+
+(autoload 'magit-no-skip-worktree "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-gitignore" "\
+Call \"git update-index --no-skip-worktree -- FILE\".
+
+\(fn FILE)" t nil)
+
+(autoload 'magit-assume-unchanged "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-gitignore" "\
+Call \"git update-index --assume-unchanged -- FILE\".
+
+\(fn FILE)" t nil)
+
+(autoload 'magit-no-assume-unchanged "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-gitignore" "\
+Call \"git update-index --no-assume-unchanged -- FILE\".
+
+\(fn FILE)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-gitignore" '("magit-")))
+
+
+
+
+(autoload 'magit-imenu--log-prev-index-position-function "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-imenu" "\
+Move point to previous line in current buffer.
+This function is used as a value for
+`imenu-prev-index-position-function'." nil nil)
+
+(autoload 'magit-imenu--log-extract-index-name-function "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-imenu" "\
+Return imenu name for line at point.
+This function is used as a value for
+`imenu-extract-index-name-function'.  Point should be at the
+beginning of the line." nil nil)
+
+(autoload 'magit-imenu--diff-prev-index-position-function "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-imenu" "\
+Move point to previous file line in current buffer.
+This function is used as a value for
+`imenu-prev-index-position-function'." nil nil)
+
+(autoload 'magit-imenu--diff-extract-index-name-function "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-imenu" "\
+Return imenu name for line at point.
+This function is used as a value for
+`imenu-extract-index-name-function'.  Point should be at the
+beginning of the line." nil nil)
+
+(autoload 'magit-imenu--status-create-index-function "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-imenu" "\
+Return an alist of all imenu entries in current buffer.
+This function is used as a value for
+`imenu-create-index-function'." nil nil)
+
+(autoload 'magit-imenu--refs-create-index-function "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-imenu" "\
+Return an alist of all imenu entries in current buffer.
+This function is used as a value for
+`imenu-create-index-function'." nil nil)
+
+(autoload 'magit-imenu--cherry-create-index-function "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-imenu" "\
+Return an alist of all imenu entries in current buffer.
+This function is used as a value for
+`imenu-create-index-function'." nil nil)
+
+(autoload 'magit-imenu--submodule-prev-index-position-function "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-imenu" "\
+Move point to previous line in magit-submodule-list buffer.
+This function is used as a value for
+`imenu-prev-index-position-function'." nil nil)
+
+(autoload 'magit-imenu--submodule-extract-index-name-function "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-imenu" "\
+Return imenu name for line at point.
+This function is used as a value for
+`imenu-extract-index-name-function'.  Point should be at the
+beginning of the line." nil nil)
+
+(autoload 'magit-imenu--repolist-prev-index-position-function "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-imenu" "\
+Move point to previous line in magit-repolist buffer.
+This function is used as a value for
+`imenu-prev-index-position-function'." nil nil)
+
+(autoload 'magit-imenu--repolist-extract-index-name-function "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-imenu" "\
+Return imenu name for line at point.
+This function is used as a value for
+`imenu-extract-index-name-function'.  Point should be at the
+beginning of the line." nil nil)
+
+(autoload 'magit-imenu--process-prev-index-position-function "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-imenu" "\
+Move point to previous process in magit-process buffer.
+This function is used as a value for
+`imenu-prev-index-position-function'." nil nil)
+
+(autoload 'magit-imenu--process-extract-index-name-function "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-imenu" "\
+Return imenu name for line at point.
+This function is used as a value for
+`imenu-extract-index-name-function'.  Point should be at the
+beginning of the line." nil nil)
+
+(autoload 'magit-imenu--rebase-prev-index-position-function "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-imenu" "\
+Move point to previous commit in git-rebase buffer.
+This function is used as a value for
+`imenu-prev-index-position-function'." nil nil)
+
+(autoload 'magit-imenu--rebase-extract-index-name-function "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-imenu" "\
+Return imenu name for line at point.
+This function is used as a value for
+`imenu-extract-index-name-function'.  Point should be at the
+beginning of the line." nil nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-imenu" '("magit-imenu--index-function")))
+
+
+
+ (autoload 'magit-log "magit-log" nil t)
+ (autoload 'magit-log-refresh "magit-log" nil t)
+
+(autoload 'magit-log-current "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-log" "\
+Show log for the current branch.
+When `HEAD' is detached or with a prefix argument show log for
+one or more revs read from the minibuffer.
+
+\(fn REVS &optional ARGS FILES)" t nil)
+
+(autoload 'magit-log-other "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-log" "\
+Show log for one or more revs read from the minibuffer.
+The user can input any revision or revisions separated by a
+space, or even ranges, but only branches and tags, and a
+representation of the commit at point, are available as
+completion candidates.
+
+\(fn REVS &optional ARGS FILES)" t nil)
+
+(autoload 'magit-log-head "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-log" "\
+Show log for `HEAD'.
+
+\(fn &optional ARGS FILES)" t nil)
+
+(autoload 'magit-log-branches "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-log" "\
+Show log for all local branches and `HEAD'.
+
+\(fn &optional ARGS FILES)" t nil)
+
+(autoload 'magit-log-matching-branches "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-log" "\
+Show log for all branches matching PATTERN and `HEAD'.
+
+\(fn PATTERN &optional ARGS FILES)" t nil)
+
+(autoload 'magit-log-matching-tags "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-log" "\
+Show log for all tags matching PATTERN and `HEAD'.
+
+\(fn PATTERN &optional ARGS FILES)" t nil)
+
+(autoload 'magit-log-all-branches "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-log" "\
+Show log for all local and remote branches and `HEAD'.
+
+\(fn &optional ARGS FILES)" t nil)
+
+(autoload 'magit-log-all "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-log" "\
+Show log for all references and `HEAD'.
+
+\(fn &optional ARGS FILES)" t nil)
+
+(autoload 'magit-log-buffer-file "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-log" "\
+Show log for the blob or file visited in the current buffer.
+With a prefix argument or when `--follow' is an active log
+argument, then follow renames.  When the region is active,
+restrict the log to the lines that the region touches.
+
+\(fn &optional FOLLOW BEG END)" t nil)
+
+(autoload 'magit-log-trace-definition "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-log" "\
+Show log for the definition at point.
+
+\(fn FILE FN REV)" t nil)
+
+(autoload 'magit-log-merged "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-log" "\
+Show log for the merge of COMMIT into BRANCH.
+
+More precisely, find merge commit M that brought COMMIT into
+BRANCH, and show the log of the range \"M^1..M\".  If COMMIT is
+directly on BRANCH, then show approximately twenty surrounding
+commits instead.
+
+This command requires git-when-merged, which is available from
+https://github.com/mhagger/git-when-merged.
+
+\(fn COMMIT BRANCH &optional ARGS FILES)" t nil)
+
+(autoload 'magit-log-move-to-parent "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-log" "\
+Move to the Nth parent of the current commit.
+
+\(fn &optional N)" t nil)
+ (autoload 'magit-shortlog "magit-log" nil t)
+
+(autoload 'magit-shortlog-since "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-log" "\
+Show a history summary for commits since REV.
+
+\(fn REV ARGS)" t nil)
+
+(autoload 'magit-shortlog-range "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-log" "\
+Show a history summary for commit or range REV-OR-RANGE.
+
+\(fn REV-OR-RANGE ARGS)" t nil)
+
+(autoload 'magit-cherry "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-log" "\
+Show commits in a branch that are not merged in the upstream branch.
+
+\(fn HEAD UPSTREAM)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-log" '("magit-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-margin" '("magit-")))
+
+
+ (autoload 'magit-merge "magit" nil t)
+
+(autoload 'magit-merge-plain "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-merge" "\
+Merge commit REV into the current branch; using default message.
+
+Unless there are conflicts or a prefix argument is used create a
+merge commit using a generic commit message and without letting
+the user inspect the result.  With a prefix argument pretend the
+merge failed to give the user the opportunity to inspect the
+merge.
+
+\(git merge --no-edit|--no-commit [ARGS] REV)
+
+\(fn REV &optional ARGS NOCOMMIT)" t nil)
+
+(autoload 'magit-merge-editmsg "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-merge" "\
+Merge commit REV into the current branch; and edit message.
+Perform the merge and prepare a commit message but let the user
+edit it.
+
+\(git merge --edit --no-ff [ARGS] REV)
+
+\(fn REV &optional ARGS)" t nil)
+
+(autoload 'magit-merge-nocommit "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-merge" "\
+Merge commit REV into the current branch; pretending it failed.
+Pretend the merge failed to give the user the opportunity to
+inspect the merge and change the commit message.
+
+\(git merge --no-commit --no-ff [ARGS] REV)
+
+\(fn REV &optional ARGS)" t nil)
+
+(autoload 'magit-merge-into "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-merge" "\
+Merge the current branch into BRANCH and remove the former.
+
+Before merging, force push the source branch to its push-remote,
+provided the respective remote branch already exists, ensuring
+that the respective pull-request (if any) won't get stuck on some
+obsolete version of the commits that are being merged.  Finally
+if `forge-branch-pullreq' was used to create the merged branch,
+branch, then also remove the respective remote branch.
+
+\(fn BRANCH &optional ARGS)" t nil)
+
+(autoload 'magit-merge-absorb "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-merge" "\
+Merge BRANCH into the current branch and remove the former.
+
+Before merging, force push the source branch to its push-remote,
+provided the respective remote branch already exists, ensuring
+that the respective pull-request (if any) won't get stuck on some
+obsolete version of the commits that are being merged.  Finally
+if `forge-branch-pullreq' was used to create the merged branch,
+then also remove the respective remote branch.
+
+\(fn BRANCH &optional ARGS)" t nil)
+
+(autoload 'magit-merge-squash "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-merge" "\
+Squash commit REV into the current branch; don't create a commit.
+
+\(git merge --squash REV)
+
+\(fn REV)" t nil)
+
+(autoload 'magit-merge-preview "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-merge" "\
+Preview result of merging REV into the current branch.
+
+\(fn REV)" t nil)
+
+(autoload 'magit-merge-abort "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-merge" "\
+Abort the current merge operation.
+
+\(git merge --abort)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-merge" '("magit-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-mode" '("disable-magit-save-buffers" "magit-")))
+
+
+ (autoload 'magit-notes "magit" nil t)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-notes" '("magit-notes-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-obsolete" '("magit--magit-popup-warning")))
+
+
+ (autoload 'magit-patch "magit-patch" nil t)
+ (autoload 'magit-patch-create "magit-patch" nil t)
+ (autoload 'magit-patch-apply "magit-patch" nil t)
+
+(autoload 'magit-patch-save "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-patch" "\
+Write current diff into patch FILE.
+
+What arguments are used to create the patch depends on the value
+of `magit-patch-save-arguments' and whether a prefix argument is
+used.
+
+If the value is the symbol `buffer', then use the same arguments
+as the buffer.  With a prefix argument use no arguments.
+
+If the value is a list beginning with the symbol `exclude', then
+use the same arguments as the buffer except for those matched by
+entries in the cdr of the list.  The comparison is done using
+`string-prefix-p'.  With a prefix argument use the same arguments
+as the buffer.
+
+If the value is a list of strings (including the empty list),
+then use those arguments.  With a prefix argument use the same
+arguments as the buffer.
+
+Of course the arguments that are required to actually show the
+same differences as those shown in the buffer are always used.
+
+\(fn FILE &optional ARG)" t nil)
+
+(autoload 'magit-request-pull "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-patch" "\
+Request upstream to pull from your public repository.
+
+URL is the url of your publicly accessible repository.
+START is a commit that already is in the upstream repository.
+END is the last commit, usually a branch name, which upstream
+is asked to pull.  START has to be reachable from that commit.
+
+\(fn URL START END)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-patch" '("magit-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-process" '("magit-" "tramp-sh-handle-")))
+
+
+ (autoload 'magit-pull "magit-pull" nil t)
+ (autoload 'magit-pull-from-pushremote "magit-pull" nil t)
+ (autoload 'magit-pull-from-upstream "magit-pull" nil t)
+
+(autoload 'magit-pull-branch "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-pull" "\
+Pull from a branch read in the minibuffer.
+
+\(fn SOURCE ARGS)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-pull" '("magit-pull-")))
+
+
+
+ (autoload 'magit-push "magit-push" nil t)
+ (autoload 'magit-push-current-to-pushremote "magit-push" nil t)
+ (autoload 'magit-push-current-to-upstream "magit-push" nil t)
+
+(autoload 'magit-push-current "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-push" "\
+Push the current branch to a branch read in the minibuffer.
+
+\(fn TARGET ARGS)" t nil)
+
+(autoload 'magit-push-other "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-push" "\
+Push an arbitrary branch or commit somewhere.
+Both the source and the target are read in the minibuffer.
+
+\(fn SOURCE TARGET ARGS)" t nil)
+
+(autoload 'magit-push-refspecs "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-push" "\
+Push one or multiple REFSPECS to a REMOTE.
+Both the REMOTE and the REFSPECS are read in the minibuffer.  To
+use multiple REFSPECS, separate them with commas.  Completion is
+only available for the part before the colon, or when no colon
+is used.
+
+\(fn REMOTE REFSPECS ARGS)" t nil)
+
+(autoload 'magit-push-matching "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-push" "\
+Push all matching branches to another repository.
+If multiple remotes exist, then read one from the user.
+If just one exists, use that without requiring confirmation.
+
+\(fn REMOTE &optional ARGS)" t nil)
+
+(autoload 'magit-push-tags "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-push" "\
+Push all tags to another repository.
+If only one remote exists, then push to that.  Otherwise prompt
+for a remote, offering the remote configured for the current
+branch as default.
+
+\(fn REMOTE &optional ARGS)" t nil)
+
+(autoload 'magit-push-tag "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-push" "\
+Push a tag to another repository.
+
+\(fn TAG REMOTE &optional ARGS)" t nil)
+
+(autoload 'magit-push-notes-ref "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-push" "\
+Push a notes ref to another repository.
+
+\(fn REF REMOTE &optional ARGS)" t nil)
+ (autoload 'magit-push-implicitly "magit-push" nil t)
+
+(autoload 'magit-push-to-remote "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-push" "\
+Push to REMOTE without using an explicit refspec.
+The REMOTE is read in the minibuffer.
+
+This command simply runs \"git push -v [ARGS] REMOTE\".  ARGS
+are the arguments specified in the popup buffer.  No refspec
+arguments are used.  Instead the behavior depends on at least
+these Git variables: `push.default', `remote.pushDefault',
+`branch.<branch>.pushRemote', `branch.<branch>.remote',
+`branch.<branch>.merge', and `remote.<remote>.push'.
+
+\(fn REMOTE ARGS)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-push" '("magit-")))
+
+
+
+
+(autoload 'magit-reflog-current "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-reflog" "\
+Display the reflog of the current branch.
+If `HEAD' is detached, then show the reflog for that instead." t nil)
+
+(autoload 'magit-reflog-other "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-reflog" "\
+Display the reflog of a branch or another ref.
+
+\(fn REF)" t nil)
+
+(autoload 'magit-reflog-head "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-reflog" "\
+Display the `HEAD' reflog." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-reflog" '("magit-reflog-")))
+
+
+
+ (autoload 'magit-show-refs "magit-refs" nil t)
+
+(autoload 'magit-show-refs-head "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-refs" "\
+List and compare references in a dedicated buffer.
+Compared with `HEAD'.
+
+\(fn &optional ARGS)" t nil)
+
+(autoload 'magit-show-refs-current "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-refs" "\
+List and compare references in a dedicated buffer.
+Compare with the current branch or `HEAD' if it is detached.
+
+\(fn &optional ARGS)" t nil)
+
+(autoload 'magit-show-refs-other "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-refs" "\
+List and compare references in a dedicated buffer.
+Compared with a branch read from the user.
+
+\(fn &optional REF ARGS)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-refs" '("magit-")))
+
+
+
+ (autoload 'magit-remote "magit-remote" nil t)
+
+(autoload 'magit-remote-add "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-remote" "\
+Add a remote named REMOTE and fetch it.
+
+\(fn REMOTE URL &optional ARGS)" t nil)
+
+(autoload 'magit-remote-rename "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-remote" "\
+Rename the remote named OLD to NEW.
+
+\(fn OLD NEW)" t nil)
+
+(autoload 'magit-remote-remove "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-remote" "\
+Delete the remote named REMOTE.
+
+\(fn REMOTE)" t nil)
+
+(autoload 'magit-remote-prune "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-remote" "\
+Remove stale remote-tracking branches for REMOTE.
+
+\(fn REMOTE)" t nil)
+
+(autoload 'magit-remote-prune-refspecs "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-remote" "\
+Remove stale refspecs for REMOTE.
+
+A refspec is stale if there no longer exists at least one branch
+on the remote that would be fetched due to that refspec.  A stale
+refspec is problematic because its existence causes Git to refuse
+to fetch according to the remaining non-stale refspecs.
+
+If only stale refspecs remain, then offer to either delete the
+remote or to replace the stale refspecs with the default refspec.
+
+Also remove the remote-tracking branches that were created due to
+the now stale refspecs.  Other stale branches are not removed.
+
+\(fn REMOTE)" t nil)
+
+(autoload 'magit-remote-set-head "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-remote" "\
+Set the local representation of REMOTE's default branch.
+Query REMOTE and set the symbolic-ref refs/remotes/<remote>/HEAD
+accordingly.  With a prefix argument query for the branch to be
+used, which allows you to select an incorrect value if you fancy
+doing that.
+
+\(fn REMOTE &optional BRANCH)" t nil)
+
+(autoload 'magit-remote-unset-head "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-remote" "\
+Unset the local representation of REMOTE's default branch.
+Delete the symbolic-ref \"refs/remotes/<remote>/HEAD\".
+
+\(fn REMOTE)" t nil)
+ (autoload 'magit-remote-configure "magit-remote" nil t)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-remote" '("magit-")))
+
+
+
+
+(autoload 'magit-list-repositories "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-repos" "\
+Display a list of repositories.
+
+Use the options `magit-repository-directories' to control which
+repositories are displayed." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-repos" '("magit-")))
+
+
+
+ (autoload 'magit-reset "magit" nil t)
+
+(autoload 'magit-reset-mixed "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-reset" "\
+Reset the `HEAD' and index to COMMIT, but not the working tree.
+
+\(git reset --mixed COMMIT)
+
+\(fn COMMIT)" t nil)
+
+(autoload 'magit-reset-soft "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-reset" "\
+Reset the `HEAD' to COMMIT, but not the index and working tree.
+
+\(git reset --soft REVISION)
+
+\(fn COMMIT)" t nil)
+
+(autoload 'magit-reset-hard "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-reset" "\
+Reset the `HEAD', index, and working tree to COMMIT.
+
+\(git reset --hard REVISION)
+
+\(fn COMMIT)" t nil)
+
+(autoload 'magit-reset-keep "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-reset" "\
+Reset the `HEAD' and index to COMMIT, while keeping uncommitted changes.
+
+\(git reset --keep REVISION)
+
+\(fn COMMIT)" t nil)
+
+(autoload 'magit-reset-index "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-reset" "\
+Reset the index to COMMIT.
+Keep the `HEAD' and working tree as-is, so if COMMIT refers to the
+head this effectively unstages all changes.
+
+\(git reset COMMIT .)
+
+\(fn COMMIT)" t nil)
+
+(autoload 'magit-reset-worktree "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-reset" "\
+Reset the worktree to COMMIT.
+Keep the `HEAD' and index as-is.
+
+\(fn COMMIT)" t nil)
+
+(autoload 'magit-reset-quickly "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-reset" "\
+Reset the `HEAD' and index to COMMIT, and possibly the working tree.
+With a prefix argument reset the working tree otherwise don't.
+
+\(git reset --mixed|--hard COMMIT)
+
+\(fn COMMIT &optional HARD)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-reset" '("magit-reset-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-section" '("isearch-clean-overlays@magit-mode" "magit-")))
+
+
+
+(autoload 'magit-sequencer-continue "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-sequence" "\
+Resume the current cherry-pick or revert sequence." t nil)
+
+(autoload 'magit-sequencer-skip "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-sequence" "\
+Skip the stopped at commit during a cherry-pick or revert sequence." t nil)
+
+(autoload 'magit-sequencer-abort "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-sequence" "\
+Abort the current cherry-pick or revert sequence.
+This discards all changes made since the sequence started." t nil)
+ (autoload 'magit-cherry-pick "magit-sequence" nil t)
+
+(autoload 'magit-cherry-copy "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-sequence" "\
+Copy COMMITS from another branch onto the current branch.
+Prompt for a commit, defaulting to the commit at point.  If
+the region selects multiple commits, then pick all of them,
+without prompting.
+
+\(fn COMMITS &optional ARGS)" t nil)
+
+(autoload 'magit-cherry-apply "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-sequence" "\
+Apply the changes in COMMITS but do not commit them.
+Prompt for a commit, defaulting to the commit at point.  If
+the region selects multiple commits, then apply all of them,
+without prompting.
+
+\(fn COMMITS &optional ARGS)" t nil)
+
+(autoload 'magit-cherry-harvest "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-sequence" "\
+Move COMMITS from another BRANCH onto the current branch.
+Remove the COMMITS from BRANCH and stay on the current branch.
+If a conflict occurs, then you have to fix that and finish the
+process manually.
+
+\(fn COMMITS BRANCH &optional ARGS)" t nil)
+
+(autoload 'magit-cherry-donate "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-sequence" "\
+Move COMMITS from the current branch onto another existing BRANCH.
+Remove COMMITS from the current branch and stay on that branch.
+If a conflict occurs, then you have to fix that and finish the
+process manually.
+
+\(fn COMMITS BRANCH &optional ARGS)" t nil)
+
+(autoload 'magit-cherry-spinout "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-sequence" "\
+Move COMMITS from the current branch onto a new BRANCH.
+Remove COMMITS from the current branch and stay on that branch.
+If a conflict occurs, then you have to fix that and finish the
+process manually.
+
+\(fn COMMITS BRANCH START-POINT &optional ARGS)" t nil)
+
+(autoload 'magit-cherry-spinoff "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-sequence" "\
+Move COMMITS from the current branch onto a new BRANCH.
+Remove COMMITS from the current branch and checkout BRANCH.
+If a conflict occurs, then you have to fix that and finish
+the process manually.
+
+\(fn COMMITS BRANCH START-POINT &optional ARGS)" t nil)
+ (autoload 'magit-revert "magit-sequence" nil t)
+
+(autoload 'magit-revert-and-commit "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-sequence" "\
+Revert COMMIT by creating a new commit.
+Prompt for a commit, defaulting to the commit at point.  If
+the region selects multiple commits, then revert all of them,
+without prompting.
+
+\(fn COMMIT &optional ARGS)" t nil)
+
+(autoload 'magit-revert-no-commit "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-sequence" "\
+Revert COMMIT by applying it in reverse to the worktree.
+Prompt for a commit, defaulting to the commit at point.  If
+the region selects multiple commits, then revert all of them,
+without prompting.
+
+\(fn COMMIT &optional ARGS)" t nil)
+ (autoload 'magit-am "magit-sequence" nil t)
+
+(autoload 'magit-am-apply-patches "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-sequence" "\
+Apply the patches FILES.
+
+\(fn &optional FILES ARGS)" t nil)
+
+(autoload 'magit-am-apply-maildir "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-sequence" "\
+Apply the patches from MAILDIR.
+
+\(fn &optional MAILDIR ARGS)" t nil)
+
+(autoload 'magit-am-continue "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-sequence" "\
+Resume the current patch applying sequence." t nil)
+
+(autoload 'magit-am-skip "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-sequence" "\
+Skip the stopped at patch during a patch applying sequence." t nil)
+
+(autoload 'magit-am-abort "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-sequence" "\
+Abort the current patch applying sequence.
+This discards all changes made since the sequence started." t nil)
+ (autoload 'magit-rebase "magit-sequence" nil t)
+ (autoload 'magit-rebase-onto-pushremote "magit-sequence" nil t)
+ (autoload 'magit-rebase-onto-upstream "magit-sequence" nil t)
+
+(autoload 'magit-rebase-branch "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-sequence" "\
+Rebase the current branch onto a branch read in the minibuffer.
+All commits that are reachable from `HEAD' but not from the
+selected branch TARGET are being rebased.
+
+\(fn TARGET ARGS)" t nil)
+
+(autoload 'magit-rebase-subset "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-sequence" "\
+Rebase a subset of the current branch's history onto a new base.
+Rebase commits from START to `HEAD' onto NEWBASE.
+START has to be selected from a list of recent commits.
+
+\(fn NEWBASE START ARGS)" t nil)
+
+(autoload 'magit-rebase-interactive "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-sequence" "\
+Start an interactive rebase sequence.
+
+\(fn COMMIT ARGS)" t nil)
+
+(autoload 'magit-rebase-autosquash "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-sequence" "\
+Combine squash and fixup commits with their intended targets.
+
+\(fn ARGS)" t nil)
+
+(autoload 'magit-rebase-edit-commit "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-sequence" "\
+Edit a single older commit using rebase.
+
+\(fn COMMIT ARGS)" t nil)
+
+(autoload 'magit-rebase-reword-commit "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-sequence" "\
+Reword a single older commit using rebase.
+
+\(fn COMMIT ARGS)" t nil)
+
+(autoload 'magit-rebase-remove-commit "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-sequence" "\
+Remove a single older commit using rebase.
+
+\(fn COMMIT ARGS)" t nil)
+
+(autoload 'magit-rebase-continue "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-sequence" "\
+Restart the current rebasing operation.
+In some cases this pops up a commit message buffer for you do
+edit.  With a prefix argument the old message is reused as-is.
+
+\(fn &optional NOEDIT)" t nil)
+
+(autoload 'magit-rebase-skip "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-sequence" "\
+Skip the current commit and restart the current rebase operation." t nil)
+
+(autoload 'magit-rebase-edit "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-sequence" "\
+Edit the todo list of the current rebase operation." t nil)
+
+(autoload 'magit-rebase-abort "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-sequence" "\
+Abort the current rebase operation, restoring the original branch." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-sequence" '("magit-")))
+
+
+
+ (autoload 'magit-stash "magit-stash" nil t)
+
+(autoload 'magit-stash-both "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-stash" "\
+Create a stash of the index and working tree.
+Untracked files are included according to infix arguments.
+One prefix argument is equivalent to `--include-untracked'
+while two prefix arguments are equivalent to `--all'.
+
+\(fn MESSAGE &optional INCLUDE-UNTRACKED)" t nil)
+
+(autoload 'magit-stash-index "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-stash" "\
+Create a stash of the index only.
+Unstaged and untracked changes are not stashed.  The stashed
+changes are applied in reverse to both the index and the
+worktree.  This command can fail when the worktree is not clean.
+Applying the resulting stash has the inverse effect.
+
+\(fn MESSAGE)" t nil)
+
+(autoload 'magit-stash-worktree "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-stash" "\
+Create a stash of unstaged changes in the working tree.
+Untracked files are included according to infix arguments.
+One prefix argument is equivalent to `--include-untracked'
+while two prefix arguments are equivalent to `--all'.
+
+\(fn MESSAGE &optional INCLUDE-UNTRACKED)" t nil)
+
+(autoload 'magit-stash-keep-index "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-stash" "\
+Create a stash of the index and working tree, keeping index intact.
+Untracked files are included according to infix arguments.
+One prefix argument is equivalent to `--include-untracked'
+while two prefix arguments are equivalent to `--all'.
+
+\(fn MESSAGE &optional INCLUDE-UNTRACKED)" t nil)
+
+(autoload 'magit-snapshot-both "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-stash" "\
+Create a snapshot of the index and working tree.
+Untracked files are included according to infix arguments.
+One prefix argument is equivalent to `--include-untracked'
+while two prefix arguments are equivalent to `--all'.
+
+\(fn &optional INCLUDE-UNTRACKED)" t nil)
+
+(autoload 'magit-snapshot-index "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-stash" "\
+Create a snapshot of the index only.
+Unstaged and untracked changes are not stashed." t nil)
+
+(autoload 'magit-snapshot-worktree "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-stash" "\
+Create a snapshot of unstaged changes in the working tree.
+Untracked files are included according to infix arguments.
+One prefix argument is equivalent to `--include-untracked'
+while two prefix arguments are equivalent to `--all'.
+
+\(fn &optional INCLUDE-UNTRACKED)" t nil)
+
+(autoload 'magit-stash-apply "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-stash" "\
+Apply a stash to the working tree.
+Try to preserve the stash index.  If that fails because there
+are staged changes, apply without preserving the stash index.
+
+\(fn STASH)" t nil)
+
+(autoload 'magit-stash-drop "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-stash" "\
+Remove a stash from the stash list.
+When the region is active offer to drop all contained stashes.
+
+\(fn STASH)" t nil)
+
+(autoload 'magit-stash-clear "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-stash" "\
+Remove all stashes saved in REF's reflog by deleting REF.
+
+\(fn REF)" t nil)
+
+(autoload 'magit-stash-branch "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-stash" "\
+Create and checkout a new BRANCH from STASH.
+
+\(fn STASH BRANCH)" t nil)
+
+(autoload 'magit-stash-branch-here "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-stash" "\
+Create and checkout a new BRANCH and apply STASH.
+The branch is created using `magit-branch-and-checkout', using the
+current branch or `HEAD' as the start-point.
+
+\(fn STASH BRANCH)" t nil)
+
+(autoload 'magit-stash-format-patch "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-stash" "\
+Create a patch from STASH
+
+\(fn STASH)" t nil)
+
+(autoload 'magit-stash-list "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-stash" "\
+List all stashes in a buffer." t nil)
+
+(autoload 'magit-stash-show "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-stash" "\
+Show all diffs of a stash in a buffer.
+
+\(fn STASH &optional ARGS FILES)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-stash" '("magit-")))
+
+
+
+
+(autoload 'magit-init "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-status" "\
+Initialize a Git repository, then show its status.
+
+If the directory is below an existing repository, then the user
+has to confirm that a new one should be created inside.  If the
+directory is the root of the existing repository, then the user
+has to confirm that it should be reinitialized.
+
+Non-interactively DIRECTORY is (re-)initialized unconditionally.
+
+\(fn DIRECTORY)" t nil)
+
+(autoload 'magit-status "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-status" "\
+Show the status of the current Git repository in a buffer.
+
+If the current directory isn't located within a Git repository,
+then prompt for an existing repository or an arbitrary directory,
+depending on option `magit-repository-directories', and show the
+status of the selected repository instead.
+
+* If that option specifies any existing repositories, then offer
+  those for completion and show the status buffer for the
+  selected one.
+
+* Otherwise read an arbitrary directory using regular file-name
+  completion.  If the selected directory is the top-level of an
+  existing working tree, then show the status buffer for that.
+
+* Otherwise offer to initialize the selected directory as a new
+  repository.  After creating the repository show its status
+  buffer.
+
+These fallback behaviors can also be forced using one or more
+prefix arguments:
+
+* With two prefix arguments (or more precisely a numeric prefix
+  value of 16 or greater) read an arbitrary directory and act on
+  it as described above.  The same could be accomplished using
+  the command `magit-init'.
+
+* With a single prefix argument read an existing repository, or
+  if none can be found based on `magit-repository-directories',
+  then fall back to the same behavior as with two prefix
+  arguments.
+
+\(fn &optional DIRECTORY CACHE)" t nil)
+
+(defalias 'magit 'magit-status "\
+An alias for `magit-status' for better discoverability.
+
+Instead of invoking this alias for `magit-status' using
+\"M-x magit RET\", you should bind a key to `magit-status'
+and read the info node `(magit)Getting Started', which
+also contains other useful hints.")
+
+(autoload 'magit-status-here "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-status" "\
+Like `magit-status' but with non-nil `magit-status-goto-file-position'." t nil)
+
+(autoload 'magit-status-setup-buffer "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-status" "\
+
+
+\(fn &optional DIRECTORY)" nil nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-status" '("magit-")))
+
+
+
+ (autoload 'magit-submodule "magit-submodule" nil t)
+ (autoload 'magit-submodule-add "magit-submodule" nil t)
+
+(autoload 'magit-submodule-read-name-for-path "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-submodule" "\
+
+
+\(fn PATH &optional PREFER-SHORT)" nil nil)
+ (autoload 'magit-submodule-register "magit-submodule" nil t)
+ (autoload 'magit-submodule-populate "magit-submodule" nil t)
+ (autoload 'magit-submodule-update "magit-submodule" nil t)
+ (autoload 'magit-submodule-synchronize "magit-submodule" nil t)
+ (autoload 'magit-submodule-unpopulate "magit-submodule" nil t)
+
+(autoload 'magit-submodule-remove "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-submodule" "\
+Unregister MODULES and remove their working directories.
+
+For safety reasons, do not remove the gitdirs and if a module has
+uncommitted changes, then do not remove it at all.  If a module's
+gitdir is located inside the working directory, then move it into
+the gitdir of the superproject first.
+
+With the \"--force\" argument offer to remove dirty working
+directories and with a prefix argument offer to delete gitdirs.
+Both actions are very dangerous and have to be confirmed.  There
+are additional safety precautions in place, so you might be able
+to recover from making a mistake here, but don't count on it.
+
+\(fn MODULES ARGS TRASH-GITDIRS)" t nil)
+
+(autoload 'magit-insert-modules "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-submodule" "\
+Insert submodule sections.
+Hook `magit-module-sections-hook' controls which module sections
+are inserted, and option `magit-module-sections-nested' controls
+whether they are wrapped in an additional section." nil nil)
+
+(autoload 'magit-insert-modules-overview "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-submodule" "\
+Insert sections for all modules.
+For each section insert the path and the output of `git describe --tags',
+or, failing that, the abbreviated HEAD commit hash." nil nil)
+
+(autoload 'magit-insert-modules-unpulled-from-upstream "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-submodule" "\
+Insert sections for modules that haven't been pulled from the upstream.
+These sections can be expanded to show the respective commits." nil nil)
+
+(autoload 'magit-insert-modules-unpulled-from-pushremote "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-submodule" "\
+Insert sections for modules that haven't been pulled from the push-remote.
+These sections can be expanded to show the respective commits." nil nil)
+
+(autoload 'magit-insert-modules-unpushed-to-upstream "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-submodule" "\
+Insert sections for modules that haven't been pushed to the upstream.
+These sections can be expanded to show the respective commits." nil nil)
+
+(autoload 'magit-insert-modules-unpushed-to-pushremote "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-submodule" "\
+Insert sections for modules that haven't been pushed to the push-remote.
+These sections can be expanded to show the respective commits." nil nil)
+
+(autoload 'magit-list-submodules "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-submodule" "\
+Display a list of the current repository's submodules." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-submodule" '("magit-")))
+
+
+
+ (autoload 'magit-subtree "magit-subtree" nil t)
+ (autoload 'magit-subtree-import "magit-subtree" nil t)
+ (autoload 'magit-subtree-export "magit-subtree" nil t)
+
+(autoload 'magit-subtree-add "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-subtree" "\
+Add REF from REPOSITORY as a new subtree at PREFIX.
+
+\(fn PREFIX REPOSITORY REF ARGS)" t nil)
+
+(autoload 'magit-subtree-add-commit "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-subtree" "\
+Add COMMIT as a new subtree at PREFIX.
+
+\(fn PREFIX COMMIT ARGS)" t nil)
+
+(autoload 'magit-subtree-merge "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-subtree" "\
+Merge COMMIT into the PREFIX subtree.
+
+\(fn PREFIX COMMIT ARGS)" t nil)
+
+(autoload 'magit-subtree-pull "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-subtree" "\
+Pull REF from REPOSITORY into the PREFIX subtree.
+
+\(fn PREFIX REPOSITORY REF ARGS)" t nil)
+
+(autoload 'magit-subtree-push "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-subtree" "\
+Extract the history of the subtree PREFIX and push it to REF on REPOSITORY.
+
+\(fn PREFIX REPOSITORY REF ARGS)" t nil)
+
+(autoload 'magit-subtree-split "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-subtree" "\
+Extract the history of the subtree PREFIX.
+
+\(fn PREFIX COMMIT ARGS)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-subtree" '("magit-")))
+
+
+
+ (autoload 'magit-tag "magit" nil t)
+
+(autoload 'magit-tag-create "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-tag" "\
+Create a new tag with the given NAME at REV.
+With a prefix argument annotate the tag.
+
+\(git tag [--annotate] NAME REV)
+
+\(fn NAME REV &optional ARGS)" t nil)
+
+(autoload 'magit-tag-delete "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-tag" "\
+Delete one or more tags.
+If the region marks multiple tags (and nothing else), then offer
+to delete those, otherwise prompt for a single tag to be deleted,
+defaulting to the tag at point.
+
+\(git tag -d TAGS)
+
+\(fn TAGS)" t nil)
+
+(autoload 'magit-tag-prune "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-tag" "\
+Offer to delete tags missing locally from REMOTE, and vice versa.
+
+\(fn TAGS REMOTE-TAGS REMOTE)" t nil)
+
+(autoload 'magit-tag-release "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-tag" "\
+Create a release tag.
+
+Assume that release tags match `magit-release-tag-regexp'.
+
+First prompt for the name of the new tag using the highest
+existing tag as initial input and leaving it to the user to
+increment the desired part of the version string.
+
+If `--annotate' is enabled, then prompt for the message of the
+new tag.  Base the proposed tag message on the message of the
+highest tag, provided that that contains the corresponding
+version string and substituting the new version string for that.
+Otherwise propose something like \"Foo-Bar 1.2.3\", given, for
+example, a TAG \"v1.2.3\" and a repository located at something
+like \"/path/to/foo-bar\".
+
+\(fn TAG MSG &optional ARGS)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-tag" '("magit-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-transient" '("magit-")))
+
+
+
+(autoload 'magit-emacs-Q-command "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-utils" "\
+Show a shell command that runs an uncustomized Emacs with only Magit loaded.
+See info node `(magit)Debugging Tools' for more information." t nil)
+
+(autoload 'Info-follow-nearest-node--magit-gitman "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-utils" "\
+
+
+\(fn FN &optional FORK)" nil nil)
+
+(advice-add 'Info-follow-nearest-node :around 'Info-follow-nearest-node--magit-gitman)
+
+(autoload 'org-man-export--magit-gitman "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-utils" "\
+
+
+\(fn FN LINK DESCRIPTION FORMAT)" nil nil)
+
+(advice-add 'org-man-export :around 'org-man-export--magit-gitman)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-utils" '("magit-")))
+
+
+
+
+(defvar magit-wip-mode nil "\
+Non-nil if Magit-Wip mode is enabled.
+See the `magit-wip-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `magit-wip-mode'.")
+
+(custom-autoload 'magit-wip-mode "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-wip" nil)
+
+(autoload 'magit-wip-mode "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-wip" "\
+Save uncommitted changes to work-in-progress refs.
+
+If called interactively, enable Magit-Wip mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+Whenever appropriate (i.e. when dataloss would be a possibility
+otherwise) this mode causes uncommitted changes to be committed
+to dedicated work-in-progress refs.
+
+For historic reasons this mode is implemented on top of four
+other `magit-wip-*' modes, which can also be used individually,
+if you want finer control over when the wip refs are updated;
+but that is discouraged.
+
+\(fn &optional ARG)" t nil)
+
+(put 'magit-wip-after-save-mode 'globalized-minor-mode t)
+
+(defvar magit-wip-after-save-mode nil "\
+Non-nil if Magit-Wip-After-Save mode is enabled.
+See the `magit-wip-after-save-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `magit-wip-after-save-mode'.")
+
+(custom-autoload 'magit-wip-after-save-mode "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-wip" nil)
+
+(autoload 'magit-wip-after-save-mode "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-wip" "\
+Toggle Magit-Wip-After-Save-Local mode in all buffers.
+With prefix ARG, enable Magit-Wip-After-Save mode if ARG is positive;
+otherwise, disable it.  If called from Lisp, enable the mode if
+ARG is omitted or nil.
+
+Magit-Wip-After-Save-Local mode is enabled in all buffers where
+`magit-wip-after-save-local-mode-turn-on' would do it.
+See `magit-wip-after-save-local-mode' for more information on Magit-Wip-After-Save-Local mode.
+
+\(fn &optional ARG)" t nil)
+
+(defvar magit-wip-after-apply-mode nil "\
+Non-nil if Magit-Wip-After-Apply mode is enabled.
+See the `magit-wip-after-apply-mode' command
+for a description of this minor mode.")
+
+(custom-autoload 'magit-wip-after-apply-mode "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-wip" nil)
+
+(autoload 'magit-wip-after-apply-mode "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-wip" "\
+Commit to work-in-progress refs.
+
+If called interactively, enable Magit-Wip-After-Apply mode if ARG
+is positive, and disable it if ARG is zero or negative.
+If called from Lisp, also enable the mode if ARG is omitted or
+nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
+
+After applying a change using any \"apply variant\"
+command (apply, stage, unstage, discard, and reverse) commit the
+affected files to the current wip refs.  For each branch there
+may be two wip refs; one contains snapshots of the files as found
+in the worktree and the other contains snapshots of the entries
+in the index.
+
+\(fn &optional ARG)" t nil)
+
+(defvar magit-wip-before-change-mode nil "\
+Non-nil if Magit-Wip-Before-Change mode is enabled.
+See the `magit-wip-before-change-mode' command
+for a description of this minor mode.")
+
+(custom-autoload 'magit-wip-before-change-mode "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-wip" nil)
+
+(autoload 'magit-wip-before-change-mode "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-wip" "\
+Commit to work-in-progress refs before certain destructive changes.
+
+If called interactively, enable Magit-Wip-Before-Change mode if
+ARG is positive, and disable it if ARG is zero or negative.
+If called from Lisp, also enable the mode if ARG is omitted or
+nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
+
+Before invoking a revert command or an \"apply variant\"
+command (apply, stage, unstage, discard, and reverse) commit the
+affected tracked files to the current wip refs.  For each branch
+there may be two wip refs; one contains snapshots of the files
+as found in the worktree and the other contains snapshots of the
+entries in the index.
+
+Only changes to files which could potentially be affected by the
+command which is about to be called are committed.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'magit-wip-commit-initial-backup "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-wip" "\
+Before saving, commit current file to a worktree wip ref.
+
+The user has to add this function to `before-save-hook'.
+
+Commit the current state of the visited file before saving the
+current buffer to that file.  This backs up the same version of
+the file as `backup-buffer' would, but stores the backup in the
+worktree wip ref, which is also used by the various Magit Wip
+modes, instead of in a backup file as `backup-buffer' would.
+
+This function ignores the variables that affect `backup-buffer'
+and can be used along-side that function, which is recommended
+because this function only backs up files that are tracked in
+a Git repository." nil nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-wip" '("magit-")))
+
+
+
+ (autoload 'magit-worktree "magit-worktree" nil t)
+
+(autoload 'magit-worktree-checkout "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-worktree" "\
+Checkout BRANCH in a new worktree at PATH.
+
+\(fn PATH BRANCH)" t nil)
+
+(autoload 'magit-worktree-branch "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-worktree" "\
+Create a new BRANCH and check it out in a new worktree at PATH.
+
+\(fn PATH BRANCH START-POINT &optional FORCE)" t nil)
+
+(autoload 'magit-worktree-move "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-worktree" "\
+Move WORKTREE to PATH.
+
+\(fn WORKTREE PATH)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/magit-20210327.1617/magit-worktree" '("magit-")))
+
 
 
 
@@ -6538,8 +11582,10 @@ running 'man git-rebase' at the command line) for details.
 (defconst git-rebase-filename-regexp "/git-rebase-todo\\'")
 
 (add-to-list 'auto-mode-alist (cons git-rebase-filename-regexp 'git-rebase-mode))
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "git-rebase" '("git-rebase-")))
+
 
 
 
@@ -6636,8 +11682,10 @@ a prefix argument), also print the used versions of Magit, Git,
 and Emacs to it.
 
 \(fn &optional PRINT-DEST)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit" '("magit-")))
+
 
 
 
@@ -6668,8 +11716,10 @@ without requiring confirmation.
 
 (autoload 'magit-unstage-all "magit-apply" "\
 Remove all changes from the staging area." t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-apply" '("magit-")))
+
 
 
 
@@ -6696,8 +11746,10 @@ Auto-Revert mode is enabled in all buffers where
 See `auto-revert-mode' for more information on Auto-Revert mode.
 
 \(fn &optional ARG)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-autorevert" '("auto-revert-buffer" "magit-")))
+
 
 
  (autoload 'magit-bisect "magit-bisect" nil t)
@@ -6747,8 +11799,10 @@ begun.  In that case it behaves like `git bisect start; git
 bisect run'.
 
 \(fn CMDLINE &optional BAD GOOD ARGS)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-bisect" '("magit-")))
+
 
 
  (autoload 'magit-blame-echo "magit-blame" nil t)
@@ -6756,8 +11810,10 @@ bisect run'.
  (autoload 'magit-blame-removal "magit-blame" nil t)
  (autoload 'magit-blame-reverse "magit-blame" nil t)
  (autoload 'magit-blame "magit-blame" nil t)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-blame" '("magit-")))
+
 
 
 
@@ -6768,8 +11824,10 @@ with the variables' values as arguments, which were recorded by
 `magit--make-bookmark'.  Ignore `magit-display-buffer-function'.
 
 \(fn BOOKMARK)" nil nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-bookmark" '("magit--make-bookmark")))
+
 
 
  (autoload 'magit-branch "magit" nil t)
@@ -6783,7 +11841,7 @@ changes.
 
 \(git checkout REVISION).
 
-\(fn REVISION)" t nil)
+\(fn REVISION &optional ARGS)" t nil)
 
 (autoload 'magit-branch-create "magit-branch" "\
 Create BRANCH at branch or revision START-POINT.
@@ -6793,7 +11851,7 @@ Create BRANCH at branch or revision START-POINT.
 (autoload 'magit-branch-and-checkout "magit-branch" "\
 Create and checkout BRANCH at branch or revision START-POINT.
 
-\(fn BRANCH START-POINT)" t nil)
+\(fn BRANCH START-POINT &optional ARGS)" t nil)
 
 (autoload 'magit-branch-or-checkout "magit-branch" "\
 Hybrid between `magit-checkout' and `magit-branch-and-checkout'.
@@ -6931,8 +11989,10 @@ and also rename the respective reflog file.
 
 \(fn BRANCH)" t nil)
  (autoload 'magit-branch-configure "magit-branch" nil t)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-branch" '("magit-")))
+
 
 
  (autoload 'magit-clone "magit-clone" nil t)
@@ -6978,8 +12038,10 @@ Create a mirror of REPOSITORY in DIRECTORY.
 Then show the status buffer for the new repository.
 
 \(fn REPOSITORY DIRECTORY ARGS)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-clone" '("magit-clone-")))
+
 
 
  (autoload 'magit-commit "magit-commit" nil t)
@@ -7064,13 +12126,18 @@ Create a squash commit targeting COMMIT and instantly rebase.
 (autoload 'magit-commit-reshelve "magit-commit" "\
 Change the committer date and possibly the author date of `HEAD'.
 
-If you are the author of `HEAD', then both dates are changed,
-otherwise only the committer date.  The current time is used
-as the initial minibuffer input and the original author (if
-that is you) or committer date is available as the previous
+The current time is used as the initial minibuffer input and the
+original author or committer date is available as the previous
 history element.
 
-\(fn DATE)" t nil)
+Both the author and the committer dates are changes, unless one
+of the following is true, in which case only the committer date
+is updated:
+- You are not the author of the commit that is being reshelved.
+- The command was invoked with a prefix argument.
+- Non-interactively if UPDATE-AUTHOR is nil.
+
+\(fn DATE UPDATE-AUTHOR &optional ARGS)" t nil)
 
 (autoload 'magit-commit-absorb-modules "magit-commit" "\
 Spread modified modules across recent commits.
@@ -7078,8 +12145,10 @@ Spread modified modules across recent commits.
 \(fn PHASE COMMIT)" t nil)
  (autoload 'magit-commit-absorb "magit-commit" nil t)
  (autoload 'magit-commit-autofixup "magit-commit" nil t)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-commit" '("magit-")))
+
 
 
  (autoload 'magit-diff "magit-diff" nil t)
@@ -7157,8 +12226,10 @@ If there is no revision at point or with a prefix argument prompt
 for a revision.
 
 \(fn REV &optional ARGS FILES MODULE)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-diff" '("magit-")))
+
 
 
  (autoload 'magit-ediff "magit-ediff" nil)
@@ -7242,8 +12313,10 @@ three-buffer Ediff is used in order to distinguish changes in the
 stash that were staged.
 
 \(fn STASH)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-ediff" '("magit-ediff-")))
+
 
 
 
@@ -7408,7 +12481,11 @@ on.
 This command is only intended for interactive use and should only
 be used on highly rearranged and unpublished history.
 
-\(fn REV)" t nil)
+If KEYID is non-nil, then use that to sign all reshelved commits.
+Interactively use the value of the \"--gpg-sign\" option in the
+list returned by `magit-rebase-arguments'.
+
+\(fn REV KEYID)" t nil)
 
 (autoload 'magit-pop-revision-stack "magit-extras" "\
 Insert a representation of a revision into the current buffer.
@@ -7491,8 +12568,10 @@ abbreviated revision to the `kill-ring' and the
 Abort current operation.
 Depending on the context, this will abort a merge, a rebase, a
 patch application, a cherry-pick, a revert, or a bisect." t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-extras" '("magit-")))
+
 
 
  (autoload 'magit-fetch "magit-fetch" nil t)
@@ -7536,8 +12615,10 @@ because `git-fetch' does not support not doing that.  With a
 prefix argument fetch all remotes.
 
 \(fn &optional ALL)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-fetch" '("magit-")))
+
 
 
 
@@ -7578,8 +12659,10 @@ the same location in the respective file in the working tree." t nil)
 Checkout FILE from REV.
 
 \(fn REV FILE)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-files" '("magit-")))
+
 
 
 
@@ -7596,8 +12679,8 @@ repository.  Also stage the file.
 \(fn RULE)" t nil)
 
 (autoload 'magit-gitignore-in-subdir "magit-gitignore" "\
-Add the Git ignore RULE to a \".gitignore\" file.
-Prompted the user for a directory and add the rule to the
+Add the Git ignore RULE to a \".gitignore\" file in DIRECTORY.
+Prompt the user for a directory and add the rule to the
 \".gitignore\" file in that directory.  Since such files are
 tracked, they are shared with other clones of the repository.
 Also stage the file.
@@ -7635,8 +12718,10 @@ Call \"git update-index --assume-unchanged -- FILE\".
 Call \"git update-index --no-assume-unchanged -- FILE\".
 
 \(fn FILE)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-gitignore" '("magit-")))
+
 
 
 
@@ -7720,8 +12805,10 @@ Return imenu name for line at point.
 This function is used as a value for
 `imenu-extract-index-name-function'.  Point should be at the
 beginning of the line." nil nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-imenu" '("magit-imenu--index-function")))
+
 
 
  (autoload 'magit-log "magit-log" nil t)
@@ -7819,8 +12906,10 @@ Show a history summary for commit or range REV-OR-RANGE.
 Show commits in a branch that are not merged in the upstream branch.
 
 \(fn HEAD UPSTREAM)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-log" '("magit-")))
+
 
 
 
@@ -7900,17 +12989,21 @@ Preview result of merging REV into the current branch.
 Abort the current merge operation.
 
 \(git merge --abort)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-merge" '("magit-")))
 
+
 
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-mode" '("disable-magit-save-buffers" "inhibit-magit-refresh" "magit-")))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-mode" '("disable-magit-save-buffers" "magit-")))
 
 
  (autoload 'magit-notes "magit" nil t)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-notes" '("magit-notes-")))
+
 
 
 
@@ -7955,8 +13048,10 @@ END is the last commit, usually a branch name, which upstream
 is asked to pull.  START has to be reachable from that commit.
 
 \(fn URL START END)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-patch" '("magit-")))
+
 
 
 
@@ -7971,8 +13066,10 @@ is asked to pull.  START has to be reachable from that commit.
 Pull from a branch read in the minibuffer.
 
 \(fn SOURCE ARGS)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-pull" '("magit-pull-")))
+
 
 
  (autoload 'magit-push "magit-push" nil t)
@@ -8037,8 +13134,10 @@ these Git variables: `push.default', `remote.pushDefault',
 `branch.<branch>.merge', and `remote.<remote>.push'.
 
 \(fn REMOTE ARGS)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-push" '("magit-")))
+
 
 
 
@@ -8053,8 +13152,10 @@ Display the reflog of a branch or another ref.
 
 (autoload 'magit-reflog-head "magit-reflog" "\
 Display the `HEAD' reflog." t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-reflog" '("magit-reflog-")))
+
 
 
  (autoload 'magit-show-refs "magit-refs" nil t)
@@ -8076,8 +13177,10 @@ List and compare references in a dedicated buffer.
 Compared with a branch read from the user.
 
 \(fn &optional REF ARGS)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-refs" '("magit-")))
+
 
 
  (autoload 'magit-remote "magit-remote" nil t)
@@ -8133,8 +13236,10 @@ Delete the symbolic-ref \"refs/remotes/<remote>/HEAD\".
 
 \(fn REMOTE)" t nil)
  (autoload 'magit-remote-configure "magit-remote" nil t)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-remote" '("magit-")))
+
 
 
 
@@ -8143,8 +13248,10 @@ Display a list of repositories.
 
 Use the options `magit-repository-directories' to control which
 repositories are displayed." t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-repos" '("magit-")))
+
 
 
  (autoload 'magit-reset "magit" nil t)
@@ -8199,8 +13306,10 @@ With a prefix argument reset the working tree otherwise don't.
 \(git reset --mixed|--hard COMMIT)
 
 \(fn COMMIT &optional HARD)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-reset" '("magit-reset-")))
+
 
 
 
@@ -8362,8 +13471,10 @@ Edit the todo list of the current rebase operation." t nil)
 
 (autoload 'magit-rebase-abort "magit-sequence" "\
 Abort the current rebase operation, restoring the original branch." t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-sequence" '("magit-")))
+
 
 
  (autoload 'magit-stash "magit-stash" nil t)
@@ -8463,8 +13574,10 @@ List all stashes in a buffer." t nil)
 Show all diffs of a stash in a buffer.
 
 \(fn STASH &optional ARGS FILES)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-stash" '("magit-")))
+
 
 
 
@@ -8530,8 +13643,10 @@ Like `magit-status' but with non-nil `magit-status-goto-file-position'." t nil)
 
 
 \(fn &optional DIRECTORY)" nil nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-status" '("magit-")))
+
 
 
  (autoload 'magit-submodule "magit-submodule" nil t)
@@ -8592,8 +13707,10 @@ These sections can be expanded to show the respective commits." nil nil)
 
 (autoload 'magit-list-submodules "magit-submodule" "\
 Display a list of the current repository's submodules." t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-submodule" '("magit-")))
+
 
 
  (autoload 'magit-subtree "magit-subtree" nil t)
@@ -8629,8 +13746,10 @@ Extract the history of the subtree PREFIX and push it to REF on REPOSITORY.
 Extract the history of the subtree PREFIX.
 
 \(fn PREFIX COMMIT ARGS)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-subtree" '("magit-")))
+
 
 
  (autoload 'magit-tag "magit" nil t)
@@ -8676,8 +13795,10 @@ example, a TAG \"v1.2.3\" and a repository located at something
 like \"/path/to/foo-bar\".
 
 \(fn TAG MSG &optional ARGS)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-tag" '("magit-")))
+
 
 
 
@@ -8702,8 +13823,10 @@ See info node `(magit)Debugging Tools' for more information." t nil)
 \(fn FN LINK DESCRIPTION FORMAT)" nil nil)
 
 (advice-add 'org-man-export :around 'org-man-export--magit-gitman)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-utils" '("magit-")))
+
 
 
 
@@ -8771,9 +13894,10 @@ for a description of this minor mode.")
 Commit to work-in-progress refs.
 
 If called interactively, enable Magit-Wip-After-Apply mode if ARG
-is positive, and disable it if ARG is zero or negative.  If
-called from Lisp, also enable the mode if ARG is omitted or nil,
-and toggle it if ARG is `toggle'; disable the mode otherwise.
+is positive, and disable it if ARG is zero or negative.
+If called from Lisp, also enable the mode if ARG is omitted or
+nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
 
 After applying a change using any \"apply variant\"
 command (apply, stage, unstage, discard, and reverse) commit the
@@ -8795,9 +13919,10 @@ for a description of this minor mode.")
 Commit to work-in-progress refs before certain destructive changes.
 
 If called interactively, enable Magit-Wip-Before-Change mode if
-ARG is positive, and disable it if ARG is zero or negative.  If
-called from Lisp, also enable the mode if ARG is omitted or nil,
-and toggle it if ARG is `toggle'; disable the mode otherwise.
+ARG is positive, and disable it if ARG is zero or negative.
+If called from Lisp, also enable the mode if ARG is omitted or
+nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
 
 Before invoking a revert command or an \"apply variant\"
 command (apply, stage, unstage, discard, and reverse) commit the
@@ -8826,8 +13951,10 @@ This function ignores the variables that affect `backup-buffer'
 and can be used along-side that function, which is recommended
 because this function only backs up files that are tracked in
 a Git repository." nil nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-wip" '("magit-")))
+
 
 
  (autoload 'magit-worktree "magit-worktree" nil t)
@@ -8846,8 +13973,10 @@ Create a new BRANCH and check it out in a new worktree at PATH.
 Move WORKTREE to PATH.
 
 \(fn WORKTREE PATH)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-worktree" '("magit-")))
+
 
 
 
@@ -9008,10 +14137,513 @@ Commands:
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/counsel-20210129.1143/counsel-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/counsel-20210129.1143/counsel-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel-autoloads.el") (car load-path))))
+
+
+
+(autoload 'counsel-company "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Complete using `company-candidates'." t nil)
+
+(autoload 'counsel-irony "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Inline C/C++ completion using Irony." t nil)
+
+(autoload 'counsel-describe-variable "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Forward to `describe-variable'.
+
+Variables declared using `defcustom' are highlighted according to
+`ivy-highlight-face'." t nil)
+
+(autoload 'counsel-describe-function "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Forward to `describe-function'.
+
+Interactive functions (i.e., commands) are highlighted according
+to `ivy-highlight-face'." t nil)
+
+(autoload 'counsel-describe-symbol "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Forward to `describe-symbol'." t nil)
+
+(autoload 'counsel-set-variable "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Set a variable SYM, with completion.
+
+When the selected variable is a `defcustom' with the type boolean
+or radio, offer completion of all possible values.
+
+Otherwise, offer a variant of `eval-expression', with the initial
+input corresponding to the chosen variable.
+
+With a prefix arg, restrict list to variables defined using
+`defcustom'.
+
+\(fn SYM)" t nil)
+
+(autoload 'counsel-apropos "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Show all matching symbols.
+See `apropos' for further information on what is considered
+a symbol and how to search for them." t nil)
+
+(autoload 'counsel-info-lookup-symbol "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Forward SYMBOL to `info-lookup-symbol' with ivy completion.
+With prefix arg MODE a query for the symbol help mode is offered.
+
+\(fn SYMBOL &optional MODE)" t nil)
+
+(autoload 'counsel-M-x "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Ivy version of `execute-extended-command'.
+Optional INITIAL-INPUT is the initial input in the minibuffer.
+This function integrates with either the `amx' or `smex' package
+when available, in that order of precedence.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-command-history "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Show the history of commands." t nil)
+
+(autoload 'counsel-load-library "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Load a selected the Emacs Lisp library.
+The libraries are offered from `load-path'." t nil)
+
+(autoload 'counsel-find-library "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Visit a selected the Emacs Lisp library.
+The libraries are offered from `load-path'." t nil)
+
+(autoload 'counsel-load-theme "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Forward to `load-theme'.
+Usable with `ivy-resume', `ivy-next-line-and-call' and
+`ivy-previous-line-and-call'." t nil)
+
+(autoload 'counsel-descbinds "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Show a list of all defined keys and their definitions.
+If non-nil, show only bindings that start with PREFIX.
+BUFFER defaults to the current one.
+
+\(fn &optional PREFIX BUFFER)" t nil)
+
+(autoload 'counsel-describe-face "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Completion for `describe-face'." t nil)
+
+(autoload 'counsel-faces "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Complete faces with preview.
+Actions are provided by default for describing or customizing the
+selected face." t nil)
+
+(autoload 'counsel-git "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Find file in the current Git repository.
+INITIAL-INPUT can be given as the initial minibuffer input.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-git-grep "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Grep for a string in the current Git repository.
+INITIAL-INPUT can be given as the initial minibuffer input.
+INITIAL-DIRECTORY, if non-nil, is used as the root directory for search.
+When CMD is a string, use it as a \"git grep\" command.
+When CMD is non-nil, prompt for a specific \"git grep\" command.
+
+\(fn &optional INITIAL-INPUT INITIAL-DIRECTORY CMD)" t nil)
+
+(autoload 'counsel-git-stash "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Search through all available git stashes." t nil)
+
+(autoload 'counsel-git-change-worktree "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Find the file corresponding to the current buffer on a different worktree." t nil)
+
+(autoload 'counsel-git-checkout "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Call the \"git checkout\" command." t nil)
+
+(autoload 'counsel-git-log "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Call the \"git log --grep\" shell command." t nil)
+
+(autoload 'counsel-find-file "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Forward to `find-file'.
+When INITIAL-INPUT is non-nil, use it in the minibuffer during completion.
+
+\(fn &optional INITIAL-INPUT INITIAL-DIRECTORY)" t nil)
+
+(autoload 'counsel-dired "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Forward to `dired'.
+When INITIAL-INPUT is non-nil, use it in the minibuffer during completion.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-recentf "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Find a file on `recentf-list'." t nil)
+
+(autoload 'counsel-buffer-or-recentf "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Find a buffer visiting a file or file on `recentf-list'." t nil)
+
+(autoload 'counsel-bookmark "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Forward to `bookmark-jump' or `bookmark-set' if bookmark doesn't exist." t nil)
+
+(autoload 'counsel-bookmarked-directory "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Ivy interface for bookmarked directories.
+
+With a prefix argument, this command creates a new bookmark which points to the
+current value of `default-directory'." t nil)
+
+(autoload 'counsel-file-register "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Search file in register.
+
+You cannot use Emacs' normal register commands to create file
+registers.  Instead you must use the `set-register' function like
+so: `(set-register ?i \"/home/eric/.emacs.d/init.el\")'.  Now you
+can use `C-x r j i' to open that file." t nil)
+
+(autoload 'counsel-locate-action-extern "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Pass X to `xdg-open' or equivalent command via the shell.
+
+\(fn X)" t nil)
+
+(autoload 'counsel-locate "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Call a \"locate\" style shell command.
+INITIAL-INPUT can be given as the initial minibuffer input.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-tracker "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" nil t nil)
+
+(autoload 'counsel-fzf "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Open a file using the fzf shell command.
+INITIAL-INPUT can be given as the initial minibuffer input.
+INITIAL-DIRECTORY, if non-nil, is used as the root directory for search.
+FZF-PROMPT, if non-nil, is passed as `ivy-read' prompt argument.
+
+\(fn &optional INITIAL-INPUT INITIAL-DIRECTORY FZF-PROMPT)" t nil)
+
+(autoload 'counsel-dpkg "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Call the \"dpkg\" shell command." t nil)
+
+(autoload 'counsel-rpm "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Call the \"rpm\" shell command." t nil)
+
+(autoload 'counsel-file-jump "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Jump to a file below the current directory.
+List all files within the current directory or any of its sub-directories.
+INITIAL-INPUT can be given as the initial minibuffer input.
+INITIAL-DIRECTORY, if non-nil, is used as the root directory for search.
+
+\(fn &optional INITIAL-INPUT INITIAL-DIRECTORY)" t nil)
+
+(autoload 'counsel-dired-jump "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Jump to a directory (see `dired-jump') below the current directory.
+List all sub-directories within the current directory.
+INITIAL-INPUT can be given as the initial minibuffer input.
+INITIAL-DIRECTORY, if non-nil, is used as the root directory for search.
+
+\(fn &optional INITIAL-INPUT INITIAL-DIRECTORY)" t nil)
+
+(autoload 'counsel-ag "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Grep for a string in a root directory using `ag'.
+
+By default, the root directory is the first directory containing
+a .git subdirectory.
+
+INITIAL-INPUT can be given as the initial minibuffer input.
+INITIAL-DIRECTORY, if non-nil, is used as the root directory for search.
+EXTRA-AG-ARGS, if non-nil, is appended to `counsel-ag-base-command'.
+AG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument.
+CALLER is passed to `ivy-read'.
+
+With a `\\[universal-argument]' prefix argument, prompt for INITIAL-DIRECTORY.
+With a `\\[universal-argument] \\[universal-argument]' prefix argument, prompt additionally for EXTRA-AG-ARGS.
+
+\(fn &optional INITIAL-INPUT INITIAL-DIRECTORY EXTRA-AG-ARGS AG-PROMPT &key CALLER)" t nil)
+
+(autoload 'counsel-pt "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Grep for a string in the current directory using pt.
+INITIAL-INPUT can be given as the initial minibuffer input.
+This uses `counsel-ag' with `counsel-pt-base-command' instead of
+`counsel-ag-base-command'.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-ack "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Grep for a string in the current directory using ack.
+INITIAL-INPUT can be given as the initial minibuffer input.
+This uses `counsel-ag' with `counsel-ack-base-command' replacing
+`counsel-ag-base-command'.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-rg "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Grep for a string in the current directory using `rg'.
+INITIAL-INPUT can be given as the initial minibuffer input.
+INITIAL-DIRECTORY, if non-nil, is used as the root directory for search.
+EXTRA-RG-ARGS string, if non-nil, is appended to `counsel-rg-base-command'.
+RG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument.
+
+Example input with inclusion and exclusion file patterns:
+    require i -- -g*.el
+
+\(fn &optional INITIAL-INPUT INITIAL-DIRECTORY EXTRA-RG-ARGS RG-PROMPT)" t nil)
+
+(autoload 'counsel-grep "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Grep for a string in the file visited by the current buffer.
+When non-nil, INITIAL-INPUT is the initial search pattern.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-grep-backward "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Grep for a string in the file visited by the current buffer going
+backward similar to `swiper-backward'. When non-nil, INITIAL-INPUT is
+the initial search pattern.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-grep-or-swiper "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Call `swiper' for small buffers and `counsel-grep' for large ones.
+When non-nil, INITIAL-INPUT is the initial search pattern.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-grep-or-swiper-backward "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Call `swiper-backward' for small buffers and `counsel-grep-backward' for
+large ones.  When non-nil, INITIAL-INPUT is the initial search pattern.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-recoll "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Search for a string in the recoll database.
+You'll be given a list of files that match.
+Selecting a file will launch `swiper' for that file.
+INITIAL-INPUT can be given as the initial minibuffer input.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel--org-get-tags "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" nil nil nil)
+
+(autoload 'counsel-org-tag "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Add or remove tags in `org-mode'." t nil)
+
+(autoload 'counsel-org-tag-agenda "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Set tags for the current agenda item." t nil)
+
+(defalias 'counsel-org-goto #'counsel-outline)
+
+(autoload 'counsel-org-goto-all "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Go to a different location in any org file." t nil)
+
+(autoload 'counsel-org-file "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Browse all attachments for current Org file." t nil)
+
+(autoload 'counsel-org-entity "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Complete Org entities using Ivy." t nil)
+
+(autoload 'counsel-org-capture "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Capture something." t nil)
+
+(autoload 'counsel-org-agenda-headlines "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Choose from headers of `org-mode' files in the agenda." t nil)
+
+(autoload 'counsel-org-link "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Insert a link to an headline with completion." t nil)
+
+(autoload 'counsel-mark-ring "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Browse `mark-ring' interactively.
+Obeys `widen-automatically', which see." t nil)
+
+(autoload 'counsel-evil-marks "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Ivy replacement for `evil-show-marks'.
+By default, this function respects `counsel-evil-marks-exclude-registers'.
+When ARG is non-nil, display all active evil registers.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'counsel-package "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Install or delete packages.
+
+Packages not currently installed are prefixed with \"+\", and
+selecting one of these will try to install it.
+Packages currently installed are prefixed with \"-\", and
+selecting one of these will try to delete it.
+
+Additional actions:\\<ivy-minibuffer-map>
+
+  \\[ivy-dispatching-done] d: Describe package
+  \\[ivy-dispatching-done] h: Visit package's homepage" t nil)
+
+(autoload 'counsel-tmm "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Text-mode emulation of looking and choosing from a menu bar." t nil)
+
+(autoload 'counsel-yank-pop "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Ivy replacement for `yank-pop'.
+With a plain prefix argument (\\[universal-argument]),
+temporarily toggle the value of `counsel-yank-pop-after-point'.
+Any other value of ARG has the same meaning as in `yank-pop', but
+`counsel-yank-pop-preselect-last' determines its default value.
+See also `counsel-yank-pop-filter' for how to filter candidates.
+
+Note: Duplicate elements of `kill-ring' are always deleted.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'counsel-register "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Interactively choose a register." t nil)
+
+(autoload 'counsel-evil-registers "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Ivy replacement for `evil-show-registers'." t nil)
+
+(autoload 'counsel-imenu "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Jump to a buffer position indexed by imenu." t nil)
+
+(autoload 'counsel-list-processes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Offer completion for `process-list'.
+The default action deletes the selected process.
+An extra action allows to switch to the process buffer." t nil)
+
+(autoload 'counsel-minibuffer-history "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Browse minibuffer history." t nil)
+
+(autoload 'counsel-esh-history "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Browse Eshell history." t nil)
+
+(autoload 'counsel-shell-history "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Browse shell history." t nil)
+
+(autoload 'counsel-slime-repl-history "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Browse Slime REPL history." t nil)
+
+(autoload 'counsel-hydra-heads "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Call a head of the current/last hydra." t nil)
+
+(autoload 'counsel-semantic "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Jump to a semantic tag in the current buffer." t nil)
+
+(autoload 'counsel-semantic-or-imenu "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" nil t nil)
+
+(autoload 'counsel-outline "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Jump to an outline heading with completion." t nil)
+
+(autoload 'counsel-ibuffer "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Use ibuffer to switch to another buffer.
+NAME specifies the name of the buffer (defaults to \"*Ibuffer*\").
+
+\(fn &optional NAME)" t nil)
+
+(autoload 'counsel-switch-to-shell-buffer "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Switch to a shell buffer, or create one." t nil)
+
+(autoload 'counsel-unicode-char "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Insert COUNT copies of a Unicode character at point.
+COUNT defaults to 1.
+
+\(fn &optional COUNT)" t nil)
+
+(autoload 'counsel-colors-emacs "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Show a list of all supported colors for a particular frame.
+
+You can insert or kill the name or hexadecimal RGB value of the
+selected color." t nil)
+
+(autoload 'counsel-colors-web "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Show a list of all W3C web colors for use in CSS.
+
+You can insert or kill the name or hexadecimal RGB value of the
+selected color." t nil)
+
+(autoload 'counsel-fonts "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Show a list of all supported font families for a particular frame.
+
+You can insert or kill the name of the selected font." t nil)
+
+(autoload 'counsel-kmacro "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Interactively choose and run a keyboard macro.
+
+With prefix argument, run macro that many times.
+
+Macros are run using the current value of `kmacro-counter-value'
+and their respective counter format. Displayed next to each macro is
+the counter's format and initial value.
+
+One can use actions to copy the counter format or initial counter
+value of a macro, using them for a new macro." t nil)
+
+(autoload 'counsel-geiser-doc-look-up-manual "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Search Scheme documentation." t nil)
+
+(autoload 'counsel-rhythmbox "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Choose a song from the Rhythmbox library to play or enqueue.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'counsel-linux-app "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Launch a Linux desktop application, similar to Alt-<F2>.
+When ARG is non-nil, ignore NoDisplay property in *.desktop files.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'counsel-wmctrl "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Select a desktop window using wmctrl." t nil)
+
+(autoload 'counsel-switch-buffer "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Switch to another buffer.
+Display a preview of the selected ivy completion candidate buffer
+in the current window." t nil)
+
+(autoload 'counsel-switch-buffer-other-window "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Switch to another buffer in another window.
+Display a preview of the selected ivy completion candidate buffer
+in the current window." t nil)
+
+(autoload 'counsel-compile "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Call `compile' completing with smart suggestions, optionally for DIR.
+
+Additional actions:
+
+\\{counsel-compile-map}
+
+\(fn &optional DIR)" t nil)
+
+(autoload 'counsel-compile-env "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Update `counsel-compile-env' interactively." t nil)
+
+(autoload 'counsel-minor "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Enable or disable minor mode.
+
+Disabled minor modes are prefixed with \"+\", and
+selecting one of these will enable it.
+Enabled minor modes are prefixed with \"-\", and
+selecting one of these will enable it.
+
+Additional actions:\\<ivy-minibuffer-map>
+
+  \\[ivy-dispatching-done] d: Go to minor mode definition
+  \\[ivy-dispatching-done] h: Describe minor mode" t nil)
+
+(autoload 'counsel-major "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" nil t nil)
+
+(autoload 'counsel-compilation-errors "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Compilation errors." t nil)
+
+(autoload 'counsel-flycheck "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Flycheck errors." t nil)
+
+(defvar counsel-mode nil "\
+Non-nil if Counsel mode is enabled.
+See the `counsel-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `counsel-mode'.")
+
+(custom-autoload 'counsel-mode "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" nil)
+
+(autoload 'counsel-mode "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" "\
+Toggle Counsel mode on or off.
+Turn Counsel mode on if ARG is positive, off otherwise. Counsel
+mode remaps built-in emacs functions that have counsel
+replacements.
+
+Local bindings (`counsel-mode-map'):
+\\{counsel-mode-map}
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/counsel-20210327.2022/counsel" '("counsel-" "ivy-function-called-at-point" "tmm-km-list")))
+
 
 
 
@@ -9206,9 +14838,10 @@ INITIAL-DIRECTORY, if non-nil, is used as the root directory for search.
 \(fn &optional INITIAL-INPUT INITIAL-DIRECTORY)" t nil)
 
 (autoload 'counsel-ag "counsel" "\
-Grep for a string in a root directory using ag.
+Grep for a string in a root directory using `ag'.
 
-By default, the root directory is the first directory containing a .git subdirectory.
+By default, the root directory is the first directory containing
+a .git subdirectory.
 
 INITIAL-INPUT can be given as the initial minibuffer input.
 INITIAL-DIRECTORY, if non-nil, is used as the root directory for search.
@@ -9238,7 +14871,7 @@ This uses `counsel-ag' with `counsel-ack-base-command' replacing
 \(fn &optional INITIAL-INPUT)" t nil)
 
 (autoload 'counsel-rg "counsel" "\
-Grep for a string in the current directory using rg.
+Grep for a string in the current directory using `rg'.
 INITIAL-INPUT can be given as the initial minibuffer input.
 INITIAL-DIRECTORY, if non-nil, is used as the root directory for search.
 EXTRA-RG-ARGS string, if non-nil, is appended to `counsel-rg-base-command'.
@@ -9790,10 +15423,10 @@ Beautify / pretty-print the active region (or the entire buffer if no active reg
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-rich-20210130.522/ivy-rich-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-rich-20210212.1441/ivy-rich-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-rich-20210130.522/ivy-rich-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-rich-20210212.1441/ivy-rich-autoloads.el") (car load-path))))
 
 
 
@@ -9848,10 +15481,10 @@ mode otherwise.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-prescient-20200716.1414/ivy-prescient-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-prescient-20210227.600/ivy-prescient-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-prescient-20200716.1414/ivy-prescient-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-prescient-20210227.600/ivy-prescient-autoloads.el") (car load-path))))
 
 
 
@@ -9918,10 +15551,10 @@ toggle it if ARG is `toggle'; disable the mode otherwise.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-hydra-20200608.1010/ivy-hydra-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-hydra-20210311.1108/ivy-hydra-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-hydra-20200608.1010/ivy-hydra-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-hydra-20210311.1108/ivy-hydra-autoloads.el") (car load-path))))
 
 
 
@@ -10132,10 +15765,10 @@ search.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/helpful-20201012.614/helpful-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/helpful-20210319.802/helpful-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/helpful-20201012.614/helpful-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/helpful-20210319.802/helpful-autoloads.el") (car load-path))))
 
 
 
@@ -10245,70 +15878,6 @@ ARG is omitted or nil.
 Echo the `hardhat-mode' status of the current buffer." t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "hardhat" '("global-hardhat-mode" "hardhat-")))
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/gnus-alias-20150316.42/gnus-alias-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/gnus-alias-20150316.42/gnus-alias-autoloads.el") (car load-path))))
-
-
-
-(autoload 'gnus-alias-init "gnus-alias" "\
-Add gnus-alias call to message mode hook." t nil)
-
-(autoload 'gnus-alias-select-identity "gnus-alias" "\
-Prompt user for an identity and use it." t nil)
-
-(autoload 'gnus-alias-use-identity "gnus-alias" "\
-Use an Identity defined in `gnus-alias-identity-alist'.
-
-IDENTITY must be a valid entry in `gnus-alias-identity-alist',
-otherwise an error will occur (NOTE: this behavior has changed
-significantly from that found in 'gnus-pers').
-
-If called interactively with no identity, user will be prompted for
-one.
-
-\(fn &optional IDENTITY)" t nil)
-
-(autoload 'gnus-alias-determine-identity "gnus-alias" "\
-Function that chooses a Identity based on message headers.
-
-See `gnus-alias-identity-rules' for more information.  Optional
-LOOKUP-ONLY is a boolean that, when non-nil, says to determine the
-Identity, but don't actually use it (just return it)
-
-\(fn &optional LOOKUP-ONLY)" nil nil)
-
-(autoload 'gnus-alias-message-x-completion "gnus-alias" "\
-Can be used to select identifies in new mail after tab-completion.
-
-WHICH-HEADER should be set to the header that completion was just
-performed on.
-
-When tab-completion is performed in the To: header, a new identity
-will be selected according to the rules set up in
-`gnus-alias-identity-alist' (which see).
-
-This particular function expects an argument, and as such should only
-be used with the `message-x-after-completion-functions'hook:
-
-  (add-hook 'message-x-after-completion-functions
-            'gnus-alias-message-x-completion)
-
-This should be place in the `message-load-hook' (see gnus-alias file
-for details).  If such an argument is not needed in the current
-context, `gnus-alias-determine-identity' may be used directly in a hook.
-
-\(fn WHICH-HEADER)" nil nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "gnus-alias" '("gnus-alias-")))
-
-
-
 
 
 )
@@ -10485,10 +16054,10 @@ of (command, word) to be used by `flyspell-do-correct'.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/flycheck-20201228.2104/flycheck-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/flycheck-20210321.852/flycheck-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/flycheck-20201228.2104/flycheck-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/flycheck-20210321.852/flycheck-autoloads.el") (car load-path))))
 
 
 
@@ -10787,10 +16356,27 @@ Setup Flycheck YAMLLint integration." t nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/fish-mode-20200213.2137/fish-mode-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/flycheck-swiftx-20200814.845/flycheck-swiftx-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/fish-mode-20200213.2137/fish-mode-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/flycheck-swiftx-20200814.845/flycheck-swiftx-autoloads.el") (car load-path))))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "../../../../../SyncServices/Dropbox/env/emacs.d/elpa/27.1/elpa/flycheck-swiftx-20200814.845/flycheck-swiftx" '("flycheck-swiftx--")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "flycheck-swiftx" '("flycheck-swiftx--")))
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/fish-mode-20210215.1114/fish-mode-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/fish-mode-20210215.1114/fish-mode-autoloads.el") (car load-path))))
 
 
 
@@ -11387,10 +16973,10 @@ Format LIBRARY.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/dtrt-indent-20210205.1727/dtrt-indent-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/dtrt-indent-20210307.2140/dtrt-indent-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/dtrt-indent-20210205.1727/dtrt-indent-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/dtrt-indent-20210307.2140/dtrt-indent-autoloads.el") (car load-path))))
 
 
 
@@ -11441,8 +17027,10 @@ Setting this variable directly does not take effect;
 use either \\[customize] or the function `dtrt-indent-mode'.")
 
 (custom-autoload 'dtrt-indent-mode "dtrt-indent" nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dtrt-indent" '("dtrt-indent-")))
+
 
 
 
@@ -11649,10 +17237,10 @@ what diminished modes would be on the mode-line if they were still minor." t nil
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/diff-hl-20210121.218/diff-hl-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/diff-hl-20210318.1413/diff-hl-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/diff-hl-20210121.218/diff-hl-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/diff-hl-20210318.1413/diff-hl-autoloads.el") (car load-path))))
 
 
 
@@ -11674,13 +17262,15 @@ Call `turn-on-diff-hl-mode' if the current major mode is applicable." nil nil)
 
 (autoload 'diff-hl-set-reference-rev "diff-hl" "\
 Set the reference revision globally to REV.
-When called interactively, REV is get from contexts:
+When called interactively, REV read with completion.
+
+The default value chosen using one of methods below:
 
 - In a log view buffer, it uses the revision of current entry.
 Call `vc-print-log' or `vc-print-root-log' first to open a log
 view buffer.
 - In a VC annotate buffer, it uses the revision of current line.
-- In other situations, get the revision name at point.
+- In other situations, it uses the symbol at point.
 
 Notice that this sets the reference revision globally, so in
 files from other repositories, `diff-hl-mode' will not highlight
@@ -11690,7 +17280,7 @@ Also notice that this will disable `diff-hl-amend-mode' in
 buffers that enables it, since `diff-hl-amend-mode' overrides its
 effect.
 
-\(fn &optional REV)" t nil)
+\(fn REV)" t nil)
 
 (autoload 'diff-hl-reset-reference-rev "diff-hl" "\
 Reset the reference revision globally to the most recent one." t nil)
@@ -11813,6 +17403,23 @@ toggle it if ARG is `toggle'; disable the mode otherwise.
 
 
 
+(autoload 'diff-hl-inline-popup-hide "diff-hl-inline-popup" "\
+Hide the current inline popup." t nil)
+
+(autoload 'diff-hl-inline-popup-show "diff-hl-inline-popup" "\
+Create a phantom overlay to show the inline popup, with some
+content LINES, and a HEADER and a FOOTER, at POINT.  KEYMAP is
+added to the current keymaps.  CLOSE-HOOK is called when the popup
+is closed.
+
+\(fn LINES &optional HEADER FOOTER KEYMAP CLOSE-HOOK POINT HEIGHT)" nil nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "diff-hl-inline-popup" '("diff-hl-inline-popup-")))
+
+
+
+
 (defvar diff-hl-margin-mode nil "\
 Non-nil if Diff-Hl-Margin mode is enabled.
 See the `diff-hl-margin-mode' command
@@ -11832,6 +17439,18 @@ from Lisp, also enable the mode if ARG is omitted or nil, and
 toggle it if ARG is `toggle'; disable the mode otherwise.
 
 \(fn &optional ARG)" t nil)
+
+(autoload 'diff-hl-margin-local-mode "diff-hl-margin" "\
+Toggle displaying `diff-hl-mode' highlights on the margin locally.
+You probably shouldn't use this function directly.
+
+If called interactively, enable Diff-Hl-Margin-Local mode if ARG
+is positive, and disable it if ARG is zero or negative.
+If called from Lisp, also enable the mode if ARG is omitted or
+nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
+
+\(fn &optional ARG)" t nil)
 
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "diff-hl-margin" '("diff-hl-")))
@@ -11839,12 +17458,86 @@ toggle it if ARG is `toggle'; disable the mode otherwise.
 
 
 
+(autoload 'diff-hl-show-hunk-inline-popup "diff-hl-show-hunk" "\
+Implementation to show the hunk in a inline popup.
+BUFFER is a buffer with the hunk.
+
+\(fn BUFFER &optional IGNORED-LINE)" nil nil)
+
+(autoload 'diff-hl-show-hunk-previous "diff-hl-show-hunk" "\
+Go to previous hunk/change and show it." t nil)
+
+(autoload 'diff-hl-show-hunk-next "diff-hl-show-hunk" "\
+Go to next hunk/change and show it." t nil)
+
+(autoload 'diff-hl-show-hunk "diff-hl-show-hunk" "\
+Show the VC diff hunk at point.
+The backend is determined by `diff-hl-show-hunk-function'." t nil)
+
+(autoload 'diff-hl-show-hunk-mouse-mode "diff-hl-show-hunk" "\
+Enables the margin and fringe to show a posframe/popup with vc diffs when clicked.
+By default, the popup shows only the current hunk, and
+the line of the hunk that matches the current position is
+highlighted.  The face, border and other visual preferences are
+customizable.  It can be also invoked with the command
+`diff-hl-show-hunk'
+\\{diff-hl-show-hunk-mouse-mode-map}
+
+If called interactively, enable Diff-Hl-Show-Hunk-Mouse mode if
+ARG is positive, and disable it if ARG is zero or negative.
+If called from Lisp, also enable the mode if ARG is omitted or
+nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+(put 'global-diff-hl-show-hunk-mouse-mode 'globalized-minor-mode t)
+
+(defvar global-diff-hl-show-hunk-mouse-mode nil "\
+Non-nil if Global Diff-Hl-Show-Hunk-Mouse mode is enabled.
+See the `global-diff-hl-show-hunk-mouse-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `global-diff-hl-show-hunk-mouse-mode'.")
+
+(custom-autoload 'global-diff-hl-show-hunk-mouse-mode "diff-hl-show-hunk" nil)
+
+(autoload 'global-diff-hl-show-hunk-mouse-mode "diff-hl-show-hunk" "\
+Toggle Diff-Hl-Show-Hunk-Mouse mode in all buffers.
+With prefix ARG, enable Global Diff-Hl-Show-Hunk-Mouse mode if ARG is positive;
+otherwise, disable it.  If called from Lisp, enable the mode if
+ARG is omitted or nil.
+
+Diff-Hl-Show-Hunk-Mouse mode is enabled in all buffers where
+`diff-hl-show-hunk-mouse-mode' would do it.
+See `diff-hl-show-hunk-mouse-mode' for more information on Diff-Hl-Show-Hunk-Mouse mode.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "diff-hl-show-hunk" '("diff-hl-show-hunk-")))
+
+
+
+
+(autoload 'diff-hl-show-hunk-posframe "diff-hl-show-hunk-posframe" "\
+Implementation to show the hunk in a posframe.
+
+\(fn BUFFER &optional LINE)" nil nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "diff-hl-show-hunk-posframe" '("diff-hl-show-hunk-")))
+
+
+
+
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/deadgrep-20210113.829/deadgrep-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/deadgrep-20210219.748/deadgrep-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/deadgrep-20210113.829/deadgrep-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/deadgrep-20210219.748/deadgrep-autoloads.el") (car load-path))))
 
 
 
@@ -11863,10 +17556,10 @@ don't actually start the search.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/company-20210122.2314/company-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/company-20210401.1228/company-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/company-20210122.2314/company-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/company-20210401.1228/company-autoloads.el") (car load-path))))
 
 
 
@@ -12198,10 +17891,10 @@ shadow backends that come after it.  Recommended usages:
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/company-prescient-20200716.1414/company-prescient-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/company-prescient-20210227.600/company-prescient-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/company-prescient-20200716.1414/company-prescient-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/company-prescient-20210227.600/company-prescient-autoloads.el") (car load-path))))
 
 
 
@@ -12233,10 +17926,10 @@ toggle it if ARG is `toggle'; disable the mode otherwise.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/company-posframe-20201214.52/company-posframe-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/company-posframe-20210331.325/company-posframe-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/company-posframe-20201214.52/company-posframe-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/company-posframe-20210331.325/company-posframe-autoloads.el") (car load-path))))
 
 
 
@@ -13367,370 +19060,6 @@ ARG is `toggle'; disable the mode otherwise.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/auctex-13.0.4/auctex-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/auctex-13.0.4/auctex-autoloads.el") (car load-path))))
-
-
-
-(autoload 'bib-cite-minor-mode "bib-cite" "\
-Toggle bib-cite mode.
-When bib-cite mode is enabled, citations, labels and refs are highlighted
-when the mouse is over them.  Clicking on these highlights with [mouse-2]
-runs bib-find, and [mouse-3] runs bib-display.
-
-\(fn ARG)" t nil)
-
-(autoload 'turn-on-bib-cite "bib-cite" "\
-Unconditionally turn on Bib Cite mode." nil nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "bib-cite" '("LaTeX-" "bib-" "create-alist-from-list" "member-cis" "psg-" "search-directory-tree")))
-
-
-
-
-(defalias 'ConTeXt-mode 'context-mode)
-
-(autoload 'context-mode "context" "\
-Major mode in AUCTeX for editing ConTeXt files.
-
-Special commands:
-\\{ConTeXt-mode-map}
-
-Entering `context-mode' calls the value of `text-mode-hook',
-then the value of `TeX-mode-hook', and then the value
-of ConTeXt-mode-hook." t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "context" '("ConTeXt-" "TeX-ConTeXt-sentinel" "context-guess-current-interface")))
-
-
-
-
-(autoload 'context-en-mode "context-en" "\
-Major mode for editing files for ConTeXt using its english interface.
-
-Special commands:
-\\{ConTeXt-mode-map}
-
-Entering `context-mode' calls the value of `text-mode-hook',
-then the value of TeX-mode-hook, and then the value
-of context-mode-hook." t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "context-en" '("ConTeXt-")))
-
-
-
-
-(autoload 'context-nl-mode "context-nl" "\
-Major mode for editing files for ConTeXt using its dutch interface.
-
-Special commands:
-\\{ConTeXt-mode-map}
-
-Entering `context-mode' calls the value of `text-mode-hook',
-then the value of TeX-mode-hook, and then the value
-of context-mode-hook." t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "context-nl" '("ConTeXt-")))
-
-
-
-
-(autoload 'font-latex-setup "font-latex" "\
-Setup this buffer for LaTeX font-lock.  Usually called from a hook." nil nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "font-latex" '("font-latex-")))
-
-
-
-
-(autoload 'BibTeX-auto-store "latex" "\
-This function should be called from `bibtex-mode-hook'.
-It will setup BibTeX to store keys in an auto file." nil nil)
-
-(add-to-list 'auto-mode-alist '("\\.drv\\'" . latex-mode))
-
-(add-to-list 'auto-mode-alist '("\\.hva\\'" . latex-mode))
-
-(autoload 'TeX-latex-mode "latex" "\
-Major mode in AUCTeX for editing LaTeX files.
-See info under AUCTeX for full documentation.
-
-Special commands:
-\\{LaTeX-mode-map}
-
-Entering LaTeX mode calls the value of `text-mode-hook',
-then the value of `TeX-mode-hook', and then the value
-of `LaTeX-mode-hook'." t nil)
-
-(add-to-list 'auto-mode-alist '("\\.dtx\\'" . doctex-mode))
-
-(autoload 'docTeX-mode "latex" "\
-Major mode in AUCTeX for editing .dtx files derived from `LaTeX-mode'.
-Runs `LaTeX-mode', sets a few variables and
-runs the hooks in `docTeX-mode-hook'.
-
-\(fn)" t nil)
-
-(defalias 'TeX-doctex-mode 'docTeX-mode)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "latex" '("Bib" "LaTeX-" "TeX-" "docTeX-" "latex-math-mode")))
-
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "latex-flymake" '("LaTeX-")))
-
-
-
-(autoload 'multi-prompt "multi-prompt" "\
-Completing prompt for a list of strings.  
-The first argument SEPARATOR should be the string (of length 1) to
-separate the elements in the list.  The second argument UNIQUE should
-be non-nil, if each element must be unique.  The remaining elements
-are the arguments to `completing-read'.  See that.
-
-\(fn SEPARATOR UNIQUE PROMPT TABLE &optional MP-PREDICATE REQUIRE-MATCH INITIAL HISTORY)" nil nil)
-
-(autoload 'multi-prompt-key-value "multi-prompt" "\
-Read multiple strings, with completion and key=value support.
-PROMPT is a string to prompt with, usually ending with a colon
-and a space.  TABLE is an alist.  The car of each element should
-be a string representing a key and the optional cdr should be a
-list with strings to be used as values for the key.
-
-See the documentation for `completing-read' for details on the
-other arguments: PREDICATE, REQUIRE-MATCH, INITIAL-INPUT, HIST,
-DEF, and INHERIT-INPUT-METHOD.
-
-The return value is the string as entered in the minibuffer.
-
-\(fn PROMPT TABLE &optional PREDICATE REQUIRE-MATCH INITIAL-INPUT HIST DEF INHERIT-INPUT-METHOD)" nil nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "multi-prompt" '("multi-prompt-")))
-
-
-
-
-(autoload 'TeX-plain-tex-mode "plain-tex" "\
-Major mode in AUCTeX for editing plain TeX files.
-See info under AUCTeX for documentation.
-
-Special commands:
-\\{plain-TeX-mode-map}
-
-Entering `plain-tex-mode' calls the value of `text-mode-hook',
-then the value of `TeX-mode-hook', and then the value
-of `plain-TeX-mode-hook'." t nil)
-
-(autoload 'ams-tex-mode "plain-tex" "\
-Major mode in AUCTeX for editing AmS-TeX files.
-See info under AUCTeX for documentation.
-
-Special commands:
-\\{AmSTeX-mode-map}
-
-Entering `ams-tex-mode' calls the value of `text-mode-hook',
-then the value of `TeX-mode-hook', and then the value
-of `AmS-TeX-mode-hook'." t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "plain-tex" '("AmS" "plain-TeX-")))
-
-
-
-
-(autoload 'preview-install-styles "preview" "\
-Installs the TeX style files into a permanent location.
-This must be in the TeX search path.  If FORCE-OVERWRITE is greater
-than 1, files will get overwritten without query, if it is less
-than 1 or nil, the operation will fail.  The default of 1 for interactive
-use will query.
-
-Similarly FORCE-SAVE can be used for saving
-`preview-TeX-style-dir' to record the fact that the uninstalled
-files are no longer needed in the search path.
-
-\(fn DIR &optional FORCE-OVERWRITE FORCE-SAVE)" t nil)
-
-(autoload 'LaTeX-preview-setup "preview" "\
-Hook function for embedding the preview package into AUCTeX.
-This is called by `LaTeX-mode-hook' and changes AUCTeX variables
-to add the preview functionality." nil nil)
-
-(autoload 'preview-report-bug "preview" "\
-Report a bug in the preview-latex package." t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "preview" '("TeX-" "desktop-buffer-preview" "preview-")))
-
-
-
-
-(autoload 'TeX-tex-mode "tex" "\
-Major mode in AUCTeX for editing TeX or LaTeX files.
-Tries to guess whether this file is for plain TeX or LaTeX.
-
-The algorithm is as follows:
-
-   1) if the file is empty or `TeX-force-default-mode' is not set to nil,
-      `TeX-default-mode' is chosen
-   2) If \\documentstyle or \\begin{, \\section{, \\part{ or \\chapter{ is
-      found, `latex-mode' is selected.
-   3) Otherwise, use `plain-tex-mode'" t nil)
-
-(autoload 'TeX-auto-generate "tex" "\
-Generate style file for TEX and store it in AUTO.
-If TEX is a directory, generate style files for all files in the directory.
-
-\(fn TEX AUTO)" t nil)
-
-(autoload 'TeX-auto-generate-global "tex" "\
-Create global auto directory for global TeX macro definitions." t nil)
-
-(autoload 'TeX-submit-bug-report "tex" "\
-Submit a bug report on AUCTeX via mail.
-
-Don't hesitate to report any problems or inaccurate documentation.
-
-If you don't have setup sending mail from (X)Emacs, please copy the
-output buffer into your mail program, as it gives us important
-information about your AUCTeX version and AUCTeX configuration." t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex" '("Bib" "ConTeXt-" "LaTeX-" "TeX-" "VirTeX-common-initialization" "docTeX-default-extension" "ispell-tex-major-modes" "plain-TeX-auto-regexp-list" "tex-")))
-
-
-
-
-(autoload 'TeX-install-toolbar "tex-bar" "\
-Install toolbar buttons for TeX mode." t nil)
-
-(autoload 'LaTeX-install-toolbar "tex-bar" "\
-Install toolbar buttons for LaTeX mode." t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex-bar" '("TeX-bar-")))
-
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex-buf" '("LaTeX-" "TeX-")))
-
-
-
-(autoload 'TeX-fold-mode "tex-fold" "\
-Minor mode for hiding and revealing macros and environments.
-
-Called interactively, with no prefix argument, toggle the mode.
-With universal prefix ARG (or if ARG is nil) turn mode on.
-With zero or negative ARG turn mode off.
-
-\(fn &optional ARG)" t nil)
-
-(defalias 'tex-fold-mode 'TeX-fold-mode)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex-fold" '("TeX-fold-")))
-
-
-
-
-(autoload 'tex-font-setup "tex-font" "\
-Setup font lock support for TeX." nil nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex-font" '("tex-")))
-
-
-
-
-(defalias 'Texinfo-mode 'texinfo-mode)
-
-(autoload 'TeX-texinfo-mode "tex-info" "\
-Major mode in AUCTeX for editing Texinfo files.
-
-Special commands:
-\\{Texinfo-mode-map}
-
-Entering Texinfo mode calls the value of `text-mode-hook'  and then the
-value of `Texinfo-mode-hook'." t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex-info" '("Texinfo-" "texinfo-environment-regexp")))
-
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex-ispell" '("TeX-ispell-")))
-
-
-
-(autoload 'japanese-plain-tex-mode "tex-jp" "\
-Major mode in AUCTeX for editing Japanese plain TeX files.
-Set `japanese-TeX-mode' to t, and enter `TeX-plain-tex-mode'." t nil)
-
-(autoload 'japanese-latex-mode "tex-jp" "\
-Major mode in AUCTeX for editing Japanese LaTeX files.
-Set `japanese-TeX-mode' to t, and enter `TeX-latex-mode'." t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex-jp" '("TeX-" "japanese-")))
-
-
-
- (require 'tex-site)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex-site" '("AUCTeX-" "TeX-" "preview-TeX-style-dir")))
-
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex-style" '("LaTeX-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex-wizard" '("TeX-wizard")))
-
-
-
-(autoload 'texmathp "texmathp" "\
-Determine if point is inside (La)TeX math mode.
-Returns t or nil.  Additional info is placed into `texmathp-why'.
-The functions assumes that you have (almost) syntactically correct (La)TeX in
-the buffer.
-See the variable `texmathp-tex-commands' about which commands are checked." t nil)
-
-(autoload 'texmathp-match-switch "texmathp" "\
-Search backward for any of the math switches.
-Limit searched to BOUND.
-
-\(fn BOUND)" nil nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "texmathp" '("texmathp-")))
-
-
-
- (autoload 'toolbarx-install-toolbar "toolbar-x")
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "toolbar-x" '("toolbarx-")))
-
-
-
-
-
-)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/async-20210117.718/async-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -13898,10 +19227,10 @@ Run ‘dired-do-rename’ asynchronously.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/amx-20210101.1921/amx-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/amx-20210305.118/amx-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/amx-20210101.1921/amx-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/amx-20210305.118/amx-autoloads.el") (car load-path))))
 
 
 
@@ -13946,15 +19275,19 @@ be re-run. Interactively, reinitialize when a prefix arg is
 provided.
 
 \(fn &optional REINIT)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "amx" '("amx-")))
 
+
+
+
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/all-the-icons-20210208.0/all-the-icons-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/all-the-icons-20210401.848/all-the-icons-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/all-the-icons-20210208.0/all-the-icons-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/all-the-icons-20210401.848/all-the-icons-autoloads.el") (car load-path))))
 
 
 
@@ -14005,17 +19338,19 @@ When Prefix ARG is non-nil, insert the propertized icon.
 When FAMILY is non-nil, limit the candidates to the icon set matching it.
 
 \(fn &optional ARG FAMILY)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "all-the-icons" '("all-the-icons-")))
+
 
 
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/all-the-icons-dired-20200403.1018/all-the-icons-dired-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.1/elpa/all-the-icons-dired-20210302.1410/all-the-icons-dired-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/all-the-icons-dired-20200403.1018/all-the-icons-dired-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.1/elpa/all-the-icons-dired-20210302.1410/all-the-icons-dired-autoloads.el") (car load-path))))
 
 
 
@@ -14023,9 +19358,10 @@ When FAMILY is non-nil, limit the candidates to the icon set matching it.
 Display all-the-icons icon for each files in a dired buffer.
 
 If called interactively, enable All-The-Icons-Dired mode if ARG
-is positive, and disable it if ARG is zero or negative.  If
-called from Lisp, also enable the mode if ARG is omitted or nil,
-and toggle it if ARG is `toggle'; disable the mode otherwise.
+is positive, and disable it if ARG is zero or negative.
+If called from Lisp, also enable the mode if ARG is omitted or
+nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
 
 \(fn &optional ARG)" t nil)
 
@@ -14105,16 +19441,16 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
 
 )
 (setq package-activated-list
-      (append
-       '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe vlf validate bind-key use-package use-package-hydra key-chord bind-chord use-package-chords epl pkg-info projectile dash s f avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile treemacs-icons-dired transient transient-posframe toc-org test-simple ivy swiper super-save srefactor spinner sml-mode smartparens load-relative loc-changes realgud rainbow-delimiters pos-tip racket-mode pythonic dash-functional pretty-hydra prescient popup persistent-scratch paren-face paredit paradox outorg outshine org-bullets org esxml nov mwim modus-themes memoize math-symbol-lists makey major-mode-hydra git-commit magit macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat gnus-alias git-timemachine gcmh flyspell-correct flyspell-correct-popup flycheck flycheck-yamllint fish-mode fira-code-mode expand-region eval-in-repl eros elmacro elisp-format dtrt-indent discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep company company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-identifiers-mode cmake-mode cask-mode beacon auctex async amx all-the-icons all-the-icons-dired aggressive-indent)
-       package-activated-list))
+	  (append
+	   '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode xcode-project ws-butler with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra key-chord bind-chord use-package-chords epl pkg-info projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile treemacs-icons-dired transient transient-posframe toc-org ivy swiper swift-playground-mode swift-mode f spinner markdown-mode lsp-mode swift-helpful super-save srefactor sml-mode smartparens rainbow-delimiters pos-tip racket-mode pretty-hydra prescient popup persistent-scratch paren-face paredit paradox outorg outshine org-bullets org ob-swift kv esxml nov mwim modus-themes math-symbol-lists makey major-mode-hydra git-commit magit macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine gcmh flyspell-correct flyspell-correct-popup flycheck flycheck-yamllint flycheck-swiftx fish-mode fira-code-mode expand-region eval-in-repl eros elmacro elisp-format dtrt-indent discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep company company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-identifiers-mode cmake-mode cask-mode beacon async amx all-the-icons all-the-icons-dired aggressive-indent)
+	   package-activated-list))
 (progn
   (require 'info)
   (info-initialize)
   (setq Info-directory-list
-	(append
-	 '("/Users/mark/.emacs.d/elpa/27.1/elpa/auctex-13.0.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210209.1110" "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210211.923" "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4.4" "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210213.24" "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210202.1423" "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20210117.2008" "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210210.1427" "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20210207.1926" "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20210117.2008")
-	 Info-directory-list)))
+		(append
+		 '("/Users/mark/.emacs.d/elpa/27.1/elpa/magit-20210327.1617" "/Users/mark/.emacs.d/elpa/27.1/elpa/modus-themes-20210331.1458" "/Users/mark/.emacs.d/elpa/27.1/elpa/org-9.4.5" "/Users/mark/.emacs.d/elpa/27.1/elpa/racket-mode-20210328.2038" "/Users/mark/.emacs.d/elpa/27.1/elpa/swift-helpful-20201031.1654" "/Users/mark/.emacs.d/elpa/27.1/elpa/ivy-20210311.1638" "/Users/mark/.emacs.d/elpa/27.1/elpa/transient-20210315.1902" "/Users/mark/.emacs.d/elpa/27.1/elpa/dash-20210330.1544" "/Users/mark/.emacs.d/elpa/27.1/elpa/use-package-20210207.1926" "/Users/mark/.emacs.d/elpa/27.1/elpa/with-editor-20210319.1930")
+		 Info-directory-list)))
 
 ;; Local Variables:
 ;; version-control: never

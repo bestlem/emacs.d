@@ -15,6 +15,9 @@
 	  (signature "Mark"))
 	 ("bar\\.baen\\.com"
 	  (address "baen@bestley.co.uk")
+	  (signature "Mark"))
+	 ("baensbar\\.net"
+	  (address "baen@bestley.co.uk")
 	  (signature "Mark"))))
  '(gnus-suppress-duplicates t)
  '(mail-default-directory "~/.emacs.d/var/Mail")

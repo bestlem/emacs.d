@@ -140,11 +140,11 @@ Use eternal-September but add Baen and then gmane for mail list
 There might also be gwene for RSS
 #+NAME: org_mark_2020-10-04T16-13-47+01-00_mini12.local_1BF43E07-3359-4A4B-ADC1-9E5E2F15053A
   #+begin_src emacs-lisp :tangle no :noweb-ref gnus-init
-  (setq auth-source-debug 'trivia)
-  (setq gnus-read-active-file 'some)
-  (setq gnus-secondary-select-methods '((nntp "news.gmane.io")
-                                        (nntp "bar.baen.com")))
-  (setq gnus-select-method '(nntp "news.eternal-september.org"))
+(setq auth-source-debug 'trivia)
+(setq gnus-read-active-file 'some)
+(setq gnus-secondary-select-methods '((nntp "news.gmane.io")
+                                        (nntp "baensbar.net")))
+(setq gnus-select-method '(nntp "news.eternal-september.org"))
   #+end_src
 
 *** Fastmail

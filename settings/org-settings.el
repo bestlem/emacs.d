@@ -33,7 +33,6 @@
    '(org-crypt org-tempo org-id org-mouse))
  '(org-src-ask-before-returning-to-edit-buffer nil)
  '(org-src-window-setup 'current-window)
- '(org-startup-folded 'fold nil nil "Customized with use-package org")
  '(org-todo-keywords
    '((sequence "TODO" "DONE" "LEAVE(@)")))
  '(org-yank-adjusted-subtrees t))

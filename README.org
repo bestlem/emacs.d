@@ -1,6 +1,6 @@
 #+ TITLE Org mode emacs startup
 #+PROPERTY:header-args :cache yes :tangle no :comments link
-#+STARTUP: content
+#+STARTUP: showall
 
 * Introduction
 :PROPERTIES:
@@ -10,7 +10,77 @@
 
  The reason is not for the pretty files that you see on the web or github but that I was writing a few comments and realised that org mode looks nicer for those (no comment marker ; on lines) and you can deal in text mode for documentation.
 
-I would note that my programming style is to have lots of small functions. With org-mode I can execute code from a block and not from a tangle. Unfortunately for init files use-package wants you to pout all code into one lisp form so making comments away from code.
+I would note that my programming style is to have lots of small functions. With org-mode I can execute code from a block and not from a tangle. Unfortunately for init files use-package wants you to pout all code into one lisp form so making comments away from code, so you have an incentive to use weaving - but then the top level code is not executable you have to tangle first.
+
+* Structure of startup files
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210424T144238.850528
+:END:
+** init.org
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210424T122437.576128
+:END:
+generates init.el and early-init.el (if emacs > 26). These .el files need to be in source code control as they need to run the startup. They include a minimal tangle method, this does not allow weaving or other controls. This minimal method is used on config.org (init.org currently could use this as well)
+
+init.org contains the minimal amout to load otyher things so in essence should not need to be edited.-originally put this text in here.
+
+There is now an alternate - which is a way to try other init setups
+
+** config.org
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210424T122437.573251
+:END:
+Basically loads org-mode using packaging etc. Note uses the minimal tangle so no weaving etc.
+The last thing it does is load init/org.all
+
+** init
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210424T144238.849064
+:END:
+This directory includes all the files that can have the full detangle i.e. including weaving.
+
+The files directly in init are explicitly loaded. Subdirectories are loaded by iterating over all the files in them, they contain files where the order of loading does not matter - well strictly done by length of file so can add some dependency.
+
+** init/all.org
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210424T155316.632809
+:END:
+Ideally this should just controls the order of loading things but originally did various things inline.
+*** behaviour
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210424T155316.631696
+:END:
+This controls how emacs works. Sets up the environment for how other things work.
+This is behaviour.org , completion.org and then all the file in behaviours ibuffer is a mode and can be separated out.
+In general these are needed and can't be lazy loaded.
+*** modes
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210424T155316.629706
+:END:
+Originally programming modes but these are all the modes. The load order dies not need to be determined.
+Much of progmodes.org can be put into individual modes or behaviours.
+In general any lazy loaded stuff can go here.
+*** command completion
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210424T171159.512509
+:END:
+I think can be moved out to modes
+*** keys
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210424T171159.511861
+:END:
+Well this can be the last - basically sets up my key bindings.\
+The one odd case is dealing with Aquamacs/macos differences which have to be done upfront.
+*** Startup
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210424T171159.511203
+:END:
+Detailed of extr setup at end
+*** Appearance
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210424T171159.510292
+:END:
+How things look
 
 * Use of org mode
 :PROPERTIES:
@@ -21,8 +91,6 @@ I would note that my programming style is to have lots of small functions. With 
 :ID:       org_mark_mini20.local:20210424T122854.197145
 :END:
 After experience and a problem with org mode with Aquamacs having issues the setup is.
-
-init.org generates init.el and early-init.el (if emacs > 26). These .el files need to be in source code control as they need to run the startup. They include a minimal tangle method
 
 ** Original commentary
 :PROPERTIES:

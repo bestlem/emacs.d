@@ -372,8 +372,7 @@ Functional programming
     :ensure t
     :demand
     :config
-    (global-dash-fontify-mode)
-    (dash-enable-font-lock))
+    (global-dash-fontify-mode))
 #+end_src
 ***** Hash maps
 :PROPERTIES:

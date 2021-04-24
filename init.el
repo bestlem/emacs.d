@@ -25,7 +25,7 @@
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
-                                        ;(package-initialize)
+										;(package-initialize)
 ;; org_mark_2020-01-23T20-40-42+00-00_mini12_B623E658-A6AA-46DF-AD9C-6EAC3BDC1BEE ends here
 
 ;; [[file:init.org::*Debug flag][Debug flag:1]]

@@ -16,9 +16,9 @@
 
 ;; [[file:init.org::org_mark_2020-09-28T01-08-28+01-00_mini12.local_0E90CFE6-BBAC-4DA3-8461-12811764098F][org_mark_2020-09-28T01-08-28+01-00_mini12.local_0E90CFE6-BBAC-4DA3-8461-12811764098F]]
 (setq package-user-dir
-      (expand-file-name
-       (format "elpa/%s/elpa"
-               (concat emacs-version (when (getenv "MELPA_STABLE") "-stable"))) user-emacs-directory))
+	  (expand-file-name
+	   (format "elpa/%s/elpa"
+			   (concat emacs-version (when (getenv "MELPA_STABLE") "-stable"))) user-emacs-directory))
 ;; org_mark_2020-09-28T01-08-28+01-00_mini12.local_0E90CFE6-BBAC-4DA3-8461-12811764098F ends here
 
 ;; [[file:init.org::org_mark_2020-09-28T01-08-28+01-00_mini12.local_19B4CE88-E1D4-4E44-91B7-AD3D8E74C2D3][org_mark_2020-09-28T01-08-28+01-00_mini12.local_19B4CE88-E1D4-4E44-91B7-AD3D8E74C2D3]]

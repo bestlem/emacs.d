@@ -21,6 +21,7 @@
   - [[#line-wrapping][Line wrapping]]
   - [[#folding-visibility][Folding visibility]]
   - [[#hide-property-drawers][Hide property drawers]]
+  - [[#hide--lines][Hide #+ lines]]
   - [[#footnotes][Footnotes]]
   - [[#babel-initialisation][Babel initialisation]]
     - [[#grettke-babel][Grettke babel]]
@@ -286,6 +287,20 @@ OK need to hide #+name and also make the properties visible
                 (if (re-search-forward "^[ \t]*:END:" limit t)
                     (outline-flag-region start (point-at-eol) t)
                   (user-error msg))))))))))
+#+end_src
+** Hide #+ lines
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210422T091310.119974
+:END:
+Taken from https://github.com/amno1/org-babel-hide-markers-mode and my version adds #+NAME
+TODO add property drawers
+#+NAME: org_mark_mini20.local_20210422T091310.076424
+#+begin_src emacs-lisp :tangle no :noweb-ref org-config
+(use-package ob-hide-markers
+  :mwb-load-path "fork/org-babel-hide-markers-mode"
+  :hook (org-font-lock . org-babel-hide-markers-mode)
+  :init
+  (setq org-babel-hide-markers-line t))
 #+end_src
 ** Footnotes
 :PROPERTIES:
@@ -1347,7 +1362,7 @@ But org mode keepos changing and functions go missing so does not work but a fix
 Using new pretty mode hydra
 
 #+NAME: org_2020-12-07+00-00_005A3AAF-4168-444A-8AD4-BCA80924C59A
-#+begin_src emacs-lisp :tangle no :noweb-ref org-config
+#+begin_src emacs-lisp :tangle no :noweb-ref org-extras
 (major-mode-hydra-define org-mode (:idle 1.0)
   ("Edit Subtree"
    (("x" org-cut-subtree "Cut")
@@ -1356,7 +1371,8 @@ Using new pretty mode hydra
     ("Y" org-yank "Yank")
     ("W" org-clone-subtree-with-time-shift "Clone"))
    "Visibility"
-   (("va" outline-show-all "All"))
+   (("va" outline-show-all "All")
+	("vm" org-babel-hide-markers-mode "Markers"))
    "Babel"
    (("e" org-babel-execute-src-block "Execute Source Block")
     ("'" org-edit-src-code "Edit Source")

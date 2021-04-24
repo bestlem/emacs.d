@@ -5,3 +5,6 @@
 	path = fork/conda.el
 	url = git@github.com:bestlem/conda.el.git
 	branch = conda-activation-work
+[submodule "fork/org-babel-hide-markers-mode"]
+	path = fork/org-babel-hide-markers-mode
+	url = git@github.com:amno1/org-babel-hide-markers-mode.git

@@ -7,6 +7,7 @@
 :END:
 Change from lispy to smartparens. The delete-selection issue is too much. I keep typing on a selected region
 And back again: 😤
+Structure - as this is controlling a major mode which is called on load then autoloads aren't really needed so can put functions etc in config - as shown by originally racket-support.el
 ** Issues
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20201221T122900.930444
@@ -22,7 +23,7 @@ Got odd behaviour on completion last letter underlined and stuff in echo area, i
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20201213T235255.178814
 :END:
-The racket-mode version seems to invoke quail which confused me - it mightn stop company but I am not sure
+The racket-mode version seems to invoke quail which confused me - it might stop company but I am not sure
 Also see [[https://github.com/david-christiansen/dr-racket-like-unicode/blob/master/dr-racket-like-unicode.el][this mode]] that can do a completion - also look at abbrev
 Trying company math
 *** Completions
@@ -34,6 +35,9 @@ Ok I lose the :with of having yasnippet and racket mode completions but get one 
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20201221T122900.924619
 :END:
+Break up so code can be tested but also allow weaving
+This is the minimal setup and does not need changing
+
 #+NAME: org_mark_mini12.local_20201213T220930.519021
 #+begin_src emacs-lisp
 (use-package racket-mode
@@ -70,23 +74,33 @@ Ok I lose the :with of having yasnippet and racket mode completions but get one 
     (company-mode 1)
     ;;(smartparens-strict-mode 1)
     ;;(racket-unicode-input-method-enable)
-    (racket-mwb-smart-open-bracket-mode))
+      (racket-mwb-smart-open-bracket-mode))
 
   (defun racket-mwb-send-to-repl ()
     "Send region or last sexp"
     (if (region-active-p)
         (racket-send-region)
       (racket-send-last-sexp)))
-  :config
-  (require 'racket-support)
+
   ;; (diminish 'racket-smart-open-bracket-mode)
                                         ; This is broken as it used racket internals - maybe racket itself
   ;;(require 'eval-in-repl-racket)
                                         ;(require 'racket-mwb-smart-open)
   :hook (racket-mode . my-racket-mode-hook)
   (racket-repl-mode . my-all-racket-mode-hook))
-    #+end_src
-*** racket smart open bracket
+#+end_src
+** After load
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210429T080050.292908
+:END:
+Set this up so can use weave to load extra code. Originally in a .el file but I want to see commenting.
+#+NAME: org_mark_mini20.local_20210429T080050.281031
+#+begin_src emacs-lisp
+(with-eval-after-load 'racket-mode
+  <<config>>
+  )
+#+end_src
+** racket smart open bracket
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20210104T233820.588011
 :END:
@@ -97,4 +111,88 @@ Modified to deal with lispy - lispy does not quite do it e.g. [ on a region does
     :after racket-mode
     ;; :demand t
     :diminish)
+#+end_src
+
+** Racket test and run
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210427T091817.214065
+:END:
+I want to add the flags to racket-test to deal with "Context (plain; to see better errortrace context, re-run with C-u prefix):". This means calling racket--repl-run.
+When it works best to add as issue to the mode
+
+*** Run all tests
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210429T083233.526375
+:END:
+Runs all the test modules in the directory  using raco test -drdr
+#+NAME: org_mark_mini20.local_20210429T083233.512138
+#+begin_src emacs-lisp :tangle no :noweb-ref config
+(defun racket-mwb-raco-all-tests ()
+  "Do \"raco test --drdr .\" in a shell buffer to run the
+  \"test\" submodules of all in the current directory."
+  (interactive)
+  (mwb-projectile-save-project-buffers)
+  (racket--shell
+   (concat (shell-quote-argument racket-program)
+           " -l raco test --drdr "
+           (projectile-project-root))))
+#+end_src
+
+*** Test as file
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210429T083346.614112
+:END:
+Run test via raco
+#+NAME: org_mark_mini20.local_20210429T083346.597384
+#+begin_src emacs-lisp :tangle no :noweb-ref config
+(defun racket-mwb-raco-test ()
+  "Run current buffer through raco test but save buffers first"
+  (interactive)
+  (mwb-projectile-save-project-buffers)
+  (racket-raco-test))
+#+end_src
+*** Simple run
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210429T083233.524532
+:END:
+Save the project before running - note usues default racket-run so some loss of stack info
+#+NAME: org_mark_mini20.local_20210429T083233.512672
+#+begin_src emacs-lisp :tangle no :noweb-ref config
+(defun racket-mwb-run ()
+  "Run the current buffer as per racket-run but save other buffers in project first"
+  (interactive)
+  (mwb-projectile-save-project-buffers)
+  (racket-run))
+#+end_src
+** Mode hydra
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210428T110325.379266
+:END:
+Provide something to hang all things off.
+#+NAME: org_mark_mini20.local_20210428T110325.362631
+#+begin_src emacs-lisp :tangle no :noweb-ref config
+(major-mode-hydra-define racket-mode nil
+  ("Run"
+   (("b" racket-run "run")
+    ("B" racket-run-and-switch-to-repl "run and REPL")
+    ("sr" racket-send-region "Region to REPL")
+    ("ss" racket-send-last-sexp "sexp to REPL")
+    ("rr" (lambda () (interactive) (racket-run 4)) "Run with errortrace")
+    ("re" (lambda () (interactive) (racket-run 2)) "Run with errortrace 2")
+    ("ri" (lambda () (interactive) (racket-run 16)) "Instrument for debug"))
+   "Edit"
+   (("ea" hydra-lispy-mwb-alter/body "Alter...")
+    ("er" hydra-lispy-mwb-mark/body "Region...")
+    ("eg" hydra-lispy-mwb-goto/body "Goto..."))
+"Test"
+   (("T" racket-test "Test")
+    ("t" racket-mwb-raco-test "Raco Test")
+    ("p" racket-mwb-raco-all-tests "All Tests in project")
+    ("c" racket-check-syntax-mode "Check syntax"))
+   "Fold"
+   (("ht" racket-fold-all-tests "Hide tests")
+    ("hs" racket-unfold-all-tests "Show tests")
+    ("hh" hydra-hs/body "Hide-show..."))
+   "Navigate"
+   (("[" ptrv/smartparens/body "Smartparens..."))))
 #+end_src

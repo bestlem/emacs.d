@@ -1,6 +1,7 @@
 ;;; racket-mwb-smart-open.el -*- lexical-binding: t; -*-
 
 ;; Copyright (c) 2013-2020 by Greg Hendershott.
+;;  Copyright (c) 2020 Mark Bestley
 ;; Portions Copyright (C) 1985-1986, 1999-2013 Free Software Foundation, Inc.
 
 ;; Author: Greg Hendershott
@@ -15,6 +16,8 @@
 ;; of merchantability or fitness for a particular purpose. See the GNU
 ;; General Public License for more details. See
 ;; http://www.gnu.org/licenses/ for details.
+
+;; Add code to deal with lispy
 
 ;;; racket-smart-open-bracket-mode
 

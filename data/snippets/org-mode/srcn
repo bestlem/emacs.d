@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: Source Code block named for use with weave
+# name: Source Code block named for use with weave using NAME
 # key: srcn
 # --
 #+name: $1

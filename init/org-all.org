@@ -1407,8 +1407,6 @@ Possibly all this could go in a config control by properties
 :END:
   #+NAME: org_mark_2020-01-23T20-21-34+00-00_mini12_12513515-1117-4C44-86E5-C9E98808513C
   #+begin_src emacs-lisp
-  (add-hook 'org-mode-hook
-			(lambda () (imenu-add-to-menubar "Imenu")))
   (setq org-imenu-depth 6)
   #+end_src
 ** Prettify

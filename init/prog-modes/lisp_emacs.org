@@ -81,6 +81,7 @@ Plus the lisp formatting is not autoloaded
 #+begin_src emacs-lisp :tangle no
 (use-package srefactor
     :ensure t
+    :disabled
     :demand                             ; need as not enough exposed to autoload
     :commands srefactor-lisp-format-sexp
     :config (use-package srefactor-lisp))

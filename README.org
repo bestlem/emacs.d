@@ -53,6 +53,7 @@ Ideally this should just controls the order of loading things but originally did
 This controls how emacs works. Sets up the environment for how other things work.
 This is behaviour.org , completion.org and then all the file in behaviours ibuffer is a mode and can be separated out.
 In general these are needed and can't be lazy loaded.
+Given latest insight to prog-modes - this is mainly minor modes that need to be available and not loaded after a major mode.
 *** modes
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210424T155316.629706
@@ -60,11 +61,12 @@ In general these are needed and can't be lazy loaded.
 Originally programming modes but these are all the modes. The load order dies not need to be determined.
 Much of progmodes.org can be put into individual modes or behaviours.
 In general any lazy loaded stuff can go here.
+Actually this looks like this is major mode specific stuff
 *** command completion
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210424T171159.512509
 :END:
-I think can be moved out to modes
+I think can be moved out to modes or behaviours - the latter makes sense
 *** keys
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210424T171159.511861

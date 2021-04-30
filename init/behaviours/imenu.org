@@ -1,0 +1,19 @@
+#+TITLE:  Imenu
+#+AUTHOR: Mark Bestley
+#+DATE:   30 Apr 2021
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+STARTUP: overview
+* Imenu
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210430T161141.960043
+:END:
+Setup is used in many modes.
+#+NAME: org_mark_mini20.local_20210430T161141.957796
+#+begin_src emacs-lisp
+(defun imenu-mwb-hook-function ()
+  "Add iMenu to menubar"
+  (imenu-add-to-menubar "Imenu"))
+
+(dolist (elt '(org-mode-hook prog-mode-hook))
+  (add-hook elt 'imenu-mwb-hook-function))
+#+end_src

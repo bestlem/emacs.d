@@ -4,5 +4,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(recentf-exclude
-   '("COMMIT_MSG" "COMMIT_EDITMSG" "github.*txt$" "^/var/folders\\.*" "COMMIT_EDITMSG\\'" ".recentf" "~$" ".~/" ".*-autoloads\\.el\\'" "[/\\]emacs.d/elpa/" ".*png$" ".*cache$" "~/\\.emacs\\.d/\\.*/*\\.el" "~/src/env/emacs\\.d/init/.*\\.el" "SessionDesktop\\.el" "treemacs-persist"))
+   '("COMMIT_MSG" "COMMIT_EDITMSG" "github.*txt$" "^/var/folders\\.*" "COMMIT_EDITMSG\\'" ".recentf" "~$" ".~/" ".*-autoloads\\.el\\'" "[/\\]emacs.d/elpa/" ".*png$" ".*cache$" "~/\\.emacs\\.d/\\.*/*\\.el" "~/src/env/emacs\\.d/init/.*\\.el" "SessionDesktop\\.el" "treemacs-persist")
+   t)
  '(recentf-max-saved-items 500))

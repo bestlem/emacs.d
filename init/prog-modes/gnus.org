@@ -66,7 +66,7 @@ Cover method for gnus to create new frame
 ;; (setcdr (assoc 'nndraft-directory
 ;;                (nnoo-variables 'nndraft))
 ;;         nndraft-directory)
-(setq gnus-dribble-directory "~/tmp")
+(setq gnus-dribble-directory "~/tmp/emacs_unwanted")
 (setq gnus-kill-save-kill-file t)
 (setq gnus-server-browse-in-group-buffer t)
 (setq gnus-verbose 10)

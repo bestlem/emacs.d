@@ -3437,6 +3437,272 @@ Major Mode for editing ML-Yacc files.
 
 
 )
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/smartparens-20210330.850/smartparens-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/smartparens-20210330.850/smartparens-autoloads.el") (car load-path))))
+
+
+
+(autoload 'sp-cheat-sheet "smartparens" "\
+Generate a cheat sheet of all the smartparens interactive functions.
+
+Without a prefix argument, print only the short documentation and examples.
+
+With non-nil prefix argument ARG, show the full documentation for each function.
+
+You can follow the links to the function or variable help page.
+To get back to the full list, use \\[help-go-back].
+
+You can use `beginning-of-defun' and `end-of-defun' to jump to
+the previous/next entry.
+
+Examples are fontified using the `font-lock-string-face' for
+better orientation.
+
+\(fn &optional ARG)" t nil)
+
+(defvar smartparens-mode-map (make-sparse-keymap) "\
+Keymap used for `smartparens-mode'.")
+
+(autoload 'sp-use-paredit-bindings "smartparens" "\
+Initiate `smartparens-mode-map' with `sp-paredit-bindings'." t nil)
+
+(autoload 'sp-use-smartparens-bindings "smartparens" "\
+Initiate `smartparens-mode-map' with `sp-smartparens-bindings'." t nil)
+
+(autoload 'smartparens-mode "smartparens" "\
+Toggle smartparens mode.
+
+If called interactively, enable Smartparens mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+You can enable pre-set bindings by customizing
+`sp-base-key-bindings' variable.  The current content of
+`smartparens-mode-map' is:
+
+ \\{smartparens-mode-map}
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'smartparens-strict-mode "smartparens" "\
+Toggle the strict smartparens mode.
+
+If called interactively, enable Smartparens-Strict mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+When strict mode is active, `delete-char', `kill-word' and their
+backward variants will skip over the pair delimiters in order to
+keep the structure always valid (the same way as `paredit-mode'
+does).  This is accomplished by remapping them to
+`sp-delete-char' and `sp-kill-word'.  There is also function
+`sp-kill-symbol' that deletes symbols instead of words, otherwise
+working exactly the same (it is not bound to any key by default).
+
+When strict mode is active, this is indicated with \"/s\"
+after the smartparens indicator in the mode list.
+
+\(fn &optional ARG)" t nil)
+
+(put 'smartparens-global-strict-mode 'globalized-minor-mode t)
+
+(defvar smartparens-global-strict-mode nil "\
+Non-nil if Smartparens-Global-Strict mode is enabled.
+See the `smartparens-global-strict-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `smartparens-global-strict-mode'.")
+
+(custom-autoload 'smartparens-global-strict-mode "smartparens" nil)
+
+(autoload 'smartparens-global-strict-mode "smartparens" "\
+Toggle Smartparens-Strict mode in all buffers.
+With prefix ARG, enable Smartparens-Global-Strict mode if ARG is positive;
+otherwise, disable it.  If called from Lisp, enable the mode if
+ARG is omitted or nil.
+
+Smartparens-Strict mode is enabled in all buffers where
+`turn-on-smartparens-strict-mode' would do it.
+See `smartparens-strict-mode' for more information on Smartparens-Strict mode.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'turn-on-smartparens-strict-mode "smartparens" "\
+Turn on `smartparens-strict-mode'." t nil)
+
+(autoload 'turn-off-smartparens-strict-mode "smartparens" "\
+Turn off `smartparens-strict-mode'." t nil)
+
+(put 'smartparens-global-mode 'globalized-minor-mode t)
+
+(defvar smartparens-global-mode nil "\
+Non-nil if Smartparens-Global mode is enabled.
+See the `smartparens-global-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `smartparens-global-mode'.")
+
+(custom-autoload 'smartparens-global-mode "smartparens" nil)
+
+(autoload 'smartparens-global-mode "smartparens" "\
+Toggle Smartparens mode in all buffers.
+With prefix ARG, enable Smartparens-Global mode if ARG is positive;
+otherwise, disable it.  If called from Lisp, enable the mode if
+ARG is omitted or nil.
+
+Smartparens mode is enabled in all buffers where
+`turn-on-smartparens-mode' would do it.
+See `smartparens-mode' for more information on Smartparens mode.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'turn-on-smartparens-mode "smartparens" "\
+Turn on `smartparens-mode'.
+
+This function is used to turn on `smartparens-global-mode'.
+
+By default `smartparens-global-mode' ignores buffers with
+`mode-class' set to special, but only if they are also not comint
+buffers.
+
+Additionally, buffers on `sp-ignore-modes-list' are ignored.
+
+You can still turn on smartparens in these mode manually (or
+in mode's startup-hook etc.) by calling `smartparens-mode'." t nil)
+
+(autoload 'turn-off-smartparens-mode "smartparens" "\
+Turn off `smartparens-mode'." t nil)
+
+(autoload 'show-smartparens-mode "smartparens" "\
+Toggle visualization of matching pairs.  When enabled, any
+matching pair is highlighted after `sp-show-pair-delay' seconds
+of Emacs idle time if the point is immediately in front or after
+a pair.  This mode works similarly to `show-paren-mode', but
+support custom pairs.
+
+If called interactively, enable Show-Smartparens mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+(put 'show-smartparens-global-mode 'globalized-minor-mode t)
+
+(defvar show-smartparens-global-mode nil "\
+Non-nil if Show-Smartparens-Global mode is enabled.
+See the `show-smartparens-global-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `show-smartparens-global-mode'.")
+
+(custom-autoload 'show-smartparens-global-mode "smartparens" nil)
+
+(autoload 'show-smartparens-global-mode "smartparens" "\
+Toggle Show-Smartparens mode in all buffers.
+With prefix ARG, enable Show-Smartparens-Global mode if ARG is positive;
+otherwise, disable it.  If called from Lisp, enable the mode if
+ARG is omitted or nil.
+
+Show-Smartparens mode is enabled in all buffers where
+`turn-on-show-smartparens-mode' would do it.
+See `show-smartparens-mode' for more information on Show-Smartparens mode.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'turn-on-show-smartparens-mode "smartparens" "\
+Turn on `show-smartparens-mode'." t nil)
+
+(autoload 'turn-off-show-smartparens-mode "smartparens" "\
+Turn off `show-smartparens-mode'." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens" '("smartparens-" "sp-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-clojure" '("sp-clojure-prefix")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-config" '("sp-lisp-invalid-hyperlink-p")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-crystal" '("sp-crystal-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-elixir" '("sp-elixir-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-ess" '("sp-ess-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-haskell" '("sp-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-html" '("sp-html-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-latex" '("sp-latex-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-lua" '("sp-lua-post-keyword-insert")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-markdown" '("sp-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-org" '("sp-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-python" '("sp-python-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-rst" '("sp-rst-point-after-backtick")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-ruby" '("sp-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-rust" '("sp-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-scala" '("sp-scala-wrap-with-indented-newlines")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-text" '("sp-text-mode-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "sp-sublimetext-like" '("sp-point-not-before-word")))
+
+
+
+
+)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/rainbow-delimiters-20200827.321/rainbow-delimiters-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -4297,6 +4563,96 @@ Turn on pseudo-structural editing of Lisp code." t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "paredit" '("?\\" "disable-paredit-mode" "paredit-")))
 
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/paradox-20191011.1111/paradox-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/paradox-20191011.1111/paradox-autoloads.el") (car load-path))))
+
+
+
+(autoload 'paradox-list-packages "paradox" "\
+Improved version of `package-list-packages'.  The heart of Paradox.
+Function is equivalent to `package-list-packages' (including the
+prefix NO-FETCH), but the resulting Package Menu is improved in
+several ways.
+
+Among them:
+
+1. Uses `paradox-menu-mode', which has more functionality and
+keybinds than `package-menu-mode'.
+
+2. Uses some font-locking to improve readability.
+
+3. Optionally shows the number GitHub stars and Melpa downloads
+for packages.
+
+4. Adds useful information in the mode-line.
+
+\(fn NO-FETCH)" t nil)
+
+(autoload 'paradox-upgrade-packages "paradox" "\
+Upgrade all packages.  No questions asked.
+This function is equivalent to `list-packages', followed by a
+`package-menu-mark-upgrades' and a `package-menu-execute'.  Except
+the user isn't asked to confirm deletion of packages.
+
+If `paradox-execute-asynchronously' is non-nil, part of this
+operation may be performed in the background.
+
+The NO-FETCH prefix argument is passed to `list-packages'.  It
+prevents re-download of information about new versions.  It does
+not prevent downloading the actual packages (obviously).
+
+\(fn &optional NO-FETCH)" t nil)
+
+(autoload 'paradox-enable "paradox" "\
+Enable paradox, overriding the default package-menu." t nil)
+
+(autoload 'paradox-require "paradox" "\
+Like `require', but also install FEATURE if it is absent.
+FILENAME is passed to `require'.
+If NOERROR is non-nil, don't complain if the feature couldn't be
+installed, just return nil.
+
+- If FEATURE is present, `require' it and return t.
+
+- If FEATURE is not present, install PACKAGE with `package-install'.
+If PACKAGE is nil, assume FEATURE is the package name.
+After installation, `require' FEATURE.
+
+By default, the current package database is only updated if it is
+empty.  Passing a non-nil REFRESH argument forces this update.
+
+\(fn FEATURE &optional FILENAME NOERROR PACKAGE REFRESH)" nil nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "paradox" '("paradox-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "paradox-commit-list" '("paradox-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "paradox-core" '("paradox-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "paradox-execute" '("paradox-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "paradox-github" '("paradox-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "paradox-menu" '("paradox-")))
 
 
 
@@ -5506,10 +5862,10 @@ Interactively, with prefix argument, move to the previous position.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/modus-themes-20210423.1624/modus-themes-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/modus-themes-20210418.327/modus-themes-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/modus-themes-20210423.1624/modus-themes-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/modus-themes-20210418.327/modus-themes-autoloads.el") (car load-path))))
 
 
 
@@ -11675,14 +12031,14 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
 )
 (setq package-activated-list
 	  (append
-	   '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra epl pkg-info projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile treemacs-icons-dired transient transient-posframe toc-org ivy swiper spinner sml-mode rainbow-delimiters pos-tip racket-mode pretty-hydra prescient persistent-scratch paredit outorg outshine org-bullets org kv esxml nov mwim modus-themes math-symbol-lists makey major-mode-hydra git-commit magit macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides f elisp-refs helpful hardhat git-timemachine gcmh flycheck fish-mode expand-region eval-in-repl eros elmacro dtrt-indent discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep company company-prescient company-posframe company-math comment-dwim-2 cmake-mode cask-mode beacon amx all-the-icons aggressive-indent)
+	   '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra epl pkg-info projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile treemacs-icons-dired transient transient-posframe toc-org ivy swiper spinner sml-mode smartparens rainbow-delimiters pos-tip racket-mode pretty-hydra prescient persistent-scratch paredit paradox outorg outshine org-bullets org kv esxml nov mwim modus-themes math-symbol-lists makey major-mode-hydra git-commit magit macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides f elisp-refs helpful hardhat git-timemachine gcmh flycheck fish-mode expand-region eval-in-repl eros elmacro dtrt-indent discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep company company-prescient company-posframe company-math comment-dwim-2 cmake-mode cask-mode beacon amx all-the-icons aggressive-indent)
 	   package-activated-list))
 (progn
   (require 'info)
   (info-initialize)
   (setq Info-directory-list
 		(append
-		 '("/Users/mark/.emacs.d/elpa/27.2/elpa/magit-20210421.1731" "/Users/mark/.emacs.d/elpa/27.2/elpa/modus-themes-20210423.1624" "/Users/mark/.emacs.d/elpa/27.2/elpa/org-9.4.5" "/Users/mark/.emacs.d/elpa/27.2/elpa/racket-mode-20210328.2038" "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-20210423.1127" "/Users/mark/.emacs.d/elpa/27.2/elpa/transient-20210420.1635" "/Users/mark/.emacs.d/elpa/27.2/elpa/dash-20210330.1544" "/Users/mark/.emacs.d/elpa/27.2/elpa/use-package-20210207.1926" "/Users/mark/.emacs.d/elpa/27.2/elpa/with-editor-20210319.1930")
+		 '("/Users/mark/.emacs.d/elpa/27.2/elpa/magit-20210421.1731" "/Users/mark/.emacs.d/elpa/27.2/elpa/modus-themes-20210418.327" "/Users/mark/.emacs.d/elpa/27.2/elpa/org-9.4.5" "/Users/mark/.emacs.d/elpa/27.2/elpa/racket-mode-20210328.2038" "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-20210423.1127" "/Users/mark/.emacs.d/elpa/27.2/elpa/transient-20210420.1635" "/Users/mark/.emacs.d/elpa/27.2/elpa/dash-20210330.1544" "/Users/mark/.emacs.d/elpa/27.2/elpa/use-package-20210207.1926" "/Users/mark/.emacs.d/elpa/27.2/elpa/with-editor-20210319.1930")
 		 Info-directory-list)))
 
 ;; Local Variables:

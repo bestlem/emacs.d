@@ -43,7 +43,7 @@ This is the minimal setup and does not need changing
 (use-package racket-mode
   :ensure t
   :bind (:map racket-mode-map
-              ("<f5>" . racket-test)
+              ("<f5>" . racket-mwb-run-hydra)
               ("<C-f5>" . racket-mwb-run)
               ("A-<f5>" . racket-mwb-raco-all-tests)
               ("S-<f5>" . racket-mwb-raco-test)
@@ -58,7 +58,7 @@ This is the minimal setup and does not need changing
               ("<f5>" . racket-run))
   :mode (rx (seq ".racket" string-end))
   :init
-  (setq racket-program "/Applications/Racket v8.0/bin/racket"
+  (setq racket-program "/Applications/Racket v8.1/bin/racket"
         racket-images-inline t)
 
   ;; From   https://stackoverflow.com/questions/37571164/emacs-company-mode-completion-not-working
@@ -74,7 +74,7 @@ This is the minimal setup and does not need changing
     (company-mode 1)
     ;;(smartparens-strict-mode 1)
     ;;(racket-unicode-input-method-enable)
-      (racket-mwb-smart-open-bracket-mode))
+    (racket-mwb-smart-open-bracket-mode))
 
   (defun racket-mwb-send-to-repl ()
     "Send region or last sexp"
@@ -163,6 +163,59 @@ Save the project before running - note usues default racket-run so some loss of 
   (interactive)
   (mwb-projectile-save-project-buffers)
   (racket-run))
+#+end_src
+*** Test with error trace
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210504T162256.000938
+:END:
+Run tests with error context to show error. This will slow running down so is not the default.
+This is taking a copy of racket-modes racket-test and -run and mixing them.
+#+NAME: org_mark_mini20.local_20210504T162255.984619
+#+begin_src emacs-lisp :tangle no :noweb-ref config
+(defun racket-mwb-test ()
+  "Run the \"test\" submodule.
+
+ A mix of racket-run and racket-test"
+  (interactive)
+  (pcase (get-buffer "*Racket REPL*")
+	('() nil) ;; <=======
+	(buf (with-current-buffer buf
+		   (comint-kill-region (point-min) (point-max))
+		   ;; (delete-region (point-min) (point-max))
+		   )))
+  (let ((mod-path (list 'submod (racket--buffer-file-name) 'test))
+		(buf (current-buffer)))
+	(racket--repl-run mod-path '() 'high)))
+#+end_src
+*** Run hydra
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210504T113432.050129
+:END:
+#+NAME: org_mark_mini20.local_20210504T113432.039283
+#+begin_src emacs-lisp :tangle no :noweb-ref config
+(pretty-hydra-define hydra-racket-run
+  (:foreign-keys run
+                 :title (mwb-icon-string "rkt" "Racket Run")
+                 :quit-key "<f12>")
+  ("Run"
+   (("<f8>" racket-run-and-switch-to-repl "run and REPL")
+    ("<f5>" racket-test "Test")
+    ("<f6>" racket-mwb-test "Test Errortrace"))
+   "Quit"
+   (("<f12>" nil "Quit" :exit t))))
+
+#+end_src
+*** Run a hydra
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210504T113432.048691
+:END:
+We want to save the current project and then do something
+#+NAME: org_mark_mini20.local_20210504T113432.039755
+#+begin_src emacs-lisp :tangle no :noweb-ref config
+(defun racket-mwb-run-hydra ()
+  (interactive)
+  (mwb-projectile-save-project-buffers)
+  (hydra-racket-run/body))
 #+end_src
 ** Mode hydra
 :PROPERTIES:

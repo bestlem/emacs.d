@@ -21,7 +21,7 @@
 ** RacketProgrammingtheFunWay
  - path :: ~/src/Racket/RacketProgrammingtheFunWay
 ** mandlebrot
- - path :: ~/src/Racket/mandlebrot
+ - path :: ~/src/Racket/mandelbrot
 * C based
 ** rftg
  - path :: ~/src/cpp/rftg

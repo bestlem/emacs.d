@@ -52,33 +52,33 @@ I have wanted a good visual identification of indentation since I had the dos pr
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:838D12E0-E4AA-4DD0-8F6E-56CDA89B5F0E
 :END:
 I have lispy working in racket
-Also its global mode messes up org-mode so disable
+Also its global mode messes up org-mode so disable - but it is somewhere in python
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_A84231FF-A68D-44B0-9010-3CD91C8B2DA4
 #+begin_src emacs-lisp
 (use-package smartparens
-    :ensure t
-    :disabled
-    :diminish smartparens-mode
-    :bind (:map smartparens-mode-map
-                ("M-(" . sp-wrap-round)
-                ("M-[" . sp-wrap-square)
-                ("M-{" . sp-wrap-curly)
-                ("H-M-<backspace>" . sp-unwrap-sexp)  ;; in macporst this is
-                ;; what the M-delete maps to
-                ("M-<backspace>" . sp-backward-unwrap-sexp)
-                ;; from jp-smartparens
-                ("M-<right>" . sp-forward-slurp-sexp)
-                ("M-<left>" . sp-forward-barf-sexp)
-                ("M-S-<right>" . sp-backward-slurp-sexp)
-                ("M-S-<left>" . sp-backward-slurp-sexp)
-                ("M-<up>" . sp-raise-sexp)
-                ("C-k" . sp-kill-hybrid-sexp)
-                ("C-M-f" . sp-forward-sexp)
-                ("C-M-b" . sp-backward-sexp))
-    :config
-    (setq sp-show-pair-from-inside nil)
-    (require 'smartparens-config)
-    (smartparens-global-mode))
+  :ensure t
+  :diminish smartparens-mode
+  :bind (:map smartparens-mode-map
+			  ("M-(" . sp-wrap-round)
+			  ("M-[" . sp-wrap-square)
+			  ("M-{" . sp-wrap-curly)
+			  ("H-M-<backspace>" . sp-unwrap-sexp) ;; in macporst this is
+			  ;; what the M-delete maps to
+			  ("M-<backspace>" . sp-backward-unwrap-sexp)
+			  ;; from jp-smartparens
+			  ("M-<right>" . sp-forward-slurp-sexp)
+			  ("M-<left>" . sp-forward-barf-sexp)
+			  ("M-S-<right>" . sp-backward-slurp-sexp)
+			  ("M-S-<left>" . sp-backward-slurp-sexp)
+			  ("M-<up>" . sp-raise-sexp)
+			  ("C-k" . sp-kill-hybrid-sexp)
+			  ("C-M-f" . sp-forward-sexp)
+			  ("C-M-b" . sp-backward-sexp))
+  :config
+  (setq sp-show-pair-from-inside nil)
+  (require 'smartparens-config)
+  ;; (smartparens-global-mode)
+  )
 #+end_src
 **** Hydra
 :PROPERTIES:

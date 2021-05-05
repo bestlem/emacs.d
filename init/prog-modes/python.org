@@ -67,14 +67,14 @@ One in emacs and has things built on it
   (defun python-hook-mwb ()
 	(setq tab-width 4)
 	(aggressive-indent-mode -1)
+    (smartparens-mode 1)
+    (mwb-prog-auto-fill-80)
 	(setq-local indent-tabs-mode 't))
   :config
   (setq python-indent-offset 4)
   (setq python-indent-guess-indent-offset nil)
-  (add-hook 'python-mode-hook 'smartparens-mode)
   ;; (add-hook 'python-mode-hook 'color-identifiers-mode)
-  (add-hook 'python-mode-hook 'python-hook-mwb)
-  (add-hook 'python-mode-hook 'mwb-prog-auto-fill-80))
+  )
 #+end_src
 ** TODO Org mode
 :PROPERTIES:

@@ -44,19 +44,42 @@ Look at https://github.com/IvanMalison/dotfiles/tree/master/dotfiles/emacs.d
   :ensure t
   ;; :when (version< emacs-version "26.1")
   :diminish
-  :init (global-flycheck-mode) ; for all
+  :init (global-flycheck-mode)          ; for all
 
-  ;; I don't like `global-flycheck-mode', some mode, such as elisp mode
-  ;; don't need.
-  ;;  racket seems to have issues with this and company
+  <<flycheck-init>>
 
-  ;; :hook (racket-mode . flycheck-mode )
-  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
   :config
   <<flycheck-hydra>>
   :custom
   (flycheck-display-errors-delay 0.3))
      #+end_src
+*** Set modes for which it is used
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210504T172051.622727
+:END:
+I don't like `global-flycheck-mode' everywhere  some modes, such as elisp mode; don't need.
+
+ racket seems to have issues with this and company
+**** Disable some checkers
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210504T172051.621095
+:END:
+This is to stop check for full package level emacs lisp documentation
+
+#+NAME: org_mark_mini20.local_20210504T172051.605822
+#+begin_src emacs-lisp :tangle no :noweb-ref flycheck-init
+(setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
+#+end_src
+**** Disable modes
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210504T172342.698972
+:END:
+Found the correct way https://emacs.stackexchange.com/a/21046/9874
+#+NAME: org_mark_mini20.local_20210504T172342.686752
+#+begin_src emacs-lisp :tangle no :noweb-ref flycheck-init
+(setq flycheck-global-modes '(not racket-mode))
+
+#+end_src
 *** Hydra to control
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:48CD7AF6-DA56-471F-98EF-51C816A565FFy

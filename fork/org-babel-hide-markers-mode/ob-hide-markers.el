@@ -55,7 +55,9 @@
   :tag "Org Babel Hide Source Block Markers Line")
 
 (defvar hbm--mode-on nil)
-(defvar hbm--marker-re "^[ \t]*#\\+\\(begin\\|end\\)_src")
+(defvar hbm--marker-re (rx (seq bol (zero-or-more blank)
+							   "#+"
+							   (or "name" "begin_src" "end_src"))))
 
 (defun hbm--update-line (visible)
   (let ((beg (if org-babel-hide-markers-line
@@ -69,8 +71,7 @@
     (goto-char (point-min))
     (with-silent-modifications
       (while (re-search-forward hbm--marker-re nil t)
-        (hbm--update-line visible))
-      (setq hbm--mode-on visible))))
+        (hbm--update-line visible)))))
 
 ;;;###autoload
 (defun org-babel-refresh-markers ()
@@ -85,15 +86,13 @@
   "Hide/show babel source code blocks on demand."
   :global nil :lighter " OB Hmm"
   (unless (derived-mode-p 'org-mode)
-    (error "Not in org-mode."))
+	(error "Not in org-mode."))
   (make-local-variable 'hbm--mode-on)
   (cond (org-babel-hide-markers-mode
-         (unless hbm--mode-on
-           (font-lock-ensure)
-           (hbm--update-markers t)))
-        (t
-         (when hbm--mode-on
-           (hbm--update-markers nil)))))
+		 (font-lock-ensure)
+		 (hbm--update-markers t))
+		(t
+		 (hbm--update-markers nil))))
 
 (provide 'ob-hide-markers)
 

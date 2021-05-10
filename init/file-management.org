@@ -11,11 +11,13 @@ See [[https://github.com/lunaryorn/osx-trash.el][osx-trash]] but might need to f
 Or better patch Aquamacs to have this C code - perhaps done?
 Need also to exclude some files - basically only iof you edit them
 Well I was going to include [[https://github.com/lunaryorn/osx-trash.el][osx trash]] which uses the trash executable or an applescript to do the proper trash. But realised I don't want to trash files - just those I delete by hand so the patching of the emacs delete is not a good idea. By default emacs does not delete by moving to trash. It is customisable so set to to never.
+But the mac port does have this if set mac_system_move_file_to_trash_use_finder
 Think of editing dired and treemacs
 On reading more this is only if passed to delete functions so might not be too much trash.
 #+NAME: org_mark_mini12.local_20210105T204218.519535
 #+begin_src emacs-lisp
-(setq delete-by-moving-to-trash t)
+(setq delete-by-moving-to-trash t
+	  mac_system_move_file_to_trash_use_finder t)
 #+end_src
 * Backups
 :PROPERTIES:

@@ -39,6 +39,7 @@
   - [[#imenu-to-provide-info-for-treemacs-and-contextual-menu][Imenu to provide info for treemacs and contextual menu]]
   - [[#prettify][Prettify]]
     - [[#circular-bullets][Circular bullets]]
+      - [[#add-the-keywords-to-be-changed][Add the keywords to be changed]]
     - [[#indent-other-text][Indent other text]]
   - [[#table-of-contents-setup][Table of Contents setup]]
   - [[#refile][Refile]]
@@ -300,7 +301,8 @@ TODO add property drawers
   :mwb-load-path "fork/org-babel-hide-markers-mode"
   :hook (org-font-lock . org-babel-hide-markers-mode)
   :init
-  (setq org-babel-hide-markers-line t))
+  (setq org-babel-hide-markers-line t)
+  :diminish org-babel-hide-markers-mode)
 #+end_src
 ** Footnotes
 :PROPERTIES:
@@ -1428,17 +1430,22 @@ From [[http://www.howardism.org/Technical/Emacs/orgmode-wordprocessor.html][here
   :hook (org-mode . org-bullets-mode))
  #+end_src
 
+**** Add the keywords to be changed
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210507T132612.415034
+:END:
+
 	#+begin_src emacs-lisp
-    (font-lock-add-keywords
-     'org-mode
-     '(("^ +\\([-*]\\) "
-        (0
-         (prog1
-             ()
-           (compose-region
-            (match-beginning 1)
-            (match-end 1)
-            "•"))))))
+(font-lock-add-keywords
+ 'org-mode
+ '(("^ +\\([-*]\\) "
+    (0
+     (prog1
+         ()
+       (compose-region
+        (match-beginning 1)
+        (match-end 1)
+        "•"))))))
 	#+end_src
 *** Indent other text
 :PROPERTIES:

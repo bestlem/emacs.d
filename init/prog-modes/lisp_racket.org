@@ -1,5 +1,5 @@
 #+TITLE Emacs configuration - racket
-#+PROPERTY:header-args :cache yes :tangle yes  :comments link
+#+PROPERTY:header-args :cache yes :tangle yes  :comments noweb
 #+STARTUP: content
 * Racket
 :PROPERTIES:
@@ -55,7 +55,8 @@ This is the minimal setup and does not need changing
               ("<C-return>" . racket-mwb-send-to-repl)
                                         ;("H-A" . hydra-paredit/body)
               :map racket-repl-mode-map
-              ("<f5>" . racket-run))
+              ("<f5>" . racket-mwb-run-hydra)
+              )
   :mode (rx (seq ".racket" string-end))
   :init
   (setq racket-program "/Applications/Racket v8.1/bin/racket"
@@ -110,7 +111,7 @@ Modified to deal with lispy - lispy does not quite do it e.g. [ on a region does
 (use-package racket-mwb-smart-open
     :after racket-mode
     ;; :demand t
-    :diminish)
+    :diminish racket-mwb-smart-open-bracket-mode)
 #+end_src
 
 ** Racket test and run
@@ -151,11 +152,25 @@ Run test via raco
   (mwb-projectile-save-project-buffers)
   (racket-raco-test))
 #+end_src
+*** Clear REPL buffer
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210507T225817.527094
+:END:
+#+NAME: org_mark_mini20.local_20210507T225817.512408
+#+begin_src emacs-lisp :tangle no :noweb-ref config
+(defun racket-mwb-clear-repl ()
+  (pcase (get-buffer "*Racket REPL*")
+	('() nil) ;; <=======
+	(buf (with-current-buffer buf
+		   (comint-kill-region (point-min) (point-max))
+		   ;; (delete-region (point-min) (point-max))
+		   ))))
+#+end_src
 *** Simple run
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210429T083233.524532
 :END:
-Save the project before running - note usues default racket-run so some loss of stack info
+Save the project before running - note uses default racket-run so some loss of stack info
 #+NAME: org_mark_mini20.local_20210429T083233.512672
 #+begin_src emacs-lisp :tangle no :noweb-ref config
 (defun racket-mwb-run ()
@@ -164,28 +179,63 @@ Save the project before running - note usues default racket-run so some loss of 
   (mwb-projectile-save-project-buffers)
   (racket-run))
 #+end_src
-*** Test with error trace
+
+*** Run with errortrace
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210507T225817.528412
+:END:
+Save the project before running - note uses racket-run with errortrace
+
+#+NAME: org_mark_mini20.local_20210507T225817.511916
+#+begin_src emacs-lisp :tangle no :noweb-ref config
+(defun racket-mwb-run-errortrace ()
+  "Run the current buffer as per racket-run but save other buffers in project first"
+  (interactive)
+  (racket-mwb-clear-repl)
+  (mwb-projectile-save-project-buffers)
+  (racket-run '(4)))
+#+end_src
+*** Test frame
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210505T133138.746429
+:END:
+Main function to run tests - takes parameter to denote how deep to instrument.
+#+NAME: org_mark_mini20.local_20210505T133138.731277
+#+begin_src emacs-lisp :tangle no :noweb-ref config
+(defun racket-mwb--test (instrument-level)
+  "Run the \"test\" submodule.
+
+ A mix of racket-run and racket-test but also zapping the REPL buffer"
+  (interactive)
+  (mwb-projectile-save-project-buffers)
+  (racket-mwb-clear-repl)
+  (let ((mod-path (list 'submod (racket--buffer-file-name) 'test))
+		(buf (current-buffer)))
+	(racket--repl-run mod-path '() instrument-level)))
+#+end_src
+***  Test with error trace
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210504T162256.000938
 :END:
 Run tests with error context to show error. This will slow running down so is not the default.
-This is taking a copy of racket-modes racket-test and -run and mixing them.
 #+NAME: org_mark_mini20.local_20210504T162255.984619
 #+begin_src emacs-lisp :tangle no :noweb-ref config
-(defun racket-mwb-test ()
-  "Run the \"test\" submodule.
-
- A mix of racket-run and racket-test"
+(defun racket-mwb-test-errortrace ()
+  "Run the \"test\" submodule. with errortrace"
   (interactive)
-  (pcase (get-buffer "*Racket REPL*")
-	('() nil) ;; <=======
-	(buf (with-current-buffer buf
-		   (comint-kill-region (point-min) (point-max))
-		   ;; (delete-region (point-min) (point-max))
-		   )))
-  (let ((mod-path (list 'submod (racket--buffer-file-name) 'test))
-		(buf (current-buffer)))
-	(racket--repl-run mod-path '() 'high)))
+  (racket-mwb--test 'high))
+#+end_src
+***  Test
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210505T133138.745214
+:END:
+Run tests with no error context to show error.
+#+NAME: org_mark_mini20.local_20210505T133138.732464
+#+begin_src emacs-lisp :tangle no :noweb-ref config
+(defun racket-mwb-test ()
+  "Run the \"test\" submodule. "
+  (interactive)
+  (racket-mwb--test 'medium))
 #+end_src
 *** Run hydra
 :PROPERTIES:
@@ -196,11 +246,15 @@ This is taking a copy of racket-modes racket-test and -run and mixing them.
 (pretty-hydra-define hydra-racket-run
   (:foreign-keys run
                  :title (mwb-icon-string "rkt" "Racket Run")
-                 :quit-key "<f12>")
-  ("Run"
-   (("<f8>" racket-run-and-switch-to-repl "run and REPL")
-    ("<f5>" racket-test "Test")
+                 :quit-key "<f12>"
+                 :exit t)
+  ("Test"
+   (("<f5>" racket-test "Test")
     ("<f6>" racket-mwb-test "Test Errortrace"))
+   "Run"
+   (("<f9>" racket-run-and-switch-to-repl "run and REPL")
+    ("<f7>" racket-run "Run")
+    ("<f8>" racket-mwb-run-errortrace "Run with errortrace"))
    "Quit"
    (("<f12>" nil "Quit" :exit t))))
 
@@ -217,7 +271,7 @@ We want to save the current project and then do something
   (mwb-projectile-save-project-buffers)
   (hydra-racket-run/body))
 #+end_src
-** Mode hydra
+** Hydra for mode
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210428T110325.379266
 :END:

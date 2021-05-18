@@ -6,8 +6,7 @@
  '(gnus-article-skip-boring t)
  '(gnus-directory "~/Library/Preferences/Aquamacs Emacs/News")
  '(gnus-group-sort-function
-   '(gnus-group-sort-by-level)
-   t)
+   '(gnus-group-sort-by-level))
  '(gnus-home-directory "~/.emacs.d/var/gnus")
  '(gnus-interactive-exit nil)
  '(gnus-posting-styles
@@ -20,6 +19,8 @@
 	  (address "baen@bestley.co.uk")
 	  (signature "Mark"))))
  '(gnus-suppress-duplicates t)
+ '(gnus-visible-headers
+   '("^From:" "^Newsgroups:" "^Subject:" "^Date:" "^Followup-To:" "^Reply-To:" "^Organization:" "^Summary:" "^Keywords:" "^To:" "^[BGF]?Cc:" "^Posted-To:" "^Mail-Copies-To:" "^Mail-Followup-To:" "^Apparently-To:" "^Gnus-Warning:" "^Resent-From:" "^References:" "^Xref:" "^Message-Id:"))
  '(mail-default-directory "~/.emacs.d/var/Mail")
  '(message-auto-save-directory "~/.emacs.d/var/gnus/Mail")
  '(message-directory "~/.emacs.d/var/Mail/")

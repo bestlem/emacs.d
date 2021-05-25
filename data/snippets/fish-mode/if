@@ -2,7 +2,7 @@
 # name: if ... end
 # key: if
 # --
-if ${1:[ -f file ]}
-    ${2:do}
+if ${1:test -f file }
+${2:do}
 end
 $0

@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: quote
-# key: qb
+# key: quo
 # --
 #+begin_quote
 $0

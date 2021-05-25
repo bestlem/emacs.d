@@ -2,8 +2,8 @@
 # name: if ... ... else ... end
 # key: ife
 # --
-if ${1:cond}
-    ${2:stuff}
+if ${1:test }
+${2:stuff}
 else
     ${3:other}
 end

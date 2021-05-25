@@ -15,11 +15,11 @@ The minimum setup needed to load the rest.
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:62080F1E-8D8F-4EBB-8ACE-9C2D6DCA14A9
 :END:
-	  This slows things down so for debugging outside init. but I now don't like Backtrace mainly as trying to use emacs not edit it.
-	  But for debugging init we don't want the backtrace
+This slows things down so for debugging outside init. but I now don't like Backtrace mainly as trying to use emacs not edit it.
+However  for debugging init we don't want the backtrace
 
-      #+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_B6CC1317-E222-4867-9C34-C0396275139E
-      #+begin_src emacs-lisp
+#+NAME: org_mark_mini20.local_20210511T155720.262624
+#+begin_src emacs-lisp
 ;;  setting to nil turns them off
 (add-hook 'after-init-hook
           (lambda () (setq debug-on-error nil)))

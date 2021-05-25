@@ -25,10 +25,16 @@ Note takes time to load
               ("C-d" . ivy-done-or-delete-char)
               ("C-i" . ivy-partial-or-done)
               ("C-r" . ivy-previous-line-or-history)
-              ("M-r" . ivy-reverse-i-search) ; emacs complains about this]
+              ;; ("M-r" . ivy-reverse-i-search)
+                                        ; emacs complains about this due to mapping ESC here
               ("<C-return>" . ivy-immediate-done)
               ("C-<f18>" . ivy-next-line) ;c-ins
-              ("<ESC>" . minibuffer-keyboard-quit))
+              ;; ("<ESC>" . minibuffer-keyboard-quit)
+
+              ;;  following should already be in map
+              ;; ("M-n" . ivy-next-history-element)
+              ;; ("M-p" . ivy-previous-history-element)
+              )
   :bind (:map ivy-switch-buffer-map
               ("C-k" . ivy-switch-buffer-kill))
 

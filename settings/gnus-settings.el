@@ -6,7 +6,8 @@
  '(gnus-article-skip-boring t)
  '(gnus-directory "~/Library/Preferences/Aquamacs Emacs/News")
  '(gnus-group-sort-function
-   '(gnus-group-sort-by-level))
+   '(gnus-group-sort-by-level)
+   t)
  '(gnus-home-directory "~/.emacs.d/var/gnus")
  '(gnus-interactive-exit nil)
  '(gnus-posting-styles
@@ -23,5 +24,5 @@
    '("^From:" "^Newsgroups:" "^Subject:" "^Date:" "^Followup-To:" "^Reply-To:" "^Organization:" "^Summary:" "^Keywords:" "^To:" "^[BGF]?Cc:" "^Posted-To:" "^Mail-Copies-To:" "^Mail-Followup-To:" "^Apparently-To:" "^Gnus-Warning:" "^Resent-From:" "^References:" "^Xref:" "^Message-Id:"))
  '(mail-default-directory "~/.emacs.d/var/Mail")
  '(message-auto-save-directory "~/.emacs.d/var/gnus/Mail")
- '(message-directory "~/.emacs.d/var/Mail/")
+ '(message-directory "~/.emacs.d/var/Mail/" t)
  '(nnmail-message-id-cache-file "~/.emacs.d/var/gnus/.nnmail-cache"))

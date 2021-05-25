@@ -383,17 +383,16 @@ projectile-save-project-buffers is nice but save-buffer does not make a backup. 
   "Save all project buffers."
   (interactive)
   (let* ((project (projectile-ensure-project (projectile-project-root)))
-	 (project-name (projectile-project-name project))
-	 (modified-buffers (cl-remove-if-not (lambda (buf)
-					       (and (buffer-file-name buf)
-						    (buffer-modified-p buf)))
-					     (projectile-project-buffers project))))
-    (if (null modified-buffers)
-	(message "[%s] No buffers need saving mwb" project-name)
-      (dolist (buf modified-buffers)
-	(with-current-buffer buf
-	  (save-buffer 16)))
-      (message "[%s] Saved %d buffers mwb" project-name (length modified-buffers)))))
+		 (project-name (projectile-project-name project))
+		 (modified-buffers (cl-remove-if-not (lambda (buf)
+											   (and (buffer-file-name buf)
+													(buffer-modified-p buf)))
+											 (projectile-project-buffers project))))
+	(unless (null modified-buffers)
+	  (dolist (buf modified-buffers)
+		(with-current-buffer buf
+		  (save-buffer 16)))
+	  (message "[%s] Saved %d buffers mwb" project-name (length modified-buffers)))))
 #+end_src
 *** Hydra
 :PROPERTIES:

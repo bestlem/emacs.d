@@ -2,4 +2,6 @@
 
 ;;  need packages but loads them anyway
 
-(require 'racket-mode)
+(require 'modus-themes)
+(modus-themes-load-themes)
+(modus-themes-load-vivendi)

@@ -80,14 +80,15 @@ Note should check on defconst
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:605AC9D7-C3F1-495D-872C-C5B901A553BB
 :END:
- This is a simple server start - to allow emacsclient from Terminal. There are more complex starters.
+This is a simple server start - to allow emacsclient from Terminal. There are more complex starters.
 
- Unfortunately macport seems not to have a working one. and NS Emacs is not that good.
- Then again I don't use it
- Try macport now as on arm
+Unfortunately macport seems not to have a working one. and NS Emacs is not that good.
+Then again I don't use it as I fiddel with startup code so much (and have a GUI emacs open anyway) - so remove it.
+Try macport now as on arm
  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_922BC8C2-56FC-46E7-B506-2CB94F2BB86A
  #+begin_src emacs-lisp
 (use-package server
+  :disabled
   :unless *aquamacs*
   :ensure nil
   :hook (after-init . server-mode))

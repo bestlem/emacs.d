@@ -153,11 +153,10 @@ Indent as you type. Only for emacs lisp or racket at the moment. But that failed
 #+begin_src emacs-lisp
 (use-package aggressive-indent
   :ensure t
-  :after smartparens
   :hook
   (prog-mode . aggressive-indent-mode)
-  ;;(python-mode . (lambda () (aggressive-indent-mode -1)))
-)
+  (python-mode . (lambda () (aggressive-indent-mode -1)))
+  )
 #+end_src
 ** Refactor
 :PROPERTIES:
@@ -253,15 +252,16 @@ Basically want to collapse/fold depending on comments.
 #+begin_src emacs-lisp
 (use-package outshine
   :ensure t
-  :hook (outline-minor-mode . outshine-hook-function)
+  :hook (outline-minor-mode . outshine-mode)
   :init
   ;; (add-hook 'outline-minor-mode-hook #'outshine-hook-function)
   :bind (:map outline-minor-mode-map
               ("M-p" . outline-previous-visible-heading)
-              ("M-p" . outline-next-visible-heading)
+              ("M-n" . outline-next-visible-heading)
               ("<S-tab>" . outshine-cycle-buffer))
   :preface
-  (defvar outline-minor-mode-prefix "H-o") ;  to set before loading note other package name
+  ;; (defvar outline-minor-mode-prefix "H-o")
+                                        ;  to set before loading note other package name
   )
 #+end_src
 *** Folding

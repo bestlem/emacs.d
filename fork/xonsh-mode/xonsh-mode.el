@@ -34,7 +34,7 @@
 
 ;;; Code:
 
-(require 'python)
+;; (require 'python)
 
 (defvar xonsh-font-lock-keywords
   `(;; new keywords in xonsh language
@@ -45,8 +45,8 @@
      1 font-lock-builtin-face)
     ;; $ENV business
     (,(rx (* (any " \t"))
-          (group "\$" (1+ (or word ?_
-                              (0+ "." (1+ (or word ?_)))))))
+       (group "\$" (1+ (or word ?_
+                        (0+ "." (1+ (or word ?_)))))))
      (1 font-lock-type-face)))
   "Additional font lock keywords for xonsh mode.")
 

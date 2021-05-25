@@ -18,7 +18,7 @@
 ;;; Code:
 (require 'dash)
 (require 's)
-(require 'pythonic)
+;; (require 'pythonic)
 (require 'f)
 (require 'eshell)
 

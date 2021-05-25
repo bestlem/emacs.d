@@ -4316,6 +4316,102 @@ commands directly to whatever keys you prefer.
 
 
 )
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/python-mode-20210408.800/python-mode-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/python-mode-20210408.800/python-mode-autoloads.el") (car load-path))))
+
+
+
+(autoload 'py-backward-class-bol "python-mode" "\
+Go to beginning of ‘class’, go to BOL.
+If already at beginning, go one ‘class’ backward.
+Return beginning of ‘class’ if successful, nil otherwise" t nil)
+
+(autoload 'py-backward-def-bol "python-mode" "\
+Go to beginning of ‘def’, go to BOL.
+If already at beginning, go one ‘def’ backward.
+Return beginning of ‘def’ if successful, nil otherwise" t nil)
+
+(autoload 'py-backward-def-or-class-bol "python-mode" "\
+Go to beginning of ‘def-or-class’, go to BOL.
+If already at beginning, go one ‘def-or-class’ backward.
+Return beginning of ‘def-or-class’ if successful, nil otherwise" t nil)
+
+(autoload 'py-forward-class "python-mode" "\
+Go to end of class.
+
+Return end of ‘class’ if successful, nil otherwise
+Optional ORIG: start position
+Optional BOL: go to beginning of line following end-position
+
+\(fn &optional ORIG BOL)" t nil)
+
+(autoload 'py-forward-def "python-mode" "\
+Go to end of def.
+
+Return end of ‘def’ if successful, nil otherwise
+Optional ORIG: start position
+Optional BOL: go to beginning of line following end-position
+
+\(fn &optional ORIG BOL)" t nil)
+
+(autoload 'py-forward-def-or-class "python-mode" "\
+Go to end of def-or-class.
+
+Return end of ‘def-or-class’ if successful, nil otherwise
+Optional ORIG: start position
+Optional BOL: go to beginning of line following end-position
+
+\(fn &optional ORIG BOL)" t nil)
+
+(autoload 'py-auto-completion-mode "python-mode" "\
+Run auto-completion
+
+\(fn)" t nil)
+
+(autoload 'python-mode "python-mode" "\
+Major mode for editing Python files.
+
+To submit a problem report, enter `\\[py-submit-bug-report]' from a
+`python-mode' buffer.  Do `\\[py-describe-mode]' for detailed
+documentation.  To see what version of `python-mode' you are running,
+enter `\\[py-version]'.
+
+This mode knows about Python indentation, tokens, comments and
+continuation lines.  Paragraphs are separated by blank lines only.
+
+COMMANDS
+
+`py-shell'	Start an interactive Python interpreter in another window
+`py-execute-statement'	Send statement at point to Python default interpreter
+`py-backward-statement'	Go to the initial line of a simple statement
+
+etc.
+
+See available commands listed in files commands-python-mode at directory doc
+
+VARIABLES
+
+`py-indent-offset'	indentation increment
+`py-shell-name'		shell command to invoke Python interpreter
+`py-split-window-on-execute'		When non-nil split windows
+`py-switch-buffers-on-execute-p'	When non-nil switch to the Python output buffer
+
+See available customizations listed in files variables-python-mode at directory doc
+
+\\{python-mode-map}
+
+\(fn)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "python-mode" '("all-mode-setting" "autopair-mode" "flake8" "force-py-shell-name-p-o" "highlight-indent-active" "hs-hide-comments-when-hiding-all" "info-lookup-mode" "ipython" "iypthon" "jython" "pdb-track-stack-from-shell-p" "pep8" "pst-here" "stri" "toggle-force-py-shell-name-p" "turn-o" "virtualenv-")))
+
+
+
+
+
+)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/pretty-hydra-20210221.834/pretty-hydra-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -13095,7 +13191,7 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
 )
 (setq package-activated-list
 	  (append
-	   '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra epl pkg-info projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile treemacs-icons-dired transient transient-posframe toc-org ivy swiper spinner sml-mode smartparens rainbow-delimiters pos-tip racket-mode pretty-hydra prescient persistent-scratch paredit paradox outorg outshine org-bullets org kv esxml nov mwim modus-themes math-symbol-lists makey major-mode-hydra git-commit magit macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides f elisp-refs helpful hardhat git-timemachine gcmh flycheck fish-mode fira-code-mode expand-region eval-in-repl eros elmacro dtrt-indent discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep company company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-theme cmake-mode cask-mode beacon amx all-the-icons aggressive-indent)
+	   '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra epl pkg-info projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile treemacs-icons-dired transient transient-posframe toc-org ivy swiper spinner sml-mode smartparens rainbow-delimiters pos-tip racket-mode python-mode pretty-hydra prescient persistent-scratch paredit paradox outorg outshine org-bullets org kv esxml nov mwim modus-themes math-symbol-lists makey major-mode-hydra git-commit magit macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides f elisp-refs helpful hardhat git-timemachine gcmh flycheck fish-mode fira-code-mode expand-region eval-in-repl eros elmacro dtrt-indent discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep company company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-theme cmake-mode cask-mode beacon amx all-the-icons aggressive-indent)
 	   package-activated-list))
 (progn
   (require 'info)

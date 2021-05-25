@@ -1,0 +1,21 @@
+* xonsh-mode
+
+Emacs major mode for editing [[https://xon.sh][xonshrc]] files. This mode inherits from
+=python-mode= but adds specific =xonsh= syntax.
+
+** Installation
+
+=xonsh-mode= is available on [[https://melpa.org][Melpa]]:
+
+#+begin_src elisp
+M-x package-install xonsh-mode
+#+end_src
+
+** Configuration
+
+You can always add this snippet to the header of any file you want to be
+interpreted in =xonsh-mode=.
+
+#+begin_src fundamental
+# -*- mode: xonsh; -*-
+#+end_src

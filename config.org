@@ -23,9 +23,9 @@ The minimum setup needed to load the rest.
 ;;  setting to nil turns them off
 (add-hook 'after-init-hook
           (lambda () (setq debug-on-error nil)))
- ;(setq debug-on-error 't)
+(setq debug-on-error 't)
 (setq debug-on-error nil)
-(setq debug-on-quit nil)
+;(setq debug-on-quit nil)
 
 ;; Trace some function
 ;; (require 'trace)

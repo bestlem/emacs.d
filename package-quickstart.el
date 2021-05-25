@@ -75,10 +75,10 @@ See `yas-minor-mode' for more information on Yas minor mode.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/yaml-mode-20201109.1026/yaml-mode-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/yaml-mode-20210508.1641/yaml-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/yaml-mode-20201109.1026/yaml-mode-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/yaml-mode-20210508.1641/yaml-mode-autoloads.el") (car load-path))))
 
 
 
@@ -328,10 +328,10 @@ See `ws-butler-mode' for more information on Ws-Butler mode.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/with-editor-20210319.1930/with-editor-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/with-editor-20210427.1244/with-editor-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/with-editor-20210319.1930/with-editor-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/with-editor-20210427.1244/with-editor-autoloads.el") (car load-path))))
 
 
 
@@ -1338,10 +1338,10 @@ version.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/projectile-20210407.707/projectile-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/projectile-20210525.709/projectile-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/projectile-20210407.707/projectile-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/projectile-20210525.709/projectile-autoloads.el") (car load-path))))
 
 
 
@@ -1844,6 +1844,9 @@ Remove known projects that don't exist anymore." t nil)
 
 (autoload 'projectile-clear-known-projects "projectile" "\
 Clear both `projectile-known-projects' and `projectile-known-projects-file'." t nil)
+
+(autoload 'projectile-reset-known-projects "projectile" "\
+Clear known projects and rediscover." t nil)
 
 (autoload 'projectile-remove-known-project "projectile" "\
 Remove PROJECT from the list of known projects.
@@ -2480,10 +2483,10 @@ Read a string using a pos-frame with given PROMPT and INITIAL-INPUT.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/treemacs-20210422.2011/treemacs-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/treemacs-20210524.1338/treemacs-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/treemacs-20210422.2011/treemacs-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/treemacs-20210524.1338/treemacs-autoloads.el") (car load-path))))
 
 
 
@@ -2980,10 +2983,10 @@ mode otherwise.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/transient-20210420.1635/transient-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/transient-20210426.2141/transient-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/transient-20210420.1635/transient-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/transient-20210426.2141/transient-autoloads.el") (car load-path))))
 
 
 
@@ -3112,10 +3115,10 @@ ARG is `toggle'; disable the mode otherwise.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-20210423.1127/ivy-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-20210518.1815/ivy-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-20210423.1127/ivy-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-20210518.1815/ivy-autoloads.el") (car load-path))))
 
 
 
@@ -3260,15 +3263,15 @@ Switch to another buffer in another window." t nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/swiper-20210404.1302/swiper-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/swiper-20210521.1319/swiper-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/swiper-20210404.1302/swiper-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/swiper-20210521.1319/swiper-autoloads.el") (car load-path))))
 
 
 
 (autoload 'swiper-avy "swiper" "\
-Jump to one of the current swiper candidates." t nil)
+Jump to one of the current swiper candidates with `avy'." t nil)
 
 (autoload 'swiper-backward "swiper" "\
 `isearch-backward' with an overview.
@@ -3703,10 +3706,10 @@ Turn off `show-smartparens-mode'." t nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/rainbow-delimiters-20200827.321/rainbow-delimiters-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/rainbow-delimiters-20210515.1254/rainbow-delimiters-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/rainbow-delimiters-20200827.321/rainbow-delimiters-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/rainbow-delimiters-20210515.1254/rainbow-delimiters-autoloads.el") (car load-path))))
 
 
 
@@ -3747,10 +3750,10 @@ Disable `rainbow-delimiters-mode'." nil nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/racket-mode-20210328.2038/racket-mode-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/racket-mode-20210524.1655/racket-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/racket-mode-20210328.2038/racket-mode-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/racket-mode-20210524.1655/racket-mode-autoloads.el") (car load-path))))
 
 
 
@@ -4388,10 +4391,10 @@ Radio is considered on when STATUS is non-nil, otherwise off.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/prescient-20210411.2007/prescient-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/prescient-20210425.1720/prescient-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/prescient-20210411.2007/prescient-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/prescient-20210425.1720/prescient-autoloads.el") (car load-path))))
 
 
 
@@ -4743,10 +4746,10 @@ toggle it if ARG is `toggle'; disable the mode otherwise.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/org-9.4.5/org-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/org-9.4.6/org-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/org-9.4.5/org-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/org-9.4.6/org-autoloads.el") (car load-path))))
 
 
 
@@ -5225,8 +5228,10 @@ With prefix arg UNCOMPILED, load the uncompiled versions.
 
 (autoload 'org-customize "org" "\
 Call the customize function with org as argument." t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org" '("org-" "turn-on-org-cdlatex")))
+
 
 
 
@@ -5498,8 +5503,10 @@ If an entry has a APPT_WARNTIME property, its value will be used
 to override `appt-message-warning-time'.
 
 \(fn &optional REFRESH FILTER &rest ARGS)" t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-agenda" '("org-")))
+
 
 
 
@@ -5553,8 +5560,10 @@ of the day at point (if any) or the current HH:MM time.
 
 (autoload 'org-capture-import-remember-templates "org-capture" "\
 Set `org-capture-templates' to be similar to `org-remember-templates'." t nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-capture" '("org-capture-")))
+
 
 
 
@@ -5584,8 +5593,10 @@ Decrypt all entries in the current buffer." t nil)
 
 (autoload 'org-crypt-use-before-save-magic "org-crypt" "\
 Add a hook to automatically encrypt entries before a file is saved to disk." nil nil)
+
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-crypt" '("org-")))
+
 
 
 
@@ -5862,10 +5873,10 @@ Interactively, with prefix argument, move to the previous position.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/modus-themes-20210418.327/modus-themes-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/modus-themes-20210524.1750/modus-themes-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/modus-themes-20210418.327/modus-themes-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/modus-themes-20210524.1750/modus-themes-autoloads.el") (car load-path))))
 
 
 
@@ -6052,10 +6063,10 @@ Show the hydra for the current major mode." t nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/magit-20210421.1731/magit-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/magit-20210524.1513/magit-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/magit-20210421.1731/magit-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/magit-20210524.1513/magit-autoloads.el") (car load-path))))
 
 
 
@@ -8632,10 +8643,10 @@ Commands:
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/counsel-20210423.1127/counsel-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/counsel-20210509.830/counsel-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/counsel-20210423.1127/counsel-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/counsel-20210509.830/counsel-autoloads.el") (car load-path))))
 
 
 
@@ -9416,10 +9427,10 @@ Beautify / pretty-print the active region (or the entire buffer if no active reg
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-prescient-20210227.600/ivy-prescient-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-prescient-20210425.1720/ivy-prescient-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-prescient-20210227.600/ivy-prescient-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-prescient-20210425.1720/ivy-prescient-autoloads.el") (car load-path))))
 
 
 
@@ -9451,10 +9462,10 @@ toggle it if ARG is `toggle'; disable the mode otherwise.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-posframe-20210410.530/ivy-posframe-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-posframe-20210426.2144/ivy-posframe-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-posframe-20210410.530/ivy-posframe-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-posframe-20210426.2144/ivy-posframe-autoloads.el") (car load-path))))
 
 
 
@@ -9499,10 +9510,10 @@ toggle it if ARG is `toggle'; disable the mode otherwise.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/ignoramus-20210108.2026/ignoramus-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/ignoramus-20210515.1422/ignoramus-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/ignoramus-20210108.2026/ignoramus-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/ignoramus-20210515.1422/ignoramus-autoloads.el") (car load-path))))
 
 
 
@@ -9769,10 +9780,10 @@ Show help for the symbol at point." t nil)
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/hardhat-20160414.1413/hardhat-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/hardhat-20210515.1422/hardhat-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/hardhat-20160414.1413/hardhat-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/hardhat-20210515.1422/hardhat-autoloads.el") (car load-path))))
 
 
 
@@ -10195,6 +10206,61 @@ Major mode for editing fish shell files.
 
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "fish-mode" '("fish")))
+
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/fira-code-mode-20201005.1607/fira-code-mode-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/fira-code-mode-20201005.1607/fira-code-mode-autoloads.el") (car load-path))))
+
+
+
+(autoload 'fira-code-mode "fira-code-mode" "\
+Fira Code ligatures minor mode
+
+If called interactively, enable Fira-Code mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+(put 'global-fira-code-mode 'globalized-minor-mode t)
+
+(defvar global-fira-code-mode nil "\
+Non-nil if Global Fira-Code mode is enabled.
+See the `global-fira-code-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `global-fira-code-mode'.")
+
+(custom-autoload 'global-fira-code-mode "fira-code-mode" nil)
+
+(autoload 'global-fira-code-mode "fira-code-mode" "\
+Toggle Fira-Code mode in all buffers.
+With prefix ARG, enable Global Fira-Code mode if ARG is positive;
+otherwise, disable it.  If called from Lisp, enable the mode if
+ARG is omitted or nil.
+
+Fira-Code mode is enabled in all buffers where
+`fira-code-mode' would do it.
+See `fira-code-mode' for more information on Fira-Code mode.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'fira-code-mode-install-fonts "fira-code-mode" "\
+Helper function to download and install the latests fonts based on OS.
+When PFX is non-nil, ignore the prompt and just install
+
+\(fn &optional PFX)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "fira-code-mode" '("fira-code-mode-")))
 
 
 
@@ -10925,10 +10991,10 @@ what diminished modes would be on the mode-line if they were still minor." t nil
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/diff-hl-20210410.130/diff-hl-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/diff-hl-20210523.11/diff-hl-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/diff-hl-20210410.130/diff-hl-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/diff-hl-20210523.11/diff-hl-autoloads.el") (car load-path))))
 
 
 
@@ -11222,10 +11288,10 @@ Implementation to show the hunk in a posframe.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/deadgrep-20210219.748/deadgrep-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/deadgrep-20210510.416/deadgrep-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/deadgrep-20210219.748/deadgrep-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/deadgrep-20210510.416/deadgrep-autoloads.el") (car load-path))))
 
 
 
@@ -11244,10 +11310,10 @@ don't actually start the search.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/company-20210423.2340/company-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/company-20210525.140/company-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/company-20210423.2340/company-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/company-20210525.140/company-autoloads.el") (car load-path))))
 
 
 
@@ -11722,6 +11788,1004 @@ Call `comment-dwim-2' inside source blocks. Else, fallback to `org-toggle-commen
 
 
 )
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/color-theme-modern-20200729.921/color-theme-modern-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/color-theme-modern-20200729.921/color-theme-modern-autoloads.el") (car load-path))))
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "aalto-dark-theme" '("aalto-dark")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "aalto-light-theme" '("aalto-light")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "aliceblue-theme" '("aliceblue")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "andreas-theme" '("andreas")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "arjen-theme" '("arjen")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "beige-diff-theme" '("beige-diff")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "beige-eshell-theme" '("beige-eshell")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "bharadwaj-slate-theme" '("bharadwaj-slate")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "bharadwaj-theme" '("bharadwaj")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "billw-theme" '("billw")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "black-on-gray-theme" '("black-on-gray")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "blippblopp-theme" '("blippblopp")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "blue-erc-theme" '("blue-erc")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "blue-eshell-theme" '("blue-eshell")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "blue-gnus-theme" '("blue-gnus")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "blue-mood-theme" '("blue-mood")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "blue-sea-theme" '("blue-sea")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "calm-forest-theme" '("calm-forest")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "charcoal-black-theme" '("charcoal-black")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "clarity-theme" '("clarity")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "classic-theme" '("classic")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "cobalt-theme" '("cobalt")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "comidia-theme" '("comidia")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dark-blue-theme" '("dark-blue")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dark-blue2-theme" '("dark-blue2")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dark-erc-theme" '("dark-erc")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dark-font-lock-theme" '("dark-font-lock")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dark-gnus-theme" '("dark-gnus")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dark-green-theme" '("dark-green")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dark-info-theme" '("dark-info")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dark-laptop-theme" '("dark-laptop")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "deep-blue-theme" '("deep-blue")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "desert-theme" '("desert")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "digital-ofs1-theme" '("digital-ofs1")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "emacs-21-theme" '("emacs-21")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "emacs-nw-theme" '("emacs-nw")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "euphoria-theme" '("euphoria")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "feng-shui-theme" '("feng-shui")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "fischmeister-theme" '("fischmeister")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "gnome-theme" '("gnome")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "gnome2-theme" '("gnome2")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "goldenrod-theme" '("goldenrod")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "gray1-theme" '("gray1")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "gray30-theme" '("gray30")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "greiner-theme" '("greiner")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "gtk-ide-theme" '("gtk-ide")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "high-contrast-theme" '("high-contrast")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "hober-theme" '("hober")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "infodoc-theme" '("infodoc")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "jb-simple-theme" '("jb-simple")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "jedit-grey-theme" '("jedit-grey")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "jonadabian-slate-theme" '("jonadabian-slate")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "jonadabian-theme" '("jonadabian")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "jsc-dark-theme" '("jsc-dark")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "jsc-light-theme" '("jsc-light")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "jsc-light2-theme" '("jsc-light2")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "julie-theme" '("julie")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "katester-theme" '("katester")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "kingsajz-theme" '("kingsajz")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "late-night-theme" '("late-night")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lawrence-theme" '("lawrence")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ld-dark-theme" '("ld-dark")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lethe-theme" '("lethe")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "marine-theme" '("marine")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "marquardt-theme" '("marquardt")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "matrix-theme" '("matrix")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "midnight-theme" '("midnight")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "mistyday-theme" '("mistyday")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "montz-theme" '("montz")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "oswald-theme" '("oswald")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "parus-theme" '("parus")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "pierson-theme" '("pierson")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "pok-wob-theme" '("pok-wob")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "pok-wog-theme" '("pok-wog")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "railscast-theme" '("railscast")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ramangalahy-theme" '("ramangalahy")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "raspopovic-theme" '("raspopovic")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "renegade-theme" '("renegade")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "resolve-theme" '("resolve")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "retro-green-theme" '("retro-green")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "retro-orange-theme" '("retro-orange")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "robin-hood-theme" '("robin-hood")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "rotor-theme" '("rotor")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ryerson-theme" '("ryerson")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "salmon-diff-theme" '("salmon-diff")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "salmon-font-lock-theme" '("salmon-font-lock")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "scintilla-theme" '("scintilla")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "shaman-theme" '("shaman")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "simple-1-theme" '("simple-1")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "sitaramv-nt-theme" '("sitaramv-nt")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "sitaramv-solaris-theme" '("sitaramv-solaris")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "snow-theme" '("snow")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "snowish-theme" '("snowish")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "standard-ediff-theme" '("standard-ediff")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "standard-theme" '("standard")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "subdued-theme" '("subdued")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "subtle-blue-theme" '("subtle-blue")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "subtle-hacker-theme" '("subtle-hacker")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "taming-mr-arneson-theme" '("taming-mr-arneson")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "taylor-theme" '("taylor")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tty-dark-theme" '("tty-dark")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "vim-colors-theme" '("vim-colors")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "whateveryouwant-theme" '("whateveryouwant")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "wheat-theme" '("wheat")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "word-perfect-theme" '("word-perfect")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "xemacs-theme" '("xemacs")))
+
+
+
+
+(when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "xp-theme" 'nil))
+
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/color-theme-20190220.1115/color-theme-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/color-theme-20190220.1115/color-theme-autoloads.el") (car load-path))))
+
+
+
+(autoload 'color-theme-select "color-theme" "\
+Displays a special buffer for selecting and installing a color theme.
+With optional prefix ARG, this buffer will include color theme libraries
+as well.  A color theme library is in itself not complete, it must be
+used as part of another color theme to be useful.  Thus, color theme
+libraries are mainly useful for color theme authors.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'color-theme-describe "color-theme" "\
+Describe color theme listed at point.
+This shows the documentation of the value of text-property color-theme
+at point.  The text-property color-theme should be a color theme
+function.  See `color-themes'." t nil)
+
+(autoload 'color-theme-install-at-mouse "color-theme" "\
+Install color theme clicked upon using the mouse.
+First argument EVENT is used to set point.  Then
+`color-theme-install-at-point' is called.
+
+\(fn EVENT)" t nil)
+
+(autoload 'color-theme-install-at-point-for-current-frame "color-theme" "\
+Install color theme at point for current frame only.
+Binds `color-theme-is-global' to nil and calls
+`color-theme-install-at-point'." t nil)
+
+(autoload 'color-theme-print "color-theme" "\
+Print the current color theme function.
+
+You can contribute this function to <URL:news:gnu.emacs.sources> or
+paste it into your .emacs file and call it.  That should recreate all
+the settings necessary for your color theme.
+
+Example:
+
+    (require 'color-theme)
+    (defun my-color-theme ()
+      \"Color theme by Alex Schroeder, created 2000-05-17.\"
+      (interactive)
+      (color-theme-install
+       '(...
+	 ...
+	 ...)))
+    (my-color-theme)
+
+If you want to use a specific color theme function, you can call the
+color theme function in your .emacs directly.
+
+Example:
+
+    (require 'color-theme)
+    (color-theme-gnome2)
+
+\(fn &optional BUF)" t nil)
+
+(autoload 'color-theme-analyze-defun "color-theme" "\
+Once you have a color-theme printed, check for missing faces.
+This is used by maintainers who receive a color-theme submission
+and want to make sure it follows the guidelines by the color-theme
+author." t nil)
+
+(autoload 'color-theme-make-snapshot "color-theme" "\
+Return the definition of the current color-theme.
+The function returned will recreate the color-theme in use at the moment." nil nil)
+
+(autoload 'color-theme-compare "color-theme" "\
+Compare two color themes.
+This will print the differences between installing THEME-A and
+installing THEME-B.  Note that the order is important: If a face is
+defined in THEME-A and not in THEME-B, then this will not show up as a
+difference, because there is no reset before installing THEME-B.  If a
+face is defined in THEME-B and not in THEME-A, then this will show up as
+a difference.
+
+\(fn THEME-A THEME-B)" t nil)
+
+(autoload 'color-theme-install "color-theme" "\
+Install a color theme defined by frame parameters, variables and faces.
+
+The theme is installed for all present and future frames; any missing
+faces are created.  See `color-theme-install-faces'.
+
+THEME is a color theme definition.  See below for more information.
+
+If you want to install a color theme from your .emacs, use the output
+generated by `color-theme-print'.  This produces color theme function
+which you can copy to your .emacs.
+
+A color theme definition is a list:
+\([FUNCTION] FRAME-PARAMETERS VARIABLE-SETTINGS FACE-DEFINITIONS)
+
+FUNCTION is the color theme function which called `color-theme-install'.
+This is no longer used.  There was a time when this package supported
+automatic factoring of color themes.  This has been abandoned.
+
+FRAME-PARAMETERS is an alist of frame parameters.  These are installed
+with `color-theme-install-frame-params'.  These are installed last such
+that any changes to the default face can be changed by the frame
+parameters.
+
+VARIABLE-DEFINITIONS is an alist of variable settings.  These are
+installed with `color-theme-install-variables'.
+
+FACE-DEFINITIONS is an alist of face definitions.  These are installed
+with `color-theme-install-faces'.
+
+If `color-theme-is-cumulative' is nil, a color theme will undo face and
+frame-parameter settings of previous color themes.
+
+\(fn THEME)" nil nil)
+
+(autoload 'color-theme-submit "color-theme" "\
+Submit your color-theme to the maintainer." t nil)
+
+(autoload 'color-theme-initialize "color-theme" "\
+Initialize the color theme package by loading color-theme-libraries." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "color-theme" '("color-theme" "define-color-theme")))
+
+
+
+
+
+)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/cmake-mode-20210104.1831/cmake-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -11899,10 +12963,10 @@ provided.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/all-the-icons-20210422.1147/all-the-icons-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/all-the-icons-20210522.1337/all-the-icons-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/all-the-icons-20210422.1147/all-the-icons-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/all-the-icons-20210522.1337/all-the-icons-autoloads.el") (car load-path))))
 
 
 
@@ -12031,14 +13095,14 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
 )
 (setq package-activated-list
 	  (append
-	   '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra epl pkg-info projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile treemacs-icons-dired transient transient-posframe toc-org ivy swiper spinner sml-mode smartparens rainbow-delimiters pos-tip racket-mode pretty-hydra prescient persistent-scratch paredit paradox outorg outshine org-bullets org kv esxml nov mwim modus-themes math-symbol-lists makey major-mode-hydra git-commit magit macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides f elisp-refs helpful hardhat git-timemachine gcmh flycheck fish-mode expand-region eval-in-repl eros elmacro dtrt-indent discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep company company-prescient company-posframe company-math comment-dwim-2 cmake-mode cask-mode beacon amx all-the-icons aggressive-indent)
+	   '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra epl pkg-info projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile treemacs-icons-dired transient transient-posframe toc-org ivy swiper spinner sml-mode smartparens rainbow-delimiters pos-tip racket-mode pretty-hydra prescient persistent-scratch paredit paradox outorg outshine org-bullets org kv esxml nov mwim modus-themes math-symbol-lists makey major-mode-hydra git-commit magit macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides f elisp-refs helpful hardhat git-timemachine gcmh flycheck fish-mode fira-code-mode expand-region eval-in-repl eros elmacro dtrt-indent discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep company company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-theme cmake-mode cask-mode beacon amx all-the-icons aggressive-indent)
 	   package-activated-list))
 (progn
   (require 'info)
   (info-initialize)
   (setq Info-directory-list
 		(append
-		 '("/Users/mark/.emacs.d/elpa/27.2/elpa/magit-20210421.1731" "/Users/mark/.emacs.d/elpa/27.2/elpa/modus-themes-20210418.327" "/Users/mark/.emacs.d/elpa/27.2/elpa/org-9.4.5" "/Users/mark/.emacs.d/elpa/27.2/elpa/racket-mode-20210328.2038" "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-20210423.1127" "/Users/mark/.emacs.d/elpa/27.2/elpa/transient-20210420.1635" "/Users/mark/.emacs.d/elpa/27.2/elpa/dash-20210330.1544" "/Users/mark/.emacs.d/elpa/27.2/elpa/use-package-20210207.1926" "/Users/mark/.emacs.d/elpa/27.2/elpa/with-editor-20210319.1930")
+		 '("/Users/mark/.emacs.d/elpa/27.2/elpa/magit-20210524.1513" "/Users/mark/.emacs.d/elpa/27.2/elpa/modus-themes-20210524.1750" "/Users/mark/.emacs.d/elpa/27.2/elpa/org-9.4.6" "/Users/mark/.emacs.d/elpa/27.2/elpa/racket-mode-20210524.1655" "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-20210518.1815" "/Users/mark/.emacs.d/elpa/27.2/elpa/transient-20210426.2141" "/Users/mark/.emacs.d/elpa/27.2/elpa/dash-20210330.1544" "/Users/mark/.emacs.d/elpa/27.2/elpa/use-package-20210207.1926" "/Users/mark/.emacs.d/elpa/27.2/elpa/with-editor-20210427.1244")
 		 Info-directory-list)))
 
 ;; Local Variables:

@@ -460,8 +460,8 @@ vivendi is dark
 #+NAME: org_2020-12-06+00-00_0A5F5673-C8F4-4FCE-869B-205BC1B9DAF5
 #+begin_src emacs-lisp :tangle no :noweb-ref theme-modus
 (use-package modus-themes
-  :ensure t						 ; As modus is in emacs always need some ensure
-  ;; :mwb-load-path "fork/modus-themes"
+  ;; :ensure t						 ; As modus is in emacs always need some ensure
+  :mwb-load-path "fork/modus-themes"
   :demand
   :init
   ;; Add all your customizations prior to loading the themes

@@ -33,17 +33,26 @@ Unfortunately conda and xonsh require the other so I hack them
   :mode ("\\.py\\'" . python-mode)
   :interpreter ("python" . python-mode)
   :bind (:map python-mode-map
-			  ("C-c c")
+              ("<f5>" . py-execute-buffer)
 			  ("C-c C-z" . python-shell))
   :init
   (setq py--imenu-create-index-p t)
   :config
+  (setq org-babel-python-mode 'python-mode)
 
+  (defun py-hook-mwb ()
+    ;; (setq tab-width 4)
+    (aggressive-indent-mode -1)
+    (smartparens-mode 1)
+    (guess-style-guess-all)
+    ;; (mwb-prog-auto-fill-80)
+    )
   (setq-default python-indent 4)
   (setq-default python-indent-offset 4)
 
   (setq-default pdb-command-name "python3 -m pdb")
   (setq-default python-shell-interpreter "python3")
+  :hook (python-mode . py-hook-mwb)
   )
 #+end_src
 

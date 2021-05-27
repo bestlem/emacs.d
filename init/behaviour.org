@@ -132,6 +132,18 @@ Let's use [[https://github.com/Wilfred/helpful][Helpful]]
   ("<f1> ." . helpful-at-point)
   ("<f1> <f1>" . helpful-at-point))
 #+end_src
+** Improve majors
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210526T204803.505076
+:END:
+This package helps to discover the major mode bindings. I use it very occasionally and hence not binding it to any modal binding.
+#+NAME: org_mark_mini20.local_20210526T204803.473143
+#+begin_src emacs-lisp
+(use-package discover-my-major
+  :ensure t
+  :bind (("C-h C-m" . discover-my-major)
+		 ("C-h M-m" . discover-my-mode)))
+#+end_src
 * Key Chord
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:727BACF4-7E05-4203-85B7-65661B36F7B5
@@ -350,25 +362,6 @@ mwin might have mode aware
 (setq track-eol t)
 (setq truncate-lines t)
 #+end_src
-**  tabs
-:PROPERTIES:
-:ID:       org_2020-12-05+00-00:2067C531-01D2-4988-98A8-1A6A7BE16371
-:END:
-#+NAME: org_2020-12-05+00-00_EA04789D-7F1B-4CB5-BBF4-4D476DB57D6E
-#+begin_src emacs-lisp
-(setq-default tab-width 4)
-(setq-default tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100))
-(setq indent-tabs-mode 't)
-#+end_src
-*** Making Backspace Properly Delete Tabs
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20210115T193538.630184
-:END:
-From https://dougie.io/emacs/indentation/#tldr-the-full-configuration
-#+NAME: org_mark_mini20.local_20210115T193538.606987
-#+begin_src emacs-lisp
-(setq backward-delete-char-untabify-method 'hungry)
-#+end_src
 ** Rest
 :PROPERTIES:
 :ID:       org_2020-12-05+00-00:D912E5B5-F6B5-4BBF-9FCF-A8F276FA3A38
@@ -396,12 +389,6 @@ From https://dougie.io/emacs/indentation/#tldr-the-full-configuration
 
 ;; General emacs behaviour
 ;;  From https://sriramkswamy.github.io/dotemacs/
-
-;; This package helps to discover the major mode bindings. I use it very occasionally and hence not binding it to any modal binding.
-(use-package discover-my-major
-  :ensure t
-  :bind (("C-h C-m" . discover-my-major)
-		 ("C-h M-m" . discover-my-mode)))
 
 #+end_src
 

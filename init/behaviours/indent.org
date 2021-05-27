@@ -1,0 +1,85 @@
+#+TITLE:  Indent
+#+AUTHOR: Mark Bestley
+#+EMAIL:  @bestley.co.uk
+#+DATE:   26 May 2021
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+STARTUP: overview
+* Indentation
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210526T204810.693496
+:END:
+This is one of these things that you want  the editor to do.
+
+The key for return is bound so that the new line indents. Most indentation is done by the major mode but we can add guesses
+
+
+** Tabs
+:PROPERTIES:
+:ID:       org_2020-11-29+00-00:3338E830-6C15-4A2B-ADF6-D31BAAB4807A
+:END:
+Well I like them as being sensibles others do not.
+We have the best discussion at https://www.emacswiki.org/emacs/TabsAreEvil
+
+So try smart-tabs - later
+First issue is we need to switch as many people use spaces so we need to guess indent levewls - python.el does this automatically. There is the [[https://www.emacswiki.org/emacs/GuessStyle][GuessStyle ]]but it is old and not maintained. [[https://github.com/jscheid/dtrt-indent][dtrt-indent]] seems more modern and has a maintainer but.... and comments on python worry - but is does tabs mode things and dtrt-indent can't deal well with files that mix hard tabs with spaces for indentation. Which is the case I really want but seems OK - however need to then think on what to do for (un)tabify
+dtrt-indent-mode does not set hard tabs for python - which I need so hack guess-style that does for wrongh python mode.
+
+*** Tab can complete
+:PROPERTIES:
+:ID:       org_2020-11-30+00-00:EE7B6EBD-B2B6-4B79-9A24-65CFCB314BAE
+:END:
+#+NAME: org_2020-11-30+00-00_ABE0660B-27FC-4AC0-B441-5232EFDE64D3
+#+begin_src emacs-lisp
+(setq tab-always-indent 'complete)
+#+end_src
+
+***  Basics
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210526T204810.692856
+:END:
+Probably the oldest cod - yes tab-with should be a calculation but I did not know how in 1994
+#+NAME: org_mark_mini20.local_20210526T204810.689837
+#+begin_src emacs-lisp
+(setq-default tab-width 4)
+(setq-default tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100))
+(setq indent-tabs-mode 't)
+#+end_src
+**** Making Backspace Properly Delete Tabs
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210115T193538.630184
+:END:
+From https://dougie.io/emacs/indentation/#tldr-the-full-configuration
+#+NAME: org_mark_mini20.local_20210115T193538.606987
+#+begin_src emacs-lisp
+(setq backward-delete-char-untabify-method 'hungry)
+#+end_src
+** Guess
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210526T204810.692169
+:END:
+Don't use the defaults look at the file
+*** Guess indentation
+:PROPERTIES:
+:ID:       org_2020-11-30+00-00:DB587002-CCA1-4A79-8F32-4E389CEE1126
+:END:
+#+NAME: org_2020-11-29+00-00_5DF7AA9A-5AD2-4C8E-8FFE-5D878310646D
+#+begin_src emacs-lisp
+(use-package dtrt-indent
+  :ensure t
+  :diminish
+  :hook (prog-mode . dtrt-indent-mode))
+#+end_src
+*** Guess Style
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210526T185848.660684
+:END:
+#+NAME: org_mark_mini20.local_20210526T195505.023756
+#+begin_src emacs-lisp
+(use-package guess-style
+  :mwb-load-path "fork/guess-style"
+  :commands guess-style-guess-all
+  guess-style-info-mode
+  global-guess-style-info-mode
+  )
+(global-guess-style-info-mode 1)        ; force the load
+#+end_src

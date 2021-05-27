@@ -22,6 +22,8 @@
  - path :: ~/src/Racket/RacketProgrammingtheFunWay
 ** mandlebrot
  - path :: ~/src/Racket/mandelbrot
+** dummy-load
+ - path :: ~/src/Racket/dummy-load
 * C based
 ** rftg
  - path :: ~/src/cpp/rftg
@@ -33,12 +35,6 @@
  - path :: ~/src/cpp/test_gtk
 ** macports-ports
  - path :: ~/src/cpp/macports-ports
-** trash
- - path :: ~/src/cpp/trash
-** S01E22-command-line-tools-with-swift
- - path :: ~/src/macos/S01E22-command-line-tools-with-swift
 * Odds
-** SML unit test
- - path :: ~/old_src/sml/unit_test
-** Coursera Programming languages
- - path :: ~/old_src/coursera/ProgrammingLanguages
+** py-bash-completion
+ - path :: ~/src/python/py-bash-completion

@@ -801,7 +801,6 @@ The functions are from jerrypnz for use in pretty hydra headers.
 Treemacs icons are better but they are purely keyed off file extensions. All the icons has a look up from mode to icon, treemacs does not.
 #+NAME: org_mark_mini12.local_20201224T121457.192342
 
-
 ***** All the icons
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210602T212702.710382
@@ -825,6 +824,28 @@ Treemacs icons are better but they are purely keyed off file extensions. All the
 #+begin_src emacs-lisp
 (use-package jp-icons
   :mwb-load-path "site-lisp/jerrypnz")
+#+end_src
+***** Centaur pretty-hydra-title
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210602T225047.764883
+:END:
+Used as a function to give an iconized title
+#+NAME: org_mark_mini20.local_20210602T225047.737701
+#+begin_src emacs-lisp
+(cl-defun pretty-hydra-title (title &optional icon-type icon-name
+                                    &key face height v-adjust)
+  "Add an icon in the hydra title."
+  (let ((face (or face `(:foreground ,(face-background 'highlight))))
+        (height (or height 1.0))
+        (v-adjust (or v-adjust 0.0)))
+    (concat
+     (when (and (display-graphic-p) icon-type icon-name)
+       (let ((f (intern (format "all-the-icons-%s" icon-type))))
+         (when (fboundp f)
+           (concat
+            (apply f (list icon-name :face face :height height :v-adjust v-adjust))
+            " "))))
+     (propertize title 'face face))))
 #+end_src
 *** Remainder of org
 :PROPERTIES:

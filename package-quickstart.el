@@ -6166,6 +6166,30 @@ Turn off `show-smartparens-mode'." t nil)
 
 
 )
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/f-20191110.1357/f-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/f-20191110.1357/f-autoloads.el") (car load-path))))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "f" '("f-")))
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/shrink-path-20190208.1335/shrink-path-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/shrink-path-20190208.1335/shrink-path-autoloads.el") (car load-path))))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "shrink-path" '("shrink-path-")))
+
+
+
+
+)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/rainbow-delimiters-20210515.1254/rainbow-delimiters-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -8531,6 +8555,44 @@ by virtue of calling either of `modus-themes-load-operandi' and
 
 
 )
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/minions-20201204.1051/minions-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/minions-20201204.1051/minions-autoloads.el") (car load-path))))
+
+
+
+(defvar minions-mode nil "\
+Non-nil if Minions mode is enabled.
+See the `minions-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `minions-mode'.")
+
+(custom-autoload 'minions-mode "minions" nil)
+
+(autoload 'minions-mode "minions" "\
+Display a minor-mode menu in the mode line.
+
+If called interactively, enable Minions mode if ARG is positive,
+and disable it if ARG is zero or negative.  If called from Lisp,
+also enable the mode if ARG is omitted or nil, and toggle it if
+ARG is `toggle'; disable the mode otherwise.
+
+This replaces the likely incomplete and possibly cut off list of
+minor-modes that is usually displayed directly in the mode line.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "minions" '("minions-")))
+
+
+
+
+
+)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/math-symbol-lists-20200131.2333/math-symbol-lists-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -9794,17 +9856,6 @@ mode otherwise.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/f-20191110.1357/f-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/f-20191110.1357/f-autoloads.el") (car load-path))))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "f" '("f-")))
-
-
-)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/elisp-refs-20200815.2357/elisp-refs-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -10957,6 +11008,174 @@ use either \\[customize] or the function `dtrt-indent-mode'.")
 
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dtrt-indent-diag" '("dtrt-indent-" "save-buffer-state")))
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/all-the-icons-20210522.1337/all-the-icons-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/all-the-icons-20210522.1337/all-the-icons-autoloads.el") (car load-path))))
+
+
+
+(autoload 'all-the-icons-icon-for-dir "all-the-icons" "\
+Get the formatted icon for DIR.
+ARG-OVERRIDES should be a plist containining `:height',
+`:v-adjust' or `:face' properties like in the normal icon
+inserting functions.
+
+Note: You want chevron, please use `all-the-icons-icon-for-dir-with-chevron'.
+
+\(fn DIR &rest ARG-OVERRIDES)" nil nil)
+
+(autoload 'all-the-icons-icon-for-file "all-the-icons" "\
+Get the formatted icon for FILE.
+ARG-OVERRIDES should be a plist containining `:height',
+`:v-adjust' or `:face' properties like in the normal icon
+inserting functions.
+
+\(fn FILE &rest ARG-OVERRIDES)" nil nil)
+
+(autoload 'all-the-icons-icon-for-mode "all-the-icons" "\
+Get the formatted icon for MODE.
+ARG-OVERRIDES should be a plist containining `:height',
+`:v-adjust' or `:face' properties like in the normal icon
+inserting functions.
+
+\(fn MODE &rest ARG-OVERRIDES)" nil nil)
+
+(autoload 'all-the-icons-icon-for-url "all-the-icons" "\
+Get the formatted icon for URL.
+If an icon for URL isn't found in `all-the-icons-url-alist', a globe is used.
+ARG-OVERRIDES should be a plist containining `:height',
+`:v-adjust' or `:face' properties like in the normal icon
+inserting functions.
+
+\(fn URL &rest ARG-OVERRIDES)" nil nil)
+
+(autoload 'all-the-icons-install-fonts "all-the-icons" "\
+Helper function to download and install the latests fonts based on OS.
+When PFX is non-nil, ignore the prompt and just install
+
+\(fn &optional PFX)" t nil)
+
+(autoload 'all-the-icons-insert "all-the-icons" "\
+Interactive icon insertion function.
+When Prefix ARG is non-nil, insert the propertized icon.
+When FAMILY is non-nil, limit the candidates to the icon set matching it.
+
+\(fn &optional ARG FAMILY)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "all-the-icons" '("all-the-icons-")))
+
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/doom-modeline-20210527.840/doom-modeline-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/doom-modeline-20210527.840/doom-modeline-autoloads.el") (car load-path))))
+
+
+
+(autoload 'doom-modeline-init "doom-modeline" "\
+Initialize doom mode-line." nil nil)
+
+(autoload 'doom-modeline-set-main-modeline "doom-modeline" "\
+Set main mode-line.
+If DEFAULT is non-nil, set the default mode-line for all buffers.
+
+\(fn &optional DEFAULT)" nil nil)
+
+(autoload 'doom-modeline-set-minimal-modeline "doom-modeline" "\
+Set minimal mode-line." nil nil)
+
+(autoload 'doom-modeline-set-special-modeline "doom-modeline" "\
+Set special mode-line." nil nil)
+
+(autoload 'doom-modeline-set-project-modeline "doom-modeline" "\
+Set project mode-line." nil nil)
+
+(autoload 'doom-modeline-set-dashboard-modeline "doom-modeline" "\
+Set dashboard mode-line." nil nil)
+
+(autoload 'doom-modeline-set-vcs-modeline "doom-modeline" "\
+Set vcs mode-line." nil nil)
+
+(autoload 'doom-modeline-set-info-modeline "doom-modeline" "\
+Set Info mode-line." nil nil)
+
+(autoload 'doom-modeline-set-package-modeline "doom-modeline" "\
+Set package mode-line." nil nil)
+
+(autoload 'doom-modeline-set-media-modeline "doom-modeline" "\
+Set media mode-line." nil nil)
+
+(autoload 'doom-modeline-set-message-modeline "doom-modeline" "\
+Set message mode-line." nil nil)
+
+(autoload 'doom-modeline-set-pdf-modeline "doom-modeline" "\
+Set pdf mode-line." nil nil)
+
+(autoload 'doom-modeline-set-org-src-modeline "doom-modeline" "\
+Set org-src mode-line." nil nil)
+
+(autoload 'doom-modeline-set-helm-modeline "doom-modeline" "\
+Set helm mode-line.
+
+\(fn &rest _)" nil nil)
+
+(autoload 'doom-modeline-set-timemachine-modeline "doom-modeline" "\
+Set timemachine mode-line." nil nil)
+
+(defvar doom-modeline-mode nil "\
+Non-nil if Doom-Modeline mode is enabled.
+See the `doom-modeline-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `doom-modeline-mode'.")
+
+(custom-autoload 'doom-modeline-mode "doom-modeline" nil)
+
+(autoload 'doom-modeline-mode "doom-modeline" "\
+Toggle doom-modeline on or off.
+
+If called interactively, enable Doom-Modeline mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "doom-modeline" '("doom-modeline-mode-map")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "doom-modeline-core" '("doom-modeline")))
+
+
+ (autoload 'doom-modeline-env-setup-python "doom-modeline-env")
+ (autoload 'doom-modeline-env-setup-ruby "doom-modeline-env")
+ (autoload 'doom-modeline-env-setup-perl "doom-modeline-env")
+ (autoload 'doom-modeline-env-setup-go "doom-modeline-env")
+ (autoload 'doom-modeline-env-setup-elixir "doom-modeline-env")
+ (autoload 'doom-modeline-env-setup-rust "doom-modeline-env")
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "doom-modeline-env" '("doom-modeline-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "doom-modeline-segments" '("doom-modeline-")))
 
 
 
@@ -13181,69 +13400,6 @@ provided.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/all-the-icons-20210522.1337/all-the-icons-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/all-the-icons-20210522.1337/all-the-icons-autoloads.el") (car load-path))))
-
-
-
-(autoload 'all-the-icons-icon-for-dir "all-the-icons" "\
-Get the formatted icon for DIR.
-ARG-OVERRIDES should be a plist containining `:height',
-`:v-adjust' or `:face' properties like in the normal icon
-inserting functions.
-
-Note: You want chevron, please use `all-the-icons-icon-for-dir-with-chevron'.
-
-\(fn DIR &rest ARG-OVERRIDES)" nil nil)
-
-(autoload 'all-the-icons-icon-for-file "all-the-icons" "\
-Get the formatted icon for FILE.
-ARG-OVERRIDES should be a plist containining `:height',
-`:v-adjust' or `:face' properties like in the normal icon
-inserting functions.
-
-\(fn FILE &rest ARG-OVERRIDES)" nil nil)
-
-(autoload 'all-the-icons-icon-for-mode "all-the-icons" "\
-Get the formatted icon for MODE.
-ARG-OVERRIDES should be a plist containining `:height',
-`:v-adjust' or `:face' properties like in the normal icon
-inserting functions.
-
-\(fn MODE &rest ARG-OVERRIDES)" nil nil)
-
-(autoload 'all-the-icons-icon-for-url "all-the-icons" "\
-Get the formatted icon for URL.
-If an icon for URL isn't found in `all-the-icons-url-alist', a globe is used.
-ARG-OVERRIDES should be a plist containining `:height',
-`:v-adjust' or `:face' properties like in the normal icon
-inserting functions.
-
-\(fn URL &rest ARG-OVERRIDES)" nil nil)
-
-(autoload 'all-the-icons-install-fonts "all-the-icons" "\
-Helper function to download and install the latests fonts based on OS.
-When PFX is non-nil, ignore the prompt and just install
-
-\(fn &optional PFX)" t nil)
-
-(autoload 'all-the-icons-insert "all-the-icons" "\
-Interactive icon insertion function.
-When Prefix ARG is non-nil, insert the propertized icon.
-When FAMILY is non-nil, limit the candidates to the icon set matching it.
-
-\(fn &optional ARG FAMILY)" t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "all-the-icons" '("all-the-icons-")))
-
-
-
-
-
-)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/aggressive-indent-20200824.2352/aggressive-indent-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -13313,7 +13469,7 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
 )
 (setq package-activated-list
 	  (append
-	   '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra epl pkg-info projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit treemacs-magit treemacs-icons-dired transient-posframe toc-org ivy swiper spinner sml-mode smartparens rainbow-delimiters pos-tip racket-mode python-mode pretty-hydra prescient persistent-scratch paredit paradox outorg outshine org-bullets org kv esxml nov mwim moody modus-themes math-symbol-lists makey major-mode-hydra macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides f elisp-refs helpful hardhat git-timemachine gcmh free-keys flycheck fish-mode fira-code-mode expand-region eval-in-repl eros elmacro dtrt-indent discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-theme cmake-mode cask-mode beacon amx all-the-icons aggressive-indent)
+	   '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra epl pkg-info projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit treemacs-magit treemacs-icons-dired transient-posframe toc-org ivy swiper spinner sml-mode smartparens f shrink-path rainbow-delimiters pos-tip racket-mode python-mode pretty-hydra prescient persistent-scratch paredit paradox outorg outshine org-bullets org kv esxml nov mwim moody modus-themes minions math-symbol-lists makey major-mode-hydra macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine gcmh free-keys flycheck fish-mode fira-code-mode expand-region eval-in-repl eros elmacro dtrt-indent all-the-icons doom-modeline discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-theme cmake-mode cask-mode beacon amx aggressive-indent)
 	   package-activated-list))
 (progn
   (require 'info)

@@ -7,29 +7,53 @@
 
 There are several ways see
 
-I can't find a couple. ALso start left with icons for read only etc.
+[[https://github.com/domtronn/all-the-icons.el/wiki/Mode-Line][All the icons]] has icons but example code is broken and incomplete
 
-[[https://github.com/domtronn/all-the-icons.el/wiki/Mode-Line][All the icons]] has icons
-
-[[https://www.manueluberti.eu/emacs/2018/03/10/moody-and-minions/][Uberti]] for a comment on smartline aand powerline - I might  this frst due to use of minions. then discovered smart-mode-line also has similar rich-minority-mode
+[[https://www.manueluberti.eu/emacs/2018/03/10/moody-and-minions/][Uberti]] for a comment on smartline aand powerline - I might  this first due to use of minions. then discovered smart-mode-line also has similar rich-minority-mode
 
 [[https://github.com/Malabarba/smart-mode-line/][Smart Mode Line]] the one that seems to have a fuller set of builders
 
 From my collection of init see
 
-leuven for a setup possibloy using pwerline
+leuven for a setup possibly using pwerline
 greghendershott  for a seemingly simple one
 howardabrams for a powerline  and a smart-mode-line
 jerrypnz for complex but lead to  http://amitp.blogspot.co.nz/2011/08/emacs-custom-mode-line.html and then https://gist.github.com/redblobgames/5d9cf891120028440a4bdb429f101de6
 kaushalmodi as author of smart mode line
-* Mode line setup
+
+So try
+all-the-icons - it is incomlete
+jerry pnz as it uses all-the icons
+
+* Packages
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210602T212500.391684
+:END:
+
+**[[https://github.com/tarsius/moody][Moody]]
+#+NAME: org_mark_mini20.local_20210602T212500.385625
+#+begin_src emacs-lisp
+(use-package moody
+  :ensure t
+  :config
+  (setq x-underline-at-descent-line t)
+  ;; (moody-replace-mode-line-buffer-identification)
+  ;; (moody-replace-vc-mode)
+  )
+#+end_src
+
+
+* All the icons setup - not tangled
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210601T223826.692851
+:header-args:    :tangle no
 :END:
 Start with all the icons . This is a set of snippets
 Also as mode line is a emacs package it is already loaded and all-the icons is in config this is just plain elisp.
 However they don't work and it is an incomplete Line
-** fields
+
+So removed
+** all the icon fields
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210601T224327.731932
 :END:
@@ -187,4 +211,19 @@ This snippet displays the number of packages that you last needed to update. Thi
 								;; (custom-modeline-region-info)
 								;; (custom-modeline-flycheck-status)
 								))))
+#+end_src
+* Jerry Peng setup
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210602T212500.390542
+:END:
+See site-lisp/jerrypnz/jp-modeline.el
+Needs Moody. I also removed some
+#+NAME: org_mark_mini20.local_20210602T212500.386769
+#+begin_src emacs-lisp
+(use-package jp-modeline
+  :demand
+  :config
+  (setq jp-modeline-enabled-p t)
+  (jp-modeline-activate)
+  )
 #+end_src

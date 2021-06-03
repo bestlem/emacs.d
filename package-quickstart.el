@@ -2947,42 +2947,6 @@ the project's root directory.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/treemacs-icons-dired-20210107.1251/treemacs-icons-dired-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/treemacs-icons-dired-20210107.1251/treemacs-icons-dired-autoloads.el") (car load-path))))
-
-
-
-(defvar treemacs-icons-dired-mode nil "\
-Non-nil if Treemacs-Icons-Dired mode is enabled.
-See the `treemacs-icons-dired-mode' command
-for a description of this minor mode.
-Setting this variable directly does not take effect;
-either customize it (see the info node `Easy Customization')
-or call the function `treemacs-icons-dired-mode'.")
-
-(custom-autoload 'treemacs-icons-dired-mode "treemacs-icons-dired" nil)
-
-(autoload 'treemacs-icons-dired-mode "treemacs-icons-dired" "\
-Display treemacs icons for each file in a dired buffer.
-
-If called interactively, enable Treemacs-Icons-Dired mode if ARG
-is positive, and disable it if ARG is zero or negative.
-If called from Lisp, also enable the mode if ARG is omitted or
-nil, and toggle it if ARG is `toggle'; disable the
-mode otherwise.
-
-\(fn &optional ARG)" t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-icons-dired" '("treemacs-icons-dired-")))
-
-
-
-
-
-)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/transient-20210426.2141/transient-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -3049,3091 +3013,6 @@ See info node `(transient)Modifying Existing Transients'.
 
 
 
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/transient-posframe-20210102.130/transient-posframe-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/transient-posframe-20210102.130/transient-posframe-autoloads.el") (car load-path))))
-
-
-
-(defvar transient-posframe-mode nil "\
-Non-nil if Transient-Posframe mode is enabled.
-See the `transient-posframe-mode' command
-for a description of this minor mode.
-Setting this variable directly does not take effect;
-either customize it (see the info node `Easy Customization')
-or call the function `transient-posframe-mode'.")
-
-(custom-autoload 'transient-posframe-mode "transient-posframe" nil)
-
-(autoload 'transient-posframe-mode "transient-posframe" "\
-Toggle transient posframe mode on of off.
-
-If called interactively, enable Transient-Posframe mode if ARG is
-positive, and disable it if ARG is zero or negative.  If called
-from Lisp, also enable the mode if ARG is omitted or nil, and
-toggle it if ARG is `toggle'; disable the mode otherwise.
-
-\(fn &optional ARG)" t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "transient-posframe" '("transient-posframe-")))
-
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/toc-org-20210421.657/toc-org-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/toc-org-20210421.657/toc-org-autoloads.el") (car load-path))))
-
-
-
-(autoload 'toc-org-enable "toc-org" "\
-Enable toc-org in this buffer." nil nil)
-
-(autoload 'toc-org-mode "toc-org" "\
-Toggle `toc-org' in this buffer.
-
-If called interactively, enable Toc-Org mode if ARG is positive,
-and disable it if ARG is zero or negative.  If called from Lisp,
-also enable the mode if ARG is omitted or nil, and toggle it if
-ARG is `toggle'; disable the mode otherwise.
-
-\(fn &optional ARG)" t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "toc-org" '("toc-org-")))
-
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-20210518.1815/ivy-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-20210518.1815/ivy-autoloads.el") (car load-path))))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "colir" '("colir-")))
-
-
-
-(autoload 'ivy-resume "ivy" "\
-Resume the last completion session, or SESSION if non-nil.
-With a prefix arg, try to restore a recorded completion session,
-if one exists.
-
-\(fn &optional SESSION)" t nil)
-
-(autoload 'ivy-read "ivy" "\
-Read a string in the minibuffer, with completion.
-
-PROMPT is a string, normally ending in a colon and a space.
-`ivy-count-format' is prepended to PROMPT during completion.
-
-COLLECTION is either a list of strings, a function, an alist, or
-a hash table, supplied for `minibuffer-completion-table'.
-
-PREDICATE is applied to filter out the COLLECTION immediately.
-This argument is for compatibility with `completing-read'.
-
-When REQUIRE-MATCH is non-nil, only members of COLLECTION can be
-selected.
-
-If INITIAL-INPUT is non-nil, then insert that input in the
-minibuffer initially.
-
-HISTORY is a name of a variable to hold the completion session
-history.
-
-KEYMAP is composed with `ivy-minibuffer-map'.
-
-PRESELECT, when non-nil, determines which one of the candidates
-matching INITIAL-INPUT to select initially.  An integer stands
-for the position of the desired candidate in the collection,
-counting from zero.  Otherwise, use the first occurrence of
-PRESELECT in the collection.  Comparison is first done with
-`equal'.  If that fails, and when applicable, match PRESELECT as
-a regular expression.
-
-DEF is for compatibility with `completing-read'.
-
-UPDATE-FN is called each time the candidate list is re-displayed.
-
-When SORT is non-nil, `ivy-sort-functions-alist' determines how
-to sort candidates before displaying them.
-
-ACTION is a function to call after selecting a candidate.
-It takes one argument, the selected candidate. If COLLECTION is
-an alist, the argument is a cons cell, otherwise it's a string.
-
-MULTI-ACTION, when non-nil, is called instead of ACTION when
-there are marked candidates. It takes the list of candidates as
-its only argument. When it's nil, ACTION is called on each marked
-candidate.
-
-UNWIND is a function of no arguments to call before exiting.
-
-RE-BUILDER is a function transforming input text into a regex
-pattern.
-
-MATCHER is a function which can override how candidates are
-filtered based on user input.  It takes a regex pattern and a
-list of candidates, and returns the list of matching candidates.
-
-DYNAMIC-COLLECTION is a boolean specifying whether the list of
-candidates is updated after each input by calling COLLECTION.
-
-EXTRA-PROPS is a plist that can be used to store
-collection-specific session-specific data.
-
-CALLER is a symbol to uniquely identify the caller to `ivy-read'.
-It is used, along with COLLECTION, to determine which
-customizations apply to the current completion session.
-
-\(fn PROMPT COLLECTION &key PREDICATE REQUIRE-MATCH INITIAL-INPUT HISTORY PRESELECT DEF KEYMAP UPDATE-FN SORT ACTION MULTI-ACTION UNWIND RE-BUILDER MATCHER DYNAMIC-COLLECTION EXTRA-PROPS CALLER)" nil nil)
-
-(autoload 'ivy-completing-read "ivy" "\
-Read a string in the minibuffer, with completion.
-
-This interface conforms to `completing-read' and can be used for
-`completing-read-function'.
-
-PROMPT is a string that normally ends in a colon and a space.
-COLLECTION is either a list of strings, an alist, an obarray, or a hash table.
-PREDICATE limits completion to a subset of COLLECTION.
-REQUIRE-MATCH is a boolean value or a symbol.  See `completing-read'.
-INITIAL-INPUT is a string inserted into the minibuffer initially.
-HISTORY is a list of previously selected inputs.
-DEF is the default value.
-INHERIT-INPUT-METHOD is currently ignored.
-
-\(fn PROMPT COLLECTION &optional PREDICATE REQUIRE-MATCH INITIAL-INPUT HISTORY DEF INHERIT-INPUT-METHOD)" nil nil)
-
-(defvar ivy-mode nil "\
-Non-nil if Ivy mode is enabled.
-See the `ivy-mode' command
-for a description of this minor mode.
-Setting this variable directly does not take effect;
-either customize it (see the info node `Easy Customization')
-or call the function `ivy-mode'.")
-
-(custom-autoload 'ivy-mode "ivy" nil)
-
-(autoload 'ivy-mode "ivy" "\
-Toggle Ivy mode on or off.
-Turn Ivy mode on if ARG is positive, off otherwise.
-Turning on Ivy mode sets `completing-read-function' to
-`ivy-completing-read'.
-
-Global bindings:
-\\{ivy-mode-map}
-
-Minibuffer bindings:
-\\{ivy-minibuffer-map}
-
-\(fn &optional ARG)" t nil)
-
-(autoload 'ivy-switch-buffer "ivy" "\
-Switch to another buffer." t nil)
-
-(autoload 'ivy-switch-view "ivy" "\
-Switch to one of the window views stored by `ivy-push-view'." t nil)
-
-(autoload 'ivy-switch-buffer-other-window "ivy" "\
-Switch to another buffer in another window." t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ivy" '("ivy-" "with-ivy-window")))
-
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ivy-overlay" '("ivy-")))
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/swiper-20210521.1319/swiper-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/swiper-20210521.1319/swiper-autoloads.el") (car load-path))))
-
-
-
-(autoload 'swiper-avy "swiper" "\
-Jump to one of the current swiper candidates with `avy'." t nil)
-
-(autoload 'swiper-backward "swiper" "\
-`isearch-backward' with an overview.
-When non-nil, INITIAL-INPUT is the initial search pattern.
-
-\(fn &optional INITIAL-INPUT)" t nil)
-
-(autoload 'swiper-thing-at-point "swiper" "\
-`swiper' with `ivy-thing-at-point'." t nil)
-
-(autoload 'swiper-all-thing-at-point "swiper" "\
-`swiper-all' with `ivy-thing-at-point'." t nil)
-
-(autoload 'swiper "swiper" "\
-`isearch-forward' with an overview.
-When non-nil, INITIAL-INPUT is the initial search pattern.
-
-\(fn &optional INITIAL-INPUT)" t nil)
-
-(autoload 'swiper-all "swiper" "\
-Run `swiper' for all open buffers.
-
-\(fn &optional INITIAL-INPUT)" t nil)
-
-(autoload 'swiper-isearch "swiper" "\
-A `swiper' that's not line-based.
-
-\(fn &optional INITIAL-INPUT)" t nil)
-
-(autoload 'swiper-isearch-backward "swiper" "\
-Like `swiper-isearch' but the first result is before the point.
-
-\(fn &optional INITIAL-INPUT)" t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "swiper" '("swiper-")))
-
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/spinner-1.7.3/spinner-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/spinner-1.7.3/spinner-autoloads.el") (car load-path))))
-
-
-
-(autoload 'spinner-create "spinner" "\
-Create a spinner of the given TYPE.
-The possible TYPEs are described in `spinner--type-to-frames'.
-
-FPS, if given, is the number of desired frames per second.
-Default is `spinner-frames-per-second'.
-
-If BUFFER-LOCAL is non-nil, the spinner will be automatically
-deactivated if the buffer is killed.  If BUFFER-LOCAL is a
-buffer, use that instead of current buffer.
-
-When started, in order to function properly, the spinner runs a
-timer which periodically calls `force-mode-line-update' in the
-curent buffer.  If BUFFER-LOCAL was set at creation time, then
-`force-mode-line-update' is called in that buffer instead.  When
-the spinner is stopped, the timer is deactivated.
-
-DELAY, if given, is the number of seconds to wait after starting
-the spinner before actually displaying it. It is safe to cancel
-the spinner before this time, in which case it won't display at
-all.
-
-\(fn &optional TYPE BUFFER-LOCAL FPS DELAY)" nil nil)
-
-(autoload 'spinner-start "spinner" "\
-Start a mode-line spinner of given TYPE-OR-OBJECT.
-If TYPE-OR-OBJECT is an object created with `make-spinner',
-simply activate it.  This method is designed for minor modes, so
-they can use the spinner as part of their lighter by doing:
-    \\='(:eval (spinner-print THE-SPINNER))
-To stop this spinner, call `spinner-stop' on it.
-
-If TYPE-OR-OBJECT is anything else, a buffer-local spinner is
-created with this type, and it is displayed in the
-`mode-line-process' of the buffer it was created it.  Both
-TYPE-OR-OBJECT and FPS are passed to `make-spinner' (which see).
-To stop this spinner, call `spinner-stop' in the same buffer.
-
-Either way, the return value is a function which can be called
-anywhere to stop this spinner.  You can also call `spinner-stop'
-in the same buffer where the spinner was created.
-
-FPS, if given, is the number of desired frames per second.
-Default is `spinner-frames-per-second'.
-
-DELAY, if given, is the number of seconds to wait until actually
-displaying the spinner. It is safe to cancel the spinner before
-this time, in which case it won't display at all.
-
-\(fn &optional TYPE-OR-OBJECT FPS DELAY)" nil nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "spinner" '("spinner")))
-
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/sml-mode-6.10/sml-mode-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/sml-mode-6.10/sml-mode-autoloads.el") (car load-path))))
-
-
-
-(defalias 'run-sml 'sml-run)
-
-(autoload 'sml-run "sml-mode" "\
-Run the program CMD with given arguments ARG.
-The command is run in buffer *CMD* using mode `inferior-sml-mode'.
-If the buffer already exists and has a running process, then
-just go to this buffer.
-
-If a prefix argument is used, the user is also prompted for a HOST
-on which to run CMD using `remote-shell-program'.
-
-\(Type \\[describe-mode] in the process's buffer for a list of commands.)
-
-\(fn CMD ARG &optional HOST)" t nil)
-
-(add-to-list 'auto-mode-alist '("\\.s\\(ml\\|ig\\)\\'" . sml-mode))
-
-(autoload 'sml-mode "sml-mode" "\
-Major mode for editing Standard ML code.
-This mode runs `sml-mode-hook' just before exiting.
-See also (info \"(sml-mode)Top\").
-
-\(fn)" t nil)
-
-(add-to-list 'completion-ignored-extensions ".cm/")
-
-(add-to-list 'auto-mode-alist '("\\.cm\\'" . sml-cm-mode))
-
-(autoload 'sml-cm-mode "sml-mode" "\
-Major mode for SML/NJ's Compilation Manager configuration files.
-
-\(fn)" t nil)
-
-(autoload 'sml-lex-mode "sml-mode" "\
-Major Mode for editing ML-Lex files.
-
-\(fn)" t nil)
-
-(add-to-list 'auto-mode-alist '("\\.grm\\'" . sml-yacc-mode))
-
-(autoload 'sml-yacc-mode "sml-mode" "\
-Major Mode for editing ML-Yacc files.
-
-\(fn)" t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "sml-mode" '("font-lock-" "inferior-sml-" "sml-")))
-
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/smartparens-20210330.850/smartparens-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/smartparens-20210330.850/smartparens-autoloads.el") (car load-path))))
-
-
-
-(autoload 'sp-cheat-sheet "smartparens" "\
-Generate a cheat sheet of all the smartparens interactive functions.
-
-Without a prefix argument, print only the short documentation and examples.
-
-With non-nil prefix argument ARG, show the full documentation for each function.
-
-You can follow the links to the function or variable help page.
-To get back to the full list, use \\[help-go-back].
-
-You can use `beginning-of-defun' and `end-of-defun' to jump to
-the previous/next entry.
-
-Examples are fontified using the `font-lock-string-face' for
-better orientation.
-
-\(fn &optional ARG)" t nil)
-
-(defvar smartparens-mode-map (make-sparse-keymap) "\
-Keymap used for `smartparens-mode'.")
-
-(autoload 'sp-use-paredit-bindings "smartparens" "\
-Initiate `smartparens-mode-map' with `sp-paredit-bindings'." t nil)
-
-(autoload 'sp-use-smartparens-bindings "smartparens" "\
-Initiate `smartparens-mode-map' with `sp-smartparens-bindings'." t nil)
-
-(autoload 'smartparens-mode "smartparens" "\
-Toggle smartparens mode.
-
-If called interactively, enable Smartparens mode if ARG is
-positive, and disable it if ARG is zero or negative.  If called
-from Lisp, also enable the mode if ARG is omitted or nil, and
-toggle it if ARG is `toggle'; disable the mode otherwise.
-
-You can enable pre-set bindings by customizing
-`sp-base-key-bindings' variable.  The current content of
-`smartparens-mode-map' is:
-
- \\{smartparens-mode-map}
-
-\(fn &optional ARG)" t nil)
-
-(autoload 'smartparens-strict-mode "smartparens" "\
-Toggle the strict smartparens mode.
-
-If called interactively, enable Smartparens-Strict mode if ARG is
-positive, and disable it if ARG is zero or negative.  If called
-from Lisp, also enable the mode if ARG is omitted or nil, and
-toggle it if ARG is `toggle'; disable the mode otherwise.
-
-When strict mode is active, `delete-char', `kill-word' and their
-backward variants will skip over the pair delimiters in order to
-keep the structure always valid (the same way as `paredit-mode'
-does).  This is accomplished by remapping them to
-`sp-delete-char' and `sp-kill-word'.  There is also function
-`sp-kill-symbol' that deletes symbols instead of words, otherwise
-working exactly the same (it is not bound to any key by default).
-
-When strict mode is active, this is indicated with \"/s\"
-after the smartparens indicator in the mode list.
-
-\(fn &optional ARG)" t nil)
-
-(put 'smartparens-global-strict-mode 'globalized-minor-mode t)
-
-(defvar smartparens-global-strict-mode nil "\
-Non-nil if Smartparens-Global-Strict mode is enabled.
-See the `smartparens-global-strict-mode' command
-for a description of this minor mode.
-Setting this variable directly does not take effect;
-either customize it (see the info node `Easy Customization')
-or call the function `smartparens-global-strict-mode'.")
-
-(custom-autoload 'smartparens-global-strict-mode "smartparens" nil)
-
-(autoload 'smartparens-global-strict-mode "smartparens" "\
-Toggle Smartparens-Strict mode in all buffers.
-With prefix ARG, enable Smartparens-Global-Strict mode if ARG is positive;
-otherwise, disable it.  If called from Lisp, enable the mode if
-ARG is omitted or nil.
-
-Smartparens-Strict mode is enabled in all buffers where
-`turn-on-smartparens-strict-mode' would do it.
-See `smartparens-strict-mode' for more information on Smartparens-Strict mode.
-
-\(fn &optional ARG)" t nil)
-
-(autoload 'turn-on-smartparens-strict-mode "smartparens" "\
-Turn on `smartparens-strict-mode'." t nil)
-
-(autoload 'turn-off-smartparens-strict-mode "smartparens" "\
-Turn off `smartparens-strict-mode'." t nil)
-
-(put 'smartparens-global-mode 'globalized-minor-mode t)
-
-(defvar smartparens-global-mode nil "\
-Non-nil if Smartparens-Global mode is enabled.
-See the `smartparens-global-mode' command
-for a description of this minor mode.
-Setting this variable directly does not take effect;
-either customize it (see the info node `Easy Customization')
-or call the function `smartparens-global-mode'.")
-
-(custom-autoload 'smartparens-global-mode "smartparens" nil)
-
-(autoload 'smartparens-global-mode "smartparens" "\
-Toggle Smartparens mode in all buffers.
-With prefix ARG, enable Smartparens-Global mode if ARG is positive;
-otherwise, disable it.  If called from Lisp, enable the mode if
-ARG is omitted or nil.
-
-Smartparens mode is enabled in all buffers where
-`turn-on-smartparens-mode' would do it.
-See `smartparens-mode' for more information on Smartparens mode.
-
-\(fn &optional ARG)" t nil)
-
-(autoload 'turn-on-smartparens-mode "smartparens" "\
-Turn on `smartparens-mode'.
-
-This function is used to turn on `smartparens-global-mode'.
-
-By default `smartparens-global-mode' ignores buffers with
-`mode-class' set to special, but only if they are also not comint
-buffers.
-
-Additionally, buffers on `sp-ignore-modes-list' are ignored.
-
-You can still turn on smartparens in these mode manually (or
-in mode's startup-hook etc.) by calling `smartparens-mode'." t nil)
-
-(autoload 'turn-off-smartparens-mode "smartparens" "\
-Turn off `smartparens-mode'." t nil)
-
-(autoload 'show-smartparens-mode "smartparens" "\
-Toggle visualization of matching pairs.  When enabled, any
-matching pair is highlighted after `sp-show-pair-delay' seconds
-of Emacs idle time if the point is immediately in front or after
-a pair.  This mode works similarly to `show-paren-mode', but
-support custom pairs.
-
-If called interactively, enable Show-Smartparens mode if ARG is
-positive, and disable it if ARG is zero or negative.  If called
-from Lisp, also enable the mode if ARG is omitted or nil, and
-toggle it if ARG is `toggle'; disable the mode otherwise.
-
-\(fn &optional ARG)" t nil)
-
-(put 'show-smartparens-global-mode 'globalized-minor-mode t)
-
-(defvar show-smartparens-global-mode nil "\
-Non-nil if Show-Smartparens-Global mode is enabled.
-See the `show-smartparens-global-mode' command
-for a description of this minor mode.
-Setting this variable directly does not take effect;
-either customize it (see the info node `Easy Customization')
-or call the function `show-smartparens-global-mode'.")
-
-(custom-autoload 'show-smartparens-global-mode "smartparens" nil)
-
-(autoload 'show-smartparens-global-mode "smartparens" "\
-Toggle Show-Smartparens mode in all buffers.
-With prefix ARG, enable Show-Smartparens-Global mode if ARG is positive;
-otherwise, disable it.  If called from Lisp, enable the mode if
-ARG is omitted or nil.
-
-Show-Smartparens mode is enabled in all buffers where
-`turn-on-show-smartparens-mode' would do it.
-See `show-smartparens-mode' for more information on Show-Smartparens mode.
-
-\(fn &optional ARG)" t nil)
-
-(autoload 'turn-on-show-smartparens-mode "smartparens" "\
-Turn on `show-smartparens-mode'." t nil)
-
-(autoload 'turn-off-show-smartparens-mode "smartparens" "\
-Turn off `show-smartparens-mode'." t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens" '("smartparens-" "sp-")))
-
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-clojure" '("sp-clojure-prefix")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-config" '("sp-lisp-invalid-hyperlink-p")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-crystal" '("sp-crystal-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-elixir" '("sp-elixir-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-ess" '("sp-ess-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-haskell" '("sp-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-html" '("sp-html-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-latex" '("sp-latex-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-lua" '("sp-lua-post-keyword-insert")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-markdown" '("sp-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-org" '("sp-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-python" '("sp-python-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-rst" '("sp-rst-point-after-backtick")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-ruby" '("sp-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-rust" '("sp-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-scala" '("sp-scala-wrap-with-indented-newlines")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-text" '("sp-text-mode-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "sp-sublimetext-like" '("sp-point-not-before-word")))
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/rainbow-delimiters-20210515.1254/rainbow-delimiters-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/rainbow-delimiters-20210515.1254/rainbow-delimiters-autoloads.el") (car load-path))))
-
-
-
-(autoload 'rainbow-delimiters-mode "rainbow-delimiters" "\
-Highlight nested parentheses, brackets, and braces according to their depth.
-
-If called interactively, enable Rainbow-Delimiters mode if ARG is
-positive, and disable it if ARG is zero or negative.  If called
-from Lisp, also enable the mode if ARG is omitted or nil, and
-toggle it if ARG is `toggle'; disable the mode otherwise.
-
-\(fn &optional ARG)" t nil)
-
-(autoload 'rainbow-delimiters-mode-enable "rainbow-delimiters" "\
-Enable `rainbow-delimiters-mode'." nil nil)
-
-(autoload 'rainbow-delimiters-mode-disable "rainbow-delimiters" "\
-Disable `rainbow-delimiters-mode'." nil nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "rainbow-delimiters" '("rainbow-delimiters-")))
-
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/pos-tip-20191227.1356/pos-tip-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/pos-tip-20191227.1356/pos-tip-autoloads.el") (car load-path))))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "pos-tip" '("pos-tip-")))
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/racket-mode-20210524.1655/racket-mode-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/racket-mode-20210524.1655/racket-mode-autoloads.el") (car load-path))))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-browse-url" '("racket-browse-url")))
-
-
-
-(autoload 'racket-bug-report "racket-bug-report" "\
-Fill a buffer with data to make a Racket Mode bug report." t nil)
-
-
-
-(defvar racket-start-back-end-hook nil "\
-Hook run after `racket-start-back-end'.")
-
-(autoload 'racket-start-back-end "racket-cmd" "\
-Start the back end process used by Racket Mode.
-
-If the process is already started, this command will stop and restart it.
-
-As the final step, runs the hook `racket-start-back-end-hook'." t nil)
-
-(autoload 'racket-stop-back-end "racket-cmd" "\
-Stop the back end process used by Racket Mode.
-
-If the process is not already started, this does nothing." t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-cmd" '("racket-")))
-
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-collection" '("racket-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-common" '("racket-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-complete" '("racket--")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-custom" '("defface-racket" "racket-")))
-
-
-
-(autoload 'racket--debug-send-definition "racket-debug" "\
-
-
-\(fn BEG END)" nil nil)
-
-(autoload 'racket--debug-on-break "racket-debug" "\
-
-
-\(fn RESPONSE)" nil nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-debug" '("racket-")))
-
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-describe" '("racket-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-doc" '("racket--")))
-
-
-
-(add-to-list 'hs-special-modes-alist '(racket-mode "(" ")" ";" nil nil))
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-edit" '("racket-")))
-
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-eldoc" '("racket--do-eldoc")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-font-lock" '("racket-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-imenu" '("racket-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-indent" '("racket-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-keywords-and-builtins" '("racket-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-logger" '("racket-")))
-
-
-
-(autoload 'racket-mode "racket-mode" "\
-Major mode for editing Racket source files.
-
-\\{racket-mode-map}
-
-\(fn)" t nil)
-
-(add-to-list 'auto-mode-alist '("\\.rkt\\'" . racket-mode))
-
-(add-to-list 'auto-mode-alist '("\\.rktd\\'" . racket-mode))
-
-(add-to-list 'auto-mode-alist '("\\.rktl\\'" . racket-mode))
-
-(modify-coding-system-alist 'file "\\.rkt[dl]?\\'" 'utf-8)
-
-(add-to-list 'interpreter-mode-alist '("racket" . racket-mode))
-
-(autoload 'racket-mode-start-faster "racket-mode" "\
-Compile Racket Mode's .rkt files for faster startup.
-
-Racket Mode is implemented as an Emacs Lisp \"front end\" that
-talks to a Racket process \"back end\". Because Racket Mode is
-delivered as an Emacs package instead of a Racket package,
-installing it does not do the `raco setup` that is normally done
-for Racket packages.
-
-This command will do a `raco make` of Racket Mode's .rkt files,
-creating bytecode files in `compiled/` subdirectories. As a
-result, when a command must start the Racket process, it will
-start somewhat faster.
-
-On many computers, the resulting speed up is negligible, and
-might not be worth the complication.
-
-If you run this command, ever, you will need to run it again
-after:
-
-- Installing an updated version of Racket Mode. Otherwise, you
-  might lose some of the speed-up.
-
-- Installing a new version of Racket and/or changing the value of
-  the variable `racket-program'. Otherwise, you might get an
-  error message due to the bytecode being different versions.
-
-To revert to compiling on startup, use
-`racket-mode-start-slower'. " t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-mode" '("racket-")))
-
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-parens" '("racket-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-ppss" '("racket--ppss-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-profile" '("racket-")))
-
-
-
-(autoload 'racket-repl "racket-repl" "\
-Show a Racket REPL buffer in some window.
-
-*IMPORTANT*
-
-The main, intended use of Racket Mode's REPL is that you
-`find-file' some specific .rkt file, then `racket-run' it. The
-REPL will then match that file.
-
-If the REPL isn't running, and you want to start it for no file
-in particular? Then you could use this command. But the resulting
-REPL will have a minimal \"#lang racket/base\" namespace. You
-could enter \"(require racket)\" if you want the equivalent of
-\"#lang racket\". You could also \"(require racket/enter)\" if
-you want things like \"enter!\". But in some sense you'd be
-\"using it wrong\". If you really don't want to use Racket Mode's
-REPL as intended, then you might as well use a plain Emacs shell
-buffer to run command-line Racket.
-
-\(fn &optional NOSELECT)" t nil)
-
-(autoload 'racket-run "racket-repl" "\
-Save the buffer in REPL and run your program.
-
-As well as evaluating the outermost, file module, automatically
-runs the submodules specified by the customization variable
-`racket-submodules-to-run'.
-
-See also `racket-run-module-at-point', which runs just the
-specific module at point.
-
-With \\[universal-argument] uses errortrace for improved stack traces.
-Otherwise follows the `racket-error-context' setting.
-
-With \\[universal-argument] \\[universal-argument] instruments
-code for step debugging. See `racket-debug-mode' and the variable
-`racket-debuggable-files'.
-
-Each run occurs within a Racket custodian. Any prior run's
-custodian is shut down, releasing resources like threads and
-ports. Each run's evaluation environment is reset to the contents
-of the source file. In other words, like Dr Racket, this provides
-the benefit that your source file is the \"single source of
-truth\". At the same time, the run gives you a REPL inside the
-namespace of the module, giving you the ability to explore it
-interactively. Any explorations are temporary, unless you also
-make them to your source file, they will be lost on the next run.
-
-See also `racket-run-and-switch-to-repl', which is even more like
-Dr Racket's Run command because it selects the REPL window after
-running.
-
-In the `racket-repl-mode' buffer, output that describes a file
-and position is automatically \"linkified\". Examples of such
-text include:
-
-- Racket error messages.
-- rackunit test failure location messages.
-- print representation of path objects.
-
-To visit these locations, move point there and press RET or mouse
-click. Or, use the standard `next-error' and `previous-error'
-commands.
-
-\(fn &optional PREFIX)" t nil)
-
-(autoload 'racket-run-module-at-point "racket-repl" "\
-Save the buffer and run the module at point.
-
-Like `racket-run' but runs the innermost module around point,
-which is determined textually by looking for \"module\",
-\"module*\", or \"module+\" forms nested to any depth, else
-simply the outermost, file module.
-
-\(fn &optional PREFIX)" t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-repl" '("racket-" "with-racket-repl-buffer")))
-
-
-
-
-(autoload 'racket-repl-buffer-name-shared "racket-repl-buffer-name" "\
-All `racket-mode' edit buffers share one `racket-repl-mode' buffer.
-
-A value for the variable `racket-repl-buffer-name-function'." t nil)
-
-(autoload 'racket-repl-buffer-name-unique "racket-repl-buffer-name" "\
-Each `racket-mode' edit buffer gets its own `racket-repl-mode' buffer.
-
-A value for the variable `racket-repl-buffer-name-function'." t nil)
-
-(autoload 'racket-repl-buffer-name-project "racket-repl-buffer-name" "\
-All `racket-mode' buffers in a project share a `racket-repl-mode' buffer.
-
-A value for the variable `racket-repl-buffer-name-function'.
-
-The \"project\" is determined by `racket-project-root'." t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-repl-buffer-name" '("racket-")))
-
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-show" '("racket-")))
-
-
-
-(autoload 'racket-smart-open-bracket-mode "racket-smart-open" "\
-Minor mode to let you always type `[`' to insert `(` or `[` automatically.
-
-If called interactively, enable Racket-Smart-Open-Bracket mode if
-ARG is positive, and disable it if ARG is zero or negative.
-If called from Lisp, also enable the mode if ARG is omitted or
-nil, and toggle it if ARG is `toggle'; disable the
-mode otherwise.
-
-Behaves like the \"Automatically adjust opening square brackets\"
-feature in Dr. Racket.
-
-By default, inserts a `(`. Inserts a `[` in the following cases:
-
-  - `let`-like bindings -- forms with `let` in the name as well
-    as things like `parameterize`, `with-handlers`, and
-    `with-syntax`.
-
-  - `case`, `cond`, `match`, `syntax-case`, `syntax-parse`, and
-    `syntax-rules` clauses.
-
-  - `for`-like bindings and `for/fold` accumulators.
-
-  - `class` declaration syntax, such as `init` and `inherit`.
-
-When the previous s-expression in a sequence is a compound
-expression, uses the same kind of delimiter.
-
-To force insert `[`, use `quoted-insert'.
-
-Combined with `racket-insert-closing' this means that you can
-press the unshifted `[` and `]` keys to get whatever delimiters
-follow the Racket conventions for these forms. When something
-like `electric-pair-mode' or `paredit-mode' is active, you need
-not even press `]`.
-
-Tip: When also using `paredit-mode', enable that first so that
-the binding for the `[`' key in the map for
-`racket-smart-open-bracket-mode' has higher priority. See also
-the variable `minor-mode-map-alist'.
-
-\(fn &optional ARG)" t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-smart-open" '("racket-")))
-
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-stepper" '("racket-")))
-
-
-
-(autoload 'racket-unicode-input-method-enable "racket-unicode-input-method" "\
-Set input method to racket-unicode.
-
-The racket-unicode input method lets you easily type various
-Unicode symbols that might be useful when writing Racket code.
-
-To automatically enable the racket-unicode input method in
-racket-mode and racket-repl-mode buffers, put the following code
-in your Emacs init file:
-
-#+BEGIN_SRC elisp
-    (add-hook 'racket-mode-hook #'racket-unicode-input-method-enable)
-    (add-hook 'racket-repl-mode-hook #'racket-unicode-input-method-enable)
-#+END_SRC
-
-To temporarily enable this input method for a single buffer you
-can use \"M-x racket-unicode-input-method-enable\".
-
-Use the standard Emacs key C-\\ to toggle the input method.
-
-When the racket-unicode input method is active, you can for
-example type \"All\" and it is immediately replaced with \"∀\". A
-few other examples:
-
-| omega     | ω                        |
-| x_1       | x₁                       |
-| x^1       | x¹                       |
-| A         | 𝔸                        |
-| test-->>E | test-->>∃ (racket/redex) |
-| vdash     | ⊢                        |
-
-To see a table of all key sequences use \"M-x
-describe-input-method <RET> racket-unicode\".
-
-If you want to add your own mappings to the \"racket-unicode\"
-input method, you may add code like the following example in your
-Emacs init file:
-
-#+BEGIN_SRC elisp
-    ;; Either (require 'racket-mode) here, or, if you use
-    ;; use-package, put the code below in the :config section.
-    (with-temp-buffer
-      (racket-unicode-input-method-enable)
-      (set-input-method \"racket-unicode\")
-      (let ((quail-current-package (assoc \"racket-unicode\"
-                                          quail-package-alist)))
-        (quail-define-rules ((append . t))
-                            (\"^o\" [\"ᵒ\"]))))
-#+END_SRC
-
-If you don’t like the highlighting of partially matching tokens you
-can turn it off by setting `input-method-highlight-flag' to nil." t nil)
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-util" '("racket-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-visit" '("racket--")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-wsl" '("racket-")))
-
-
-
-(autoload 'racket-xp-mode "racket-xp" "\
-A minor mode that analyzes expanded code to explain and explore.
-
-If called interactively, enable Racket-Xp mode if ARG is
-positive, and disable it if ARG is zero or negative.  If called
-from Lisp, also enable the mode if ARG is omitted or nil, and
-toggle it if ARG is `toggle'; disable the mode otherwise.
-
-This minor mode is an optional enhancement to `racket-mode' edit
-buffers. Like any minor mode, you can turn it on or off for a
-specific buffer. If you always want to use it, put the following
-code in your Emacs init file:
-
-#+BEGIN_SRC elisp
-    (require 'racket-xp)
-    (add-hook 'racket-mode-hook #'racket-xp-mode)
-#+END_SRC
-
-Note: This mode won't do anything unless/until the Racket Mode
-back end is running. It will try to start the back end
-automatically. You do /not/ need to `racket-run' the buffer you
-are editing.
-
-This mode uses the drracket/check-syntax package to analyze
-fully-expanded programs, without needing to evaluate a.k.a.
-\"run\" them. The resulting analysis provides information for:
-
-- Visually annotating bindings -- local or imported definitions
-  and references to them.
-
-- Visually annotating expressions in a tail position, as well as
-  the enclosing expression with respect to which they are in a
-  tail position.
-
-- Completion candidates.
-
-- Defintions' source and documentation.
-
-When point is on a definition or use, related items are
-highlighted using `racket-xp-def-face' and `racket-xp-use-face'
--- instead of drawing arrows as in Dr Racket. Information is
-displayed using the function(s) in the hook variable
-`racket-show-functions'; it is also available when hovering the
-mouse cursor.
-
-Note: If you find these point-motion features too distracting
-and/or slow, in your `racket-xp-mode-hook' you may disable them:
-
-#+BEGIN_SRC elisp
-  (require 'racket-xp)
-  (add-hook 'racket-xp-mode-hook
-            (lambda ()
-              (remove-hook 'pre-redisplay-functions
-                           #'racket-xp-pre-redisplay
-                           t)))
-#+END_SRC
-
-The remaining features discussed below will still work.
-
-You may also use commands to navigate among a definition and its
-uses, or to rename a local definitions and all its uses:
-
-  - `racket-xp-next-definition'
-  - `racket-xp-previous-definition'
-  - `racket-xp-next-use'
-  - `racket-xp-previous-use'
-
-In the following little example, not only does
-drracket/check-syntax distinguish the various \"x\" bindings, it
-understands the two different imports of \"define\":
-
-#+BEGIN_SRC racket
-  #lang racket/base
-  (define x 1)
-  x
-  (let ([x x])
-    (+ x 1))
-  (module m typed/racket/base
-    (define x 2)
-    x)
-#+END_SRC
-
-When point is on the opening parenthesis of an expression in tail
-position, it is highlighted using the face
-`racket-xp-tail-position-face'.
-
-When point is on the opening parenthesis of an enclosing
-expression with respect to which one or more expressions are in
-tail position, it is highlighted using the face
-`racket-xp-tail-target-face'.
-
-Furthermore, when point is on the opening parenthesis of either
-kind of expression, all of the immediately related expressions
-are also highlighted. Various commands move among them:
-
-  - `racket-xp-tail-up'
-  - `racket-xp-tail-down'
-  - `racket-xp-tail-next-sibling'
-  - `racket-xp-tail-previous-sibling'
-
-The function `racket-xp-complete-at-point' is added to the
-variable `completion-at-point-functions'. Note that in this case,
-it is not smart about submodules; identifiers are assumed to be
-definitions from the file's module or its imports. In addition to
-supplying completion candidates, it supports the
-\":company-location\" property to inspect the definition of a
-candidate and the \":company-doc-buffer\" property to view its
-documentation.
-
-When you edit the buffer, existing annotations are retained;
-their positions are updated to reflect the edit. Annotations for
-new or deleted text are not requested until after
-`racket-xp-after-change-refresh-delay' seconds. The request is
-made asynchronously so that Emacs will not block -- for
-moderately complex source files, it can take some seconds simply
-to fully expand them, as well as a little more time for the
-drracket/check-syntax analysis. When the results are ready, all
-annotations for the buffer are completely refreshed.
-
-You may also set `racket-xp-after-change-refresh-delay' to nil
-and use the `racket-xp-annotate' command manually.
-
-The mode line changes to reflect the current status of
-annotations, and whether or not you had a syntax error.
-
-If you have one or more syntax errors, `racket-xp-next-error' and
-`racket-xp-previous-error' navigate among them. Although most
-languages will stop after the first syntax error, some like Typed
-Racket will try to collect and report multiple errors.
-
-You may use `xref-find-definitions' \\[xref-find-definitions],
-`xref-pop-marker-stack' \\[xref-pop-marker-stack], and
-`xref-find-references': `racket-xp-mode' adds a backend to the
-variable `xref-backend-functions'. This backend uses information
-from the drracket/check-syntax static analysis. Its ability to
-find references is limited to the current file; when it finds
-none it will try the default xref backend implementation which is
-grep-based.
-
-Tip: This mode follows the convention that a minor mode may only
-use a prefix key consisting of \"C-c\" followed by a punctuation
-key. As a result, `racket-xp-control-c-hash-keymap' is bound to
-\"C-c #\" by default. Although you might find this awkward to
-type, remember that as an Emacs user, you are free to bind this
-map to a more convenient prefix, and/or bind any individual
-commands directly to whatever keys you prefer.
-
-\\{racket-xp-mode-map}
-
-\(fn &optional ARG)" t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-xp" '("racket-")))
-
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-xp-complete" '("racket-")))
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/python-mode-20210408.800/python-mode-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/python-mode-20210408.800/python-mode-autoloads.el") (car load-path))))
-
-
-
-(autoload 'py-backward-class-bol "python-mode" "\
-Go to beginning of ‘class’, go to BOL.
-If already at beginning, go one ‘class’ backward.
-Return beginning of ‘class’ if successful, nil otherwise" t nil)
-
-(autoload 'py-backward-def-bol "python-mode" "\
-Go to beginning of ‘def’, go to BOL.
-If already at beginning, go one ‘def’ backward.
-Return beginning of ‘def’ if successful, nil otherwise" t nil)
-
-(autoload 'py-backward-def-or-class-bol "python-mode" "\
-Go to beginning of ‘def-or-class’, go to BOL.
-If already at beginning, go one ‘def-or-class’ backward.
-Return beginning of ‘def-or-class’ if successful, nil otherwise" t nil)
-
-(autoload 'py-forward-class "python-mode" "\
-Go to end of class.
-
-Return end of ‘class’ if successful, nil otherwise
-Optional ORIG: start position
-Optional BOL: go to beginning of line following end-position
-
-\(fn &optional ORIG BOL)" t nil)
-
-(autoload 'py-forward-def "python-mode" "\
-Go to end of def.
-
-Return end of ‘def’ if successful, nil otherwise
-Optional ORIG: start position
-Optional BOL: go to beginning of line following end-position
-
-\(fn &optional ORIG BOL)" t nil)
-
-(autoload 'py-forward-def-or-class "python-mode" "\
-Go to end of def-or-class.
-
-Return end of ‘def-or-class’ if successful, nil otherwise
-Optional ORIG: start position
-Optional BOL: go to beginning of line following end-position
-
-\(fn &optional ORIG BOL)" t nil)
-
-(autoload 'py-auto-completion-mode "python-mode" "\
-Run auto-completion
-
-\(fn)" t nil)
-
-(autoload 'python-mode "python-mode" "\
-Major mode for editing Python files.
-
-To submit a problem report, enter `\\[py-submit-bug-report]' from a
-`python-mode' buffer.  Do `\\[py-describe-mode]' for detailed
-documentation.  To see what version of `python-mode' you are running,
-enter `\\[py-version]'.
-
-This mode knows about Python indentation, tokens, comments and
-continuation lines.  Paragraphs are separated by blank lines only.
-
-COMMANDS
-
-`py-shell'	Start an interactive Python interpreter in another window
-`py-execute-statement'	Send statement at point to Python default interpreter
-`py-backward-statement'	Go to the initial line of a simple statement
-
-etc.
-
-See available commands listed in files commands-python-mode at directory doc
-
-VARIABLES
-
-`py-indent-offset'	indentation increment
-`py-shell-name'		shell command to invoke Python interpreter
-`py-split-window-on-execute'		When non-nil split windows
-`py-switch-buffers-on-execute-p'	When non-nil switch to the Python output buffer
-
-See available customizations listed in files variables-python-mode at directory doc
-
-\\{python-mode-map}
-
-\(fn)" t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "python-mode" '("all-mode-setting" "autopair-mode" "flake8" "force-py-shell-name-p-o" "highlight-indent-active" "hs-hide-comments-when-hiding-all" "info-lookup-mode" "ipython" "iypthon" "jython" "pdb-track-stack-from-shell-p" "pep8" "pst-here" "stri" "toggle-force-py-shell-name-p" "turn-o" "virtualenv-")))
-
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/pretty-hydra-20210221.834/pretty-hydra-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/pretty-hydra-20210221.834/pretty-hydra-autoloads.el") (car load-path))))
-
-
-
-(autoload 'pretty-hydra-define "pretty-hydra" "\
-Define a pretty hydra with given NAME, BODY options and HEADS-PLIST.
-The generated hydra has a nice-looking docstring which is a table
-with columns of command keys and hints.
-
-NAME should be a symbol and is passed to `defhydra' as is.
-
-BODY is the same as that in `defhydra', withe the following
-pretty hydra specific ones:
-
-  - `:separator' a single char used to generate the separator
-    line.
-
-  - `:title' a string that's added to the beginning of the
-    docstring as a title of the hydra.
-
-  - `:formatter' a function that takes the generated docstring
-    and return a decorated one.  It can be used to further
-    customize the hydra docstring.
-
-  - `:quit-key' a key of list of keys for quitting the hydra.
-    When specified, invisible head(s) are created with the
-    specified keys for quitting the hydra.
-
-HEADS-PLIST is a plist of columns of hydra heads.  The keys of
-the plist should be column names.  The values should be lists of
-hydra heads.  Each head has exactly the same syntax as that of
-`defhydra', except hint is required for the head to appear in the
-docstring.  The following additional options are supported:
-
-  - `:width' the max width of a dynamic hint, used to calculate
-    the final width of the entire column.  It is ignored when the
-    hint is a string.
-
-  - `:toggle' when specified, it makes the head a toggle and adds
-    an indicator to the end of the hint for the status of the
-    toggle.  The value of this option can be a symbol, an s-exp
-    or t.  The toggle status is read from the given variable, by
-    evaluating the given expression or checking the `cmd' as if
-    it's a variable.  The latter is especially useful for minior
-    modes, e.g.
-
-       (\"n\" `linum-mode' \"line number\" :toggle t)
-
-\(fn NAME BODY HEADS-PLIST)" nil t)
-
-(function-put 'pretty-hydra-define 'lisp-indent-function 'defun)
-
-(autoload 'pretty-hydra-define+ "pretty-hydra" "\
-Redefine an existing pretty-hydra by adding new HEADS-PLIST.
-If heads are added to a column already in NAME, the heads are
-appended to that column.  Existing BODY is replaced with the new
-one if specified.  Arguments are the same as `pretty-hydra-define'.
-
-\(fn NAME BODY HEADS-PLIST)" nil t)
-
-(function-put 'pretty-hydra-define+ 'lisp-indent-function 'defun)
-
-(autoload 'pretty-hydra-toggle "pretty-hydra" "\
-Create a dynamic hint that look like a radio button with given NAME.
-Radio is considered on when STATUS is non-nil, otherwise off.
-
-\(fn NAME STATUS)" nil nil)
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "pretty-hydra" '("pretty-hydra-")))
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/prescient-20210425.1720/prescient-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/prescient-20210425.1720/prescient-autoloads.el") (car load-path))))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "prescient" '("prescient-")))
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/persistent-scratch-20200921.2309/persistent-scratch-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/persistent-scratch-20200921.2309/persistent-scratch-autoloads.el") (car load-path))))
-
-
-
-(autoload 'persistent-scratch-save "persistent-scratch" "\
-Save the current state of scratch buffers.
-When FILE is non-nil, the state is saved to FILE; when nil or when called
-interactively, the state is saved to `persistent-scratch-save-file'.
-What state exactly is saved is determined by `persistent-scratch-what-to-save'.
-
-When FILE is nil and `persistent-scratch-backup-directory' is non-nil, a copy of
-`persistent-scratch-save-file' is stored in that directory, with a name
-representing the time of the last `persistent-scratch-new-backup' call.
-
-\(fn &optional FILE)" t nil)
-
-(autoload 'persistent-scratch-save-to-file "persistent-scratch" "\
-Save the current state of scratch buffers.
-The state is saved to FILE.
-
-When called interactively, prompt for the file name, which is the only
-difference between this function and `persistent-scratch-save'.
-
-See `persistent-scratch-save'.
-
-\(fn FILE)" t nil)
-
-(autoload 'persistent-scratch-restore "persistent-scratch" "\
-Restore the scratch buffers.
-Load FILE and restore all saved buffers to their saved state.
-
-FILE is a file to restore scratch buffers from; when nil or when called
-interactively, `persistent-scratch-save-file' is used.
-
-This is a potentially destructive operation: if there's an open buffer with the
-same name as a saved buffer, the contents of that buffer will be overwritten.
-
-\(fn &optional FILE)" t nil)
-
-(autoload 'persistent-scratch-restore-from-file "persistent-scratch" "\
-Restore the scratch buffers from a file.
-FILE is a file storing saved scratch buffer state.
-
-When called interactively, prompt for the file name, which is the only
-difference between this function and `persistent-scratch-restore'.
-
-See `persistent-scratch-restore'.
-
-\(fn FILE)" t nil)
-
-(autoload 'persistent-scratch-mode "persistent-scratch" "\
-Utility mode that remaps `save-buffer' and `write-file' to their
-`persistent-scratch' equivalents.
-
-If called interactively, enable Persistent-Scratch mode if ARG is
-positive, and disable it if ARG is zero or negative.  If called
-from Lisp, also enable the mode if ARG is omitted or nil, and
-toggle it if ARG is `toggle'; disable the mode otherwise.
-
-This mode cannot be enabled in buffers for which
-`persistent-scratch-scratch-buffer-p-function' is nil.
-
-\\{persistent-scratch-mode-map}
-
-\(fn &optional ARG)" t nil)
-
-(defvar persistent-scratch-autosave-mode nil "\
-Non-nil if Persistent-Scratch-Autosave mode is enabled.
-See the `persistent-scratch-autosave-mode' command
-for a description of this minor mode.
-Setting this variable directly does not take effect;
-either customize it (see the info node `Easy Customization')
-or call the function `persistent-scratch-autosave-mode'.")
-
-(custom-autoload 'persistent-scratch-autosave-mode "persistent-scratch" nil)
-
-(autoload 'persistent-scratch-autosave-mode "persistent-scratch" "\
-Autosave scratch buffer state.
-Every `persistent-scratch-autosave-interval' seconds and when Emacs quits, the
-state of all active scratch buffers is saved.
-This uses `persistent-scratch-save', which see.
-
-Toggle Persistent-Scratch-Autosave mode on or off.
-With a prefix argument ARG, enable Persistent-Scratch-Autosave mode if ARG is
-positive, and disable it otherwise. If called from Lisp, enable the mode if ARG
-is omitted or nil, and toggle it if ARG is `toggle'.
-\\{persistent-scratch-autosave-mode-map}
-
-\(fn &optional ARG)" t nil)
-
-(autoload 'persistent-scratch-new-backup "persistent-scratch" "\
-Create a new scratch buffer save backup file.
-The next time `persistent-scratch-save' is called, it will create a new backup
-file and use that file from now on." t nil)
-
-(autoload 'persistent-scratch-setup-default "persistent-scratch" "\
-Enable `persistent-scratch-autosave-mode' and restore the scratch buffers.
-When an error occurs while restoring the scratch buffers, it's demoted to a
-message." nil nil)
-
-(autoload 'persistent-scratch-keep-n-newest-backups "persistent-scratch" "\
-Return a backup filter that keeps N newest backups.
-The returned function is suitable for `persistent-scratch-backup-filter'.
-
-Note: this function assumes that increasing time values result in
-lexicographically increasing file names when formatted using
-`persistent-scratch-backup-file-name-format'.
-
-\(fn N)" nil nil)
-
-(autoload 'persistent-scratch-keep-backups-not-older-than "persistent-scratch" "\
-Return a backup filter that keeps backups newer than DIFF.
-DIFF may be either a number representing the number of second, or a time value
-in the format returned by `current-time' or `seconds-to-time'.
-The returned function is suitable for `persistent-scratch-backup-filter'.
-
-Note: this function assumes that increasing time values result in
-lexicographically increasing file names when formatted using
-`persistent-scratch-backup-file-name-format'.
-
-\(fn DIFF)" nil nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "persistent-scratch" '("persistent-scratch-")))
-
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/paredit-20191121.2328/paredit-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/paredit-20191121.2328/paredit-autoloads.el") (car load-path))))
-
-
-
-(autoload 'paredit-mode "paredit" "\
-Minor mode for pseudo-structurally editing Lisp code.
-With a prefix argument, enable Paredit Mode even if there are
-  unbalanced parentheses in the buffer.
-Paredit behaves badly if parentheses are unbalanced, so exercise
-  caution when forcing Paredit Mode to be enabled, and consider
-  fixing unbalanced parentheses instead.
-\\<paredit-mode-map>
-
-If called interactively, enable Paredit mode if ARG is positive,
-and disable it if ARG is zero or negative.  If called from Lisp,
-also enable the mode if ARG is omitted or nil, and toggle it if
-ARG is `toggle'; disable the mode otherwise.
-
-\(fn &optional ARG)" t nil)
-
-(autoload 'enable-paredit-mode "paredit" "\
-Turn on pseudo-structural editing of Lisp code." t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "paredit" '("?\\" "disable-paredit-mode" "paredit-")))
-
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/paradox-20191011.1111/paradox-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/paradox-20191011.1111/paradox-autoloads.el") (car load-path))))
-
-
-
-(autoload 'paradox-list-packages "paradox" "\
-Improved version of `package-list-packages'.  The heart of Paradox.
-Function is equivalent to `package-list-packages' (including the
-prefix NO-FETCH), but the resulting Package Menu is improved in
-several ways.
-
-Among them:
-
-1. Uses `paradox-menu-mode', which has more functionality and
-keybinds than `package-menu-mode'.
-
-2. Uses some font-locking to improve readability.
-
-3. Optionally shows the number GitHub stars and Melpa downloads
-for packages.
-
-4. Adds useful information in the mode-line.
-
-\(fn NO-FETCH)" t nil)
-
-(autoload 'paradox-upgrade-packages "paradox" "\
-Upgrade all packages.  No questions asked.
-This function is equivalent to `list-packages', followed by a
-`package-menu-mark-upgrades' and a `package-menu-execute'.  Except
-the user isn't asked to confirm deletion of packages.
-
-If `paradox-execute-asynchronously' is non-nil, part of this
-operation may be performed in the background.
-
-The NO-FETCH prefix argument is passed to `list-packages'.  It
-prevents re-download of information about new versions.  It does
-not prevent downloading the actual packages (obviously).
-
-\(fn &optional NO-FETCH)" t nil)
-
-(autoload 'paradox-enable "paradox" "\
-Enable paradox, overriding the default package-menu." t nil)
-
-(autoload 'paradox-require "paradox" "\
-Like `require', but also install FEATURE if it is absent.
-FILENAME is passed to `require'.
-If NOERROR is non-nil, don't complain if the feature couldn't be
-installed, just return nil.
-
-- If FEATURE is present, `require' it and return t.
-
-- If FEATURE is not present, install PACKAGE with `package-install'.
-If PACKAGE is nil, assume FEATURE is the package name.
-After installation, `require' FEATURE.
-
-By default, the current package database is only updated if it is
-empty.  Passing a non-nil REFRESH argument forces this update.
-
-\(fn FEATURE &optional FILENAME NOERROR PACKAGE REFRESH)" nil nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "paradox" '("paradox-")))
-
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "paradox-commit-list" '("paradox-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "paradox-core" '("paradox-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "paradox-execute" '("paradox-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "paradox-github" '("paradox-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "paradox-menu" '("paradox-")))
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/outorg-20190720.2002/outorg-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/outorg-20190720.2002/outorg-autoloads.el") (car load-path))))
-
-
-
-(autoload 'outorg-edit-as-org "outorg" "\
-Convert and copy to temporary Org buffer
-
-With ARG, act conditional on the raw value of ARG:
-
-| prefix | raw | action 1          | action 2                       |
-|--------+-----+-------------------+--------------------------------|
-| C-u    | (4) | edit-whole-buffer | ---                            |
-| C-1    |   1 | edit-whole-buffer | insert default export-template |
-| C-2    |   2 | edit-whole-buffer | prompt user for template-file  |
-| C-3    |   3 | edit-whole-buffer | insert & keep default template |
-| C-4    |   4 | edit-whole-buffer | insert & keep template-file    |
-| C-5    |   5 | propagate changes | ---                            |
-
-\(fn &optional ARG)" t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "outorg" '("backward-line-comments" "forward-line-comments" "out" "skip-line-comment-or-ws")))
-
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/outshine-20191112.1414/outshine-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/outshine-20191112.1414/outshine-autoloads.el") (car load-path))))
-
-
-
-(autoload 'outshine-mode "outshine" "\
-Outshine brings the look&feel of Org-mode to the (GNU Emacs)
-world outside of the Org major-mode.
-
-If called interactively, enable Outshine mode if ARG is positive,
-and disable it if ARG is zero or negative.  If called from Lisp,
-also enable the mode if ARG is omitted or nil, and toggle it if
-ARG is `toggle'; disable the mode otherwise.
-
-\(fn &optional ARG)" t nil)
-
-(autoload 'outshine-hook-function "outshine" "\
-DEPRECATED, use `outshine-mode'." nil nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "outshine" '("outshine-")))
-
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "outshine-org-cmds" '("outshine-")))
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/org-bullets-20200317.1740/org-bullets-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/org-bullets-20200317.1740/org-bullets-autoloads.el") (car load-path))))
-
-
-
-(autoload 'org-bullets-mode "org-bullets" "\
-Use UTF8 bullets in Org mode headings.
-
-If called interactively, enable Org-Bullets mode if ARG is
-positive, and disable it if ARG is zero or negative.  If called
-from Lisp, also enable the mode if ARG is omitted or nil, and
-toggle it if ARG is `toggle'; disable the mode otherwise.
-
-\(fn &optional ARG)" t nil)
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-bullets" '("org-bullets-")))
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/org-9.4.6/org-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/org-9.4.6/org-autoloads.el") (car load-path))))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-C" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-J" '("obj-" "org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-R" '("ob-R-" "org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-abc" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-asymptote" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-awk" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-calc" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-clojure" '("ob-clojure-" "org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-comint" '("org-babel-comint-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-coq" '("coq-program-name" "org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-core" '("org-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-css" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-ditaa" '("org-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-dot" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-ebnf" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-emacs-lisp" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-eshell" '("ob-eshell-session-live-p" "org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-eval" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-exp" '("org-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-forth" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-fortran" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-gnuplot" '("*org-babel-gnuplot-" "org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-groovy" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-haskell" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-hledger" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-io" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-java" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-js" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-latex" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-ledger" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-lilypond" '("lilypond-mode" "org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-lisp" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-lob" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-lua" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-makefile" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-maxima" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-mscgen" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-ocaml" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-octave" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-org" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-perl" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-picolisp" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-plantuml" '("org-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-processing" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-python" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-ref" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-ruby" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-sass" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-scheme" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-screen" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-sed" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-shell" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-shen" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-sql" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-sqlite" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-stan" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-table" '("org-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-tangle" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-vala" '("org-babel-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ol" '("org-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ol-bbdb" '("org-bbdb-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ol-bibtex" '("org-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ol-docview" '("org-docview-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ol-eshell" '("org-eshell-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ol-eww" '("org-eww-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ol-gnus" '("org-gnus-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ol-info" '("org-info-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ol-irc" '("org-irc-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ol-mhe" '("org-mhe-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ol-rmail" '("org-rmail-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ol-w3m" '("org-w3m-")))
-
-
-
-(autoload 'org-babel-do-load-languages "org" "\
-Load the languages defined in `org-babel-load-languages'.
-
-\(fn SYM VALUE)" nil nil)
-
-(autoload 'org-babel-load-file "org" "\
-Load Emacs Lisp source code blocks in the Org FILE.
-This function exports the source code using `org-babel-tangle'
-and then loads the resulting file using `load-file'.  With
-optional prefix argument COMPILE, the tangled Emacs Lisp file is
-byte-compiled before it is loaded.
-
-\(fn FILE &optional COMPILE)" t nil)
-
-(autoload 'org-version "org" "\
-Show the Org version.
-Interactively, or when MESSAGE is non-nil, show it in echo area.
-With prefix argument, or when HERE is non-nil, insert it at point.
-In non-interactive uses, a reduced version string is output unless
-FULL is given.
-
-\(fn &optional HERE FULL MESSAGE)" t nil)
-
-(autoload 'org-load-modules-maybe "org" "\
-Load all extensions listed in `org-modules'.
-
-\(fn &optional FORCE)" nil nil)
-
-(autoload 'org-clock-persistence-insinuate "org" "\
-Set up hooks for clock persistence." nil nil)
-
-(autoload 'org-mode "org" "\
-Outline-based notes management and organizer, alias
-\"Carsten's outline-mode for keeping track of everything.\"
-
-Org mode develops organizational tasks around a NOTES file which
-contains information about projects as plain text.  Org mode is
-implemented on top of Outline mode, which is ideal to keep the content
-of large files well structured.  It supports ToDo items, deadlines and
-time stamps, which magically appear in the diary listing of the Emacs
-calendar.  Tables are easily created with a built-in table editor.
-Plain text URL-like links connect to websites, emails (VM), Usenet
-messages (Gnus), BBDB entries, and any files related to the project.
-For printing and sharing of notes, an Org file (or a part of it)
-can be exported as a structured ASCII or HTML file.
-
-The following commands are available:
-
-\\{org-mode-map}
-
-\(fn)" t nil)
-
-(autoload 'org-cycle "org" "\
-TAB-action and visibility cycling for Org mode.
-
-This is the command invoked in Org mode by the `TAB' key.  Its main
-purpose is outline visibility cycling, but it also invokes other actions
-in special contexts.
-
-When this function is called with a `\\[universal-argument]' prefix, rotate the entire
-buffer through 3 states (global cycling)
-  1. OVERVIEW: Show only top-level headlines.
-  2. CONTENTS: Show all headlines of all levels, but no body text.
-  3. SHOW ALL: Show everything.
-
-With a `\\[universal-argument] \\[universal-argument]' prefix argument, switch to the startup visibility,
-determined by the variable `org-startup-folded', and by any VISIBILITY
-properties in the buffer.
-
-With a `\\[universal-argument] \\[universal-argument] \\[universal-argument]' prefix argument, show the entire buffer, including
-any drawers.
-
-When inside a table, re-align the table and move to the next field.
-
-When point is at the beginning of a headline, rotate the subtree started
-by this line through 3 different states (local cycling)
-  1. FOLDED:   Only the main headline is shown.
-  2. CHILDREN: The main headline and the direct children are shown.
-               From this state, you can move to one of the children
-               and zoom in further.
-  3. SUBTREE:  Show the entire subtree, including body text.
-If there is no subtree, switch directly from CHILDREN to FOLDED.
-
-When point is at the beginning of an empty headline and the variable
-`org-cycle-level-after-item/entry-creation' is set, cycle the level
-of the headline by demoting and promoting it to likely levels.  This
-speeds up creation document structure by pressing `TAB' once or several
-times right after creating a new headline.
-
-When there is a numeric prefix, go up to a heading with level ARG, do
-a `show-subtree' and return to the previous cursor position.  If ARG
-is negative, go up that many levels.
-
-When point is not at the beginning of a headline, execute the global
-binding for `TAB', which is re-indenting the line.  See the option
-`org-cycle-emulate-tab' for details.
-
-As a special case, if point is at the very beginning of the buffer, if
-there is no headline there, and if the variable `org-cycle-global-at-bob'
-is non-nil, this function acts as if called with prefix argument (`\\[universal-argument] TAB',
-same as `S-TAB') also when called without prefix argument.
-
-\(fn &optional ARG)" t nil)
-
-(autoload 'org-global-cycle "org" "\
-Cycle the global visibility.  For details see `org-cycle'.
-With `\\[universal-argument]' prefix ARG, switch to startup visibility.
-With a numeric prefix, show all headlines up to that level.
-
-\(fn &optional ARG)" t nil)
-
-(autoload 'org-run-like-in-org-mode "org" "\
-Run a command, pretending that the current buffer is in Org mode.
-This will temporarily bind local variables that are typically bound in
-Org mode to the values they have in Org mode, and then interactively
-call CMD.
-
-\(fn CMD)" nil nil)
-
-(autoload 'org-open-file "org" "\
-Open the file at PATH.
-First, this expands any special file name abbreviations.  Then the
-configuration variable `org-file-apps' is checked if it contains an
-entry for this file type, and if yes, the corresponding command is launched.
-
-If no application is found, Emacs simply visits the file.
-
-With optional prefix argument IN-EMACS, Emacs will visit the file.
-With a double \\[universal-argument] \\[universal-argument] prefix arg, Org tries to avoid opening in Emacs
-and to use an external application to visit the file.
-
-Optional LINE specifies a line to go to, optional SEARCH a string
-to search for.  If LINE or SEARCH is given, the file will be
-opened in Emacs, unless an entry from `org-file-apps' that makes
-use of groups in a regexp matches.
-
-If you want to change the way frames are used when following a
-link, please customize `org-link-frame-setup'.
-
-If the file does not exist, throw an error.
-
-\(fn PATH &optional IN-EMACS LINE SEARCH)" nil nil)
-
-(autoload 'org-open-at-point-global "org" "\
-Follow a link or a time-stamp like Org mode does.
-Also follow links and emails as seen by `thing-at-point'.
-This command can be called in any mode to follow an external
-link or a time-stamp that has Org mode syntax.  Its behavior
-is undefined when called on internal links like fuzzy links.
-Raise a user error when there is nothing to follow." t nil)
-
-(autoload 'org-offer-links-in-entry "org" "\
-Offer links in the current entry and return the selected link.
-If there is only one link, return it.
-If NTH is an integer, return the NTH link found.
-If ZERO is a string, check also this string for a link, and if
-there is one, return it.
-
-\(fn BUFFER MARKER &optional NTH ZERO)" nil nil)
-
-(autoload 'org-switchb "org" "\
-Switch between Org buffers.
-
-With `\\[universal-argument]' prefix, restrict available buffers to files.
-
-With `\\[universal-argument] \\[universal-argument]' prefix, restrict available buffers to agenda files.
-
-\(fn &optional ARG)" t nil)
-
-(autoload 'org-cycle-agenda-files "org" "\
-Cycle through the files in `org-agenda-files'.
-If the current buffer visits an agenda file, find the next one in the list.
-If the current buffer does not, find the first agenda file." t nil)
-
-(autoload 'org-submit-bug-report "org" "\
-Submit a bug report on Org via mail.
-
-Don't hesitate to report any problems or inaccurate documentation.
-
-If you don't have setup sending mail from (X)Emacs, please copy the
-output buffer into your mail program, as it gives us important
-information about your Org version and configuration." t nil)
-
-(autoload 'org-reload "org" "\
-Reload all Org Lisp files.
-With prefix arg UNCOMPILED, load the uncompiled versions.
-
-\(fn &optional UNCOMPILED)" t nil)
-
-(autoload 'org-customize "org" "\
-Call the customize function with org as argument." t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org" '("org-" "turn-on-org-cdlatex")))
-
-
-
-
-(autoload 'org-toggle-sticky-agenda "org-agenda" "\
-Toggle `org-agenda-sticky'.
-
-\(fn &optional ARG)" t nil)
-
-(autoload 'org-agenda "org-agenda" "\
-Dispatch agenda commands to collect entries to the agenda buffer.
-Prompts for a command to execute.  Any prefix arg will be passed
-on to the selected command.  The default selections are:
-
-a     Call `org-agenda-list' to display the agenda for current day or week.
-t     Call `org-todo-list' to display the global todo list.
-T     Call `org-todo-list' to display the global todo list, select only
-      entries with a specific TODO keyword (the user gets a prompt).
-m     Call `org-tags-view' to display headlines with tags matching
-      a condition  (the user is prompted for the condition).
-M     Like `m', but select only TODO entries, no ordinary headlines.
-e     Export views to associated files.
-s     Search entries for keywords.
-S     Search entries for keywords, only with TODO keywords.
-/     Multi occur across all agenda files and also files listed
-      in `org-agenda-text-search-extra-files'.
-<     Restrict agenda commands to buffer, subtree, or region.
-      Press several times to get the desired effect.
->     Remove a previous restriction.
-#     List \"stuck\" projects.
-!     Configure what \"stuck\" means.
-C     Configure custom agenda commands.
-
-More commands can be added by configuring the variable
-`org-agenda-custom-commands'.  In particular, specific tags and TODO keyword
-searches can be pre-defined in this way.
-
-If the current buffer is in Org mode and visiting a file, you can also
-first press `<' once to indicate that the agenda should be temporarily
-\(until the next use of `\\[org-agenda]') restricted to the current file.
-Pressing `<' twice means to restrict to the current subtree or region
-\(if active).
-
-\(fn &optional ARG ORG-KEYS RESTRICTION)" t nil)
-
-(autoload 'org-batch-agenda "org-agenda" "\
-Run an agenda command in batch mode and send the result to STDOUT.
-If CMD-KEY is a string of length 1, it is used as a key in
-`org-agenda-custom-commands' and triggers this command.  If it is a
-longer string it is used as a tags/todo match string.
-Parameters are alternating variable names and values that will be bound
-before running the agenda command.
-
-\(fn CMD-KEY &rest PARAMETERS)" nil t)
-
-(autoload 'org-batch-agenda-csv "org-agenda" "\
-Run an agenda command in batch mode and send the result to STDOUT.
-If CMD-KEY is a string of length 1, it is used as a key in
-`org-agenda-custom-commands' and triggers this command.  If it is a
-longer string it is used as a tags/todo match string.
-Parameters are alternating variable names and values that will be bound
-before running the agenda command.
-
-The output gives a line for each selected agenda item.  Each
-item is a list of comma-separated values, like this:
-
-category,head,type,todo,tags,date,time,extra,priority-l,priority-n
-
-category     The category of the item
-head         The headline, without TODO kwd, TAGS and PRIORITY
-type         The type of the agenda entry, can be
-                todo               selected in TODO match
-                tagsmatch          selected in tags match
-                diary              imported from diary
-                deadline           a deadline on given date
-                scheduled          scheduled on given date
-                timestamp          entry has timestamp on given date
-                closed             entry was closed on given date
-                upcoming-deadline  warning about deadline
-                past-scheduled     forwarded scheduled item
-                block              entry has date block including g. date
-todo         The todo keyword, if any
-tags         All tags including inherited ones, separated by colons
-date         The relevant date, like 2007-2-14
-time         The time, like 15:00-16:50
-extra        String with extra planning info
-priority-l   The priority letter if any was given
-priority-n   The computed numerical priority
-agenda-day   The day in the agenda where this is listed
-
-\(fn CMD-KEY &rest PARAMETERS)" nil t)
-
-(autoload 'org-store-agenda-views "org-agenda" "\
-Store agenda views.
-
-\(fn &rest PARAMETERS)" t nil)
-
-(autoload 'org-batch-store-agenda-views "org-agenda" "\
-Run all custom agenda commands that have a file argument.
-
-\(fn &rest PARAMETERS)" nil t)
-
-(autoload 'org-agenda-list "org-agenda" "\
-Produce a daily/weekly view from all files in variable `org-agenda-files'.
-The view will be for the current day or week, but from the overview buffer
-you will be able to go to other days/weeks.
-
-With a numeric prefix argument in an interactive call, the agenda will
-span ARG days.  Lisp programs should instead specify SPAN to change
-the number of days.  SPAN defaults to `org-agenda-span'.
-
-START-DAY defaults to TODAY, or to the most recent match for the weekday
-given in `org-agenda-start-on-weekday'.
-
-When WITH-HOUR is non-nil, only include scheduled and deadline
-items if they have an hour specification like [h]h:mm.
-
-\(fn &optional ARG START-DAY SPAN WITH-HOUR)" t nil)
-
-(autoload 'org-search-view "org-agenda" "\
-Show all entries that contain a phrase or words or regular expressions.
-
-With optional prefix argument TODO-ONLY, only consider entries that are
-TODO entries.  The argument STRING can be used to pass a default search
-string into this function.  If EDIT-AT is non-nil, it means that the
-user should get a chance to edit this string, with cursor at position
-EDIT-AT.
-
-The search string can be viewed either as a phrase that should be found as
-is, or it can be broken into a number of snippets, each of which must match
-in a Boolean way to select an entry.  The default depends on the variable
-`org-agenda-search-view-always-boolean'.
-Even if this is turned off (the default) you can always switch to
-Boolean search dynamically by preceding the first word with  \"+\" or \"-\".
-
-The default is a direct search of the whole phrase, where each space in
-the search string can expand to an arbitrary amount of whitespace,
-including newlines.
-
-If using a Boolean search, the search string is split on whitespace and
-each snippet is searched separately, with logical AND to select an entry.
-Words prefixed with a minus must *not* occur in the entry.  Words without
-a prefix or prefixed with a plus must occur in the entry.  Matching is
-case-insensitive.  Words are enclosed by word delimiters (i.e. they must
-match whole words, not parts of a word) if
-`org-agenda-search-view-force-full-words' is set (default is nil).
-
-Boolean search snippets enclosed by curly braces are interpreted as
-regular expressions that must or (when preceded with \"-\") must not
-match in the entry.  Snippets enclosed into double quotes will be taken
-as a whole, to include whitespace.
-
-- If the search string starts with an asterisk, search only in headlines.
-- If (possibly after the leading star) the search string starts with an
-  exclamation mark, this also means to look at TODO entries only, an effect
-  that can also be achieved with a prefix argument.
-- If (possibly after star and exclamation mark) the search string starts
-  with a colon, this will mean that the (non-regexp) snippets of the
-  Boolean search must match as full words.
-
-This command searches the agenda files, and in addition the files
-listed in `org-agenda-text-search-extra-files' unless a restriction lock
-is active.
-
-\(fn &optional TODO-ONLY STRING EDIT-AT)" t nil)
-
-(autoload 'org-todo-list "org-agenda" "\
-Show all (not done) TODO entries from all agenda file in a single list.
-The prefix arg can be used to select a specific TODO keyword and limit
-the list to these.  When using `\\[universal-argument]', you will be prompted
-for a keyword.  A numeric prefix directly selects the Nth keyword in
-`org-todo-keywords-1'.
-
-\(fn &optional ARG)" t nil)
-
-(autoload 'org-tags-view "org-agenda" "\
-Show all headlines for all `org-agenda-files' matching a TAGS criterion.
-The prefix arg TODO-ONLY limits the search to TODO entries.
-
-\(fn &optional TODO-ONLY MATCH)" t nil)
-
-(autoload 'org-agenda-list-stuck-projects "org-agenda" "\
-Create agenda view for projects that are stuck.
-Stuck projects are project that have no next actions.  For the definitions
-of what a project is and how to check if it stuck, customize the variable
-`org-stuck-projects'.
-
-\(fn &rest IGNORE)" t nil)
-
-(autoload 'org-diary "org-agenda" "\
-Return diary information from org files.
-This function can be used in a \"sexp\" diary entry in the Emacs calendar.
-It accesses org files and extracts information from those files to be
-listed in the diary.  The function accepts arguments specifying what
-items should be listed.  For a list of arguments allowed here, see the
-variable `org-agenda-entry-types'.
-
-The call in the diary file should look like this:
-
-   &%%(org-diary) ~/path/to/some/orgfile.org
-
-Use a separate line for each org file to check.  Or, if you omit the file name,
-all files listed in `org-agenda-files' will be checked automatically:
-
-   &%%(org-diary)
-
-If you don't give any arguments (as in the example above), the default value
-of `org-agenda-entry-types' is used: (:deadline :scheduled :timestamp :sexp).
-So the example above may also be written as
-
-   &%%(org-diary :deadline :timestamp :sexp :scheduled)
-
-The function expects the lisp variables `entry' and `date' to be provided
-by the caller, because this is how the calendar works.  Don't use this
-function from a program - use `org-agenda-get-day-entries' instead.
-
-\(fn &rest ARGS)" nil nil)
-
-(autoload 'org-agenda-check-for-timestamp-as-reason-to-ignore-todo-item "org-agenda" "\
-Do we have a reason to ignore this TODO entry because it has a time stamp?
-
-\(fn &optional END)" nil nil)
-
-(autoload 'org-agenda-set-restriction-lock "org-agenda" "\
-Set restriction lock for agenda to current subtree or file.
-When in a restricted subtree, remove it.
-
-The restriction will span over the entire file if TYPE is `file',
-or if type is '(4), or if the cursor is before the first headline
-in the file. Otherwise, only apply the restriction to the current
-subtree.
-
-\(fn &optional TYPE)" t nil)
-
-(autoload 'org-calendar-goto-agenda "org-agenda" "\
-Compute the Org agenda for the calendar date displayed at the cursor.
-This is a command that has to be installed in `calendar-mode-map'." t nil)
-
-(autoload 'org-agenda-to-appt "org-agenda" "\
-Activate appointments found in `org-agenda-files'.
-
-With a `\\[universal-argument]' prefix, refresh the list of appointments.
-
-If FILTER is t, interactively prompt the user for a regular
-expression, and filter out entries that don't match it.
-
-If FILTER is a string, use this string as a regular expression
-for filtering entries out.
-
-If FILTER is a function, filter out entries against which
-calling the function returns nil.  This function takes one
-argument: an entry from `org-agenda-get-day-entries'.
-
-FILTER can also be an alist with the car of each cell being
-either `headline' or `category'.  For example:
-
-  \\='((headline \"IMPORTANT\")
-    (category \"Work\"))
-
-will only add headlines containing IMPORTANT or headlines
-belonging to the \"Work\" category.
-
-ARGS are symbols indicating what kind of entries to consider.
-By default `org-agenda-to-appt' will use :deadline*, :scheduled*
-\(i.e., deadlines and scheduled items with a hh:mm specification)
-and :timestamp entries.  See the docstring of `org-diary' for
-details and examples.
-
-If an entry has a APPT_WARNTIME property, its value will be used
-to override `appt-message-warning-time'.
-
-\(fn &optional REFRESH FILTER &rest ARGS)" t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-agenda" '("org-")))
-
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-archive" '("org-a")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-attach" '("org-attach-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-attach-git" '("org-attach-git-")))
-
-
-
-(autoload 'org-capture-string "org-capture" "\
-Capture STRING with the template selected by KEYS.
-
-\(fn STRING &optional KEYS)" t nil)
-
-(autoload 'org-capture "org-capture" "\
-Capture something.
-\\<org-capture-mode-map>
-This will let you select a template from `org-capture-templates', and
-then file the newly captured information.  The text is immediately
-inserted at the target location, and an indirect buffer is shown where
-you can edit it.  Pressing `\\[org-capture-finalize]' brings you back to the previous
-state of Emacs, so that you can continue your work.
-
-When called interactively with a `\\[universal-argument]' prefix argument GOTO, don't
-capture anything, just go to the file/headline where the selected
-template stores its notes.
-
-With a `\\[universal-argument] \\[universal-argument]' prefix argument, go to the last note stored.
-
-When called with a `C-0' (zero) prefix, insert a template at point.
-
-When called with a `C-1' (one) prefix, force prompting for a date when
-a datetree entry is made.
-
-ELisp programs can set KEYS to a string associated with a template
-in `org-capture-templates'.  In this case, interactive selection
-will be bypassed.
-
-If `org-capture-use-agenda-date' is non-nil, capturing from the
-agenda will use the date at point as the default date.  Then, a
-`C-1' prefix will tell the capture process to use the HH:MM time
-of the day at point (if any) or the current HH:MM time.
-
-\(fn &optional GOTO KEYS)" t nil)
-
-(autoload 'org-capture-import-remember-templates "org-capture" "\
-Set `org-capture-templates' to be similar to `org-remember-templates'." t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-capture" '("org-capture-")))
-
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-clock" '("org-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-colview" '("org-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-compat" '("org-")))
-
-
-
-(autoload 'org-encrypt-entry "org-crypt" "\
-Encrypt the content of the current headline." t nil)
-
-(autoload 'org-decrypt-entry "org-crypt" "\
-Decrypt the content of the current headline." t nil)
-
-(autoload 'org-encrypt-entries "org-crypt" "\
-Encrypt all top-level entries in the current buffer." t nil)
-
-(autoload 'org-decrypt-entries "org-crypt" "\
-Decrypt all entries in the current buffer." t nil)
-
-(autoload 'org-crypt-use-before-save-magic "org-crypt" "\
-Add a hook to automatically encrypt entries before a file is saved to disk." nil nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-crypt" '("org-")))
-
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-ctags" '("org-ctags-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-datetree" '("org-datetree-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-duration" '("org-duration-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-element" '("org-element-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-entities" '("org-entit")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-faces" '("org-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-feed" '("org-feed-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-footnote" '("org-footnote-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-goto" '("org-goto-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-habit" '("org-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-id" '("org-id-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-indent" '("org-indent-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-inlinetask" '("org-inlinetask-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-keys" '("org-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-lint" '("org-lint-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-list" '("org-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-macro" '("org-macro-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-macs" '("org-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-mobile" '("org-mobile-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-mouse" '("org-mouse-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-num" '("org-num-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-pcomplete" '("org-" "pcomplete/org-mode/")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-plot" '("org-plot")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-protocol" '("org-protocol-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-refile" '("org-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-src" '("org-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-table" '("org")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-tempo" '("org-tempo-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-timer" '("org-timer-")))
-
-
-
-(autoload 'org-release "org-version" "\
-The release version of Org.
-Inserted by installing Org mode or when a release is made." nil nil)
-
-(autoload 'org-git-version "org-version" "\
-The Git version of Org mode.
-Inserted by installing Org or when a release is made." nil nil)
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ox" '("org-export-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ox-ascii" '("org-ascii-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ox-beamer" '("org-beamer-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ox-html" '("org-html-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ox-icalendar" '("org-icalendar-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ox-latex" '("org-latex-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ox-man" '("org-man-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ox-md" '("org-md-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ox-odt" '("org-odt-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ox-org" '("org-org-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ox-publish" '("org-publish-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ox-texinfo" '("org-texinfo-")))
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/kv-20140108.1534/kv-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/kv-20140108.1534/kv-autoloads.el") (car load-path))))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "kv" '("dotass" "keyword->symbol" "map-bind")))
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/esxml-20210323.1102/esxml-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/esxml-20210323.1102/esxml-autoloads.el") (car load-path))))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "esxml" '("attr" "esxml-" "pp-esxml-to-xml" "string-trim-whitespace" "sxml-to-" "xml-to-esxml")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "esxml-query" '("esxml-")))
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/nov-20210323.1105/nov-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/nov-20210323.1105/nov-autoloads.el") (car load-path))))
-
-
-
-(autoload 'nov-mode "nov" "\
-Major mode for reading EPUB documents
-
-\(fn)" t nil)
-
-(autoload 'nov-bookmark-jump-handler "nov" "\
-The bookmark handler-function interface for bookmark BMK.
-
-See also `nov-bookmark-make-record'.
-
-\(fn BMK)" nil nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "nov" '("nov-")))
-
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/mwim-20181110.1900/mwim-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/mwim-20181110.1900/mwim-autoloads.el") (car load-path))))
-
-
- (autoload 'mwim-beginning-of-line-or-code "mwim" nil t)
- (autoload 'mwim-beginning-of-code-or-line "mwim" nil t)
- (autoload 'mwim-beginning-of-code-or-line-or-comment "mwim" nil t)
- (autoload 'mwim-end-of-line-or-code "mwim" nil t)
- (autoload 'mwim-end-of-code-or-line "mwim" nil t)
-
-(autoload 'mwim-beginning "mwim" "\
-Move point to the next beginning position
-Available positions are defined by `mwim-beginning-position-functions'.
-See `mwim-move-to-next-position' for details.
-Interactively, with prefix argument, move to the previous position.
-
-\(fn &optional ARG)" t nil)
-
-(autoload 'mwim-end "mwim" "\
-Move point to the next end position.
-Available positions are defined by `mwim-end-position-functions'.
-See `mwim-move-to-next-position' for details.
-Interactively, with prefix argument, move to the previous position.
-
-\(fn &optional ARG)" t nil)
-
-(autoload 'mwim "mwim" "\
-Switch between various positions on the current line.
-Available positions are defined by `mwim-position-functions'
-variable.
-Interactively, with prefix argument, move to the previous position.
-
-\(fn &optional ARG)" t nil)
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "mwim" '("mwim-")))
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/modus-themes-20210524.1750/modus-themes-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/modus-themes-20210524.1750/modus-themes-autoloads.el") (car load-path))))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "modus-operandi-theme" '("modus-operandi")))
-
-
-
-(autoload 'modus-themes-contrast "modus-themes" "\
-Measure WCAG contrast ratio between C1 and C2.
-C1 and C2 are color values written in hexadecimal RGB.
-
-\(fn C1 C2)" nil nil)
-
-(autoload 'modus-themes-color "modus-themes" "\
-Return color value for COLOR from current palette.
-COLOR is a key in `modus-themes-operandi-colors' or
-`modus-themes-vivendi-colors'.
-
-\(fn COLOR)" nil nil)
-
-(autoload 'modus-themes-color-alts "modus-themes" "\
-Return color value from current palette.
-When Modus Operandi is enabled, return color value for color
-LIGHT-COLOR.  When Modus Vivendi is enabled, return color value
-for DARK-COLOR.  LIGHT-COLOR and DARK-COLOR are keys in
-`modus-themes-operandi-colors' or `modus-themes-vivendi-colors'.
-
-\(fn LIGHT-COLOR DARK-COLOR)" nil nil)
-
-(autoload 'modus-themes-load-themes "modus-themes" "\
-Ensure that the Modus themes are in `custom-enabled-themes'.
-
-This function is intended for use in package declarations such as
-those defined with the help of `use-package'.  The idea is to add
-this function to the `:init' stage of the package's loading, so
-that subsequent calls that assume the presence of a loaded theme,
-like `modus-themes-toggle' or `modus-themes-load-operandi', will
-continue to work as intended even if they are lazy-loaded (such
-as when they are declared in the `:config' phase)." nil nil)
-
-(autoload 'modus-themes-load-operandi "modus-themes" "\
-Load `modus-operandi' and disable `modus-vivendi'.
-Also run `modus-themes-after-load-theme-hook'." nil nil)
-
-(autoload 'modus-themes-load-vivendi "modus-themes" "\
-Load `modus-vivendi' and disable `modus-operandi'.
-Also run `modus-themes-after-load-theme-hook'." nil nil)
-
-(autoload 'modus-themes-toggle "modus-themes" "\
-Toggle between `modus-operandi' and `modus-vivendi' themes.
-Also runs `modus-themes-after-load-theme-hook' at its last stage
-by virtue of calling either of `modus-themes-load-operandi' and
-`modus-themes-load-vivendi' functions." t nil)
-
-(when load-file-name (let ((dir (file-name-directory load-file-name))) (unless (equal dir (expand-file-name "themes/" data-directory)) (add-to-list 'custom-theme-load-path dir))))
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "modus-themes" '("modus-themes-")))
-
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "modus-vivendi-theme" '("modus-vivendi")))
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/math-symbol-lists-20200131.2333/math-symbol-lists-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/math-symbol-lists-20200131.2333/math-symbol-lists-autoloads.el") (car load-path))))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "math-symbol-lists" '("math-symbol-list-")))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "msl-build" '("msl-")))
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/makey-20131231.1430/makey-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/makey-20131231.1430/makey-autoloads.el") (car load-path))))
-
-
-
-(autoload 'makey-initialize-key-groups "makey" "\
-Initializes KEY-GROUP and creates all the relevant interactive commands.
-
-\(fn KEY-GROUP)" nil nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "makey" '("makey-")))
-
-
-
-
-
-)
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/major-mode-hydra-20210221.834/major-mode-hydra-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/major-mode-hydra-20210221.834/major-mode-hydra-autoloads.el") (car load-path))))
-
-
-
-(autoload 'major-mode-hydra-define "major-mode-hydra" "\
-Generate a major mode hydra for given MODE with given BODY and HEADS-PLIST.
-Overwrite existing hydra if there is one.
-
-MODE can also be a list of modes in which case the same hydras
-are created for all these modes.  Useful in multiple closely
-related major modes.
-
-Refer to `pretty-hydra-define' for documentation about BODY and HEADS-PLIST.
-
-\(fn MODE BODY HEADS-PLIST)" nil t)
-
-(function-put 'major-mode-hydra-define 'lisp-indent-function 'defun)
-
-(autoload 'major-mode-hydra-define+ "major-mode-hydra" "\
-Generate a major mode hydra for given MODE with given BODY and HEADS-PLIST.
-Add new heads if there is already an existing one.
-
-MODE can also be a list of modes in which case the same hydras
-are created for all these modes.  Useful in multiple closely
-related major modes.
-
-Refer to `pretty-hydra-define' for documentation about BODY and HEADS-PLIST.
-
-\(fn MODE BODY HEADS-PLIST)" nil t)
-
-(function-put 'major-mode-hydra-define+ 'lisp-indent-function 'defun)
-
-(autoload 'major-mode-hydra-bind "major-mode-hydra" "\
-Add BINDINGS (heads) for a MODE under the COLUMN.
-
-MODE is the major mode name (symbol).  There is no need to quote it.
-
-COLUMN is a string to put the hydra heads under.
-
-BINDINGS is a list of hydra heads to be added.  Each head has
-exactly the same structure as that in `pretty-hydra-define' or
-`defhydra', except `:exit' is set to t by default.
-
-\(fn MODE COLUMN &rest BINDINGS)" nil t)
-
-(function-put 'major-mode-hydra-bind 'lisp-indent-function '2)
-
-(make-obsolete 'major-mode-hydra-bind 'major-mode-hydra-define+ '"July 2019")
-
-(autoload 'major-mode-hydra "major-mode-hydra" "\
-Show the hydra for the current major mode." t nil)
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "major-mode-hydra" '("major-mode-hydra-")))
 
 
 )
@@ -8584,6 +5463,3232 @@ Move WORKTREE to PATH.
 
 
 )
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/treemacs-magit-20210107.1251/treemacs-magit-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/treemacs-magit-20210107.1251/treemacs-magit-autoloads.el") (car load-path))))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-magit" '("treemacs-magit--")))
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/treemacs-icons-dired-20210107.1251/treemacs-icons-dired-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/treemacs-icons-dired-20210107.1251/treemacs-icons-dired-autoloads.el") (car load-path))))
+
+
+
+(defvar treemacs-icons-dired-mode nil "\
+Non-nil if Treemacs-Icons-Dired mode is enabled.
+See the `treemacs-icons-dired-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `treemacs-icons-dired-mode'.")
+
+(custom-autoload 'treemacs-icons-dired-mode "treemacs-icons-dired" nil)
+
+(autoload 'treemacs-icons-dired-mode "treemacs-icons-dired" "\
+Display treemacs icons for each file in a dired buffer.
+
+If called interactively, enable Treemacs-Icons-Dired mode if ARG
+is positive, and disable it if ARG is zero or negative.
+If called from Lisp, also enable the mode if ARG is omitted or
+nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-icons-dired" '("treemacs-icons-dired-")))
+
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/transient-posframe-20210102.130/transient-posframe-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/transient-posframe-20210102.130/transient-posframe-autoloads.el") (car load-path))))
+
+
+
+(defvar transient-posframe-mode nil "\
+Non-nil if Transient-Posframe mode is enabled.
+See the `transient-posframe-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `transient-posframe-mode'.")
+
+(custom-autoload 'transient-posframe-mode "transient-posframe" nil)
+
+(autoload 'transient-posframe-mode "transient-posframe" "\
+Toggle transient posframe mode on of off.
+
+If called interactively, enable Transient-Posframe mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "transient-posframe" '("transient-posframe-")))
+
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/toc-org-20210421.657/toc-org-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/toc-org-20210421.657/toc-org-autoloads.el") (car load-path))))
+
+
+
+(autoload 'toc-org-enable "toc-org" "\
+Enable toc-org in this buffer." nil nil)
+
+(autoload 'toc-org-mode "toc-org" "\
+Toggle `toc-org' in this buffer.
+
+If called interactively, enable Toc-Org mode if ARG is positive,
+and disable it if ARG is zero or negative.  If called from Lisp,
+also enable the mode if ARG is omitted or nil, and toggle it if
+ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "toc-org" '("toc-org-")))
+
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-20210518.1815/ivy-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-20210518.1815/ivy-autoloads.el") (car load-path))))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "colir" '("colir-")))
+
+
+
+(autoload 'ivy-resume "ivy" "\
+Resume the last completion session, or SESSION if non-nil.
+With a prefix arg, try to restore a recorded completion session,
+if one exists.
+
+\(fn &optional SESSION)" t nil)
+
+(autoload 'ivy-read "ivy" "\
+Read a string in the minibuffer, with completion.
+
+PROMPT is a string, normally ending in a colon and a space.
+`ivy-count-format' is prepended to PROMPT during completion.
+
+COLLECTION is either a list of strings, a function, an alist, or
+a hash table, supplied for `minibuffer-completion-table'.
+
+PREDICATE is applied to filter out the COLLECTION immediately.
+This argument is for compatibility with `completing-read'.
+
+When REQUIRE-MATCH is non-nil, only members of COLLECTION can be
+selected.
+
+If INITIAL-INPUT is non-nil, then insert that input in the
+minibuffer initially.
+
+HISTORY is a name of a variable to hold the completion session
+history.
+
+KEYMAP is composed with `ivy-minibuffer-map'.
+
+PRESELECT, when non-nil, determines which one of the candidates
+matching INITIAL-INPUT to select initially.  An integer stands
+for the position of the desired candidate in the collection,
+counting from zero.  Otherwise, use the first occurrence of
+PRESELECT in the collection.  Comparison is first done with
+`equal'.  If that fails, and when applicable, match PRESELECT as
+a regular expression.
+
+DEF is for compatibility with `completing-read'.
+
+UPDATE-FN is called each time the candidate list is re-displayed.
+
+When SORT is non-nil, `ivy-sort-functions-alist' determines how
+to sort candidates before displaying them.
+
+ACTION is a function to call after selecting a candidate.
+It takes one argument, the selected candidate. If COLLECTION is
+an alist, the argument is a cons cell, otherwise it's a string.
+
+MULTI-ACTION, when non-nil, is called instead of ACTION when
+there are marked candidates. It takes the list of candidates as
+its only argument. When it's nil, ACTION is called on each marked
+candidate.
+
+UNWIND is a function of no arguments to call before exiting.
+
+RE-BUILDER is a function transforming input text into a regex
+pattern.
+
+MATCHER is a function which can override how candidates are
+filtered based on user input.  It takes a regex pattern and a
+list of candidates, and returns the list of matching candidates.
+
+DYNAMIC-COLLECTION is a boolean specifying whether the list of
+candidates is updated after each input by calling COLLECTION.
+
+EXTRA-PROPS is a plist that can be used to store
+collection-specific session-specific data.
+
+CALLER is a symbol to uniquely identify the caller to `ivy-read'.
+It is used, along with COLLECTION, to determine which
+customizations apply to the current completion session.
+
+\(fn PROMPT COLLECTION &key PREDICATE REQUIRE-MATCH INITIAL-INPUT HISTORY PRESELECT DEF KEYMAP UPDATE-FN SORT ACTION MULTI-ACTION UNWIND RE-BUILDER MATCHER DYNAMIC-COLLECTION EXTRA-PROPS CALLER)" nil nil)
+
+(autoload 'ivy-completing-read "ivy" "\
+Read a string in the minibuffer, with completion.
+
+This interface conforms to `completing-read' and can be used for
+`completing-read-function'.
+
+PROMPT is a string that normally ends in a colon and a space.
+COLLECTION is either a list of strings, an alist, an obarray, or a hash table.
+PREDICATE limits completion to a subset of COLLECTION.
+REQUIRE-MATCH is a boolean value or a symbol.  See `completing-read'.
+INITIAL-INPUT is a string inserted into the minibuffer initially.
+HISTORY is a list of previously selected inputs.
+DEF is the default value.
+INHERIT-INPUT-METHOD is currently ignored.
+
+\(fn PROMPT COLLECTION &optional PREDICATE REQUIRE-MATCH INITIAL-INPUT HISTORY DEF INHERIT-INPUT-METHOD)" nil nil)
+
+(defvar ivy-mode nil "\
+Non-nil if Ivy mode is enabled.
+See the `ivy-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `ivy-mode'.")
+
+(custom-autoload 'ivy-mode "ivy" nil)
+
+(autoload 'ivy-mode "ivy" "\
+Toggle Ivy mode on or off.
+Turn Ivy mode on if ARG is positive, off otherwise.
+Turning on Ivy mode sets `completing-read-function' to
+`ivy-completing-read'.
+
+Global bindings:
+\\{ivy-mode-map}
+
+Minibuffer bindings:
+\\{ivy-minibuffer-map}
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'ivy-switch-buffer "ivy" "\
+Switch to another buffer." t nil)
+
+(autoload 'ivy-switch-view "ivy" "\
+Switch to one of the window views stored by `ivy-push-view'." t nil)
+
+(autoload 'ivy-switch-buffer-other-window "ivy" "\
+Switch to another buffer in another window." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ivy" '("ivy-" "with-ivy-window")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ivy-overlay" '("ivy-")))
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/swiper-20210521.1319/swiper-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/swiper-20210521.1319/swiper-autoloads.el") (car load-path))))
+
+
+
+(autoload 'swiper-avy "swiper" "\
+Jump to one of the current swiper candidates with `avy'." t nil)
+
+(autoload 'swiper-backward "swiper" "\
+`isearch-backward' with an overview.
+When non-nil, INITIAL-INPUT is the initial search pattern.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'swiper-thing-at-point "swiper" "\
+`swiper' with `ivy-thing-at-point'." t nil)
+
+(autoload 'swiper-all-thing-at-point "swiper" "\
+`swiper-all' with `ivy-thing-at-point'." t nil)
+
+(autoload 'swiper "swiper" "\
+`isearch-forward' with an overview.
+When non-nil, INITIAL-INPUT is the initial search pattern.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'swiper-all "swiper" "\
+Run `swiper' for all open buffers.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'swiper-isearch "swiper" "\
+A `swiper' that's not line-based.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'swiper-isearch-backward "swiper" "\
+Like `swiper-isearch' but the first result is before the point.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "swiper" '("swiper-")))
+
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/spinner-1.7.3/spinner-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/spinner-1.7.3/spinner-autoloads.el") (car load-path))))
+
+
+
+(autoload 'spinner-create "spinner" "\
+Create a spinner of the given TYPE.
+The possible TYPEs are described in `spinner--type-to-frames'.
+
+FPS, if given, is the number of desired frames per second.
+Default is `spinner-frames-per-second'.
+
+If BUFFER-LOCAL is non-nil, the spinner will be automatically
+deactivated if the buffer is killed.  If BUFFER-LOCAL is a
+buffer, use that instead of current buffer.
+
+When started, in order to function properly, the spinner runs a
+timer which periodically calls `force-mode-line-update' in the
+curent buffer.  If BUFFER-LOCAL was set at creation time, then
+`force-mode-line-update' is called in that buffer instead.  When
+the spinner is stopped, the timer is deactivated.
+
+DELAY, if given, is the number of seconds to wait after starting
+the spinner before actually displaying it. It is safe to cancel
+the spinner before this time, in which case it won't display at
+all.
+
+\(fn &optional TYPE BUFFER-LOCAL FPS DELAY)" nil nil)
+
+(autoload 'spinner-start "spinner" "\
+Start a mode-line spinner of given TYPE-OR-OBJECT.
+If TYPE-OR-OBJECT is an object created with `make-spinner',
+simply activate it.  This method is designed for minor modes, so
+they can use the spinner as part of their lighter by doing:
+    \\='(:eval (spinner-print THE-SPINNER))
+To stop this spinner, call `spinner-stop' on it.
+
+If TYPE-OR-OBJECT is anything else, a buffer-local spinner is
+created with this type, and it is displayed in the
+`mode-line-process' of the buffer it was created it.  Both
+TYPE-OR-OBJECT and FPS are passed to `make-spinner' (which see).
+To stop this spinner, call `spinner-stop' in the same buffer.
+
+Either way, the return value is a function which can be called
+anywhere to stop this spinner.  You can also call `spinner-stop'
+in the same buffer where the spinner was created.
+
+FPS, if given, is the number of desired frames per second.
+Default is `spinner-frames-per-second'.
+
+DELAY, if given, is the number of seconds to wait until actually
+displaying the spinner. It is safe to cancel the spinner before
+this time, in which case it won't display at all.
+
+\(fn &optional TYPE-OR-OBJECT FPS DELAY)" nil nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "spinner" '("spinner")))
+
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/sml-mode-6.10/sml-mode-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/sml-mode-6.10/sml-mode-autoloads.el") (car load-path))))
+
+
+
+(defalias 'run-sml 'sml-run)
+
+(autoload 'sml-run "sml-mode" "\
+Run the program CMD with given arguments ARG.
+The command is run in buffer *CMD* using mode `inferior-sml-mode'.
+If the buffer already exists and has a running process, then
+just go to this buffer.
+
+If a prefix argument is used, the user is also prompted for a HOST
+on which to run CMD using `remote-shell-program'.
+
+\(Type \\[describe-mode] in the process's buffer for a list of commands.)
+
+\(fn CMD ARG &optional HOST)" t nil)
+
+(add-to-list 'auto-mode-alist '("\\.s\\(ml\\|ig\\)\\'" . sml-mode))
+
+(autoload 'sml-mode "sml-mode" "\
+Major mode for editing Standard ML code.
+This mode runs `sml-mode-hook' just before exiting.
+See also (info \"(sml-mode)Top\").
+
+\(fn)" t nil)
+
+(add-to-list 'completion-ignored-extensions ".cm/")
+
+(add-to-list 'auto-mode-alist '("\\.cm\\'" . sml-cm-mode))
+
+(autoload 'sml-cm-mode "sml-mode" "\
+Major mode for SML/NJ's Compilation Manager configuration files.
+
+\(fn)" t nil)
+
+(autoload 'sml-lex-mode "sml-mode" "\
+Major Mode for editing ML-Lex files.
+
+\(fn)" t nil)
+
+(add-to-list 'auto-mode-alist '("\\.grm\\'" . sml-yacc-mode))
+
+(autoload 'sml-yacc-mode "sml-mode" "\
+Major Mode for editing ML-Yacc files.
+
+\(fn)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "sml-mode" '("font-lock-" "inferior-sml-" "sml-")))
+
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/smartparens-20210330.850/smartparens-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/smartparens-20210330.850/smartparens-autoloads.el") (car load-path))))
+
+
+
+(autoload 'sp-cheat-sheet "smartparens" "\
+Generate a cheat sheet of all the smartparens interactive functions.
+
+Without a prefix argument, print only the short documentation and examples.
+
+With non-nil prefix argument ARG, show the full documentation for each function.
+
+You can follow the links to the function or variable help page.
+To get back to the full list, use \\[help-go-back].
+
+You can use `beginning-of-defun' and `end-of-defun' to jump to
+the previous/next entry.
+
+Examples are fontified using the `font-lock-string-face' for
+better orientation.
+
+\(fn &optional ARG)" t nil)
+
+(defvar smartparens-mode-map (make-sparse-keymap) "\
+Keymap used for `smartparens-mode'.")
+
+(autoload 'sp-use-paredit-bindings "smartparens" "\
+Initiate `smartparens-mode-map' with `sp-paredit-bindings'." t nil)
+
+(autoload 'sp-use-smartparens-bindings "smartparens" "\
+Initiate `smartparens-mode-map' with `sp-smartparens-bindings'." t nil)
+
+(autoload 'smartparens-mode "smartparens" "\
+Toggle smartparens mode.
+
+If called interactively, enable Smartparens mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+You can enable pre-set bindings by customizing
+`sp-base-key-bindings' variable.  The current content of
+`smartparens-mode-map' is:
+
+ \\{smartparens-mode-map}
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'smartparens-strict-mode "smartparens" "\
+Toggle the strict smartparens mode.
+
+If called interactively, enable Smartparens-Strict mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+When strict mode is active, `delete-char', `kill-word' and their
+backward variants will skip over the pair delimiters in order to
+keep the structure always valid (the same way as `paredit-mode'
+does).  This is accomplished by remapping them to
+`sp-delete-char' and `sp-kill-word'.  There is also function
+`sp-kill-symbol' that deletes symbols instead of words, otherwise
+working exactly the same (it is not bound to any key by default).
+
+When strict mode is active, this is indicated with \"/s\"
+after the smartparens indicator in the mode list.
+
+\(fn &optional ARG)" t nil)
+
+(put 'smartparens-global-strict-mode 'globalized-minor-mode t)
+
+(defvar smartparens-global-strict-mode nil "\
+Non-nil if Smartparens-Global-Strict mode is enabled.
+See the `smartparens-global-strict-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `smartparens-global-strict-mode'.")
+
+(custom-autoload 'smartparens-global-strict-mode "smartparens" nil)
+
+(autoload 'smartparens-global-strict-mode "smartparens" "\
+Toggle Smartparens-Strict mode in all buffers.
+With prefix ARG, enable Smartparens-Global-Strict mode if ARG is positive;
+otherwise, disable it.  If called from Lisp, enable the mode if
+ARG is omitted or nil.
+
+Smartparens-Strict mode is enabled in all buffers where
+`turn-on-smartparens-strict-mode' would do it.
+See `smartparens-strict-mode' for more information on Smartparens-Strict mode.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'turn-on-smartparens-strict-mode "smartparens" "\
+Turn on `smartparens-strict-mode'." t nil)
+
+(autoload 'turn-off-smartparens-strict-mode "smartparens" "\
+Turn off `smartparens-strict-mode'." t nil)
+
+(put 'smartparens-global-mode 'globalized-minor-mode t)
+
+(defvar smartparens-global-mode nil "\
+Non-nil if Smartparens-Global mode is enabled.
+See the `smartparens-global-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `smartparens-global-mode'.")
+
+(custom-autoload 'smartparens-global-mode "smartparens" nil)
+
+(autoload 'smartparens-global-mode "smartparens" "\
+Toggle Smartparens mode in all buffers.
+With prefix ARG, enable Smartparens-Global mode if ARG is positive;
+otherwise, disable it.  If called from Lisp, enable the mode if
+ARG is omitted or nil.
+
+Smartparens mode is enabled in all buffers where
+`turn-on-smartparens-mode' would do it.
+See `smartparens-mode' for more information on Smartparens mode.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'turn-on-smartparens-mode "smartparens" "\
+Turn on `smartparens-mode'.
+
+This function is used to turn on `smartparens-global-mode'.
+
+By default `smartparens-global-mode' ignores buffers with
+`mode-class' set to special, but only if they are also not comint
+buffers.
+
+Additionally, buffers on `sp-ignore-modes-list' are ignored.
+
+You can still turn on smartparens in these mode manually (or
+in mode's startup-hook etc.) by calling `smartparens-mode'." t nil)
+
+(autoload 'turn-off-smartparens-mode "smartparens" "\
+Turn off `smartparens-mode'." t nil)
+
+(autoload 'show-smartparens-mode "smartparens" "\
+Toggle visualization of matching pairs.  When enabled, any
+matching pair is highlighted after `sp-show-pair-delay' seconds
+of Emacs idle time if the point is immediately in front or after
+a pair.  This mode works similarly to `show-paren-mode', but
+support custom pairs.
+
+If called interactively, enable Show-Smartparens mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+(put 'show-smartparens-global-mode 'globalized-minor-mode t)
+
+(defvar show-smartparens-global-mode nil "\
+Non-nil if Show-Smartparens-Global mode is enabled.
+See the `show-smartparens-global-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `show-smartparens-global-mode'.")
+
+(custom-autoload 'show-smartparens-global-mode "smartparens" nil)
+
+(autoload 'show-smartparens-global-mode "smartparens" "\
+Toggle Show-Smartparens mode in all buffers.
+With prefix ARG, enable Show-Smartparens-Global mode if ARG is positive;
+otherwise, disable it.  If called from Lisp, enable the mode if
+ARG is omitted or nil.
+
+Show-Smartparens mode is enabled in all buffers where
+`turn-on-show-smartparens-mode' would do it.
+See `show-smartparens-mode' for more information on Show-Smartparens mode.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'turn-on-show-smartparens-mode "smartparens" "\
+Turn on `show-smartparens-mode'." t nil)
+
+(autoload 'turn-off-show-smartparens-mode "smartparens" "\
+Turn off `show-smartparens-mode'." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens" '("smartparens-" "sp-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-clojure" '("sp-clojure-prefix")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-config" '("sp-lisp-invalid-hyperlink-p")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-crystal" '("sp-crystal-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-elixir" '("sp-elixir-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-ess" '("sp-ess-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-haskell" '("sp-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-html" '("sp-html-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-latex" '("sp-latex-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-lua" '("sp-lua-post-keyword-insert")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-markdown" '("sp-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-org" '("sp-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-python" '("sp-python-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-rst" '("sp-rst-point-after-backtick")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-ruby" '("sp-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-rust" '("sp-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-scala" '("sp-scala-wrap-with-indented-newlines")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smartparens-text" '("sp-text-mode-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "sp-sublimetext-like" '("sp-point-not-before-word")))
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/f-20191110.1357/f-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/f-20191110.1357/f-autoloads.el") (car load-path))))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "f" '("f-")))
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/shrink-path-20190208.1335/shrink-path-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/shrink-path-20190208.1335/shrink-path-autoloads.el") (car load-path))))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "shrink-path" '("shrink-path-")))
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/rainbow-delimiters-20210515.1254/rainbow-delimiters-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/rainbow-delimiters-20210515.1254/rainbow-delimiters-autoloads.el") (car load-path))))
+
+
+
+(autoload 'rainbow-delimiters-mode "rainbow-delimiters" "\
+Highlight nested parentheses, brackets, and braces according to their depth.
+
+If called interactively, enable Rainbow-Delimiters mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'rainbow-delimiters-mode-enable "rainbow-delimiters" "\
+Enable `rainbow-delimiters-mode'." nil nil)
+
+(autoload 'rainbow-delimiters-mode-disable "rainbow-delimiters" "\
+Disable `rainbow-delimiters-mode'." nil nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "rainbow-delimiters" '("rainbow-delimiters-")))
+
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/pos-tip-20191227.1356/pos-tip-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/pos-tip-20191227.1356/pos-tip-autoloads.el") (car load-path))))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "pos-tip" '("pos-tip-")))
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/racket-mode-20210524.1655/racket-mode-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/racket-mode-20210524.1655/racket-mode-autoloads.el") (car load-path))))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-browse-url" '("racket-browse-url")))
+
+
+
+(autoload 'racket-bug-report "racket-bug-report" "\
+Fill a buffer with data to make a Racket Mode bug report." t nil)
+
+
+
+(defvar racket-start-back-end-hook nil "\
+Hook run after `racket-start-back-end'.")
+
+(autoload 'racket-start-back-end "racket-cmd" "\
+Start the back end process used by Racket Mode.
+
+If the process is already started, this command will stop and restart it.
+
+As the final step, runs the hook `racket-start-back-end-hook'." t nil)
+
+(autoload 'racket-stop-back-end "racket-cmd" "\
+Stop the back end process used by Racket Mode.
+
+If the process is not already started, this does nothing." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-cmd" '("racket-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-collection" '("racket-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-common" '("racket-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-complete" '("racket--")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-custom" '("defface-racket" "racket-")))
+
+
+
+(autoload 'racket--debug-send-definition "racket-debug" "\
+
+
+\(fn BEG END)" nil nil)
+
+(autoload 'racket--debug-on-break "racket-debug" "\
+
+
+\(fn RESPONSE)" nil nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-debug" '("racket-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-describe" '("racket-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-doc" '("racket--")))
+
+
+
+(add-to-list 'hs-special-modes-alist '(racket-mode "(" ")" ";" nil nil))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-edit" '("racket-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-eldoc" '("racket--do-eldoc")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-font-lock" '("racket-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-imenu" '("racket-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-indent" '("racket-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-keywords-and-builtins" '("racket-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-logger" '("racket-")))
+
+
+
+(autoload 'racket-mode "racket-mode" "\
+Major mode for editing Racket source files.
+
+\\{racket-mode-map}
+
+\(fn)" t nil)
+
+(add-to-list 'auto-mode-alist '("\\.rkt\\'" . racket-mode))
+
+(add-to-list 'auto-mode-alist '("\\.rktd\\'" . racket-mode))
+
+(add-to-list 'auto-mode-alist '("\\.rktl\\'" . racket-mode))
+
+(modify-coding-system-alist 'file "\\.rkt[dl]?\\'" 'utf-8)
+
+(add-to-list 'interpreter-mode-alist '("racket" . racket-mode))
+
+(autoload 'racket-mode-start-faster "racket-mode" "\
+Compile Racket Mode's .rkt files for faster startup.
+
+Racket Mode is implemented as an Emacs Lisp \"front end\" that
+talks to a Racket process \"back end\". Because Racket Mode is
+delivered as an Emacs package instead of a Racket package,
+installing it does not do the `raco setup` that is normally done
+for Racket packages.
+
+This command will do a `raco make` of Racket Mode's .rkt files,
+creating bytecode files in `compiled/` subdirectories. As a
+result, when a command must start the Racket process, it will
+start somewhat faster.
+
+On many computers, the resulting speed up is negligible, and
+might not be worth the complication.
+
+If you run this command, ever, you will need to run it again
+after:
+
+- Installing an updated version of Racket Mode. Otherwise, you
+  might lose some of the speed-up.
+
+- Installing a new version of Racket and/or changing the value of
+  the variable `racket-program'. Otherwise, you might get an
+  error message due to the bytecode being different versions.
+
+To revert to compiling on startup, use
+`racket-mode-start-slower'. " t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-mode" '("racket-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-parens" '("racket-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-ppss" '("racket--ppss-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-profile" '("racket-")))
+
+
+
+(autoload 'racket-repl "racket-repl" "\
+Show a Racket REPL buffer in some window.
+
+*IMPORTANT*
+
+The main, intended use of Racket Mode's REPL is that you
+`find-file' some specific .rkt file, then `racket-run' it. The
+REPL will then match that file.
+
+If the REPL isn't running, and you want to start it for no file
+in particular? Then you could use this command. But the resulting
+REPL will have a minimal \"#lang racket/base\" namespace. You
+could enter \"(require racket)\" if you want the equivalent of
+\"#lang racket\". You could also \"(require racket/enter)\" if
+you want things like \"enter!\". But in some sense you'd be
+\"using it wrong\". If you really don't want to use Racket Mode's
+REPL as intended, then you might as well use a plain Emacs shell
+buffer to run command-line Racket.
+
+\(fn &optional NOSELECT)" t nil)
+
+(autoload 'racket-run "racket-repl" "\
+Save the buffer in REPL and run your program.
+
+As well as evaluating the outermost, file module, automatically
+runs the submodules specified by the customization variable
+`racket-submodules-to-run'.
+
+See also `racket-run-module-at-point', which runs just the
+specific module at point.
+
+With \\[universal-argument] uses errortrace for improved stack traces.
+Otherwise follows the `racket-error-context' setting.
+
+With \\[universal-argument] \\[universal-argument] instruments
+code for step debugging. See `racket-debug-mode' and the variable
+`racket-debuggable-files'.
+
+Each run occurs within a Racket custodian. Any prior run's
+custodian is shut down, releasing resources like threads and
+ports. Each run's evaluation environment is reset to the contents
+of the source file. In other words, like Dr Racket, this provides
+the benefit that your source file is the \"single source of
+truth\". At the same time, the run gives you a REPL inside the
+namespace of the module, giving you the ability to explore it
+interactively. Any explorations are temporary, unless you also
+make them to your source file, they will be lost on the next run.
+
+See also `racket-run-and-switch-to-repl', which is even more like
+Dr Racket's Run command because it selects the REPL window after
+running.
+
+In the `racket-repl-mode' buffer, output that describes a file
+and position is automatically \"linkified\". Examples of such
+text include:
+
+- Racket error messages.
+- rackunit test failure location messages.
+- print representation of path objects.
+
+To visit these locations, move point there and press RET or mouse
+click. Or, use the standard `next-error' and `previous-error'
+commands.
+
+\(fn &optional PREFIX)" t nil)
+
+(autoload 'racket-run-module-at-point "racket-repl" "\
+Save the buffer and run the module at point.
+
+Like `racket-run' but runs the innermost module around point,
+which is determined textually by looking for \"module\",
+\"module*\", or \"module+\" forms nested to any depth, else
+simply the outermost, file module.
+
+\(fn &optional PREFIX)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-repl" '("racket-" "with-racket-repl-buffer")))
+
+
+
+
+(autoload 'racket-repl-buffer-name-shared "racket-repl-buffer-name" "\
+All `racket-mode' edit buffers share one `racket-repl-mode' buffer.
+
+A value for the variable `racket-repl-buffer-name-function'." t nil)
+
+(autoload 'racket-repl-buffer-name-unique "racket-repl-buffer-name" "\
+Each `racket-mode' edit buffer gets its own `racket-repl-mode' buffer.
+
+A value for the variable `racket-repl-buffer-name-function'." t nil)
+
+(autoload 'racket-repl-buffer-name-project "racket-repl-buffer-name" "\
+All `racket-mode' buffers in a project share a `racket-repl-mode' buffer.
+
+A value for the variable `racket-repl-buffer-name-function'.
+
+The \"project\" is determined by `racket-project-root'." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-repl-buffer-name" '("racket-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-show" '("racket-")))
+
+
+
+(autoload 'racket-smart-open-bracket-mode "racket-smart-open" "\
+Minor mode to let you always type `[`' to insert `(` or `[` automatically.
+
+If called interactively, enable Racket-Smart-Open-Bracket mode if
+ARG is positive, and disable it if ARG is zero or negative.
+If called from Lisp, also enable the mode if ARG is omitted or
+nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
+
+Behaves like the \"Automatically adjust opening square brackets\"
+feature in Dr. Racket.
+
+By default, inserts a `(`. Inserts a `[` in the following cases:
+
+  - `let`-like bindings -- forms with `let` in the name as well
+    as things like `parameterize`, `with-handlers`, and
+    `with-syntax`.
+
+  - `case`, `cond`, `match`, `syntax-case`, `syntax-parse`, and
+    `syntax-rules` clauses.
+
+  - `for`-like bindings and `for/fold` accumulators.
+
+  - `class` declaration syntax, such as `init` and `inherit`.
+
+When the previous s-expression in a sequence is a compound
+expression, uses the same kind of delimiter.
+
+To force insert `[`, use `quoted-insert'.
+
+Combined with `racket-insert-closing' this means that you can
+press the unshifted `[` and `]` keys to get whatever delimiters
+follow the Racket conventions for these forms. When something
+like `electric-pair-mode' or `paredit-mode' is active, you need
+not even press `]`.
+
+Tip: When also using `paredit-mode', enable that first so that
+the binding for the `[`' key in the map for
+`racket-smart-open-bracket-mode' has higher priority. See also
+the variable `minor-mode-map-alist'.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-smart-open" '("racket-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-stepper" '("racket-")))
+
+
+
+(autoload 'racket-unicode-input-method-enable "racket-unicode-input-method" "\
+Set input method to racket-unicode.
+
+The racket-unicode input method lets you easily type various
+Unicode symbols that might be useful when writing Racket code.
+
+To automatically enable the racket-unicode input method in
+racket-mode and racket-repl-mode buffers, put the following code
+in your Emacs init file:
+
+#+BEGIN_SRC elisp
+    (add-hook 'racket-mode-hook #'racket-unicode-input-method-enable)
+    (add-hook 'racket-repl-mode-hook #'racket-unicode-input-method-enable)
+#+END_SRC
+
+To temporarily enable this input method for a single buffer you
+can use \"M-x racket-unicode-input-method-enable\".
+
+Use the standard Emacs key C-\\ to toggle the input method.
+
+When the racket-unicode input method is active, you can for
+example type \"All\" and it is immediately replaced with \"∀\". A
+few other examples:
+
+| omega     | ω                        |
+| x_1       | x₁                       |
+| x^1       | x¹                       |
+| A         | 𝔸                        |
+| test-->>E | test-->>∃ (racket/redex) |
+| vdash     | ⊢                        |
+
+To see a table of all key sequences use \"M-x
+describe-input-method <RET> racket-unicode\".
+
+If you want to add your own mappings to the \"racket-unicode\"
+input method, you may add code like the following example in your
+Emacs init file:
+
+#+BEGIN_SRC elisp
+    ;; Either (require 'racket-mode) here, or, if you use
+    ;; use-package, put the code below in the :config section.
+    (with-temp-buffer
+      (racket-unicode-input-method-enable)
+      (set-input-method \"racket-unicode\")
+      (let ((quail-current-package (assoc \"racket-unicode\"
+                                          quail-package-alist)))
+        (quail-define-rules ((append . t))
+                            (\"^o\" [\"ᵒ\"]))))
+#+END_SRC
+
+If you don’t like the highlighting of partially matching tokens you
+can turn it off by setting `input-method-highlight-flag' to nil." t nil)
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-util" '("racket-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-visit" '("racket--")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-wsl" '("racket-")))
+
+
+
+(autoload 'racket-xp-mode "racket-xp" "\
+A minor mode that analyzes expanded code to explain and explore.
+
+If called interactively, enable Racket-Xp mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+This minor mode is an optional enhancement to `racket-mode' edit
+buffers. Like any minor mode, you can turn it on or off for a
+specific buffer. If you always want to use it, put the following
+code in your Emacs init file:
+
+#+BEGIN_SRC elisp
+    (require 'racket-xp)
+    (add-hook 'racket-mode-hook #'racket-xp-mode)
+#+END_SRC
+
+Note: This mode won't do anything unless/until the Racket Mode
+back end is running. It will try to start the back end
+automatically. You do /not/ need to `racket-run' the buffer you
+are editing.
+
+This mode uses the drracket/check-syntax package to analyze
+fully-expanded programs, without needing to evaluate a.k.a.
+\"run\" them. The resulting analysis provides information for:
+
+- Visually annotating bindings -- local or imported definitions
+  and references to them.
+
+- Visually annotating expressions in a tail position, as well as
+  the enclosing expression with respect to which they are in a
+  tail position.
+
+- Completion candidates.
+
+- Defintions' source and documentation.
+
+When point is on a definition or use, related items are
+highlighted using `racket-xp-def-face' and `racket-xp-use-face'
+-- instead of drawing arrows as in Dr Racket. Information is
+displayed using the function(s) in the hook variable
+`racket-show-functions'; it is also available when hovering the
+mouse cursor.
+
+Note: If you find these point-motion features too distracting
+and/or slow, in your `racket-xp-mode-hook' you may disable them:
+
+#+BEGIN_SRC elisp
+  (require 'racket-xp)
+  (add-hook 'racket-xp-mode-hook
+            (lambda ()
+              (remove-hook 'pre-redisplay-functions
+                           #'racket-xp-pre-redisplay
+                           t)))
+#+END_SRC
+
+The remaining features discussed below will still work.
+
+You may also use commands to navigate among a definition and its
+uses, or to rename a local definitions and all its uses:
+
+  - `racket-xp-next-definition'
+  - `racket-xp-previous-definition'
+  - `racket-xp-next-use'
+  - `racket-xp-previous-use'
+
+In the following little example, not only does
+drracket/check-syntax distinguish the various \"x\" bindings, it
+understands the two different imports of \"define\":
+
+#+BEGIN_SRC racket
+  #lang racket/base
+  (define x 1)
+  x
+  (let ([x x])
+    (+ x 1))
+  (module m typed/racket/base
+    (define x 2)
+    x)
+#+END_SRC
+
+When point is on the opening parenthesis of an expression in tail
+position, it is highlighted using the face
+`racket-xp-tail-position-face'.
+
+When point is on the opening parenthesis of an enclosing
+expression with respect to which one or more expressions are in
+tail position, it is highlighted using the face
+`racket-xp-tail-target-face'.
+
+Furthermore, when point is on the opening parenthesis of either
+kind of expression, all of the immediately related expressions
+are also highlighted. Various commands move among them:
+
+  - `racket-xp-tail-up'
+  - `racket-xp-tail-down'
+  - `racket-xp-tail-next-sibling'
+  - `racket-xp-tail-previous-sibling'
+
+The function `racket-xp-complete-at-point' is added to the
+variable `completion-at-point-functions'. Note that in this case,
+it is not smart about submodules; identifiers are assumed to be
+definitions from the file's module or its imports. In addition to
+supplying completion candidates, it supports the
+\":company-location\" property to inspect the definition of a
+candidate and the \":company-doc-buffer\" property to view its
+documentation.
+
+When you edit the buffer, existing annotations are retained;
+their positions are updated to reflect the edit. Annotations for
+new or deleted text are not requested until after
+`racket-xp-after-change-refresh-delay' seconds. The request is
+made asynchronously so that Emacs will not block -- for
+moderately complex source files, it can take some seconds simply
+to fully expand them, as well as a little more time for the
+drracket/check-syntax analysis. When the results are ready, all
+annotations for the buffer are completely refreshed.
+
+You may also set `racket-xp-after-change-refresh-delay' to nil
+and use the `racket-xp-annotate' command manually.
+
+The mode line changes to reflect the current status of
+annotations, and whether or not you had a syntax error.
+
+If you have one or more syntax errors, `racket-xp-next-error' and
+`racket-xp-previous-error' navigate among them. Although most
+languages will stop after the first syntax error, some like Typed
+Racket will try to collect and report multiple errors.
+
+You may use `xref-find-definitions' \\[xref-find-definitions],
+`xref-pop-marker-stack' \\[xref-pop-marker-stack], and
+`xref-find-references': `racket-xp-mode' adds a backend to the
+variable `xref-backend-functions'. This backend uses information
+from the drracket/check-syntax static analysis. Its ability to
+find references is limited to the current file; when it finds
+none it will try the default xref backend implementation which is
+grep-based.
+
+Tip: This mode follows the convention that a minor mode may only
+use a prefix key consisting of \"C-c\" followed by a punctuation
+key. As a result, `racket-xp-control-c-hash-keymap' is bound to
+\"C-c #\" by default. Although you might find this awkward to
+type, remember that as an Emacs user, you are free to bind this
+map to a more convenient prefix, and/or bind any individual
+commands directly to whatever keys you prefer.
+
+\\{racket-xp-mode-map}
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-xp" '("racket-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "racket-xp-complete" '("racket-")))
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/python-mode-20210408.800/python-mode-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/python-mode-20210408.800/python-mode-autoloads.el") (car load-path))))
+
+
+
+(autoload 'py-backward-class-bol "python-mode" "\
+Go to beginning of ‘class’, go to BOL.
+If already at beginning, go one ‘class’ backward.
+Return beginning of ‘class’ if successful, nil otherwise" t nil)
+
+(autoload 'py-backward-def-bol "python-mode" "\
+Go to beginning of ‘def’, go to BOL.
+If already at beginning, go one ‘def’ backward.
+Return beginning of ‘def’ if successful, nil otherwise" t nil)
+
+(autoload 'py-backward-def-or-class-bol "python-mode" "\
+Go to beginning of ‘def-or-class’, go to BOL.
+If already at beginning, go one ‘def-or-class’ backward.
+Return beginning of ‘def-or-class’ if successful, nil otherwise" t nil)
+
+(autoload 'py-forward-class "python-mode" "\
+Go to end of class.
+
+Return end of ‘class’ if successful, nil otherwise
+Optional ORIG: start position
+Optional BOL: go to beginning of line following end-position
+
+\(fn &optional ORIG BOL)" t nil)
+
+(autoload 'py-forward-def "python-mode" "\
+Go to end of def.
+
+Return end of ‘def’ if successful, nil otherwise
+Optional ORIG: start position
+Optional BOL: go to beginning of line following end-position
+
+\(fn &optional ORIG BOL)" t nil)
+
+(autoload 'py-forward-def-or-class "python-mode" "\
+Go to end of def-or-class.
+
+Return end of ‘def-or-class’ if successful, nil otherwise
+Optional ORIG: start position
+Optional BOL: go to beginning of line following end-position
+
+\(fn &optional ORIG BOL)" t nil)
+
+(autoload 'py-auto-completion-mode "python-mode" "\
+Run auto-completion
+
+\(fn)" t nil)
+
+(autoload 'python-mode "python-mode" "\
+Major mode for editing Python files.
+
+To submit a problem report, enter `\\[py-submit-bug-report]' from a
+`python-mode' buffer.  Do `\\[py-describe-mode]' for detailed
+documentation.  To see what version of `python-mode' you are running,
+enter `\\[py-version]'.
+
+This mode knows about Python indentation, tokens, comments and
+continuation lines.  Paragraphs are separated by blank lines only.
+
+COMMANDS
+
+`py-shell'	Start an interactive Python interpreter in another window
+`py-execute-statement'	Send statement at point to Python default interpreter
+`py-backward-statement'	Go to the initial line of a simple statement
+
+etc.
+
+See available commands listed in files commands-python-mode at directory doc
+
+VARIABLES
+
+`py-indent-offset'	indentation increment
+`py-shell-name'		shell command to invoke Python interpreter
+`py-split-window-on-execute'		When non-nil split windows
+`py-switch-buffers-on-execute-p'	When non-nil switch to the Python output buffer
+
+See available customizations listed in files variables-python-mode at directory doc
+
+\\{python-mode-map}
+
+\(fn)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "python-mode" '("all-mode-setting" "autopair-mode" "flake8" "force-py-shell-name-p-o" "highlight-indent-active" "hs-hide-comments-when-hiding-all" "info-lookup-mode" "ipython" "iypthon" "jython" "pdb-track-stack-from-shell-p" "pep8" "pst-here" "stri" "toggle-force-py-shell-name-p" "turn-o" "virtualenv-")))
+
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/pretty-hydra-20210221.834/pretty-hydra-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/pretty-hydra-20210221.834/pretty-hydra-autoloads.el") (car load-path))))
+
+
+
+(autoload 'pretty-hydra-define "pretty-hydra" "\
+Define a pretty hydra with given NAME, BODY options and HEADS-PLIST.
+The generated hydra has a nice-looking docstring which is a table
+with columns of command keys and hints.
+
+NAME should be a symbol and is passed to `defhydra' as is.
+
+BODY is the same as that in `defhydra', withe the following
+pretty hydra specific ones:
+
+  - `:separator' a single char used to generate the separator
+    line.
+
+  - `:title' a string that's added to the beginning of the
+    docstring as a title of the hydra.
+
+  - `:formatter' a function that takes the generated docstring
+    and return a decorated one.  It can be used to further
+    customize the hydra docstring.
+
+  - `:quit-key' a key of list of keys for quitting the hydra.
+    When specified, invisible head(s) are created with the
+    specified keys for quitting the hydra.
+
+HEADS-PLIST is a plist of columns of hydra heads.  The keys of
+the plist should be column names.  The values should be lists of
+hydra heads.  Each head has exactly the same syntax as that of
+`defhydra', except hint is required for the head to appear in the
+docstring.  The following additional options are supported:
+
+  - `:width' the max width of a dynamic hint, used to calculate
+    the final width of the entire column.  It is ignored when the
+    hint is a string.
+
+  - `:toggle' when specified, it makes the head a toggle and adds
+    an indicator to the end of the hint for the status of the
+    toggle.  The value of this option can be a symbol, an s-exp
+    or t.  The toggle status is read from the given variable, by
+    evaluating the given expression or checking the `cmd' as if
+    it's a variable.  The latter is especially useful for minior
+    modes, e.g.
+
+       (\"n\" `linum-mode' \"line number\" :toggle t)
+
+\(fn NAME BODY HEADS-PLIST)" nil t)
+
+(function-put 'pretty-hydra-define 'lisp-indent-function 'defun)
+
+(autoload 'pretty-hydra-define+ "pretty-hydra" "\
+Redefine an existing pretty-hydra by adding new HEADS-PLIST.
+If heads are added to a column already in NAME, the heads are
+appended to that column.  Existing BODY is replaced with the new
+one if specified.  Arguments are the same as `pretty-hydra-define'.
+
+\(fn NAME BODY HEADS-PLIST)" nil t)
+
+(function-put 'pretty-hydra-define+ 'lisp-indent-function 'defun)
+
+(autoload 'pretty-hydra-toggle "pretty-hydra" "\
+Create a dynamic hint that look like a radio button with given NAME.
+Radio is considered on when STATUS is non-nil, otherwise off.
+
+\(fn NAME STATUS)" nil nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "pretty-hydra" '("pretty-hydra-")))
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/prescient-20210425.1720/prescient-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/prescient-20210425.1720/prescient-autoloads.el") (car load-path))))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "prescient" '("prescient-")))
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/persistent-scratch-20200921.2309/persistent-scratch-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/persistent-scratch-20200921.2309/persistent-scratch-autoloads.el") (car load-path))))
+
+
+
+(autoload 'persistent-scratch-save "persistent-scratch" "\
+Save the current state of scratch buffers.
+When FILE is non-nil, the state is saved to FILE; when nil or when called
+interactively, the state is saved to `persistent-scratch-save-file'.
+What state exactly is saved is determined by `persistent-scratch-what-to-save'.
+
+When FILE is nil and `persistent-scratch-backup-directory' is non-nil, a copy of
+`persistent-scratch-save-file' is stored in that directory, with a name
+representing the time of the last `persistent-scratch-new-backup' call.
+
+\(fn &optional FILE)" t nil)
+
+(autoload 'persistent-scratch-save-to-file "persistent-scratch" "\
+Save the current state of scratch buffers.
+The state is saved to FILE.
+
+When called interactively, prompt for the file name, which is the only
+difference between this function and `persistent-scratch-save'.
+
+See `persistent-scratch-save'.
+
+\(fn FILE)" t nil)
+
+(autoload 'persistent-scratch-restore "persistent-scratch" "\
+Restore the scratch buffers.
+Load FILE and restore all saved buffers to their saved state.
+
+FILE is a file to restore scratch buffers from; when nil or when called
+interactively, `persistent-scratch-save-file' is used.
+
+This is a potentially destructive operation: if there's an open buffer with the
+same name as a saved buffer, the contents of that buffer will be overwritten.
+
+\(fn &optional FILE)" t nil)
+
+(autoload 'persistent-scratch-restore-from-file "persistent-scratch" "\
+Restore the scratch buffers from a file.
+FILE is a file storing saved scratch buffer state.
+
+When called interactively, prompt for the file name, which is the only
+difference between this function and `persistent-scratch-restore'.
+
+See `persistent-scratch-restore'.
+
+\(fn FILE)" t nil)
+
+(autoload 'persistent-scratch-mode "persistent-scratch" "\
+Utility mode that remaps `save-buffer' and `write-file' to their
+`persistent-scratch' equivalents.
+
+If called interactively, enable Persistent-Scratch mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+This mode cannot be enabled in buffers for which
+`persistent-scratch-scratch-buffer-p-function' is nil.
+
+\\{persistent-scratch-mode-map}
+
+\(fn &optional ARG)" t nil)
+
+(defvar persistent-scratch-autosave-mode nil "\
+Non-nil if Persistent-Scratch-Autosave mode is enabled.
+See the `persistent-scratch-autosave-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `persistent-scratch-autosave-mode'.")
+
+(custom-autoload 'persistent-scratch-autosave-mode "persistent-scratch" nil)
+
+(autoload 'persistent-scratch-autosave-mode "persistent-scratch" "\
+Autosave scratch buffer state.
+Every `persistent-scratch-autosave-interval' seconds and when Emacs quits, the
+state of all active scratch buffers is saved.
+This uses `persistent-scratch-save', which see.
+
+Toggle Persistent-Scratch-Autosave mode on or off.
+With a prefix argument ARG, enable Persistent-Scratch-Autosave mode if ARG is
+positive, and disable it otherwise. If called from Lisp, enable the mode if ARG
+is omitted or nil, and toggle it if ARG is `toggle'.
+\\{persistent-scratch-autosave-mode-map}
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'persistent-scratch-new-backup "persistent-scratch" "\
+Create a new scratch buffer save backup file.
+The next time `persistent-scratch-save' is called, it will create a new backup
+file and use that file from now on." t nil)
+
+(autoload 'persistent-scratch-setup-default "persistent-scratch" "\
+Enable `persistent-scratch-autosave-mode' and restore the scratch buffers.
+When an error occurs while restoring the scratch buffers, it's demoted to a
+message." nil nil)
+
+(autoload 'persistent-scratch-keep-n-newest-backups "persistent-scratch" "\
+Return a backup filter that keeps N newest backups.
+The returned function is suitable for `persistent-scratch-backup-filter'.
+
+Note: this function assumes that increasing time values result in
+lexicographically increasing file names when formatted using
+`persistent-scratch-backup-file-name-format'.
+
+\(fn N)" nil nil)
+
+(autoload 'persistent-scratch-keep-backups-not-older-than "persistent-scratch" "\
+Return a backup filter that keeps backups newer than DIFF.
+DIFF may be either a number representing the number of second, or a time value
+in the format returned by `current-time' or `seconds-to-time'.
+The returned function is suitable for `persistent-scratch-backup-filter'.
+
+Note: this function assumes that increasing time values result in
+lexicographically increasing file names when formatted using
+`persistent-scratch-backup-file-name-format'.
+
+\(fn DIFF)" nil nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "persistent-scratch" '("persistent-scratch-")))
+
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/paredit-20191121.2328/paredit-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/paredit-20191121.2328/paredit-autoloads.el") (car load-path))))
+
+
+
+(autoload 'paredit-mode "paredit" "\
+Minor mode for pseudo-structurally editing Lisp code.
+With a prefix argument, enable Paredit Mode even if there are
+  unbalanced parentheses in the buffer.
+Paredit behaves badly if parentheses are unbalanced, so exercise
+  caution when forcing Paredit Mode to be enabled, and consider
+  fixing unbalanced parentheses instead.
+\\<paredit-mode-map>
+
+If called interactively, enable Paredit mode if ARG is positive,
+and disable it if ARG is zero or negative.  If called from Lisp,
+also enable the mode if ARG is omitted or nil, and toggle it if
+ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'enable-paredit-mode "paredit" "\
+Turn on pseudo-structural editing of Lisp code." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "paredit" '("?\\" "disable-paredit-mode" "paredit-")))
+
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/paradox-20191011.1111/paradox-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/paradox-20191011.1111/paradox-autoloads.el") (car load-path))))
+
+
+
+(autoload 'paradox-list-packages "paradox" "\
+Improved version of `package-list-packages'.  The heart of Paradox.
+Function is equivalent to `package-list-packages' (including the
+prefix NO-FETCH), but the resulting Package Menu is improved in
+several ways.
+
+Among them:
+
+1. Uses `paradox-menu-mode', which has more functionality and
+keybinds than `package-menu-mode'.
+
+2. Uses some font-locking to improve readability.
+
+3. Optionally shows the number GitHub stars and Melpa downloads
+for packages.
+
+4. Adds useful information in the mode-line.
+
+\(fn NO-FETCH)" t nil)
+
+(autoload 'paradox-upgrade-packages "paradox" "\
+Upgrade all packages.  No questions asked.
+This function is equivalent to `list-packages', followed by a
+`package-menu-mark-upgrades' and a `package-menu-execute'.  Except
+the user isn't asked to confirm deletion of packages.
+
+If `paradox-execute-asynchronously' is non-nil, part of this
+operation may be performed in the background.
+
+The NO-FETCH prefix argument is passed to `list-packages'.  It
+prevents re-download of information about new versions.  It does
+not prevent downloading the actual packages (obviously).
+
+\(fn &optional NO-FETCH)" t nil)
+
+(autoload 'paradox-enable "paradox" "\
+Enable paradox, overriding the default package-menu." t nil)
+
+(autoload 'paradox-require "paradox" "\
+Like `require', but also install FEATURE if it is absent.
+FILENAME is passed to `require'.
+If NOERROR is non-nil, don't complain if the feature couldn't be
+installed, just return nil.
+
+- If FEATURE is present, `require' it and return t.
+
+- If FEATURE is not present, install PACKAGE with `package-install'.
+If PACKAGE is nil, assume FEATURE is the package name.
+After installation, `require' FEATURE.
+
+By default, the current package database is only updated if it is
+empty.  Passing a non-nil REFRESH argument forces this update.
+
+\(fn FEATURE &optional FILENAME NOERROR PACKAGE REFRESH)" nil nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "paradox" '("paradox-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "paradox-commit-list" '("paradox-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "paradox-core" '("paradox-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "paradox-execute" '("paradox-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "paradox-github" '("paradox-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "paradox-menu" '("paradox-")))
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/outorg-20190720.2002/outorg-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/outorg-20190720.2002/outorg-autoloads.el") (car load-path))))
+
+
+
+(autoload 'outorg-edit-as-org "outorg" "\
+Convert and copy to temporary Org buffer
+
+With ARG, act conditional on the raw value of ARG:
+
+| prefix | raw | action 1          | action 2                       |
+|--------+-----+-------------------+--------------------------------|
+| C-u    | (4) | edit-whole-buffer | ---                            |
+| C-1    |   1 | edit-whole-buffer | insert default export-template |
+| C-2    |   2 | edit-whole-buffer | prompt user for template-file  |
+| C-3    |   3 | edit-whole-buffer | insert & keep default template |
+| C-4    |   4 | edit-whole-buffer | insert & keep template-file    |
+| C-5    |   5 | propagate changes | ---                            |
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "outorg" '("backward-line-comments" "forward-line-comments" "out" "skip-line-comment-or-ws")))
+
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/outshine-20191112.1414/outshine-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/outshine-20191112.1414/outshine-autoloads.el") (car load-path))))
+
+
+
+(autoload 'outshine-mode "outshine" "\
+Outshine brings the look&feel of Org-mode to the (GNU Emacs)
+world outside of the Org major-mode.
+
+If called interactively, enable Outshine mode if ARG is positive,
+and disable it if ARG is zero or negative.  If called from Lisp,
+also enable the mode if ARG is omitted or nil, and toggle it if
+ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'outshine-hook-function "outshine" "\
+DEPRECATED, use `outshine-mode'." nil nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "outshine" '("outshine-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "outshine-org-cmds" '("outshine-")))
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/org-bullets-20200317.1740/org-bullets-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/org-bullets-20200317.1740/org-bullets-autoloads.el") (car load-path))))
+
+
+
+(autoload 'org-bullets-mode "org-bullets" "\
+Use UTF8 bullets in Org mode headings.
+
+If called interactively, enable Org-Bullets mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-bullets" '("org-bullets-")))
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/org-9.4.6/org-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/org-9.4.6/org-autoloads.el") (car load-path))))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-C" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-J" '("obj-" "org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-R" '("ob-R-" "org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-abc" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-asymptote" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-awk" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-calc" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-clojure" '("ob-clojure-" "org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-comint" '("org-babel-comint-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-coq" '("coq-program-name" "org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-core" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-css" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-ditaa" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-dot" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-ebnf" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-emacs-lisp" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-eshell" '("ob-eshell-session-live-p" "org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-eval" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-exp" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-forth" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-fortran" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-gnuplot" '("*org-babel-gnuplot-" "org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-groovy" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-haskell" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-hledger" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-io" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-java" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-js" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-latex" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-ledger" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-lilypond" '("lilypond-mode" "org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-lisp" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-lob" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-lua" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-makefile" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-maxima" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-mscgen" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-ocaml" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-octave" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-org" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-perl" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-picolisp" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-plantuml" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-processing" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-python" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-ref" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-ruby" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-sass" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-scheme" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-screen" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-sed" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-shell" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-shen" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-sql" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-sqlite" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-stan" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-table" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-tangle" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ob-vala" '("org-babel-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ol" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ol-bbdb" '("org-bbdb-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ol-bibtex" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ol-docview" '("org-docview-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ol-eshell" '("org-eshell-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ol-eww" '("org-eww-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ol-gnus" '("org-gnus-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ol-info" '("org-info-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ol-irc" '("org-irc-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ol-mhe" '("org-mhe-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ol-rmail" '("org-rmail-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ol-w3m" '("org-w3m-")))
+
+
+
+(autoload 'org-babel-do-load-languages "org" "\
+Load the languages defined in `org-babel-load-languages'.
+
+\(fn SYM VALUE)" nil nil)
+
+(autoload 'org-babel-load-file "org" "\
+Load Emacs Lisp source code blocks in the Org FILE.
+This function exports the source code using `org-babel-tangle'
+and then loads the resulting file using `load-file'.  With
+optional prefix argument COMPILE, the tangled Emacs Lisp file is
+byte-compiled before it is loaded.
+
+\(fn FILE &optional COMPILE)" t nil)
+
+(autoload 'org-version "org" "\
+Show the Org version.
+Interactively, or when MESSAGE is non-nil, show it in echo area.
+With prefix argument, or when HERE is non-nil, insert it at point.
+In non-interactive uses, a reduced version string is output unless
+FULL is given.
+
+\(fn &optional HERE FULL MESSAGE)" t nil)
+
+(autoload 'org-load-modules-maybe "org" "\
+Load all extensions listed in `org-modules'.
+
+\(fn &optional FORCE)" nil nil)
+
+(autoload 'org-clock-persistence-insinuate "org" "\
+Set up hooks for clock persistence." nil nil)
+
+(autoload 'org-mode "org" "\
+Outline-based notes management and organizer, alias
+\"Carsten's outline-mode for keeping track of everything.\"
+
+Org mode develops organizational tasks around a NOTES file which
+contains information about projects as plain text.  Org mode is
+implemented on top of Outline mode, which is ideal to keep the content
+of large files well structured.  It supports ToDo items, deadlines and
+time stamps, which magically appear in the diary listing of the Emacs
+calendar.  Tables are easily created with a built-in table editor.
+Plain text URL-like links connect to websites, emails (VM), Usenet
+messages (Gnus), BBDB entries, and any files related to the project.
+For printing and sharing of notes, an Org file (or a part of it)
+can be exported as a structured ASCII or HTML file.
+
+The following commands are available:
+
+\\{org-mode-map}
+
+\(fn)" t nil)
+
+(autoload 'org-cycle "org" "\
+TAB-action and visibility cycling for Org mode.
+
+This is the command invoked in Org mode by the `TAB' key.  Its main
+purpose is outline visibility cycling, but it also invokes other actions
+in special contexts.
+
+When this function is called with a `\\[universal-argument]' prefix, rotate the entire
+buffer through 3 states (global cycling)
+  1. OVERVIEW: Show only top-level headlines.
+  2. CONTENTS: Show all headlines of all levels, but no body text.
+  3. SHOW ALL: Show everything.
+
+With a `\\[universal-argument] \\[universal-argument]' prefix argument, switch to the startup visibility,
+determined by the variable `org-startup-folded', and by any VISIBILITY
+properties in the buffer.
+
+With a `\\[universal-argument] \\[universal-argument] \\[universal-argument]' prefix argument, show the entire buffer, including
+any drawers.
+
+When inside a table, re-align the table and move to the next field.
+
+When point is at the beginning of a headline, rotate the subtree started
+by this line through 3 different states (local cycling)
+  1. FOLDED:   Only the main headline is shown.
+  2. CHILDREN: The main headline and the direct children are shown.
+               From this state, you can move to one of the children
+               and zoom in further.
+  3. SUBTREE:  Show the entire subtree, including body text.
+If there is no subtree, switch directly from CHILDREN to FOLDED.
+
+When point is at the beginning of an empty headline and the variable
+`org-cycle-level-after-item/entry-creation' is set, cycle the level
+of the headline by demoting and promoting it to likely levels.  This
+speeds up creation document structure by pressing `TAB' once or several
+times right after creating a new headline.
+
+When there is a numeric prefix, go up to a heading with level ARG, do
+a `show-subtree' and return to the previous cursor position.  If ARG
+is negative, go up that many levels.
+
+When point is not at the beginning of a headline, execute the global
+binding for `TAB', which is re-indenting the line.  See the option
+`org-cycle-emulate-tab' for details.
+
+As a special case, if point is at the very beginning of the buffer, if
+there is no headline there, and if the variable `org-cycle-global-at-bob'
+is non-nil, this function acts as if called with prefix argument (`\\[universal-argument] TAB',
+same as `S-TAB') also when called without prefix argument.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'org-global-cycle "org" "\
+Cycle the global visibility.  For details see `org-cycle'.
+With `\\[universal-argument]' prefix ARG, switch to startup visibility.
+With a numeric prefix, show all headlines up to that level.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'org-run-like-in-org-mode "org" "\
+Run a command, pretending that the current buffer is in Org mode.
+This will temporarily bind local variables that are typically bound in
+Org mode to the values they have in Org mode, and then interactively
+call CMD.
+
+\(fn CMD)" nil nil)
+
+(autoload 'org-open-file "org" "\
+Open the file at PATH.
+First, this expands any special file name abbreviations.  Then the
+configuration variable `org-file-apps' is checked if it contains an
+entry for this file type, and if yes, the corresponding command is launched.
+
+If no application is found, Emacs simply visits the file.
+
+With optional prefix argument IN-EMACS, Emacs will visit the file.
+With a double \\[universal-argument] \\[universal-argument] prefix arg, Org tries to avoid opening in Emacs
+and to use an external application to visit the file.
+
+Optional LINE specifies a line to go to, optional SEARCH a string
+to search for.  If LINE or SEARCH is given, the file will be
+opened in Emacs, unless an entry from `org-file-apps' that makes
+use of groups in a regexp matches.
+
+If you want to change the way frames are used when following a
+link, please customize `org-link-frame-setup'.
+
+If the file does not exist, throw an error.
+
+\(fn PATH &optional IN-EMACS LINE SEARCH)" nil nil)
+
+(autoload 'org-open-at-point-global "org" "\
+Follow a link or a time-stamp like Org mode does.
+Also follow links and emails as seen by `thing-at-point'.
+This command can be called in any mode to follow an external
+link or a time-stamp that has Org mode syntax.  Its behavior
+is undefined when called on internal links like fuzzy links.
+Raise a user error when there is nothing to follow." t nil)
+
+(autoload 'org-offer-links-in-entry "org" "\
+Offer links in the current entry and return the selected link.
+If there is only one link, return it.
+If NTH is an integer, return the NTH link found.
+If ZERO is a string, check also this string for a link, and if
+there is one, return it.
+
+\(fn BUFFER MARKER &optional NTH ZERO)" nil nil)
+
+(autoload 'org-switchb "org" "\
+Switch between Org buffers.
+
+With `\\[universal-argument]' prefix, restrict available buffers to files.
+
+With `\\[universal-argument] \\[universal-argument]' prefix, restrict available buffers to agenda files.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'org-cycle-agenda-files "org" "\
+Cycle through the files in `org-agenda-files'.
+If the current buffer visits an agenda file, find the next one in the list.
+If the current buffer does not, find the first agenda file." t nil)
+
+(autoload 'org-submit-bug-report "org" "\
+Submit a bug report on Org via mail.
+
+Don't hesitate to report any problems or inaccurate documentation.
+
+If you don't have setup sending mail from (X)Emacs, please copy the
+output buffer into your mail program, as it gives us important
+information about your Org version and configuration." t nil)
+
+(autoload 'org-reload "org" "\
+Reload all Org Lisp files.
+With prefix arg UNCOMPILED, load the uncompiled versions.
+
+\(fn &optional UNCOMPILED)" t nil)
+
+(autoload 'org-customize "org" "\
+Call the customize function with org as argument." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org" '("org-" "turn-on-org-cdlatex")))
+
+
+
+
+(autoload 'org-toggle-sticky-agenda "org-agenda" "\
+Toggle `org-agenda-sticky'.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'org-agenda "org-agenda" "\
+Dispatch agenda commands to collect entries to the agenda buffer.
+Prompts for a command to execute.  Any prefix arg will be passed
+on to the selected command.  The default selections are:
+
+a     Call `org-agenda-list' to display the agenda for current day or week.
+t     Call `org-todo-list' to display the global todo list.
+T     Call `org-todo-list' to display the global todo list, select only
+      entries with a specific TODO keyword (the user gets a prompt).
+m     Call `org-tags-view' to display headlines with tags matching
+      a condition  (the user is prompted for the condition).
+M     Like `m', but select only TODO entries, no ordinary headlines.
+e     Export views to associated files.
+s     Search entries for keywords.
+S     Search entries for keywords, only with TODO keywords.
+/     Multi occur across all agenda files and also files listed
+      in `org-agenda-text-search-extra-files'.
+<     Restrict agenda commands to buffer, subtree, or region.
+      Press several times to get the desired effect.
+>     Remove a previous restriction.
+#     List \"stuck\" projects.
+!     Configure what \"stuck\" means.
+C     Configure custom agenda commands.
+
+More commands can be added by configuring the variable
+`org-agenda-custom-commands'.  In particular, specific tags and TODO keyword
+searches can be pre-defined in this way.
+
+If the current buffer is in Org mode and visiting a file, you can also
+first press `<' once to indicate that the agenda should be temporarily
+\(until the next use of `\\[org-agenda]') restricted to the current file.
+Pressing `<' twice means to restrict to the current subtree or region
+\(if active).
+
+\(fn &optional ARG ORG-KEYS RESTRICTION)" t nil)
+
+(autoload 'org-batch-agenda "org-agenda" "\
+Run an agenda command in batch mode and send the result to STDOUT.
+If CMD-KEY is a string of length 1, it is used as a key in
+`org-agenda-custom-commands' and triggers this command.  If it is a
+longer string it is used as a tags/todo match string.
+Parameters are alternating variable names and values that will be bound
+before running the agenda command.
+
+\(fn CMD-KEY &rest PARAMETERS)" nil t)
+
+(autoload 'org-batch-agenda-csv "org-agenda" "\
+Run an agenda command in batch mode and send the result to STDOUT.
+If CMD-KEY is a string of length 1, it is used as a key in
+`org-agenda-custom-commands' and triggers this command.  If it is a
+longer string it is used as a tags/todo match string.
+Parameters are alternating variable names and values that will be bound
+before running the agenda command.
+
+The output gives a line for each selected agenda item.  Each
+item is a list of comma-separated values, like this:
+
+category,head,type,todo,tags,date,time,extra,priority-l,priority-n
+
+category     The category of the item
+head         The headline, without TODO kwd, TAGS and PRIORITY
+type         The type of the agenda entry, can be
+                todo               selected in TODO match
+                tagsmatch          selected in tags match
+                diary              imported from diary
+                deadline           a deadline on given date
+                scheduled          scheduled on given date
+                timestamp          entry has timestamp on given date
+                closed             entry was closed on given date
+                upcoming-deadline  warning about deadline
+                past-scheduled     forwarded scheduled item
+                block              entry has date block including g. date
+todo         The todo keyword, if any
+tags         All tags including inherited ones, separated by colons
+date         The relevant date, like 2007-2-14
+time         The time, like 15:00-16:50
+extra        String with extra planning info
+priority-l   The priority letter if any was given
+priority-n   The computed numerical priority
+agenda-day   The day in the agenda where this is listed
+
+\(fn CMD-KEY &rest PARAMETERS)" nil t)
+
+(autoload 'org-store-agenda-views "org-agenda" "\
+Store agenda views.
+
+\(fn &rest PARAMETERS)" t nil)
+
+(autoload 'org-batch-store-agenda-views "org-agenda" "\
+Run all custom agenda commands that have a file argument.
+
+\(fn &rest PARAMETERS)" nil t)
+
+(autoload 'org-agenda-list "org-agenda" "\
+Produce a daily/weekly view from all files in variable `org-agenda-files'.
+The view will be for the current day or week, but from the overview buffer
+you will be able to go to other days/weeks.
+
+With a numeric prefix argument in an interactive call, the agenda will
+span ARG days.  Lisp programs should instead specify SPAN to change
+the number of days.  SPAN defaults to `org-agenda-span'.
+
+START-DAY defaults to TODAY, or to the most recent match for the weekday
+given in `org-agenda-start-on-weekday'.
+
+When WITH-HOUR is non-nil, only include scheduled and deadline
+items if they have an hour specification like [h]h:mm.
+
+\(fn &optional ARG START-DAY SPAN WITH-HOUR)" t nil)
+
+(autoload 'org-search-view "org-agenda" "\
+Show all entries that contain a phrase or words or regular expressions.
+
+With optional prefix argument TODO-ONLY, only consider entries that are
+TODO entries.  The argument STRING can be used to pass a default search
+string into this function.  If EDIT-AT is non-nil, it means that the
+user should get a chance to edit this string, with cursor at position
+EDIT-AT.
+
+The search string can be viewed either as a phrase that should be found as
+is, or it can be broken into a number of snippets, each of which must match
+in a Boolean way to select an entry.  The default depends on the variable
+`org-agenda-search-view-always-boolean'.
+Even if this is turned off (the default) you can always switch to
+Boolean search dynamically by preceding the first word with  \"+\" or \"-\".
+
+The default is a direct search of the whole phrase, where each space in
+the search string can expand to an arbitrary amount of whitespace,
+including newlines.
+
+If using a Boolean search, the search string is split on whitespace and
+each snippet is searched separately, with logical AND to select an entry.
+Words prefixed with a minus must *not* occur in the entry.  Words without
+a prefix or prefixed with a plus must occur in the entry.  Matching is
+case-insensitive.  Words are enclosed by word delimiters (i.e. they must
+match whole words, not parts of a word) if
+`org-agenda-search-view-force-full-words' is set (default is nil).
+
+Boolean search snippets enclosed by curly braces are interpreted as
+regular expressions that must or (when preceded with \"-\") must not
+match in the entry.  Snippets enclosed into double quotes will be taken
+as a whole, to include whitespace.
+
+- If the search string starts with an asterisk, search only in headlines.
+- If (possibly after the leading star) the search string starts with an
+  exclamation mark, this also means to look at TODO entries only, an effect
+  that can also be achieved with a prefix argument.
+- If (possibly after star and exclamation mark) the search string starts
+  with a colon, this will mean that the (non-regexp) snippets of the
+  Boolean search must match as full words.
+
+This command searches the agenda files, and in addition the files
+listed in `org-agenda-text-search-extra-files' unless a restriction lock
+is active.
+
+\(fn &optional TODO-ONLY STRING EDIT-AT)" t nil)
+
+(autoload 'org-todo-list "org-agenda" "\
+Show all (not done) TODO entries from all agenda file in a single list.
+The prefix arg can be used to select a specific TODO keyword and limit
+the list to these.  When using `\\[universal-argument]', you will be prompted
+for a keyword.  A numeric prefix directly selects the Nth keyword in
+`org-todo-keywords-1'.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'org-tags-view "org-agenda" "\
+Show all headlines for all `org-agenda-files' matching a TAGS criterion.
+The prefix arg TODO-ONLY limits the search to TODO entries.
+
+\(fn &optional TODO-ONLY MATCH)" t nil)
+
+(autoload 'org-agenda-list-stuck-projects "org-agenda" "\
+Create agenda view for projects that are stuck.
+Stuck projects are project that have no next actions.  For the definitions
+of what a project is and how to check if it stuck, customize the variable
+`org-stuck-projects'.
+
+\(fn &rest IGNORE)" t nil)
+
+(autoload 'org-diary "org-agenda" "\
+Return diary information from org files.
+This function can be used in a \"sexp\" diary entry in the Emacs calendar.
+It accesses org files and extracts information from those files to be
+listed in the diary.  The function accepts arguments specifying what
+items should be listed.  For a list of arguments allowed here, see the
+variable `org-agenda-entry-types'.
+
+The call in the diary file should look like this:
+
+   &%%(org-diary) ~/path/to/some/orgfile.org
+
+Use a separate line for each org file to check.  Or, if you omit the file name,
+all files listed in `org-agenda-files' will be checked automatically:
+
+   &%%(org-diary)
+
+If you don't give any arguments (as in the example above), the default value
+of `org-agenda-entry-types' is used: (:deadline :scheduled :timestamp :sexp).
+So the example above may also be written as
+
+   &%%(org-diary :deadline :timestamp :sexp :scheduled)
+
+The function expects the lisp variables `entry' and `date' to be provided
+by the caller, because this is how the calendar works.  Don't use this
+function from a program - use `org-agenda-get-day-entries' instead.
+
+\(fn &rest ARGS)" nil nil)
+
+(autoload 'org-agenda-check-for-timestamp-as-reason-to-ignore-todo-item "org-agenda" "\
+Do we have a reason to ignore this TODO entry because it has a time stamp?
+
+\(fn &optional END)" nil nil)
+
+(autoload 'org-agenda-set-restriction-lock "org-agenda" "\
+Set restriction lock for agenda to current subtree or file.
+When in a restricted subtree, remove it.
+
+The restriction will span over the entire file if TYPE is `file',
+or if type is '(4), or if the cursor is before the first headline
+in the file. Otherwise, only apply the restriction to the current
+subtree.
+
+\(fn &optional TYPE)" t nil)
+
+(autoload 'org-calendar-goto-agenda "org-agenda" "\
+Compute the Org agenda for the calendar date displayed at the cursor.
+This is a command that has to be installed in `calendar-mode-map'." t nil)
+
+(autoload 'org-agenda-to-appt "org-agenda" "\
+Activate appointments found in `org-agenda-files'.
+
+With a `\\[universal-argument]' prefix, refresh the list of appointments.
+
+If FILTER is t, interactively prompt the user for a regular
+expression, and filter out entries that don't match it.
+
+If FILTER is a string, use this string as a regular expression
+for filtering entries out.
+
+If FILTER is a function, filter out entries against which
+calling the function returns nil.  This function takes one
+argument: an entry from `org-agenda-get-day-entries'.
+
+FILTER can also be an alist with the car of each cell being
+either `headline' or `category'.  For example:
+
+  \\='((headline \"IMPORTANT\")
+    (category \"Work\"))
+
+will only add headlines containing IMPORTANT or headlines
+belonging to the \"Work\" category.
+
+ARGS are symbols indicating what kind of entries to consider.
+By default `org-agenda-to-appt' will use :deadline*, :scheduled*
+\(i.e., deadlines and scheduled items with a hh:mm specification)
+and :timestamp entries.  See the docstring of `org-diary' for
+details and examples.
+
+If an entry has a APPT_WARNTIME property, its value will be used
+to override `appt-message-warning-time'.
+
+\(fn &optional REFRESH FILTER &rest ARGS)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-agenda" '("org-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-archive" '("org-a")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-attach" '("org-attach-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-attach-git" '("org-attach-git-")))
+
+
+
+(autoload 'org-capture-string "org-capture" "\
+Capture STRING with the template selected by KEYS.
+
+\(fn STRING &optional KEYS)" t nil)
+
+(autoload 'org-capture "org-capture" "\
+Capture something.
+\\<org-capture-mode-map>
+This will let you select a template from `org-capture-templates', and
+then file the newly captured information.  The text is immediately
+inserted at the target location, and an indirect buffer is shown where
+you can edit it.  Pressing `\\[org-capture-finalize]' brings you back to the previous
+state of Emacs, so that you can continue your work.
+
+When called interactively with a `\\[universal-argument]' prefix argument GOTO, don't
+capture anything, just go to the file/headline where the selected
+template stores its notes.
+
+With a `\\[universal-argument] \\[universal-argument]' prefix argument, go to the last note stored.
+
+When called with a `C-0' (zero) prefix, insert a template at point.
+
+When called with a `C-1' (one) prefix, force prompting for a date when
+a datetree entry is made.
+
+ELisp programs can set KEYS to a string associated with a template
+in `org-capture-templates'.  In this case, interactive selection
+will be bypassed.
+
+If `org-capture-use-agenda-date' is non-nil, capturing from the
+agenda will use the date at point as the default date.  Then, a
+`C-1' prefix will tell the capture process to use the HH:MM time
+of the day at point (if any) or the current HH:MM time.
+
+\(fn &optional GOTO KEYS)" t nil)
+
+(autoload 'org-capture-import-remember-templates "org-capture" "\
+Set `org-capture-templates' to be similar to `org-remember-templates'." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-capture" '("org-capture-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-clock" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-colview" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-compat" '("org-")))
+
+
+
+(autoload 'org-encrypt-entry "org-crypt" "\
+Encrypt the content of the current headline." t nil)
+
+(autoload 'org-decrypt-entry "org-crypt" "\
+Decrypt the content of the current headline." t nil)
+
+(autoload 'org-encrypt-entries "org-crypt" "\
+Encrypt all top-level entries in the current buffer." t nil)
+
+(autoload 'org-decrypt-entries "org-crypt" "\
+Decrypt all entries in the current buffer." t nil)
+
+(autoload 'org-crypt-use-before-save-magic "org-crypt" "\
+Add a hook to automatically encrypt entries before a file is saved to disk." nil nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-crypt" '("org-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-ctags" '("org-ctags-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-datetree" '("org-datetree-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-duration" '("org-duration-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-element" '("org-element-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-entities" '("org-entit")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-faces" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-feed" '("org-feed-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-footnote" '("org-footnote-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-goto" '("org-goto-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-habit" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-id" '("org-id-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-indent" '("org-indent-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-inlinetask" '("org-inlinetask-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-keys" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-lint" '("org-lint-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-list" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-macro" '("org-macro-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-macs" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-mobile" '("org-mobile-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-mouse" '("org-mouse-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-num" '("org-num-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-pcomplete" '("org-" "pcomplete/org-mode/")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-plot" '("org-plot")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-protocol" '("org-protocol-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-refile" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-src" '("org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-table" '("org")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-tempo" '("org-tempo-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "org-timer" '("org-timer-")))
+
+
+
+(autoload 'org-release "org-version" "\
+The release version of Org.
+Inserted by installing Org mode or when a release is made." nil nil)
+
+(autoload 'org-git-version "org-version" "\
+The Git version of Org mode.
+Inserted by installing Org or when a release is made." nil nil)
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ox" '("org-export-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ox-ascii" '("org-ascii-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ox-beamer" '("org-beamer-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ox-html" '("org-html-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ox-icalendar" '("org-icalendar-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ox-latex" '("org-latex-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ox-man" '("org-man-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ox-md" '("org-md-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ox-odt" '("org-odt-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ox-org" '("org-org-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ox-publish" '("org-publish-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ox-texinfo" '("org-texinfo-")))
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/kv-20140108.1534/kv-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/kv-20140108.1534/kv-autoloads.el") (car load-path))))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "kv" '("dotass" "keyword->symbol" "map-bind")))
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/esxml-20210323.1102/esxml-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/esxml-20210323.1102/esxml-autoloads.el") (car load-path))))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "esxml" '("attr" "esxml-" "pp-esxml-to-xml" "string-trim-whitespace" "sxml-to-" "xml-to-esxml")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "esxml-query" '("esxml-")))
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/nov-20210323.1105/nov-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/nov-20210323.1105/nov-autoloads.el") (car load-path))))
+
+
+
+(autoload 'nov-mode "nov" "\
+Major mode for reading EPUB documents
+
+\(fn)" t nil)
+
+(autoload 'nov-bookmark-jump-handler "nov" "\
+The bookmark handler-function interface for bookmark BMK.
+
+See also `nov-bookmark-make-record'.
+
+\(fn BMK)" nil nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "nov" '("nov-")))
+
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/mwim-20181110.1900/mwim-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/mwim-20181110.1900/mwim-autoloads.el") (car load-path))))
+
+
+ (autoload 'mwim-beginning-of-line-or-code "mwim" nil t)
+ (autoload 'mwim-beginning-of-code-or-line "mwim" nil t)
+ (autoload 'mwim-beginning-of-code-or-line-or-comment "mwim" nil t)
+ (autoload 'mwim-end-of-line-or-code "mwim" nil t)
+ (autoload 'mwim-end-of-code-or-line "mwim" nil t)
+
+(autoload 'mwim-beginning "mwim" "\
+Move point to the next beginning position
+Available positions are defined by `mwim-beginning-position-functions'.
+See `mwim-move-to-next-position' for details.
+Interactively, with prefix argument, move to the previous position.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'mwim-end "mwim" "\
+Move point to the next end position.
+Available positions are defined by `mwim-end-position-functions'.
+See `mwim-move-to-next-position' for details.
+Interactively, with prefix argument, move to the previous position.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'mwim "mwim" "\
+Switch between various positions on the current line.
+Available positions are defined by `mwim-position-functions'
+variable.
+Interactively, with prefix argument, move to the previous position.
+
+\(fn &optional ARG)" t nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "mwim" '("mwim-")))
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/moody-20210522.1100/moody-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/moody-20210522.1100/moody-autoloads.el") (car load-path))))
+
+
+
+(autoload 'moody-replace-mode-line-buffer-identification "moody" "\
+
+
+\(fn &optional REVERSE)" t nil)
+
+(autoload 'moody-replace-sml/mode-line-buffer-identification "moody" "\
+
+
+\(fn &optional REVERSE)" t nil)
+
+(autoload 'moody-replace-vc-mode "moody" "\
+
+
+\(fn &optional REVERSE)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "moody" '("moody-")))
+
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/modus-themes-20210524.1750/modus-themes-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/modus-themes-20210524.1750/modus-themes-autoloads.el") (car load-path))))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "modus-operandi-theme" '("modus-operandi")))
+
+
+
+(autoload 'modus-themes-contrast "modus-themes" "\
+Measure WCAG contrast ratio between C1 and C2.
+C1 and C2 are color values written in hexadecimal RGB.
+
+\(fn C1 C2)" nil nil)
+
+(autoload 'modus-themes-color "modus-themes" "\
+Return color value for COLOR from current palette.
+COLOR is a key in `modus-themes-operandi-colors' or
+`modus-themes-vivendi-colors'.
+
+\(fn COLOR)" nil nil)
+
+(autoload 'modus-themes-color-alts "modus-themes" "\
+Return color value from current palette.
+When Modus Operandi is enabled, return color value for color
+LIGHT-COLOR.  When Modus Vivendi is enabled, return color value
+for DARK-COLOR.  LIGHT-COLOR and DARK-COLOR are keys in
+`modus-themes-operandi-colors' or `modus-themes-vivendi-colors'.
+
+\(fn LIGHT-COLOR DARK-COLOR)" nil nil)
+
+(autoload 'modus-themes-load-themes "modus-themes" "\
+Ensure that the Modus themes are in `custom-enabled-themes'.
+
+This function is intended for use in package declarations such as
+those defined with the help of `use-package'.  The idea is to add
+this function to the `:init' stage of the package's loading, so
+that subsequent calls that assume the presence of a loaded theme,
+like `modus-themes-toggle' or `modus-themes-load-operandi', will
+continue to work as intended even if they are lazy-loaded (such
+as when they are declared in the `:config' phase)." nil nil)
+
+(autoload 'modus-themes-load-operandi "modus-themes" "\
+Load `modus-operandi' and disable `modus-vivendi'.
+Also run `modus-themes-after-load-theme-hook'." nil nil)
+
+(autoload 'modus-themes-load-vivendi "modus-themes" "\
+Load `modus-vivendi' and disable `modus-operandi'.
+Also run `modus-themes-after-load-theme-hook'." nil nil)
+
+(autoload 'modus-themes-toggle "modus-themes" "\
+Toggle between `modus-operandi' and `modus-vivendi' themes.
+Also runs `modus-themes-after-load-theme-hook' at its last stage
+by virtue of calling either of `modus-themes-load-operandi' and
+`modus-themes-load-vivendi' functions." t nil)
+
+(when load-file-name (let ((dir (file-name-directory load-file-name))) (unless (equal dir (expand-file-name "themes/" data-directory)) (add-to-list 'custom-theme-load-path dir))))
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "modus-themes" '("modus-themes-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "modus-vivendi-theme" '("modus-vivendi")))
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/minions-20201204.1051/minions-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/minions-20201204.1051/minions-autoloads.el") (car load-path))))
+
+
+
+(defvar minions-mode nil "\
+Non-nil if Minions mode is enabled.
+See the `minions-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `minions-mode'.")
+
+(custom-autoload 'minions-mode "minions" nil)
+
+(autoload 'minions-mode "minions" "\
+Display a minor-mode menu in the mode line.
+
+If called interactively, enable Minions mode if ARG is positive,
+and disable it if ARG is zero or negative.  If called from Lisp,
+also enable the mode if ARG is omitted or nil, and toggle it if
+ARG is `toggle'; disable the mode otherwise.
+
+This replaces the likely incomplete and possibly cut off list of
+minor-modes that is usually displayed directly in the mode line.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "minions" '("minions-")))
+
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/math-symbol-lists-20200131.2333/math-symbol-lists-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/math-symbol-lists-20200131.2333/math-symbol-lists-autoloads.el") (car load-path))))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "math-symbol-lists" '("math-symbol-list-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "msl-build" '("msl-")))
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/makey-20131231.1430/makey-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/makey-20131231.1430/makey-autoloads.el") (car load-path))))
+
+
+
+(autoload 'makey-initialize-key-groups "makey" "\
+Initializes KEY-GROUP and creates all the relevant interactive commands.
+
+\(fn KEY-GROUP)" nil nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "makey" '("makey-")))
+
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/major-mode-hydra-20210221.834/major-mode-hydra-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/major-mode-hydra-20210221.834/major-mode-hydra-autoloads.el") (car load-path))))
+
+
+
+(autoload 'major-mode-hydra-define "major-mode-hydra" "\
+Generate a major mode hydra for given MODE with given BODY and HEADS-PLIST.
+Overwrite existing hydra if there is one.
+
+MODE can also be a list of modes in which case the same hydras
+are created for all these modes.  Useful in multiple closely
+related major modes.
+
+Refer to `pretty-hydra-define' for documentation about BODY and HEADS-PLIST.
+
+\(fn MODE BODY HEADS-PLIST)" nil t)
+
+(function-put 'major-mode-hydra-define 'lisp-indent-function 'defun)
+
+(autoload 'major-mode-hydra-define+ "major-mode-hydra" "\
+Generate a major mode hydra for given MODE with given BODY and HEADS-PLIST.
+Add new heads if there is already an existing one.
+
+MODE can also be a list of modes in which case the same hydras
+are created for all these modes.  Useful in multiple closely
+related major modes.
+
+Refer to `pretty-hydra-define' for documentation about BODY and HEADS-PLIST.
+
+\(fn MODE BODY HEADS-PLIST)" nil t)
+
+(function-put 'major-mode-hydra-define+ 'lisp-indent-function 'defun)
+
+(autoload 'major-mode-hydra-bind "major-mode-hydra" "\
+Add BINDINGS (heads) for a MODE under the COLUMN.
+
+MODE is the major mode name (symbol).  There is no need to quote it.
+
+COLUMN is a string to put the hydra heads under.
+
+BINDINGS is a list of hydra heads to be added.  Each head has
+exactly the same structure as that in `pretty-hydra-define' or
+`defhydra', except `:exit' is set to t by default.
+
+\(fn MODE COLUMN &rest BINDINGS)" nil t)
+
+(function-put 'major-mode-hydra-bind 'lisp-indent-function '2)
+
+(make-obsolete 'major-mode-hydra-bind 'major-mode-hydra-define+ '"July 2019")
+
+(autoload 'major-mode-hydra "major-mode-hydra" "\
+Show the hydra for the current major mode." t nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "major-mode-hydra" '("major-mode-hydra-")))
+
+
+)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/macrostep-20161120.2106/macrostep-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -9751,17 +9856,6 @@ mode otherwise.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/f-20191110.1357/f-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/f-20191110.1357/f-autoloads.el") (car load-path))))
-
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "f" '("f-")))
-
-
-)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/elisp-refs-20200815.2357/elisp-refs-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -9989,6 +10083,35 @@ enable the mode if ARG is omitted or nil, and toggle it if ARG is
 \(fn &optional ARG)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "gcmh" '("gcmh-")))
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/free-keys-20160726.2050/free-keys-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/free-keys-20160726.2050/free-keys-autoloads.el") (car load-path))))
+
+
+
+(autoload 'free-keys "free-keys" "\
+Display free keys in current buffer.
+
+A free key is a key that has no associated key-binding as
+determined by function `key-binding'.
+
+By default, keys on `free-keys-keys' list with no prefix sequence
+are considered, possibly together with modifier keys from
+`free-keys-modifiers'.  You can change the prefix sequence by
+hitting 'p' in the *Free keys* buffer.  Prefix is supplied in
+format recognized by `kbd', for example \"C-x\".
+
+\(fn &optional PREFIX BUFFER)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "free-keys" '("free-keys-")))
+
+
+
 
 
 )
@@ -10890,6 +11013,174 @@ use either \\[customize] or the function `dtrt-indent-mode'.")
 
 
 )
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/all-the-icons-20210522.1337/all-the-icons-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/all-the-icons-20210522.1337/all-the-icons-autoloads.el") (car load-path))))
+
+
+
+(autoload 'all-the-icons-icon-for-dir "all-the-icons" "\
+Get the formatted icon for DIR.
+ARG-OVERRIDES should be a plist containining `:height',
+`:v-adjust' or `:face' properties like in the normal icon
+inserting functions.
+
+Note: You want chevron, please use `all-the-icons-icon-for-dir-with-chevron'.
+
+\(fn DIR &rest ARG-OVERRIDES)" nil nil)
+
+(autoload 'all-the-icons-icon-for-file "all-the-icons" "\
+Get the formatted icon for FILE.
+ARG-OVERRIDES should be a plist containining `:height',
+`:v-adjust' or `:face' properties like in the normal icon
+inserting functions.
+
+\(fn FILE &rest ARG-OVERRIDES)" nil nil)
+
+(autoload 'all-the-icons-icon-for-mode "all-the-icons" "\
+Get the formatted icon for MODE.
+ARG-OVERRIDES should be a plist containining `:height',
+`:v-adjust' or `:face' properties like in the normal icon
+inserting functions.
+
+\(fn MODE &rest ARG-OVERRIDES)" nil nil)
+
+(autoload 'all-the-icons-icon-for-url "all-the-icons" "\
+Get the formatted icon for URL.
+If an icon for URL isn't found in `all-the-icons-url-alist', a globe is used.
+ARG-OVERRIDES should be a plist containining `:height',
+`:v-adjust' or `:face' properties like in the normal icon
+inserting functions.
+
+\(fn URL &rest ARG-OVERRIDES)" nil nil)
+
+(autoload 'all-the-icons-install-fonts "all-the-icons" "\
+Helper function to download and install the latests fonts based on OS.
+When PFX is non-nil, ignore the prompt and just install
+
+\(fn &optional PFX)" t nil)
+
+(autoload 'all-the-icons-insert "all-the-icons" "\
+Interactive icon insertion function.
+When Prefix ARG is non-nil, insert the propertized icon.
+When FAMILY is non-nil, limit the candidates to the icon set matching it.
+
+\(fn &optional ARG FAMILY)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "all-the-icons" '("all-the-icons-")))
+
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/doom-modeline-20210527.840/doom-modeline-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/doom-modeline-20210527.840/doom-modeline-autoloads.el") (car load-path))))
+
+
+
+(autoload 'doom-modeline-init "doom-modeline" "\
+Initialize doom mode-line." nil nil)
+
+(autoload 'doom-modeline-set-main-modeline "doom-modeline" "\
+Set main mode-line.
+If DEFAULT is non-nil, set the default mode-line for all buffers.
+
+\(fn &optional DEFAULT)" nil nil)
+
+(autoload 'doom-modeline-set-minimal-modeline "doom-modeline" "\
+Set minimal mode-line." nil nil)
+
+(autoload 'doom-modeline-set-special-modeline "doom-modeline" "\
+Set special mode-line." nil nil)
+
+(autoload 'doom-modeline-set-project-modeline "doom-modeline" "\
+Set project mode-line." nil nil)
+
+(autoload 'doom-modeline-set-dashboard-modeline "doom-modeline" "\
+Set dashboard mode-line." nil nil)
+
+(autoload 'doom-modeline-set-vcs-modeline "doom-modeline" "\
+Set vcs mode-line." nil nil)
+
+(autoload 'doom-modeline-set-info-modeline "doom-modeline" "\
+Set Info mode-line." nil nil)
+
+(autoload 'doom-modeline-set-package-modeline "doom-modeline" "\
+Set package mode-line." nil nil)
+
+(autoload 'doom-modeline-set-media-modeline "doom-modeline" "\
+Set media mode-line." nil nil)
+
+(autoload 'doom-modeline-set-message-modeline "doom-modeline" "\
+Set message mode-line." nil nil)
+
+(autoload 'doom-modeline-set-pdf-modeline "doom-modeline" "\
+Set pdf mode-line." nil nil)
+
+(autoload 'doom-modeline-set-org-src-modeline "doom-modeline" "\
+Set org-src mode-line." nil nil)
+
+(autoload 'doom-modeline-set-helm-modeline "doom-modeline" "\
+Set helm mode-line.
+
+\(fn &rest _)" nil nil)
+
+(autoload 'doom-modeline-set-timemachine-modeline "doom-modeline" "\
+Set timemachine mode-line." nil nil)
+
+(defvar doom-modeline-mode nil "\
+Non-nil if Doom-Modeline mode is enabled.
+See the `doom-modeline-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `doom-modeline-mode'.")
+
+(custom-autoload 'doom-modeline-mode "doom-modeline" nil)
+
+(autoload 'doom-modeline-mode "doom-modeline" "\
+Toggle doom-modeline on or off.
+
+If called interactively, enable Doom-Modeline mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "doom-modeline" '("doom-modeline-mode-map")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "doom-modeline-core" '("doom-modeline")))
+
+
+ (autoload 'doom-modeline-env-setup-python "doom-modeline-env")
+ (autoload 'doom-modeline-env-setup-ruby "doom-modeline-env")
+ (autoload 'doom-modeline-env-setup-perl "doom-modeline-env")
+ (autoload 'doom-modeline-env-setup-go "doom-modeline-env")
+ (autoload 'doom-modeline-env-setup-elixir "doom-modeline-env")
+ (autoload 'doom-modeline-env-setup-rust "doom-modeline-env")
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "doom-modeline-env" '("doom-modeline-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "doom-modeline-segments" '("doom-modeline-")))
+
+
+
+
+)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/discover-my-major-20180606.511/discover-my-major-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -11735,6 +12026,56 @@ shadow backends that come after it.  Recommended usages:
 
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-yasnippet" '("company-yasnippet-")))
+
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/company-quickhelp-20210515.2212/company-quickhelp-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/company-quickhelp-20210515.2212/company-quickhelp-autoloads.el") (car load-path))))
+
+
+
+(autoload 'company-quickhelp-local-mode "company-quickhelp" "\
+Provides documentation popups for `company-mode' using `pos-tip'.
+
+If called interactively, enable Company-Quickhelp-Local mode if
+ARG is positive, and disable it if ARG is zero or negative.
+If called from Lisp, also enable the mode if ARG is omitted or
+nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+(put 'company-quickhelp-mode 'globalized-minor-mode t)
+
+(defvar company-quickhelp-mode nil "\
+Non-nil if Company-Quickhelp mode is enabled.
+See the `company-quickhelp-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `company-quickhelp-mode'.")
+
+(custom-autoload 'company-quickhelp-mode "company-quickhelp" nil)
+
+(autoload 'company-quickhelp-mode "company-quickhelp" "\
+Toggle Company-Quickhelp-Local mode in all buffers.
+With prefix ARG, enable Company-Quickhelp mode if ARG is positive;
+otherwise, disable it.  If called from Lisp, enable the mode if
+ARG is omitted or nil.
+
+Company-Quickhelp-Local mode is enabled in all buffers where
+`company-quickhelp-local-mode' would do it.
+See `company-quickhelp-local-mode' for more information on Company-Quickhelp-Local mode.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "company-quickhelp" '("company-quickhelp-")))
 
 
 
@@ -13059,69 +13400,6 @@ provided.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/all-the-icons-20210522.1337/all-the-icons-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/all-the-icons-20210522.1337/all-the-icons-autoloads.el") (car load-path))))
-
-
-
-(autoload 'all-the-icons-icon-for-dir "all-the-icons" "\
-Get the formatted icon for DIR.
-ARG-OVERRIDES should be a plist containining `:height',
-`:v-adjust' or `:face' properties like in the normal icon
-inserting functions.
-
-Note: You want chevron, please use `all-the-icons-icon-for-dir-with-chevron'.
-
-\(fn DIR &rest ARG-OVERRIDES)" nil nil)
-
-(autoload 'all-the-icons-icon-for-file "all-the-icons" "\
-Get the formatted icon for FILE.
-ARG-OVERRIDES should be a plist containining `:height',
-`:v-adjust' or `:face' properties like in the normal icon
-inserting functions.
-
-\(fn FILE &rest ARG-OVERRIDES)" nil nil)
-
-(autoload 'all-the-icons-icon-for-mode "all-the-icons" "\
-Get the formatted icon for MODE.
-ARG-OVERRIDES should be a plist containining `:height',
-`:v-adjust' or `:face' properties like in the normal icon
-inserting functions.
-
-\(fn MODE &rest ARG-OVERRIDES)" nil nil)
-
-(autoload 'all-the-icons-icon-for-url "all-the-icons" "\
-Get the formatted icon for URL.
-If an icon for URL isn't found in `all-the-icons-url-alist', a globe is used.
-ARG-OVERRIDES should be a plist containining `:height',
-`:v-adjust' or `:face' properties like in the normal icon
-inserting functions.
-
-\(fn URL &rest ARG-OVERRIDES)" nil nil)
-
-(autoload 'all-the-icons-install-fonts "all-the-icons" "\
-Helper function to download and install the latests fonts based on OS.
-When PFX is non-nil, ignore the prompt and just install
-
-\(fn &optional PFX)" t nil)
-
-(autoload 'all-the-icons-insert "all-the-icons" "\
-Interactive icon insertion function.
-When Prefix ARG is non-nil, insert the propertized icon.
-When FAMILY is non-nil, limit the candidates to the icon set matching it.
-
-\(fn &optional ARG FAMILY)" t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "all-the-icons" '("all-the-icons-")))
-
-
-
-
-
-)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/aggressive-indent-20200824.2352/aggressive-indent-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -13191,14 +13469,14 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
 )
 (setq package-activated-list
 	  (append
-	   '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra epl pkg-info projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile treemacs-icons-dired transient transient-posframe toc-org ivy swiper spinner sml-mode smartparens rainbow-delimiters pos-tip racket-mode python-mode pretty-hydra prescient persistent-scratch paredit paradox outorg outshine org-bullets org kv esxml nov mwim modus-themes math-symbol-lists makey major-mode-hydra git-commit magit macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides f elisp-refs helpful hardhat git-timemachine gcmh flycheck fish-mode fira-code-mode expand-region eval-in-repl eros elmacro dtrt-indent discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep company company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-theme cmake-mode cask-mode beacon amx all-the-icons aggressive-indent)
+	   '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra epl pkg-info projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit treemacs-magit treemacs-icons-dired transient-posframe toc-org ivy swiper spinner sml-mode smartparens f shrink-path rainbow-delimiters pos-tip racket-mode python-mode pretty-hydra prescient persistent-scratch paredit paradox outorg outshine org-bullets org kv esxml nov mwim moody modus-themes minions math-symbol-lists makey major-mode-hydra macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine gcmh free-keys flycheck fish-mode fira-code-mode expand-region eval-in-repl eros elmacro dtrt-indent all-the-icons doom-modeline discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-theme cmake-mode cask-mode beacon amx aggressive-indent)
 	   package-activated-list))
 (progn
   (require 'info)
   (info-initialize)
   (setq Info-directory-list
 		(append
-		 '("/Users/mark/.emacs.d/elpa/27.2/elpa/magit-20210524.1513" "/Users/mark/.emacs.d/elpa/27.2/elpa/modus-themes-20210524.1750" "/Users/mark/.emacs.d/elpa/27.2/elpa/org-9.4.6" "/Users/mark/.emacs.d/elpa/27.2/elpa/racket-mode-20210524.1655" "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-20210518.1815" "/Users/mark/.emacs.d/elpa/27.2/elpa/transient-20210426.2141" "/Users/mark/.emacs.d/elpa/27.2/elpa/dash-20210330.1544" "/Users/mark/.emacs.d/elpa/27.2/elpa/use-package-20210207.1926" "/Users/mark/.emacs.d/elpa/27.2/elpa/with-editor-20210427.1244")
+		 '("/Users/mark/.emacs.d/elpa/27.2/elpa/modus-themes-20210524.1750" "/Users/mark/.emacs.d/elpa/27.2/elpa/org-9.4.6" "/Users/mark/.emacs.d/elpa/27.2/elpa/racket-mode-20210524.1655" "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-20210518.1815" "/Users/mark/.emacs.d/elpa/27.2/elpa/magit-20210524.1513" "/Users/mark/.emacs.d/elpa/27.2/elpa/transient-20210426.2141" "/Users/mark/.emacs.d/elpa/27.2/elpa/dash-20210330.1544" "/Users/mark/.emacs.d/elpa/27.2/elpa/use-package-20210207.1926" "/Users/mark/.emacs.d/elpa/27.2/elpa/with-editor-20210427.1244")
 		 Info-directory-list)))
 
 ;; Local Variables:

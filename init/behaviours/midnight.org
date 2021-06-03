@@ -21,11 +21,11 @@ midnight-mode purges buffers which haven’t been displayed in 3 days.
   (message "config midnight")
   (midnight-delay-set 'midnight-delay "06:15")
   (defun add-to-clean-buffer-regex (str)
-    (add-to-list 'clean-buffer-list-kill-regexps
-                 (rx-to-string `(seq line-start "*" ,str " "))))
+	(add-to-list 'clean-buffer-list-kill-regexps
+				 (rx-to-string `(seq line-start "*" ,str " "))))
   (add-to-clean-buffer-regex "deadgrep")
   (add-to-clean-buffer-regex "helpful")
   (midnight-mode 1)
-  (add-hook 'midnight-hook  'garbage-collect 99) ;; at end
+  (add-hook 'midnight-hook 'garbage-collect 99) ;; at end
   )
 #+end_src

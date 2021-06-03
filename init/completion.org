@@ -8,7 +8,7 @@ This is completion for text in buffer
 :END:
 This looks at the current code and prompts for variables etc
 I need something and company seems to be the current one.
-Understandin the order is a bit confusing and this [[https://emacs.stackexchange.com/a/15251/9874][Stackexchnage]] answer helps. Basically test one at a time. 9it really helps to read especially at the end.
+Understanding the order is a bit confusing and this [[https://emacs.stackexchange.com/a/15251/9874][Stackexchnage]] answer helps. Basically test one at a time. 9it really helps to read especially at the end.
 After use in racket I am not sure with helps in code
 Add some from jweigley
 ** Company
@@ -120,7 +120,21 @@ Merging `company-yasnippet' to `company-capf' will yield
 	(merge-backend-with-company-backends 'company-yasnippet)
 	(merge-backend-with-company-backends 'company-dabbrev-code)))
 #+end_src
-
+** Help
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210601T123210.332921
+:END:
+Add company help
+#+NAME: org_mark_mini20.local_20210601T123210.313241
+#+begin_src emacs-lisp
+(use-package company-quickhelp
+  :ensure t
+  :init
+  (setq company-quickhelp-use-propertized-text t)
+  (setq company-quickhelp-delay 1)
+  :config
+  (company-quickhelp-mode 1))
+#+end_src
 * Text expansion
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:15548A48-9E39-4C39-9010-C4B94096DA80

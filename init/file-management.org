@@ -447,63 +447,70 @@ This is the visual tree to manage files etc
  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_55CB1D47-BC33-40F8-BC2A-12D014C6B18D
  #+begin_src emacs-lisp
 (use-package treemacs
-    :ensure t
-    :init
-    (with-eval-after-load 'winum
-      (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
-    (setq treemacs-width 50)
-    :commands (treemacs)
-    :config
+  ;; :ensure t
+  :mwb-load-path "fork/treemacs"
+  :init
+  (with-eval-after-load 'winum
+    (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
+  (setq treemacs-width 50)
+  :commands (treemacs)
+  :config
 
-    (setq hydra-key-regex "\\[\\|]\\|[-\\[:alnum:] ~.,;:/|?<>={}*+#%@!&^⇧⌘⌥↑↓←→⌫⌦⏎'`()\"$]+?") ; add Mac key symbols
+  (setq hydra-key-regex "\\[\\|]\\|[-\\[:alnum:] ~.,;:/|?<>={}*+#%@!&^⇧⌘⌥↑↓←→⌫⌦⏎'`()\"$]+?") ; add Mac key symbols
 
-    (setq treemacs-silent-refresh t
-          treemacs-persist-file (mwb-user-emacs-file "data/treemacs-persist"))
-    (with-eval-after-load 'treemacs
-      (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?))
+  (setq treemacs-silent-refresh t
+        treemacs-persist-file (mwb-user-emacs-file "data/treemacs-persist"))
+  (with-eval-after-load 'treemacs
+    (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?))
 
-    ;; The default width and height of the icons is 22 pixels. If you are
-    ;; using a Hi-DPI display, uncomment this to double the icon size.
-    ;;(treemacs-resize-icons 44)
+  ;; The default width and height of the icons is 22 pixels. If you are
+  ;; using a Hi-DPI display, uncomment this to double the icon size.
+  ;;(treemacs-resize-icons 44)
 
-    (treemacs-follow-mode t)
-    (setq treemacs-silent-filewatch t)
-    (treemacs-filewatch-mode t)
-    (treemacs-fringe-indicator-mode t)
-    (pcase (cons (not (null (executable-find "git")))
-                 (not (null treemacs-python-executable )))
-      (`(t . t)
-        (treemacs-git-mode 'deferred))
-      (`(t . _)
-        (treemacs-git-mode 'simple)))
-    :mode-hydra
-    (treemacs-mode
-     ("Project"
-      (
-       ;; ("p" matcha-projectile/body "Projectile")
-       ("c" treemacs-add-project-to-workspace "Create Project")
-       ("d" treemacs-remove-project-from-workspace "Delete Project")
-       )
-      "Workspace"
-      (("s" treemacs-switch-workspace "Switch" )
-       ("e" treemacs-edit-workspaces "Edit" ))
-      "Width"
-      (("w" treemacs-toggle-fixed-width "Toggle variable width" ))))
+  (treemacs-follow-mode t)
+  (setq treemacs-silent-filewatch t)
+  (treemacs-filewatch-mode t)
+  (treemacs-fringe-indicator-mode t)
+  (pcase (cons (not (null (executable-find "git")))
+               (not (null treemacs-python-executable )))
+    (`(t . t)
+     (treemacs-git-mode 'deferred))
+    (`(t . _)
+     (treemacs-git-mode 'simple)))
+  :mode-hydra
+  (treemacs-mode
+   ("Project"
+    (
+     ;; ("p" matcha-projectile/body "Projectile")
+     ("c" treemacs-add-project-to-workspace "Create Project")
+     ("d" treemacs-remove-project-from-workspace "Delete Project")
+     )
+	"All"
+	(("h"  treemacs--common-helpful-hydra/body "Hydra.."))
+    "Workspace"
+    (("s" treemacs-switch-workspace "Switch" )
+     ("e" treemacs-edit-workspaces "Edit" ))
+    "Width"
+    (("w" treemacs-toggle-fixed-width "Toggle variable width" ))))
 
-    :bind ( :map treemacs-mode-map
-                 ("<mouse-5>" . treemacs-rightclick-menu)
-                 ("<mouse-4>" . treemacs-rightclick-menu)
-                 ("<f5>" . treemacs-switch-workspace)
-                 ("<C-f5>" . treemacs-edit-workspaces)))
+  :bind ( :map treemacs-mode-map
+               ("<mouse-5>" . treemacs-rightclick-menu)
+               ("<mouse-4>" . treemacs-rightclick-menu)
+               ("<f5>" . treemacs-switch-workspace)
+               ("<C-f5>" . treemacs-edit-workspaces)))
 
- (use-package treemacs-projectile
-   :after treemacs projectile
-   :ensure t)
+(use-package treemacs-projectile
+  :mwb-load-path "fork/treemacs"
+  :after treemacs projectile
+  ;; :ensure t
+  )
 
 (use-package treemacs-magit
-  :disabled                             ; Emacs 27 did not like this
+  :mwb-load-path "fork/treemacs"
+  ;; :disabled                             ; Emacs 27 did not like this
   :after treemacs magit
-  :ensure t)
+  ;; :ensure t
+  )
   #+end_src
 *** Debug
 :PROPERTIES:

@@ -46,7 +46,7 @@ jerry pnz as it uses all-the icons - OK but need to do a bit more. Right hand go
 centaur for fuller use of doom-modeline and minions
 
 Current best jerry pnz + minions + get segments from doom-modeline. The reason is that I want to alter things depending on mode. Or doom-modeline if I can get the constructor in public
-
+Another issue with frameworks is that mode specific stuff has to be in the segments not in the construction of the header (This is really a framework) - well excpt for the repitious lists.
 
 * Packages
 :PROPERTIES:
@@ -261,7 +261,7 @@ Needs Moody. I also removed some
   (jp-modeline-activate)
   )
 #+end_src
-* Centaur setup
+* Centaur setup/ a configured Doom
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210602T224030.562027
 :END:
@@ -271,7 +271,10 @@ TODO Racket xp add to flycheck
 TODO Set line and column - in plain mode-line?
 TODO Lispy in modal
 TODO Hardhat as part of read only
-
+** Doom setup
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210605T225204.595400
+:END:
 #+NAME: org_mark_mini20.local_20210602T224030.553632
 #+begin_src emacs-lisp
 (use-package doom-modeline
@@ -318,7 +321,7 @@ TODO Hardhat as part of read only
   (setq doom-modeline-env-load-string "...")
 
 
-  :hook (after-init . doom-modeline-mode)
+  :hook (after-init . mwb-headline-mode)
   :init
   ;; Prevent flash of unstyled modeline at startup
   (unless after-init-time
@@ -327,7 +330,7 @@ TODO Hardhat as part of read only
   :bind (:map doom-modeline-mode-map
 			  ("C-<f6>" . doom-modeline-hydra/body)))
 #+end_src
-*** Hydra
+** Hydra
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210603T094224.182401
 :END:
@@ -451,4 +454,103 @@ Separate out so org file is easier to read
 	("z w" (counsel-read-setq-expression 'doom-modeline-bar-width) "set bar width")
 	("z g" (counsel-read-setq-expression 'doom-modeline-github-interval) "set github interval")
 	("z n" (counsel-read-setq-expression 'doom-modeline-gnus-timer) "set gnus interval"))))
+#+end_src
+** Headline
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210605T225204.594420
+:END:
+Doom-modeline is a framework and not easy to reconfigure so do in a hook when the mode changes
+*** Wrapper
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210605T225204.593417
+:END:
+To control when loaded
+#+NAME: org_mark_mini20.local_20210605T225204.571319
+#+begin_src emacs-lisp
+(with-eval-after-load 'doom-modeline
+  <<doom-modeline-config>>
+  )
+#+end_src
+*** Support functions
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210605T225204.592204
+:header-args:    :noweb-ref doom-modeline-config
+:END:
+Basically headline versions of modeline ones.
+We will use badly name modline in may cases but some have mode-line hard coded
+**** Set the headline
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210605T230128.789333
+:END:
+
+
+
+
+#+NAME: org_mark_mini20.local_20210605T230128.769614
+#+begin_src emacs-lisp
+(defun mwb-headline-set-headline (key &optional default)
+  "Set the headline format. Does nothing if the modeline KEY doesn't exist.
+If DEFAULT is non-nil, set the default mode-line for all buffers."
+  (when-let ((modeline (doom-modeline key)))
+    (setf (if default
+              (default-value 'header-line-format)
+            (buffer-local-value 'header-line-format (current-buffer)))
+          (list "%e" modeline))))
+#+end_src
+**** Set the  headline by key
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210605T231939.477073
+:END:
+Need separate functions that can be called in hooks etc
+#+NAME: org_mark_mini20.local_20210605T231939.448911
+#+begin_src emacs-lisp
+(defun mwb-headline-set-main-headline (&optional default)
+  "Set main header-line.
+If DEFAULT is non-nil, set the default header-line for all buffers."
+  (mwb-headline-set-headline 'main-headline default))
+#+end_src
+**** Set the fields in the header
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210605T231939.474664
+:END:
+Need sets of fields for special cases
+#+NAME: org_mark_mini20.local_20210605T231939.449934
+#+begin_src emacs-lisp
+(doom-modeline-def-modeline 'main-headline
+  '(bar major-mode modals  buffer-position selection-info)
+  '(minor-modes  process checker))
+#+end_src
+**** Create the mode
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210605T234647.542654
+:END:
+Best way to turn off and on seems to be create a mode that turns doom-modeline-mode off and on.
+#+NAME: org_mark_mini20.local_20210605T234647.521270
+#+begin_src emacs-lisp
+(define-minor-mode mwb-headline-mode
+  "Toggle headline on or off"
+  :group 'mwb-headline
+  :global t
+  :lighter nil
+  ;; :keymap mwb-headline-mode-map
+  (if mwb-headline-mode
+	  (progn
+		(doom-modeline-mode 1)
+
+		(mwb-headline-set-main-headline t) ; set default
+
+        ;; Apply to all existing buffers.
+        (dolist (buf (buffer-list))
+          (with-current-buffer buf
+            (mwb-headline-set-main-headline)))
+
+		;;  hooks for special cases
+		)
+	;; Restore mode-line
+    (let ((original-format (doom-modeline--original-value 'header-line-format)))
+      (setq-default header-line-format original-format)
+      (dolist (buf (buffer-list))
+        (with-current-buffer buf
+          (setq header-line-format original-format)))))
+  )
 #+end_src

@@ -6,8 +6,7 @@
  '(gnus-article-skip-boring t)
  '(gnus-directory "~/Library/Preferences/Aquamacs Emacs/News")
  '(gnus-group-sort-function
-   '(gnus-group-sort-by-level)
-   t)
+   '(gnus-group-sort-by-level))
  '(gnus-home-directory "~/.emacs.d/var/gnus")
  '(gnus-interactive-exit nil)
  '(gnus-posting-styles

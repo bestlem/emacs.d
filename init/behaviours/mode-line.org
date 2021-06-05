@@ -5,31 +5,52 @@
 #+PROPERTY:header-args :cache yes :tangle yes :comments noweb
 #+STARTUP: overview
 
+* Overview
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210604T101559.873281
+:END:
 There are several ways see
+
+** Possibilities
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210604T101559.872240
+:END:
 
 [[https://github.com/domtronn/all-the-icons.el/wiki/Mode-Line][All the icons]] has icons but example code is broken and incomplete
 
-[[https://www.manueluberti.eu/emacs/2018/03/10/moody-and-minions/][Uberti]] for a comment on smartline aand powerline - I might  this first due to use of minions. then discovered smart-mode-line also has similar rich-minority-mode
+[[https://www.manueluberti.eu/emacs/2018/03/10/moody-and-minions/][Uberti]] for a comment on smartline aand powerline - I might  this first due to use of minions. then discovered smart-mode-line also has similar rich-minority-mode well not quite. Minion is sort of needed
 
-[[https://github.com/Malabarba/smart-mode-line/][Smart Mode Line]] the one that seems to have a fuller set of builders
+[[https://github.com/Malabarba/smart-mode-line/][Smart Mode Line]] the one that seems to have a fuller set of builders - well not so much
+
+doom-modeline seems to be the best to start especially via centaur but difficult to add another segment.
+It makes the usual issue with frameworks. Once you need a small change it is difficult. e.g. look up by mode is all partiiallyn hard coded as it is a look up by mode - not a case statement so I can't add a rule e.g. for lisp. I effectively wantr to edit the totp level but that is hidden.
+
+
+So minions is needed and is the main issue that I had - all the minor mode info I do not need to see.
 
 From my collection of init see
 
-leuven for a setup possibly using pwerline
+leuven for a setup possibly using powerline
 greghendershott  for a seemingly simple one
 howardabrams for a powerline  and a smart-mode-line
 jerrypnz for complex but lead to  http://amitp.blogspot.co.nz/2011/08/emacs-custom-mode-line.html and then https://gist.github.com/redblobgames/5d9cf891120028440a4bdb429f101de6
 kaushalmodi as author of smart mode line
 
+** Attempts
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210604T101559.870927
+:END:
 So try
-all-the-icons - it is incomlete
-jerry pnz as it uses all-the icons - OK but need to do a bit more.
+all-the-icons - it is incomplete
+jerry pnz as it uses all-the icons - OK but need to do a bit more. Right hand goes off end
 centaur for fuller use of doom-modeline and minions
+
+Current best jerry pnz + minions + get segments from doom-modeline. The reason is that I want to alter things depending on mode. Or doom-modeline if I can get the constructor in public
 
 
 * Packages
 :PROPERTIES:
-:ID:       org_mark_mini20.local:20210602T212500.391684
+:ID:       org_mark_mini20o.local:20210602T212500.391684
 :END:
 
 **[[https://github.com/tarsius/moody][Moody]]
@@ -45,6 +66,16 @@ centaur for fuller use of doom-modeline and minions
 #+end_src
 
 
+** Minions
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210602T224030.560968
+:END:
+#+NAME: org_mark_mini20.local_20210602T224030.555025
+#+begin_src emacs-lisp
+(use-package minions
+  :ensure t
+  :hook (doom-modeline-mode . minions-mode))
+#+end_src
 * All the icons setup - not tangled
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210601T223826.692851
@@ -420,14 +451,4 @@ Separate out so org file is easier to read
 	("z w" (counsel-read-setq-expression 'doom-modeline-bar-width) "set bar width")
 	("z g" (counsel-read-setq-expression 'doom-modeline-github-interval) "set github interval")
 	("z n" (counsel-read-setq-expression 'doom-modeline-gnus-timer) "set gnus interval"))))
-#+end_src
-** Minions
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20210602T224030.560968
-:END:
-#+NAME: org_mark_mini20.local_20210602T224030.555025
-#+begin_src emacs-lisp
-(use-package minions
-  :ensure t
-  :hook (doom-modeline-mode . minions-mode))
 #+end_src

@@ -116,6 +116,18 @@ Comes from gnus setup
 (defun turn-off-backup-for-current-buffer ()
   (set (make-local-variable 'backup-inhibited) t))
 #+end_src
+** Look at backups
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210605T200354.655882
+:END:
+This is [[https://github.com/lewang/backup-walker][Backup Walker]]
+
+#+NAME: org_mark_mini20.local_20210605T200354.625130
+#+begin_src emacs-lisp
+(use-package backup-walker
+  :mwb-load-path "fork/backup-walker"
+  :commands backup-walker-start)
+  #+end_src
 ** Super save
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210120T104054.760044

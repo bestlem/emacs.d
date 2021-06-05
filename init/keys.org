@@ -646,12 +646,13 @@ Odd things needed
     (")" delete-window "Delete Window")
     ("|"  split-window-right "horizontally")
     )
-   "Current window"
+   "Current buffer"
    (("l" linum-mode "line number" :toggle t)
     ("c" (what-cursor-position 'detail) "Character at POS")
     ("TAB" hs-mwb-show-one-level "show one level")
     ("C-<tab>" hs-toggle-hiding "Toggle hide-show")
 	("f" refill-mode "Auto refill mode ")
+	("r" backup-walker-start "Backup Walker" )
     )
    "Actions"
    (("D" toggle-debug-on-error "debug on error" :toggle (default-value 'debug-on-error))

@@ -184,6 +184,10 @@ Add more based on [[https://github.com/seagle0128/.emacs.d][Centaur Emacs]]
   (>= emacs-major-version 27)
   "Emacs is 27 or above.")
 
+(defconst *emacs/>=28p*
+  (>= emacs-major-version 28)
+  "Emacs is 28 or above.")
+
 ;;  well this is true for all installed one
 (defconst *emacs/>=25.3p*
   (or *emacs/>=26p*

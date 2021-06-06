@@ -124,13 +124,14 @@ Let's use [[https://github.com/Wilfred/helpful][Helpful]]
   (counsel-describe-function-function #'helpful-callable)
   (counsel-describe-variable-function #'helpful-variable)
   :bind
-  ([remap describe-function] . helpful-callable)
+  ;; ([remap describe-function] . helpful-callable)
   ([remap describe-command] . helpful-command)
-  ([remap describe-variable] . helpful-variable)
+  ;; ([remap describe-variable] . helpful-variable)
   ([remap describe-key] . helpful-key)
-  ("<f1> F" . helpful-function)
-  ("<f1> ." . helpful-at-point)
-  ("<f1> <f1>" . helpful-at-point))
+  ;; ("<f1> F" . helpful-function)
+  ;; ("<f1> ." . helpful-at-point)
+  ;; ("<f1> <f1>" . helpful-at-point)
+  )
 #+end_src
 ** Improve majors
 :PROPERTIES:

@@ -67,6 +67,8 @@ Don't use the defaults look at the file
 (use-package dtrt-indent
   :ensure t
   :diminish
+  :init
+  (setq dtrt-indent-run-after-smie t) ;; Run even if SMIE is active
   :hook (prog-mode . dtrt-indent-mode))
 #+end_src
 *** Guess Style

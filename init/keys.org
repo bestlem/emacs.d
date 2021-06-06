@@ -30,6 +30,7 @@
   - [[#file-actions][File actions]]
   - [[#buffer-related][Buffer related]]
   - [[#goto][Goto]]
+  - [[#help][Help]]
 - [[#single-key-bindings][Single key bindings]]
   - [[#function-keys][Function keys]]
   - [[#hyper-key-bindings][Hyper key bindings]]
@@ -42,6 +43,7 @@
   - [[#hydra-transpose][Hydra transpose]]
   - [[#kitchin-hydras][Kitchin hydras]]
   - [[#toggle-treemode-as-needed-often][Toggle treemode as needed often]]
+- [[#freekeys][FreeKeys]]
 
 * Global key bindings musings
 :PROPERTIES:
@@ -409,6 +411,33 @@ This is the override of save etc to the mode maps
 #+begin_src emacs-lisp
 (bind-key "M-g" 'goto-line)             ; one of the oldest binds
 #+end_src
+** Help
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210601T121908.363715
+:END:
+This got confusing as both counsel and helpful change things. So move all here.
+#+NAME: org_mark_mini20.local_20210601T121908.338748
+#+begin_src emacs-lisp
+(bind-keys :map help-map
+		   ("f" . counsel-describe-function)
+		   ("v" . counsel-describe-variable)
+		   ("l" . counsel-find-library)
+
+		   ("." . helpful-at-point)
+		   ("<f1>" . helpful-at-point)
+		   ([remap describe-key] . helpful-key)
+
+		   ("c" . describe-char)
+
+		   ;; hemacs
+		   ;; ("g" . google-this)
+		   ("K" . free-keys)
+		   ;;  ("f" . flymake-show-diagnostics-buffer)
+		   )
+#+end_src
+
+
+
 * Single key bindings
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:7A9AB89E-F4F2-4508-8FD9-FCB30C5AE861
@@ -617,12 +646,13 @@ Odd things needed
     (")" delete-window "Delete Window")
     ("|"  split-window-right "horizontally")
     )
-   "Current window"
+   "Current buffer"
    (("l" linum-mode "line number" :toggle t)
     ("c" (what-cursor-position 'detail) "Character at POS")
     ("TAB" hs-mwb-show-one-level "show one level")
     ("C-<tab>" hs-toggle-hiding "Toggle hide-show")
 	("f" refill-mode "Auto refill mode ")
+	("r" backup-walker-start "Backup Walker" )
     )
    "Actions"
    (("D" toggle-debug-on-error "debug on error" :toggle (default-value 'debug-on-error))
@@ -779,4 +809,15 @@ _<_ beginning of buffer _>_ end of buffer _m_: set mark _/_: jump to mark
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_B45876F9-F64F-46A1-A3A9-5727BFAB647C
 #+begin_src emacs-lisp
 (bind-key "A-M-t" 'treemacs)
+#+end_src
+* FreeKeys
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210601T161324.978840
+:END:
+Show unused keys from https://github.com/Fuco1/free-keys
+#+NAME: org_mark_mini20.local_20210601T161324.957225
+#+begin_src emacs-lisp
+(use-package free-keys
+  :ensure t
+  :commands free-keys)
 #+end_src

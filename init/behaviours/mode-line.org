@@ -64,6 +64,7 @@ Another issue with frameworks is that mode specific stuff has to be in the segme
 #+begin_src emacs-lisp
 (use-package moody
   :ensure t
+  :disabled
   :config
   (setq x-underline-at-descent-line t)
   ;; (moody-replace-mode-line-buffer-identification)
@@ -273,10 +274,9 @@ Needs Moody. I also removed some
   (jp-modeline-activate)
   )
 #+end_src
-* Centaur setup/ a configured Doom - no tangle
+* Centaur setup/ a configured Doom
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210602T224030.562027
-:header-args:    :tangle no
 :END:
 Makes use of doom-modeline and minions
 TODO add to doom-modeline-indent-alist
@@ -495,10 +495,6 @@ We will use badly name modline in may cases but some have mode-line hard coded
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210605T230128.789333
 :END:
-
-
-
-
 #+NAME: org_mark_mini20.local_20210605T230128.769614
 #+begin_src emacs-lisp
 (defun mwb-headline-set-headline (key &optional default)
@@ -557,6 +553,9 @@ Best way to turn off and on seems to be create a mode that turns doom-modeline-m
           (with-current-buffer buf
             (mwb-headline-set-main-headline)))
 
+		;;  set the header keymap as a copy of mode line
+		(define-key mode-line-major-mode-keymap [header-line]
+		  (lookup-key mode-line-major-mode-keymap [mode-line]))
 		;;  hooks for special cases
 		)
 	;; Restore mode-line
@@ -564,12 +563,21 @@ Best way to turn off and on seems to be create a mode that turns doom-modeline-m
       (setq-default header-line-format original-format)
       (dolist (buf (buffer-list))
         (with-current-buffer buf
-          (setq header-line-format original-format)))))
+          (setq header-line-format original-format))))
+	(doom-modeline-mode -1))
   )
 #+end_src
-* Spaceline
+**** Deal with active window or not
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210606T221600.822244
+:END:
+We need to switch the background face for active mode line. (jp- is easier as each segment does this
+ as does some doom segments)
+ Issue looks like some faces don't set the background
+* Spaceline -no tangle
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210606T165448.626960
+:header-args:    :tangle no
 :END:
 
 ** Load
@@ -588,7 +596,6 @@ Best way to turn off and on seems to be create a mode that turns doom-modeline-m
   )
   #+end_src
 #+end_src
-
 ** All the icons
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210606T165448.624436

@@ -24,6 +24,8 @@
  - path :: ~/src/Racket/mandelbrot
 ** dummy-load
  - path :: ~/src/Racket/dummy-load
+** web
+ - path :: ~/src/Racket/web
 * C based
 ** rftg
  - path :: ~/src/cpp/rftg

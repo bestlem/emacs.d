@@ -74,7 +74,13 @@ Another issue with frameworks is that mode specific stuff has to be in the segme
 #+begin_src emacs-lisp
 (use-package minions
   :ensure t
-  :hook (doom-modeline-mode . minions-mode))
+  :hook (doom-modeline-mode . minions-mode)
+  :config
+  (setq minions-mode-line-minor-modes-map
+        (let ((map (make-sparse-keymap)))
+          (define-key map [mode-line down-mouse-1] 'minions-minor-modes-menu)
+          (define-key map [header-line down-mouse-1] 'minions-minor-modes-menu)
+          map)))
 #+end_src
 * All the icons setup - not tangled
 :PROPERTIES:

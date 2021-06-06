@@ -28,6 +28,8 @@ It makes the usual issue with frameworks. Once you need a small change it is dif
 
 So minions is needed and is the main issue that I had - all the minor mode info I do not need to see.
 
+Spaceline also has some setup ideas.
+
 From my collection of init see
 
 leuven for a setup possibly using powerline
@@ -35,6 +37,10 @@ greghendershott  for a seemingly simple one
 howardabrams for a powerline  and a smart-mode-line
 jerrypnz for complex but lead to  http://amitp.blogspot.co.nz/2011/08/emacs-custom-mode-line.html and then https://gist.github.com/redblobgames/5d9cf891120028440a4bdb429f101de6
 kaushalmodi as author of smart mode line
+
+At the end doom-modeline looks the best and has most detail but internals are hidden - you need to clone it and modify the internals.
+
+Spaceline looks like it has the parts to build up but not all the needed defined segments. But it is not variable space. But the segments have more external controls like a toggle and have :when options.
 
 ** Attempts
 :PROPERTIES:
@@ -267,9 +273,10 @@ Needs Moody. I also removed some
   (jp-modeline-activate)
   )
 #+end_src
-* Centaur setup/ a configured Doom
+* Centaur setup/ a configured Doom - no tangle
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210602T224030.562027
+:header-args:    :tangle no
 :END:
 Makes use of doom-modeline and minions
 TODO add to doom-modeline-indent-alist
@@ -559,4 +566,37 @@ Best way to turn off and on seems to be create a mode that turns doom-modeline-m
         (with-current-buffer buf
           (setq header-line-format original-format)))))
   )
+#+end_src
+* Spaceline
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210606T165448.626960
+:END:
+
+** Load
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210606T165448.625918
+:END:
+
+#+NAME: org_mark_mini20.local_20210606T165448.609794
+#+begin_src emacs-lisp
+(use-package spaceline
+  :ensure t
+  :demand
+  :config
+  (require 'spaceline-config)
+  ;;(spaceline-spacemacs-theme)
+  )
+  #+end_src
+#+end_src
+
+** All the icons
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210606T165448.624436
+:END:
+#+NAME: org_mark_mini20.local_20210606T165448.610552
+#+begin_src emacs-lisp
+(use-package spaceline-all-the-icons
+  :ensure t
+  :after spaceline
+  :config (spaceline-all-the-icons-theme))
 #+end_src

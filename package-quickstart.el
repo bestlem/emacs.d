@@ -5840,6 +5840,268 @@ this time, in which case it won't display at all.
 
 
 )
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/all-the-icons-20210522.1337/all-the-icons-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/all-the-icons-20210522.1337/all-the-icons-autoloads.el") (car load-path))))
+
+
+
+(autoload 'all-the-icons-icon-for-dir "all-the-icons" "\
+Get the formatted icon for DIR.
+ARG-OVERRIDES should be a plist containining `:height',
+`:v-adjust' or `:face' properties like in the normal icon
+inserting functions.
+
+Note: You want chevron, please use `all-the-icons-icon-for-dir-with-chevron'.
+
+\(fn DIR &rest ARG-OVERRIDES)" nil nil)
+
+(autoload 'all-the-icons-icon-for-file "all-the-icons" "\
+Get the formatted icon for FILE.
+ARG-OVERRIDES should be a plist containining `:height',
+`:v-adjust' or `:face' properties like in the normal icon
+inserting functions.
+
+\(fn FILE &rest ARG-OVERRIDES)" nil nil)
+
+(autoload 'all-the-icons-icon-for-mode "all-the-icons" "\
+Get the formatted icon for MODE.
+ARG-OVERRIDES should be a plist containining `:height',
+`:v-adjust' or `:face' properties like in the normal icon
+inserting functions.
+
+\(fn MODE &rest ARG-OVERRIDES)" nil nil)
+
+(autoload 'all-the-icons-icon-for-url "all-the-icons" "\
+Get the formatted icon for URL.
+If an icon for URL isn't found in `all-the-icons-url-alist', a globe is used.
+ARG-OVERRIDES should be a plist containining `:height',
+`:v-adjust' or `:face' properties like in the normal icon
+inserting functions.
+
+\(fn URL &rest ARG-OVERRIDES)" nil nil)
+
+(autoload 'all-the-icons-install-fonts "all-the-icons" "\
+Helper function to download and install the latests fonts based on OS.
+When PFX is non-nil, ignore the prompt and just install
+
+\(fn &optional PFX)" t nil)
+
+(autoload 'all-the-icons-insert "all-the-icons" "\
+Interactive icon insertion function.
+When Prefix ARG is non-nil, insert the propertized icon.
+When FAMILY is non-nil, limit the candidates to the icon set matching it.
+
+\(fn &optional ARG FAMILY)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "all-the-icons" '("all-the-icons-")))
+
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/powerline-20210527.1953/powerline-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/powerline-20210527.1953/powerline-autoloads.el") (car load-path))))
+
+
+
+(autoload 'powerline-hud "powerline" "\
+Return an XPM of relative buffer location using FACE1 and FACE2 of optional WIDTH.
+
+\(fn FACE1 FACE2 &optional WIDTH)" nil nil)
+
+(autoload 'powerline-mouse "powerline" "\
+Return mouse handler for CLICK-GROUP given CLICK-TYPE and STRING.
+
+\(fn CLICK-GROUP CLICK-TYPE STRING)" nil nil)
+
+(autoload 'powerline-concat "powerline" "\
+Concatonate STRINGS and pad sides by spaces.
+
+\(fn &rest STRINGS)" nil nil)
+
+(autoload 'defpowerline "powerline" "\
+Create function NAME by wrapping BODY with powerline padding an propetization.
+
+\(fn NAME BODY)" nil t)
+
+(autoload 'powerline-raw "powerline" "\
+Render STR as mode-line data using FACE and optionally PAD import on left (l) or right (r).
+
+\(fn STR &optional FACE PAD)" nil nil)
+
+(autoload 'powerline-fill "powerline" "\
+Return empty space using FACE and leaving RESERVE space on the right.
+
+\(fn FACE RESERVE)" nil nil)
+ (autoload 'powerline-major-mode "powerline")
+ (autoload 'powerline-minor-modes "powerline")
+ (autoload 'powerline-narrow "powerline")
+ (autoload 'powerline-vc "powerline")
+ (autoload 'powerline-encoding "powerline")
+ (autoload 'powerline-buffer-size "powerline")
+ (autoload 'powerline-buffer-id "powerline")
+ (autoload 'powerline-process "powerline")
+ (autoload 'powerline-selected-window-active "powerline")
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "powerline" '("pl/" "powerline-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "powerline-separators" '("pl/" "powerline-image-apple-rgb")))
+
+
+
+(autoload 'powerline-default-theme "powerline-themes" "\
+Setup the default mode-line." t nil)
+
+(autoload 'powerline-center-theme "powerline-themes" "\
+Setup a mode-line with major and minor modes centered." t nil)
+
+(autoload 'powerline-vim-theme "powerline-themes" "\
+Setup a Vim-like mode-line." t nil)
+
+(autoload 'powerline-nano-theme "powerline-themes" "\
+Setup a nano-like mode-line." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "powerline-themes" '("powerline-")))
+
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/spaceline-20201016.1043/spaceline-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/spaceline-20201016.1043/spaceline-autoloads.el") (car load-path))))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "spaceline" '("spaceline-")))
+
+
+
+(autoload 'spaceline-spacemacs-theme "spaceline-config" "\
+Install the modeline used by Spacemacs.
+
+ADDITIONAL-SEGMENTS are inserted on the right, between `global' and
+`buffer-position'.
+
+\(fn &rest ADDITIONAL-SEGMENTS)" nil nil)
+
+(autoload 'spaceline-emacs-theme "spaceline-config" "\
+Install a modeline close to the one used by Spacemacs, but which
+looks better without third-party dependencies.
+
+ADDITIONAL-SEGMENTS are inserted on the right, between `global' and
+`buffer-position'.
+
+\(fn &rest ADDITIONAL-SEGMENTS)" nil nil)
+
+(defvar spaceline-helm-mode nil "\
+Non-nil if Spaceline-Helm mode is enabled.
+See the `spaceline-helm-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `spaceline-helm-mode'.")
+
+(custom-autoload 'spaceline-helm-mode "spaceline-config" nil)
+
+(autoload 'spaceline-helm-mode "spaceline-config" "\
+Customize the mode-line in helm.
+
+If called interactively, enable Spaceline-Helm mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+(defvar spaceline-info-mode nil "\
+Non-nil if Spaceline-Info mode is enabled.
+See the `spaceline-info-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `spaceline-info-mode'.")
+
+(custom-autoload 'spaceline-info-mode "spaceline-config" nil)
+
+(autoload 'spaceline-info-mode "spaceline-config" "\
+Customize the mode-line in info.
+This minor mode requires info+.
+
+If called interactively, enable Spaceline-Info mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "spaceline-config" '("spaceline--")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "spaceline-segments" '("spaceline-")))
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/memoize-20200103.2036/memoize-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/memoize-20200103.2036/memoize-autoloads.el") (car load-path))))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "memoize" '("defmemoize" "memoize")))
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/spaceline-all-the-icons-20190325.1602/spaceline-all-the-icons-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/spaceline-all-the-icons-20190325.1602/spaceline-all-the-icons-autoloads.el") (car load-path))))
+
+
+
+(autoload 'spaceline-all-the-icons-theme "spaceline-all-the-icons" "\
+Install the `spaceline-ml-all-the-icons'.
+Add ADDITIONAL-SEGMENTS to the end of the theme.
+
+\(fn &rest ADDITIONAL-SEGMENTS)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "spaceline-all-the-icons" '("spaceline-all-the-icons-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "spaceline-all-the-icons-segments" '("define-spaceline-all-the-icons--" "dirs" "files" "new" "spaceline-all-the-icons-" "upgrade")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "spaceline-all-the-icons-separators" '("define-spaceline-all-the-icons--separator" "left-" "minor-mode-" "paradox-" "right-" "spaceline-all-the-icons-separator")))
+
+
+
+
+)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/sml-mode-6.10/sml-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -11013,69 +11275,6 @@ use either \\[customize] or the function `dtrt-indent-mode'.")
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/all-the-icons-20210522.1337/all-the-icons-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/all-the-icons-20210522.1337/all-the-icons-autoloads.el") (car load-path))))
-
-
-
-(autoload 'all-the-icons-icon-for-dir "all-the-icons" "\
-Get the formatted icon for DIR.
-ARG-OVERRIDES should be a plist containining `:height',
-`:v-adjust' or `:face' properties like in the normal icon
-inserting functions.
-
-Note: You want chevron, please use `all-the-icons-icon-for-dir-with-chevron'.
-
-\(fn DIR &rest ARG-OVERRIDES)" nil nil)
-
-(autoload 'all-the-icons-icon-for-file "all-the-icons" "\
-Get the formatted icon for FILE.
-ARG-OVERRIDES should be a plist containining `:height',
-`:v-adjust' or `:face' properties like in the normal icon
-inserting functions.
-
-\(fn FILE &rest ARG-OVERRIDES)" nil nil)
-
-(autoload 'all-the-icons-icon-for-mode "all-the-icons" "\
-Get the formatted icon for MODE.
-ARG-OVERRIDES should be a plist containining `:height',
-`:v-adjust' or `:face' properties like in the normal icon
-inserting functions.
-
-\(fn MODE &rest ARG-OVERRIDES)" nil nil)
-
-(autoload 'all-the-icons-icon-for-url "all-the-icons" "\
-Get the formatted icon for URL.
-If an icon for URL isn't found in `all-the-icons-url-alist', a globe is used.
-ARG-OVERRIDES should be a plist containining `:height',
-`:v-adjust' or `:face' properties like in the normal icon
-inserting functions.
-
-\(fn URL &rest ARG-OVERRIDES)" nil nil)
-
-(autoload 'all-the-icons-install-fonts "all-the-icons" "\
-Helper function to download and install the latests fonts based on OS.
-When PFX is non-nil, ignore the prompt and just install
-
-\(fn &optional PFX)" t nil)
-
-(autoload 'all-the-icons-insert "all-the-icons" "\
-Interactive icon insertion function.
-When Prefix ARG is non-nil, insert the propertized icon.
-When FAMILY is non-nil, limit the candidates to the icon set matching it.
-
-\(fn &optional ARG FAMILY)" t nil)
-
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "all-the-icons" '("all-the-icons-")))
-
-
-
-
-
-)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/doom-modeline-20210527.840/doom-modeline-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -13469,7 +13668,7 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
 )
 (setq package-activated-list
 	  (append
-	   '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra epl pkg-info projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit treemacs-magit treemacs-icons-dired transient-posframe toc-org ivy swiper spinner sml-mode smartparens f shrink-path rainbow-delimiters pos-tip racket-mode python-mode pretty-hydra prescient persistent-scratch paredit paradox outorg outshine org-bullets org kv esxml nov mwim moody modus-themes minions math-symbol-lists makey major-mode-hydra macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine gcmh free-keys flycheck fish-mode fira-code-mode expand-region eval-in-repl eros elmacro dtrt-indent all-the-icons doom-modeline discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-theme cmake-mode cask-mode beacon amx aggressive-indent)
+	   '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra epl pkg-info projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit treemacs-magit treemacs-icons-dired transient-posframe toc-org ivy swiper spinner all-the-icons powerline spaceline memoize spaceline-all-the-icons sml-mode smartparens f shrink-path rainbow-delimiters pos-tip racket-mode python-mode pretty-hydra prescient persistent-scratch paredit paradox outorg outshine org-bullets org kv esxml nov mwim moody modus-themes minions math-symbol-lists makey major-mode-hydra macrostep iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine gcmh free-keys flycheck fish-mode fira-code-mode expand-region eval-in-repl eros elmacro dtrt-indent doom-modeline discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-theme cmake-mode cask-mode beacon amx aggressive-indent)
 	   package-activated-list))
 (progn
   (require 'info)

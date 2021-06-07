@@ -468,12 +468,8 @@ Separate out so org file is easier to read
 	("z g" (counsel-read-setq-expression 'doom-modeline-github-interval) "set github interval")
 	("z n" (counsel-read-setq-expression 'doom-modeline-gnus-timer) "set gnus interval"))))
 #+end_src
-** Headline
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20210605T225204.594420
-:END:
-Doom-modeline is a framework and not easy to reconfigure so do in a hook when the mode changes
-*** Wrapper
+
+** Wrapper for loading rest
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210605T225204.593417
 :END:
@@ -484,10 +480,24 @@ To control when loaded
   <<doom-modeline-config>>
   )
 #+end_src
+** Headline
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210605T225204.594420
+:header-args:    :noweb-ref doom-modeline-config
+:END:
+Doom-modeline is a framework and not easy to reconfigure so do in a hook when the mode changes
+*** Fix minor mode segment
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210607T071758.129742
+:END:
+The segment does not set the background of the face correctly
+#+NAME: org_mark_mini20.local_20210607T071758.113035
+#+begin_src emacs-lisp
+(set-face-attribute 'doom-modeline-buffer-minor-mode nil :inherit 'mode-line)
+#+end_src
 *** Support functions
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210605T225204.592204
-:header-args:    :noweb-ref doom-modeline-config
 :END:
 Basically headline versions of modeline ones.
 We will use badly name modline in may cases but some have mode-line hard coded

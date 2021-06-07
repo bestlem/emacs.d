@@ -501,3 +501,20 @@ vivendi is dark
 		(my-demo-modus-vivendi)
 	  (my-demo-modus-operandi))))
 #+end_src
+***** Modify modus-theme
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210607T072324.266533
+:END:
+Modus-themes needs some alteration
+
+For my setup header-line needs to inherit from mode-line
+
+Doom-modeline faces are wrong - the setup in doom-modeline is nearly correct modus just hardcodes stuff it does not need to. Unfortunately this requies a direct edit.
+#+NAME: org_mark_mini20.local_20210607T072324.245245
+#+begin_src emacs-lisp
+(defun my-modus-themes-custom-faces ()
+  (set-face-attribute 'header-line nil :inherit 'mode-line)
+  )
+
+(add-hook 'modus-themes-after-load-theme-hook #'my-modus-themes-custom-faces)
+#+end_src

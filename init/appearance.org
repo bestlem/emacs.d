@@ -367,6 +367,7 @@ For my setup header-line needs to inherit from mode-line
 (defun mwb-themes-custom-faces-fixup (&rest _)
   "Some faces should have inheritance"
   (set-face-attribute 'header-line nil :inherit 'mode-line)
+  (set-face-attribute 'mode-line-emphasis nil :inherit 'mode-line)
   )
 
 ;; (add-hook 'modus-themes-after-load-theme-hook

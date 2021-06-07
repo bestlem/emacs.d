@@ -333,6 +333,11 @@ TODO Hardhat as part of read only
   ;; What to display as the version while a new one is being loaded
   (setq doom-modeline-env-load-string "...")
 
+  ;; From customisation
+  (setq doom-modeline-buffer-file-name-style 'truncate-with-project)
+  (setq column-number-mode t)
+  (setq size-indication-mode t)
+  (setq mode-line-percent-position nil)
 
   :hook (after-init . mwb-headline-mode)
   :init
@@ -516,7 +521,205 @@ If DEFAULT is non-nil, set the default mode-line for all buffers."
             (buffer-local-value 'header-line-format (current-buffer)))
           (list "%e" modeline))))
 #+end_src
-**** Set the  headline by key
+**** Keymap helper macro
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210607T135237.586136
+:END:
+Need to make headline keymaps copy the mode-line ones
+#+NAME: org_mark_mini20.local_20210607T135237.571219
+#+begin_src emacs-lisp
+(defmacro mwb-headline-map-keymap (keymap)
+  `(define-key ,keymap [header-line]
+	 (lookup-key ,keymap [mode-line])))
+#+end_src
+*** Override doom functions
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210607T181542.121274
+:END:
+These are needed mainly because maps are hard coded or they need extra functionality
+**** Update flycheck icon
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210607T181542.119985
+:END:
+#+NAME: org_mark_mini20.local_20210607T181542.097353
+#+begin_src emacs-lisp
+(defun doom-modeline-update-flycheck-icon (&optional status)
+  "Update flycheck icon via STATUS."
+  (setq doom-modeline--flycheck-icon
+		(when-let
+			((icon
+			  (pcase status
+				('finished (if flycheck-current-errors
+							   (let-alist (doom-modeline--flycheck-count-errors)
+								 (doom-modeline-checker-icon
+								  "block" "🚫" "!"
+								  (cond ((> \.error 0) 'doom-modeline-urgent)
+										((> \.warning 0) 'doom-modeline-warning)
+										(t 'doom-modeline-info))))
+							 (doom-modeline-checker-icon "check" "✓" "-" 'doom-modeline-info)))
+				('running (doom-modeline-checker-icon "access_time" "⏱" "*" 'doom-modeline-debug))
+				('no-checker (doom-modeline-checker-icon "sim_card_alert" "⚠" "-" 'doom-modeline-debug))
+				('errored (doom-modeline-checker-icon "sim_card_alert" "⚠" "-" 'doom-modeline-urgent))
+				('interrupted (doom-modeline-checker-icon "pause" "⏸" "=" 'doom-modeline-debug))
+				('suspicious (doom-modeline-checker-icon "priority_high" "❗" "!" 'doom-modeline-urgent))
+				(_ nil))))
+		  (propertize icon
+					  'help-echo (concat "Flycheck\n"
+										 (pcase status
+										   ('finished "mouse-1: Display minor mode menu
+mouse-2: Show help for minor mode")
+										   ('running "Running...")
+										   ('no-checker "No Checker")
+										   ('errored "Error")
+										   ('interrupted "Interrupted")
+										   ('suspicious "Suspicious")))
+					  'mouse-face 'mode-line-highlight
+					  'local-map (let ((map (make-sparse-keymap)))
+								   (define-key map [mode-line down-mouse-1]
+									 flycheck-mode-menu-map)
+								   (define-key map [mode-line mouse-2]
+									 (lambda ()
+									   (interactive)
+									   (describe-function 'flycheck-mode)))
+								   map)))))
+#+end_src
+**** Flycheck Status
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210607T181542.118496
+:END:
+#+NAME: org_mark_mini20.local_20210607T181542.098345
+#+begin_src emacs-lisp
+(defun doom-modeline-update-flycheck-text (&optional status)
+  "Update flycheck text via STATUS."
+  (setq doom-modeline--flycheck-text
+		(when-let
+			((text
+			  (pcase status
+				('finished (when flycheck-current-errors
+							 (let-alist (doom-modeline--flycheck-count-errors)
+							   (if doom-modeline-checker-simple-format
+								   (doom-modeline-checker-text
+									(number-to-string (+ \.error \.warning \.info))
+									(cond ((> \.error 0) 'doom-modeline-urgent)
+										  ((> \.warning 0) 'doom-modeline-warning)
+										  (t 'doom-modeline-info)))
+								 (format "%s/%s/%s"
+										 (doom-modeline-checker-text (number-to-string \.error)
+																	 'doom-modeline-urgent)
+										 (doom-modeline-checker-text (number-to-string \.warning)
+																	 'doom-modeline-warning)
+										 (doom-modeline-checker-text (number-to-string \.info)
+																	 'doom-modeline-info))))))
+				('running nil)
+				('no-checker nil)
+				('errored (doom-modeline-checker-text "Error" 'doom-modeline-urgent))
+				('interrupted (doom-modeline-checker-text "Interrupted" 'doom-modeline-debug))
+				('suspicious (doom-modeline-checker-text "Suspicious" 'doom-modeline-urgent))
+				(_ nil))))
+		  (propertize
+		   text
+		   'help-echo (pcase status
+						('finished
+						 (concat
+						  (when flycheck-current-errors
+							(let-alist (doom-modeline--flycheck-count-errors)
+							  (format "error: %d, warning: %d, info: %d\n" \.error \.warning \.info)))
+						  "mouse-1: Show all errors
+mouse-3: Next error"
+						  (if (featurep 'mwheel)
+							  "\nwheel-up/wheel-down: Previous/next error")))
+						('running "Running...")
+						('no-checker "No Checker")
+						('errored "Error")
+						('interrupted "Interrupted")
+						('suspicious "Suspicious"))
+		   'mouse-face 'mode-line-highlight
+		   'local-map (let ((map (make-sparse-keymap)))
+						(define-key map [mode-line mouse-1]
+						  #'flycheck-list-errors)
+						(define-key map [mode-line mouse-3]
+						  #'flycheck-next-error)
+						(when (featurep 'mwheel)
+						  (define-key map (vector 'mode-line
+												  mouse-wheel-down-event)
+							(lambda (event)
+							  (interactive "e")
+							  (with-selected-window (posn-window (event-start event))
+								(flycheck-previous-error 1))))
+						  (define-key map (vector 'mode-line
+												  mouse-wheel-up-event)
+							(lambda (event)
+							  (interactive "e")
+							  (with-selected-window (posn-window (event-start event))
+								(flycheck-next-error 1))))
+						  map))))))
+#+end_src
+**** Indent
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210607T181542.117048
+:END:
+This should be hidden many times
+#+NAME: org_mark_mini20.local_20210607T181542.099140
+#+begin_src emacs-lisp
+(doom-modeline-def-segment indent-info
+  "Displays the indentation information."
+  (when doom-modeline-indent-info
+    (let ((do-propertize
+           (lambda (mode size)
+             (propertize
+              (format " %s %d " mode size)
+              'face (if (doom-modeline--active) 'mode-line 'mode-line-inactive)))))
+      (if indent-tabs-mode
+          (funcall do-propertize "TAB" tab-width)
+        (let ((lookup-var
+               (seq-find (lambda (var)
+                           (and var (boundp var) (symbol-value var)))
+                         (cdr (assoc major-mode doom-modeline-indent-alist)) nil)))
+          (funcall do-propertize "SPC"
+                   (if lookup-var
+                       (symbol-value lookup-var)
+                     tab-width)))))))
+#+end_src
+**** Buffer State icon
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210607T182608.613907
+:END:
+Show read only etc.  Need to add Hardhat including menu to make no  RO. Misgh as well add save when fiddling.
+#+NAME: org_mark_mini20.local_20210607T182608.594878
+#+begin_src emacs-lisp
+(defun doom-modeline-update-buffer-file-state-icon (&rest _)
+  "Update the buffer or file state in mode-line."
+  (setq doom-modeline--buffer-file-state-icon
+        (when doom-modeline-buffer-state-icon
+          (ignore-errors
+            (concat
+             (cond (buffer-read-only
+                    (doom-modeline-buffer-file-state-icon
+                     "lock" "🔒" "%1*" `(:inherit doom-modeline-warning
+                                         :weight ,(if doom-modeline-icon
+                                                      'normal
+                                                    'bold))))
+                   ((and buffer-file-name (buffer-modified-p)
+                         doom-modeline-buffer-modification-icon)
+                    (doom-modeline-buffer-file-state-icon
+                     "save" "💾" "%1*" `(:inherit doom-modeline-buffer-modified
+                                         :weight ,(if doom-modeline-icon
+                                                      'normal
+                                                    'bold))))
+                   ((and buffer-file-name
+                         (not (file-remote-p buffer-file-name)) ; Avoid freezing while connection is lost
+                         (not (file-exists-p buffer-file-name)))
+                    (doom-modeline-buffer-file-state-icon
+                     "do_not_disturb_alt" "🚫" "!" 'doom-modeline-urgent))
+                   (t ""))
+             (when (or (buffer-narrowed-p)
+                       (and (bound-and-true-p fancy-narrow-mode)
+                            (fancy-narrow-active-p))
+                       (bound-and-true-p dired-narrow-mode))
+               (doom-modeline-buffer-file-state-icon
+                "vertical_align_center" "↕" "><" 'doom-modeline-warning)))))))
+#+end_src
+*** Set the  headline by key
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210605T231939.477073
 :END:
@@ -528,7 +731,7 @@ Need separate functions that can be called in hooks etc
 If DEFAULT is non-nil, set the default header-line for all buffers."
   (mwb-headline-set-headline 'main-headline default))
 #+end_src
-**** Set the fields in the header
+*** Set the fields in the header
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210605T231939.474664
 :END:
@@ -536,8 +739,21 @@ Need sets of fields for special cases
 #+NAME: org_mark_mini20.local_20210605T231939.449934
 #+begin_src emacs-lisp
 (doom-modeline-def-modeline 'main-headline
-  '(bar major-mode modals  buffer-position selection-info)
-  '(minor-modes  process checker))
+  '(bar major-mode  buffer-size minor-modes  buffer-position selection-info)
+  '(  indent-info buffer-encoding  process checker))
+
+
+(doom-modeline-def-modeline 'main
+  '(bar workspace-name window-number modals  buffer-info remote-host  word-count parrot )
+  '(objed-state misc-info persp-name battery grip irc mu4e gnus github debug repl lsp  input-method process vcs ))
+
+(doom-modeline-def-modeline 'org-src
+  '(bar window-number modals matches buffer-info-simple buffer-position word-count parrot selection-info)
+  '(objed-state misc-info debug lsp minor-modes input-method indent-info buffer-encoding major-mode process checker))
+
+;; (doom-modeline-def-modeline 'special-headline
+;;   '()
+;;   )
 #+end_src
 **** Create the mode
 :PROPERTIES:
@@ -558,32 +774,25 @@ Best way to turn off and on seems to be create a mode that turns doom-modeline-m
 
 		(mwb-headline-set-main-headline t) ; set default
 
-        ;; Apply to all existing buffers.
-        (dolist (buf (buffer-list))
-          (with-current-buffer buf
-            (mwb-headline-set-main-headline)))
+		;; Apply to all existing buffers.
+		(dolist (buf (buffer-list))
+		  (with-current-buffer buf
+			(mwb-headline-set-main-headline)))
 
 		;;  set the header keymap as a copy of mode line
-		(define-key mode-line-major-mode-keymap [header-line]
-		  (lookup-key mode-line-major-mode-keymap [mode-line]))
+		(mwb-headline-map-keymap mode-line-major-mode-keymap)
+		(mwb-headline-map-keymap mode-line-column-line-number-mode-map)
+
 		;;  hooks for special cases
 		)
 	;; Restore mode-line
-    (let ((original-format (doom-modeline--original-value 'header-line-format)))
-      (setq-default header-line-format original-format)
-      (dolist (buf (buffer-list))
-        (with-current-buffer buf
-          (setq header-line-format original-format))))
-	(doom-modeline-mode -1))
-  )
+	(let ((original-format (doom-modeline--original-value 'header-line-format)))
+	  (setq-default header-line-format original-format)
+	  (dolist (buf (buffer-list))
+		(with-current-buffer buf
+		  (setq header-line-format original-format))))
+	(doom-modeline-mode -1)))
 #+end_src
-**** Deal with active window or not
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20210606T221600.822244
-:END:
-We need to switch the background face for active mode line. (jp- is easier as each segment does this
- as does some doom segments)
- Issue looks like some faces don't set the background
 * Spaceline -no tangle
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210606T165448.626960

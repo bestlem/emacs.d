@@ -453,7 +453,7 @@ mwin might have mode aware
           "/Applications/"
           "~/Library/Preferences/Aquamacs Emacs/Packages"
           "~/src/ThirdParty/"
-          "~/src/env/emacs\\.d/elpa/"))
+          "emacs\\.d/elpa/"))
   (global-hardhat-mode)
   :config (validate-setq hardhat-mode-lighter "Ⓗ"))
 #+end_src

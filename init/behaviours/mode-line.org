@@ -316,6 +316,9 @@ TODO Hardhat as part of read only
   ;; From actual customization
   (column-number-mode t)
   (doom-modeline-indent-info t)
+  (mode-line-percent-position nil)
+  (column-number-mode t)
+  (size-indication-mode t)
 
   ;; Whether display icons in the mode-line.
   ;; While using the server mode in GUI, should set the value explicitly.
@@ -337,7 +340,6 @@ TODO Hardhat as part of read only
   (setq doom-modeline-buffer-file-name-style 'truncate-with-project)
   (setq column-number-mode t)
   (setq size-indication-mode t)
-  (setq mode-line-percent-position nil)
 
   :hook (after-init . mwb-headline-mode)
   :init

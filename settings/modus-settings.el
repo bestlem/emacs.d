@@ -7,7 +7,7 @@
  '(modus-themes-fringes 'intense)
  '(modus-themes-headings
    ''((t)))
- '(modus-themes-mode-line 'borderless-accented)
+ '(modus-themes-mode-line '3d)
  '(modus-themes-org-blocks 'rainbow)
  '(modus-themes-paren-match 'intense-bold)
  '(modus-themes-prompts 'intense)

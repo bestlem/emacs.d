@@ -74,8 +74,20 @@ As noted the aquamacs way might be better. But at the moment all disabled.
 exec-path-from-shell does work with more shells including fish - but requires you to name variables needed - which might be OK
 It calls the shell in exec-path-from-shell-shell-name otherwise shell-file-name otherwise (getenv "SHELL"). Then calls sh from fish so printf works.
 Now I remember writing my own printenv as env|sort - looking at man page printenv is older but env is POSIX. printf is later but might not work with UTF-8
-
-
+*** Emacs
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210608T162151.310188
+:END:
+Some compilation (e.g. using cask) wants to know what Emacs is so set  it
+#+NAME: org_mark_mini20.local_20210608T162151.298139
+#+begin_src emacs-lisp
+(setenv "EMACS"
+		(expand-file-name invocation-name invocation-directory))
+#+end_src
+** Starting a shell
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210608T162151.309300
+:END:
 *** Spaces in command line
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210214T131312.687097
@@ -104,7 +116,7 @@ Oh give up and hard code where needed
 
 And drifted back to xonsh to give more control - and bite the bullet and debug all issues.
 I think that eventually  xonsh for interactive and dash for simple including compilation - compile
-Spacesand xonsh lack of reading startup files  put me back to a POSIX shell for running non interactive shells.- unfortunately Apple makes sh a link to bash - not dash. So I will use zsh
+Spaces and xonsh lack of reading startup files  put me back to a POSIX shell for running non interactive shells.- unfortunately Apple makes sh a link to bash - not dash. So I will use zsh
 
 * Set shell
 :PROPERTIES:
@@ -190,8 +202,8 @@ buffer you are working in though, you want to go back and read something. So alt
 #+NAME: org_mark_2020-10-11T00-40-32+01-00_mini12.local_0963EB06-7A75-414C-BBC9-C032966D9019
 #+begin_src emacs-lisp
 (setq comint-scroll-to-bottom-on-input 'this)
-(setq comint-scroll-to-bottom-on-output 'others)
-(setq comint-move-point-for-output 'others)
+;(setq comint-scroll-to-bottom-on-output 'all)
+(setq comint-move-point-for-output 'this)
 (setq comint-scroll-show-maximum-output t)
 (setq comint-prompt-read-only t)
 #+end_src

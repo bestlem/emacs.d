@@ -1011,6 +1011,7 @@ parents' git status can be updated."
   (let ((recurse t)
         (refreshed-nodes nil))
     (-when-let (change-list (treemacs-dom-node->refresh-flag node))
+	  (treemacs-log "Change List %s %s" (treemacs-dom-node->key node) change-list)
       (setf (treemacs-dom-node->refresh-flag node) nil)
       (push node refreshed-nodes)
       (if (> (length change-list) 8)

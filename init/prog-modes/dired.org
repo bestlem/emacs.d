@@ -348,6 +348,7 @@ Use icons from treemacs
 #+begin_src emacs-lisp
 (use-package treemacs-icons-dired
    :after treemacs dired
+   :disabled
    :ensure t
    :config (treemacs-icons-dired-mode))
 #+end_src

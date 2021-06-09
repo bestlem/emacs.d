@@ -860,6 +860,95 @@ This needs the full expansion
 #+begin_src emacs-lisp
 (mwb-init-load "init/org-all")
 #+end_src
+
+
+** Debug force treemacs
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210609T115756.661028
+:END:
+
+
+*** Treemacs
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:22044AD2-EC4A-4C3B-B3D2-7F994D4BB958
+:END:
+This is the visual tree to manage files etc
+ #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_55CB1D47-BC33-40F8-BC2A-12D014C6B18D
+ #+begin_src emacs-lisp
+(use-package treemacs
+  ;; :ensure t
+  :mwb-load-path "fork/treemacs/src/elisp"
+  :demand
+  :init
+  (with-eval-after-load 'winum
+    (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
+  (setq treemacs-width 50)
+  :commands (treemacs)
+  :config
+
+  (setq hydra-key-regex "\\[\\|]\\|[-\\[:alnum:] ~.,;:/|?<>={}*+#%@!&^⇧⌘⌥↑↓←→⌫⌦⏎'`()\"$]+?") ; add Mac key symbols
+
+  (setq treemacs-silent-refresh t
+        treemacs-persist-file (mwb-user-emacs-file "data/treemacs-persist"))
+  (with-eval-after-load 'treemacs
+    (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?))
+
+  ;; The default width and height of the icons is 22 pixels. If you are
+  ;; using a Hi-DPI display, uncomment this to double the icon size.
+  ;;(treemacs-resize-icons 44)
+
+  (treemacs-follow-mode t)
+  (setq treemacs-silent-filewatch t)
+  (treemacs-filewatch-mode t)
+  (treemacs-fringe-indicator-mode t)
+  (pcase (cons (not (null (executable-find "git")))
+               (not (null treemacs-python-executable )))
+    (`(t . t)
+     (treemacs-git-mode 'deferred))
+    (`(t . _)
+     (treemacs-git-mode 'simple)))
+  :mode-hydra
+  (treemacs-mode
+   ("Project"
+    (
+     ;; ("p" matcha-projectile/body "Projectile")
+     ("c" treemacs-add-project-to-workspace "Create Project")
+     ("d" treemacs-remove-project-from-workspace "Delete Project")
+     )
+	"All"
+	(("h"  treemacs--common-helpful-hydra/body "Hydra.."))
+    "Workspace"
+    (("s" treemacs-switch-workspace "Switch" )
+     ("e" treemacs-edit-workspaces "Edit" ))
+    "Width"
+    (("w" treemacs-toggle-fixed-width "Toggle variable width" ))))
+
+  :bind ( :map treemacs-mode-map
+               ("<mouse-5>" . treemacs-rightclick-menu)
+               ("<mouse-4>" . treemacs-rightclick-menu)
+               ("<f5>" . treemacs-switch-workspace)
+               ("<C-f5>" . treemacs-edit-workspaces)))
+
+(use-package treemacs-projectile
+  :mwb-load-path "fork/treemacs/src/extra"
+  :after treemacs projectile
+  ;; :ensure t
+  )
+
+(use-package treemacs-magit
+  :mwb-load-path "fork/treemacs/src/extra"
+  ;; :disabled                             ; Emacs 27 did not like this
+  :after treemacs magit
+  ;; :ensure t
+  )
+  #+end_src
+*** Debug
+:PROPERTIES:
+:ID:       org_mark_2020-11-14T12-12-03+00-00_mini12.local:4F9B14A7-978B-4BF7-A64E-41B8EE921099
+:END:
+I get
+Error running timer ‘treemacs--process-file-events’: (wrong-type-argument sequencep t)
+So from https://github.com/Alexander-Miller/treemacs/issues/168
 ** The remaining setup with complete org file processing
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:35D80650-3C0F-4147-8B3A-3BC84158367B

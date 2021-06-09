@@ -338,8 +338,6 @@ TODO Hardhat as part of read only
 
   ;; From customisation
   (setq doom-modeline-buffer-file-name-style 'truncate-with-project)
-  (setq column-number-mode t)
-  (setq size-indication-mode t)
 
   :hook (after-init . mwb-headline-mode)
   :init
@@ -548,7 +546,7 @@ These are needed mainly because maps are hard coded or they need extra functiona
 (defun doom-modeline-update-flycheck-icon (&optional status)
   "Update flycheck icon via STATUS."
   (setq doom-modeline--flycheck-icon
-		(when-let
+        (when-let
 			((icon
 			  (pcase status
 				('finished (if flycheck-current-errors
@@ -565,25 +563,26 @@ These are needed mainly because maps are hard coded or they need extra functiona
 				('interrupted (doom-modeline-checker-icon "pause" "⏸" "=" 'doom-modeline-debug))
 				('suspicious (doom-modeline-checker-icon "priority_high" "❗" "!" 'doom-modeline-urgent))
 				(_ nil))))
-		  (propertize icon
-					  'help-echo (concat "Flycheck\n"
-										 (pcase status
-										   ('finished "mouse-1: Display minor mode menu
+          (propertize icon
+                      'help-echo (concat "Flycheck\n"
+                                         (pcase status
+                                           ('finished "mouse-1: Display minor mode menu
 mouse-2: Show help for minor mode")
-										   ('running "Running...")
-										   ('no-checker "No Checker")
-										   ('errored "Error")
-										   ('interrupted "Interrupted")
-										   ('suspicious "Suspicious")))
-					  'mouse-face 'mode-line-highlight
-					  'local-map (let ((map (make-sparse-keymap)))
-								   (define-key map [mode-line down-mouse-1]
-									 flycheck-mode-menu-map)
-								   (define-key map [mode-line mouse-2]
-									 (lambda ()
-									   (interactive)
-									   (describe-function 'flycheck-mode)))
-								   map)))))
+                                           ('running "Running...")
+                                           ('no-checker "No Checker")
+                                           ('errored "Error")
+                                           ('interrupted "Interrupted")
+                                           ('suspicious "Suspicious")))
+                      'mouse-face 'mode-line-highlight
+                      'local-map (let ((map (make-sparse-keymap)))
+                                   (define-key map [mode-line down-mouse-1]
+                                     flycheck-mode-menu-map)
+                                   (define-key map [mode-line mouse-2]
+                                     (lambda ()
+                                       (interactive)
+                                       (describe-function 'flycheck-mode)))
+								   (mwb-headline-map-keymap map)
+                                   map)))))
 #+end_src
 **** Flycheck Status
 :PROPERTIES:
@@ -654,6 +653,7 @@ mouse-3: Next error"
 							  (interactive "e")
 							  (with-selected-window (posn-window (event-start event))
 								(flycheck-next-error 1))))
+						  (mwb-headline-map-keymap map)
 						  map))))))
 #+end_src
 **** Indent
@@ -741,17 +741,17 @@ Need sets of fields for special cases
 #+NAME: org_mark_mini20.local_20210605T231939.449934
 #+begin_src emacs-lisp
 (doom-modeline-def-modeline 'main-headline
-  '(bar major-mode  buffer-size minor-modes  buffer-position selection-info)
+  '( major-mode  buffer-size minor-modes  buffer-position selection-info)
   '(  indent-info buffer-encoding  process checker))
 
 
 (doom-modeline-def-modeline 'main
-  '(bar workspace-name window-number modals  buffer-info remote-host  word-count parrot )
+  '( workspace-name window-number modals  buffer-info remote-host  word-count parrot )
   '(objed-state misc-info persp-name battery grip irc mu4e gnus github debug repl lsp  input-method process vcs ))
 
 (doom-modeline-def-modeline 'org-src
-  '(bar window-number modals matches buffer-info-simple buffer-position word-count parrot selection-info)
-  '(objed-state misc-info debug lsp minor-modes input-method indent-info buffer-encoding major-mode process checker))
+  '( window-number modals  buffer-info-simple buffer-position word-count parrot selection-info)
+  '(objed-state misc-info debug lsp minor-modes input-method  buffer-encoding major-mode process checker))
 
 ;; (doom-modeline-def-modeline 'special-headline
 ;;   '()
@@ -800,7 +800,6 @@ Best way to turn off and on seems to be create a mode that turns doom-modeline-m
 :ID:       org_mark_mini20.local:20210606T165448.626960
 :header-args:    :tangle no
 :END:
-
 ** Load
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210606T165448.625918

@@ -885,7 +885,7 @@ This is the visual tree to manage files etc
   (setq treemacs-width 50)
   :commands (treemacs)
   :config
-
+  (setq treemacs--no-messages nil)
   (setq hydra-key-regex "\\[\\|]\\|[-\\[:alnum:] ~.,;:/|?<>={}*+#%@!&^⇧⌘⌥↑↓←→⌫⌦⏎'`()\"$]+?") ; add Mac key symbols
 
   (setq treemacs-silent-refresh t

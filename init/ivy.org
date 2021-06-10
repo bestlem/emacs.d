@@ -119,7 +119,17 @@ Note takes time to load
   :ensure t
   :after (ivy hydra))
 #+end_src
-
+* Ivy rich all the icons
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210610T180145.175955
+:END:
+#+NAME: org_mark_mini20.local_20210610T180145.157654
+#+begin_src emacs-lisp
+(use-package all-the-icons-ivy-rich
+  :ensure t
+  :init (all-the-icons-ivy-rich-mode 1)
+  :after ivy counsel-projectile )
+#+end_src
 * Ivy rich
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:F5A59AEA-8733-49B8-9EFF-C93F935CC468
@@ -128,7 +138,7 @@ More friendly interface for ivy
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_29D787D4-65EA-4C99-9F6F-30C2667174CD
 #+begin_src emacs-lisp :
 (use-package ivy-rich
-    :after ivy counsel
+    :after ivy counsel  all-the-icons-ivy-rich
     :disabled
     :unless *aquamacs*
     :demand t
@@ -200,19 +210,18 @@ Improve many emacs functions
          ("C-c g" . counsel-git-grep) ; well deadgrep does that
          ("C-c j" . counsel-git)
                                         ;("C-c k" . counsel-ag)
-         ;; ("C-c r" . counsel-rg) ; deadgrep much better
+         ("A-<f4>" . counsel-rg) ; deadgrep much better
          ("C-x l" . counsel-locate)
          :map minibuffer-local-map
          ("C-r" . counsel-minibuffer-add))
   :config
-  ;; (if (executable-find "rg")
-  ;;     ;; use ripgrep instead of grep because it's way faster
-  ;;     (setq counsel-grep-base-command
-  ;; 		  "rg -i -M 120 --no-heading --line-number --color never '%s' %s"
-  ;; 		  counsel-rg-base-command
-  ;; 		  "rg -i -M 120 --no-heading --line-number --color never %s .")
-  ;;   (warn "\nWARNING: Could not find the ripgrep executable. It is recommended you i
-  ;; nstall ripgrep."))
+  (if (executable-find "ripgrep")
+      ;; use ripgrep instead of grep because it's way faster
+      (setq counsel-grep-base-command
+			"ripgrep  -M 120 --no-heading --line-number --color never '%s' %s"
+			counsel-rg-base-command
+			"ripgrep -i -M 120 --no-heading --line-number --color never %s .")
+    (warn "\nWARNING: Could not find the ripgrep executable. It is recommended you install ripgrep."))
   (setq counsel-find-file-at-point t)
   :config
   (counsel-mode 1))

@@ -9372,6 +9372,64 @@ Beautify / pretty-print the active region (or the entire buffer if no active reg
 
 
 )
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-rich-20210409.931/ivy-rich-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-rich-20210409.931/ivy-rich-autoloads.el") (car load-path))))
+
+
+
+(defvar ivy-rich-mode nil "\
+Non-nil if Ivy-Rich mode is enabled.
+See the `ivy-rich-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `ivy-rich-mode'.")
+
+(custom-autoload 'ivy-rich-mode "ivy-rich" nil)
+
+(autoload 'ivy-rich-mode "ivy-rich" "\
+Toggle ivy-rich mode globally.
+
+If called interactively, enable Ivy-Rich mode if ARG is positive,
+and disable it if ARG is zero or negative.  If called from Lisp,
+also enable the mode if ARG is omitted or nil, and toggle it if
+ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'ivy-rich-reload "ivy-rich" nil nil nil)
+
+(defvar ivy-rich-project-root-cache-mode nil "\
+Non-nil if Ivy-Rich-Project-Root-Cache mode is enabled.
+See the `ivy-rich-project-root-cache-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `ivy-rich-project-root-cache-mode'.")
+
+(custom-autoload 'ivy-rich-project-root-cache-mode "ivy-rich" nil)
+
+(autoload 'ivy-rich-project-root-cache-mode "ivy-rich" "\
+Toggle ivy-rich-root-cache-mode globally.
+
+If called interactively, enable Ivy-Rich-Project-Root-Cache mode
+if ARG is positive, and disable it if ARG is zero or negative.
+If called from Lisp, also enable the mode if ARG is omitted or
+nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ivy-rich" '("ivy-rich-")))
+
+
+
+
+
+)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-prescient-20210425.1720/ivy-prescient-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -13112,6 +13170,45 @@ provided.
 
 
 )
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/all-the-icons-ivy-rich-20210608.1739/all-the-icons-ivy-rich-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/all-the-icons-ivy-rich-20210608.1739/all-the-icons-ivy-rich-autoloads.el") (car load-path))))
+
+
+
+(defvar all-the-icons-ivy-rich-mode nil "\
+Non-nil if All-The-Icons-Ivy-Rich mode is enabled.
+See the `all-the-icons-ivy-rich-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `all-the-icons-ivy-rich-mode'.")
+
+(custom-autoload 'all-the-icons-ivy-rich-mode "all-the-icons-ivy-rich" nil)
+
+(autoload 'all-the-icons-ivy-rich-mode "all-the-icons-ivy-rich" "\
+Better experience with icons for ivy.
+
+If called interactively, enable All-The-Icons-Ivy-Rich mode if
+ARG is positive, and disable it if ARG is zero or negative.
+If called from Lisp, also enable the mode if ARG is omitted or
+nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'all-the-icons-ivy-rich-reload "all-the-icons-ivy-rich" "\
+Reload `all-the-icons-ivy-rich'." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "all-the-icons-ivy-rich" '("all-the-icons-ivy-rich-")))
+
+
+
+
+
+)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/aggressive-indent-20200824.2352/aggressive-indent-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -13181,7 +13278,7 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
 )
 (setq package-activated-list
 	  (append
-	   '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra transient transient-posframe toc-org ivy swiper spinner all-the-icons powerline dash s spaceline memoize spaceline-all-the-icons sml-mode smartparens f shrink-path rainbow-mode rainbow-delimiters pos-tip racket-mode python-mode epl pkg-info projectile lv hydra pretty-hydra prescient pfuture persistent-scratch paredit paradox outorg outshine org-bullets org kv esxml nov mwim moody modus-themes minions math-symbol-lists makey major-mode-hydra git-commit magit macrostep avy ace-window iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc ht highlight-indent-guides elisp-refs helpful hardhat git-timemachine gcmh free-keys flycheck fish-mode fira-code-mode expand-region eval-in-repl eros elmacro dtrt-indent doom-modeline discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-theme cmake-mode cfrs cask-mode beacon amx aggressive-indent)
+	   '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra transient transient-posframe toc-org ivy swiper spinner all-the-icons powerline dash s spaceline memoize spaceline-all-the-icons sml-mode smartparens f shrink-path rainbow-mode rainbow-delimiters pos-tip racket-mode python-mode epl pkg-info projectile lv hydra pretty-hydra prescient pfuture persistent-scratch paredit paradox outorg outshine org-bullets org kv esxml nov mwim moody modus-themes minions math-symbol-lists makey major-mode-hydra git-commit magit macrostep avy ace-window iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc ht highlight-indent-guides elisp-refs helpful hardhat git-timemachine gcmh free-keys flycheck fish-mode fira-code-mode expand-region eval-in-repl eros elmacro dtrt-indent doom-modeline discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-theme cmake-mode cfrs cask-mode beacon amx all-the-icons-ivy-rich aggressive-indent)
 	   package-activated-list))
 (progn
   (require 'info)

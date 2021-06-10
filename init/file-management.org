@@ -431,8 +431,8 @@ projectile-save-project-buffers is nice but save-buffer does not make a backup. 
 
  Fun:    [_o_] other win [_l_] lsp        [_K_] cleanup
  "
-   ("a"   deadgrep "rg")
-   ("A"   counsel-rg "qrg")
+   ("a"   deadgrep "deadgrep")
+   ("A"   counsel-rg "counsel rg")
    ("b"   projectile-switch-to-buffer "buf")
    ("d"   projectile-find-dir "dir")
    ("f"   projectile-find-file "file")

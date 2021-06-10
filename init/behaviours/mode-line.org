@@ -695,25 +695,33 @@ Show read only etc.  Need to add Hardhat including menu to make no  RO. Misgh as
         (when doom-modeline-buffer-state-icon
           (ignore-errors
             (concat
-             (cond (buffer-read-only
-                    (doom-modeline-buffer-file-state-icon
-                     "lock" "🔒" "%1*" `(:inherit doom-modeline-warning
-                                         :weight ,(if doom-modeline-icon
-                                                      'normal
-                                                    'bold))))
-                   ((and buffer-file-name (buffer-modified-p)
-                         doom-modeline-buffer-modification-icon)
-                    (doom-modeline-buffer-file-state-icon
-                     "save" "💾" "%1*" `(:inherit doom-modeline-buffer-modified
-                                         :weight ,(if doom-modeline-icon
-                                                      'normal
-                                                    'bold))))
-                   ((and buffer-file-name
-                         (not (file-remote-p buffer-file-name)) ; Avoid freezing while connection is lost
-                         (not (file-exists-p buffer-file-name)))
-                    (doom-modeline-buffer-file-state-icon
-                     "do_not_disturb_alt" "🚫" "!" 'doom-modeline-urgent))
-                   (t ""))
+             (cond
+			  ((and (boundp 'hardhat-reasons)  hardhat-reasons )
+			   (doom-modeline-buffer-file-state-icon
+				nil "⛑" "%1*" `(:inherit doom-modeline-warning
+								 :weight ,(if doom-modeline-icon
+											  'normal
+											'bold))) )
+
+			  (buffer-read-only
+               (doom-modeline-buffer-file-state-icon
+                "lock" "🔒" "%1*" `(:inherit doom-modeline-warning
+                                    :weight ,(if doom-modeline-icon
+                                                 'normal
+                                               'bold))))
+              ((and buffer-file-name (buffer-modified-p)
+                    doom-modeline-buffer-modification-icon)
+               (doom-modeline-buffer-file-state-icon
+                "save" "💾" "%1*" `(:inherit doom-modeline-buffer-modified
+                                    :weight ,(if doom-modeline-icon
+                                                 'normal
+                                               'bold))))
+              ((and buffer-file-name
+                    (not (file-remote-p buffer-file-name)) ; Avoid freezing while connection is lost
+                    (not (file-exists-p buffer-file-name)))
+               (doom-modeline-buffer-file-state-icon
+                "do_not_disturb_alt" "🚫" "!" 'doom-modeline-urgent))
+              (t ""))
              (when (or (buffer-narrowed-p)
                        (and (bound-and-true-p fancy-narrow-mode)
                             (fancy-narrow-active-p))

@@ -127,8 +127,9 @@ Note takes time to load
 #+begin_src emacs-lisp
 (use-package all-the-icons-ivy-rich
   :ensure t
-  :init (all-the-icons-ivy-rich-mode 1)
-  :after ivy counsel-projectile )
+  :unless *aquamacs*
+  :config (all-the-icons-ivy-rich-mode 1)
+  :after ivy-prescient)
 #+end_src
 * Ivy rich
 :PROPERTIES:
@@ -138,16 +139,15 @@ More friendly interface for ivy
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_29D787D4-65EA-4C99-9F6F-30C2667174CD
 #+begin_src emacs-lisp :
 (use-package ivy-rich
-    :after ivy counsel  all-the-icons-ivy-rich
-    :disabled
-    :unless *aquamacs*
-    :demand t
-    :ensure t
-    :config
-    (ivy-rich-mode 1)
-    (setq ivy-virtual-abbreviate 'full
-          ivy-rich-switch-buffer-align-virtual-buffer t
-          ivy-rich-path-style 'abbrev))
+  :after ivy counsel  all-the-icons-ivy-rich
+  :unless *aquamacs*
+  :demand t
+  :ensure t
+  :config
+  (ivy-rich-mode 1)
+  (setq ivy-virtual-abbreviate 'full
+        ivy-rich-switch-buffer-align-virtual-buffer t
+        ivy-rich-path-style 'abbrev))
 #+end_src
 
 * Swiper
@@ -234,9 +234,11 @@ Improve many emacs functions
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_378BD735-5E0C-4075-9ED5-A69FC65B29E4
 #+begin_src emacs-lisp
 (use-package prescient
+  :demand
   :ensure t)
 (use-package ivy-prescient
   :ensure t
+  :demand
   :after (counsel prescient)
   :config (ivy-prescient-mode 1)
   (prescient-persist-mode 1))

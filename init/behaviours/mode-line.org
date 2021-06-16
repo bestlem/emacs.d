@@ -40,7 +40,7 @@ kaushalmodi as author of smart mode line
 
 At the end doom-modeline looks the best and has most detail but internals are hidden - you need to clone it and modify the internals.
 
-Spaceline looks like it has the parts to build up but not all the needed defined segments. But it is not variable space. But the segments have more external controls like a toggle and have :when options.
+Spaceline looks like it has the parts to build up but not all the needed defined segments. But it is not variable space. But the segments have more external controls like a toggle and have :when options. The :when allows the icon to be listed all the time but igoned if not in correct mode e.g. :when (derived-mode-p 'paradox-menu-mode) means only display if in paradox mode.
 
 ** Attempts
 :PROPERTIES:
@@ -53,6 +53,8 @@ centaur for fuller use of doom-modeline and minions
 
 Current best jerry pnz + minions + get segments from doom-modeline. The reason is that I want to alter things depending on mode. Or doom-modeline if I can get the constructor in public
 Another issue with frameworks is that mode specific stuff has to be in the segments not in the construction of the header (This is really a framework) - well excpt for the repitious lists.
+
+doom-modeline seems expandable enough. The one issue left is that it sets itself for all modes, better I think if set in prog-mode hook as it does for other modes e.g. info. In practice so far the only one messed up is gnus, so an alternative might be to reset that manually.
 
 * Packages
 :PROPERTIES:
@@ -302,7 +304,6 @@ TODO Hardhat as part of read only
 
   ;;  from doom-modeline page change to custom
   (doom-modeline-major-mode-icon t)
-  (doom-modeline-major-mode-icon t)
   (doom-modeline-major-mode-color-icon t)
   (doom-modeline-buffer-state-icon t)
   (doom-modeline-buffer-modification-icon t)
@@ -315,7 +316,6 @@ TODO Hardhat as part of read only
   (doom-modeline-indent-info t)
 
   ;; From actual customization
-  (column-number-mode t)
   (doom-modeline-indent-info t)
   (mode-line-percent-position nil)
   (column-number-mode t)

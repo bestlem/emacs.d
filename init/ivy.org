@@ -90,24 +90,23 @@ Note takes time to load
 ;; Show ivy frame using posframe
 (when (>= emacs-major-version 27)
   (use-package ivy-posframe
-      :ensure t
-      :demand
-      :diminish
-      :init
-      (setq ivy-posframe-display-functions-alist
-            '((swiper . ivy-display-function-fallback)
-              (swiper-isearch . ivy-display-function-fallback)
-              ;; (complete-symbol . ivy-posframe-display-at-point)
-              (t . ivy-posframe-display)))
-      ;; (ivy-posframe-mode 1)
-      :custom
-      ;; (ivy-posframe-width 130)
-      ;; (ivy-posframe-height 11)
-      (ivy-posframe-parameters
-       '((left-fringe . 5)
-         (right-fringe . 5)))
-      :config
-      (ivy-posframe-mode)))
+    :ensure t
+    :after ivy
+    :init
+    (setq ivy-posframe-display-functions-alist
+          '((swiper . ivy-display-function-fallback)
+            (swiper-isearch . ivy-display-function-fallback)
+            ;; (complete-symbol . ivy-posframe-display-at-point)
+            (t . ivy-posframe-display)))
+    ;; (ivy-posframe-mode 1)
+    :custom
+    ;; (ivy-posframe-width 130)
+    ;; (ivy-posframe-height 11)
+    (ivy-posframe-parameters
+     '((left-fringe . 5)
+       (right-fringe . 5)))
+    :config
+    (ivy-posframe-mode)))
 #+end_src
 * Ivy hydra
 :PROPERTIES:
@@ -235,11 +234,13 @@ Improve many emacs functions
 #+begin_src emacs-lisp
 (use-package prescient
   :demand
-  :ensure t)
+  :ensure t
+  :config
+  (prescient-persist-mode t))
 (use-package ivy-prescient
   :ensure t
   :demand
   :after (counsel prescient)
   :config (ivy-prescient-mode 1)
-  (prescient-persist-mode 1))
+  )
 #+end_src

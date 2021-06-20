@@ -30,6 +30,8 @@ So minions is needed and is the main issue that I had - all the minor mode info 
 
 Spaceline also has some setup ideas.
 
+[[https://github.com/rougier/nano-modeline][nano-modeline]]is what jerrypnz is based on now. It does a headline only form. (Noone does both). Its eval is mode dependent explicitly
+
 From my collection of init see
 
 leuven for a setup possibly using powerline
@@ -59,6 +61,8 @@ doom-modeline seems expandable enough. The one issue left is that it sets itself
 So back to spaceline - but again complex.
 
 Stick with jp- but I suspect when complete will be as bad as the others e.g. need to define segments and colours and icons
+
+But jp- is based on nano-modeline so lets see that, Note it only appeard begging of Jun 2021 so I could not have it earlier before like jp- I would have had to cut and paste. from nano
 
 * Packages
 :PROPERTIES:
@@ -269,6 +273,7 @@ This snippet displays the number of packages that you last needed to update. Thi
 * Jerry Peng setup
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210602T212500.390542
+:header-args:    :tangle no
 :END:
 See site-lisp/jerrypnz/jp-modeline.el
 Needs Moody. I also removed some
@@ -555,4 +560,16 @@ Separate out so org file is easier to read
   :ensure t
   :after spaceline
   :config (spaceline-all-the-icons-theme))
+#+end_src
+* Nano
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210620T130539.637610
+:END:
+Let's do the basic
+#+NAME: org_mark_mini20.local_20210620T130539.623889
+#+begin_src emacs-lisp
+(use-package nano-modeline
+  :mwb-load-path "fork/nano-modeline"
+  :demand
+  :config (nano-modeline))
 #+end_src

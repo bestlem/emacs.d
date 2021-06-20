@@ -64,6 +64,17 @@ Stick with jp- but I suspect when complete will be as bad as the others e.g. nee
 
 But jp- is based on nano-modeline so lets see that, Note it only appeard begging of Jun 2021 so I could not have it earlier before like jp- I would have had to cut and paste. from nano
 
+nano well config is nice but each build up hardcodes the buffer status and uses its own colors. I think I can just override the status but colors no. I can see copying it all into mine.
+nano-modeline sets face (but not if I had it at bottom, as does nano-modeline-compose, or some face remapping :(
+
+Basically nano has lots of different mode lines but that can be done with spaceline as well - although not done in space line as such.
+
+So use spaceline works but with the eval as per nano (segments nicked from doom)
+
+Actually nano does not add much here -
+
+Back to spaceline
+
 * Packages
 :PROPERTIES:
 :ID:       org_mark_mini20o.local:20210602T212500.391684

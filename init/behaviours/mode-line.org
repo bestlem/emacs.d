@@ -56,6 +56,10 @@ Another issue with frameworks is that mode specific stuff has to be in the segme
 
 doom-modeline seems expandable enough. The one issue left is that it sets itself for all modes, better I think if set in prog-mode hook as it does for other modes e.g. info. In practice so far the only one messed up is gnus, so an alternative might be to reset that manually.
 
+So back to spaceline - but again complex.
+
+Stick with jp- but I suspect when complete will be as bad as the others e.g. need to define segments and colours and icons
+
 * Packages
 :PROPERTIES:
 :ID:       org_mark_mini20o.local:20210602T212500.391684
@@ -66,7 +70,9 @@ doom-modeline seems expandable enough. The one issue left is that it sets itself
 #+begin_src emacs-lisp
 (use-package moody
   :ensure t
-  :disabled
+  ;;  Temportary as in jp-modeline
+  ;; :disabled
+
   :config
   (setq x-underline-at-descent-line t)
   ;; (moody-replace-mode-line-buffer-identification)
@@ -260,25 +266,42 @@ This snippet displays the number of packages that you last needed to update. Thi
 								;; (custom-modeline-flycheck-status)
 								))))
 #+end_src
-* Jerry Peng setup - no tangle
+* Jerry Peng setup
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210602T212500.390542
-:header-args:    :tangle no
 :END:
 See site-lisp/jerrypnz/jp-modeline.el
 Needs Moody. I also removed some
-#+NAME: org_mark_mini20.local_20210602T212500.386769
+But easier to manipulate - if get slow then go to spaceline
+Use his code verbatim
+
+#+NAME: org_mark_mini20.local_20210620T111717.655680
 #+begin_src emacs-lisp
 (use-package jp-modeline
   :demand
   :config
-  (setq jp-modeline-enabled-p t)
   (jp-modeline-activate)
   )
 #+end_src
-* Centaur setup/ a configured Doom
+** My config
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210620T111717.677813
+:END:
+Make mine call his
+#+NAME: org_mark_mini20.local_20210620T111717.656799
+#+begin_src emacs-lisp
+(use-package mwb-modeline
+  :mwb-load-path "site-lisp/mwb"
+  :demand
+  :config
+  (mwb-modeline-setup)
+  )
+#+end_src
+#+end_src
+* Centaur setup/ a configured Doom -no tangle
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210602T224030.562027
+:header-args:    :tangle no
 :END:
 Makes use of doom-modeline and minions
 TODO add to doom-modeline-indent-alist
@@ -501,7 +524,7 @@ Separate out so org file is easier to read
 	'(objed-state misc-info debug lsp minor-modes input-method buffer-encoding major-mode process checker))
   (mwb-headline-mode 1))
 #+end_src
-* Spaceline -no tangle
+* Spaceline - no tangle
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210606T165448.626960
 :header-args:    :tangle no

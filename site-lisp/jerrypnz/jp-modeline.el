@@ -1,8 +1,7 @@
 ;;; jp-modeline.el --- An awesome elisp package -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2017 Jerry Peng
-;; (c) 2021 Mark Bestley
-;; Based on amitp from Red Blob Games <redblobgames@gmail.com>
+
 ;; Author: Jerry Peng <pr2jerry@gmail.com>
 
 ;;; Commentary:
@@ -10,15 +9,12 @@
 ;; Taken from http://amitp.blogspot.co.nz/2011/08/emacs-custom-mode-line.html with
 ;; some modifications
 ;;
-;;  Amit is now on
-;;https://gist.github.com/redblobgames/5d9cf891120028440a4bdb429f101de6
-
 ;;; Code:
 
 (require 'all-the-icons)
 (require 'jp-icons)
 (require 's)
-;; (require 'moody)
+(require 'moody)
 
 ;; Extra mode line faces
 (defface mode-line-read-only-face
@@ -193,42 +189,26 @@ RIGHT, aligned respectively."
               "UTF-8")
              (t (upcase (symbol-name (plist-get sys :name)))))))))
 
-(defun mwb-modeline-encoding ()
-  " From jp-modeline-encoding and doom-modeline-def-segment"
-  )
-
 (defun jp-modeline-filename ()
   (let* ((face (if (jp-modeline-active-p) 'mode-line-filename-face 'mode-line-filename-inactive-face))
          (icon-face (unless (jp-modeline-active-p) 'mode-line-inactive))
          (filename (s-concat
-					(when (buffer-file-name)
-                      (shorten-directory default-directory 10))
-					(propertize (jp-buffer-filename) 'face face)))
-         (icon-size 0.8))
+                   (when (buffer-file-name)
+                     (shorten-directory default-directory 10))
+                   (propertize (jp-buffer-filename) 'face face)))
+        (icon-size 0.8))
     `(" "
       ,(moody-tab (with-mode-icon major-mode filename icon-size nil icon-face) nil 'down)
       " ")))
 
-(defun mwb-headline-filename ()
-  (let* ((face (if (jp-modeline-active-p) 'mode-line-filename-face 'mode-line-filename-inactive-face))
-         (icon-face (unless (jp-modeline-active-p) 'mode-line-inactive))
-         (filename (propertize (s-concat
-								(when (buffer-file-name)
-								  (shorten-directory default-directory 10))
-								(jp-buffer-filename))
-							   'face face))
-         (icon-size 0.8))
-    `(" "
-      ,(moody-tab (with-mode-icon major-mode filename icon-size nil icon-face) nil 'down)
-      " ")))
 (defun jp-modeline-position ()
   `(" %3l:"
     (3 ,(s-concat
-         (propertize "%c" 'face
-          (cond
-           ((not (jp-modeline-active-p)) 'mode-line-inactive)
-           ((>= (current-column) 80) 'mode-line-80col-face)
-           (t 'mode-line)))))))
+            (propertize "%c" 'face
+                         (cond
+                          ((not (jp-modeline-active-p)) 'mode-line-inactive)
+                          ((>= (current-column) 80) 'mode-line-80col-face)
+                          (t 'mode-line)))))))
 
 (defun jp-modeline-vc ()
   (when vc-mode
@@ -267,7 +247,7 @@ RIGHT, aligned respectively."
       (if (jp-modeline-active-p)
           x
         (propertize x 'face 'mode-line-inactive)))))
-;; TODO make this actually the mode icon
+
 (defun jp-headline-mode-icon ()
   (propertize " ☰ "
               'face (if (jp-modeline-active-p)
@@ -297,31 +277,7 @@ RIGHT, aligned respectively."
         jp-modeline--flycheck-text
       (propertize jp-modeline--flycheck-text 'face 'header-line-dimmed-face))))
 
-(defun mwb-headline-flycheck ()
-  (when doom-modeline--flycheck-text
-    (if (jp-modeline-active-p)
-        doom-modeline--flycheck-text
-	  (propertize doom-modeline--flycheck-text 'face 'header-line-dimmed-face))))
-
-(defun frame-title-format ()
-  "Return frame title with current project name, where applicable."
-  (let ((file buffer-file-name))
-    (if file
-        (if (and (bound-and-true-p projectile-mode)
-                 (projectile-project-p))
-            (concat
-             (format "[%s] " (projectile-project-name))
-             (replace-regexp-in-string (format "^%s" (projectile-project-p)) "" (file-truename file)))
-          (abbreviate-file-name file))
-      "%b")))
-
-
-
 (defvar jp-modeline-enabled-p nil)
-
-
-(defvar mwb-frame-title-format
-  '(:eval (mwb-frame-title)))
 
 (defvar jp-modeline-format
   '((:eval
@@ -343,10 +299,10 @@ RIGHT, aligned respectively."
      (jp-modeline-format
       ;; Left
       '((:eval (jp-headline-mode-icon))
-        (:eval (mwb-headline-filename))
+        (:eval (jp-headline-filename))
         (:eval (jp-headline-status)))
       ;; Right
-      '((:eval (mwb-headline-flycheck))
+      '((:eval (jp-headline-flycheck))
         (:eval (jp-headline-position)))))))
 
 (defvar jp-mini-modeline-r-format
@@ -357,9 +313,6 @@ RIGHT, aligned respectively."
     (:eval (jp-modeline-encoding))))
 
 (defun jp-modeline-activate ()
-  ;; (setq-default frame-title-format mwb-frame-title-format )
-  (when (display-graphic-p)
-	(setq frame-title-format '((:eval (frame-title-format)))))
   (if jp-modeline-enabled-p
       (progn
         (setq-default mode-line-format jp-modeline-format)

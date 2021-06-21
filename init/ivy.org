@@ -127,7 +127,7 @@ Note takes time to load
 (use-package all-the-icons-ivy-rich
   :ensure t
   :unless *aquamacs*
-  :config (all-the-icons-ivy-rich-mode 1)
+  :init (all-the-icons-ivy-rich-mode 1)
   :after ivy-prescient)
 #+end_src
 * Ivy rich
@@ -193,6 +193,7 @@ Improve many emacs functions
 #+begin_src emacs-lisp
 (use-package counsel
   :ensure t
+  :demand
   :diminish
   :after ivy
 ;;;  Using mode means these aren't needed?

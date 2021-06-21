@@ -348,15 +348,25 @@ Started as file management but actually deals with files and what is in them/ Tr
 :END:
 	This provides a cover for ripgrep.
 	#+begin_src emacs-lisp
-	(use-package deadgrep
-      :ensure t
-      :bind (("<f4>" . deadgrep)
-             :map deadgrep-mode-map
-             ("<double-mouse-1>" . deadgrep-visit-result-other-window)
-             ("<mouse-3>" . deadgrep-toggle-file-results))
-      :config (unless (executable-find "rg")
-                (warning "Please install ripgrep snap...")))
+(use-package deadgrep
+  :ensure t
+  :bind (("<f4>" . deadgrep)
+		 :map deadgrep-mode-map
+		 ("<double-mouse-1>" . deadgrep-visit-result-other-window)
+		 ("<mouse-3>" . deadgrep-toggle-file-results))
+  :config (unless (executable-find "rg")
+			(warning "Please install ripgrep snap...")))
 	#+end_src
+*** [[https://github.com/dajva/rg.el][rg]]
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210620T213143.122210
+:END:
+Might allow search in ignore files. It is more flexible but display is not as easy to use as you don't switch to found buffer and cannot tab to fold items
+#+NAME: org_mark_mini20.local_20210620T213143.089059
+#+begin_src emacs-lisp
+(use-package rg
+  :ensure t)
+#+end_src
 ** Projectile
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:4F9B2163-41AC-4087-B80D-C1A8815C6D20

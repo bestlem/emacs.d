@@ -888,6 +888,26 @@ toggle it if ARG is `toggle'; disable the mode otherwise.
 
 
 )
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/wgrep-20210322.2207/wgrep-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/wgrep-20210322.2207/wgrep-autoloads.el") (car load-path))))
+
+
+
+(autoload 'wgrep-setup "wgrep" "\
+Setup wgrep preparation." nil nil)
+
+(add-hook 'grep-setup-hook 'wgrep-setup)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "wgrep" '("wgrep-")))
+
+
+
+
+
+)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/validate-1.0.4/validate-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -2281,6 +2301,185 @@ Turn off `show-smartparens-mode'." t nil)
 
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "shrink-path" '("shrink-path-")))
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/rg-20210617.1715/rg-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/rg-20210617.1715/rg-autoloads.el") (car load-path))))
+
+
+
+(defvar rg-keymap-prefix "\3s" "\
+Prefix for global `rg' keymap.")
+
+(custom-autoload 'rg-keymap-prefix "rg" t)
+
+(defvar rg-command-line-flags-function 'identity "\
+Function to modify command line flags of a search.
+The argument of the function is an optional list of search specific
+command line flags and the function shall return a list of command
+line flags to use.")
+
+(autoload 'rg-define-toggle "rg" "\
+Define a command line flag that can be toggled from the rg result buffer.
+
+This will create a function with prefix 'rg-custom-toggle-flag-'
+concatenated with the FLAG name, stripped of any leading dashes.  Flag
+must be a form that will be evaluated to a string at macro expansion
+time.  For instance, if FLAG is '--invert-match' the function name
+will be 'rg-custom-toggle-flag-invert-match.  If the flag contains a
+value that will be excluded from the function name.
+
+Optional KEY is a key binding that is added to `rg-mode-map'.  If the
+optional DEFAULT parameter is non nil the flag will be enabled by default.
+
+\(fn FLAG &optional KEY DEFAULT)" nil t)
+
+(autoload 'rg-enable-default-bindings "rg" "\
+Enable the global `rg' default key bindings under PREFIX key.
+If prefix is not supplied `rg-keymap-prefix' is used.
+
+\(fn &optional PREFIX)" t nil)
+
+(autoload 'rg-use-old-defaults "rg" "\
+Restore default settings pre version 2.0.0." nil nil)
+
+(autoload 'rg-define-search "rg" "\
+Define an rg search functions named NAME.
+ARGS is a search specification that defines parameters of a search.
+It optionally starts with a string that is used as the docstring for
+the defined function.  The rest of ARGS contains key value pairs
+according to the specification below.  All keys are optional with
+specified default if left out.
+
+:query      Method for retrieving the search string.  Allowed values
+            are `point' which means extract thing at point and `ask'
+            which means prompt the user for a string.  Any form that
+            evaluates to a string is allowed.
+            Default is `ask'.
+:format     Specifies if :query is interpreted literally (`literal')
+            or as a regexp (`regexp').  If it is a form, eg.
+            (not `current-prefix-arg'), and is non-nil the :query is
+            interpreted literally, otherwise as a regexp.
+            Default is `regexp'.
+:files      Form that evaluates to a file alias or custom file glob.
+            `current' means extract alias from current buffer file name,
+            `ask' will prompt the user.
+            Default is `ask'.
+:dir        Root search directory.  Allowed values are `ask' for user
+            prompt, `current' for current dir and `project' for project
+            root.  Any form that evaluates to a directory string is
+            also allowed.
+            Default is `ask'.
+:confirm    `never', `always', or `prefix' are allowed values.  Specifies
+            if the the final search command line string can be modified
+            and confirmed the user.
+            Default is `never'.
+:flags      `ask' or a list of command line flags that will be used when
+            invoking the search.
+:menu       Bind the command into `rg-menu'.  Must be a list with three
+            items in it.  The first item is the description of the
+            group in witch the new command will appear.  If the group
+            does not exist a new will be created.  The second item is
+            the key binding for this new command (ether a key vector
+            or a key description string) and the third item is the
+            description of the command that will appear in the menu.
+
+Example:
+\(rg-define-search search-home-dir-in-elisp
+  \"Doc string.\"
+  :query ask
+  :format literal
+  :files \"elisp\"
+  :dir (getenv \"HOME\"))
+  :menu (\"Custom\" \"H\" \"Home dir\")
+
+\(fn NAME &rest ARGS)" nil t)
+
+(function-put 'rg-define-search 'lisp-indent-function 'defun)
+ (autoload 'rg-project "rg.el" "" t)
+ (autoload 'rg-dwim-project-dir "rg.el" "" t)
+ (autoload 'rg-dwim-current-dir "rg.el" "" t)
+ (autoload 'rg-dwim-current-file "rg.el" "" t)
+
+(autoload 'rg-dwim "rg" "\
+Run ripgrep without user interaction figuring out the intention by magic(!).
+The default magic searches for thing at point in files matching
+current file under project root directory.
+
+With \\[universal-argument] prefix (CURDIR), search is done in
+current dir instead of project root.
+
+With repeated \\[universal-argument] prefix, search is done in
+the current dir and using the current variable `buffer-file-name'
+as a pattern.  Subdirectories are still searched, so different
+files with the same name pattern still will be searched.
+
+\(fn &optional CURDIR)" t nil)
+ (autoload 'rg-literal "rg.el" "" t)
+ (autoload 'rg "rg.el" "" t)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "rg" '("kill-rg" "rg-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "rg-header" '("rg-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "rg-history" '("rg-history-")))
+
+
+
+(autoload 'rg-list-searches "rg-ibuffer" "\
+List all `rg-mode' buffers in `ibuffer'." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "rg-ibuffer" '("rg-")))
+
+
+
+ (autoload 'rg-isearch-current-file "rg-isearch.el" "" t)
+ (autoload 'rg-isearch-current-dir "rg-isearch.el" "" t)
+ (autoload 'rg-isearch-project "rg-isearch.el" "" t)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "rg-isearch" '("rg-get-isearch-string")))
+
+
+
+ (autoload 'rg-menu "rg-menu.el" "" t)
+
+(autoload 'rg-enable-menu "rg-menu" "\
+Bind `rg-menu' to PREFIX key.
+If prefix is not supplied `rg-keymap-prefix' is used.
+
+\(fn &optional PREFIX)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "rg-menu" '("rg-menu-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "rg-result" '("rg-")))
+
+
+
+(autoload 'wgrep-rg-setup "wgrep-rg" "\
+Setup wgrep rg support." nil nil)
+
+(add-hook 'rg-mode-hook 'wgrep-rg-setup)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "wgrep-rg" '("wgrep-rg-")))
+
 
 
 
@@ -13278,14 +13477,14 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
 )
 (setq package-activated-list
 	  (append
-	   '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra transient transient-posframe toc-org ivy swiper spinner all-the-icons powerline dash s spaceline memoize spaceline-all-the-icons sml-mode smartparens f shrink-path rainbow-mode rainbow-delimiters pos-tip racket-mode python-mode epl pkg-info projectile lv hydra pretty-hydra prescient pfuture persistent-scratch paredit paradox outorg outshine org-bullets org kv esxml nov mwim moody modus-themes minions math-symbol-lists makey major-mode-hydra git-commit magit macrostep avy ace-window iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc ht highlight-indent-guides elisp-refs helpful hardhat git-timemachine gcmh free-keys flycheck fish-mode fira-code-mode expand-region eval-in-repl eros elmacro dtrt-indent doom-modeline discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-theme cmake-mode cfrs cask-mode beacon amx all-the-icons-ivy-rich aggressive-indent)
+	   '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe wgrep validate bind-key use-package use-package-hydra transient transient-posframe toc-org ivy swiper spinner all-the-icons powerline dash s spaceline memoize spaceline-all-the-icons sml-mode smartparens f shrink-path rg rainbow-mode rainbow-delimiters pos-tip racket-mode python-mode epl pkg-info projectile lv hydra pretty-hydra prescient pfuture persistent-scratch paredit paradox outorg outshine org-bullets org kv esxml nov mwim moody modus-themes minions math-symbol-lists makey major-mode-hydra git-commit magit macrostep avy ace-window iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc ht highlight-indent-guides elisp-refs helpful hardhat git-timemachine gcmh free-keys flycheck fish-mode fira-code-mode expand-region eval-in-repl eros elmacro dtrt-indent doom-modeline discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-theme cmake-mode cfrs cask-mode beacon amx all-the-icons-ivy-rich aggressive-indent)
 	   package-activated-list))
 (progn
   (require 'info)
   (info-initialize)
   (setq Info-directory-list
 		(append
-		 '("/Users/mark/.emacs.d/elpa/27.2/elpa/magit-20210524.1513" "/Users/mark/.emacs.d/elpa/27.2/elpa/modus-themes-20210524.1750" "/Users/mark/.emacs.d/elpa/27.2/elpa/org-9.4.6" "/Users/mark/.emacs.d/elpa/27.2/elpa/racket-mode-20210524.1655" "/Users/mark/.emacs.d/elpa/27.2/elpa/dash-20210330.1544" "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-20210518.1815" "/Users/mark/.emacs.d/elpa/27.2/elpa/transient-20210426.2141" "/Users/mark/.emacs.d/elpa/27.2/elpa/use-package-20210207.1926" "/Users/mark/.emacs.d/elpa/27.2/elpa/with-editor-20210427.1244")
+		 '("/Users/mark/.emacs.d/elpa/27.2/elpa/magit-20210524.1513" "/Users/mark/.emacs.d/elpa/27.2/elpa/modus-themes-20210524.1750" "/Users/mark/.emacs.d/elpa/27.2/elpa/org-9.4.6" "/Users/mark/.emacs.d/elpa/27.2/elpa/racket-mode-20210524.1655" "/Users/mark/.emacs.d/elpa/27.2/elpa/rg-20210617.1715" "/Users/mark/.emacs.d/elpa/27.2/elpa/dash-20210330.1544" "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-20210518.1815" "/Users/mark/.emacs.d/elpa/27.2/elpa/transient-20210426.2141" "/Users/mark/.emacs.d/elpa/27.2/elpa/use-package-20210207.1926" "/Users/mark/.emacs.d/elpa/27.2/elpa/with-editor-20210427.1244")
 		 Info-directory-list)))
 
 ;; Local Variables:

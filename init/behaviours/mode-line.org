@@ -75,6 +75,8 @@ Actually nano does not add much here -
 
 Back to spaceline
 
+Back to doom - noting I don't need to setup the mode - that can be copied to my mode.
+
 * Packages
 :PROPERTIES:
 :ID:       org_mark_mini20o.local:20210602T212500.391684
@@ -104,7 +106,7 @@ Back to spaceline
 #+begin_src emacs-lisp
 (use-package minions
   :ensure t
-  :hook (doom-modeline-mode . minions-mode)
+  :hook ((mwb-headline-mode doom-modeline-mode) . minions-mode)
   :config
   (setq minions-mode-line-minor-modes-map
         (let ((map (make-sparse-keymap)))
@@ -314,10 +316,9 @@ Make mine call his
   )
 #+end_src
 #+end_src
-* Centaur setup/ a configured Doom -no tangle
+* Centaur setup/ a configured Doom
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210602T224030.562027
-:header-args:    :tangle no
 :END:
 Makes use of doom-modeline and minions
 TODO add to doom-modeline-indent-alist
@@ -333,7 +334,7 @@ TODO Hardhat as part of read only
 #+begin_src emacs-lisp
 (use-package doom-modeline
   :ensure t
-  :commands doom-modeline-mode doom-modeline-def-modeline
+  :commands doom-modeline-def-modeline doom-modeline
   :custom
   ;; (doom-modeline-icon centaur-icon)
   (doom-modeline-bar nil)
@@ -360,6 +361,7 @@ TODO Hardhat as part of read only
   (column-number-mode t)
   (size-indication-mode t)
 
+  :init
   ;; Whether display icons in the mode-line.
   ;; While using the server mode in GUI, should set the value explicitly.
   (setq doom-modeline-icon (display-graphic-p))
@@ -379,14 +381,7 @@ TODO Hardhat as part of read only
   ;; From customisation
   (setq doom-modeline-buffer-file-name-style 'truncate-with-project)
 
-  ;; The segment does not set the background of the face correctly
-  (set-face-attribute 'doom-modeline-buffer-minor-mode nil :inherit 'mode-line)
 
-  :init
-  ;; Prevent flash of unstyled modeline at startup
-  (unless after-init-time
-	(setq doom-modeline--default-format mode-line-format)
-	(setq-default mode-line-format nil))
   :bind (:map doom-modeline-mode-map
 			  ("C-<f6>" . doom-modeline-hydra/body)))
 #+end_src
@@ -525,7 +520,12 @@ Separate out so org file is easier to read
 (use-package mwb-headline-mode
   :mwb-load-path "site-lisp/mwb"
   :demand
-
+  :after doom-modeline
+  :init
+  ;; Prevent flash of unstyled modeline at startup
+  (unless after-init-time
+	(setq doom-modeline--default-format mode-line-format)
+	(setq-default mode-line-format nil))
   :config
   (doom-modeline-def-modeline 'main-headline
 	'(major-mode buffer-size minor-modes buffer-position selection-info)
@@ -538,6 +538,10 @@ Separate out so org file is easier to read
   (doom-modeline-def-modeline 'org-src
 	'(window-number modals buffer-info-simple buffer-position word-count parrot selection-info)
 	'(objed-state misc-info debug lsp minor-modes input-method buffer-encoding major-mode process checker))
+
+  ;; The segment does not set the background of the face correctly
+  (set-face-attribute 'doom-modeline-buffer-minor-mode nil :inherit 'mode-line)
+
   (mwb-headline-mode 1))
 #+end_src
 * Nano - no tangle
@@ -553,9 +557,10 @@ Let's do the basic
   :demand
   :config (nano-modeline))
 #+end_src
-* Spaceline
+* Spaceline -no tangle
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210606T165448.626960
+:header-args:    :tangle no
 :END:
 ** Load
 :PROPERTIES:

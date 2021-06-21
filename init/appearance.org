@@ -383,36 +383,43 @@ For my setup header-line needs to inherit from mode-line
 (require 'color-theme)
 (eval-after-load "color-theme"
   '(progn
-    (color-theme-initialize)
-    (color-theme-jsc-dark)
-    (set-face-attribute 'font-lock-keyword-face nil  :background 'unspecified)
-    (custom-set-faces
-     '(org-block
-       ((t
-         (:inherit shadow :extend t :background "midnight blue" :foreground "white" :family "Fira Code"))))
-     '(org-block-begin-line
-       ((t
-         (:inherit org-meta-line :foreground "cyan" :weight normal))))
-     '(org-block-end-line
-       ((t
-         (:inherit org-block-begin-line :foreground "cyan"))))
-     )
-    ;; (color-theme-high-contrast)
-    ;; (custom-set-faces
-    ;;  '(org-block
-    ;;    ((t
-    ;;      (:inherit shadow :extend t :background "lemon chiffon" :foreground "black" :family "Fira Code"))))
-    ;;  '(org-block-begin-line
-    ;;    ((t
-    ;;      (:inherit org-meta-line :foreground "blue" :weight normal))))
-    ;;  '(org-block-end-line
-    ;;    ((t
-    ;;      (:inherit org-block-begin-line :foreground "blue"))))
-    ;;  )
-    ))
+	 (color-theme-initialize)
+	 (color-theme-jsc-dark)
+	 (set-face-attribute 'font-lock-keyword-face nil :background 'unspecified)
+	 (set-face-attribute 'mode-line nil
+	  :foreground "white" :background "#323232")
+	 (set-face-attribute 'mode-line-inactive nil
+	  :foreground "#bfc0c4" :background "black" :box 'unspecified)
+	 (set-face-attribute 'mode-line-buffer-id nil
+	  :foreground 'unspecified
+	  :background 'unspecified)
+	 (set-face-attribute 'mode-line-emphasis nil :inherit 'mode-line)
+	 (set-face-attribute 'mode-line-highlight nil :inherit 'mode-line)
+	 (custom-set-faces
+	  '(org-block
+		((t
+		  (:inherit shadow :extend t :background "midnight blue" :foreground "white" :family "Fira Code"))))
+	  '(org-block-begin-line
+		((t
+		  (:inherit org-meta-line :foreground "cyan" :weight normal))))
+	  '(org-block-end-line
+		((t
+		  (:inherit org-block-begin-line :foreground "cyan")))))
+	 ;; (color-theme-high-contrast)
+	 ;; (custom-set-faces
+	 ;;  '(org-block
+	 ;;    ((t
+	 ;;      (:inherit shadow :extend t :background "lemon chiffon" :foreground "black" :family "Fira Code"))))
+	 ;;  '(org-block-begin-line
+	 ;;    ((t
+	 ;;      (:inherit org-meta-line :foreground "blue" :weight normal))))
+	 ;;  '(org-block-end-line
+	 ;;    ((t
+	 ;;      (:inherit org-block-begin-line :foreground "blue"))))
+	 ;;  )
+	 ))
 
 #+end_src
-
 *** New themes subpart
 :PROPERTIES:
 :ID:       org_2020-12-06+00-00:2DE8AEF4-0339-4B2E-885A-627140CF1894

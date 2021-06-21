@@ -38,6 +38,8 @@
 
 ;;; Code:
 
+(require 'doom-modeline-core)
+
 (defgroup mwb-headline-mode nil
   "Addition to doom-modeline to give a header"
   :group 'mode-line)
@@ -214,6 +216,36 @@ mouse-3: Next error"
 						  (mwb-headline-map-keymap map)
 						  map))))))
 
+(defun mwb-modeline--hook-action (add? mappings)
+  (let ((hook-action (if add? 'add-hook 'remove-hook))
+		(elements (seq-partition mappings 2)))
+	(dolist (elt elements)
+	  (apply hook-action elt))))
+
+(setq mwb-headline--hook-list
+	  (list
+	   'Info-mode-hook #'doom-modeline-set-info-modeline
+	   'dired-mode-hook #'doom-modeline-set-project-modeline
+	   'dashboard-mode-hook #'doom-modeline-set-dashboard-modeline
+	   'image-mode-hook #'doom-modeline-set-media-modeline
+	   'message-mode-hook #'doom-modeline-set-message-modeline
+	   'git-commit-mode-hook #'doom-modeline-set-message-modeline
+	   'magit-mode-hook #'doom-modeline-set-vcs-modeline
+	   'circe-mode-hook #'doom-modeline-set-special-modeline
+	   'erc-mode-hook #'doom-modeline-set-special-modeline
+	   'rcirc-mode-hook #'doom-modeline-set-special-modeline
+	   'pdf-view-mode-hook #'doom-modeline-set-pdf-modeline
+	   'org-src-mode-hook #'doom-modeline-set-org-src-modeline
+	   'git-timemachine-mode-hook #'doom-modeline-set-timemachine-modeline
+	   'paradox-menu-mode-hook #'doom-modeline-set-package-modeline
+	   'xwidget-webkit-mode-hook #'doom-modeline-set-minimal-modeline))
+
+(defun mwb-headline--hook-action (add? mappings)
+  (let ((hook-action (if add? 'add-hook 'remove-hook))
+		(elements (seq-partition mappings 2)))
+	(dolist (elt elements)
+	  (apply hook-action elt))))
+
 ;;; The actual mode
 ;;;###autoload
 (define-minor-mode mwb-headline-mode
@@ -222,22 +254,34 @@ mouse-3: Next error"
   :global t
   :lighter nil
   ;; :keymap mwb-headline-mode-map
+  :keymap doom-modeline-mode-map
+
   (if mwb-headline-mode
 	  (progn
-		(doom-modeline-mode 1)
+		;; (doom-modeline-mode 1)
+		(doom-modeline-refresh-bars)	; Create bars
 
-		(mwb-headline-set-main-headline t) ; set default
+		(mwb-headline-set-main-headline t)	; set default headline
+		(doom-modeline-set-main-modeline t) ; Set default mode-line
 
 		;; Apply to all existing buffers.
 		(dolist (buf (buffer-list))
 		  (with-current-buffer buf
-			(mwb-headline-set-main-headline)))
+			(mwb-headline-set-main-headline)
+			(doom-modeline-set-main-modeline)))
 
 		;;  set the header keymap as a copy of mode line
 		(mwb-headline-map-keymap mode-line-major-mode-keymap)
 		(mwb-headline-map-keymap mode-line-column-line-number-mode-map)
 
 		;;  hooks for special cases
+		;; For two-column editing
+		(setq 2C-mode-line-format (doom-modeline 'special))
+
+		;; Add hooks
+		(mwb-headline--hook-action 't mwb-headline--hook-list)
+		;; Add advices
+        (advice-add #'helm-display-mode-line :after #'doom-modeline-set-helm-modeline)
 		)
 	;; Restore mode-line
 	(let ((original-format (doom-modeline--original-value 'header-line-format)))
@@ -245,7 +289,19 @@ mouse-3: Next error"
 	  (dolist (buf (buffer-list))
 		(with-current-buffer buf
 		  (setq header-line-format original-format))))
-	(doom-modeline-mode -1)))
+	(let ((original-format (doom-modeline--original-value 'mode-line-format)))
+      (setq-default mode-line-format original-format)
+      (dolist (buf (buffer-list))
+        (with-current-buffer buf
+          (setq mode-line-format original-format))))
+	;; For two-column editing
+    (setq 2C-mode-line-format (doom-modeline--original-value '2C-mode-line-format))
+
+    ;; Remove hooks
+	(mwb-headline--hook-action nil mwb-headline--hook-list)
+	;; Remove advices
+    (advice-remove #'helm-display-mode-line #'doom-modeline-set-helm-modeline)
+	))
 
 (provide 'mwb-headline-mode)
 

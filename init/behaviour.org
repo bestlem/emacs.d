@@ -246,7 +246,8 @@ Single Capitals as you type. "
   (if dubcaps-mode
 	  (add-hook 'post-self-insert-hook #'dcaps-to-scaps nil 'local)
 	(remove-hook 'post-self-insert-hook #'dcaps-to-scaps 'local)))
-(dubcaps-mode 1)
+
+(add-hook 'text-mode-hook #'dubcaps-mode)
 
 #+end_src
 ** Misspelling correction

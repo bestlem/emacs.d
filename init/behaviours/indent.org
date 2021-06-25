@@ -85,3 +85,52 @@ Don't use the defaults look at the file
   )
 (global-guess-style-info-mode 1)        ; force the load
 #+end_src
+** Indent
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210625T090940.642292
+:END:
+*** [[https://github.com/Malabarba/aggressive-indent-mode][Aggressive indent]]
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210625T090940.640769
+:END:
+
+Indent as you type. Only for emacs lisp or racket at the moment. But that failed so back to global - If want to exclude then set (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+ https://github.com/Malabarba/aggressive-indent-mode
+ Setup from centuar
+
+#+NAME: org_mark_mini20.local_20210625T090940.620775
+#+begin_src emacs-lisp
+(use-package aggressive-indent
+  :ensure t
+  :hook
+  (prog-mode . aggressive-indent-mode)
+  ;; (python-mode . (lambda () (aggressive-indent-mode -1)))
+  :config
+  ;; Disable in some modes
+  (dolist (mode '(asm-mode
+				  web-mode
+				  html-mode
+				  css-mode
+				  go-mode
+				  yth
+				  scala-mode
+				  prolog-inferior-mode))
+	(push mode aggressive-indent-excluded-modes))
+  ;; Be slightly less aggressive in C/C++/C#/Java/Go/Swift
+  (add-to-list 'aggressive-indent-dont-indent-if
+			   '(and (derived-mode-p
+					  'c-mode
+					  'c++-mode
+					  'csharp-mode
+					  'java-mode
+					  'go-mode
+					  'swift-mode)
+				 (null (string-match (rx '(group
+										   (or (any ";{}")
+											(seq word-boundary
+											 (group
+											  (or "if" "for" "while"))
+											 word-boundary))))
+						;; "\\([;{}]\\|\\b\\(if\\|for\\|while\\)\\b\\)"
+						(thing-at-point 'line))))))
+#+end_src

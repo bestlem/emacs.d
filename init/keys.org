@@ -664,6 +664,7 @@ Odd things needed
     ("C-<tab>" hs-toggle-hiding "Toggle hide-show")
 	("f" refill-mode "Auto refill mode ")
 	("r" backup-walker-start "Backup Walker" )
+	("i" counsel-imenu "imenu")
     )
    "Actions"
    (("D" toggle-debug-on-error "debug on error" :toggle (default-value 'debug-on-error))

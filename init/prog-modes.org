@@ -141,23 +141,6 @@ _k_: kill        _s_: split                   _{_: wrap with { }
 
 (bind-key "H-["  'ptrv/smartparens/body)
 #+end_src
-*** [[https://github.com/Malabarba/aggressive-indent-mode][Aggressive indent]]
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:25EEAB16-473F-4321-B9CD-085BD4B97CB5
-:END:
-Indent as you type. Only for emacs lisp or racket at the moment. But that failed so back to global - If want to exclude then set (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
- https://github.com/Malabarba/aggressive-indent-mode
-
-
-#+NAME: org_mark_mini20.local_20210429T084405.767658
-#+begin_src emacs-lisp
-(use-package aggressive-indent
-  :ensure t
-  :hook
-  (prog-mode . aggressive-indent-mode)
-  ;; (python-mode . (lambda () (aggressive-indent-mode -1)))
-  )
-#+end_src
 ** Refactor
 :PROPERTIES:
 :ID:       org_mark_2020-10-14T11-05-37+01-00_mini12.local:A69F6693-E4CF-4C02-B645-5D83516AFE64

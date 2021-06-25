@@ -41,6 +41,7 @@ Note that if a subdirectory is just for one thing then use keyword mwb-load-path
 #+begin_src emacs-lisp
 (add-to-list 'load-path (mwb-user-emacs-file "site-lisp"))
 #+end_src
+****
 *** Where things are put
 :PROPERTIES:
 :ID:       org_mark_2020-09-29T11-53-58+01-00_mini12.local:63AB1DE7-5C65-415D-96D0-7DAF0E0BC2BA
@@ -75,6 +76,32 @@ Note should check on defconst
 #+begin_src emacs-lisp
 (use-package validate
   :ensure t)
+#+end_src
+
+* Support functions
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210624T203034.970975
+:END:
+Various things to make management of init files easier
+Many taken from centuar
+
+** recompile site-lisp
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210624T203034.970002
+:END:
+This is a function so can run only from old emacs as newer emacs will not understand the byte codes. Modified to use my directories and to add fork
+TODO: exclude sopme directories - especially modus-themes and treemacs as they need a proper build and/or can be done for later emacs.
+#+NAME: org_mark_mini20.local_20210624T203034.951856
+#+begin_src emacs-lisp
+(unless *emacs/>=26p*
+  (defun mwb-init-recompile-site-lisp ()
+    "Recompile packages in site-lisp directory."
+    (interactive)
+    (dolist (elt '("site-lisp" "fork"))
+      (let ((temp-dir (mwb-user-emacs-file elt)))
+        (if (fboundp 'async-byte-recompile-directory)
+            (async-byte-recompile-directory temp-dir)
+          (byte-recompile-directory temp-dir 0 t))))))
 #+end_src
 * Emacs server
 :PROPERTIES:

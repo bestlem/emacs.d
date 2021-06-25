@@ -115,23 +115,14 @@ I haven't used before but might try with hydra from [[https://sriramkswamy.githu
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:BA8FE03C-5430-4984-9CD3-7E5971925F68
 :END:
-Let's use [[https://github.com/Wilfred/helpful][Helpful]]
+Let's use [[https://github.com/Wilfred/helpful][Helpful]] But bind the keys in keys.org
 #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_20EF0E45-D1C2-493C-B710-6E2B48D98DB9
 #+begin_src emacs-lisp
 (use-package helpful
   :ensure t
   :custom
   (counsel-describe-function-function #'helpful-callable)
-  (counsel-describe-variable-function #'helpful-variable)
-  :bind
-  ;; ([remap describe-function] . helpful-callable)
-  ([remap describe-command] . helpful-command)
-  ;; ([remap describe-variable] . helpful-variable)
-  ([remap describe-key] . helpful-key)
-  ;; ("<f1> F" . helpful-function)
-  ;; ("<f1> ." . helpful-at-point)
-  ;; ("<f1> <f1>" . helpful-at-point)
-  )
+  (counsel-describe-variable-function #'helpful-variable))
 #+end_src
 ** Improve majors
 :PROPERTIES:
@@ -141,9 +132,7 @@ This package helps to discover the major mode bindings. I use it very occasional
 #+NAME: org_mark_mini20.local_20210526T204803.473143
 #+begin_src emacs-lisp
 (use-package discover-my-major
-  :ensure t
-  :bind (("C-h C-m" . discover-my-major)
-		 ("C-h M-m" . discover-my-mode)))
+  :ensure t)
 #+end_src
 * Key Chord
 :PROPERTIES:

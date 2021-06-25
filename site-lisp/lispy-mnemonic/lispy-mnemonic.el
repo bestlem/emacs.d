@@ -147,14 +147,19 @@
 
 (require 'lispy)
 (require 'hydra)
+(require 'pretty-hydra)
+
+(declare-function bind-key 'bind-key)
+(declare-function aquamacs-undo 'aquamacs-redo)
+(declare-function er/expand-region 'expand-region)
+(declare-function er/contract-region 'expand-region)
 
 (defgroup lispy-mnemonic nil
   "Mnemonic key bindings for Lispy."
   :group 'bindings)
 
 (defcustom lispy-mnemonic-restore-bindings nil
-  "When non-nil, restore default bindings for commands that ship
-  with Emacs."
+  "When non-nil, restore default bindings for commands that ship with Emacs."
   :type 'boolean)
 
 (defvar lispy-mnemonic-mode-map (copy-keymap lispy-mode-map)
@@ -178,28 +183,10 @@
 ;;; Hydra ;;;
 ;;;;;;;;;;;;;
 
-(pretty-hydra-define hydra-lispy-mwb-run
-    (:foreign-keys run
-     :title "☾☽ Lispy Run"
-     :quit-key "q")
-  ("Lispy debug"
-   (("d" lispy-edebug "edebug")
-    ("s" lispy-debug-step-in "step in")
-    ("S" lispy-edebug-stop "stop")
-    ("d" lispy-describe "describe"))
-   "Lispy eval"
-   (("e" lispy-eval "eval")
-    ("r" lispy-eval-and-replace "replace" :color red)
-    ("o" lispy-eval-other-window "other window")
-    ("i" lispy-eval-and-insert "insert")
-    ("c" lispy-eval-and-comment "comment"))))
-
-
-
 (pretty-hydra-define hydra-lispy-mwb-alter
-    (:foreign-keys run
-     :title "☾☽ Lispy Alter"
-     :quit-key "q")
+  (:foreign-keys run
+				 :title "☾☽ Lispy Alter"
+				 :quit-key "q")
   ("Lispy raise"
    (("c" lispy-convolute "Convolute - Swap?")
     ("r" lispy-raise "raise")
@@ -216,10 +203,27 @@
    ( ("o" lispy-oneline "one line")
      ("m" lispy-multiline "multiple lines"))))
 
+(pretty-hydra-define hydra-lispy-mwb-run
+  (:foreign-keys run
+				 :title "☾☽ Lispy Run"
+				 :quit-key "q")
+  ("Lispy debug"
+   (("d" lispy-edebug "edebug")
+    ("s" lispy-debug-step-in "step in")
+    ("S" lispy-edebug-stop "stop")
+    ("d" lispy-describe "describe"))
+   "Lispy eval"
+   (("e" lispy-eval "eval")
+    ("r" lispy-eval-and-replace "replace" :color red)
+    ("o" lispy-eval-other-window "other window")
+    ("i" lispy-eval-and-insert "insert")
+    ("c" lispy-eval-and-comment "comment"))))
+
+
 (pretty-hydra-define hydra-lispy-mwb-mark
-    (:foreign-keys warn
-     :title "☾☽ Lispy Play with regions"
-     :quit-key "q")
+  (:foreign-keys warn
+				 :title "☾☽ Lispy Play with regions"
+				 :quit-key "q")
   ("Lispy move"
    (("<down>" lispy-move-down "down")
     ("<left>" lispy-move-left "left")
@@ -241,7 +245,7 @@
     (">" lispy-slurp nil)
     ("<" lispy-barf nil))
    "actions"
-   (("a" hydra-lispy-mwb-alter "Alter...")
+   (("a" hydra-lispy-mwb-alter/body "Alter...")
     ("x" clipboard-kill-region "cut")
     ("z" aquamacs-undo "undo"))))
 
@@ -372,3 +376,5 @@
 				(lispy-mnemonic--restore-bindings)))
 
 (provide 'lispy-mnemonic)
+
+;;; lispy-mnemonic ends here

@@ -46,6 +46,11 @@ But if using package we do want it done - early-init turn off is for straight.el
 #+begin_src emacs-lisp
 ;;(setq package-enable-at-startup nil)
 #+end_src
+
+*** Set paths
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210625T123956.569254
+:END:
 Set the path to packages
 #+NAME: org_mark_2020-09-28T01-08-28+01-00_mini12.local_0E90CFE6-BBAC-4DA3-8461-12811764098F
 #+begin_src emacs-lisp
@@ -53,6 +58,17 @@ Set the path to packages
                  (expand-file-name
                   (format "elpa/%s/elpa"
                           (concat emacs-version (when (getenv "MELPA_STABLE") "-stable"))) user-emacs-directory))
+#+end_src
+*** Set package quickload by version
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210625T123956.568444
+:END:
+#+NAME: org_mark_mini20.local_20210625T123956.553714
+#+begin_src emacs-lisp
+(setq package-quickstart-file
+	  (expand-file-name
+	   (format "package-quickstart.%s.el" emacs-version)
+	   user-emacs-directory))
 #+end_src
 ** Graphical suppression
 :PROPERTIES:

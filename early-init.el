@@ -21,6 +21,13 @@
                (concat emacs-version (when (getenv "MELPA_STABLE") "-stable"))) user-emacs-directory))
 ;; org_mark_2020-09-28T01-08-28+01-00_mini12.local_0E90CFE6-BBAC-4DA3-8461-12811764098F ends here
 
+;; [[file:init.org::org_mark_mini20.local_20210625T123956.553714][org_mark_mini20.local_20210625T123956.553714]]
+(setq package-quickstart-file
+	  (expand-file-name
+	   (format "package-quickstart.%s.el" emacs-version)
+	   user-emacs-directory))
+;; org_mark_mini20.local_20210625T123956.553714 ends here
+
 ;; [[file:init.org::org_mark_2020-09-28T01-08-28+01-00_mini12.local_19B4CE88-E1D4-4E44-91B7-AD3D8E74C2D3][org_mark_2020-09-28T01-08-28+01-00_mini12.local_19B4CE88-E1D4-4E44-91B7-AD3D8E74C2D3]]
 ;;(menu-bar-mode -1)
 (unless (and (display-graphic-p) (eq system-type 'darwin))

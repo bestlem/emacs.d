@@ -1556,6 +1556,35 @@ Like `swiper-isearch' but the first result is before the point.
 
 
 )
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/srefactor-20180703.1810/srefactor-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/srefactor-20180703.1810/srefactor-autoloads.el") (car load-path))))
+
+
+
+(autoload 'srefactor-refactor-at-point "srefactor" "\
+Offer contextual menu with actions based on current tag in scope.
+
+Each menu item added returns a token for what type of refactoring
+to perform." t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "srefactor" '("srefactor-")))
+
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "srefactor-lisp" '("comment-" "cur-buf" "first-token" "format-type" "ignore-num" "lexemes" "next-token" "orig-format-type" "recursive-p" "second-token" "srefactor-" "tok")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "srefactor-ui" '("srefactor-ui-")))
+
+
+
+
+)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/spinner-1.7.3/spinner-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -5744,6 +5773,41 @@ minor-modes that is usually displayed directly in the mode line.
 
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "minions" '("minions-")))
+
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/mini-frame-20210212.2041/mini-frame-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/mini-frame-20210212.2041/mini-frame-autoloads.el") (car load-path))))
+
+
+
+(defvar mini-frame-mode nil "\
+Non-nil if Mini-Frame mode is enabled.
+See the `mini-frame-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `mini-frame-mode'.")
+
+(custom-autoload 'mini-frame-mode "mini-frame" nil)
+
+(autoload 'mini-frame-mode "mini-frame" "\
+Show minibuffer in child frame on read-from-minibuffer.
+
+If called interactively, enable Mini-Frame mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "mini-frame" '("mini-frame-")))
 
 
 
@@ -13477,7 +13541,7 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
 )
 (setq package-activated-list
 	  (append
-	   '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe wgrep validate bind-key use-package use-package-hydra transient transient-posframe toc-org ivy swiper spinner all-the-icons powerline dash s spaceline memoize spaceline-all-the-icons sml-mode smartparens f shrink-path rg rainbow-mode rainbow-delimiters pos-tip racket-mode python-mode epl pkg-info projectile lv hydra pretty-hydra prescient pfuture persistent-scratch paredit paradox outorg outshine org-bullets org kv esxml nov mwim moody modus-themes minions math-symbol-lists makey major-mode-hydra git-commit magit macrostep avy ace-window iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc ht highlight-indent-guides elisp-refs helpful hardhat git-timemachine gcmh free-keys flycheck fish-mode fira-code-mode expand-region eval-in-repl eros elmacro dtrt-indent doom-modeline discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-theme cmake-mode cfrs cask-mode beacon amx all-the-icons-ivy-rich aggressive-indent)
+	   '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe wgrep validate bind-key use-package use-package-hydra transient transient-posframe toc-org ivy swiper srefactor spinner all-the-icons powerline dash s spaceline memoize spaceline-all-the-icons sml-mode smartparens f shrink-path rg rainbow-mode rainbow-delimiters pos-tip racket-mode python-mode epl pkg-info projectile lv hydra pretty-hydra prescient pfuture persistent-scratch paredit paradox outorg outshine org-bullets org kv esxml nov mwim moody modus-themes minions mini-frame math-symbol-lists makey major-mode-hydra git-commit magit macrostep avy ace-window iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc ht highlight-indent-guides elisp-refs helpful hardhat git-timemachine gcmh free-keys flycheck fish-mode fira-code-mode expand-region eval-in-repl eros elmacro dtrt-indent doom-modeline discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-theme cmake-mode cfrs cask-mode beacon amx all-the-icons-ivy-rich aggressive-indent)
 	   package-activated-list))
 (progn
   (require 'info)

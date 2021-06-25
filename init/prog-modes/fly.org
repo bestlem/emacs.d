@@ -5,21 +5,6 @@
 :PROPERTIES:
 :ID:       org_mark_2020-11-09T11-32-01+00-00_mini12.local:0ECCD41D-B2B9-4183-A618-D1256CA9090F
 :END:
-** Spellcheck comments
-:PROPERTIES:
-:ID:       org_mark_2020-11-09T11-32-01+00-00_mini12.local:15BE314B-C570-410A-B613-4830D1424173
-:END:
-From [[https://www.emacswiki.org/emacs/FlySpell#toc2][Emacs Wiki]]
-#+NAME: org_mark_2020-11-09T11-32-01+00-00_mini12.local_FF77B281-6EF6-4E33-AF12-0BECC8930426
-#+begin_src emacs-lisp
-(add-hook 'prog-mode-hook
-          #'flyspell-prog-mode)
-#+end_src
-*** TODO keys etc
-:PROPERTIES:
-:ID:       org_2020-12-02+00-00:9303336C-3D74-4225-9A72-98D5AF250F76
-:END:
-Look at https://github.com/IvanMalison/dotfiles/tree/master/dotfiles/emacs.d
 ** TODO Flymake
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:6D225364-60B5-4C41-A802-CFBE5E7E6F2A
@@ -38,8 +23,11 @@ Look at https://github.com/IvanMalison/dotfiles/tree/master/dotfiles/emacs.d
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:2D0EB2E3-8745-45CE-9B24-937DB5282589
 :END:
-	 I have seen comments that for emacs <26 this is definitely better
-	 #+begin_src emacs-lisp
+I have seen comments that for emacs <26 this is definitely better
+Added things from centaur. Especially for emacs-lisp
+
+#+NAME: org_mark_mini20.local_20210622T192842.412752
+#+begin_src emacs-lisp
 (use-package flycheck
   :ensure t
   ;; :when (version< emacs-version "26.1")
@@ -52,7 +40,7 @@ Look at https://github.com/IvanMalison/dotfiles/tree/master/dotfiles/emacs.d
   <<flycheck-hydra>>
   :custom
   (flycheck-display-errors-delay 0.3))
-     #+end_src
+#+end_src
 *** Set modes for which it is used
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210504T172051.622727
@@ -64,11 +52,14 @@ I don't like `global-flycheck-mode' everywhere  some modes, such as elisp mode; 
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210504T172051.621095
 :END:
-This is to stop check for full package level emacs lisp documentation
+This is to stop check for full package level emacs lisp documentation. But really only need that in org-src
 
 #+NAME: org_mark_mini20.local_20210504T172051.605822
 #+begin_src emacs-lisp :tangle no :noweb-ref flycheck-init
-(setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
+(defun -mwb-org-src-hook-flycheck-fn ()
+  (setq flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
+
+(add-hook 'org-src-mode-hook #'-mwb-org-src-hook-flycheck-fn )
 #+end_src
 **** Disable modes
 :PROPERTIES:
@@ -77,8 +68,30 @@ This is to stop check for full package level emacs lisp documentation
 Found the correct way https://emacs.stackexchange.com/a/21046/9874
 #+NAME: org_mark_mini20.local_20210504T172342.686752
 #+begin_src emacs-lisp :tangle no :noweb-ref flycheck-init
-(setq flycheck-global-modes '(not racket-mode))
+(setq flycheck-global-modes '(not
+							  text-mode
+							  outline-mode
+							  fundamental-mode
+							  lisp-interaction-mode
+							  org-mode
+							  diff-mode
+							  ;; shell-mode
+							  eshell-mode
+							  ;; term-mode
+							  ;; vterm-mode
+							  racket-mode
+							  ))
 
+#+end_src
+**** Load-path
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210622T193832.857681
+:END:
+Flycheck runs in a new emacs and by default has only emacs as load-path. I want it to have all the ones I have in init.
+
+#+NAME: org_mark_mini20.local_20210622T193832.844090
+#+begin_src emacs-lisp :tangle no :noweb-ref flycheck-init
+(setq flycheck-emacs-lisp-load-path 'inherit)
 #+end_src
 *** Hydra to control
 :PROPERTIES:

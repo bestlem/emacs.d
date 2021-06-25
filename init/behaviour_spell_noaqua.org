@@ -46,3 +46,22 @@ ASpell automatically configures a personal dictionary  at =~/.aspell.en.pws=, so
 A possibly nifty feature of aspell is the ability to spellcheck individual words in CamelCase that is used extensively in some code (for details, see [[http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html][this article]]).
 
 But I don't do camel case :)
+
+
+* Spellcheck comments
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210622T191515.804637
+:END:
+
+From [[https://www.emacswiki.org/emacs/FlySpell#toc2][Emacs Wiki]]
+
+#+NAME: org_mark_mini20.local_20210622T191515.789225
+#+begin_src emacs-lisp
+(add-hook 'prog-mode-hook
+          #'flyspell-prog-mode)
+#+end_src
+** TODO keys etc
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210622T191515.803292
+:END:
+Look at https://github.com/IvanMalison/dotfiles/tree/master/dotfiles/emacs.d

@@ -322,9 +322,10 @@ Make mine call his
   )
 #+end_src
 #+end_src
-* Centaur setup/ a configured Doom
+* Centaur setup/ a configured Doom -no tangle
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210602T224030.562027
+:header-args:    :tangle no
 :END:
 Makes use of doom-modeline and minions
 TODO add to doom-modeline-indent-alist

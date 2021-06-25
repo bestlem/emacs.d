@@ -7,4 +7,3 @@ data/abbrev.el
 var
 .org-id-locations
 .cask
-/eln-cache/

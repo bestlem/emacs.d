@@ -39,6 +39,28 @@
 ;;; Code:
 
 (require 'doom-modeline-core)
+(require 'doom-modeline)
+(require 'doom-modeline-segments)
+
+;;
+;; Externals
+;;
+;; Suppress warnings
+(defvar 2C-mode-line-format)
+(defvar flycheck-current-errors)
+(defvar flycheck-mode-menu-map)
+
+(declare-function fancy-narrow-active-p 'fancy-narrow)
+(declare-function flycheck-count-errors 'flycheck)
+(declare-function flycheck-error-level-compilation-level 'flycheck)
+(declare-function flycheck-list-errors 'flycheck)
+(declare-function flycheck-next-error 'flycheck)
+(declare-function flycheck-previous-error 'flycheck)
+(declare-function helm-candidate-number-at-point 'helm)
+(declare-function helm-display-mode-line 'helm)
+(declare-function helm-get-candidate-number 'helm)
+
+
 
 (defgroup mwb-headline-mode nil
   "Addition to doom-modeline to give a header"
@@ -46,7 +68,7 @@
 
 ;;; Support functions
 (defmacro mwb-headline-map-keymap (keymap)
-  "Copy the mode-line keymap to header-line."
+  "Copy the mode-line KEYMAP to header-line."
   `(define-key ,keymap [header-line]
 	 (lookup-key ,keymap [mode-line])))
 
@@ -109,7 +131,7 @@ Adds a hardhat indicator"
 
 (defun doom-modeline-update-flycheck-icon (&optional status)
   "Update flycheck icon via STATUS.
-Adds the headerline keymap "
+Adds the headerline keymap"
   (setq doom-modeline--flycheck-icon
 		(when-let
 			((icon
@@ -216,31 +238,27 @@ mouse-3: Next error"
 						  (mwb-headline-map-keymap map)
 						  map))))))
 
-(defun mwb-modeline--hook-action (add? mappings)
-  (let ((hook-action (if add? 'add-hook 'remove-hook))
-		(elements (seq-partition mappings 2)))
-	(dolist (elt elements)
-	  (apply hook-action elt))))
-
-(setq mwb-headline--hook-list
-	  (list
-	   'Info-mode-hook #'doom-modeline-set-info-modeline
-	   'dired-mode-hook #'doom-modeline-set-project-modeline
-	   'dashboard-mode-hook #'doom-modeline-set-dashboard-modeline
-	   'image-mode-hook #'doom-modeline-set-media-modeline
-	   'message-mode-hook #'doom-modeline-set-message-modeline
-	   'git-commit-mode-hook #'doom-modeline-set-message-modeline
-	   'magit-mode-hook #'doom-modeline-set-vcs-modeline
-	   'circe-mode-hook #'doom-modeline-set-special-modeline
-	   'erc-mode-hook #'doom-modeline-set-special-modeline
-	   'rcirc-mode-hook #'doom-modeline-set-special-modeline
-	   'pdf-view-mode-hook #'doom-modeline-set-pdf-modeline
-	   'org-src-mode-hook #'doom-modeline-set-org-src-modeline
-	   'git-timemachine-mode-hook #'doom-modeline-set-timemachine-modeline
-	   'paradox-menu-mode-hook #'doom-modeline-set-package-modeline
-	   'xwidget-webkit-mode-hook #'doom-modeline-set-minimal-modeline))
+(defvar mwb-headline--hook-list
+  (list
+   'Info-mode-hook #'doom-modeline-set-info-modeline
+   'dired-mode-hook #'doom-modeline-set-project-modeline
+   'dashboard-mode-hook #'doom-modeline-set-dashboard-modeline
+   'image-mode-hook #'doom-modeline-set-media-modeline
+   'message-mode-hook #'doom-modeline-set-message-modeline
+   'git-commit-mode-hook #'doom-modeline-set-message-modeline
+   'magit-mode-hook #'doom-modeline-set-vcs-modeline
+   'circe-mode-hook #'doom-modeline-set-special-modeline
+   'erc-mode-hook #'doom-modeline-set-special-modeline
+   'rcirc-mode-hook #'doom-modeline-set-special-modeline
+   'pdf-view-mode-hook #'doom-modeline-set-pdf-modeline
+   'org-src-mode-hook #'doom-modeline-set-org-src-modeline
+   'git-timemachine-mode-hook #'doom-modeline-set-timemachine-modeline
+   'paradox-menu-mode-hook #'doom-modeline-set-package-modeline
+   'xwidget-webkit-mode-hook #'doom-modeline-set-minimal-modeline)
+  "A list of hooks and actions as funbctions to be added or removed.")
 
 (defun mwb-headline--hook-action (add? mappings)
+  "Go through MAPPINGS, a list of hooks and actions and either depending on ADD? add or remove them."
   (let ((hook-action (if add? 'add-hook 'remove-hook))
 		(elements (seq-partition mappings 2)))
 	(dolist (elt elements)

@@ -77,6 +77,8 @@ Back to spaceline
 
 Back to doom - noting I don't need to setup the mode - that can be copied to my mode.
 
+Spaceline looks the best architected need a minions and possibly icons done. e.g. hat icon just in Unicode (OK doom looks best)
+
 * Packages
 :PROPERTIES:
 :ID:       org_mark_mini20o.local:20210602T212500.391684
@@ -99,6 +101,10 @@ Back to doom - noting I don't need to setup the mode - that can be copied to my 
 
 
 ** Minions
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210625T080416.517119
+:END:
+This cuts out all diminish issues but also see https://www.manueluberti.eu/emacs/2018/03/10/moody-and-minions/ for noting can make some minor modes stay
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210602T224030.560968
 :END:

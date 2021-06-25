@@ -77,6 +77,7 @@ However I had a lot of strings so tried.
 :END:
 Just for lisp But seems no better
 Plus the lisp formatting is not autoloaded
+The one thing I wanted ot for this time was to break an expression to a work per line and it does not. But lispy multiple lines did.
 #+NAME: org_mark_2020-11-24T18-08-50+00-00_mini12.local_BA7E1106-4E0E-4D38-B512-2C59194F3F4D
 #+begin_src emacs-lisp :tangle no
 (use-package srefactor

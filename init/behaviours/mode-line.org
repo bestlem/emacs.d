@@ -77,7 +77,7 @@ Back to spaceline
 
 Back to doom - noting I don't need to setup the mode - that can be copied to my mode.
 
-Spaceline looks the best architected need a minions and possibly icons done. e.g. hat icon just in Unicode (OK doom looks best)
+Spaceline looks the best architected need a minions and possibly icons done. e.g. hat icon just in Unicode (OK doom looks best) But does not get the icons and setup there. Doom just has more already. So I write crappier code for doom but less. (Basically if I was better at emacs I would modify spaceline)
 
 * Packages
 :PROPERTIES:
@@ -564,10 +564,9 @@ Let's do the basic
   :demand
   :config (nano-modeline))
 #+end_src
-* Spaceline -no tangle
+* Spaceline
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210606T165448.626960
-:header-args:    :tangle no
 :END:
 ** Load
 :PROPERTIES:

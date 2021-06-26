@@ -35,8 +35,15 @@
 (require 'spaceline)
 (require 'all-the-icons)
 
-(provide 'spaceline-mwb-segments)
+(defmacro mwb-headline--map-keymap (keymap)
+  "Copy the mode-line KEYMAP to header-line."
+  `(define-key ,keymap [header-line]
+	 (lookup-key ,keymap [mode-line])))
 
+(defun mwb-headline--keymap-header-and-mode (keymap)
+  "Return a mode-line KEYMAP copied to header-line as well."
+  (mwb-headline--map-keymap keymap)
+  keymap)
 
 
 ;;; First Divider Segments
@@ -51,7 +58,8 @@
     (propertize (all-the-icons-faicon icon :v-adjust 0.0)
                 'face `(:family ,(all-the-icons-faicon-family) :height ,(spaceline-all-the-icons--height 1.1) :inherit)
                 'mouse-face (spaceline-all-the-icons--highlight)
-                'local-map (make-mode-line-mouse-map 'mouse-1 'read-only-mode)))
+                'local-map (mwb-headline--keymap-header-and-mode (make-mode-line-mouse-map 'mouse-1 'read-only-mode))))
   :tight t)
 
+(provide 'spaceline-mwb-segments)
 ;;; spaceline-mwb-segments.el ends here

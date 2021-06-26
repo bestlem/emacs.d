@@ -52,7 +52,9 @@
 
 
 ;;; Full Modeline Definition
-(defconst spaceline-mwb-theme '("%e" (:eval (spaceline-ml-mwb)))
+(defconst spaceline-mwb-mode-theme '("%e" (:eval (spaceline-ml-mwb-mode)))
+  "Constant version of variable `spaceline-mwb-theme' to allow to be set manually.")
+(defconst spaceline-mwb-head-theme '("%e" (:eval (spaceline-ml-mwb-head)))
   "Constant version of variable `spaceline-mwb-theme' to allow to be set manually.")
 
 ;;;###autoload
@@ -61,7 +63,7 @@
 Add ADDITIONAL-SEGMENTS to the end of the theme."
   (interactive)
   (spaceline-compile
-	"mwb"
+	"mwb-mode"
 	'((all-the-icons-anzu
 	   :face 'mode-line
 	   :skip-alternate t)
@@ -128,8 +130,68 @@ Add ADDITIONAL-SEGMENTS to the end of the theme."
 
 	  all-the-icons-separator-right-active-2
 	  all-the-icons-separator-right-inactive))
+  (spaceline-compile
+	"mwb-head"
+	'(
 
-  (setq-default mode-line-format spaceline-mwb-theme))
+	  ((mwb-modified
+		all-the-icons-bookmark
+		all-the-icons-dedicated
+		all-the-icons-window-number
+		all-the-icons-eyebrowse-workspace
+		all-the-icons-buffer-size) :face highlight-face :skip-alternate t)
+
+	  all-the-icons-separator-left-active-1
+
+	  ;; The actual buffer mode
+	  (( all-the-icons-mode-icon)
+	   :face default-face)
+
+	  all-the-icons-separator-left-active-2
+
+	  ((all-the-icons-process
+		all-the-icons-position
+		all-the-icons-region-info
+		all-the-icons-fullscreen
+		all-the-icons-text-scale
+		all-the-icons-narrowed
+		all-the-icons-multiple-cursors)
+	   :face highlight-face
+	   :separator (spaceline-all-the-icons--separator spaceline-all-the-icons-primary-separator " "))
+
+	  all-the-icons-separator-left-active-3
+	  all-the-icons-separator-left-inactive
+
+	  (( ((all-the-icons-flycheck-status
+		   all-the-icons-flycheck-status-info) :separator " ")
+		 all-the-icons-package-updates)
+	   :face other-face
+	   :separator (spaceline-all-the-icons--separator spaceline-all-the-icons-secondary-separator " "))
+
+	  ((all-the-icons-separator-minor-mode-left
+		all-the-icons-minor-modes
+		all-the-icons-separator-minor-mode-right)
+	   :tight t
+	   :face highlight-face
+	   :when spaceline-all-the-icons-minor-modes-p)
+
+	  ((all-the-icons-which-function)
+	   :face 'powerline-active2
+	   :separator ""))
+
+	`(((,@additional-segments) :when active :face 'powerline-active2)
+	  ((,@additional-segments) :when (not active) :face 'powerline-inactive2)
+
+	  all-the-icons-separator-right-active-1
+	  ((all-the-icons-hud
+		all-the-icons-buffer-position)
+	   :separator " " :when active)
+
+	  all-the-icons-separator-right-active-2
+	  all-the-icons-separator-right-inactive))
+
+  (setq-default mode-line-format spaceline-mwb-mode-theme)
+  (setq-default header-line-format spaceline-mwb-head-theme))
 
 
 ;; Interactive & Setup Functions

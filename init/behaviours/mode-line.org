@@ -79,6 +79,16 @@ Back to doom - noting I don't need to setup the mode - that can be copied to my 
 
 Spaceline looks the best architected need a minions and possibly icons done. e.g. hat icon just in Unicode (OK doom looks best) But does not get the icons and setup there. Doom just has more already. So I write crappier code for doom but less. (Basically if I was better at emacs I would modify spaceline)
 
+** Current thought
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210626T143427.653264
+:END:
+doom mixes all things together look at .. status-icon it messes with a variable and at bottom level and has to deal with active/inactive but some things are correct e.g. doom-modeline-icon wraps up the icon with no other things.
+
+Basically the active/inactive flag  should be above the segment level or if complex to level of segment  function
+
+The author of doom-modeline did spaceline-allthe-icons - perhaps he is the problem.
+Let's try pure spaceline
 * Packages
 :PROPERTIES:
 :ID:       org_mark_mini20o.local:20210602T212500.391684
@@ -580,7 +590,7 @@ Let's do the basic
   :demand
   :config
   (require 'spaceline-config)
-  ;;(spaceline-spacemacs-theme)
+  (spaceline-spacemacs-theme)
   )
   #+end_src
 #+end_src
@@ -605,6 +615,7 @@ Let's do the basic
 (use-package spaceline-mwb
   :mwb-load-path "site-lisp/mwb"
   :after spaceline-all-the-icons
-  :config (spaceline-mwb-theme))
+  :config (spaceline-mwb-theme)
+  )
 #+end_src
 #+end_src

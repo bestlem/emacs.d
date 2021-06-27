@@ -36,9 +36,11 @@
 
 (require 'spaceline-all-the-icons)
 (require 'spaceline-all-the-icons-segments)
+(require 'spaceline-segments)
 (require 'spaceline-all-the-icons-separators)
 
 ;;; Forward declarations of Optional Dependencies
+(declare-function python-pyenv 'python-mode)
 
 ;; Declare Customization Groups
 (defgroup spaceline-mwb nil
@@ -63,10 +65,11 @@
 Add ADDITIONAL-SEGMENTS to the end of the theme."
   (interactive)
   (spaceline-compile
-	"mwb-mode"
+	"mwb-mode-theme"
 	'((all-the-icons-anzu
 	   :face 'mode-line
 	   :skip-alternate t)
+      auto-compile
 
 	  ((all-the-icons-modified
 		all-the-icons-bookmark
@@ -115,14 +118,14 @@ Add ADDITIONAL-SEGMENTS to the end of the theme."
 	   :tight t
 	   :face highlight-face
 	   :when spaceline-all-the-icons-minor-modes-p)
-
-	  ((all-the-icons-which-function)
-	   :face 'powerline-active2
-	   :separator ""))
+      )
 
 	`(((,@additional-segments) :when active :face 'powerline-active2)
 	  ((,@additional-segments) :when (not active) :face 'powerline-inactive2)
-
+      python-env
+      ((all-the-icons-which-function)
+	   :face 'powerline-active2
+	   :separator "")
 	  all-the-icons-separator-right-active-1
 	  ((all-the-icons-hud
 		all-the-icons-buffer-position)
@@ -131,10 +134,9 @@ Add ADDITIONAL-SEGMENTS to the end of the theme."
 	  all-the-icons-separator-right-active-2
 	  all-the-icons-separator-right-inactive))
   (spaceline-compile
-	"mwb-head"
+	"mwb-head-theme"
 	'(
-
-	  ((mwb-modified
+      ((mwb-modified
 		all-the-icons-bookmark
 		all-the-icons-dedicated
 		all-the-icons-window-number
@@ -144,7 +146,7 @@ Add ADDITIONAL-SEGMENTS to the end of the theme."
 	  all-the-icons-separator-left-active-1
 
 	  ;; The actual buffer mode
-	  (( all-the-icons-mode-icon)
+	  ((all-the-icons-mode-icon)
 	   :face default-face)
 
 	  all-the-icons-separator-left-active-2
@@ -159,12 +161,14 @@ Add ADDITIONAL-SEGMENTS to the end of the theme."
 	   :face highlight-face
 	   :separator (spaceline-all-the-icons--separator spaceline-all-the-icons-primary-separator " "))
 
+	  (minor-modes :when active
+	   :priority 9)
 	  all-the-icons-separator-left-active-3
 	  all-the-icons-separator-left-inactive
 
-	  (( ((all-the-icons-flycheck-status
-		   all-the-icons-flycheck-status-info) :separator " ")
-		 all-the-icons-package-updates)
+	  ((((all-the-icons-flycheck-status
+		  all-the-icons-flycheck-status-info) :separator " ")
+		all-the-icons-package-updates)
 	   :face other-face
 	   :separator (spaceline-all-the-icons--separator spaceline-all-the-icons-secondary-separator " "))
 
@@ -175,10 +179,7 @@ Add ADDITIONAL-SEGMENTS to the end of the theme."
 	   :face highlight-face
 	   :when spaceline-all-the-icons-minor-modes-p)
 
-	  ((all-the-icons-which-function)
-	   :face 'powerline-active2
-	   :separator ""))
-
+	  )
 	`(((,@additional-segments) :when active :face 'powerline-active2)
 	  ((,@additional-segments) :when (not active) :face 'powerline-inactive2)
 
@@ -189,17 +190,16 @@ Add ADDITIONAL-SEGMENTS to the end of the theme."
 
 	  all-the-icons-separator-right-active-2
 	  all-the-icons-separator-right-inactive))
-
-  (setq-default mode-line-format spaceline-mwb-mode-theme)
-  (setq-default header-line-format spaceline-mwb-head-theme))
-
+  (setq-default mode-line-format '("%e" (:eval (spaceline-ml-mwb-mode-theme))))
+  (setq-default header-line-format '("%e" (:eval (spaceline-ml-mwb-head-theme))))
+  )
 
 ;; Interactive & Setup Functions
 
 
 ;; Debugging functions
-(defun spaceline-mwb--turn-off (segment) "Turn spaceline SEGMENT off." (funcall (intern (format "spaceline-toggle-all-the-icons-%s-off" segment))))
-(defun spaceline-mwb--turn-on (segment) "Turn spaceline SEGMENT on." (funcall (intern (format "spaceline-toggle-all-the-icons-%s-on" segment))))
+(defun spaceline-mwb--turn-off (segment) "Turn spaceline SEGMENT off." (funcall (intern (format "spaceline-toggle-mwb-%s-off" segment))))
+(defun spaceline-mwb--turn-on (segment) "Turn spaceline SEGMENT on." (funcall (intern (format "spaceline-toggle-mwb-%s-on" segment))))
 (defun spaceline-mwb--get-active-segments ()
   "Get a list of all currently active segment names."
   (let* ((segments (apropos-internal "^spaceline-mwb-.*-p$"))
@@ -218,7 +218,7 @@ When PFX is non-nil, disable erroring segments at the same time."
                   (lambda (segment)
                     (mapc 'spaceline-mwb--turn-off active-segments)
                     (spaceline-mwb--turn-on segment)
-                    (string= "" (format-mode-line spaceline-mwb-theme)))
+                    (string= "" (format-mode-line spaceline-mwb-mode-theme)))
                   active-segments)))
     (mapc 'spaceline-mwb--turn-on active-segments)
     (if (not errors)
@@ -229,8 +229,5 @@ When PFX is non-nil, disable erroring segments at the same time."
              (mapconcat 'identity errors ", ")))))
 
 (provide 'spaceline-mwb)
-;; Local Variables:
-;; indent-tabs-mode: nil
-;; End:
 
 ;;; spaceline-mwb.el ends here

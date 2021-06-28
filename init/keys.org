@@ -430,8 +430,9 @@ This got confusing as both counsel and helpful change things. So move all here.
 		   ;; From helpful
 		   ("." . helpful-at-point)
 		   ("<f1>" . helpful-at-point)
-		   ([remap describe-key] . helpful-key)
-
+		   ;; This worked when in helpful I spose it did the prefix as well
+		   ;; ([remap describe-key] . helpful-key)
+		   ("k" . helpful-key)
 		   ;; hemacs
 		   ;; ("g" . google-this)
 		   ("K" . free-keys)

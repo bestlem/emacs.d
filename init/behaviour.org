@@ -566,3 +566,27 @@ Make a new popup frame
   (switch-to-buffer buffer_name)
   (unless go-to-end (goto-char (point-max))))
 #+end_src
+* Sounds
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210628T102012.945985
+:END:
+Stop emacs beeping so much
+From [[ https://www.reddit.com/r/emacs/comments/1a6z4n/can_i_make_emacs_beep_less/c8v5][reddit]]
+Reduce the number of times the bell rings. Turn off the bell for the listed functions.
+#+NAME: org_mark_mini20.local_20210628T102012.908898
+#+begin_src emacs-lisp
+(setq ring-bell-function
+      (lambda ()
+        (unless (memq this-command
+                      '(isearch-abort
+                        abort-recursive-edit
+                        exit-minibuffer
+                        keyboard-quit
+                        previous-line
+                        next-line
+                        scroll-down
+                        scroll-up
+                        cua-scroll-down
+                        cua-scroll-up))
+          (ding))))
+#+end_src

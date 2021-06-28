@@ -88,7 +88,8 @@ doom mixes all things together look at .. status-icon it messes with a variable 
 Basically the active/inactive flag  should be above the segment level or if complex to level of segment  function
 
 The author of doom-modeline did spaceline-allthe-icons - perhaps he is the problem.
-Let's try pure spaceline
+Let's try pure spaceline. However its speedup of interning things makes debugging difficult
+
 * Packages
 :PROPERTIES:
 :ID:       org_mark_mini20o.local:20210602T212500.391684

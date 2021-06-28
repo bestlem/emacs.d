@@ -37,6 +37,7 @@
 (require 'spaceline-all-the-icons)
 (require 'spaceline-all-the-icons-segments)
 (require 'spaceline-segments)
+(require 'spaceline-mwb-segments)
 (require 'spaceline-all-the-icons-separators)
 
 ;;; Forward declarations of Optional Dependencies
@@ -78,7 +79,7 @@ Add ADDITIONAL-SEGMENTS to the end of the theme."
 		all-the-icons-eyebrowse-workspace
 		all-the-icons-buffer-size) :face highlight-face :skip-alternate t)
 
-	  all-the-icons-separator-left-active-1
+
 
 	  ;; The actual buffer info
 	  ((all-the-icons-projectile
@@ -87,7 +88,7 @@ Add ADDITIONAL-SEGMENTS to the end of the theme."
 		  all-the-icons-buffer-id) :separator ""))
 	   :face default-face)
 
-	  all-the-icons-separator-left-active-2
+
 
 	  ((all-the-icons-process
 		all-the-icons-position
@@ -99,15 +100,14 @@ Add ADDITIONAL-SEGMENTS to the end of the theme."
 	   :face highlight-face
 	   :separator (spaceline-all-the-icons--separator spaceline-all-the-icons-primary-separator " "))
 
-	  all-the-icons-separator-left-active-3
-	  all-the-icons-separator-left-inactive
+	  ;; all-the-icons-separator-left-active-3
+	  ;; all-the-icons-separator-left-inactive
 
 	  ((all-the-icons-vc-icon
 		all-the-icons-vc-status
 		((all-the-icons-git-ahead
 		  all-the-icons-git-status) :separator " ")
-		((all-the-icons-flycheck-status
-		  all-the-icons-flycheck-status-info) :separator " ")
+
 		all-the-icons-package-updates)
 	   :face other-face
 	   :separator (spaceline-all-the-icons--separator spaceline-all-the-icons-secondary-separator " "))
@@ -126,13 +126,20 @@ Add ADDITIONAL-SEGMENTS to the end of the theme."
       ((all-the-icons-which-function)
 	   :face 'powerline-active2
 	   :separator "")
-	  all-the-icons-separator-right-active-1
+	  ((((all-the-icons-flycheck-status
+		  all-the-icons-flycheck-status-info) :separator " ")
+		all-the-icons-package-updates)
+	   :face other-face
+	   :separator (spaceline-all-the-icons--separator spaceline-all-the-icons-secondary-separator " "))
+	  ;; all-the-icons-separator-right-active-1
 	  ((all-the-icons-hud
 		all-the-icons-buffer-position)
 	   :separator " " :when active)
 
-	  all-the-icons-separator-right-active-2
-	  all-the-icons-separator-right-inactive))
+	  ;; all-the-icons-separator-right-active-2
+	  ;; all-the-icons-separator-right-inactive
+      ))
+
   (spaceline-compile
 	"mwb-head-theme"
 	'(
@@ -143,13 +150,13 @@ Add ADDITIONAL-SEGMENTS to the end of the theme."
 		all-the-icons-eyebrowse-workspace
 		all-the-icons-buffer-size) :face highlight-face :skip-alternate t)
 
-	  all-the-icons-separator-left-active-1
+	  ;; all-the-icons-separator-left-active-1
 
 	  ;; The actual buffer mode
 	  ((all-the-icons-mode-icon)
 	   :face default-face)
 
-	  all-the-icons-separator-left-active-2
+	  ;; all-the-icons-separator-left-active-2
 
 	  ((all-the-icons-process
 		all-the-icons-position
@@ -166,11 +173,7 @@ Add ADDITIONAL-SEGMENTS to the end of the theme."
 	  all-the-icons-separator-left-active-3
 	  all-the-icons-separator-left-inactive
 
-	  ((((all-the-icons-flycheck-status
-		  all-the-icons-flycheck-status-info) :separator " ")
-		all-the-icons-package-updates)
-	   :face other-face
-	   :separator (spaceline-all-the-icons--separator spaceline-all-the-icons-secondary-separator " "))
+
 
 	  ((all-the-icons-separator-minor-mode-left
 		all-the-icons-minor-modes
@@ -183,13 +186,17 @@ Add ADDITIONAL-SEGMENTS to the end of the theme."
 	`(((,@additional-segments) :when active :face 'powerline-active2)
 	  ((,@additional-segments) :when (not active) :face 'powerline-inactive2)
 
+	  ((flycheck-error flycheck-warning flycheck-info)
+       :when active
+       :priority 89)
 	  all-the-icons-separator-right-active-1
 	  ((all-the-icons-hud
 		all-the-icons-buffer-position)
 	   :separator " " :when active)
 
-	  all-the-icons-separator-right-active-2
-	  all-the-icons-separator-right-inactive))
+	  ;; all-the-icons-separator-right-active-2
+	  ;; all-the-icons-separator-right-inactive
+      ))
   (setq-default mode-line-format '("%e" (:eval (spaceline-ml-mwb-mode-theme))))
   (setq-default header-line-format '("%e" (:eval (spaceline-ml-mwb-head-theme))))
   )

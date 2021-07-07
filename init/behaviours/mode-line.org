@@ -71,7 +71,7 @@ Basically nano has lots of different mode lines but that can be done with spacel
 
 So use spaceline works but with the eval as per nano (segments nicked from doom)
 
-Actually nano does not add much here -
+Actually nano does not add much here - it is simple and des separate out the active/inactive
 
 Back to spaceline
 
@@ -87,8 +87,12 @@ doom mixes all things together look at .. status-icon it messes with a variable 
 
 Basically the active/inactive flag  should be above the segment level or if complex to level of segment  function
 
-The author of doom-modeline did spaceline-allthe-icons - perhaps he is the problem.
+The author of doom-modeline did spaceline-allthe-icons - perhaps they are the problem.
 Let's try pure spaceline. However its speedup of interning things makes debugging difficult
+
+However spaceline hard codes modeline as it depends on powerline - and the things to change are macros - so not a simple one.
+
+So in effect I need to replace all. nano has a minimal set and does headline. So start there. (doom probbaly has the most but is complex - but I would not be surprised if we end up with that complexity)
 
 * Packages
 :PROPERTIES:
@@ -562,9 +566,8 @@ Separate out so org file is easier to read
 
   (mwb-headline-mode 1))
 #+end_src
-* Nano - no tangle
+* Nano
 :PROPERTIES:
-:header-args:    :tangle no
 :ID:       org_mark_mini20.local:20210620T130539.637610
 :END:
 Let's do the basic
@@ -575,16 +578,18 @@ Let's do the basic
   :demand
   :config (nano-modeline))
 #+end_src
-* Spaceline
+* Spaceline - no tangle
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210606T165448.626960
+:header-args:    :tangle no
 :END:
 ** Load
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210606T165448.625918
 :END:
 
-#+NAME: org_mark_mini20.local_20210606T165448.609794
+
+#+NAME: org_mark_mini20.local_20210706T132917.944916
 #+begin_src emacs-lisp
 (use-package spaceline
   :ensure t

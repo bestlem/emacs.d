@@ -17,7 +17,6 @@
   - [[#iso-transl][iso-transl]]
   - [[#which-key][Which Key]]
   - [[#display-keys-in-help-and-menus][Display keys in help and menus]]
-  - [[#improve-on-help][Improve on help]]
 - [[#bindings-grouped-by-topic][Bindings grouped by topic]]
   - [[#homeendpaging][Home/End/Paging]]
   - [[#cua-bindings][Cua bindings]]
@@ -229,17 +228,6 @@ Note that you can control what the screen displays A for Alt or ⌥. Emacs is no
 #+begin_src emacs-lisp
 (when *aquamacs*
   (setq ns-use-mac-modifier-symbols  t))
-#+end_src
-** Improve on help
-:PROPERTIES:
-:ID:       org_2020-12-08+00-00:19F09EB5-F1E8-4BB8-956D-B6F0893377C0
-:END:
-This will be fun as it uses *Help* and I use *Helpful*
-#+NAME: org_2020-12-08+00-00_F53AC824-5902-4E24-B6C7-AC4EC2BA328B
-#+begin_src emacs-lisp
-(use-package help-fns+
-    :defer 15
-    :mwb-load-path "site-lisp/Emacs_wiki")
 #+end_src
 * Bindings grouped by topic
 :PROPERTIES:

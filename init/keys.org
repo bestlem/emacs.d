@@ -30,7 +30,6 @@
   - [[#file-actions][File actions]]
   - [[#buffer-related][Buffer related]]
   - [[#goto][Goto]]
-  - [[#help][Help]]
 - [[#single-key-bindings][Single key bindings]]
   - [[#function-keys][Function keys]]
   - [[#hyper-key-bindings][Hyper key bindings]]
@@ -410,46 +409,6 @@ This is the override of save etc to the mode maps
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_A1DB0752-B232-4FA8-BF33-3CE313E5306C
 #+begin_src emacs-lisp
 (bind-key "M-g" 'goto-line)             ; one of the oldest binds
-#+end_src
-** Help
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20210601T121908.363715
-:END:
-This got confusing as both counsel and helpful change things. So move all here.
-#+NAME: org_mark_mini20.local_20210601T121908.338748
-#+begin_src emacs-lisp
-(bind-keys :map help-map
-		   ;; mine
-		   ("c" . describe-char)
-
-		   ;; From counsel note helpfult setup points them to helpful
-		   ("f" . counsel-describe-function)
-		   ("v" . counsel-describe-variable)
-		   ("l" . counsel-find-library)
-
-		   ;; From helpful
-		   ("." . helpful-at-point)
-		   ("<f1>" . helpful-at-point)
-		   ;; This worked when in helpful I spose it did the prefix as well
-		   ;; ([remap describe-key] . helpful-key)
-		   ("k" . helpful-key)
-		   ;; hemacs
-		   ;; ("g" . google-this)
-		   ("K" . free-keys)
-		   ;;  ("f" . flymake-show-diagnostics-buffer)
-
-		   ;; discover my major
-		   ("C-m" . discover-my-major)
-		   ("M-m" . discover-my-mode)
-		   ;; helpful
-		   ;; ([remap describe-function] . helpful-callable)
-           ;;([remap describe-command] . helpful-command)
-		   ;; ([remap describe-variable] . helpful-variable)
-		   ;; ([remap describe-key] . helpful-key)
-		   ;; ("<f1> F" . helpful-function)
-		   ;; ("<f1> ." . helpful-at-point)
-		   ;; ("<f1> <f1>" . helpful-at-point)
-		   )
 #+end_src
 * Single key bindings
 :PROPERTIES:

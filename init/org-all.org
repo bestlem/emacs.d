@@ -251,8 +251,8 @@ This describes how the org file is shown I think 9.4 altered this
 From [[https://stackoverflow.com/a/17492723/151019][SO]] override org function
 OK need to hide #+name and also make the properties visible
 
-#+NAME: org_mark_mini20.local_20210131T001131.842296
-#+begin_src emacs-lisp
+#+NAME: org_mark_mini20.local_20210707T094624.575933
+#+begin_src emacs-lisp :tangle no :noweb-ref org-config
 (defun org-cycle-hide-drawers (state)
   "Re-hide all drawers after a visibility state change."
   (when (and (derived-mode-p 'org-mode)

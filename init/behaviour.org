@@ -118,8 +118,39 @@ I haven't used before but might try with hydra from [[https://sriramkswamy.githu
 Let's use [[https://github.com/Wilfred/helpful][Helpful]] But bind the keys in keys.org
 #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_20EF0E45-D1C2-493C-B710-6E2B48D98DB9
 #+begin_src emacs-lisp
-(use-package helpful
-  :ensure t
+(use-package-elpa helpful
+  :bind (:map help-map
+              ;; mine
+		      ("c" . describe-char)
+
+		      ;; From counsel note helpfult setup points them to helpful
+		      ("f" . counsel-describe-function)
+		      ("v" . counsel-describe-variable)
+		      ("l" . counsel-find-library)
+
+		      ;; From helpful
+		      ("." . helpful-at-point)
+		      ("<f1>" . helpful-at-point)
+		      ;; This worked when in helpful I spose it did the prefix as well
+		      ;; ([remap describe-key] . helpful-key)
+		      ("k" . helpful-key)
+		      ;; hemacs
+		      ;; ("g" . google-this)
+		      ("K" . free-keys)
+		      ;;  ("f" . flymake-show-diagnostics-buffer)
+
+		      ;; discover my major
+		      ("C-m" . discover-my-major)
+		      ("M-m" . discover-my-mode)
+		      ;; helpful
+		      ;; ([remap describe-function] . helpful-callable)
+              ;;([remap describe-command] . helpful-command)
+		      ;; ([remap describe-variable] . helpful-variable)
+		      ;; ([remap describe-key] . helpful-key)
+		      ;; ("<f1> F" . helpful-function)
+		      ;; ("<f1> ." . helpful-at-point)
+		      ;; ("<f1> <f1>" . helpful-at-point)  )
+              )
   :custom
   (counsel-describe-function-function #'helpful-callable)
   (counsel-describe-variable-function #'helpful-variable))

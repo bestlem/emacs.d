@@ -39,7 +39,14 @@ Although see starter kit where they run after init.
 Note that if a subdirectory is just for one thing then use keyword mwb-load-path in use-package. Non Aquamacs does not set all sub-directories on load path.
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_CC0BEB6F-84DC-4320-9455-9906069CD4C9
 #+begin_src emacs-lisp
+(defun add-subdirs-to-load-path ()
+  "Add subdirectories to `load-path'."
+  (interactive)
+  (let ((default-directory (mwb-user-emacs-file "site-lisp")))
+    (normal-top-level-add-subdirs-to-load-path)))
+
 (add-to-list 'load-path (mwb-user-emacs-file "site-lisp"))
+(add-subdirs-to-load-path)
 #+end_src
 ****
 *** Where things are put

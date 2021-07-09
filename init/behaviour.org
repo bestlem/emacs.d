@@ -200,7 +200,7 @@ Let's stop it. from [[https://emacs.stackexchange.com/a/13975/9874][Emacs SE]]
 		 (and (if (called-interactively-p)
 				  (skip-syntax-backward "w")
 				(= -3 (skip-syntax-backward "w")))
-			  (let (case-fold-search)
+			  (let (case-fold-search nil)
 				(looking-at "\\b[[:upper:]]\\{2\\}[[:lower:]]"))
 			  (capitalize-word 1)))))
 
@@ -237,6 +237,16 @@ Aquamacs does its own binding to comment and uncomment region.
   :unless *aquamacs*
   :ensure t
   :commands comment-dwim-2 ;; need as mac binding
+  )
+#+end_src
+* Edit
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210708T102755.604371
+:END:
+There are things like multiple-cursors but iedit sounds simpler
+#+NAME: org_mark_mini20.local_20210708T102755.576131
+#+begin_src emacs-lisp
+(use-package-elpa iedit
   )
 #+end_src
 * Navigation

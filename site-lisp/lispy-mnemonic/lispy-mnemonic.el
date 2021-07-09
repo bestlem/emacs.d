@@ -320,7 +320,8 @@
 ;; (bind-key "M-n" 'lispy-forward lispy-mnemonic-mode-map)
 ;; (bind-key "M-p" 'lispy-backward lispy-mnemonic-mode-map)
 (bind-key "M-o" 'lispy-parens-down lispy-mnemonic-mode-map)
-;; (bind-key "H-i" 'lispy-iedit lispy-mnemonic-mode-map)
+(bind-key "M-e" 'lispy-iedit lispy-mnemonic-mode-map)
+
 ;; (bind-key "H-j" 'lispy-join lispy-mnemonic-mode-map)
 ;; (bind-key "H-l" 'lispy-left lispy-mnemonic-mode-map)
 ;; (bind-key "H-o" 'lispy-out-forward-newline lispy-mnemonic-mode-map)

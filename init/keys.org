@@ -621,6 +621,7 @@ Odd things needed
     ("p" package-quickstart-refresh "refresh quickstart packages")
     ("q" keyboard-quit-context+ "Quit minibuffer etc")
     ("S" org-babel-detangle "Detangle")
+	("e" iedit-mode "iedit")
     )
 
    "Change Buffers"

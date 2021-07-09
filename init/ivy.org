@@ -25,15 +25,17 @@ Note takes time to load
               ("C-d" . ivy-done-or-delete-char)
               ("C-i" . ivy-partial-or-done)
               ("C-r" . ivy-previous-line-or-history)
-              ;; ("M-r" . ivy-reverse-i-search)
-                                        ; emacs complains about this due to mapping ESC here
+              ("M-r" . ivy-reverse-i-search)
+
               ("<C-return>" . ivy-immediate-done)
               ("C-<f18>" . ivy-next-line) ;c-ins
+              ; emacs complains about this due to mapping ESC here. ESC map is
+              ; the M- map so can't use it as a key
               ;; ("<ESC>" . minibuffer-keyboard-quit)
 
               ;;  following should already be in map
-              ;; ("M-n" . ivy-next-history-element)
-              ;; ("M-p" . ivy-previous-history-element)
+              ("M-n" . ivy-next-history-element)
+              ("M-p" . ivy-previous-history-element)
               )
   :bind (:map ivy-switch-buffer-map
               ("C-k" . ivy-switch-buffer-kill))
@@ -44,7 +46,7 @@ Note takes time to load
   (setq enable-recursive-minibuffers t)
   ;; Do not show ./ amd ../ at top
   ;; https://emacs.stackexchange.com/a/40540/9874
-  (setq ivy-extra-directories ())
+  (setq ivy-extra-directories '())
   ;; Show #/total when scrolling buffers
   (setq ivy-count-format "%d/%d ")
   :preface
@@ -94,18 +96,23 @@ Note takes time to load
     :after ivy
     :init
     (setq ivy-posframe-display-functions-alist
-          '((swiper . ivy-display-function-fallback)
-            (swiper-isearch . ivy-display-function-fallback)
-            ;; (complete-symbol . ivy-posframe-display-at-point)
-            (t . ivy-posframe-display)))
+		  '((swiper . ivy-display-function-fallback)
+			(swiper-isearch . ivy-display-function-fallback)
+			;; (complete-symbol . ivy-posframe-display-at-point)
+			(t . ivy-posframe-display)
+			;; (t . ivy-display-function-fallback)
+			))
     ;; (ivy-posframe-mode 1)
-    :custom
-    ;; (ivy-posframe-width 130)
-    ;; (ivy-posframe-height 11)
-    (ivy-posframe-parameters
-     '((left-fringe . 5)
-       (right-fringe . 5)))
+
     :config
+	(setq ivy-posframe-border-width 1
+		  ivy-posframe-hide-minibuffer t
+		  ivy-posframe-min-width 100
+		  ivy-posframe-min-height 10
+		  ivy-posframe-parameters '((alpha 100 100)
+									(max-width . 140)
+									(left-fringe . 10)
+									(right-fringe . 10)))
     (ivy-posframe-mode)))
 #+end_src
 * Ivy hydra
@@ -127,8 +134,11 @@ Note takes time to load
 (use-package all-the-icons-ivy-rich
   :ensure t
   :unless *aquamacs*
-  :init (all-the-icons-ivy-rich-mode 1)
-  :after ivy-prescient)
+  :after (ivy-rich ivy-prescient)
+  :config
+  (setq all-the-icons-ivy-rich-icon-size 0.8)
+  (all-the-icons-ivy-rich-mode 1)
+  )
 #+end_src
 * Ivy rich
 :PROPERTIES:

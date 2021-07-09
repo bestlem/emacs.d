@@ -321,7 +321,7 @@ RIGHT, aligned respectively."
       (setq x-underline-at-descent-line t)
       (defvar mini-modeline-r-format)
       (setq mini-modeline-r-format jp-mini-modeline-r-format)
-      (setq-default mode-line-format '(""))
+      (setq-default mode-line-format jp-mini-modeline-r-format)
       (setq-default header-line-format jp-headline-format))))
 
 ;; Mode line setup

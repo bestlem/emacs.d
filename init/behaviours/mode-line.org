@@ -94,6 +94,10 @@ However spaceline hard codes modeline as it depends on powerline - and the thing
 
 So in effect I need to replace all. nano has a minimal set and does headline. So start there. (doom probbaly has the most but is complex - but I would not be surprised if we end up with that complexity)
 
+OK more - the active flag has to go into the segment and the icon
+
+So giveup and hack doom
+
 * Packages
 :PROPERTIES:
 :ID:       org_mark_mini20o.local:20210602T212500.391684
@@ -307,7 +311,6 @@ This snippet displays the number of packages that you last needed to update. Thi
 * Jerry Peng setup - no tangle
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210602T212500.390542
-:header-args:    :tangle no
 :END:
 See site-lisp/jerrypnz/jp-modeline.el
 Needs Moody. I also removed some
@@ -340,7 +343,6 @@ Make mine call his
 * Centaur setup/ a configured Doom -no tangle
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210602T224030.562027
-:header-args:    :tangle no
 :END:
 Makes use of doom-modeline and minions
 TODO add to doom-modeline-indent-alist
@@ -566,9 +568,10 @@ Separate out so org file is easier to read
 
   (mwb-headline-mode 1))
 #+end_src
-* Nano
+* Nano - no tangle
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210620T130539.637610
+:header-args:    :tangle no
 :END:
 Let's do the basic
 #+NAME: org_mark_mini20.local_20210620T130539.623889
@@ -578,10 +581,10 @@ Let's do the basic
   :demand
   :config (nano-modeline))
 #+end_src
-* Spaceline - no tangle
+* Spaceline
 :PROPERTIES:
-:ID:       org_mark_mini20.local:20210606T165448.626960
 :header-args:    :tangle no
+:ID:       org_mark_mini20.local:20210606T165448.626960
 :END:
 ** Load
 :PROPERTIES:
@@ -594,9 +597,9 @@ Let's do the basic
 (use-package spaceline
   :ensure t
   :demand
-  :config
-  (require 'spaceline-config)
-  (spaceline-spacemacs-theme)
+  ;; :config
+  ;; (require 'spaceline-config)
+  ;; (spaceline-spacemacs-theme)
   )
   #+end_src
 #+end_src
@@ -618,9 +621,8 @@ Let's do the basic
 :END:
 #+NAME: org_mark_mini20.local_20210620T171618.620120
 #+begin_src emacs-lisp
-(use-package spaceline-mwb
-  :mwb-load-path "site-lisp/mwb"
-  :after spaceline-all-the-icons
+(use-feature spaceline-mwb
+  :unless *aquamacs*
   :config (spaceline-mwb-theme)
   )
 #+end_src

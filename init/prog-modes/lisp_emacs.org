@@ -116,6 +116,7 @@ But then this [[https://emacs.stackexchange.com/a/52789/9874][SO answer to a dif
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210123T234427.949964
 :END:
+Not used as messes to much
 #+NAME: org_2020-12-08+00-00_67C53BD2-DAF3-4B25-80DB-ADB3958F1820
 #+begin_src emacs-lisp :tangle no
 (setq lisp-indent-function 'common-lisp-indent-function)
@@ -124,6 +125,9 @@ But then this [[https://emacs.stackexchange.com/a/52789/9874][SO answer to a dif
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210123T234427.948316
 :END:
+Indenting data (ie lists) not as functions.
+From https://www.reddit.com/r/emacs/comments/d7x7x8/finally_fixing_indentation_of_quoted_lists/
+
 #+NAME: org_mark_mini20.local_20210123T234427.935989
 #+begin_src emacs-lisp
 (advice-add #'calculate-lisp-indent :override #'void~calculate-lisp-indent)
@@ -700,3 +704,56 @@ From [[https://github.com/abo-abo/hydra/wiki/Macro][Hydra wiki]] and [[https://g
 
 (bind-key "<f3>" 'hydra-keyboard-macros/body)
 	  #+end_src
+* imenu
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210702T115348.583868
+:END:
+Mainly ways to add more to the menu.
+From https://github.com/alezost/emacs-utils/blob/master/utl-imenu.el
+also hemacs and greg hendersolt
+** Sections
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210702T115348.582525
+:END:
+If you have sections in lisp/elisp files that begin with ";;;", you may use the following code to add "Sections" entry in `imenu':
+
+(add-hook 'emacs-lisp-mode-hook 'utl-imenu-add-sections)
+(add-hook 'lisp-mode-hook 'utl-imenu-add-sections)
+
+
+
+
+
+#+NAME: org_mark_mini20.local_20210702T115348.557748
+#+begin_src emacs-lisp
+
+(defvar utl-imenu-sections-re "^;;; \\(.+\\)$"
+  "Regexp used for \"Sections\" imenu entries.")
+
+(defvar utl-imenu-sections-group "Sections"
+  "Group name in imenu index of \"Sections\" entries.
+If nil, put the entries in a top level.  See MENU-TITLE in
+`imenu-generic-expression' variable for details.")
+
+;;;###autoload
+(defun utl-imenu-add-sections (&optional regexp)
+  "Add REGEXP as a \"Sections\" element to `imenu-generic-expression'.
+If REGEXP is nil, use `utl-imenu-sections-re'."
+  (add-to-list
+   'imenu-generic-expression
+   (list utl-imenu-sections-group (or regexp utl-imenu-sections-re) 1)
+   t))
+#+end_src
+** Add hook
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210702T115348.580846
+:END:
+#+NAME: org_mark_mini20.local_20210702T115348.558787
+#+begin_src emacs-lisp
+(defun hemacs-imenu-elisp-expressions ()
+  (dolist (pattern '( ("Features" "^(use-feature \\(.+\\)$" 1)
+                      ("Sections" "^;;; \\(.+\\)$" 1)))
+    (add-to-list 'imenu-generic-expression pattern)))
+(add-hook 'emacs-lisp-mode-hook 'hemacs-imenu-elisp-expressions)
+
+#+end_src

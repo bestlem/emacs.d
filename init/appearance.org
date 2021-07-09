@@ -82,6 +82,17 @@ There is also more a mode called pretty-mode but not looked into that yet - for 
 #+begin_src emacs-lisp
 (global-prettify-symbols-mode 1)
 #+end_src
+** Icons
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210708T220551.722023
+:END:
+Mainly use all-the-icons but treemacs has some as well, unfortunately only available by extension
+
+Example to show them all
+#+begin_example emacs-lisp
+(dolist (ele '(material wicon octicon faicon fileicon alltheicon))
+  (all-the-icons-insert-icons-for ele))
+#+end_example
 * Structure
 :PROPERTIES:
 :ID:       org_mark_2020-10-03T14-51-52+01-00_mini12.local:2E4982D0-8D77-435D-8651-A796B057CCD7
@@ -398,16 +409,17 @@ For my setup header-line needs to inherit from mode-line
 	  :background 'unspecified)
 	 (set-face-attribute 'mode-line-emphasis nil :inherit 'mode-line)
 	 (set-face-attribute 'mode-line-highlight nil :inherit 'mode-line)
-	 (custom-set-faces
-	  '(org-block
-		((t
-		  (:inherit shadow :extend t :background "midnight blue" :foreground "white" :family "Fira Code"))))
-	  '(org-block-begin-line
-		((t
-		  (:inherit org-meta-line :foreground "cyan" :weight normal))))
-	  '(org-block-end-line
-		((t
-		  (:inherit org-block-begin-line :foreground "cyan")))))
+	 ;; (custom-set-faces
+	 ;;  '(org-block
+	 ;; 	((t
+	 ;; 	  (:inherit shadow :extend t :background "midnight blue" :foreground "white" :family "Fira Code"))))
+	 ;;  '(org-block-begin-line
+	 ;; 	((t
+	 ;; 	  (:inherit org-meta-line :foreground "cyan" :weight normal))))
+	 ;;  '(org-block-end-line
+	 ;; 	((t
+	 ;; 	  (:inherit org-block-begin-line :foreground "cyan")))))
+
 	 ;; (color-theme-high-contrast)
 	 ;; (custom-set-faces
 	 ;;  '(org-block

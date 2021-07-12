@@ -121,7 +121,7 @@ Adds a hardhat indicator"
 					(not (file-exists-p buffer-file-name)))
 			   (doom-modeline-buffer-file-state-icon
 				"do_not_disturb_alt" "🚫" "!" 'doom-modeline-urgent))
-			  (t ""))
+			  (t " "))
 			 (when (or (buffer-narrowed-p)
 					   (and (bound-and-true-p fancy-narrow-mode)
 							(fancy-narrow-active-p))

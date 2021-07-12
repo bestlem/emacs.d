@@ -96,7 +96,12 @@ So in effect I need to replace all. nano has a minimal set and does headline. So
 
 OK more - the active flag has to go into the segment and the icon
 
-So giveup and hack doom
+So giveup and hack doom, Dooms problem is that the active/non active is right down in the icons which are then used in segments. nano - does this is the compose but then no icons.
+jp active is at low level as well. spaceline seems to hide this all in spaceline--get-face
+
+And that paragraph is better analysis than for the last month.
+
+So spaceline - all the icons based.
 
 * Packages
 :PROPERTIES:
@@ -343,6 +348,7 @@ Make mine call his
 * Centaur setup/ a configured Doom -no tangle
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210602T224030.562027
+:header-args:    :tangle no
 :END:
 Makes use of doom-modeline and minions
 TODO add to doom-modeline-indent-alist
@@ -583,7 +589,6 @@ Let's do the basic
 #+end_src
 * Spaceline
 :PROPERTIES:
-:header-args:    :tangle no
 :ID:       org_mark_mini20.local:20210606T165448.626960
 :END:
 ** Load

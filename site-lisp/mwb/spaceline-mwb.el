@@ -148,6 +148,7 @@ Add ADDITIONAL-SEGMENTS to the end of the theme."
 	"mwb-head-theme"
 	'(
       ((mwb-modified
+		all-the-icons-modified
 		all-the-icons-bookmark
 		all-the-icons-dedicated
 		all-the-icons-window-number

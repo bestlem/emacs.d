@@ -48,25 +48,25 @@
 
 ;;; Create icons
 
-
 ;;; Segments
-(spaceline-define-segment mwb-modified
-						  "An `all-the-icons' segment depiciting the current buffers state"
-						  (let* ((buffer-state (format-mode-line "%*"))
-								 (icon-key (cond
-											((and (boundp 'hardhat-reasons) hardhat-reasons) 'hardhat-protected)
-											(buffer-read-only 'read-only)
-											((and buffer-file-name (buffer-modified-p)) 'modified)
-											((and buffer-file-name
-												  (not (file-remote-p buffer-file-name)) ; Avoid freezing while connection is lost
-												  (not (file-exists-p buffer-file-name))) 'missing)
-											(t 'empty)))
-								 (icon (mwb-icons-get-icon icon-key)))
+(spaceline-define-segment
+	mwb-modified
+  "An `all-the-icons' segment depiciting the current buffers state"
+  (let* ((buffer-state (format-mode-line "%*"))
+		 (icon-key (cond
+					((and buffer-file-name (buffer-modified-p)) 'modified)
+					((and (boundp 'hardhat-reasons) hardhat-reasons) 'hardhat-protected)
+					(buffer-read-only 'read-only)
+					((and buffer-file-name
+						  (not (file-remote-p buffer-file-name)) ; Avoid freezing while connection is lost
+						  (not (file-exists-p buffer-file-name))) 'missing )
+					(t 'OK)))
+		 (icon (mwb-icons-get-icon icon-key)))
 
-							(propertize icon
-										'mouse-face (spaceline-all-the-icons--highlight)
-										'local-map (mwb-headline--keymap-header-and-mode (make-mode-line-mouse-map 'mouse-1 'read-only-mode))))
-						  :tight t)
+	(propertize icon
+				'mouse-face (spaceline-all-the-icons--highlight)
+				'local-map (mwb-headline--keymap-header-and-mode (make-mode-line-mouse-map 'mouse-1 'read-only-mode))))
+  :tight t)
 
 (provide 'spaceline-mwb-segments)
 ;;; spaceline-mwb-segments.el ends here

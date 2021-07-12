@@ -103,20 +103,20 @@ ARGS is same as `all-the-icons-octicon' and others."
   (eval-when-compile
 	(list
 	 (mwb-icon--name-and-icon 'hardhat-protected
-							  nil nil  "⛑" "%1*"
-							  :face `(:inherit warning))
+							  'faicon "h-square"  "⛑" "%1*"
+							  `(:inherit warning  ))
 	 (mwb-icon--name-and-icon 'read-only
 							  'material "lock" "🔒" "%1*"
-							  :face `(:inherit warning))
+							  `(:inherit warning))
 	 (mwb-icon--name-and-icon 'modified
 							  'material "save" "💾" "%1*"
-							  :face `(:inherit warning))
+							  `(:inherit warning))
 	 (mwb-icon--name-and-icon 'missing
 							  'material "do_not_disturb_alt" "🚫" "!"
-							  :face `(:inherit error))
-	 (mwb-icon--name-and-icon 'empty
-							  nil "" "" " "
-							  :face `(:inherit error)))
+							  `(:inherit error))
+	 (mwb-icon--name-and-icon 'OK
+							  'faicon"check" "✔" " "
+							  `(:inherit error)))
 	)
   "An alist of icon name and icon or text.")
 

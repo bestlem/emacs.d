@@ -726,7 +726,6 @@ If you have sections in lisp/elisp files that begin with ";;;", you may use the 
 
 #+NAME: org_mark_mini20.local_20210702T115348.557748
 #+begin_src emacs-lisp
-
 (defvar utl-imenu-sections-re "^;;; \\(.+\\)$"
   "Regexp used for \"Sections\" imenu entries.")
 
@@ -751,9 +750,22 @@ If REGEXP is nil, use `utl-imenu-sections-re'."
 #+NAME: org_mark_mini20.local_20210702T115348.558787
 #+begin_src emacs-lisp
 (defun hemacs-imenu-elisp-expressions ()
-  (dolist (pattern '( ("Features" "^(use-feature \\(.+\\)$" 1)
-                      ("Sections" "^;;; \\(.+\\)$" 1)))
-    (add-to-list 'imenu-generic-expression pattern)))
+  (dolist (pattern `(("Segments" ,(rx (seq bol "(spaceline-define-segment"
+									   (zero-or-more (or (syntax whitespace) "\n"))
+									   (group
+										(one-or-more (or (syntax word)
+													  (syntax symbol))))
+									   ))
+					  1)
+                     ("Package elpa"
+					  ,(rx (seq bol "(use-package-elpa"
+							(group
+							 (one-or-more (or (syntax word)
+										   (syntax symbol))))
+							))
+					  1)
+					 ("Features" "^(use-feature \\(.+\\)$" 1)
+					 ("Sections" "^;;; \\(.+\\)$" 1)))
+	(add-to-list 'imenu-generic-expression pattern)))
 (add-hook 'emacs-lisp-mode-hook 'hemacs-imenu-elisp-expressions)
-
 #+end_src

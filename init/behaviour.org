@@ -15,16 +15,16 @@ The only bit to stay is after-init
 Note that gcmh cannot explicitly reduce the memory it does this when it gcs, which might be wrong - it assumes you do not gc during a process
 #+NAME: org_2020-12-08+00-00_C06FD610-2FD2-4E60-94B2-33A789850588
 #+begin_src emacs-lisp
-(use-package gcmh
-    :ensure t
-    :diminish
-    :config
-    (setq gcmh-high-cons-threshold (* 128 1024 1024)) ; reduces as I got a 10G
+(use-package-elpa  gcmh
+  :diminish
+  :defer 5
+  :config
+  (setq gcmh-high-cons-threshold (* 128 1024 1024)) ; reduces as I got a 10G
                                         ; monster
-    (setq gcmh-low-cons-threshold (* 1024 1024)) ; originally 800000 - increas
+  (setq gcmh-low-cons-threshold (* 1024 1024)) ; originally 800000 - increas
                                         ; because of gnus
-    ;; (setq gcmh-verbose 't)
-    (gcmh-mode 1))
+  ;; (setq gcmh-verbose 't)
+  (gcmh-mode 1))
 #+end_src
 
 ** Instrument emacs

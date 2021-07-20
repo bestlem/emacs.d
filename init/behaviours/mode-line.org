@@ -103,6 +103,8 @@ And that paragraph is better analysis than for the last month.
 
 So spaceline - all the icons based.
 
+Found eyeline - spaceline wioth icons but less that all-the icons - might be easier though
+
 * Packages
 :PROPERTIES:
 :ID:       org_mark_mini20o.local:20210602T212500.391684
@@ -316,6 +318,7 @@ This snippet displays the number of packages that you last needed to update. Thi
 * Jerry Peng setup - no tangle
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210602T212500.390542
+:header-args:    :tangle no
 :END:
 See site-lisp/jerrypnz/jp-modeline.el
 Needs Moody. I also removed some
@@ -590,6 +593,7 @@ Let's do the basic
 * Spaceline
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210606T165448.626960
+:header-args:    :tangle no
 :END:
 ** Load
 :PROPERTIES:
@@ -631,4 +635,29 @@ Let's do the basic
   :config (spaceline-mwb-theme)
   )
 #+end_src
+#+end_src
+* Eyeliner
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210720T211034.187440
+:END:
+And another from spaceline.
+It has not been update since creation so take as mine
+#+NAME: org_mark_mini20.local_20210720T211034.172150
+#+begin_src emacs-lisp
+(use-feature eyeliner
+  :config
+  (require 'eyeliner)
+
+  (setq eyeliner/left-hand-segments
+        '((eyeliner/buffer-modified)
+          (eyeliner/branch-icon :skip-alternate t :tight-right t)
+          (eyeliner/branch-name)
+          (eyeliner/project-name :skip-alternate t)
+          (eyeliner/mode-icon :skip-alternate t :tight t)
+          (eyeliner/buffer-name))
+
+        eyeliner/right-hand-segments
+        '(("%l:%c")))
+
+  (eyeliner/install))
 #+end_src

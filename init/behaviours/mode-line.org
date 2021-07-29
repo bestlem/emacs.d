@@ -103,7 +103,7 @@ And that paragraph is better analysis than for the last month.
 
 So spaceline - all the icons based.
 
-Found eyeline - spaceline wioth icons but less that all-the icons - might be easier though
+Found eyeline - spaceline wioth icons but less that all-the icons - might be easier though unfortunately author noiw uses doom
 
 * Packages
 :PROPERTIES:
@@ -550,10 +550,7 @@ Separate out so org file is easier to read
 :END:
 #+NAME: org_mark_mini20.local_20210611T102455.355063
 #+begin_src emacs-lisp
-(use-package mwb-headline-mode
-  :mwb-load-path "site-lisp/mwb"
-  :demand
-  :after doom-modeline
+(use-feature mwb-headline-mode
   :init
   ;; Prevent flash of unstyled modeline at startup
   (unless after-init-time
@@ -561,16 +558,16 @@ Separate out so org file is easier to read
 	(setq-default mode-line-format nil))
   :config
   (doom-modeline-def-modeline 'main-headline
-	'(major-mode buffer-size minor-modes buffer-position selection-info)
-	'(indent-info buffer-encoding process checker))
+							  '(major-mode buffer-size minor-modes buffer-position selection-info)
+							  '(indent-info buffer-encoding process checker))
 
   (doom-modeline-def-modeline 'main
-	'(workspace-name window-number modals buffer-info remote-host word-count parrot)
-	'(objed-state misc-info persp-name battery grip irc mu4e gnus github debug repl lsp input-method process vcs))
+							  '(workspace-name window-number modals buffer-info remote-host word-count parrot)
+							  '(objed-state misc-info persp-name battery grip irc mu4e gnus github debug repl lsp input-method process vcs))
 
   (doom-modeline-def-modeline 'org-src
-	'(window-number modals buffer-info-simple buffer-position word-count parrot selection-info)
-	'(objed-state misc-info debug lsp minor-modes input-method buffer-encoding major-mode process checker))
+							  '(window-number modals buffer-info-simple buffer-position word-count parrot selection-info)
+							  '(objed-state misc-info debug lsp minor-modes input-method buffer-encoding major-mode process checker))
 
   ;; The segment does not set the background of the face correctly
   (set-face-attribute 'doom-modeline-buffer-minor-mode nil :inherit 'mode-line)
@@ -593,7 +590,6 @@ Let's do the basic
 * Spaceline
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210606T165448.626960
-:header-args:    :tangle no
 :END:
 ** Load
 :PROPERTIES:
@@ -639,6 +635,7 @@ Let's do the basic
 * Eyeliner
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210720T211034.187440
+:header-args:    :tangle no
 :END:
 And another from spaceline.
 It has not been update since creation so take as mine

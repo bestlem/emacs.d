@@ -274,39 +274,37 @@ Make the message "/FILENAME has auto save data/" unmissable:
 
  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_8950A078-0D0D-4B58-90E9-2E103AB4934D
  #+begin_src emacs-lisp
-;; Problem is this is set after the recent files are set https://emacs.stackexchange.com/questions/48784/recent-files-in-aquamacs
-;;  Seems to be OK
-
-
-;; (setq recentf-exclude '("COMMIT_MSG" "COMMIT_EDITMSG" "github.*txt$"
-;;                         "^/var/folders\\.*"
-;;                         "COMMIT_EDITMSG\\'"
-;;                         ".recentf"
-;;                         "~$" ".~/"      ; Emacs (and others) backup.
-;;                         ".*-autoloads\\.el\\'"
-;;                         "[/\\]emacs.d/elpa/"
-;;                         ".*png$" ".*cache$"
-;;                         "~/\\.emacs\\.d/\\.*/*\\.el"
-;;                         "~/src/env/emacs\\.d/.*/.*\\.el"
-;;                         "SessionDesktop\\.el"
-;;                         "treemacs-persist"))
-;; (setq recentf-exclude '())
-(use-package recentf
-  :unless *aquamacs*
+(use-feature recentf
   :commands (recentf-mode
-             recentf-add-file
-             recentf-apply-filename-handlers
-             recentf-save-list)
+			 recentf-add-file
+			 recentf-apply-filename-handlers
+			 recentf-save-list)
   :init
   (setq recentf-filename-handlers '(abbreviate-file-name)
-        recentf-auto-cleanup (* 3600 2) ; 2 hours
-        recentf-keep '(file-remote-p file-readable-p)
-        recentf-save-file (mwb-user-emacs-file "var/recentf-save.el")
-        ;; recentf-max-saved-items 100
-        recentf-max-menu-items 25)
+		recentf-auto-cleanup (* 3600 2) ; 2 hours
+		recentf-keep '(file-remote-p file-readable-p)
+		recentf-max-saved-items 500
+		recentf-max-menu-items 25)
+  (unless *aquamacs*
+	(setq recentf-save-file (mwb-user-emacs-file "var/recentf-save.el")))
   :config
+  (setq recentf-exclude '("COMMIT_MSG" "COMMIT_EDITMSG" "github.*txt$"
+						  "^/var/folders\\.*"
+						  "COMMIT_EDITMSG\\'"
+						  ".recentf"
+						  "~$" ".~/"	; Emacs (and others) backup.
+						  ".*-autoloads\\.el\\'"
+						  "[/\\]emacs.d/elpa/"
+						  ".*png$" ".*cache$"
+						  "SessionDesktop\\.el"
+						  "treemacs-persist"))
   (recentf-mode 1))
   #+end_src
+
+#+RESULTS[0f3a20a035e38133cab5393182122c5404f4249c]: org_mark_2020-01-24T17-28-10+00-00_mini12_8950A078-0D0D-4B58-90E9-2E103AB4934D
+#+begin_EXAMPLE
+t
+#+end_EXAMPLE
 
 ** TODO Compressed files
 :PROPERTIES:

@@ -8,9 +8,44 @@ Note all loaded immediately as could be called anytime.
 
 * Hydra
 :PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:F65CCA9F-596F-4B8D-A0B2-29C44A4886D3
+:ID:       org_mark_mini20.local:20210724T104659.216246
 :END:
-#+NAME: org_2020-12-03+00-00_644A7537-C980-48C1-894E-D92826418F53
+
+** Support
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210724T104659.213041
+:END:
+Need a function to save an then do things
+#+NAME: org_mark_mini20.local_20210724T104659.187112
+#+begin_src emacs-lisp
+(defun elisp-mwb-run-hydra ()
+  (interactive)
+  (mwb-projectile-save-project-buffers)
+  (hydra-elisp-compile/body))
+#+end_src
+
+** Compile Hydra
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210724T104906.121238
+:END:
+#+NAME: org_mark_mini20.local_20210724T104906.096473
+#+begin_src emacs-lisp
+(pretty-hydra-define hydra-elisp-compile
+  (:foreign-keys run
+				 :title (mwb-icon-string "el" "Emacs Lips Compile")
+				 :exit t)
+  ("compile"
+   (("c" emacs-lisp-byte-compile "Compile")
+	("l" emacs-lisp-byte-compile-and-load "Compile and Load")
+	("r" byte-recompile-directory "Byte Recompile Directory")
+	("x" disassemble "Disassemble"))))
+#+end_src
+
+** Major mode hydra
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210724T105126.330418
+:END:
+#+NAME: org_mark_mini20.local_20210724T104659.188563
 #+begin_src emacs-lisp
 (use-package emacs-lisp-mode
   :bind ("<f5>" . eval-buffer)
@@ -21,6 +56,7 @@ Note all loaded immediately as could be called anytime.
                  ("d" eval-defun "defun [well top level form]")
                  ;; ("r" eval-region "region") ; lispy-eval
                  ("I" ielm "ielm")
+				 ("c" elisp-mwb-run-hydra "compile")
                  ;; ("f" matcha-elisp-eval-current-form-sp "form")
                  ;; ("x" matcha-goto-scratch "*Scratch*")
                  )
@@ -30,9 +66,9 @@ Note all loaded immediately as could be called anytime.
                  ("F" (ert :failed) "failed"))
                 "Edit"
                 (("a" hydra-lispy-mwb-alter/body "Alter...")
-                 ("r" hydra-lispy-mwb-mark/body "Region...")
-                 ("g" hydra-lispy-mwb-goto/body "Goto...")
-                 ("f" srefactor-lisp-format-sexp "srefactor sexp"))
+				 ("r" hydra-lispy-mwb-mark/body "Region...")
+				 ("g" hydra-lispy-mwb-goto/body "Goto...")
+				 ("f" emr-show-refactor-menu "Refactor..."))
                 "Debug"
                 (("m" sk/hydra-macro-step/body "Macrostep...")
                  ("E" modi/toggle-edebug "Toggle edebug")
@@ -42,11 +78,8 @@ Note all loaded immediately as could be called anytime.
                 ;; ["Watch"
                 ;;  ("w" debug-watch "Watch")
                 ;;  ("W" cancel-debug-watch  "Cancel Watch")]
-                "Compile"
-                (("cc" emacs-lisp-byte-compile "Compile")
-                 ("cl" emacs-lisp-byte-compile-and-load "Compile and Load")
-                 ("cr" byte-recompile-directory "Byte Recompile Directory")
-                 ("cx" disassemble "Disassemble")))))
+				)))
+
 #+end_src
 
 * Formatting

@@ -67,3 +67,7 @@ symbol in NAME-LIST. Bound variables are visible for each form inside BODY."
 ;;   (benchmark-run-compiled 1000000
 ;;     (mv-let (a b c) (mv-ret 1 2 3)
 ;;       (ignore a b c))))
+
+
+(provide 'mv-lib)
+;;; mv-lib.el ends here

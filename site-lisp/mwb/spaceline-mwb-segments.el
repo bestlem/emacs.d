@@ -35,66 +35,11 @@
 ;;; Code:
 (require 'spaceline)
 (require 'all-the-icons)
-(require 'mwb-icons)
 (require 'spaceline-mwb-core)
-
-(defmacro mwb-headline--map-keymap (keymap)
-  "Copy the mode-line KEYMAP to header-line."
-  `(define-key ,keymap [header-line]
-	 (lookup-key ,keymap [mode-line])))
-
-(defun mwb-headline--keymap-header-and-mode (keymap)
-  "Return a mode-line KEYMAP copied to header-line as well."
-  (mwb-headline--map-keymap keymap)
-  keymap)
 
 ;;; Create icons
 
-(defun eyeliner/get-icon-factory (set-name)
-  "Return an icon factory for the given iconset SET-NAME."
-  (--when-let (all-the-icons--function-name set-name)
-    (when (fboundp it) it)))
-
-(defun eyeliner/get-icon-family (set-name)
-  "Return the family-name for a given iconset SET-NAME."
-  (--when-let (all-the-icons--family-name set-name)
-    (apply it '())))
-
-(defun eyeliner/find-icon (icon-name)
-  "Return a cons containing an icon and its family-name from ICON-NAME."
-  (cl-loop for set-name in '(octicon faicon wicon fileicon material alltheicon)
-           for factory = (eyeliner/get-icon-factory set-name)
-           for icon = (ignore-errors (apply factory `(,icon-name)))
-           for family = (eyeliner/get-icon-family set-name)
-           if icon
-           return (cons icon family)))
-
-(defmacro eyeliner/with-icon (icon-name &rest body)
-  "Execute BODY while binding icon and family from ICON-NAME."
-  (declare (indent defun))
-  `(--when-let (eyeliner/find-icon ,icon-name)
-    (cl-destructuring-bind (icon . family) it ,@body)))
-
 ;;; Segments
-(spaceline-define-segment
-	mwb-modified
-  "An `all-the-icons' segment depiciting the current buffers state"
-  (let* ((buffer-state (format-mode-line "%*"))
-		 (icon-key (cond
-					((and buffer-file-name (buffer-modified-p)) 'modified)
-					((and (boundp 'hardhat-reasons) hardhat-reasons) 'hardhat-protected)
-					(buffer-read-only 'read-only)
-					((and buffer-file-name
-						  (not (file-remote-p buffer-file-name)) ; Avoid freezing while connection is lost
-						  (not (file-exists-p buffer-file-name))) 'missing )
-					(t 'OK)))
-		 (icon (mwb-icons-get-icon icon-key)))
-
-	(propertize icon
-				'mouse-face (spaceline-all-the-icons--highlight)
-				'local-map (mwb-headline--keymap-header-and-mode (make-mode-line-mouse-map 'mouse-1 'read-only-mode))))
-  :tight t)
-
 
 (spaceline-define-segment mwb-projectile
   "An `all-the-icons' segment to indicate the current `projectile' project"
@@ -131,6 +76,37 @@ mouse-1: Display minor modes menu"
 				'local-map minions-mode-line-minor-modes-map
 				'face `(:family ,family
 						:inherit)) ))
+
+;;; Buffer state
+(spaceline-define-segment mwb-narrowed
+  "A segment to indicate whether the current buffer is narrowed."
+  (eyeliner/with-icon "filter"
+	(propertize icon
+				'family family
+				'help-echo "mouse-1: Widen the current file"
+				'mouse-face mode-line-highlight
+				'local-map (spaceline-mwb--mouse-map 'mouse-1 'widen)))
+  :when (or (buffer-narrowed-p)
+			(and (bound-and-true-p fancy-narrow-mode)
+				 (fancy-narrow-active-p))))
+(spaceline-define-segment
+	mwb-modified
+  "A iconised status of buffer showing readonly/modified."
+  (when (and buffer-file-name (buffer-modified-p))
+	(mwb-icon-with-family "save")))
+
+(spaceline-define-segment mwb-rw
+  (let ((ro-icon (cond ((and (boundp 'hardhat-reasons) hardhat-reasons) "h-square")
+					   (buffer-read-only "lock")
+					   (t "unlock"))))
+	(propertize (mwb-icon-with-family ro-icon)
+				'mouse-face 'mode-line-highlight
+				'local-map (spaceline-mwb--mouse-map 'mouse-1 'read-only-mode))))
+
+(spaceline-define-segment mwb-buffer-size
+  "The size of the buffer.
+Can't use spaceline as it has unneeded mouse menu"
+  "%I")
 
 ;;; Flycheck -
 ;; Keys based on doom-modeline
@@ -222,6 +198,12 @@ mouse-1: Display minor modes menu"
 
 (add-hook 'flycheck-status-changed-functions #'spaceline-mwb--update-flycheck-segment)
 (add-hook 'flycheck-mode-hook #'spaceline-mwb--update-flycheck-segment)
+
+(spaceline-define-segment mwb-flycheck
+  "Show if there are any flycheck errors/warnings/issues."
+  (when spaceline-mwb--flycheck-text
+	spaceline-mwb--flycheck-text))
+
 
 (provide 'spaceline-mwb-segments)
 ;;; spaceline-mwb-segments.el ends here

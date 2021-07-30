@@ -39,32 +39,39 @@
 (require 'spaceline-mwb-segments)
 (require 'spaceline-all-the-icons-separators)
 (require 'spaceline-mwb-core)
+(require 'mwb-icons)
+(require 'minions)
 
 
+(defmacro mwb-headline--keymap-duo-header (keymap)
+  "Copy the mode-line KEYMAP to header-line."
+  `(define-key ,keymap [header-line]
+	 (lookup-key ,keymap [mode-line])))
 
+(defun mwb-headline--keymap-header-and-mode (keymap)
+  "Return a mode-line KEYMAP copied to header-line as well."
+  (mwb-headline--keymap-duo-header keymap)
+  keymap)
 
 ;;; Forward declarations of Optional Dependencies
 
 
 
-(spaceline-define-segment mwb-flycheck
-  "Show if there are any flycheck errors/warnings/issues."
-  (when spaceline-mwb--flycheck-text
-	spaceline-mwb--flycheck-text))
+
 ;;; Themes
 
 (spaceline-compile
   "mwb-test"
   '(
 	(mwb-mode-icon
-	 mwb-minor-modes
-	 )
-	(mwb-flycheck
-	 :when active :priority 89)
-	(line-column all-the-icons-region-info)
-
+	 mwb-minor-modes)
+	(mwb-narrowed mwb-modified mwb-rw )
+	(mwb-buffer-size line-column)
 	)
-  '())
+  '(
+	(all-the-icons-which-function)
+	(mwb-flycheck
+	 :when active :priority 89)))
 
 (spaceline-compile
   "mwb-mode-theme"
@@ -73,6 +80,7 @@
 	 :skip-alternate t)
     auto-compile
 	mwb-projectile
+
 	;; The actual buffer info
 	((
 	  all-the-icons-mode-icon
@@ -118,11 +126,13 @@
 
 
 ;;;###autoload
-(defun spaceline-mwb-theme (&rest additional-segments)
-  "Install the `spaceline-ml-all-the-icons'wb.
-Add ADDITIONAL-SEGMENTS to the end of the theme."
+(defun spaceline-mwb-theme ()
+  "Install my spaceline configs."
   (interactive)
   (minions-mode 1)
+  ;;  set the header keymap as a copy of mode line
+  (mwb-headline--keymap-duo-header mode-line-major-mode-keymap)
+  (mwb-headline--keymap-duo-header mode-line-column-line-number-mode-map)
   (setq-default mode-line-format '("%e" (:eval (spaceline-ml-mwb-mode-theme))))
   (setq-default header-line-format '("%e" (:eval (spaceline-ml-mwb-test))))
   )

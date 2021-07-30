@@ -34,6 +34,10 @@
 
 ;;; Code:
 
+(require 'dash)
+(require 'cl-lib)
+(require 'all-the-icons)
+(require 'spaceline)
 
 ;; Declare Customization Groups
 (defgroup spaceline-mwb nil
@@ -42,10 +46,42 @@
   :group 'spaceline
   :group 'appearance)
 
+;;; Icons
 
-;;; Global helper functions
+(defun eyeliner/get-icon-factory (set-name)
+  "Return an icon factory for the given iconset SET-NAME."
+  (--when-let (all-the-icons--function-name set-name)
+    (when (fboundp it) it)))
+
+(defun eyeliner/get-icon-family (set-name)
+  "Return the family-name for a given iconset SET-NAME."
+  (--when-let (all-the-icons--family-name set-name)
+    (apply it '())))
+
+(defun eyeliner/find-icon (icon-name)
+  "Return a cons containing an icon and its family-name from ICON-NAME."
+  (cl-loop for set-name in '(octicon faicon wicon fileicon material alltheicon)
+           for factory = (eyeliner/get-icon-factory set-name)
+           for icon = (ignore-errors (apply factory `(,icon-name)))
+           for family = (eyeliner/get-icon-family set-name)
+           if icon
+           return (cons icon family)))
+
+(defmacro eyeliner/with-icon (icon-name &rest body)
+  "Execute BODY while binding icon and family from ICON-NAME."
+  (declare (indent defun))
+  `(--when-let (eyeliner/find-icon ,icon-name)
+    (cl-destructuring-bind (icon . family) it ,@body)))
+
+(defun mwb-icon-with-family (icon-name)
+  "Return a propertized icon from ICON-NAME."
+  (eyeliner/with-icon icon-name (propertize icon 'family family)))
+
+;;; Global helper keymap functions
 (defun spaceline-mwb--mouse-map (mouse function) "\
-Return a keymap with single entry for mouse key MOUSE on the mode and header lines.
+Return a keymap with single entry for mouse key MOUSE on the mode and header
+lines.
+
 MOUSE is defined to run function FUNCTION with no args in the buffer
 corresponding to the mode line clicked."
 	   (let ((map (make-sparse-keymap)))

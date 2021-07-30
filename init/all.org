@@ -217,34 +217,6 @@ Includes structured data and now anything that does not have dependency order
 (mwb-init-load "init/prog-modes")
  #+end_src
 
-* Command completion
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:B8539BA6-84DE-4075-80AF-0B37BE1CBA52
-:END:
-This is completion for emacs commands. Choice is ido, ivy helm.
-I'll try ivy.
-Note headers have tangle command in to suppress one or other
-*** Find M-x commands
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:2B101998-0D34-4143-95AF-769C4001D58C
-:END:
-#+begin_quote
-Smex is a M-x enhancement for Emacs. Built on top of IDO, it provides a convenient interface to your recently and most frequently used commands. And to all the other commands, too.
-#+end_quote
-
-However smex seems not to be maintained so try amx
-#+NAME: org_2020-11-30+00-00_28F3664A-77DF-4D77-8554-E9F37CB1815E
-#+begin_src emacs-lisp
-(use-package amx :ensure t)
-#+end_src
-*** Ivy
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:DF80C3BB-D098-429D-A993-3DB810603205
-:END:
-#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_AE80986F-5F2A-4603-A292-6FB20CB43A9C
-#+begin_src emacs-lisp
-(mwb-init-load "init/ivy")
-#+end_src
 * Key binding
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:BF4F840D-AE27-4C9B-B83E-CCFAC0C0E8DB

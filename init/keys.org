@@ -28,7 +28,6 @@
   - [[#quickrun][quickrun]]
   - [[#file-actions][File actions]]
   - [[#buffer-related][Buffer related]]
-  - [[#goto][Goto]]
 - [[#single-key-bindings][Single key bindings]]
   - [[#function-keys][Function keys]]
   - [[#hyper-key-bindings][Hyper key bindings]]
@@ -39,6 +38,8 @@
 - [[#hydra][Hydra]]
   - [[#leader-keys][Leader keys]]
   - [[#hydra-transpose][Hydra transpose]]
+  - [[#goto][Goto]]
+  - [[#search][Search]]
   - [[#kitchin-hydras][Kitchin hydras]]
   - [[#toggle-treemode-as-needed-often][Toggle treemode as needed often]]
 - [[#freekeys][FreeKeys]]
@@ -382,21 +383,14 @@ This is the override of save etc to the mode maps
 :END:
 #+NAME: org_mark_2020-09-24T21-45-16+01-00_mini12.local_427A6531-52EE-4F7E-A5E8-B2841C9B166A
 #+begin_src emacs-lisp
-(bind-key "A-b" 'ivy-switch-buffer macos-key-map)
+;; (bind-key "A-b" 'ivy-switch-buffer macos-key-map)
+(bind-key "A-b" 'consult-buffer macos-key-map)
 (bind-key "A-M-k" 'bjm/kill-this-buffer macos-key-map)
 (bind-key "C-x k" 'bjm/kill-this-buffer macos-key-map)
 (bind-key "A-k" 'bury-buffer macos-key-map)
 ;; (bind-chord "kk" #'er-switch-to-previous-buffer macos-key-map)
 ;; macport makes A-u µ
 (bind-key  "A-u" 'revert-buffer-no-confirm macos-key-map)
-#+end_src
-** Goto
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:3F4F065D-FF4D-4D2B-BA34-42AEA1DE2043
-:END:
-#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_A1DB0752-B232-4FA8-BF33-3CE313E5306C
-#+begin_src emacs-lisp
-(bind-key "M-g" 'goto-line)             ; one of the oldest binds
 #+end_src
 * Single key bindings
 :PROPERTIES:
@@ -571,7 +565,7 @@ Try with an enhanced one but test to mouse-4 which might have issues with treema
 :PROPERTIES:
 :ID:       org_2020-12-08+00-00:8916E17A-D941-4F9E-B5B6-2F32476DF3C0
 :END:
-Replace Hyper key combination with a leader key - eventually this will be caps lock
+Replace Hyper key combination with a leader key
 
 As this has to be a leader map so no hydra H-s is the issue as in some org-mode maps then mighty be better to use which-key-add-keymap-based-replacements to set pretty names for which key
 
@@ -612,7 +606,8 @@ Odd things needed
     ("C-<tab>" hs-toggle-hiding "Toggle hide-show")
 	("f" refill-mode "Auto refill mode ")
 	("r" backup-walker-start "Backup Walker" )
-	("i" counsel-imenu "imenu")
+	;; ("i" counsel-imenu "imenu")
+	("i" consult-imenu "imenu")
     )
    "Actions"
    (("D" toggle-debug-on-error "debug on error" :toggle (default-value 'debug-on-error))
@@ -652,6 +647,77 @@ Odd things needed
      ("t" org-table-transpose-table-at-point "Org mode table")
      ("q" nil "cancel" :color blue))
 	#+end_src
+
+** Goto
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210801T222808.558433
+:END:
+TODO
+As noted based on Sacha Chua's consult setup.
+
+** Search
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210801T222808.557693
+:END:
+Again from Sasha Chua
+#+NAME: org_mark_mini20.local_20210801T222808.532824
+#+begin_src emacs-lisp
+(pretty-hydra-define hydra-search
+  (:title (mwb-icon-text "search" "Search")
+		  :foreign-keys warn
+		  :quit-key "q"
+		  :exit t
+		  :idle 0.5)
+  ("Project"
+   (("<f5>" deadgrep "Deadgrep")
+	("r" consult-ripgrep "Counsel ripgrep"))
+   "Global"
+   (("L" consult-locate "Locate")
+	("M-w" eww-search-words "Web"))
+   "Directory"
+   (("g" consult-grep "grep")
+	("G" consult-git-grep "grep using git")
+	("f" consult-find "Find"))
+   "Current Buffer"
+   (("l" consult-line "Line")
+	("k" consult-keep-lines "Keep Lines")
+	("u" consult-focus-lines "Focus Lines")
+	("e" consult-isearch "Incremental search")
+	("<f4>" consult-isearch "Incremental search")
+	("o" occur "Occur")
+	("." isearch-forward-symbol-at-point "isearch point")
+	("_" isearch-forward-symbol "isearch symbol")
+	("w" isearch-forward-word "Isearch word"))
+   "Buffers"
+   (("m"  consult-multi-occur "Multi occur"))
+   "Highlight"
+   (("h." highlight-symbol-at-point "Point")
+	("hf" hi-lock-find-patterns "Lock Pattern")
+	("hl" highlight-lines-matching-regexp "Lines")
+	("hp" highlight-phrase "Phrase")
+	("hr" highlight-regexp "regexp")
+	("hu" unhighlight-regexp "Unhighlight")
+	("hw" hi-lock-write-interactive-patterns "Write patterns"))))
+(bind-key "<f4>" 'hydra-search/body)
+#+end_src
+
+*** isearch map
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210802T082202.482760
+:END:
+#+NAME: org_mark_mini20.local_20210802T104242.905780
+#+begin_src emacs-lisp
+(use-feature emacs
+  :bind ( :map isearch-mode-map
+			   ("M-e" . consult-isearch) ;; orig. isearch-edit-string
+			   ("M-s e" . consult-isearch) ;; orig. isearch-edit-string
+			   ("M-s l" . consult-line)
+			   ("<f4>" . isearch-repeat-forward)
+			   ("<f3>" . isearch-repeat-backward)))
+#+end_src
+
+
+
 ** Kitchin hydras
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:CA320A7E-C8CE-4C9D-B24B-C7FFE5F04B9C

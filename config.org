@@ -482,7 +482,7 @@ Need to alter list
   :ensure t
   :config (key-chord-mode 1))
 #+end_src
-**** Add load path
+**** use-package load path
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:25E6B29E-1FD7-4FB8-BA7C-5546A45CFA00
 :END:
@@ -523,6 +523,25 @@ Not really needed as should set load-path
 (setq use-package-keywords
       (mwb-insert-before-element :load-path :mwb-load-path  use-package-keywords))
 #+end_src
+
+**** load-path
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:BBB5C272-C2B4-4F38-948C-ED758D56E6A4
+:END:
+Setup for elisp  used by normal load not org tangle
+Note that if a subdirectory is just for one thing then use keyword mwb-load-path in use-package. Non Aquamacs does not set all sub-directories on load path.
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_CC0BEB6F-84DC-4320-9455-9906069CD4C9
+#+begin_src emacs-lisp
+(defun add-subdirs-to-load-path ()
+  "Add subdirectories to `load-path'."
+  (interactive)
+  (let ((default-directory (mwb-user-emacs-file "site-lisp")))
+    (normal-top-level-add-subdirs-to-load-path)))
+
+(add-to-list 'load-path (mwb-user-emacs-file "site-lisp"))
+(add-subdirs-to-load-path)
+#+end_src
+
 ** Customisation file
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:A28603F3-9100-4C41-855A-5D202E7ACFE3
@@ -891,27 +910,14 @@ Treemacs icons are better but they are purely keyed off file extensions. All the
 (use-package jp-icons
   :mwb-load-path "site-lisp/jerrypnz")
 #+end_src
-***** Centaur pretty-hydra-title
+
+***** My icon code
 :PROPERTIES:
-:ID:       org_mark_mini20.local:20210602T225047.764883
+:ID:       org_mark_mini20.local:20210801T222229.925338
 :END:
-Used as a function to give an iconized title
-#+NAME: org_mark_mini20.local_20210602T225047.737701
+#+NAME: org_mark_mini20.local_20210801T222229.905961
 #+begin_src emacs-lisp
-(cl-defun pretty-hydra-title (title &optional icon-type icon-name
-                                    &key face height v-adjust)
-  "Add an icon in the hydra title."
-  (let ((face (or face `(:foreground ,(face-background 'highlight))))
-        (height (or height 1.0))
-        (v-adjust (or v-adjust 0.0)))
-    (concat
-     (when (and (display-graphic-p) icon-type icon-name)
-       (let ((f (intern (format "all-the-icons-%s" icon-type))))
-         (when (fboundp f)
-           (concat
-            (apply f (list icon-name :face face :height height :v-adjust v-adjust))
-            " "))))
-     (propertize title 'face face))))
+(use-feature mwb-icons)
 #+end_src
 *** Remainder of org
 :PROPERTIES:

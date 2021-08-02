@@ -1,5 +1,16 @@
-#+TITLE Emacs configuration How emacs completes itself
-#+PROPERTY:header-args :cache yes :tangle yes :comments link
+#+TITLE:  Minibuffer
+#+AUTHOR: Mark Bestley
+#+EMAIL:  git@bestley.co.uk
+#+DATE:   01 Aug 2021
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+STARTUP: overview
+
+* Overview
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210801T131222.157445
+:END:
+This originally was ivy.org but when trying to replace ivy I realised that this was not just command completion but anything involving the minibuffer. 9example is ivy-posframe
+
 
 * Command completion
 :PROPERTIES:
@@ -7,8 +18,9 @@
 :END:
 This is completion for emacs commands. Choice is ido, ivy helm.
 I'll try ivy.
-In general most supported by minibuffer can get in a mess and Aquamacs fails with swiper
-So the new stuff seems to be [[https://github.com/minad/consult][consult]] and spectrum and marginalia but they don't seem to have posframwe but try mini-frame
+In general most supported by minibuffer (well buffer switching) can get in a mess and Aquamacs fails with swiper - and now
+So the new stuff seems to be [[https://github.com/minad/consult][consult]] and spectrum and marginalia but they don't seem to have posframe but try mini-frame
+Well posframe seems to be used but with same beep problem
 
 * Support packages
 :PROPERTIES:
@@ -23,11 +35,10 @@ General purpose but used for the completion
 [[https://github.com/raxod502/prescient.el][Prescient]]  is a library which sorts and filters lists of candidates,
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_378BD735-5E0C-4075-9ED5-A69FC65B29E4
 #+begin_src emacs-lisp
-(use-package prescient
+(use-package-elpa prescient
   :demand
-  :ensure t
   :config
-  (prescient-persist-mode t))
+  (prescient-persist-mode 1))
 #+end_src
 ** Find M-x commands
 :PROPERTIES:
@@ -42,9 +53,47 @@ However smex seems not to be maintained so try amx
 #+begin_src emacs-lisp
 (use-package amx :ensure t)
 #+end_src
+** Emacs mini frame
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210801T194100.725461
+:END:
+Put the minibuffer elsewhere.
+posframe does a few more things as it works with non minibuffer. But mini-frame works with all minibuffer.
+
+This puts it at the top
+But it does blank the header line - noticeable with ivy-posframe.
+Also I want it in middle or over the non treemacs frame. Look at treemacs-current-visibility to see if visible in current frame
+
+
+#+NAME: org_mark_mini20.local_20210801T194100.707636
+#+begin_src emacs-lisp
+(when *emacs/>=26p*
+  (use-package-elpa mini-frame
+	:demand
+	:config
+	(defun mwb-mini-treemacs-width ()
+	  "Find width of treemacs window if it exists plus a fringe."
+	  (if (treemacs-get-local-window)
+		  (+ treemacs-width 0.5)
+		0.5))
+
+	(defun mwb-mini-frame-parameters ()
+	  "Normal minibuffer extents."
+	  `((left . ,(mwb-mini-treemacs-width)) (top . 0.0) (width . 1.0) (height . 1)))
+	(defun mwb-mini-frame-completions-parameters ()
+	  "Minibuffer for completions extents."
+	  `((left . ,(mwb-mini-treemacs-width)) (width . 1.0) (height . 0.25)))
+
+
+	(setq mini-frame-show-parameters #'mwb-mini-frame-parameters)
+	(setq mini-frame-completions-show-parameters
+		  #'mwb-mini-frame-completions-parameters)
+	(mini-frame-mode 1)))
+#+end_src
 * Ivy
 :PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:064B90CD-F13F-4BB4-B46E-49B8F0354D54
+:header-args: :tangle no
+:ID:       org_mark_mini20.local:20210801T131222.155992
 :END:
 Start with a small setup as I lost track but some of it is needed.
 
@@ -139,6 +188,7 @@ Note takes time to load
     (setq ivy-posframe-display-functions-alist
 		  '((swiper . ivy-display-function-fallback)
 			(swiper-isearch . ivy-display-function-fallback)
+			(consult-isearch . ivy-display-function-fallback)
 			;; (complete-symbol . ivy-posframe-display-at-point)
 			(t . ivy-posframe-display)
 			;; (t . ivy-display-function-fallback)
@@ -292,4 +342,166 @@ Improve many emacs functions
   :after (counsel prescient)
   :config (ivy-prescient-mode 1)
   )
+#+end_src
+* Newer
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210731T152331.776146
+:END:
+Mainly from Sacha Chua
+** Consult
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210731T152331.774706
+:END:
+
+#+NAME: org_mark_mini20.local_20210731T152331.759640
+#+begin_src emacs-lisp
+(use-package-elpa consult
+  :demand
+  :bind (("C-x r x" . consult-register)
+         ("C-x r b" . consult-bookmark)
+         ("C-c k" . consult-kmacro)
+         ("C-x M-:" . consult-complex-command) ;; orig. repeat-complet-command
+         ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
+         ("C-x 5 b" . consult-buffer-other-frame)
+         ("M-#" . consult-register-load)
+         ("M-'" . consult-register-store) ;; orig. abbrev-prefix-mark (unrelated)
+         ("C-M-#" . consult-register)
+         ("M-g o" . consult-outline)
+         ("M-g h" . consult-org-heading)
+         ("M-g a" . consult-org-agenda)
+         ("M-g m" . consult-mark)
+         ("C-x b" . consult-buffer)
+         ("<help> a" . consult-apropos)  ;; orig. apropos-command
+         ("M-g M-g" . consult-goto-line) ;; orig. goto-line
+         ("M-g o" . consult-outline)
+         ("M-g m" . consult-mark)
+         ("M-g k" . consult-global-mark)
+         ("M-g i" . consult-imenu)
+         ("M-g I" . consult-project-imenu)
+         ("M-g e" . consult-error)
+         ;; M-s bindings (search-map)
+         ("M-s f" . consult-find)
+         ("M-s L" . consult-locate)
+         ("M-s g" . consult-grep)
+         ("M-s G" . consult-git-grep)
+         ("M-s r" . consult-ripgrep)
+         ("M-s l" . consult-line)
+         ("M-s m" . consult-multi-occur)
+         ("M-s k" . consult-keep-lines)
+         ("M-s u" . consult-focus-lines)
+         ;; Isearch integration
+         ("M-s e" . consult-isearch)
+         ;; ("M-g l" . consult-line)
+
+         ("M-s m" . consult-multi-occur)
+         ("C-x c o" . consult-multi-occur)
+         ("C-x c SPC" . consult-mark)
+         :map isearch-mode-map
+         ("M-e" . consult-isearch)   ;; orig. isearch-edit-string
+         ("M-s e" . consult-isearch) ;; orig. isearch-edit-string
+         ("M-s l" . consult-line))
+  :init
+  (setq register-preview-delay 0
+        register-preview-function #'consult-register-format)
+  :config
+  (setq consult-project-root-function #'projectile-project-root)
+  (setq consult-narrow-key "<")
+  )
+#+end_src
+** Marginalia
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210801T165758.232477
+:END:
+Add decoration/information
+#+NAME: org_mark_mini20.local_20210801T165758.216698
+#+begin_src emacs-lisp
+(use-package-elpa marginalia
+  :init
+  (marginalia-mode)
+  :config
+  (setq marginalia-annotators
+		'(marginalia-annotators-heavy marginalia-annotators-light))
+  (advice-add #'marginalia-cycle :after
+              (lambda () (when (bound-and-true-p selectrum-mode) (selectrum-exhibit))))
+  :bind (:map minibuffer-local-completion-map
+              ("M-A" . marginalia-cycle)
+              ("C-i" . marginalia-cycle-annotators)))
+#+end_src
+** Embark
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210801T171053.885805
+:END:
+Take action in selection buffer
+#+NAME: org_mark_mini20.local_20210801T171053.868666
+#+begin_src emacs-lisp
+(use-package-elpa embark
+  :after selectrum
+  :config
+  (setq embark-prompter 'embark-keymap-prompter)
+  ;; (add-to-list 'embark-target-finders 'my/embark-org-element)
+  ;; (add-to-list 'embark-allow-edit-commands #'my/stream-message)
+  ;; (add-to-list 'embark-allow-edit-commands #'my/journal-post)
+  ;; (embark-define-keymap embark-sketch-actions
+  ;;   "Org Mode sketch-related actions"
+  ;;   ("o" my/sketch-insert-file-as-link)
+  ;;   ("v" my/geeqie-view))
+  ;; (embark-define-keymap embark-journal-actions
+  ;;   "Journal"
+  ;;   ("e" my/journal-edit))
+  (add-to-list 'embark-keymap-alist '(sketch . embark-sketch-actions))
+  (add-to-list 'embark-keymap-alist '(journal . embark-journal-actions))
+
+  ;; Hide the mode line of the Embark live/completions buffers from embark
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 nil
+                 (window-parameters (mode-line-format . none))))
+
+  :bind
+  (:map minibuffer-local-map
+        (("C-c e" . embark-act)
+         ("C-;" . embark-act))
+        :map embark-collect-mode-map
+        (("C-c e" . embark-act)
+         ("C-;" . embark-act))
+        :map embark-general-map
+        (("j" . my/journal-post)
+         ("m" . my/stream-message))
+        :map embark-variable-map
+        ("l" . edit-list)))
+
+#+end_src
+*** Embark counsel
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210801T171307.569379
+:END:
+#+NAME: org_mark_mini20.local_20210801T171307.553247
+#+begin_src emacs-lisp
+(use-package-elpa embark-consult
+  :after (embark consult)
+  :demand t                ; only necessary if you have the hook below
+  ;; if you want to have consult previews as you move around an
+  ;; auto-updating embark collect buffer
+  :hook (embark-collect-mode . embark-consult-preview-minor-mode))
+     #+end_src
+#+end_src
+** Selectrum
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210801T174734.765653
+:END:
+The display part as verticle list
+#+NAME: org_mark_mini20.local_20210801T174734.748739
+#+begin_src emacs-lisp
+(use-package-elpa selectrum  :init (selectrum-mode +1))
+#+end_src
+*** Prescient
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210801T174941.158080
+:END:
+To put in order
+#+NAME: org_mark_mini20.local_20210801T174941.141568
+#+begin_src emacs-lisp
+(use-package-elpa selectrum-prescient
+  :init (selectrum-prescient-mode +1)
+  :after selectrum)
 #+end_src

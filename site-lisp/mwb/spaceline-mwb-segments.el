@@ -93,13 +93,13 @@ mouse-1: Display minor modes menu"
 	mwb-modified
   "A iconised status of buffer showing readonly/modified."
   (when (and buffer-file-name (buffer-modified-p))
-	(mwb-icon-with-family "save")))
+	(mwb-icon-get "save")))
 
 (spaceline-define-segment mwb-rw
   (let ((ro-icon (cond ((and (boundp 'hardhat-reasons) hardhat-reasons) "h-square")
 					   (buffer-read-only "lock")
 					   (t "unlock"))))
-	(propertize (mwb-icon-with-family ro-icon)
+	(propertize (mwb-icon-get ro-icon)
 				'mouse-face 'mode-line-highlight
 				'local-map (spaceline-mwb--mouse-map 'mouse-1 'read-only-mode))))
 

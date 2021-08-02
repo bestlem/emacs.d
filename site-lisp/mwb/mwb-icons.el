@@ -30,16 +30,23 @@
 
 ;;; Commentary:
 
-;; This sets up an alist of icons so that they can be accessed by name using
-;; function mwb-get-icon
+;;  A collection of my helper functions to get icons. Mainly a cover for
+;; all-the-icons or treemacs.
+;; Main use is in pretty-hydra and modeline
+
 
 ;;; Code:
 
 (require 'all-the-icons)
+(require 'ht)
 
 (defgroup mwb-icons nil
   "Setup icons in a lookup"
   :group 'mwb-icons)
+
+;;; doom icons
+;; Taken from doom-modeline - too complex as adds Unicode fallback which
+;; I don't need
 
 (eval-and-compile
   (defun mwb-icon--propertize-icon (icon &optional face)
@@ -119,6 +126,64 @@ ARGS is same as `all-the-icons-octicon' and others."
 							  `(:inherit error)))
 	)
   "An alist of icon name and icon or text.")
+
+;;; Treemacs based
+(declare-function treemacs-theme->gui-icons "ext:treemacs-themes")
+(defvar treemacs--current-theme )
+(defun mwb-icon-string (icon-file-extension text )
+  "Get an icon from treemacs for the ICON-FILE-EXTENSION e.g. \"el\" for an emacs icon and add to front of string TEXT."
+  (concat
+   (ht-get (treemacs-theme->gui-icons treemacs--current-theme) icon-file-extension)
+   text))
+
+;;; All - the icons
+
+;;;; Eyeliner based
+
+(defun eyeliner/get-icon-factory (set-name)
+  "Return an icon factory for the given iconset SET-NAME."
+  (--when-let (all-the-icons--function-name set-name)
+    (when (fboundp it) it)))
+
+(defun eyeliner/get-icon-family (set-name)
+  "Return the family-name for a given iconset SET-NAME."
+  (--when-let (all-the-icons--family-name set-name)
+    (apply it '())))
+
+(defun eyeliner/find-icon (icon-name)
+  "Return a cons containing an icon and its family-name from ICON-NAME."
+  (cl-loop for set-name in '(octicon faicon wicon fileicon material alltheicon)
+           for factory = (eyeliner/get-icon-factory set-name)
+           for icon = (ignore-errors (apply factory `(,icon-name)))
+           for family = (eyeliner/get-icon-family set-name)
+           if icon
+           return (cons icon family)))
+
+(defmacro eyeliner/with-icon (icon-name &rest body)
+  "Execute BODY while binding icon and family from ICON-NAME."
+  (declare (indent defun))
+  `(--when-let (eyeliner/find-icon ,icon-name)
+    (cl-destructuring-bind (icon . family) it ,@body)))
+
+(defun mwb-icon-get (icon-name)
+  "Return a propertized icon from ICON-NAME."
+  (eyeliner/with-icon icon-name (propertize icon 'family family)))
+
+
+(cl-defun mwb-icon-text (icon-name text
+								   &key face height v-adjust)
+  "Add an icon from ICON-NAME onto TEXT. Optional modification to icon properties of FACE HEIGHT and V-ADJUST."
+  (let ((face (or face `(:foreground ,(face-background 'highlight))))
+        (height (or height 1.0))
+        (v-adjust (or v-adjust 0.0)))
+    (concat
+     (when (and (display-graphic-p) icon-name)
+	   (concat
+		(eyeliner/with-icon icon-name
+		  (propertize icon 'family family
+					  'face face 'height height 'v-adjust v-adjust ))
+		" "))
+     (propertize text 'face face))))
 
 ;;;###autoload
 (defun mwb-icons-get-icon (name)

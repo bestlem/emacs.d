@@ -36,9 +36,3 @@
 ;;(push '(vertical-scroll-bars) default-frame-alist)
 (setq tool-bar-mode nil)
 ;; org_mark_2020-09-28T01-08-28+01-00_mini12.local_19B4CE88-E1D4-4E44-91B7-AD3D8E74C2D3 ends here
-
-;; [[file:init.org::org_mark_2020-11-13T08-54-14+00-00_mini12.local_B13702B5-689F-4646-85F2-FD570054EAC4][org_mark_2020-11-13T08-54-14+00-00_mini12.local_B13702B5-689F-4646-85F2-FD570054EAC4]]
-(defmacro add-hook-lambda (hook &rest body)
-  (declare (indent 1) (debug t))
-  `(add-hook ,hook (lambda () ,@body)))
-;; org_mark_2020-11-13T08-54-14+00-00_mini12.local_B13702B5-689F-4646-85F2-FD570054EAC4 ends here

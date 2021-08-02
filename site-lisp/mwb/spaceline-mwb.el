@@ -66,12 +66,17 @@
 	(mwb-mode-icon
 	 mwb-minor-modes)
 	(mwb-narrowed mwb-modified mwb-rw )
+	recursive-edit
 	(mwb-buffer-size line-column)
 	)
   '(
 	(all-the-icons-which-function)
 	(mwb-flycheck
-	 :when active :priority 89)))
+	 :when active :priority 89
+	 )
+	" "
+
+	))
 
 (spaceline-compile
   "mwb-mode-theme"

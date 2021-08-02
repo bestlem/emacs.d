@@ -175,6 +175,17 @@ but the answer below has an interesting suggestion
 #+begin_src emacs-lisp
 (setq cursor-type 'box)
 #+end_src
+** Reveal
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210802T104243.799441
+:END:
+Reveal invisible text around point.
+Hopefully searches will expand org-mode
+#+NAME: org_mark_mini20.local_20210802T104243.783283
+#+begin_src emacs-lisp
+(use-feature reveal
+  :config (reveal-mode 1))
+#+end_src
 * Windows
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:2DFC202B-3FB4-41C4-BFE6-9718ECD07F63

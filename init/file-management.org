@@ -350,7 +350,8 @@ Started as file management but actually deals with files and what is in them/ Tr
 	#+begin_src emacs-lisp
 (use-package deadgrep
   :ensure t
-  :bind (("<f4>" . deadgrep)
+  :commands deadgrep
+  :bind (
 		 :map deadgrep-mode-map
 		 ("<double-mouse-1>" . deadgrep-visit-result-other-window)
 		 ("<mouse-3>" . deadgrep-toggle-file-results))

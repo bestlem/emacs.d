@@ -147,8 +147,9 @@ ARGS is same as `all-the-icons-octicon' and others."
 
 (defun eyeliner/get-icon-family (set-name)
   "Return the family-name for a given iconset SET-NAME."
-  (--when-let (all-the-icons--family-name set-name)
-    (apply it '())))
+  (if-let (it (all-the-icons--family-name set-name))
+	  (apply it '())
+	(message "No family for %s" set-name)))
 
 (defun eyeliner/find-icon (icon-name)
   "Return a cons containing an icon and its family-name from ICON-NAME."
@@ -163,7 +164,8 @@ ARGS is same as `all-the-icons-octicon' and others."
   "Execute BODY while binding icon and family from ICON-NAME."
   (declare (indent defun))
   `(--when-let (eyeliner/find-icon ,icon-name)
-    (cl-destructuring-bind (icon . family) it ,@body)))
+    (cl-destructuring-bind (icon . family) it
+	 ,@body)))
 
 (defun mwb-icon-get (icon-name)
   "Return a propertized icon from ICON-NAME."

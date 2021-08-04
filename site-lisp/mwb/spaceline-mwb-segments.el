@@ -54,16 +54,33 @@
 
 
 (spaceline-define-segment mwb-mode-icon
-  "An `all-the-icons' segment indicating the current buffer's mode with an icon"
-  (let ((icon (all-the-icons-icon-for-mode major-mode)))
-    (unless (symbolp icon)
-      (propertize icon
-                  'help-echo (format "Major-mode: `%s'" major-mode)
-				  'mouse-face 'mode-line-highlight
-				  'local-map   mode-line-major-mode-keymap
-                  'face `(;; :height ,(spaceline-all-the-icons--height 1.1)
-                          :family ,(all-the-icons-icon-family-for-mode major-mode)
-                          :inherit)))))
+  "An `all-the-icons' segment indicating the current buffer's mode with an icon. spaceline does not check for missing icon so try e"
+  (let ((icon-major (all-the-icons-icon-for-mode major-mode))
+		(family-major (all-the-icons-icon-family-for-mode major-mode) ))
+	(if (and icon-major family-major)
+		(propertize icon-major
+					'help-echo (format "Major-mode!: `%s'" major-mode)
+					'display '(raise 0)
+					'face `(
+							:height 0.9
+							:family ,(all-the-icons-icon-family-for-mode major-mode)
+							:inherit))
+	  (eyeliner/with-icon "bars"
+		;; (message "Bars Not found %s %s %s" major-mode icon family)
+        (propertize icon
+					'help-echo (format "Major-modex: `%s'" major-mode)
+					'display `(raise 0)
+					'face `(
+							:height 0.9
+							:family ,family
+							:inherit))))))
+;; (spaceline-define-segment mwb-mode-icon
+;;   "Use jp-modeline version so no fancy lookups."
+;;   (propertize " ☰ "
+;;               'help-echo (format "Major-mode!: `%s'" major-mode)
+
+;;               'help-echo "Show major mode menu"
+;;               'local-map   mode-line-major-mode-keymap))
 
 (spaceline-define-segment
 	mwb-minor-modes
@@ -82,7 +99,7 @@ mouse-1: Display minor modes menu"
   "A segment to indicate whether the current buffer is narrowed."
   (eyeliner/with-icon "filter"
 	(propertize icon
-				'family family
+				'family ,family
 				'help-echo "mouse-1: Widen the current file"
 				'mouse-face mode-line-highlight
 				'local-map (spaceline-mwb--mouse-map 'mouse-1 'widen)))

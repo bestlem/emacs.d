@@ -42,7 +42,6 @@
 (require 'mwb-icons)
 (require 'minions)
 
-
 (defmacro mwb-headline--keymap-duo-header (keymap)
   "Copy the mode-line KEYMAP to header-line."
   `(define-key ,keymap [header-line]
@@ -88,7 +87,7 @@
 
 	;; The actual buffer info
 	((
-	  all-the-icons-mode-icon
+	  ;; all-the-icons-mode-icon
 	  ((all-the-icons-buffer-path
 		all-the-icons-buffer-id) :separator ""))
 	 :face default-face)

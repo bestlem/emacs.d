@@ -59,7 +59,7 @@
 		(family-major (all-the-icons-icon-family-for-mode major-mode) ))
 	(if (and icon-major family-major)
 		(propertize icon-major
-					'help-echo (format "Major-mode!: `%s'" major-mode)
+					'help-echo (format "Major-mode: `%s'" major-mode)
 					'display '(raise 0)
 					'face `(
 							:height 0.9
@@ -68,7 +68,7 @@
 	  (eyeliner/with-icon "bars"
 		;; (message "Bars Not found %s %s %s" major-mode icon family)
         (propertize icon
-					'help-echo (format "Major-modex: `%s'" major-mode)
+					'help-echo (format "Major-mode (unknown icon): `%s'" major-mode)
 					'display `(raise 0)
 					'face `(
 							:height 0.9

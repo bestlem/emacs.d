@@ -137,7 +137,9 @@ ARGS is same as `all-the-icons-octicon' and others."
    text))
 
 ;;; All - the icons
-
+;; As major mode does not have helpful mode
+(add-to-list 'all-the-icons-mode-icon-alist
+			 '(helpful-mode all-the-icons-faicon "info" :v-adjust -0.1 :face all-the-icons-purple))
 ;;;; Eyeliner based
 
 (defun eyeliner/get-icon-factory (set-name)
@@ -170,7 +172,6 @@ ARGS is same as `all-the-icons-octicon' and others."
 (defun mwb-icon-get (icon-name)
   "Return a propertized icon from ICON-NAME."
   (eyeliner/with-icon icon-name (propertize icon 'family family)))
-
 
 (cl-defun mwb-icon-text (icon-name text
 								   &key face height v-adjust)

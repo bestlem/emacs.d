@@ -5,15 +5,11 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    '(mini-frame
-	 emacs-mini-frame
 	 rg
-	 all-the-icons-ivy-rich
 	 rainbow-mode
 	 spaceline-all-the-icons
 	 spaceline
 	 minions
-	 doom-modeline
-	 moody
 	 free-keys
 	 company-quickhelp
 	 python-mode

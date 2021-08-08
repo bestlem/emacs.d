@@ -23,7 +23,6 @@
   - [[#scrolling][Scrolling]]
   - [[#deleting-and-return][Deleting and return]]
   - [[#undo][undo]]
-  - [[#let-search-continue-with-arrows][Let search continue with arrows]]
   - [[#old-bindings][Old bindings]]
   - [[#quickrun][quickrun]]
   - [[#file-actions][File actions]]
@@ -321,32 +320,6 @@ Use Aquamacs'
     )
 #+end_src
 
-** Let search continue with arrows
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:9C6C52F9-BD9C-4A80-856B-6D5620E5C9A7
-:END:
-DISABLED
-But point seems to be messed up and does Aquamacs do something.
-[[http://ergoemacs.org/emacs/emacs_isearch_by_arrow_keys.html][Xah Lee  again]] set arrow keys in isearch. left/right is backward/forward, up/down is history. press Return to exit
-How does this work with ivy
-#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_91E28470-7CDD-41AD-B712-ACCD36F51EAF
-#+begin_src emacs-lisp :tangle no
-
-(progn
-  ;; (define-key isearch-mode-map (kbd "<up>") 'isearch-ring-retreat )
-  ;; (define-key isearch-mode-map (kbd "<down>") 'isearch-ring-advance )
-
-  (define-key isearch-mode-map (kbd "<left>") 'isearch-repeat-backward)
-  (define-key isearch-mode-map (kbd "<right>") 'isearch-repeat-forward)
-
-  (define-key minibuffer-local-isearch-map (kbd "<left>") 'isearch-reverse-exit-minibuffer)
-  (define-key minibuffer-local-isearch-map (kbd "<right>") 'isearch-forward-exit-minibuffer))
-#+end_src
-*** TODO Use with cmd-F
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:A15CC8C1-7203-4FD0-8E6B-F0923D40F40D
-:END:
-Aquamacs also messes around with isearch and the two don't exactly match. Which might be a good thing
 ** Old bindings
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:9DC3CE51-289C-4767-A1DE-E461A402C58F
@@ -682,8 +655,8 @@ Again from Sasha Chua
    (("l" consult-line "Line")
 	("k" consult-keep-lines "Keep Lines")
 	("u" consult-focus-lines "Focus Lines")
-	("e" consult-isearch "Incremental search")
-	("<f4>" consult-isearch "Incremental search")
+	("e" consult-isearch "consult Incremental search")
+	("<f4>" consult-line  "Incremental search")
 	("o" occur "Occur")
 	("." isearch-forward-symbol-at-point "isearch point")
 	("_" isearch-forward-symbol "isearch symbol")
@@ -708,16 +681,48 @@ Again from Sasha Chua
 #+NAME: org_mark_mini20.local_20210802T104242.905780
 #+begin_src emacs-lisp
 (use-feature emacs
-  :bind ( :map isearch-mode-map
-			   ("M-e" . consult-isearch) ;; orig. isearch-edit-string
-			   ("M-s e" . consult-isearch) ;; orig. isearch-edit-string
-			   ("M-s l" . consult-line)
-			   ("<f4>" . isearch-repeat-forward)
-			   ("<f3>" . isearch-repeat-backward)))
+  :bind (:map isearch-mode-map
+			  ("M-e" . consult-isearch)
+			  ("<f4>" . consult-isearch) ;; orig. isearch-edit-string
+			  ("M-s e" . consult-isearch) ;; orig. isearch-edit-string
+			  ("M-s l" . consult-line)
+			  ("<right>" . isearch-repeat-forward)
+			  ("<left>" . isearch-repeat-backward)
+			  :map minibuffer-local-isearch-map
+			  ("<left>" . isearch-reverse-exit-minibuffer)
+			  ("<right>" . isearch-forward-exit-minibuffer)))
+
 #+end_src
 
 
 
+
+*** Let search continue with arrows
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:9C6C52F9-BD9C-4A80-856B-6D5620E5C9A7
+:END:
+This is disabled
+But point seems to be messed up and does Aquamacs do something.
+[[http://ergoemacs.org/emacs/emacs_isearch_by_arrow_keys.html][Xah Lee  again]] set arrow keys in isearch. left/right is backward/forward, up/down is history. press Return to exit
+How does this work with ivy
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_91E28470-7CDD-41AD-B712-ACCD36F51EAF
+#+begin_src emacs-lisp :tangle no
+
+(progn
+  ;; (define-key isearch-mode-map (kbd "<up>") 'isearch-ring-retreat )
+  ;; (define-key isearch-mode-map (kbd "<down>") 'isearch-ring-advance )
+
+  (define-key isearch-mode-map (kbd "<left>") 'isearch-repeat-backward)
+  (define-key isearch-mode-map (kbd "<right>") 'isearch-repeat-forward)
+
+  (define-key minibuffer-local-isearch-map (kbd "<left>") 'isearch-reverse-exit-minibuffer)
+  (define-key minibuffer-local-isearch-map (kbd "<right>") 'isearch-forward-exit-minibuffer))
+#+end_src
+**** TODO Use with cmd-F
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:A15CC8C1-7203-4FD0-8E6B-F0923D40F40D
+:END:
+Aquamacs also messes around with isearch and the two don't exactly match. Which might be a good thing
 ** Kitchin hydras
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:CA320A7E-C8CE-4C9D-B24B-C7FFE5F04B9C

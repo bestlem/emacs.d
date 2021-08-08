@@ -294,7 +294,7 @@ Make the message "/FILENAME has auto save data/" unmissable:
 						  ".recentf"
 						  "~$" ".~/"	; Emacs (and others) backup.
 						  ".*-autoloads\\.el\\'"
-						  "[/\\]emacs.d/elpa/"
+						  ;; "[/\\]emacs.d/elpa/"
 						  ".*png$" ".*cache$"
 						  "SessionDesktop\\.el"
 						  "treemacs-persist"))

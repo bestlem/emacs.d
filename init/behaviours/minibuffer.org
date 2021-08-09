@@ -116,9 +116,6 @@ Well I don't know what the frame parameters are left and width can be proportion
 	(setq mini-frame-completions-show-parameters
 		  #'mwb-mini-frame-completions-parameters)
 	(mini-frame-mode 1)))
-
-(setq q (frame-list))
-(length q)
 #+end_src
 * Ivy
 :PROPERTIES:

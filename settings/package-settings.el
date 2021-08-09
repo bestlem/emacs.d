@@ -4,12 +4,16 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(mini-frame
+   '(treemacs-projectile
+	 treemacs
+	 mini-frame
 	 rg
+	 all-the-icons-ivy-rich
 	 rainbow-mode
 	 spaceline-all-the-icons
 	 spaceline
 	 minions
+	 moody
 	 free-keys
 	 company-quickhelp
 	 python-mode
@@ -28,7 +32,6 @@
 	 magit
 	 async
 	 paradox
-	 ivy-posframe
 	 gcmh
 	 flyspell
 	 color-theme-modern
@@ -69,11 +72,6 @@
 	 deadgrep
 	 ivy-prescient
 	 prescient
-	 counsel
-	 swiper
-	 ivy-rich
-	 ivy-hydra
-	 ivy
 	 yasnippet
 	 company
 	 helpful

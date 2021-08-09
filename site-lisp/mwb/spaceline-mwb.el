@@ -115,8 +115,7 @@
     ((all-the-icons-which-function)
 	 :face 'powerline-active2
 	 :separator "")
-	((((all-the-icons-flycheck-status
-		all-the-icons-flycheck-status-info) :separator " ")
+	((
 	  all-the-icons-package-updates)
 	 :face other-face
 	 :separator (spaceline-all-the-icons--separator spaceline-all-the-icons-secondary-separator " "))

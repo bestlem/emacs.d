@@ -69,9 +69,8 @@ corresponding to the mode line clicked."
 (defconst spaceline-mwb-head-theme '("%e" (:eval (spaceline-ml-mwb-head)))
   "Constant version of variable `spaceline-mwb-theme' to allow to be set manually.")
 
-
 (spaceline-compile
-  "mwb-head-theme"
+  "mwb-head-theme-orig"
   '(
     ((mwb-modified
 	  all-the-icons-modified
@@ -129,8 +128,14 @@ corresponding to the mode line clicked."
 
 
 ;; Debugging functions
-(defun spaceline-mwb--turn-off (segment) "Turn spaceline SEGMENT off." (funcall (intern (format "spaceline-toggle-mwb-%s-off" segment))))
-(defun spaceline-mwb--turn-on (segment) "Turn spaceline SEGMENT on." (funcall (intern (format "spaceline-toggle-mwb-%s-on" segment))))
+(defun spaceline-mwb--turn-off (segment)
+  "Turn spaceline SEGMENT off."
+  (funcall (intern (format "spaceline-toggle-mwb-%s-off" segment))))
+
+(defun spaceline-mwb--turn-on (segment)
+  "Turn spaceline SEGMENT on."
+  (funcall (intern (format "spaceline-toggle-mwb-%s-on" segment))))
+
 (defun spaceline-mwb--get-active-segments ()
   "Get a list of all currently active segment names."
   (let* ((segments (apropos-internal "^spaceline-mwb-.*-p$"))
@@ -158,6 +163,15 @@ When PFX is non-nil, disable erroring segments at the same time."
       (error "%s Errors found in Spaceline Segments: [%s]"
              (all-the-icons-faicon "fire-extinguisher")
              (mapconcat 'identity errors ", ")))))
+
+(defun spaceline-mwb-mode-lines ()
+  "Return a list of symbols that are spaceline mode lines"
+  (let ((symlist '()))
+	(mapatoms (lambda (x)
+				(let ((name (symbol-name x)))
+				  (when (string-prefix-p "spaceline-ml-" name)
+					(push x symlist)))))
+	symlist))
 
 (provide 'spaceline-mwb-core)
 

@@ -950,6 +950,7 @@ This is the visual tree to manage files etc
   :commands (treemacs)
   :config
   (setq treemacs--no-messages nil)
+  (setq treemacs-user-header-line-format  #'treemacs-header-buttons-format)
   (setq hydra-key-regex "\\[\\|]\\|[-\\[:alnum:] ~.,;:/|?<>={}*+#%@!&^⇧⌘⌥↑↓←→⌫⌦⏎'`()\"$]+?") ; add Mac key symbols
 
   (setq treemacs-silent-refresh t
@@ -988,7 +989,8 @@ This is the visual tree to manage files etc
     (("w" treemacs-toggle-fixed-width "Toggle variable width" ))))
 
   :bind ( :map treemacs-mode-map
-               ("<mouse-5>" . treemacs-rightclick-menu)
+               ("<mouse-3>" . treemacs-rightclick-menu)
+			   ("<mouse-5>" . treemacs-rightclick-menu)
                ("<mouse-4>" . treemacs-rightclick-menu)
                ("<f5>" . treemacs-switch-workspace)
                ("<C-f5>" . treemacs-edit-workspaces)))

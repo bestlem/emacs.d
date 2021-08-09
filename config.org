@@ -940,8 +940,8 @@ This is the visual tree to manage files etc
  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_55CB1D47-BC33-40F8-BC2A-12D014C6B18D
  #+begin_src emacs-lisp
 (use-package treemacs
-  ;; :ensure t
-  :mwb-load-path "fork/treemacs/src/elisp"
+  :ensure t
+  ;; :mwb-load-path "fork/treemacs/src/elisp"
   :demand
   :init
   (with-eval-after-load 'winum
@@ -993,14 +993,12 @@ This is the visual tree to manage files etc
                ("<f5>" . treemacs-switch-workspace)
                ("<C-f5>" . treemacs-edit-workspaces)))
 
-(use-package treemacs-projectile
-  :mwb-load-path "fork/treemacs/src/extra"
+(use-package-elpa treemacs-projectile
   :after treemacs projectile
-  ;; :ensure t
   )
 
-(use-package treemacs-magit
-  :mwb-load-path "fork/treemacs/src/extra"
+(use-package-elpa treemacs-magit
+
   ;; :disabled                             ; Emacs 27 did not like this
   :after treemacs magit
   ;; :ensure t

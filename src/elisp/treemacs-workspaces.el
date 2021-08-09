@@ -76,7 +76,9 @@
 
 (defvar treemacs--workspaces (list (treemacs-workspace->create! :name "Default")))
 
-(defvar treemacs--find-user-project-functions (list #'treemacs--default-current-user-project-function)
+(defvar treemacs--find-user-project-functions
+  (list #'treemacs--current-builtin-project-function
+        #'treemacs--current-directory-project-function)
   "List of functions to find the user project for the current buffer.")
 
 (defvar-local treemacs--org-err-ov nil
@@ -100,10 +102,15 @@ To be called whenever a project or workspace changes."
   (dolist (buf (buffer-list))
     (setf (buffer-local-value 'treemacs--project-of-buffer buf) nil))))
 
-(defun treemacs--default-current-user-project-function ()
+(defun treemacs--current-builtin-project-function ()
   "Find the current project.el project."
   (declare (side-effect-free t))
   (-some-> (project-current) (cdr) (file-truename) (treemacs-canonical-path)))
+
+(defun treemacs--current-directory-project-function ()
+  "Find the current working directory."
+  (declare (side-effect-free t))
+  (-some-> default-directory (treemacs--canonical-path)))
 
 (define-inline treemacs-workspaces ()
   "Return the list of all workspaces in treemacs."
@@ -461,11 +468,11 @@ Return values may be as follows:
 PATH: Filepath
 NAME: String"
   (treemacs-block
-   (treemacs-error-return-if (null path)
+   (treemacs-return-if (null path)
      `(invalid-path "Path is nil."))
    (let ((path-status (treemacs--get-path-status path))
          (added-in-workspace (treemacs-current-workspace)))
-     (treemacs-error-return-if (not (file-readable-p path))
+     (treemacs-return-if (not (file-readable-p path))
        `(invalid-path "Path is not readable does not exist."))
      (setq path (-> path (file-truename) (treemacs-canonical-path)))
      (-when-let (project (treemacs--find-project-for-path path))
@@ -513,15 +520,15 @@ NAME: String"
   (make-obsolete #'treemacs-add-project-at #'treemacs-do-add-project-to-workspace "v.2.2.1"))
 
 (defun treemacs-do-remove-project-from-workspace (project &optional ignore-last-project-restriction)
-  "Add the given PROJECT to the current workspace.
+  "Remove the given PROJECT from the current workspace.
 
 PROJECT may either be a `treemacs-project' instance or a string path.  In the
 latter case the project containing the path will be selected.
 
-When IGNORE-LAST-PROJECT-RESTRICTION removing the last project will not count
-as an error.  This is meant to be used in non-interactive code, where another
-project is immediately added afterwards, as leaving the project list empty is
-probably a bad idea.
+When IGNORE-LAST-PROJECT-RESTRICTION is non-nil removing the last project will
+not count as an error.  This is meant to be used in non-interactive code, where
+another project is immediately added afterwards, as leaving the project list
+empty is generally a bad idea.
 
 Return values may be as follows:
 
@@ -534,16 +541,17 @@ Return values may be as follows:
   - the symbol `success'"
   (treemacs-block
    (unless ignore-last-project-restriction
-     (treemacs-error-return-if (>= 1 (length (treemacs-workspace->projects (treemacs-current-workspace))))
+     (treemacs-return-if (>= 1 (length (treemacs-workspace->projects (treemacs-current-workspace))))
        'cannot-delete-last-project))
-   (treemacs-error-return-if (null project)
+   (treemacs-return-if (null project)
      `(invalid-project "Project is nil"))
    ;; when used from outside treemacs it is much easier to supply a path string than to
    ;; look up the project instance
    (when (stringp project)
-     (setf project (treemacs-is-path (treemacs-canonical-path project) :in-workspace)))
-   (treemacs-error-return-if (null project)
-     `(invalid-project "Given path is not in the workspace"))
+     (-let [found-project (treemacs-is-path (treemacs-canonical-path project) :in-workspace)]
+       (treemacs-return-if (null found-project)
+         `(invalid-project ,(format "Given path '%s' is not in the workspace" project)))
+       (setf project found-project)))
    (treemacs-run-in-every-buffer
     (treemacs-with-writable-buffer
      (let* ((project-path (treemacs-project->path project))

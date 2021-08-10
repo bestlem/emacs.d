@@ -398,6 +398,9 @@ Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in e
 ;; But makes more sense to quickly hit a key
 (bind-key [f8] 'next-error)
 (bind-key [S-f8] 'previous-error)
+
+;; f11 is bound by emacs to toggle-frame-fullscreen
+(unbind-key [f11])
 #+end_src
 
 ** Hyper key bindings

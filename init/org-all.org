@@ -1527,21 +1527,25 @@ Again from jerrypnz
   ;; :after (org)
   :commands (org-capture)
   :bind (("<f13>" . org-capture)
-         ("C-<f13>" . open-org-notes))
+		 ("C-<f13>" . open-org-notes)
+		 :map org-capture-mode-map
+		 ("A-s" . org-capture-finalize)
+		 ("A-k" . org-capture-kill)
+		 ("A-w" . org-capture-refile))
   :preface
   (defun open-org-notes ()
-    (interactive)
-    (find-file org-default-notes-file))
+	(interactive)
+	(find-file org-default-notes-file))
   :config
   (setq org-capture-templates
-        `(("t" "TODO" entry (file org-default-notes-file)
-           "* TODO %?\n%u\n")
-          ("p" "Project" entry (file org-default-notes-file)
-           "* %? [%] :PROJECT:\n%u\n")
-          ("m" "Meeting" entry (file org-default-notes-file)
-           "* Meeting notes for %? :MEETING:\n%t" :clock-in t :clock-resume t)
-          ("n" "Notes" entry (file org-default-notes-file)
-           "* %? \n%t"))))
+		`(("t" "TODO" entry (file org-default-notes-file)
+		   "* TODO %?\n%u\n")
+		  ("p" "Project" entry (file org-default-notes-file)
+		   "* %? [%] :PROJECT:\n%u\n")
+		  ("m" "Meeting" entry (file org-default-notes-file)
+		   "* Meeting notes for %? :MEETING:\n%t" :clock-in t :clock-resume t)
+		  ("n" "Notes" entry (file org-default-notes-file)
+		   "* %? \n%t"))))
 #+end_src
 
 ** Agenda

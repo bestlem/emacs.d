@@ -94,15 +94,6 @@ However  for debugging init we don't want the backtrace
 
 ;; (message "test")
       #+end_src
-*** Use source where newer
-:PROPERTIES:
-:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:D13FB268-3059-4AEC-9A25-50AD765F26C5
-:END:
- This variable tells Emacs to prefer the .el file if it’s newer, even if there is a corresponding .elc file.
-	  #+begin_src emacs-lisp
-(setq load-prefer-newer t)
-	  #+end_src
-
 ** Various constants
 :PROPERTIES:
 :ID:       org_mark_2020-02-20T21-36-43+00-00_mini12.local:EC43B9AE-44B4-4FBB-9E63-AC26BB45592E

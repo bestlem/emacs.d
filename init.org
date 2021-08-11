@@ -84,6 +84,21 @@ Fiddle with suppressing graphics. I do want some of these
 ;;(push '(vertical-scroll-bars) default-frame-alist)
 (setq tool-bar-mode nil)
 #+end_src
+** Emacs lisp
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210810T184947.222205
+:END:
+Control a bit of loading
+*** Use source where newer
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210810T184947.221385
+:END:
+This variable tells Emacs to prefer the .el file if itq’s newer, even if there is a corresponding .elc
+#+NAME: org_mark_mini20.local_20210811T183548.057306
+#+begin_src emacs-lisp
+(setq load-prefer-newer t)
+#+end_src
+
 * Implement init environment (init.el)
 :PROPERTIES:
   :header-args:    :tangle init.el :comments link

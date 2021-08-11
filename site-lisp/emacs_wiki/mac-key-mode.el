@@ -67,6 +67,8 @@
 
 ;; requires redo+
 (require 'redo+)
+(require 'dired)
+(require 'bind-key)
 
 (defgroup mac-key-mode nil
   "Mac-style key-binding mode."
@@ -76,8 +78,7 @@
   (char-to-string 343416) ;; the command mark
 ;;  (char-to-string 323935) ;; the Apple mark
 ;;  (char-to-string (ucs-to-char 63743)) ;; the Apple mark
-  "A lighter string which is displayed in the modeline
-when `mac-key-mode' is on.")
+  "A lighter string which is displayed in the modeline when `mac-key-mode' is on.")
 
 (defcustom mac-key-mode-hook nil
   "The hook to run when mac-key-mode is toggled."
@@ -87,7 +88,7 @@ when `mac-key-mode' is on.")
 (defcustom mac-key-advanced-setting t
   "If non-nil, `mac-key-mode' activates addional settings:
 1) menu items are added to the File menu and the Edit menu, and
-2) the SPC key invokes Quick Look information in dired-mode."
+2) the SPC key invokes Quick Look information in \"dired-mode.\""
   :group 'mac-key-mode
   :type 'boolean)
 
@@ -101,54 +102,56 @@ when `mac-key-mode' is on.")
 (defvar mac-key-ql-process nil
   "The process object for Quick Look subprocess.")
 
-
 (defvar mac-key-mode-map
-  (let ((map (make-sparse-keymap)))
-    (define-key map [(alt o)] (lambda()(interactive)(let(last-nonmenu-event)(menu-find-file-existing))))
-    (define-key map [(alt w)] 'mac-key-close-window)
-    (define-key map [(alt s)] 'save-buffer)
-    (define-key map [(alt shift s)] 'mac-key-save-as)
-    (define-key map [(alt i)] 'mac-key-show-in-finder)
-    (define-key map [(alt p)] 'print-buffer)
-    (define-key map [(alt q)] 'save-buffers-kill-emacs)
-    (define-key map [(alt z)] 'undo)
-    (define-key map [(alt shift z)] 'redo) ; requires redo+
-    (define-key map [(alt x)] 'clipboard-kill-region)
-    (define-key map [(alt c)] 'clipboard-kill-ring-save)
-    (define-key map [(alt v)] 'clipboard-yank)
-    (define-key map [(alt a)] 'mark-whole-buffer)
-    (define-key map [(alt f)] 'isearch-forward)
-    (define-key map [(alt meta f)] 'occur)
-    (define-key map [(alt g)] 'isearch-repeat-forward)
-    (define-key map [(alt shift g)] 'isearch-repeat-backward)
-    (define-key map [(alt l)] 'goto-line)
-    (define-key map [(alt t)] 'mac-font-panel-mode)
-    (define-key map [(alt m)] 'iconify-frame)
-    (define-key map [(alt \`)] 'other-frame)
-    (define-key map [(alt shift n)] 'make-frame-command)
-    (define-key map [(alt shift w)] 'delete-frame)
-    (define-key map [(alt \?)] 'info)
-    (define-key map [(alt /)] 'info)
-    (define-key map [(alt .)] 'keyboard-quit)
-    (define-key map [(alt up)] 'beginning-of-buffer)
-    (define-key map [(alt down)] 'end-of-buffer)
-    (define-key map [(alt left)] 'beginning-of-line)
-    (define-key map [(alt right)] 'end-of-line)
-    (define-key map [A-mouse-1] 'browse-url-at-mouse)
-    (define-key map [C-down-mouse-1] 'mac-key-context-menu)
-    (define-key map [mouse-3] 'mac-key-context-menu)
-;;    (define-key map [C-mouse-1] 'mac-key-context-menu)
-    (define-key map [A-S-mouse-1] 'mouse-buffer-menu)
-    (define-key map [S-down-mouse-1] 'mac-key-shift-mouse-select)
-
-    map)
+  (make-sparse-keymap)
   "Keymap for `mac-key-mode'.")
+
+(defun mac-key--mode-map-binds ()
+  "Bind keys to mac-key-mode-map."
+  ;; (bind-key [(alt o)] (lambda()(interactive)(let(last-nonmenu-event)(menu-find-file-existing))) mac-key-mode)
+  (bind-key  [(alt w)] 'mac-key-close-window mac-key-mode-map)
+  (bind-key  [(alt s)] 'save-buffer mac-key-mode-map)
+  (bind-key  [(alt shift s)] 'mac-key-save-as mac-key-mode-map)
+  (bind-key  [(alt i)] 'mac-key-show-in-finder mac-key-mode-map)
+  (bind-key  [(alt p)] 'print-buffer mac-key-mode-map)
+  (bind-key  [(alt q)] 'save-buffers-kill-emacs mac-key-mode-map)
+  (bind-key  [(alt z)] 'undo mac-key-mode-map)
+  (bind-key  [(alt shift z)] 'redo mac-key-mode-map) ; rbinds redo+
+  (bind-key  [(alt x)] 'clipboard-kill-region mac-key-mode-map)
+  (bind-key  [(alt c)] 'clipboard-kill-ring-save mac-key-mode-map)
+  (bind-key  [(alt v)] 'clipboard-yank mac-key-mode-map)
+  (bind-key  [(alt a)] 'mark-whole-buffer mac-key-mode-map)
+  ;; (define-key map [(alt f)] 'isearch-forward)
+  (bind-key  [(alt meta f)] 'occur mac-key-mode-map)
+  (bind-key  [(alt g)] 'isearch-repeat-forward mac-key-mode-map)
+  (bind-key  [(alt shift g)] 'isearch-repeat-backward mac-key-mode-map)
+  ;; (define-key map [(alt l)] 'goto-line)
+  (bind-key  [(alt t)] 'mac-font-panel-mode mac-key-mode-map)
+  (bind-key  [(alt m)] 'iconify-frame mac-key-mode-map)
+  (bind-key  [(alt \`)] 'other-frame mac-key-mode-map)
+  (bind-key  [(alt shift n)] 'make-frame-command mac-key-mode-map)
+  (bind-key  [(alt shift w)] 'delete-frame mac-key-mode-map)
+  (bind-key  [(alt \?)] 'info mac-key-mode-map)
+  (bind-key  [(alt /)] 'info mac-key-mode-map)
+  (bind-key  [(alt .)] 'keyboard-quit mac-key-mode-map)
+  (bind-key  [(alt up)] 'beginning-of-buffer mac-key-mode-map)
+  (bind-key  [(alt down)] 'end-of-buffer mac-key-mode-map)
+  (bind-key  [(alt left)] 'beginning-of-line mac-key-mode-map)
+  (bind-key  [(alt right)] 'end-of-line mac-key-mode-map)
+  (bind-key  [A-mouse-1] 'browse-url-at-mouse mac-key-mode-map)
+  (bind-key  [C-down-mouse-1] 'mac-key-context-menu mac-key-mode-map)
+  (bind-key  [mouse-3] 'mac-key-context-menu mac-key-mode-map)
+  ;;    (define-key map [C-mouse-1] 'mac-key-context-menu)
+  (bind-key  [A-S-mouse-1] 'mouse-buffer-menu mac-key-mode-map)
+  (bind-key  [S-down-mouse-1] 'mac-key-shift-mouse-select mac-key-mode-map)
+
+  )
 
 ;; mode-line menu
 (define-key-after mode-line-mode-menu [mac-key-mode]
   `(menu-item ,(purecopy
                 (concat "Mac Key (" mac-key-mode-lighter ")"))
-              mac-key-mode :button (:toggle . mac-key-mode))
+    mac-key-mode :button (:toggle . mac-key-mode))
   'highlight-changes-mode)
 
 ;;;###autoload
@@ -167,7 +170,7 @@ When Mac Key mode is enabled, mac-style key bindings are provided."
         (setq mac-command-modifier 'alt)
         (if (boundp 'mac-key-mode-internal)
             (setq mac-key-mode-internal t))
-
+        (mac-key--mode-map-binds)
         ;; turn on advanced settings
         (when mac-key-advanced-setting
 
@@ -178,7 +181,7 @@ When Mac Key mode is enabled, mac-style key bindings are provided."
             '(menu-item "Show In Finder" mac-key-show-in-finder
               :help "Display current file/directory in a Finder window"
               :enable (or (and (boundp 'buffer-file-name) buffer-file-name)
-                          (and (boundp 'dired-directory) dired-directory)))
+                       (and (boundp 'dired-directory) dired-directory)))
             'mac-key-file-separator)
           (define-key-after menu-bar-file-menu [mac-key-open-terminal]
             '(menu-item "Open Terminal" mac-key-open-terminal
@@ -186,13 +189,13 @@ When Mac Key mode is enabled, mac-style key bindings are provided."
             'mac-key-show-in-finder)
           (define-key-after menu-bar-edit-menu [redo]
             '(menu-item "Redo" redo
-            :help "Redo the most recent undo"
-            :enable (not (or (eq buffer-undo-list t)
-                             (eq last-buffer-undo-list nil)
-                             ;; ** one more thing here **
-                             (eq buffer-undo-list pending-undo-list)
-                             (eq (cdr buffer-undo-list) pending-undo-list)
-                             )))
+              :help "Redo the most recent undo"
+              :enable (not (or (eq buffer-undo-list t)
+                            (eq last-buffer-undo-list nil)
+                            ;; ** one more thing here **
+                            (eq buffer-undo-list pending-undo-list)
+                            (eq (cdr buffer-undo-list) pending-undo-list)
+                            )))
             'undo)
           (define-key-after menu-bar-edit-menu [mac-key-edit-separator]
             '("--" . nil) 'redo)
@@ -246,17 +249,19 @@ When Mac Key mode is enabled, mac-style key bindings are provided."
 
 ;; save as.. dialog (shift + command + S)
 (defun mac-key-save-as (filename &optional wildcards)
-  "Write current buffer to another file using standard file open dialog."
+  "Write current buffer to another file using standard file open dialog.
+Default to FILENAME. Restrict dialog with WILDCARDS"
   (interactive
    (let (last-nonmenu-event)
      (find-file-read-args "Write file: " nil)))
-   (write-file filename))
+  (write-file filename))
 
 
 ;; utf8 code by Ando-san
 (defun mac-key-applescript-utf8data (str)
+  "Make STR into UTF8 data."
   (let ((len (length str))
-        (len1 31) ;XXX: 254/2/4. utf-8 is 4byte per code point at most.
+        (len1 31)		  ;XXX: 254/2/4. utf-8 is 4byte per code point at most.
         (reslist '(")"))
         pos epos)
     (setq pos len)
@@ -276,7 +281,7 @@ When Mac Key mode is enabled, mac-style key bindings are provided."
 ;; Show In Finder (command + I)
 
 (defun mac-key-show-in-finder (&optional path)
-  "Display current file/directory in a Finder window"
+  "Display current file/directory or given in PATH in a Finder window."
   (interactive)
   (let ((item (or path
                   (and (boundp 'buffer-file-name) buffer-file-name)
@@ -285,7 +290,7 @@ When Mac Key mode is enabled, mac-style key bindings are provided."
     (cond
      ((not (stringp item)))
      ((file-remote-p item)
-      (error "This item is located on a remote system."))
+      (error "This item is located on a remote system"))
      (t
       (setq item (expand-file-name item))
       (condition-case err
@@ -307,14 +312,14 @@ When Mac Key mode is enabled, mac-style key bindings are provided."
 ;; Open Terminal.app
 
 (defun mac-key-open-terminal (&optional path)
-  "Launch Terminal and go to the relevant directory"
+  "Launch Terminal and go to the relevant directory or optionally PATH."
   (interactive)
   (let ((item (or path default-directory)))
 
     (cond
      ((not (stringp item)))
      ((file-remote-p item)
-      (error "This item is located on a remote system."))
+      (error "This item is located on a remote system"))
      ((file-directory-p item)
       (setq item (expand-file-name item))
       (condition-case err
@@ -340,13 +345,13 @@ When Mac Key mode is enabled, mac-style key bindings are provided."
   (interactive)
   (mac-key-speak-region (point-min)(point-max)))
 
-(defun mac-key-speak-region (beg end)
-  "Speak the region contents."
+(defun mac-key-speak-region (beginning-of-region end)
+  "Speak the region from BEGINNING-OF-REGION to END contents."
   (interactive "r")
   (mac-key-stop-speaking)
   (let ((buffer-file-coding-system 'utf-8-unix)
         (tmp-file (make-temp-file "emacs-speech-" nil ".txt")))
-    (write-region beg end tmp-file nil)
+    (write-region beginning-of-region end tmp-file nil)
     (message "Invoking text-to-speech...")
     (setq mac-key-speech-process
           (start-process "text-to-speech" "*Text-to-Speech Output*"
@@ -374,19 +379,19 @@ like this:
 
     \(add-hook 'dired-mode-hook
        (lambda() (local-set-key \" \" 'mac-key-quick-look)))
-"
+."
   (interactive)
-  
+
   (let ((mybuffer (and mac-key-ql-process
                        (process-buffer mac-key-ql-process)))
         (item default-directory))
     (cond
      ((buffer-live-p mybuffer)
       (kill-buffer mybuffer))
-;;       (eq (process-status mac-key-ql-process) 'run)
-;;       (kill-process mac-key-ql-process))
+	 ;;       (eq (process-status mac-key-ql-process) 'run)
+	 ;;       (kill-process mac-key-ql-process))
      ((file-remote-p item)
-      (error "This item is located on a remote system."))
+      (error "This item is located on a remote system"))
      (t
       (setq item (expand-file-name item))
       (condition-case err
@@ -404,8 +409,7 @@ like this:
 ;; Contributed by Dave Peck
 
 (defun mac-key-shift-mouse-select (event)
-  "Set the mark and then move point to the position clicked on with
-the mouse.  This should be bound to a mouse click event type."
+  "Set the mark and then move point to the position clicked on with the mouse detailed in EVENT.  This should be bound to a mouse click event type."
   (interactive "e")
   (mouse-minibuffer-check event)
   (if mark-active (exchange-point-and-mark))
@@ -418,7 +422,7 @@ the mouse.  This should be bound to a mouse click event type."
 ;; Contextual menu
 
 (defun mac-key-context-menu (event)
-  "Pop up a contextual menu."
+  "Pop up a contextual menu. A position in EVENT."
   (interactive "e")
 
   (let ((editable (not buffer-read-only))
@@ -447,62 +451,61 @@ the mouse.  This should be bound to a mouse click event type."
        ["Search in Google"
         (browse-url
          (concat "http://www.google.com/search?q="
-                 (url-hexify-string (buffer-substring-no-properties beg end))))
+          (url-hexify-string (buffer-substring-no-properties beg end))))
         :help "Ask a WWW browser to do a Google search"]
-     ["--" nil]
-     ["Look Up in Dictionary"
-      (browse-url
-       (concat "dict:///"
-               (url-hexify-string (buffer-substring-no-properties beg end))))
-      :active t
-      :help "Look up word at cursor in Dictionary.app"]
-     ["--" nil]
-     ["Cut"   (clipboard-kill-region beg end) :active (and editable mark-active)
-      :help "Delete text in region and copy it to the clipboard"]
-     ["Copy"  (clipboard-kill-ring-save beg end) :active mark-active
-      :help "Copy text in region to the clipboard"]
-     ["Paste" (clipboard-yank) :active editable
-      :help "Paste text from clipboard"]
-     ["--" nil]
-     ("Spelling"
-      ["Spelling..."
-       (progn (goto-char end)(ispell-word)) :active editable
-       :help "Spell-check word at cursor"]
-      ["Check Spelling" (ispell-buffer) :active editable
-       :help "Check spelling of the current buffer"]
-      ["Check Spelling as You Type"
-       (flyspell-mode)
-       :style toggle :selected flyspell-mode :active editable
-       :help "Check spelling while you edit the text"]
-     )
-     ("Font"
-      ["Show Fonts" (ignore) :active nil]
-      ["Bold"       (ignore) :active nil]
-      ["Italic"     (ignore) :active nil]
-      ["Underline"  (ignore) :active nil]
-      ["Outline"    (ignore) :active nil]
-      ["Styles..."  (ignore) :active nil]
-      ["--" nil]
-      ["Show Colors" (ignore) :active nil]
-     )
-     ("Speech"
-      ["Start Speaking"
-       (if (and mark-active
-                (<= (region-beginning) pt) (<= pt (region-end)) )
-           (mac-key-speak-region beg end)
-         (mac-key-speak-buffer) )
-       :help "Speak text through the sound output"]
-      ["Stop Speaking" (mac-key-stop-speaking)
-       :active (and mac-key-speech-process
-                    (eq (process-status mac-key-speech-process) 'run))
-       :help "Stop speaking"]
-     )
-     ["--" nil]
-     ["Buffers" mouse-buffer-menu
-       :help "Pop up a menu of buffers for selection with the mouse"]
-     ))))
+       ["--" nil]
+       ["Look Up in Dictionary"
+		(browse-url
+		 (concat "dict:///"
+          (url-hexify-string (buffer-substring-no-properties beg end))))
+		:active t
+		:help "Look up word at cursor in Dictionary.app"]
+       ["--" nil]
+       ["Cut"   (clipboard-kill-region beg end) :active (and editable mark-active)
+		:help "Delete text in region and copy it to the clipboard"]
+       ["Copy"  (clipboard-kill-ring-save beg end) :active mark-active
+		:help "Copy text in region to the clipboard"]
+       ["Paste" (clipboard-yank) :active editable
+		:help "Paste text from clipboard"]
+       ["--" nil]
+       ("Spelling"
+		["Spelling..."
+		 (progn (goto-char end)(ispell-word)) :active editable
+		 :help "Spell-check word at cursor"]
+		["Check Spelling" (ispell-buffer) :active editable
+		 :help "Check spelling of the current buffer"]
+		["Check Spelling as You Type"
+		 (flyspell-mode)
+		 :style toggle :selected flyspell-mode :active editable
+		 :help "Check spelling while you edit the text"]
+		)
+       ("Font"
+		["Show Fonts" (ignore) :active nil]
+		["Bold"       (ignore) :active nil]
+		["Italic"     (ignore) :active nil]
+		["Underline"  (ignore) :active nil]
+		["Outline"    (ignore) :active nil]
+		["Styles..."  (ignore) :active nil]
+		["--" nil]
+		["Show Colors" (ignore) :active nil]
+		)
+       ("Speech"
+		["Start Speaking"
+		 (if (and mark-active
+              (<= (region-beginning) pt) (<= pt (region-end)) )
+			 (mac-key-speak-region beg end)
+           (mac-key-speak-buffer) )
+		 :help "Speak text through the sound output"]
+		["Stop Speaking" (mac-key-stop-speaking)
+		 :active (and mac-key-speech-process
+                  (eq (process-status mac-key-speech-process) 'run))
+		 :help "Stop speaking"]
+		)
+       ["--" nil]
+       ["Buffers" mouse-buffer-menu
+		:help "Pop up a menu of buffers for selection with the mouse"]
+       ))))
 
 
 (provide 'mac-key-mode)
-
-;;; mac-key-mode.el ends here.
+;;; mac-key-mode.el ends here

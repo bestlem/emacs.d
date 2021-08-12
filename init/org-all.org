@@ -56,7 +56,7 @@ This is my first attempt at learning it.
 The config is a mess as I pick up on things.
 I was going to leave this to last so could make changes as I used org. However as I kept editing it I realised that I needed to comment and than was better in literate programming so this is the first non key file to be done.
 This is a large config and might be easier to document if not all put in a use-package (or break my rule and let some parts not be complete lisp)
-** use package issues
+** DONE use package issues
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:1C8523CC-5CB5-4EA3-A010-6881059B6B32
 :END:
@@ -80,6 +80,7 @@ org-babel-tangle-jump-to-org does mainly if :comments noweb is in the org :Prope
 :END:
 This seems one of the most complete literate programming setups and he does have weave but no examples with links. He does say a few things so lets try.
 As everything is after loading of org dump in a config section after the rest.
+
 
 
 ** TODO Save org files saved in dropbox dir automatically (NB not emacs autosave)
@@ -153,12 +154,12 @@ Put the bind bit in noweb
  ("H-S-s" . org-babel-detangle) ;; actually update but can't deal with weave
  :map org-mode-map
  ("H-s" . org-edit-special)
- ("<f19> s" . org-edit-special)
+ ;; ("<f19> s" . org-edit-special)
 
  ("<f5>" . org-ctrl-c-ctrl-c)
  :map org-src-mode-map
  ("H-s" . org-edit-src-exit)
- ("<f19> s" . org-edit-src-exit)
+ ;; ("<f19> s" . org-edit-src-exit)
  ("A-s" . org-edit-src-save)            ; I press by mistake but it makes
                                         ; sense now save not save and exit
  ("A-k". org-edit-src-abort)
@@ -298,6 +299,7 @@ TODO add property drawers
 #+NAME: org_mark_mini20.local_20210422T091310.076424
 #+begin_src emacs-lisp :tangle no :noweb-ref org-config
 (use-package ob-hide-markers
+  :disabled
   :mwb-load-path "fork/org-babel-hide-markers-mode"
   :hook (org-font-lock . org-babel-hide-markers-mode)
   :init

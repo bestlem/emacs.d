@@ -31,6 +31,7 @@
   - [[#function-keys][Function keys]]
   - [[#hyper-key-bindings][Hyper key bindings]]
   - [[#other][Other]]
+  - [[#toggle-treemode-as-needed-often][Toggle treemode as needed often]]
   - [[#control-x-binding][Control x binding]]
 - [[#mouse][Mouse]]
   - [[#imenu][iMenu]]
@@ -40,7 +41,6 @@
   - [[#goto][Goto]]
   - [[#search][Search]]
   - [[#kitchin-hydras][Kitchin hydras]]
-  - [[#toggle-treemode-as-needed-often][Toggle treemode as needed often]]
 - [[#freekeys][FreeKeys]]
 
 * Global key bindings musings
@@ -440,7 +440,14 @@ Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in e
     (bind-key "A-<kp-subtract>" 'zoom-out macos-key-map)
     (bind-key "A-/" 'comment-dwim-2 macos-key-map)))
 #+end_src
-
+** Toggle treemode as needed often
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210812T103208.413730
+:END:
+#+NAME: org_mark_mini20.local_20210812T103208.394575
+#+begin_src emacs-lisp
+(bind-key "A-M-t" 'treemacs)
+#+end_src
 ** Control x binding
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:69EED50E-06AD-4068-A0FA-34186BCC8E7D
@@ -545,66 +552,73 @@ Replace Hyper key combination with a leader key
 As this has to be a leader map so no hydra H-s is the issue as in some org-mode maps then mighty be better to use which-key-add-keymap-based-replacements to set pretty names for which key
 
 Odd things needed
+Tried inherit to set f19 s as mode dependant but seems not to work with pretty hydra. So make the function dispatch by mode
+*** Special function
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210812T114450.516655
+:END:
+#+NAME: org_mark_mini20.local_20210812T114450.499147
+#+begin_src emacs-lisp
+(defun mwb-special-in-hydra ()
+  (interactive)
+  (message "Major-mode %s" major-mode)
+  (cond ((eq major-mode 'org-mode) (org-edit-special))
+		((bound-and-true-p org-src-mode) (org-edit-src-exit))
+		(t org-babel-tangle-jump-to-org)))
+#+end_src
+*** Main map
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210812T103208.412764
+:END:
 #+NAME: org_2020-12-05+00-00_94E1455C-7F91-48B1-BF7B-EA3753E7BDCB
 #+begin_src emacs-lisp
-(pretty-hydra-define hydra-kl ; short name for which-key
-  (global-map "<f19>"
-			  ;; :foreign-keys warn
-			  :title (with-octicon "tools" "Global tools" 1 -0.05)
-			  :color teal
-			  :idle 0.5)
+(pretty-hydra-define hydra-kl			; short name for which-key
+  (:title (with-octicon "tools" "Global tools" 1 -0.05)
+		  :color teal
+		  :idle 1.0)
   ("Hydrae"
-   (("a" major-mode-hydra "Major mode")
-    ("C" hydra-flycheck/body "Flycheck")
-    ("G" hydra-goto/body "Goto")
-    ("g" jp-git/body "git...")
+   (("C" hydra-flycheck/body "Flycheck")
+	("g" jp-git/body "git...")
 	("h" hydra-hs/body "Hide/show...")
-    ("n" hydra-navigate/body "Navigate")
-    ("P" hydra-projectile/body "projectile")
-    ("t" hydra-transpose/body "Transpose")
-    ("x" x-hydra-readonly/body "C-X fns")
-    ("<f19>" major-mode-hydra "Major mode")
+	("n" hydra-navigate/body "Navigate")
+	("P" hydra-projectile/body "projectile")
+	("t" hydra-transpose/body "Transpose")
+	("x" x-hydra-readonly/body "C-X fns")
+	("<f19>" major-mode-hydra "Major mode")
 	("[" ptrv/smartparens/body "Smartparens")
-    ("?" hydra-kl/body "this as a hydra")
 	("l" hydra-goto/body "Go to"))
-   "Windows"
-   (("F" other-frame "Switch Frame")
-    ("m" (mwb-new-frame "*Messages*") "Messages")
-    ("w" hydra-jp-window/body "Window Management")
-    ("0" delete-window "Delete Window")
-    (")" delete-window "Delete Window")
-    ("|"  split-window-right "horizontally")
-    )
-   "Current buffer"
-   (("L" linum-mode "line number" :toggle t)
-    ("c" (what-cursor-position 'detail) "Character at POS")
-    ("TAB" hs-mwb-show-one-level "show one level")
-    ("C-<tab>" hs-toggle-hiding "Toggle hide-show")
+"Windows"
+(("F" other-frame "Switch Frame")
+	("m" (mwb-new-frame "*Messages*") "Messages")
+	("w" hydra-jp-window/body "Window Management")
+	("0" delete-window "Delete Window")
+	(")" delete-window "Delete Window")
+	("|" split-window-right "horizontally"))
+"Current buffer"
+(("L" linum-mode "line number" :toggle t)
+	("c" (what-cursor-position 'detail) "Character at POS")
+	("TAB" hs-mwb-show-one-level "show one level")
+	("C-<tab>" hs-toggle-hiding "Toggle hide-show")
 	("f" refill-mode "Auto refill mode ")
-	("r" backup-walker-start "Backup Walker" )
-	;; ("i" counsel-imenu "imenu")
-	("i" consult-imenu "imenu")
-    )
+	("r" backup-walker-start "Backup Walker")
+	("i" consult-imenu "imenu"))
    "Actions"
    (("D" toggle-debug-on-error "debug on error" :toggle (default-value 'debug-on-error))
-    ("d" hyd-dired-common/body "Open dired frame")
-    ("M" toggle-mwb-message-timestamp :toggle mwb-message-timestamp)
-    ("p" package-quickstart-refresh "refresh quickstart packages")
-    ("q" keyboard-quit-context+ "Quit minibuffer etc")
-    ("S" org-babel-detangle "Detangle")
-	("e" iedit-mode "iedit")
-    )
-
+	("d" hyd-dired-common/body "Open dired frame")
+	("M" toggle-mwb-message-timestamp :toggle mwb-message-timestamp)
+	("p" package-quickstart-refresh "refresh quickstart packages")
+	("q" keyboard-quit-context+ "Quit minibuffer etc")
+	("S" org-babel-detangle "Detangle")
+	("e" iedit-mode "iedit"))
    "Change Buffers"
-   (("b" ivy-switch-buffer "Switch Buffer")
-    ("B" counsel-bookmark "Jump to bookmark")
-    ("s" org-babel-tangle-jump-to-org "Back to org")
-    ("j" dired-jump "Dired jump")
-    )))
+   (("b" consult-buffer "Switch Buffer")
+	("B" counsel-bookmark "Jump to bookmark")
+	("s" mwb-special-in-hydra "org edit")
+	;; ("s" org-babel-tangle-jump-to-org "Back to org")
+	("j" dired-jump "Dired jump"))))
 (bind-key "H-`"  'hydra-kl/body)
-;; (bind-key "<f19>"  'hydra-key-leader/body)
+(bind-key "<f19>"  'hydra-kl/body)
 #+end_src
-
 ** Hydra transpose
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:F0488F70-6114-4DF6-AB8A-70BCCF07A5C2
@@ -825,14 +839,6 @@ _<_ beginning of buffer _>_ end of buffer _m_: set mark _/_: jump to mark
 
 (bind-key "H-m" 'hydra-navigate/body)
 	#+end_src
-** Toggle treemode as needed often
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:E96CD5B5-8DFE-489A-BBF2-B969886F2607
-:END:
-#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_B45876F9-F64F-46A1-A3A9-5727BFAB647C
-#+begin_src emacs-lisp
-(bind-key "A-M-t" 'treemacs)
-#+end_src
 * FreeKeys
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210601T161324.978840

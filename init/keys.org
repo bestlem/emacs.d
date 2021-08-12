@@ -327,12 +327,12 @@ Use Aquamacs'
 These will be old NeXT Pizza bindings
 
 
-	 ;(global-set-key [?\A-=] 'what-line )
-	 ;(global-set-key [?\M-g] 'goto-line)
-	 ;(global-set-key [?\A-g] 'goto-line)
-	 ;(global-set-key "\M-q" 'query-replace)
-	 ;(global-set-key "\M-r" 'replace-string)
-	 ;(global-set-key "\M-i" 'indent-region)
+     ;(global-set-key [?\A-=] 'what-line )
+     ;(global-set-key [?\M-g] 'goto-line)
+     ;(global-set-key [?\A-g] 'goto-line)
+     ;(global-set-key "\M-q" 'query-replace)
+     ;(global-set-key "\M-r" 'replace-string)
+     ;(global-set-key "\M-i" 'indent-region)
 ** quickrun
 :PROPERTIES:
 :ID:       org_2020-12-10+00-00:FEC7FE48-F0F3-44D4-B404-B8B876681B21
@@ -466,8 +466,8 @@ Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in e
     (timer-activate timer)))
 
 (defhydra x-hydra (:body-pre x-hydra-pre
-			     :color blue
-			     :hint nil)
+                 :color blue
+                 :hint nil)
   ("b" (progn (zap-to-char -1 ?x) (ivy-switch-buffer)))
   ("f" (progn (zap-to-char -1 ?x) (counsel-find-file)))
   ("r" (progn (zap-to-char -1 ?x) (counsel-recentf))))
@@ -561,10 +561,9 @@ Tried inherit to set f19 s as mode dependant but seems not to work with pretty h
 #+begin_src emacs-lisp
 (defun mwb-special-in-hydra ()
   (interactive)
-  (message "Major-mode %s" major-mode)
   (cond ((eq major-mode 'org-mode) (org-edit-special))
-		((bound-and-true-p org-src-mode) (org-edit-src-exit))
-		(t org-babel-tangle-jump-to-org)))
+        ((bound-and-true-p org-src-mode) (org-edit-src-exit))
+        (t org-babel-tangle-jump-to-org)))
 #+end_src
 *** Main map
 :PROPERTIES:
@@ -572,50 +571,49 @@ Tried inherit to set f19 s as mode dependant but seems not to work with pretty h
 :END:
 #+NAME: org_2020-12-05+00-00_94E1455C-7F91-48B1-BF7B-EA3753E7BDCB
 #+begin_src emacs-lisp
-(pretty-hydra-define hydra-kl			; short name for which-key
-  (:title (with-octicon "tools" "Global tools" 1 -0.05)
-		  :color teal
-		  :idle 1.0)
+(pretty-hydra-define hydra-kl (:title (with-octicon "tools" "Global tools" 1 -0.05)
+                                      :color teal
+                                      :idle 1.0)
   ("Hydrae"
    (("C" hydra-flycheck/body "Flycheck")
-	("g" jp-git/body "git...")
-	("h" hydra-hs/body "Hide/show...")
-	("n" hydra-navigate/body "Navigate")
-	("P" hydra-projectile/body "projectile")
-	("t" hydra-transpose/body "Transpose")
-	("x" x-hydra-readonly/body "C-X fns")
-	("<f19>" major-mode-hydra "Major mode")
-	("[" ptrv/smartparens/body "Smartparens")
-	("l" hydra-goto/body "Go to"))
-"Windows"
-(("F" other-frame "Switch Frame")
-	("m" (mwb-new-frame "*Messages*") "Messages")
-	("w" hydra-jp-window/body "Window Management")
-	("0" delete-window "Delete Window")
-	(")" delete-window "Delete Window")
-	("|" split-window-right "horizontally"))
-"Current buffer"
-(("L" linum-mode "line number" :toggle t)
-	("c" (what-cursor-position 'detail) "Character at POS")
-	("TAB" hs-mwb-show-one-level "show one level")
-	("C-<tab>" hs-toggle-hiding "Toggle hide-show")
-	("f" refill-mode "Auto refill mode ")
-	("r" backup-walker-start "Backup Walker")
-	("i" consult-imenu "imenu"))
+    ("g" jp-git/body "git...")
+    ("h" hydra-hs/body "Hide/show...")
+    ("n" hydra-navigate/body "Navigate")
+    ("P" hydra-projectile/body "projectile")
+    ("t" hydra-transpose/body "Transpose")
+    ("x" x-hydra-readonly/body "C-X fns")
+    ("<f19>" major-mode-hydra "Major mode")
+    ("[" ptrv/smartparens/body "Smartparens")
+    ("l" hydra-goto/body "Go to"))
+   "Windows"
+   (("F" other-frame "Switch Frame")
+    ("m" (mwb-new-frame "*Messages*") "Messages")
+    ("w" hydra-jp-window/body "Window Management")
+    ("0" delete-window "Delete Window")
+    (")" delete-window "Delete Window")
+    ("|" split-window-right "horizontally"))
+   "Current buffer"
+   (("L" linum-mode "line number" :toggle t)
+    ("c" (what-cursor-position 'detail) "Character at POS")
+    ("TAB" hs-mwb-show-one-level "show one level")
+    ("C-<tab>" hs-toggle-hiding "Toggle hide-show")
+    ("f" refill-mode "Auto refill mode ")
+    ("r" backup-walker-start "Backup Walker")
+    ("i" consult-imenu "imenu"))
    "Actions"
    (("D" toggle-debug-on-error "debug on error" :toggle (default-value 'debug-on-error))
-	("d" hyd-dired-common/body "Open dired frame")
-	("M" toggle-mwb-message-timestamp :toggle mwb-message-timestamp)
-	("p" package-quickstart-refresh "refresh quickstart packages")
-	("q" keyboard-quit-context+ "Quit minibuffer etc")
-	("S" org-babel-detangle "Detangle")
-	("e" iedit-mode "iedit"))
+    ("d" hyd-dired-common/body "Open dired frame")
+    ("M" toggle-mwb-message-timestamp :toggle mwb-message-timestamp)
+    ("p" package-quickstart-refresh "refresh quickstart packages")
+    ("q" keyboard-quit-context+ "Quit minibuffer etc")
+    ("S" org-babel-detangle "Detangle")
+    ("e" iedit-mode "iedit"))
    "Change Buffers"
    (("b" consult-buffer "Switch Buffer")
-	("B" counsel-bookmark "Jump to bookmark")
-	("s" mwb-special-in-hydra "org edit")
-	;; ("s" org-babel-tangle-jump-to-org "Back to org")
-	("j" dired-jump "Dired jump"))))
+    ("B" counsel-bookmark "Jump to bookmark")
+    ("s" mwb-special-in-hydra "org edit")
+    ;; ("s" org-babel-tangle-jump-to-org "Back to org")
+    ("j" dired-jump "Dired jump"))))
 (bind-key "H-`"  'hydra-kl/body)
 (bind-key "<f19>"  'hydra-kl/body)
 #+end_src
@@ -623,8 +621,9 @@ Tried inherit to set f19 s as mode dependant but seems not to work with pretty h
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:F0488F70-6114-4DF6-AB8A-70BCCF07A5C2
 :END:
-	From hydra wiki
-	#+begin_src emacs-lisp
+    From hydra wiki
+    #+NAME: org_mark_mini20.local_20210812T123645.018949
+    #+begin_src emacs-lisp
 (defhydra hydra-transpose (:color red)
     "Transpose"
      ("c" transpose-chars "characters")
@@ -636,7 +635,7 @@ Tried inherit to set f19 s as mode dependant but seems not to work with pretty h
      ("p" transpose-paragraphs "paragraphs")
      ("t" org-table-transpose-table-at-point "Org mode table")
      ("q" nil "cancel" :color blue))
-	#+end_src
+    #+end_src
 
 ** Goto
 :PROPERTIES:
@@ -647,24 +646,24 @@ Goto is based on consult's map and Kitchin hydra
 #+begin_src emacs-lisp
 (pretty-hydra-define hydra-goto
   (:title (mwb-icon-text "directions" "Goto")
-		  :foreign-keys warn
-		  :quit-key "q"
-		  :exit t
-		  :idle 0.5)
+          :foreign-keys warn
+          :quit-key "q"
+          :exit t
+          :idle 0.5)
   ("goto"
    (("g" consult-goto-line))
    "Structure"
    (("h" consult-org-heading "Org heading")
-	("o" consult-outline "Outline")
-	("i" consult-imenu "imenu")
-	("I" consult-project-imenu "Project imenu"))
+    ("o" consult-outline "Outline")
+    ("i" consult-imenu "imenu")
+    ("I" consult-project-imenu "Project imenu"))
    "Errors"
    (
-	("e" consult-compile-error "compile error")
-	("f" consult-flycheck "flycheck"))
+    ("e" consult-compile-error "compile error")
+    ("f" consult-flycheck "flycheck"))
    "Marks"
    (("m" consult-mark "mark")
-	("M" consult-global-mark "global mark"))))
+    ("M" consult-global-mark "global mark"))))
 #+end_src
 
 ** Search
@@ -692,42 +691,42 @@ From consult
 #+NAME: org_mark_mini20.local_20210811T144548.688365
 #+begin_src emacs-lisp
 (bind-key "<f4>"
-		  (pretty-hydra-define hydra-search
-			(:title (mwb-icon-text "search" "Search")
-					:foreign-keys warn
-					:quit-key "q"
-					:exit t
-					:idle 0.5)
-			("Project"
-			 (("<f5>" deadgrep "Deadgrep")
-			  ("r" consult-ripgrep "Counsel ripgrep"))
-			 "Global"
-			 (("L" consult-locate "Locate")
-			  ("M-w" eww-search-words "Web"))
-			 "Directory"
-			 (("g" consult-grep "grep")
-			  ("G" consult-git-grep "grep using git")
-			  ("f" consult-find "Find"))
-			 "Current Buffer"
-			 (("l" consult-line "Line")
-			  ("k" consult-keep-lines "Keep Lines")
-			  ("u" consult-focus-lines "Focus Lines")
-			  ("e" consult-isearch "consult Incremental search")
-			  ("<f4>" consult-line  "Incremental search")
-			  ("o" occur "Occur")
-			  ("." consult-line-symbol-at-point "isearch point")
-			  ("_" isearch-forward-symbol "isearch symbol")
-			  ("w" isearch-forward-word "Isearch word"))
-			 "Buffers"
-			 (("m"  consult-multi-occur "Multi occur"))
-			 "Highlight"
-			 (("h." highlight-symbol-at-point "Point")
-			  ("hf" hi-lock-find-patterns "Lock Pattern")
-			  ("hl" highlight-lines-matching-regexp "Lines")
-			  ("hp" highlight-phrase "Phrase")
-			  ("hr" highlight-regexp "regexp")
-			  ("hu" unhighlight-regexp "Unhighlight")
-			  ("hw" hi-lock-write-interactive-patterns "Write patterns")))))
+          (pretty-hydra-define hydra-search
+            (:title (mwb-icon-text "search" "Search")
+                    :foreign-keys warn
+                    :quit-key "q"
+                    :exit t
+                    :idle 0.5)
+            ("Project"
+             (("<f5>" deadgrep "Deadgrep")
+              ("r" consult-ripgrep "Counsel ripgrep"))
+             "Global"
+             (("L" consult-locate "Locate")
+              ("M-w" eww-search-words "Web"))
+             "Directory"
+             (("g" consult-grep "grep")
+              ("G" consult-git-grep "grep using git")
+              ("f" consult-find "Find"))
+             "Current Buffer"
+             (("l" consult-line "Line")
+              ("k" consult-keep-lines "Keep Lines")
+              ("u" consult-focus-lines "Focus Lines")
+              ("e" consult-isearch "consult Incremental search")
+              ("<f4>" consult-line  "Incremental search")
+              ("o" occur "Occur")
+              ("." consult-line-symbol-at-point "isearch point")
+              ("_" isearch-forward-symbol "isearch symbol")
+              ("w" isearch-forward-word "Isearch word"))
+             "Buffers"
+             (("m"  consult-multi-occur "Multi occur"))
+             "Highlight"
+             (("h." highlight-symbol-at-point "Point")
+              ("hf" hi-lock-find-patterns "Lock Pattern")
+              ("hl" highlight-lines-matching-regexp "Lines")
+              ("hp" highlight-phrase "Phrase")
+              ("hr" highlight-regexp "regexp")
+              ("hu" unhighlight-regexp "Unhighlight")
+              ("hw" hi-lock-write-interactive-patterns "Write patterns")))))
 #+end_src
 
 *** isearch map
@@ -738,15 +737,15 @@ From consult
 #+begin_src emacs-lisp
 (use-feature emacs
   :bind (:map isearch-mode-map
-			  ("M-e" . consult-isearch)
-			  ("<f4>" . consult-isearch) ;; orig. isearch-edit-string
-			  ("M-s e" . consult-isearch) ;; orig. isearch-edit-string
-			  ("M-s l" . consult-line)
-			  ("<right>" . isearch-repeat-forward)
-			  ("<left>" . isearch-repeat-backward)
-			  :map minibuffer-local-isearch-map
-			  ("<left>" . isearch-reverse-exit-minibuffer)
-			  ("<right>" . isearch-forward-exit-minibuffer)))
+              ("M-e" . consult-isearch)
+              ("<f4>" . consult-isearch) ;; orig. isearch-edit-string
+              ("M-s e" . consult-isearch) ;; orig. isearch-edit-string
+              ("M-s l" . consult-line)
+              ("<right>" . isearch-repeat-forward)
+              ("<left>" . isearch-repeat-backward)
+              :map minibuffer-local-isearch-map
+              ("<left>" . isearch-reverse-exit-minibuffer)
+              ("<right>" . isearch-forward-exit-minibuffer)))
 
 #+end_src
 
@@ -788,7 +787,8 @@ Aquamacs also messes around with isearch and the two don't exactly match. Which 
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:85154714-C478-4D9F-850F-7C01537CFD9C
 :END:
-	#+begin_src emacs-lisp
+    #+NAME: org_mark_mini20.local_20210812T123645.021261
+    #+begin_src emacs-lisp
 (defhydra hydra-navigate (:color red
                           :hint nil)
   "
@@ -838,7 +838,7 @@ _<_ beginning of buffer _>_ end of buffer _m_: set mark _/_: jump to mark
   ("q" nil "quit" :color blue))
 
 (bind-key "H-m" 'hydra-navigate/body)
-	#+end_src
+    #+end_src
 * FreeKeys
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210601T161324.978840

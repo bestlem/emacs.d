@@ -11435,6 +11435,23 @@ Enable git timemachine for current buffer, switching to GIT-BRANCH.
 
 
 )
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/git-messenger-20201202.1637/git-messenger-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/git-messenger-20201202.1637/git-messenger-autoloads.el") (car load-path))))
+
+
+
+(autoload 'git-messenger:popup-message "git-messenger" nil t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "git-messenger" '("git-messenger")))
+
+
+
+
+
+)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/ggtags-0.9.0/ggtags-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -15982,7 +15999,7 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
 )
 (setq package-activated-list
 	  (append
-	   '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe wgrep validate bind-key use-package use-package-hydra epl pkg-info projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit treemacs-magit transient-posframe toc-org ivy swiper srefactor spinner all-the-icons powerline spaceline memoize spaceline-all-the-icons sml-mode smartparens f shrink-path prescient selectrum selectrum-prescient rg rainbow-mode rainbow-delimiters pos-tip racket-mode python-mode pretty-hydra popup persistent-scratch paredit paradox outorg outshine org-bullets org kv esxml nov mwim moody modus-themes mmm-mode minions mini-frame math-symbol-lists marginalia makey major-mode-hydra macrostep list-utils iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine ggtags gcmh free-keys flycheck fish-mode fira-code-mode expand-region eval-in-repl eros clang-format emr embark consult embark-consult elmacro dtrt-indent doom-modeline discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep ctrlf company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-theme cmake-mode cask-mode beacon amx all-the-icons-ivy-rich aggressive-indent)
+	   '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe wgrep validate bind-key use-package use-package-hydra epl pkg-info projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit treemacs-magit transient-posframe toc-org ivy swiper srefactor spinner all-the-icons powerline spaceline memoize spaceline-all-the-icons sml-mode smartparens f shrink-path prescient selectrum selectrum-prescient rg rainbow-mode rainbow-delimiters pos-tip racket-mode python-mode pretty-hydra popup persistent-scratch paredit paradox outorg outshine org-bullets org kv esxml nov mwim moody modus-themes mmm-mode minions mini-frame math-symbol-lists marginalia makey major-mode-hydra macrostep list-utils iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine git-messenger ggtags gcmh free-keys flycheck fish-mode fira-code-mode expand-region eval-in-repl eros clang-format emr embark consult embark-consult elmacro dtrt-indent doom-modeline discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep ctrlf company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-theme cmake-mode cask-mode beacon amx all-the-icons-ivy-rich aggressive-indent)
 	   package-activated-list))
 (progn
   (require 'info)

@@ -4,19 +4,18 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(all-the-icons-completion
+   '(modus-themes
+	 all-the-icons-completion
 	 git-messenger
 	 org-capture
 	 treemacs-projectile
 	 treemacs
 	 mini-frame
 	 rg
-	 all-the-icons-ivy-rich
 	 rainbow-mode
 	 spaceline-all-the-icons
 	 spaceline
 	 minions
-	 moody
 	 free-keys
 	 company-quickhelp
 	 python-mode
@@ -56,7 +55,6 @@
 	 company-posframe
 	 which-key-posframe
 	 which-key-posframe-mode
-	 mac-key-mode
 	 hydra
 	 s
 	 dash

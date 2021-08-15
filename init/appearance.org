@@ -490,14 +490,12 @@ One for writing code and the other for reading articles."
 
 ;; From emacs or local
 ;; (load-theme 'leuven t t)
-(load-theme 'mwbtheme-leuven t t)
-
 (use-package color-theme-modern
   :ensure t
   :config
   (load-theme 'high-contrast t t))
 
-(use-package modus-themes
+(use-package-elpa modus-themes
   :config
   (load-theme 'modus-operandi t t)
   (load-theme 'modus-vivendi t t))
@@ -511,18 +509,30 @@ vivendi is dark
 #+NAME: org_2020-12-06+00-00_0A5F5673-C8F4-4FCE-869B-205BC1B9DAF5
 #+begin_src emacs-lisp :tangle no :noweb-ref theme-modus
 (use-package modus-themes
-  ;; :ensure t						 ; As modus is in emacs always need some ensure
-  :mwb-load-path "fork/modus-themes"
+  :ensure t
+  ;; :mwb-load-path "fork/modus-themes"
   :demand
+  :custom
+  (modus-themes-italic-constructs t)
+  (modus-themes-slanted-constructs t)
+  (modus-themes-variable-pitch-headings t)
+  (modus-themes-bold-constructs nil)
+  (modus-themes-region '(bg-only accented))
+  (modus-themes-completions 'opinionated)
+  (modus-themes-fringes 'intense)
+  (modus-themes-mode-line 'borderless)
+  (modus-themes-org-blocks 'rainbow)
+  (modus-themes-paren-match 'intense-bold)
+  (modus-themes-prompts 'intense)
+  (modus-themes-scale-headings t)
+  (modus-themes-syntax 'yellow-comments)
+
   :init
-  ;; Add all your customizations prior to loading the themes
-  (setq modus-themes-slanted-constructs t
-		modus-themes-bold-constructs nil)
   ;;  This is lists of lists so set here not custom
   (setq modus-themes-headings
 		'((t . rainbow-section)))
 
-  (setq modus-themes-region '())		; the default
+  ;; (setq modus-themes-region '())		; the default
 
   ;; Enable the theme files only as local
   ;; (use-package modus-operandi-theme)
@@ -532,23 +542,6 @@ vivendi is dark
   ;; Load the theme of your choice
   (modus-themes-load-vivendi)
 
-  ;; Match my earlier code as this is called by a hydra
-  (defun quick-switch-themes* ()
-	(my-demo-modus-themes-toggle))
 
-  ;;  Allow different set for different theme https://protesilaos.com/modus-themes/#h:a897b302-8e10-4a26-beab-3caaee1e1193
-  (defun my-demo-modus-operandi ()
-	(interactive)m
-	(setq modus-themes-bold-constructs t) ; ENABLE bold
-	(modus-themes-load-operandi))
-
-  (defun my-demo-modus-vivendi ()
-	(interactive)
-	(setq modus-themes-bold-constructs nil) ; DISABLE bold
-	(modus-themes-load-vivendi))
-
-  (defun my-demo-modus-themes-toggle ()
-	(if (eq (car custom-enabled-themes) 'modus-operandi)
-		(my-demo-modus-vivendi)
-	  (my-demo-modus-operandi))))
+  )
 #+end_src

@@ -9156,10 +9156,10 @@ Interactively, with prefix argument, move to the previous position.
 
 
 )
-(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/modus-themes-20210524.1750/modus-themes-autoloads.el"))
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/modus-themes-20210804.1453/modus-themes-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/modus-themes-20210524.1750/modus-themes-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/modus-themes-20210804.1453/modus-themes-autoloads.el") (car load-path))))
 
 
 
@@ -16045,7 +16045,7 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
   (info-initialize)
   (setq Info-directory-list
 		(append
-		 '("/Users/mark/.emacs.d/elpa/27.2/elpa/embark-20210801.1347" "/Users/mark/.emacs.d/elpa/27.2/elpa/modus-themes-20210524.1750" "/Users/mark/.emacs.d/elpa/27.2/elpa/org-9.4.6" "/Users/mark/.emacs.d/elpa/27.2/elpa/racket-mode-20210524.1655" "/Users/mark/.emacs.d/elpa/27.2/elpa/rg-20210617.1715" "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-20210518.1815" "/Users/mark/.emacs.d/elpa/27.2/elpa/magit-20210524.1513" "/Users/mark/.emacs.d/elpa/27.2/elpa/transient-20210426.2141" "/Users/mark/.emacs.d/elpa/27.2/elpa/dash-20210330.1544" "/Users/mark/.emacs.d/elpa/27.2/elpa/use-package-20210207.1926" "/Users/mark/.emacs.d/elpa/27.2/elpa/with-editor-20210427.1244")
+		 '("/Users/mark/.emacs.d/elpa/27.2/elpa/embark-20210801.1347" "/Users/mark/.emacs.d/elpa/27.2/elpa/modus-themes-20210804.1453" "/Users/mark/.emacs.d/elpa/27.2/elpa/org-9.4.6" "/Users/mark/.emacs.d/elpa/27.2/elpa/racket-mode-20210524.1655" "/Users/mark/.emacs.d/elpa/27.2/elpa/rg-20210617.1715" "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-20210518.1815" "/Users/mark/.emacs.d/elpa/27.2/elpa/magit-20210524.1513" "/Users/mark/.emacs.d/elpa/27.2/elpa/transient-20210426.2141" "/Users/mark/.emacs.d/elpa/27.2/elpa/dash-20210330.1544" "/Users/mark/.emacs.d/elpa/27.2/elpa/use-package-20210207.1926" "/Users/mark/.emacs.d/elpa/27.2/elpa/with-editor-20210427.1244")
 		 Info-directory-list)))
 
 ;; Local Variables:

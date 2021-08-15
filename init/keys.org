@@ -35,6 +35,7 @@
   - [[#control-x-binding][Control x binding]]
 - [[#mouse][Mouse]]
   - [[#imenu][iMenu]]
+  - [[#macos-mouse][Macos mouse]]
 - [[#hydra][Hydra]]
   - [[#leader-keys][Leader keys]]
   - [[#hydra-transpose][Hydra transpose]]
@@ -130,7 +131,7 @@ I can't touch type but seem to have two modes. One is two or more finger for tex
 I discovered [[https://github.com/abo-abo/hydra][Hydra Mode]] which allows you to define keys and a menu to show what they do. I realised that for a new to me mode I could bind the most interesting functions to a hydra to help me learn what the mode does and also cut down on control-C (That's interrupt, isn't it 🤣must bind control-C to control-G as I have wanted that for ages)
 
 So hyper-A is now a mode hydra key and I have started defining a hydra on that,
-And as per Yah Lee it might be better to not use chords - ie two key presses e.g.  A-s so I have started implementinmg a leader hydra so that I can make caps-lock a real key not hyper.
+And as per Yah Lee it might be better to not use chords - ie two key presses e.g.  A-s so I have started implementinmg a leader hydra so that I can make caps-lock a real key not hyper. Now use caps lock as a leader key f19 which now calls a hydra.
 
 **** Windows menu key
 :PROPERTIES:
@@ -246,8 +247,7 @@ This does the actual binding
   (bind-key [C-H-left] 'beginning-of-buffer macos-key-map)
   (bind-key [C-H-right] 'end-of-buffer macos-key-map))
 
-
-;;  From old Windows/Next/Unix
+;;  From old Windows/Next/Unix -
 (bind-key [C-kp-end] 'end-of-buffer)
 (bind-key [C-kp-home] 'beginning-of-buffer)
 (bind-key [S-kp-next] 'scroll-other-window-down)
@@ -272,9 +272,7 @@ This does the actual binding
   ;;(bind-key [C-end] 'end-of-buffer )
   ;;(bind-key [C-home] 'beginning-of-buffer )
   )
- ;; Unknown
- (bind-key [C-kp-end] 'end-of-buffer )
- (bind-key [C-kp-home] 'beginning-of-buffer )
+
 #+end_src
 ** Scrolling
 :PROPERTIES:
@@ -493,7 +491,8 @@ Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in e
 :PROPERTIES:
 :ID:       org_mark_2020-10-17T19-55-57+01-00_mini12.local:6D65DE51-07D2-4306-9156-B8E684BC67C3
 :END:
-This is a problem. I have used several mice with emacs. The best is the old 3 button Sun mouse or Logitech trackball, this makes mouse-2 easy to use. However we now have scroll wheels so mouse-2 is uncomfortable and not easy to control.
+This is a problem. I have used several mice with emacs. The best is the old 3 button Sun mouse or Logitech trackball, this makes mouse-2 easy to use. However we now have scroll wheels so mouse-2 is uncomfortable and not easy to control. But then I bouth a 3 button mouse.
+
 macOS has its own standards so mouse-3 does its own thing.
 There are several things we want mouse-3 to do:
 1. If on a word and it is misspelt then show alternatives and ability to save.
@@ -517,11 +516,11 @@ Sort the imenu found options in the mouse menu
 #+begin_src emacs-lisp
 (setq imenu-sort-function 'imenu--sort-by-name)
 #+end_src
-*** Macos mouse
+** Macos mouse
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20210104T224325.845039
 :END:
-Well Aquamacs at least - and possibly others does an emulate # button mouse which stops c-mouse! (and alt)
+Well Aquamacs at least - and possibly others does an emulate 3 button mouse which stops c-mouse! (and alt)
 #+NAME: org_mark_mini12.local_20210104T224325.807058
 #+begin_src emacs-lisp
 (when *aquamacs*
@@ -756,7 +755,7 @@ From consult
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:9C6C52F9-BD9C-4A80-856B-6D5620E5C9A7
 :END:
-This is disabled
+This is disabled as swiper and consult-line scroll in the minibuffer.
 But point seems to be messed up and does Aquamacs do something.
 [[http://ergoemacs.org/emacs/emacs_isearch_by_arrow_keys.html][Xah Lee  again]] set arrow keys in isearch. left/right is backward/forward, up/down is history. press Return to exit
 How does this work with ivy

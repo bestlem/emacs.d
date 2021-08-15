@@ -15930,6 +15930,45 @@ Reload `all-the-icons-ivy-rich'." t nil)
 
 
 )
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/all-the-icons-completion-20210728.2119/all-the-icons-completion-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/all-the-icons-completion-20210728.2119/all-the-icons-completion-autoloads.el") (car load-path))))
+
+
+
+(autoload 'all-the-icons-completion-marginalia-setup "all-the-icons-completion" "\
+Hook to `marginalia-mode-hook' to bind `all-the-icons-completion-mode' to it." nil nil)
+
+(defvar all-the-icons-completion-mode nil "\
+Non-nil if All-The-Icons-Completion mode is enabled.
+See the `all-the-icons-completion-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `all-the-icons-completion-mode'.")
+
+(custom-autoload 'all-the-icons-completion-mode "all-the-icons-completion" nil)
+
+(autoload 'all-the-icons-completion-mode "all-the-icons-completion" "\
+Add icons to completion candidates.
+
+If called interactively, enable All-The-Icons-Completion mode if
+ARG is positive, and disable it if ARG is zero or negative.
+If called from Lisp, also enable the mode if ARG is omitted or
+nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "all-the-icons-completion" '("all-the-icons-completion-")))
+
+
+
+
+
+)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/aggressive-indent-20200824.2352/aggressive-indent-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -15999,7 +16038,7 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
 )
 (setq package-activated-list
 	  (append
-	   '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe wgrep validate bind-key use-package use-package-hydra epl pkg-info projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit treemacs-magit transient-posframe toc-org ivy swiper srefactor spinner all-the-icons powerline spaceline memoize spaceline-all-the-icons sml-mode smartparens f shrink-path prescient selectrum selectrum-prescient rg rainbow-mode rainbow-delimiters pos-tip racket-mode python-mode pretty-hydra popup persistent-scratch paredit paradox outorg outshine org-bullets org kv esxml nov mwim moody modus-themes mmm-mode minions mini-frame math-symbol-lists marginalia makey major-mode-hydra macrostep list-utils iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine git-messenger ggtags gcmh free-keys flycheck fish-mode fira-code-mode expand-region eval-in-repl eros clang-format emr embark consult embark-consult elmacro dtrt-indent doom-modeline discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep ctrlf company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-theme cmake-mode cask-mode beacon amx all-the-icons-ivy-rich aggressive-indent)
+	   '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe wgrep validate bind-key use-package use-package-hydra epl pkg-info projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit treemacs-magit transient-posframe toc-org ivy swiper srefactor spinner all-the-icons powerline spaceline memoize spaceline-all-the-icons sml-mode smartparens f shrink-path prescient selectrum selectrum-prescient rg rainbow-mode rainbow-delimiters pos-tip racket-mode python-mode pretty-hydra popup persistent-scratch paredit paradox outorg outshine org-bullets org kv esxml nov mwim moody modus-themes mmm-mode minions mini-frame math-symbol-lists marginalia makey major-mode-hydra macrostep list-utils iedit counsel lispy lisp-extra-font-lock json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine git-messenger ggtags gcmh free-keys flycheck fish-mode fira-code-mode expand-region eval-in-repl eros clang-format emr embark consult embark-consult elmacro dtrt-indent doom-modeline discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep ctrlf company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-theme cmake-mode cask-mode beacon amx all-the-icons-ivy-rich all-the-icons-completion aggressive-indent)
 	   package-activated-list))
 (progn
   (require 'info)

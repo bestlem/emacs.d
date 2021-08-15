@@ -478,6 +478,18 @@ Separate so smaller buffer to edit
 		 ("A-f" . consult-line)
 		 ("A-b" . consult-buffer)))
 #+end_src
+** All-the-icons-completion
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210815T090804.369866
+:END:
+Add icons to completion screens
+#+NAME: org_mark_mini20.local_20210815T090804.348976
+#+begin_src emacs-lisp
+(use-package-elpa all-the-icons-completion
+  :init
+  (all-the-icons-completion-mode)
+  :hook (marginalia-mode . all-the-icons-completion-marginalia-setup))
+#+end_src
 ** Marginalia
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210801T165758.232477

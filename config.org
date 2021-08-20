@@ -630,8 +630,8 @@ But hack an load it directly
           ("aquamacs"
            ("aquamacs-" "tabbar-" "auto-word-wrap-default-function"
             "global-hi-line-mode" "toolbar-mode" "visual-line-mode"))
-          ("modus"
-           ("modus-" "ibuffer-title-face" "ibuffer-marked-face" "ibuffer-deletion-face"))
+          ;; ("modus"
+          ;;  ("modus-" "ibuffer-title-face" "ibuffer-marked-face" "ibuffer-deletion-face"))
           ;; ("completion"
           ;;  ("company-" "yas-"))
           ("mac-based"
@@ -929,6 +929,26 @@ This needs the full expansion
 :END:
 This is the visual tree to manage files etc
 
+**** Support functions
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210819T110926.745369
+:END:
+
+***** Key hook
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210819T110926.744579
+:END:
+I need to set the mouse - unfortunately it is in a minor mode map not global so simple bind does not work
+#+NAME: org_mark_mini20.local_20210819T110926.728132
+#+begin_src emacs-lisp
+(defun treemacs-mwb-mouse ()
+  (let ((oldmap (cdr (assoc 'mac-key-mode-map minor-mode-map-alist)))
+        (newmap (make-sparse-keymap)))
+    (set-keymap-parent newmap oldmap)
+    (bind-key (kbd "<mouse-3>") #'treemacs-rightclick-menu newmap )
+    (make-local-variable 'minor-mode-overriding-map-alist)
+    (push `(mac-key-mode-map . ,newmap) minor-mode-overriding-map-alist)))
+#+end_src
 **** Main setup
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210811T192501.325010
@@ -943,7 +963,7 @@ This is the visual tree to manage files etc
   (with-eval-after-load 'winum
     (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
   (setq treemacs-width 50)
-  :commands (treemacs)
+  :commands (treemacs treemacs-rightclick-menu)
   :config
   (setq treemacs--no-messages nil)
   (setq treemacs-user-header-line-format  #'treemacs-header-buttons-format)
@@ -994,11 +1014,11 @@ This is the visual tree to manage files etc
     (("w" treemacs-toggle-fixed-width "Toggle variable width" ))))
 
   :bind ( :map treemacs-mode-map
-               ("<mouse-3>" . treemacs-rightclick-menu)
 			   ("<mouse-5>" . treemacs-rightclick-menu)
                ("<mouse-4>" . treemacs-rightclick-menu)
                ("<f5>" . treemacs-switch-workspace)
-               ("<C-f5>" . treemacs-edit-workspaces)))
+               ("<C-f5>" . treemacs-edit-workspaces))
+  :hook (treemacs-mode . treemacs-mwb-mouse))
 #+end_src
 
 **** Projectile

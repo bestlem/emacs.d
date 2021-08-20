@@ -17,6 +17,8 @@
   - [[#iso-transl][iso-transl]]
   - [[#which-key][Which Key]]
   - [[#display-keys-in-help-and-menus][Display keys in help and menus]]
+  - [[#freekeys][FreeKeys]]
+  - [[#log-keys][Log keys]]
 - [[#bindings-grouped-by-topic][Bindings grouped by topic]]
   - [[#homeendpaging][Home/End/Paging]]
   - [[#cua-bindings][Cua bindings]]
@@ -42,7 +44,6 @@
   - [[#goto][Goto]]
   - [[#search][Search]]
   - [[#kitchin-hydras][Kitchin hydras]]
-- [[#freekeys][FreeKeys]]
 
 * Global key bindings musings
 :PROPERTIES:
@@ -84,6 +85,12 @@ There is a difference between bind and general in how they report the bindings. 
 Use bind-key
 
 ??? Oct 2020 I don't understand
+
+*** Emacs versions
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210819T115433.266731
+:END:
+GNUemacs, Aquamacs  and macport don't agree on mouse 4 and 5 - GNU and Aquamacs  bind 3 to 4 and has no 5
 ** Keyboard Thoughts
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:68EED975-E28B-4FD7-8E78-BA5A8E260CD1
@@ -229,6 +236,46 @@ Note that you can control what the screen displays A for Alt or ⌥. Emacs is no
 #+begin_src emacs-lisp
 (when *aquamacs*
   (setq ns-use-mac-modifier-symbols  t))
+#+end_src
+
+** FreeKeys
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210601T161324.978840
+:END:
+Show unused keys from https://github.com/Fuco1/free-keys
+#+NAME: org_mark_mini20.local_20210601T161324.957225
+#+begin_src emacs-lisp
+(use-package free-keys
+  :ensure t
+  :commands free-keys)
+#+end_src
+
+** Log keys
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210819T101912.817939
+:END:
+Show the frequency of keys
+#+NAME: org_mark_mini20.local_20210819T101912.797007
+#+begin_src emacs-lisp
+(use-package-elpa keyfreq
+  :demand
+  :init
+  (setq keyfreq-excluded-commands
+		'(self-insert-command
+          org-self-insert-command
+          forward-char
+          backward-char
+          previous-line
+          next-line
+          mac-mwheel-scroll
+          mouse-set-point
+          org-mouse-down-mouse
+          mouse-drag-region
+          ))
+  :config
+  (keyfreq-mode 1)
+  (keyfreq-autosave-mode 1)
+  )
 #+end_src
 * Bindings grouped by topic
 :PROPERTIES:
@@ -838,14 +885,3 @@ _<_ beginning of buffer _>_ end of buffer _m_: set mark _/_: jump to mark
 
 (bind-key "H-m" 'hydra-navigate/body)
     #+end_src
-* FreeKeys
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20210601T161324.978840
-:END:
-Show unused keys from https://github.com/Fuco1/free-keys
-#+NAME: org_mark_mini20.local_20210601T161324.957225
-#+begin_src emacs-lisp
-(use-package free-keys
-  :ensure t
-  :commands free-keys)
-#+end_src

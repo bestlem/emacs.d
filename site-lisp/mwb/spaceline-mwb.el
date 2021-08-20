@@ -76,6 +76,25 @@
 	" "
 
 	))
+(spaceline-compile
+  "mwb-minimum"
+  '(
+	(mwb-mode-icon
+	 mwb-minor-modes)
+	(mwb-narrowed mwb-modified mwb-rw )
+	recursive-edit
+	;; (mwb-buffer-size line-column)
+	((all-the-icons-buffer-path
+	  all-the-icons-buffer-id) :separator "")
+	)
+  '(
+	;; (all-the-icons-which-function)
+	(mwb-flycheck
+	 :when active :priority 89
+	 )
+	" "
+
+	))
 
 (spaceline-compile
   "mwb-mode-theme"
@@ -126,7 +145,15 @@
 	;; all-the-icons-separator-right-inactive
     ))
 
+(defun spaceline-mwb-simple-mode ()
+  (setq header-line-format '("%e" (:eval (spaceline-ml-mwb-minimum))))
+  (setq mode-line-format nil)
+  )
 
+(defun spaceline-mwb-prog-mode ()
+  (setq mode-line-format '("%e" (:eval (spaceline-ml-mwb-mode-theme))))
+  (setq header-line-format '("%e" (:eval (spaceline-ml-mwb-test))))
+  )
 
 ;;;###autoload
 (defun spaceline-mwb-theme ()
@@ -136,8 +163,13 @@
   ;;  set the header keymap as a copy of mode line
   (mwb-headline--keymap-duo-header mode-line-major-mode-keymap)
   (mwb-headline--keymap-duo-header mode-line-column-line-number-mode-map)
-  (setq-default mode-line-format '("%e" (:eval (spaceline-ml-mwb-mode-theme))))
-  (setq-default header-line-format '("%e" (:eval (spaceline-ml-mwb-test))))
+  ;; (setq-default mode-line-format '("%e" (:eval (spaceline-ml-mwb-mode-theme))))
+  ;; (setq-default header-line-format '("%e" (:eval (spaceline-ml-mwb-test))))
+  (setq-default header-line-format '("%e" (:eval (spaceline-ml-mwb-minimum))))
+  (setq-default mode-line-format nil)
+
+  (add-hook 'prog-mode-hook #'spaceline-mwb-prog-mode )
+  (add-hook 'text-mode-hook #'spaceline-mwb-prog-mode )
   )
 
 ;; Interactive & Setup Functions

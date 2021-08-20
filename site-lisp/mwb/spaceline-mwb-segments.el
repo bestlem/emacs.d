@@ -65,15 +65,12 @@
 							:height 0.9
 							:family ,(all-the-icons-icon-family-for-mode major-mode)
 							:inherit))
-	  (eyeliner/with-icon "bars"
-		;; (message "Bars Not found %s %s %s" major-mode icon family)
-        (propertize icon
-					'help-echo (format "Major-mode (unknown icon): `%s'" major-mode)
-					'display `(raise 0)
-					'face `(
-							:height 0.9
-							:family ,family
-							:inherit))))))
+	  ;; (message "Bars Not found %s %s %s" major-mode icon family)
+      (propertize  (format "%s" major-mode)
+				   'help-echo (format "Major-mode (unknown icon): `%s'" major-mode)
+				   'display `(raise 0)
+				   'face `(
+						   :inherit)))))
 ;; (spaceline-define-segment mwb-mode-icon
 ;;   "Use jp-modeline version so no fancy lookups."
 ;;   (propertize " ☰ "
@@ -91,8 +88,12 @@
 				'help-echo "Minions
 mouse-1: Display minor modes menu"
 				'local-map minions-mode-line-minor-modes-map
+				'display `(:raise 4.0
+						   :height -1.0
+						   )
 				'face `(:family ,family
-						:inherit)) ))
+						:inherit)
+				) ))
 
 ;;; Buffer state
 (spaceline-define-segment mwb-narrowed
@@ -118,7 +119,9 @@ mouse-1: Display minor modes menu"
 					   (t "unlock"))))
 	(propertize (mwb-icon-get ro-icon)
 				'mouse-face 'mode-line-highlight
-				'local-map (spaceline-mwb--mouse-map 'mouse-1 'read-only-mode))))
+				'local-map (spaceline-mwb--mouse-map 'mouse-1 'read-only-mode)
+				'display '(:raise 1.0
+						   ))))
 
 (spaceline-define-segment mwb-buffer-size
   "The size of the buffer.

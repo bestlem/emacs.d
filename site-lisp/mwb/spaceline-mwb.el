@@ -60,22 +60,26 @@
 ;;; Themes
 
 (spaceline-compile
-  "mwb-test"
+  "mwb-main-header"
   '(
 	(mwb-mode-icon
 	 mwb-minor-modes)
 	(mwb-narrowed mwb-modified mwb-rw )
 	recursive-edit
-	(mwb-buffer-size line-column)
+	mwb-bookmark
+	auto-compile
+
 	)
   '(
 	(all-the-icons-which-function)
+	(mwb-buffer-size line-column)
 	(mwb-flycheck
 	 :when active :priority 89
 	 )
 	" "
 
 	))
+
 (spaceline-compile
   "mwb-minimum"
   '(
@@ -92,50 +96,37 @@
 	(mwb-flycheck
 	 :when active :priority 89
 	 )
-	" "
-
+	" " 								; needed as last chacter can be half hidden
 	))
 
 (spaceline-compile
-  "mwb-mode-theme"
+  "mwb-mode-footer"
   '((all-the-icons-anzu
 	 :face 'mode-line
 	 :skip-alternate t)
-    auto-compile
 	mwb-projectile
 
 	;; The actual buffer info
-	((
-	  ;; all-the-icons-mode-icon
-	  ((all-the-icons-buffer-path
+	((((all-the-icons-buffer-path
 		all-the-icons-buffer-id) :separator ""))
 	 :face default-face)
-
-
-
-	;; all-the-icons-separator-left-active-3
-	;; all-the-icons-separator-left-inactive
 
 	((all-the-icons-vc-icon
 	  all-the-icons-vc-status
 	  ((all-the-icons-git-ahead
-		all-the-icons-git-status) :separator " ")
+		all-the-icons-git-status) :separator " ") :priority 80
 
 	  all-the-icons-package-updates)
 	 :face other-face
 	 :separator (spaceline-all-the-icons--separator spaceline-all-the-icons-secondary-separator " "))
+	)
 
-
-    )
-
-  `(;; ((,@additional-segments) :when active :face 'powerline-active2)
-	;; ((,@additional-segments) :when (not active) :face 'powerline-inactive2)
+  `(
     python-env
     ((all-the-icons-which-function)
 	 :face 'powerline-active2
 	 :separator "")
-	((
-	  all-the-icons-package-updates)
+	((  all-the-icons-package-updates)
 	 :face other-face
 	 :separator (spaceline-all-the-icons--separator spaceline-all-the-icons-secondary-separator " "))
 	;; all-the-icons-separator-right-active-1
@@ -146,13 +137,15 @@
     ))
 
 (defun spaceline-mwb-simple-mode ()
+  "Simplest header - mainly for internal buffers."
   (setq header-line-format '("%e" (:eval (spaceline-ml-mwb-minimum))))
   (setq mode-line-format nil)
   )
 
 (defun spaceline-mwb-prog-mode ()
-  (setq mode-line-format '("%e" (:eval (spaceline-ml-mwb-mode-theme))))
-  (setq header-line-format '("%e" (:eval (spaceline-ml-mwb-test))))
+  "Main useful header/footer for modes which I do work in."
+  (setq mode-line-format '("%e" (:eval (spaceline-ml-mwb-mode-footer))))
+  (setq header-line-format '("%e" (:eval (spaceline-ml-mwb-main-header))))
   )
 
 ;;;###autoload

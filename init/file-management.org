@@ -356,7 +356,7 @@ Started as file management but actually deals with files and what is in them/ Tr
 		 ("<double-mouse-1>" . deadgrep-visit-result-other-window)
 		 ("<mouse-3>" . deadgrep-toggle-file-results))
   :config (unless (executable-find "rg")
-			(warning "Please install ripgrep snap...")))
+			(warning "Please install ripgrep ...")))
 	#+end_src
 *** [[https://github.com/dajva/rg.el][rg]]
 :PROPERTIES:
@@ -414,8 +414,10 @@ projectile-save-project-buffers is nice but save-buffer does not make a backup. 
 	(unless (null modified-buffers)
 	  (dolist (buf modified-buffers)
 		(with-current-buffer buf
+		  (message "Project %s Saved buffer %s"
+				   project-name buf)
 		  (save-buffer 16)))
-	  (message "[%s] Saved %d buffers mwb" project-name (length modified-buffers)))))
+	  )))
 #+end_src
 *** Hydra
 :PROPERTIES:

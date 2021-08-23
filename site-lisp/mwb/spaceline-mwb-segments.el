@@ -37,6 +37,11 @@
 (require 'all-the-icons)
 (require 'spaceline-mwb-core)
 
+;;; Forward declarations of Optional Dependencies
+(declare-function projectile-project-root "ext:projectile.el")
+(declare-function fancy-narrow-active-p "ext:fancy-narrow.el")
+
+
 ;;; Create icons
 
 ;;; Segments
@@ -48,7 +53,7 @@
 		(project-id (if (and (fboundp 'projectile-project-p) (projectile-project-p))
 						(projectile-project-name) "×")))
 	(propertize project-id
-				'face (:height 0.8)
+				'face `(:height 0.8)
 				'display `(raise 0.2)
 				'mouse-face 'mode-line-highlight
 				'help-echo help-echo
@@ -73,13 +78,7 @@
 				   'display `(raise 0)
 				   'face `(
 						   :inherit)))))
-;; (spaceline-define-segment mwb-mode-icon
-;;   "Use jp-modeline version so no fancy lookups."
-;;   (propertize " ☰ "
-;;               'help-echo (format "Major-mode!: `%s'" major-mode)
 
-;;               'help-echo "Show major mode menu"
-;;               'local-map   mode-line-major-mode-keymap))
 
 (spaceline-define-segment
 	mwb-minor-modes
@@ -90,12 +89,10 @@
 				'help-echo "Minions
 mouse-1: Display minor modes menu"
 				'local-map minions-mode-line-minor-modes-map
-				'display `(:raise 4.0
-						   :height -1.0
-						   )
+				'display `(:raise 0.2)
 				'face `(:family ,family
-						:inherit)
-				) ))
+						:height 0.8
+						:inherit))))
 
 ;;; Buffer state
 (spaceline-define-segment mwb-narrowed
@@ -134,21 +131,22 @@ Can't use spaceline as it has unneeded mouse menu"
 ;; Mainly issues with mouse
 (spaceline-define-segment mwb-bookmark
   "An `all-the-icons' segment allowing for easy bookmarking of files."
-  (let-alist (spaceline-all-the-icons-icon-set-bookmark)
-    (let* ((bookmark-name (buffer-file-name))
-           (bookmark (cl-find-if (lambda (it) (string= bookmark-name (car it))) bookmark-alist)))
+  (when (buffer-file-name)
+	(let-alist (spaceline-all-the-icons-icon-set-bookmark)
+	  (let* ((bookmark-name (buffer-file-name))
+			 (bookmark (cl-find-if (lambda (it) (string= bookmark-name (car it))) bookmark-alist)))
 
-      (propertize (all-the-icons-faicon (if bookmark .icon.on .icon.off) :v-adjust 0.1)
-                  'face      `(:family ,(all-the-icons-faicon-family) :height ,(spaceline-all-the-icons--height):inherit)
-                  'help-echo  (if bookmark .echo.off .echo.on)
-                  'mouse-face (spaceline-all-the-icons--highlight)
-                  'local-map  (spaceline-mwb--mouse-map
-                               'mouse-1
-                               `(lambda () (interactive)
-                                  (if ,(car bookmark)
-                                      (bookmark-delete ,(car bookmark))
-                                    (bookmark-set ,bookmark-name))
-                                  (force-mode-line-update)))))))
+		(propertize (all-the-icons-faicon (if bookmark .icon.on .icon.off) :v-adjust 0.1)
+					'face      `(:family ,(all-the-icons-faicon-family) :height ,(spaceline-all-the-icons--height):inherit)
+					'help-echo  (if bookmark .echo.off .echo.on)
+					'mouse-face (spaceline-all-the-icons--highlight)
+					'local-map  (spaceline-mwb--mouse-map
+								 'mouse-1
+								 `(lambda () (interactive)
+									(if ,(car bookmark)
+										(bookmark-delete ,(car bookmark))
+									  (bookmark-set ,bookmark-name))
+									(force-mode-line-update))))))))
 
 ;;; Flycheck -
 ;; Keys based on doom-modeline

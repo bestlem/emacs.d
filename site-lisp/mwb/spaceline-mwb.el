@@ -42,6 +42,9 @@
 (require 'mwb-icons)
 (require 'minions)
 
+;; External references
+(defvar mode-line-highlight )
+
 (defmacro mwb-headline--keymap-duo-header (keymap)
   "Copy the mode-line KEYMAP to header-line."
   `(define-key ,keymap [header-line]
@@ -96,11 +99,11 @@
 	(mwb-flycheck
 	 :when active :priority 89
 	 )
-	" " 								; needed as last chacter can be half hidden
+	" "								; needed as last chacter can be half hidden
 	))
 
 (spaceline-compile
-  "mwb-mode-footer"
+  "mwb-footer"
   '((all-the-icons-anzu
 	 :face 'mode-line
 	 :skip-alternate t)
@@ -114,9 +117,10 @@
 	((all-the-icons-vc-icon
 	  all-the-icons-vc-status
 	  ((all-the-icons-git-ahead
-		all-the-icons-git-status) :separator " ") :priority 80
+		all-the-icons-git-status) :separator " " :priority 90)
 
-	  all-the-icons-package-updates)
+	  ;; all-the-icons-package-updates
+	  )
 	 :face other-face
 	 :separator (spaceline-all-the-icons--separator spaceline-all-the-icons-secondary-separator " "))
 	)
@@ -144,7 +148,7 @@
 
 (defun spaceline-mwb-prog-mode ()
   "Main useful header/footer for modes which I do work in."
-  (setq mode-line-format '("%e" (:eval (spaceline-ml-mwb-mode-footer))))
+  (setq mode-line-format '("%e" (:eval (spaceline-ml-mwb-footer))))
   (setq header-line-format '("%e" (:eval (spaceline-ml-mwb-main-header))))
   )
 

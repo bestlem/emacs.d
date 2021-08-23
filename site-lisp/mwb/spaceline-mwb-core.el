@@ -64,7 +64,7 @@ corresponding to the mode line clicked."
 	 (lookup-key ,keymap [mode-line])))
 
 ;;; Full Modeline Definition
-(defconst spaceline-mwb-mode-theme '("%e" (:eval (spaceline-ml-mwb-mode)))
+(defconst spaceline-mwb-footer '("%e" (:eval (spaceline-ml-mwb-footer)))
   "Constant version of variable `spaceline-mwb-theme' to allow to be set manually.")
 (defconst spaceline-mwb-head-theme '("%e" (:eval (spaceline-ml-mwb-head)))
   "Constant version of variable `spaceline-mwb-theme' to allow to be set manually.")
@@ -154,7 +154,7 @@ When PFX is non-nil, disable erroring segments at the same time."
                   (lambda (segment)
                     (mapc 'spaceline-mwb--turn-off active-segments)
                     (spaceline-mwb--turn-on segment)
-                    (string= "" (format-mode-line spaceline-mwb-mode-theme)))
+                    (string= "" (format-mode-line spaceline-mwb-footer)))
                   active-segments)))
     (mapc 'spaceline-mwb--turn-on active-segments)
     (if (not errors)

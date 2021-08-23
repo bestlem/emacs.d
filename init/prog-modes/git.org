@@ -121,7 +121,6 @@ I think works with other vcs
 #+NAME: org_mark_mini12.local_20201223T212747.790111
 #+begin_src emacs-lisp
 (use-package-elpa git-timemachine
-  :after magit
   :custom-face
   (git-timemachine-minibuffer-author-face ((t (:inherit success))))
   (git-timemachine-minibuffer-detail-face ((t (:inherit warning))))
@@ -240,11 +239,10 @@ I think works with other vcs
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20201223T212427.542343
 :END:
-[[https://github.com/dgutov/diff-hl][diff-hl]]
+[[https://github.com/dgutov/diff-hl][diff-hl]] Does not need magit
 #+NAME: org_mark_mini12.local_20201223T212427.538014
 #+begin_src emacs-lisp
 (use-package-elpa diff-hl
-  :after magit
   :commands (diff-hl-next-hunk diff-hl-previous-hunk diff-hl-revert-hunk )
   :hook ((magit-post-refresh . diff-hl-magit-post-refresh)
 		 (magit-pre-refresh . diff-hl-magit-pre-refresh))
@@ -256,6 +254,25 @@ I think works with other vcs
   :config
   (global-diff-hl-mode)
   (diff-hl-flydiff-mode))
+#+end_src
+* Git gutter
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210823T133333.265928
+:END:
+Seems to have the same function as diff-hl but does it in realtime. This is commented in git-gutter readme. "diff-hl is similar tool based on vc."
+Also gets used by spaceline-all-the-icons but not in my elpa so not used.
+#+NAME: org_mark_mini20.local_20210823T133333.243027
+#+begin_src emacs-lisp :tangle no
+(use-package-elpa git-gutter
+  :config
+  (global-git-gutter-mode +1)
+
+  (set-face-background 'git-gutter:modified "purple") ;; background color
+  (set-face-foreground 'git-gutter:added "green")
+  (set-face-foreground 'git-gutter:deleted "red")
+  :custom
+  (git-gutter:hide-gutter t)
+  )
 #+end_src
 * Smerge
 :PROPERTIES:

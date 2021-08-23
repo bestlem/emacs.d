@@ -92,6 +92,21 @@ TODO: exclude sopme directories - especially modus-themes and treemacs as they n
             (async-byte-recompile-directory temp-dir)
           (byte-recompile-directory temp-dir 0 t))))))
 #+end_src
+
+** Autocompile
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210822T130011.018491
+:END:
+Recompile emacs lisp  if already compiled on save but also on load.
+#+NAME: org_mark_mini20.local_20210822T130010.997493
+#+begin_src emacs-lisp
+(use-package auto-compile
+  :ensure t
+  :config
+  (auto-compile-on-load-mode)
+  (auto-compile-on-save-mode)
+  (setq auto-compile-display-buffer 1))
+#+end_src
 * Emacs server
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:605AC9D7-C3F1-495D-872C-C5B901A553BB

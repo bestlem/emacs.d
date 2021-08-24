@@ -211,6 +211,15 @@ Includes structured data and now anything that does not have dependency order
   (mwb-init-load "init/keys")
   #+end_src
 
+
+* Appearance
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:4E2542DC-19A8-480A-A0B2-EF1C192A77FB
+:END:
+   #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_FDEBBB87-4E2F-4E81-87B0-349A09B8D866
+   #+begin_src emacs-lisp
+   (mwb-init-load  "init/appearance")
+   #+end_src
 * Startup data
 :PROPERTIES:
 :ID:       org_mark_2020-10-22T09-50-00+01-00_mini12.local:CAF18BDF-1B4E-49DD-B4CE-F0A18829FDDC
@@ -330,11 +339,3 @@ Emacs 27 seems to have a timing issue pop to buffer seems not to see the spare w
              ))
 #+end_src
 
-* Appearance
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:4E2542DC-19A8-480A-A0B2-EF1C192A77FB
-:END:
-   #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_FDEBBB87-4E2F-4E81-87B0-349A09B8D866
-   #+begin_src emacs-lisp
-   (mwb-init-load  "init/appearance")
-   #+end_src

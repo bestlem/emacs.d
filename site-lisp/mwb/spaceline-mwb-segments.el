@@ -53,7 +53,7 @@
 		(project-id (if (and (fboundp 'projectile-project-p) (projectile-project-p))
 						(projectile-project-name) "×")))
 	(propertize project-id
-				'face `(:height 0.8)
+				'face `(:height 0.8 :inherit)
 				'display `(raise 0.2)
 				'mouse-face 'mode-line-highlight
 				'help-echo help-echo
@@ -89,7 +89,7 @@
 				'help-echo "Minions
 mouse-1: Display minor modes menu"
 				'local-map minions-mode-line-minor-modes-map
-				'display `(:raise 0.2)
+				'display `(:raise 0.5)
 				'face `(:family ,family
 						:height 0.8
 						:inherit))))
@@ -106,21 +106,29 @@ mouse-1: Display minor modes menu"
   :when (or (buffer-narrowed-p)
 			(and (bound-and-true-p fancy-narrow-mode)
 				 (fancy-narrow-active-p))))
+
 (spaceline-define-segment
 	mwb-modified
   "A iconised status of buffer showing readonly/modified."
   (when (and buffer-file-name (buffer-modified-p))
-	(mwb-icon-get "save")))
+	(propertize (mwb-icon-get "save")
+				'display '(:raise 0.3)
+				'face '(:inherit))))
 
 (spaceline-define-segment mwb-rw
-  (let ((ro-icon (cond ((and (boundp 'hardhat-reasons) hardhat-reasons) "h-square")
-					   (buffer-read-only "lock")
+  (let ((ro-icon (cond (buffer-read-only "lock")
 					   (t "unlock"))))
 	(propertize (mwb-icon-get ro-icon)
 				'mouse-face 'mode-line-highlight
 				'local-map (spaceline-mwb--mouse-map 'mouse-1 'read-only-mode)
-				'display '(:raise 1.0
-						   ))))
+				'display '(:raise 1.0)
+				'face '(:inherit))))
+
+(spaceline-define-segment mwb-hardhat
+  (when (and (boundp 'hardhat-reasons) hardhat-reasons)
+	(propertize (mwb-icon-get "h-square")
+				'display '(:raise 1.0)
+				'face '(:inherit))))
 
 (spaceline-define-segment mwb-buffer-size
   "The size of the buffer.

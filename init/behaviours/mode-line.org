@@ -628,10 +628,11 @@ Let's do the basic
 #+begin_src emacs-lisp
 (use-feature spaceline-mwb
   :unless *aquamacs*
-  :config (spaceline-mwb-theme)
-  )
+  :defer 1
+  :config
+  (spaceline-mwb-theme))
 #+end_src
-#+end_src
+
 * Eyeliner
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210720T211034.187440

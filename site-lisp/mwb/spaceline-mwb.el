@@ -65,14 +65,12 @@
 (spaceline-compile
   "mwb-main-header"
   '(
-	(mwb-mode-icon
-	 mwb-minor-modes)
-	(mwb-narrowed mwb-modified mwb-rw )
+	mwb-mode-icon
+	mwb-minor-modes
+	(mwb-narrowed mwb-modified mwb-hardhat mwb-rw )
 	recursive-edit
 	mwb-bookmark
-	auto-compile
-
-	)
+	auto-compile)
   '(
 	(all-the-icons-which-function)
 	(mwb-buffer-size line-column)
@@ -86,14 +84,13 @@
 (spaceline-compile
   "mwb-minimum"
   '(
-	(mwb-mode-icon
-	 mwb-minor-modes)
-	(mwb-narrowed mwb-modified mwb-rw )
+	mwb-mode-icon
+	mwb-minor-modes
+	(mwb-narrowed mwb-modified mwb-hardhat mwb-rw )
 	recursive-edit
 	;; (mwb-buffer-size line-column)
 	((all-the-icons-buffer-path
-	  all-the-icons-buffer-id) :separator "")
-	)
+	  all-the-icons-buffer-id) :separator ""))
   '(
 	;; (all-the-icons-which-function)
 	(mwb-flycheck
@@ -111,52 +108,34 @@
 
 	;; The actual buffer info
 	((((all-the-icons-buffer-path
-		all-the-icons-buffer-id) :separator ""))
-	 :face default-face)
+		all-the-icons-buffer-id) :separator "")))
 
-	((all-the-icons-vc-icon
-	  all-the-icons-vc-status
+	((all-the-icons-vc-status
 	  ((all-the-icons-git-ahead
-		all-the-icons-git-status) :separator " " :priority 90)
-
-	  ;; all-the-icons-package-updates
-	  )
-	 :face other-face
-	 :separator (spaceline-all-the-icons--separator spaceline-all-the-icons-secondary-separator " "))
-	)
+		all-the-icons-git-status) :separator " " :priority 90))
+	 :separator (spaceline-all-the-icons--separator spaceline-all-the-icons-secondary-separator " ")))
 
   `(
-    python-env
-    ((all-the-icons-which-function)
-	 :face 'powerline-active2
-	 :separator "")
-	((  all-the-icons-package-updates)
-	 :face other-face
-	 :separator (spaceline-all-the-icons--separator spaceline-all-the-icons-secondary-separator " "))
-	;; all-the-icons-separator-right-active-1
-
-
-	;; all-the-icons-separator-right-active-2
-	;; all-the-icons-separator-right-inactive
-    ))
+	python-env
+	all-the-icons-which-function
+	((all-the-icons-package-updates))))
 
 (defun spaceline-mwb-simple-mode ()
   "Simplest header - mainly for internal buffers."
   (setq header-line-format '("%e" (:eval (spaceline-ml-mwb-minimum))))
-  (setq mode-line-format nil)
-  )
+  (setq mode-line-format nil))
 
 (defun spaceline-mwb-prog-mode ()
   "Main useful header/footer for modes which I do work in."
   (setq mode-line-format '("%e" (:eval (spaceline-ml-mwb-footer))))
-  (setq header-line-format '("%e" (:eval (spaceline-ml-mwb-main-header))))
-  )
+  (setq header-line-format '("%e" (:eval (spaceline-ml-mwb-main-header)))))
 
 ;;;###autoload
 (defun spaceline-mwb-theme ()
   "Install my spaceline configs."
   (interactive)
   (minions-mode 1)
+  (setq spaceline-all-the-icons-hide-long-buffer-path t)
   ;;  set the header keymap as a copy of mode line
   (mwb-headline--keymap-duo-header mode-line-major-mode-keymap)
   (mwb-headline--keymap-duo-header mode-line-column-line-number-mode-map)

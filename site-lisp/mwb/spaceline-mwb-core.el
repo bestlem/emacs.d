@@ -63,6 +63,23 @@ corresponding to the mode line clicked."
   `(define-key ,keymap [header-line]
 	 (lookup-key ,keymap [mode-line])))
 
+;;; Colors
+;; I don't like gray background
+
+(defun spaceline-mwb--get-face (face active)
+  "My function to get the right face.
+FACE and ACTIVE have the same meanings as in
+`spaceline-face-func'."
+  (cond
+   ((eq 'face1 face) (if active 'modus-themes-intense-cyan   'powerline-inactive1))
+   ((eq 'face2 face) (if active 'modus-themes-intense-magenta 'powerline-inactive2))
+   ((eq 'line face) (if active 'mode-line 'mode-line-inactive))
+   ((eq 'highlight face) (if active
+							 (funcall spaceline-highlight-face-func)
+                           'powerline-inactive1))))
+
+(setq spaceline-face-func 'spaceline-mwb--get-face)
+
 ;;; Full Modeline Definition
 (defconst spaceline-mwb-footer '("%e" (:eval (spaceline-ml-mwb-footer)))
   "Constant version of variable `spaceline-mwb-theme' to allow to be set manually.")

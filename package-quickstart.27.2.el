@@ -908,6 +908,70 @@ Setup wgrep preparation." nil nil)
 
 
 )
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/vlf-1.7.2/vlf-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/vlf-1.7.2/vlf-autoloads.el") (car load-path))))
+
+
+
+(autoload 'vlf "vlf" "\
+View Large FILE in batches.  When MINIMAL load just a few bytes.
+You can customize number of bytes displayed by customizing
+`vlf-batch-size'.
+Return newly created buffer.
+
+\(fn FILE &optional MINIMAL)" t nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "vlf" '("vlf-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "vlf-base" '("vlf-")))
+
+
+
+(autoload 'vlf-ediff-files "vlf-ediff" "\
+Run batch by batch ediff over FILE-A and FILE-B.
+Files are processed with VLF with BATCH-SIZE chunks.
+Requesting next or previous difference at the end or beginning
+respectively of difference list, runs ediff over the adjacent chunks.
+
+\(fn FILE-A FILE-B BATCH-SIZE)" t nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "vlf-ediff" '("vlf-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "vlf-follow" '("vlf-")))
+
+
+
+(autoload 'vlf-occur-load "vlf-occur" "\
+Load serialized `vlf-occur' results from current buffer." t nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "vlf-occur" '("vlf-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "vlf-search" '("vlf-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "vlf-setup" '("dired-vlf" "vlf-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "vlf-tune" '("vlf-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "vlf-write" '("vlf-")))
+
+
+
+
+)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/validate-1.0.4/validate-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -5583,6 +5647,40 @@ ARG is `toggle'; disable the mode otherwise.
 
 
 )
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/test-simple-1.3.0/test-simple-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/test-simple-1.3.0/test-simple-autoloads.el") (car load-path))))
+
+
+
+(autoload 'test-simple-start "test-simple" "\
+
+
+\(fn &optional TEST-START-MSG)" nil t)
+
+(autoload 'test-simple-clear "test-simple" "\
+Initialize and reset everything to run tests.
+You should run this before running any assertions.  Running more than once
+clears out information from the previous run.
+
+\(fn &optional TEST-INFO TEST-START-MSG)" t nil)
+
+(autoload 'test-simple-run "test-simple" "\
+Register command line to run tests non-interactively and bind key to run test.
+After calling this function, you can run test by key specified by `test-simple-runner-key'.
+
+It is preferable to write at the first line of test files as a comment, e.g,
+;;;; (test-simple-run \"emacs -batch -L %s -l %s\" (file-name-directory (locate-library \"test-simple.elc\")) buffer-file-name)
+
+Calling this function interactively, COMMAND-LINE-FORMATS is set above.
+
+\(fn &rest COMMAND-LINE-FORMATS)" t nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "test-simple" '("assert-" "end-tests" "note" "test-simple-")))
+
+
+)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-20210518.1815/ivy-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -6837,6 +6935,172 @@ Setup wgrep rg support." nil nil)
 
 
 )
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/load-relative-1.3.1/load-relative-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/load-relative-1.3.1/load-relative-autoloads.el") (car load-path))))
+
+
+
+(autoload '__FILE__ "load-relative" "\
+Return the string name of file/buffer that is currently begin executed.
+
+The first approach for getting this information is perhaps the
+most pervasive and reliable.  But it the most low-level and not
+part of a public API, so it might change in future
+implementations.  This method uses the name that is recorded by
+readevalloop of `lread.c' as the car of variable
+`current-load-list'.
+
+Failing that, we use `load-file-name' which should work in some
+subset of the same places that the first method works.  However
+`load-file-name' will be nil for code that is eval'd.  To cover
+those cases, we try function `buffer-file-name' which is initially
+correct, for eval'd code, but will change and may be wrong if the
+code sets or switches buffers after the initial execution.
+
+As a last resort, you can pass in SYMBOL which should be some
+symbol that has been previously defined if none of the above
+methods work we will use the file-name value find via
+`symbol-file'.
+
+\(fn &optional SYMBOL)" nil nil)
+
+(autoload 'find-file-noselect-relative "load-relative" "\
+Read relative FILENAME into a buffer and return the buffer.
+If a buffer exists visiting FILENAME, return that one, but
+verify that the file has not changed since visited or saved.
+The buffer is not selected, just returned to the caller.
+Optional second arg NOWARN non-nil means suppress any warning messages.
+Optional third arg RAWFILE non-nil means the file is read literally.
+Optional fourth arg WILDCARDS non-nil means do wildcard processing
+and visit all the matching files.  When wildcards are actually
+used and expanded, return a list of buffers that are visiting
+the various files.
+
+\(fn FILENAME &optional NOWARN RAWFILE WILDCARDS)" nil nil)
+
+(autoload 'with-relative-file "load-relative" "\
+Read the relative FILE into a temporary buffer and evaluate BODY
+in this buffer.
+
+\(fn FILE &rest BODY)" nil t)
+
+(function-put 'with-relative-file 'lisp-indent-function '1)
+
+(autoload 'load-relative "load-relative" "\
+Load an Emacs Lisp file relative to Emacs Lisp code that is in
+the process of being loaded or eval'd.
+
+FILE-OR-LIST is either a string or a list of strings containing
+files that you want to loaded.  If SYMBOL is given, the location of
+of the file of where that was defined (as given by `symbol-file' is used
+if other methods of finding __FILE__ don't work.
+
+\(fn FILE-OR-LIST &optional SYMBOL)" nil nil)
+
+(autoload 'require-relative "load-relative" "\
+Run `require' on an Emacs Lisp file relative to the Emacs Lisp code
+that is in the process of being loaded or eval'd.  The symbol used in require
+is the base file name (without directory or file extension) treated as a
+symbol.
+
+WARNING: it is best to to run this function before any
+buffer-setting or buffer changing operations.
+
+\(fn RELATIVE-FILE &optional OPT-FILE OPT-PREFIX)" nil nil)
+
+(autoload 'require-relative-list "load-relative" "\
+Run `require-relative' on each name in LIST which should be a list of
+strings, each string being the relative name of file you want to run.
+
+\(fn LIST &optional OPT-PREFIX)" nil t)
+
+(autoload 'provide-me "load-relative" "\
+Call `provide' with the feature's symbol name made from
+source-code's file basename sans extension.  For example if you
+write (provide-me) inside file ~/lisp/foo.el, this is the same as
+writing: (provide \\='foo).
+
+With a prefix, that prefix is prepended to the `provide' So in
+the previous example, if you write (provide-me \"bar-\") this is the
+same as writing (provide \\='bar-foo).
+
+\(fn &optional PREFIX)" nil t)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "load-relative" '("autoload-relative")))
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/loc-changes-1.2/loc-changes-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/loc-changes-1.2/loc-changes-autoloads.el") (car load-path))))
+
+
+
+(autoload 'loc-changes-goto-line "loc-changes" "\
+Position `point' at LINE-NUMBER of the current buffer. If
+COLUMN-NUMBER is given, position `point' at that column just
+before that column number within the line. Note that the beginning of
+the line starts at column 0, so the column number display will be one less
+than COLUMN-NUMBER. For example COLUMN-NUMBER 1 will set before the first
+column on the line and show 0.
+
+The Emacs `goto-line' docstring says it is the wrong to use that
+function in a Lisp program. So here is something that I proclaim
+is okay to use in a Lisp program.
+
+\(fn LINE-NUMBER &optional COLUMN-NUMBER)" t nil)
+
+(autoload 'loc-changes-add-and-goto "loc-changes" "\
+Add a marker at LINE-NUMBER and record LINE-NUMBER and its
+marker association in `loc-changes-alist'.
+
+\(fn LINE-NUMBER &optional OPT-BUFFER)" t nil)
+
+(autoload 'loc-changes-clear-buffer "loc-changes" "\
+Remove all location-tracking associations in BUFFER.
+
+\(fn &optional OPT-BUFFER)" t nil)
+
+(autoload 'loc-changes-reset-position "loc-changes" "\
+Update `loc-changes-alist' so that the line number of point is
+used to when aline number is requested.
+
+Updates any existing line numbers referred to in marks at this
+position.
+
+This may be useful for example in debugging if you save the
+buffer and then cause the debugger to reread/reevaluate the file
+so that its positions are will be reflected.
+
+\(fn &optional OPT-BUFFER NO-INSERT)" t nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "loc-changes" '("loc-changes")))
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/realgud-1.5.1/realgud-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/realgud-1.5.1/realgud-autoloads.el") (car load-path))))
+
+
+
+(defconst realgud--recursive-autoloads-file-name "realgud-recursive-autoloads.el" "\
+Where to store autoloads for subdirectory contents.")
+
+(defconst realgud--recursive-autoloads-base-directory (file-name-directory (if load-in-progress load-file-name buffer-file-name)))
+
+(with-demoted-errors "Error in RealGUD's autoloads: %s" (load (expand-file-name realgud--recursive-autoloads-file-name realgud--recursive-autoloads-base-directory) t t))
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "realgud" '("realgud--rebuild-recursive-autoloads")))
+
+
+
+
+)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/rainbow-mode-1.0.5/rainbow-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -7909,6 +8173,19 @@ empty.  Passing a non-nil REFRESH argument forces this update.
 
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "paradox-menu" '("paradox-")))
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/packed-20210503.2046/packed-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/packed-20210503.2046/packed-autoloads.el") (car load-path))))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "packed" '("packed-")))
 
 
 
@@ -15896,6 +16173,629 @@ ARG is `toggle'; disable the mode otherwise.
 
 
 )
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/auto-compile-20210820.1353/auto-compile-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/auto-compile-20210820.1353/auto-compile-autoloads.el") (car load-path))))
+
+
+
+
+(autoload 'auto-compile-mode "auto-compile" "\
+Compile Emacs Lisp source files after the visiting buffers are saved.
+
+If called interactively, enable Auto-Compile mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+After a buffer containing Emacs Lisp code is saved to its source
+file update the respective byte code file.  If the latter does
+not exist do nothing.  Therefore to disable automatic compilation
+remove the byte code file.  See command `toggle-auto-compile' for
+a convenient way to do so.
+
+This mode should be enabled globally, using it's globalized
+variant `auto-compile-on-save-mode'.  Also see the related
+`auto-compile-on-load-mode'.
+
+\(fn &optional ARG)" t nil)
+
+(put 'auto-compile-on-save-mode 'globalized-minor-mode t)
+
+(defvar auto-compile-on-save-mode nil "\
+Non-nil if Auto-Compile-On-Save mode is enabled.
+See the `auto-compile-on-save-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `auto-compile-on-save-mode'.")
+
+(custom-autoload 'auto-compile-on-save-mode "auto-compile" nil)
+
+(autoload 'auto-compile-on-save-mode "auto-compile" "\
+Toggle Auto-Compile mode in all buffers.
+With prefix ARG, enable Auto-Compile-On-Save mode if ARG is positive;
+otherwise, disable it.  If called from Lisp, enable the mode if
+ARG is omitted or nil.
+
+Auto-Compile mode is enabled in all buffers where
+`turn-on-auto-compile-mode' would do it.
+See `auto-compile-mode' for more information on Auto-Compile mode.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'toggle-auto-compile "auto-compile" "\
+Toggle automatic compilation of an Emacs Lisp source file or files.
+
+Read a file or directory name from the minibuffer defaulting to
+the visited Emacs Lisp source file or `default-directory' if no
+such file is being visited in the current buffer.
+
+If the user selects a file then automatic compilation of only
+that file is toggled.  Since both `auto-compile-on-save' and
+`auto-compile-on-save' only ever _recompile_ byte code files,
+toggling automatic compilation is done simply by creating or
+removing the respective byte code file.
+
+If the user selects a directory then automatic compilation for
+multiple files is toggled as follows:
+
+* With a positive prefix argument always compile source files;
+  with a negative prefix argument always remove byte code files.
+
+* Otherwise the existence or absence of the byte code file of
+  the source file that was current when this command was invoked
+  determines whether byte code files should be created or removed.
+
+* If no Emacs Lisp source file is being visited in the buffer
+  that was current when the command was invoked ask the user what
+  to do.
+
+* When _removing_ byte code files then all byte code files are
+  removed.  If `auto-compile-deletes-stray-dest' is non-nil this
+  even includes byte code files for which no source file exists.
+
+* When _creating_ byte code files only do so for source files
+  that are actual libraries.  Source files that provide the
+  correct feature are considered to be libraries; see
+  `packed-library-p'.
+
+* Note that non-libraries can still be automatically compiled,
+  you just cannot _recursively_ turn on automatic compilation
+  using this command.
+
+* When `auto-compile-toggle-recompiles' is non-nil recompile all
+  affected source files even when the respective source files are
+  up-to-date.  Do so even for non-library source files.
+
+* Only enter subdirectories for which `packed-ignore-directory-p'
+  returns nil; i.e. don't enter hidden directories or directories
+  containing a file named \".nosearch\".
+
+\(fn FILE ACTION)" t nil)
+
+(defvar auto-compile-on-load-mode nil "\
+Non-nil if Auto-Compile-On-Load mode is enabled.
+See the `auto-compile-on-load-mode' command
+for a description of this minor mode.")
+
+(custom-autoload 'auto-compile-on-load-mode "auto-compile" nil)
+
+(autoload 'auto-compile-on-load-mode "auto-compile" "\
+Before loading a library recompile it if it needs recompilation.
+
+If called interactively, enable Auto-Compile-On-Load mode if ARG
+is positive, and disable it if ARG is zero or negative.  If
+called from Lisp, also enable the mode if ARG is omitted or nil,
+and toggle it if ARG is `toggle'; disable the mode otherwise.
+
+A library needs to be recompiled if the source file is newer than
+it's byte-compile destination.  Without this advice the outdated
+byte code file would be loaded instead.
+
+Also see the related `auto-compile-on-save-mode'.
+
+\(fn &optional ARG)" t nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "auto-compile" '("auto-compile-" "byte-compile-log-warning" "load" "mode-line-" "require" "save-buffers-kill-" "turn-on-auto-compile-mode")))
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/auctex-13.0.13/auctex-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/auctex-13.0.13/auctex-autoloads.el") (car load-path))))
+
+
+
+(autoload 'bib-cite-minor-mode "bib-cite" "\
+Toggle bib-cite mode.
+When bib-cite mode is enabled, citations, labels and refs are highlighted
+when the mouse is over them.  Clicking on these highlights with [mouse-2]
+runs `bib-find', and [mouse-3] runs `bib-display'.
+
+\(fn ARG)" t nil)
+
+(autoload 'turn-on-bib-cite "bib-cite" "\
+Unconditionally turn on Bib Cite mode." nil nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "bib-cite" '("LaTeX-" "bib-" "create-alist-from-list" "member-cis" "psg-" "search-directory-tree")))
+
+
+
+(defalias 'ConTeXt-mode #'context-mode)
+
+(autoload 'context-mode "context" "\
+Major mode in AUCTeX for editing ConTeXt files.
+
+Special commands:
+\\{ConTeXt-mode-map}
+
+Entering `context-mode' calls the value of `text-mode-hook',
+then the value of `TeX-mode-hook', and then the value
+of ConTeXt-mode-hook." t nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "context" '("ConTeXt-" "TeX-ConTeXt-sentinel" "context-guess-current-interface")))
+
+
+
+(autoload 'context-en-mode "context-en" "\
+Major mode for editing files for ConTeXt using its english interface.
+
+Special commands:
+\\{ConTeXt-mode-map}
+
+Entering `context-mode' calls the value of `text-mode-hook',
+then the value of TeX-mode-hook, and then the value
+of context-mode-hook." t nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "context-en" '("ConTeXt-")))
+
+
+
+(autoload 'context-nl-mode "context-nl" "\
+Major mode for editing files for ConTeXt using its dutch interface.
+
+Special commands:
+\\{ConTeXt-mode-map}
+
+Entering `context-mode' calls the value of `text-mode-hook',
+then the value of TeX-mode-hook, and then the value
+of context-mode-hook." t nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "context-nl" '("ConTeXt-")))
+
+
+
+(autoload 'font-latex-setup "font-latex" "\
+Setup this buffer for LaTeX font-lock.  Usually called from a hook." nil nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "font-latex" '("font-latex-")))
+
+
+
+(autoload 'BibTeX-auto-store "latex" "\
+This function should be called from `bibtex-mode-hook'.
+It will setup BibTeX to store keys in an auto file." nil nil)
+
+(add-to-list 'auto-mode-alist '("\\.drv\\'" . latex-mode) t)
+
+(add-to-list 'auto-mode-alist '("\\.hva\\'" . latex-mode))
+
+(autoload 'TeX-latex-mode "latex" "\
+Major mode in AUCTeX for editing LaTeX files.
+See info under AUCTeX for full documentation.
+
+Special commands:
+\\{LaTeX-mode-map}
+
+Entering LaTeX mode calls the value of `text-mode-hook',
+then the value of `TeX-mode-hook', and then the value
+of `LaTeX-mode-hook'." t nil)
+
+(add-to-list 'auto-mode-alist '("\\.dtx\\'" . doctex-mode))
+
+(autoload 'docTeX-mode "latex" "\
+Major mode in AUCTeX for editing .dtx files derived from `LaTeX-mode'.
+Runs `LaTeX-mode', sets a few variables and
+runs the hooks in `docTeX-mode-hook'.
+
+\(fn)" t nil)
+
+(defalias 'TeX-doctex-mode #'docTeX-mode)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "latex" '("Bib" "LaTeX-" "TeX-" "docTeX-" "latex-math-mode")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "latex-flymake" '("LaTeX-")))
+
+
+
+(autoload 'multi-prompt "multi-prompt" "\
+Completing prompt for a list of strings.  
+The first argument SEPARATOR should be the string (of length 1) to
+separate the elements in the list.  The second argument UNIQUE should
+be non-nil, if each element must be unique.  The remaining elements
+are the arguments to `completing-read'.  See that.
+
+\(fn SEPARATOR UNIQUE PROMPT TABLE &optional MP-PREDICATE REQUIRE-MATCH INITIAL HISTORY)" nil nil)
+
+(autoload 'multi-prompt-key-value "multi-prompt" "\
+Read multiple strings, with completion and key=value support.
+PROMPT is a string to prompt with, usually ending with a colon
+and a space.  TABLE is an alist.  The car of each element should
+be a string representing a key and the optional cdr should be a
+list with strings to be used as values for the key.
+
+See the documentation for `completing-read' for details on the
+other arguments: PREDICATE, REQUIRE-MATCH, INITIAL-INPUT, HIST,
+DEF, and INHERIT-INPUT-METHOD.
+
+The return value is the string as entered in the minibuffer.
+
+\(fn PROMPT TABLE &optional PREDICATE REQUIRE-MATCH INITIAL-INPUT HIST DEF INHERIT-INPUT-METHOD)" nil nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "multi-prompt" '("multi-prompt-")))
+
+
+
+(autoload 'TeX-plain-tex-mode "plain-tex" "\
+Major mode in AUCTeX for editing plain TeX files.
+See info under AUCTeX for documentation.
+
+Special commands:
+\\{plain-TeX-mode-map}
+
+Entering `plain-tex-mode' calls the value of `text-mode-hook',
+then the value of `TeX-mode-hook', and then the value
+of `plain-TeX-mode-hook'." t nil)
+
+(autoload 'ams-tex-mode "plain-tex" "\
+Major mode in AUCTeX for editing AmS-TeX files.
+See info under AUCTeX for documentation.
+
+Special commands:
+\\{AmSTeX-mode-map}
+
+Entering `ams-tex-mode' calls the value of `text-mode-hook',
+then the value of `TeX-mode-hook', and then the value
+of `AmS-TeX-mode-hook'." t nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "plain-tex" '("AmS" "plain-TeX-")))
+
+
+
+(autoload 'preview-install-styles "preview" "\
+Installs the TeX style files into a permanent location.
+This must be in the TeX search path.  If FORCE-OVERWRITE is greater
+than 1, files will get overwritten without query, if it is less
+than 1 or nil, the operation will fail.  The default of 1 for interactive
+use will query.
+
+Similarly FORCE-SAVE can be used for saving
+`preview-TeX-style-dir' to record the fact that the uninstalled
+files are no longer needed in the search path.
+
+\(fn DIR &optional FORCE-OVERWRITE FORCE-SAVE)" t nil)
+
+(autoload 'LaTeX-preview-setup "preview" "\
+Hook function for embedding the preview package into AUCTeX.
+This is called by `LaTeX-mode-hook' and changes AUCTeX variables
+to add the preview functionality." nil nil)
+
+(autoload 'preview-report-bug "preview" "\
+Report a bug in the preview-latex package." t nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "preview" '("TeX-" "desktop-buffer-preview" "preview-")))
+
+
+
+(autoload 'TeX-tex-mode "tex" "\
+Major mode in AUCTeX for editing TeX or LaTeX files.
+Tries to guess whether this file is for plain TeX or LaTeX.
+
+The algorithm is as follows:
+
+   1) if the file is empty or `TeX-force-default-mode' is not set to nil,
+      `TeX-default-mode' is chosen
+   2) If \\documentstyle or \\begin{, \\section{, \\part{ or \\chapter{ is
+      found, `latex-mode' is selected.
+   3) Otherwise, use `plain-tex-mode'" t nil)
+
+(autoload 'TeX-auto-generate "tex" "\
+Generate style file for TEX and store it in AUTO.
+If TEX is a directory, generate style files for all files in the directory.
+
+\(fn TEX AUTO)" t nil)
+
+(autoload 'TeX-auto-generate-global "tex" "\
+Create global auto directory for global TeX macro definitions." t nil)
+
+(autoload 'TeX-submit-bug-report "tex" "\
+Submit a bug report on AUCTeX via mail.
+
+Don't hesitate to report any problems or inaccurate documentation.
+
+If you don't have setup sending mail from Emacs, please copy the
+output buffer into your mail program, as it gives us important
+information about your AUCTeX version and AUCTeX configuration." t nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex" '("Bib" "ConTeXt-" "LaTeX-" "TeX-" "VirTeX-common-initialization" "docTeX-default-extension" "plain-TeX-auto-regexp-list" "tex-")))
+
+
+
+(autoload 'TeX-install-toolbar "tex-bar" "\
+Install toolbar buttons for TeX mode." t nil)
+
+(autoload 'LaTeX-install-toolbar "tex-bar" "\
+Install toolbar buttons for LaTeX mode." t nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex-bar" '("TeX-bar-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex-buf" '("LaTeX-" "TeX-")))
+
+
+
+(autoload 'TeX-fold-mode "tex-fold" "\
+Minor mode for hiding and revealing macros and environments.
+
+Called interactively, with no prefix argument, toggle the mode.
+With universal prefix ARG (or if ARG is nil) turn mode on.
+With zero or negative ARG turn mode off.
+
+\(fn &optional ARG)" t nil)
+
+(defalias 'tex-fold-mode #'TeX-fold-mode)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex-fold" '("TeX-fold-")))
+
+
+
+(autoload 'tex-font-setup "tex-font" "\
+Setup font lock support for TeX." nil nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex-font" '("tex-")))
+
+
+
+(defalias 'Texinfo-mode #'texinfo-mode)
+
+(autoload 'TeX-texinfo-mode "tex-info" "\
+Major mode in AUCTeX for editing Texinfo files.
+
+Special commands:
+\\{Texinfo-mode-map}
+
+Entering Texinfo mode calls the value of `text-mode-hook'  and then the
+value of `Texinfo-mode-hook'." t nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex-info" '("Texinfo-" "texinfo-environment-regexp")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex-ispell" '("TeX-ispell-")))
+
+
+
+(autoload 'japanese-plain-tex-mode "tex-jp" "\
+Major mode in AUCTeX for editing Japanese plain TeX files.
+Set `japanese-TeX-mode' to t, and enter `TeX-plain-tex-mode'." t nil)
+
+(autoload 'japanese-latex-mode "tex-jp" "\
+Major mode in AUCTeX for editing Japanese LaTeX files.
+Set `japanese-TeX-mode' to t, and enter `TeX-latex-mode'." t nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex-jp" '("TeX-" "japanese-")))
+
+
+ (require 'tex-site)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex-site" '("AUCTeX-" "TeX-" "preview-TeX-style-dir")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex-style" '("LaTeX-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tex-wizard" '("TeX-wizard")))
+
+
+
+(autoload 'texmathp "texmathp" "\
+Determine if point is inside (La)TeX math mode.
+Returns t or nil.  Additional info is placed into `texmathp-why'.
+The functions assumes that you have (almost) syntactically correct (La)TeX in
+the buffer.
+See the variable `texmathp-tex-commands' about which commands are checked." t nil)
+
+(autoload 'texmathp-match-switch "texmathp" "\
+Search backward for any of the math switches.
+Limit searched to BOUND.
+
+\(fn BOUND)" nil nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "texmathp" '("texmathp-")))
+
+
+ (autoload 'toolbarx-install-toolbar "toolbar-x")
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "toolbar-x" '("toolbarx-")))
+
+
+
+
+)
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/async-1.9.5/async-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/async-1.9.5/async-autoloads.el") (car load-path))))
+
+
+
+(autoload 'async-start-process "async" "\
+Start the executable PROGRAM asynchronously named NAME.  See `async-start'.
+PROGRAM is passed PROGRAM-ARGS, calling FINISH-FUNC with the
+process object when done.  If FINISH-FUNC is nil, the future
+object will return the process object when the program is
+finished.  Set DEFAULT-DIRECTORY to change PROGRAM's current
+working directory.
+
+\(fn NAME PROGRAM FINISH-FUNC &rest PROGRAM-ARGS)" nil nil)
+
+(autoload 'async-start "async" "\
+Execute START-FUNC (often a lambda) in a subordinate Emacs process.
+When done, the return value is passed to FINISH-FUNC.  Example:
+
+    (async-start
+       ;; What to do in the child process
+       (lambda ()
+         (message \"This is a test\")
+         (sleep-for 3)
+         222)
+
+       ;; What to do when it finishes
+       (lambda (result)
+         (message \"Async process done, result should be 222: %s\"
+                  result)))
+
+If FINISH-FUNC is nil or missing, a future is returned that can
+be inspected using `async-get', blocking until the value is
+ready.  Example:
+
+    (let ((proc (async-start
+                   ;; What to do in the child process
+                   (lambda ()
+                     (message \"This is a test\")
+                     (sleep-for 3)
+                     222))))
+
+        (message \"I'm going to do some work here\") ;; ....
+
+        (message \"Waiting on async process, result should be 222: %s\"
+                 (async-get proc)))
+
+If you don't want to use a callback, and you don't care about any
+return value from the child process, pass the `ignore' symbol as
+the second argument (if you don't, and never call `async-get', it
+will leave *emacs* process buffers hanging around):
+
+    (async-start
+     (lambda ()
+       (delete-file \"a remote file on a slow link\" nil))
+     \\='ignore)
+
+Note: Even when FINISH-FUNC is present, a future is still
+returned except that it yields no value (since the value is
+passed to FINISH-FUNC).  Call `async-get' on such a future always
+returns nil.  It can still be useful, however, as an argument to
+`async-ready' or `async-wait'.
+
+\(fn START-FUNC &optional FINISH-FUNC)" nil nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "async" '("async-")))
+
+
+
+(autoload 'async-byte-recompile-directory "async-bytecomp" "\
+Compile all *.el files in DIRECTORY asynchronously.
+All *.elc files are systematically deleted before proceeding.
+
+\(fn DIRECTORY &optional QUIET)" nil nil)
+
+(defvar async-bytecomp-package-mode nil "\
+Non-nil if Async-Bytecomp-Package mode is enabled.
+See the `async-bytecomp-package-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `async-bytecomp-package-mode'.")
+
+(custom-autoload 'async-bytecomp-package-mode "async-bytecomp" nil)
+
+(autoload 'async-bytecomp-package-mode "async-bytecomp" "\
+Byte compile asynchronously packages installed with package.el.
+Async compilation of packages can be controlled by
+`async-bytecomp-allowed-packages'.
+
+If called interactively, enable Async-Bytecomp-Package mode if
+ARG is positive, and disable it if ARG is zero or negative.  If
+called from Lisp, also enable the mode if ARG is omitted or nil,
+and toggle it if ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'async-byte-compile-file "async-bytecomp" "\
+Byte compile Lisp code FILE asynchronously.
+
+Same as `byte-compile-file' but asynchronous.
+
+\(fn FILE)" t nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "async-bytecomp" '("async-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "async-test" '("async-test-")))
+
+
+
+(defvar dired-async-mode nil "\
+Non-nil if Dired-Async mode is enabled.
+See the `dired-async-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `dired-async-mode'.")
+
+(custom-autoload 'dired-async-mode "dired-async" nil)
+
+(autoload 'dired-async-mode "dired-async" "\
+Do dired actions asynchronously.
+
+If called interactively, enable Dired-Async mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'dired-async-do-copy "dired-async" "\
+Run ‘dired-do-copy’ asynchronously.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'dired-async-do-symlink "dired-async" "\
+Run ‘dired-do-symlink’ asynchronously.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'dired-async-do-hardlink "dired-async" "\
+Run ‘dired-do-hardlink’ asynchronously.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'dired-async-do-rename "dired-async" "\
+Run ‘dired-do-rename’ asynchronously.
+
+\(fn &optional ARG)" t nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dired-async" '("dired-async-")))
+
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "smtpmail-async" '("async-smtpmail-")))
+
+
+
+
+)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/amx-20210305.118/amx-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -16099,16 +16999,16 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
 
 )
 (setq package-activated-list
-	  (append
-	   '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe wgrep validate bind-key use-package use-package-hydra epl pkg-info projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit treemacs-magit transient-posframe toc-org ivy swiper srefactor spinner all-the-icons powerline spaceline memoize spaceline-all-the-icons sml-mode smartparens f shrink-path prescient selectrum selectrum-prescient rg rainbow-mode rainbow-delimiters pos-tip racket-mode python-mode pretty-hydra popup persistent-scratch paredit paradox outorg outshine org-bullets org kv esxml nov mwim moody modus-themes mmm-mode minions mini-frame math-symbol-lists marginalia makey major-mode-hydra macrostep list-utils iedit counsel lispy lisp-extra-font-lock keyfreq json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine git-messenger ggtags gcmh free-keys flycheck fish-mode fira-code-mode expand-region eval-in-repl eros clang-format emr embark consult embark-consult elmacro dtrt-indent doom-modeline discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep ctrlf company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-theme cmake-mode cask-mode beacon amx all-the-icons-ivy-rich all-the-icons-completion aggressive-indent)
-	   package-activated-list))
+      (append
+       '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe wgrep vlf validate bind-key use-package use-package-hydra epl pkg-info projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit treemacs-magit transient-posframe toc-org test-simple ivy swiper srefactor spinner all-the-icons powerline spaceline memoize spaceline-all-the-icons sml-mode smartparens f shrink-path prescient selectrum selectrum-prescient rg load-relative loc-changes realgud rainbow-mode rainbow-delimiters pos-tip racket-mode python-mode pretty-hydra popup persistent-scratch paredit paradox packed outorg outshine org-bullets org kv esxml nov mwim moody modus-themes mmm-mode minions mini-frame math-symbol-lists marginalia makey major-mode-hydra macrostep list-utils iedit counsel lispy lisp-extra-font-lock keyfreq json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine git-messenger ggtags gcmh free-keys flycheck fish-mode fira-code-mode expand-region eval-in-repl eros clang-format emr embark consult embark-consult elmacro dtrt-indent doom-modeline discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep ctrlf company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-theme cmake-mode cask-mode beacon auto-compile auctex async amx all-the-icons-ivy-rich all-the-icons-completion aggressive-indent)
+       package-activated-list))
 (progn
   (require 'info)
   (info-initialize)
   (setq Info-directory-list
-		(append
-		 '("/Users/mark/.emacs.d/elpa/27.2/elpa/embark-20210801.1347" "/Users/mark/.emacs.d/elpa/27.2/elpa/modus-themes-20210804.1453" "/Users/mark/.emacs.d/elpa/27.2/elpa/org-9.4.6" "/Users/mark/.emacs.d/elpa/27.2/elpa/racket-mode-20210524.1655" "/Users/mark/.emacs.d/elpa/27.2/elpa/rg-20210617.1715" "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-20210518.1815" "/Users/mark/.emacs.d/elpa/27.2/elpa/magit-20210524.1513" "/Users/mark/.emacs.d/elpa/27.2/elpa/transient-20210426.2141" "/Users/mark/.emacs.d/elpa/27.2/elpa/dash-20210330.1544" "/Users/mark/.emacs.d/elpa/27.2/elpa/use-package-20210207.1926" "/Users/mark/.emacs.d/elpa/27.2/elpa/with-editor-20210427.1244")
-		 Info-directory-list)))
+	(append
+	 '("/Users/mark/.emacs.d/elpa/27.2/elpa/auctex-13.0.13" "/Users/mark/.emacs.d/elpa/27.2/elpa/embark-20210801.1347" "/Users/mark/.emacs.d/elpa/27.2/elpa/modus-themes-20210804.1453" "/Users/mark/.emacs.d/elpa/27.2/elpa/org-9.4.6" "/Users/mark/.emacs.d/elpa/27.2/elpa/racket-mode-20210524.1655" "/Users/mark/.emacs.d/elpa/27.2/elpa/rg-20210617.1715" "/Users/mark/.emacs.d/elpa/27.2/elpa/ivy-20210518.1815" "/Users/mark/.emacs.d/elpa/27.2/elpa/magit-20210524.1513" "/Users/mark/.emacs.d/elpa/27.2/elpa/transient-20210426.2141" "/Users/mark/.emacs.d/elpa/27.2/elpa/dash-20210330.1544" "/Users/mark/.emacs.d/elpa/27.2/elpa/use-package-20210207.1926" "/Users/mark/.emacs.d/elpa/27.2/elpa/with-editor-20210427.1244")
+	 Info-directory-list)))
 
 ;; Local Variables:
 ;; version-control: never

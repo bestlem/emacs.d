@@ -48,7 +48,8 @@ Need a function to save an then do things
 #+NAME: org_mark_mini20.local_20210724T104659.188563
 #+begin_src emacs-lisp
 (use-package emacs-lisp-mode
-  :bind ("<f5>" . eval-buffer)
+  :bind (:map emacs-lisp-mode-map
+			  ("<f5>" . eval-buffer))
   :mode-hydra ((:idle 0.5)
                ("Eval"
                 (("b" eval-buffer "buffer")
@@ -396,12 +397,12 @@ But add his functions as called from top level
 :ID:       org_mark_mini12.local:20201218T062750.205110
 :END:
 #+NAME: org_mark_mini12.local_20201218T062750.172372
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 ;;  mainly from setup-elisp.el
 
 ;; Solution to toggle debug on a function whether it is defined inside or
 ;; outside a `use-package' wrapper
-;; http://emacs.stackexchange.com/q/7643/115
+;; http://emacs.stackexchange.com/q/76w43/115
 
 ;; Edebug a defun or defmacro
 (defvar modi/fns-in-edebug nil
@@ -444,6 +445,7 @@ But add his functions as called from top level
           (message "Edebug: %s" fn))))))
 
 #+end_src
+
 *** Hydra
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20201218T062750.198857
@@ -583,6 +585,16 @@ _c_ontinue (_C_ fast)      ^^^^                       _X_ global breakpoint
   ("6" #'edebug-Continue-fast-mode "continue fast" :column "modes")
   ("7" #'edebug-trace-mode "trace" :column "modes")
   ("8" #'edebug-Trace-fast-mode "trace fast" :column "modes"))
+#+end_src
+*** Bind it
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210825T102536.195886
+:END:
+This is actually from Modi's  [[https://github.com/kaushalmodi/.emacs.d/blob/7ca71081a8c32eb895e75dd2b460d772b774b152/setup-files/setup-elisp.el][setup]]
+#+NAME: org_mark_mini20.local_20210825T102536.172923
+#+begin_src emacs-lisp
+(with-eval-after-load 'edebug
+  (bind-key "?" #'hydra-edebug/body edebug-mode-map))
 #+end_src
 * Flycheck
 :PROPERTIES:

@@ -91,6 +91,11 @@ Well I don't know what the frame parameters are left and width can be proportion
 	(defvar my/mini-frame-normal-functions
 	  '(isearch-forward
 		consult-line
+		consult-line-symbol-at-point
+		consult-grep
+		consult-git-grep
+		consult-find
+		consult-ripgrep
 		ctrlf-backward-default
 		ctrlf-forward-default
 		ctrlf-forward-alternate
@@ -565,7 +570,6 @@ Take action in selection buffer
   ;; if you want to have consult previews as you move around an
   ;; auto-updating embark collect buffer
   :hook (embark-collect-mode . embark-consult-preview-minor-mode))
-     #+end_src
 #+end_src
 ** Selectrum
 :PROPERTIES:

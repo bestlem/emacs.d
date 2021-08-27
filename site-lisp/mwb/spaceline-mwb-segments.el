@@ -266,7 +266,7 @@ Can't use spaceline as it has unneeded mouse menu"
 
 (defvar spaceline-mwb--racket-menu
   (let ((map (make-sparse-keymap)))
-    (define-key map [mode-line mouse-1] (lambda (event)
+    (define-key map [mode-line mouse-1] (lambda (_)
 										  (interactive "e")
 										  (popup-menu racket-xp-mode-menu)))
     (spaceline-mwb--headline-map-keymap map)

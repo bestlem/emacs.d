@@ -45,23 +45,13 @@
 ;; External references
 (defvar mode-line-highlight )
 
-(defmacro mwb-headline--keymap-duo-header (keymap)
-  "Copy the mode-line KEYMAP to header-line."
-  `(define-key ,keymap [header-line]
-	 (lookup-key ,keymap [mode-line])))
-
-(defun mwb-headline--keymap-header-and-mode (keymap)
-  "Return a mode-line KEYMAP copied to header-line as well."
-  (mwb-headline--keymap-duo-header keymap)
-  keymap)
-
 ;;; Forward declarations of Optional Dependencies
 
-
-
-
 ;;; Themes
-
+(spaceline-compile "mwb-test"
+  '(mwb-racket)
+  '("test")
+  )
 (spaceline-compile
   "mwb-main-header"
   '(
@@ -74,11 +64,8 @@
   '(
 	(all-the-icons-which-function)
 	(mwb-buffer-size line-column)
-	(mwb-flycheck
-	 :when active :priority 89
-	 )
+	((mwb-flycheck mwb-racket)  :priority 89 :when active )
 	" "
-
 	))
 
 (spaceline-compile
@@ -118,7 +105,7 @@
   `(
 	python-env
 	all-the-icons-which-function
-	((all-the-icons-package-updates))))
+	all-the-icons-package-updates))
 
 (defun spaceline-mwb-simple-mode ()
   "Simplest header - mainly for internal buffers."
@@ -128,6 +115,7 @@
 (defun spaceline-mwb-prog-mode ()
   "Main useful header/footer for modes which I do work in."
   (setq mode-line-format '("%e" (:eval (spaceline-ml-mwb-footer))))
+  ;; (setq mode-line-format '("%e" (:eval (spaceline-ml-mwb-test))))
   (setq header-line-format '("%e" (:eval (spaceline-ml-mwb-main-header)))))
 
 ;;;###autoload
@@ -155,7 +143,3 @@
 (provide 'spaceline-mwb)
 
 ;;; spaceline-mwb.el ends here
-
-										; LocalWords:  Flycheck modeline
-										; LocalWords:  flycheck spaceline
-										; LocalWords:  concat

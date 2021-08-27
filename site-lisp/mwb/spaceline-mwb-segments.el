@@ -36,6 +36,7 @@
 (require 'spaceline)
 (require 'all-the-icons)
 (require 'spaceline-mwb-core)
+(require 'mwb-fns)
 
 ;;; Forward declarations of Optional Dependencies
 (declare-function projectile-project-root "ext:projectile.el")
@@ -62,10 +63,12 @@
 
 (spaceline-define-segment mwb-mode-icon
   "An `all-the-icons' segment indicating the current buffer's mode with an icon. spaceline does not check for missing icon so try e"
-  (let ((icon-major (all-the-icons-icon-for-mode major-mode))
-		(family-major (all-the-icons-icon-family-for-mode major-mode) ))
+  (let* ((icon-major (all-the-icons-icon-for-mode major-mode))
+		 (family-major (all-the-icons-icon-family-for-mode major-mode)))
 	(if (and icon-major family-major)
 		(propertize icon-major
+					'local-map   mode-line-major-mode-keymap
+					'mouse-face 'mode-line-highlight
 					'help-echo (format "Major-mode: `%s'" major-mode)
 					'display '(raise 0)
 					'face `(
@@ -74,6 +77,8 @@
 							:inherit))
 	  ;; (message "Bars Not found %s %s %s" major-mode icon family)
       (propertize  (format "%s" major-mode)
+				   'local-map   mode-line-major-mode-keymap
+				   'mouse-face 'mode-line-highlight
 				   'help-echo (format "Major-mode (unknown icon): `%s'" major-mode)
 				   'display `(raise 0)
 				   'face `(
@@ -89,7 +94,7 @@
 				'help-echo "Minions
 mouse-1: Display minor modes menu"
 				'local-map minions-mode-line-minor-modes-map
-				'display `(:raise 0.5)
+				'display `(:raise 1.0)
 				'face `(:family ,family
 						:height 0.8
 						:inherit))))
@@ -112,7 +117,7 @@ mouse-1: Display minor modes menu"
   "A iconised status of buffer showing readonly/modified."
   (when (and buffer-file-name (buffer-modified-p))
 	(propertize (mwb-icon-get "save")
-				'display '(:raise 0.3)
+				;; 'display '(:raise 0.3)
 				'face '(:inherit))))
 
 (spaceline-define-segment mwb-rw
@@ -252,9 +257,64 @@ Can't use spaceline as it has unneeded mouse menu"
   (when spaceline-mwb--flycheck-text
 	spaceline-mwb--flycheck-text))
 
+;;; Racket segments
+;;;; Forward declarations
+
+(declare-function racket--cmd-open-p "racket-xp")
+(declare-function racket-xp-mode-menu "racket-xp")
+(defvar racket-xp-mode-menu )
+
+(defvar spaceline-mwb--racket-menu
+  (let ((map (make-sparse-keymap)))
+    (define-key map [mode-line mouse-1] (lambda (event)
+										  (interactive "e")
+										  (popup-menu racket-xp-mode-menu)))
+    (spaceline-mwb--headline-map-keymap map)
+	map))
+
+
+(defvar-local spaceline-mwb--racket--xp-mode-status nil)
+
+(defun  spaceline-mwb--racket-text-construct (status text face-name help-echo)
+  "Construct the propertized TEXT for display of racket STATUS.
+using FACE-NAME and HELP-ECHO."
+  (cons status
+		(propertize text
+					'face face-name
+					'mouse-face 'mode-line-highlight
+					'local-map spaceline-mwb--racket-menu
+					'help-echo help-echo
+					)))
+
+(defvar spaceline-mwb--racket-text-alist
+  (mwb-mapcar* 'spaceline-mwb--racket-text-construct
+			   '((ok "✔" success
+				  "Syntax OK")
+				 (err "✖" modus-themes-intense-red
+				  "Syntax error")
+				 (outdated "…" spaceline-flycheck-info
+				  "Outdated: Waiting for `racket-xp-after-change-refresh-delay' or manual `racket-xp-annotate'")
+				 (running "λ" spaceline-flycheck-info
+				  "Getting analysis from Racket Mode back-end and annotating")
+				 (otherwise "!" racket-xp-error-face
+				  "Racket Mode back-end not available"))))
+
+(defun spaceline-mwb--racket--xp-update (&optional status)
+  "My version of racket--xp-mode-status. Setting the variable to STATUS."
+  (let ((text (alist-get status spaceline-mwb--racket-text-alist)))
+	(setq spaceline-mwb--racket--xp-mode-status text)))
+
+(advice-add  'racket--xp-set-status :before 'spaceline-mwb--racket--xp-update)
+
+(spaceline-define-segment
+	mwb-racket
+  "Show racket mode+ status. Taken from racket--xp-mode-lighter and a bit from on flycheck."
+  ;; (concat  "Rkt" (racket--xp-mode-lighter))
+  (when (eq major-mode 'racket-mode)
+	spaceline-mwb--racket--xp-mode-status
+	;; (racket--xp-mode-lighter)
+	)
+  )
 
 (provide 'spaceline-mwb-segments)
 ;;; spaceline-mwb-segments.el ends here
-
-										; LocalWords:  flycheck spaceline
-; LocalWords:  iconset

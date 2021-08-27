@@ -121,6 +121,7 @@ I think works with other vcs
 #+NAME: org_mark_mini12.local_20201223T212747.790111
 #+begin_src emacs-lisp
 (use-package-elpa git-timemachine
+  :after magit
   :custom-face
   (git-timemachine-minibuffer-author-face ((t (:inherit success))))
   (git-timemachine-minibuffer-detail-face ((t (:inherit warning))))
@@ -147,6 +148,7 @@ I think works with other vcs
 #+NAME: org_mark_mini20.local_20210814T100659.226333
 #+begin_src emacs-lisp
 (use-package-elpa git-messenger
+  :after magit
   :bind (:map vc-prefix-map
 			  ("p" . git-messenger:popup-message)
 			  :map git-messenger-map

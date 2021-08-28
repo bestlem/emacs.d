@@ -14,13 +14,13 @@ f5 has always been my main - build and go used to be build all but now do tests
 C-f5 now can be build and run app.
 f6 lets try for send to repl as better one key than shift keys.
 A later thought is to use f5 as leader use key chords and then others for test
-** Code Edit Structure
+* Code Edit Structure
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:800B97C9-1558-4A77-A66F-C526AEBABFFD
 :END:
 Indentation and tabs
 Look at smart-tabs-insinuate but aggressive indent means not needed, although if I did an Algol language again I might find that not so true.
-*** Highlight indents
+** Highlight indents
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:83292AA8-EE2B-4044-9E4B-99DDF6A034D1
 :END:
@@ -47,7 +47,7 @@ I have wanted a good visual identification of indentation since I had the dos pr
 
   :hook ((prog-mode yaml-mode nxml-mode json-mode ) . highlight-indent-guides-mode))
  #+end_src
-*** Smartparens
+** Smartparens
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:838D12E0-E4AA-4DD0-8F6E-56CDA89B5F0E
 :END:
@@ -140,16 +140,6 @@ _k_: kill        _s_: split                   _{_: wrap with { }
   ("C-<right>" sp-backward-slurp-sexp))
 
 (bind-key "H-["  'ptrv/smartparens/body)
-#+end_src
-** Refactor
-:PROPERTIES:
-:ID:       org_mark_2020-10-14T11-05-37+01-00_mini12.local:A69F6693-E4CF-4C02-B645-5D83516AFE64
-:END:
-From https://github.com/Wilfred/emacs-refactor
-#+NAME: org_mark_2020-10-14T11-05-37+01-00_mini12.local_D19502C6-D155-4612-B223-E1B3D318935B
-#+begin_src emacs-lisp
-(use-package-elpa emr
-  :commands emr-show-refactor-menu)
 #+end_src
 ** TODO Folding
 :PROPERTIES:
@@ -248,24 +238,25 @@ Basically want to collapse/fold depending on comments.
                                         ;  to set before loading note other package name
   )
 #+end_src
-*** Folding
+* Refactor
 :PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:5E3357DF-791A-45BB-8DD8-300C3689C284
+:ID:       org_mark_2020-10-14T11-05-37+01-00_mini12.local:A69F6693-E4CF-4C02-B645-5D83516AFE64
 :END:
-Lets try another
-#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_30083007-CADD-49A5-8AC3-23B14475C3BB
+From https://github.com/Wilfred/emacs-refactor
+#+NAME: org_mark_2020-10-14T11-05-37+01-00_mini12.local_D19502C6-D155-4612-B223-E1B3D318935B
 #+begin_src emacs-lisp
-
+(use-package-elpa emr
+  :commands emr-show-refactor-menu)
 #+end_src
-** Build systems
+* Build systems
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:0BE82E38-EDB5-4196-B76E-FB6F1DBC0791
 :END:
-*** Gradle
+** Gradle
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:D059B203-9EB7-4713-8AB5-3D49422DAFD7
 :END:
- As Emacs is bad for java my java setup is now just gradle so that should be a generic build when I rename.
+As Emacs is bad for java my java setup is now just gradle so that should be a generic build when I rename.
 This also takes time to load. Need to sort out config entries and gradele-mode needs a bind as you need the keystrokes but only in some modes.
  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_8FC0E8CB-72D8-4306-96E3-F856F8917088
  #+begin_src emacs-lisp
@@ -313,33 +304,39 @@ This also takes time to load. Need to sort out config entries and gradele-mode n
 		 gradle-use-gradlew t)
    (gradle-mode))
  #+end_src
-*** make
+** make
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:C53BB68B-57E2-4F16-9BE7-B629633B3C4B
 :END:
-	#+begin_src emacs-lisp
-	(use-package make-mode
-	  :ensure nil
-	  :mode
-	  ("Imakefile\\'" . makefile-imake-mode)
-	  ("Makeppfile\\(?:\\.mk\\)?\\'" . makefile-makepp-mode)
-	  ("\\.makepp\\'" . makefile-makepp-mode)
-	  ("\\.mk\\'" . makefile-bsdmake-mode)
-	  ("\\.make\\'" . makefile-bsdmake-mode)
-	  ("GNUmakefile\\'" . makefile-gmake-mode)
-	  ("[Mm]akefile\\'" . makefile-bsdmake-mode)
-	  ("\\.am\\'" . makefile-automake-mode))
-	#+end_src
-	#+begin_src emacs-lisp
-	(use-package cmake-mode
-	  :ensure t
-	  :mode
-	  ("\\.cmake\\'" . cmake-mode)
-	  ("CMakeLists\\.txt\\'" . cmake-mode)
-	  :config
-	  (setq cmake-tab-width 2))
-	#+end_src
-** REPL
+#+NAME: org_mark_mini20.local_20210828T122054.531791
+#+begin_src emacs-lisp
+(use-package make-mode
+  :ensure nil
+  :mode
+  ("Imakefile\\'" . makefile-imake-mode)
+  ("Makeppfile\\(?:\\.mk\\)?\\'" . makefile-makepp-mode)
+  ("\\.makepp\\'" . makefile-makepp-mode)
+  ("\\.mk\\'" . makefile-bsdmake-mode)
+  ("\\.make\\'" . makefile-bsdmake-mode)
+  ("GNUmakefile\\'" . makefile-gmake-mode)
+  ("[Mm]akefile\\'" . makefile-bsdmake-mode)
+  ("\\.am\\'" . makefile-automake-mode))
+#+end_src
+** Cmake
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210828T122054.549211
+:END:
+#+NAME: org_mark_mini20.local_20210828T122054.532611
+#+begin_src emacs-lisp
+(use-package cmake-mode
+  :ensure t
+  :mode
+  ("\\.cmake\\'" . cmake-mode)
+  ("CMakeLists\\.txt\\'" . cmake-mode)
+  :config
+  (setq cmake-tab-width 2))
+#+end_src
+* REPL
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:558A449F-72D3-4F5C-BCE0-02C011944F6B
 :END:
@@ -361,7 +358,7 @@ As racket is broken and sml had oddities with ; and emacs really does not need i
   :config
   (setq mwb-repl-region-key "<f6>"))
 #+END_SRC
-*** emacs - ielm
+** emacs - ielm
 :PROPERTIES:
 :ID:       org_mark_2020-02-10T11-53-11+00-00_mini12:DF45202A-884C-4B11-866F-526417609CF2
 :END:
@@ -395,9 +392,6 @@ However I can't use that for a send to buffer as the map from mode to function i
 
 (eir-mwb-send-to-repl-define 'emacs-lisp-mode 'eir-eval-in-ielm)
 (eir-mwb-send-to-repl-define 'inferior-emacs-lisp-mode 'eir-eval-in-ielm)
-
-
-
 #+end_src
 * General groups
 :PROPERTIES:

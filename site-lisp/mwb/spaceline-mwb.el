@@ -107,16 +107,37 @@
 	all-the-icons-which-function
 	all-the-icons-package-updates))
 
+(defun spaceline-mwb--set-format (header? target)
+  "Set the full eval for HEADER? or modeline if false. TARGET is a spaceline-compile name."
+  (let* ((symbol (intern (format "spaceline-ml-%s" target)))
+		 (fmt `("%e" (:eval (,symbol)))))
+	(if header?
+		(setq header-line-format fmt)
+	  (setq mode-line-format fmt))))
+
+(defun spaceline-mwb--set-header (target)
+  "Set the header-line to the TARGET defined by a spaceline-copmpile."
+  (spaceline-mwb--set-format 't target))
+
+(defun spaceline-mwb--set-footer (target)
+  "Set the mode-line to the TARGET defined by a spaceline-copmpile."
+  (spaceline-mwb--set-format '() target))
+
 (defun spaceline-mwb-simple-mode ()
   "Simplest header - mainly for internal buffers."
   (setq header-line-format '("%e" (:eval (spaceline-ml-mwb-minimum))))
   (setq mode-line-format nil))
 
-(defun spaceline-mwb-prog-mode ()
+(defun spaceline-mwb-theme-paradox ()
+  "Mode line for  all-the-icons paradox. Note it has a header so not set."
+  (spaceline-mwb--set-format 'nil "all-the-icons-paradox" )
+  )
+
+(defun spaceline-mwb-theme-prog ()
   "Main useful header/footer for modes which I do work in."
-  (setq mode-line-format '("%e" (:eval (spaceline-ml-mwb-footer))))
-  ;; (setq mode-line-format '("%e" (:eval (spaceline-ml-mwb-test))))
-  (setq header-line-format '("%e" (:eval (spaceline-ml-mwb-main-header)))))
+  (spaceline-mwb--set-footer  "mwb-footer")
+  (spaceline-mwb--set-header "mwb-main-header"))
+
 
 ;;;###autoload
 (defun spaceline-mwb-theme ()
@@ -132,8 +153,9 @@
   (setq-default header-line-format '("%e" (:eval (spaceline-ml-mwb-minimum))))
   (setq-default mode-line-format nil)
 
-  (add-hook 'prog-mode-hook #'spaceline-mwb-prog-mode )
-  (add-hook 'text-mode-hook #'spaceline-mwb-prog-mode )
+  (add-hook 'prog-mode-hook #'spaceline-mwb-theme-prog )
+  (add-hook 'text-mode-hook #'spaceline-mwb-theme-prog )
+  (add-hook 'paradox-menu-mode-hook #'spaceline-mwb-theme-paradox )
   )
 
 ;; Interactive & Setup Functions

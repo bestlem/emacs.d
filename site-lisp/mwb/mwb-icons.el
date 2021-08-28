@@ -138,8 +138,15 @@ ARGS is same as `all-the-icons-octicon' and others."
 
 ;;; All - the icons
 ;; As major mode does not have helpful mode
-(add-to-list 'all-the-icons-mode-icon-alist
-			 '(helpful-mode all-the-icons-faicon "info" :v-adjust -0.1 :face all-the-icons-purple))
+(defconst mwb-icons--all-the-icons-mode-list
+  '((helpful-mode all-the-icons-faicon "info" :v-adjust -0.1 :face all-the-icons-purple)
+	(gnus-mode    all-the-icons-fileicon "gnu"              :face all-the-icons-dorange)
+	(gnus-article-mode    all-the-icons-fileicon "gnu"              :face all-the-icons-dorange)
+	(gnus-group-mode    all-the-icons-fileicon "gnu"              :face all-the-icons-dorange)
+	(gnus-summary-mode    all-the-icons-fileicon "gnu"              :face all-the-icons-dorange)
+	))
+(dolist (ele mwb-icons--all-the-icons-mode-list)
+  (add-to-list 'all-the-icons-mode-icon-alist ele))
 ;;;; Eyeliner based
 
 (defun eyeliner/get-icon-factory (set-name)

@@ -42,7 +42,9 @@
 (declare-function projectile-project-root "ext:projectile.el")
 (declare-function fancy-narrow-active-p "ext:fancy-narrow.el")
 
-
+;;; help spaceline segments to work especially in header
+(with-eval-after-load 'which-func
+  (spaceline-mwb--headline-map-keymap which-func-keymap))
 ;;; Create icons
 
 ;;; Segments

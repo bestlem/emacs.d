@@ -80,17 +80,6 @@ FACE and ACTIVE have the same meanings as in
 
 (setq spaceline-face-func 'spaceline-mwb--get-face)
 
-;;; Support macros and functions
-(defmacro mwb-headline--keymap-duo-header (keymap)
-  "Copy the mode-line KEYMAP to header-line."
-  `(define-key ,keymap [header-line]
-	 (lookup-key ,keymap [mode-line])))
-
-(defun mwb-headline--keymap-header-and-mode (keymap)
-  "Return a mode-line KEYMAP copied to header-line as well."
-  (mwb-headline--keymap-duo-header keymap)
-  keymap)
-
 ;;; Full Modeline Definition
 (defconst spaceline-mwb-footer '("%e" (:eval (spaceline-ml-mwb-footer)))
   "Constant version of variable `spaceline-mwb-theme' to allow to be set manually.")

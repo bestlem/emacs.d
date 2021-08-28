@@ -14,6 +14,17 @@ f5 has always been my main - build and go used to be build all but now do tests
 C-f5 now can be build and run app.
 f6 lets try for send to repl as better one key than shift keys.
 A later thought is to use f5 as leader use key chords and then others for test
+
+* Prog mode
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210828T133945.004924
+:END:
+Setup for all prog modes
+#+NAME: org_mark_mini20.local_20210828T133944.980854
+#+begin_src emacs-lisp
+(use-feature prog-mode
+  :hook (prog-mode . which-function-mode))
+#+end_src
 * Code Edit Structure
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:800B97C9-1558-4A77-A66F-C526AEBABFFD

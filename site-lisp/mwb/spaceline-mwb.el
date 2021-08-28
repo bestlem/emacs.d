@@ -62,10 +62,9 @@
 	mwb-bookmark
 	auto-compile)
   '(
-	(all-the-icons-which-function)
 	(mwb-buffer-size line-column)
 	((mwb-flycheck mwb-racket)  :priority 89 :when active )
-	" "
+	(all-the-icons-which-function)
 	))
 
 (spaceline-compile
@@ -104,7 +103,6 @@
 
   `(
 	python-env
-	all-the-icons-which-function
 	all-the-icons-package-updates))
 
 (defun spaceline-mwb--set-format (header? target)
@@ -146,8 +144,8 @@
   (minions-mode 1)
   (setq spaceline-all-the-icons-hide-long-buffer-path t)
   ;;  set the header keymap as a copy of mode line
-  (mwb-headline--keymap-duo-header mode-line-major-mode-keymap)
-  (mwb-headline--keymap-duo-header mode-line-column-line-number-mode-map)
+  (spaceline-mwb--headline-map-keymap mode-line-major-mode-keymap)
+  (spaceline-mwb--headline-map-keymap mode-line-column-line-number-mode-map)
   ;; (setq-default mode-line-format '("%e" (:eval (spaceline-ml-mwb-mode-theme))))
   ;; (setq-default header-line-format '("%e" (:eval (spaceline-ml-mwb-test))))
   (setq-default header-line-format '("%e" (:eval (spaceline-ml-mwb-minimum))))

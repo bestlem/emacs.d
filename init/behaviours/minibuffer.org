@@ -75,6 +75,8 @@ Well I don't know what the frame parameters are left and width can be proportion
   (use-package-elpa mini-frame
 	:demand
 	:init
+	(setq mini-frame-detach-on-hide 'nil
+		  mini-frame-standalone 't)
 	(defun mwb-mini-treemacs-width ()
 	  "Find width of treemacs window if it exists plus a fringe."
 	  (if (treemacs-get-local-window)

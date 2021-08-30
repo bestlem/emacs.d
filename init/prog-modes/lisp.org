@@ -5,7 +5,7 @@
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:E97B88C8-A249-4DEC-BAE3-41153EA01D6C
 :END:
-These are for all () languages but could extend to more as manythings are for all structured ASTs or simply brackets
+These are for all () languages but could extend to more as many things are for all structured ASTs or simply brackets.
 ** Parentheses
 :PROPERTIES:
 :ID:       org_mark_2020-10-11T00-40-32+01-00_mini12.local:27461EE9-1768-4943-B3AE-65E50E8F41C7
@@ -15,13 +15,12 @@ These are for all () languages but could extend to more as manythings are for al
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:9CBA29B7-2EB3-42F5-80C7-C3F7507D141B
 :END:
 Although that should be in prog mode
-	#+begin_src emacs-lisp
-(use-package
-  rainbow-delimiters
-  :ensure t
+#+NAME: org_mark_mini20.local_20210829T122201.450355
+#+begin_src emacs-lisp
+(use-package-elpa rainbow-delimiters
   :delight rainbow-delimiters-mode
   :hook (prog-mode . rainbow-delimiters-mode))
-	#+end_src
+#+end_src
 *** And hidden
 :PROPERTIES:
 :ID:       org_mark_2020-10-11T00-40-32+01-00_mini12.local:E13260FF-71E9-49D7-8F3B-C3A27D36CD65
@@ -85,15 +84,17 @@ It assumes things like clojure
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:E63D4DBA-0F28-4311-8FC8-2D387D350185
 :END:
 Changes are now made directly to the package which is only now here
-	 #+begin_src emacs-lisp
+#+NAME: org_mark_mini20.local_20210829T122427.146425
+#+begin_src emacs-lisp
 (use-package lispy-mnemonic
   :mwb-load-path "site-lisp/lispy-mnemonic"
   :hook ((emacs-lisp-mode
           lisp-interaction-mode
-		  racket-mode
-		  racket-xp-mode
+          racket-mode
+          racket-xp-mode
+          racket-repl-mode
           inferior-emacs-lisp-mode) . lispy-mnemonic-mode))
-	 #+end_src
+ #+end_src
 ** Evaluation
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:1A57188F-FBC8-400C-BBB4-740993B7481D

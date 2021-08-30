@@ -40,23 +40,23 @@ This is the minimal setup and does not need changing
 
 #+NAME: org_mark_mini12.local_20201213T220930.519021
 #+begin_src emacs-lisp
-(use-package racket-mode
-  :ensure t
+(use-package-elpa racket-mode
   :bind (:map racket-mode-map
-              ("<f5>" . racket-mwb-run-hydra)
-              ("<C-f5>" . racket-mwb-run)
-              ("A-<f5>" . racket-mwb-raco-all-tests)
-              ("S-<f5>" . racket-mwb-raco-test)
-              ("<f1> <f1>" . racket-xp-describe)
-              ("M-l" . racket-insert-lambda)
-              ("M-`" . racket-insert-lambda)
-              ;; ("<C-return>" . eir-eval-in-racket)
-              ("<f6>" . racket-send-definition)
-              ("<C-return>" . racket-mwb-send-to-repl)
-                                        ;("H-A" . hydra-paredit/body)
-              :map racket-repl-mode-map
-              ("<f5>" . racket-mwb-run-hydra)
-              )
+			  ("<f5>" . racket-mwb-run-hydra)
+			  ("<C-f5>" . racket-mwb-run)
+			  ("A-<f5>" . racket-mwb-raco-all-tests)
+			  ("S-<f5>" . racket-mwb-raco-test)
+			  ("<f1> <f1>" . racket-xp-describe)
+			  ("M-l" . racket-insert-lambda)
+			  ("M-`" . racket-insert-lambda)
+			  ;; ("<C-return>" . eir-eval-in-racket)
+			  ("<f6>" . racket-send-definition)
+			  ("<C-return>" . racket-mwb-send-to-repl)
+										;("H-A" . hydra-paredit/body)
+			  :map racket-repl-mode-map
+			  ("<f5>" . racket-mwb-run-hydra)
+			  ("M-l" . racket-insert-lambda)
+	          ("<f1> <f1>" . racket-xp-describe))
   :mode (rx (seq ".racket" string-end))
   :init
   (setq racket-program "/Applications/Racket v8.1/bin/racket"
@@ -66,6 +66,7 @@ This is the minimal setup and does not need changing
   (defun my-racket-mode-hook ()
     (my-all-racket-mode-hook)
     (racket-xp-mode))
+
   (defun my-all-racket-mode-hook ()
     (set (make-local-variable 'company-backends)
          '((company-capf
@@ -257,7 +258,6 @@ Run tests with no error context to show error.
     ("<f8>" racket-mwb-run-errortrace "Run with errortrace"))
    "Quit"
    (("<f12>" nil "Quit" :exit t))))
-
 #+end_src
 *** Run a hydra
 :PROPERTIES:

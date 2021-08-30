@@ -13,11 +13,9 @@ Spell checking with [[http://www.emacswiki.org/emacs/FlySpell][FlySpell]], which
 However enchant has an interface to the Apple dictionary
 
 Start for all text modes (but not for log files):
-
-   #+NAME: org_mark_2020-09-29T11-53-58+01-00_mini12.local_495114A0-DDED-47C8-95EB-92DD64E002A0
-#+BEGIN_SRC emacs-lisp
-(use-package flyspell
-  ;; :ensure t
+#+NAME: org_mark_mini20.local_20210830T145405.149131
+#+begin_src emacs-lisp
+(use-feature flyspell
   :unless *aquamacs*
   :defer 20
   :commands flyspell-mode
@@ -30,28 +28,23 @@ Start for all text modes (but not for log files):
 		 (setq-default ispell-program-name "aspell")
 		 (setq ispell-extra-args '("--sug-mode=normal"))
 		 (setq ispell-dictionary "british-ize"))
-        ((executable-find "hunspell")
+		((executable-find "hunspell")
 		 (setq-default ispell-program-name "hunspell")
 		 (setq ispell-really-hunspell t)))
-  (message "--------------------------In flyspell init")
-  :config
-  ;; Popup window for spellchecking
+  :hook ((prog-mode . flyspell-prog-mode)
+		 ((text-mode org-mode) . turn-on-flyspell)
+		 ((change-log-mode log-edit-mode org-agenda-mode) . turn-off-flyspell))
+  ;; :config
+  ;; Popup window for spellchecking - seems that flyspell does this itself
   ;; (use-package flyspell-correct
   ;;   :ensure t
   ;;   :after flyspell
   ;;   :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-wrapper)))
   ;; (use-package flyspell-correct-popup :ensure t
   ;;   :after flyspell-correct)
-  (message "--------------------------In flyspell config")
-  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
-  (dolist (hook '(text-mode-hook org-mode-hook))
-    (add-hook hook (lambda () (flyspell-mode 1))))
-  (dolist (hook '(change-log-mode-hook log-edit-mode-hook org-agenda-mode-hook))
-    (add-hook hook (lambda () (flyspell-mode -1)))))
-   #+END_SRC
+  )
+#+end_src
 
 ASpell automatically configures a personal dictionary  at =~/.aspell.en.pws=, so no need to configure that.
 
-A possibly nifty feature of aspell is the ability to spellcheck individual words in CamelCase that is used extensively in some code (for details, see [[http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html][this article]]).
-
-But I don't do camel case :)
+A possibly nifty feature of aspell is the ability to spellcheck individual words in CamelCase that is used extensively in some code (for details, see [[http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html][this article]]). But I don't do camel case  😉

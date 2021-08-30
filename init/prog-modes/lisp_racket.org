@@ -67,7 +67,7 @@ This is the minimal setup and does not need changing
 	          ("<f1> <f1>" . racket-xp-describe))
   :mode (rx (seq ".racket" string-end))
   :init
-  (setq racket-program "/Applications/Racket v8.1/bin/racket"
+  (setq racket-program "/Applications/Racket v8.2/bin/racket"
         racket-images-inline t)
 
   ;; From   https://stackoverflow.com/questions/37571164/emacs-company-mode-completion-not-working

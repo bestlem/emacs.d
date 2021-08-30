@@ -1,14 +1,14 @@
-#+TITLE Emacs configuration - racket
-#+PROPERTY:header-args :cache yes :tangle yes  :comments noweb
-#+STARTUP: content
-* Racket
+#+TITLE:Racket
+#+AUTHOR: Mark Bestley
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+STARTUP: overview
+
+* Implementation of mode
 :PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:1C20958B-CC40-4D69-B34D-3F34D5C8699A
+:ID:       org_mark_mini20.local:20210830T195229.448446
 :END:
-Change from lispy to smartparens. The delete-selection issue is too much. I keep typing on a selected region
-And back again: 😤
-Structure - as this is controlling a major mode which is called on load then autoloads aren't really needed so can put functions etc in config - as shown by originally racket-support.el
-** Issues
+Structure - as this is controlling a major mode which is called on load then autoloads aren't really needed so can put functions etc in config - as shown by originally racket-support.elsewhere
+* Issues
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20201221T122900.930444
 :END:
@@ -31,11 +31,19 @@ Trying company math
 :ID:       org_mark_mini12.local:20201221T122900.927064
 :END:
 Ok I lose the :with of having yasnippet and racket mode completions but get one or the other which is acceptable. In effect yasnippet if not in a form and racket elsewhere. (Strictly racket first then if none yasnippet )
-** racket mode
+*** smart editing
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210830T195229.445424
+:END:
+Change from lispy to smartparens. The delete-selection issue is too much. I keep typing on a selected region
+And back again: 😤
+But formatting is a problem
+
+* Racket mode load
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20201221T122900.924619
 :END:
-Break up so code can be tested but also allow weaving
+Break up so code can be tested but also allow weaving.
 This is the minimal setup and does not need changing
 
 #+NAME: org_mark_mini12.local_20201213T220930.519021
@@ -91,7 +99,7 @@ This is the minimal setup and does not need changing
   :hook (racket-mode . my-racket-mode-hook)
   (racket-repl-mode . my-all-racket-mode-hook))
 #+end_src
-** After load
+* After load
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210429T080050.292908
 :END:

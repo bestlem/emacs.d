@@ -14,6 +14,7 @@ Well I was going to include [[https://github.com/lunaryorn/osx-trash.el][osx tra
 But the mac port does have this if set mac_system_move_file_to_trash_use_finder
 Think of editing dired and treemacs
 On reading more this is only if passed to delete functions so might not be too much trash.
+And I hear a sound on deletes so Finder is being used.
 #+NAME: org_mark_mini12.local_20210105T204218.519535
 #+begin_src emacs-lisp
 (setq delete-by-moving-to-trash t
@@ -260,20 +261,20 @@ Make the message "/FILENAME has auto save data/" unmissable:
 
 ** Recent Files
 :PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:F7A7B04A-465B-4E07-B218-96A10C71D481
+:ID:       org_mark_mini20.local:20210830T180007.828713
 :END:
- Exclusion regexes from [[https://www.reddit.com/r/emacs/comments/3g468d/stop_recent_files_showing_elpa_packages/][reddit]]
+Exclusion regexes from [[https://www.reddit.com/r/emacs/comments/3g468d/stop_recent_files_showing_elpa_packages/][reddit]]
 
- Issue is that recentf-exclude is used by passing the expanded filename(which makes sense)  and the file list uses the shortened name which also makes sense at least in the file as then is independent of ~
+Issue is that recentf-exclude is used by passing the expanded filename(which makes sense)  and the file list uses the shortened name which also makes sense at least in the file as then is independent of ~
 
- The save in file is done by the set of abbreviate-file-name to recentf-filename-handlers which means that the name is expanded and then replaced by ~. Unfortunately the regexes are done on just the expanded file name. But all expansion is done the same way so all should work
+The save in file is done by the set of abbreviate-file-name to recentf-filename-handlers which means that the name is expanded and then replaced by ~. Unfortunately the regexes are done on just the expanded file name. But all expansion is done the same way so all should work
 
- Cleanup does seem to normalize file names
+Cleanup does seem to normalize file names
 
- The problem is that we have regex
+The problem is that we have regex
 
- #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_8950A078-0D0D-4B58-90E9-2E103AB4934D
- #+begin_src emacs-lisp
+#+NAME: org_mark_mini20.local_20210830T180007.805003
+#+begin_src emacs-lisp
 (use-feature recentf
   :commands (recentf-mode
 			 recentf-add-file
@@ -299,13 +300,7 @@ Make the message "/FILENAME has auto save data/" unmissable:
 						  "SessionDesktop\\.el"
 						  "treemacs-persist"))
   (recentf-mode 1))
-  #+end_src
-
-#+RESULTS[0f3a20a035e38133cab5393182122c5404f4249c]: org_mark_2020-01-24T17-28-10+00-00_mini12_8950A078-0D0D-4B58-90E9-2E103AB4934D
-#+begin_EXAMPLE
-t
-#+end_EXAMPLE
-
+#+end_src
 ** TODO Compressed files
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:D8E61D05-2A53-45CF-A59D-EC1D1883BAC5
@@ -346,7 +341,7 @@ Started as file management but actually deals with files and what is in them/ Tr
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:88F75F08-A36B-4A9D-AC7B-B618451935B6
 :END:
-	This provides a cover for ripgrep.
+This provides a cover for ripgrep.
 	#+begin_src emacs-lisp
 (use-package deadgrep
   :ensure t
@@ -366,6 +361,7 @@ Might allow search in ignore files. It is more flexible but display is not as ea
 #+NAME: org_mark_mini20.local_20210620T213143.089059
 #+begin_src emacs-lisp
 (use-package rg
+  :disabled
   :ensure t)
 #+end_src
 ** Projectile

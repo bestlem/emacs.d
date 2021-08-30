@@ -359,50 +359,50 @@ Use icons from treemacs
 #+NAME: org_mark_mini12.local_20210109T234936.604576
 #+begin_src emacs-lisp
 (use-package dired
-    :after dired-x
-    :config
-    (defvar dired-title (with-material "folder_open" "Directories"))
-    (defun my-dired-create-file (file)
-      (interactive
-       (list (read-file-name "Create file: " (concat (dired-current-directory) (create-new-file (directory-files (dired-current-directory)))))))
-      (write-region "" nil (expand-file-name file) t)
-      (dired-add-file file)
-      (revert-buffer)
-      (dired-goto-file (expand-file-name file)))
+  :after dired-x
+  :config
+  (defvar dired-title (with-material "folder_open" "Directories"))
+  (defun my-dired-create-file (file)
+    (interactive
+     (list (read-file-name "Create file: "
+                           (concat (dired-current-directory)
+                                   (create-new-file (directory-files
+                                                     (dired-current-directory)))))))
+    (write-region "" nil (expand-file-name file) t)
+    (dired-add-file file)
+    (revert-buffer)
+    (dired-goto-file (expand-file-name file)))
+  :mode-hydra
+  ((:title dired-title :color pink :foreign-keys run)
+   ("Mode"
+    (("d" dired "Directory Choose")
+     ("+" dired-create-directory "Create A Directory")
+     ("f" my-dired-create-file "Create A File")
+     ;; ("x" xah-open-in-external-app "Open In External Program")
+     ("g" revert-buffer "Refresh Directory")
+     ("~" dired-hide-details-mode "Show Details" :toggle t)
+     ;; ("i" all-the-icons-dired-mode "Directory With Icons" :toggle t)
+     ;; ("h" hydra-helm/body "Go To Hydra Helm" :color blue )
+     )
 
+    "Mark"
+    (("SPC" dired-mark "Mark Selection At Point")
+     ("u" dired-unmark "Unmark Selection At Point")
+     ("a" dired-toggle-marks "Mark Or Unmark All In Directory" :toggle t)
+     ("A" dired-unmark-all-files "Unmark All Files")
+     ("*" dired-change-marks "Change Marks")
+     ;; ("o" dired-find-file-other-window "Open File In Other Window")
+     ("C" dired-copy-filename-as-kill "Copy Selection Name")
+     ;; ("<SPC>" nil "Quit" :color blue)
+     )
 
-    (major-mode-hydra-define dired-mode
-        (:title dired-title :color pink :foreign-keys run)
-      ("Mode"
-       (("d" dired "Directory Choose")
-        ("+" dired-create-directory "Create A Directory")
-        ("f" my-dired-create-file "Create A File")
-        ;; ("x" xah-open-in-external-app "Open In External Program")
-        ("g" revert-buffer "Refresh Directory")
-        ("~" dired-hide-details-mode "Show Details" :toggle t)
-        ;; ("i" all-the-icons-dired-mode "Directory With Icons" :toggle t)
-        ;; ("h" hydra-helm/body "Go To Hydra Helm" :color blue )
-
-        )
-
-       "Mark"
-       (("SPC" dired-mark "Mark Selection At Point")
-        ("u" dired-unmark "Unmark Selection At Point")
-        ("a" dired-toggle-marks "Mark Or Unmark All In Directory" :toggle t)
-        ("A" dired-unmark-all-files "Unmark All Files")
-        ("*" dired-change-marks "Change Marks")
-        ;; ("o" dired-find-file-other-window "Open File In Other Window")
-        ("C" dired-copy-filename-as-kill "Copy Selection Name")
-        ;; ("<SPC>" nil "Quit" :color blue)
-        )
-
-       "Action"
-       (
-        ("o" my-open-in-external-app "Open in app")
-        ("D" dired-do-delete "Delete Marked Sections")
-        ("r" dired-do-rename "Rename Selection At Point")
-        ("R" ora-dired-rsync "Rsync")
-        ("c" dired-do-copy "Copy Marked Selections")
-        ("s" dired-do-symlink "Symlink Marked Selections")
-        ("m" dired-do-rename "Move Marked Selections")))))
+    "Action"
+    (("o" my-open-in-external-app "Open in app")
+	 ("l" mac-key-quick-look "Open in QuickLook")
+     ("D" dired-do-delete "Delete Marked Sections")
+     ("r" dired-do-rename "Rename Selection At Point")
+     ("R" ora-dired-rsync "Rsync")
+     ("c" dired-do-copy "Copy Marked Selections")
+     ("s" dired-do-symlink "Symlink Marked Selections")
+     ("m" dired-do-rename "Move Marked Selections")))))
 #+end_src

@@ -41,6 +41,7 @@
 ;;; Forward declarations of Optional Dependencies
 (declare-function projectile-project-root "ext:projectile.el")
 (declare-function fancy-narrow-active-p "ext:fancy-narrow.el")
+(defvar which-func-keymap)
 
 ;;; help spaceline segments to work especially in header
 (with-eval-after-load 'which-func
@@ -90,25 +91,29 @@
 (spaceline-define-segment
 	mwb-minor-modes
   "Taken from doom-modeline a minion in mode-line."
-  (eyeliner/with-icon "gear"
-	(propertize icon
-				'mouse-face 'mode-line-highlight
-				'help-echo "Minions
+  (
+   eyeliner/with-icon "gear"
+   (propertize icon
+			   'mouse-face 'mode-line-highlight
+			   'help-echo "Minions
 mouse-1: Display minor modes menu"
-				'local-map minions-mode-line-minor-modes-map
-				'display `(:raise 1.0)
-				'face `(:family ,family
-						:height 0.8
-						:inherit))))
+			   'local-map minions-mode-line-minor-modes-map
+			   'display `(:raise 1.0)
+			   'face `(:family ,family
+					   :height 0.8
+					   :inherit))))
 
 ;;; Buffer state
 (spaceline-define-segment mwb-narrowed
   "A segment to indicate whether the current buffer is narrowed."
-  (eyeliner/with-icon "filter"
+  (eyeliner/with-icon "arrows-h"
 	(propertize icon
-				'family ,family
+				'face `(:family ,family
+						;; :height 0.8
+						:inherit)
+				'display '(:raise 1.0)
 				'help-echo "mouse-1: Widen the current file"
-				'mouse-face mode-line-highlight
+				'mouse-face 'mode-line-highlight
 				'local-map (spaceline-mwb--mouse-map 'mouse-1 'widen)))
   :when (or (buffer-narrowed-p)
 			(and (bound-and-true-p fancy-narrow-mode)

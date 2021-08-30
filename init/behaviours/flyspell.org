@@ -18,6 +18,7 @@ Start for all text modes (but not for log files):
 #+BEGIN_SRC emacs-lisp
 (use-package flyspell
   ;; :ensure t
+  :unless *aquamacs*
   :defer 20
   :commands flyspell-mode
   :init

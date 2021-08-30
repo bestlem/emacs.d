@@ -6,10 +6,11 @@
 :ID:       org_mark_2020-03-02T07-49-31+00-00_mini12.local:F19DE0CC-B946-4885-808E-36CB21A4AF3D
 :END:
 
-** [[https://github.com/emacsmirror/gcmh][GCMH - the Garbage Collector Magic Hack]]
+** [[https://github.com/emacsmirror/gcmh][GCMH]]
 :PROPERTIES:
-:ID:       org_2020-12-08+00-00:9CBD1225-1938-4671-8260-E362EA08EE86
+:ID:       org_mark_mini20.local:20210830T145836.679819
 :END:
+The Garbage Collector Magic Hack
 This seems to be a more consistent way so can replace other bits
 The only bit to stay is after-init
 Note that gcmh cannot explicitly reduce the memory it does this when it gcs, which might be wrong - it assumes you do not gc during a process
@@ -215,16 +216,6 @@ Single Capitals as you type. "
 
 (add-hook 'text-mode-hook #'dubcaps-mode)
 
-#+end_src
-** Misspelling correction
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:5AA8C57E-7AEA-4F16-AD52-84CE2450344B
-:END:
-See http://endlessparentheses.com/ispell-and-abbrev-the-perfect-auto-correct.html but I need to deal with Aquamacs spelling as well
-#+NAME: org_mark_2020-09-29T11-53-58+01-00_mini12.local_C107F37F-7EE4-4A6E-B97C-C3CEB3BA7A7C
-#+begin_src emacs-lisp
-(unless *aquamacs*
-  (mwb-init-load "init/behaviour_spell_noaqua"))
 #+end_src
 * Comments
 :PROPERTIES:

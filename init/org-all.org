@@ -13,6 +13,7 @@
   - [[#save-org-files-saved-in-dropbox-dir-automatically-nb-not-emacs-autosave][Save org files saved in dropbox dir automatically (NB not emacs autosave)]]
   - [[#load-and-setup-org-mode][Load and setup org mode]]
 - [[#the-use-package-setup][The use package setup]]
+  - [[#support-functions][Support functions]]
   - [[#use-package][use-package]]
   - [[#key-bindings][Key bindings]]
   - [[#hack-around][Hack around]]
@@ -105,7 +106,17 @@ Now jump to back to src issues. They go back to the code block that contains the
 This is the main setup that includes other things
 Note Hydra is not really used after just a couple of weeks.
 It is now for subtree todo refile and links
-
+** Support functions
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210830T173642.889781
+:END:
+#+NAME: org_mark_mini20.local_20210830T173642.840556
+#+begin_src emacs-lisp
+(defun my/org-edit-src-exit ()
+  (interactive)
+  (org-edit-src-save)
+  (org-edit-src-exit))
+#+end_src
 ** use-package
 :PROPERTIES:
 :ID:       org_2020-12-08+00-00:D690B0FD-0E4B-44ED-A01E-7FEC29D8E7F4
@@ -150,18 +161,17 @@ Put the bind bit in noweb
 #+NAME: key-binds
 #+begin_src emacs-lisp :tangle no
 (
- ("H-s" . org-babel-tangle-jump-to-org)
- ("H-S-s" . org-babel-detangle) ;; actually update but can't deal with weave
+ ;; ("H-s" . org-babel-tangle-jump-to-org)
+ ;; ("H-S-s" . org-babel-detangle)
+ ;; actually update but can't deal with weave
  :map org-mode-map
- ("H-s" . org-edit-special)
- ;; ("<f19> s" . org-edit-special)
-
  ("<f5>" . org-ctrl-c-ctrl-c)
  :map org-src-mode-map
  ("H-s" . org-edit-src-exit)
- ;; ("<f19> s" . org-edit-src-exit)
- ("A-s" . org-edit-src-save)            ; I press by mistake but it makes
+ ;; ("A-s" . org-edit-src-save)
+										; I press by mistake but it makes
                                         ; sense now save not save and exit
+ ("A-s" . my/org-edit-src-exit)
  ("A-k". org-edit-src-abort)
  ;; :map org-capture-mode-map
  ;; ("<f12>" . org-capture-finalize)

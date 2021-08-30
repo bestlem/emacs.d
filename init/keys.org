@@ -634,13 +634,13 @@ Tried inherit to set f19 s as mode dependant but seems not to work with pretty h
    "Windows"
    (("F" other-frame "Switch Frame")
     ("m" (mwb-new-frame "*Messages*") "Messages")
-    ("w" hydra-jp-window/body "Window Management")
+    ("W" hydra-jp-window/body "Window Management")
     ("0" delete-window "Delete Window")
     (")" delete-window "Delete Window")
     ("|" split-window-right "horizontally"))
    "Current buffer"
    (("L" linum-mode "line number" :toggle t)
-    ("c" (what-cursor-position 'detail) "Character at POS")
+    ("c" insert-char "insert char")
     ("TAB" hs-mwb-show-one-level "show one level")
     ("C-<tab>" hs-toggle-hiding "Toggle hide-show")
     ("f" refill-mode "Auto refill mode ")
@@ -658,6 +658,7 @@ Tried inherit to set f19 s as mode dependant but seems not to work with pretty h
    (("b" consult-buffer "Switch Buffer")
     ("B" counsel-bookmark "Jump to bookmark")
     ("s" mwb-special-in-hydra "org edit")
+	("w" narrow-or-widen-dwim "Narrow or Widen")
     ;; ("s" org-babel-tangle-jump-to-org "Back to org")
     ("j" dired-jump "Dired jump"))))
 (bind-key "H-`"  'hydra-kl/body)

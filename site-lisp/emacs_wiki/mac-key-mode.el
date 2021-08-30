@@ -201,12 +201,12 @@ When Mac Key mode is enabled, mac-style key bindings are provided."
             '("--" . nil) 'redo)
 
           ;; assign mac-key-quick-look to the SPC key
-          (if (boundp 'dired-mode-map)
-              (define-key dired-mode-map " " 'mac-key-quick-look)
-            (add-hook 'dired-mode-hook
-                      (lambda () (interactive)
-                        (define-key dired-mode-map " " 'mac-key-quick-look)))
-            )
+          ;; (if (boundp 'dired-mode-map)
+          ;;     (define-key dired-mode-map " " 'mac-key-quick-look)
+          ;;   (add-hook 'dired-mode-hook
+          ;;             (lambda () (interactive)
+          ;;               (define-key dired-mode-map " " 'mac-key-quick-look)))
+          ;;   )
 
           ))
     (progn
@@ -226,11 +226,11 @@ When Mac Key mode is enabled, mac-style key bindings are provided."
         (global-unset-key [menu-bar edit mac-key-edit-separator])
 
         ;; restore SPC to dired-next-line (a bad way to deal with it)
-        (if (boundp 'dired-mode-map)
-            (define-key dired-mode-map " " 'dired-next-line))
-        (remove-hook 'dired-mode-hook
-                     (lambda () (interactive)
-                       (define-key dired-mode-map " " 'mac-key-quick-look)))
+        ;; (if (boundp 'dired-mode-map)
+        ;;     (define-key dired-mode-map " " 'dired-next-line))
+        ;; (remove-hook 'dired-mode-hook
+        ;;              (lambda () (interactive)
+        ;;                (define-key dired-mode-map " " 'mac-key-quick-look)))
 
         ))
     ))

@@ -5440,6 +5440,42 @@ Move WORKTREE to PATH.
 
 
 )
+(let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/treemacs-icons-dired-20210630.1953/treemacs-icons-dired-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/27.2/elpa/treemacs-icons-dired-20210630.1953/treemacs-icons-dired-autoloads.el") (car load-path))))
+
+
+
+(defvar treemacs-icons-dired-mode nil "\
+Non-nil if Treemacs-Icons-Dired mode is enabled.
+See the `treemacs-icons-dired-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `treemacs-icons-dired-mode'.")
+
+(custom-autoload 'treemacs-icons-dired-mode "treemacs-icons-dired" nil)
+
+(autoload 'treemacs-icons-dired-mode "treemacs-icons-dired" "\
+Display treemacs icons for each file in a dired buffer.
+
+If called interactively, enable Treemacs-Icons-Dired mode if ARG
+is positive, and disable it if ARG is zero or negative.
+If called from Lisp, also enable the mode if ARG is omitted or
+nil, and toggle it if ARG is `toggle'; disable the
+mode otherwise.
+
+\(fn &optional ARG)" t nil)
+
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "treemacs-icons-dired" '("treemacs-icons-dired-")))
+
+
+
+
+
+)
 (let ((load-file-name "/Users/mark/.emacs.d/elpa/27.2/elpa/transient-posframe-20210102.130/transient-posframe-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -16893,7 +16929,7 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
 )
 (setq package-activated-list
 	  (append
-	   '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe wgrep vlf validate bind-key use-package use-package-hydra projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit-section magit treemacs-magit transient-posframe toc-org test-simple ivy swiper srefactor spinner all-the-icons powerline spaceline memoize spaceline-all-the-icons sml-mode smartparens f shrink-path prescient selectrum selectrum-prescient rg load-relative loc-changes realgud rainbow-mode rainbow-delimiters pos-tip racket-mode python-mode pretty-hydra popup epl pkg-info persistent-scratch paredit paradox packed outorg outshine org-bullets org kv esxml nov mwim moody modus-themes mmm-mode minions mini-frame math-symbol-lists marginalia makey major-mode-hydra macrostep list-utils iedit counsel lispy lisp-extra-font-lock keyfreq json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine git-messenger ggtags gcmh free-keys flycheck fish-mode fira-code-mode expand-region eval-in-repl eros clang-format emr embark consult embark-consult elmacro dtrt-indent doom-modeline discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep ctrlf company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-theme cmake-mode cask-mode beacon auto-compile auctex async amx all-the-icons-ivy-rich all-the-icons-completion aggressive-indent)
+	   '(zoutline yasnippet yaml-mode xterm-color xr xonsh-mode ws-butler with-editor posframe which-key which-key-posframe wgrep vlf validate bind-key use-package use-package-hydra projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit-section magit treemacs-magit treemacs-icons-dired transient-posframe toc-org test-simple ivy swiper srefactor spinner all-the-icons powerline spaceline memoize spaceline-all-the-icons sml-mode smartparens f shrink-path prescient selectrum selectrum-prescient rg load-relative loc-changes realgud rainbow-mode rainbow-delimiters pos-tip racket-mode python-mode pretty-hydra popup epl pkg-info persistent-scratch paredit paradox packed outorg outshine org-bullets org kv esxml nov mwim moody modus-themes mmm-mode minions mini-frame math-symbol-lists marginalia makey major-mode-hydra macrostep list-utils iedit counsel lispy lisp-extra-font-lock keyfreq json-snatcher json-reformat hierarchy json-navigator json-mode ivy-rich ivy-prescient ivy-posframe ivy-hydra ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine git-messenger ggtags gcmh free-keys flycheck fish-mode fira-code-mode expand-region eval-in-repl eros clang-format emr embark consult embark-consult elmacro dtrt-indent doom-modeline discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep ctrlf company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 color-theme-modern color-theme cmake-mode cask-mode beacon auto-compile auctex async amx all-the-icons-ivy-rich all-the-icons-completion aggressive-indent)
 	   package-activated-list))
 (progn
   (require 'info)

@@ -347,10 +347,9 @@ Use icons from treemacs
 #+NAME: org_2020-12-06+00-00_C748F245-1E25-4A85-BE27-BD671864B180
 #+begin_src emacs-lisp
 (use-package treemacs-icons-dired
-   :after treemacs dired
-   :disabled
-   :ensure t
-   :config (treemacs-icons-dired-mode))
+  :after treemacs dired
+  :ensure t
+  :config (treemacs-icons-dired-mode))
 #+end_src
 
 ** Hydra

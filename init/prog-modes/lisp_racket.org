@@ -64,12 +64,15 @@ This is the minimal setup and does not need changing
 			  :map racket-repl-mode-map
 			  ("<f5>" . racket-mwb-run-hydra)
 			  ("M-l" . racket-insert-lambda)
-	          ("<f1> <f1>" . racket-xp-describe))
+	          ("<f1> <f1>" . racket-xp-describe)
+			  :map racket-xp-mode-map
+			  ("<f8>"  . racket-xp-next-error))
   :mode (rx (seq ".racket" string-end))
   :init
   (setq racket-program "/Applications/Racket v8.2/bin/racket"
         racket-images-inline t)
-
+  (setq racket-repl-buffer-name-function
+        #'racket-repl-buffer-name-project)
   ;; From   https://stackoverflow.com/questions/37571164/emacs-company-mode-completion-not-working
   (defun my-racket-mode-hook ()
     (my-all-racket-mode-hook)

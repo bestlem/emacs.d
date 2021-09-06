@@ -482,9 +482,14 @@ By default C-x k runs the command kill-buffer which prompts you for which buffer
 :END:
 If a buffer has a subprocess running (e.g. shell, racket-run then emacs will prompt to ask if you want to kill it. I think you always do. So from https://emacs.stackexchange.com/a/14511/9874
 #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_4D892993-8FA6-4917-A0AD-D75C5B69035E
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (setq kill-buffer-query-functions
       (delq 'process-kill-buffer-query-function kill-buffer-query-functions))
+#+end_src
+But emacs 26 seems to have improved this from [[https://emacs.stackexchange.com/a/52677/9874][Another SO]]
+#+NAME: org_mark_mini20.local_20210906T081112.772859
+#+begin_src emacs-lisp
+(setq confirm-kill-processes nil)
 #+end_src
 ** Revert buffer
 :PROPERTIES:

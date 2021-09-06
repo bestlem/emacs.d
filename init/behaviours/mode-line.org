@@ -140,23 +140,25 @@ This cuts out all diminish issues but also see https://www.manueluberti.eu/emacs
   :hook ((mwb-headline-mode doom-modeline-mode) . minions-mode)
   :init
   (setq minions-blacklist '(auto-compile-mode
-                            company-mode
-                            dash-fontify-mode
-                            eldoc-mode
-                            flycheck-mode
-                            font-lock-mode
-                            guess-style-info-mode
-                            highlight-indent-guides-mode
-                            lispy-mnemonic-mode
-                            org-src-mode
-                            rainbow-delimiters-mode
-                            ws-butler-mode
                             auto-compile-on-load-mode
-                            beacon-mode
-                            gcmh-mode
-                            global-hardhat-mode
-                            persistent-scratch-autosave-mode
-                            ))
+							beacon-mode
+							company-mode
+							company-posframe
+							dash-fontify-mode
+                            diff-hl-flydiff-mode
+							eldoc-mode
+							flycheck-mode
+							font-lock-mode
+							gcmh-mode
+							global-hardhat-mode
+							guess-style-info-mode
+							highlight-indent-guides-mode
+							lispy-mnemonic-mode
+							org-src-mode
+							persistent-scratch-autosave-mode
+							rainbow-delimiters-mode
+							which-key-mode
+							ws-butler-mode))
   :config
   (setq minions-mode-line-minor-modes-map
         (let ((map (make-sparse-keymap)))

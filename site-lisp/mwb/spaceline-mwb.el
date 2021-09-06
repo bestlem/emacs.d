@@ -47,6 +47,21 @@
 
 ;;; Forward declarations of Optional Dependencies
 
+
+(spaceline-define-segment
+	mwb-minor-modes-tree
+  "Taken from doom-modeline a minion in mode-line."
+
+  (propertize ( treemacs-get-icon-value "config")
+			  'mouse-face 'mode-line-highlight
+			  'help-echo "Minions
+mouse-1: Display minor modes menu"
+			  'local-map minions-mode-line-minor-modes-map
+			  ;; 'display `(:raise 1.0)
+			  'face `(
+					  :height 0.5
+			   		  :inherit)
+			  ))
 ;;; Themes
 (spaceline-compile "mwb-test"
   '(mwb-racket)
@@ -57,6 +72,7 @@
   '(
 	mwb-mode-icon
 	mwb-minor-modes
+	mwb-minor-modes-tree
 	(mwb-narrowed mwb-modified mwb-hardhat mwb-rw )
 	recursive-edit
 	mwb-bookmark
@@ -65,6 +81,7 @@
 	(mwb-buffer-size line-column)
 	((mwb-flycheck mwb-racket)  :priority 89 :when active )
 	(all-the-icons-which-function)
+	""
 	))
 
 (spaceline-compile
@@ -114,11 +131,11 @@
 	  (setq mode-line-format fmt))))
 
 (defun spaceline-mwb--set-header (target)
-  "Set the header-line to the TARGET defined by a spaceline-copmpile."
+  "Set the header-line to the TARGET defined by a spaceline-compile."
   (spaceline-mwb--set-format 't target))
 
 (defun spaceline-mwb--set-footer (target)
-  "Set the mode-line to the TARGET defined by a spaceline-copmpile."
+  "Set the mode-line to the TARGET defined by a spaceline-compile."
   (spaceline-mwb--set-format '() target))
 
 (defun spaceline-mwb-simple-mode ()

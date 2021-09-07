@@ -62,7 +62,7 @@ So back to spaceline - but again complex.
 
 Stick with jp- but I suspect when complete will be as bad as the others e.g. need to define segments and colours and icons
 
-But jp- is based on nano-modeline so lets see that, Note it only appeard begging of Jun 2021 so I could not have it earlier before like jp- I would have had to cut and paste. from nano
+But jp- is based on nano-modeline so lets see that, Note it only appeard beginning of Jun 2021 so I could not have it earlier before like jp- I would have had to cut and paste. from nano
 
 nano well config is nice but each build up hardcodes the buffer status and uses its own colors. I think I can just override the status but colors no. I can see copying it all into mine.
 nano-modeline sets face (but not if I had it at bottom, as does nano-modeline-compose, or some face remapping :(
@@ -103,7 +103,19 @@ And that paragraph is better analysis than for the last month.
 
 So spaceline - all the icons based.
 
-Found eyeline - spaceline wioth icons but less that all-the icons - might be easier though unfortunately author noiw uses doom
+Found eyeline - spaceline wioth icons but less that all-the icons - might be easier though unfortunately author noiw uses doom.
+
+** Design
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210907T094034.689822
+:END:
+In essence you need the equivalent of  spaceline--get-face (and I had to change that fior header) to choose face depending on active/inactive/selected then icons need these three choices which breaks treemacs which does not have the 3 cases and would need another set as background for active is not bright.
+
+Then you need to wrap the logic in a macro so this active etc flag is passed in.
+
+So again spaceline is best but is based off powerline - and I want just the one background no chevrons. set the separator to nil (and for color set both the same)
+
+So arat from not dealing with icon spacing (ie width) does all.
 
 * Packages
 :PROPERTIES:
@@ -202,7 +214,7 @@ Make mine call his
 * Centaur setup/ a configured Doom -no tangle
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210602T224030.562027
-:header-args:    :tangle no
+:header-args: :tangle no
 :END:
 Makes use of doom-modeline and minions
 TODO add to doom-modeline-indent-alist
@@ -454,6 +466,8 @@ Let's do the basic
   ;; :config
   ;; (require 'spaceline-config)
   ;; (spaceline-spacemacs-theme)
+  :init
+  (setq powerline-default-separator nil) ; no chevrons etc
   )
   #+end_src
 #+end_src

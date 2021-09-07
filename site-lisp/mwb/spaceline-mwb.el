@@ -72,7 +72,6 @@ mouse-1: Display minor modes menu"
   '(
 	mwb-mode-icon
 	mwb-minor-modes
-	mwb-minor-modes-tree
 	(mwb-narrowed mwb-modified mwb-hardhat mwb-rw )
 	recursive-edit
 	mwb-bookmark

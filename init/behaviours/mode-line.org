@@ -127,6 +127,7 @@ So arat from not dealing with icon spacing (ie width) does all.
 #+begin_src emacs-lisp
 (use-package moody
   :ensure t
+  :disabled
   ;;  Temportary as in jp-modeline
   ;; :disabled
 
@@ -148,8 +149,8 @@ This cuts out all diminish issues but also see https://www.manueluberti.eu/emacs
 #+NAME: org_mark_mini20.local_20210602T224030.555025
 #+begin_src emacs-lisp
 (use-package minions
-  :ensure t
   :hook ((mwb-headline-mode doom-modeline-mode) . minions-mode)
+  :commands minions-mode
   :init
   (setq minions-blacklist '(auto-compile-mode
                             auto-compile-on-load-mode
@@ -462,7 +463,7 @@ Let's do the basic
 #+begin_src emacs-lisp
 (use-package spaceline
   :ensure t
-  :demand
+  :defer 1
   ;; :config
   ;; (require 'spaceline-config)
   ;; (spaceline-spacemacs-theme)
@@ -491,7 +492,7 @@ Let's do the basic
 #+begin_src emacs-lisp
 (use-feature spaceline-mwb
   :unless *aquamacs*
-  :defer 1
+  :after spaceline-all-the-icons
   :config
   (spaceline-mwb-theme))
 #+end_src

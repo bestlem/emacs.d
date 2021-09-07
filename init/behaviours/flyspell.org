@@ -31,9 +31,17 @@ Start for all text modes (but not for log files):
 		((executable-find "hunspell")
 		 (setq-default ispell-program-name "hunspell")
 		 (setq ispell-really-hunspell t)))
-  :hook ((prog-mode . flyspell-prog-mode)
-		 ((text-mode org-mode) . turn-on-flyspell)
-		 ((change-log-mode log-edit-mode org-agenda-mode) . turn-off-flyspell))
+  :config
+  ;; defer loading
+  (add-hook 'prog-mode-hook #'flyspell-prog-mode)
+  (add-hook 'text-mode-hook #'turn-on-flyspell)
+  (dolist (ele '(change-log-mode-hook
+				 log-edit-mode-hook
+				 org-agenda-mode-hook))
+	(add-hook ele #'turn-off-flyspell))
+  ;; :hook ((prog-mode . flyspell-prog-mode)
+  ;; 		 ((text-mode org-mode) . turn-on-flyspell)
+  ;; 		 ((change-log-mode log-edit-mode org-agenda-mode) . turn-off-flyspell))
   ;; :config
   ;; Popup window for spellchecking - seems that flyspell does this itself
   ;; (use-package flyspell-correct

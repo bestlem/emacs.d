@@ -112,17 +112,6 @@ I haven't used before but might try with hydra from [[https://sriramkswamy.githu
 (unless *aquamacs*
   (fset 'yes-or-no-p 'y-or-n-p))
    #+END_SRC
-* Key Chord
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:727BACF4-7E05-4203-85B7-65661B36F7B5
-:END:
-#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_CAA5ED48-7C06-4625-A839-267E09964133
-#+begin_src emacs-lisp
-(use-package key-chord
-  :disabled
-  :ensure t
-  :config (key-chord-mode 1))
-#+end_src
 * Delete if selected
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:1093B961-57F6-4B74-9CCD-F155EEDA2E87
@@ -287,23 +276,8 @@ The hydra did not add anything. Just keep hitting f2
 There are several ways to make begin go to first non whitespace  then to begin line, some will then make next press go to defun or buffer.
 Note home and end are in Aquamacs osx-mode-map makes life more complex (actually not as mosey overrides it unless you deactivate and reactivate it). Perhaps I will have to unset them to allow modes to do their things These include crux, [[https://github.com/alezost/mwim.el][mwin]] and ergoemacs,  [[https://github.com/alphapapa/mosey.el][mosey]] + snippets on web.
 Note that lispy also does this but not back a form.
+Tried mosey as it has the back function - NB can use smartparens, unfortunately does not seem to work with shift and as others do try another.
 mwin seems the current winner
-*** Mosey
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:7A6F1A54-B69B-4674-8B4B-1B404D40B67D
-:END:
-Try mosey as it has the back function - NB can use smartparens, unfortunately does not seem to work with shift and as others do try another.
-#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_D167236A-A698-4694-A38A-C0A02B3D0153
-#+begin_src emacs-lisp
-(use-package mosey
-  :disabled
-  :ensure t
-  :bind (
-         ;; My personal favorites
-         ("<home>" . mosey-backward-bounce)
-         ("<end>" . mosey-forward-bounce)
-         ))
-#+end_src
 *** mwin
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:73B44400-98DA-4212-B923-8DC1AF3E360A

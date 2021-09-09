@@ -93,18 +93,6 @@ Need a function to save an then do things
 :END:
 I am not certain this is needed now as other things do this. Aggressive indent for example
 However I had a lot of strings so tried.
-*** elisp formatter
-:PROPERTIES:
-:ID:       org_mark_2020-11-24T18-08-50+00-00_mini12.local:254245E4-B413-4094-9DB5-555CC09FAC81
-:END:
-    After a use not that good
-    #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_371FFD2B-49E8-4C8D-BD20-E974C39BA8E2
-    #+begin_src  emacs-lisp :tangle no
-(use-package elisp-format
-  :disabled
-  :defer 10
-  :ensure t)
-    #+end_src
 *** [[https://github.com/tuhdo/semantic-refactor][Semantic Refactor]]
 :PROPERTIES:
 :ID:       org_mark_2020-11-24T18-08-50+00-00_mini12.local:CB649654-2804-4D51-8437-55D5DC0A68F6
@@ -619,19 +607,6 @@ Original just stops check for all the package and documentation heading. Need to
 #+begin_src emacs-lisp
 (use-package cask-mode :ensure t)
 #+end_src
-
-* xah mode
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:FB3F4B30-A5F0-41D1-A9D5-48069D7A5898
-:END:
-	 This does more formatting and has useful abbreviations but I don't know if will work with lispy
-     #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_93A1C8F8-DA67-4EF7-BA47-905CC3187347
-     #+begin_src emacs-lisp
-(use-package xah-elisp-mode
-  :ensure t
-  :disabled
-  :hook emacs-lisp-mode)
-     #+end_src
 
 * Regular expressions
 :PROPERTIES:

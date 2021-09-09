@@ -178,18 +178,6 @@ These provide some tools for all the other modes so can't be in the modes sub di
 		   (face-remap-add-relative 'variable-pitch :family "Times New Roman" :height 1.5)
 		   :hook (nov-mode . my-nov-setup)))
 	   #+end_src
-*** Web display
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:F2507988-AE2D-4676-9002-0FDC2DF2DBCB
-:END:
-	   Make contrast higher from steckemacs
-	   #+begin_src emacs-lisp
-	   (use-package shr
-         :disabled
-		 :custom
-		 ;; increase contrast between similar colors
-		 (shr-color-visible-luminance-min 60))
-	   #+end_src
 ** Programming modes
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:3C0D8B60-3C14-4F89-84AB-6D54D08C2C36
@@ -275,24 +263,6 @@ Well tried and treemacs screwed up
         wg-session-file (no-littering-expand-var-file-name "workgroups2")
         ))
 #+end_src
-** Dashboard
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:047865CE-76CF-4835-98C6-1B1313B9544C
-:END:
-This seemed interesting but seemed to messup lispy
-    #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_36B9271A-376B-404D-AC09-6460A21BCBBF
-    #+begin_src emacs-lisp
-    (use-package dashboard
-:disabled
-      :ensure t
-      :config
-      (dashboard-setup-startup-hook)
-      (setq dashboard-items '((recents . 5)
-                              (bookmarks . 5)
-                              (projects . 5)
-                              (agenda . 5)
-                              (registers . 5))))
-    #+end_src
 ** Current startup settings
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:0904FB99-90C7-4D22-8B26-846E12DE3921

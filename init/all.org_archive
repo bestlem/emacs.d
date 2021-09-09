@@ -1,0 +1,57 @@
+#    -*- mode: org -*-
+
+
+Archived entries from file /Users/mark/SyncServices/Dropbox/env/emacs.d/init/all.org
+
+
+* Major modes
+  :PROPERTIES:
+  :ID:       org_mark_mini20.local:20210909T094653.520727
+  :END:
+** Text modes
+   :PROPERTIES:
+   :ID:       org_mark_mini20.local:20210909T094653.520231
+   :END:
+*** Web display
+	:PROPERTIES:
+	:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:F2507988-AE2D-4676-9002-0FDC2DF2DBCB
+	:ARCHIVE_TIME: 2021-09-09 Thu 09:46
+	:ARCHIVE_FILE: ~/SyncServices/Dropbox/env/emacs.d/init/all.org
+	:ARCHIVE_OLPATH: Major modes/Text modes
+	:ARCHIVE_CATEGORY: all
+	:END:
+	   Make contrast higher from steckemacs
+	   #+begin_src emacs-lisp
+	   (use-package shr
+         :disabled
+		 :custom
+		 ;; increase contrast between similar colors
+		 (shr-color-visible-luminance-min 60))
+	   #+end_src
+
+* Startup data
+  :PROPERTIES:
+  :ID:       org_mark_mini20.local:20210909T095207.322264
+  :END:
+** Dashboard
+   :PROPERTIES:
+   :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:047865CE-76CF-4835-98C6-1B1313B9544C
+   :ARCHIVE_TIME: 2021-09-09 Thu 09:46
+   :ARCHIVE_FILE: ~/SyncServices/Dropbox/env/emacs.d/init/all.org
+   :ARCHIVE_OLPATH: Startup data
+   :ARCHIVE_CATEGORY: all
+   :END:
+ This seemed interesting but seemed to messup lispy
+     #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_36B9271A-376B-404D-AC09-6460A21BCBBF
+     #+begin_src emacs-lisp
+    (use-package dashboard
+:disabled
+      :ensure t
+      :config
+      (dashboard-setup-startup-hook)
+      (setq dashboard-items '((recents . 5)
+                              (bookmarks . 5)
+                              (projects . 5)
+                              (agenda . 5)
+                              (registers . 5))))
+     #+end_src

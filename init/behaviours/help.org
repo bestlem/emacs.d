@@ -32,40 +32,28 @@ Let's use [[https://github.com/Wilfred/helpful][Helpful]] But bind the keys in k
 (use-package-elpa helpful
   :after help-fns+
   :bind (:map help-map
-              ;; mine
-		      ("c" . describe-char)
+			  ;; mine
+			  ("c" . describe-char)
+			  ;; ("l" . counsel-find-library)
 
-		      ;; From counsel note helpfult setup points them to helpful
-		      ("f" . counsel-describe-function)
-		      ("v" . counsel-describe-variable)
-		      ("l" . counsel-find-library)
+			  ;; From helpful - not using remsp - make it explicit
+			  ;; Note these use consult be default - counsel need explicit.
+			  ("." . helpful-at-point)
+			  ("<f1>" . helpful-at-point)
+			  ("f" . helpful-callable)
+			  ("v" . helpful-variable)
+			  ;; This worked when in helpful I spose it did the prefix as well
+			  ;; ([remap describe-key] . helpful-key)
+			  ("k" . helpful-key)
 
-		      ;; From helpful
-		      ("." . helpful-at-point)
-		      ("<f1>" . helpful-at-point)
-		      ;; This worked when in helpful I spose it did the prefix as well
-		      ;; ([remap describe-key] . helpful-key)
-		      ("k" . helpful-key)
-		      ;; hemacs
-		      ;; ("g" . google-this)
-		      ("K" . free-keys)
-		      ;;  ("f" . flymake-show-diagnostics-buffer)
+			  ;; hemacs
+			  ;; ("g" . google-this)
+			  ("K" . free-keys)
+			  ;;  ("f" . flymake-show-diagnostics-buffer)
 
-		      ;; discover my major
-		      ("C-m" . discover-my-major)
-		      ("M-m" . discover-my-mode)
-		      ;; helpful
-		      ;; ([remap describe-function] . helpful-callable)
-              ;;([remap describe-command] . helpful-command)
-		      ;; ([remap describe-variable] . helpful-variable)
-		      ;; ([remap describe-key] . helpful-key)
-		      ;; ("<f1> F" . helpful-function)
-		      ;; ("<f1> ." . helpful-at-point)
-		      ;; ("<f1> <f1>" . helpful-at-point)  )
-              )
-  :custom
-  (counsel-describe-function-function #'helpful-callable)
-  (counsel-describe-variable-function #'helpful-variable))
+			  ;; discover my major
+			  ("C-m" . discover-my-major)
+			  ("M-m" . discover-my-mode)))
 #+end_src
 * Improve majors
 :PROPERTIES:

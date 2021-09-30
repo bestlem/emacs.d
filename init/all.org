@@ -100,12 +100,13 @@ TODO: exclude sopme directories - especially modus-themes and treemacs as they n
 Recompile emacs lisp  if already compiled on save but also on load.
 #+NAME: org_mark_mini20.local_20210822T130010.997493
 #+begin_src emacs-lisp
-(use-package auto-compile
-  :ensure t
-  :config
-  (auto-compile-on-load-mode)
-  (auto-compile-on-save-mode)
-  (setq auto-compile-display-buffer 1))
+(when (= emacs-major-version 27)
+  (use-package auto-compile
+    :ensure t
+    :config
+    (auto-compile-on-load-mode)
+    (auto-compile-on-save-mode)
+    (setq auto-compile-display-buffer 1)))
 #+end_src
 * Emacs server
 :PROPERTIES:

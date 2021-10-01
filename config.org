@@ -994,34 +994,39 @@ I need to set the mouse - unfortunately it is in a minor mode map not global so 
   ;; :mwb-load-path "fork/treemacs/src/elisp"
   :demand
   :init
-  (with-eval-after-load 'winum
-    (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
   (setq treemacs-width 50)
   :commands (treemacs treemacs-rightclick-menu)
   :config
   (setq treemacs--no-messages nil)
-  (setq treemacs-user-header-line-format  #'treemacs-header-buttons-format)
+
   (setq hydra-key-regex "\\[\\|]\\|[-\\[:alnum:] ~.,;:/|?<>={}*+#%@!&^⇧⌘⌥↑↓←→⌫⌦⏎'`()\"$]+?") ; add Mac key symbols
 
-  (setq treemacs-silent-refresh t
-        treemacs-persist-file (mwb-user-emacs-file "data/treemacs-persist"))
+  (setq treemacs-persist-file (mwb-user-emacs-file "data/treemacs-persist"))
   (with-eval-after-load 'treemacs
-    (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?))
+	(add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?))
+
 
   ;; The default width and height of the icons is 22 pixels. If you are
   ;; using a Hi-DPI display, uncomment this to double the icon size.
   ;;(treemacs-resize-icons 44)
 
   (treemacs-follow-mode t)
-  (setq treemacs-silent-filewatch t)
+
   (treemacs-filewatch-mode t)
   (treemacs-fringe-indicator-mode t)
   (pcase (cons (not (null (executable-find "git")))
-               (not (null treemacs-python-executable )))
-    (`(t . t)
-     (treemacs-git-mode 'deferred))
-    (`(t . _)
-     (treemacs-git-mode 'simple))))
+			   (not (null treemacs-python-executable)))
+	(`(t . t)
+	 (treemacs-git-mode 'deferred))
+	(`(t . _)
+	 (treemacs-git-mode 'simple)))
+  :custom
+  (treemacs-indent-guide-mode t)
+  (treemacs-silent-refresh t)
+  ( treemacs-silent-filewatch t)
+  ( treemacs-tag-follow-delay 2.5)
+  (treemacs-indent-guide-style 'block)
+  (treemacs-user-header-line-format #'treemacs-header-buttons-format))
 #+end_src
 
 **** Keys

@@ -122,6 +122,7 @@ Well I don't know what the frame parameters are left and width can be proportion
 	;; (setq mini-frame-show-parameters #'mwb-mini-frame-parameters)
 	(setq mini-frame-completions-show-parameters
 		  #'mwb-mini-frame-completions-parameters)
+	:config
 	(mini-frame-mode 1)))
 #+end_src
 * Newer
@@ -156,82 +157,71 @@ Replace isearch but not so easy as consult-line plus can leave the progress mark
 #+begin_src emacs-lisp
 (when *emacs/>=26p*
   (use-package-elpa consult
-    :demand
-    :init
-    (setq register-preview-delay 0
-          register-preview-function #'consult-register-format)
-    ;; Optionally tweak the register preview window.
-    ;; This adds thin lines, sorting and hides the mode line of the window.
-    (advice-add #'register-preview :override #'consult-register-window)
+	:demand
+	:init
+	(setq register-preview-delay 0
+		  register-preview-function #'consult-register-format)
+	;; Optionally tweak the register preview window.
+	;; This adds thin lines, sorting and hides the mode line of the window.
+	(advice-add #'register-preview :override #'consult-register-window)
 
-    ;; Use Consult to select xref locations with preview
-    (setq xref-show-xrefs-function #'consult-xref
-          xref-show-definitions-function #'consult-xref)
+	;; Use Consult to select xref locations with preview
+	(setq xref-show-xrefs-function #'consult-xref
+		  xref-show-definitions-function #'consult-xref)
 
-    :config
-    (setq consult-project-root-function #'projectile-project-root)
-    (setq consult-narrow-key "<")
+	:config
+	(setq consult-project-root-function #'projectile-project-root)
+	(setq consult-narrow-key "<")
 
-    ;;  Delay preview
-    (consult-customize consult-theme consult-buffer
-                       :preview-key '(:debounce 1.0 any))
-    ))
-#+end_src
-** Key bindings
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20210810T181833.289447
-:END:
-Separate so smaller buffer to edit
-
-#+NAME: org_mark_mini20.local_20210810T181833.276964
-#+begin_src emacs-lisp
-(use-package-elpa consult
-  :bind (("C-x r x" . consult-register)
-		 ("C-x r b" . consult-bookmark)
-		 ("C-c k" . consult-kmacro)
-		 ("C-x M-:" . consult-complex-command) ;; orig. repeat-complet-command
-		 ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
-		 ("C-x 5 b" . consult-buffer-other-frame)
-		 ("M-#" . consult-register-load)
-		 ("M-'" . consult-register-store) ;; orig. abbrev-prefix-mark (unrelated)
-		 ("C-M-#" . consult-register)
-		 ("C-x b" . consult-buffer)
-		 ("<help> a" . consult-apropos) ;; orig. apropos-command
-		 ;; Goto keys
-		 ("M-g h" . consult-org-heading)
-		 ("M-g e" . consult-compile-error)
-		 ("M-g f" . consult-flycheck)
-		 ("M-g g" . consult-goto-line) ;; orig. goto-line
-		 ("M-g M-g" . consult-goto-line) ;; orig. goto-line
-		 ("M-g a" . consult-org-agenda)
-		 ("M-g m" . consult-mark)
-		 ("M-g M-g" . consult-goto-line) ;; orig. goto-line
-		 ("M-g o" . consult-outline)
-		 ("M-g m" . consult-mark)
-		 ("M-g k" . consult-global-mark)
-		 ("M-g i" . consult-imenu)
-		 ("M-g I" . consult-project-imenu)
-		 ;; M-s bindings (search-map)
-		 ("M-s f" . consult-find)
-		 ("M-s L" . consult-locate)
-		 ("M-s g" . consult-grep)
-		 ("M-s G" . consult-git-grep)
-		 ("M-s r" . consult-ripgrep)
-		 ("M-s l" . consult-line)
-		 ("M-s m" . consult-multi-occur)
-		 ("M-s k" . consult-keep-lines)
-		 ("M-s u" . consult-focus-lines)
-		 ;; Isearch integration
-		 ("M-s e" . consult-isearch)
-		 ;; ("M-g l" . consult-line)
-		 ("C-x c SPC" . consult-mark)
-		 :map isearch-mode-map
-		 ("M-e" . consult-isearch) ;; orig. isearch-edit-string
-		 ("M-s e" . consult-isearch) ;; orig. isearch-edit-string
-		 ("M-s l" . consult-line)
-		 :map mac-key-mode-map
-		 ("A-f" . consult-line)
-		 ("A-b" . consult-buffer)))
+	;;  Delay preview
+	(consult-customize consult-theme consult-buffer
+					   :preview-key '(:debounce 1.0 any))
+	:bind (("C-x r x" . consult-register)
+		   ("C-x r b" . consult-bookmark)
+		   ("C-c k" . consult-kmacro)
+		   ("C-x M-:" . consult-complex-command) ;; orig. repeat-complet-command
+		   ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
+		   ("C-x 5 b" . consult-buffer-other-frame)
+		   ("M-#" . consult-register-load)
+		   ("M-'" . consult-register-store) ;; orig. abbrev-prefix-mark (unrelated)
+		   ("C-M-#" . consult-register)
+		   ("C-x b" . consult-buffer)
+		   ("<help> a" . consult-apropos) ;; orig. apropos-command
+		   ;; Goto keys
+		   ("M-g h" . consult-org-heading)
+		   ("M-g e" . consult-compile-error)
+		   ("M-g f" . consult-flycheck)
+		   ("M-g g" . consult-goto-line) ;; orig. goto-line
+		   ("M-g M-g" . consult-goto-line) ;; orig. goto-line
+		   ("M-g a" . consult-org-agenda)
+		   ("M-g m" . consult-mark)
+		   ("M-g M-g" . consult-goto-line) ;; orig. goto-line
+		   ("M-g o" . consult-outline)
+		   ("M-g m" . consult-mark)
+		   ("M-g k" . consult-global-mark)
+		   ("M-g i" . consult-imenu)
+		   ("M-g I" . consult-project-imenu)
+		   ;; M-s bindings (search-map)
+		   ("M-s f" . consult-find)
+		   ("M-s L" . consult-locate)
+		   ("M-s g" . consult-grep)
+		   ("M-s G" . consult-git-grep)
+		   ("M-s r" . consult-ripgrep)
+		   ("M-s l" . consult-line)
+		   ("M-s m" . consult-multi-occur)
+		   ("M-s k" . consult-keep-lines)
+		   ("M-s u" . consult-focus-lines)
+		   ;; Isearch integration
+		   ("M-s e" . consult-isearch)
+		   ;; ("M-g l" . consult-line)
+		   ("C-x c SPC" . consult-mark)
+		   :map isearch-mode-map
+		   ("M-e" . consult-isearch) ;; orig. isearch-edit-string
+		   ("M-s e" . consult-isearch) ;; orig. isearch-edit-string
+		   ("M-s l" . consult-line)
+		   :map mac-key-mode-map
+		   ("A-f" . consult-line)
+		   ("A-b" . consult-buffer))))
 #+end_src
 ** All-the-icons-completion
 :PROPERTIES:
@@ -241,7 +231,7 @@ Add icons to completion screens
 #+NAME: org_mark_mini20.local_20210815T090804.348976
 #+begin_src emacs-lisp
 (use-package-elpa all-the-icons-completion
-  :init
+  :config
   (all-the-icons-completion-mode)
   :hook (marginalia-mode . all-the-icons-completion-marginalia-setup))
 #+end_src
@@ -253,6 +243,7 @@ Add decoration/information
 #+NAME: org_mark_mini20.local_20210801T165758.216698
 #+begin_src emacs-lisp
 (use-package-elpa marginalia
+  :commands marginalia-mode
   :init
   (marginalia-mode)
   :config

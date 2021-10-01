@@ -60,12 +60,13 @@
 
 ;;; Code:
 
-(eval-when-compile
-  (require 'cl))
+;; (eval-when-compile
+;;   (require 'cl))
 (require 'cl-lib)
 (require 'find-func)
 (require 'simple) ;; for delete-blank-lines
 (require 'cus-edit)
+(require 'dash)
 (require 'rx)
 
 (defconst initsplit-version "1.9"
@@ -99,7 +100,7 @@ A List of PREFIX where each prefix is the beginning of a symbol that should be n
 Variables and faces matching REGEXP will be written to FILE.
 
 If BYTECOMP is nil, `initsplit-byte-compile-files' will
-not byte-compile FILE.
+not byte compile FILE.
 
 If PRE-LOAD is nil, initsplit will not try to ensure FILE is
 loaded at startup."
@@ -129,6 +130,7 @@ specified with a non-absolute path"
   :group 'initsplit
   :type 'directory)
 
+(defvar mwb-init-customize-directory)
 (defcustom initsplit-pretty-print
   nil
   "If t, initsplit will write reformat customizations with
@@ -137,7 +139,7 @@ customizations in version control, as it tends to result in diffs
 that cover only the actual changes."
   :group 'initsplit
   :type 'boolean)
-
+(defvar initsplit--ignore-prefix-regexp)
 (defcustom initsplit-ignore-prefixes '()
   "*Variable to list tests mto exclude settings files from loading.
 Don't edit in customise as it depends on evaluating the lines.
@@ -330,7 +332,7 @@ Used to remove empty custom-set-* stanzas."
     (goto-char initsplit-stanza-position)
     (unwind-protect
         (let ((sexp (read (current-buffer))))
-          (assert (eq (car sexp) symbol))
+          (cl-assert (eq (car sexp) symbol))
           (if (= 1 (length sexp))
               (progn
                 (custom-save-delete symbol)
@@ -387,7 +389,7 @@ modification."
 (defadvice custom-save-all (around initsplit-custom-save-all
                                    activate compile preactivate)
   "Wrapper over custom-save-all that saves customizations into
-multiple files per (initsplit-custom-alist)"
+multiple files per (initsplit-custom-alist)."
 
   ;; Store up the saved-value/face properties of all symbols
   ;; and remember that we haven't saved them yet

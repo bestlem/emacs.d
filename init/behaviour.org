@@ -417,8 +417,9 @@ mwin might have mode aware
           "~/Library/Preferences/Aquamacs Emacs/Packages"
           "~/src/ThirdParty/"
           "emacs\\.d/elpa/"))
+  :config
   (global-hardhat-mode)
-  :config (validate-setq hardhat-mode-lighter "Ⓗ"))
+  (validate-setq hardhat-mode-lighter "Ⓗ"))
 #+end_src
 ** Buffer switch
 :PROPERTIES:

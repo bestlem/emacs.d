@@ -30,6 +30,7 @@
 
 ;; [[file:init.org::*Debug flag][Debug flag:1]]
 (setq init-file-debug 'nil)
+(setq init-file-debug t)
 ;; (require 'profiler)
 ;; (profiler-start 'cpu+mem)
 ;; (add-hook-lambda after-init-hook (profiler-stop))

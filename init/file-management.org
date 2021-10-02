@@ -370,18 +370,19 @@ Might allow search in ignore files. It is more flexible but display is not as ea
 :END:
 This add functions. I would use John Wiegley's setup but projectile hung
 So take from projectile
-#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_EC0FF02A-9007-4E8B-AFC6-969483F6963D
+*** use_package
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20211002T193350.827718
+:END:
+#+NAME: org_mark_mini20.local_20211002T193350.818453
 #+begin_src emacs-lisp
 (use-package projectile
   :ensure t
   :diminish
-  ;; :bind* (
-  ;;         ("H-P" . (lambda () (interactive)
-  ;;                      (projectile-cleanup-known-projects)
-  ;;                      (projectile-discover-projects-in-search-path))))
-  ;; :bind-keymap ("H-p" . projectile-command-map)
+  :init
+  (setq projectile-known-projects-file (concat user-emacs-directory "projectile/projectile-bookmarks.eld"))
   :config
-  ;; racket from greghendershott
+
   (add-to-list 'projectile-globally-ignored-directories "compiled")
   (projectile-register-project-type 'racket '("info.rkt")
 									:compile "make setup"

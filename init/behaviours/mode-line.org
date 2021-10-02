@@ -132,9 +132,10 @@ This cuts out all diminish issues but also see https://www.manueluberti.eu/emacs
 :END:
 #+NAME: org_mark_mini20.local_20210602T224030.555025
 #+begin_src emacs-lisp
-(use-package minions
+(use-package-elpa minions
   :hook ((mwb-headline-mode doom-modeline-mode) . minions-mode)
   :commands minions-mode
+
   :init
   (setq minions-blacklist '(auto-compile-mode
                             auto-compile-on-load-mode

@@ -17,14 +17,13 @@
 ;; [[file:init.org::org_mark_2020-09-28T01-08-28+01-00_mini12.local_0E90CFE6-BBAC-4DA3-8461-12811764098F][org_mark_2020-09-28T01-08-28+01-00_mini12.local_0E90CFE6-BBAC-4DA3-8461-12811764098F]]
 (setq package-user-dir
       (expand-file-name
-       (format "elpa/%s/elpa"
-               (concat emacs-version (when (getenv "MELPA_STABLE") "-stable"))) user-emacs-directory))
+       (format "elpa/%s" emacs-major-version) user-emacs-directory))
 ;; org_mark_2020-09-28T01-08-28+01-00_mini12.local_0E90CFE6-BBAC-4DA3-8461-12811764098F ends here
 
 ;; [[file:init.org::org_mark_mini20.local_20210625T123956.553714][org_mark_mini20.local_20210625T123956.553714]]
 (setq package-quickstart-file
 	  (expand-file-name
-	   (format "package-quickstart.%s.el" emacs-version)
+	   (format "package-quickstart.%d.el" emacs-major-version)
 	   user-emacs-directory))
 ;; org_mark_mini20.local_20210625T123956.553714 ends here
 

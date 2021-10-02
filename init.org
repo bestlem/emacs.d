@@ -55,9 +55,8 @@ Set the path to packages
 #+NAME: org_mark_2020-09-28T01-08-28+01-00_mini12.local_0E90CFE6-BBAC-4DA3-8461-12811764098F
 #+begin_src emacs-lisp
 (setq package-user-dir
-                 (expand-file-name
-                  (format "elpa/%s/elpa"
-                          (concat emacs-version (when (getenv "MELPA_STABLE") "-stable"))) user-emacs-directory))
+      (expand-file-name
+       (format "elpa/%s" emacs-major-version) user-emacs-directory))
 #+end_src
 *** Set package quickload by version
 :PROPERTIES:
@@ -67,7 +66,7 @@ Set the path to packages
 #+begin_src emacs-lisp
 (setq package-quickstart-file
 	  (expand-file-name
-	   (format "package-quickstart.%s.el" emacs-version)
+	   (format "package-quickstart.%d.el" emacs-major-version)
 	   user-emacs-directory))
 #+end_src
 ** Graphical suppression
@@ -167,6 +166,7 @@ As this is now ~/.emacs.d/init.el and not in ~/Library/Preferences Emacs sees th
 :END:
 	 #+begin_src emacs-lisp
 (setq init-file-debug 'nil)
+(setq init-file-debug t)
 ;; (require 'profiler)
 ;; (profiler-start 'cpu+mem)
 ;; (add-hook-lambda after-init-hook (profiler-stop))

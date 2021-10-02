@@ -75,7 +75,6 @@
 	 ibuffer-vc
 	 projectile
 	 deadgrep
-	 ivy-prescient
 	 prescient
 	 yasnippet
 	 company
@@ -104,7 +103,6 @@
 	 beacon
 	 gitignore-mode
 	 gitconfig-mode
-	 manual
 	 use-package-hydra
 	 backup-each-save
 	 org-bullets
@@ -112,13 +110,10 @@
 	 helm
 	 elisp-format
 	 comment-dwim-2
-	 discover-my-major
 	 json-mode
 	 dired-toggle
 	 aggressive-indent
 	 gradle-mode
-	 groovy-imports
 	 groovy-mode
 	 ws-butler
-	 diminish
-	 key-chord)))
+	 diminish)))

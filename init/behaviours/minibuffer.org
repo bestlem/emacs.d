@@ -316,7 +316,7 @@ Take action in selection buffer
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210801T174734.765653
 :END:
-The display part as verticle list
+The display part as vertical list
 #+NAME: org_mark_mini20.local_20210801T174734.748739
 #+begin_src emacs-lisp
 (use-package-elpa selectrum  :init (selectrum-mode +1))

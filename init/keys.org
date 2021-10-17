@@ -589,7 +589,7 @@ Try with an enhanced one but test to mouse-4 which might have issues with treema
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:A41389A4-CD6E-44AD-A79A-C170F7936D9D
 :END:
-** TODO Leader keys
+** Leader keys
 :PROPERTIES:
 :ID:       org_2020-12-08+00-00:8916E17A-D941-4F9E-B5B6-2F32476DF3C0
 :END:
@@ -658,7 +658,7 @@ Tried inherit to set f19 s as mode dependant but seems not to work with pretty h
    (("b" consult-buffer "Switch Buffer")
     ("B" counsel-bookmark "Jump to bookmark")
     ("s" mwb-special-in-hydra "org edit")
-	("w" narrow-or-widen-dwim "Narrow or Widen")
+    ("w" narrow-or-widen-dwim "Narrow or Widen")
     ;; ("s" org-babel-tangle-jump-to-org "Back to org")
     ("j" dired-jump "Dired jump"))))
 (bind-key "H-`"  'hydra-kl/body)

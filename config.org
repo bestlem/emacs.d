@@ -357,16 +357,20 @@ TODO: make this a new frame
 #+NAME: org_mark_mini20.local_20210625T110216.825145
 #+begin_src emacs-lisp
 (use-package-elpa paradox
+  :commands paradox-list-packages
   :init
   (setq paradox-execute-asynchronously t
 		paradox-github-token t
 		paradox-display-star-count nil)
 
   ;; Replace default `list-packages'
-  (defun my-paradox-enable (&rest _)
-	"Enable paradox, overriding the default package-menu."
-	(paradox-enable))
-  (advice-add #'list-packages :before #'my-paradox-enable)
+  (defun mwb-packages ()
+	"Use paradox in a new window."
+	(interactive)
+	(select-frame (make-frame))
+	(paradox-list-packages nil)
+	(fit-frame-to-buffer))
+
   :config
   (when (fboundp 'page-break-lines-mode)
 	(add-hook 'paradox-after-execute-functions
@@ -375,7 +379,14 @@ TODO: make this a new frame
 					  (inhibit-read-only t))
 				  (with-current-buffer buf
 					(page-break-lines-mode 1))))
-			  t)))
+			  t))
+
+  (defun paradox-mwb-quit-advice (kill)
+	"Function added to paradox-quit-and-close to close the frame.
+With prefix KILL, kill the buffer instead of burying."
+	(delete-frame))
+  (advice-add   #'paradox-quit-and-close :after  #'paradox-mwb-quit-advice )
+  )
 #+end_src
 *** Profile/Benchmark init
 :PROPERTIES:
@@ -1025,7 +1036,7 @@ I need to set the mouse - unfortunately it is in a minor mode map not global so 
   (treemacs-silent-refresh t)
   ( treemacs-silent-filewatch t)
   ( treemacs-tag-follow-delay 2.5)
-  (treemacs-indent-guide-style 'block)
+  (treemacs-indent-guide-style 'line)
   (treemacs-user-header-line-format #'treemacs-header-buttons-format))
 #+end_src
 

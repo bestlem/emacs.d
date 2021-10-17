@@ -64,7 +64,7 @@ However all the save frame and window is from my old diff (no idea where that ca
 :END:
 From Emacs wiki
 #+NAME: org_mark_2020-10-25T21-37-40+00-00_mini12.local_A65CB2C2-2A77-4367-9C18-B426D4C32A42
-#+begin_src emacs-lisp :tangle no :noweb-ref ediff-framex
+#+begin_src emacs-lisp :tangle no :noweb-ref ediff-frame
 :hook (ediff-startup . ediff-mwb-startup-control-hook)
 
 :init

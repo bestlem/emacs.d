@@ -287,7 +287,7 @@ sequence VECTOR.  (VECTOR is normally one character long.)")
   `(progn
      (put ',keymap 'iso-transl-backup
 	  (cons (cons ,key (or (lookup-key ,keymap ,key) 'none))
-		(get ',keymap 'iso-transl-backup)))
+	   (get ',keymap 'iso-transl-backup)))
      ;; can't use push, since `cl' is not available during compilation
      ;; (push (cons ,key (or (lookup-key ,keymap ,key) 'none))
      ;; 	   (get ',keymap 'iso-transl-backup))
@@ -337,40 +337,40 @@ sequence VECTOR.  (VECTOR is normally one character long.)")
 (define-key isearch-mode-map [?\C-x t] 'isearch-other-control-char)
 (define-key isearch-mode-map "\C-x8" nil)
 
-(define-minor-mode iso-transl-mode
- "ISO Key translation mode.
+(define-minor-mode iso-transl-override-mode
+  "ISO Key translation mode.
 This mode defines two ways of entering the non-ASCII printable
-characters with codes above 127: the Alt key and 
-a dead accent key.  For example, you can enter uppercase A-umlaut as
-`Alt-\" A' (if you have an Alt key) or `umlaut A' (if
-you have an umlaut/diaeresis key).
+characters with codes above 127: the Alt key and a dead accent
+key. For example, you can enter uppercase A-umlaut as `Alt-\"
+A' (if you have an Alt key) or `umlaut A' (if you have an
+umlaut/diaeresis key).
 
 This character can always be entered as `C-x 8 \" A' regardless of
 this mode."
- :group 'i18n
- :lighter " ISO"
+  :group 'i18n
+  :lighter " ISO"
 
- (if iso-transl-mode
-     ;; The standard mapping comes automatically.  You can partially overlay it
-     ;; with a language-specific mapping by using `M-x iso-transl-set-language'.
-     (iso-transl-define-keys iso-transl-char-map)
-   (mapc
-    (lambda (key-def) 
-      (define-key key-translation-map (car key-def) 
-	(and (not (eq (cdr key-def) 'none)) (cdr key-def))))
-    (nreverse (get 'key-translation-map 'iso-transl-backup)))
-   (put 'key-translation-map 'iso-transl-backup nil)
-   (mapc
-    (lambda (key-def) 
-      (condition-case nil
-	  (define-key isearch-mode-map (car key-def) 
-	    (and (not (eq (cdr key-def) 'none)) (cdr key-def)))
-	;; if some of the unconditional definitions above are instead made conditional
-	;; restoring the default keys fails.
-	(error nil)))
-    (nreverse (get 'isearch-mode-map 'iso-transl-backup)))
-   (put 'isearch-mode-map 'iso-transl-backup nil)))
+  (if iso-transl-override-mode
+      ;; The standard mapping comes automatically.  You can partially overlay it
+      ;; with a language-specific mapping by using `M-x iso-transl-set-language'.
+      (iso-transl-define-keys iso-transl-char-map)
+	(mapc
+     (lambda (key-def)
+       (define-key key-translation-map (car key-def)
+		 (and (not (eq (cdr key-def) 'none)) (cdr key-def))))
+     (nreverse (get 'key-translation-map 'iso-transl-backup)))
+	(put 'key-translation-map 'iso-transl-backup nil)
+	(mapc
+     (lambda (key-def)
+       (condition-case nil
+		   (define-key isearch-mode-map (car key-def)
+			 (and (not (eq (cdr key-def) 'none)) (cdr key-def)))
+		 ;; if some of the unconditional definitions above are instead made conditional
+		 ;; restoring the default keys fails.
+		 (error nil)))
+     (nreverse (get 'isearch-mode-map 'iso-transl-backup)))
+	(put 'isearch-mode-map 'iso-transl-backup nil)))
 
-(provide 'iso-transl)
+(provide 'iso-transl-override)
 
-;;; iso-transl.el ends here
+;;; iso-transl-override.el ends here

@@ -193,10 +193,10 @@ So lets try to patch iso-transl. I copied the Aquamacs one and then merged with 
 #+NAME: org_2020-12-11+00-00_CC01A657-95E4-4A31-8FCC-B45CCB63A851
 #+begin_src emacs-lisp
 (unless *aquamacs*
-  (use-package iso-transl
-      :mwb-load-path "site-lisp/aquamacs"
-      :config
-      (iso-transl-mode -1)))
+  (use-package iso-transl-override
+    :mwb-load-path "site-lisp/aquamacs"
+    :config
+    (iso-transl-override-mode -1)))
 #+end_src
 
 

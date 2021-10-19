@@ -353,13 +353,13 @@ This is hardcoded. See all.org and desktop for other ways. Aquamacs just restore
   (set-frame-position (selected-frame) 132 132))
 #+end_src
 
-** Colour theme
+* Colour theme
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:CD3D232B-6BDA-4CBC-BADF-BCEA9B8EBEC4
 :END:
 Aquamacs is stuck with old color themes not the cusomisable ones.
 
-*** Control my way of choosing
+** Control my way of choosing
 :PROPERTIES:
 :ID:       org_2020-12-06+00-00:326043C3-12B2-4F79-988D-93708CA4B055
 :END:
@@ -381,7 +381,7 @@ So put the choice here - comment out one of last two
     ))
 #+end_src
 
-*** Fixup Themes
+** Fixup Themes
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210607T075745.192824
 :END:
@@ -399,7 +399,7 @@ For my setup header-line needs to inherit from mode-line
 ;; #'my-modus-themes-custom-faces)
 (advice-add   'enable-theme :after 'mwb-themes-custom-faces-fixup)
 #+end_src
-*** Aquamacs Theme subpart
+** Aquamacs Theme subpart
 :PROPERTIES:
 :ID:       org_mark_2020-10-11T17-50-37+01-00_mini12.local:1BFA8790-4910-4422-A0B6-0425767328AD
 :END:
@@ -446,13 +446,13 @@ For my setup header-line needs to inherit from mode-line
      ))
 
 #+end_src
-*** New themes subpart
+** New themes subpart
 :PROPERTIES:
 :ID:       org_2020-12-06+00-00:2DE8AEF4-0339-4B2E-885A-627140CF1894
 :END:
 
 The new way seems to be the only supported one but one theme can mess up another e.g. changing background incompletely. SO lets have choice of general and also do the documented modus only way
-**** General
+*** General
 :PROPERTIES:
 :ID:       org_2020-12-06+00-00:1E62F0F5-3E08-4D41-906B-B6807657A157
 :END:
@@ -501,7 +501,7 @@ One for writing code and the other for reading articles."
   (load-theme 'modus-vivendi t t))
 (enable-theme (car quick-switch-themes)) ; first in list
 #+end_src
-**** Modus setup
+*** Modus setup
 :PROPERTIES:
 :ID:       org_2020-12-06+00-00:031AC435-9F4F-46D3-931F-5A79F7EF033F
 :END:

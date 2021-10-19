@@ -335,14 +335,19 @@ From https://www.reddit.com/r/emacs/comments/d7x7x8/finally_fixing_indentation_o
 :END:
 	Dependencies because lispy etc and macrostep use the same keys
 	#+begin_src emacs-lisp
-    (use-package macrostep
-      :ensure t
-      :after (emacs-lisp lispy-mnemonic lispy)
-      :commands (macrostep-expand
-                 macrostep-mode)
-      ;;:config (set macrostep-expand-in-separate-buffer t)
-      :bind (:map emacs-lisp-mode
-                  ("C-c e m" . macrostep-expand)))
+(use-package macrostep
+  :ensure t
+  :after (emacs-lisp lispy-mnemonic lispy)
+  :hook (before-save . macrostep-collapse-all)
+
+  :commands (macrostep-expand
+			 macrostep-mode)
+  ;;:config (set macrostep-expand-in-separate-buffer t)
+  :bind
+  (:map emacs-lisp-mode-map
+		("C-c C-e" . macrostep-expand))
+  (:map lisp-interaction-mode-map
+		("C-c C-e" . macrostep-expand)))
 	#+end_src
 and the hydra is from https://sriramkswamy.github.io/dotemacs/ . Note it expands what is at current point,
 *

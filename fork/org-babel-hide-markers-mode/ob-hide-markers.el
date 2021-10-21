@@ -56,8 +56,8 @@
 
 (defvar hbm--mode-on nil)
 (defvar hbm--marker-re (rx (seq bol (zero-or-more blank)
-							   "#+"
-							   (or "name" "begin_src" "end_src"))))
+								"#+"
+								(or "name:" "begin_src" "end_src"))))
 
 (defun hbm--update-line (visible)
   (let ((beg (if org-babel-hide-markers-line
@@ -70,8 +70,9 @@
   (save-excursion
     (goto-char (point-min))
     (with-silent-modifications
-      (while (re-search-forward hbm--marker-re nil t)
-        (hbm--update-line visible)))))
+	  (let ((case-fold-search t))
+		(while (re-search-forward hbm--marker-re nil t)
+          (hbm--update-line visible))))))
 
 ;;;###autoload
 (defun org-babel-refresh-markers ()

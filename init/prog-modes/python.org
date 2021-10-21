@@ -34,11 +34,12 @@ Unfortunately conda and xonsh require the other so I hack them
   :interpreter ("python" . python-mode)
   :bind (:map python-mode-map
               ("<f5>" . py-execute-buffer)
-			  ("C-c C-z" . python-shell))
+              ("C-c C-z" . python-shell))
   :init
   (setq py--imenu-create-index-p t)
   :config
   (setq org-babel-python-mode 'python-mode)
+  (setq expand-region-preferred-python-mode 'python-mode)
 
   (defun py-hook-mwb ()
     ;; (setq tab-width 4)
@@ -75,6 +76,7 @@ One in emacs and has things built on it
   :init
   (setq-default indent-tabs-mode 't)
   (setq org-babel-python-mode 'python-mode)
+  (setq expand-region-preferred-python-mode 'python)
 
   (defun python-hook-mwb ()
     (setq tab-width 4)

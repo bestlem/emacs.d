@@ -13,6 +13,7 @@
   - [[#save-org-files-saved-in-dropbox-dir-automatically-nb-not-emacs-autosave][Save org files saved in dropbox dir automatically (NB not emacs autosave)]]
   - [[#load-and-setup-org-mode][Load and setup org mode]]
 - [[#the-use-package-setup][The use package setup]]
+  - [[#support-functions][Support functions]]
   - [[#use-package][use-package]]
   - [[#key-bindings][Key bindings]]
   - [[#hack-around][Hack around]]
@@ -56,7 +57,7 @@ This is my first attempt at learning it.
 The config is a mess as I pick up on things.
 I was going to leave this to last so could make changes as I used org. However as I kept editing it I realised that I needed to comment and than was better in literate programming so this is the first non key file to be done.
 This is a large config and might be easier to document if not all put in a use-package (or break my rule and let some parts not be complete lisp)
-** use package issues
+** DONE use package issues
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:1C8523CC-5CB5-4EA3-A010-6881059B6B32
 :END:
@@ -82,6 +83,7 @@ This seems one of the most complete literate programming setups and he does have
 As everything is after loading of org dump in a config section after the rest.
 
 
+
 ** TODO Save org files saved in dropbox dir automatically (NB not emacs autosave)
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:8A5AC122-42AB-4B05-BEEE-ED6A16F5A966
@@ -104,7 +106,17 @@ Now jump to back to src issues. They go back to the code block that contains the
 This is the main setup that includes other things
 Note Hydra is not really used after just a couple of weeks.
 It is now for subtree todo refile and links
-
+** Support functions
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210830T173642.889781
+:END:
+#+NAME: org_mark_mini20.local_20210830T173642.840556
+#+begin_src emacs-lisp
+(defun my/org-edit-src-exit ()
+  (interactive)
+  (org-edit-src-save)
+  (org-edit-src-exit))
+#+end_src
 ** use-package
 :PROPERTIES:
 :ID:       org_2020-12-08+00-00:D690B0FD-0E4B-44ED-A01E-7FEC29D8E7F4
@@ -149,18 +161,17 @@ Put the bind bit in noweb
 #+NAME: key-binds
 #+begin_src emacs-lisp :tangle no
 (
- ("H-s" . org-babel-tangle-jump-to-org)
- ("H-S-s" . org-babel-detangle) ;; actually update but can't deal with weave
+ ;; ("H-s" . org-babel-tangle-jump-to-org)
+ ;; ("H-S-s" . org-babel-detangle)
+ ;; actually update but can't deal with weave
  :map org-mode-map
- ("H-s" . org-edit-special)
- ("<f19> s" . org-edit-special)
-
  ("<f5>" . org-ctrl-c-ctrl-c)
  :map org-src-mode-map
  ("H-s" . org-edit-src-exit)
- ("<f19> s" . org-edit-src-exit)
- ("A-s" . org-edit-src-save)            ; I press by mistake but it makes
+ ;; ("A-s" . org-edit-src-save)
+										; I press by mistake but it makes
                                         ; sense now save not save and exit
+ ("A-s" . my/org-edit-src-exit)
  ("A-k". org-edit-src-abort)
  ;; :map org-capture-mode-map
  ;; ("<f12>" . org-capture-finalize)
@@ -251,8 +262,8 @@ This describes how the org file is shown I think 9.4 altered this
 From [[https://stackoverflow.com/a/17492723/151019][SO]] override org function
 OK need to hide #+name and also make the properties visible
 
-#+NAME: org_mark_mini20.local_20210131T001131.842296
-#+begin_src emacs-lisp
+#+NAME: org_mark_mini20.local_20210707T094624.575933
+#+begin_src emacs-lisp :tangle no :noweb-ref org-config
 (defun org-cycle-hide-drawers (state)
   "Re-hide all drawers after a visibility state change."
   (when (and (derived-mode-p 'org-mode)
@@ -298,6 +309,7 @@ TODO add property drawers
 #+NAME: org_mark_mini20.local_20210422T091310.076424
 #+begin_src emacs-lisp :tangle no :noweb-ref org-config
 (use-package ob-hide-markers
+  :disabled
   :mwb-load-path "fork/org-babel-hide-markers-mode"
   :hook (org-font-lock . org-babel-hide-markers-mode)
   :init
@@ -1527,21 +1539,25 @@ Again from jerrypnz
   ;; :after (org)
   :commands (org-capture)
   :bind (("<f13>" . org-capture)
-         ("C-<f13>" . open-org-notes))
+		 ("C-<f13>" . open-org-notes)
+		 :map org-capture-mode-map
+		 ("A-s" . org-capture-finalize)
+		 ("A-k" . org-capture-kill)
+		 ("A-w" . org-capture-refile))
   :preface
   (defun open-org-notes ()
-    (interactive)
-    (find-file org-default-notes-file))
+	(interactive)
+	(find-file org-default-notes-file))
   :config
   (setq org-capture-templates
-        `(("t" "TODO" entry (file org-default-notes-file)
-           "* TODO %?\n%u\n")
-          ("p" "Project" entry (file org-default-notes-file)
-           "* %? [%] :PROJECT:\n%u\n")
-          ("m" "Meeting" entry (file org-default-notes-file)
-           "* Meeting notes for %? :MEETING:\n%t" :clock-in t :clock-resume t)
-          ("n" "Notes" entry (file org-default-notes-file)
-           "* %? \n%t"))))
+		`(("t" "TODO" entry (file org-default-notes-file)
+		   "* TODO %?\n%u\n")
+		  ("p" "Project" entry (file org-default-notes-file)
+		   "* %? [%] :PROJECT:\n%u\n")
+		  ("m" "Meeting" entry (file org-default-notes-file)
+		   "* Meeting notes for %? :MEETING:\n%t" :clock-in t :clock-resume t)
+		  ("n" "Notes" entry (file org-default-notes-file)
+		   "* %? \n%t"))))
 #+end_src
 
 ** Agenda

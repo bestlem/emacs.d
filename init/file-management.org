@@ -14,6 +14,7 @@ Well I was going to include [[https://github.com/lunaryorn/osx-trash.el][osx tra
 But the mac port does have this if set mac_system_move_file_to_trash_use_finder
 Think of editing dired and treemacs
 On reading more this is only if passed to delete functions so might not be too much trash.
+And I hear a sound on deletes so Finder is being used.
 #+NAME: org_mark_mini12.local_20210105T204218.519535
 #+begin_src emacs-lisp
 (setq delete-by-moving-to-trash t
@@ -170,17 +171,20 @@ Also odds/main.org
 #+NAME: org_mark_mini20.local_20210120T014441.002252
 #+begin_src emacs-lisp
 (defvar auto-save-directory
-  (expand-file-name "auto-save-dir/" user-emacs-directory)
-  "Directory the auto-save bits go in")
+  (expand-file-name "~/.local/emacs/auto-save-dir/" )
+  "Directory the auto-save bits go in. The default was temporary-file-directory")
+
 (setq auto-save-file-name-transforms `((".*" ,auto-save-directory t)))
 
 (when (not (file-exists-p auto-save-directory))
   (make-directory auto-save-directory t))
 
 (setq auto-save-interval 64
-      auto-save-list-file-prefix  (expand-file-name "auto-save-list/.saves-" user-emacs-directory)
+      auto-save-list-file-prefix  (expand-file-name "~/.local/emacs/auto-save-list/.saves-" )
       auto-save-timeout 2
       auto-save-default 't)
+
+
 #+end_src
 *** Turn off auto-save and backups
 :PROPERTIES:
@@ -216,7 +220,6 @@ Disable backups and auto-save only in the current buffer with
 #+end_src
 
 You should enable it for all =.vcf= and =.gpg= files.
-
 
 *** Make those with auto-save more obvious
 :PROPERTIES:
@@ -258,54 +261,46 @@ Make the message "/FILENAME has auto save data/" unmissable:
 
 ** Recent Files
 :PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:F7A7B04A-465B-4E07-B218-96A10C71D481
+:ID:       org_mark_mini20.local:20210830T180007.828713
 :END:
- Exclusion regexes from [[https://www.reddit.com/r/emacs/comments/3g468d/stop_recent_files_showing_elpa_packages/][reddit]]
+Exclusion regexes from [[https://www.reddit.com/r/emacs/comments/3g468d/stop_recent_files_showing_elpa_packages/][reddit]]
 
- Issue is that recentf-exclude is used by passing the expanded filename(which makes sense)  and the file list uses the shortened name which also makes sense at least in the file as then is independent of ~
+Issue is that recentf-exclude is used by passing the expanded filename(which makes sense)  and the file list uses the shortened name which also makes sense at least in the file as then is independent of ~
 
- The save in file is done by the set of abbreviate-file-name to recentf-filename-handlers which means that the name is expanded and then replaced by ~. Unfortunately the regexes are done on just the expanded file name. But all expansion is done the same way so all should work
+The save in file is done by the set of abbreviate-file-name to recentf-filename-handlers which means that the name is expanded and then replaced by ~. Unfortunately the regexes are done on just the expanded file name. But all expansion is done the same way so all should work
 
- Cleanup does seem to normalize file names
+Cleanup does seem to normalize file names
 
- The problem is that we have regex
+The problem is that we have regex
 
- #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_8950A078-0D0D-4B58-90E9-2E103AB4934D
- #+begin_src emacs-lisp
-;; Problem is this is set after the recent files are set https://emacs.stackexchange.com/questions/48784/recent-files-in-aquamacs
-;;  Seems to be OK
-
-
-;; (setq recentf-exclude '("COMMIT_MSG" "COMMIT_EDITMSG" "github.*txt$"
-;;                         "^/var/folders\\.*"
-;;                         "COMMIT_EDITMSG\\'"
-;;                         ".recentf"
-;;                         "~$" ".~/"      ; Emacs (and others) backup.
-;;                         ".*-autoloads\\.el\\'"
-;;                         "[/\\]emacs.d/elpa/"
-;;                         ".*png$" ".*cache$"
-;;                         "~/\\.emacs\\.d/\\.*/*\\.el"
-;;                         "~/src/env/emacs\\.d/.*/.*\\.el"
-;;                         "SessionDesktop\\.el"
-;;                         "treemacs-persist"))
-;; (setq recentf-exclude '())
-(use-package recentf
-  :unless *aquamacs*
+#+NAME: org_mark_mini20.local_20210830T180007.805003
+#+begin_src emacs-lisp
+(use-feature recentf
   :commands (recentf-mode
-             recentf-add-file
-             recentf-apply-filename-handlers
-             recentf-save-list)
+			 recentf-add-file
+			 recentf-apply-filename-handlers
+			 recentf-save-list)
   :init
   (setq recentf-filename-handlers '(abbreviate-file-name)
-        recentf-auto-cleanup (* 3600 2) ; 2 hours
-        recentf-keep '(file-remote-p file-readable-p)
-        recentf-save-file (mwb-user-emacs-file "var/recentf-save.el")
-        ;; recentf-max-saved-items 100
-        recentf-max-menu-items 25)
+		recentf-auto-cleanup (* 3600 2) ; 2 hours
+		recentf-keep '(file-remote-p file-readable-p)
+		recentf-max-saved-items 500
+		recentf-max-menu-items 25)
+  (unless *aquamacs*
+	(setq recentf-save-file (mwb-user-emacs-file "var/recentf-save.el")))
   :config
+  (setq recentf-exclude '("COMMIT_MSG" "COMMIT_EDITMSG" "github.*txt$"
+						  "^/var/folders\\.*"
+						  "COMMIT_EDITMSG\\'"
+						  ".recentf"
+						  "~$" ".~/"	; Emacs (and others) backup.
+						  ".*-autoloads\\.el\\'"
+						  ;; "[/\\]emacs.d/elpa/"
+						  ".*png$" ".*cache$"
+						  "SessionDesktop\\.el"
+						  "treemacs-persist"))
   (recentf-mode 1))
-  #+end_src
-
+#+end_src
 ** TODO Compressed files
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:D8E61D05-2A53-45CF-A59D-EC1D1883BAC5
@@ -346,35 +341,48 @@ Started as file management but actually deals with files and what is in them/ Tr
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:88F75F08-A36B-4A9D-AC7B-B618451935B6
 :END:
-	This provides a cover for ripgrep.
+This provides a cover for ripgrep.
 	#+begin_src emacs-lisp
-	(use-package deadgrep
-      :ensure t
-      :bind (("<f4>" . deadgrep)
-             :map deadgrep-mode-map
-             ("<double-mouse-1>" . deadgrep-visit-result-other-window)
-             ("<mouse-3>" . deadgrep-toggle-file-results))
-      :config (unless (executable-find "rg")
-                (warning "Please install ripgrep snap...")))
+(use-package deadgrep
+  :ensure t
+  :commands deadgrep
+  :bind (
+		 :map deadgrep-mode-map
+		 ("<double-mouse-1>" . deadgrep-visit-result-other-window)
+		 ("<mouse-3>" . deadgrep-toggle-file-results))
+  :config (unless (executable-find "rg")
+			(warning "Please install ripgrep ...")))
 	#+end_src
+*** [[https://github.com/dajva/rg.el][rg]]
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210620T213143.122210
+:END:
+Might allow search in ignore files. It is more flexible but display is not as easy to use as you don't switch to found buffer and cannot tab to fold items
+#+NAME: org_mark_mini20.local_20210620T213143.089059
+#+begin_src emacs-lisp
+(use-package rg
+  :disabled
+  :ensure t)
+#+end_src
 ** Projectile
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:4F9B2163-41AC-4087-B80D-C1A8815C6D20
 :END:
 This add functions. I would use John Wiegley's setup but projectile hung
 So take from projectile
-#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_EC0FF02A-9007-4E8B-AFC6-969483F6963D
+*** use_package
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20211002T193350.827718
+:END:
+#+NAME: org_mark_mini20.local_20211002T193350.818453
 #+begin_src emacs-lisp
 (use-package projectile
   :ensure t
   :diminish
-  ;; :bind* (
-  ;;         ("H-P" . (lambda () (interactive)
-  ;;                      (projectile-cleanup-known-projects)
-  ;;                      (projectile-discover-projects-in-search-path))))
-  ;; :bind-keymap ("H-p" . projectile-command-map)
+  :init
+  (setq projectile-known-projects-file (concat user-emacs-directory "projectile/projectile-bookmarks.eld"))
   :config
-  ;; racket from greghendershott
+
   (add-to-list 'projectile-globally-ignored-directories "compiled")
   (projectile-register-project-type 'racket '("info.rkt")
 									:compile "make setup"
@@ -403,8 +411,10 @@ projectile-save-project-buffers is nice but save-buffer does not make a backup. 
 	(unless (null modified-buffers)
 	  (dolist (buf modified-buffers)
 		(with-current-buffer buf
+		  (message "Project %s Saved buffer %s"
+				   project-name buf)
 		  (save-buffer 16)))
-	  (message "[%s] Saved %d buffers mwb" project-name (length modified-buffers)))))
+	  )))
 #+end_src
 *** Hydra
 :PROPERTIES:
@@ -431,8 +441,8 @@ projectile-save-project-buffers is nice but save-buffer does not make a backup. 
 
  Fun:    [_o_] other win [_l_] lsp        [_K_] cleanup
  "
-   ("a"   deadgrep "rg")
-   ("A"   counsel-rg "qrg")
+   ("a"   deadgrep "deadgrep")
+   ("A"   counsel-rg "counsel rg")
    ("b"   projectile-switch-to-buffer "buf")
    ("d"   projectile-find-dir "dir")
    ("f"   projectile-find-file "file")
@@ -451,83 +461,3 @@ projectile-save-project-buffers is nice but save-buffer does not make a backup. 
 
  (bind-key "H-p" 'hydra-projectile/body)
  #+end_src
-** Treemacs
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:22044AD2-EC4A-4C3B-B3D2-7F994D4BB958
-:END:
-This is the visual tree to manage files etc
- #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_55CB1D47-BC33-40F8-BC2A-12D014C6B18D
- #+begin_src emacs-lisp
-(use-package treemacs
-  ;; :ensure t
-  :mwb-load-path "fork/treemacs"
-  :init
-  (with-eval-after-load 'winum
-    (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
-  (setq treemacs-width 50)
-  :commands (treemacs)
-  :config
-
-  (setq hydra-key-regex "\\[\\|]\\|[-\\[:alnum:] ~.,;:/|?<>={}*+#%@!&^⇧⌘⌥↑↓←→⌫⌦⏎'`()\"$]+?") ; add Mac key symbols
-
-  (setq treemacs-silent-refresh t
-        treemacs-persist-file (mwb-user-emacs-file "data/treemacs-persist"))
-  (with-eval-after-load 'treemacs
-    (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?))
-
-  ;; The default width and height of the icons is 22 pixels. If you are
-  ;; using a Hi-DPI display, uncomment this to double the icon size.
-  ;;(treemacs-resize-icons 44)
-
-  (treemacs-follow-mode t)
-  (setq treemacs-silent-filewatch t)
-  (treemacs-filewatch-mode t)
-  (treemacs-fringe-indicator-mode t)
-  (pcase (cons (not (null (executable-find "git")))
-               (not (null treemacs-python-executable )))
-    (`(t . t)
-     (treemacs-git-mode 'deferred))
-    (`(t . _)
-     (treemacs-git-mode 'simple)))
-  :mode-hydra
-  (treemacs-mode
-   ("Project"
-    (
-     ;; ("p" matcha-projectile/body "Projectile")
-     ("c" treemacs-add-project-to-workspace "Create Project")
-     ("d" treemacs-remove-project-from-workspace "Delete Project")
-     )
-	"All"
-	(("h"  treemacs--common-helpful-hydra/body "Hydra.."))
-    "Workspace"
-    (("s" treemacs-switch-workspace "Switch" )
-     ("e" treemacs-edit-workspaces "Edit" ))
-    "Width"
-    (("w" treemacs-toggle-fixed-width "Toggle variable width" ))))
-
-  :bind ( :map treemacs-mode-map
-               ("<mouse-5>" . treemacs-rightclick-menu)
-               ("<mouse-4>" . treemacs-rightclick-menu)
-               ("<f5>" . treemacs-switch-workspace)
-               ("<C-f5>" . treemacs-edit-workspaces)))
-
-(use-package treemacs-projectile
-  :mwb-load-path "fork/treemacs"
-  :after treemacs projectile
-  ;; :ensure t
-  )
-
-(use-package treemacs-magit
-  :mwb-load-path "fork/treemacs"
-  ;; :disabled                             ; Emacs 27 did not like this
-  :after treemacs magit
-  ;; :ensure t
-  )
-  #+end_src
-*** Debug
-:PROPERTIES:
-:ID:       org_mark_2020-11-14T12-12-03+00-00_mini12.local:4F9B14A7-978B-4BF7-A64E-41B8EE921099
-:END:
-I get
-Error running timer ‘treemacs--process-file-events’: (wrong-type-argument sequencep t)
-So from https://github.com/Alexander-Miller/treemacs/issues/168

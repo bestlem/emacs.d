@@ -14,7 +14,7 @@
 (require 'all-the-icons)
 (require 'jp-icons)
 (require 's)
-;; (require 'moody)
+(require 'moody)
 
 ;; Extra mode line faces
 (defface mode-line-read-only-face
@@ -286,7 +286,7 @@ RIGHT, aligned respectively."
       '((:eval (jp-modeline-status))
         (:eval (jp-modeline-position))
         (:eval (jp-modeline-filename))
-        ;; (:eval (jp-modeline-major-mode-no-icon))
+        (:eval (jp-modeline-major-mode-no-icon))
         (:eval (jp-modeline-vc)))
       ;; Right
       '((:eval (jp-modeline-flycheck))
@@ -321,7 +321,7 @@ RIGHT, aligned respectively."
       (setq x-underline-at-descent-line t)
       (defvar mini-modeline-r-format)
       (setq mini-modeline-r-format jp-mini-modeline-r-format)
-      (setq-default mode-line-format '(""))
+      (setq-default mode-line-format jp-mini-modeline-r-format)
       (setq-default header-line-format jp-headline-format))))
 
 ;; Mode line setup

@@ -18,10 +18,14 @@
 	  (signature "Mark"))
 	 ("baensbar\\.net"
 	  (address "baen@bestley.co.uk")
-	  (signature "Mark"))))
+	  (signature "Mark"))
+	 ("aquamacs"
+	  (address "aquamacs@bestley.co.uk"))
+	 ("macports"
+	  (address "macports@bestley.co.uk"))))
  '(gnus-suppress-duplicates t)
  '(gnus-visible-headers
-   '("^From:" "^Newsgroups:" "^Subject:" "^Date:" "^Followup-To:" "^Reply-To:" "^Organization:" "^Summary:" "^Keywords:" "^To:" "^[BGF]?Cc:" "^Posted-To:" "^Mail-Copies-To:" "^Mail-Followup-To:" "^Apparently-To:" "^Gnus-Warning:" "^Resent-From:" "^References:" "^Xref:" "^Message-Id:"))
+   '("^From:" "^Newsgroups:" "^Subject:" "^Date:" "^Followup-To:" "^Reply-To:" "^Summary:" "^Keywords:" "^To:" "^[BGF]?Cc:" "^Posted-To:" "^Mail-Copies-To:" "^Mail-Followup-To:" "^Apparently-To:" "^Gnus-Warning:" "^Resent-From:"))
  '(mail-default-directory "~/.emacs.d/var/Mail")
  '(message-auto-save-directory "~/.emacs.d/var/gnus/Mail")
  '(message-directory "~/.emacs.d/var/Mail/")

@@ -5,8 +5,6 @@
  - path :: ~/SyncServices/Dropbox/env/dotfiles
 ** Org
  - path :: ~/SyncServices/Dropbox/Docs/org
-** Aquamacs Application
- - path :: /Applications/Aquamacs.app/Contents/Resources/lisp/aquamacs
 ** aquamacs-emacs code
  - path :: ~/src/macos/aquamacs-emacs
 ** emacs-init
@@ -24,6 +22,8 @@
  - path :: ~/src/Racket/mandelbrot
 ** dummy-load
  - path :: ~/src/Racket/dummy-load
+** web
+ - path :: ~/src/Racket/web
 * C based
 ** rftg
  - path :: ~/src/cpp/rftg

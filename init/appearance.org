@@ -17,9 +17,11 @@ Altering the size of variable-font seems to change the size of fixed-font - How?
 #+NAME: org_2020-12-06+00-00_87B9331B-36CE-4ED5-B82C-E637E0A4BE9A
 #+begin_src emacs-lisp
 (require 'cl-lib)
+(require 'cl-seq)
+
 (defun font-candidate (&rest fonts)
   "Return existing font which first match."
-  (find-if (lambda (f) (find-font (font-spec :name f))) fonts))
+  (cl-find-if (lambda (f) (find-font (font-spec :name f))) fonts))
 
 
 (let ((font-found (font-candidate
@@ -35,6 +37,7 @@ Altering the size of variable-font seems to change the size of fixed-font - How?
                       :family font-found)
   ;; Monospaced typeface
   (set-face-attribute 'fixed-pitch nil :family font-found :height 0.8))
+
 (let ((font-found (font-candidate
                    "Georgia"
                    "Times New Roman")))
@@ -79,6 +82,17 @@ There is also more a mode called pretty-mode but not looked into that yet - for 
 #+begin_src emacs-lisp
 (global-prettify-symbols-mode 1)
 #+end_src
+** Icons
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210708T220551.722023
+:END:
+Mainly use all-the-icons but treemacs has some as well, unfortunately only available by extension
+
+Example to show them all
+#+begin_example emacs-lisp
+(dolist (ele '(material wicon octicon faicon fileicon alltheicon))
+  (all-the-icons-insert-icons-for ele))
+#+end_example
 * Structure
 :PROPERTIES:
 :ID:       org_mark_2020-10-03T14-51-52+01-00_mini12.local:2E4982D0-8D77-435D-8651-A796B057CCD7
@@ -160,6 +174,17 @@ but the answer below has an interesting suggestion
 #+NAME: org_2020-12-06+00-00_C6FEED37-790D-4D9A-A322-BB50D7DAB9CA
 #+begin_src emacs-lisp
 (setq cursor-type 'box)
+#+end_src
+** Reveal
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210802T104243.799441
+:END:
+Reveal invisible text around point.
+Hopefully searches will expand org-mode
+#+NAME: org_mark_mini20.local_20210802T104243.783283
+#+begin_src emacs-lisp
+(use-feature reveal
+  :config (reveal-mode 1))
 #+end_src
 * Windows
 :PROPERTIES:
@@ -356,6 +381,24 @@ So put the choice here - comment out one of last two
     ))
 #+end_src
 
+*** Fixup Themes
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210607T075745.192824
+:END:
+For my setup header-line needs to inherit from mode-line
+
+#+NAME: org_mark_mini20.local_20210607T075745.170443
+#+begin_src emacs-lisp
+(defun mwb-themes-custom-faces-fixup (&rest _)
+  "Some faces should have inheritance"
+  (set-face-attribute 'header-line nil :inherit 'mode-line)
+  (set-face-attribute 'mode-line-emphasis nil :inherit 'mode-line)
+  )
+
+;; (add-hook 'modus-themes-after-load-theme-hook
+;; #'my-modus-themes-custom-faces)
+(advice-add   'enable-theme :after 'mwb-themes-custom-faces-fixup)
+#+end_src
 *** Aquamacs Theme subpart
 :PROPERTIES:
 :ID:       org_mark_2020-10-11T17-50-37+01-00_mini12.local:1BFA8790-4910-4422-A0B6-0425767328AD
@@ -365,36 +408,44 @@ So put the choice here - comment out one of last two
 (require 'color-theme)
 (eval-after-load "color-theme"
   '(progn
-    (color-theme-initialize)
-    (color-theme-jsc-dark)
-    (set-face-attribute 'font-lock-keyword-face nil  :background 'unspecified)
-    (custom-set-faces
-     '(org-block
-       ((t
-         (:inherit shadow :extend t :background "midnight blue" :foreground "white" :family "Fira Code"))))
-     '(org-block-begin-line
-       ((t
-         (:inherit org-meta-line :foreground "cyan" :weight normal))))
-     '(org-block-end-line
-       ((t
-         (:inherit org-block-begin-line :foreground "cyan"))))
-     )
-    ;; (color-theme-high-contrast)
-    ;; (custom-set-faces
-    ;;  '(org-block
-    ;;    ((t
-    ;;      (:inherit shadow :extend t :background "lemon chiffon" :foreground "black" :family "Fira Code"))))
-    ;;  '(org-block-begin-line
-    ;;    ((t
-    ;;      (:inherit org-meta-line :foreground "blue" :weight normal))))
-    ;;  '(org-block-end-line
-    ;;    ((t
-    ;;      (:inherit org-block-begin-line :foreground "blue"))))
-    ;;  )
-    ))
+     (color-theme-initialize)
+     (color-theme-jsc-dark)
+     (set-face-attribute 'font-lock-keyword-face nil :background 'unspecified)
+     (set-face-attribute 'mode-line nil
+      :foreground "white" :background "#323232")
+     (set-face-attribute 'mode-line-inactive nil
+      :foreground "#bfc0c4" :background "black" :box 'unspecified)
+     (set-face-attribute 'mode-line-buffer-id nil
+      :foreground 'unspecified
+      :background 'unspecified)
+     (set-face-attribute 'mode-line-emphasis nil :inherit 'mode-line)
+     (set-face-attribute 'mode-line-highlight nil :inherit 'mode-line)
+     ;; (custom-set-faces
+     ;;  '(org-block
+     ;;     ((t
+     ;;       (:inherit shadow :extend t :background "midnight blue" :foreground "white" :family "Fira Code"))))
+     ;;  '(org-block-begin-line
+     ;;     ((t
+     ;;       (:inherit org-meta-line :foreground "cyan" :weight normal))))
+     ;;  '(org-block-end-line
+     ;;     ((t
+     ;;       (:inherit org-block-begin-line :foreground "cyan")))))
+
+     ;; (color-theme-high-contrast)
+     ;; (custom-set-faces
+     ;;  '(org-block
+     ;;    ((t
+     ;;      (:inherit shadow :extend t :background "lemon chiffon" :foreground "black" :family "Fira Code"))))
+     ;;  '(org-block-begin-line
+     ;;    ((t
+     ;;      (:inherit org-meta-line :foreground "blue" :weight normal))))
+     ;;  '(org-block-end-line
+     ;;    ((t
+     ;;      (:inherit org-block-begin-line :foreground "blue"))))
+     ;;  )
+     ))
 
 #+end_src
-
 *** New themes subpart
 :PROPERTIES:
 :ID:       org_2020-12-06+00-00:2DE8AEF4-0339-4B2E-885A-627140CF1894
@@ -412,7 +463,7 @@ It turns out Emacs supports multiple themes being active at the same time, which
 #+begin_src emacs-lisp :tangle no :noweb-ref theme-25
 (defvar quick-switch-themes
   (let ((themes-list (list 'modus-vivendi
-                           'mwbtheme-leuven
+                           ;; 'mwbtheme-leuven
                            'high-contrast
                            'modus-operandi)))
     (nconc themes-list themes-list))
@@ -439,14 +490,12 @@ One for writing code and the other for reading articles."
 
 ;; From emacs or local
 ;; (load-theme 'leuven t t)
-(load-theme 'mwbtheme-leuven t t)
-
 (use-package color-theme-modern
   :ensure t
   :config
   (load-theme 'high-contrast t t))
 
-(use-package modus-themes
+(use-package-elpa modus-themes
   :config
   (load-theme 'modus-operandi t t)
   (load-theme 'modus-vivendi t t))
@@ -460,18 +509,30 @@ vivendi is dark
 #+NAME: org_2020-12-06+00-00_0A5F5673-C8F4-4FCE-869B-205BC1B9DAF5
 #+begin_src emacs-lisp :tangle no :noweb-ref theme-modus
 (use-package modus-themes
-  ;; :ensure t						 ; As modus is in emacs always need some ensure
-  :mwb-load-path "fork/modus-themes"
+  :ensure t
+  ;; :mwb-load-path "fork/modus-themes"
   :demand
+  :custom
+  (modus-themes-italic-constructs t)
+  (modus-themes-slanted-constructs t)
+  (modus-themes-variable-pitch-headings t)
+  (modus-themes-bold-constructs nil)
+  (modus-themes-region '(bg-only accented))
+  (modus-themes-completions 'opinionated)
+  (modus-themes-fringes 'intense)
+  (modus-themes-mode-line 'borderless)
+  (modus-themes-org-blocks 'rainbow)
+  (modus-themes-paren-match 'intense-bold)
+  (modus-themes-prompts 'intense)
+  (modus-themes-scale-headings t)
+  (modus-themes-syntax 'yellow-comments)
+
   :init
-  ;; Add all your customizations prior to loading the themes
-  (setq modus-themes-slanted-constructs t
-		modus-themes-bold-constructs nil)
   ;;  This is lists of lists so set here not custom
   (setq modus-themes-headings
-		'((t . rainbow-section)))
+        '((t . rainbow-section)))
 
-  (setq modus-themes-region '())		; the default
+  ;; (setq modus-themes-region '())     ; the default
 
   ;; Enable the theme files only as local
   ;; (use-package modus-operandi-theme)
@@ -480,24 +541,5 @@ vivendi is dark
   :config
   ;; Load the theme of your choice
   (modus-themes-load-vivendi)
-
-  ;; Match my earlier code as this is called by a hydra
-  (defun quick-switch-themes* ()
-	(my-demo-modus-themes-toggle))
-
-  ;;  Allow different set for different theme https://protesilaos.com/modus-themes/#h:a897b302-8e10-4a26-beab-3caaee1e1193
-  (defun my-demo-modus-operandi ()
-	(interactive)m
-	(setq modus-themes-bold-constructs t) ; ENABLE bold
-	(modus-themes-load-operandi))
-
-  (defun my-demo-modus-vivendi ()
-	(interactive)
-	(setq modus-themes-bold-constructs nil) ; DISABLE bold
-	(modus-themes-load-vivendi))
-
-  (defun my-demo-modus-themes-toggle ()
-	(if (eq (car custom-enabled-themes) 'modus-operandi)
-		(my-demo-modus-vivendi)
-	  (my-demo-modus-operandi))))
+  )
 #+end_src

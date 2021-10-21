@@ -46,13 +46,28 @@ But if using package we do want it done - early-init turn off is for straight.el
 #+begin_src emacs-lisp
 ;;(setq package-enable-at-startup nil)
 #+end_src
+
+*** Set paths
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210625T123956.569254
+:END:
 Set the path to packages
 #+NAME: org_mark_2020-09-28T01-08-28+01-00_mini12.local_0E90CFE6-BBAC-4DA3-8461-12811764098F
 #+begin_src emacs-lisp
 (setq package-user-dir
-                 (expand-file-name
-                  (format "elpa/%s/elpa"
-                          (concat emacs-version (when (getenv "MELPA_STABLE") "-stable"))) user-emacs-directory))
+      (expand-file-name
+       (format "elpa/%s" emacs-major-version) user-emacs-directory))
+#+end_src
+*** Set package quickload by version
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210625T123956.568444
+:END:
+#+NAME: org_mark_mini20.local_20210625T123956.553714
+#+begin_src emacs-lisp
+(setq package-quickstart-file
+	  (expand-file-name
+	   (format "package-quickstart.%d.el" emacs-major-version)
+	   user-emacs-directory))
 #+end_src
 ** Graphical suppression
 :PROPERTIES:
@@ -68,19 +83,21 @@ Fiddle with suppressing graphics. I do want some of these
 ;;(push '(vertical-scroll-bars) default-frame-alist)
 (setq tool-bar-mode nil)
 #+end_src
-** Elisp code for use in all
+** Emacs lisp
 :PROPERTIES:
-:ID:       org_mark_2020-11-13T08-54-14+00-00_mini12.local:5DDEB242-A0B0-4733-BCA1-7C5602A55762
+:ID:       org_mark_mini20.local:20210810T184947.222205
 :END:
-
-For some useful macros [[https://github.com/waymondo/hemacs][hemacs]]
-
-#+NAME: org_mark_2020-11-13T08-54-14+00-00_mini12.local_B13702B5-689F-4646-85F2-FD570054EAC4
+Control a bit of loading
+*** Use source where newer
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210810T184947.221385
+:END:
+This variable tells Emacs to prefer the .el file if itq’s newer, even if there is a corresponding .elc
+#+NAME: org_mark_mini20.local_20210811T183548.057306
 #+begin_src emacs-lisp
-(defmacro add-hook-lambda (hook &rest body)
-  (declare (indent 1) (debug t))
-  `(add-hook ,hook (lambda () ,@body)))
+(setq load-prefer-newer t)
 #+end_src
+
 * Implement init environment (init.el)
 :PROPERTIES:
   :header-args:    :tangle init.el :comments link
@@ -149,6 +166,7 @@ As this is now ~/.emacs.d/init.el and not in ~/Library/Preferences Emacs sees th
 :END:
 	 #+begin_src emacs-lisp
 (setq init-file-debug 'nil)
+(setq init-file-debug t)
 ;; (require 'profiler)
 ;; (profiler-start 'cpu+mem)
 ;; (add-hook-lambda after-init-hook (profiler-stop))

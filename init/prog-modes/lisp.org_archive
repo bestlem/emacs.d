@@ -1,0 +1,34 @@
+#    -*- mode: org -*-
+
+
+Archived entries from file /Users/mark/SyncServices/Dropbox/env/emacs.d/init/prog-modes/lisp.org
+
+
+* Lisp running environments
+  :PROPERTIES:
+  :ID:       org_mark_mini20.local:20210909T095206.626771
+  :END:
+** Parentheses
+   :PROPERTIES:
+   :ID:       org_mark_mini20.local:20210909T095206.626282
+   :END:
+*** And hidden
+	:PROPERTIES:
+	:ID:       org_mark_2020-10-11T00-40-32+01-00_mini12.local:E13260FF-71E9-49D7-8F3B-C3A27D36CD65
+	:ARCHIVE_TIME: 2021-09-09 Thu 09:50
+	:ARCHIVE_FILE: ~/SyncServices/Dropbox/env/emacs.d/init/prog-modes/lisp.org
+	:ARCHIVE_OLPATH: Lisp running environments/Parentheses
+	:ARCHIVE_CATEGORY: lisp
+	:END:
+  Hide the parens - however with modus theme the different levels colours really show up so this is opposite to what I want.
+  #+NAME: org_mark_2020-10-11T00-40-32+01-00_mini12.local_066E9D01-BBA2-4788-B4FD-743EED689771
+  #+begin_src emacs-lisp
+(use-package paren-face
+  :ensure t
+  :disabled
+  :config
+  (setq paren-face-regexp (rx (any "()[]{}")))
+  (add-to-list 'paren-face-modes 'racket-mode)
+  (add-to-list 'paren-face-modes 'racket-repl-mode)
+  (global-paren-face-mode))
+  #+end_src

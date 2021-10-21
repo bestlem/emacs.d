@@ -8,12 +8,48 @@ Note all loaded immediately as could be called anytime.
 
 * Hydra
 :PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:F65CCA9F-596F-4B8D-A0B2-29C44A4886D3
+:ID:       org_mark_mini20.local:20210724T104659.216246
 :END:
-#+NAME: org_2020-12-03+00-00_644A7537-C980-48C1-894E-D92826418F53
+
+** Support
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210724T104659.213041
+:END:
+Need a function to save an then do things
+#+NAME: org_mark_mini20.local_20210724T104659.187112
+#+begin_src emacs-lisp
+(defun elisp-mwb-run-hydra ()
+  (interactive)
+  (mwb-projectile-save-project-buffers)
+  (hydra-elisp-compile/body))
+#+end_src
+
+** Compile Hydra
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210724T104906.121238
+:END:
+#+NAME: org_mark_mini20.local_20210724T104906.096473
+#+begin_src emacs-lisp
+(pretty-hydra-define hydra-elisp-compile
+  (:foreign-keys run
+				 :title (mwb-icon-string "el" "Emacs Lips Compile")
+				 :exit t)
+  ("compile"
+   (("c" emacs-lisp-byte-compile "Compile")
+	("l" emacs-lisp-byte-compile-and-load "Compile and Load")
+	("r" byte-recompile-directory "Byte Recompile Directory")
+	("x" disassemble "Disassemble"))))
+#+end_src
+
+** Major mode hydra
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210724T105126.330418
+:END:
+#+NAME: org_mark_mini20.local_20210724T104659.188563
 #+begin_src emacs-lisp
 (use-package emacs-lisp-mode
-  :bind ("<f5>" . eval-buffer)
+  :bind (:map emacs-lisp-mode-map
+			  ("<f5>" . eval-buffer))
   :mode-hydra ((:idle 0.5)
                ("Eval"
                 (("b" eval-buffer "buffer")
@@ -21,6 +57,7 @@ Note all loaded immediately as could be called anytime.
                  ("d" eval-defun "defun [well top level form]")
                  ;; ("r" eval-region "region") ; lispy-eval
                  ("I" ielm "ielm")
+				 ("c" elisp-mwb-run-hydra "compile")
                  ;; ("f" matcha-elisp-eval-current-form-sp "form")
                  ;; ("x" matcha-goto-scratch "*Scratch*")
                  )
@@ -30,9 +67,9 @@ Note all loaded immediately as could be called anytime.
                  ("F" (ert :failed) "failed"))
                 "Edit"
                 (("a" hydra-lispy-mwb-alter/body "Alter...")
-                 ("r" hydra-lispy-mwb-mark/body "Region...")
-                 ("g" hydra-lispy-mwb-goto/body "Goto...")
-                 ("f" srefactor-lisp-format-sexp "srefactor sexp"))
+				 ("r" hydra-lispy-mwb-mark/body "Region...")
+				 ("g" hydra-lispy-mwb-goto/body "Goto...")
+				 ("f" emr-show-refactor-menu "Refactor..."))
                 "Debug"
                 (("m" sk/hydra-macro-step/body "Macrostep...")
                  ("E" modi/toggle-edebug "Toggle edebug")
@@ -42,11 +79,8 @@ Note all loaded immediately as could be called anytime.
                 ;; ["Watch"
                 ;;  ("w" debug-watch "Watch")
                 ;;  ("W" cancel-debug-watch  "Cancel Watch")]
-                "Compile"
-                (("cc" emacs-lisp-byte-compile "Compile")
-                 ("cl" emacs-lisp-byte-compile-and-load "Compile and Load")
-                 ("cr" byte-recompile-directory "Byte Recompile Directory")
-                 ("cx" disassemble "Disassemble")))))
+				)))
+
 #+end_src
 
 * Formatting
@@ -59,24 +93,13 @@ Note all loaded immediately as could be called anytime.
 :END:
 I am not certain this is needed now as other things do this. Aggressive indent for example
 However I had a lot of strings so tried.
-*** elisp formatter
-:PROPERTIES:
-:ID:       org_mark_2020-11-24T18-08-50+00-00_mini12.local:254245E4-B413-4094-9DB5-555CC09FAC81
-:END:
-    After a use not that good
-    #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_371FFD2B-49E8-4C8D-BD20-E974C39BA8E2
-    #+begin_src  emacs-lisp :tangle no
-(use-package elisp-format
-  :disabled
-  :defer 10
-  :ensure t)
-    #+end_src
 *** [[https://github.com/tuhdo/semantic-refactor][Semantic Refactor]]
 :PROPERTIES:
 :ID:       org_mark_2020-11-24T18-08-50+00-00_mini12.local:CB649654-2804-4D51-8437-55D5DC0A68F6
 :END:
 Just for lisp But seems no better
 Plus the lisp formatting is not autoloaded
+The one thing I wanted ot for this time was to break an expression to a work per line and it does not. But lispy multiple lines did.
 #+NAME: org_mark_2020-11-24T18-08-50+00-00_mini12.local_BA7E1106-4E0E-4D38-B512-2C59194F3F4D
 #+begin_src emacs-lisp :tangle no
 (use-package srefactor
@@ -115,6 +138,7 @@ But then this [[https://emacs.stackexchange.com/a/52789/9874][SO answer to a dif
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210123T234427.949964
 :END:
+Not used as messes to much
 #+NAME: org_2020-12-08+00-00_67C53BD2-DAF3-4B25-80DB-ADB3958F1820
 #+begin_src emacs-lisp :tangle no
 (setq lisp-indent-function 'common-lisp-indent-function)
@@ -123,6 +147,9 @@ But then this [[https://emacs.stackexchange.com/a/52789/9874][SO answer to a dif
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210123T234427.948316
 :END:
+Indenting data (ie lists) not as functions.
+From https://www.reddit.com/r/emacs/comments/d7x7x8/finally_fixing_indentation_of_quoted_lists/
+
 #+NAME: org_mark_mini20.local_20210123T234427.935989
 #+begin_src emacs-lisp
 (advice-add #'calculate-lisp-indent :override #'void~calculate-lisp-indent)
@@ -358,12 +385,12 @@ But add his functions as called from top level
 :ID:       org_mark_mini12.local:20201218T062750.205110
 :END:
 #+NAME: org_mark_mini12.local_20201218T062750.172372
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 ;;  mainly from setup-elisp.el
 
 ;; Solution to toggle debug on a function whether it is defined inside or
 ;; outside a `use-package' wrapper
-;; http://emacs.stackexchange.com/q/7643/115
+;; http://emacs.stackexchange.com/q/76w43/115
 
 ;; Edebug a defun or defmacro
 (defvar modi/fns-in-edebug nil
@@ -406,6 +433,7 @@ But add his functions as called from top level
           (message "Edebug: %s" fn))))))
 
 #+end_src
+
 *** Hydra
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20201218T062750.198857
@@ -546,6 +574,16 @@ _c_ontinue (_C_ fast)      ^^^^                       _X_ global breakpoint
   ("7" #'edebug-trace-mode "trace" :column "modes")
   ("8" #'edebug-Trace-fast-mode "trace fast" :column "modes"))
 #+end_src
+*** Bind it
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210825T102536.195886
+:END:
+This is actually from Modi's  [[https://github.com/kaushalmodi/.emacs.d/blob/7ca71081a8c32eb895e75dd2b460d772b774b152/setup-files/setup-elisp.el][setup]]
+#+NAME: org_mark_mini20.local_20210825T102536.172923
+#+begin_src emacs-lisp
+(with-eval-after-load 'edebug
+  (bind-key "?" #'hydra-edebug/body edebug-mode-map))
+#+end_src
 * Flycheck
 :PROPERTIES:
 :ID:       org_2020-12-02+00-00:8AED05A2-E475-45E7-9FE1-2D0C6CBC3F2E
@@ -569,19 +607,6 @@ Original just stops check for all the package and documentation heading. Need to
 #+begin_src emacs-lisp
 (use-package cask-mode :ensure t)
 #+end_src
-
-* xah mode
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:FB3F4B30-A5F0-41D1-A9D5-48069D7A5898
-:END:
-	 This does more formatting and has useful abbreviations but I don't know if will work with lispy
-     #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_93A1C8F8-DA67-4EF7-BA47-905CC3187347
-     #+begin_src emacs-lisp
-(use-package xah-elisp-mode
-  :ensure t
-  :disabled
-  :hook emacs-lisp-mode)
-     #+end_src
 
 * Regular expressions
 :PROPERTIES:
@@ -699,3 +724,68 @@ From [[https://github.com/abo-abo/hydra/wiki/Macro][Hydra wiki]] and [[https://g
 
 (bind-key "<f3>" 'hydra-keyboard-macros/body)
 	  #+end_src
+* imenu
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210702T115348.583868
+:END:
+Mainly ways to add more to the menu.
+From https://github.com/alezost/emacs-utils/blob/master/utl-imenu.el
+also hemacs and greg hendersolt
+** Sections
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210702T115348.582525
+:END:
+If you have sections in lisp/elisp files that begin with ";;;", you may use the following code to add "Sections" entry in `imenu':
+
+(add-hook 'emacs-lisp-mode-hook 'utl-imenu-add-sections)
+(add-hook 'lisp-mode-hook 'utl-imenu-add-sections)
+
+
+
+
+
+#+NAME: org_mark_mini20.local_20210702T115348.557748
+#+begin_src emacs-lisp
+(defvar utl-imenu-sections-re "^;;; \\(.+\\)$"
+  "Regexp used for \"Sections\" imenu entries.")
+
+(defvar utl-imenu-sections-group "Sections"
+  "Group name in imenu index of \"Sections\" entries.
+If nil, put the entries in a top level.  See MENU-TITLE in
+`imenu-generic-expression' variable for details.")
+
+;;;###autoload
+(defun utl-imenu-add-sections (&optional regexp)
+  "Add REGEXP as a \"Sections\" element to `imenu-generic-expression'.
+If REGEXP is nil, use `utl-imenu-sections-re'."
+  (add-to-list
+   'imenu-generic-expression
+   (list utl-imenu-sections-group (or regexp utl-imenu-sections-re) 1)
+   t))
+#+end_src
+** Add hook
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210702T115348.580846
+:END:
+#+NAME: org_mark_mini20.local_20210702T115348.558787
+#+begin_src emacs-lisp
+(defun hemacs-imenu-elisp-expressions ()
+  (dolist (pattern `(("Segments" ,(rx (seq bol "(spaceline-define-segment"
+									   (zero-or-more (or (syntax whitespace) "\n"))
+									   (group
+										(one-or-more (or (syntax word)
+													  (syntax symbol))))
+									   ))
+					  1)
+                     ("Package elpa"
+					  ,(rx (seq bol "(use-package-elpa"
+							(group
+							 (one-or-more (or (syntax word)
+										   (syntax symbol))))
+							))
+					  1)
+					 ("Features" "^(use-feature \\(.+\\)$" 1)
+					 ("Sections" "^;;; \\(.+\\)$" 1)))
+	(add-to-list 'imenu-generic-expression pattern)))
+(add-hook 'emacs-lisp-mode-hook 'hemacs-imenu-elisp-expressions)
+#+end_src

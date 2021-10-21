@@ -31,16 +31,6 @@ Although see starter kit where they run after init.
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:C615E483-7CA9-42EA-9AEB-E0B541771836
 :END:
-*** load-path
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:BBB5C272-C2B4-4F38-948C-ED758D56E6A4
-:END:
-. Setup for elisp  used by notmal load not org tangle
-Note that if a subdirectory is just for one thing then use keyword mwb-load-path in use-package. Non Aquamacs does not set all sub-directories on load path.
-#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_CC0BEB6F-84DC-4320-9455-9906069CD4C9
-#+begin_src emacs-lisp
-(add-to-list 'load-path (mwb-user-emacs-file "site-lisp"))
-#+end_src
 *** Where things are put
 :PROPERTIES:
 :ID:       org_mark_2020-09-29T11-53-58+01-00_mini12.local:63AB1DE7-5C65-415D-96D0-7DAF0E0BC2BA
@@ -75,6 +65,48 @@ Note should check on defconst
 #+begin_src emacs-lisp
 (use-package validate
   :ensure t)
+#+end_src
+
+* Support functions
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210624T203034.970975
+:END:
+Various things to make management of init files easier
+Many taken from centuar
+
+** recompile site-lisp
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210624T203034.970002
+:END:
+This is a function so can run only from old emacs as newer emacs will not understand the byte codes. Modified to use my directories and to add fork
+TODO: exclude sopme directories - especially modus-themes and treemacs as they need a proper build and/or can be done for later emacs.
+#+NAME: org_mark_mini20.local_20210624T203034.951856
+#+begin_src emacs-lisp
+(unless *emacs/>=26p*
+  (defun mwb-init-recompile-site-lisp ()
+    "Recompile packages in site-lisp directory."
+    (interactive)
+    (dolist (elt '("site-lisp" "fork"))
+      (let ((temp-dir (mwb-user-emacs-file elt)))
+        (if (fboundp 'async-byte-recompile-directory)
+            (async-byte-recompile-directory temp-dir)
+          (byte-recompile-directory temp-dir 0 t))))))
+#+end_src
+
+** Autocompile
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210822T130011.018491
+:END:
+Recompile emacs lisp  if already compiled on save but also on load.
+#+NAME: org_mark_mini20.local_20210822T130010.997493
+#+begin_src emacs-lisp
+(when (= emacs-major-version 27)
+  (use-package auto-compile
+    :ensure t
+    :config
+    (auto-compile-on-load-mode)
+    (auto-compile-on-save-mode)
+    (setq auto-compile-display-buffer 1)))
 #+end_src
 * Emacs server
 :PROPERTIES:
@@ -128,20 +160,6 @@ These provide some tools for all the other modes so can't be in the modes sub di
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20201223T175853.562586
 :END:
-*** Get a icon at the front of a string
-:PROPERTIES:
-:ID:       org_mark_mini12.local:20201223T175853.557567
-:END:
-Add a treemacs icon to the front - needs to be after file management
-#+NAME: org_mark_mini12.local_20201223T175853.523006
-#+begin_src emacs-lisp
-(defun mwb-icon-string (icon-file-extension text )
-  ;; Get an icon for the icon-file-extension e.g. "el" for an emacs icon and
-  ;; add to front of string text
-  (concat
-   (ht-get (treemacs-theme->gui-icons treemacs--current-theme) icon-file-extension)
-   text))
-#+end_src
 ** Text modes
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:5275BBAD-CBB4-4E9E-9FD1-C79EBBF642B7
@@ -161,18 +179,6 @@ Add a treemacs icon to the front - needs to be after file management
 		   (face-remap-add-relative 'variable-pitch :family "Times New Roman" :height 1.5)
 		   :hook (nov-mode . my-nov-setup)))
 	   #+end_src
-*** Web display
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:F2507988-AE2D-4676-9002-0FDC2DF2DBCB
-:END:
-	   Make contrast higher from steckemacs
-	   #+begin_src emacs-lisp
-	   (use-package shr
-         :disabled
-		 :custom
-		 ;; increase contrast between similar colors
-		 (shr-color-visible-luminance-min 60))
-	   #+end_src
 ** Programming modes
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:3C0D8B60-3C14-4F89-84AB-6D54D08C2C36
@@ -183,34 +189,6 @@ Includes structured data and now anything that does not have dependency order
 (mwb-init-load "init/prog-modes")
  #+end_src
 
-* Command completion
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:B8539BA6-84DE-4075-80AF-0B37BE1CBA52
-:END:
-This is completion for emacs commands. Choice is ido, ivy helm.
-I'll try ivy.
-Note headers have tangle command in to suppress one or other
-*** Find M-x commands
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:2B101998-0D34-4143-95AF-769C4001D58C
-:END:
-#+begin_quote
-Smex is a M-x enhancement for Emacs. Built on top of IDO, it provides a convenient interface to your recently and most frequently used commands. And to all the other commands, too.
-#+end_quote
-
-However smex seems not to be maintained so try amx
-#+NAME: org_2020-11-30+00-00_28F3664A-77DF-4D77-8554-E9F37CB1815E
-#+begin_src emacs-lisp
-(use-package amx :ensure t)
-#+end_src
-*** Ivy
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:DF80C3BB-D098-429D-A993-3DB810603205
-:END:
-#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_AE80986F-5F2A-4603-A292-6FB20CB43A9C
-#+begin_src emacs-lisp
-(mwb-init-load "init/ivy")
-#+end_src
 * Key binding
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:BF4F840D-AE27-4C9B-B83E-CCFAC0C0E8DB
@@ -222,6 +200,15 @@ However smex seems not to be maintained so try amx
   (mwb-init-load "init/keys")
   #+end_src
 
+
+* Appearance
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:4E2542DC-19A8-480A-A0B2-EF1C192A77FB
+:END:
+   #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_FDEBBB87-4E2F-4E81-87B0-349A09B8D866
+   #+begin_src emacs-lisp
+   (mwb-init-load  "init/appearance")
+   #+end_src
 * Startup data
 :PROPERTIES:
 :ID:       org_mark_2020-10-22T09-50-00+01-00_mini12.local:CAF18BDF-1B4E-49DD-B4CE-F0A18829FDDC
@@ -277,24 +264,6 @@ Well tried and treemacs screwed up
         wg-session-file (no-littering-expand-var-file-name "workgroups2")
         ))
 #+end_src
-** Dashboard
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:047865CE-76CF-4835-98C6-1B1313B9544C
-:END:
-This seemed interesting but seemed to messup lispy
-    #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_36B9271A-376B-404D-AC09-6460A21BCBBF
-    #+begin_src emacs-lisp
-    (use-package dashboard
-:disabled
-      :ensure t
-      :config
-      (dashboard-setup-startup-hook)
-      (setq dashboard-items '((recents . 5)
-                              (bookmarks . 5)
-                              (projects . 5)
-                              (agenda . 5)
-                              (registers . 5))))
-    #+end_src
 ** Current startup settings
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:0904FB99-90C7-4D22-8B26-846E12DE3921
@@ -341,11 +310,3 @@ Emacs 27 seems to have a timing issue pop to buffer seems not to see the spare w
              ))
 #+end_src
 
-* Appearance
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:4E2542DC-19A8-480A-A0B2-EF1C192A77FB
-:END:
-   #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_FDEBBB87-4E2F-4E81-87B0-349A09B8D866
-   #+begin_src emacs-lisp
-   (mwb-init-load  "init/appearance")
-   #+end_src

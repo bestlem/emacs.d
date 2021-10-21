@@ -17,33 +17,33 @@
   - [[#iso-transl][iso-transl]]
   - [[#which-key][Which Key]]
   - [[#display-keys-in-help-and-menus][Display keys in help and menus]]
-  - [[#improve-on-help][Improve on help]]
+  - [[#freekeys][FreeKeys]]
+  - [[#log-keys][Log keys]]
 - [[#bindings-grouped-by-topic][Bindings grouped by topic]]
   - [[#homeendpaging][Home/End/Paging]]
   - [[#cua-bindings][Cua bindings]]
   - [[#scrolling][Scrolling]]
   - [[#deleting-and-return][Deleting and return]]
   - [[#undo][undo]]
-  - [[#let-search-continue-with-arrows][Let search continue with arrows]]
   - [[#old-bindings][Old bindings]]
   - [[#quickrun][quickrun]]
   - [[#file-actions][File actions]]
   - [[#buffer-related][Buffer related]]
-  - [[#goto][Goto]]
-  - [[#help][Help]]
 - [[#single-key-bindings][Single key bindings]]
   - [[#function-keys][Function keys]]
   - [[#hyper-key-bindings][Hyper key bindings]]
   - [[#other][Other]]
+  - [[#toggle-treemode-as-needed-often][Toggle treemode as needed often]]
   - [[#control-x-binding][Control x binding]]
 - [[#mouse][Mouse]]
   - [[#imenu][iMenu]]
+  - [[#macos-mouse][Macos mouse]]
 - [[#hydra][Hydra]]
   - [[#leader-keys][Leader keys]]
   - [[#hydra-transpose][Hydra transpose]]
+  - [[#goto][Goto]]
+  - [[#search][Search]]
   - [[#kitchin-hydras][Kitchin hydras]]
-  - [[#toggle-treemode-as-needed-often][Toggle treemode as needed often]]
-- [[#freekeys][FreeKeys]]
 
 * Global key bindings musings
 :PROPERTIES:
@@ -85,6 +85,12 @@ There is a difference between bind and general in how they report the bindings. 
 Use bind-key
 
 ??? Oct 2020 I don't understand
+
+*** Emacs versions
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210819T115433.266731
+:END:
+GNUemacs, Aquamacs  and macport don't agree on mouse 4 and 5 - GNU and Aquamacs  bind 3 to 4 and has no 5
 ** Keyboard Thoughts
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:68EED975-E28B-4FD7-8E78-BA5A8E260CD1
@@ -132,7 +138,7 @@ I can't touch type but seem to have two modes. One is two or more finger for tex
 I discovered [[https://github.com/abo-abo/hydra][Hydra Mode]] which allows you to define keys and a menu to show what they do. I realised that for a new to me mode I could bind the most interesting functions to a hydra to help me learn what the mode does and also cut down on control-C (That's interrupt, isn't it 🤣must bind control-C to control-G as I have wanted that for ages)
 
 So hyper-A is now a mode hydra key and I have started defining a hydra on that,
-And as per Yah Lee it might be better to not use chords - ie two key presses e.g.  A-s so I have started implementinmg a leader hydra so that I can make caps-lock a real key not hyper.
+And as per Yah Lee it might be better to not use chords - ie two key presses e.g.  A-s so I have started implementinmg a leader hydra so that I can make caps-lock a real key not hyper. Now use caps lock as a leader key f19 which now calls a hydra.
 
 **** Windows menu key
 :PROPERTIES:
@@ -198,9 +204,9 @@ So lets try to patch iso-transl. I copied the Aquamacs one and then merged with 
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:CF1562A8-8457-4393-ADE7-E36762C1ED47
 :END:
-   Package [[https://github.com/justbur/emacs-which-key][which-key]] shows after a key press what you can do next (not useful for control-C as there are too many to show and you can't scroll).
+Package [[https://github.com/justbur/emacs-which-key][which-key]] shows after a key press what you can do next (not useful for control-C as there are too many to show and you can't scroll).
 
-   Disabled as it calls iso-transl to wreck A-/ bindings but fix iso-transl as above so back
+It was disabled as it calls iso-transl to wreck A-/ bindings but fix iso-transl as above so back
    #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_E1F20E36-2E4C-47E8-B20E-F08B7B7F9C77
    #+begin_src emacs-lisp
 (use-package which-key
@@ -231,16 +237,45 @@ Note that you can control what the screen displays A for Alt or ⌥. Emacs is no
 (when *aquamacs*
   (setq ns-use-mac-modifier-symbols  t))
 #+end_src
-** Improve on help
+
+** FreeKeys
 :PROPERTIES:
-:ID:       org_2020-12-08+00-00:19F09EB5-F1E8-4BB8-956D-B6F0893377C0
+:ID:       org_mark_mini20.local:20210601T161324.978840
 :END:
-This will be fun as it uses *Help* and I use *Helpful*
-#+NAME: org_2020-12-08+00-00_F53AC824-5902-4E24-B6C7-AC4EC2BA328B
+Show unused keys from https://github.com/Fuco1/free-keys
+#+NAME: org_mark_mini20.local_20210601T161324.957225
 #+begin_src emacs-lisp
-(use-package help-fns+
-    :defer 15
-    :mwb-load-path "site-lisp/Emacs_wiki")
+(use-package free-keys
+  :ensure t
+  :commands free-keys)
+#+end_src
+
+** Log keys
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210819T101912.817939
+:END:
+Show the frequency of keys
+#+NAME: org_mark_mini20.local_20210819T101912.797007
+#+begin_src emacs-lisp
+(use-package-elpa keyfreq
+  :demand
+  :init
+  (setq keyfreq-excluded-commands
+		'(self-insert-command
+          org-self-insert-command
+          forward-char
+          backward-char
+          previous-line
+          next-line
+          mac-mwheel-scroll
+          mouse-set-point
+          org-mouse-down-mouse
+          mouse-drag-region
+          ))
+  :config
+  (keyfreq-mode 1)
+  (keyfreq-autosave-mode 1)
+  )
 #+end_src
 * Bindings grouped by topic
 :PROPERTIES:
@@ -259,8 +294,7 @@ This does the actual binding
   (bind-key [C-H-left] 'beginning-of-buffer macos-key-map)
   (bind-key [C-H-right] 'end-of-buffer macos-key-map))
 
-
-;;  From old Windows/Next/Unix
+;;  From old Windows/Next/Unix -
 (bind-key [C-kp-end] 'end-of-buffer)
 (bind-key [C-kp-home] 'beginning-of-buffer)
 (bind-key [S-kp-next] 'scroll-other-window-down)
@@ -285,9 +319,7 @@ This does the actual binding
   ;;(bind-key [C-end] 'end-of-buffer )
   ;;(bind-key [C-home] 'beginning-of-buffer )
   )
- ;; Unknown
- (bind-key [C-kp-end] 'end-of-buffer )
- (bind-key [C-kp-home] 'beginning-of-buffer )
+
 #+end_src
 ** Scrolling
 :PROPERTIES:
@@ -333,32 +365,6 @@ Use Aquamacs'
     )
 #+end_src
 
-** Let search continue with arrows
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:9C6C52F9-BD9C-4A80-856B-6D5620E5C9A7
-:END:
-DISABLED
-But point seems to be messed up and does Aquamacs do something.
-[[http://ergoemacs.org/emacs/emacs_isearch_by_arrow_keys.html][Xah Lee  again]] set arrow keys in isearch. left/right is backward/forward, up/down is history. press Return to exit
-How does this work with ivy
-#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_91E28470-7CDD-41AD-B712-ACCD36F51EAF
-#+begin_src emacs-lisp :tangle no
-
-(progn
-  ;; (define-key isearch-mode-map (kbd "<up>") 'isearch-ring-retreat )
-  ;; (define-key isearch-mode-map (kbd "<down>") 'isearch-ring-advance )
-
-  (define-key isearch-mode-map (kbd "<left>") 'isearch-repeat-backward)
-  (define-key isearch-mode-map (kbd "<right>") 'isearch-repeat-forward)
-
-  (define-key minibuffer-local-isearch-map (kbd "<left>") 'isearch-reverse-exit-minibuffer)
-  (define-key minibuffer-local-isearch-map (kbd "<right>") 'isearch-forward-exit-minibuffer))
-#+end_src
-*** TODO Use with cmd-F
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:A15CC8C1-7203-4FD0-8E6B-F0923D40F40D
-:END:
-Aquamacs also messes around with isearch and the two don't exactly match. Which might be a good thing
 ** Old bindings
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:9DC3CE51-289C-4767-A1DE-E461A402C58F
@@ -366,12 +372,12 @@ Aquamacs also messes around with isearch and the two don't exactly match. Which 
 These will be old NeXT Pizza bindings
 
 
-	 ;(global-set-key [?\A-=] 'what-line )
-	 ;(global-set-key [?\M-g] 'goto-line)
-	 ;(global-set-key [?\A-g] 'goto-line)
-	 ;(global-set-key "\M-q" 'query-replace)
-	 ;(global-set-key "\M-r" 'replace-string)
-	 ;(global-set-key "\M-i" 'indent-region)
+     ;(global-set-key [?\A-=] 'what-line )
+     ;(global-set-key [?\M-g] 'goto-line)
+     ;(global-set-key [?\A-g] 'goto-line)
+     ;(global-set-key "\M-q" 'query-replace)
+     ;(global-set-key "\M-r" 'replace-string)
+     ;(global-set-key "\M-i" 'indent-region)
 ** quickrun
 :PROPERTIES:
 :ID:       org_2020-12-10+00-00:FEC7FE48-F0F3-44D4-B404-B8B876681B21
@@ -395,7 +401,7 @@ This is the override of save etc to the mode maps
 :END:
 #+NAME: org_mark_2020-09-24T21-45-16+01-00_mini12.local_427A6531-52EE-4F7E-A5E8-B2841C9B166A
 #+begin_src emacs-lisp
-(bind-key "A-b" 'ivy-switch-buffer macos-key-map)
+;; (bind-key "A-b" 'ivy-switch-buffer macos-key-map)
 (bind-key "A-M-k" 'bjm/kill-this-buffer macos-key-map)
 (bind-key "C-x k" 'bjm/kill-this-buffer macos-key-map)
 (bind-key "A-k" 'bury-buffer macos-key-map)
@@ -403,41 +409,6 @@ This is the override of save etc to the mode maps
 ;; macport makes A-u µ
 (bind-key  "A-u" 'revert-buffer-no-confirm macos-key-map)
 #+end_src
-** Goto
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:3F4F065D-FF4D-4D2B-BA34-42AEA1DE2043
-:END:
-#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_A1DB0752-B232-4FA8-BF33-3CE313E5306C
-#+begin_src emacs-lisp
-(bind-key "M-g" 'goto-line)             ; one of the oldest binds
-#+end_src
-** Help
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20210601T121908.363715
-:END:
-This got confusing as both counsel and helpful change things. So move all here.
-#+NAME: org_mark_mini20.local_20210601T121908.338748
-#+begin_src emacs-lisp
-(bind-keys :map help-map
-		   ("f" . counsel-describe-function)
-		   ("v" . counsel-describe-variable)
-		   ("l" . counsel-find-library)
-
-		   ("." . helpful-at-point)
-		   ("<f1>" . helpful-at-point)
-		   ([remap describe-key] . helpful-key)
-
-		   ("c" . describe-char)
-
-		   ;; hemacs
-		   ;; ("g" . google-this)
-		   ("K" . free-keys)
-		   ;;  ("f" . flymake-show-diagnostics-buffer)
-		   )
-#+end_src
-
-
-
 * Single key bindings
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:7A9AB89E-F4F2-4508-8FD9-FCB30C5AE861
@@ -471,6 +442,9 @@ Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in e
 ;; But makes more sense to quickly hit a key
 (bind-key [f8] 'next-error)
 (bind-key [S-f8] 'previous-error)
+
+;; f11 is bound by emacs to toggle-frame-fullscreen
+(unbind-key [f11])
 #+end_src
 
 ** Hyper key bindings
@@ -511,7 +485,14 @@ Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in e
     (bind-key "A-<kp-subtract>" 'zoom-out macos-key-map)
     (bind-key "A-/" 'comment-dwim-2 macos-key-map)))
 #+end_src
-
+** Toggle treemode as needed often
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210812T103208.413730
+:END:
+#+NAME: org_mark_mini20.local_20210812T103208.394575
+#+begin_src emacs-lisp
+(bind-key "A-M-t" 'treemacs)
+#+end_src
 ** Control x binding
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:69EED50E-06AD-4068-A0FA-34186BCC8E7D
@@ -530,8 +511,8 @@ Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in e
     (timer-activate timer)))
 
 (defhydra x-hydra (:body-pre x-hydra-pre
-			     :color blue
-			     :hint nil)
+                 :color blue
+                 :hint nil)
   ("b" (progn (zap-to-char -1 ?x) (ivy-switch-buffer)))
   ("f" (progn (zap-to-char -1 ?x) (counsel-find-file)))
   ("r" (progn (zap-to-char -1 ?x) (counsel-recentf))))
@@ -557,7 +538,8 @@ Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in e
 :PROPERTIES:
 :ID:       org_mark_2020-10-17T19-55-57+01-00_mini12.local:6D65DE51-07D2-4306-9156-B8E684BC67C3
 :END:
-This is a problem. I have used several mice with emacs. The best is the old 3 button Sun mouse or Logitech trackball, this makes mouse-2 easy to use. However we now have scroll wheels so mouse-2 is uncomfortable and not easy to control.
+This is a problem. I have used several mice with emacs. The best is the old 3 button Sun mouse or Logitech trackball, this makes mouse-2 easy to use. However we now have scroll wheels so mouse-2 is uncomfortable and not easy to control. But then I bouth a 3 button mouse.
+
 macOS has its own standards so mouse-3 does its own thing.
 There are several things we want mouse-3 to do:
 1. If on a word and it is misspelt then show alternatives and ability to save.
@@ -581,11 +563,11 @@ Sort the imenu found options in the mouse menu
 #+begin_src emacs-lisp
 (setq imenu-sort-function 'imenu--sort-by-name)
 #+end_src
-*** Macos mouse
+** Macos mouse
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20210104T224325.845039
 :END:
-Well Aquamacs at least - and possibly others does an emulate # button mouse which stops c-mouse! (and alt)
+Well Aquamacs at least - and possibly others does an emulate 3 button mouse which stops c-mouse! (and alt)
 #+NAME: org_mark_mini12.local_20210104T224325.807058
 #+begin_src emacs-lisp
 (when *aquamacs*
@@ -607,53 +589,63 @@ Try with an enhanced one but test to mouse-4 which might have issues with treema
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:A41389A4-CD6E-44AD-A79A-C170F7936D9D
 :END:
-
-** TODO Leader keys
+** Leader keys
 :PROPERTIES:
 :ID:       org_2020-12-08+00-00:8916E17A-D941-4F9E-B5B6-2F32476DF3C0
 :END:
-Replace Hyper key combination with a leader key - eventually this will be caps lock
+Replace Hyper key combination with a leader key
 
 As this has to be a leader map so no hydra H-s is the issue as in some org-mode maps then mighty be better to use which-key-add-keymap-based-replacements to set pretty names for which key
 
 Odd things needed
+Tried inherit to set f19 s as mode dependant but seems not to work with pretty hydra. So make the function dispatch by mode
+*** Special function
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210812T114450.516655
+:END:
+#+NAME: org_mark_mini20.local_20210812T114450.499147
+#+begin_src emacs-lisp
+(defun mwb-special-in-hydra ()
+  (interactive)
+  (cond ((eq major-mode 'org-mode) (org-edit-special))
+        ((bound-and-true-p org-src-mode) (org-edit-src-exit))
+        (t org-babel-tangle-jump-to-org)))
+#+end_src
+*** Main map
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210812T103208.412764
+:END:
 #+NAME: org_2020-12-05+00-00_94E1455C-7F91-48B1-BF7B-EA3753E7BDCB
 #+begin_src emacs-lisp
-(pretty-hydra-define hydra-kl ; short name for which-key
-  (global-map "<f19>"
-			  ;; :foreign-keys warn
-			  :title (with-octicon "tools" "Global tools" 1 -0.05)
-			  :color teal
-			  :idle 0.5)
+(pretty-hydra-define hydra-kl (:title (with-octicon "tools" "Global tools" 1 -0.05)
+                                      :color teal
+                                      :idle 1.0)
   ("Hydrae"
-   (("a" major-mode-hydra "Major mode")
-    ("C" hydra-flycheck/body "Flycheck")
-    ("G" hydra-goto/body "Goto")
+   (("C" hydra-flycheck/body "Flycheck")
     ("g" jp-git/body "git...")
-	("h" hydra-hs/body "Hide/show...")
+    ("h" hydra-hs/body "Hide/show...")
     ("n" hydra-navigate/body "Navigate")
     ("P" hydra-projectile/body "projectile")
     ("t" hydra-transpose/body "Transpose")
     ("x" x-hydra-readonly/body "C-X fns")
     ("<f19>" major-mode-hydra "Major mode")
-	("[" ptrv/smartparens/body "Smartparens")
-    ("?" hydra-kl/body "this as a hydra"))
+    ("[" ptrv/smartparens/body "Smartparens")
+    ("l" hydra-goto/body "Go to"))
    "Windows"
    (("F" other-frame "Switch Frame")
     ("m" (mwb-new-frame "*Messages*") "Messages")
-    ("w" hydra-jp-window/body "Window Management")
+    ("W" hydra-jp-window/body "Window Management")
     ("0" delete-window "Delete Window")
     (")" delete-window "Delete Window")
-    ("|"  split-window-right "horizontally")
-    )
+    ("|" split-window-right "horizontally"))
    "Current buffer"
-   (("l" linum-mode "line number" :toggle t)
-    ("c" (what-cursor-position 'detail) "Character at POS")
+   (("L" linum-mode "line number" :toggle t)
+    ("c" insert-char "insert char")
     ("TAB" hs-mwb-show-one-level "show one level")
     ("C-<tab>" hs-toggle-hiding "Toggle hide-show")
-	("f" refill-mode "Auto refill mode ")
-	("r" backup-walker-start "Backup Walker" )
-    )
+    ("f" refill-mode "Auto refill mode ")
+    ("r" backup-walker-start "Backup Walker")
+    ("i" consult-imenu "imenu"))
    "Actions"
    (("D" toggle-debug-on-error "debug on error" :toggle (default-value 'debug-on-error))
     ("d" hyd-dired-common/body "Open dired frame")
@@ -661,24 +653,24 @@ Odd things needed
     ("p" package-quickstart-refresh "refresh quickstart packages")
     ("q" keyboard-quit-context+ "Quit minibuffer etc")
     ("S" org-babel-detangle "Detangle")
-    )
-
+    ("e" iedit-mode "iedit"))
    "Change Buffers"
-   (("b" ivy-switch-buffer "Switch Buffer")
+   (("b" consult-buffer "Switch Buffer")
     ("B" counsel-bookmark "Jump to bookmark")
-    ("s" org-babel-tangle-jump-to-org "Back to org")
-    ("j" dired-jump "Dired jump")
-    )))
+    ("s" mwb-special-in-hydra "org edit")
+    ("w" narrow-or-widen-dwim "Narrow or Widen")
+    ;; ("s" org-babel-tangle-jump-to-org "Back to org")
+    ("j" dired-jump "Dired jump"))))
 (bind-key "H-`"  'hydra-kl/body)
-;; (bind-key "<f19>"  'hydra-key-leader/body)
+(bind-key "<f19>"  'hydra-kl/body)
 #+end_src
-
 ** Hydra transpose
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:F0488F70-6114-4DF6-AB8A-70BCCF07A5C2
 :END:
-	From hydra wiki
-	#+begin_src emacs-lisp
+    From hydra wiki
+    #+NAME: org_mark_mini20.local_20210812T123645.018949
+    #+begin_src emacs-lisp
 (defhydra hydra-transpose (:color red)
     "Transpose"
      ("c" transpose-chars "characters")
@@ -690,7 +682,149 @@ Odd things needed
      ("p" transpose-paragraphs "paragraphs")
      ("t" org-table-transpose-table-at-point "Org mode table")
      ("q" nil "cancel" :color blue))
-	#+end_src
+    #+end_src
+
+** Goto
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210801T222808.558433
+:END:
+Goto is based on consult's map and Kitchin hydra
+#+NAME: org_mark_mini20.local_20210811T180310.388838
+#+begin_src emacs-lisp
+(pretty-hydra-define hydra-goto
+  (:title (mwb-icon-text "directions" "Goto")
+          :foreign-keys warn
+          :quit-key "q"
+          :exit t
+          :idle 0.5)
+  ("goto"
+   (("g" consult-goto-line))
+   "Structure"
+   (("h" consult-org-heading "Org heading")
+    ("o" consult-outline "Outline")
+    ("i" consult-imenu "imenu")
+    ("I" consult-project-imenu "Project imenu"))
+   "Errors"
+   (
+    ("e" consult-compile-error "compile error")
+    ("f" consult-flycheck "flycheck"))
+   "Marks"
+   (("m" consult-mark "mark")
+    ("M" consult-global-mark "global mark"))))
+#+end_src
+
+** Search
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210801T222808.557693
+:END:
+From consult
+
+*** Helper functions
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210811T144548.707417
+:END:
+#+NAME: org_mark_mini20.local_20210811T144548.684882
+#+begin_src emacs-lisp
+(defun consult-line-symbol-at-point ()
+  (interactive)
+  (consult-line (thing-at-point 'symbol)))
+#+end_src
+
+
+**** Hydra
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210811T144548.706167
+:END:
+#+NAME: org_mark_mini20.local_20210811T144548.688365
+#+begin_src emacs-lisp
+(bind-key "<f4>"
+          (pretty-hydra-define hydra-search
+            (:title (mwb-icon-text "search" "Search")
+                    :foreign-keys warn
+                    :quit-key "q"
+                    :exit t
+                    :idle 0.5)
+            ("Project"
+             (("<f5>" deadgrep "Deadgrep")
+              ("r" consult-ripgrep "Counsel ripgrep"))
+             "Global"
+             (("L" consult-locate "Locate")
+              ("M-w" eww-search-words "Web"))
+             "Directory"
+             (("g" consult-grep "grep")
+              ("G" consult-git-grep "grep using git")
+              ("f" consult-find "Find"))
+             "Current Buffer"
+             (("l" consult-line "Line")
+              ("k" consult-keep-lines "Keep Lines")
+              ("u" consult-focus-lines "Focus Lines")
+              ("e" consult-isearch "consult Incremental search")
+              ("<f4>" consult-line  "Incremental search")
+              ("o" occur "Occur")
+              ("." consult-line-symbol-at-point "isearch point")
+              ("_" isearch-forward-symbol "isearch symbol")
+              ("w" isearch-forward-word "Isearch word"))
+             "Buffers"
+             (("m"  consult-multi-occur "Multi occur"))
+             "Highlight"
+             (("h." highlight-symbol-at-point "Point")
+              ("hf" hi-lock-find-patterns "Lock Pattern")
+              ("hl" highlight-lines-matching-regexp "Lines")
+              ("hp" highlight-phrase "Phrase")
+              ("hr" highlight-regexp "regexp")
+              ("hu" unhighlight-regexp "Unhighlight")
+              ("hw" hi-lock-write-interactive-patterns "Write patterns")))))
+#+end_src
+
+*** isearch map
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210802T082202.482760
+:END:
+#+NAME: org_mark_mini20.local_20210802T104242.905780
+#+begin_src emacs-lisp
+(use-feature emacs
+  :bind (:map isearch-mode-map
+              ("M-e" . consult-isearch)
+              ("<f4>" . consult-isearch) ;; orig. isearch-edit-string
+              ("M-s e" . consult-isearch) ;; orig. isearch-edit-string
+              ("M-s l" . consult-line)
+              ("<right>" . isearch-repeat-forward)
+              ("<left>" . isearch-repeat-backward)
+              :map minibuffer-local-isearch-map
+              ("<left>" . isearch-reverse-exit-minibuffer)
+              ("<right>" . isearch-forward-exit-minibuffer)))
+
+#+end_src
+
+
+
+
+*** Let search continue with arrows
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:9C6C52F9-BD9C-4A80-856B-6D5620E5C9A7
+:END:
+This is disabled as swiper and consult-line scroll in the minibuffer.
+But point seems to be messed up and does Aquamacs do something.
+[[http://ergoemacs.org/emacs/emacs_isearch_by_arrow_keys.html][Xah Lee  again]] set arrow keys in isearch. left/right is backward/forward, up/down is history. press Return to exit
+How does this work with ivy
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_91E28470-7CDD-41AD-B712-ACCD36F51EAF
+#+begin_src emacs-lisp :tangle no
+
+(progn
+  ;; (define-key isearch-mode-map (kbd "<up>") 'isearch-ring-retreat )
+  ;; (define-key isearch-mode-map (kbd "<down>") 'isearch-ring-advance )
+
+  (define-key isearch-mode-map (kbd "<left>") 'isearch-repeat-backward)
+  (define-key isearch-mode-map (kbd "<right>") 'isearch-repeat-forward)
+
+  (define-key minibuffer-local-isearch-map (kbd "<left>") 'isearch-reverse-exit-minibuffer)
+  (define-key minibuffer-local-isearch-map (kbd "<right>") 'isearch-forward-exit-minibuffer))
+#+end_src
+**** TODO Use with cmd-F
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:A15CC8C1-7203-4FD0-8E6B-F0923D40F40D
+:END:
+Aquamacs also messes around with isearch and the two don't exactly match. Which might be a good thing
 ** Kitchin hydras
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:CA320A7E-C8CE-4C9D-B24B-C7FFE5F04B9C
@@ -700,7 +834,8 @@ Odd things needed
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:85154714-C478-4D9F-850F-7C01537CFD9C
 :END:
-	#+begin_src emacs-lisp
+    #+NAME: org_mark_mini20.local_20210812T123645.021261
+    #+begin_src emacs-lisp
 (defhydra hydra-navigate (:color red
                           :hint nil)
   "
@@ -750,74 +885,4 @@ _<_ beginning of buffer _>_ end of buffer _m_: set mark _/_: jump to mark
   ("q" nil "quit" :color blue))
 
 (bind-key "H-m" 'hydra-navigate/body)
-	#+end_src
-*** Goto
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:F42353DF-4D49-4E20-92C2-7C637E5483A8
-:END:
-	#+begin_src emacs-lisp
-(defhydra hydra-goto (:color blue :hint nil)
-  "
-	Goto:
-	^Char^              ^Word^                ^search^
-	^^^^^^^^--------------------------------------------------
-	_c_: 2 chars        _w_: word by char     _f_: search forward
-	_C_: char           _W_: some word        _b_: search backward
-	_L_: char in line   _s_: subword by char  _B_: counsel-buffers
-	_l_: avy-goto-line  _S_: some subword     _R_: counsel-recentf
-	_i_: ace-window
-	_n_: Navigate       _._: mark position    _/_: jump to mark
-	----------------------------------------------------------
-	"
-  ("c" avy-goto-char-2)
-  ("C" avy-goto-char)
-  ("L" avy-goto-char-in-line)
-  ("w" avy-goto-word-1)
-  ;; jump to beginning of some word
-  ("W" avy-goto-word-0)
-  ;; jump to subword starting with a char
-  ("s" avy-goto-subword-1)
-  ;; jump to some subword
-  ("S" avy-goto-subword-0)
-
-  ("l" avy-goto-line)
-  ("i" ace-window)
-
-  ;; ("h" helm-org-headlines)
-  ;; ("a" helm-org-agenda-files-headings)
-  ;; ("q" helm-multi-swoop-org)
-
-  ;; ("o" helm-occur)
-  ;; ("p" swiper-helm)
-
-  ("f" isearch-forward)
-  ("b" isearch-backward)
-
-  ("." org-mark-ring-push :color red)
-  ("/" org-mark-ring-goto :color blue)
-  ("B" ibuffer)
-  ;; ("m" helm-mini)
-  ("R" counsel-recentf)
-  ("n" hydra-navigate/body))
-
-(bind-key "H-g" 'hydra-goto/body)
-	#+end_src
-** Toggle treemode as needed often
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:E96CD5B5-8DFE-489A-BBF2-B969886F2607
-:END:
-#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_B45876F9-F64F-46A1-A3A9-5727BFAB647C
-#+begin_src emacs-lisp
-(bind-key "A-M-t" 'treemacs)
-#+end_src
-* FreeKeys
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20210601T161324.978840
-:END:
-Show unused keys from https://github.com/Fuco1/free-keys
-#+NAME: org_mark_mini20.local_20210601T161324.957225
-#+begin_src emacs-lisp
-(use-package free-keys
-  :ensure t
-  :commands free-keys)
-#+end_src
+    #+end_src

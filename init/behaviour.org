@@ -6,25 +6,26 @@
 :ID:       org_mark_2020-03-02T07-49-31+00-00_mini12.local:F19DE0CC-B946-4885-808E-36CB21A4AF3D
 :END:
 
-** [[https://github.com/emacsmirror/gcmh][GCMH - the Garbage Collector Magic Hack]]
+** [[https://github.com/emacsmirror/gcmh][GCMH]]
 :PROPERTIES:
-:ID:       org_2020-12-08+00-00:9CBD1225-1938-4671-8260-E362EA08EE86
+:ID:       org_mark_mini20.local:20210830T145836.679819
 :END:
+The Garbage Collector Magic Hack
 This seems to be a more consistent way so can replace other bits
 The only bit to stay is after-init
 Note that gcmh cannot explicitly reduce the memory it does this when it gcs, which might be wrong - it assumes you do not gc during a process
 #+NAME: org_2020-12-08+00-00_C06FD610-2FD2-4E60-94B2-33A789850588
 #+begin_src emacs-lisp
-(use-package gcmh
-    :ensure t
-    :diminish
-    :config
-    (setq gcmh-high-cons-threshold (* 128 1024 1024)) ; reduces as I got a 10G
+(use-package-elpa  gcmh
+  :diminish
+  :defer 5
+  :config
+  (setq gcmh-high-cons-threshold (* 128 1024 1024)) ; reduces as I got a 10G
                                         ; monster
-    (setq gcmh-low-cons-threshold (* 1024 1024)) ; originally 800000 - increas
+  (setq gcmh-low-cons-threshold (* 1024 1024)) ; originally 800000 - increas
                                         ; because of gnus
-    ;; (setq gcmh-verbose 't)
-    (gcmh-mode 1))
+  ;; (setq gcmh-verbose 't)
+  (gcmh-mode 1))
 #+end_src
 
 ** Instrument emacs
@@ -111,51 +112,6 @@ I haven't used before but might try with hydra from [[https://sriramkswamy.githu
 (unless *aquamacs*
   (fset 'yes-or-no-p 'y-or-n-p))
    #+END_SRC
-* Help
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:BA8FE03C-5430-4984-9CD3-7E5971925F68
-:END:
-Let's use [[https://github.com/Wilfred/helpful][Helpful]]
-#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_20EF0E45-D1C2-493C-B710-6E2B48D98DB9
-#+begin_src emacs-lisp
-(use-package helpful
-  :ensure t
-  :custom
-  (counsel-describe-function-function #'helpful-callable)
-  (counsel-describe-variable-function #'helpful-variable)
-  :bind
-  ;; ([remap describe-function] . helpful-callable)
-  ([remap describe-command] . helpful-command)
-  ;; ([remap describe-variable] . helpful-variable)
-  ([remap describe-key] . helpful-key)
-  ;; ("<f1> F" . helpful-function)
-  ;; ("<f1> ." . helpful-at-point)
-  ;; ("<f1> <f1>" . helpful-at-point)
-  )
-#+end_src
-** Improve majors
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20210526T204803.505076
-:END:
-This package helps to discover the major mode bindings. I use it very occasionally and hence not binding it to any modal binding.
-#+NAME: org_mark_mini20.local_20210526T204803.473143
-#+begin_src emacs-lisp
-(use-package discover-my-major
-  :ensure t
-  :bind (("C-h C-m" . discover-my-major)
-		 ("C-h M-m" . discover-my-mode)))
-#+end_src
-* Key Chord
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:727BACF4-7E05-4203-85B7-65661B36F7B5
-:END:
-#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_CAA5ED48-7C06-4625-A839-267E09964133
-#+begin_src emacs-lisp
-(use-package key-chord
-  :disabled
-  :ensure t
-  :config (key-chord-mode 1))
-#+end_src
 * Delete if selected
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:1093B961-57F6-4B74-9CCD-F155EEDA2E87
@@ -234,7 +190,7 @@ Let's stop it. from [[https://emacs.stackexchange.com/a/13975/9874][Emacs SE]]
 		 (and (if (called-interactively-p)
 				  (skip-syntax-backward "w")
 				(= -3 (skip-syntax-backward "w")))
-			  (let (case-fold-search)
+			  (let (case-fold-search nil)
 				(looking-at "\\b[[:upper:]]\\{2\\}[[:lower:]]"))
 			  (capitalize-word 1)))))
 
@@ -246,18 +202,9 @@ Single Capitals as you type. "
   (if dubcaps-mode
 	  (add-hook 'post-self-insert-hook #'dcaps-to-scaps nil 'local)
 	(remove-hook 'post-self-insert-hook #'dcaps-to-scaps 'local)))
-(dubcaps-mode 1)
 
-#+end_src
-** Misspelling correction
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:5AA8C57E-7AEA-4F16-AD52-84CE2450344B
-:END:
-See http://endlessparentheses.com/ispell-and-abbrev-the-perfect-auto-correct.html but I need to deal with Aquamacs spelling as well
-#+NAME: org_mark_2020-09-29T11-53-58+01-00_mini12.local_C107F37F-7EE4-4A6E-B97C-C3CEB3BA7A7C
-#+begin_src emacs-lisp
-(unless *aquamacs*
-  (mwb-init-load "init/behaviour_spell_noaqua"))
+(add-hook 'text-mode-hook #'dubcaps-mode)
+
 #+end_src
 * Comments
 :PROPERTIES:
@@ -271,6 +218,37 @@ Aquamacs does its own binding to comment and uncomment region.
   :ensure t
   :commands comment-dwim-2 ;; need as mac binding
   )
+#+end_src
+* Edit
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210708T102755.604371
+:END:
+There are things like multiple-cursors but iedit sounds simpler
+#+NAME: org_mark_mini20.local_20210708T102755.576131
+#+begin_src emacs-lisp
+(use-package-elpa iedit
+  :bind (:map iedit-mode-keymap
+              ("<f5>" . iedit-hydra/body))
+  :pretty-hydra
+  ( (:title "IEdit" :hint nil)
+    ("Navigate" (("j" iedit-next-occurrence "next")
+                 ("k" iedit-prev-occurrence "previous")
+                 ("<" iedit-goto-first-occurrence "first")
+                 (">" iedit-goto-last-occurrence "last")
+                 ("h" iedit-show/hide-unmatched-lines "hide"))
+     "Restrict" (("c" iedit-toggle-case-sensitive "case" :toggle iedit-case-sensitive)
+                 ("f" iedit-restrict-function "function")
+                 ("l" iedit-restrict-current-line "line")
+                 ("i" iedit-toggle-selection "toggle")
+                 ("n" iedit-expand-down-to-occurrence "down-expand")
+                 ("p" iedit-expand-up-to-occurrence "up-expand"))
+     "Edit" (("r" iedit-replace-occurrences "replace" :exit t)
+             ("d" iedit-delete-occurrences "delete" :exit t)
+             ("1" iedit-number-occurrences "number")
+             ("m" iedit-switch-to-mc-mode "multiple-cursors" :exit t))))
+  )
+
+
 #+end_src
 * Navigation
 :PROPERTIES:
@@ -298,23 +276,8 @@ The hydra did not add anything. Just keep hitting f2
 There are several ways to make begin go to first non whitespace  then to begin line, some will then make next press go to defun or buffer.
 Note home and end are in Aquamacs osx-mode-map makes life more complex (actually not as mosey overrides it unless you deactivate and reactivate it). Perhaps I will have to unset them to allow modes to do their things These include crux, [[https://github.com/alezost/mwim.el][mwin]] and ergoemacs,  [[https://github.com/alphapapa/mosey.el][mosey]] + snippets on web.
 Note that lispy also does this but not back a form.
+Tried mosey as it has the back function - NB can use smartparens, unfortunately does not seem to work with shift and as others do try another.
 mwin seems the current winner
-*** Mosey
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:7A6F1A54-B69B-4674-8B4B-1B404D40B67D
-:END:
-Try mosey as it has the back function - NB can use smartparens, unfortunately does not seem to work with shift and as others do try another.
-#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_D167236A-A698-4694-A38A-C0A02B3D0153
-#+begin_src emacs-lisp
-(use-package mosey
-  :disabled
-  :ensure t
-  :bind (
-         ;; My personal favorites
-         ("<home>" . mosey-backward-bounce)
-         ("<end>" . mosey-forward-bounce)
-         ))
-#+end_src
 *** mwin
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:73B44400-98DA-4212-B923-8DC1AF3E360A
@@ -453,9 +416,10 @@ mwin might have mode aware
           "/Applications/"
           "~/Library/Preferences/Aquamacs Emacs/Packages"
           "~/src/ThirdParty/"
-          "~/src/env/emacs\\.d/elpa/"))
+          "emacs\\.d/elpa/"))
+  :config
   (global-hardhat-mode)
-  :config (validate-setq hardhat-mode-lighter "Ⓗ"))
+  (validate-setq hardhat-mode-lighter "Ⓗ"))
 #+end_src
 ** Buffer switch
 :PROPERTIES:
@@ -493,9 +457,14 @@ By default C-x k runs the command kill-buffer which prompts you for which buffer
 :END:
 If a buffer has a subprocess running (e.g. shell, racket-run then emacs will prompt to ask if you want to kill it. I think you always do. So from https://emacs.stackexchange.com/a/14511/9874
 #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_4D892993-8FA6-4917-A0AD-D75C5B69035E
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (setq kill-buffer-query-functions
       (delq 'process-kill-buffer-query-function kill-buffer-query-functions))
+#+end_src
+But emacs 26 seems to have improved this from [[https://emacs.stackexchange.com/a/52677/9874][Another SO]]
+#+NAME: org_mark_mini20.local_20210906T081112.772859
+#+begin_src emacs-lisp
+(setq confirm-kill-processes nil)
 #+end_src
 ** Revert buffer
 :PROPERTIES:
@@ -575,4 +544,28 @@ Make a new popup frame
   (select-frame (make-frame))
   (switch-to-buffer buffer_name)
   (unless go-to-end (goto-char (point-max))))
+#+end_src
+* Sounds
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210628T102012.945985
+:END:
+Stop emacs beeping so much
+From [[ https://www.reddit.com/r/emacs/comments/1a6z4n/can_i_make_emacs_beep_less/c8v5][reddit]]
+Reduce the number of times the bell rings. Turn off the bell for the listed functions.
+#+NAME: org_mark_mini20.local_20210628T102012.908898
+#+begin_src emacs-lisp
+(setq ring-bell-function
+      (lambda ()
+        (unless (memq this-command
+                      '(isearch-abort
+                        abort-recursive-edit
+                        exit-minibuffer
+                        keyboard-quit
+                        previous-line
+                        next-line
+                        scroll-down
+                        scroll-up
+                        cua-scroll-down
+                        cua-scroll-up))
+          (ding))))
 #+end_src

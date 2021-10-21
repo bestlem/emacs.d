@@ -94,15 +94,6 @@ However  for debugging init we don't want the backtrace
 
 ;; (message "test")
       #+end_src
-*** Use source where newer
-:PROPERTIES:
-:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:D13FB268-3059-4AEC-9A25-50AD765F26C5
-:END:
- This variable tells Emacs to prefer the .el file if it’s newer, even if there is a corresponding .elc file.
-	  #+begin_src emacs-lisp
-(setq load-prefer-newer t)
-	  #+end_src
-
 ** Various constants
 :PROPERTIES:
 :ID:       org_mark_2020-02-20T21-36-43+00-00_mini12.local:EC43B9AE-44B4-4FBB-9E63-AC26BB45592E
@@ -183,6 +174,10 @@ Add more based on [[https://github.com/seagle0128/.emacs.d][Centaur Emacs]]
 (defconst *emacs/>=27p*
   (>= emacs-major-version 27)
   "Emacs is 27 or above.")
+
+(defconst *emacs/>=28p*
+  (>= emacs-major-version 28)
+  "Emacs is 28 or above.")
 
 ;;  well this is true for all installed one
 (defconst *emacs/>=25.3p*
@@ -300,7 +295,8 @@ Basically use-package and helpers - strictly some of these can be left to later.
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:3D4EAA9E-BE50-474E-8111-F20ACA6A1703
 :END:
- include use-package setup from <https://github.com/CachesToCaches/getting_started_with_use_package/blob/master/init-use-package.el>
+include use-package setup from <https://github.com/CachesToCaches/getting_started_with_use_package/blob/master/init-use-package.el>
+Ideally I will use as per hemacs use-feature if on load-path and use-package if from elpa by setting ensure t - however too late so add use-elpa-package
  #+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_77FB1165-1A41-4244-818F-7BFAF0F191FB
  #+begin_src emacs-lisp
 (unless (package-installed-p 'use-package)
@@ -320,7 +316,78 @@ Basically use-package and helpers - strictly some of these can be left to later.
     (setq use-package-verbose nil
           use-package-expand-minimally t)))
  #+end_src
-Override bind-keys othat
+Override bind-keys othat ?
+**** use-feature
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210625T104452.805391
+:END:
+Use package just off load-path
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210625T104400.030616
+:END:
+#+NAME: org_mark_mini20.local_20210625T104400.003367
+#+begin_src emacs-lisp
+(defmacro use-feature (name &rest args)
+  (declare (indent 1))
+  `(use-package ,name
+     ,@args))
+#+end_src
+**** use-package-elpa
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210625T104452.804093
+:END:
+use-package using :ensure t
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210625T104400.029445
+:END:
+#+NAME: org_mark_mini20.local_20210625T104400.003994
+#+begin_src emacs-lisp
+(defmacro use-package-elpa (name &rest args)
+  (declare (indent 1))
+  `(use-package ,name
+	 :ensure t
+     ,@args))
+#+end_src
+*** Paradox
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210625T110216.854054
+:END:
+From centaur to make list-packages nicer.
+TODO: make this a new frame
+#+NAME: org_mark_mini20.local_20210625T110216.825145
+#+begin_src emacs-lisp
+(use-package-elpa paradox
+  :commands paradox-list-packages
+  :init
+  (setq paradox-execute-asynchronously t
+		paradox-github-token t
+		paradox-display-star-count nil)
+
+  ;; Replace default `list-packages'
+  (defun mwb-packages ()
+	"Use paradox in a new window."
+	(interactive)
+	(select-frame (make-frame))
+	(paradox-list-packages nil)
+	(fit-frame-to-buffer))
+
+  :config
+  (when (fboundp 'page-break-lines-mode)
+	(add-hook 'paradox-after-execute-functions
+			  (lambda (&rest _)
+				(let ((buf (get-buffer-create "*Paradox Report*"))
+					  (inhibit-read-only t))
+				  (with-current-buffer buf
+					(page-break-lines-mode 1))))
+			  t))
+
+  (defun paradox-mwb-quit-advice (kill)
+	"Function added to paradox-quit-and-close to close the frame.
+With prefix KILL, kill the buffer instead of burying."
+	(delete-frame))
+  (advice-add   #'paradox-quit-and-close :after  #'paradox-mwb-quit-advice )
+  )
+#+end_src
 *** Profile/Benchmark init
 :PROPERTIES:
 :ID:       org_mark_2020-11-12T14-43-30+00-00_mini12.local:CCEFA537-D499-4E55-8B0C-62DA4221E19B
@@ -417,13 +484,14 @@ Need to alter list
   :ensure t
   :config (key-chord-mode 1))
 #+end_src
-**** Add load path
+**** use-package load path
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:25E6B29E-1FD7-4FB8-BA7C-5546A45CFA00
 :END:
 The code is relative to this file and not user-emacs-directory
 So add :mwb-load-path as a new key to use-package
 Note that this is making the addition explicit so for example the aquamacs path does not get added in Aquamacs.
+Not really needed as should set load-path
 #+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_A19E700E-BA25-4246-8752-B775A2177D5D
 #+begin_src emacs-lisp
 (defun use-package-normalize-mwb-paths (label arg &optional recursed)
@@ -457,6 +525,25 @@ Note that this is making the addition explicit so for example the aquamacs path 
 (setq use-package-keywords
       (mwb-insert-before-element :load-path :mwb-load-path  use-package-keywords))
 #+end_src
+
+**** load-path
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:BBB5C272-C2B4-4F38-948C-ED758D56E6A4
+:END:
+Setup for elisp  used by normal load not org tangle
+Note that if a subdirectory is just for one thing then use keyword mwb-load-path in use-package. Non Aquamacs does not set all sub-directories on load path.
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_CC0BEB6F-84DC-4320-9455-9906069CD4C9
+#+begin_src emacs-lisp
+(defun add-subdirs-to-load-path ()
+  "Add subdirectories to `load-path'."
+  (interactive)
+  (let ((default-directory (mwb-user-emacs-file "site-lisp")))
+    (normal-top-level-add-subdirs-to-load-path)))
+
+(add-to-list 'load-path (mwb-user-emacs-file "site-lisp"))
+(add-subdirs-to-load-path)
+#+end_src
+
 ** Customisation file
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:A28603F3-9100-4C41-855A-5D202E7ACFE3
@@ -538,68 +625,64 @@ I could keep as a set.
 But hack an load it directly
 #+NAME: org_mark_2020-10-29T09-11-06+00-00_mini12.local_04FB6D16-A43C-4D7C-9767-4C79FC0FABDD
 #+begin_src emacs-lisp
-(use-package initsplit
-    :mwb-load-path "site-lisp"
-    :after cus-edit
-    :init
-    (setq initsplit-pretty-print t)
-    (setq initsplit-default-directory mwb-init-customize-directory)
-    (setq initsplit-load-function 'initsplit-load-if-exists-and-does-not-match)
-    ;; (load (expand-file-name "initsplit-settings.el"
-    ;; mwb-init-customize-directory))
-    ;; set here so no need to load twice
-    ;;  initsplit-known-p will not save to files that have not been loaded and exist
-    (setq initsplit-simple-customizations
-          '(
-            ;; ("unknown"
-            ;;  ("awesome-" "highlight-tails" "ansi-color" "xterm-color" "highlight-tail"))
-            ("aquamacs"
-             ("aquamacs-" "tabbar-" "auto-word-wrap-default-function"
-              "global-hi-line-mode" "toolbar-mode" "visual-line-mode"))
-            ("modus"
-             ("modus-" "ibuffer-title-face" "ibuffer-marked-face" "ibuffer-deletion-face"))
-            ;; ("completion"
-            ;;  ("company-" "yas-"))
-            ("mac-based"
-             ("ns-" "mac-" "cua-"))
-            ("files"
-             ("recentf-"))
-            ;; ("flymake"
-            ;;  ("flymake-" "flycheck-"))
-            ("fringe"
-             ("fringe-"))
-            ;; ("hardhat"
-            ;;  ("hardhat-"))
-            ;; ("ibuffer"
-            ;;  ("ibuffer-"))
-            ;; ("initsplit"
-            ;;  ("initsplit-"))
-            ("package"
-             ("package-"))
-            ;; ("python"
-            ;;  ("python" "py-"))
-            ;; ("shell"
-            ;;  ("exec-path-" "explicit-shell-file-name"))
-            ;; ("structured-data"
-            ;;  ("nxml-"))
+(use-feature initsplit
+  :init
+  (setq initsplit-pretty-print t)
+  (setq initsplit-default-directory mwb-init-customize-directory)
+  (setq initsplit-load-function 'initsplit-load-if-exists-and-does-not-match)
+  ;; (load (expand-file-name "initsplit-settings.el"
+  ;; mwb-init-customize-directory))
+  ;; set here so no need to load twice
+  ;;  initsplit-known-p will not save to files that have not been loaded and exist
+  (setq initsplit-simple-customizations
+        '(
+          ;; ("unknown"
+          ;;  ("awesome-" "highlight-tails" "ansi-color" "xterm-color" "highlight-tail"))
+          ("aquamacs"
+           ("aquamacs-" "tabbar-" "auto-word-wrap-default-function"
+            "global-hi-line-mode" "toolbar-mode" "visual-line-mode"))
+          ;; ("modus"
+          ;;  ("modus-" "ibuffer-title-face" "ibuffer-marked-face" "ibuffer-deletion-face"))
+          ;; ("completion"
+          ;;  ("company-" "yas-"))
+          ("mac-based"
+           ("ns-" "mac-" "cua-"))
+          ;; ("flymake"
+          ;;  ("flymake-" "flycheck-"))
+          ("fringe"
+           ("fringe-"))
+          ;; ("hardhat"
+          ;;  ("hardhat-"))
+          ;; ("ibuffer"
+          ;;  ("ibuffer-"))
+          ;; ("initsplit"
+          ;;  ("initsplit-"))
+          ("package"
+           ("package-"))
+          ;; ("python"
+          ;;  ("python" "py-"))
+          ;; ("shell"
+          ;;  ("exec-path-" "explicit-shell-file-name"))
+          ;; ("structured-data"
+          ;;  ("nxml-"))
 
-            ("vc"
-             ("vc-" "magit-" "ediff-"))
-            ;; ("emacs-base"
-            ;;  ("make-backup" "minibuffer-"   "global-h" "cursor-type" "tool-bar-mode" "delete-old-"  "custom-" "undo-limit" "desktop-" "customize-"))
-            ))
-    (setq initsplit-customizations-alist
-          '(
-            ("\\`\\(gnus\\|nn\\|message\\|mail\\|mm-\\|smtp\\|send-mail\\|check-mail\\|spam\\|sc-\\)" "gnus-settings.el" nil t)
-            ("\\`\\(org-\\|hl-todo-\\|deft-\\|cfw:\\)" "org-settings.el" nil t)))
-    :custom
-    ;; Set here and not in custom as the values need evaluation of the running environment
-    (initsplit-ignore-prefixes
-     (list
-      (unless *aquamacs* "aquamacs")
-      (unless (string-equal system-type "darwin") "mac")
-      (unless (>= emacs-major-version 26) "modus")
-      (unless (string-equal system-type "windows") "MSWindows"))))
+          ("vc"
+           ("vc-" "magit-" "ediff-"))
+          ;; ("emacs-base"
+          ;;  ("make-backup" "minibuffer-"   "global-h" "cursor-type" "tool-bar-mode" "delete-old-"  "custom-" "undo-limit" "desktop-" "customize-"))
+          ))
+  (setq initsplit-customizations-alist
+        '(
+          ("\\`\\(gnus\\|nn\\|message\\|mail\\|mm-\\|smtp\\|send-mail\\|check-mail\\|spam\\|sc-\\)" "gnus-settings.el" nil t)
+          ("\\`\\(org-\\|hl-todo-\\|deft-\\|cfw:\\)" "org-settings.el" nil t)))
+  :custom
+  ;; Set here and not in custom as the values need evaluation of the running environment
+  (initsplit-ignore-prefixes
+   (list
+    (unless *aquamacs* "aquamacs")
+    (unless (string-equal system-type "darwin") "mac")
+    (unless (>= emacs-major-version 26) "modus")
+    (unless (string-equal system-type "windows") "MSWindows"))))
 #+end_src
 ** Key bindings
 :PROPERTIES:
@@ -825,27 +908,48 @@ Treemacs icons are better but they are purely keyed off file extensions. All the
 (use-package jp-icons
   :mwb-load-path "site-lisp/jerrypnz")
 #+end_src
-***** Centaur pretty-hydra-title
+
+***** My icon code
 :PROPERTIES:
-:ID:       org_mark_mini20.local:20210602T225047.764883
+:ID:       org_mark_mini20.local:20210801T222229.925338
 :END:
-Used as a function to give an iconized title
-#+NAME: org_mark_mini20.local_20210602T225047.737701
+#+NAME: org_mark_mini20.local_20210801T222229.905961
 #+begin_src emacs-lisp
-(cl-defun pretty-hydra-title (title &optional icon-type icon-name
-                                    &key face height v-adjust)
-  "Add an icon in the hydra title."
-  (let ((face (or face `(:foreground ,(face-background 'highlight))))
-        (height (or height 1.0))
-        (v-adjust (or v-adjust 0.0)))
-    (concat
-     (when (and (display-graphic-p) icon-type icon-name)
-       (let ((f (intern (format "all-the-icons-%s" icon-type))))
-         (when (fboundp f)
-           (concat
-            (apply f (list icon-name :face face :height height :v-adjust v-adjust))
-            " "))))
-     (propertize title 'face face))))
+(use-feature mwb-icons)
+#+end_src
+
+*** Narrow-widen
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210830T131813.182296
+:END:
+Mainly from [[https://endlessparentheses.com/emacs-narrow-or-widen-dwim.html][here]] via greghendershot
+This basically cuts down what is visible. Need to extend so can do more but see how it works first.
+#+NAME: org_mark_mini20.local_20210830T131813.146706
+#+begin_src emacs-lisp
+(defun narrow-or-widen-dwim (p)
+  "Widen if buffer is narrowed, narrow-dwim otherwise.
+Dwim means: region, org-src-block, org-subtree, or
+defun, whichever applies first. Narrowing to
+org-src-block actually calls `org-edit-src-code'.
+
+With prefix P, don't widen, just narrow even if buffer
+is already narrowed."
+  (interactive "P")
+  (declare (interactive-only))
+  (cond ((and (buffer-narrowed-p) (not p)) (widen))
+        ((region-active-p)
+         (narrow-to-region (region-beginning)
+                           (region-end)))
+        ((derived-mode-p 'org-mode)
+         ;; `org-edit-src-code' is not a real narrowing
+         ;; command. Remove this first conditional if
+         ;; you don't want it.
+         (cond ((ignore-errors (org-edit-src-code) t))
+               ((ignore-errors (org-narrow-to-block) t))
+               (t (org-narrow-to-subtree))))
+        ((derived-mode-p 'latex-mode)
+         (LaTeX-narrow-to-environment))
+        (t (narrow-to-defun))))
 #+end_src
 *** Remainder of org
 :PROPERTIES:
@@ -856,6 +960,144 @@ This needs the full expansion
 #+begin_src emacs-lisp
 (mwb-init-load "init/org-all")
 #+end_src
+
+
+** Debug force treemacs
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210609T115756.661028
+:END:
+
+
+*** Treemacs
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:22044AD2-EC4A-4C3B-B3D2-7F994D4BB958
+:END:
+This is the visual tree to manage files etc
+
+**** Support functions
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210819T110926.745369
+:END:
+
+***** Key hook
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210819T110926.744579
+:END:
+I need to set the mouse - unfortunately it is in a minor mode map not global so simple bind does not work
+#+NAME: org_mark_mini20.local_20210819T110926.728132
+#+begin_src emacs-lisp
+(defun treemacs-mwb-mouse ()
+  (let ((oldmap (cdr (assoc 'mac-key-mode-map minor-mode-map-alist)))
+        (newmap (make-sparse-keymap)))
+    (set-keymap-parent newmap oldmap)
+    (bind-key (kbd "<mouse-3>") #'treemacs-rightclick-menu newmap )
+    (make-local-variable 'minor-mode-overriding-map-alist)
+    (push `(mac-key-mode-map . ,newmap) minor-mode-overriding-map-alist)))
+#+end_src
+**** Main setup
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210811T192501.325010
+:END:
+ #+NAME: org_mark_mini20.local_20210811T192501.283076
+ #+begin_src emacs-lisp
+(use-package treemacs
+  :ensure t
+  ;; :mwb-load-path "fork/treemacs/src/elisp"
+  :demand
+  :init
+  (setq treemacs-width 50)
+  :commands (treemacs treemacs-rightclick-menu)
+  :config
+  (setq treemacs--no-messages nil)
+
+  (setq hydra-key-regex "\\[\\|]\\|[-\\[:alnum:] ~.,;:/|?<>={}*+#%@!&^⇧⌘⌥↑↓←→⌫⌦⏎'`()\"$]+?") ; add Mac key symbols
+
+  (setq treemacs-persist-file (mwb-user-emacs-file "data/treemacs-persist"))
+  (with-eval-after-load 'treemacs
+	(add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?))
+
+
+  ;; The default width and height of the icons is 22 pixels. If you are
+  ;; using a Hi-DPI display, uncomment this to double the icon size.
+  ;;(treemacs-resize-icons 44)
+
+  (treemacs-follow-mode t)
+
+  (treemacs-filewatch-mode t)
+  (treemacs-fringe-indicator-mode t)
+  (pcase (cons (not (null (executable-find "git")))
+			   (not (null treemacs-python-executable)))
+	(`(t . t)
+	 (treemacs-git-mode 'deferred))
+	(`(t . _)
+	 (treemacs-git-mode 'simple)))
+  :custom
+  (treemacs-indent-guide-mode t)
+  (treemacs-silent-refresh t)
+  ( treemacs-silent-filewatch t)
+  ( treemacs-tag-follow-delay 2.5)
+  (treemacs-indent-guide-style 'line)
+  (treemacs-user-header-line-format #'treemacs-header-buttons-format))
+#+end_src
+
+**** Keys
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210811T192501.323662
+:END:
+#+NAME: org_mark_mini20.local_20210811T192501.298758
+#+begin_src emacs-lisp
+(use-package treemacs
+  :mode-hydra
+  (treemacs-mode
+   ("Project"
+    (
+     ;; ("p" matcha-projectile/body "Projectile")
+     ("c" treemacs-add-project-to-workspace "Create Project")
+     ("d" treemacs-remove-project-from-workspace "Delete Project")
+     )
+	"All"
+	(("h"  treemacs--common-helpful-hydra/body "Hydra.."))
+    "Workspace"
+    (("s" treemacs-switch-workspace "Switch" )
+     ("e" treemacs-edit-workspaces "Edit" ))
+    "Width"
+    (("w" treemacs-toggle-fixed-width "Toggle variable width" ))))
+
+  :bind ( :map treemacs-mode-map
+			   ("<mouse-5>" . treemacs-rightclick-menu)
+               ("<mouse-4>" . treemacs-rightclick-menu)
+               ("<f5>" . treemacs-switch-workspace)
+               ("<C-f5>" . treemacs-edit-workspaces))
+  :hook (treemacs-mode . treemacs-mwb-mouse))
+#+end_src
+
+**** Projectile
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210811T192501.322521
+:END:
+#+NAME: org_mark_mini20.local_20210811T192501.299143
+#+begin_src emacs-lisp
+(use-package-elpa treemacs-projectile
+  :after treemacs projectile
+  )
+#+end_src
+
+**** magit
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210811T192501.320012
+:END:
+#+NAME: org_mark_mini20.local_20210811T192501.299460
+#+begin_src emacs-lisp
+(use-package-elpa treemacs-magit
+  :after treemacs magit)
+#+end_src
+*** Debug
+:PROPERTIES:
+:ID:       org_mark_2020-11-14T12-12-03+00-00_mini12.local:4F9B14A7-978B-4BF7-A64E-41B8EE921099
+:END:
+I get
+Error running timer ‘treemacs--process-file-events’: (wrong-type-argument sequencep t)
+So from https://github.com/Alexander-Miller/treemacs/issues/168
 ** The remaining setup with complete org file processing
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:35D80650-3C0F-4147-8B3A-3BC84158367B

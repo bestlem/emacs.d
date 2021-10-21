@@ -9,6 +9,11 @@
 :END:
 Setup is used in many modes.
 #+NAME: org_mark_mini20.local_20210430T161141.957796
+* Add to menubar
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210831T062026.341629
+:END:
+#+NAME: org_mark_mini20.local_20210831T062026.317944
 #+begin_src emacs-lisp
 (defun imenu-mwb-hook-function ()
   "Add iMenu to menubar"
@@ -16,4 +21,13 @@ Setup is used in many modes.
 
 (dolist (elt '(org-mode-hook prog-mode-hook))
   (add-hook elt 'imenu-mwb-hook-function))
+#+end_src
+* Force rescan
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210831T062026.340893
+:END:
+Normal works for elisp and org mode but racket seems to need a rescan. So let's try setting it.
+#+NAME: org_mark_mini20.local_20210831T062026.318856
+#+begin_src emacs-lisp
+(setq imenu-auto-rescan t)
 #+end_src

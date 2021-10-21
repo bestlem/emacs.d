@@ -67,10 +67,11 @@ emacs-27 has another way
 #+begin_src emacs-lisp
 (if (fboundp 'mac-auto-operator-composition-mode)
     (mac-auto-operator-composition-mode 1)
-  (use-package fira-code-mode
-    :ensure t
-    :custom (fira-code-mode-disabled-ligatures '("[]" "x")) ; ligatures you don't want
-    :hook prog-mode))
+  ;; (use-package fira-code-mode
+  ;;   :ensure t
+  ;;   :custom (fira-code-mode-disabled-ligatures '("[]" "x")) ; ligatures you don't want
+  ;;   :hook prog-mode)
+  )
 #+end_src
 ** Prettify Symbols
 :PROPERTIES:

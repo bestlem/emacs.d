@@ -55,8 +55,16 @@ Add some from jweigley
   (bind-key "TAB" #'company-indent-or-complete-common)
   (bind-key "`" 'company-abort company-active-map)
   (when (>= emacs-major-version 27)
-	(use-package company-posframe :ensure t :diminish :config (company-posframe-mode 1)))
-  (use-package company-prescient :ensure t :diminish :config (company-prescient-mode 1))
+	(use-package company-posframe
+	  :ensure t
+	  :after posframe
+	  :diminish
+	  :config (company-posframe-mode 1)))
+  (use-package company-prescient
+	:ensure t
+	:diminish
+	:after prescient
+	:config (company-prescient-mode 1))
 
   :init
   ;; Set the backends - I don't like files and a few oters are unlikely

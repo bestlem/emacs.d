@@ -369,7 +369,8 @@ Also switch between an alternate setup - ideally should be driven from command l
 
 #+NAME: org_mark_mini12.local_20201213T195905.304356
 #+begin_src emacs-lisp
-(if (>= emacs-major-version 28)
-	(load (concat (expand-file-name "alt/alt_init" mwb-user-emacs-directory) ".el"))
-  (mwb-init-load "config" "no-org"))
+;; (if (>= emacs-major-version 28)
+;; 	(load (concat (expand-file-name "alt/alt_init" mwb-user-emacs-directory) ".el"))
+;;   (mwb-init-load "config" "no-org"))
+(mwb-init-load "config" "no-org")
 #+end_src

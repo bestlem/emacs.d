@@ -183,20 +183,8 @@ If org and no el or org file is newer then retangle the org file if noorg is not
 ;; org_mark_mini20.local_20210126T224850.527835 ends here
 
 ;; [[file:init.org::org_mark_mini12.local_20201213T195905.304356][org_mark_mini12.local_20201213T195905.304356]]
-(if (>= emacs-major-version 28)
-	(load (concat (expand-file-name "alt/alt_init" mwb-user-emacs-directory) ".el"))
-  (mwb-init-load "config" "no-org"))
+;; (if (>= emacs-major-version 28)
+;; 	(load (concat (expand-file-name "alt/alt_init" mwb-user-emacs-directory) ".el"))
+;;   (mwb-init-load "config" "no-org"))
+(mwb-init-load "config" "no-org")
 ;; org_mark_mini12.local_20201213T195905.304356 ends here
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(modus-themes use-package-hydra major-mode-hydra macrostep ht all-the-icons)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

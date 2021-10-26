@@ -1,6 +1,6 @@
 * Default Workspace
 ** Aquamacs Emacs My init .emacs.d
- - path :: ~/SyncServices/Dropbox/env/emacs.d
+ - path :: ~/.emacs.d
 ** dotfiles
  - path :: ~/SyncServices/Dropbox/env/dotfiles
 ** Org

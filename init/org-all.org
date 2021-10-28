@@ -123,8 +123,7 @@ It is now for subtree todo refile and links
 :END:
   #+NAME: org_mark_2020-01-23T20-21-34+00-00_mini12_72F56F5E-3D65-491F-B68F-CDCFF334FFB6
   #+begin_src emacs-lisp :noweb tangle
-(use-package org
-  :ensure t
+(use-feature org
   :bind
   <<key-binds>>
   :config

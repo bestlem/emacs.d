@@ -544,6 +544,94 @@ Note that if a subdirectory is just for one thing then use keyword mwb-load-path
 (add-subdirs-to-load-path)
 #+end_src
 
+**** Hydra
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:F4B80C2A-6E55-4DAA-A894-CEAAF485CEEB
+:END:
+Need key setting menus.
+***** Original
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201224T121457.227057
+:END:
+#+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_4EC591E8-D02C-4F21-97C1-80F28A75490F
+#+begin_src emacs-lisp
+(use-package hydra
+    :ensure t
+    :config (setq hydra-look-for-remap t
+                  lv-use-padding t)
+    (defun lv--pad-to-center (str width)
+      "Pad STR with spaces on the left to be centered to WIDTH."
+      (let* ((strs (split-string str "\n"))
+             (padding-length (/ (- width (apply 'max (mapcar 'length strs))) 2)))
+        (if (> padding-length  0)
+            (mapconcat (lambda (s)
+                         (concat (make-string padding-length ?\ ) s)) strs "\n")
+          str))))
+(use-package use-package-hydra :ensure t)
+#+end_src
+***** major mode hydra
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:B0B1AA76-E4F7-424D-A9EA-1E430BD90E28
+:END:
+#+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_7958B394-66F9-4AF5-8C22-10F1CAB276B3
+#+begin_src emacs-lisp
+(use-package major-mode-hydra
+  :ensure t
+  :demand
+  :bind ("H-a" . major-mode-hydra)
+  :config
+  (progn
+    (setq major-mode-hydra-invisible-quit-key "q")
+    (defun jp-major-mode-hydra-title-generator (_)
+      `(with-mode-icon major-mode
+                       (propertize (s-concat (format-mode-line mode-name) " Commands")
+                                   'face '(:weight bold :height 1.1))
+                       1.1))
+    (setq major-mode-hydra-title-generator #'jp-major-mode-hydra-title-generator)))
+#+end_src
+
+***** Show icons
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201224T121457.223827
+:END:
+The functions are from jerrypnz for use in pretty hydra headers.
+Treemacs icons are better but they are purely keyed off file extensions. All the icons has a look up from mode to icon, treemacs does not.
+#+NAME: org_mark_mini12.local_20201224T121457.192342
+
+****** All the icons
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210602T212702.710382
+:END:
+#+NAME: org_mark_mini20.local_20210602T212702.682113
+#+begin_src emacs-lisp
+(use-package all-the-icons
+  :ensure t
+  :commands (all-the-icons-faicon
+			 all-the-icons-fileicon
+			 all-the-icons-material
+			 all-the-icons-octicon
+			 all-the-icons-icon-for-mode))
+#+end_src
+
+****** jp named functions for icons
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210602T212702.709213
+:END:
+#+NAME: org_mark_mini20.local_20210602T212702.684671
+#+begin_src emacs-lisp
+(use-package jp-icons
+  :mwb-load-path "site-lisp/jerrypnz")
+#+end_src
+
+****** My icon code
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210801T222229.925338
+:END:
+#+NAME: org_mark_mini20.local_20210801T222229.905961
+#+begin_src emacs-lisp
+(use-feature mwb-icons)
+#+end_src
+
 ** Customisation file
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:A28603F3-9100-4C41-855A-5D202E7ACFE3
@@ -720,8 +808,8 @@ So lets try to patch iso-transl. I copied the Aquamacs one and then merged with 
     :config
     (dolist (transl-char iso-transl-char-map)
       (let ((vec (vconcat (car transl-char))))
-	(aset vec 0 (logior (aref vec 0) ?\A-\^@))
-	(define-key key-translation-map vec nil)))))
+        (aset vec 0 (logior (aref vec 0) ?\A-\^@))
+        (define-key key-translation-map vec nil)))))
 #+end_src
 *** Aquamacs unbind
 :PROPERTIES:
@@ -804,18 +892,9 @@ Both Aquamacs and mac-keys-mode introduce a map for macOS keys. Unfortunately it
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:D93E7BE4-C5B1-419E-B03F-B2D4980DAF02
 :END:
 This is so the file can be processed by nullman's expand - basically no noweb weaving.
-*** Force load of new version
+*** Need to set before load
 :PROPERTIES:
-:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:CD8344F0-55B3-4A44-8910-693F375848EA
-:END:
-[[https://github.com/jwiegley/use-package/issues/319#issuecomment-471274348][mzuther  fix]] to load via package as otherwise loads from emacs. However first attempt dec 2019 seemed not to be needed but leave here.
- #+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_CD5FDF9B-34ED-4E57-917C-C1C2295C864F
- #+begin_src emacs-lisp
-(assq-delete-all 'org package--builtins)
- #+end_src
-*** Do the load of org from package.el
-:PROPERTIES:
-:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:E973F582-6BC0-4363-A8C1-EAC4A6878532
+:ID:       org_mark_mini20.local:20211028T133119.373871
 :END:
 With some variables set from https://github.com/grettke/help as these are cutomisation variables they need to be before org.el.
 
@@ -834,113 +913,15 @@ occur before loading Org-Mode. *Never* remove this from a submitted ECM.
 (setq org-enforce-todo-checkbox-dependencies t)
 #+END_SRC
 
-#+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_450E5072-6040-468E-843F-E62E4CB34FA7
-#+begin_src emacs-lisp
-(use-package org
-  :defer t
-  :ensure t)
-#+end_src
-* The rest
-:PROPERTIES:
-:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:2A8A375D-2708-4559-9CA7-0F81B8DE4247
-:END:
-This all can be written using latest org mode allowing weaving etc.
+
 ** Complex Org Mode
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:913C5D29-620D-4FB7-9D2E-31D3FE538503
 :END:
-
+This all can be written using latest org mode allowing weaving etc.
 This file (org-all) uses noweb weaving so must be loaded via a proper org babel
 
 But has requirements like hydra
-*** Hydra
-:PROPERTIES:
-:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:F4B80C2A-6E55-4DAA-A894-CEAAF485CEEB
-:END:
-Need key setting menus.
-**** Original
-:PROPERTIES:
-:ID:       org_mark_mini12.local:20201224T121457.227057
-:END:
-#+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_4EC591E8-D02C-4F21-97C1-80F28A75490F
-#+begin_src emacs-lisp
-(use-package hydra
-    :ensure t
-    :config (setq hydra-look-for-remap t
-                  lv-use-padding t)
-    (defun lv--pad-to-center (str width)
-      "Pad STR with spaces on the left to be centered to WIDTH."
-      (let* ((strs (split-string str "\n"))
-             (padding-length (/ (- width (apply 'max (mapcar 'length strs))) 2)))
-        (if (> padding-length  0)
-            (mapconcat (lambda (s)
-                         (concat (make-string padding-length ?\ ) s)) strs "\n")
-          str))))
-(use-package use-package-hydra :ensure t)
-#+end_src
-**** major mode hydra
-:PROPERTIES:
-:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:B0B1AA76-E4F7-424D-A9EA-1E430BD90E28
-:END:
-#+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_7958B394-66F9-4AF5-8C22-10F1CAB276B3
-#+begin_src emacs-lisp
-(use-package major-mode-hydra
-  :ensure t
-  :demand
-  :bind ("H-a" . major-mode-hydra)
-  :config
-  (progn
-    (setq major-mode-hydra-invisible-quit-key "q")
-    (defun jp-major-mode-hydra-title-generator (_)
-      `(with-mode-icon major-mode
-                       (propertize (s-concat (format-mode-line mode-name) " Commands")
-                                   'face '(:weight bold :height 1.1))
-                       1.1))
-    (setq major-mode-hydra-title-generator #'jp-major-mode-hydra-title-generator)))
-#+end_src
-
-**** Show icons
-:PROPERTIES:
-:ID:       org_mark_mini12.local:20201224T121457.223827
-:END:
-The functions are from jerrypnz for use in pretty hydra headers.
-Treemacs icons are better but they are purely keyed off file extensions. All the icons has a look up from mode to icon, treemacs does not.
-#+NAME: org_mark_mini12.local_20201224T121457.192342
-
-***** All the icons
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20210602T212702.710382
-:END:
-#+NAME: org_mark_mini20.local_20210602T212702.682113
-#+begin_src emacs-lisp
-(use-package all-the-icons
-  :ensure t
-  :commands (all-the-icons-faicon
-			 all-the-icons-fileicon
-			 all-the-icons-material
-			 all-the-icons-octicon
-			 all-the-icons-icon-for-mode))
-#+end_src
-
-***** jp named functions for icons
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20210602T212702.709213
-:END:
-#+NAME: org_mark_mini20.local_20210602T212702.684671
-#+begin_src emacs-lisp
-(use-package jp-icons
-  :mwb-load-path "site-lisp/jerrypnz")
-#+end_src
-
-***** My icon code
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20210801T222229.925338
-:END:
-#+NAME: org_mark_mini20.local_20210801T222229.905961
-#+begin_src emacs-lisp
-(use-feature mwb-icons)
-#+end_src
-
 *** Narrow-widen
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210830T131813.182296

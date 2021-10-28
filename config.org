@@ -700,6 +700,29 @@ Also the bindings are less and the menu is less so might be best to copy oskeys.
 
 Mouse3 might also give a more interesting menu + the extra bit of standard Emacs mouse extend selection plus I want a different menu for say treemacs.
 
+*** iso-transl
+:PROPERTIES:
+:ID:       org_2020-12-10+00-00:304665E1-9D39-4752-8195-F6A48D215B59
+:END:
+This inbuilt emacs package provides bindings for odd characters using a C-x 8 map - but it also biunds them to Alt key which wrechis things like A-C which is now ¢
+
+Aquamacs patched iso-transl.el so it is now a mode and can be turned on and off.
+
+I am not the only one to suffer see [[https://emacs.stackexchange.com/q/17508/9874][Emacs SX question]] and also [[https://emacs.stackexchange.com/q/61415/9874][my question]]
+
+So lets try to patch iso-transl. I copied the Aquamacs one and then merged with macport emacs 27.1, now try to load first
+
+#+NAME: org_2020-12-11+00-00_CC01A657-95E4-4A31-8FCC-B45CCB63A851
+#+begin_src emacs-lisp
+(unless *aquamacs*
+  (use-feature iso-transl
+    :demand
+    :config
+    (dolist (transl-char iso-transl-char-map)
+      (let ((vec (vconcat (car transl-char))))
+	(aset vec 0 (logior (aref vec 0) ?\A-\^@))
+	(define-key key-translation-map vec nil)))))
+#+end_src
 *** Aquamacs unbind
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:628BE0A1-2280-4914-98A9-12830F84FEF8

@@ -15,14 +15,14 @@ C-f5 now can be build and run app.
 f6 lets try for send to repl as better one key than shift keys.
 A later thought is to use f5 as leader use key chords and then others for test
 
-* Prog mode
+* Which function
 :PROPERTIES:
-:ID:       org_mark_mini20.local:20210828T133945.004924
+:ID:       org_mark_mini20.local:20211031T140445.090521
 :END:
 Setup for all prog modes
 #+NAME: org_mark_mini20.local_20210828T133944.980854
 #+begin_src emacs-lisp
-(use-feature prog-mode
+(use-feature which-func
   :hook (prog-mode . which-function-mode))
 #+end_src
 * Code Edit Structure
@@ -58,6 +58,21 @@ I have wanted a good visual identification of indentation since I had the dos pr
 
   :hook ((prog-mode yaml-mode nxml-mode json-mode ) . highlight-indent-guides-mode))
  #+end_src
+** Parentheses
+:PROPERTIES:
+:ID:       org_mark_2020-10-11T00-40-32+01-00_mini12.local:27461EE9-1768-4943-B3AE-65E50E8F41C7
+:END:
+*** Make parentheses pretty
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:9CBA29B7-2EB3-42F5-80C7-C3F7507D141B
+:END:
+Although that should be in prog mode
+#+NAME: org_mark_mini20.local_20210829T122201.450355
+#+begin_src emacs-lisp
+(use-package-elpa rainbow-delimiters
+  :delight rainbow-delimiters-mode
+  :hook (prog-mode . rainbow-delimiters-mode))
+#+end_src
 ** Smartparens
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:838D12E0-E4AA-4DD0-8F6E-56CDA89B5F0E

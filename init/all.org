@@ -27,34 +27,6 @@ Although see starter kit where they run after init.
 			 (garbage-collect)
 			 (message "Emacs init-time %s" (emacs-init-time))) t)
   #+end_src
-** Environment
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:C615E483-7CA9-42EA-9AEB-E0B541771836
-:END:
-*** Where things are put
-:PROPERTIES:
-:ID:       org_mark_2020-09-29T11-53-58+01-00_mini12.local:63AB1DE7-5C65-415D-96D0-7DAF0E0BC2BA
-:END:
-Aquamacs puts a lot in ~/Library/Preferences/Emacs but Emacs 27 does not know that so we want to keep some of the crap out of .Emacs.d So try no littering.
-We gave up as it is just a set of people adding modes to it. There are not enough to be worth it. Do it myself. But use var as the default directory
-#+NAME: org_mark_2020-09-29T11-53-58+01-00_mini12.local_1F694F93-C501-4512-BA63-CA34560F68CE
-#+begin_src emacs-lisp
-(use-package no-littering
-  :ensure t
-  :disabled
-  :unless *aquamacs*)
-#+end_src
-**** Use Aquamacs hack and put user-Emacs-directory elsewhere
-:PROPERTIES:
-:ID:       org_mark_2020-10-10T14-59-33+01-00_mini12.local:0A357D06-99EB-4ACF-8F3E-646665D1053F
-:END:
-In this case var and overlap no-littering
-#+NAME: org_mark_2020-10-10T14-59-33+01-00_mini12.local_DB515763-D42A-4AC9-B13B-49CCF27056D8
-#+begin_src emacs-lisp
-(unless *aquamacs*
-  (setq user-emacs-directory (mwb-user-emacs-file "var/")))
-#+end_src
-
 ** Setting variables with a check on type
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:86E6A7B5-5C85-4429-AE49-FA5AE7AEF73D

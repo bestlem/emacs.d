@@ -186,6 +186,34 @@ Add more based on [[https://github.com/seagle0128/.emacs.d][Centaur Emacs]]
   "Emacs is 25.3 or above.")
 
 #+end_src
+*** Directories
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20211029T224932.745031
+:END:
+**** Where things are put
+:PROPERTIES:
+:ID:       org_mark_2020-09-29T11-53-58+01-00_mini12.local:63AB1DE7-5C65-415D-96D0-7DAF0E0BC2BA
+:END:
+Aquamacs puts a lot in ~/Library/Preferences/Emacs but Emacs 27 does not know that so we want to keep some of the crap out of .Emacs.d So try no littering.
+We gave up as it is just a set of people adding modes to it. There are not enough to be worth it. Do it myself. But use var as the default directory
+#+NAME: org_mark_mini20.local_20211029T224932.715909
+#+begin_src emacs-lisp :tangle no
+(use-package no-littering
+  :ensure t
+  :disabled
+  :unless *aquamacs*)
+#+end_src
+***** Use Aquamacs hack and put user-Emacs-directory elsewhere
+:PROPERTIES:
+:ID:       org_mark_2020-10-10T14-59-33+01-00_mini12.local:0A357D06-99EB-4ACF-8F3E-646665D1053F
+:END:
+In this case var and overlap no-littering
+#+NAME: org_mark_2020-10-10T14-59-33+01-00_mini12.local_DB515763-D42A-4AC9-B13B-49CCF27056D8
+#+begin_src emacs-lisp
+(unless *aquamacs*
+  (setq user-emacs-directory (mwb-user-emacs-file "var/")))
+#+end_src
+
 ** Packaging
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:9ACB4F21-BFAB-4D2F-A271-1D8D9B9625FB
@@ -198,23 +226,26 @@ But this is working so don;t need to chnage until an actual bug + my org-mode se
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:836EC728-DBED-4BB7-BC7C-6F39951A32BE
 :END:
- Basically we need gnutls to connect via SSL as certificates have changed
- From https://github.com/paolodedios/dot-files/blob/1a7b4500c8ce07d0d473dbf714a2303f4d440ef5/.emacs.d/init.el
- Configure GnuTLS
+***** TLS Setup - emacs 25
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20211029T224242.291574
+:END:
+Basically we need gnutls to connect via SSL as certificates have changed
+From https://github.com/paolodedios/dot-files/blob/1a7b4500c8ce07d0d473dbf714a2303f4d440ef5/.emacs.d/init.el
+Configure GnuTLS
 
- GnuTLS requires additional configuration on Emacs 25+ on macOS to prevent it
- from crashing when loading package repositories.
+GnuTLS requires additional configuration on Emacs 25+ on macOS to prevent it from crashing when loading package repositories.
 
- @see https://github.com/davidswelt/aquamacs-emacs/issues/133
- @see https://github.com/davidswelt/aquamacs-emacs/issues/149
- @see https://www.reddit.com/r/emacs/comments/8sykl1/emacs_tls_defaults_are_downright_dangerous/
- @see https://www.gnu.org/software/emacs/manual/html_node/emacs-gnutls/Help-For-Users.html
+@see https://github.com/davidswelt/aquamacs-emacs/issues/133
+@see https://github.com/davidswelt/aquamacs-emacs/issues/149
+@see https://www.reddit.com/r/emacs/comments/8sykl1/emacs_tls_defaults_are_downright_dangerous/
+@see https://www.gnu.org/software/emacs/manual/html_node/emacs-gnutls/Help-For-Users.html
 
-  @note starttls.el and tls.el have been moved to obsolete in the master branch
-  (what will be Emacs 27).
-  To work with Emacs 27 package is in early-init.el This section is aquamacs specific although if that is upgraded need a better test
-	 #+begin_src emacs-lisp
-(when *aquamacs*
+@note starttls.el and tls.el have been moved to obsolete in the master branch (what will be Emacs 27).
+To work with Emacs 27 package is in early-init.el
+#+NAME: org_mark_mini20.local_20211029T224242.255722
+#+begin_src emacs-lisp
+(unless *emacs/>=27p*
   (require 'tls)
 
   (with-eval-after-load 'tls

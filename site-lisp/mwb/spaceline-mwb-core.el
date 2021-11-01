@@ -111,7 +111,8 @@ FACE and ACTIVE have the same meanings as in
 	  all-the-icons-fullscreen
 	  all-the-icons-text-scale
 	  all-the-icons-narrowed
-	  all-the-icons-multiple-cursors)
+	  ;; all-the-icons-multiple-cursors
+	  )
 	 :face highlight-face
 	 :separator (spaceline-all-the-icons--separator spaceline-all-the-icons-primary-separator " "))
 

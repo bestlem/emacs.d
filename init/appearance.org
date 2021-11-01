@@ -130,6 +130,7 @@ but does not seem to work well
 #+begin_src emacs-lisp
 (use-package beacon
   :ensure t
+  :defer 5
   :diminish beacon-mode
   :custom (beacon-blink-when-focused t)
   :init (eval-when-compile

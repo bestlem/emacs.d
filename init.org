@@ -372,5 +372,7 @@ Also switch between an alternate setup - ideally should be driven from command l
 ;; (if (>= emacs-major-version 28)
 ;; 	(load (concat (expand-file-name "alt/alt_init" mwb-user-emacs-directory) ".el"))
 ;;   (mwb-init-load "config" "no-org"))
+
+;; (load (concat (expand-file-name "alt/alt_init" mwb-user-emacs-directory) ".el"))
 (mwb-init-load "config" "no-org")
 #+end_src

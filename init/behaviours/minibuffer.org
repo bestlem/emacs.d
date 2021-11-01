@@ -36,8 +36,9 @@ General purpose but used for the completion
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_378BD735-5E0C-4075-9ED5-A69FC65B29E4
 #+begin_src emacs-lisp
 (use-package-elpa prescient
+  :demand
   :commands prescient-persist-mode
-  :init (prescient-persist-mode 1))
+  :config (prescient-persist-mode 1))
 #+end_src
 ** Find M-x commands
 :PROPERTIES:
@@ -52,7 +53,12 @@ However smex seems not to be maintained so try amx
 #+begin_src emacs-lisp
 (use-package-elpa amx
   :defer 2
-  :init (amx-mode 1))
+  :init
+  (setq amx-history-length  20)
+  (amx-mode 1)
+  ;; :config
+  ;; (amx-debug-mode 1)
+  )
 #+end_src
 ** Emacs mini frame
 :PROPERTIES:

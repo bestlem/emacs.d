@@ -24,6 +24,8 @@
  - path :: ~/src/Racket/dummy-load
 ** web
  - path :: ~/src/Racket/web
+** aoc21
+ - path :: ~/src/Racket/aoc21
 * C based
 ** rftg
  - path :: ~/src/cpp/rftg

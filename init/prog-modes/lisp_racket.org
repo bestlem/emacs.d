@@ -69,7 +69,7 @@ This is the minimal setup and does not need changing
 			  ("<f8>"  . racket-xp-next-error))
   :mode (rx (seq ".racket" string-end))
   :init
-  (setq racket-program "/Applications/Racket v8.2/bin/racket"
+  (setq racket-program "/Applications/Racket v8.3/bin/racket"
         racket-images-inline t)
   (setq racket-repl-buffer-name-function
         #'racket-repl-buffer-name-project)
@@ -221,7 +221,7 @@ Main function to run tests - takes parameter to denote how deep to instrument.
   (interactive)
   (mwb-projectile-save-project-buffers)
   (racket-mwb-clear-repl)
-  (let ((mod-path (list 'submod (racket--buffer-file-name) 'test))
+  (let ((mod-path (list (racket--buffer-file-name) 'test))
 		(buf (current-buffer)))
 	(racket--repl-run mod-path '() instrument-level)))
 #+end_src

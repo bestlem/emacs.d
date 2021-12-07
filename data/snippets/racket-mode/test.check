@@ -1,5 +1,5 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# key: test
+# key: chk
 # name:  check-equal? form
 # expand-env: ((yas-indent-line 'fixed))
 # contributor: Greg Hendershott <greghendershot@gmail.com>

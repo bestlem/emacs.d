@@ -1,3 +1,4 @@
+
 #+TITLE Emacs configuration setup
 #+PROPERTY:header-args :cache yes :tangle yes :comments link
 #+STARTUP: content
@@ -24,7 +25,7 @@ However  for debugging init we don't want the backtrace
 (add-hook 'after-init-hook
           (lambda () (setq debug-on-error nil)))
 (setq debug-on-error 't)
-(setq debug-on-error nil)
+;(setq debug-on-error nil)
 ;(setq debug-on-quit nil)
 
 ;; Trace some function
@@ -315,6 +316,9 @@ Don't need package-initialize as use package does it all? per https://www.youtub
     (setq package-quickstart t)
   (package-initialize)
   (message "Packages initialised"))
+(unless (bound-and-true-p package--initialized) ; To avoid warnings in 27
+  (setq package-enable-at-startup nil)          ; To prevent initializing twice
+  (package-initialize))
 #+end_src
 
 ** Macros to set up how modes are set up
@@ -386,7 +390,7 @@ use-package using :ensure t
 From centaur to make list-packages nicer.
 TODO: make this a new frame
 #+NAME: org_mark_mini20.local_20210625T110216.825145
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package-elpa paradox
   :commands paradox-list-packages
   :init
@@ -415,6 +419,7 @@ TODO: make this a new frame
   (defun paradox-mwb-quit-advice (kill)
 	"Function added to paradox-quit-and-close to close the frame.
 With prefix KILL, kill the buffer instead of burying."
+	(package-quickstart-refresh)
 	(delete-frame))
   (advice-add   #'paradox-quit-and-close :after  #'paradox-mwb-quit-advice )
   )
@@ -444,6 +449,22 @@ With prefix KILL, kill the buffer instead of burying."
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:8EEFB5D5-EB93-442F-8ECA-CB62A943A310
 :END:
  These are used in the use-package macro
+**** Async
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20211104T083255.480572
+:END:
+#+NAME: org_mark_mini20.local_20211104T083255.461863
+#+begin_src emacs-lisp  :tangle no
+(use-package-elpa async
+  :init
+  ;; Fix dired-async-mode with sudo buffers
+  ;; https://github.com/jwiegley/emacs-async/issues/91
+  (setq async-quiet-switch "-q")
+  (async-bytecomp-package-mode)
+  ;; (dired-async-mode)
+  )
+
+#+end_src
 **** Diminish
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:960EBB57-7FC4-47DB-81FE-C0A425520C00
@@ -982,8 +1003,8 @@ is already narrowed."
          (cond ((ignore-errors (org-edit-src-code) t))
                ((ignore-errors (org-narrow-to-block) t))
                (t (org-narrow-to-subtree))))
-        ((derived-mode-p 'latex-mode)
-         (LaTeX-narrow-to-environment))
+        ;; ((derived-mode-p 'latex-mode)
+        ;;  (LaTeX-narrow-to-environment))
         (t (narrow-to-defun))))
 #+end_src
 *** Remainder of org

@@ -558,7 +558,7 @@ Try with an enhanced one but test to mouse-4 which might have issues with treema
 #+NAME: org_mark_mini12.local_20201213T170631.361457
 #+begin_src emacs-lisp
 (unless *aquamacs*
-  (use-package "mouse3"
+  (use-package mouse3
     :mwb-load-path "site-lisp/Emacs_wiki"
     :bind ("<mouse-4>" . 'mouse3-action-wo-save-then-kill)))
 #+end_src

@@ -228,25 +228,25 @@ There are things like multiple-cursors but iedit sounds simpler
 #+begin_src emacs-lisp
 (use-package-elpa iedit
   :bind (:map iedit-mode-keymap
-              ("<f5>" . iedit-hydra/body))
+			  ("<f5>" . iedit-hydra/body))
   :pretty-hydra
-  ( (:title "IEdit" :hint nil)
-    ("Navigate" (("j" iedit-next-occurrence "next")
-                 ("k" iedit-prev-occurrence "previous")
-                 ("<" iedit-goto-first-occurrence "first")
-                 (">" iedit-goto-last-occurrence "last")
-                 ("h" iedit-show/hide-unmatched-lines "hide"))
-     "Restrict" (("c" iedit-toggle-case-sensitive "case" :toggle iedit-case-sensitive)
-                 ("f" iedit-restrict-function "function")
-                 ("l" iedit-restrict-current-line "line")
-                 ("i" iedit-toggle-selection "toggle")
-                 ("n" iedit-expand-down-to-occurrence "down-expand")
-                 ("p" iedit-expand-up-to-occurrence "up-expand"))
-     "Edit" (("r" iedit-replace-occurrences "replace" :exit t)
-             ("d" iedit-delete-occurrences "delete" :exit t)
-             ("1" iedit-number-occurrences "number")
-             ("m" iedit-switch-to-mc-mode "multiple-cursors" :exit t))))
-  )
+  ((:title "IEdit" :hint nil)
+   ("Navigate" (("j" iedit-next-occurrence "next")
+				("k" iedit-prev-occurrence "previous")
+				("<" iedit-goto-first-occurrence "first")
+				(">" iedit-goto-last-occurrence "last")
+				("h" iedit-show/hide-unmatched-lines "hide"))
+	"Restrict" (("c" iedit-toggle-case-sensitive "case" :toggle iedit-case-sensitive)
+				("f" iedit-restrict-function "function")
+				("l" iedit-restrict-current-line "line")
+				("i" iedit-toggle-selection "toggle")
+				("n" iedit-expand-down-to-occurrence "down-expand")
+				("p" iedit-expand-up-to-occurrence "up-expand"))
+	"Edit" (("r" iedit-replace-occurrences "replace" :exit t)
+			("d" iedit-delete-occurrences "delete" :exit t)
+			("1" iedit-number-occurrences "number")
+			;; ("m" iedit-switch-to-mc-mode "multiple-cursors" :exit t)
+			))))
 
 
 #+end_src

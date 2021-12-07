@@ -73,8 +73,9 @@ But the GNU manual gives the best - in a subdirectory of where you are - OK Tram
 			   ".newsrc"
 			   (seq "emacs.d/init/" (one-or-more anything) ".el" eos)))
          . "~/tmp/emacs_unwanted")
-		;; (".*" . "~/.cache/emacs/backups")
-		("." . ".~")))
+		(".*" . "~/.cache/emacs/backups")
+		;; ("." . ".~")
+		))
 
 ;; (setq tramp-backup-directory-alist `((,(rx (zero-or-more anything))
 ;;                                        . my/tramp-backup-directory)))
@@ -194,8 +195,9 @@ From leuven but earlier https://anirudhsasikumar.net/blog/2005.01.21.html
 Disable backups and auto-save only in the current buffer with
 ~M-x sensitive-mode~:
 
+Emacs 28 complains Warning: Use keywords rather than deprecated positional arguments to `define-minor-mode'
 #+NAME: org_mark_mini20.local_20210120T104054.742450
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (define-minor-mode sensitive-mode
     "For sensitive files like password lists.
   It disables backup creation and auto saving in the current buffer.
@@ -228,7 +230,7 @@ You should enable it for all =.vcf= and =.gpg= files.
 From leuven and I assume dired based.
 Make the message "/FILENAME has auto save data/" unmissable:
 #+NAME: org_mark_mini20.local_20210120T104054.742797
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (defface recover-this-file
     '((t (:weight bold :background "#FF3F3F")))
   "Face for buffers visiting files with auto save data."
@@ -376,21 +378,32 @@ So take from projectile
 :END:
 #+NAME: org_mark_mini20.local_20211002T193350.818453
 #+begin_src emacs-lisp
-(use-package projectile
-  :ensure t
-  :diminish
+(use-package-elpa projectile
+  :defer 5
+  :commands (projectile-project-p
+			 projectile-project-root
+			 projectile-find-file
+			 projectile-switch-project
+			 projectile-switch-to-buffer
+			 projectile-ag
+			 projectile-recentf)
   :init
   (setq projectile-known-projects-file (concat user-emacs-directory "projectile/projectile-bookmarks.eld"))
-  :config
+  (setq projectile-cache-file (concat user-emacs-directory "projectile/projectile.cache"))
+  (setq projectile-enable-caching t)
+  (setq projectile-completion-system 'auto)
+  :custom
+  (projectile-file-exists-local-cache-expire 300)
+  (projectile-sort-order 'recentf)
+  (projectile-project-search-path '("~/src"))
 
+  :config
+  ;; racket
   (add-to-list 'projectile-globally-ignored-directories "compiled")
-  (projectile-register-project-type 'racket '("info.rkt")
-									:compile "make setup"
-									:test "make test")
-  (setq projectile-completion-system 'ivy)
-  (projectile-global-mode)
+
+  (projectile-mode 1)
   <<projectile-hydra>>
-  )
+  (projectile-cleanup-known-projects))
 #+end_src
 *** File saving
 :PROPERTIES:

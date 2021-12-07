@@ -412,10 +412,10 @@ else like the former.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/posframe-20211030.2326/posframe-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/posframe-20211030.2326/posframe-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/posframe-20211126.944/posframe-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/posframe-20211126.944/posframe-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/posframe-20211030.2326/posframe-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/posframe-20211126.944/posframe-autoloads.el") (car load-path))))
 
 
 
@@ -538,13 +538,11 @@ the buffer name will hide for ibuffer and `list-buffers'.
 If NO-PROPERTIES is non-nil, The STRING's properties will
 be removed before being shown in posframe.
 
- (6) WIDTH, MIN-WIDTH, HEIGHT and MIN-HEIGHT
+ (6) HEIGHT, MAX-HEIGHT, MIN-HEIGHT, WIDTH, MAX-WIDTH and MIN-WIDTH
 
-WIDTH, MIN-WIDTH, HEIGHT and MIN-HEIGHT, specify bounds on the
-new total size of posframe.  MIN-HEIGHT and MIN-WIDTH default to
-the values of ‘window-min-height’ and ‘window-min-width’
-respectively.  These arguments are specified in the canonical
-character width and height of posframe.
+These arguments are specified in the canonical character width
+and height of posframe, more details can be found in docstring of
+function `fit-frame-to-buffer',
 
  (7) LEFT-FRINGE and RIGHT-FRINGE
 
@@ -591,8 +589,11 @@ posframe instead of wrap.
 
  (13) OVERRIDE-PARAMETERS
 
-OVERRIDE-PARAMETERS is very powful, *all* the frame parameters
+OVERRIDE-PARAMETERS is very powful, *all* the valid frame parameters
 used by posframe's frame can be overridden by it.
+
+NOTE: some `posframe-show' arguments are not frame parameters, so they
+can not be overrided by this argument.
 
  (14) TIMEOUT
 
@@ -644,7 +645,7 @@ An example parent frame poshandler function is:
 
 You can use `posframe-delete-all' to delete all posframes.
 
-\(fn BUFFER-OR-NAME &key STRING POSITION POSHANDLER POSHANDLER-EXTRA-INFO WIDTH HEIGHT MIN-WIDTH MIN-HEIGHT X-PIXEL-OFFSET Y-PIXEL-OFFSET LEFT-FRINGE RIGHT-FRINGE BORDER-WIDTH BORDER-COLOR INTERNAL-BORDER-WIDTH INTERNAL-BORDER-COLOR FONT FOREGROUND-COLOR BACKGROUND-COLOR RESPECT-HEADER-LINE RESPECT-MODE-LINE INITIALIZE NO-PROPERTIES KEEP-RATIO LINES-TRUNCATE OVERRIDE-PARAMETERS TIMEOUT REFRESH ACCEPT-FOCUS HIDEHANDLER REFPOSHANDLER &allow-other-keys)" nil nil)
+\(fn BUFFER-OR-NAME &key STRING POSITION POSHANDLER POSHANDLER-EXTRA-INFO WIDTH HEIGHT MAX-WIDTH MAX-HEIGHT MIN-WIDTH MIN-HEIGHT X-PIXEL-OFFSET Y-PIXEL-OFFSET LEFT-FRINGE RIGHT-FRINGE BORDER-WIDTH BORDER-COLOR INTERNAL-BORDER-WIDTH INTERNAL-BORDER-COLOR FONT FOREGROUND-COLOR BACKGROUND-COLOR RESPECT-HEADER-LINE RESPECT-MODE-LINE INITIALIZE NO-PROPERTIES KEEP-RATIO LINES-TRUNCATE OVERRIDE-PARAMETERS TIMEOUT REFRESH ACCEPT-FOCUS HIDEHANDLER REFPOSHANDLER &allow-other-keys)" nil nil)
 
 (autoload 'posframe-hide-all "posframe" "\
 Hide all posframe frames." t nil)
@@ -665,10 +666,10 @@ Benchmark tool for posframe." t nil)
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/which-key-20210824.11/which-key-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/which-key-20210824.11/which-key-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/which-key-20211126.345/which-key-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/which-key-20211126.345/which-key-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/which-key-20210824.11/which-key-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/which-key-20211126.345/which-key-autoloads.el") (car load-path))))
 
 
 
@@ -1230,10 +1231,10 @@ ARGS, REST, and STATE are prepared by `use-package-normalize/:hydra'.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/projectile-20210930.1757/projectile-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/projectile-20210930.1757/projectile-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/projectile-20211206.1920/projectile-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/projectile-20211206.1920/projectile-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/projectile-20210930.1757/projectile-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/projectile-20211206.1920/projectile-autoloads.el") (car load-path))))
 
 
 
@@ -1279,7 +1280,7 @@ Discover any projects in DIRECTORY and add them to the projectile cache.
 If DEPTH is non-nil recursively descend exactly DEPTH levels below DIRECTORY and
 discover projects there.
 
-\(fn DIRECTORY &optional DEPTH)" nil nil)
+\(fn DIRECTORY &optional DEPTH)" t nil)
 
 (autoload 'projectile-discover-projects-in-search-path "projectile" "\
 Discover projects in `projectile-project-search-path'.
@@ -2386,10 +2387,10 @@ Read a string using a pos-frame with given PROMPT and INITIAL-INPUT.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/treemacs-20211019.1654/treemacs-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/treemacs-20211019.1654/treemacs-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/treemacs-20211206.2147/treemacs-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/treemacs-20211206.2147/treemacs-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/treemacs-20211019.1654/treemacs-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/treemacs-20211206.2147/treemacs-autoloads.el") (car load-path))))
 
 
 
@@ -2674,12 +2675,13 @@ Must be bound to a mouse click, or EVENT will not be supplied.
 
 (autoload 'treemacs-doubleclick-action "treemacs-mouse-interface" "\
 Run the appropriate double-click action for the current node.
-In the default configuration this means to do the same as `treemacs-RET-action'.
+In the default configuration this means to expand/collapse directories and open
+files and tags in the most recently used window.
 
 This function's exact configuration is stored in
 `treemacs-doubleclick-actions-config'.
 
-Must be bound to a mouse click, or EVENT will not be supplied.
+Must be bound to a mouse double click to properly handle a click EVENT.
 
 \(fn EVENT)" t nil)
 
@@ -2726,6 +2728,52 @@ Show a contextual right click menu based on click EVENT.
 
 
 
+(defvar treemacs-peek-mode nil "\
+Non-nil if Treemacs-Peek mode is enabled.
+See the `treemacs-peek-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `treemacs-peek-mode'.")
+
+(custom-autoload 'treemacs-peek-mode "treemacs-peek-mode" nil)
+
+(autoload 'treemacs-peek-mode "treemacs-peek-mode" "\
+Minor mode that allows you to peek at buffers before deciding to open them.
+
+This is a minor mode.  If called interactively, toggle the
+`Treemacs-Peek mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='treemacs-peek-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+While the mode is active treemacs will automatically display the file at point,
+without leving the treemacs window.
+
+Peeking will stop when you leave the treemacs window, be it through a command
+like `treemacs-RET-action' or some other window selection change.
+
+Files' buffers that have been opened for peeking will be cleaned up if they did
+not exist before peeking started.
+
+The peeked window can be scrolled using
+`treemacs-next/previous-line-other-window' and
+`treemacs-next/previous-page-other-window'
+
+\(fn &optional ARG)" t nil)
+
+(register-definition-prefixes "treemacs-peek-mode" '("treemacs--"))
+
+
+
 (register-definition-prefixes "treemacs-persistence" '("treemacs-"))
 
 
@@ -2748,8 +2796,8 @@ This is a minor mode.  If called interactively, toggle the
 positive, enable the mode, and if it is zero or negative, disable
 the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -2815,8 +2863,8 @@ This is a minor mode.  If called interactively, toggle the
 positive, enable the mode, and if it is zero or negative, disable
 the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -2939,10 +2987,10 @@ the project's root directory.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/transient-20211029.1405/transient-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/transient-20211029.1405/transient-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/transient-20211129.1146/transient-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/transient-20211129.1146/transient-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/transient-20211029.1405/transient-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/transient-20211129.1146/transient-autoloads.el") (car load-path))))
 
 
 
@@ -3006,10 +3054,10 @@ See info node `(transient)Modifying Existing Transients'.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/git-commit-20211010.1635/git-commit-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/git-commit-20211010.1635/git-commit-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/git-commit-20211204.2135/git-commit-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/git-commit-20211204.2135/git-commit-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/git-commit-20211010.1635/git-commit-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/git-commit-20211204.2135/git-commit-autoloads.el") (car load-path))))
 
 
 (put 'git-commit-major-mode 'safe-local-variable
@@ -3039,10 +3087,10 @@ See info node `(transient)Modifying Existing Transients'.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/magit-20211031.1744/magit-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/magit-20211031.1744/magit-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/magit-20211207.1506/magit-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/magit-20211207.1506/magit-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/magit-20211031.1744/magit-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/magit-20211207.1506/magit-autoloads.el") (car load-path))))
 
 
 
@@ -4128,16 +4176,7 @@ removed on the respective remote." t nil)
 
 (autoload 'magit-fetch-all-no-prune "magit-fetch" "\
 Fetch from all remotes." t nil)
-
-(autoload 'magit-fetch-modules "magit-fetch" "\
-Fetch all submodules.
-
-Option `magit-fetch-modules-jobs' controls how many submodules
-are being fetched in parallel.  Also fetch the super-repository,
-because `git-fetch' does not support not doing that.  With a
-prefix argument fetch all remotes.
-
-\(fn &optional ALL)" t nil)
+ (autoload 'magit-fetch-modules "magit-fetch" nil t)
 
 (register-definition-prefixes "magit-fetch" '("magit-"))
 
@@ -4470,7 +4509,7 @@ provided the respective remote branch already exists, ensuring
 that the respective pull-request (if any) won't get stuck on some
 obsolete version of the commits that are being merged.  Finally
 if `forge-branch-pullreq' was used to create the merged branch,
-branch, then also remove the respective remote branch.
+then also remove the respective remote branch.
 
 \(fn BRANCH &optional ARGS)" t nil)
 
@@ -4853,7 +4892,7 @@ process manually.
 Move COMMITS from the current branch onto another existing BRANCH.
 Remove COMMITS from the current branch and stay on that branch.
 If a conflict occurs, then you have to fix that and finish the
-process manually.
+process manually.  `HEAD' is allowed to be detached initially.
 
 \(fn COMMITS BRANCH &optional ARGS)" t nil)
 
@@ -5354,8 +5393,8 @@ This is a minor mode.  If called interactively, toggle the
 `Magit-Wip mode' mode.  If the prefix argument is positive,
 enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -5419,8 +5458,8 @@ This is a minor mode.  If called interactively, toggle the
 positive, enable the mode, and if it is zero or negative, disable
 the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -5453,8 +5492,8 @@ This is a minor mode.  If called interactively, toggle the
 positive, enable the mode, and if it is zero or negative, disable
 the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -5907,10 +5946,10 @@ this time, in which case it won't display at all.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/all-the-icons-20211021.1244/all-the-icons-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/all-the-icons-20211021.1244/all-the-icons-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/all-the-icons-20211108.7/all-the-icons-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/all-the-icons-20211108.7/all-the-icons-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/all-the-icons-20211021.1244/all-the-icons-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/all-the-icons-20211108.7/all-the-icons-autoloads.el") (car load-path))))
 
 
 
@@ -6040,10 +6079,10 @@ Setup a nano-like mode-line." t nil)
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/spaceline-20201016.1043/spaceline-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/spaceline-20201016.1043/spaceline-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/spaceline-20211120.1636/spaceline-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/spaceline-20211120.1636/spaceline-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/spaceline-20201016.1043/spaceline-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/spaceline-20211120.1636/spaceline-autoloads.el") (car load-path))))
 
 
 
@@ -6231,10 +6270,10 @@ Major Mode for editing ML-Yacc files.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/smartparens-20210904.1621/smartparens-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/smartparens-20210904.1621/smartparens-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/smartparens-20211101.1101/smartparens-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/smartparens-20211101.1101/smartparens-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/smartparens-20210904.1621/smartparens-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/smartparens-20211101.1101/smartparens-autoloads.el") (car load-path))))
 
 
 
@@ -6538,10 +6577,10 @@ Turn off `show-smartparens-mode'." t nil)
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/prescient-20210724.1756/prescient-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/prescient-20210724.1756/prescient-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/prescient-20211031.1908/prescient-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/prescient-20211031.1908/prescient-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/prescient-20210724.1756/prescient-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/prescient-20211031.1908/prescient-autoloads.el") (car load-path))))
 
 
 
@@ -6743,10 +6782,10 @@ Disable `rainbow-delimiters-mode'." nil nil)
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/racket-mode-20211031.1319/racket-mode-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/racket-mode-20211031.1319/racket-mode-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/racket-mode-20211130.1748/racket-mode-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/racket-mode-20211130.1748/racket-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/racket-mode-20211031.1319/racket-mode-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/racket-mode-20211130.1748/racket-mode-autoloads.el") (car load-path))))
 
 
 
@@ -7315,10 +7354,10 @@ commands directly to whatever keys you prefer.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/python-mode-20211013.1620/python-mode-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/python-mode-20211013.1620/python-mode-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/python-mode-20211117.1920/python-mode-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/python-mode-20211117.1920/python-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/python-mode-20211013.1620/python-mode-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/python-mode-20211117.1920/python-mode-autoloads.el") (car load-path))))
 
 
 
@@ -7372,7 +7411,7 @@ Run auto-completion
 (autoload 'python-mode "python-mode" "\
 Major mode for editing Python files.
 
-To submit a problem report, enter `\\[py-submit-bug-report]'
+To submit a report, enter `\\[py-submit-bug-report]'
 from a`python-mode' buffer.
 Do `\\[py-describe-mode]' for detailed documentation.
 To see what version of `python-mode' you are running,
@@ -7398,8 +7437,6 @@ VARIABLES
 `py-shell-name'		shell command to invoke Python interpreter
 `py-split-window-on-execute'		When non-nil split windows
 `py-switch-buffers-on-execute-p'	When non-nil switch to the Python output buffer
-
-See available customizations listed in files variables-python-mode at directory doc
 
 \\{python-mode-map}
 
@@ -7813,94 +7850,6 @@ Turn on pseudo-structural editing of Lisp code." t nil)
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/paradox-20191011.1111/paradox-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/paradox-20191011.1111/paradox-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/paradox-20191011.1111/paradox-autoloads.el") (car load-path))))
-
-
-
-(autoload 'paradox-list-packages "paradox" "\
-Improved version of `package-list-packages'.  The heart of Paradox.
-Function is equivalent to `package-list-packages' (including the
-prefix NO-FETCH), but the resulting Package Menu is improved in
-several ways.
-
-Among them:
-
-1. Uses `paradox-menu-mode', which has more functionality and
-keybinds than `package-menu-mode'.
-
-2. Uses some font-locking to improve readability.
-
-3. Optionally shows the number GitHub stars and Melpa downloads
-for packages.
-
-4. Adds useful information in the mode-line.
-
-\(fn NO-FETCH)" t nil)
-
-(autoload 'paradox-upgrade-packages "paradox" "\
-Upgrade all packages.  No questions asked.
-This function is equivalent to `list-packages', followed by a
-`package-menu-mark-upgrades' and a `package-menu-execute'.  Except
-the user isn't asked to confirm deletion of packages.
-
-If `paradox-execute-asynchronously' is non-nil, part of this
-operation may be performed in the background.
-
-The NO-FETCH prefix argument is passed to `list-packages'.  It
-prevents re-download of information about new versions.  It does
-not prevent downloading the actual packages (obviously).
-
-\(fn &optional NO-FETCH)" t nil)
-
-(autoload 'paradox-enable "paradox" "\
-Enable paradox, overriding the default package-menu." t nil)
-
-(autoload 'paradox-require "paradox" "\
-Like `require', but also install FEATURE if it is absent.
-FILENAME is passed to `require'.
-If NOERROR is non-nil, don't complain if the feature couldn't be
-installed, just return nil.
-
-- If FEATURE is present, `require' it and return t.
-
-- If FEATURE is not present, install PACKAGE with `package-install'.
-If PACKAGE is nil, assume FEATURE is the package name.
-After installation, `require' FEATURE.
-
-By default, the current package database is only updated if it is
-empty.  Passing a non-nil REFRESH argument forces this update.
-
-\(fn FEATURE &optional FILENAME NOERROR PACKAGE REFRESH)" nil nil)
-
-(register-definition-prefixes "paradox" '("paradox-"))
-
-
-
-(register-definition-prefixes "paradox-commit-list" '("paradox-"))
-
-
-
-(register-definition-prefixes "paradox-core" '("paradox-"))
-
-
-
-(register-definition-prefixes "paradox-execute" '("paradox-"))
-
-
-
-(register-definition-prefixes "paradox-github" '("paradox-"))
-
-
-
-(register-definition-prefixes "paradox-menu" '("paradox-"))
-
-
-
-
-)
 (let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/outorg-20190720.2002/outorg-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/outorg-20190720.2002/outorg-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -8009,10 +7958,10 @@ it is disabled.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/esxml-20210722.1345/esxml-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/esxml-20210722.1345/esxml-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/esxml-20211122.1657/esxml-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/esxml-20211122.1657/esxml-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/esxml-20210722.1345/esxml-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/esxml-20211122.1657/esxml-autoloads.el") (car load-path))))
 
 
 
@@ -8026,10 +7975,10 @@ it is disabled.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/nov-20210323.1105/nov-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/nov-20210323.1105/nov-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/nov-20211130.1805/nov-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/nov-20211130.1805/nov-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/nov-20210323.1105/nov-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/nov-20211130.1805/nov-autoloads.el") (car load-path))))
 
 
 
@@ -8089,10 +8038,10 @@ Interactively, with prefix argument, move to the previous position.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/modus-themes-20211030.738/modus-themes-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/modus-themes-20211030.738/modus-themes-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/modus-themes-20211207.1603/modus-themes-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/modus-themes-20211207.1603/modus-themes-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/modus-themes-20211030.738/modus-themes-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/modus-themes-20211207.1603/modus-themes-autoloads.el") (car load-path))))
 
 
 
@@ -8135,11 +8084,11 @@ as when they are declared in the `:config' phase)." nil nil)
 
 (autoload 'modus-themes-load-operandi "modus-themes" "\
 Load `modus-operandi' and disable `modus-vivendi'.
-Also run `modus-themes-after-load-theme-hook'." nil nil)
+Also run `modus-themes-after-load-theme-hook'." t nil)
 
 (autoload 'modus-themes-load-vivendi "modus-themes" "\
 Load `modus-vivendi' and disable `modus-operandi'.
-Also run `modus-themes-after-load-theme-hook'." nil nil)
+Also run `modus-themes-after-load-theme-hook'." t nil)
 
 (autoload 'modus-themes-toggle "modus-themes" "\
 Toggle between `modus-operandi' and `modus-vivendi' themes.
@@ -8159,10 +8108,10 @@ by virtue of calling either of `modus-themes-load-operandi' and
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/minions-20211022.2311/minions-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/minions-20211022.2311/minions-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/minions-20211110.142/minions-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/minions-20211110.142/minions-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/minions-20211022.2311/minions-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/minions-20211110.142/minions-autoloads.el") (car load-path))))
 
 
 
@@ -8259,10 +8208,10 @@ it is disabled.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/marginalia-20211028.1244/marginalia-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/marginalia-20211028.1244/marginalia-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/marginalia-20211203.2231/marginalia-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/marginalia-20211203.2231/marginalia-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/marginalia-20211028.1244/marginalia-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/marginalia-20211203.2231/marginalia-autoloads.el") (car load-path))))
 
 
 
@@ -8923,10 +8872,10 @@ This functionality overlaps with the undocumented `cl-do-remf'.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/iedit-20210812.735/iedit-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/iedit-20210812.735/iedit-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/iedit-20211116.11/iedit-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/iedit-20211116.11/iedit-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/iedit-20210812.735/iedit-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/iedit-20211116.11/iedit-autoloads.el") (car load-path))))
 
 
 
@@ -10267,10 +10216,10 @@ it is disabled.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/free-keys-20160726.2050/free-keys-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/free-keys-20160726.2050/free-keys-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/free-keys-20211116.1501/free-keys-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/free-keys-20211116.1501/free-keys-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/free-keys-20160726.2050/free-keys-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/free-keys-20211116.1501/free-keys-autoloads.el") (car load-path))))
 
 
 
@@ -11318,10 +11267,10 @@ The variable will be called NAME.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/embark-20211031.1522/embark-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/embark-20211031.1522/embark-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/embark-20211203.1921/embark-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/embark-20211203.1921/embark-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/embark-20211031.1522/embark-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/embark-20211203.1921/embark-autoloads.el") (car load-path))))
 
 
 
@@ -11466,10 +11415,10 @@ buffer for each type of completion." t nil)
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/consult-20211027.1058/consult-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/consult-20211027.1058/consult-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/consult-20211202.1100/consult-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/consult-20211202.1100/consult-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/consult-20211027.1058/consult-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/consult-20211202.1100/consult-autoloads.el") (car load-path))))
 
 
 
@@ -11660,7 +11609,8 @@ This command can act as a drop-in replacement for `repeat-complex-command'." t n
 (autoload 'consult-history "consult" "\
 Insert string from HISTORY of current buffer.
 
-In order to select from a specific HISTORY, pass the history variable as argument.
+In order to select from a specific HISTORY, pass the history variable
+as argument.
 
 \(fn &optional HISTORY)" t nil)
 
@@ -11709,15 +11659,32 @@ Macros containing mouse clicks are omitted.
 (autoload 'consult-grep "consult" "\
 Search for regexp with grep in DIR with INITIAL input.
 
-The input string is split, the first part of the string is passed to
-the asynchronous grep process and the second part of the string is
-passed to the completion-style filtering. The input string is split at
-a punctuation character, which is given as the first character of the
-input string. The format is similar to Perl-style regular expressions,
-e.g., /regexp/. Furthermore command line options can be passed to
-grep, specified behind --.
+The input string is split, the first part of the string (grep input) is
+passed to the asynchronous grep process and the second part of the string is
+passed to the completion-style filtering.
 
-Example: #async-regexp -- grep-opts#filter-string
+The input string is split at a punctuation character, which is given as the
+first character of the input string. The format is similar to Perl-style
+regular expressions, e.g., /regexp/. Furthermore command line options can be
+passed to grep, specified behind --. The overall prompt input has the form
+`#async-input -- grep-opts#filter-string'.
+
+Note that the grep input string is transformed from Emacs regular expressions
+to Posix regular expressions. Always enter Emacs regular expressions at the
+prompt. `consult-grep' behaves like builtin Emacs search commands, e.g.,
+Isearch, which take Emacs regular expressions. Furthermore the asynchronous
+input split into words, each word must match separately and in any order. See
+`consult--regexp-compiler' for the inner workings. In order to disable
+transformations of the grep input, adjust `consult--regexp-compiler'
+accordingly.
+
+Here we give a few example inputs:
+
+#alpha beta         : Search for alpha and beta in any order.
+#alpha.*beta        : Search for alpha before beta.
+#\\(alpha\\|beta\\) : Search for alpha or beta (Note Emacs syntax!)
+#word -- -C3        : Search for word, include 3 lines as context
+#first#second       : Search for first, quick filter for second.
 
 The symbol at point is added to the future history. If `consult-grep'
 is called interactively with a prefix argument, the user can specify
@@ -11908,10 +11875,10 @@ FETCHER and ALIST arguments.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/embark-consult-20211031.1522/embark-consult-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/embark-consult-20211031.1522/embark-consult-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/embark-consult-20211119.1254/embark-consult-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/embark-consult-20211119.1254/embark-consult-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/embark-consult-20211031.1522/embark-consult-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/embark-consult-20211119.1254/embark-consult-autoloads.el") (car load-path))))
 
 
 
@@ -11970,10 +11937,10 @@ the mode if ARG is omitted or nil.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/dtrt-indent-20210423.745/dtrt-indent-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/dtrt-indent-20210423.745/dtrt-indent-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/dtrt-indent-20211121.2114/dtrt-indent-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/dtrt-indent-20211121.2114/dtrt-indent-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/dtrt-indent-20210423.745/dtrt-indent-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/dtrt-indent-20211121.2114/dtrt-indent-autoloads.el") (car load-path))))
 
 
 
@@ -12046,6 +12013,41 @@ use either \\[customize] or the function `dtrt-indent-mode'.")
 (register-definition-prefixes "dtrt-indent-diag" '("dtrt-indent-" "save-buffer-state"))
 
 
+
+
+)
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/dockerfile-mode-20211016.1545/dockerfile-mode-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/dockerfile-mode-20211016.1545/dockerfile-mode-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/dockerfile-mode-20211016.1545/dockerfile-mode-autoloads.el") (car load-path))))
+
+
+
+(autoload 'dockerfile-build-buffer "dockerfile-mode" "\
+Build an image called IMAGE-NAME based upon the buffer.
+
+If prefix arg NO-CACHE is set, don't cache the image.
+The build string will be of the format:
+`sudo docker build --no-cache --tag IMAGE-NAME --build-args arg1.. -f filename directory`
+
+\(fn IMAGE-NAME &optional NO-CACHE)" t nil)
+
+(autoload 'dockerfile-build-no-cache-buffer "dockerfile-mode" "\
+Build an image called IMAGE-NAME based upon the buffer without cache.
+
+\(fn IMAGE-NAME)" t nil)
+
+(autoload 'dockerfile-mode "dockerfile-mode" "\
+A major mode to edit Dockerfiles.
+\\{dockerfile-mode-map}
+
+\(fn)" t nil)
+
+(add-to-list 'auto-mode-alist '("/Dockerfile\\(?:\\.[^/\\]*\\)?\\'" . dockerfile-mode))
+
+(add-to-list 'auto-mode-alist '("\\.dockerfile\\'" . dockerfile-mode))
+
+(register-definition-prefixes "dockerfile-mode" '("dockerfile-"))
 
 
 )
@@ -12236,10 +12238,10 @@ what diminished modes would be on the mode-line if they were still minor." t nil
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/diff-hl-20211031.213/diff-hl-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/diff-hl-20211031.213/diff-hl-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/diff-hl-20211106.2353/diff-hl-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/diff-hl-20211106.2353/diff-hl-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/diff-hl-20211031.213/diff-hl-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/diff-hl-20211106.2353/diff-hl-autoloads.el") (car load-path))))
 
 
 
@@ -12593,28 +12595,34 @@ Implementation to show the hunk in a posframe.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/deadgrep-20210830.656/deadgrep-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/deadgrep-20210830.656/deadgrep-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/deadgrep-20211201.1747/deadgrep-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/deadgrep-20211201.1747/deadgrep-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/deadgrep-20210830.656/deadgrep-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/deadgrep-20211201.1747/deadgrep-autoloads.el") (car load-path))))
 
 
 
 (autoload 'deadgrep "deadgrep" "\
-Start a ripgrep search for SEARCH-TERM.
+Start a ripgrep search for SEARCH-TERM in DIRECTORY.
+
+If not provided, DIR defaults to the directory as determined by 
+`deadgrep-project-root-function'. 
+
+See also `deadgrep-project-root-overrides'.
+
 If called with a prefix argument, create the results buffer but
 don't actually start the search.
 
-\(fn SEARCH-TERM)" t nil)
+\(fn SEARCH-TERM &optional DIRECTORY)" t nil)
 
 (register-definition-prefixes "deadgrep" '("deadgrep-"))
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/company-20211024.2305/company-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/company-20211024.2305/company-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/company-20211201.2335/company-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/company-20211201.2335/company-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/company-20211024.2305/company-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/company-20211201.2335/company-autoloads.el") (car load-path))))
 
 
 
@@ -12932,10 +12940,10 @@ shadow backends that come after it.  Recommended usages:
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/company-quickhelp-20210515.2212/company-quickhelp-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/company-quickhelp-20210515.2212/company-quickhelp-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/company-quickhelp-20211115.1335/company-quickhelp-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/company-quickhelp-20211115.1335/company-quickhelp-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/company-quickhelp-20210515.2212/company-quickhelp-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/company-quickhelp-20211115.1335/company-quickhelp-autoloads.el") (car load-path))))
 
 
 
@@ -13033,10 +13041,10 @@ it is disabled.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/company-posframe-20210419.607/company-posframe-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/company-posframe-20210419.607/company-posframe-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/company-posframe-20211103.232/company-posframe-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/company-posframe-20211103.232/company-posframe-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/company-posframe-20210419.607/company-posframe-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/company-posframe-20211103.232/company-posframe-autoloads.el") (car load-path))))
 
 
 
@@ -13444,19 +13452,21 @@ mode.
 
 
 )
+(defvar package-activated-list)
 (setq package-activated-list
 	  (append
-	   '(zoutline yasnippet yaml-mode xterm-color xr ws-butler with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit-section magit treemacs-magit treemacs-icons-dired transient-posframe toc-org ivy swiper spinner all-the-icons powerline spaceline memoize spaceline-all-the-icons sml-mode smartparens prescient selectrum selectrum-prescient rainbow-delimiters racket-mode python-mode pretty-hydra pos-tip popup epl pkg-info persistent-scratch paredit paradox outorg outshine org-bullets kv esxml nov mwim modus-themes minions mini-frame math-symbol-lists marginalia makey major-mode-hydra macrostep list-utils iedit counsel lispy lisp-extra-font-lock keyfreq json-snatcher hierarchy json-navigator json-mode ignoramus ibuffer-vc highlight-indent-guides f elisp-refs helpful hardhat git-timemachine git-messenger gcmh free-keys flycheck fish-mode expand-region eval-in-repl eros clang-format emr embark consult embark-consult elmacro dtrt-indent discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 cmake-mode cask-mode beacon amx all-the-icons-completion aggressive-indent)
+	   '(zoutline yasnippet yaml-mode xterm-color xr ws-butler with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit-section magit treemacs-magit treemacs-icons-dired transient-posframe toc-org ivy swiper spinner all-the-icons powerline spaceline memoize spaceline-all-the-icons sml-mode smartparens prescient selectrum selectrum-prescient rainbow-delimiters racket-mode python-mode pretty-hydra pos-tip popup epl pkg-info persistent-scratch paredit outorg outshine org-bullets kv esxml nov mwim modus-themes minions mini-frame math-symbol-lists marginalia makey major-mode-hydra macrostep list-utils iedit counsel lispy lisp-extra-font-lock keyfreq json-snatcher hierarchy json-navigator json-mode ignoramus ibuffer-vc highlight-indent-guides f elisp-refs helpful hardhat git-timemachine git-messenger gcmh free-keys flycheck fish-mode expand-region eval-in-repl eros clang-format emr embark consult embark-consult elmacro dtrt-indent dockerfile-mode discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 cmake-mode cask-mode beacon amx all-the-icons-completion aggressive-indent)
 	   package-activated-list))
 (progn
   (require 'info)
   (info-initialize)
   (setq Info-directory-list
 		(append
-		 '("/Users/mark/.emacs.d/elpa/29/embark-20211031.1522" "/Users/mark/.emacs.d/elpa/29/modus-themes-20211030.738" "/Users/mark/.emacs.d/elpa/29/racket-mode-20211031.1319" "/Users/mark/.emacs.d/elpa/29/ivy-20210930.1450" "/Users/mark/.emacs.d/elpa/29/magit-20211031.1744" "/Users/mark/.emacs.d/elpa/29/magit-section-20211019.2114" "/Users/mark/.emacs.d/elpa/29/transient-20211029.1405" "/Users/mark/.emacs.d/elpa/29/dash-20210826.1149" "/Users/mark/.emacs.d/elpa/29/use-package-20210207.1926" "/Users/mark/.emacs.d/elpa/29/with-editor-20211028.2105")
+		 '("/Users/mark/.emacs.d/elpa/29/embark-20211203.1921" "/Users/mark/.emacs.d/elpa/29/modus-themes-20211207.1603" "/Users/mark/.emacs.d/elpa/29/racket-mode-20211130.1748" "/Users/mark/.emacs.d/elpa/29/ivy-20210930.1450" "/Users/mark/.emacs.d/elpa/29/magit-20211207.1506" "/Users/mark/.emacs.d/elpa/29/magit-section-20211019.2114" "/Users/mark/.emacs.d/elpa/29/transient-20211129.1146" "/Users/mark/.emacs.d/elpa/29/dash-20210826.1149" "/Users/mark/.emacs.d/elpa/29/use-package-20210207.1926" "/Users/mark/.emacs.d/elpa/29/with-editor-20211028.2105")
 		 Info-directory-list)))
 
 ;; Local Variables:
 ;; version-control: never
 ;; no-update-autoloads: t
+;; byte-compile-warnings: (not make-local)
 ;; End:

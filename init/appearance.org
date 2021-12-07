@@ -532,7 +532,7 @@ vivendi is dark
   :init
   ;;  This is lists of lists so set here not custom
   (setq modus-themes-headings
-        '((t . rainbow-section)))
+        '((t . rainbow-highlight)))
 
   ;; (setq modus-themes-region '())     ; the default
 

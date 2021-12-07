@@ -258,7 +258,8 @@ Add decoration/information
               (lambda () (when (bound-and-true-p selectrum-mode) (selectrum-exhibit))))
   :bind (:map minibuffer-local-completion-map
               ("M-A" . marginalia-cycle)
-              ("C-i" . marginalia-cycle-annotators)))
+              ("C-i" . marginalia-cycle-annotators))
+  :hook (marginalia-mode . all-the-icons-completion-marginalia-setup))
 #+end_src
 ** Embark
 :PROPERTIES:

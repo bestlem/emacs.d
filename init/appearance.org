@@ -514,27 +514,8 @@ vivendi is dark
   :ensure t
   ;; :mwb-load-path "fork/modus-themes"
   :demand
-  :custom
-  (modus-themes-italic-constructs t)
-  (modus-themes-slanted-constructs t)
-  (modus-themes-variable-pitch-headings t)
-  (modus-themes-bold-constructs nil)
-  (modus-themes-region '(bg-only accented))
-  (modus-themes-completions 'opinionated)
-  (modus-themes-fringes 'intense)
-  (modus-themes-mode-line 'borderless)
-  (modus-themes-org-blocks 'rainbow)
-  (modus-themes-paren-match 'intense-bold)
-  (modus-themes-prompts 'intense)
-  (modus-themes-scale-headings t)
-  (modus-themes-syntax 'yellow-comments)
-
-  :init
-  ;;  This is lists of lists so set here not custom
-  (setq modus-themes-headings
-        '((t . rainbow-highlight)))
-
-  ;; (setq modus-themes-region '())     ; the default
+    :init
+    ;; (setq modus-themes-region '())     ; the default
 
   ;; Enable the theme files only as local
   ;; (use-package modus-operandi-theme)

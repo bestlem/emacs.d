@@ -781,8 +781,8 @@ But hack an load it directly
           ("aquamacs"
            ("aquamacs-" "tabbar-" "auto-word-wrap-default-function"
             "global-hi-line-mode" "toolbar-mode" "visual-line-mode"))
-          ;; ("modus"
-          ;;  ("modus-" "ibuffer-title-face" "ibuffer-marked-face" "ibuffer-deletion-face"))
+          ("modus"
+           ("modus-" "ibuffer-title-face" "ibuffer-marked-face" "ibuffer-deletion-face"))
           ;; ("completion"
           ;;  ("company-" "yas-"))
           ("mac-based"

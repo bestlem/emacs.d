@@ -25,7 +25,7 @@ Got odd behaviour on completion last letter underlined and stuff in echo area, i
 :END:
 The racket-mode version seems to invoke quail which confused me - it might stop company but I am not sure
 Also see [[https://github.com/david-christiansen/dr-racket-like-unicode/blob/master/dr-racket-like-unicode.el][this mode]] that can do a completion - also look at abbrev
-Trying company math
+Trying company math ie //gamma
 *** Completions
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20201221T122900.927064
@@ -79,28 +79,34 @@ This is the minimal setup and does not need changing
     (racket-xp-mode))
 
   (defun my-all-racket-mode-hook ()
-    (set (make-local-variable 'company-backends)
-         '((company-capf
-            company-math-symbols-unicode
-            company-dabbrev
-            company-yasnippet)))        ; each looks for its own prefix
-    (company-mode 1)
-    ;;(smartparens-strict-mode 1)
-    ;;(racket-unicode-input-method-enable)
-    (racket-mwb-smart-open-bracket-mode))
+	(set (make-local-variable 'company-backends)
+		 '((company-capf :with company-yasnippet)
+		   (company-dabbrev-code company-keywords company-files)
+		   company-dabbrev))
+	;; '((company-capf :with company-yasnippet company-dabbrev-code)
+	;;   (;; company-capf
+	;;    company-math-symbols-unicode
+	;;    ;; company-dabbrev
+	;;    ;; company-yasnippet
+	;;    ))
+	;; )									; each looks for its own prefix
+	(company-mode 1)
+	;;(smartparens-strict-mode 1)
+	;;(racket-unicode-input-method-enable)
+	(racket-mwb-smart-open-bracket-mode))
 
   (defun racket-mwb-send-to-repl ()
-    "Send region or last sexp"
-    (if (region-active-p)
-        (racket-send-region)
-      (racket-send-last-sexp)))
+	"Send region or last sexp"
+	(if (region-active-p)
+		(racket-send-region)
+      (racket-send-last-sexp))
 
-  ;; (diminish 'racket-smart-open-bracket-mode)
+	;; (diminish 'racket-smart-open-bracket-mode)
                                         ; This is broken as it used racket internals - maybe racket itself
-  ;;(require 'eval-in-repl-racket)
+	;;(require 'eval-in-repl-racket)
                                         ;(require 'racket-mwb-smart-open)
-  :hook (racket-mode . my-racket-mode-hook)
-  (racket-repl-mode . my-all-racket-mode-hook))
+	:hook (racket-mode . my-racket-mode-hook)
+	(racket-repl-mode . my-all-racket-mode-hook)))
 #+end_src
 * After load
 :PROPERTIES:
@@ -146,9 +152,9 @@ Runs all the test modules in the directory  using raco test -drdr
   (interactive)
   (mwb-projectile-save-project-buffers)
   (racket--shell
-   (concat (shell-quote-argument racket-program)
-           " -l raco test --drdr "
-           (projectile-project-root))))
+   (concat
+	"racket -l raco test --drdr "
+	(projectile-project-root))))
 #+end_src
 
 *** Test as file
@@ -177,35 +183,6 @@ Run test via raco
 		   (comint-kill-region (point-min) (point-max))
 		   ;; (delete-region (point-min) (point-max))
 		   ))))
-#+end_src
-*** Simple run
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20210429T083233.524532
-:END:
-Save the project before running - note uses default racket-run so some loss of stack info
-#+NAME: org_mark_mini20.local_20210429T083233.512672
-#+begin_src emacs-lisp :tangle no :noweb-ref config
-(defun racket-mwb-run ()
-  "Run the current buffer as per racket-run but save other buffers in project first"
-  (interactive)
-  (mwb-projectile-save-project-buffers)
-  (racket-run))
-#+end_src
-
-*** Run with errortrace
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20210507T225817.528412
-:END:
-Save the project before running - note uses racket-run with errortrace
-
-#+NAME: org_mark_mini20.local_20210507T225817.511916
-#+begin_src emacs-lisp :tangle no :noweb-ref config
-(defun racket-mwb-run-errortrace ()
-  "Run the current buffer as per racket-run but save other buffers in project first"
-  (interactive)
-  (racket-mwb-clear-repl)
-  (mwb-projectile-save-project-buffers)
-  (racket-run '(4)))
 #+end_src
 *** Test frame
 :PROPERTIES:
@@ -261,12 +238,14 @@ Run tests with no error context to show error.
                  :quit-key "<f12>"
                  :exit t)
   ("Test"
-   (("<f5>" racket-test "Test")
-    ("<f6>" racket-mwb-test "Test Errortrace"))
+   (("<f4>" racket-mwb-raco-all-tests  "Run all Tests across files")
+	("<f5>" racket-test "Test")
+    ("<f6>" racket-mwb-test-errortrace "Test Errortrace"))
    "Run"
    (("<f9>" racket-run-and-switch-to-repl "run and REPL")
     ("<f7>" racket-run "Run")
-    ("<f8>" racket-mwb-run-errortrace "Run with errortrace"))
+    ("<f8>" racket-run-with-errortrace "Run with errortrace")
+	("<f9>" racket-run-with-debugging "Run with debugging"))
    "Quit"
    (("<f12>" nil "Quit" :exit t))))
 #+end_src

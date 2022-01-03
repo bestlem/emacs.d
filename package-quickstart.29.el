@@ -13220,6 +13220,38 @@ for more details on the DSL accepted by Cask.
 
 
 )
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/bison-mode-20210527.717/bison-mode-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/bison-mode-20210527.717/bison-mode-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/29/bison-mode-20210527.717/bison-mode-autoloads.el") (car load-path))))
+
+
+
+(add-to-list 'auto-mode-alist '("\\.y\\'" . bison-mode))
+
+(add-to-list 'auto-mode-alist '("\\.l\\'" . flex-mode))
+
+(add-to-list 'auto-mode-alist '("\\.jison\\'" . jison-mode))
+
+(autoload 'bison-mode "bison-mode" "\
+Major mode for editing bison/yacc files.
+
+\(fn)" t nil)
+
+(autoload 'jison-mode "bison-mode" "\
+Major mode for editing jison files.
+
+\(fn)" t nil)
+
+(autoload 'flex-mode "bison-mode" "\
+Major mode for editing flex files. (bison-mode by any other name)
+
+\(fn)" t nil)
+
+(register-definition-prefixes "bison-mode" '("bison-"))
+
+
+)
 (let ((load-true-file-name "/Users/mark/.emacs.d/elpa/29/beacon-20190104.1931/beacon-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/29/beacon-20190104.1931/beacon-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -13455,7 +13487,7 @@ mode.
 (defvar package-activated-list)
 (setq package-activated-list
 	  (append
-	   '(zoutline yasnippet yaml-mode xterm-color xr ws-butler with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit-section magit treemacs-magit treemacs-icons-dired transient-posframe toc-org ivy swiper spinner all-the-icons powerline spaceline memoize spaceline-all-the-icons sml-mode smartparens prescient selectrum selectrum-prescient rainbow-delimiters racket-mode python-mode pretty-hydra pos-tip popup epl pkg-info persistent-scratch paredit outorg outshine org-bullets kv esxml nov mwim modus-themes minions mini-frame math-symbol-lists marginalia makey major-mode-hydra macrostep list-utils iedit counsel lispy lisp-extra-font-lock keyfreq json-snatcher hierarchy json-navigator json-mode ignoramus ibuffer-vc highlight-indent-guides f elisp-refs helpful hardhat git-timemachine git-messenger gcmh free-keys flycheck fish-mode expand-region eval-in-repl eros clang-format emr embark consult embark-consult elmacro dtrt-indent dockerfile-mode discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 cmake-mode cask-mode beacon amx all-the-icons-completion aggressive-indent)
+	   '(zoutline yasnippet yaml-mode xterm-color xr ws-butler with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit-section magit treemacs-magit treemacs-icons-dired transient-posframe toc-org ivy swiper spinner all-the-icons powerline spaceline memoize spaceline-all-the-icons sml-mode smartparens prescient selectrum selectrum-prescient rainbow-delimiters racket-mode python-mode pretty-hydra pos-tip popup epl pkg-info persistent-scratch paredit outorg outshine org-bullets kv esxml nov mwim modus-themes minions mini-frame math-symbol-lists marginalia makey major-mode-hydra macrostep list-utils iedit counsel lispy lisp-extra-font-lock keyfreq json-snatcher hierarchy json-navigator json-mode ignoramus ibuffer-vc highlight-indent-guides f elisp-refs helpful hardhat git-timemachine git-messenger gcmh free-keys flycheck fish-mode expand-region eval-in-repl eros clang-format emr embark consult embark-consult elmacro dtrt-indent dockerfile-mode discover-my-major dired-hacks-utils dired-subtree diminish diff-hl deadgrep company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 cmake-mode cask-mode bison-mode beacon amx all-the-icons-completion aggressive-indent)
 	   package-activated-list))
 (progn
   (require 'info)

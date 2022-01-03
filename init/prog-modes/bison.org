@@ -1,0 +1,16 @@
+#+TITLE:  Bison
+#+AUTHOR: Mark Bestley
+#+EMAIL:  @bestley.co.uk
+#+DATE:   14 Dec 2021
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+STARTUP: overview
+* Bison
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20211214T191128.917819
+:END:
+Well I needed for a .l file so let's see
+#+NAME: org_mark_mini20.local_20211214T191128.912641
+#+begin_src emacs-lisp
+(use-package-elpa bison-mode
+  )
+#+end_src

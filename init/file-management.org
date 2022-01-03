@@ -62,7 +62,7 @@ Aquamacs seems to turn this off sometimes in customization so need to investigat
 :END:
 The default is the ~ on end of file.
 All the google searches say put in one directory
-But the GNU manual gives the best - in a subdirectory of where you are - OK Tramp and other machines and NFS etc might be different
+But the GNU manual gives the best - in a subdirectory of where you are - OK Tramp and other machines and NFS etc might be different. Changed as backup-walker should be able to find old and thus don't need to use finder etc.
 #+NAME: org_mark_mini12.local_20210105T204218.521153
 #+begin_src emacs-lisp
 (setq backup-directory-alist
@@ -300,7 +300,9 @@ The problem is that we have regex
 						  ;; "[/\\]emacs.d/elpa/"
 						  ".*png$" ".*cache$"
 						  "SessionDesktop\\.el"
-						  "treemacs-persist"))
+						  "treemacs-persist"
+						  "^/Volumes/"
+						  ))
   (recentf-mode 1))
 #+end_src
 ** TODO Compressed files

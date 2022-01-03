@@ -80,7 +80,15 @@ This is the standard mode
 	   :after json-mode
 	   :ensure t)
   #+end_src
-
+* Config file
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20211212T113859.518642
+:END:
+#+NAME: org_mark_mini20.local_20211212T113859.497593
+#+begin_src emacs-lisp
+(use-feature config
+  :mode ("\\.cnf\\'" .  conf-mode))
+#+end_src
 
 * YAML
 :PROPERTIES:

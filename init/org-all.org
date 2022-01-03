@@ -82,8 +82,6 @@ org-babel-tangle-jump-to-org does mainly if :comments noweb is in the org :Prope
 This seems one of the most complete literate programming setups and he does have weave but no examples with links. He does say a few things so lets try.
 As everything is after loading of org dump in a config section after the rest.
 
-
-
 ** TODO Save org files saved in dropbox dir automatically (NB not emacs autosave)
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:8A5AC122-42AB-4B05-BEEE-ED6A16F5A966

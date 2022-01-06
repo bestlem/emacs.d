@@ -15,16 +15,41 @@ Add some from jweigley
 :PROPERTIES:
 :ID:       org_mark_2020-10-05T18-36-08+01-00_mini12.local:B1FF068E-6489-4EB1-8990-DA1D3E6262D2
 :END:
- #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_0A6134EA-DC55-4651-ACC8-B1478B5A38F3
+Much is taken for jojojames - the first attempted failed for racket as it did not combine the results; So that was coded differently.
+Later saw question on stacke exchnage and got a response that lead back to
+ #+NAME: org_mark_mini20.local_20220105T111136.887789
  #+begin_src emacs-lisp
-(use-package company
-  :ensure t
+(use-package-elpa company
   :defer 5
   :diminish
   :commands (company-mode company-indent-or-complete-common company-complete)
 
+  :bind (("TAB" . #'company-indent-or-complete-common)
+		 :map company-active-map
+		 ("`" . company-abort)
+		 ;; From jojojames
+		 ("RET" . j-company-expand-yasnippet-or-return)
+		 ("TAB" . company-select-next-if-tooltip-visible-or-complete-selection)
+		 ("S-TAB" . company-select-previous)
+		 ("DEL" . company-cancel-or-backspace)
+		 ("<backspace>" . company-cancel-or-backspace)
+		 )
+
+  :init
+  (require 'j-company)
+  ;; Set the backends - I don't like files and a few oters are unlikely
+  (setq company-backends
+		'(company-semantic company-cmake
+		  company-capf
+		  ;; company-clang
+		  company-files
+		  (company-dabbrev-code company-gtags company-etags company-keywords)
+		  ;; company-oddmuse
+		  company-dabbrev))
+
   :config
-  (setq company-dabbrev-ignore-case t
+  (setq company-dabbrev-downcase nil
+		company-dabbrev-ignore-case t
 		company-dabbrev-ignore-case 'keep-prefix
 		;; Dabbrev all code buffers together.
 		company-dabbrev-code-other-buffers t
@@ -34,17 +59,23 @@ Add some from jweigley
 		company-dabbrev-code-time-limit 0.0005
 		company-dabbrev-time-limit 0.0005
 		company-dabbrev-char-regexp "\\sw\\|\\s_")
-  (setq company-dabbrev-downcase nil)
-  (setq company-dabbrev-ignore-case t)
+
 
   (setq company-show-numbers t)
   (setq company-lighter-base "/"
 		company-tooltip-align-annotations t
 		company-echo-delay 1
 		company-selection-wrap-around t
-		company-idle-delay 0.05 ;; company-idle-delay 0.05
+		company-idle-delay 0.05
 		company-tooltip-minimum-width 30
 		company-minimum-prefix-length 2)
+
+  (push #'company-sort-by-backend-importance company-transformers)
+  (push #'company-sort-prefer-same-case-prefix company-transformers)
+  (push #'j-company-remove-dabbrev-dups-keep-order company-transformers)
+
+  (j-company-merge-backends)
+  (j-company-tng-configure-default)
   (global-company-mode t)	 ; don't put in after-init hook
 										; as we are deferred
   ;; (define-key company-mode-map [tab]
@@ -52,8 +83,7 @@ Add some from jweigley
   ;;               :filter (lambda (&optional _)
   ;;                         (when (check-expansion)
   ;;                           #'company-complete-common))))
-  (bind-key "TAB" #'company-indent-or-complete-common)
-  (bind-key "`" 'company-abort company-active-map)
+
   (when (>= emacs-major-version 27)
 	(use-package company-posframe
 	  :ensure t
@@ -65,68 +95,7 @@ Add some from jweigley
 	:diminish
 	:after prescient
 	:config (company-prescient-mode 1))
-
-  :init
-  ;; Set the backends - I don't like files and a few oters are unlikely
-  (setq company-backends
-		'(company-semantic company-cmake
-		  company-capf
-		  company-clang
-		  ;; company-files
-		  (company-dabbrev-code company-gtags company-etags company-keywords)
-		  ;; company-oddmuse
-		  company-dabbrev))
-  ;; jojojames to add a backend with yasnippet in a :with
-  (defun j|company-backend-in-backends (b)
-	"Check if backend B is already in `company-backends'."
-	(if (member b company-backends)
-		t
-	  (let ((in-backend nil))
-		(dolist (backend company-backends)
-		  (when (and
-				 (consp backend)
-				 (member b backend))
-			(setq in-backend t)))
-		in-backend)))
-
-  (defun j|company-push-backend (backend &optional local append)
-	"Adds backend BACKEND to company mode if it's not already in the list of backends.
-IF APPEND, add to end of list."
-	(when local
-	  (make-local-variable 'company-backends))
-	(unless (j|company-backend-in-backends backend)
-	  (if append
-		  (setcdr (last company-backends) (list backend))
-		(push backend company-backends))
-	  (j|company-merge-backends)))
-
-  (defun merge-backend-with-company-backends (backend-to-merge)
-	"Merges a backend with every backend in company-backends.
-BACKEND-TO_MERGE will only be merged if it's not already in the current backend.
-
-Merging `company-yasnippet' to `company-capf' will yield
-'\(company-capf :with company-yasnippet\)."
-	(setq company-backends
-		  (mapcar (lambda (backend)
-					(cond
-					 ((and (listp backend)
-						   (member backend-to-merge backend))
-					  backend)
-					 (:else
-					  (append (if (consp backend)
-								  backend
-								(list backend))
-							  (if (and (listp backend)
-									   (member :with backend))
-								  `(,backend-to-merge)
-								`(:with ,backend-to-merge))))))
-				  company-backends)))
-
-  (defun j|company-merge-backends ()
-	"Merge common backends."
-	(interactive)
-	(merge-backend-with-company-backends 'company-yasnippet)
-	(merge-backend-with-company-backends 'company-dabbrev-code)))
+  )
 #+end_src
 ** Help
 :PROPERTIES:
@@ -135,13 +104,13 @@ Merging `company-yasnippet' to `company-capf' will yield
 Add company help
 #+NAME: org_mark_mini20.local_20210601T123210.313241
 #+begin_src emacs-lisp
-(use-package company-quickhelp
-  :ensure t
+(use-package-elpa company-quickhelp
+  :commands (company-quickhelp-mode)
+  :hook (company-mode . company-quickhelp-mode)
   :init
   (setq company-quickhelp-use-propertized-text t)
   (setq company-quickhelp-delay 1)
-  :config
-  (company-quickhelp-mode 1))
+  )
 #+end_src
 * Text expansion
 :PROPERTIES:
@@ -189,7 +158,24 @@ I suspect that emacs's inbuilt skeleton can do what I need but there are more ex
   (yas-global-mode 1)
 
   ;; Add to company
-  (j|company-merge-backends)
+  (j-company-merge-backends)
+  ;; When yasnippet gets an empty prefix, (can happen in a grouped backend)
+  ;; don't trigger it if the prefix comes back with an empty string.
+  (advice-add 'company-yasnippet :around #'j-company-yasnippet)
+
+  (defun j-company-yasnippet (orig-fun &rest args)
+    "`company-mode' backend for `yasnippet'."
+    (interactive (list 'interactive))
+    (cl-case (nth 0 args)
+      (prefix
+       (and (bound-and-true-p yas-minor-mode)
+            (let ((company-symbol (company-grab-symbol)))
+              (if (string-equal company-symbol "")
+                  nil
+                company-symbol))))
+      (t
+       (apply orig-fun args))))
+
 
 
   :hydra (hydra-yasnippet (:color blue :hint nil)

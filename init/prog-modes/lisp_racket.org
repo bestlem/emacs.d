@@ -79,10 +79,12 @@ This is the minimal setup and does not need changing
     (racket-xp-mode))
 
   (defun my-all-racket-mode-hook ()
-	(set (make-local-variable 'company-backends)
-		 '((company-capf :with company-yasnippet)
-		   (company-dabbrev-code company-keywords company-files)
-		   company-dabbrev))
+	;; (set (make-local-variable 'company-backends)
+	;; 	 '((company-capf :with company-yasnippet)
+	;; 	   (company-dabbrev-code company-keywords company-files)
+	;; 	   company-dabbrev))
+
+	;; (setq-local company-transformers '(delete-dups))
 	;; '((company-capf :with company-yasnippet company-dabbrev-code)
 	;;   (;; company-capf
 	;;    company-math-symbols-unicode

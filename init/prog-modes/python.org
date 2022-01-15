@@ -10,7 +10,7 @@ Now I used python's python mode not the one in emacs. The latter has been improv
 
 The problem is conda uses pythonic which has a require 'python and so always loads the emacs one.
 And xonsh mode uses python.el as well
-But python.el sets tab-width to 8 for no reason - I found out using drtr-indent which does not load my hook. For an explanation see SO questions [[https://emacs.stackexchange.com/questions/17563/trouble-adjusting-tab-width][simple]] and [[https://stackoverflow.com/q/60123265/151019][more vitriolic]]
+But python.el sets tab-width to 8 for no reason - I found out using drtr-indent which does not load my hook. For an explanation see SO questions [[https://emacs.stackexchange.com/questions/17563/trouble-adjusting-tab-width][simple]] and [[https://stackoverflow.com/q/60123265/151019][more vitriolic]] But so does python-mode.el
 
 So it is a mess
 
@@ -23,6 +23,8 @@ First patch conda.el and xonsh to other python-mode then if OK leave otherwise l
 :END:
 Full dancing one from python
 Unfortunately conda and xonsh require the other so I hack them
+
+Other issue is for pure python in hard tab files - something sets the offset to 8 (xonsh-mode seems OK) So if I do more python work I need to sort this out. I have 3 things guessing dtrt which does guess 8, guess-style and python-mode But us python-mode sets tab-with to py-indent-offset then it is py-guess-indent-offset doing the wrong thing.
 
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_26CAE374-0A00-4CBD-A31D-D465AE7AD800
 #+begin_src emacs-lisp
@@ -48,8 +50,8 @@ Unfortunately conda and xonsh require the other so I hack them
     (guess-style-guess-all)
     ;; (mwb-prog-auto-fill-80)
     )
-  (setq-default python-indent 4)
-  (setq-default python-indent-offset 4)
+                                        ;(setq-default python-indent 4)
+                                        ;(setq-default python-indent-offset 4)
 
   (setq-default pdb-command-name "python3 -m pdb")
   (setq-default python-shell-interpreter "python3")
@@ -61,7 +63,7 @@ Unfortunately conda and xonsh require the other so I hack them
 :PROPERTIES:
 :ID:       org_mark_2020-11-24T21-22-09+00-00_mini12.local:5313A1ED-609C-49B1-9C6B-C6A1279D4873
 :END:
-One in emacs and has things built on it
+One in emacs and has things built on it but not enabled
 #+NAME: org_mark_2020-11-24T21-22-09+00-00_mini12.local_D8E951D0-C15C-4B10-AAC8-8DAF8382B214
 #+begin_src emacs-lisp
 (use-package python

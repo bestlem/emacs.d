@@ -63,6 +63,8 @@ Aquamacs seems to turn this off sometimes in customization so need to investigat
 The default is the ~ on end of file.
 All the google searches say put in one directory
 But the GNU manual gives the best - in a subdirectory of where you are - OK Tramp and other machines and NFS etc might be different. Changed as backup-walker should be able to find old and thus don't need to use finder etc.
+
+Now changed to one directory as I have found backup-walker
 #+NAME: org_mark_mini12.local_20210105T204218.521153
 #+begin_src emacs-lisp
 (setq backup-directory-alist
@@ -291,18 +293,20 @@ The problem is that we have regex
   (unless *aquamacs*
 	(setq recentf-save-file (mwb-user-emacs-file "var/recentf-save.el")))
   :config
-  (setq recentf-exclude '("COMMIT_MSG" "COMMIT_EDITMSG" "github.*txt$"
+  (setq recentf-exclude '("COMMIT_MSG"
+						  "COMMIT_EDITMSG"
+						  "github.*txt$"
 						  "^/var/folders\\.*"
 						  "COMMIT_EDITMSG\\'"
 						  ".recentf"
-						  "~$" ".~/"	; Emacs (and others) backup.
+						  "~$"
+						  ".~/"
 						  ".*-autoloads\\.el\\'"
-						  ;; "[/\\]emacs.d/elpa/"
-						  ".*png$" ".*cache$"
+						  ".*png$"
+						  ".*cache$"
 						  "SessionDesktop\\.el"
 						  "treemacs-persist"
-						  "^/Volumes/"
-						  ))
+						  "^/Volumes/"))
   (recentf-mode 1))
 #+end_src
 ** TODO Compressed files

@@ -66,7 +66,7 @@ Cover method for gnus to create new frame
 ;; (setcdr (assoc 'nndraft-directory
 ;;                (nnoo-variables 'nndraft))
 ;;         nndraft-directory)
-(setq gnus-dribble-directory "~/tmp/emacs_unwanted")
+(setq gnus-dribble-directory (expand-file-name "~/tmp/emacs_unwanted"))
 (setq gnus-kill-save-kill-file t)
 (setq gnus-server-browse-in-group-buffer t)
 (setq gnus-verbose 10)
@@ -155,6 +155,10 @@ Try reading email basic set up https://gnus.ding.narkive.com/8d6BbA6o/gnus-with-
 
 But not used. I really want a separate email for mail lists, I used to have gmail for this - but I do prefer separate usenames
 So this is not used
+
+However looking at old setup - they key is (setq nnimap-split-inbox   '("INBOX" ))
+Change that INBOX to something else then gnus rules only work on that mailbox
+
 #+NAME: org_mark_2020-10-03T14-51-52+01-00_mini12.local_09D28CC8-C58C-4D23-ABB3-AA0DC1F53B0F
 #+begin_src emacs-lisp :tangle no
 (add-to-list 'gnus-secondary-select-methods

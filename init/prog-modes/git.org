@@ -241,10 +241,17 @@ I think works with other vcs
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20201223T212427.542343
 :END:
-[[https://github.com/dgutov/diff-hl][diff-hl]] Does not need magit
+diff-hl seems the more all round as uses vc but then it puts a mess in fringe
+So switch to git-gutter but try git-gutter-fringe which id GUIO only as I might want linum mode (and I suspect hide show) in fringe
+** [[https://github.com/dgutov/diff-hl][diff-hl]]
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220203T125913.915203
+:END:
+Does not need magit
 #+NAME: org_mark_mini12.local_20201223T212427.538014
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package-elpa diff-hl
+  :defer 15
   :commands (diff-hl-next-hunk diff-hl-previous-hunk diff-hl-revert-hunk )
   :hook ((magit-post-refresh . diff-hl-magit-post-refresh)
 		 (magit-pre-refresh . diff-hl-magit-pre-refresh))
@@ -257,24 +264,29 @@ I think works with other vcs
   (global-diff-hl-mode)
   (diff-hl-flydiff-mode))
 #+end_src
-* Git gutter
+** Git gutter
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210823T133333.265928
 :END:
 Seems to have the same function as diff-hl but does it in realtime. This is commented in git-gutter readme. "diff-hl is similar tool based on vc."
-Also gets used by spaceline-all-the-icons but not in my elpa so not used.
+Also gets used by spaceline-all-the-icons.
+Try git-gutter-fringe but seems to clash [[https://github.com/emacsorphanage/git-gutter-fringe/issues/9][with flycheck]].
 #+NAME: org_mark_mini20.local_20210823T133333.243027
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 (use-package-elpa git-gutter
+  :defer 1
   :config
-  (global-git-gutter-mode +1)
+  (global-git-gutter-mode 1)
 
-  (set-face-background 'git-gutter:modified "purple") ;; background color
-  (set-face-foreground 'git-gutter:added "green")
-  (set-face-foreground 'git-gutter:deleted "red")
+  ;; (set-face-background 'git-gutter-fr:modified "purple")
+  ;; background color
+  ;; (set-face-foreground 'git-gutter:added "green")
+  ;; (set-face-foreground 'git-gutter:deleted "red")
+
+  ;; (setq git-gutter-fr:side 'right-fringe)
+
   :custom
-  (git-gutter:hide-gutter t)
-  )
+  (git-gutter:hide-gutter t))
 #+end_src
 * Smerge
 :PROPERTIES:

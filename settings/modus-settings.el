@@ -15,7 +15,6 @@
  '(modus-themes-lang-checkers
    '(straight-underline text-also))
  '(modus-themes-mixed-fonts t)
- '(modus-themes-mode-line 'borderless)
  '(modus-themes-org-blocks 'tinted-background)
  '(modus-themes-paren-match 'intense-bold)
  '(modus-themes-prompts

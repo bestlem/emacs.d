@@ -27,3 +27,20 @@
 	 (340 . "#0000c0")
 	 (360 . "#5317ac")))
  '(vc-annotate-very-old-color "#0046FF" t))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(git-timemachine-minibuffer-author-face
+   ((t
+	 (:inherit success))))
+ '(git-timemachine-minibuffer-detail-face
+   ((t
+	 (:inherit warning))))
+ '(transient-posframe
+   ((t
+	 (:inherit tooltip))))
+ '(transient-posframe-border
+   ((t
+	 (:background "#d0a070")))))

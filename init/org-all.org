@@ -1309,14 +1309,40 @@ as their origin document.
 However the ~org-babel-tangle-jump-to-org~ does not work with set to true as grettke does.
 #+NAME: org_mark_mini20.local_20220206T103323.222456
 #+BEGIN_SRC emacs-lisp
-(setq org-babel-tangle-use-relative-file-links 't)
+(setq org-babel-tangle-use-relative-file-links nil)
 #+END_SRC
 **** Post tangle
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220206T102457.695907
 :END:
-As grettke's code  updates the whole buffer and saves either add to the same function or make the save to be the last
+As grettke's code  updates the whole buffer and saves either add to the same function or make the save to be the last (I chose the latter
+***** Add header
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220206T120941.917997
+:END:
+From my [[https://emacs.stackexchange.com/q/50488/9874][SO question]] and based on the first part of [[https://emacs.stackexchange.com/a/55728/9874][this answer]]
+#+NAME: org_mark_mini20.local_20220206T120941.889585
+#+begin_src emacs-lisp
+(defun mwbinit-add-tangle-headers ()
+  (message "running in %s" (buffer-file-name))
+  (cond
+   ((f-ext? (buffer-file-name) "py")
+	(goto-char (point-min))
+	(insert "# This is a generated file do not edit\n"))
+   ((f-ext? (buffer-file-name) "el")
+	(goto-char (point-min))
+	(insert ";;; -*- lexical-binding: t -*-\n")
+	(insert ";;; This is a generated file do not edit\n"))
+   (t
+	nil))
+  (save-buffer))
 
+(add-hook 'org-babel-post-tangle-hook 'mwbinit-add-tangle-headers)
+#+end_src
+***** Indent and save
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220206T120941.916978
+:END:
 - Post tangle actions (grettke)
   - Indentation
     - At first glance this is surprising! The author should be responsible for
@@ -1326,15 +1352,14 @@ As grettke's code  updates the whole buffer and saves either add to the same fun
       reader format it to make any sense of it. That is a poor start to using
       the tangled files. So tangled files get indented.
 - Headers
-#+NAME: org_gcr_2017-05-12_mara_1946BB7D-D2A7-40F3-BF7D-1C22B887D1F6
+#+NAME: org_mark_mini20.local_20220206T121247.727128
 #+BEGIN_SRC emacs-lisp
-(defun help/org-babel-post-tangle-hook-fn ()
+(defun mwb/org-babel-post-tangle-hook-fn ()
   (interactive)
   (indent-region (point-min) (point-max) nil)
   (save-buffer))
-(add-hook 'org-babel-post-tangle-hook #'help/org-babel-post-tangle-hook-fn)
+(add-hook 'org-babel-post-tangle-hook #'mwb/org-babel-post-tangle-hook-fn 100)
 #+END_SRC
-
 ** Archive
 :PROPERTIES:
 :ID:       org_2020-12-08+00-00:C0A61800-DCE8-4C03-96B8-944F662CBA2A

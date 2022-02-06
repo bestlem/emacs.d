@@ -34,6 +34,9 @@
       - [[#tangling][Tangling]]
       - [[#evaluating][Evaluating]]
       - [[#weaving][Weaving]]
+    - [[#my-changes][My changes]]
+      - [[#tangling-1][Tangling]]
+      - [[#post-tangle][Post tangle]]
   - [[#archive][Archive]]
   - [[#main-mode-hydra][Main mode hydra]]
 - [[#setup-outside-use-package][Setup outside use-package]]
@@ -142,7 +145,7 @@ It is now for subtree todo refile and links
   <<org-mode-hydrae-refile>>
 
   <<org-grettke>>
-
+  <<org-mine>>
   :custom
   <<org-custom>>
 
@@ -666,31 +669,8 @@ never allow that. Its inconsistent with how Org-Mode works.
 (setq org-babel-use-quick-and-dirty-noweb-expansion nil)
 #+END_SRC
 
-Assume that tangled document always live within the same directory structure
-as their origin document.
 
-#+NAME: org_gcr_2017-05-12_mara_BFB80EA4-F37F-484C-9A7E-7B97166A2F49
-#+BEGIN_SRC emacs-lisp
-(setq org-babel-tangle-use-relative-file-links t)
-#+END_SRC
 
-- Post tangle actions
-  - Indentation
-    - At first glance this is surprising! The author should be responsible for
-      the indentation, right? Yes, that is right. But there is one exception:
-      using ~:noweb-ref~ source block concatenation. [[http://orgmode.org/manual/noweb_002dref.html][It]] is powerful and elegant.
-      But the source blocks are indented on their own line. It forces any
-      reader format it to make any sense of it. That is a poor start to using
-      the tangled files. So tangled files get indented.
-
-#+NAME: org_gcr_2017-05-12_mara_1946BB7D-D2A7-40F3-BF7D-1C22B887D1F6
-#+BEGIN_SRC emacs-lisp
-(defun help/org-babel-post-tangle-hook-fn ()
-  (interactive)
-  (indent-region (point-min) (point-max) nil)
-  (save-buffer))
-(add-hook 'org-babel-post-tangle-hook #'help/org-babel-post-tangle-hook-fn)
-#+END_SRC
 
 ***** comments
     :PROPERTIES:
@@ -1309,6 +1289,51 @@ results need to be visibly noticeably different for the reader by making them
 #+END_SRC
 
 Diagramming languages require =RESULTS= output for exporting.
+
+*** My changes
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220206T102457.700416
+:header-args: :noweb-ref org-mine :tangle no
+:END:
+
+**** Tangling
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220206T103323.254283
+:END:
+***** File links
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220206T103323.253442
+:END:
+Assume that tangled document always live within the same directory structure
+as their origin document.
+However the ~org-babel-tangle-jump-to-org~ does not work with set to true as grettke does.
+#+NAME: org_mark_mini20.local_20220206T103323.222456
+#+BEGIN_SRC emacs-lisp
+(setq org-babel-tangle-use-relative-file-links 't)
+#+END_SRC
+**** Post tangle
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220206T102457.695907
+:END:
+As grettke's code  updates the whole buffer and saves either add to the same function or make the save to be the last
+
+- Post tangle actions (grettke)
+  - Indentation
+    - At first glance this is surprising! The author should be responsible for
+      the indentation, right? Yes, that is right. But there is one exception:
+      using ~:noweb-ref~ source block concatenation. [[http://orgmode.org/manual/noweb_002dref.html][It]] is powerful and elegant.
+      But the source blocks are indented on their own line. It forces any
+      reader format it to make any sense of it. That is a poor start to using
+      the tangled files. So tangled files get indented.
+- Headers
+#+NAME: org_gcr_2017-05-12_mara_1946BB7D-D2A7-40F3-BF7D-1C22B887D1F6
+#+BEGIN_SRC emacs-lisp
+(defun help/org-babel-post-tangle-hook-fn ()
+  (interactive)
+  (indent-region (point-min) (point-max) nil)
+  (save-buffer))
+(add-hook 'org-babel-post-tangle-hook #'help/org-babel-post-tangle-hook-fn)
+#+END_SRC
 
 ** Archive
 :PROPERTIES:

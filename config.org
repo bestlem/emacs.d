@@ -24,7 +24,7 @@ However  for debugging init we don't want the backtrace
 ;;  setting to nil turns them off
 (add-hook 'after-init-hook
           (lambda () (setq debug-on-error nil)))
-(setq debug-on-error 't)
+;;(setq debug-on-error 't)
 ;(setq debug-on-error nil)
 ;(setq debug-on-quit nil)
 

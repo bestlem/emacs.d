@@ -69,7 +69,7 @@ This is the minimal setup and does not need changing
 			  ("<f8>"  . racket-xp-next-error))
   :mode (rx (seq ".racket" string-end))
   :init
-  (setq racket-program "/Applications/Racket v8.3/bin/racket"
+  (setq racket-program "/Applications/Racket v8.4/bin/racket"
         racket-images-inline t)
   (setq racket-repl-buffer-name-function
         #'racket-repl-buffer-name-project)
@@ -84,31 +84,30 @@ This is the minimal setup and does not need changing
 	;; 	   (company-dabbrev-code company-keywords company-files)
 	;; 	   company-dabbrev))
 
-	;; (setq-local company-transformers '(delete-dups))
-	;; '((company-capf :with company-yasnippet company-dabbrev-code)
-	;;   (;; company-capf
-	;;    company-math-symbols-unicode
-	;;    ;; company-dabbrev
-	;;    ;; company-yasnippet
-	;;    ))
-	;; )									; each looks for its own prefix
+	(setq-local company-transformers '(delete-dups)
+				company-backends '((company-capf :with company-yasnippet company-dabbrev-code)
+								   (;; company-capf
+									company-math-symbols-unicode
+									;; company-dabbrev
+									;; company-yasnippet
+									)))
 	(company-mode 1)
 	;;(smartparens-strict-mode 1)
-	;;(racket-unicode-input-method-enable)
+	;; (racket-unicode-input-method-enable)
 	(racket-mwb-smart-open-bracket-mode))
 
   (defun racket-mwb-send-to-repl ()
 	"Send region or last sexp"
 	(if (region-active-p)
 		(racket-send-region)
-      (racket-send-last-sexp))
+      (racket-send-last-sexp)))
 
-	;; (diminish 'racket-smart-open-bracket-mode)
-                                        ; This is broken as it used racket internals - maybe racket itself
-	;;(require 'eval-in-repl-racket)
-                                        ;(require 'racket-mwb-smart-open)
-	:hook (racket-mode . my-racket-mode-hook)
-	(racket-repl-mode . my-all-racket-mode-hook)))
+  ;;  This is broken as it used racket internals - maybe racket itself
+  ;;(require 'eval-in-repl-racket)
+
+  :hook
+  (racket-mode . my-racket-mode-hook)
+  (racket-repl-mode . my-all-racket-mode-hook))
 #+end_src
 * After load
 :PROPERTIES:

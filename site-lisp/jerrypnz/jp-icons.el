@@ -9,6 +9,7 @@
 ;;; Code:
 
 (require 'all-the-icons)
+(require 's)
 
 (defun with-faicon (icon str &optional height v-adjust)
   (s-concat (all-the-icons-faicon icon :v-adjust (or v-adjust 0) :height (or height 1)) " " str))

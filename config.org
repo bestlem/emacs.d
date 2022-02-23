@@ -24,7 +24,7 @@ However  for debugging init we don't want the backtrace
 ;;  setting to nil turns them off
 (add-hook 'after-init-hook
           (lambda () (setq debug-on-error nil)))
-;;(setq debug-on-error 't)
+(setq debug-on-error 't)
 ;(setq debug-on-error nil)
 ;(setq debug-on-quit nil)
 
@@ -32,14 +32,6 @@ However  for debugging init we don't want the backtrace
 ;; (require 'trace)
 ;; (untrace-all)
 ;; (trace-function-foreground 'iso-transl-define-keys)
-
-
-;; (with-eval-after-load 'iso-transl
-;;   (warning "loading \"iso-trransl\"")
-;;   (dolist (transl-char iso-transl-char-map)
-;;     (let ((vec (vconcat (car transl-char))))
-;;       (aset vec 0 (logior (aref vec 0) ?\A-\^@))
-;;       (define-key key-translation-map vec nil))))
      #+end_src
 **** Message
 :PROPERTIES:
@@ -511,7 +503,15 @@ Convert a set of function calls to an RE. (it is part of emacs.
 #+BEGIN_SRC emacs-lisp
 (use-package rx)
 #+END_SRC
-
+***** F
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220223T081525.650258
+:END:
+File handling - seem to use it and after a few years I managed to get it not loaded so had to do explicitly
+#+NAME: org_mark_mini20.local_20220223T081525.623390
+#+begin_src emacs-lisp
+(use-package-elpa f)
+#+end_src
 **** Elisp code
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:8A9FE4DD-E2ED-4457-B819-F32FF65A28A9

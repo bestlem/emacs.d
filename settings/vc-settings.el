@@ -5,6 +5,8 @@
  ;; If there is more than one, they won't work right.
  '(magit-log-margin
    '(t "%Y-%m-%d %H:%M " magit-log-margin-width t 18))
+ '(magit-status-margin
+   '(t age magit-log-margin-width nil 18))
  '(vc-annotate-background nil)
  '(vc-annotate-background-mode nil)
  '(vc-annotate-color-map
@@ -43,4 +45,4 @@
 	 (:inherit tooltip))))
  '(transient-posframe-border
    ((t
-	 (:background "#d0a070")))))
+	 (:background "Firebrick")))))

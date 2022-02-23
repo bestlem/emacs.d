@@ -11,6 +11,5 @@
  '(py-imenu-show-method-args-p t)
  '(py-smart-indentation t)
  '(py-split-window-on-execute t)
- '(py-split-windows-on-execute-function
-   (quote split-window-horizontally))
+ '(py-split-windows-on-execute-function 'split-window-horizontally)
  '(py-tab-shifts-region-p t))

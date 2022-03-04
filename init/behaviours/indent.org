@@ -37,7 +37,7 @@ dtrt-indent-mode does not set hard tabs for python - which I need so hack guess-
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210526T204810.692856
 :END:
-Probably the oldest cod - yes tab-with should be a calculation but I did not know how in 1994
+Probably the oldest code - yes tab-with should be a calculation but I did not know how in 1994
 #+NAME: org_mark_mini20.local_20210526T204810.689837
 #+begin_src emacs-lisp
 (setq-default tab-width 4)
@@ -93,8 +93,8 @@ Don't use the defaults look at the file
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210625T090940.640769
 :END:
-
-Indent as you type. Only for emacs lisp or racket at the moment. But that failed so back to global - If want to exclude then set (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+Indent as you type.
+If want to exclude then set (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
  https://github.com/Malabarba/aggressive-indent-mode
  Setup from centuar
 

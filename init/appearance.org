@@ -199,15 +199,12 @@ I think I now want mainly one window and have splits but tabs are useful.
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:B1304247-BC2C-4292-808D-F38E6D972F3F
 :END:
  It is an aquamacs setting see [[https://www.emacswiki.org/emacs/AquamacsFAQ#toc19][FAQ]]
- #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_48EF73E1-936C-4BEA-810D-AC96FDD92B40
- #+begin_src emacs-lisp
+#+NAME: org_mark_mini20.local_20220227T105918.508004
+#+begin_src emacs-lisp
 (when *aquamacs*
   (one-buffer-one-frame-mode -1)
-  (setq  special-display-regexps nil))
- #+end_src
-
-
-
+  (setq special-display-regexps nil))
+#+end_src
 ** TODO Context help
 :PROPERTIES:
 :ID:       org_mark_2020-10-09T10-33-48+01-00_mini12.local:4FC3755A-A7F5-45B0-BD0D-8DCBFEC5D4CC
@@ -331,7 +328,7 @@ For my setup header-line needs to inherit from mode-line
 :ID:       org_2020-12-06+00-00:2DE8AEF4-0339-4B2E-885A-627140CF1894
 :END:
 
-The new way seems to be the only supported one but one theme can mess up another e.g. changing background incompletely. SO lets have choice of general and also do the documented modus only way
+The new way seems to be the only supported one but one theme can mess up another e.g. changing background incompletely. So lets have choice of general and also do the documented modus only way
 *** General
 :PROPERTIES:
 :ID:       org_2020-12-06+00-00:1E62F0F5-3E08-4D41-906B-B6807657A157

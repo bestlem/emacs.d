@@ -22,8 +22,7 @@ However  for debugging init we don't want the backtrace
 #+NAME: org_mark_mini20.local_20210511T155720.262624
 #+begin_src emacs-lisp
 ;;  setting to nil turns them off
-(add-hook 'after-init-hook
-          (lambda () (setq debug-on-error nil)))
+;; see init-after-hook for normal setup
 (setq debug-on-error 't)
 ;(setq debug-on-error nil)
 ;(setq debug-on-quit nil)
@@ -37,9 +36,9 @@ However  for debugging init we don't want the backtrace
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:3247611A-A6FB-40F6-9BB1-7B0772C213DE
 :END:
-	 Show message with timestamp - commented out
-     #+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_6AF865AB-787D-4082-BE2B-6702BA26B4E2
-     #+begin_src emacs-lisp
+Show message with timestamp - commented out
+#+NAME: org_mark_mini20.local_20220313T215512.598628
+#+begin_src emacs-lisp
 (defvar mwb-message-offset (float-time) "Time of last message")
 
 (defun my-message-with-timestamp (old-func fmt-string &rest args)
@@ -86,22 +85,11 @@ However  for debugging init we don't want the backtrace
 (add-hook 'after-init-hook 'mwb-message-remove-timediff)
 
 ;; (message "test")
-      #+end_src
+#+end_src
 ** Various constants
 :PROPERTIES:
 :ID:       org_mark_2020-02-20T21-36-43+00-00_mini12.local:EC43B9AE-44B4-4FBB-9E63-AC26BB45592E
 :END:
-
-*** TODO Memory
-:PROPERTIES:
-:ID:       org_mark_2020-09-29T11-53-58+01-00_mini12.local:9D47A2C9-7038-4697-BFA4-92B1DA6CF5B1
-:END:
-Fiddling in org-all - perhaps best to remove
-#+NAME: org_mark_2020-09-29T11-53-58+01-00_mini12.local_7D9953DD-3F51-4877-A56E-8FC6AB539FF7
-#+begin_src emacs-lisp
-(setq mwb/gc-cons-threshold 800000)
-#+end_src
-
 *** Emacs versions
 :PROPERTIES:
 :ID:       org_mark_2020-09-29T11-53-58+01-00_mini12.local:433ED4F4-38B0-44D9-8067-0EF36DB709FB

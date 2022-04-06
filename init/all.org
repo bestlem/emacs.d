@@ -16,17 +16,19 @@ We need the environment set up before we load files. Appearance and keys are lat
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:9D8E9437-08ED-4247-BFC3-9B5BEE178468
 :END:
-Although see starter kit where they run after init.
-  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_6BFB6DB1-D7D7-4A49-895F-C5D06CACED2F
-  #+begin_src emacs-lisp
-(add-hook 'after-init-hook
-		  `(lambda ()
-			 (setq file-name-handler-alist file-name-handler-alist-old
-				   gc-cons-threshold mwb/gc-cons-threshold
-				   gc-cons-percentage 0.1)
-			 (garbage-collect)
-			 (message "Emacs init-time %s" (emacs-init-time))) t)
-  #+end_src
+Run this immediately after init to set a more reasonable setup
+Memory is now in gcmh
+#+NAME: org_mark_mini20.local_20220313T215313.571669
+#+begin_src emacs-lisp
+(defun hook-after-init ()
+  (setq debug-on-error nil)
+  (setq debug-on-quit nil)
+  (setq file-name-handler-alist file-name-handler-alist-old
+		gc-cons-percentage 0.1)
+  (garbage-collect)
+  (message "Emacs init-time %s" (emacs-init-time)))
+(add-hook 'after-init-hook #'hook-after-init)
+#+end_src
 ** Setting variables with a check on type
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:86E6A7B5-5C85-4429-AE49-FA5AE7AEF73D
@@ -172,7 +174,6 @@ Includes structured data and now anything that does not have dependency order
   (mwb-init-load "init/keys")
   #+end_src
 
-
 * Appearance
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:4E2542DC-19A8-480A-A0B2-EF1C192A77FB
@@ -274,11 +275,12 @@ I want two windows in a frame and treemacs
 Emacs 27 seems to have a timing issue pop to buffer seems not to see the spare window unless after treemacs
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_60953FEE-7E07-48DE-AD1C-66D90DAE2D5A
 #+begin_src emacs-lisp
+(defun init-window-setup ()
+  (split-window-horizontally)
+  (treemacs)
+  (pop-to-buffer "*Messages*"))
+
 (add-hook 'window-setup-hook
-          '(lambda ()
-             (split-window-horizontally)
-             (treemacs)
-             (pop-to-buffer "*Messages*")
-             ))
+          #'init-window-setup)
 #+end_src
 

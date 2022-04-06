@@ -42,5 +42,12 @@
 * Odds
 ** py-bash-completion
  - path :: ~/src/python/py-bash-completion
-** jellyfin
+* Swift
+** JellyFin Swift
+ - path :: ~/src/swift/JellyfinSwiftPlayer
+** jellyfin server
  - path :: ~/src/ThirdParty/jellyfin
+** 2048
+ - path :: ~/src/Swift/2048 related
+** SwiftUITutorial-Landmarks
+ - path :: ~/src/Swift/SwiftUITutorial-Landmarks

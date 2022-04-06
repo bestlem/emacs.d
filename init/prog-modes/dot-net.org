@@ -1,0 +1,19 @@
+#+TITLE: . Net framework setup
+#+AUTHOR: Mark Bestley
+#+DATE:   13 Mar 2022
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+STARTUP: overview
+* Languages
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220313T213937.917640
+:END:
+** F#
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220313T213937.914885
+:END:
+#+NAME: org_mark_mini20.local_20220313T213937.907540
+#+begin_src emacs-lisp
+(use-package-elpa fsharp-mode
+  :defer t
+  )
+#+end_src

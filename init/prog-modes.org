@@ -455,19 +455,6 @@ Now I have no idea if it works
 
 ;; (setq auto-mode-alist (cons '("\\.sql$" . sql-mode) auto-mode-alist))
 #+end_src
-** C
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:E0F36384-0C3B-4A4A-A24C-2E644372D6C6
-:END:
-This is where I have really lost history there used to be all sorts of indenation rules.
-Look at jojojames init for a complete one - but no lsp/completion.
-#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_5983974D-B148-47DA-9331-169894A3CCA5
-#+begin_src emacs-lisp
-   ;; objective C
-   (add-to-list 'auto-mode-alist '("\\.h$" . objc-mode) )
-   (add-to-list 'auto-mode-alist '("\\.m$" . objc-mode))
-   (add-to-list 'auto-mode-alist '("\\.mm$" . objc-mode))
-#+end_src
 ** Perl
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:FD5A12CE-2124-4469-A206-D1C16C2420F1

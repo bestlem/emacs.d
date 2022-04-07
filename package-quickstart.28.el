@@ -8829,6 +8829,17 @@ Turn on pseudo-structural editing of Lisp code." t nil)
 
 
 )
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/packed-20220402.1638/packed-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/packed-20220402.1638/packed-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/packed-20220402.1638/packed-autoloads.el") (car load-path))))
+
+
+
+(register-definition-prefixes "packed" '("packed-"))
+
+
+)
 (let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/outorg-20190720.2002/outorg-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/outorg-20190720.2002/outorg-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -13562,6 +13573,157 @@ it is disabled.
 
 
 )
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/auto-compile-20220402.1035/auto-compile-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/auto-compile-20220402.1035/auto-compile-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/auto-compile-20220402.1035/auto-compile-autoloads.el") (car load-path))))
+
+
+
+(autoload 'auto-compile-mode "auto-compile" "\
+Compile Emacs Lisp source files after the visiting buffers are saved.
+
+This is a minor mode.  If called interactively, toggle the
+`Auto-Compile mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `auto-compile-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+After a buffer containing Emacs Lisp code is saved to its source
+file update the respective byte code file.  If the latter does
+not exist do nothing.  Therefore to disable automatic compilation
+remove the byte code file.  See command `toggle-auto-compile' for
+a convenient way to do so.
+
+This mode should be enabled globally, using it's globalized
+variant `auto-compile-on-save-mode'.  Also see the related
+`auto-compile-on-load-mode'.
+
+\(fn &optional ARG)" t nil)
+
+(put 'auto-compile-on-save-mode 'globalized-minor-mode t)
+
+(defvar auto-compile-on-save-mode nil "\
+Non-nil if Auto-Compile-On-Save mode is enabled.
+See the `auto-compile-on-save-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `auto-compile-on-save-mode'.")
+
+(custom-autoload 'auto-compile-on-save-mode "auto-compile" nil)
+
+(autoload 'auto-compile-on-save-mode "auto-compile" "\
+Toggle Auto-Compile mode in all buffers.
+With prefix ARG, enable Auto-Compile-On-Save mode if ARG is positive;
+otherwise, disable it.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+Auto-Compile mode is enabled in all buffers where
+`turn-on-auto-compile-mode' would do it.
+
+See `auto-compile-mode' for more information on Auto-Compile mode.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'toggle-auto-compile "auto-compile" "\
+Toggle automatic compilation of an Emacs Lisp source file or files.
+
+Read a file or directory name from the minibuffer defaulting to
+the visited Emacs Lisp source file or `default-directory' if no
+such file is being visited in the current buffer.
+
+If the user selects a file then automatic compilation of only
+that file is toggled.  Since both `auto-compile-on-save' and
+`auto-compile-on-save' only ever _recompile_ byte code files,
+toggling automatic compilation is done simply by creating or
+removing the respective byte code file.
+
+If the user selects a directory then automatic compilation for
+multiple files is toggled as follows:
+
+* With a positive prefix argument always compile source files;
+  with a negative prefix argument always remove byte code files.
+
+* Otherwise the existence or absence of the byte code file of
+  the source file that was current when this command was invoked
+  determines whether byte code files should be created or removed.
+
+* If no Emacs Lisp source file is being visited in the buffer
+  that was current when the command was invoked ask the user what
+  to do.
+
+* When _removing_ byte code files then all byte code files are
+  removed.  If `auto-compile-deletes-stray-dest' is non-nil this
+  even includes byte code files for which no source file exists.
+
+* When _creating_ byte code files only do so for source files
+  that are actual libraries.  Source files that provide the
+  correct feature are considered to be libraries; see
+  `packed-library-p'.
+
+* Note that non-libraries can still be automatically compiled,
+  you just cannot _recursively_ turn on automatic compilation
+  using this command.
+
+* When `auto-compile-toggle-recompiles' is non-nil recompile all
+  affected source files even when the respective source files are
+  up-to-date.  Do so even for non-library source files.
+
+* Only enter subdirectories for which `packed-ignore-directory-p'
+  returns nil; i.e. don't enter hidden directories or directories
+  containing a file named \".nosearch\".
+
+\(fn FILE ACTION)" t nil)
+
+(defvar auto-compile-on-load-mode nil "\
+Non-nil if Auto-Compile-On-Load mode is enabled.
+See the `auto-compile-on-load-mode' command
+for a description of this minor mode.")
+
+(custom-autoload 'auto-compile-on-load-mode "auto-compile" nil)
+
+(autoload 'auto-compile-on-load-mode "auto-compile" "\
+Before loading a library recompile it if it needs recompilation.
+
+This is a minor mode.  If called interactively, toggle the
+`Auto-Compile-On-Load mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='auto-compile-on-load-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+A library needs to be recompiled if the source file is newer than
+it's byte-compile destination.  Without this advice the outdated
+byte code file would be loaded instead.
+
+Also see the related `auto-compile-on-save-mode'.
+
+\(fn &optional ARG)" t nil)
+
+(register-definition-prefixes "auto-compile" '("auto-compile-" "byte-compile-log-warning" "load" "mode-line-" "require" "save-buffers-kill-" "turn-on-auto-compile-mode"))
+
+
+)
 (let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/amx-20210305.118/amx-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/amx-20210305.118/amx-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -13748,7 +13910,7 @@ mode.
 )
 (setq package-activated-list
 	  (append
-	   '(zoutline yasnippet yaml-mode xterm-color xr ws-butler with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit-section magit treemacs-magit treemacs-icons-dired transient-posframe toc-org ivy swiper swift-mode f spinner markdown-mode lsp-mode swift-helpful all-the-icons powerline spaceline memoize spaceline-all-the-icons sml-mode smartparens prescient selectrum selectrum-prescient rainbow-delimiters racket-mode python-mode pretty-hydra pos-tip popup epl pkg-info persistent-scratch paredit outorg outshine org-bullets kv esxml nov mwim modus-themes minions mini-frame math-symbol-lists marginalia makey major-mode-hydra macrostep list-utils iedit lispy lisp-extra-font-lock keyfreq json-snatcher hierarchy json-navigator json-mode ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine git-messenger git-gutter gcmh fsharp-mode free-keys flycheck flycheck-swift fish-mode expand-region eval-in-repl eros clang-format emr embark consult embark-consult elmacro dtrt-indent dockerfile-mode discover-my-major dired-hacks-utils dired-subtree diminish deadgrep company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 cmake-mode cask-mode bison-mode beacon amx all-the-icons-completion aggressive-indent)
+	   '(zoutline yasnippet yaml-mode xterm-color xr ws-butler with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit-section magit treemacs-magit treemacs-icons-dired transient-posframe toc-org ivy swiper swift-mode f spinner markdown-mode lsp-mode swift-helpful all-the-icons powerline spaceline memoize spaceline-all-the-icons sml-mode smartparens prescient selectrum selectrum-prescient rainbow-delimiters racket-mode python-mode pretty-hydra pos-tip popup epl pkg-info persistent-scratch paredit packed outorg outshine org-bullets kv esxml nov mwim modus-themes minions mini-frame math-symbol-lists marginalia makey major-mode-hydra macrostep list-utils iedit lispy lisp-extra-font-lock keyfreq json-snatcher hierarchy json-navigator json-mode ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine git-messenger git-gutter gcmh fsharp-mode free-keys flycheck flycheck-swift fish-mode expand-region eval-in-repl eros clang-format emr embark consult embark-consult elmacro dtrt-indent dockerfile-mode discover-my-major dired-hacks-utils dired-subtree diminish deadgrep company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 cmake-mode cask-mode bison-mode beacon auto-compile amx all-the-icons-completion aggressive-indent)
 	   package-activated-list))
 (progn
   (require 'info)

@@ -4,7 +4,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(flycheck-swift
+   '(calibredb
+	 flycheck-swift
 	 swift-helpful
 	 swift-mode
 	 fsharp-mode

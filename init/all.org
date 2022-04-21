@@ -134,25 +134,6 @@ These provide some tools for all the other modes so can't be in the modes sub di
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20201223T175853.562586
 :END:
-** Text modes
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:5275BBAD-CBB4-4E9E-9FD1-C79EBBF642B7
-:END:
-*** Epub reading
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:E3F69F7F-65FF-44C2-AA1E-2F74168D8731
-:END:
-	   #+begin_src emacs-lisp
-	   ;; Epub reader
-	   (use-package nov
-		 :ensure t
-		 :mode ("\\.epub\\'" . nov-mode)
-		 :preface
-		 (defun my-nov-setup ()
-		   (visual-line-mode 1)
-		   (face-remap-add-relative 'variable-pitch :family "Times New Roman" :height 1.5)
-		   :hook (nov-mode . my-nov-setup)))
-	   #+end_src
 ** Programming modes
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:3C0D8B60-3C14-4F89-84AB-6D54D08C2C36

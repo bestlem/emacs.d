@@ -7710,6 +7710,17 @@ it is disabled.
 
 
 )
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/request-20211107.1907/request-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/request-20211107.1907/request-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/request-20211107.1907/request-autoloads.el") (car load-path))))
+
+
+
+(register-definition-prefixes "request" '("request-"))
+
+
+)
 (let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/rainbow-delimiters-20210515.1254/rainbow-delimiters-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/rainbow-delimiters-20210515.1254/rainbow-delimiters-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -13493,6 +13504,90 @@ for more details on the DSL accepted by Cask.
 
 
 )
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/calibredb-20220305.1621/calibredb-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/calibredb-20220305.1621/calibredb-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/calibredb-20220305.1621/calibredb-autoloads.el") (car load-path))))
+
+
+
+(autoload 'calibredb "calibredb" "\
+Enter calibre Search Buffer." t nil)
+
+
+
+(register-definition-prefixes "calibredb-annotation" '("calibredb-"))
+
+
+
+(register-definition-prefixes "calibredb-core" '("calibredb-"))
+
+
+
+(register-definition-prefixes "calibredb-helm" '("calibredb-"))
+
+
+
+(autoload 'calibredb-find-counsel "calibredb-ivy" "\
+Use counsel to list all ebooks details." t nil)
+
+(register-definition-prefixes "calibredb-ivy" '("calibredb-"))
+
+
+
+(autoload 'calibredb-switch-library "calibredb-library" "\
+Swich Calibre Library." t nil)
+
+(autoload 'calibredb-library-list "calibredb-library" "\
+Switch library from variable `calibredb-library-alist'.
+If under *calibredb-search* buffer, it will auto refresh after
+selecting the new item." t nil)
+
+(register-definition-prefixes "calibredb-library" '("calibredb-"))
+
+
+
+(register-definition-prefixes "calibredb-opds" '("calibredb-opds-"))
+
+
+
+(autoload 'calibredb-org-link-view "calibredb-org" "\
+Follow calibredb org links by ID.
+
+\(fn ID _)" nil nil)
+
+(autoload 'calibredb-org-complete-link "calibredb-org" "\
+Define completion for Org \"calibredb:\" links.
+The optional PREFIX argument is ignored.
+Please notice: `calibredb-id-width' must >= the real id lenth.
+
+\(fn &optional PREFIX)" nil nil)
+
+(register-definition-prefixes "calibredb-org" '("calibredb-org-link-copy"))
+
+
+
+(register-definition-prefixes "calibredb-search" '("calibredb-"))
+
+
+
+(register-definition-prefixes "calibredb-show" '("calibredb-"))
+
+
+
+(register-definition-prefixes "calibredb-transient" '("calibredb-"))
+
+
+
+(autoload 'calibredb-list "calibredb-utils" "\
+Generate an org buffer which contain all ebooks' cover image, title and the file link." t nil)
+
+(register-definition-prefixes "calibredb-utils" '("calibredb-"))
+
+
+
+
+)
 (let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/bison-mode-20210527.717/bison-mode-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/bison-mode-20210527.717/bison-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -13910,7 +14005,7 @@ mode.
 )
 (setq package-activated-list
 	  (append
-	   '(zoutline yasnippet yaml-mode xterm-color xr ws-butler with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit-section magit treemacs-magit treemacs-icons-dired transient-posframe toc-org ivy swiper swift-mode f spinner markdown-mode lsp-mode swift-helpful all-the-icons powerline spaceline memoize spaceline-all-the-icons sml-mode smartparens prescient selectrum selectrum-prescient rainbow-delimiters racket-mode python-mode pretty-hydra pos-tip popup epl pkg-info persistent-scratch paredit packed outorg outshine org-bullets kv esxml nov mwim modus-themes minions mini-frame math-symbol-lists marginalia makey major-mode-hydra macrostep list-utils iedit lispy lisp-extra-font-lock keyfreq json-snatcher hierarchy json-navigator json-mode ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine git-messenger git-gutter gcmh fsharp-mode free-keys flycheck flycheck-swift fish-mode expand-region eval-in-repl eros clang-format emr embark consult embark-consult elmacro dtrt-indent dockerfile-mode discover-my-major dired-hacks-utils dired-subtree diminish deadgrep company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 cmake-mode cask-mode bison-mode beacon auto-compile amx all-the-icons-completion aggressive-indent)
+	   '(zoutline yasnippet yaml-mode xterm-color xr ws-butler with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit-section magit treemacs-magit treemacs-icons-dired transient-posframe toc-org ivy swiper swift-mode f spinner markdown-mode lsp-mode swift-helpful all-the-icons powerline spaceline memoize spaceline-all-the-icons sml-mode smartparens prescient selectrum selectrum-prescient request rainbow-delimiters racket-mode python-mode pretty-hydra pos-tip popup epl pkg-info persistent-scratch paredit packed outorg outshine org-bullets kv esxml nov mwim modus-themes minions mini-frame math-symbol-lists marginalia makey major-mode-hydra macrostep list-utils iedit lispy lisp-extra-font-lock keyfreq json-snatcher hierarchy json-navigator json-mode ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine git-messenger git-gutter gcmh fsharp-mode free-keys flycheck flycheck-swift fish-mode expand-region eval-in-repl eros clang-format emr embark consult embark-consult elmacro dtrt-indent dockerfile-mode discover-my-major dired-hacks-utils dired-subtree diminish deadgrep company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 cmake-mode cask-mode calibredb bison-mode beacon auto-compile amx all-the-icons-completion aggressive-indent)
 	   package-activated-list))
 (progn
   (require 'info)

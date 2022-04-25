@@ -135,7 +135,7 @@ It is dealing with bashism - see makem.sh for some.
       (my-shell "/bin/zsh")
       ;; (my-shell "/bin/dash")
       )
-  (setq explicit-shell-file-name "/Users/mark/miniconda3/envs/xonsh/bin/xonsh")
+  (setq explicit-qshell-file-name "/opt/local/bin/xonsh")
   (setq exec-path-from-shell-shell-name my-shell)
   (setq shell-file-name my-shell))
 #+end_src

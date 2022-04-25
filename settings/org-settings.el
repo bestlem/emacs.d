@@ -34,5 +34,5 @@
  '(org-src-ask-before-returning-to-edit-buffer nil)
  '(org-src-window-setup 'current-window)
  '(org-todo-keywords
-   '((sequence "TODO" "DONE" "LEAVE(@)")))
+   '((sequence "TODO" "DONE(!)" "LEAVE(@)")))
  '(org-yank-adjusted-subtrees t))

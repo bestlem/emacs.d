@@ -92,7 +92,22 @@
   "Save buffer to a file, selecting file by dialog.
 Displays sheet.  File is saved once user has dismissed sheet."
   (interactive)
-  (ns-popup-save-panel "Select File to Save Buffer" default-directory (if buffer-file-name (file-name-nondirectory buffer-file-name) "Untitled")))
+  ;;  from ns-write-file-using-panel
+  (let (ns-output-file)
+    ;; Prompt dir defaultName isLoad initial.
+    (setq ns-output-file (ns-read-file-name
+			  "Save As"
+			  default-directory
+			  nil
+			  (cond (buffer-file-name
+	                         (file-name-nondirectory buffer-file-name))
+                                (filename filename)
+	                        (t
+	                         nil))))
+    (message "Saving %s" ns-output-file)
+    (if ns-output-file (write-file ns-output-file)))
+  ;; (ns-popup-save-panel "Select File to Save Buffer" default-directory (if buffer-file-name (file-name-nondirectory buffer-file-name) "Untitled"))
+  )
 
 
 ;; when saving a file, set its creator code

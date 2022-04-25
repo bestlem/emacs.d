@@ -44,7 +44,6 @@ The best inits I found for this were [[http://pragmaticemacs.com/emacs/auto-save
  delete-old-versions "keep them all"   ; t is don't ask about deleting old versions - otyher non nil is don't delete
  version-control t       ; number backups
  vc-make-backup-files t) ; backup version controlled files
-
 #+end_src
 
 ** Do the backups
@@ -54,7 +53,7 @@ The best inits I found for this were [[http://pragmaticemacs.com/emacs/auto-save
 Aquamacs seems to turn this off sometimes in customization so need to investigate more
  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_8D7B76E7-DCB4-46D7-8DE7-1063A4FF19D3
  #+begin_src emacs-lisp
- (setq make-backup-files t)
+(setq make-backup-files t)
  #+end_src
 ** Where
 :PROPERTIES:
@@ -82,7 +81,7 @@ Now changed to one directory as I have found backup-walker
 ;; (setq tramp-backup-directory-alist `((,(rx (zero-or-more anything))
 ;;                                        . my/tramp-backup-directory)))
 #+end_src
-** TODO Backup on save
+** Backup on save
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:EBBF14AB-888E-4043-8ADB-8DE11ACDBC46
 :END:
@@ -90,20 +89,18 @@ Emacs is odd backups are started when loaded in a session and then not again (I 
 
 All the logs are very clever but what I want is the version number to increase so just see [[https://stackoverflow.com/a/9452080/151019][this SO answer]] I have modified it so that only saves on mac save ie when you manually save - possibly not good on emacs exit.
 
- Note need to change
  Filters are interesting for other reasons
-
-
- #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_2B3B6826-1AF6-4ABC-B4F7-4AEE52B62E50
- #+begin_src emacs-lisp
- (defun mwb/mac-key-save-buffer-force-backup ()
-   (interactive)
-   "Save buffer. If needed, select file by dialog"
-   (if buffer-file-name
-	   (save-buffer 16)
-     ;; This is not defined in non aquamacs
-	 (mac-key-save-file-as)))
- #+end_src
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_2B3B6826-1AF6-4ABC-B4F7-4AEE52B62E50
+#+begin_src emacs-lisp
+(require 'mac-extra-functions) ; From Aquamacs
+(defun mwb/mac-key-save-buffer-force-backup ()
+  (interactive)
+  "Save buffer. If needed, select file by dialog"
+  (if buffer-file-name
+	  (save-buffer 16)
+    ;; This is not defined in non aquamacs
+	(mac-key-save-file-as)))
+#+end_src
 *** TODO save special buffers
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:0A3506D6-DE37-44F4-A990-C06C1D567023
@@ -186,8 +183,6 @@ Also odds/main.org
       auto-save-list-file-prefix  (expand-file-name "~/.local/emacs/auto-save-list/.saves-" )
       auto-save-timeout 2
       auto-save-default 't)
-
-
 #+end_src
 *** Turn off auto-save and backups
 :PROPERTIES:
@@ -332,7 +327,6 @@ From original not certain how used now.
 ;; 	  (cons '("\\.gz$" . uncompress-while-visiting) auto-mode-alist))
 ;; (setq auto-mode-alist
 ;;       (cons '("\\.tgz$" . uncompress-while-visiting) auto-mode-alist))
-
 #+end_src
 
 * Project management
@@ -408,7 +402,43 @@ So take from projectile
   (add-to-list 'projectile-globally-ignored-directories "compiled")
 
   (projectile-mode 1)
-  <<projectile-hydra>>
+  (defhydra hydra-projectile-other-window (:color teal)
+    "projectile-other-window"
+    ("f"  projectile-find-file-other-window        "file")
+    ("g"  projectile-find-file-dwim-other-window   "file dwim")
+    ("d"  projectile-find-dir-other-window         "dir")
+    ("b"  projectile-switch-to-buffer-other-window "buffer")
+    ("q"  nil                                      "cancel" :color blue))
+
+  (defhydra hydra-projectile ( :color teal)
+    "
+  	  PROJECTILE: %(projectile-project-root)
+
+   Search: [_a_] deadgrep  [_A_] counsel-rg
+   Find:   [_b_] buffer    [_d_] dir        [_f_] file
+   Look:   [_i_] ibuffer   [_j_] imenu
+
+   Fun:    [_o_] other win [_l_] lsp        [_K_] cleanup
+   "
+    ("a"   deadgrep "deadgrep")
+    ("A"   counsel-rg "counsel rg")
+    ("b"   projectile-switch-to-buffer "buf")
+    ("d"   projectile-find-dir "dir")
+    ("f"   projectile-find-file "file")
+    ("i"   projectile-ibuffer "ibuf")
+    ("j"   counsel-imenu "imenu")
+    ("K"   projectile-kill-buffers)
+    ("l"   hydra-lsp/body)
+    ("P"   projectile-switch-project)
+    ("p"   projectile-switch-project)
+    ("r"   projectile-recentf "recentf")
+    ("x"   projectile-remove-known-project)
+    ("X"   projectile-cleanup-known-projects)
+    ("z"   projectile-cache-current-file)
+    ("o"   hydra-projectile-other-window/body "other")
+    ("q"   nil "cancel" :color blue))
+
+  (bind-key "H-p" 'hydra-projectile/body)
   (projectile-cleanup-known-projects))
 #+end_src
 *** File saving
@@ -442,16 +472,16 @@ projectile-save-project-buffers is nice but save-buffer does not make a backup. 
  I really do not want all but for ease just do it from [[https://github.com/jojojames/matcha][Matcha]] but that is too much as is the Hydra wiki So lets try from [[http://doc.rix.si/cce/cce-code-core.html][Ryan Rix]], also he uses rg (bbatsov has a complex one as well)
  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_01B9A5FA-87F9-4520-A7A0-E0C04BA45AD9
  #+begin_src emacs-lisp :noweb-ref projectile-hydra
- (defhydra hydra-projectile-other-window (:color teal)
-   "projectile-other-window"
-   ("f"  projectile-find-file-other-window        "file")
-   ("g"  projectile-find-file-dwim-other-window   "file dwim")
-   ("d"  projectile-find-dir-other-window         "dir")
-   ("b"  projectile-switch-to-buffer-other-window "buffer")
-   ("q"  nil                                      "cancel" :color blue))
+(defhydra hydra-projectile-other-window (:color teal)
+  "projectile-other-window"
+  ("f"  projectile-find-file-other-window        "file")
+  ("g"  projectile-find-file-dwim-other-window   "file dwim")
+  ("d"  projectile-find-dir-other-window         "dir")
+  ("b"  projectile-switch-to-buffer-other-window "buffer")
+  ("q"  nil                                      "cancel" :color blue))
 
- (defhydra hydra-projectile ( :color teal)
-   "
+(defhydra hydra-projectile ( :color teal)
+  "
 	  PROJECTILE: %(projectile-project-root)
 
  Search: [_a_] deadgrep  [_A_] counsel-rg
@@ -460,23 +490,23 @@ projectile-save-project-buffers is nice but save-buffer does not make a backup. 
 
  Fun:    [_o_] other win [_l_] lsp        [_K_] cleanup
  "
-   ("a"   deadgrep "deadgrep")
-   ("A"   counsel-rg "counsel rg")
-   ("b"   projectile-switch-to-buffer "buf")
-   ("d"   projectile-find-dir "dir")
-   ("f"   projectile-find-file "file")
-   ("i"   projectile-ibuffer "ibuf")
-   ("j"   counsel-imenu "imenu")
-   ("K"   projectile-kill-buffers)
-   ("l"   hydra-lsp/body)
-   ("P"   projectile-switch-project)
-   ("p"   projectile-switch-project)
-   ("r"   projectile-recentf "recentf")
-   ("x"   projectile-remove-known-project)
-   ("X"   projectile-cleanup-known-projects)
-   ("z"   projectile-cache-current-file)
-   ("o"   hydra-projectile-other-window/body "other")
-   ("q"   nil "cancel" :color blue))
+  ("a"   deadgrep "deadgrep")
+  ("A"   counsel-rg "counsel rg")
+  ("b"   projectile-switch-to-buffer "buf")
+  ("d"   projectile-find-dir "dir")
+  ("f"   projectile-find-file "file")
+  ("i"   projectile-ibuffer "ibuf")
+  ("j"   counsel-imenu "imenu")
+  ("K"   projectile-kill-buffers)
+  ("l"   hydra-lsp/body)
+  ("P"   projectile-switch-project)
+  ("p"   projectile-switch-project)
+  ("r"   projectile-recentf "recentf")
+  ("x"   projectile-remove-known-project)
+  ("X"   projectile-cleanup-known-projects)
+  ("z"   projectile-cache-current-file)
+  ("o"   hydra-projectile-other-window/body "other")
+  ("q"   nil "cancel" :color blue))
 
- (bind-key "H-p" 'hydra-projectile/body)
+(bind-key "H-p" 'hydra-projectile/body)
  #+end_src

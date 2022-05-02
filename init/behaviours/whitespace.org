@@ -1,0 +1,51 @@
+#+TITLE:  Whitespace
+#+AUTHOR: Mark Bestley
+#+EMAIL:  @bestley.co.uk
+#+DATE:   02 May 2022
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+STARTUP: overview
+
+* Clean up whitespace
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:5CBAA3C9-A6AD-4881-BACC-D2A3099D294A
+:END:
+ Only do it on my edits
+** Whitespace at end of line uses [[https://github.com/lewang/ws-butler][ws-butler]]
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:7F269BB3-F95F-4F6D-944B-252975923B43
+:END:
+#+begin_quote
+Only lines touched get trimmed. If the white space at end of buffer is changed, then blank lines at the end of buffer are truncated respecting require-final-newline.
+Trimming only happens when saving.
+#+end_quote
+#+NAME: org_2020-12-08+00-00_3CD0E180-0745-4B05-9BCE-0FB50626F9F9
+#+begin_src emacs-lisp
+(use-package ws-butler
+  :ensure t
+  :diminish ws-butler-mode
+  :hook ((prog-mode org-mode) . ws-butler-mode ))
+#+end_src
+** Others
+:PROPERTIES:
+:ID:       org_mark_2020-10-11T00-40-32+01-00_mini12.local:D368B1BE-8B1A-4ED3-B447-077ED18711A3
+:END:
+This is from greghendershot
+#+NAME: org_mark_2020-10-11T00-40-32+01-00_mini12.local_BF7FA9EE-AC6E-46D8-863C-7E632C9D8B2A
+#+begin_src emacs-lisp
+;; Show trailing whitespace in certain modes.
+(setq-default show-trailing-whitespace nil)
+;; Although it may seem silly to define these as named functions, nicer to
+;; view/debug hook variables:
+(defun gh/show-trailing-whitespace-yes () (setq show-trailing-whitespace t))
+(defun gh/show-trailing-whitespace-no ()  (setq show-trailing-whitespace nil))
+(dolist (hook '(prog-mode-hook))
+  (add-hook hook #'gh/show-trailing-whitespace-yes))
+(dolist (hook '(magit-mode-hook))
+  (add-hook hook #'gh/show-trailing-whitespace-no 'append))
+
+(add-to-list 'safe-local-variable-values
+             '(require-final-newline . t))
+
+;; Show empty lines at buffer end.
+(set-default 'indicate-empty-lines t)
+#+end_src

@@ -1,6 +1,5 @@
 #+TITLE Emacs configuration git
 #+PROPERTY:header-args :cache yes :tangle yes  :comments link
-
 #+STARTUP: content
 
 Picked up from many places especially jerry peng  but then looked a centaur and this is very much like what I have already so add the rest
@@ -59,9 +58,6 @@ Show choices in posframe
 (when *emacs/>=26p*
   (use-package-elpa transient-posframe
     :demand
-    :custom-face
-    (transient-posframe ((t (:inherit tooltip))))
-    (transient-posframe-border ((t (:background ,(face-foreground 'font-lock-comment-face nil t)))))
     :after magit
     :init
     (setq transient-posframe-border-width 3

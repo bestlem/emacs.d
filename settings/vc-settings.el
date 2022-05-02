@@ -40,9 +40,6 @@
  '(git-timemachine-minibuffer-detail-face
    ((t
 	 (:inherit warning))))
- '(transient-posframe
-   ((t
-	 (:inherit tooltip))))
  '(transient-posframe-border
    ((t
-	 (:background "Firebrick")))))
+	 (:background "White")))))

@@ -33,10 +33,10 @@ Altering the size of variable-font seems to change the size of fixed-font - How?
 
   ;; Main typeface
   (set-face-attribute 'default nil
-                      :height 120
+                      :height 130
                       :family font-found)
   ;; Monospaced typeface
-  (set-face-attribute 'fixed-pitch nil :family font-found :height 0.8))
+  (set-face-attribute 'fixed-pitch nil :family font-found :height 1.0))
 
 (let ((font-found (font-candidate
                    "Georgia"

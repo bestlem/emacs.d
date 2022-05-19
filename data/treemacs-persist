@@ -39,6 +39,8 @@
  - path :: ~/src/cpp/test_gtk
 ** macports-ports
  - path :: ~/src/cpp/macports-ports
+** my-macports
+ - path :: ~/src/my-macports
 * Odds
 ** py-bash-completion
  - path :: ~/src/python/py-bash-completion

@@ -5,12 +5,8 @@
 #+PROPERTY:header-args :cache yes :tangle yes :comments noweb
 #+STARTUP: overview
 
-* Clean up whitespace
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:5CBAA3C9-A6AD-4881-BACC-D2A3099D294A
-:END:
- Only do it on my edits
-** Whitespace at end of line uses [[https://github.com/lewang/ws-butler][ws-butler]]
+Only do it on my edits
+* Whitespace at end of line uses [[https://github.com/lewang/ws-butler][ws-butler]]
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:7F269BB3-F95F-4F6D-944B-252975923B43
 :END:
@@ -25,12 +21,12 @@ Trimming only happens when saving.
   :diminish ws-butler-mode
   :hook ((prog-mode org-mode) . ws-butler-mode ))
 #+end_src
-** Others
+* Show whitespace at end of line
 :PROPERTIES:
-:ID:       org_mark_2020-10-11T00-40-32+01-00_mini12.local:D368B1BE-8B1A-4ED3-B447-077ED18711A3
+:ID:       org_mark_mini20.local:20220502T134313.167880
 :END:
 This is from greghendershot
-#+NAME: org_mark_2020-10-11T00-40-32+01-00_mini12.local_BF7FA9EE-AC6E-46D8-863C-7E632C9D8B2A
+#+NAME: org_mark_mini20.local_20220502T134313.164296
 #+begin_src emacs-lisp
 ;; Show trailing whitespace in certain modes.
 (setq-default show-trailing-whitespace nil)
@@ -38,14 +34,73 @@ This is from greghendershot
 ;; view/debug hook variables:
 (defun gh/show-trailing-whitespace-yes () (setq show-trailing-whitespace t))
 (defun gh/show-trailing-whitespace-no ()  (setq show-trailing-whitespace nil))
-(dolist (hook '(prog-mode-hook))
+(dolist (hook '(prog-mode-hook text-mode-hook conf-mode-hook))
   (add-hook hook #'gh/show-trailing-whitespace-yes))
 (dolist (hook '(magit-mode-hook))
   (add-hook hook #'gh/show-trailing-whitespace-no 'append))
+#+end_src
 
+* Require newline at end of file
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220502T134419.396235
+:END:
+#+NAME: org_mark_mini20.local_20220502T134419.393170
+#+begin_src emacs-lisp
 (add-to-list 'safe-local-variable-values
              '(require-final-newline . t))
 
 ;; Show empty lines at buffer end.
 (set-default 'indicate-empty-lines t)
+#+end_src
+* Delete blank lines
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220502T134543.152193
+:END:
+This will work around a line or for a region from
+** Shrink-whitespace
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220502T143604.436952
+:END:
+https://github.com/jcpetkovich/shrink-whitespace.el But this removes all sorts of whitespace and is not useful for code
+#+NAME: org_mark_mini20.local_20220502T134543.147811
+#+begin_src emacs-lisp :tangle no
+(use-feature shrink-whitespace
+  :mwb-load-path "fork/shrink-whitespace"
+  :commands shrink-whitespace)
+#+end_src
+** Own attempt
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220502T143604.435179
+:END:
+Based on http://ergoemacs.org/emacs/elisp_compact_empty_lines.html
+#+NAME: org_mark_mini20.local_20220502T143604.418405
+#+begin_src emacs-lisp
+(defun xah-clean-whitespace ()
+  "Delete trailing whitespace, and replace repeated blank lines to just 1.
+Only space and tab is considered whitespace here.
+Works on whole buffer or text selection, respects `narrow-to-region'.
+
+URL `http://xahlee.info/emacs/emacs/elisp_compact_empty_lines.html'
+Version 2017-09-22 2020-09-08"
+  (interactive)
+  (let ($begin $end)
+    (if (use-region-p)
+        (setq $begin (region-beginning) $end (region-end))
+      (setq $begin (point-min) $end (point-max)))
+    (save-excursion
+      (save-restriction
+        (narrow-to-region $begin $end)
+        (progn
+          (goto-char (point-min))
+          (while (re-search-forward "[ \t]+\n" nil "move")
+            (replace-match "\n")))
+        (progn
+          (goto-char (point-min))
+          (while (re-search-forward "\n\n+" nil "move")
+            (replace-match "\n")))
+        (progn
+          (goto-char (point-max))
+          (while (equal (char-before) 32) ; char 32 is space
+            (delete-char -1))))
+      (message "white space cleaned"))))
 #+end_src

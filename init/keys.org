@@ -618,6 +618,7 @@ Tried inherit to set f19 s as mode dependant but seems not to work with pretty h
    "Current buffer"
    (("L" linum-mode "line number" :toggle t)
     ("c" insert-char "insert char")
+	("o" xah-clean-whitespace "Remove Blank lines")
     ("TAB" hs-mwb-show-one-level "show one level")
     ("C-<tab>" hs-toggle-hiding "Toggle hide-show")
     ("f" refill-mode "Auto refill mode ")

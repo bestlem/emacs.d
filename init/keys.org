@@ -600,6 +600,7 @@ Tried inherit to set f19 s as mode dependant but seems not to work with pretty h
 :END:
 #+NAME: org_2020-12-05+00-00_94E1455C-7F91-48B1-BF7B-EA3753E7BDCB
 #+begin_src emacs-lisp
+(require 'jp-window)
 (pretty-hydra-define hydra-kl (:title (with-octicon "tools" "Global tools" 1 -0.05)
                                       :color teal
                                       :idle 1.0)

@@ -10,7 +10,6 @@ See centuar for lsp setup
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220317T112921.678405
 :END:
-
 ** Language
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220317T112921.676869
@@ -26,7 +25,6 @@ Also jojojames
   (setq swift-mode:multiline-statement-offset 4) ;; Match xcode.
   )
 #+end_src
-
 ** Help
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220317T112921.675486
@@ -39,7 +37,6 @@ Curated Swift  documentation with cross-references, and keyword/topic indices.
               ("<f1><f1>" . swift-helpful))
   :commands swift-helpful)
 #+end_src
-
 ** Flycheck
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220405T140718.195475
@@ -53,7 +50,7 @@ Curated Swift  documentation with cross-references, and keyword/topic indices.
         "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc")
   (setq flycheck-swift-sdk-path
         "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk")
-  (setq flycheck-swift-target "x86_64-apple-ios11.2")
+  (setq flycheck-swift-target "arm64-apple-ios15")
   (with-eval-after-load 'flycheck
     (flycheck-swift-setup)))
 #+end_src
@@ -67,7 +64,7 @@ This has not been updated.
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220317T112921.673795
 :END:
-This is where I have really lost history there used to be all sorts of indenation rules.
+This is where I have really lost history there used to be all sorts of indentation rules.
 Look at jojojames init for a complete one - but no lsp/completion.
 #+NAME: org_mark_mini20.local_20220317T112921.670268
 #+begin_src emacs-lisp

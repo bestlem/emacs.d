@@ -33,8 +33,6 @@
  - path :: ~/src/cpp/rftg
 ** simutrans
  - path :: ~/src/cpp/simutrans
-** ports
- - path :: ~/src/ports
 ** test_gtk
  - path :: ~/src/cpp/test_gtk
 ** macports-ports

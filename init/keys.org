@@ -37,6 +37,7 @@
 - [[#mouse][Mouse]]
   - [[#imenu][iMenu]]
   - [[#macos-mouse][Macos mouse]]
+  - [[#mouse-3][Mouse 3]]
 - [[#hydra][Hydra]]
   - [[#leader-keys][Leader keys]]
   - [[#hydra-transpose][Hydra transpose]]
@@ -550,7 +551,7 @@ Well Aquamacs at least - and possibly others does an emulate 3 button mouse whic
 (when *aquamacs*
   (setq ns-emulate-three-button-mouse 'nil))
 #+end_src
-*** Mouse 3
+** Mouse 3
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20201213T170631.398434
 :END:
@@ -559,8 +560,13 @@ Try with an enhanced one but test to mouse-4 which might have issues with treema
 #+begin_src emacs-lisp
 (unless *aquamacs*
   (use-package mouse3
+	:demand
     :mwb-load-path "site-lisp/Emacs_wiki"
-    :bind ("<mouse-4>" . 'mouse3-action-wo-save-then-kill)))
+    :preface  (unbind-key  [mouse-3]  macos-key-map)
+    :custom (mouse3-menu-always-flag t)
+    :bind (
+           ("<mouse-4>" . 'mouse3-action-wo-save-then-kill))))
+
 #+end_src
 * Hydra
 :PROPERTIES:

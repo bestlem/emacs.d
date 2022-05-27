@@ -24,7 +24,7 @@ However  for debugging init we don't want the backtrace
 ;;  setting to nil turns them off
 ;; see init-after-hook for normal setup
 (setq debug-on-error 't)
-;(setq debug-on-error nil)
+(setq debug-on-error nil)
 ;(setq debug-on-quit nil)
 
 ;; Trace some function
@@ -936,7 +936,7 @@ This is so the file can be processed by nullman's expand - basically no noweb we
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20211028T133119.373871
 :END:
-With some variables set from https://github.com/grettke/help as these are cutomisation variables they need to be before org.el.
+With some variables set from https://github.com/grettke/help as these are customisation variables they need to be before org.el.
 
 Allow single-character alphabetical bullet lists. This configuration must occur
 before loading Org-Mode. *Never* remove this from a submitted ECM.

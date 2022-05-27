@@ -99,10 +99,6 @@ Try macport now as on arm
   :ensure nil
   :hook (after-init . server-mode))
  #+end_src
-* Emacs settings
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:0EBF0016-296F-41EA-8DC3-96CE752F9E9A
-:END:
 * Emacs behaviour
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:EB57B856-C1F8-4E5E-82AF-2F8E154DBCA4

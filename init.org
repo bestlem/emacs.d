@@ -114,15 +114,16 @@ We need to sort out paths - ideally after init timers etc but we also need them 
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:5F44E496-0565-4D23-9D8B-128A663B9280
 :END:
- In constant mwb-user-emacs-directory
-	  #+begin_src emacs-lisp
+In constant mwb-user-emacs-directory
+#+NAME: org_mark_mini20.local_20220521T104243.397754
+#+begin_src emacs-lisp
  ;; Need the directory from here.
  (defun mwb-get-directory-of-current-file ()
    "Return the full directory path of the caller's file location."
    (file-name-directory (or load-file-name buffer-file-name))
    )
  (defconst mwb-user-emacs-directory (mwb-get-directory-of-current-file))
-	  #+end_src
+#+end_src
 *** Where my init code is
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:F550A4FA-B16B-4FD2-B11F-9F7DB4F82859

@@ -13,8 +13,7 @@
  ;; If there is more than one, they won't work right.
  '(aquamacs-additional-fontsets nil t)
  '(aquamacs-customization-version-id 312 t)
- '(aquamacs-save-options-on-quit
-   (quote ask))
+ '(aquamacs-save-options-on-quit 'ask)
  '(aquamacs-tool-bar-user-customization nil t)
  '(auto-word-wrap-default-function nil)
  '(tabbar-mode nil nil

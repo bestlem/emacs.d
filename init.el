@@ -1,13 +1,15 @@
-;; [[file:init.org::*Set where the init file is][Set where the init file is:1]]
+;;; -*- lexical-binding: t -*-
+;;; This is a generated file do not edit
+;; [[file:~/.emacs.d/init.org::org_mark_mini20.local_20220521T104243.397754][org_mark_mini20.local_20220521T104243.397754]]
 ;; Need the directory from here.
 (defun mwb-get-directory-of-current-file ()
   "Return the full directory path of the caller's file location."
   (file-name-directory (or load-file-name buffer-file-name))
   )
 (defconst mwb-user-emacs-directory (mwb-get-directory-of-current-file))
-;; Set where the init file is:1 ends here
+;; org_mark_mini20.local_20220521T104243.397754 ends here
 
-;; [[file:init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_86BD52C1-8055-4BB2-834D-2F088719C835][org_mark_2020-01-23T20-40-42+00-00_mini12_86BD52C1-8055-4BB2-834D-2F088719C835]]
+;; [[file:~/.emacs.d/init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_86BD52C1-8055-4BB2-834D-2F088719C835][org_mark_2020-01-23T20-40-42+00-00_mini12_86BD52C1-8055-4BB2-834D-2F088719C835]]
 (defun mwb-user-emacs-file (name)
   "Return an absolute per-user Emacs-specific file name around where the init file is.
   It is basically locate-user-emacs-file but I have followed Aquamacs is setting that not where my init.el file is.
@@ -15,12 +17,12 @@
   (expand-file-name name mwb-user-emacs-directory))
 ;; org_mark_2020-01-23T20-40-42+00-00_mini12_86BD52C1-8055-4BB2-834D-2F088719C835 ends here
 
-;; [[file:init.org::org_mark_2020-09-28T01-08-28+01-00_mini12.local_E7D671F1-9D29-4FF6-A8E5-8884826E6E4B][org_mark_2020-09-28T01-08-28+01-00_mini12.local_E7D671F1-9D29-4FF6-A8E5-8884826E6E4B]]
+;; [[file:~/.emacs.d/init.org::org_mark_2020-09-28T01-08-28+01-00_mini12.local_E7D671F1-9D29-4FF6-A8E5-8884826E6E4B][org_mark_2020-09-28T01-08-28+01-00_mini12.local_E7D671F1-9D29-4FF6-A8E5-8884826E6E4B]]
 (when (version< emacs-version "27")
   (load (mwb-user-emacs-file "early-init")))
 ;; org_mark_2020-09-28T01-08-28+01-00_mini12.local_E7D671F1-9D29-4FF6-A8E5-8884826E6E4B ends here
 
-;; [[file:init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_B623E658-A6AA-46DF-AD9C-6EAC3BDC1BEE][org_mark_2020-01-23T20-40-42+00-00_mini12_B623E658-A6AA-46DF-AD9C-6EAC3BDC1BEE]]
+;; [[file:~/.emacs.d/init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_B623E658-A6AA-46DF-AD9C-6EAC3BDC1BEE][org_mark_2020-01-23T20-40-42+00-00_mini12_B623E658-A6AA-46DF-AD9C-6EAC3BDC1BEE]]
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
@@ -28,7 +30,7 @@
 										;(package-initialize)
 ;; org_mark_2020-01-23T20-40-42+00-00_mini12_B623E658-A6AA-46DF-AD9C-6EAC3BDC1BEE ends here
 
-;; [[file:init.org::*Debug flag][Debug flag:1]]
+;; [[file:~/.emacs.d/init.org::*Debug flag][Debug flag:1]]
 (setq init-file-debug 'nil)
 (setq init-file-debug t)
 ;; (require 'profiler)
@@ -36,7 +38,7 @@
 ;; (add-hook-lambda after-init-hook (profiler-stop))
 ;; Debug flag:1 ends here
 
-;; [[file:init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_315EE687-FC28-4D41-810D-4FF19AA66CD4][org_mark_2020-01-23T20-40-42+00-00_mini12_315EE687-FC28-4D41-810D-4FF19AA66CD4]]
+;; [[file:~/.emacs.d/init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_315EE687-FC28-4D41-810D-4FF19AA66CD4][org_mark_2020-01-23T20-40-42+00-00_mini12_315EE687-FC28-4D41-810D-4FF19AA66CD4]]
 (defun nullman/org-babel-generate-elisp-file (file &optional byte-compile force)
   "Generate an emacs-lisp file from an org-babel FILE.
 
@@ -128,7 +130,7 @@ is non-nil."
     ))
 ;; org_mark_2020-01-23T20-40-42+00-00_mini12_315EE687-FC28-4D41-810D-4FF19AA66CD4 ends here
 
-;; [[file:init.org::org_mark_mini20.local_20210126T224850.526804][org_mark_mini20.local_20210126T224850.526804]]
+;; [[file:~/.emacs.d/init.org::org_mark_mini20.local_20210126T224850.526804][org_mark_mini20.local_20210126T224850.526804]]
 (setq mwb-esup-depth 1)                 ; Some attempt at benchmarking
 
 (defun mwb-init--load (file-root-abs &optional no-org)
@@ -164,12 +166,12 @@ If org and no el or org file is newer then retangle the org file if noorg is not
                (message msg))))))
 ;; org_mark_mini20.local_20210126T224850.526804 ends here
 
-;; [[file:init.org::org_mark_mini20.local_20210126T224850.527570][org_mark_mini20.local_20210126T224850.527570]]
+;; [[file:~/.emacs.d/init.org::org_mark_mini20.local_20210126T224850.527570][org_mark_mini20.local_20210126T224850.527570]]
 (defun mwb-init-load (file-root &optional no-org)
   (mwb-init--load (expand-file-name file-root mwb-user-emacs-directory) no-org))
 ;; org_mark_mini20.local_20210126T224850.527570 ends here
 
-;; [[file:init.org::org_mark_mini20.local_20210126T224850.527835][org_mark_mini20.local_20210126T224850.527835]]
+;; [[file:~/.emacs.d/init.org::org_mark_mini20.local_20210126T224850.527835][org_mark_mini20.local_20210126T224850.527835]]
 (defun mwb-init-load-directory (rel-dir-name)
   "Load up all the files using the init loaded from a directory"
   (let* ((directory-name (expand-file-name rel-dir-name mwb-user-emacs-directory))
@@ -182,7 +184,7 @@ If org and no el or org file is newer then retangle the org file if noorg is not
       (mwb-init--load (expand-file-name (file-name-sans-extension f) directory-name)))))
 ;; org_mark_mini20.local_20210126T224850.527835 ends here
 
-;; [[file:init.org::org_mark_mini12.local_20201213T195905.304356][org_mark_mini12.local_20201213T195905.304356]]
+;; [[file:~/.emacs.d/init.org::org_mark_mini12.local_20201213T195905.304356][org_mark_mini12.local_20201213T195905.304356]]
 ;; (if (>= emacs-major-version 28)
 ;; 	(load (concat (expand-file-name "alt/alt_init" mwb-user-emacs-directory) ".el"))
 ;;   (mwb-init-load "config" "no-org"))

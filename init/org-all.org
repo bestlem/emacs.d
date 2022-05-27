@@ -1612,10 +1612,12 @@ Again from jerrypnz
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:E8D53E27-7D3B-403A-9179-D415A9B2581A
 :END:
 I don't use but the hook is there. Main setup from Jerry Peng, needed as in org hydra and might as well setup up.
+Also in org-mouse so must be loaded
 #+NAME: org_mark_2020-01-23T20-21-34+00-00_mini12_D54091C8-6480-46A6-B79B-3350E35DA246
 #+begin_src emacs-lisp
 (use-package org-agenda
-  ;; :after (org)
+  :after (org)
+  :demand
   :commands (org-agenda)
   :config
   (progn
@@ -1628,7 +1630,7 @@ I don't use but the hook is there. Main setup from Jerry Peng, needed as in org 
           '(
             ("s" "Someday"
              ((tags "+someday/TODO"
-                    ((org-agenda-overriding-header "Maybe Someday:")))))))
+               ((org-agenda-overriding-header "Maybe Someday:")))))))
 
     (setq org-agenda-files (list  org-directory
                                   ))

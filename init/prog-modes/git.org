@@ -41,10 +41,19 @@ jp-git from Jerry Peng and then rest from centuar
     (:color teal :quit-key "q"
 			:title (mwb-icon-string "git" "Git"))
     ("Magit"
-     (("s" mwb-magit-status "magit status")
+     (("g" mwb-magit-status "status")
+      ("s" mwb-magit-status "status")
       ("l" magit-log-buffer-file "commit log (current file)")
       ("L" magit-log-current "commit log (project)")
-      ("b" magit-blame-addition "blame"))
+      ("B" magit-blame-addition "blame")
+      ("b" magit-branch-popup "branch popup"))
+     "Remote"
+     (("r" magit-rebase-popup "rebase popup")
+      ("f" magit-fetch-popup "fetch popup")
+      ("P" magit-push-popup "push popup")
+      ("F" magit-pull-popup "pull popup")
+      ("W" magit-format-patch "format patch")
+      ("$" magit-process "process"))
      "Diff"
      (("d" magit-diff-buffer-file "diff buffer")))))
 #+end_src

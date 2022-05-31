@@ -4,13 +4,13 @@
 ;; Description: Customizable behavior for `mouse-3'.
 ;; Author: Drew Adams
 ;; Maintainer: Drew Adams (concat "drew.adams" "@" "oracle" ".com")
-;; Copyright (C) 2010-2018, Drew Adams, all rights reserved.
+;; Copyright (C) 2010-2021, Drew Adams, all rights reserved.
 ;; Created: Tue Nov 30 15:22:56 2010 (-0800)
 ;; Version: 0
 ;; Package-Requires: ()
-;; Last-Updated: Sun Sep 13 16:28:49 2020 (-0700)
+;; Last-Updated: Wed Dec 15 09:54:55 2021 (-0800)
 ;;           By: dradams
-;;     Update #: 1877
+;;     Update #: 1898
 ;; URL: https://www.emacswiki.org/emacs/download/mouse3.el
 ;; Doc URL: https://www.emacswiki.org/emacs/Mouse3
 ;; Keywords: mouse menu keymap kill rectangle region
@@ -19,9 +19,9 @@
 ;; Features that might be required by this library:
 ;;
 ;;   `avoid', `backquote', `bytecomp', `cconv', `cl', `cl-lib',
-;;   `color', `frame-fns', `gv', `hexrgb', `isearch+',
+;;   `color', `frame-fns', `gv', `highlight', `isearch+',
 ;;   `isearch-prop', `macroexp', `misc-cmds', `misc-fns', `naked',
-;;   `strings', `thingatpt', `thingatpt+', `zones'.
+;;   `rect', `strings', `thingatpt', `thingatpt+', `zones'.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -316,7 +316,6 @@
 ;;   `mouse3-popup-include-global-menus-flag',
 ;;   `mouse3-popup-x-popup-panes-flag', `mouse3-region-popup-entries',
 ;;   `mouse3-region-popup-x-popup-panes',
-;;   
 ;;   `mouse3-second-click-default-command'.
 ;;
 ;; Commands defined here:
@@ -369,6 +368,12 @@
 ;;
 ;;; Change Log:
 ;;
+;; 2021/02/01 dadams
+;;     Added: mouse3-mark-region-with-char.
+;;     mouse3-dired-add-region-menu: Added Mark with Char (mouse3-mark-region-with-char).
+;; 2020/12/26 dadams
+;;     mouse3-region-popup-(change-text-submenu|x-popup-panes): Added transpose-regions, indent-rigidly.
+;;     mouse3-region-popup-(check-convert-submenu|x-popup-panes): Added: org-table-convert-region.
 ;; 2020/09/13 dadams
 ;;     Added option mouse3-menu-always-flag, mouse3-action-wo-save-then-kill.
 ;;     mouse-save-then-kill: respect mouse3-menu-always-flag.
@@ -641,7 +646,7 @@ single-click event.  See `(elisp) Repeat Events'."
 
 ;;;###autoload
 (defcustom mouse3-menu-always-flag nil
-  "Non-nil means `mouse-3' always shows a menu.
+  "*Non-nil means `mouse-3' always shows a menu.
 If nil, `mouse-3' behavior respects options
 `mouse3-second-click-default-command' and
 `mouse3-double-click-command'.
@@ -803,7 +808,9 @@ restore it by yanking."
      ("Fill"                                    . fill-region)
      ("Fill as Paragraph"                       . fill-region-as-paragraph)
      ("Canonically Space"                       . canonically-space-region)
+     ("Transpose"                               . transpose-regions)
      ("Indent"                                  . indent-region)
+     ("Indent Rigidly"                          . indent-rigidly)
      ("--")
      ("Capitalize"                              . capitalize-region)
      ("Upcase"                                  . upcase-region)
@@ -820,6 +827,9 @@ restore it by yanking."
      ,@`,(and (fboundp 'whitespace-cleanup-region) ; Defined in `whitespace.el'.  Emacs 22+.
               '(("Check Whitespace"             . whitespace-report-region)
                 ("Clean Up Whitespace"          . whitespace-cleanup-region)))
+
+     ,@`,(and (fboundp 'org-table-convert-region) ; Definded in `org-table.el'.
+              '(("Convert to Org Table"         . org-table-convert-region)))
      ("Printify"                                . printify-region)
      ("PR Printify"                             . pr-printify-region)
      ("Compose Characters"                      . compose-region)
@@ -1287,7 +1297,9 @@ restore it by yanking."
        (fill                        menu-item "Fill" fill-region)
        (fill-as-para                menu-item "Fill as Paragraph" fill-region-as-paragraph)
        (canonically-space           menu-item "Canonically Space" canonically-space-region)
+       (transpose                   menu-item "Transpose" transpose-regions)
        (indent                      menu-item "Indent" indent-region)
+       (indent-rigidly              menu-item "Indent Rigidly" indent-rigidly)
        (sep-word-case "--")
        (capitalize                  menu-item "Capitalize" capitalize-region)
        (upcase                      menu-item "Upcase" upcase-region)
@@ -1308,9 +1320,11 @@ restore it by yanking."
        (ispell-region             menu-item "Ispell" ispell-region)
        (flyspell-region           menu-item "Flyspell" flyspell-region)
        (whitespace-report-region  menu-item "Check Whitespace" whitespace-report-region
-        :visible (fboundp 'whitespace-cleanup-region))
+        :visible (fboundp 'whitespace-report-region))
        (whitespace-cleanup-region menu-item "Clean Up Whitespace" whitespace-cleanup-region
         :visible (and (fboundp 'whitespace-cleanup-region)  (not buffer-read-only)))
+       (org-table-convert-region  menu-item "Convert to Org Table" org-table-convert-region
+        :visible (fboundp 'org-table-convert-region))
        (printify-region           menu-item "Printify" printify-region
         :visible (not buffer-read-only))
        (pr-printify-region        menu-item "PR Printify" pr-printify-region
@@ -1692,8 +1706,8 @@ and not empty.)"
 
 (defcustom mouse3-noregion-popup-entries `(,mouse3-noregion-popup-misc-submenu)
   "*Entries for the `mouse-3' popup menu when no nonempty active region.
-Other than the use context, this has the same description as
-`mouse3-noregion-popup-entries' - which see."
+Other than the use context (region or no region), this has the same
+description as `mouse3-region-popup-entries' - which see."
   ;; Could define this `:type' and so reuse the definition for both `*-region-*' and `*-noregion-*'.
   :type  '(repeat
            (choice
@@ -2030,6 +2044,7 @@ Provides commands to act on the selected files and directories."
          `((dired-menu
             "Selected Files" keymap
             (mark-region   menu-item "Mark"                   mouse3-dired-mark-region-files)
+            (mark-region-with-char menu-item "Mark with Char" mouse3-mark-region-with-char)
             (unmark-region menu-item "Unmark"                 mouse3-dired-unmark-region-files)
             (toggle-marked menu-item "Toggle Marked/Unmarked" mouse3-dired-toggle-marks-in-region-from-mouse)
             (flag          menu-item "Flag for Deletion"      mouse3-dired-flag-region-files-for-deletion)
@@ -2128,8 +2143,9 @@ Optional arg MARK-CHAR is the type of mark to check.
                            (not (looking-at (concat "^" (regexp-quote (char-to-string mark-char)))))
                          (looking-at "^ ")))))
 
+ ; Same as `diredp-mark-region-files', except uses `dired-mark-if', not `diredp-mark-if'.
 ;;;###autoload
-(defun mouse3-dired-mark-region-files (&optional unmark-p) ; Same as `diredp-mark-region-files'.
+(defun mouse3-dired-mark-region-files (&optional unmark-p)
   "Mark all of the files in the current region (if it is active).
 With non-nil prefix arg, unmark them instead."
   (interactive "P")
@@ -2142,8 +2158,32 @@ With non-nil prefix arg, unmark them instead."
       (dired-mark-if (and (<= (point) end) (>= (point) beg) (mouse3-dired-this-file-unmarked-p))
                      "region file"))))
 
+;; Same as `diredp-mark-region-files-with-char', except uses `dired-mark-if', not `diredp-mark-if'.
 ;;;###autoload
-(defun mouse3-dired-unmark-region-files (&optional mark-p) ; Same as `diredp-unmark-region-files'.
+(defun mouse3-mark-region-with-char (char &optional unmark-p)
+  "Mark lines in active region with CHAR.
+With non-nil prefix arg, unmark CHAR instead."
+  ;; Need workaround - see Emacs bug #46243.
+  ;;(interactive "cMark region with char: \nP")
+  (interactive
+   (progn (message nil)                 ; Workaround for bug #46243.
+          (list (read-char "Mark region with char: ") current-prefix-arg)))
+  (let ((dired-marker-char  char)
+        (beg                        (min (point) (mark)))
+        (end                        (max (point) (mark)))
+        (inhibit-field-text-motion  t)) ; Just in case.
+    (setq beg  (save-excursion (goto-char beg)
+                               (line-beginning-position))
+          end  (save-excursion (goto-char end)
+                               (when (and (bolp) (> end beg)) (backward-char))
+                               (line-end-position)))
+    (let ((dired-marker-char  (if unmark-p ?\040 dired-marker-char)))
+      (dired-mark-if (and (<= (point) end)  (>= (point) beg)  (mouse3-dired-this-file-unmarked-p))
+                     "region file"))))
+
+;; Same as `diredp-mark-region-files-with-char', except uses `dired-mark-if', not `diredp-mark-if'.
+;;;###autoload
+(defun mouse3-dired-unmark-region-files (&optional mark-p)
   "Unmark all of the files in the current region (if it is active).
 With non-nil prefix arg, mark them instead."
   (interactive "P")
@@ -2156,8 +2196,9 @@ With non-nil prefix arg, mark them instead."
       (dired-mark-if (and (<= (point) end) (>= (point) beg) (mouse3-dired-this-file-marked-p))
                      "region file"))))
 
+;; Same as `diredp-mark-region-files-with-char', except uses `dired-mark-if', not `diredp-mark-if'.
 ;;;###autoload
-(defun mouse3-dired-flag-region-files-for-deletion () ; Same as `diredp-flag-region-files-for-deletion'.
+(defun mouse3-dired-flag-region-files-for-deletion ()
   "Flag all of the files in the current region (if it is active) for deletion."
   (interactive)
   (let ((beg                        (min (point) (mark)))

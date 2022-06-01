@@ -167,7 +167,7 @@ I think works with other vcs
   :config
   (with-no-warnings
     (with-eval-after-load 'hydra
-      (defhydra hydra-git-messenger (:color blue)
+      (defhydra git-messenger-hydra (:color blue)
         ("s" git-messenger:popup-show "show")
         ("c" git-messenger:copy-commit-id "copy hash")
         ("m" git-messenger:copy-message "copy message")

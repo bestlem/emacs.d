@@ -22,7 +22,7 @@ The time is probably not that useful - build on Aquamacs instead and there is an
 
 The file-name-handler-alist is probably needed as some of the hooks slow things heavily
 
-This is from [[ https://github.com/jwiegley/dot-emacs/blob/master/init.el#L1013][John Wiegley]] It might make sense more in early-init.el but also needed for Emacs < 27
+This is from [[ https://github.com/jwiegley/dot-emacs/blob/master/init.el#L1013][John Wiegley]]
  #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_EC7FD451-253D-4F87-90DC-AD484305487F
  #+begin_src emacs-lisp
  ;;(defconst emacs-start-time (current-time))

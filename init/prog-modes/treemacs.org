@@ -1,0 +1,133 @@
+#+TITLE:  Treemacs
+#+AUTHOR: Mark Bestley
+#+EMAIL:  @bestley.co.uk
+#+DATE:   01 Jun 2022
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+STARTUP: overview
+
+This is the visual tree to manage files etc
+
+* Support functions
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210819T110926.745369
+:END:
+
+** Key hook
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210819T110926.744579
+:END:
+I need to set the mouse - unfortunately it is in a minor mode map not global so simple bind does not work
+#+NAME: org_mark_mini20.local_20210819T110926.728132
+#+begin_src emacs-lisp
+(defun treemacs-mwb-mouse ()
+  (let ((oldmap (cdr (assoc 'mac-key-mode-map minor-mode-map-alist)))
+        (newmap (make-sparse-keymap)))
+    (set-keymap-parent newmap oldmap)
+    (bind-key (kbd "<mouse-3>") #'treemacs-rightclick-menu newmap )
+    (make-local-variable 'minor-mode-overriding-map-alist)
+    (push `(mac-key-mode-map . ,newmap) minor-mode-overriding-map-alist)))
+#+end_src
+* Main setup
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210811T192501.325010
+:END:
+ #+NAME: org_mark_mini20.local_20210811T192501.283076
+#+begin_src emacs-lisp
+(use-package treemacs
+  :ensure t
+  ;; :mwb-load-path "fork/treemacs/src/elisp"
+  :demand
+  :init
+  (setq treemacs-width 50)
+  :commands (treemacs treemacs-rightclick-menu)
+  :config
+  (setq treemacs--no-messages nil)
+
+  (setq hydra-key-regex "\\[\\|]\\|[-\\[:alnum:] ~.,;:/|?<>={}*+#%@!&^⇧⌘⌥↑↓←→⌫⌦⏎'`()\"$]+?") ; add Mac key symbols
+
+  (setq treemacs-persist-file (mwb-user-emacs-file "data/treemacs-persist"))
+  (with-eval-after-load 'treemacs
+	(add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?))
+
+
+  ;; The default width and height of the icons is 22 pixels. If you are
+  ;; using a Hi-DPI display, uncomment this to double the icon size.
+  ;;(treemacs-resize-icons 44)
+
+  (treemacs-follow-mode t)
+
+  (treemacs-filewatch-mode t)
+  (treemacs-fringe-indicator-mode t)
+  (pcase (cons (not (null (executable-find "git")))
+			   (not (null treemacs-python-executable)))
+	(`(t . t)
+	 (treemacs-git-mode 'deferred))
+	(`(t . _)
+	 (treemacs-git-mode 'simple)))
+  :custom
+  (treemacs-indent-guide-mode t)
+  (treemacs-silent-refresh t)
+  ( treemacs-silent-filewatch t)
+  ( treemacs-tag-follow-delay 2.5)
+  (treemacs-indent-guide-style 'line)
+  (treemacs-user-header-line-format #'treemacs-header-buttons-format))
+#+end_src
+
+* Keys
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210811T192501.323662
+:END:
+#+NAME: org_mark_mini20.local_20210811T192501.298758
+#+begin_src emacs-lisp
+(use-package treemacs
+  :mode-hydra
+  (treemacs-mode
+   ("Project"
+    (
+     ;; ("p" matcha-projectile/body "Projectile")
+     ("c" treemacs-add-project-to-workspace "Create Project")
+     ("d" treemacs-remove-project-from-workspace "Delete Project")
+     )
+	"All"
+	(("h"  treemacs--common-helpful-hydra/body "Hydra.."))
+    "Workspace"
+    (("s" treemacs-switch-workspace "Switch" )
+     ("e" treemacs-edit-workspaces "Edit" ))
+    "Width"
+    (("w" treemacs-toggle-fixed-width "Toggle variable width" ))))
+
+  :bind ( :map treemacs-mode-map
+			   ("<mouse-5>" . treemacs-rightclick-menu)
+               ("<mouse-4>" . treemacs-rightclick-menu)
+               ("<f5>" . treemacs-switch-workspace)
+               ("<C-f5>" . treemacs-edit-workspaces))
+  :hook (treemacs-mode . treemacs-mwb-mouse))
+#+end_src
+
+* Projectile
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210811T192501.322521
+:END:
+#+NAME: org_mark_mini20.local_20210811T192501.299143
+#+begin_src emacs-lisp
+(use-package-elpa treemacs-projectile
+  :after treemacs projectile
+  )
+#+end_src
+
+* magit
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210811T192501.320012
+:END:
+#+NAME: org_mark_mini20.local_20210811T192501.299460
+#+begin_src emacs-lisp
+(use-package-elpa treemacs-magit
+  :after treemacs magit)
+#+end_src
+* Debug
+:PROPERTIES:
+:ID:       org_mark_2020-11-14T12-12-03+00-00_mini12.local:4F9B14A7-978B-4BF7-A64E-41B8EE921099
+:END:
+I get
+Error running timer ‘treemacs--process-file-events’: (wrong-type-argument sequencep t)
+So from https://github.com/Alexander-Miller/treemacs/issues/168

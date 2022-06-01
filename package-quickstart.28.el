@@ -12879,38 +12879,14 @@ what diminished modes would be on the mode-line if they were still minor." t nil
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/deadgrep-20220209.719/deadgrep-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/deadgrep-20220209.719/deadgrep-autoloads.el"))
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/deadgrep-20220209.719/deadgrep-autoloads.el") (car load-path))))
-
-
-
-(autoload 'deadgrep "deadgrep" "\
-Start a ripgrep search for SEARCH-TERM in DIRECTORY.
-
-If not provided, DIR defaults to the directory as determined by
-`deadgrep-project-root-function'.
-
-See also `deadgrep-project-root-overrides'.
-
-If called with a prefix argument, create the results buffer but
-don't actually start the search.
-
-\(fn SEARCH-TERM &optional DIRECTORY)" t nil)
-
-(register-definition-prefixes "deadgrep" '("deadgrep-"))
-
-
-)
 (let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/company-20220328.155/company-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/company-20220328.155/company-autoloads.el"))
 
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/company-20220328.155/company-autoloads.el") (car load-path))))
+  (add-to-list 'load-path (directory-file-name
+                           (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/company-20220328.155/company-autoloads.el") (car load-path))))
 
-
+  
 
-(autoload 'company-mode "company" "\
+  (autoload 'company-mode "company" "\
 \"complete anything\"; is an in-buffer completion framework.
 Completion starts automatically, depending on the values
 `company-idle-delay' and `company-minimum-prefix-length'.
@@ -12954,9 +12930,9 @@ keymap during active completions (`company-active-map'):
 
 \(fn &optional ARG)" t nil)
 
-(put 'global-company-mode 'globalized-minor-mode t)
+  (put 'global-company-mode 'globalized-minor-mode t)
 
-(defvar global-company-mode nil "\
+  (defvar global-company-mode nil "\
 Non-nil if Global Company mode is enabled.
 See the `global-company-mode' command
 for a description of this minor mode.
@@ -12964,9 +12940,9 @@ Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `global-company-mode'.")
 
-(custom-autoload 'global-company-mode "company" nil)
+  (custom-autoload 'global-company-mode "company" nil)
 
-(autoload 'global-company-mode "company" "\
+  (autoload 'global-company-mode "company" "\
 Toggle Company mode in all buffers.
 With prefix ARG, enable Global Company mode if ARG is positive;
 otherwise, disable it.
@@ -12982,174 +12958,174 @@ See `company-mode' for more information on Company mode.
 
 \(fn &optional ARG)" t nil)
 
-(autoload 'company-manual-begin "company" nil t nil)
+  (autoload 'company-manual-begin "company" nil t nil)
 
-(autoload 'company-complete "company" "\
+  (autoload 'company-complete "company" "\
 Insert the common part of all candidates or the current selection.
 The first time this is called, the common part is inserted, the second
 time, or when the selection has been changed, the selected candidate is
 inserted." t nil)
 
-(register-definition-prefixes "company" '("company-"))
+  (register-definition-prefixes "company" '("company-"))
 
-
+  
 
-(autoload 'company-abbrev "company-abbrev" "\
+  (autoload 'company-abbrev "company-abbrev" "\
 `company-mode' completion backend for abbrev.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
 
-(register-definition-prefixes "company-abbrev" '("company-abbrev-insert"))
+  (register-definition-prefixes "company-abbrev" '("company-abbrev-insert"))
 
-
+  
 
-(autoload 'company-bbdb "company-bbdb" "\
+  (autoload 'company-bbdb "company-bbdb" "\
 `company-mode' completion backend for BBDB.
 
 \(fn COMMAND &optional ARG &rest IGNORE)" t nil)
 
-(register-definition-prefixes "company-bbdb" '("company-bbdb-"))
+  (register-definition-prefixes "company-bbdb" '("company-bbdb-"))
 
-
+  
 
-(register-definition-prefixes "company-capf" '("company-"))
+  (register-definition-prefixes "company-capf" '("company-"))
 
-
+  
 
-(register-definition-prefixes "company-clang" '("company-clang"))
+  (register-definition-prefixes "company-clang" '("company-clang"))
 
-
+  
 
-(register-definition-prefixes "company-cmake" '("company-cmake"))
+  (register-definition-prefixes "company-cmake" '("company-cmake"))
 
-
+  
 
-(autoload 'company-css "company-css" "\
+  (autoload 'company-css "company-css" "\
 `company-mode' completion backend for `css-mode'.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
 
-(register-definition-prefixes "company-css" '("company-css-"))
+  (register-definition-prefixes "company-css" '("company-css-"))
 
-
+  
 
-(autoload 'company-dabbrev "company-dabbrev" "\
+  (autoload 'company-dabbrev "company-dabbrev" "\
 dabbrev-like `company-mode' completion backend.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
 
-(register-definition-prefixes "company-dabbrev" '("company-dabbrev-"))
+  (register-definition-prefixes "company-dabbrev" '("company-dabbrev-"))
 
-
+  
 
-(autoload 'company-dabbrev-code "company-dabbrev-code" "\
+  (autoload 'company-dabbrev-code "company-dabbrev-code" "\
 dabbrev-like `company-mode' backend for code.
 The backend looks for all symbols in the current buffer that aren't in
 comments or strings.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
 
-(register-definition-prefixes "company-dabbrev-code" '("company-dabbrev-code-"))
+  (register-definition-prefixes "company-dabbrev-code" '("company-dabbrev-code-"))
 
-
+  
 
-(autoload 'company-elisp "company-elisp" "\
+  (autoload 'company-elisp "company-elisp" "\
 `company-mode' completion backend for Emacs Lisp.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
 
-(register-definition-prefixes "company-elisp" '("company-elisp-"))
+  (register-definition-prefixes "company-elisp" '("company-elisp-"))
 
-
+  
 
-(autoload 'company-etags "company-etags" "\
+  (autoload 'company-etags "company-etags" "\
 `company-mode' completion backend for etags.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
 
-(register-definition-prefixes "company-etags" '("company-etags-"))
+  (register-definition-prefixes "company-etags" '("company-etags-"))
 
-
+  
 
-(autoload 'company-files "company-files" "\
+  (autoload 'company-files "company-files" "\
 `company-mode' completion backend existing file names.
 Completions works for proper absolute and relative files paths.
 File paths with spaces are only supported inside strings.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
 
-(register-definition-prefixes "company-files" '("company-file"))
+  (register-definition-prefixes "company-files" '("company-file"))
 
-
+  
 
-(autoload 'company-gtags "company-gtags" "\
+  (autoload 'company-gtags "company-gtags" "\
 `company-mode' completion backend for GNU Global.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
 
-(register-definition-prefixes "company-gtags" '("company-gtags-"))
+  (register-definition-prefixes "company-gtags" '("company-gtags-"))
 
-
+  
 
-(autoload 'company-ispell "company-ispell" "\
+  (autoload 'company-ispell "company-ispell" "\
 `company-mode' completion backend using Ispell.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
 
-(register-definition-prefixes "company-ispell" '("company-ispell-"))
+  (register-definition-prefixes "company-ispell" '("company-ispell-"))
 
-
+  
 
-(autoload 'company-keywords "company-keywords" "\
+  (autoload 'company-keywords "company-keywords" "\
 `company-mode' backend for programming language keywords.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
 
-(register-definition-prefixes "company-keywords" '("company-keywords-"))
+  (register-definition-prefixes "company-keywords" '("company-keywords-"))
 
-
+  
 
-(autoload 'company-nxml "company-nxml" "\
+  (autoload 'company-nxml "company-nxml" "\
 `company-mode' completion backend for `nxml-mode'.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
 
-(register-definition-prefixes "company-nxml" '("company-nxml-"))
+  (register-definition-prefixes "company-nxml" '("company-nxml-"))
 
-
+  
 
-(autoload 'company-oddmuse "company-oddmuse" "\
+  (autoload 'company-oddmuse "company-oddmuse" "\
 `company-mode' completion backend for `oddmuse-mode'.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
 
-(register-definition-prefixes "company-oddmuse" '("company-oddmuse-"))
+  (register-definition-prefixes "company-oddmuse" '("company-oddmuse-"))
 
-
+  
 
-(autoload 'company-semantic "company-semantic" "\
+  (autoload 'company-semantic "company-semantic" "\
 `company-mode' completion backend using CEDET Semantic.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
 
-(register-definition-prefixes "company-semantic" '("company-semantic-"))
+  (register-definition-prefixes "company-semantic" '("company-semantic-"))
 
-
+  
 
-(register-definition-prefixes "company-template" '("company-template-"))
+  (register-definition-prefixes "company-template" '("company-template-"))
 
-
+  
 
-(autoload 'company-tempo "company-tempo" "\
+  (autoload 'company-tempo "company-tempo" "\
 `company-mode' completion backend for tempo.
 
 \(fn COMMAND &optional ARG &rest IGNORED)" t nil)
 
-(register-definition-prefixes "company-tempo" '("company-tempo-"))
+  (register-definition-prefixes "company-tempo" '("company-tempo-"))
 
-
+  
 
-(autoload 'company-tng-frontend "company-tng" "\
+  (autoload 'company-tng-frontend "company-tng" "\
 When the user changes the selection at least once, this
 frontend will display the candidate in the buffer as if it's
 already there and any key outside of `company-active-map' will
@@ -13157,10 +13133,10 @@ confirm the selection and finish the completion.
 
 \(fn COMMAND)" nil nil)
 
-(define-obsolete-function-alias 'company-tng-configure-default 'company-tng-mode "0.9.14" "\
+  (define-obsolete-function-alias 'company-tng-configure-default 'company-tng-mode "0.9.14" "\
 Applies the default configuration to enable company-tng.")
 
-(defvar company-tng-mode nil "\
+  (defvar company-tng-mode nil "\
 Non-nil if Company-Tng mode is enabled.
 See the `company-tng-mode' command
 for a description of this minor mode.
@@ -13168,9 +13144,9 @@ Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
 or call the function `company-tng-mode'.")
 
-(custom-autoload 'company-tng-mode "company-tng" nil)
+  (custom-autoload 'company-tng-mode "company-tng" nil)
 
-(autoload 'company-tng-mode "company-tng" "\
+  (autoload 'company-tng-mode "company-tng" "\
 This minor mode enables `company-tng-frontend'.
 
 This is a minor mode.  If called interactively, toggle the
@@ -13189,11 +13165,11 @@ it is disabled.
 
 \(fn &optional ARG)" t nil)
 
-(register-definition-prefixes "company-tng" '("company-tng-"))
+  (register-definition-prefixes "company-tng" '("company-tng-"))
 
-
+  
 
-(autoload 'company-yasnippet "company-yasnippet" "\
+  (autoload 'company-yasnippet "company-yasnippet" "\
 `company-mode' backend for `yasnippet'.
 
 This backend should be used with care, because as long as there are
@@ -13218,12 +13194,12 @@ shadow backends that come after it.  Recommended usages:
 
 \(fn COMMAND &optional ARG &rest IGNORE)" t nil)
 
-(register-definition-prefixes "company-yasnippet" '("company-yasnippet-"))
+  (register-definition-prefixes "company-yasnippet" '("company-yasnippet-"))
 
-
+  
 
-
-)
+  
+  )
 (let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/company-quickhelp-20211115.1335/company-quickhelp-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/company-quickhelp-20211115.1335/company-quickhelp-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -14005,7 +13981,7 @@ mode.
 )
 (setq package-activated-list
 	  (append
-	   '(zoutline yasnippet yaml-mode xterm-color xr ws-butler with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit-section magit treemacs-magit treemacs-icons-dired transient-posframe toc-org ivy swiper swift-mode f spinner markdown-mode lsp-mode swift-helpful all-the-icons powerline spaceline memoize spaceline-all-the-icons sml-mode smartparens prescient selectrum selectrum-prescient request rainbow-delimiters racket-mode python-mode pretty-hydra pos-tip popup epl pkg-info persistent-scratch paredit packed outorg outshine org-bullets kv esxml nov mwim modus-themes minions mini-frame math-symbol-lists marginalia makey major-mode-hydra macrostep list-utils iedit lispy lisp-extra-font-lock keyfreq json-snatcher hierarchy json-navigator json-mode ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine git-messenger git-gutter gcmh fsharp-mode free-keys flycheck flycheck-swift fish-mode expand-region eval-in-repl eros clang-format emr embark consult embark-consult elmacro dtrt-indent dockerfile-mode discover-my-major dired-hacks-utils dired-subtree diminish deadgrep company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 cmake-mode cask-mode calibredb bison-mode beacon auto-compile amx all-the-icons-completion aggressive-indent)
+	   '(zoutline yasnippet yaml-mode xterm-color xr ws-butler with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit-section magit treemacs-magit treemacs-icons-dired transient-posframe toc-org ivy swiper swift-mode f spinner markdown-mode lsp-mode swift-helpful all-the-icons powerline spaceline memoize spaceline-all-the-icons sml-mode smartparens prescient selectrum selectrum-prescient request rainbow-delimiters racket-mode python-mode pretty-hydra pos-tip popup epl pkg-info persistent-scratch paredit packed outorg outshine org-bullets kv esxml nov mwim modus-themes minions mini-frame math-symbol-lists marginalia makey major-mode-hydra macrostep list-utils iedit lispy lisp-extra-font-lock keyfreq json-snatcher hierarchy json-navigator json-mode ignoramus ibuffer-vc highlight-indent-guides elisp-refs helpful hardhat git-timemachine git-messenger git-gutter gcmh fsharp-mode free-keys flycheck flycheck-swift fish-mode expand-region eval-in-repl eros clang-format emr embark consult embark-consult elmacro dtrt-indent dockerfile-mode discover-my-major dired-hacks-utils dired-subtree diminish  company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 cmake-mode cask-mode calibredb bison-mode beacon auto-compile amx all-the-icons-completion aggressive-indent)
 	   package-activated-list))
 (progn
   (require 'info)

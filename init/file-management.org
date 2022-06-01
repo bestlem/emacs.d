@@ -344,11 +344,12 @@ Started as file management but actually deals with files and what is in them/ Tr
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:88F75F08-A36B-4A9D-AC7B-B618451935B6
 :END:
 This provides a cover for ripgrep.
-No use a fork to allow search of ignored files.
+Now use a fork to allow search of ignored files.
 #+NAME: org_mark_mini20.local_20220527T140337.009175
 #+begin_src emacs-lisp
 (use-package deadgrep
   :commands deadgrep
+  :mwb-load-path "fork/deadgrep"
   :bind (
 		 :map deadgrep-mode-map
 		 ("<double-mouse-1>" . deadgrep-visit-result-other-window)

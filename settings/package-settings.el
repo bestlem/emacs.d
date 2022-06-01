@@ -85,7 +85,6 @@
 	 nov
 	 ibuffer-vc
 	 projectile
-	 deadgrep
 	 prescient
 	 yasnippet
 	 company

@@ -38,8 +38,10 @@
   - [[#imenu][iMenu]]
   - [[#macos-mouse][Macos mouse]]
   - [[#mouse-3][Mouse 3]]
+  - [[#emacs-context-menu][Emacs context-menu]]
 - [[#hydra][Hydra]]
   - [[#leader-keys][Leader keys]]
+  - [[#ctrl-x-hydra][Ctrl-x hydra]]
   - [[#hydra-transpose][Hydra transpose]]
   - [[#goto][Goto]]
   - [[#search][Search]]
@@ -76,16 +78,7 @@ So quick hack is put mac-key-mode before org-mode, so has to be in config which 
 :PROPERTIES:
 :ID:       org_mark_2020-02-09T19-36-52+00-00_mini12:AB151351-1B6E-4D39-AF9D-74CDDA7DB10E
 :END:
-There is a difference between bind and general in how they report the bindings. general always puts the string through kbd bind does not. The difference is in getting the description. Aquamacs is patched to show the Apple key symbols but bind only shows them if the string is passed through kbd. This can be patched. However Aquamacs is not fully patched, if an of the key is in <> e.g. <f1> then it does not try to reformat the string.
-
-*** TODO Replace the key definition functions with a mwb one that can switch between global-key and the Aquamacs way
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:8C7E2431-4A95-4BA4-B084-93325BB68F14
-:END:
-Use bind-key
-
-??? Oct 2020 I don't understand
-
+There is a difference between bind and general in how they report the bindings. general always puts the string through kbd bind does not. The difference is in getting the description. Aquamacs is patched to show the Apple key symbols but bind only shows them if the string is passed through kbd. This can be patched. However Aquamacs is not fully patched, if an of the key is in <> e.g. <f1> then it does not try to reformat the string. (I think emacs 28 fixes this as modifiers are now outside the <>).
 *** Emacs versions
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210819T115433.266731
@@ -145,7 +138,6 @@ And as per Yah Lee it might be better to not use chords - ie two key presses e.g
 :ID:       org_2020-12-08+00-00:FAFCEE81-16FC-42C8-AC69-6DED2AE1C468
 :END:
 This seems bound to <help> - shades of NeXT
-
 
 * Mac modifier key Bindings
 :PROPERTIES:
@@ -238,22 +230,26 @@ Show the frequency of keys
 (use-package-elpa keyfreq
   :demand
   :init
+  (setq keyfreq-file (concat user-emacs-directory "emacs.keyfreq"))
+  (setq keyfreq-lock (concat user-emacs-directory "emacs.keyfreq.lock"))
   (setq keyfreq-excluded-commands
 		'(self-insert-command
-          org-self-insert-command
-          forward-char
-          backward-char
-          previous-line
-          next-line
-          mac-mwheel-scroll
-          mouse-set-point
-          org-mouse-down-mouse
-          mouse-drag-region
-          ))
+		  org-self-insert-command
+		  forward-char
+		  left-char
+		  right-char
+		  backward-char
+		  previous-line
+		  next-line
+		  mac-mwheel-scroll
+		  mouse-set-point
+		  org-mouse-down-mouse
+		  mouse-drag-region
+		  mwheel-scroll
+		  scroll-bar-toolkit-scroll))
   :config
   (keyfreq-mode 1)
-  (keyfreq-autosave-mode 1)
-  )
+  (keyfreq-autosave-mode 1))
 #+end_src
 * Bindings grouped by topic
 :PROPERTIES:
@@ -475,12 +471,14 @@ Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in e
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:69EED50E-06AD-4068-A0FA-34186BCC8E7D
 :END:
-   From [[https://github.com/abo-abo/hydra/wiki/Emacs][Hydra wiki - Find file with xf]]
-   Not really working as elisp well lispy messes it up and I use Mac bindings so ^x rarer.
-   It does work except lispy
-   Make the x readonly more as it can replace C-x with f19 leader
-   #+NAME: org_mark_2020-03-06T13-08-35+00-00_mini12.local_BE42E0D7-506F-4778-89F9-E4DC4B14493E
-   #+begin_src emacs-lisp
+From [[https://github.com/abo-abo/hydra/wiki/Emacs][Hydra wiki - Find file with xf]]
+ Not really working as elisp well lispy messes it up and I use Mac bindings so ^x rarer.
+  It does work except lispy
+  Make the x readonly more as it can replace C-x with f19 leader
+
+  I don't actually use this and it does not work in minibuffer so remove for now
+#+NAME: org_mark_mini20.local_20220531T094859.603712
+#+begin_src emacs-lisp :tangle no
 (defun x-hydra-pre ()
   (insert "x")
   (let ((timer (timer-create)))
@@ -494,14 +492,6 @@ Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in e
   ("b" (progn (zap-to-char -1 ?x) (ivy-switch-buffer)))
   ("f" (progn (zap-to-char -1 ?x) (counsel-find-file)))
   ("r" (progn (zap-to-char -1 ?x) (counsel-recentf))))
-
-(defhydra x-hydra-readonly ( :color blue
-                            :timeout 2)
-  ("b" ivy-switch-buffer "switch buffer")
-  ("f" counsel-find-file "find-file")
-  ("r" counsel-recentf "recentf")
-  ("w" write-file "write file" )
-  ("x" nil "cancel" :color blue))
 
 (defun mwb-x-key ()
   (interactive)
@@ -528,9 +518,11 @@ There are several things we want mouse-3 to do:
 Aquamacs has the best support. But it hacks flyspell heavily mainly to get macOS dictionary (the main benefit of Aquamacs) but also to show the corrections etc. Then it adds to the flyspell menu the rest of cut and past, google etc.  help:flyspell-emacs-popup and help:aquamacs-popup-context-menu
 Emacs has a couple of maps mouse3-noregion-popup-entries etc
 mac-key-mode has a simple one [[help:mac-key-context-menu]]
-mouse3+ has a more complex setup including if selected a region or not see help:mouse3-popup-menu
+mouse3+ has a more complex setup including if selected a region or not see help:mouse3-popup-menu mouse-3 has an issue in that it should just be customize but the custom values are not just simple select as they are generated.
 
 I think start with Aquamacs copy using non Aquamacs functions and then try to put flyspell on.
+
+Emacs 28 now has context-menu-function . Which seems much simpler. However read what add-hook does when passing in local. It uses a special value to say call the global value.
 
 ** iMenu
 :PROPERTIES:
@@ -545,7 +537,9 @@ Sort the imenu found options in the mouse menu
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20210104T224325.845039
 :END:
-Well Aquamacs at least - and possibly others does an emulate 3 button mouse which stops c-mouse! (and alt)
+Well Aquamacs but not GNU  - does an emulate 3 button mouse which stops c-mouse! (and alt) (macport uses mac-emulate-three-button-mouse which defaults to 'nil)
+
+Note I now have a 3 button mouse so really don't want this.
 #+NAME: org_mark_mini12.local_20210104T224325.807058
 #+begin_src emacs-lisp
 (when *aquamacs*
@@ -558,15 +552,27 @@ Well Aquamacs at least - and possibly others does an emulate 3 button mouse whic
 Try with an enhanced one but test to mouse-4 which might have issues with treemacs but I think the order is OK
 #+NAME: org_mark_mini12.local_20201213T170631.361457
 #+begin_src emacs-lisp
-(unless *aquamacs*
+(unless (or *emacs/>=28p* *aquamacs*)
   (use-package mouse3
 	:demand
-    :mwb-load-path "site-lisp/Emacs_wiki"
-    :preface  (unbind-key  [mouse-3]  macos-key-map)
-    :custom (mouse3-menu-always-flag t)
-    :bind (
-           ("<mouse-4>" . 'mouse3-action-wo-save-then-kill))))
-
+	:mwb-load-path "site-lisp/Emacs_wiki"
+	:preface (unbind-key [mouse-3] macos-key-map)
+	:custom (mouse3-menu-always-flag t)
+	:bind (("<mouse-4>" . 'mouse3-action-wo-save-then-kill))))
+#+end_src
+** Emacs context-menu
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220531T121808.187650
+:END:
+In Emacs 28 Just do context menu.
+Add things like search in google from Aquamacs
+Seems that Macports context menu adds nothing - except using a different NS call which might give a name to menu.
+#+NAME: org_mark_mini20.local_20220531T121808.168747
+#+begin_src emacs-lisp
+(when (and *emacs/>=28p* (not *aquamacs*))
+  (use-feature emacs
+	:init
+	(context-menu-mode 1)))
 #+end_src
 * Hydra
 :PROPERTIES:
@@ -632,8 +638,9 @@ Tried inherit to set f19 s as mode dependant but seems not to work with pretty h
     ("r" backup-walker-start "Backup Walker")
     ("i" consult-imenu "imenu"))
    "Actions"
-   (("D" toggle-debug-on-error "debug on error" :toggle (default-value 'debug-on-error))
-    ("d" hyd-dired-common/body "Open dired frame")
+   (("de" toggle-debug-on-error "debug on error" :toggle (default-value 'debug-on-error))
+	("dg" toggle-debug-on-quit "debug on quit" :toggle (default-value 'debug-on-quit))
+    ("D" hyd-dired-common/body "Open dired frame")
     ("M" toggle-mwb-message-timestamp :toggle mwb-message-timestamp)
     ("p" package-quickstart-refresh "refresh quickstart packages")
     ("q" keyboard-quit-context+ "Quit minibuffer etc")
@@ -646,8 +653,24 @@ Tried inherit to set f19 s as mode dependant but seems not to work with pretty h
     ("w" narrow-or-widen-dwim "Narrow or Widen")
     ;; ("s" org-babel-tangle-jump-to-org "Back to org")
     ("j" dired-jump "Dired jump"))))
-(bind-key "H-`"  'hydra-kl/body)
 (bind-key "<f19>"  'hydra-kl/body)
+#+end_src
+** Ctrl-x hydra
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220601T145842.185461
+:END:
+Remove need for C-x keys
+#+NAME: org_mark_mini20.local_20220601T145842.163332
+#+begin_src emacs-lisp
+(pretty-hydra-define x-hydra-readonly (:title "^X functions"
+											  :color blue
+											  :timeout 2)
+  ("Files"
+   (("b" consult-buffer "switch buffer")
+	("f" mac-key-open-file "find-file")
+	("r" consult-recent-file "recentf")
+	("w" write-file "write file")
+	("x" nil "cancel" :color blue))))
 #+end_src
 ** Hydra transpose
 :PROPERTIES:

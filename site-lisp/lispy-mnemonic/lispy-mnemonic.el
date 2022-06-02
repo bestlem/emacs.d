@@ -148,11 +148,10 @@
 (require 'lispy)
 (require 'hydra)
 (require 'pretty-hydra)
+(require 'use-package)
+(require 'expand-region)
 
-(declare-function bind-key 'bind-key)
 (declare-function aquamacs-undo 'aquamacs-redo)
-(declare-function er/expand-region 'expand-region)
-(declare-function er/contract-region 'expand-region)
 
 (defgroup lispy-mnemonic nil
   "Mnemonic key bindings for Lispy."
@@ -183,6 +182,7 @@
 ;;; Hydra ;;;
 ;;;;;;;;;;;;;
 
+;; Call any time so major mode menu or a
 (pretty-hydra-define hydra-lispy-mwb-alter
   (:foreign-keys run
 				 :title "☾☽ Lispy Alter"
@@ -203,6 +203,7 @@
    ( ("o" lispy-oneline "one line")
      ("m" lispy-multiline "multiple lines"))))
 
+;; special key r or E and majur node
 (pretty-hydra-define hydra-lispy-mwb-run
   (:foreign-keys run
 				 :title "☾☽ Lispy Run"
@@ -219,9 +220,9 @@
     ("i" lispy-eval-and-insert "insert")
     ("c" lispy-eval-and-comment "comment"))))
 
-
+;; Mark only in special - key is m
 (pretty-hydra-define hydra-lispy-mwb-mark
-  (:foreign-keys warn
+  (:foreign-keys nil
 				 :title "☾☽ Lispy Play with regions"
 				 :quit-key "q")
   ("Lispy move"
@@ -246,14 +247,15 @@
     ("<" lispy-barf nil))
    "actions"
    (("a" hydra-lispy-mwb-alter/body "Alter...")
-    ("x" clipboard-kill-region "cut")
+    ("x" clipboard-kill-region "cut" :exit t)
+	("c" clipboard-kill-ring-save "copy" :exit t)
     ("z" aquamacs-undo "undo"))))
 
 
 (pretty-hydra-define hydra-lispy-mwb-goto
-    (:foreign-keys run
-     :title "☾☽ Lispy goto"
-     :quit-key "q")
+  (:foreign-keys run
+				 :title "☾☽ Lispy goto"
+				 :quit-key "q")
   ("Lispy goto"
    (("a" lispy-goto-def-ace "ace")
     ("d" lispy-goto-def-down "down")
@@ -275,6 +277,7 @@
     ("d" lispy-goto-def-ace "definition")
     ("t" lispy-teleport "teleport"))))
 
+;; Call in special mode
 (defhydra hydra-lispy-outline ()
   "Lispy outline"
   ("i" lispy-tab "tab")
@@ -285,24 +288,14 @@
   ("l" lispy-outline-left "left")
   ("r" lispy-outline-right "right"))
 
-
-
-
-
-
 ;;;;;;;;;;;;;;;;;;;;
 ;;; Key Bindings ;;;
 ;;;;;;;;;;;;;;;;;;;;
-
-
-
-
 
 ;;  See racket paredit use a minor mode after this
 ;; (if (eq major-mode 'racket-mode)
 ;;     (define-key lispy-mnemonic-mode-map (kbd "[") 'racket-lispy-smart-open-bracket)
 ;;   (define-key lispy-mnemonic-mode-map (kbd "[") 'lispy-brackets))
-
 
 ;; swap
 (bind-key "[" 'lispy-brackets lispy-mnemonic-mode-map)
@@ -343,6 +336,7 @@
 ;; (lispy-define-key lispy-mnemonic-mode-map (kbd "<") 'hydra-lispy-slurp/body)
 (lispy-define-key lispy-mnemonic-mode-map (kbd "d") 'lispy-down)
 (lispy-define-key lispy-mnemonic-mode-map (kbd "l") 'lispy-left)
+(lispy-define-key lispy-mnemonic-mode-map (kbd "m") 'hydra-lispy-mwb-mark/body)
 (lispy-define-key lispy-mnemonic-mode-map (kbd "n") 'lispy-forward)
 (lispy-define-key lispy-mnemonic-mode-map (kbd "o") 'lispy-occur)
 (lispy-define-key lispy-mnemonic-mode-map (kbd "p") 'lispy-backward)
@@ -353,13 +347,12 @@
 (lispy-define-key lispy-mnemonic-mode-map (kbd "w") 'lispy-new-copy)
 (lispy-define-key lispy-mnemonic-mode-map (kbd "x") 'hydra-lispy-x/body)
 (lispy-define-key lispy-mnemonic-mode-map (kbd "z") 'lispy-repeat)
+
 ;; (lispy-define-key lispy-mnemonic-mode-map (kbd "*") 'pop-tag-mark)
 ;; (lispy-define-key lispy-mnemonic-mode-map (kbd "/") 'lispy-undo)
 
 ;; A-Z
-
 ;; (lispy-define-key lispy-mnemonic-mode-map (kbd "F") 'hydra-lispy-format/body)
-(lispy-define-key lispy-mnemonic-mode-map (kbd "M") 'hydra-lispy-mwb-mark/body)
 (lispy-define-key lispy-mnemonic-mode-map (kbd "O") 'hydra-lispy-outline/body)
 ;; (lispy-define-key lispy-mnemonic-mode-map (kbd "R") 'hydra-lispy-raise/body)
 (lispy-define-key lispy-mnemonic-mode-map (kbd "D") 'lispy-describe)

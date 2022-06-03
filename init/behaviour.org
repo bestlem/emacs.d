@@ -13,18 +13,23 @@
 The Garbage Collector Magic Hack
 This seems to be a more consistent way so can replace other bits
 The only bit to stay is after-init
-Note that gcmh cannot explicitly reduce the memory it does this when it gcs, which might be wrong - it assumes you do not gc during a process
+Note that gcmh cannot explicitly reduce the memory it does this when it gcs, which might be wrong - it assumes you do not gc during a process.
+
+Note I now get a pizza wheel using the defaults ie might be better to have more often smaller gc
 #+NAME: org_2020-12-08+00-00_C06FD610-2FD2-4E60-94B2-33A789850588
 #+begin_src emacs-lisp
 (use-package-elpa  gcmh
   :diminish
   :defer 5
   :config
-  (setq gcmh-high-cons-threshold (* 128 1024 1024)) ; reduces as I got a 10G
+  ;; (setq gcmh-high-cons-threshold (* 128 1024 1024))
+                                        ; reduces as I got a 10G
                                         ; monster
-  (setq gcmh-low-cons-threshold (* 1024 1024)) ; originally 800000 - increas
+  ;; (setq gcmh-low-cons-threshold (* 1024 1024))
+                                        ; originally 800000 - increas
                                         ; because of gnus
   ;; (setq gcmh-verbose 't)
+  (setq gcmh-idle-delay 15)
   (gcmh-mode 1))
 #+end_src
 
@@ -124,12 +129,12 @@ So use separate PRIMARY and CLIPBOARD - hmm That is old emacs.
 
 Doing Racket repl copying from pdf I want mouse-2 to work so change back. Actually comint (ie REPL) behaves differently mouse-2 is M-n sort of)
 
-  #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_D91D1B0C-20B5-4AEF-8E53-7056B6CE706F
-  #+begin_src emacs-lisp
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_D91D1B0C-20B5-4AEF-8E53-7056B6CE706F
+#+begin_src emacs-lisp
 (delete-selection-mode 1)
 (setq select-enable-clipboard t)
 (setq select-enable-primary nil)
-  #+end_src
+#+end_src
 
 * Double Letters
 :PROPERTIES:
@@ -160,7 +165,6 @@ Single Capitals as you type. "
 	(remove-hook 'post-self-insert-hook #'dcaps-to-scaps 'local)))
 
 (add-hook 'text-mode-hook #'dubcaps-mode)
-
 #+end_src
 * Comments
 :PROPERTIES:

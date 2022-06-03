@@ -14,6 +14,7 @@ This covers what emacs looks like and how windows/frames/menus behave
 :END:
 Set the actual fonts to be used
 Altering the size of variable-font seems to change the size of fixed-font - How?
+Note this shows up in org-mode compare code to text - so have to make fixed-font a proportion of variable-font even though no direct comparison
 #+NAME: org_2020-12-06+00-00_87B9331B-36CE-4ED5-B82C-E637E0A4BE9A
 #+begin_src emacs-lisp
 (require 'cl-lib)
@@ -35,8 +36,8 @@ Altering the size of variable-font seems to change the size of fixed-font - How?
   (set-face-attribute 'default nil
                       :height 130
                       :family font-found)
-  ;; Monospaced typeface
-  (set-face-attribute 'fixed-pitch nil :family font-found :height 1.0))
+  ;; Monospaced typeface - not default
+  (set-face-attribute 'fixed-pitch nil :family font-found :height 0.8))
 
 (let ((font-found (font-candidate
                    "Georgia"

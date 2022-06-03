@@ -1331,8 +1331,8 @@ From my [[https://emacs.stackexchange.com/q/50488/9874][SO question]] and based 
 	(insert "# This is a generated file do not edit\n"))
    ((f-ext? (buffer-file-name) "el")
 	(goto-char (point-min))
-	(insert ";;; -*- lexical-binding: t -*-\n")
-	(insert ";;; This is a generated file do not edit\n"))
+	(insert ";; -*- lexical-binding: t -*-\n")
+	(insert ";; This is a generated file do not edit\n"))
    (t
 	nil))
   (save-buffer))

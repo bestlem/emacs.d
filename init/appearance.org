@@ -158,6 +158,7 @@ but the answer below has an interesting suggestion
 #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_68F04D98-3C61-4F98-9CC1-F4E152D2A007
 #+begin_src emacs-lisp
 (use-package hl-line
+  :defer 5
   :if window-system
   :preface
   (defun my-hl-line-range-function ()
@@ -187,7 +188,8 @@ Hopefully searches will expand org-mode
 #+NAME: org_mark_mini20.local_20210802T104243.783283
 #+begin_src emacs-lisp
 (use-feature reveal
-  :config (reveal-mode 1))
+  :defer 1
+  :config (global-reveal-mode 1))
 #+end_src
 * Windows
 :PROPERTIES:
@@ -401,3 +403,8 @@ vivendi is dark
   (modus-themes-load-vivendi)
   )
 #+end_src
+*** TODO Prism
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220604T093552.919193
+:END:
+See https://github.com/alphapapa/prism.el/issues/8 to add

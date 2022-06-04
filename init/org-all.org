@@ -255,13 +255,13 @@ This describes how the org file is shown I think 9.4 altered this
 #+begin_src emacs-lisp :tangle no
 (org-startup-folded 'fold)
 #+end_src
-** Hide property drawers
+** TODO Hide property drawers
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210131T001131.889643
 :END:
 From [[https://stackoverflow.com/a/17492723/151019][SO]] override org function
 OK need to hide #+name and also make the properties visible
-
+ALso see https://github.com/amno1/org-hide-properties
 #+NAME: org_mark_mini20.local_20210707T094624.575933
 #+begin_src emacs-lisp :tangle no :noweb-ref org-config
 (defun org-cycle-hide-drawers (state)
@@ -300,12 +300,13 @@ OK need to hide #+name and also make the properties visible
                     (outline-flag-region start (point-at-eol) t)
                   (user-error msg))))))))))
 #+end_src
-** Hide #+ lines
+** TODO Hide #+ lines
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210422T091310.119974
 :END:
 Taken from https://github.com/amno1/org-babel-hide-markers-mode and my version adds #+NAME
 TODO add property drawers
+The original has been updated
 #+NAME: org_mark_mini20.local_20210422T091310.076424
 #+begin_src emacs-lisp :tangle no :noweb-ref org-config
 (use-package ob-hide-markers
@@ -1513,6 +1514,7 @@ From [[http://www.howardism.org/Technical/Emacs/orgmode-wordprocessor.html][here
 	#+begin_src emacs-lisp
 (use-package org-indent
   :after (org)
+  :demand
   :ensure nil
   :diminish)
 	#+end_src
@@ -1617,7 +1619,6 @@ Also in org-mouse so must be loaded
 #+begin_src emacs-lisp
 (use-package org-agenda
   :after (org)
-  :demand
   :commands (org-agenda)
   :config
   (progn

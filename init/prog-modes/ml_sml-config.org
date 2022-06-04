@@ -15,8 +15,8 @@ sml-mode from elpa - documentation on sml/nj is old
 Make this one file as loading is now all files.
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_06AB4FFF-E369-48A3-BAED-2DC818FB3C7C
 #+begin_src emacs-lisp
-(use-package sml-mode
-  :ensure t
+(use-package-elpa sml-mode
+  :commands sml-mode
   :bind (:map sml-mode-map
               ("<f5>" . mwb-sml-run-file)
               :map inferior-sml-mode-map
@@ -42,7 +42,8 @@ Separated out
 #+NAME: org_mark_2020-11-10T11-48-28+00-00_mini12.local_8FC71439-07B8-480C-A285-3C0F6AA4192C
 #+begin_src emacs-lisp
 (use-package ob-sml
-  :after (sml-mode)
+  :demand
+  :after (sml-mode org-mode)
   :mwb-load-path "fork/ob-sml")
 #+end_src
 

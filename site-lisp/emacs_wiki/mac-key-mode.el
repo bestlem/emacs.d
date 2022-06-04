@@ -66,9 +66,11 @@
 ;;; Code:
 
 ;; requires redo+
-(require 'redo+)
-(require 'dired)
+;; (require 'redo+)
+;; (require 'dired)
 (require 'bind-key)
+
+(declare-function dired-get-file-for-visit 'dired)
 
 (defgroup mac-key-mode nil
   "Mac-style key-binding mode."
@@ -374,7 +376,7 @@ Default to FILENAME. Restrict dialog with WILDCARDS"
 
 (defun mac-key-quick-look ()
   "Display the Quick Look information for the current line's file.
-You might use dired-mode-hook to use this function in dired mode,
+You might use `dired-mode-hook` to use this function in dired mode,
 like this:
 
     \(add-hook 'dired-mode-hook
@@ -409,7 +411,10 @@ like this:
 ;; Contributed by Dave Peck
 
 (defun mac-key-shift-mouse-select (event)
-  "Set the mark and then move point to the position clicked on with the mouse detailed in EVENT.  This should be bound to a mouse click event type."
+  "Set mark and move to current mouse position.
+Set the mark and then move point to the position clicked on with
+the mouse detailed in EVENT. This should be bound to a mouse
+click event type."
   (interactive "e")
   (mouse-minibuffer-check event)
   (if mark-active (exchange-point-and-mark))

@@ -20,7 +20,7 @@ Note I now get a pizza wheel using the defaults ie might be better to have more 
 #+begin_src emacs-lisp
 (use-package-elpa  gcmh
   :diminish
-  :defer 5
+  :defer 20
   :config
   ;; (setq gcmh-high-cons-threshold (* 128 1024 1024))
                                         ; reduces as I got a 10G
@@ -28,7 +28,7 @@ Note I now get a pizza wheel using the defaults ie might be better to have more 
   ;; (setq gcmh-low-cons-threshold (* 1024 1024))
                                         ; originally 800000 - increas
                                         ; because of gnus
-  ;; (setq gcmh-verbose 't)
+  (setq gcmh-verbose 't)
   (setq gcmh-idle-delay 15)
   (gcmh-mode 1))
 #+end_src
@@ -61,21 +61,22 @@ Make emacs message when it gcs.
  Save registers et al but not the whole desktop
  #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_F7D6DF89-CC2E-4307-991E-2534CFA83732
  #+begin_src emacs-lisp
-(use-package savehist
-    :unless *aquamacs*
-    :config
-    (setq savehist-additional-variables
-		  '(kill-ring
-		    search-ring
-		    regexp-search-ring
-		    last-kbd-macro
-		    kmacro-ring
-		    shell-command-history
-            bookmark-alist
-		    Info-history-list
-		    register-alist))
-    (setq savehist-file (locate-user-emacs-file "savehist.el"))
-    (savehist-mode 1))
+(use-package-elpa savehist
+  :commands savehist-minibuffer-hook savehist-autosave
+  :unless *aquamacs*
+  :config
+  (setq savehist-additional-variables
+		'(kill-ring
+		  search-ring
+		  regexp-search-ring
+		  last-kbd-macro
+		  kmacro-ring
+		  shell-command-history
+          bookmark-alist
+		  Info-history-list
+		  register-alist))
+  (setq savehist-file (locate-user-emacs-file "savehist.el"))
+  (savehist-mode 1))
  #+end_src
 ** Registers
 :PROPERTIES:
@@ -221,8 +222,8 @@ There are things like multiple-cursors but iedit sounds simpler
 The hydra did not add anything. Just keep hitting f2
 #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_95AB0DCA-FC55-45BB-A888-847322BD6CA0
 #+begin_src emacs-lisp
-(use-package expand-region
-  :ensure t
+(use-package-elpa expand-region
+  :commands er/expand-region
   :bind ("C-=" . er/expand-region)
   ("<f2>" . er/expand-region)
   ("<S-f2>" . er/contract-region)
@@ -245,11 +246,10 @@ mwin seems the current winner
 mwin might have mode aware
 #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_DBEC557B-9FAB-458C-AACF-C315E3DCB0FB
 #+begin_src emacs-lisp
-(use-package mwim
-  :ensure t
-  :demand                               ; Need to get binds to work
+(use-package-elpa mwim
+  ;; :demand                        ; Need to get binds to work
   :commands (mwim-beginning mwim-end)
-  :config
+  :init
   (bind-key mwbkey-home 'mwim-beginning)
   (bind-key mwbkey-end 'mwim-end))
 #+end_src
@@ -328,6 +328,7 @@ mwin might have mode aware
 #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_5C4ABBCE-2400-4CD9-8740-96E9FD163C43
 #+begin_src emacs-lisp
 (use-package hardhat                    ; Protect user-writable files
+  :demand
   :ensure t
   :init (setq hardhat-basename-protected-regexps
               '("~\\'"

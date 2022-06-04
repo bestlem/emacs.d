@@ -478,16 +478,14 @@ Well not really lisp but much can be converted to it
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:6504C53C-4A9B-40A2-B2DE-8FEA72ED025C
 :END:
-	#+begin_src emacs-lisp
-(use-package elmacro
-  :ensure t
-  :demand
+#+NAME: org_mark_mini20.local_20220604T163149.473995
+#+begin_src emacs-lisp
+(use-package-elpa elmacro
   :commands (elmacro-mode
-	     elmacro-show-last-macro
-	     elmacro-show-last-commands
-	     elmacro-mode-on))
-
-	#+end_src
+			 elmacro-show-last-macro
+			 elmacro-show-last-commands
+			 elmacro-mode-on))
+#+end_src
 *** Hydra for macros
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:AAFEA2AA-603E-4FDA-8D33-A57C9CDC5077

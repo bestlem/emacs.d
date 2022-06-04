@@ -81,25 +81,28 @@ I have lispy working in racket
 Also its global mode messes up org-mode so disable - but it is somewhere in python
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_A84231FF-A68D-44B0-9010-3CD91C8B2DA4
 #+begin_src emacs-lisp
-(use-package smartparens
-  :ensure t
+(use-package-elpa smartparens
+  :commands sp-with-modes
+  sp-local-pair
+  smartparens-mode
+  turn-off-smartparens-mode
   :diminish smartparens-mode
   :bind (:map smartparens-mode-map
-			  ("M-(" . sp-wrap-round)
-			  ("M-[" . sp-wrap-square)
-			  ("M-{" . sp-wrap-curly)
-			  ("H-M-<backspace>" . sp-unwrap-sexp) ;; in macporst this is
-			  ;; what the M-delete maps to
-			  ("M-<backspace>" . sp-backward-unwrap-sexp)
-			  ;; from jp-smartparens
-			  ("M-<right>" . sp-forward-slurp-sexp)
-			  ("M-<left>" . sp-forward-barf-sexp)
-			  ("M-S-<right>" . sp-backward-slurp-sexp)
-			  ("M-S-<left>" . sp-backward-slurp-sexp)
-			  ("M-<up>" . sp-raise-sexp)
-			  ("C-k" . sp-kill-hybrid-sexp)
-			  ("C-M-f" . sp-forward-sexp)
-			  ("C-M-b" . sp-backward-sexp))
+		 ("M-(" . sp-wrap-round)
+		 ("M-[" . sp-wrap-square)
+		 ("M-{" . sp-wrap-curly)
+		 ("H-M-<backspace>" . sp-unwrap-sexp) ;; in macporst this is
+		 ;; what the M-delete maps to
+		 ("M-<backspace>" . sp-backward-unwrap-sexp)
+		 ;; from jp-smartparens
+		 ("M-<right>" . sp-forward-slurp-sexp)
+		 ("M-<left>" . sp-forward-barf-sexp)
+		 ("M-S-<right>" . sp-backward-slurp-sexp)
+		 ("M-S-<left>" . sp-backward-slurp-sexp)
+		 ("M-<up>" . sp-raise-sexp)
+		 ("C-k" . sp-kill-hybrid-sexp)
+		 ("C-M-f" . sp-forward-sexp)
+		 ("C-M-b" . sp-backward-sexp))
   :config
   (setq sp-show-pair-from-inside nil)
   (require 'smartparens-config)
@@ -380,6 +383,7 @@ As racket is broken and sml had oddities with ; and emacs really does not need i
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_A713576B-1958-4B3A-B268-DC65DC07499C
 #+BEGIN_SRC emacs-lisp
 (use-package eval-in-repl
+  :disabled
   :ensure t
   :config
   (setq mwb-repl-region-key "<f6>"))
@@ -390,7 +394,9 @@ As racket is broken and sml had oddities with ; and emacs really does not need i
 :END:
 This is simple and works. Extended by me to send whole buffer and not switch on key but mode.
 Have working base function
-BUT the propblem is that if does selection of method by the keymap in each mode so each mode has to be bound. Better if it called one function that decided via a alist what to do. ALso need to set up send buffer, or defun or line or sexp. Might also have an issue it is too low level - e.g.
+BUT the problem is that if does selection of method by the keymap in each mode so each mode has to be bound. Better if it called one function that decided via a alist what to do. ALso need to set up send buffer, or defun or line or sexp. Might also have an issue it is too low level - e.g.
+
+Now turned off as not used
 #+NAME: org_mark_2020-02-10T11-53-11+00-00_mini12_F4F528CB-9078-4C05-B2A0-23ADCA372044
 #+BEGIN_SRC emacs-lisp
 (use-package  eval-in-repl-ielm
@@ -403,7 +409,7 @@ BUT the propblem is that if does selection of method by the keymap in each mode 
 #+END_SRC
 However I can't use that for a send to buffer as the map from mode to function is via the keymap
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_D26ABD27-104F-449D-BF75-31B81F383CC5
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (setq eir--assoc '())
 
 (defun eir-mwb-send-to-repl ()
@@ -440,7 +446,8 @@ Note this is not the internal mode. It is from Emacs wiki as I like the interact
 Now I have no idea if it works
 #+NAME: org_mark_2020-11-05T12-42-05+00-00_mini12.local_CBD5D985-056C-4F30-B876-4311EB15D93A
 #+begin_src emacs-lisp
-(use-package sql-mode
+(use-feature sql-mode
+  :commands sql-mode
   :mwb-load-path "site-lisp/sql")
 
 

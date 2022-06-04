@@ -129,7 +129,7 @@ Modified to deal with lispy - lispy does not quite do it e.g. [ on a region does
 #+begin_src emacs-lisp
 (use-package racket-mwb-smart-open
     :after racket-mode
-    ;; :demand t
+    :demand t
     :diminish racket-mwb-smart-open-bracket-mode)
 #+end_src
 

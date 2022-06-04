@@ -9,7 +9,7 @@
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210801T131222.157445
 :END:
-This originally was ivy.org but when trying to replace ivy I realised that this was not just command completion but anything involving the minibuffer. 9example is ivy-posframe
+This originally was ivy.org but when trying to replace ivy I realised that this was not just command completion but anything involving the minibuffer. (example is ivy-posframe
 
 
 * Command completion
@@ -36,7 +36,6 @@ General purpose but used for the completion
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_378BD735-5E0C-4075-9ED5-A69FC65B29E4
 #+begin_src emacs-lisp
 (use-package-elpa prescient
-  :demand
   :commands prescient-persist-mode
   :config (prescient-persist-mode 1))
 #+end_src
@@ -48,17 +47,16 @@ General purpose but used for the completion
 Smex is a M-x enhancement for Emacs. Built on top of IDO, it provides a convenient interface to your recently and most frequently used commands. And to all the other commands, too.
 #+end_quote
 
-However smex seems not to be maintained so try amx
+However smex seems not to be maintained so try amx.
+I don't explicitly bind this as 'amx-mode' does this so that needs to be called.
 #+NAME: org_2020-11-30+00-00_28F3664A-77DF-4D77-8554-E9F37CB1815E
 #+begin_src emacs-lisp
 (use-package-elpa amx
-  :defer 2
+  :defer 1
+  :commands amx
   :init
-  (setq amx-history-length  20)
-  (amx-mode 1)
-  ;; :config
-  ;; (amx-debug-mode 1)
-  )
+  (setq amx-history-length 20)
+  (amx-mode 1))
 #+end_src
 ** Emacs mini frame
 :PROPERTIES:
@@ -78,7 +76,6 @@ Well I don't know what the frame parameters are left and width can be proportion
 #+begin_src emacs-lisp
 (when *emacs/>=26p*
   (use-package-elpa mini-frame
-	:demand
 	:init
 	(setq mini-frame-detach-on-hide 'nil
 		  mini-frame-standalone 't)
@@ -127,8 +124,7 @@ Well I don't know what the frame parameters are left and width can be proportion
 	;; (setq mini-frame-show-parameters #'mwb-mini-frame-parameters)
 	(setq mini-frame-completions-show-parameters
 		  #'mwb-mini-frame-completions-parameters)
-	:config
-	(mini-frame-mode 1)))
+	))
 #+end_src
 * Newer
 :PROPERTIES:
@@ -144,7 +140,7 @@ Replace isearch but not so easy as consult-line plus can leave the progress mark
 #+NAME: org_mark_mini20.local_20210804T165415.264578
 #+begin_src emacs-lisp
 (use-package-elpa ctrlf
-  :diabled
+  :disabled
   :init (ctrlf-mode 1)
   :commands (ctrlf-backward-default
 			 ctrlf-forward-default
@@ -162,7 +158,6 @@ Replace isearch but not so easy as consult-line plus can leave the progress mark
 #+begin_src emacs-lisp
 (when *emacs/>=26p*
   (use-package-elpa consult
-	:demand
 	:init
 	(setq register-preview-delay 0
 		  register-preview-function #'consult-register-format)
@@ -181,6 +176,8 @@ Replace isearch but not so easy as consult-line plus can leave the progress mark
 	;;  Delay preview
 	(consult-customize consult-theme consult-buffer
 					   :preview-key '(:debounce 1.0 any))
+	(mini-frame-mode 1)
+	(marginalia-mode 1)
 	:bind (("C-x r x" . consult-register)
 		   ("C-x r b" . consult-bookmark)
 		   ("C-c k" . consult-kmacro)
@@ -196,7 +193,7 @@ Replace isearch but not so easy as consult-line plus can leave the progress mark
 		   ("M-g h" . consult-org-heading)
 		   ("M-g e" . consult-compile-error)
 		   ("M-g f" . consult-flycheck)
-		   ("M-g g" . consult-goto-line) ;; orig. goto-line
+		   ("M-g g" . consult-goto-line)   ;; orig. goto-line
 		   ("M-g M-g" . consult-goto-line) ;; orig. goto-line
 		   ("M-g a" . consult-org-agenda)
 		   ("M-g m" . consult-mark)
@@ -221,7 +218,7 @@ Replace isearch but not so easy as consult-line plus can leave the progress mark
 		   ;; ("M-g l" . consult-line)
 		   ("C-x c SPC" . consult-mark)
 		   :map isearch-mode-map
-		   ("M-e" . consult-isearch) ;; orig. isearch-edit-string
+		   ("M-e" . consult-isearch)   ;; orig. isearch-edit-string
 		   ("M-s e" . consult-isearch) ;; orig. isearch-edit-string
 		   ("M-s l" . consult-line)
 		   :map mac-key-mode-map
@@ -255,11 +252,11 @@ Add decoration/information
   (setq marginalia-annotators
 		'(marginalia-annotators-heavy marginalia-annotators-light))
   (advice-add #'marginalia-cycle :after
-              (lambda () (when (bound-and-true-p selectrum-mode) (selectrum-exhibit))))
+			  (lambda () (when (bound-and-true-p selectrum-mode)
+                      (selectrum-exhibit))))
   :bind (:map minibuffer-local-completion-map
-              ("M-A" . marginalia-cycle)
-              ("C-i" . marginalia-cycle-annotators))
-  :hook (marginalia-mode . all-the-icons-completion-marginalia-setup))
+		 ("M-A" . marginalia-cycle)
+		 ("C-i" . marginalia-cycle-annotators)))
 #+end_src
 ** Embark
 :PROPERTIES:
@@ -325,7 +322,7 @@ Take action in selection buffer
 The display part as vertical list
 #+NAME: org_mark_mini20.local_20210801T174734.748739
 #+begin_src emacs-lisp
-(use-package-elpa selectrum  :init (selectrum-mode +1))
+(use-package-elpa selectrum :defer 2 :init (selectrum-mode +1))
 #+end_src
 *** Prescient
 :PROPERTIES:
@@ -335,6 +332,10 @@ To put in order
 #+NAME: org_mark_mini20.local_20210801T174941.141568
 #+begin_src emacs-lisp
 (use-package-elpa selectrum-prescient
-  :init (selectrum-prescient-mode +1)
+  :demand
+  :init
+  (setq prescient-save-file (mwb-user-emacs-file "var/prescient-save.el"))
+  (selectrum-prescient-mode 1)
+  (prescient-persist-mode +1)
   :after selectrum)
 #+end_src

@@ -21,13 +21,18 @@ This is [[https://github.com/magit/with-editor][with-editor]] Magit calls it - o
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20201222T214721.127535
 :END:
-#+NAME: org_mark_mini12.local_20201222T214721.115179
 jp-git from Jerry Peng and then rest from centuar
-#+NAME: org_mark_mini20.local_20210814T083258.095114
+To load the hydra needs to be available
+** Initial config
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220604T221255.578362
+:END:
+#+NAME: org_mark_mini20.local_20220604T121907.520562
 #+begin_src emacs-lisp
 (use-package-elpa magit
-  :defer 2
+  ;;:defer 2
   :init (setq magit-diff-refine-hunk t)
+  :commands magit-status
   :config
   (setq magit-repository-directories
         '(("~/src/" . 2)
@@ -37,27 +42,29 @@ jp-git from Jerry Peng and then rest from centuar
   (transient-bind-q-to-quit)
 
   <<magit-config>>
-  (pretty-hydra-define+ jp-git
-    (:color teal :quit-key "q"
-			:title (mwb-icon-string "git" "Git"))
-    ("Magit"
-     (("g" mwb-magit-status "status")
-      ("s" mwb-magit-status "status")
-      ("l" magit-log-buffer-file "commit log (current file)")
-      ("L" magit-log-current "commit log (project)")
-      ("B" magit-blame-addition "blame")
-      ("b" magit-branch-popup "branch popup"))
-     "Remote"
-     (("r" magit-rebase-popup "rebase popup")
-      ("f" magit-fetch-popup "fetch popup")
-      ("P" magit-push-popup "push popup")
-      ("F" magit-pull-popup "pull popup")
-      ("W" magit-format-patch "format patch")
-      ("$" magit-process "process"))
-     "Diff"
-     (("d" magit-diff-buffer-file "diff buffer")))))
+
+  :pretty-hydra
+  (jp-git
+   (:color teal :quit-key "q"
+	:title (mwb-icon-string "git" "Git"))
+   ("Magit"
+	(("g" mwb-magit-status "status")
+	 ("s" mwb-magit-status "status")
+	 ("l" magit-log-buffer-file "commit log (current file)")
+	 ("L" magit-log-current "commit log (project)")
+	 ("B" magit-blame-addition "blame")
+	 ("b" magit-branch-popup "branch popup"))
+	"Remote"
+	(("r" magit-rebase-popup "rebase popup")
+	 ("f" magit-fetch-popup "fetch popup")
+	 ("P" magit-push-popup "push popup")
+	 ("F" magit-pull-popup "pull popup")
+	 ("W" magit-format-patch "format patch")
+	 ("$" magit-process "process"))
+	"Diff"
+	(("d" magit-diff-buffer-file "diff buffer")))))
 #+end_src
-*** posframe
+** posframe
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210115T132445.517593
 :END:
@@ -105,7 +112,7 @@ Show choices in posframe
       (advice-add #'transient--show :after #'my-transient-posframe--render-buffer))
     ))
 #+end_src
-*** Prepare for status
+** Prepare for status
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210822T125828.245709
 :END:
@@ -256,7 +263,7 @@ Does not need magit
 #+NAME: org_mark_mini12.local_20201223T212427.538014
 #+begin_src emacs-lisp :tangle no
 (use-package-elpa diff-hl
-  :defer 15
+  :after magit
   :commands (diff-hl-next-hunk diff-hl-previous-hunk diff-hl-revert-hunk )
   :hook ((magit-post-refresh . diff-hl-magit-post-refresh)
 		 (magit-pre-refresh . diff-hl-magit-pre-refresh))
@@ -301,12 +308,12 @@ A minor mode that shows the differences
 Main use if for merge conflicts
 #+NAME: org_mark_mini20.local_20210814T191833.218656
 #+begin_src emacs-lisp
-(use-package smerge-mode
-  :ensure nil
+(use-package-elpa smerge-mode
   :diminish
+  :commands smerge-mode
   :pretty-hydra
   ((:title (mwb-icon-text "diff" "Smerge"  )
-		   :color pink :quit-key "q")
+	:color pink :quit-key "q")
    ("Move"
     (("n" smerge-next "next")
      ("p" smerge-prev "previous"))
@@ -333,8 +340,8 @@ Main use if for merge conflicts
              (bury-buffer))
       "Save and bury buffer" :exit t))))
   :bind (:map smerge-mode-map
-			  ("C-c m" . smerge-mode-hydra/body)
-			  ("<f5>" . smerge-mode-hydra/body))
+		 ("C-c m" . smerge-mode-hydra/body)
+		 ("<f5>" . smerge-mode-hydra/body))
   :hook ((find-file . (lambda ()
                         (save-excursion
                           (goto-char (point-min))

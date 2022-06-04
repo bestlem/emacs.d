@@ -17,7 +17,7 @@ Basically help-fns+ is not what I want even then it is just f1-c
 :END:
 This will be fun as it uses *Help* and I use *Helpful*
 #+NAME: org_2020-12-08+00-00_F53AC824-5902-4E24-B6C7-AC4EC2BA328B
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-feature help-fns+
   :defer 15
   )
@@ -27,10 +27,11 @@ This will be fun as it uses *Help* and I use *Helpful*
 :ID:       org_mark_mini20.local:20210707T131028.187628
 :END:
 Let's use [[https://github.com/Wilfred/helpful][Helpful]] But bind the keys in keys.org
+Although that causes loading issues so done here.
 #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_20EF0E45-D1C2-493C-B710-6E2B48D98DB9
 #+begin_src emacs-lisp
 (use-package-elpa helpful
-  :after help-fns+
+;;  :after help-fns+
   :bind (:map help-map
 			  ;; mine
 			  ("c" . describe-char)
@@ -63,5 +64,6 @@ This package helps to discover the major mode bindings. I use it very occasional
 #+NAME: org_mark_mini20.local_20210526T204803.473143
 #+begin_src emacs-lisp
 (use-package discover-my-major
+  :commands (discover-my-mode discover-my-major)
   :ensure t)
 #+end_src

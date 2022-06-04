@@ -12,9 +12,9 @@
 Might be better in elpy etc as for the pythonic issue.
 #+NAME: org_mark_mini20.local_20210127T110448.825291
  #+begin_src emacs-lisp
-
 (use-package conda
   :mwb-load-path "fork/conda.el"
+  :demand
   :after (python)
   :commands conda-env-activate
   :init

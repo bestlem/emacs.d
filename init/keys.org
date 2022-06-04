@@ -180,22 +180,22 @@ It was disabled as it calls iso-transl to wreck A-/ bindings but fix iso-transl 
    #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_E1F20E36-2E4C-47E8-B20E-F08B7B7F9C77
    #+begin_src emacs-lisp
 (use-package which-key
-    :ensure t
-    :defer 20
-    :config
-    (setq ;; which-key-sort-order 'which-key-key-order-alpha
-     which-key-sort-order 'which-key-description-order
-     which-key-side-window-max-width 0.33
-     which-key-idle-delay 1)
-    ;; (setq which-key-popup-type 'frame) ; fails to f19-f19 otherwise interesting
-    (which-key-mode)
-    (if (>= emacs-major-version 27)
-        (use-package which-key-posframe
-            :ensure t
-            :config
-            (which-key-posframe-mode 1))
-      (which-key-setup-side-window-right-bottom))
-    :diminish which-key-mode)
+  :ensure t
+  :defer 20
+  :config
+  (setq ;; which-key-sort-order 'which-key-key-order-alpha
+   which-key-sort-order 'which-key-description-order
+   which-key-side-window-max-width 0.33
+   which-key-idle-delay 1)
+  ;; (setq which-key-popup-type 'frame) ; fails to f19-f19 otherwise interesting
+  (which-key-mode)
+  (if (>= emacs-major-version 27)
+      (use-package-elpa which-key-posframe
+        :demand
+        :config
+        (which-key-posframe-mode 1))
+    (which-key-setup-side-window-right-bottom))
+  :diminish which-key-mode)
    #+end_src
 ** Display keys in help and menus
 :PROPERTIES:
@@ -215,9 +215,7 @@ Note that you can control what the screen displays A for Alt or ⌥. Emacs is no
 Show unused keys from https://github.com/Fuco1/free-keys
 #+NAME: org_mark_mini20.local_20210601T161324.957225
 #+begin_src emacs-lisp
-(use-package free-keys
-  :ensure t
-  :commands free-keys)
+(use-package-elpa free-keys :commands free-keys)
 #+end_src
 
 ** Log keys
@@ -570,9 +568,7 @@ Seems that Macports context menu adds nothing - except using a different NS call
 #+NAME: org_mark_mini20.local_20220531T121808.168747
 #+begin_src emacs-lisp
 (when (and *emacs/>=28p* (not *aquamacs*))
-  (use-feature emacs
-	:init
-	(context-menu-mode 1)))
+  (context-menu-mode 1))
 #+end_src
 * Hydra
 :PROPERTIES:
@@ -598,7 +594,7 @@ Tried inherit to set f19 s as mode dependant but seems not to work with pretty h
   (interactive)
   (cond ((eq major-mode 'org-mode) (org-edit-special))
         ((bound-and-true-p org-src-mode) (org-edit-src-exit))
-        (t org-babel-tangle-jump-to-org)))
+        (t (org-babel-tangle-jump-to-org))))
 #+end_src
 *** Main map
 :PROPERTIES:

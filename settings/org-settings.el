@@ -22,6 +22,7 @@
 	 ("XXX+" . "#972500")
 	 ("REVIEW" . "#005a5f")
 	 ("DEPRECATED" . "#201f55")))
+ '(org-archive-location "archive/%s_archive::")
  '(org-babel-python-mode 'python-mode t)
  '(org-bullets-bullet-list
    '("⦿" "◉" "◎" "○" "●"))

@@ -7,11 +7,8 @@
 
 * Epub reading
 :PROPERTIES:
-:ID:       org_mark_mini20.local:20220418T103233.377442
+:ID:       org_mark_mini20.local:20220604T172912.415510
 :END:
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:E3F69F7F-65FF-44C2-AA1E-2F74168D8731
-:END
 #+NAME: org_mark_mini20.local_20220418T102925.928951
 #+begin_src emacs-lisp
 (use-package nov

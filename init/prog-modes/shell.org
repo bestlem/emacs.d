@@ -17,8 +17,7 @@ Shell setup and use is in all.oeg
 Needs the mode and interpreter otherwise loads immediately
 #+NAME: org_mark_2020-11-05T13-13-44+00-00_mini12.local_1A77F6D2-CC9A-4B2A-A141-75F9F7A6307A
 #+begin_src emacs-lisp
-(use-package fish-mode
-  :ensure t
+(use-package-elpa fish-mode
   :mode "\\.fish\\'"
   :interpreter "fish")
 #+end_src

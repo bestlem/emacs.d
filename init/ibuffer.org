@@ -14,7 +14,9 @@ There is some comment on internet that other things in ibuffer are a mess. I wou
 
 This setup from [[https://emacs.nasy.moe/#org2ffc7b4][nasy.moe]] and others for the default and [[https://www.reddit.com/r/emacs/comments/64kr02/emacs_workflow_some_guidance_please/][reddit]] for the grouping
 
-However much of the same code appears in many places so I don't know the real source
+However much of the same code appears in many places so I don't know the real source.
+
+On really forcing loading etc this still loads immediately after-init but should be delayed until I request it. So should be redone - perhaps start with bufler from scratch
 
 * Load package
 :PROPERTIES:
@@ -129,3 +131,5 @@ This is from  [[https://www.reddit.com/r/emacs/comments/64kr02/emacs_workflow_so
 (add-hook 'ibuffer-hook 'gk-ibuffer-hook)
 	#+end_src
 
+
+#  LocalWords:  bufler

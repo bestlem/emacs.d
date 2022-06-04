@@ -28,55 +28,6 @@ I need to set the mouse - unfortunately it is in a minor mode map not global so 
     (push `(mac-key-mode-map . ,newmap) minor-mode-overriding-map-alist)))
 #+end_src
 
-** Main menu
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20220601T114847.139794
-:END:
-Treemacs' context menu does not work with emacs 28 context menu.
-Start with a main menu
-#+NAME: org_mark_mini20.local_20220601T114847.133569
-#+begin_src emacs-lisp
-(easy-menu-define treemacs-mode-menu treemacs-mode-map
-  "Menu for `treemacs-mode'."
-  `("Treemacs"
-	("New"
-     ["New File"      treemacs-create-file]
-     ["New Directory" treemacs-create-dir])
-	("Projects"
-	 ["Add Project" treemacs-add-project]
-	 ,@(--map `(,(car it) ,@(funcall (cdr it)))
-	    treemacs--mouse-project-list-functions)
-	 ;; ["Remove Project" treemacs-remove-project-from-workspace :visible ,(check project)]
-	 ;; ["Rename Project" treemacs-rename-project                :visible ,(check project)]
-	 )
-	("Workspaces"
-     ["Edit Workspaces"        treemacs-edit-workspaces]
-     ["Create Workspace"       treemacs-create-workspace]
-     ["Remove Workspace"       treemacs-remove-workspace]
-     ["Rename Workspace"       treemacs-rename-workspace]
-     ["Switch Workspace"       treemacs-switch-workspace]
-     ["Set Fallback Workspace" treemacs-set-fallback-workspace])
-	("Toggles"
-     [,(format "Dotfile Visibility (Currently %s)"
-		(if treemacs-show-hidden-files "Enabled" "Disabled"))
-      treemacs-toggle-show-dotfiles]
-     [,(format "Follow-Mode (Currently %s)"
-		(if treemacs-follow-mode "Enabled" "Disabled"))
-      treemacs-follow-mode]
-     [,(format "Filewatch-Mode (Currently %s)"
-		(if treemacs-filewatch-mode "Enabled" "Disabled"))
-      treemacs-filewatch-mode]
-     [,(format "Fringe-Indicator-Mode (Currently %s)"
-		(if treemacs-fringe-indicator-mode "Enabled" "Disabled"))
-      treemacs-fringe-indicator-mode])
-	("Help"
-     ["Show Helpful Hydra"     treemacs-helpful-hydra]
-     ["Show Active Extensions" treemacs-show-extensions]
-     ["Show Changelog"         treemacs-show-changelog])
-	))
-
-#+end_src
-
 ** Context Menu
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220602T095242.843998
@@ -92,7 +43,6 @@ Emacs 28 look at [[help:prog-context-menu][prog-context-menu]]
 (use-package treemacs
   :ensure t
   ;; :mwb-load-path "fork/treemacs/src/elisp"
-  :demand
   :init
   (setq treemacs-width 50)
   :commands (treemacs treemacs-rightclick-menu)
@@ -160,6 +110,55 @@ Emacs 28 look at [[help:prog-context-menu][prog-context-menu]]
   :hook (treemacs-mode . treemacs-mwb-mouse))
 #+end_src
 
+* Main menu
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220601T114847.139794
+:END:
+Treemacs' context menu does not work with emacs 28 context menu.
+Start with a main menu
+#+NAME: org_mark_mini20.local_20220601T114847.133569
+#+begin_src emacs-lisp :tangle no
+(easy-menu-define treemacs-mode-menu treemacs-mode-map
+  "Menu for `treemacs-mode'."
+  `("Treemacs"
+	("New"
+     ["New File"      treemacs-create-file]
+     ["New Directory" treemacs-create-dir])
+	("Projects"
+	 ["Add Project" treemacs-add-project]
+	 ,@(--map `(,(car it) ,@(funcall (cdr it)))
+	    treemacs--mouse-project-list-functions)
+	 ;; ["Remove Project" treemacs-remove-project-from-workspace :visible ,(check project)]
+	 ;; ["Rename Project" treemacs-rename-project                :visible ,(check project)]
+	 )
+	("Workspaces"
+     ["Edit Workspaces"        treemacs-edit-workspaces]
+     ["Create Workspace"       treemacs-create-workspace]
+     ["Remove Workspace"       treemacs-remove-workspace]
+     ["Rename Workspace"       treemacs-rename-workspace]
+     ["Switch Workspace"       treemacs-switch-workspace]
+     ["Set Fallback Workspace" treemacs-set-fallback-workspace])
+	("Toggles"
+     [,(format "Dotfile Visibility (Currently %s)"
+		(if treemacs-show-hidden-files "Enabled" "Disabled"))
+      treemacs-toggle-show-dotfiles]
+     [,(format "Follow-Mode (Currently %s)"
+		(if treemacs-follow-mode "Enabled" "Disabled"))
+      treemacs-follow-mode]
+     [,(format "Filewatch-Mode (Currently %s)"
+		(if treemacs-filewatch-mode "Enabled" "Disabled"))
+      treemacs-filewatch-mode]
+     [,(format "Fringe-Indicator-Mode (Currently %s)"
+		(if treemacs-fringe-indicator-mode "Enabled" "Disabled"))
+      treemacs-fringe-indicator-mode])
+	("Help"
+     ["Show Helpful Hydra"     treemacs-helpful-hydra]
+     ["Show Active Extensions" treemacs-show-extensions]
+     ["Show Changelog"         treemacs-show-changelog])
+	))
+
+#+end_src
+
 * Projectile
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210811T192501.322521
@@ -167,6 +166,7 @@ Emacs 28 look at [[help:prog-context-menu][prog-context-menu]]
 #+NAME: org_mark_mini20.local_20210811T192501.299143
 #+begin_src emacs-lisp
 (use-package-elpa treemacs-projectile
+  :demand
   :after treemacs projectile
   )
 #+end_src
@@ -178,7 +178,8 @@ Emacs 28 look at [[help:prog-context-menu][prog-context-menu]]
 #+NAME: org_mark_mini20.local_20210811T192501.299460
 #+begin_src emacs-lisp
 (use-package-elpa treemacs-magit
-  :after treemacs magit)
+  :after treemacs magit
+  :demand)
 #+end_src
 * Debug
 :PROPERTIES:

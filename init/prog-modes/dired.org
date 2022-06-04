@@ -1,6 +1,9 @@
 #+TITLE Emacs configuration - dired
 #+PROPERTY:header-args :cache yes :tangle yes :comments link
 #+STARTUP: content
+
+Dired is required elsewhere so is loaded early s we need to defer a lot or use a full noweb
+
 * Dired
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:86DB2C97-15D2-4ADA-8AFA-13397998FDC8
@@ -38,37 +41,37 @@ Take from jweigley then find a hydra and prettify it.
 #+NAME: org_mark_2020-11-27T01-10-38+00-00_mini12.local_8A575AE6-49B6-4503-835E-19A6739AB60C
 #+begin_src emacs-lisp
 (use-package dired
+  :commands dired
+  :bind (:map dired-mode-map
+              ("j" . dired)
 
-    :bind (:map dired-mode-map
-                ("j" . dired)
+              ("e" . ora-ediff-files)
+              ("l" . dired-up-directory)
+              ("q" . pop-window-configuration)
+              ("Y" . ora-dired-rsync)
+              ("M-!" . async-shell-command)
+              ("<tab>" . dired-next-window)
+              (")" . dired-hide-details-mode)
+              ("(" . dired-hide-details-mode)
+              ("C-M-u" . dired-subtree-up)
+              ("C-M-d" . dired-subtree-down)
+              ("C-M-p" . dired-subtree-previous-sibling)
+              ("C-M-n" . dired-subtree-next-sibling)
+              )
+  :diminish dired-omit-mode
 
-                ("e" . ora-ediff-files)
-                ("l" . dired-up-directory)
-                ("q" . pop-window-configuration)
-                ("Y" . ora-dired-rsync)
-                ("M-!" . async-shell-command)
-                ("<tab>" . dired-next-window)
-                (")" . dired-hide-details-mode)
-                ("(" . dired-hide-details-mode)
-                ("C-M-u" . dired-subtree-up)
-                ("C-M-d" . dired-subtree-down)
-                ("C-M-p" . dired-subtree-previous-sibling)
-                ("C-M-n" . dired-subtree-next-sibling)
-                )
-    :diminish dired-omit-mode
+  :init
+  (setq dired-recursive-copies 'always)
+  (setq dired-recursive-deletes 'always)
+  (setq dired-listing-switches
+        "-AGFhlv --group-directories-first --time-style=long-iso")
+  (setq ls-lisp-dirs-first t)
+  (setq dired-dwim-target t)
 
-    :init
-    (setq dired-recursive-copies 'always)
-    (setq dired-recursive-deletes 'always)
-    (setq dired-listing-switches
-          "-AGFhlv --group-directories-first --time-style=long-iso")
-    (setq ls-lisp-dirs-first t)
-    (setq dired-dwim-target t)
-
-    :hook ((dired-mode . dired-hide-details-mode))
-    ;; :hook (dired-mode . dired-hide-details-mode)
-    ;;:hook (dired-mode . dired-omit-mode)
-)
+  :hook ((dired-mode . dired-hide-details-mode))
+  ;; :hook (dired-mode . dired-hide-details-mode)
+  ;;:hook (dired-mode . dired-omit-mode)
+  )
 #+end_src
 
 *** Before load
@@ -347,8 +350,9 @@ But treemacs gets prettier coloured icons
 Use icons from treemacs
 #+NAME: org_2020-12-06+00-00_C748F245-1E25-4A85-BE27-BD671864B180
 #+begin_src emacs-lisp
-(use-package treemacs-icons-dired
+(use-package-elpa treemacs-icons-dired
   :after treemacs dired
+  :demand
   :ensure t
   :config (treemacs-icons-dired-mode))
 #+end_src
@@ -361,13 +365,14 @@ Use icons from treemacs
 #+begin_src emacs-lisp
 (use-feature dired-mode
   :init
+  (require 'jp-icons)
   (defvar dired-title (with-material "folder_open" "Directories"))
   (defun my-dired-create-file (file)
     (interactive
-     (list (read-file-name "Create file: "
-                           (concat (dired-current-directory)
-                                   (create-new-file (directory-files
-                                                     (dired-current-directory)))))))
+	 (list (read-file-name "Create file: "
+						   (concat (dired-current-directory)
+								   (create-new-file (directory-files
+													 (dired-current-directory)))))))
     (write-region "" nil (expand-file-name file) t)
     (dired-add-file file)
     (revert-buffer)
@@ -382,7 +387,7 @@ Use icons from treemacs
      ("g" revert-buffer "Refresh Directory")
      ("~" dired-hide-details-mode "Show Details" :toggle t)
      ;; ("i" all-the-icons-dired-mode "Directory With Icons" :toggle t)
-     ;; ("h" hydra-helm/body "Go To Hydra Helm" :color blue )
+     ;; ("h" hydra-helm/body "Go To Hydra Helm" :color blue )m
      )
 
     "Mark"

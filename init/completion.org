@@ -129,7 +129,7 @@ I suspect that emacs's inbuilt skeleton can do what I need but there are more ex
 (use-package yasnippet
   :ensure t
   :diminish yas-minor-mode
-  :demand t
+  :demand
   :after company
   :mode ((rx (or "/.emacs.d/data/snippets/"
                  (seq ".yasnippet" eol ))) . snippet-mode)
@@ -248,9 +248,9 @@ This is another basic emacs thing.
 For Unicode
 #+NAME: org_mark_mini12.local_20210102T223321.222299
 #+begin_src emacs-lisp
-(use-package company-math
-    :ensure t
-    :init
-    (setq company-math-symbol-prefix "//")
-    :after (company))
+(use-package-elpa company-math
+  :demand
+  ;; :init
+  ;; (setq company-math-symbol-prefix "//")
+  :after (company))
 #+end_src

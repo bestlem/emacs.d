@@ -172,16 +172,17 @@ This cuts out all diminish issues but also see https://www.manueluberti.eu/emacs
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210606T165448.625918
 :END:
+This is problematic as the only autoloads are the actual themse which I do not want.
+So have to lump as one and put in config.
 #+NAME: org_mark_mini20.local_20210706T132917.944916
 #+begin_src emacs-lisp
-(use-package spaceline
-  :ensure t
+(use-package-elpa spaceline
   :defer 1
-  ;; :config
-  ;; (require 'spaceline-config)
-  ;; (spaceline-spacemacs-theme)
   :init
   (setq powerline-default-separator nil) ; no chevrons etc
+  :config
+  <<spaceline-all-the-icons>>
+  <<spaceline-mwb>>
   )
   #+end_src
 #+end_src
@@ -189,25 +190,19 @@ This cuts out all diminish issues but also see https://www.manueluberti.eu/emacs
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210606T165448.624436
 :END:
-#+NAME: org_mark_mini20.local_20210606T165448.610552
-#+begin_src emacs-lisp
-(use-package spaceline-all-the-icons
-  :ensure t
-  :after spaceline
-  ;; :config (spaceline-all-the-icons-theme)
-  )
+#+NAME: spaceline-all-the-icons
+#+begin_src emacs-lisp :tangle no
+(use-package-elpa spaceline-all-the-icons :demand)
 #+end_src
 ** My version
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210620T171618.632190
 :END:
-#+NAME: org_mark_mini20.local_20210620T171618.620120
-#+begin_src emacs-lisp
+#+NAME: spaceline-mwb
+#+begin_src emacs-lisp :tangle no
 (use-feature spaceline-mwb
-  :unless *aquamacs*
-  :after spaceline-all-the-icons
-  :config
-  (spaceline-mwb-theme))
+  :demand
+  :config (spaceline-mwb-theme))
 #+end_src
 
 * Eyeliner
@@ -218,7 +213,7 @@ This cuts out all diminish issues but also see https://www.manueluberti.eu/emacs
 And another from spaceline.
 It has not been update since creation so take as mine
 #+NAME: org_mark_mini20.local_20210720T211034.172150
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-feature eyeliner
   :config
   (require 'eyeliner)

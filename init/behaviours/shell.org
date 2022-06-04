@@ -153,6 +153,7 @@ Well the compilation buffer does not do much but there are ways for it to recogn
             eshell-preoutput-filter-functions
             eshell-output-filter-functions)
   :functions (compilation-filter my-advice-compilation-filter)
+  :commands xterm-color-filter
   :init
   ;; For shell and interpreters
   (setq comint-output-filter-functions
@@ -166,8 +167,7 @@ Well the compilation buffer does not do much but there are ways for it to recogn
     ;; Prevent font-locking from being re-enabled
     (make-local-variable 'font-lock-function)
     (setq font-lock-function #'ignore))
-  (add-hook 'shell-mode-hook #'my-xterm-shell-hook-function
-            )
+  (add-hook 'shell-mode-hook #'my-xterm-shell-hook-function)
 
   ;; For eshell
   (with-eval-after-load 'esh-mode

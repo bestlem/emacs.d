@@ -14,6 +14,6 @@
 #+NAME: org_mark_mini20.local_20220313T213937.907540
 #+begin_src emacs-lisp
 (use-package-elpa fsharp-mode
-  :defer t
+  :commands fsharp-mode
   )
 #+end_src

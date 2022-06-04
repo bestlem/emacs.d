@@ -11,5 +11,6 @@
 Well I needed for a .l file so let's see
 #+NAME: org_mark_mini20.local_20211214T191128.912641
 #+begin_src emacs-lisp
-(use-package-elpa bison-mode)
+(use-package-elpa bison-mode
+  :commands bison-mode)
 #+end_src

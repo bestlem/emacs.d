@@ -25,7 +25,7 @@ Memory is now in gcmh
   (setq debug-on-quit nil)
   (setq file-name-handler-alist file-name-handler-alist-old
 		gc-cons-percentage 0.1)
-  (garbage-collect)
+  ;; (garbage-collect)
   (message "Emacs init-time %s" (emacs-init-time)))
 (add-hook 'after-init-hook #'hook-after-init)
 #+end_src
@@ -37,8 +37,7 @@ Used when overriding a defcustom or defvar.
 Note should check on defconst
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_684763C2-3193-47EF-8CFD-5518949CC4BB
 #+begin_src emacs-lisp
-(use-package validate
-  :ensure t)
+(use-package-elpa validate :demand)
 #+end_src
 
 * Support functions
@@ -74,9 +73,9 @@ TODO: exclude sopme directories - especially modus-themes and treemacs as they n
 Recompile emacs lisp  if already compiled on save but also on load.
 #+NAME: org_mark_mini20.local_20210822T130010.997493
 #+begin_src emacs-lisp
-(when (= emacs-major-version 28)
-  (use-package auto-compile
-    :ensure t
+(when *emacs/>=28p*
+  (use-package-elpa auto-compile
+    :defer 15
     :config
     (auto-compile-on-load-mode)
     (auto-compile-on-save-mode)
@@ -225,19 +224,33 @@ Well tried and treemacs screwed up
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:A300832E-1253-4E83-A0C3-3DAAEE99F20D
 :END:
-  Need to control how it is restarted. Aquamacs saves it
-  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_7CE610E6-5D87-43CE-9EF8-5D9112E28EF0
-  #+begin_src emacs-lisp
-(setq initial-major-mode 'emacs-lisp-mode)
+Need to control how it is restarted. Aquamacs saves it
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_7CE610E6-5D87-43CE-9EF8-5D9112E28EF0
+**** Fast startup
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220603T173200.242928
+:END:
+This is minmal as *scratch* is always created.
+#+NAME: org_mark_mini20.local_20220603T173200.216019
+#+begin_src emacs-lisp
+;; (setq initial-major-mode 'emacs-lisp-mode)
+(setq initial-major-mode 'fundamental-mode)
 (setq initial-scratch-message nil)
+#+end_src
+**** Reload and set
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220603T173200.236907
+:END:
+#+NAME: org_mark_mini20.local_20220603T173200.223407
+#+begin_src emacs-lisp
 (unless *aquamacs*
-  (use-package persistent-scratch
-    :ensure t
+  (use-package-elpa persistent-scratch
+    :defer 10
     :init
     (setq persistent-scratch-save-file (mwb-user-emacs-file "var/persistent-scratch"))
     :config
     (persistent-scratch-setup-default)))
-   #+end_src
+#+end_src
 *** Windows
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:E5DA693A-871D-4201-B814-758C4738654A

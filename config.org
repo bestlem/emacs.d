@@ -320,10 +320,10 @@ Ideally I will use as per hemacs use-feature if on load-path and use-package if 
 
 ;; Enable use-package
 (eval-when-compile
-  (setq use-package-enable-imenu-support t)
   (require 'use-package)
-  (setq bind-key-describe-special-forms t
-        use-package-enable-imenu-support t)
+  (setq use-package-enable-imenu-support t)
+  (setq bind-key-describe-special-forms t)
+  (setq use-package-always-defer t)
   (if init-file-debug
       (setq use-package-verbose t
             use-package-expand-minimally nil
@@ -436,6 +436,7 @@ With prefix KILL, kill the buffer instead of burying."
 #+NAME: org_mark_mini20.local_20211104T083255.461863
 #+begin_src emacs-lisp  :tangle no
 (use-package-elpa async
+  :demand
   :init
   ;; Fix dired-async-mode with sudo buffers
   ;; https://github.com/jwiegley/emacs-async/issues/91
@@ -452,7 +453,7 @@ With prefix KILL, kill the buffer instead of burying."
  Mark if the mode being setup should not show in the mode/status line.
   #+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_B22D3C47-20C6-4BA0-8F8A-9B7618FF2171
   #+begin_src emacs-lisp
-  (use-package diminish   :ensure t   :demand t)
+  (use-package-elpa diminish   :demand)
   #+end_src
 
 **** Emacs lisp additions
@@ -489,7 +490,7 @@ Cover functions [[https://github.com/Wilfred/ht.el][ht]]
 Convert a set of function calls to an RE. (it is part of emacs.
 #+NAME: org_mark_2020-11-05T13-04-24+00-00_mini12.local_B657936A-CBB7-4CE2-8BD9-8B2216C68A90
 #+BEGIN_SRC emacs-lisp
-(use-package rx)
+(use-feature rx :demand)
 #+END_SRC
 ***** F
 :PROPERTIES:
@@ -498,7 +499,7 @@ Convert a set of function calls to an RE. (it is part of emacs.
 File handling - seem to use it and after a few years I managed to get it not loaded so had to do explicitly
 #+NAME: org_mark_mini20.local_20220223T081525.623390
 #+begin_src emacs-lisp
-(use-package-elpa f)
+(use-package-elpa f :demand)
 #+end_src
 **** Elisp code
 :PROPERTIES:
@@ -596,17 +597,18 @@ Need key setting menus.
 #+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_4EC591E8-D02C-4F21-97C1-80F28A75490F
 #+begin_src emacs-lisp
 (use-package hydra
-    :ensure t
-    :config (setq hydra-look-for-remap t
-                  lv-use-padding t)
-    (defun lv--pad-to-center (str width)
-      "Pad STR with spaces on the left to be centered to WIDTH."
-      (let* ((strs (split-string str "\n"))
-             (padding-length (/ (- width (apply 'max (mapcar 'length strs))) 2)))
-        (if (> padding-length  0)
-            (mapconcat (lambda (s)
-                         (concat (make-string padding-length ?\ ) s)) strs "\n")
-          str))))
+  :demand
+  :ensure t
+  :config (setq hydra-look-for-remap t
+				lv-use-padding t)
+  (defun lv--pad-to-center (str width)
+	"Pad STR with spaces on the left to be centered to WIDTH."
+	(let* ((strs (split-string str "\n"))
+		   (padding-length (/ (- width (apply 'max (mapcar 'length strs))) 2)))
+	  (if (> padding-length 0)
+		  (mapconcat (lambda (s)
+					   (concat (make-string padding-length ?\ ) s)) strs "\n")
+		str))))
 (use-package use-package-hydra :ensure t)
 #+end_src
 ***** major mode hydra
@@ -646,6 +648,7 @@ Treemacs icons are better but they are purely keyed off file extensions. All the
 #+begin_src emacs-lisp
 (use-package all-the-icons
   :ensure t
+  :demand
   :commands (all-the-icons-faicon
 			 all-the-icons-fileicon
 			 all-the-icons-material
@@ -660,6 +663,7 @@ Treemacs icons are better but they are purely keyed off file extensions. All the
 #+NAME: org_mark_mini20.local_20210602T212702.684671
 #+begin_src emacs-lisp
 (use-package jp-icons
+  :demand
   :mwb-load-path "site-lisp/jerrypnz")
 #+end_src
 
@@ -669,7 +673,7 @@ Treemacs icons are better but they are purely keyed off file extensions. All the
 :END:
 #+NAME: org_mark_mini20.local_20210801T222229.905961
 #+begin_src emacs-lisp
-(use-feature mwb-icons)
+(use-feature mwb-icons :demand)
 #+end_src
 
 ** Customisation file
@@ -751,9 +755,11 @@ Needs in initsplit to load twice to get stuff in initsplit, but then I put all o
 Obvious way is to put in the root custom file - but I want that to die.
 I could keep as a set.
 But hack an load it directly
+Needs to load immeduiately to load the other customization files
 #+NAME: org_mark_2020-10-29T09-11-06+00-00_mini12.local_04FB6D16-A43C-4D7C-9767-4C79FC0FABDD
 #+begin_src emacs-lisp
 (use-feature initsplit
+  :demand
   :init
   (setq initsplit-pretty-print t)
   (setq initsplit-default-directory mwb-init-customize-directory)
@@ -883,9 +889,11 @@ Deal with stuff done by Aquamacs
 #+begin_src emacs-lisp
 (unless *aquamacs*
   (use-package redo+
-      :mwb-load-path "site-lisp/Emacs_wiki")
+    :demand
+    :mwb-load-path "site-lisp/Emacs_wiki")
   (use-package mac-key-mode
-      :diminish
+    :demand
+    :diminish
     :config (mac-key-mode 1)
     (unbind-key "<C-down-mouse-1>" mac-key-mode-map)))
 #+end_src

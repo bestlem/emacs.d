@@ -20,9 +20,10 @@ Also jojojames
 #+NAME: org_mark_mini20.local_20220317T110546.762908
 #+begin_src emacs-lisp
 (use-package-elpa swift-mode
+  :commands swift-mode
   :config
   (setq swift-mode:parenthesized-expression-offset 4) ;; Match xcode.
-  (setq swift-mode:multiline-statement-offset 4) ;; Match xcode.
+  (setq swift-mode:multiline-statement-offset 4)	  ;; Match xcode.
   )
 #+end_src
 ** Help
@@ -34,8 +35,7 @@ Curated Swift  documentation with cross-references, and keyword/topic indices.
 #+begin_src emacs-lisp
 (use-package-elpa swift-helpful
   :bind (:map swift-mode-map
-              ("<f1><f1>" . swift-helpful))
-  :commands swift-helpful)
+		 ("<f1><f1>" . swift-helpful)))
 #+end_src
 ** Flycheck
 :PROPERTIES:
@@ -43,16 +43,15 @@ Curated Swift  documentation with cross-references, and keyword/topic indices.
 :END:
 #+NAME: org_mark_mini20.local_20220405T140718.190737
 #+begin_src emacs-lisp
-(use-package flycheck-swift
-  :ensure t
+(use-package-elpa flycheck-swift
+  :after (flycheck swift-mode)
   :config
   (setq flycheck-swift-executable
-        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc")
+		"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc")
   (setq flycheck-swift-sdk-path
-        "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk")
+		"/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk")
   (setq flycheck-swift-target "arm64-apple-ios15")
-  (with-eval-after-load 'flycheck
-    (flycheck-swift-setup)))
+  (flycheck-swift-setup))
 #+end_src
 ** Playground
 :PROPERTIES:

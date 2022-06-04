@@ -76,9 +76,12 @@ Well I don't know what the frame parameters are left and width can be proportion
 #+begin_src emacs-lisp
 (when *emacs/>=26p*
   (use-package-elpa mini-frame
+	:custom
+	(mini-frame-internal-border-color "yellow")
+	(mini-frame-standalone 't)
+	(mini-frame-detach-on-hide 'nil)
+
 	:init
-	(setq mini-frame-detach-on-hide 'nil
-		  mini-frame-standalone 't)
 	(defun mwb-mini-treemacs-width ()
 	  "Find width of treemacs window if it exists plus a fringe."
 	  (if (treemacs-get-local-window)

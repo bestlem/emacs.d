@@ -12,10 +12,10 @@
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/zenburn-theme-2.7.0/zenburn-theme-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/zenburn-theme-2.7.0/zenburn-theme-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/zenburn-theme-20220527.1800/zenburn-theme-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/zenburn-theme-20220527.1800/zenburn-theme-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/zenburn-theme-2.7.0/zenburn-theme-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/zenburn-theme-20220527.1800/zenburn-theme-autoloads.el") (car load-path))))
 
 
 
@@ -30,8 +30,6 @@ defining them in this alist.")
 (and load-file-name (boundp 'custom-theme-load-path) (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
 
 (register-definition-prefixes "zenburn-theme" '("zenburn"))
-
-
 
 
 )
@@ -337,10 +335,27 @@ See `ws-butler-mode' for more information on Ws-Butler mode.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/with-editor-20220402.1641/with-editor-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/with-editor-20220402.1641/with-editor-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/compat-28.1.1.1/compat-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/compat-28.1.1.1/compat-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/with-editor-20220402.1641/with-editor-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/compat-28.1.1.1/compat-autoloads.el") (car load-path))))
+
+
+
+(register-definition-prefixes "compat-help" '("compat---describe"))
+
+
+
+(register-definition-prefixes "compat-macs" '("compat-"))
+
+
+
+
+)
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/with-editor-20220506.420/with-editor-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/with-editor-20220506.420/with-editor-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/with-editor-20220506.420/with-editor-autoloads.el") (car load-path))))
 
 
 
@@ -435,10 +450,10 @@ else like the former.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/posframe-20220124.859/posframe-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/posframe-20220124.859/posframe-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/posframe-20220528.27/posframe-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/posframe-20220528.27/posframe-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/posframe-20220124.859/posframe-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/posframe-20220528.27/posframe-autoloads.el") (car load-path))))
 
 
 
@@ -545,15 +560,15 @@ the help of function `posframe-poshandler-argbuilder'.  like:
  (3) POSHANDLER-EXTRA-INFO
 
 POSHANDLER-EXTRA-INFO is a plist, which will prepend to the
-argument of poshandler function: 'info', it will *OVERRIDE* the
-exist key in 'info'.
+argument of poshandler function: `info', it will *OVERRIDE* the
+exist key in `info'.
 
  (4) BUFFER-OR-NAME
 
 This posframe's buffer is BUFFER-OR-NAME, which can be a buffer
 or a name of a (possibly nonexistent) buffer.
 
-buffer name can prefix with space, for example ' *mybuffer*', so
+buffer name can prefix with space, for example \" *mybuffer*\", so
 the buffer name will hide for ibuffer and `list-buffers'.
 
  (5) NO-PROPERTIES
@@ -689,10 +704,10 @@ Benchmark tool for posframe." t nil)
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/which-key-20220214.1818/which-key-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/which-key-20220214.1818/which-key-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/which-key-20220518.1941/which-key-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/which-key-20220518.1941/which-key-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/which-key-20220214.1818/which-key-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/which-key-20220518.1941/which-key-autoloads.el") (car load-path))))
 
 
 
@@ -713,8 +728,8 @@ This is a minor mode.  If called interactively, toggle the
 `Which-Key mode' mode.  If the prefix argument is positive,
 enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.
-Enable the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -1254,10 +1269,10 @@ ARGS, REST, and STATE are prepared by `use-package-normalize/:hydra'.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/projectile-20220402.624/projectile-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/projectile-20220402.624/projectile-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/projectile-20220530.615/projectile-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/projectile-20220530.615/projectile-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/projectile-20220402.624/projectile-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/projectile-20220530.615/projectile-autoloads.el") (car load-path))))
 
 
 
@@ -1529,13 +1544,26 @@ Use files with EXTENSION based on TEST-SUFFIX.
 Display info for current project." t nil)
 
 (autoload 'projectile-find-implementation-or-test-other-window "projectile" "\
-Open matching implementation or test file in other window." t nil)
+Open matching implementation or test file in other window.
+
+See the documentation of `projectile--find-matching-file' and
+`projectile--find-matching-test' for how implementation and test files
+are determined." t nil)
 
 (autoload 'projectile-find-implementation-or-test-other-frame "projectile" "\
-Open matching implementation or test file in other frame." t nil)
+Open matching implementation or test file in other frame.
+
+See the documentation of `projectile--find-matching-file' and
+`projectile--find-matching-test' for how implementation and test files
+are determined." t nil)
 
 (autoload 'projectile-toggle-between-implementation-and-test "projectile" "\
-Toggle between an implementation file and its test file." t nil)
+Toggle between an implementation file and its test file.
+
+
+See the documentation of `projectile--find-matching-file' and
+`projectile--find-matching-test' for how implementation and test files
+are determined." t nil)
 
 (autoload 'projectile-grep "projectile" "\
 Perform rgrep in the project.
@@ -1855,10 +1883,10 @@ Otherwise behave as if called interactively.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/dash-20220404.2004/dash-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/dash-20220404.2004/dash-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/dash-20220602.2113/dash-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/dash-20220602.2113/dash-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/dash-20220404.2004/dash-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/dash-20220602.2113/dash-autoloads.el") (car load-path))))
 
 
 
@@ -2281,10 +2309,10 @@ it is disabled.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/pfuture-20211229.1513/pfuture-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/pfuture-20211229.1513/pfuture-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/pfuture-20220425.1242/pfuture-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/pfuture-20220425.1242/pfuture-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/pfuture-20211229.1513/pfuture-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/pfuture-20220425.1242/pfuture-autoloads.el") (car load-path))))
 
 
 
@@ -2423,10 +2451,10 @@ Read a string using a pos-frame with given PROMPT and INITIAL-INPUT.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/treemacs-20220216.1950/treemacs-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/treemacs-20220216.1950/treemacs-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/treemacs-20220601.1749/treemacs-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/treemacs-20220601.1749/treemacs-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/treemacs-20220216.1950/treemacs-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/treemacs-20220601.1749/treemacs-autoloads.el") (car load-path))))
 
 
 
@@ -2511,6 +2539,10 @@ An error message is displayed if the current buffer is not part of any project."
 
 
 
+(register-definition-prefixes "treemacs-annotations" '("treemacs-"))
+
+
+
 (register-definition-prefixes "treemacs-async" '("treemacs-"))
 
 
@@ -2572,15 +2604,32 @@ they will instead be wiped irreversibly.
 
 \(fn &optional ARG)" t nil)
 
+(autoload 'treemacs-delete-marked-files "treemacs-file-management" "\
+Delete all marked files.
+
+A delete action must always be confirmed.  Directories are deleted recursively.
+By default files are deleted by moving them to the trash.  With a prefix ARG
+they will instead be wiped irreversibly.
+
+For marking files see `treemacs-bulk-file-actions'.
+
+\(fn &optional ARG)" t nil)
+
 (autoload 'treemacs-move-file "treemacs-file-management" "\
-Move file (or directory) at point.
-Destination may also be a filename, in which case the moved file will also
-be renamed." t nil)
+Move file (or directory) at point." t nil)
 
 (autoload 'treemacs-copy-file "treemacs-file-management" "\
-Copy file (or directory) at point.
-Destination may also be a filename, in which case the copied file will also
-be renamed." t nil)
+Copy file (or directory) at point." t nil)
+
+(autoload 'treemacs-move-marked-files "treemacs-file-management" "\
+Move all marked files.
+
+For marking files see `treemacs-bulk-file-actions'." t nil)
+
+(autoload 'treemacs-copy-marked-files "treemacs-file-management" "\
+Copy all marked files.
+
+For marking files see `treemacs-bulk-file-actions'." t nil)
 
 (autoload 'treemacs-rename-file "treemacs-file-management" "\
 Rename the file/directory at point.
@@ -2588,6 +2637,27 @@ Rename the file/directory at point.
 Buffers visiting the renamed file or visiting a file inside the renamed
 directory and windows showing them will be reloaded.  The list of recent files
 will likewise be updated." t nil)
+
+(autoload 'treemacs-show-marked-files "treemacs-file-management" "\
+Print a list of all files marked by treemacs." t nil)
+
+(autoload 'treemacs-mark-or-unmark-path-at-point "treemacs-file-management" "\
+Mark or unmark the absolute path of the node at point." t nil)
+
+(autoload 'treemacs-reset-marks "treemacs-file-management" "\
+Unmark all previously marked files in the current buffer." t nil)
+
+(autoload 'treemacs-delete-marked-paths "treemacs-file-management" "\
+Delete all previously marked files." t nil)
+
+(autoload 'treemacs-bulk-file-actions "treemacs-file-management" "\
+Activate the bulk file actions hydra.
+This interface allows to quickly (unmark) files, so as to copy, move or delete
+them in bulk.
+
+Note that marking files is *permanent*, files will stay marked until they are
+either manually unmarked or deleted.  You can show a list of all currently
+marked files with `treemacs-show-marked-files' or `s' in the hydra." t nil)
 
 (autoload 'treemacs-create-file "treemacs-file-management" "\
 Create a new file.
@@ -2619,7 +2689,47 @@ itself, using $HOME when there is no path at or near point to grab." t nil)
 
 
 
-(register-definition-prefixes "treemacs-header-line" '("treemacs-header-buttons-format"))
+(defvar treemacs-indicate-top-scroll-mode nil "\
+Non-nil if Treemacs-Indicate-Top-Scroll mode is enabled.
+See the `treemacs-indicate-top-scroll-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `treemacs-indicate-top-scroll-mode'.")
+
+(custom-autoload 'treemacs-indicate-top-scroll-mode "treemacs-header-line" nil)
+
+(autoload 'treemacs-indicate-top-scroll-mode "treemacs-header-line" "\
+Minor mode which shows whether treemacs is scrolled all the way to the top.
+
+This is a minor mode.  If called interactively, toggle the
+`Treemacs-Indicate-Top-Scroll mode' mode.  If the prefix argument
+is positive, enable the mode, and if it is zero or negative,
+disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='treemacs-indicate-top-scroll-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+When this mode is enabled the header line of the treemacs window will display
+whether the window's first line is visible or not.
+
+The strings used for the display are determined by
+`treemacs-header-scroll-indicators'.
+
+This mode makes use of `treemacs-user-header-line-format' - and thus
+`header-line-format' - and is therefore incompatible with other modifications to
+these options.
+
+\(fn &optional ARG)" t nil)
+
+(register-definition-prefixes "treemacs-header-line" '("treemacs-"))
 
 
 
@@ -2692,8 +2802,8 @@ EXTENSIONS should be a list of file extensions such that they match the regex
 stored in `auto-mode-alist', for example '(\".cc\").
 MODE-ICON-ALIST is an alist that maps which mode from `auto-mode-alist' should
 be assigned which treemacs icon, for example
-'((c-mode . treemacs-icon-c)
-  (c++-mode . treemacs-icon-cpp))
+`((c-mode . ,(treemacs-get-icon-value \"c\"))
+  (c++-mode . ,(treemacs-get-icon-value \"cpp\")))
 
 \(fn EXTENSIONS MODE-ICON-ALIST)" nil nil)
 
@@ -3042,10 +3152,10 @@ the project's root directory.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/transient-20220406.1156/transient-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/transient-20220406.1156/transient-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/transient-20220527.2213/transient-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/transient-20220527.2213/transient-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/transient-20220406.1156/transient-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/transient-20220527.2213/transient-autoloads.el") (car load-path))))
 
 
 
@@ -3057,9 +3167,11 @@ SUFFIX is a suffix command or a group specification (of
 LOC is a command, a key vector, a key description (a string
   as returned by `key-description'), or a coordination list
   (whose last element may also be a command or key).
+Remove a conflicting binding unless optional KEEP-OTHER is
+  non-nil.
 See info node `(transient)Modifying Existing Transients'.
 
-\(fn PREFIX LOC SUFFIX)" nil nil)
+\(fn PREFIX LOC SUFFIX &optional KEEP-OTHER)" nil nil)
 
 (function-put 'transient-insert-suffix 'lisp-indent-function 'defun)
 
@@ -3071,9 +3183,11 @@ SUFFIX is a suffix command or a group specification (of
 LOC is a command, a key vector, a key description (a string
   as returned by `key-description'), or a coordination list
   (whose last element may also be a command or key).
+Remove a conflicting binding unless optional KEEP-OTHER is
+  non-nil.
 See info node `(transient)Modifying Existing Transients'.
 
-\(fn PREFIX LOC SUFFIX)" nil nil)
+\(fn PREFIX LOC SUFFIX &optional KEEP-OTHER)" nil nil)
 
 (function-put 'transient-append-suffix 'lisp-indent-function 'defun)
 
@@ -3103,16 +3217,16 @@ See info node `(transient)Modifying Existing Transients'.
 
 (function-put 'transient-remove-suffix 'lisp-indent-function 'defun)
 
-(register-definition-prefixes "transient" '("magit--fit-window-to-buffer" "transient-"))
+(register-definition-prefixes "transient" '("magit--fit-window-to-buffer" "transient"))
 
 
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/git-commit-20220331.2308/git-commit-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/git-commit-20220331.2308/git-commit-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/git-commit-20220506.1936/git-commit-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/git-commit-20220506.1936/git-commit-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/git-commit-20220331.2308/git-commit-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/git-commit-20220506.1936/git-commit-autoloads.el") (car load-path))))
 
 
 (put 'git-commit-major-mode 'safe-local-variable
@@ -3129,10 +3243,10 @@ See info node `(transient)Modifying Existing Transients'.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/magit-section-20220329.1154/magit-section-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/magit-section-20220329.1154/magit-section-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/magit-section-20220513.1429/magit-section-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/magit-section-20220513.1429/magit-section-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/magit-section-20220329.1154/magit-section-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/magit-section-20220513.1429/magit-section-autoloads.el") (car load-path))))
 
 
 
@@ -3142,10 +3256,10 @@ See info node `(transient)Modifying Existing Transients'.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/magit-20220331.2308/magit-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/magit-20220331.2308/magit-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/magit-20220603.1738/magit-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/magit-20220603.1738/magit-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/magit-20220331.2308/magit-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/magit-20220603.1738/magit-autoloads.el") (car load-path))))
 
 
 
@@ -3157,10 +3271,10 @@ instance with all nil values is returned." nil nil)
 (autoload 'git-rebase-mode "git-rebase" "\
 Major mode for editing of a Git rebase file.
 
-Rebase files are generated when you run 'git rebase -i' or run
+Rebase files are generated when you run \"git rebase -i\" or run
 `magit-interactive-rebase'.  They describe how Git should perform
 the rebase.  See the documentation for git-rebase (e.g., by
-running 'man git-rebase' at the command line) for details.
+running \"man git-rebase\" at the command line) for details.
 
 \(fn)" t nil)
 
@@ -3419,18 +3533,6 @@ bisect run'.
  (autoload 'magit-blame "magit-blame" nil t)
 
 (register-definition-prefixes "magit-blame" '("magit-"))
-
-
-
-(autoload 'magit--handle-bookmark "magit-bookmark" "\
-Open a bookmark created by `magit--make-bookmark'.
-Call the `magit-*-setup-buffer' function of the the major-mode
-with the variables' values as arguments, which were recorded by
-`magit--make-bookmark'.  Ignore `magit-display-buffer-function'.
-
-\(fn BOOKMARK)" nil nil)
-
-(register-definition-prefixes "magit-bookmark" '("magit--make-bookmark"))
 
 
  (autoload 'magit-branch "magit" nil t)
@@ -3842,7 +3944,7 @@ be committed.
 Show diff for the blob or file visited in the current buffer.
 
 When the buffer visits a blob, then show the respective commit.
-When the buffer visits a file, then show the differenced between
+When the buffer visits a file, then show the differences between
 `HEAD' and the working tree.  In both cases limit the diff to
 the file or blob." t nil)
 
@@ -3863,13 +3965,25 @@ for a revision.
 
  (autoload 'magit-ediff "magit-ediff" nil)
 
-(autoload 'magit-ediff-resolve "magit-ediff" "\
-Resolve outstanding conflicts in FILE using Ediff.
-FILE has to be relative to the top directory of the repository.
+(autoload 'magit-ediff-resolve-all "magit-ediff" "\
+Resolve all conflicts in the FILE at point using Ediff.
 
-In the rare event that you want to manually resolve all
-conflicts, including those already resolved by Git, use
-`ediff-merge-revisions-with-ancestor'.
+If there is no file at point or if it doesn't have any unmerged
+changes, then prompt for a file.
+
+See info node `(magit) Ediffing' for more information about this
+and alternative commands.
+
+\(fn FILE)" t nil)
+
+(autoload 'magit-ediff-resolve-rest "magit-ediff" "\
+Resolve outstanding conflicts in the FILE at point using Ediff.
+
+If there is no file at point or if it doesn't have any unmerged
+changes, then prompt for a file.
+
+See info node `(magit) Ediffing' for more information about this
+and alternative commands.
 
 \(fn FILE)" t nil)
 
@@ -4564,7 +4678,7 @@ Abort the current merge operation.
 (autoload 'magit-info "magit-mode" "\
 Visit the Magit manual." t nil)
 
-(register-definition-prefixes "magit-mode" '("disable-magit-save-buffers" "magit-"))
+(register-definition-prefixes "magit-mode" '("magit-"))
 
 
  (autoload 'magit-notes "magit" nil t)
@@ -5248,7 +5362,7 @@ Prefix arguments have the same meaning as for `magit-status',
 and additionally cause the buffer to be refresh.
 
 To use this function instead of `magit-status', add this to your
-init file: (global-set-key (kbd \"C-x g\") 'magit-status-quick)." t nil)
+init file: (global-set-key (kbd \"C-x g\") \\='magit-status-quick)." t nil)
 
 (autoload 'magit-status-setup-buffer "magit-status" "\
 
@@ -5428,8 +5542,8 @@ This is a minor mode.  If called interactively, toggle the
 `Magit-Wip mode' mode.  If the prefix argument is positive,
 enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -5493,8 +5607,8 @@ This is a minor mode.  If called interactively, toggle the
 positive, enable the mode, and if it is zero or negative, disable
 the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -5527,8 +5641,8 @@ This is a minor mode.  If called interactively, toggle the
 positive, enable the mode, and if it is zero or negative, disable
 the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -5591,10 +5705,10 @@ Move WORKTREE to PATH.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/treemacs-magit-20211010.1005/treemacs-magit-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/treemacs-magit-20211010.1005/treemacs-magit-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/treemacs-magit-20220502.1310/treemacs-magit-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/treemacs-magit-20220502.1310/treemacs-magit-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/treemacs-magit-20211010.1005/treemacs-magit-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/treemacs-magit-20220502.1310/treemacs-magit-autoloads.el") (car load-path))))
 
 
 
@@ -5724,10 +5838,10 @@ it is disabled.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/ivy-20220402.1259/ivy-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/ivy-20220402.1259/ivy-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/ivy-20220529.1130/ivy-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/ivy-20220529.1130/ivy-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/ivy-20220402.1259/ivy-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/ivy-20220529.1130/ivy-autoloads.el") (car load-path))))
 
 
 
@@ -5870,10 +5984,10 @@ Switch to another buffer in another window." t nil)
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/swiper-20210919.1221/swiper-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/swiper-20210919.1221/swiper-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/swiper-20220430.2247/swiper-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/swiper-20220430.2247/swiper-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/swiper-20210919.1221/swiper-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/swiper-20220430.2247/swiper-autoloads.el") (car load-path))))
 
 
 
@@ -6082,14 +6196,20 @@ the value of `swift-mode:ios-project-scheme' is used.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/f-20220405.1534/f-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/f-20220405.1534/f-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/f-20220602.1136/f-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/f-20220602.1136/f-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/f-20220405.1534/f-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/f-20220602.1136/f-autoloads.el") (car load-path))))
 
 
 
 (register-definition-prefixes "f" '("f-"))
+
+
+
+(register-definition-prefixes "f-shortdoc" 'nil)
+
+
 
 
 )
@@ -6157,10 +6277,10 @@ this time, in which case it won't display at all.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/markdown-mode-20220406.410/markdown-mode-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/markdown-mode-20220406.410/markdown-mode-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/markdown-mode-20220603.300/markdown-mode-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/markdown-mode-20220603.300/markdown-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/markdown-mode-20220406.410/markdown-mode-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/markdown-mode-20220603.300/markdown-mode-autoloads.el") (car load-path))))
 
 
 
@@ -6194,8 +6314,8 @@ This is a minor mode.  If called interactively, toggle the
 positive, enable the mode, and if it is zero or negative, disable
 the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.
-Enable the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -6210,10 +6330,10 @@ it is disabled.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/lsp-mode-20220405.1024/lsp-mode-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/lsp-mode-20220405.1024/lsp-mode-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/lsp-mode-20220603.1349/lsp-mode-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/lsp-mode-20220603.1349/lsp-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/lsp-mode-20220405.1024/lsp-mode-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/lsp-mode-20220603.1349/lsp-mode-autoloads.el") (car load-path))))
 
 
 
@@ -6276,8 +6396,8 @@ This is a minor mode.  If called interactively, toggle the
 `Lsp-Completion mode' mode.  If the prefix argument is positive,
 enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.
-Enable the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -6322,8 +6442,8 @@ This is a minor mode.  If called interactively, toggle the
 `Lsp-Diagnostics mode' mode.  If the prefix argument is positive,
 enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.
-Enable the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -6357,8 +6477,8 @@ This is a minor mode.  If called interactively, toggle the
 `Lsp-Dired mode' mode.  If the prefix argument is positive,
 enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.
-Enable the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -6414,6 +6534,10 @@ Load all of the provided PROJECTS.
 
 
 
+(register-definition-prefixes "lsp-gleam" '("lsp-gleam-executable"))
+
+
+
 (register-definition-prefixes "lsp-go" '("lsp-go-"))
 
 
@@ -6442,8 +6566,8 @@ This is a minor mode.  If called interactively, toggle the
 positive, enable the mode, and if it is zero or negative, disable
 the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.
-Enable the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -6548,8 +6672,8 @@ This is a minor mode.  If called interactively, toggle the
 `Lsp-Lens mode' mode.  If the prefix argument is positive, enable
 the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.
-Enable the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -6648,8 +6772,8 @@ This is a minor mode.  If called interactively, toggle the
 positive, enable the mode, and if it is zero or negative, disable
 the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.
-Enable the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -6670,8 +6794,8 @@ This is a minor mode.  If called interactively, toggle the
 positive, enable the mode, and if it is zero or negative, disable
 the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.
-Enable the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -6690,8 +6814,8 @@ This is a minor mode.  If called interactively, toggle the
 argument is positive, enable the mode, and if it is zero or
 negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.
-Enable the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -6710,7 +6834,7 @@ it is disabled.
 
 
 
-(register-definition-prefixes "lsp-nim" '("lsp-nim-nimsuggest-mapping"))
+(register-definition-prefixes "lsp-nim" '("lsp-nim-"))
 
 
 
@@ -6805,8 +6929,8 @@ This is a minor mode.  If called interactively, toggle the
 positive, enable the mode, and if it is zero or negative, disable
 the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.
-Enable the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -6841,7 +6965,7 @@ it is disabled.
 
 
 
-(register-definition-prefixes "lsp-terraform" '("lsp-terraform-"))
+(register-definition-prefixes "lsp-terraform" '("construct-tf-package" "lsp-terraform-"))
 
 
 
@@ -6927,10 +7051,10 @@ accessible)." t nil)
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/all-the-icons-20220325.1238/all-the-icons-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/all-the-icons-20220325.1238/all-the-icons-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/all-the-icons-20220521.816/all-the-icons-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/all-the-icons-20220521.816/all-the-icons-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/all-the-icons-20220325.1238/all-the-icons-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/all-the-icons-20220521.816/all-the-icons-autoloads.el") (car load-path))))
 
 
 
@@ -7196,25 +7320,12 @@ Add ADDITIONAL-SEGMENTS to the end of the theme.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/solarized-theme-1.3.0/solarized-theme-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/solarized-theme-1.3.0/solarized-theme-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/solarized-theme-20220324.445/solarized-theme-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/solarized-theme-20220324.445/solarized-theme-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/solarized-theme-1.3.0/solarized-theme-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/solarized-theme-20220324.445/solarized-theme-autoloads.el") (car load-path))))
 
 
-
-(autoload 'solarized-color-blend-rgb "solarized" "\
-Blends COLOR1 onto COLOR2 with ALPHA.
-
-COLOR1 and COLOR2 should be color names (e.g. \"white\") or RGB
-triplet strings (e.g. \"#ff12ec\").
-
-Alpha should be a float between 0 and 1.
-
-Optional argument DIGITS-PER-COMPONENT can be either 4 (the default) or 2;
-use the latter if you need a 24-bit specification of a color.
-
-\(fn COLOR1 COLOR2 ALPHA &optional DIGITS-PER-COMPONENT)" nil nil)
 
 (autoload 'solarized-color-blend "solarized" "\
 Blends COLOR1 onto COLOR2 with ALPHA.
@@ -7274,11 +7385,31 @@ The Returned color-palette has the same format as `solarized-color-palette'
 
 
 
+(register-definition-prefixes "solarized-selenized-black-theme" '("solarized-selenized-black"))
+
+
+
+(register-definition-prefixes "solarized-selenized-dark-theme" '("solarized-selenized-dark"))
+
+
+
+(register-definition-prefixes "solarized-selenized-light-theme" '("solarized-selenized-light"))
+
+
+
+(register-definition-prefixes "solarized-selenized-white-theme" '("solarized-selenized-white"))
+
+
+
 (register-definition-prefixes "solarized-theme-utils" '("solarized-import-faces"))
 
 
 
 (register-definition-prefixes "solarized-wombat-dark-theme" '("solarized-wombat-dark"))
+
+
+
+(register-definition-prefixes "solarized-zenburn-theme" '("solarized-zenburn"))
 
 
 
@@ -7340,10 +7471,10 @@ Major Mode for editing ML-Yacc files.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/smartparens-20220204.1134/smartparens-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/smartparens-20220204.1134/smartparens-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/smartparens-20220510.934/smartparens-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/smartparens-20220510.934/smartparens-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/smartparens-20220204.1134/smartparens-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/smartparens-20220510.934/smartparens-autoloads.el") (car load-path))))
 
 
 
@@ -7381,8 +7512,8 @@ This is a minor mode.  If called interactively, toggle the
 `Smartparens mode' mode.  If the prefix argument is positive,
 enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.
-Enable the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -7407,8 +7538,8 @@ This is a minor mode.  If called interactively, toggle the
 positive, enable the mode, and if it is zero or negative, disable
 the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.
-Enable the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -7522,8 +7653,8 @@ This is a minor mode.  If called interactively, toggle the
 positive, enable the mode, and if it is zero or negative, disable
 the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.
-Enable the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -7637,6 +7768,10 @@ Turn off `show-smartparens-mode'." t nil)
 
 
 
+(register-definition-prefixes "smartparens-swift" '("sp-swift-"))
+
+
+
 (register-definition-prefixes "smartparens-text" '("sp-text-mode-"))
 
 
@@ -7647,10 +7782,10 @@ Turn off `show-smartparens-mode'." t nil)
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/sesman-0.3.2/sesman-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/sesman-0.3.2/sesman-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/sesman-20210901.1134/sesman-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/sesman-20210901.1134/sesman-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/sesman-0.3.2/sesman-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/sesman-20210901.1134/sesman-autoloads.el") (car load-path))))
 
 
 
@@ -7713,7 +7848,11 @@ buffer.
 \(fn &optional SESSION)" t nil)
 
 (autoload 'sesman-unlink "sesman" "\
-Break any of the previously created links." t nil)
+Break sesman LINKS.
+If LINKS is nil, ask interactively for a link. With a prefix argument break all
+links.
+
+\(fn &optional LINKS)" t nil)
  (autoload 'sesman-map "sesman" "Session management prefix keymap." t 'keymap)
 
 (register-definition-prefixes "sesman" '("sesman-"))
@@ -7728,16 +7867,12 @@ See `sesman-browser-mode' for more details." t nil)
 
 
 
-(register-definition-prefixes "sesman-test" '("with-empty-sesman-vars"))
-
-
-
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/prescient-20211228.417/prescient-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/prescient-20211228.417/prescient-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/prescient-20220601.1652/prescient-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/prescient-20220601.1652/prescient-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/prescient-20211228.417/prescient-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/prescient-20220601.1652/prescient-autoloads.el") (car load-path))))
 
 
 
@@ -7745,10 +7880,10 @@ See `sesman-browser-mode' for more details." t nil)
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/selectrum-20220323.10/selectrum-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/selectrum-20220323.10/selectrum-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/selectrum-20220513.2106/selectrum-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/selectrum-20220513.2106/selectrum-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/selectrum-20220323.10/selectrum-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/selectrum-20220513.2106/selectrum-autoloads.el") (car load-path))))
 
 
 
@@ -7813,14 +7948,13 @@ PREDICATE, see `read-file-name'.
 \(fn PROMPT &optional DIR DEFAULT-FILENAME MUSTMATCH INITIAL PREDICATE)" nil nil)
 
 (autoload 'selectrum--fix-dired-read-dir-and-switches "selectrum" "\
-Make \\[dired] do the \"right thing\" with its default candidate.
-By default \\[dired] uses `read-file-name' internally, which
-causes Selectrum to provide you with the first file inside the
-working directory as the default candidate. However, it would
-arguably be more semantically appropriate to use
-`read-directory-name', and this is especially important for
-Selectrum since this causes it to select the working directory
-initially.
+Make Dired do the \"right thing\" with its default candidate.
+By default Dired uses `read-file-name' internally, which causes
+Selectrum to provide you with the first file inside the working
+directory as the default candidate. However, it would arguably be
+more semantically appropriate to use `read-directory-name', and
+this is especially important for Selectrum since this causes it
+to select the working directory initially.
 
 To test that this advice is working correctly, type \\[dired] and
 accept the default candidate. You should have opened the working
@@ -7867,10 +8001,10 @@ Minor mode to use Selectrum for `completing-read'." :global t :group 'selectrum 
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/selectrum-prescient-20211228.417/selectrum-prescient-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/selectrum-prescient-20211228.417/selectrum-prescient-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/selectrum-prescient-20220601.1652/selectrum-prescient-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/selectrum-prescient-20220601.1652/selectrum-prescient-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/selectrum-prescient-20211228.417/selectrum-prescient-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/selectrum-prescient-20220601.1652/selectrum-prescient-autoloads.el") (car load-path))))
 
 
 
@@ -7892,8 +8026,8 @@ This is a minor mode.  If called interactively, toggle the
 positive, enable the mode, and if it is zero or negative, disable
 the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.
-Enable the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -7908,10 +8042,10 @@ it is disabled.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/rust-mode-1.0.4/rust-mode-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/rust-mode-1.0.4/rust-mode-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/rust-mode-20220217.2009/rust-mode-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/rust-mode-20220217.2009/rust-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/rust-mode-1.0.4/rust-mode-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/rust-mode-20220217.2009/rust-mode-autoloads.el") (car load-path))))
 
 
 
@@ -7933,10 +8067,6 @@ Major mode for Rust code.
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
 
 (register-definition-prefixes "rust-mode" '("rust-"))
-
-
-
-(register-definition-prefixes "rust-mode-tests" '("rust-" "test-"))
 
 
 
@@ -8005,10 +8135,10 @@ Disable `rainbow-delimiters-mode'." nil nil)
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/racket-mode-20220405.1747/racket-mode-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/racket-mode-20220405.1747/racket-mode-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/racket-mode-20220530.1615/racket-mode-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/racket-mode-20220530.1615/racket-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/racket-mode-20220405.1747/racket-mode-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/racket-mode-20220530.1615/racket-mode-autoloads.el") (car load-path))))
 
 
 
@@ -8066,11 +8196,6 @@ Before doing anything runs the hook `racket-stop-back-end-hook'." t nil)
 (register-definition-prefixes "racket-custom" '("defface-racket" "racket-"))
 
 
-
-(autoload 'racket--debug-send-definition "racket-debug" "\
-
-
-\(fn BEG END)" nil nil)
 
 (autoload 'racket--debug-on-break "racket-debug" "\
 
@@ -8302,8 +8427,8 @@ This is a minor mode.  If called interactively, toggle the
 positive, enable the mode, and if it is zero or negative, disable
 the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.
-Enable the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -8428,8 +8553,8 @@ This is a minor mode.  If called interactively, toggle the
 `Racket-Xp mode' mode.  If the prefix argument is positive,
 enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.
-Enable the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -8605,32 +8730,32 @@ Create an empty queue data structure.")
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/python-mode-20220327.1842/python-mode-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/python-mode-20220327.1842/python-mode-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/python-mode-20220602.903/python-mode-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/python-mode-20220602.903/python-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/python-mode-20220327.1842/python-mode-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/python-mode-20220602.903/python-mode-autoloads.el") (car load-path))))
 
 
 
 (autoload 'py-backward-class-bol "python-mode" "\
-Go to beginning of ‘class’, go to BOL.
-If already at beginning, go one ‘class’ backward.
-Return beginning of ‘class’ if successful, nil otherwise" t nil)
+Go to beginning of `class', go to BOL.
+If already at beginning, go one `class' backward.
+Return beginning of `class' if successful, nil otherwise" t nil)
 
 (autoload 'py-backward-def-bol "python-mode" "\
-Go to beginning of ‘def’, go to BOL.
-If already at beginning, go one ‘def’ backward.
-Return beginning of ‘def’ if successful, nil otherwise" t nil)
+Go to beginning of `def', go to BOL.
+If already at beginning, go one `def' backward.
+Return beginning of `def' if successful, nil otherwise" t nil)
 
 (autoload 'py-backward-def-or-class-bol "python-mode" "\
-Go to beginning of ‘def-or-class’, go to BOL.
-If already at beginning, go one ‘def-or-class’ backward.
-Return beginning of ‘def-or-class’ if successful, nil otherwise" t nil)
+Go to beginning of `def-or-class', go to BOL.
+If already at beginning, go one `def-or-class' backward.
+Return beginning of `def-or-class' if successful, nil otherwise" t nil)
 
 (autoload 'py-forward-class "python-mode" "\
 Go to end of class.
 
-Return end of ‘class’ if successful, nil otherwise
+Return end of `class' if successful, nil otherwise
 Optional ORIG: start position
 Optional BOL: go to beginning of line following end-position
 
@@ -8639,7 +8764,7 @@ Optional BOL: go to beginning of line following end-position
 (autoload 'py-forward-def "python-mode" "\
 Go to end of def.
 
-Return end of ‘def’ if successful, nil otherwise
+Return end of `def' if successful, nil otherwise
 Optional ORIG: start position
 Optional BOL: go to beginning of line following end-position
 
@@ -8648,7 +8773,7 @@ Optional BOL: go to beginning of line following end-position
 (autoload 'py-forward-def-or-class "python-mode" "\
 Go to end of def-or-class.
 
-Return end of ‘def-or-class’ if successful, nil otherwise
+Return end of `def-or-class' if successful, nil otherwise
 Optional ORIG: start position
 Optional BOL: go to beginning of line following end-position
 
@@ -8693,7 +8818,7 @@ VARIABLES
 
 \(fn)" t nil)
 
-(register-definition-prefixes "python-mode" '("all-mode-setting" "autopair-mode" "flake8" "force-py-shell-name-p-o" "highlight-indent-active" "hs-hide-comments-when-hiding-all" "info-lookup-mode" "ipython" "iypthon" "jython" "pdb-track-stack-from-shell-p" "pep8" "pst-here" "stri" "toggle-force-py-shell-name-p" "turn-o" "virtualenv-"))
+(register-definition-prefixes "python-mode" '("all-mode-setting" "autopair-mode" "comint-mime-setup-py-shell" "flake8" "force-py-shell-name-p-o" "highlight-indent-active" "hs-hide-comments-when-hiding-all" "info-lookup-mode" "ipython" "isympy3" "iypthon" "jython" "pdb-track-stack-from-shell-p" "pep8" "pst-here" "stri" "toggle-force-py-shell-name-p" "turn-o" "virtualenv-"))
 
 
 
@@ -9062,10 +9187,10 @@ lexicographically increasing file names when formatted using
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/parseclj-1.1.0/parseclj-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/parseclj-1.1.0/parseclj-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/parseclj-20220422.936/parseclj-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/parseclj-20220422.936/parseclj-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/parseclj-1.1.0/parseclj-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/parseclj-20220422.936/parseclj-autoloads.el") (car load-path))))
 
 
 
@@ -9091,16 +9216,14 @@ lexicographically increasing file names when formatted using
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/parseedn-1.1.0/parseedn-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/parseedn-1.1.0/parseedn-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/parseedn-20220520.835/parseedn-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/parseedn-20220520.835/parseedn-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/parseedn-1.1.0/parseedn-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/parseedn-20220520.835/parseedn-autoloads.el") (car load-path))))
 
 
 
 (register-definition-prefixes "parseedn" '("parseedn-"))
-
-
 
 
 )
@@ -9143,10 +9266,98 @@ Turn on pseudo-structural editing of Lisp code." t nil)
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/packed-20220402.1638/packed-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/packed-20220402.1638/packed-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/paradox-20191011.1111/paradox-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/paradox-20191011.1111/paradox-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/packed-20220402.1638/packed-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/paradox-20191011.1111/paradox-autoloads.el") (car load-path))))
+
+
+
+(autoload 'paradox-list-packages "paradox" "\
+Improved version of `package-list-packages'.  The heart of Paradox.
+Function is equivalent to `package-list-packages' (including the
+prefix NO-FETCH), but the resulting Package Menu is improved in
+several ways.
+
+Among them:
+
+1. Uses `paradox-menu-mode', which has more functionality and
+keybinds than `package-menu-mode'.
+
+2. Uses some font-locking to improve readability.
+
+3. Optionally shows the number GitHub stars and Melpa downloads
+for packages.
+
+4. Adds useful information in the mode-line.
+
+\(fn NO-FETCH)" t nil)
+
+(autoload 'paradox-upgrade-packages "paradox" "\
+Upgrade all packages.  No questions asked.
+This function is equivalent to `list-packages', followed by a
+`package-menu-mark-upgrades' and a `package-menu-execute'.  Except
+the user isn't asked to confirm deletion of packages.
+
+If `paradox-execute-asynchronously' is non-nil, part of this
+operation may be performed in the background.
+
+The NO-FETCH prefix argument is passed to `list-packages'.  It
+prevents re-download of information about new versions.  It does
+not prevent downloading the actual packages (obviously).
+
+\(fn &optional NO-FETCH)" t nil)
+
+(autoload 'paradox-enable "paradox" "\
+Enable paradox, overriding the default package-menu." t nil)
+
+(autoload 'paradox-require "paradox" "\
+Like `require', but also install FEATURE if it is absent.
+FILENAME is passed to `require'.
+If NOERROR is non-nil, don't complain if the feature couldn't be
+installed, just return nil.
+
+- If FEATURE is present, `require' it and return t.
+
+- If FEATURE is not present, install PACKAGE with `package-install'.
+If PACKAGE is nil, assume FEATURE is the package name.
+After installation, `require' FEATURE.
+
+By default, the current package database is only updated if it is
+empty.  Passing a non-nil REFRESH argument forces this update.
+
+\(fn FEATURE &optional FILENAME NOERROR PACKAGE REFRESH)" nil nil)
+
+(register-definition-prefixes "paradox" '("paradox-"))
+
+
+
+(register-definition-prefixes "paradox-commit-list" '("paradox-"))
+
+
+
+(register-definition-prefixes "paradox-core" '("paradox-"))
+
+
+
+(register-definition-prefixes "paradox-execute" '("paradox-"))
+
+
+
+(register-definition-prefixes "paradox-github" '("paradox-"))
+
+
+
+(register-definition-prefixes "paradox-menu" '("paradox-"))
+
+
+
+
+)
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/packed-20220422.1626/packed-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/packed-20220422.1626/packed-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/packed-20220422.1626/packed-autoloads.el") (car load-path))))
 
 
 
@@ -9262,10 +9473,10 @@ it is disabled.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/esxml-20211122.1657/esxml-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/esxml-20211122.1657/esxml-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/esxml-20220506.759/esxml-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/esxml-20220506.759/esxml-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/esxml-20211122.1657/esxml-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/esxml-20220506.759/esxml-autoloads.el") (car load-path))))
 
 
 
@@ -9279,10 +9490,10 @@ it is disabled.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/nov-20220320.1009/nov-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/nov-20220320.1009/nov-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/nov-20220428.1417/nov-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/nov-20220428.1417/nov-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/nov-20220320.1009/nov-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/nov-20220428.1417/nov-autoloads.el") (car load-path))))
 
 
 
@@ -9342,10 +9553,10 @@ Interactively, with prefix argument, move to the previous position.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/multiple-cursors-1.4.0/multiple-cursors-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/multiple-cursors-1.4.0/multiple-cursors-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/multiple-cursors-20220528.1215/multiple-cursors-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/multiple-cursors-20220528.1215/multiple-cursors-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/multiple-cursors-1.4.0/multiple-cursors-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/multiple-cursors-20220528.1215/multiple-cursors-autoloads.el") (car load-path))))
 
 
 
@@ -9376,8 +9587,6 @@ Add one cursor to the beginning of each line in the active region." t nil)
 (register-definition-prefixes "mc-edit-lines" '("mc/edit-lines-empty-lines"))
 
 
-
-(macroexp--funcall-if-compiled '#[0 "\302\301!\205\n\0\303\304\300\"\207" ["Use keywords rather than deprecated positional arguments to `define-minor-mode'" nil byte-compile-warning-enabled-p byte-compile-warn "%s"] 3])
 
 (autoload 'mc-hide-unmatched-lines-mode "mc-hide-unmatched-lines-mode" "\
 Minor mode when enabled hides all lines where no cursors (and
@@ -9424,29 +9633,73 @@ With zero ARG, skip the last one and mark next.
 \(fn ARG)" t nil)
 
 (autoload 'mc/mark-next-word-like-this "mc-mark-more" "\
-
-
-\(fn ARG)" t nil)
-
-(autoload 'mc/mark-next-symbol-like-this "mc-mark-more" "\
-
-
-\(fn ARG)" t nil)
-
-(autoload 'mc/mark-previous-like-this "mc-mark-more" "\
-Find and mark the previous part of the buffer matching the currently active region
+Find and mark the next word of the buffer matching the currently active region
+The matching region must be a whole word to be a match
+If no region is active add a cursor on the next line
 With negative ARG, delete the last one instead.
 With zero ARG, skip the last one and mark next.
 
 \(fn ARG)" t nil)
 
-(autoload 'mc/mark-previous-word-like-this "mc-mark-more" "\
+(autoload 'mc/mark-next-symbol-like-this "mc-mark-more" "\
+Find and mark the next symbol of the buffer matching the currently active region
+The matching region must be a whole symbol to be a match
+If no region is active add a cursor on the next line
+With negative ARG, delete the last one instead.
+With zero ARG, skip the last one and mark next.
 
+\(fn ARG)" t nil)
+
+(autoload 'mc/mark-previous-like-this "mc-mark-more" "\
+Find and mark the previous part of the buffer matching the
+currently active region.
+
+If no region is active ,add a cursor on the previous line.
+
+With negative ARG, delete the last one instead.
+
+With zero ARG, skip the last one and mark next.
+
+\(fn ARG)" t nil)
+
+(autoload 'mc/mark-previous-like-this-word "mc-mark-more" "\
+Find and mark the previous part of the buffer matching the
+currently active region.
+
+If no region is active, mark the word at the point and find the
+previous match.
+
+With negative ARG, delete the last one instead.
+
+With zero ARG, skip the last one and mark previous.
+
+\(fn ARG)" t nil)
+
+(autoload 'mc/mark-previous-word-like-this "mc-mark-more" "\
+Find and mark the previous part of the buffer matching the
+currently active region.
+
+The matching region must be a whole word to be a match.
+
+If no region is active, add a cursor on the previous line.
+
+With negative ARG, delete the last one instead.
+
+With zero ARG, skip the last one and mark next.
 
 \(fn ARG)" t nil)
 
 (autoload 'mc/mark-previous-symbol-like-this "mc-mark-more" "\
+Find and mark the previous part of the buffer matching
+the currently active region.
 
+The matching region must be a whole symbol to be a match.
+
+If no region is active add a cursor on the previous line.
+
+With negative ARG, delete the last one instead.
+
+With zero ARG, skip the last one and mark next.
 
 \(fn ARG)" t nil)
 
@@ -9467,10 +9720,12 @@ Deselect next part of the buffer matching the currently active region." t nil)
 Deselect prev part of the buffer matching the currently active region." t nil)
 
 (autoload 'mc/skip-to-next-like-this "mc-mark-more" "\
-Skip the current one and select the next part of the buffer matching the currently active region." t nil)
+Skip the current one and select the next part of the buffer
+matching the currently active region." t nil)
 
 (autoload 'mc/skip-to-previous-like-this "mc-mark-more" "\
-Skip the current one and select the prev part of the buffer matching the currently active region." t nil)
+Skip the current one and select the prev part of the buffer
+matching the currently active region." t nil)
 
 (autoload 'mc/mark-all-like-this "mc-mark-more" "\
 Find and mark all the parts of the buffer matching the currently active region" t nil)
@@ -9490,7 +9745,7 @@ Find and mark all the parts in the region matching the given regexp.
 \(fn BEG END)" t nil)
 
 (autoload 'mc/mark-more-like-this-extended "mc-mark-more" "\
-Like mark-more-like-this, but then lets you adjust with arrows key.
+Like mark-more-like-this, but then lets you adjust with arrow keys.
 The adjustments work like this:
 
    <up>    Mark previous like this and set direction to 'up
@@ -9506,7 +9761,8 @@ If direction is 'down:
    <left>  Remove the cursor furthest down
    <right> Skip past the cursor furthest down
 
-The bindings for these commands can be changed. See `mc/mark-more-like-this-extended-keymap'." t nil)
+The bindings for these commands can be changed.
+See `mc/mark-more-like-this-extended-keymap'." t nil)
 
 (autoload 'mc/mark-all-like-this-dwim "mc-mark-more" "\
 Tries to guess what you want to mark all of.
@@ -9559,7 +9815,8 @@ to the popped mark." t nil)
 
 
 (autoload 'mc/insert-numbers "mc-separate-operations" "\
-Insert increasing numbers for each cursor, starting at 0 or ARG.
+Insert increasing numbers for each cursor, starting at
+`mc/insert-numbers-default' or ARG.
 
 \(fn ARG)" t nil)
 
@@ -9575,7 +9832,7 @@ Insert increasing letters for each cursor, starting at 0 or ARG.
 
 (autoload 'mc/vertical-align "mc-separate-operations" "\
 Aligns all cursors vertically with a given CHARACTER to the one with the
-highest colum number (the rightest).
+highest column number (the rightest).
 Might not behave as intended if more than one cursors are on the same line.
 
 \(fn CHARACTER)" t nil)
@@ -9583,11 +9840,9 @@ Might not behave as intended if more than one cursors are on the same line.
 (autoload 'mc/vertical-align-with-space "mc-separate-operations" "\
 Aligns all cursors with whitespace like `mc/vertical-align' does" t nil)
 
-(register-definition-prefixes "mc-separate-operations" '("mc--"))
+(register-definition-prefixes "mc-separate-operations" '("mc--" "mc/insert-numbers-default"))
 
 
-
-(macroexp--funcall-if-compiled '#[0 "\302\301!\205\n\0\303\304\300\"\207" ["Use keywords rather than deprecated positional arguments to `define-minor-mode'" nil byte-compile-warning-enabled-p byte-compile-warn "%s"] 3])
 
 (autoload 'multiple-cursors-mode "multiple-cursors-core" "\
 Mode while multiple cursors are active.
@@ -9616,10 +9871,9 @@ it is disabled.
 (autoload 'set-rectangular-region-anchor "rectangular-region-mode" "\
 Anchors the rectangular region at point.
 
-Think of this one as `set-mark' except you're marking a rectangular region. It is
-an exceedingly quick way of adding multiple cursors to multiple lines." t nil)
-
-(macroexp--funcall-if-compiled '#[0 "\302\301!\205\n\0\303\304\300\"\207" ["Use keywords rather than deprecated positional arguments to `define-minor-mode'" nil byte-compile-warning-enabled-p byte-compile-warn "%s"] 3])
+Think of this one as `set-mark' except you're marking a
+rectangular region. It is an exceedingly quick way of adding
+multiple cursors to multiple lines." t nil)
 
 (autoload 'rectangular-region-mode "rectangular-region-mode" "\
 A mode for creating a rectangular region to edit
@@ -9647,12 +9901,22 @@ it is disabled.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/modus-themes-20220405.630/modus-themes-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/modus-themes-20220405.630/modus-themes-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/modus-themes-20220601.1045/modus-themes-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/modus-themes-20220601.1045/modus-themes-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/modus-themes-20220405.630/modus-themes-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/modus-themes-20220601.1045/modus-themes-autoloads.el") (car load-path))))
 
 
+
+(autoload 'modus-themes-version "modus-themes" "\
+Print `modus-themes--version' in the echo area.
+If optional INSERT argument is provided from Lisp or as a prefix
+argument, insert the `modus-themes--version' at point.
+
+\(fn &optional INSERT)" t nil)
+
+(autoload 'modus-themes-report-bug "modus-themes" "\
+Submit a bug report or issue to the Modus themes developers." t nil)
 
 (autoload 'modus-themes-contrast "modus-themes" "\
 Measure WCAG contrast ratio between C1 and C2.
@@ -9709,10 +9973,10 @@ by virtue of calling either of `modus-themes-load-operandi' and
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/mmm-mode-0.5.8/mmm-mode-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/mmm-mode-0.5.8/mmm-mode-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/mmm-mode-20200908.2236/mmm-mode-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/mmm-mode-20200908.2236/mmm-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/mmm-mode-0.5.8/mmm-mode-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/mmm-mode-20200908.2236/mmm-mode-autoloads.el") (car load-path))))
 
 
 
@@ -9797,10 +10061,10 @@ Add the submode classes CLASSES to `mmm-classes-alist'.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/minions-20220402.1113/minions-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/minions-20220402.1113/minions-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/minions-20220422.1615/minions-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/minions-20220422.1615/minions-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/minions-20220402.1113/minions-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/minions-20220422.1615/minions-autoloads.el") (car load-path))))
 
 
 
@@ -9821,8 +10085,8 @@ This is a minor mode.  If called interactively, toggle the
 `Minions mode' mode.  If the prefix argument is positive, enable
 the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.
-Enable the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -9897,10 +10161,16 @@ it is disabled.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/material-theme-2015/material-theme-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/material-theme-2015/material-theme-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/material-theme-20210904.1226/material-theme-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/material-theme-20210904.1226/material-theme-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/material-theme-2015/material-theme-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/material-theme-20210904.1226/material-theme-autoloads.el") (car load-path))))
+
+
+
+(when (and (boundp 'custom-theme-load-path) load-file-name) (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
+
+(register-definition-prefixes "material-light-theme" '("material-light"))
 
 
 
@@ -9912,10 +10182,10 @@ it is disabled.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/marginalia-20220404.804/marginalia-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/marginalia-20220404.804/marginalia-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/marginalia-20220426.449/marginalia-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/marginalia-20220426.449/marginalia-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/marginalia-20220404.804/marginalia-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/marginalia-20220426.449/marginalia-autoloads.el") (car load-path))))
 
 
 
@@ -9936,8 +10206,8 @@ This is a minor mode.  If called interactively, toggle the
 `Marginalia mode' mode.  If the prefix argument is positive,
 enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.
-Enable the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -11129,10 +11399,10 @@ Set the current filter groups to filter by vc root dir." t nil)
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/highlight-parentheses-2.1.1/highlight-parentheses-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/highlight-parentheses-2.1.1/highlight-parentheses-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/highlight-parentheses-20220408.845/highlight-parentheses-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/highlight-parentheses-20220408.845/highlight-parentheses-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/highlight-parentheses-2.1.1/highlight-parentheses-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/highlight-parentheses-20220408.845/highlight-parentheses-autoloads.el") (car load-path))))
 
 
 
@@ -11141,18 +11411,18 @@ Minor mode to highlight the surrounding parentheses.
 
 This is a minor mode.  If called interactively, toggle the
 `Highlight-Parentheses mode' mode.  If the prefix argument is
-positive, enable the mode, and if it is zero or negative, disable the
-mode.
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
-mode if ARG is nil, omitted, or is a positive number.  Disable the
-mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `highlight-parentheses-mode'.
 
-The mode's hook is called both when the mode is enabled and when it is
-disabled.
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
 
 \(fn &optional ARG)" t nil)
 
@@ -11170,24 +11440,22 @@ or call the function `global-highlight-parentheses-mode'.")
 
 (autoload 'global-highlight-parentheses-mode "highlight-parentheses" "\
 Toggle Highlight-Parentheses mode in all buffers.
-With prefix ARG, enable Global Highlight-Parentheses mode if ARG is positive;
-otherwise, disable it.
+With prefix ARG, enable Global Highlight-Parentheses mode if ARG is
+positive; otherwise, disable it.
 
 If called from Lisp, toggle the mode if ARG is `toggle'.
 Enable the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
-Highlight-Parentheses mode is enabled in all buffers where `(lambda nil
-\(highlight-parentheses-mode 1))' would do it.
+Highlight-Parentheses mode is enabled in all buffers where `(lambda
+nil (highlight-parentheses-mode 1))' would do it.
 
-See `highlight-parentheses-mode' for more information on Highlight-Parentheses
-mode.
+See `highlight-parentheses-mode' for more information on
+Highlight-Parentheses mode.
 
 \(fn &optional ARG)" t nil)
 
 (register-definition-prefixes "highlight-parentheses" '("highlight-parentheses-" "hl-paren-face"))
-
-
 
 
 )
@@ -11285,10 +11553,10 @@ search.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/helpful-20220220.2308/helpful-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/helpful-20220220.2308/helpful-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/helpful-20220513.302/helpful-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/helpful-20220513.302/helpful-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/helpful-20220220.2308/helpful-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/helpful-20220513.302/helpful-autoloads.el") (car load-path))))
 
 
 
@@ -11342,14 +11610,12 @@ Show help for the symbol at point." t nil)
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/haskell-mode-4.7.1/haskell-mode-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/haskell-mode-4.7.1/haskell-mode-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/haskell-mode-20220529.1859/haskell-mode-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/haskell-mode-20220529.1859/haskell-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/haskell-mode-4.7.1/haskell-mode-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/haskell-mode-20220529.1859/haskell-mode-autoloads.el") (car load-path))))
 
 
-
-(let ((loads (get 'ghc-core 'custom-loads))) (if (member '"ghc-core" loads) nil (put 'ghc-core 'custom-loads (cons '"ghc-core" loads))))
 
 (autoload 'ghc-core-create-core "ghc-core" "\
 Compile and load the current buffer as tidy core." t nil)
@@ -11511,8 +11777,9 @@ file), then this function returns nil.
 \(fn NAME)" t nil)
 
 (autoload 'haskell-cabal-get-dir "haskell-cabal" "\
-Get the Cabal dir for a new project. Various ways of figuring this out,
-   and indeed just prompting the user. Do them all.
+Get the Cabal dir for a new project.
+Various ways of figuring this out, and indeed just prompting the user.  Do them
+all.
 
 \(fn &optional USE-DEFAULTS)" nil nil)
 
@@ -11526,8 +11793,6 @@ below the top-folder.  If called with non-nil prefix argument
 OTHER-WINDOW use `find-file-other-window'.
 
 \(fn OTHER-WINDOW)" t nil)
-
-(let ((loads (get 'haskell-cabal 'custom-loads))) (if (member '"haskell-cabal" loads) nil (put 'haskell-cabal 'custom-loads (cons '"haskell-cabal" loads))))
 
 (register-definition-prefixes "haskell-cabal" '("haskell-"))
 
@@ -11664,8 +11929,6 @@ Find use cases of the identifier at point and highlight them all." t nil)
 
 
 
-(let ((loads (get 'haskell-compile 'custom-loads))) (if (member '"haskell-compile" loads) nil (put 'haskell-compile 'custom-loads (cons '"haskell-compile" loads))))
-
 (autoload 'haskell-compile "haskell-compile" "\
 Run a compile command for the current Haskell buffer.
 Obeys haskell-compiler-type to choose the appropriate build command.
@@ -11698,8 +11961,6 @@ base directory for build tools, or the current buffer for
 
 
 
-(let ((loads (get 'haskell-completions 'custom-loads))) (if (member '"haskell-completions" loads) nil (put 'haskell-completions 'custom-loads (cons '"haskell-completions" loads))))
-
 (autoload 'haskell-completions-completion-at-point "haskell-completions" "\
 Provide completion list for thing at point.
 This function is used in non-interactive `haskell-mode'.  It
@@ -11710,39 +11971,13 @@ GHC's options, and language extensions, but not identifiers." nil nil)
 
 
 
-(let ((loads (get 'haskell 'custom-loads))) (if (member '"haskell-customize" loads) nil (put 'haskell 'custom-loads (cons '"haskell-customize" loads))))
-
-(let ((loads (get 'haskell-interactive 'custom-loads))) (if (member '"haskell-customize" loads) nil (put 'haskell-interactive 'custom-loads (cons '"haskell-customize" loads))))
-
 (register-definition-prefixes "haskell-customize" '("haskell-" "inferior-haskell-root-dir"))
 
 
 
-(let ((loads (get 'haskell-debug 'custom-loads))) (if (member '"haskell-debug" loads) nil (put 'haskell-debug 'custom-loads (cons '"haskell-debug" loads))))
-
-(defface haskell-debug-warning-face '((t :inherit 'compilation-warning)) "\
-Face for warnings." :group 'haskell-debug)
-
-(defface haskell-debug-trace-number-face '((t :weight bold :background "#f5f5f5")) "\
-Face for numbers in backtrace." :group 'haskell-debug)
-
-(defface haskell-debug-newline-face '((t :weight bold :background "#f0f0f0")) "\
-Face for newlines in trace steps." :group 'haskell-debug)
-
-(defface haskell-debug-keybinding-face '((t :inherit 'font-lock-type-face :weight bold)) "\
-Face for keybindings." :group 'haskell-debug)
-
-(defface haskell-debug-heading-face '((t :inherit 'font-lock-keyword-face)) "\
-Face for headings." :group 'haskell-debug)
-
-(defface haskell-debug-muted-face '((t :foreground "#999")) "\
-Face for muteds." :group 'haskell-debug)
-
 (register-definition-prefixes "haskell-debug" '("haskell-debug"))
 
 
-
-(let ((loads (get 'haskell-decl-scan 'custom-loads))) (if (member '"haskell-decl-scan" loads) nil (put 'haskell-decl-scan 'custom-loads (cons '"haskell-decl-scan" loads))))
 
 (autoload 'haskell-ds-create-imenu-index "haskell-decl-scan" "\
 Function for finding `imenu' declarations in Haskell mode.
@@ -11794,8 +12029,6 @@ Invokes `haskell-decl-scan-mode-hook' on activation.
 
 
 
-(let ((loads (get 'haskell-doc 'custom-loads))) (if (member '"haskell-doc" loads) nil (put 'haskell-doc 'custom-loads (cons '"haskell-doc" loads))))
-
 (autoload 'haskell-doc-mode "haskell-doc" "\
 Enter `haskell-doc-mode' for showing fct types in the echo area.
 See variable docstring.
@@ -11822,30 +12055,6 @@ current buffer.
 (register-definition-prefixes "haskell-doc" '("haskell-" "inferior-haskell-" "turn-off-haskell-doc"))
 
 
-
-(let ((loads (get 'haskell-appearance 'custom-loads))) (if (member '"haskell-font-lock" loads) nil (put 'haskell-appearance 'custom-loads (cons '"haskell-font-lock" loads))))
-
-(defface haskell-keyword-face '((t :inherit font-lock-keyword-face)) "\
-Face used to highlight Haskell keywords." :group 'haskell-appearance)
-
-(defface haskell-type-face '((t :inherit font-lock-type-face)) "\
-Face used to highlight Haskell types" :group 'haskell-appearance)
-
-(defface haskell-constructor-face '((t :inherit font-lock-type-face)) "\
-Face used to highlight Haskell constructors." :group 'haskell-appearance)
-
-(defface haskell-operator-face '((t :inherit font-lock-variable-name-face)) "\
-Face used to highlight Haskell operators." :group 'haskell-appearance)
-
-(defface haskell-pragma-face '((t :inherit font-lock-preprocessor-face)) "\
-Face used to highlight Haskell pragmas ({-# ... #-})." :group 'haskell-appearance)
-
-(defface haskell-liquid-haskell-annotation-face '((t :inherit haskell-pragma-face)) "\
-Face used to highlight LiquidHaskell annotations ({-@ ... @-})." :group 'haskell-appearance)
-
-(defface haskell-literate-comment-face '((t :inherit font-lock-doc-face)) "\
-Face with which to fontify literate comments.
-Inherit from `default' to avoid fontification of them." :group 'haskell-appearance)
 
 (register-definition-prefixes "haskell-font-lock" '("haskell-"))
 
@@ -11876,8 +12085,6 @@ Lookup QUERY on local hoogle server." t nil)
 (register-definition-prefixes "haskell-hoogle" '("haskell-hoogle-" "hoogle-prompt"))
 
 
-
-(let ((loads (get 'haskell-indent 'custom-loads))) (if (member '"haskell-indent" loads) nil (put 'haskell-indent 'custom-loads (cons '"haskell-indent" loads))))
 
 (autoload 'turn-on-haskell-indent "haskell-indent" "\
 Turn on ``intelligent'' Haskell indentation mode." nil nil)
@@ -11915,8 +12122,6 @@ Invokes `haskell-indent-hook' if not nil.
 
 
 
-(let ((loads (get 'haskell-indentation 'custom-loads))) (if (member '"haskell-indentation" loads) nil (put 'haskell-indentation 'custom-loads (cons '"haskell-indentation" loads))))
-
 (autoload 'haskell-indentation-mode "haskell-indentation" "\
 Haskell indentation mode that deals with the layout rule.
 It rebinds RET, DEL and BACKSPACE, so that indentations can be
@@ -11946,26 +12151,6 @@ Turn on the haskell-indentation minor mode." t nil)
 
 
 
-(defface haskell-interactive-face-prompt '((t :inherit font-lock-function-name-face)) "\
-Face for the prompt." :group 'haskell-interactive)
-
-(defface haskell-interactive-face-prompt-cont '((t :inherit font-lock-keyword-face)) "\
-Face for GHCi's prompt-cont in multi-line mode." :group 'haskell-interactive)
-
-(define-obsolete-face-alias 'haskell-interactive-face-prompt2 'haskell-interactive-face-prompt-cont "16.2")
-
-(defface haskell-interactive-face-compile-error '((t :inherit compilation-error)) "\
-Face for compile errors." :group 'haskell-interactive)
-
-(defface haskell-interactive-face-compile-warning '((t :inherit compilation-warning)) "\
-Face for compiler warnings." :group 'haskell-interactive)
-
-(defface haskell-interactive-face-result '((t :inherit font-lock-string-face)) "\
-Face for the result." :group 'haskell-interactive)
-
-(defface haskell-interactive-face-garbage '((t :inherit font-lock-string-face)) "\
-Face for trailing garbage after a command has completed." :group 'haskell-interactive)
-
 (autoload 'haskell-interactive-mode-reset-error "haskell-interactive-mode" "\
 Reset the error cursor position.
 
@@ -11991,15 +12176,6 @@ function `haskell-presentation-present', depending on variable
 (register-definition-prefixes "haskell-lexeme" '("haskell-lexeme-"))
 
 
-
-(defface haskell-error-face '((((supports :underline (:style wave))) :underline (:style wave :color "#dc322f")) (t :inherit error)) "\
-Face used for marking error lines." :group 'haskell-mode)
-
-(defface haskell-warning-face '((((supports :underline (:style wave))) :underline (:style wave :color "#b58900")) (t :inherit warning)) "\
-Face used for marking warning lines." :group 'haskell-mode)
-
-(defface haskell-hole-face '((((supports :underline (:style wave))) :underline (:style wave :color "#6c71c4")) (t :inherit warning)) "\
-Face used for marking hole lines." :group 'haskell-mode)
 
 (autoload 'haskell-process-reload-devel-main "haskell-load" "\
 Reload the module `DevelMain' and then run `DevelMain.update'.
@@ -12153,7 +12329,9 @@ If DONTCREATE is non-nil don't create a new session.
 
 
 (autoload 'haskell-move-nested "haskell-move-nested" "\
-Shift the nested off-side-rule block adjacent to point by COLS columns to the right.
+Shift the nested off-side-rule block adjacent to point.
+It shift the nested off-side-rule block adjacent to point by COLS
+columns to the right.
 
 In Transient Mark mode, if the mark is active, operate on the contents
 of the region instead.
@@ -12281,17 +12459,12 @@ it is disabled.
 
 
 
-(let ((loads (get 'inferior-haskell 'custom-loads))) (if (member '"inf-haskell" loads) nil (put 'inferior-haskell 'custom-loads (cons '"inf-haskell" loads))))
-
 (autoload 'run-haskell "inf-haskell" "\
 Show the inferior-haskell buffer.  Start the process if needed." t nil)
 
 (register-definition-prefixes "inf-haskell" '("haskell-" "inf"))
 
 
-
-(defface w3m-haddock-heading-face '((((class color)) :inherit highlight)) "\
-Face for quarantines." :group 'haskell)
 
 (register-definition-prefixes "w3m-haddock" '("haskell-w3m-" "w3m-haddock-"))
 
@@ -12398,10 +12571,10 @@ Enable git timemachine for current buffer, switching to GIT-BRANCH.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/git-gutter-20211222.913/git-gutter-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/git-gutter-20211222.913/git-gutter-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/git-gutter-20220423.1704/git-gutter-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/git-gutter-20220423.1704/git-gutter-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/git-gutter-20211222.913/git-gutter-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/git-gutter-20220423.1704/git-gutter-autoloads.el") (car load-path))))
 
 
 
@@ -12422,8 +12595,8 @@ mode if ARG is a negative number.
 To check whether the minor mode is enabled in the current buffer,
 evaluate `git-gutter-mode'.
 
-The mode's hook is called both when the mode is enabled and when it
-is disabled.
+The mode's hook is called both when the mode is enabled and when it is
+disabled.
 
 \(fn &optional ARG)" t nil)
 
@@ -12464,10 +12637,10 @@ Toggle to show diff information." t nil)
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/ggtags-0.9.0/ggtags-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/ggtags-0.9.0/ggtags-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/ggtags-20220511.610/ggtags-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/ggtags-20220511.610/ggtags-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/ggtags-0.9.0/ggtags-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/ggtags-20220511.610/ggtags-autoloads.el") (car load-path))))
 
 
 
@@ -12516,8 +12689,6 @@ A function suitable for `hippie-expand-try-functions-list'.
 (register-definition-prefixes "ggtags" '("ggtags-"))
 
 
-
-
 )
 (let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/gcmh-20201116.2251/gcmh-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/gcmh-20201116.2251/gcmh-autoloads.el"))
 
@@ -12559,10 +12730,10 @@ it is disabled.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/fsharp-mode-20211229.1121/fsharp-mode-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/fsharp-mode-20211229.1121/fsharp-mode-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/fsharp-mode-20220601.1740/fsharp-mode-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/fsharp-mode-20220601.1740/fsharp-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/fsharp-mode-20211229.1121/fsharp-mode-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/fsharp-mode-20220601.1740/fsharp-mode-autoloads.el") (car load-path))))
 
 
 
@@ -12626,10 +12797,10 @@ format recognized by `kbd', for example \"C-x\".
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/flycheck-20220328.1518/flycheck-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/flycheck-20220328.1518/flycheck-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/flycheck-20220514.1743/flycheck-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/flycheck-20220514.1743/flycheck-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/flycheck-20220328.1518/flycheck-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/flycheck-20220514.1743/flycheck-autoloads.el") (car load-path))))
 
 
 
@@ -12930,10 +13101,10 @@ Setup Flycheck for Swift." t nil)
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/fish-mode-20210215.1114/fish-mode-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/fish-mode-20210215.1114/fish-mode-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/fish-mode-20220505.1111/fish-mode-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/fish-mode-20220505.1111/fish-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/fish-mode-20210215.1114/fish-mode-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/fish-mode-20220505.1111/fish-mode-autoloads.el") (car load-path))))
 
 
 
@@ -13666,10 +13837,10 @@ The variable will be called NAME.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/embark-20220406.506/embark-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/embark-20220406.506/embark-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/embark-20220527.2228/embark-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/embark-20220527.2228/embark-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/embark-20220406.506/embark-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/embark-20220527.2228/embark-autoloads.el") (car load-path))))
 
 
 
@@ -13808,7 +13979,16 @@ point.
 Create an Embark Collect buffer.
 
 To control the display, add an entry to `display-buffer-alist'
-with key \"Embark Collect\"." t nil)
+with key \"Embark Collect\".
+
+Reverting an Embark Collect buffer has slightly unusual behavior
+if the buffer was obtained by running `embark-collect' from
+within a minibuffer completion session.  In that case reverting
+just restarts the completion session, that is, the command that
+opened the minibuffer is run again and the minibuffer contents
+restored.  You can then interact normally with the command,
+perhaps editing the minibuffer contents, and, if you wish, you
+can rerun `embark-collect' to get an updated buffer." t nil)
 
 (autoload 'embark-live "embark" "\
 Create a live-updating Embark Collect buffer.
@@ -13821,10 +14001,14 @@ Create a type-specific buffer to manage current candidates.
 The variable `embark-exporters-alist' controls how to make the
 buffer for each type of completion.
 
-If WINDOWS is nil, display the buffer using `pop-to-buffer',
-otherwise display it in each of the WINDOWS.
-
-\(fn &optional WINDOWS)" t nil)
+Reverting an Embark Export buffer has slightly unusual behavior if
+the buffer was obtained by running `embark-export' from within a
+minibuffer completion session.  In that case reverting just
+restarts the completion session, that is, the command that opened
+the minibuffer is run again and the minibuffer contents restored.
+You can then interact normally with the command, perhaps editing
+the minibuffer contents, and, if you wish, you can rerun
+`embark-export' to get an updated buffer." t nil)
 
 (register-definition-prefixes "embark" '("embark-"))
 
@@ -13832,10 +14016,10 @@ otherwise display it in each of the WINDOWS.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/consult-20220406.1136/consult-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/consult-20220406.1136/consult-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/consult-20220603.1902/consult-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/consult-20220603.1902/consult-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/consult-20220406.1136/consult-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/consult-20220603.1902/consult-autoloads.el") (car load-path))))
 
 
 
@@ -13860,12 +14044,6 @@ These configuration options are supported:
     * :prompt - The prompt string shown in the minibuffer
 
 \(fn START END COLLECTION &optional PREDICATE)" nil nil)
-
-(autoload 'consult-completing-read-multiple "consult" "\
-Enhanced replacement for `completing-read-multiple'.
-See `completing-read-multiple' for the documentation of the arguments.
-
-\(fn PROMPT TABLE &optional PRED REQUIRE-MATCH INITIAL-INPUT HIST DEF INHERIT-INPUT-METHOD)" nil nil)
 
 (autoload 'consult-multi-occur "consult" "\
 Improved version of `multi-occur' based on `completing-read-multiple'.
@@ -14025,9 +14203,8 @@ This command can act as a drop-in replacement for `repeat-complex-command'." t n
 
 (autoload 'consult-history "consult" "\
 Insert string from HISTORY of current buffer.
-
 In order to select from a specific HISTORY, pass the history variable
-as argument.
+as argument. See also `cape-history' from the Cape package.
 
 \(fn &optional HISTORY)" t nil)
 
@@ -14082,7 +14259,9 @@ Macros containing mouse clicks are omitted.
 \(fn ARG)" t nil)
 
 (autoload 'consult-grep "consult" "\
-Search for regexp with grep in DIR with INITIAL input.
+Search with `grep' for files in DIR where the content matches a regexp.
+
+The initial input is given by the INITIAL argument.
 
 The input string is split, the first part of the string (grep input) is
 passed to the asynchronous grep process and the second part of the string is
@@ -14120,21 +14299,21 @@ Otherwise the `default-directory' is searched.
 \(fn &optional DIR INITIAL)" t nil)
 
 (autoload 'consult-git-grep "consult" "\
-Search for regexp with grep in DIR with INITIAL input.
-
-See `consult-grep' for more details.
+Search with `git grep' for files in DIR where the content matches a regexp.
+The initial input is given by the INITIAL argument. See `consult-grep'
+for more details.
 
 \(fn &optional DIR INITIAL)" t nil)
 
 (autoload 'consult-ripgrep "consult" "\
-Search for regexp with rg in DIR with INITIAL input.
-
-See `consult-grep' for more details.
+Search with `rg' for files in DIR where the content matches a regexp.
+The initial input is given by the INITIAL argument. See `consult-grep'
+for more details.
 
 \(fn &optional DIR INITIAL)" t nil)
 
 (autoload 'consult-find "consult" "\
-Search for regexp with find in DIR with INITIAL input.
+Search for files in DIR matching input regexp given INITIAL input.
 
 The find process is started asynchronously, similar to `consult-grep'.
 See `consult-grep' for more details regarding the asynchronous search.
@@ -14142,18 +14321,23 @@ See `consult-grep' for more details regarding the asynchronous search.
 \(fn &optional DIR INITIAL)" t nil)
 
 (autoload 'consult-locate "consult" "\
-Search for regexp with locate with INITIAL input.
+Search with `locate' for files which match input given INITIAL input.
 
-The locate process is started asynchronously, similar to `consult-grep'.
-See `consult-grep' for more details regarding the asynchronous search.
+The input is treated literally such that locate can take advantage of
+the locate database index. Regular expressions would often force a slow
+linear search through the entire database. The locate process is started
+asynchronously, similar to `consult-grep'. See `consult-grep' for more
+details regarding the asynchronous search.
 
 \(fn &optional INITIAL)" t nil)
 
 (autoload 'consult-man "consult" "\
-Search for regexp with man with INITIAL input.
+Search for man page given INITIAL input.
 
-The man process is started asynchronously, similar to `consult-grep'.
-See `consult-grep' for more details regarding the asynchronous search.
+The input string is not preprocessed and passed literally to the
+underlying man commands. The man process is started asynchronously,
+similar to `consult-grep'. See `consult-grep' for more details regarding
+the asynchronous search.
 
 \(fn &optional INITIAL)" t nil)
 
@@ -14173,7 +14357,11 @@ preview of the currently selected error." t nil)
 
 
 (autoload 'consult-flymake "consult-flymake" "\
-Jump to Flymake diagnostic." t nil)
+Jump to Flymake diagnostic.
+When PROJECT is non-nil then prompt with diagnostics from all
+buffers in the current project instead of just the current buffer.
+
+\(fn &optional PROJECT)" t nil)
 
 (register-definition-prefixes "consult-flymake" '("consult-flymake--"))
 
@@ -14301,10 +14489,10 @@ FETCHER and ALIST arguments.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/embark-consult-20220406.506/embark-consult-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/embark-consult-20220406.506/embark-consult-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/embark-consult-20220526.1525/embark-consult-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/embark-consult-20220526.1525/embark-consult-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/embark-consult-20220406.506/embark-consult-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/embark-consult-20220526.1525/embark-consult-autoloads.el") (car load-path))))
 
 
 
@@ -14363,10 +14551,10 @@ the mode if ARG is omitted or nil.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/dtrt-indent-20220226.1354/dtrt-indent-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/dtrt-indent-20220226.1354/dtrt-indent-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/dtrt-indent-20220518.807/dtrt-indent-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/dtrt-indent-20220518.807/dtrt-indent-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/dtrt-indent-20220226.1354/dtrt-indent-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/dtrt-indent-20220518.807/dtrt-indent-autoloads.el") (car load-path))))
 
 
 
@@ -14380,8 +14568,8 @@ This is a minor mode.  If called interactively, toggle the
 `dtrt-indent mode' mode.  If the prefix argument is positive,
 enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.
-Enable the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -14664,10 +14852,10 @@ what diminished modes would be on the mode-line if they were still minor." t nil
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/deadgrep-20220209.719/deadgrep-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/deadgrep-20220209.719/deadgrep-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/deadgrep-20220507.1755/deadgrep-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/deadgrep-20220507.1755/deadgrep-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/deadgrep-20220209.719/deadgrep-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/deadgrep-20220507.1755/deadgrep-autoloads.el") (car load-path))))
 
 
 
@@ -14688,10 +14876,10 @@ don't actually start the search.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/company-20220328.155/company-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/company-20220328.155/company-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/company-20220425.1145/company-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/company-20220425.1145/company-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/company-20220328.155/company-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/company-20220425.1145/company-autoloads.el") (car load-path))))
 
 
 
@@ -14704,8 +14892,8 @@ This is a minor mode.  If called interactively, toggle the
 `Company mode' mode.  If the prefix argument is positive, enable
 the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.
-Enable the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -14962,8 +15150,8 @@ This is a minor mode.  If called interactively, toggle the
 `Company-Tng mode' mode.  If the prefix argument is positive,
 enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.
-Enable the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -15069,10 +15257,10 @@ Company-Quickhelp-Local mode.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/company-prescient-20211228.417/company-prescient-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/company-prescient-20211228.417/company-prescient-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/company-prescient-20220601.1652/company-prescient-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/company-prescient-20220601.1652/company-prescient-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/company-prescient-20211228.417/company-prescient-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/company-prescient-20220601.1652/company-prescient-autoloads.el") (car load-path))))
 
 
 
@@ -15094,8 +15282,8 @@ This is a minor mode.  If called interactively, toggle the
 positive, enable the mode, and if it is zero or negative, disable
 the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.
-Enable the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -15269,10 +15457,10 @@ Queries for any of the four available help topics and prints out the appropriate
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/clojure-mode-5.14.0/clojure-mode-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/clojure-mode-5.14.0/clojure-mode-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/clojure-mode-20220418.2015/clojure-mode-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/clojure-mode-20220418.2015/clojure-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/clojure-mode-5.14.0/clojure-mode-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/clojure-mode-20220418.2015/clojure-mode-autoloads.el") (car load-path))))
 
 
 
@@ -15382,7 +15570,7 @@ Major mode for editing ClojureC code.
 
 \(fn)" t nil)
 
-(add-to-list 'auto-mode-alist '("\\.\\(clj\\|dtm\\|edn\\)\\'" . clojure-mode))
+(add-to-list 'auto-mode-alist '("\\.\\(clj\\|cljd\\|dtm\\|edn\\)\\'" . clojure-mode))
 
 (add-to-list 'auto-mode-alist '("\\.cljc\\'" . clojurec-mode))
 
@@ -15395,13 +15583,11 @@ Major mode for editing ClojureC code.
 (register-definition-prefixes "clojure-mode" '("add-custom-clojure-indents" "clojure" "define-clojure-indent" "put-clojure-indent"))
 
 
-
-
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/cider-1.4.0/cider-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/cider-1.4.0/cider-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/cider-20220531.616/cider-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/cider-20220531.616/cider-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/cider-1.4.0/cider-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/cider-20220531.616/cider-autoloads.el") (car load-path))))
 
 
 
@@ -15606,6 +15792,18 @@ opposite of what that option dictates.
 
 
 
+(defvar cider-merge-sessions nil "\
+Controls session combination behaviour.
+
+Symbol `host' combines all sessions of a project associated with the same host.
+Symbol `project' combines all sessions of a project.
+
+All other values do not combine any sessions.")
+
+(custom-autoload 'cider-merge-sessions "cider-connection" t)
+
+(put 'cider-merge-sessions 'safe-local-variable #'symbolp)
+
 (register-definition-prefixes "cider-connection" '("cider-"))
 
 
@@ -15791,18 +15989,18 @@ variable to nil to disable the mode line entirely.")
 Minor mode for REPL interaction from a Clojure buffer.
 
 This is a minor mode.  If called interactively, toggle the `Cider
-mode' mode.  If the prefix argument is positive, enable the mode, and
-if it is zero or negative, disable the mode.
+mode' mode.  If the prefix argument is positive, enable the mode,
+and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
-mode if ARG is nil, omitted, or is a positive number.  Disable the
-mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `cider-mode'.
 
-The mode's hook is called both when the mode is enabled and when it is
-disabled.
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
 
 \\{cider-mode-map}
 
@@ -15966,15 +16164,15 @@ This is a minor mode.  If called interactively, toggle the
 `Cider-Auto-Test mode' mode.  If the prefix argument is positive,
 enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable the
-mode if ARG is nil, omitted, or is a positive number.  Disable the
-mode if ARG is a negative number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
 evaluate `(default-value \\='cider-auto-test-mode)'.
 
-The mode's hook is called both when the mode is enabled and when it is
-disabled.
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
 
 When enabled this reruns tests every time a Clojure file is loaded.
 Only runs tests corresponding to the loaded file's namespace and does
@@ -16065,10 +16263,10 @@ for more details on the DSL accepted by Cask.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/calibredb-20220305.1621/calibredb-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/calibredb-20220305.1621/calibredb-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/calibredb-20220604.1655/calibredb-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/calibredb-20220604.1655/calibredb-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/calibredb-20220305.1621/calibredb-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/calibredb-20220604.1655/calibredb-autoloads.el") (car load-path))))
 
 
 
@@ -16081,7 +16279,15 @@ Enter calibre Search Buffer." t nil)
 
 
 
+(register-definition-prefixes "calibredb-consult" '("calibredb-consult-read"))
+
+
+
 (register-definition-prefixes "calibredb-core" '("calibredb-"))
+
+
+
+(register-definition-prefixes "calibredb-dired" '("calibredb-dired-"))
 
 
 
@@ -16229,10 +16435,10 @@ it is disabled.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/auto-compile-20220402.1035/auto-compile-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/auto-compile-20220402.1035/auto-compile-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/auto-compile-20220517.1501/auto-compile-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/auto-compile-20220517.1501/auto-compile-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/auto-compile-20220402.1035/auto-compile-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/auto-compile-20220517.1501/auto-compile-autoloads.el") (car load-path))))
 
 
 
@@ -16243,8 +16449,8 @@ This is a minor mode.  If called interactively, toggle the
 `Auto-Compile mode' mode.  If the prefix argument is positive,
 enable the mode, and if it is zero or negative, disable the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.
-Enable the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -16358,8 +16564,8 @@ This is a minor mode.  If called interactively, toggle the
 positive, enable the mode, and if it is zero or negative, disable
 the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.
-Enable the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -16632,10 +16838,10 @@ provided.
 
 
 )
-(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/all-the-icons-completion-20220106.1310/all-the-icons-completion-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/all-the-icons-completion-20220106.1310/all-the-icons-completion-autoloads.el"))
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/all-the-icons-completion-20220409.1204/all-the-icons-completion-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/all-the-icons-completion-20220409.1204/all-the-icons-completion-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/all-the-icons-completion-20220106.1310/all-the-icons-completion-autoloads.el") (car load-path))))
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/all-the-icons-completion-20220409.1204/all-the-icons-completion-autoloads.el") (car load-path))))
 
 
 
@@ -16660,8 +16866,8 @@ This is a minor mode.  If called interactively, toggle the
 positive, enable the mode, and if it is zero or negative, disable
 the mode.
 
-If called from Lisp, toggle the mode if ARG is `toggle'.
-Enable the mode if ARG is nil, omitted, or is a positive number.
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
 Disable the mode if ARG is a negative number.
 
 To check whether the minor mode is enabled in the current buffer,
@@ -16756,14 +16962,14 @@ mode.
 )
 (setq package-activated-list
 	  (append
-	   '(zoutline zenburn-theme yasnippet yaml-mode xterm-color xr ws-butler with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit-section magit treemacs-magit treemacs-icons-dired transient-posframe toc-org ivy swiper swift-mode f spinner markdown-mode lsp-mode swift-helpful all-the-icons powerline spaceline memoize spaceline-all-the-icons solarized-theme sml-mode smartparens sesman prescient selectrum selectrum-prescient rust-mode request rainbow-delimiters racket-mode queue python-mode pretty-hydra pos-tip popup epl pkg-info persistent-scratch parseclj parseedn paredit packed outorg outshine org-bullets kv esxml nov mwim multiple-cursors modus-themes mmm-mode minions mini-frame math-symbol-lists material-theme marginalia makey major-mode-hydra macrostep list-utils iedit lispy lisp-extra-font-lock keyfreq json-snatcher hierarchy json-navigator json-mode ignoramus ibuffer-vc highlight-parentheses highlight-indent-guides elisp-refs helpful haskell-mode hardhat git-timemachine git-messenger git-gutter ggtags gcmh fsharp-mode free-keys flycheck flycheck-swift fish-mode expand-region eval-in-repl eros clang-format emr embark consult embark-consult elmacro dtrt-indent dockerfile-mode discover-my-major dired-hacks-utils dired-subtree diminish deadgrep company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 cmake-mode clojure-mode cider cask-mode calibredb bison-mode beacon auto-compile async amx all-the-icons-completion aggressive-indent)
+	   '(zoutline zenburn-theme yasnippet yaml-mode xterm-color xr ws-butler compat with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit-section magit treemacs-magit treemacs-icons-dired transient-posframe toc-org ivy swiper swift-mode f spinner markdown-mode lsp-mode swift-helpful all-the-icons powerline spaceline memoize spaceline-all-the-icons solarized-theme sml-mode smartparens sesman prescient selectrum selectrum-prescient rust-mode request rainbow-delimiters racket-mode queue python-mode pretty-hydra pos-tip popup epl pkg-info persistent-scratch parseclj parseedn paredit paradox packed outorg outshine org-bullets kv esxml nov mwim multiple-cursors modus-themes mmm-mode minions mini-frame math-symbol-lists material-theme marginalia makey major-mode-hydra macrostep list-utils iedit lispy lisp-extra-font-lock keyfreq json-snatcher hierarchy json-navigator json-mode ignoramus ibuffer-vc highlight-parentheses highlight-indent-guides elisp-refs helpful haskell-mode hardhat git-timemachine git-messenger git-gutter ggtags gcmh fsharp-mode free-keys flycheck flycheck-swift fish-mode expand-region eval-in-repl eros clang-format emr embark consult embark-consult elmacro dtrt-indent dockerfile-mode discover-my-major dired-hacks-utils dired-subtree diminish deadgrep company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 cmake-mode clojure-mode cider cask-mode calibredb bison-mode beacon auto-compile async amx all-the-icons-completion aggressive-indent)
 	   package-activated-list))
 (progn
   (require 'info)
   (info-initialize)
   (setq Info-directory-list
 		(append
-		 '("/Users/mark/.emacs.d/elpa/28/company-20220328.155" "/Users/mark/.emacs.d/elpa/28/embark-20220406.506" "/Users/mark/.emacs.d/elpa/28/haskell-mode-4.7.1" "/Users/mark/.emacs.d/elpa/28/modus-themes-20220405.630" "/Users/mark/.emacs.d/elpa/28/racket-mode-20220405.1747" "/Users/mark/.emacs.d/elpa/28/swift-helpful-20220402.1433" "/Users/mark/.emacs.d/elpa/28/ivy-20220402.1259" "/Users/mark/.emacs.d/elpa/28/magit-20220331.2308" "/Users/mark/.emacs.d/elpa/28/magit-section-20220329.1154" "/Users/mark/.emacs.d/elpa/28/transient-20220406.1156" "/Users/mark/.emacs.d/elpa/28/dash-20220404.2004" "/Users/mark/.emacs.d/elpa/28/use-package-20210207.1926" "/Users/mark/.emacs.d/elpa/28/with-editor-20220402.1641")
+		 '("/Users/mark/.emacs.d/elpa/28/company-20220425.1145" "/Users/mark/.emacs.d/elpa/28/embark-20220527.2228" "/Users/mark/.emacs.d/elpa/28/haskell-mode-20220529.1859" "/Users/mark/.emacs.d/elpa/28/mmm-mode-20200908.2236" "/Users/mark/.emacs.d/elpa/28/modus-themes-20220601.1045" "/Users/mark/.emacs.d/elpa/28/racket-mode-20220530.1615" "/Users/mark/.emacs.d/elpa/28/swift-helpful-20220402.1433" "/Users/mark/.emacs.d/elpa/28/ivy-20220529.1130" "/Users/mark/.emacs.d/elpa/28/magit-20220603.1738" "/Users/mark/.emacs.d/elpa/28/magit-section-20220513.1429" "/Users/mark/.emacs.d/elpa/28/transient-20220527.2213" "/Users/mark/.emacs.d/elpa/28/dash-20220602.2113" "/Users/mark/.emacs.d/elpa/28/use-package-20210207.1926" "/Users/mark/.emacs.d/elpa/28/with-editor-20220506.420" "/Users/mark/.emacs.d/elpa/28/compat-28.1.1.1")
 		 Info-directory-list)))
 
 ;; Local Variables:

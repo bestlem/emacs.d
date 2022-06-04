@@ -63,6 +63,7 @@ Make emacs message when it gcs.
  #+begin_src emacs-lisp
 (use-package-elpa savehist
   :commands savehist-minibuffer-hook savehist-autosave
+  :demand ; needs to be restored for mode-line
   :unless *aquamacs*
   :config
   (setq savehist-additional-variables

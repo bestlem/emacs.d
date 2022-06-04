@@ -370,9 +370,9 @@ use-package using :ensure t
 From centaur to make list-packages nicer.
 TODO: make this a new frame
 #+NAME: org_mark_mini20.local_20210625T110216.825145
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 (use-package-elpa paradox
-  :commands paradox-list-packages
+  :commands paradox-list-packages paradox-enable
   :init
   (setq paradox-execute-asynchronously t
 		paradox-github-token t

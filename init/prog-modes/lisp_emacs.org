@@ -4,8 +4,6 @@
 
 Emacs lisp specific extras
 
-Note all loaded immediately as could be called anytime.
-
 * Hydra
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210724T104659.216246
@@ -93,6 +91,8 @@ Need a function to save an then do things
 :END:
 I am not certain this is needed now as other things do this. Aggressive indent for example
 However I had a lot of strings so tried.
+
+Actually best to uise lispy multiple line.
 *** [[https://github.com/tuhdo/semantic-refactor][Semantic Refactor]]
 :PROPERTIES:
 :ID:       org_mark_2020-11-24T18-08-50+00-00_mini12.local:CB649654-2804-4D51-8437-55D5DC0A68F6
@@ -134,6 +134,20 @@ We want to wrap comments.
 :END:
 I don't like plist formatting so from this [[https://stackoverflow.com/questions/22166895/customize-elisp-plist-indentation][SO question]] I chose the simple common lisp
 But then this [[https://emacs.stackexchange.com/a/52789/9874][SO answer to a different question]] looks better.
+Read [[https://www.reddit.com/r/emacs/comments/d7x7x8/finally_fixing_indentation_of_quoted_lists][reddit]] for discussion. But note that lispy does not use calculate-lisp-indent.
+The obvious issue for me is hydra defines. (I note lispy does try but just for defhydra and I need pretty hydra and in use-package.
+So use [[https://github.com/Fuco1/.emacs.d/blob/af82072196564fa57726bdbabf97f1d35c43b7f7/site-lisp/redef.el#L12-L94][Fuco's hack]]
+Code is too long so put in actual lisp. 'mwb-redef-emacs-lisp'.
+*** Extra Code
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220604T112037.484513
+:END:
+#+NAME: org_mark_mini20.local_20220604T112037.464497
+#+begin_src emacs-lisp
+(use-feature mwb-redef-emacs-lisp
+  :demand
+  :after lisp-mode)
+#+end_src
 *** common-lisp-indent
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210123T234427.949964
@@ -149,186 +163,12 @@ Not used as messes to much
 :END:
 Indenting data (ie lists) not as functions.
 From https://www.reddit.com/r/emacs/comments/d7x7x8/finally_fixing_indentation_of_quoted_lists/
+*** Override lisp-indent-function
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220604T112133.317712
+:END:
+This is Fuco's hack
 
-#+NAME: org_mark_mini20.local_20210123T234427.935989
-#+begin_src emacs-lisp
-(advice-add #'calculate-lisp-indent :override #'void~calculate-lisp-indent)
-
-(defun void~calculate-lisp-indent (&optional parse-start)
-  "Add better indentation for quoted and backquoted lists."
-  ;; This line because `calculate-lisp-indent-last-sexp` was defined with `defvar`
-  ;; with it's value ommited, marking it special and only defining it locally. So
-  ;; if you don't have this, you'll get a void variable error.
-  (defvar calculate-lisp-indent-last-sexp)
-  (save-excursion
-    (beginning-of-line)
-    (let ((indent-point (point))
-          state
-          ;; setting this to a number inhibits calling hook
-          (desired-indent nil)
-          (retry t)
-          calculate-lisp-indent-last-sexp containing-sexp)
-      (cond ((or (markerp parse-start) (integerp parse-start))
-             (goto-char parse-start))
-            ((null parse-start) (beginning-of-defun))
-            (t (setq state parse-start)))
-      (unless state
-        ;; Find outermost containing sexp
-        (while (< (point) indent-point)
-          (setq state (parse-partial-sexp (point) indent-point 0))))
-      ;; Find innermost containing sexp
-      (while (and retry
-                  state
-                  (> (elt state 0) 0))
-        (setq retry nil)
-        (setq calculate-lisp-indent-last-sexp (elt state 2))
-        (setq containing-sexp (elt state 1))
-        ;; Position following last unclosed open.
-        (goto-char (1+ containing-sexp))
-        ;; Is there a complete sexp since then?
-        (if (and calculate-lisp-indent-last-sexp
-                 (> calculate-lisp-indent-last-sexp (point)))
-            ;; Yes, but is there a containing sexp after that?
-            (let ((peek (parse-partial-sexp calculate-lisp-indent-last-sexp
-                                            indent-point 0)))
-              (if (setq retry (car (cdr peek))) (setq state peek)))))
-      (if retry
-          nil
-        ;; Innermost containing sexp found
-        (goto-char (1+ containing-sexp))
-        (if (not calculate-lisp-indent-last-sexp)
-            ;; indent-point immediately follows open paren.
-            ;; Don't call hook.
-            (setq desired-indent (current-column))
-          ;; Find the start of first element of containing sexp.
-          (parse-partial-sexp (point) calculate-lisp-indent-last-sexp 0 t)
-          (cond ((looking-at "\\s(")
-                 ;; First element of containing sexp is a list.
-                 ;; Indent under that list.
-                 )
-                ((> (save-excursion (forward-line 1) (point))
-                    calculate-lisp-indent-last-sexp)
-                 ;; This is the first line to start within the containing sexp.
-                 ;; It's almost certainly a function call.
-                 (if (or
-                      ;; Containing sexp has nothing before this line
-                      ;; except the first element. Indent under that element.
-                      (= (point) calculate-lisp-indent-last-sexp)
-
-                      ;; First sexp after `containing-sexp' is a keyword. This
-                      ;; condition is more debatable. It's so that I can have
-                      ;; unquoted plists in macros. It assumes that you won't
-                      ;; make a function whose name is a keyword.
-                      ;; (when-let (char-after (char-after (1+ containing-sexp)))
-                      ;;   (char-equal char-after ?:))
-
-                      ;; Check for quotes or backquotes around.
-                      (let* ((positions (elt state 9))
-                             (last (car (last positions)))
-                             (rest (reverse (butlast positions)))
-                             (any-quoted-p nil)
-                             (point nil))
-                        (or
-                         (when-let (char (char-before last))
-                           (or (char-equal char ?')
-                               (char-equal char ?`)))
-                         (progn
-                           (while (and rest (not any-quoted-p))
-                             (setq point (pop rest))
-                             (setq any-quoted-p
-                                   (or
-                                    (when-let (char (char-before point))
-                                      (or (char-equal char ?')
-                                          (char-equal char ?`)))
-                                    (save-excursion
-                                      (goto-char (1+ point))
-                                      (looking-at-p
-                                       "\\(?:back\\)?quote[\t\n\f\s]+(")))))
-                           any-quoted-p))))
-                     ;; Containing sexp has nothing before this line
-                     ;; except the first element.  Indent under that element.
-                     nil
-                   ;; Skip the first element, find start of second (the first
-                   ;; argument of the function call) and indent under.
-                   (progn (forward-sexp 1)
-                          (parse-partial-sexp (point)
-                                              calculate-lisp-indent-last-sexp
-                                              0 t)))
-                 (backward-prefix-chars))
-                (t
-                 ;; Indent beneath first sexp on same line as
-                 ;; `calculate-lisp-indent-last-sexp'.  Again, it's
-                 ;; almost certainly a function call.
-                 (goto-char calculate-lisp-indent-last-sexp)
-                 (beginning-of-line)
-                 (parse-partial-sexp (point) calculate-lisp-indent-last-sexp
-                                     0 t)
-                 (backward-prefix-chars)))))
-      ;; Point is at the point to indent under unless we are inside a string.
-      ;; Call indentation hook except when overridden by lisp-indent-offset
-      ;; or if the desired indentation has already been computed.
-      (let ((normal-indent (current-column)))
-        (cond ((elt state 3)
-               ;; Inside a string, don't change indentation.
-               nil)
-              ((and (integerp lisp-indent-offset) containing-sexp)
-               ;; Indent by constant offset
-               (goto-char containing-sexp)
-               (+ (current-column) lisp-indent-offset))
-              ;; in this case calculate-lisp-indent-last-sexp is not nil
-              (calculate-lisp-indent-last-sexp
-               (or
-                ;; try to align the parameters of a known function
-                (and lisp-indent-function
-                     (not retry)
-                     (funcall lisp-indent-function indent-point state))
-                ;; If the function has no special alignment
-                ;; or it does not apply to this argument,
-                ;; try to align a constant-symbol under the last
-                ;; preceding constant symbol, if there is such one of
-                ;; the last 2 preceding symbols, in the previous
-                ;; uncommented line.
-                (and (save-excursion
-                       (goto-char indent-point)
-                       (skip-chars-forward " \t")
-                       (looking-at ":"))
-                     ;; The last sexp may not be at the indentation
-                     ;; where it begins, so find that one, instead.
-                     (save-excursion
-                       (goto-char calculate-lisp-indent-last-sexp)
-                       ;; Handle prefix characters and whitespace
-                       ;; following an open paren.  (Bug#1012)
-                       (backward-prefix-chars)
-                       (while (not (or (looking-back "^[ \t]*\\|([ \t]+"
-                                                     (line-beginning-position))
-                                       (and containing-sexp
-                                            (>= (1+ containing-sexp) (point)))))
-                         (forward-sexp -1)
-                         (backward-prefix-chars))
-                       (setq calculate-lisp-indent-last-sexp (point)))
-                     (> calculate-lisp-indent-last-sexp
-                        (save-excursion
-                          (goto-char (1+ containing-sexp))
-                          (parse-partial-sexp (point) calculate-lisp-indent-last-sexp 0 t)
-                          (point)))
-                     (let ((parse-sexp-ignore-comments t)
-                           indent)
-                       (goto-char calculate-lisp-indent-last-sexp)
-                       (or (and (looking-at ":")
-                                (setq indent (current-column)))
-                           (and (< (line-beginning-position)
-                                   (prog2 (backward-sexp) (point)))
-                                (looking-at ":")
-                                (setq indent (current-column))))
-                       indent))
-                ;; another symbols or constants not preceded by a constant
-                ;; as defined above.
-                normal-indent))
-              ;; in this case calculate-lisp-indent-last-sexp is nil
-              (desired-indent)
-              (t
-               normal-indent))))))
-#+end_src
 * See macros
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:87193D42-251A-408C-80B7-839BF6CFCE81
@@ -390,6 +230,8 @@ But add his functions as called from top level
 :ID:       org_mark_mini12.local:20201218T062750.205110
 :END:
 #+NAME: org_mark_mini12.local_20201218T062750.172372
+Not tangles as edebug can be set otherwhere so list is wrong - could be fixed by making this an advice on edebug-defun
+#+NAME: org_mark_mini20.local_20220603T120021.657510
 #+begin_src emacs-lisp :tangle no
 ;;  mainly from setup-elisp.el
 
@@ -438,7 +280,6 @@ But add his functions as called from top level
           (message "Edebug: %s" fn))))))
 
 #+end_src
-
 *** Hydra
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20201218T062750.198857
@@ -501,29 +342,6 @@ _c_ontinue (_C_ fast)      ^^^^                       _X_ global breakpoint
   ("S"     edebug-stop :color blue))
 (with-eval-after-load 'edebug
   (bind-key "?" #'hydra-edebug/body edebug-mode-map))
-
-;; Debug on entry
-(defvar modi/fns-in-debug nil
-  "List of functions for which `debug-on-entry' is instrumented.")
-
-(defun modi/toggle-debug ()
-  (interactive)
-  (let (fn)
-    (save-excursion
-      (re-search-backward modi/fns-regexp)
-      (setq fn (match-string 1)))
-    (if (member fn modi/fns-in-debug)
-        ;; If the function is already being debugged, cancel its debug on entry
-        (progn
-          (setq modi/fns-in-debug (delete fn modi/fns-in-debug))
-          (cancel-debug-on-entry (intern fn))
-          (message "Debug-on-entry disabled: %s" fn))
-      ;; If the function is not being debugged, debug it on entry
-      (progn
-        (add-to-list 'modi/fns-in-debug fn)
-        (debug-on-entry (intern fn))
-        (message "Debug-on-entry: %s" fn)))))
-
 #+end_src
 ** Grinberg edebug hydra
 :PROPERTIES:
@@ -665,9 +483,9 @@ Well not really lisp but much can be converted to it
   :ensure t
   :demand
   :commands (elmacro-mode
-             elmacro-show-last-macro
-             elmacro-show-last-commands
-             elmacro-mode-on))
+	     elmacro-show-last-macro
+	     elmacro-show-last-commands
+	     elmacro-mode-on))
 
 	#+end_src
 *** Hydra for macros
@@ -773,24 +591,38 @@ If REGEXP is nil, use `utl-imenu-sections-re'."
 :ID:       org_mark_mini20.local:20210702T115348.580846
 :END:
 #+NAME: org_mark_mini20.local_20210702T115348.558787
+This adds expressions to the imenu list. They are added in reverse order and before others.
+use-package is part of use-package itself.
+#+NAME: org_mark_mini20.local_20220531T171427.003876
 #+begin_src emacs-lisp
 (defun hemacs-imenu-elisp-expressions ()
-  (dolist (pattern `(("Segments" ,(rx (seq bol "(spaceline-define-segment"
+  "Add each item in packages to the list of imenu expressions.
+The first in the list is the last to be evaluated and is before all the others."
+  (dolist (pattern `(("Ert tests" "\\(^(ert-deftest +\\)\\(\\_<.+\\_>\\)" 2)
+                     ("Segments" ,(rx (seq bol "(spaceline-define-segment"
 									   (zero-or-more (or (syntax whitespace) "\n"))
 									   (group
 										(one-or-more (or (syntax word)
 													  (syntax symbol))))
 									   ))
 					  1)
-                     ("Package elpa"
+					 ("Package elpa"
 					  ,(rx (seq bol "(use-package-elpa"
 							(group
 							 (one-or-more (or (syntax word)
 										   (syntax symbol))))
 							))
 					  1)
+					 ("Hydrae" ,(rx (seq bol "( "
+									 (or "defhydra" "pretty-hydra-define")
+									 (group
+									  (one-or-more (or (syntax word)
+													(syntax symbol))))
+									 ))
+					  1)
 					 ("Features" "^(use-feature \\(.+\\)$" 1)
-					 ("Sections" "^;;; \\(.+\\)$" 1)))
+					 ("Sections" "^;;; \\(.+\\)$" 1)
+					 ))
 	(add-to-list 'imenu-generic-expression pattern)))
 (add-hook 'emacs-lisp-mode-hook 'hemacs-imenu-elisp-expressions)
 #+end_src

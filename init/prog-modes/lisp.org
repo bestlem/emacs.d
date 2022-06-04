@@ -21,21 +21,20 @@ Set compat so that the keys for these modes work. But macrostep does not - see i
   ;;:mwb-load-path "fork/lispy"
   :commands lispy-mode
   :bind (:map lispy-mode-map
-              ("<backspace>" . lispy-delete-backward))
+			  ("<backspace>" . lispy-delete-backward))
+  :init
+  (setq lispy-visit-method 'projectile
+		lispy-safe-copy t
+		lispy-safe-paste t
+		lispy-safe-delete t
+		lispy-safe-actions-no-pull-delimiters-into-comments t)
   :custom (lispy-eval-display-style "overlay")
   :config
   (setq lispy-compat '(edebug macrostep)
-        lispy-safe-paste t)
+		lispy-safe-paste t)
   (diminish 'eldoc-mode)
   (bind-key mwbkey-delete 'lispy-delete lispy-mode-map)
-  (add-hook 'lispy-mode-hook #'turn-off-smartparens-mode)
-  :init
-  (setq lispy-visit-method 'projectile
-        lispy-safe-copy t
-        lispy-safe-paste t
-        lispy-safe-delete t
-        lispy-safe-actions-no-pull-delimiters-into-comments t
-        ))
+  :hook (lispy-mode . turn-off-smartparens-mode))
 	 #+end_src
 *** Get lispy test working
 :PROPERTIES:
@@ -57,7 +56,7 @@ Changes are now made directly to the package which is only now here
 #+begin_src emacs-lisp
 (use-package lispy-mnemonic
   :mwb-load-path "site-lisp/lispy-mnemonic"
-  :init (lispy-mode 1)
+  ;; :init (lispy-mode 1)
   :hook ((emacs-lisp-mode
           lisp-interaction-mode
           racket-mode

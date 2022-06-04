@@ -185,29 +185,26 @@
 ;; Call any time so major mode menu or a
 (pretty-hydra-define hydra-lispy-mwb-alter
   (:foreign-keys run
-				 :title "☾☽ Lispy Alter"
-				 :quit-key "q")
-  ("Lispy raise"
-   (("c" lispy-convolute "Convolute - Swap?")
-    ("r" lispy-raise "raise")
-    ("s" lispy-raise-some "some"))
-   "Lispy slurp"
-   ((">" lispy-slurp "slurp = extend")
-    ("." lispy-slurp nil)
-    ("n" lispy-down-slurp "into next")
-    ("p" lispy-up-slurp "into previous")
-    ("<" lispy-barf "barf = shrink")
-    ("," lispy-barf nil)
-    ("/" lispy-splice "splice"))
-   "Lispy format"
-   ( ("o" lispy-oneline "one line")
-     ("m" lispy-multiline "multiple lines"))))
+   :title "☾☽ Lispy Alter"
+   :quit-key "q")
+  ("Lispy raise" (("c" lispy-convolute "Convolute - Swap?")
+				  ("r" lispy-raise "raise")
+				  ("s" lispy-raise-some "some"))
+   "Lispy slurp" ((">" lispy-slurp "slurp = extend")
+				  ("." lispy-slurp nil)
+				  ("n" lispy-down-slurp "into next")
+				  ("p" lispy-up-slurp "into previous")
+				  ("<" lispy-barf "barf = shrink")
+				  ("," lispy-barf nil)
+				  ("/" lispy-splice "splice"))
+   "Lispy format" (("o" lispy-oneline "one line")
+				   ("m" lispy-multiline "multiple lines"))))
 
 ;; special key r or E and majur node
 (pretty-hydra-define hydra-lispy-mwb-run
   (:foreign-keys run
-				 :title "☾☽ Lispy Run"
-				 :quit-key "q")
+   :title "☾☽ Lispy Run"
+   :quit-key "q")
   ("Lispy debug"
    (("d" lispy-edebug "edebug")
     ("s" lispy-debug-step-in "step in")
@@ -223,59 +220,57 @@
 ;; Mark only in special - key is m
 (pretty-hydra-define hydra-lispy-mwb-mark
   (:foreign-keys nil
-				 :title "☾☽ Lispy Play with regions"
-				 :quit-key "q")
-  ("Lispy move"
-   (("<down>" lispy-move-down "down")
-    ("<left>" lispy-move-left "left")
-    ("<right>" lispy-move-right "right")
-    ("<up>" lispy-move-up "up")
-    ("t" lispy-teleport "teleport"))
-   "Lispy mark"
-   (("<SPC>" er/expand-region "expand region")
-    ("<f2>" er/expand-region nil)
-    ("<C-f2>" er/contract-region nil)
-    ("m" lispy-mark "mark (or expand)")
-    ("c" lispy-mark-car "car")
-    ("i" lispy-mark-list "list")
-    ("s" lispy-mark-symbol "symbol")
-    ("l" lispy-mark-left "left")
-    ("S-<left>" lispy-mark-left nil)
-    ("r" lispy-mark-right "right")
-    ("S-<right>" lispy-mark-right nil)
-    (">" lispy-slurp nil)
-    ("<" lispy-barf nil))
-   "actions"
-   (("a" hydra-lispy-mwb-alter/body "Alter...")
-    ("x" clipboard-kill-region "cut" :exit t)
-	("c" clipboard-kill-ring-save "copy" :exit t)
-    ("z" aquamacs-undo "undo"))))
+   :title "☾☽ Lispy Play with regions"
+   :quit-key "q")
+  ("Lispy move" (("<down>" lispy-move-down "down")
+				 ("<left>" lispy-move-left "left")
+				 ("<right>" lispy-move-right "right")
+				 ("<up>" lispy-move-up "up")
+				 ("t" lispy-teleport "teleport"))
+   "Lispy mark" (("<SPC>" er/expand-region "expand region")
+				 ("<f2>" er/expand-region nil)
+				 ("<C-f2>" er/contract-region nil)
+				 ("m" lispy-mark "mark (or expand)")
+				 ("c" lispy-mark-car "car")
+				 ("l" lispy-mark-list "list")
+				 ("s" lispy-mark-symbol "symbol")
+				 ("L" lispy-mark-left "left")
+				 ("S-<left>" lispy-mark-left nil)
+				 ("R" lispy-mark-right "right")
+				 ("S-<right>" lispy-mark-right nil)
+				 ("d" lispy-different "Swap mark/point"))
+   "Actions" (("<" lispy-barf nil :exit t)
+			  (">" lispy-slurp nil :exit t)
+			  ("C" lispy-convolute "Convolute")
+			  ("a" hydra-lispy-mwb-alter/body "Alter...")
+			  ("u" lispy-undo "undo" :exit t)
+			  ("y" lispy-yank "paste/yank" :exit t)
+			  ("x" lispy-kill-at-point "cut" :exit t)
+			  ("c" lispy-new-copy "copy"))))
 
-
+;;  No change not used
 (pretty-hydra-define hydra-lispy-mwb-goto
   (:foreign-keys run
-				 :title "☾☽ Lispy goto"
-				 :quit-key "q")
-  ("Lispy goto"
-   (("a" lispy-goto-def-ace "ace")
-    ("d" lispy-goto-def-down "down")
-    ("f" lispy-follow "follow")
-    ("g" lispy-goto "goto")
-    ("l" lispy-goto-local "local")
-    ;; ("p" lispy-goto-projectile "projectile")
-    ("r" lispy-goto-recursive "recursive")
-    ;; ("s" lispy-goto-symbol "symbol")
-    ("." lispy-goto-symbol "symbol"))
+   :title "☾☽ Lispy goto"
+   :quit-key "q")
+  ("Lispy goto" (("a" lispy-goto-def-ace "ace")
+				 ("d" lispy-goto-def-down "down")
+				 ("f" lispy-follow "follow")
+				 ("g" lispy-goto "goto")
+				 ("l" lispy-goto-local "local")
+				 ;; ("p" lispy-goto-projectile "projectile")
+				 ("r" lispy-goto-recursive "recursive")
+				 ;; ("s" lispy-goto-symbol "symbol")
+				 ("." lispy-goto-symbol "symbol"))
    ;; ("*" pop-tag-mark "pop tag mark" :color red)
 
-   "Lispy ace"
-   (("c" lispy-ace-char "char")
-    ("p" lispy-ace-paren "paren")
-    ("r" lispy-ace-symbol-replace "replace")
-    ("s" lispy-ace-symbol "symbol")
-    ("w" lispy-ace-subword "word")
-    ("d" lispy-goto-def-ace "definition")
-    ("t" lispy-teleport "teleport"))))
+   "Lispy ace" (("c" lispy-ace-char "char")
+				("p" lispy-ace-paren "paren")
+				("r" lispy-ace-symbol-replace "replace")
+				("s" lispy-ace-symbol "symbol")
+				("w" lispy-ace-subword "word")
+				("d" lispy-goto-def-ace "definition")
+				("t" lispy-teleport "teleport"))))
 
 ;; Call in special mode
 (defhydra hydra-lispy-outline ()
@@ -370,5 +365,4 @@
 				(lispy-mnemonic--restore-bindings)))
 
 (provide 'lispy-mnemonic)
-
 ;;; lispy-mnemonic ends here

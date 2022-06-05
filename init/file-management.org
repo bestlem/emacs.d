@@ -14,11 +14,27 @@ Well I was going to include [[https://github.com/lunaryorn/osx-trash.el][osx tra
 But the mac port does have this if set mac_system_move_file_to_trash_use_finder
 Think of editing dired and treemacs
 On reading more this is only if passed to delete functions so might not be too much trash.
-And I hear a sound on deletes so Finder is being used.
-#+NAME: org_mark_mini12.local_20210105T204218.519535
+And I hear a sound on deletes so Finder is being used. Fixed with -F argument
+** Tell emacs to try using trash
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220605T102029.602639
+:END:
+#+NAME: org_mark_mini20.local_20220605T102029.575852
 #+begin_src emacs-lisp
-(setq delete-by-moving-to-trash t
-	  mac_system_move_file_to_trash_use_finder t)
+(setq delete-by-moving-to-trash t)
+#+end_src
+** Implement trash on macOS
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220605T102029.600068
+:END:
+#+NAME: org_mark_mini20.local_20220605T102029.580941
+#+begin_src emacs-lisp
+(when *sys/macp*
+  (if *emacs/mac-port-p*
+	  (setq mac_system_move_file_to_trash_use_finder t)
+	(use-package-elpa osx-trash
+	  :demand
+	  :config (osx-trash-setup))))
 #+end_src
 * Backups
 :PROPERTIES:

@@ -9432,6 +9432,28 @@ DEPRECATED, use `outshine-mode'." nil nil)
 
 
 )
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/osx-trash-20210419.2229/osx-trash-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/osx-trash-20210419.2229/osx-trash-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/osx-trash-20210419.2229/osx-trash-autoloads.el") (car load-path))))
+
+
+
+(autoload 'osx-trash-setup "osx-trash" "\
+Provide trash support for OS X.
+
+Provide `system-move-file-to-trash' as an alias for
+`osx-trash-move-file-to-trash'.
+
+Note that you still need to set `delete-by-moving-to-trash' to a
+non-nil value to enable trashing for file operations." nil nil)
+
+(register-definition-prefixes "osx-trash" '("osx-trash-"))
+
+
+
+
+)
 (let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/org-bullets-20200317.1740/org-bullets-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/org-bullets-20200317.1740/org-bullets-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -16962,7 +16984,7 @@ mode.
 )
 (setq package-activated-list
 	  (append
-	   '(zoutline zenburn-theme yasnippet yaml-mode xterm-color xr ws-butler compat with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit-section magit treemacs-magit treemacs-icons-dired transient-posframe toc-org ivy swiper swift-mode f spinner markdown-mode lsp-mode swift-helpful all-the-icons powerline spaceline memoize spaceline-all-the-icons solarized-theme sml-mode smartparens sesman prescient selectrum selectrum-prescient rust-mode request rainbow-delimiters racket-mode queue python-mode pretty-hydra pos-tip popup epl pkg-info persistent-scratch parseclj parseedn paredit paradox packed outorg outshine org-bullets kv esxml nov mwim multiple-cursors modus-themes mmm-mode minions mini-frame math-symbol-lists material-theme marginalia makey major-mode-hydra macrostep list-utils iedit lispy lisp-extra-font-lock keyfreq json-snatcher hierarchy json-navigator json-mode ignoramus ibuffer-vc highlight-parentheses highlight-indent-guides elisp-refs helpful haskell-mode hardhat git-timemachine git-messenger git-gutter ggtags gcmh fsharp-mode free-keys flycheck flycheck-swift fish-mode expand-region eval-in-repl eros clang-format emr embark consult embark-consult elmacro dtrt-indent dockerfile-mode discover-my-major dired-hacks-utils dired-subtree diminish deadgrep company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 cmake-mode clojure-mode cider cask-mode calibredb bison-mode beacon auto-compile async amx all-the-icons-completion aggressive-indent)
+	   '(zoutline zenburn-theme yasnippet yaml-mode xterm-color xr ws-butler compat with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit-section magit treemacs-magit treemacs-icons-dired transient-posframe toc-org ivy swiper swift-mode f spinner markdown-mode lsp-mode swift-helpful all-the-icons powerline spaceline memoize spaceline-all-the-icons solarized-theme sml-mode smartparens sesman prescient selectrum selectrum-prescient rust-mode request rainbow-delimiters racket-mode queue python-mode pretty-hydra pos-tip popup epl pkg-info persistent-scratch parseclj parseedn paredit paradox packed outorg outshine osx-trash org-bullets kv esxml nov mwim multiple-cursors modus-themes mmm-mode minions mini-frame math-symbol-lists material-theme marginalia makey major-mode-hydra macrostep list-utils iedit lispy lisp-extra-font-lock keyfreq json-snatcher hierarchy json-navigator json-mode ignoramus ibuffer-vc highlight-parentheses highlight-indent-guides elisp-refs helpful haskell-mode hardhat git-timemachine git-messenger git-gutter ggtags gcmh fsharp-mode free-keys flycheck flycheck-swift fish-mode expand-region eval-in-repl eros clang-format emr embark consult embark-consult elmacro dtrt-indent dockerfile-mode discover-my-major dired-hacks-utils dired-subtree diminish deadgrep company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 cmake-mode clojure-mode cider cask-mode calibredb bison-mode beacon auto-compile async amx all-the-icons-completion aggressive-indent)
 	   package-activated-list))
 (progn
   (require 'info)

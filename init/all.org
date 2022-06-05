@@ -20,16 +20,17 @@ Run this immediately after init to set a more reasonable setup
 Memory is now in gcmh
 #+NAME: org_mark_mini20.local_20220313T215313.571669
 #+begin_src emacs-lisp
-(defun hook-after-init ()
+(defun init-mwb-hook-after-init ()
   (setq debug-on-error nil)
   (setq debug-on-quit nil)
   (setq file-name-handler-alist file-name-handler-alist-old
 		gc-cons-percentage 0.1)
+  (setq frame-inhibit-implied-resize orig-frame-inhibit-implied-resize)
   ;; (garbage-collect)
   (message "Emacs init-time %s" (emacs-init-time)))
-(add-hook 'after-init-hook #'hook-after-init)
+(add-hook 'after-init-hook #'init-mwb-hook-after-init)
 #+end_src
-** Setting variables with a check on type
+* Setting variables with a check on type
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:86E6A7B5-5C85-4429-AE49-FA5AE7AEF73D
 :END:
@@ -40,10 +41,11 @@ Note should check on defconst
 (use-package-elpa validate :demand)
 #+end_src
 
-* Support functions
+* Emacs code  management
 :PROPERTIES:
-:ID:       org_mark_mini20.local:20210624T203034.970975
+:ID:       org_mark_mini20.local:20220605T115513.560840
 :END:
+
 Various things to make management of init files easier
 Many taken from centuar
 
@@ -81,6 +83,18 @@ Recompile emacs lisp  if already compiled on save but also on load.
     (auto-compile-on-save-mode)
     (setq auto-compile-display-buffer 1)))
 #+end_src
+
+** Set up C path
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220605T115513.558141
+:END:
+Let help find the C code.
+;;;; Set C Directory
+;; NOTE this assumes that the C source files are included with emacs.
+;; This depends on the build process used.
+;; For one example see https://github.com/mclear-tools/build-emacs-macos
+(setq find-function-C-source-directory "/Applications/Emacs.app/Contents/Resources/src")
+
 * Emacs server
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:605AC9D7-C3F1-495D-872C-C5B901A553BB

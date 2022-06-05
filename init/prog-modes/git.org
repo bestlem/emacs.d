@@ -30,13 +30,14 @@ To load the hydra needs to be available
 #+NAME: org_mark_mini20.local_20220604T121907.520562
 #+begin_src emacs-lisp
 (use-package-elpa magit
-  ;;:defer 2
-  :init (setq magit-diff-refine-hunk t)
-  :commands magit-status
+  :defer 2 								; rather than a lot of commands
+  :commands
+  magit-status magit-branch-popup
+  :custom
+  (magit-diff-refine-hunk t)
+  (magit-repository-directories '(("~/src/" . 2)
+								  (org-directory . 0)))
   :config
-  (setq magit-repository-directories
-        '(("~/src/" . 2)
-          (org-directory . 0)))
   ;; (setq magit-completing-read-function 'ivy-completing-read)
   (setq magit-completing-read-function 'magit-builtin-completing-read)
   (transient-bind-q-to-quit)

@@ -1,5 +1,5 @@
-;;; -*- lexical-binding: t -*-
-;;; This is a generated file do not edit
+;; -*- lexical-binding: t -*-
+;; This is a generated file do not edit
 ;; [[file:~/.emacs.d/init.org::org_mark_mini20.local_20220521T104243.397754][org_mark_mini20.local_20220521T104243.397754]]
 ;; Need the directory from here.
 (defun mwb-get-directory-of-current-file ()

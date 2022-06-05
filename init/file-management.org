@@ -33,7 +33,7 @@ And I hear a sound on deletes so Finder is being used. Fixed with -F argument
   (if *emacs/mac-port-p*
 	  (setq mac_system_move_file_to_trash_use_finder t)
 	(use-package-elpa osx-trash
-	  :demand
+	  :defer 1
 	  :config (osx-trash-setup))))
 #+end_src
 * Backups

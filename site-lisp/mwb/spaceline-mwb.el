@@ -44,9 +44,14 @@
 
 ;; External references
 (defvar mode-line-highlight )
+(defvar bookmark-alist)
+(defvar which-func-current)
+(defvar which-func-unknown)
+(defvar which-func-keymap)
 
 ;;; Forward declarations of Optional Dependencies
-
+(declare-function projectile-project-name projectile)
+(declare-function mode-line-auto-compile-control auto-compile)
 
 (spaceline-define-segment
 	mwb-minor-modes-tree
@@ -63,11 +68,11 @@ mouse-1: Display minor modes menu"
 			   		  :inherit)
 			  ))
 ;;; Themes
-(spaceline-compile "mwb-test"
+(spaceline-generate "mwb-test"
   '(mwb-racket)
   '("test")
   )
-(spaceline-compile
+(spaceline-generate
   "mwb-main-header"
   '(
 	mwb-mode-icon
@@ -83,7 +88,7 @@ mouse-1: Display minor modes menu"
 	""
 	))
 
-(spaceline-compile
+(spaceline-generate
   "mwb-minimum"
   '(
 	mwb-mode-icon
@@ -101,7 +106,7 @@ mouse-1: Display minor modes menu"
 	" "								; needed as last chacter can be half hidden
 	))
 
-(spaceline-compile
+(spaceline-generate
   "mwb-footer"
   '((all-the-icons-anzu
 	 :face 'mode-line
@@ -118,11 +123,13 @@ mouse-1: Display minor modes menu"
 	 :separator (spaceline-all-the-icons--separator spaceline-all-the-icons-secondary-separator " ")))
 
   `(
-	python-env
+	;; python-env
 	all-the-icons-package-updates))
 
 (defun spaceline-mwb--set-format (header? target)
-  "Set the full eval for HEADER? or modeline if false. TARGET is a spaceline-compile name."
+  "Eval the header and set to header or footer.
+Set the full eval for HEADER? or modeline if false. TARGET is
+a spaceline-compile name."
   (let* ((symbol (intern (format "spaceline-ml-%s" target)))
 		 (fmt `("%e" (:eval (,symbol)))))
 	(if header?

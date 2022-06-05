@@ -1,5 +1,5 @@
-;;; -*- lexical-binding: t -*-
-;;; This is a generated file do not edit
+;; -*- lexical-binding: t -*-
+;; This is a generated file do not edit
 ;; [[file:~/.emacs.d/init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_EC7FD451-253D-4F87-90DC-AD484305487F][org_mark_2020-01-23T20-40-42+00-00_mini12_EC7FD451-253D-4F87-90DC-AD484305487F]]
 ;;(defconst emacs-start-time (current-time))
 
@@ -36,7 +36,13 @@
 (push '(tool-bar-lines . 0) default-frame-alist)
 ;;(push '(vertical-scroll-bars) default-frame-alist)
 (setq tool-bar-mode nil)
+(setq mode-line-format nil)
 ;; org_mark_2020-09-28T01-08-28+01-00_mini12.local_19B4CE88-E1D4-4E44-91B7-AD3D8E74C2D3 ends here
+
+;; [[file:~/.emacs.d/init.org::org_mark_mini20.local_20220605T094912.452123][org_mark_mini20.local_20220605T094912.452123]]
+(setq orig-frame-inhibit-implied-resize frame-inhibit-implied-resize)
+(setq frame-inhibit-implied-resize t)
+;; org_mark_mini20.local_20220605T094912.452123 ends here
 
 ;; [[file:~/.emacs.d/init.org::org_mark_mini20.local_20210811T183548.057306][org_mark_mini20.local_20210811T183548.057306]]
 (setq load-prefer-newer t)

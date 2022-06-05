@@ -28,19 +28,18 @@ Added things from centaur. Especially for emacs-lisp
 
 #+NAME: org_mark_mini20.local_20210622T192842.412752
 #+begin_src emacs-lisp
-(use-package flycheck
-  :ensure t
+(use-package-elpa flycheck
   ;; :when (version< emacs-version "26.1")
+  :defer 0.5
   :diminish
-  :init
-
-  <<flycheck-init>>
-
-  :config
-  (global-flycheck-mode)          ; for all
-  <<flycheck-hydra>>
   :custom
-  (flycheck-display-errors-delay 0.3))
+  (global-flycheck-mode 1)              ; for all
+  (flycheck-display-errors-delay 0.3)
+
+  :init
+  <<flycheck-init>>
+  :config                (global-flycheck-mode)
+  <<flycheck-hydra>>)
 #+end_src
 *** Set modes for which it is used
 :PROPERTIES:

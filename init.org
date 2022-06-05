@@ -23,6 +23,7 @@ The time is probably not that useful - build on Aquamacs instead and there is an
 The file-name-handler-alist is probably needed as some of the hooks slow things heavily
 
 This is from [[ https://github.com/jwiegley/dot-emacs/blob/master/init.el#L1013][John Wiegley]]
+Also from doom via https://github.com/xenodium/dotsies/blob/main/emacs/early-init.el
  #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_EC7FD451-253D-4F87-90DC-AD484305487F
  #+begin_src emacs-lisp
  ;;(defconst emacs-start-time (current-time))
@@ -69,6 +70,20 @@ Set the path to packages
 	   (format "package-quickstart.%d.el" emacs-major-version)
 	   user-emacs-directory))
 #+end_src
+*** Eln-cache - native compile
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220605T094912.471464
+:END:
+This could be moved outside of .emacs.d - When I use multiple machines etc.
+See https://github.com/jimeh/.emacs.d/blob/master/early-init.el
+Also
+; Put eln-cache dir in cache directory
+;; NOTE the method for setting the eln-cache dir depends on the emacs version
+(when (fboundp 'startup-redirect-eln-cache)
+  (if (version< emacs-version "29")
+      (add-to-list 'native-comp-eln-load-path (convert-standard-filename (expand-file-name ".local/temp/cache/eln-cache/" user-emacs-directory)))
+    (startup-redirect-eln-cache (convert-standard-filename (expand-file-name ".local/temp/cache/eln-cache/" user-emacs-directory)))))
+
 ** Graphical suppression
 :PROPERTIES:
 :ID:       org_mark_2020-09-28T01-08-28+01-00_mini12.local:11552906-7CE1-4A2D-90DF-111015341ACB
@@ -82,7 +97,20 @@ Fiddle with suppressing graphics. I do want some of these
 (push '(tool-bar-lines . 0) default-frame-alist)
 ;;(push '(vertical-scroll-bars) default-frame-alist)
 (setq tool-bar-mode nil)
+(setq mode-line-format nil)
 #+end_src
+*** Frame size change on font
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220605T094912.469185
+:END:
+From doomemacs
+Resizing the Emacs frame can be a terribly expensive part of changing the font. By inhibiting this, we easily halve startup times with fonts that are larger than the system default.
+#+NAME: org_mark_mini20.local_20220605T094912.452123
+#+begin_src emacs-lisp
+(setq orig-frame-inhibit-implied-resize frame-inhibit-implied-resize)
+(setq frame-inhibit-implied-resize t)
+#+end_src
+
 ** Emacs lisp
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210810T184947.222205

@@ -40,7 +40,7 @@
 
 ;;; Forward declarations of Optional Dependencies
 (declare-function projectile-project-root "ext:projectile.el")
-(declare-function fancy-narrow-active-p "ext:fancy-narrow.el")
+;; (declare-function fancy-narrow-active-p "ext:fancy-narrow.el")
 (defvar which-func-keymap)
 
 ;;; help spaceline segments to work especially in header
@@ -116,8 +116,9 @@ mouse-1: Display minor modes menu"
 				'mouse-face 'mode-line-highlight
 				'local-map (spaceline-mwb--mouse-map 'mouse-1 'widen)))
   :when (or (buffer-narrowed-p)
-			(and (bound-and-true-p fancy-narrow-mode)
-				 (fancy-narrow-active-p))))
+			;; (and (bound-and-true-p fancy-narrow-mode)
+			;; 	 (fancy-narrow-active-p))
+			))
 
 (spaceline-define-segment
 	mwb-modified
@@ -217,7 +218,10 @@ Can't use spaceline as it has unneeded mouse menu"
   )
 
 (defun spaceline-mwb--flycheck-finished ()
-  "Gives a formatted text to show in mode-line and the help text for mousing over the text."
+  "Return the formatted segment.
+
+Gives a formatted text to show in mode-line and the help text for
+mousing over the text."
   (if flycheck-current-errors
 	  (let-alist (flycheck-count-errors flycheck-current-errors)
 		(let* ((text (cond

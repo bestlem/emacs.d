@@ -568,7 +568,17 @@ Seems that Macports context menu adds nothing - except using a different NS call
 #+NAME: org_mark_mini20.local_20220531T121808.168747
 #+begin_src emacs-lisp
 (when (and *emacs/>=28p* (not *aquamacs*))
-  (context-menu-mode 1))
+  (use-feature mouse
+    :demand
+    :custom (context-menu-functions
+             '(context-menu-undo
+               context-menu-region
+               context-menu-ffap
+               context-menu-middle-separator
+               context-menu-local
+               context-menu-minor))
+    :init
+    (context-menu-mode 1)))
 #+end_src
 * Hydra
 :PROPERTIES:
@@ -593,8 +603,8 @@ Tried inherit to set f19 s as mode dependant but seems not to work with pretty h
 (defun mwb-special-in-hydra ()
   (interactive)
   (cond ((eq major-mode 'org-mode) (org-edit-special))
-        ((bound-and-true-p org-src-mode) (org-edit-src-exit))
-        (t (org-babel-tangle-jump-to-org))))
+		((bound-and-true-p org-src-mode) (org-edit-src-exit))
+		(t (org-babel-tangle-jump-to-org))))
 #+end_src
 *** Main map
 :PROPERTIES:
@@ -603,9 +613,10 @@ Tried inherit to set f19 s as mode dependant but seems not to work with pretty h
 #+NAME: org_2020-12-05+00-00_94E1455C-7F91-48B1-BF7B-EA3753E7BDCB
 #+begin_src emacs-lisp
 (require 'jp-window)
-(pretty-hydra-define hydra-kl (:title (with-octicon "tools" "Global tools" 1 -0.05)
-                                      :color teal
-                                      :idle 1.0)
+(pretty-hydra-define hydra-mwb-main
+  (:title (with-octicon "tools" "Global tools" 1 -0.05)
+   :color teal
+   :idle 1.0)
   ("Hydrae"
    (("C" hydra-flycheck/body "Flycheck")
     ("g" jp-git/body "git...")
@@ -649,7 +660,7 @@ Tried inherit to set f19 s as mode dependant but seems not to work with pretty h
     ("w" narrow-or-widen-dwim "Narrow or Widen")
     ;; ("s" org-babel-tangle-jump-to-org "Back to org")
     ("j" dired-jump "Dired jump"))))
-(bind-key "<f19>"  'hydra-kl/body)
+(bind-key "<f19>"  'hydra-mwb-main/body)
 #+end_src
 ** Ctrl-x hydra
 :PROPERTIES:

@@ -32,13 +32,11 @@ Added things from centaur. Especially for emacs-lisp
   ;; :when (version< emacs-version "26.1")
   :defer 0.5
   :diminish
-  :custom
-  (global-flycheck-mode 1)              ; for all
-  (flycheck-display-errors-delay 0.3)
-
   :init
+  (setq flycheck-display-errors-delay 0.3)
   <<flycheck-init>>
-  :config                (global-flycheck-mode)
+  :config
+  (global-flycheck-mode)
   <<flycheck-hydra>>)
 #+end_src
 *** Set modes for which it is used

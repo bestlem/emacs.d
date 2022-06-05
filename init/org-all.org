@@ -1,7 +1,7 @@
 #+TITLE Emacs configuration org Mode - all the complete things
 #+PROPERTY:header-args :cache yes :tangle yes :comments noweb
 #+STARTUP: content
-* Table of Contents                 :TOC_4:
+* Table of Contents                                                   :TOC_4:
 :PROPERTIES:
 :ID:       org_mark_2020-10-24T15-08-22+01-00_mini12.local:8844FA08-DB9D-44FB-AE4D-189DDA7A2EAA
 :VISIBILITY: all
@@ -37,6 +37,7 @@
     - [[#my-changes][My changes]]
       - [[#tangling-1][Tangling]]
       - [[#post-tangle][Post tangle]]
+      - [[#jump-to-generated-code][Jump to generated code]]
   - [[#archive][Archive]]
   - [[#main-mode-hydra][Main mode hydra]]
 - [[#setup-outside-use-package][Setup outside use-package]]
@@ -135,6 +136,7 @@ It is now for subtree todo refile and links
         org-catch-invisible-edits 't
         ;;          org-use-speed-commands t
         )
+  :init (require 'init-mwb-org)
   :hook
   <<org-mode-hooks>>
   <<org-mode-hooks-wrapping>>
@@ -1325,7 +1327,7 @@ From my [[https://emacs.stackexchange.com/q/50488/9874][SO question]] and based 
 #+NAME: org_mark_mini20.local_20220206T120941.889585
 #+begin_src emacs-lisp
 (defun mwbinit-add-tangle-headers ()
-  (message "running in %s" (buffer-file-name))
+  (message "Babel in %s" (buffer-file-name))
   (cond
    ((f-ext? (buffer-file-name) "py")
 	(goto-char (point-min))
@@ -1361,6 +1363,17 @@ From my [[https://emacs.stackexchange.com/q/50488/9874][SO question]] and based 
   (save-buffer))
 (add-hook 'org-babel-post-tangle-hook #'mwb/org-babel-post-tangle-hook-fn 100)
 #+END_SRC
+****** TODO Use standard formatter
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220605T134305.891503
+:END:
+Use a standard formatter as whole file
+**** Jump to generated code
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220605T134305.890136
+:END:
+Go from org file to the generated - really only need as noweb the code in edit src is not real. From [[https://emacs.stackexchange.com/a/69591/9874][SO]]
+See file:../site-lisp/mwb/init-mwb-org.el
 ** Archive
 :PROPERTIES:
 :ID:       org_2020-12-08+00-00:C0A61800-DCE8-4C03-96B8-944F662CBA2A
@@ -1368,55 +1381,8 @@ From my [[https://emacs.stackexchange.com/q/50488/9874][SO question]] and based 
 I want separate archive files with the same structure as original
 All google seems to point via the gist quoted in [[https://emacs.stackexchange.com/questions/49079/issue-archiving-when-maintaining-org-mode-subtree-structure][SO]] but [[https://fuco1.github.io/2017-04-20-Archive-subtrees-under-the-same-hierarchy-as-original-in-the-archive-files.html][Fuco1's]] looks simpler
 But org mode keepos changing and functions go missing so does not work but a fix [[https://github.com/daviderestivo/galactic-emacs/blob/master/lisp/org-archive-subtree.el][Here]]
-#+NAME: org_2020-12-08+00-00_2D87F4C9-46F1-403B-A758-2FF8DAADA668
-#+begin_src emacs-lisp :tangle no :noweb-ref org-extras
-;;
-;; Archive subtrees under the same hierarchy as the original org file.
-;; Link: https://gist.github.com/Fuco1/e86fb5e0a5bb71ceafccedb5ca22fcfb
-;;
-(require 'dash)
 
-(defadvice org-archive-subtree (around fix-hierarchy activate)
-  (let* ((fix-archive-p (and (not current-prefix-arg)
-                             (not (use-region-p))))
-         (afile  (car (org-archive--compute-location
-		               (or (org-entry-get nil "ARCHIVE" 'inherit) org-archive-location))))
-         (buffer (or (find-buffer-visiting afile) (find-file-noselect afile))))
-    ad-do-it
-    (when fix-archive-p
-      (with-current-buffer buffer
-        (goto-char (point-max))
-        (while (org-up-heading-safe))
-        (let* ((olpath (org-entry-get (point) "ARCHIVE_OLPATH"))
-               (path (and olpath (split-string olpath "/")))
-               (level 1)
-               tree-text)
-          (when olpath
-            (org-mark-subtree)
-            (setq tree-text (buffer-substring (region-beginning) (region-end)))
-            (let (this-command) (org-cut-subtree))
-            (goto-char (point-min))
-            (save-restriction
-              (widen)
-              (-each path
-                (lambda (heading)
-                  (if (re-search-forward
-                       (rx-to-string
-                        `(: bol (repeat ,level "*") (1+ " ") ,heading)) nil t)
-                      (org-narrow-to-subtree)
-                    (goto-char (point-max))
-                    (unless (looking-at "^")
-                      (insert "\n"))
-                    (insert (make-string level ?*)
-                            " "
-                            heading
-                            "\n"))
-                  (cl-incf level)))
-              (widen)
-              (org-end-of-subtree t t)
-              (org-paste-subtree level tree-text))))))))
-
-#+end_src
+See file:../site-lisp/mwb/init-mwb-org.el
 ** Main mode hydra
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:D4058350-C97F-4A1D-858C-70008D09A2FF
@@ -1438,6 +1404,7 @@ Using new pretty mode hydra
    "Babel"
    (("e" org-babel-execute-src-block "Execute Source Block")
     ("'" org-edit-src-code "Edit Source")
+	("s" sv-org-babel-tangle-jump-to-src "Jump to generated code" )
     ("b" org-babel-tangle "Tangle"))
    "Insert"
    (("m" org-meta-return "Heading")

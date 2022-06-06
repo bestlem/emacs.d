@@ -348,6 +348,40 @@ use-package using :ensure t
 	 :ensure t
      ,@args))
 #+end_src
+*** Profile/Benchmark init
+:PROPERTIES:
+:ID:       org_mark_2020-11-12T14-43-30+00-00_mini12.local:CCEFA537-D499-4E55-8B0C-62DA4221E19B
+:END:
+I have tried both but neither work well on my init.
+**** Esup
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220606T173756.127839
+:END:
+This seemed to go too far - digging into some code e.g. vc-git
+#+NAME: org_mark_mini20.local_20220606T173756.092098
+#+begin_src emacs-lisp :tangle no
+(use-package esup
+  :disabled
+  :ensure t
+  ;; To use MELPA Stable use ":pin mepla-stable",
+  :init
+  ;; (setq esup-depth 0)
+  :commands (esup))
+#+end_src
+**** Benchmark-init
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220606T173756.124328
+:END:
+[[https://github.com/dholm/benchmark-init-el][Github]]
+Run `benchmark-init/show-durations-tree` or `benchmark-init/show-durations-tabulated`
+Well does not show what takes time - just which file. So I use more files. It also misses the slow bit as this config needs use-package and package init forst so make it a fork and use require.
+#+NAME: org_mark_mini20.local_20220606T173756.094527
+#+begin_src emacs-lisp :tangle no
+(use-package-elpa benchmark-init
+  :config
+  ;; To disable collection of benchmark data after init is done.
+  (add-hook 'after-init-hook 'benchmark-init/deactivate))
+#+end_src
 *** Paradox
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210625T110216.854054
@@ -388,26 +422,6 @@ With prefix KILL, kill the buffer instead of burying."
 	(delete-frame))
   (advice-add   #'paradox-quit-and-close :after  #'paradox-mwb-quit-advice )
   )
-#+end_src
-*** Profile/Benchmark init
-:PROPERTIES:
-:ID:       org_mark_2020-11-12T14-43-30+00-00_mini12.local:CCEFA537-D499-4E55-8B0C-62DA4221E19B
-:END:
-#+NAME: org_mark_2020-11-12T14-43-30+00-00_mini12.local_14B3DBAE-DFA1-40A3-A8B0-FCCABBECB816
-#+begin_src emacs-lisp
-(use-package esup
-  :disabled ; This needs to be rewritten to stop digging into some code e.g. vc-git
-  :ensure t
-  ;; To use MELPA Stable use ":pin mepla-stable",
-  :init
-  ;; (setq esup-depth 0)
-  :commands (esup))
-(use-package benchmark-init
-  :disabled
-  :ensure t
-  :config
-  ;; To disable collection of benchmark data after init is done.
-  (add-hook 'after-init-hook 'benchmark-init/deactivate))
 #+end_src
 *** Extras needed for loading
 :PROPERTIES:

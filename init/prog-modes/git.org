@@ -30,9 +30,7 @@ To load the hydra needs to be available
 #+NAME: org_mark_mini20.local_20220604T121907.520562
 #+begin_src emacs-lisp
 (use-package-elpa magit
-  :defer 2 								; rather than a lot of commands
-  :commands
-  magit-status magit-branch-popup
+  ;; :defer 2								; rather than a lot of commands
   :custom
   (magit-diff-refine-hunk t)
   (magit-repository-directories '(("~/src/" . 2)
@@ -42,28 +40,22 @@ To load the hydra needs to be available
   (setq magit-completing-read-function 'magit-builtin-completing-read)
   (transient-bind-q-to-quit)
 
-  <<magit-config>>
-
   :pretty-hydra
   (jp-git
    (:color teal :quit-key "q"
 	:title (mwb-icon-string "git" "Git"))
-   ("Magit"
-	(("g" mwb-magit-status "status")
-	 ("s" mwb-magit-status "status")
-	 ("l" magit-log-buffer-file "commit log (current file)")
-	 ("L" magit-log-current "commit log (project)")
-	 ("B" magit-blame-addition "blame")
-	 ("b" magit-branch-popup "branch popup"))
-	"Remote"
-	(("r" magit-rebase-popup "rebase popup")
-	 ("f" magit-fetch-popup "fetch popup")
-	 ("P" magit-push-popup "push popup")
-	 ("F" magit-pull-popup "pull popup")
-	 ("W" magit-format-patch "format patch")
-	 ("$" magit-process "process"))
-	"Diff"
-	(("d" magit-diff-buffer-file "diff buffer")))))
+   ("Status" (("g" mwb-magit-status "status")
+			  ("s" mwb-magit-status "status")
+			  ("l" magit-log-buffer-file "commit log (current file)")
+			  ("L" magit-log-current "commit log (project)")
+			  ("B" magit-blame-addition "blame"))
+	"Local" (("b" magit-branch "branch popup")
+			 ("r" magit-rebase "rebase popup"))
+	"Remote" (("f" magit-fetch "fetch popup")
+			  ("P" magit-push "push popup")
+			  ("F" magit-pull "pull popup"))
+	"Diff" (("d" magit-diff-buffer-file "diff buffer"))
+	"Magit" (("$" magit-process "process")))))
 #+end_src
 ** posframe
 :PROPERTIES:
@@ -71,7 +63,7 @@ To load the hydra needs to be available
 :END:
 Show choices in posframe
 #+NAME: org_mark_mini20.local_20210115T132445.501529
-#+begin_src emacs-lisp :tangle no :noweb-ref magit-config
+#+begin_src emacs-lisp
 (when *emacs/>=26p*
   (use-package-elpa transient-posframe
     :demand
@@ -135,6 +127,7 @@ I think works with other vcs
 #+begin_src emacs-lisp
 (use-package-elpa git-timemachine
   :after magit
+  :demand
   :custom-face
   (git-timemachine-minibuffer-author-face ((t (:inherit success))))
   (git-timemachine-minibuffer-detail-face ((t (:inherit warning))))
@@ -261,10 +254,12 @@ So switch to git-gutter but try git-gutter-fringe which id GUIO only as I might 
 :ID:       org_mark_mini20.local:20220203T125913.915203
 :END:
 Does not need magit
+Use git-gutter instead
 #+NAME: org_mark_mini12.local_20201223T212427.538014
 #+begin_src emacs-lisp :tangle no
 (use-package-elpa diff-hl
   :after magit
+  :demand
   :commands (diff-hl-next-hunk diff-hl-previous-hunk diff-hl-revert-hunk )
   :hook ((magit-post-refresh . diff-hl-magit-post-refresh)
 		 (magit-pre-refresh . diff-hl-magit-pre-refresh))
@@ -287,7 +282,7 @@ Try git-gutter-fringe but seems to clash [[https://github.com/emacsorphanage/git
 #+NAME: org_mark_mini20.local_20210823T133333.243027
 #+begin_src emacs-lisp
 (use-package-elpa git-gutter
-  :defer 1
+  :defer 2
   :config
   (global-git-gutter-mode 1)
 

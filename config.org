@@ -14,24 +14,8 @@ The minimum setup needed to load the rest.
 :END:
 *** Debugging
 :PROPERTIES:
-:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:62080F1E-8D8F-4EBB-8ACE-9C2D6DCA14A9
+:ID:       org_mark_mini20.local:20220606T144627.131899
 :END:
-This slows things down so for debugging outside init. but I now don't like Backtrace mainly as trying to use emacs not edit it.
-However  for debugging init we don't want the backtrace
-
-#+NAME: org_mark_mini20.local_20210511T155720.262624
-#+begin_src emacs-lisp
-;;  setting to nil turns them off
-;; see init-after-hook for normal setup
-(setq debug-on-error 't)
-(setq debug-on-error nil)
-;(setq debug-on-quit nil)
-
-;; Trace some function
-;; (require 'trace)
-;; (untrace-all)
-;; (trace-function-foreground 'iso-transl-define-keys)
-     #+end_src
 **** Message
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:3247611A-A6FB-40F6-9BB1-7B0772C213DE
@@ -324,6 +308,7 @@ Ideally I will use as per hemacs use-feature if on load-path and use-package if 
   (setq use-package-enable-imenu-support t)
   (setq bind-key-describe-special-forms t)
   (setq use-package-always-defer t)
+  (setq byte-compile-current-buffer t)
   (if init-file-debug
       (setq use-package-verbose t
             use-package-expand-minimally nil

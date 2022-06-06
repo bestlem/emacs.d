@@ -30,13 +30,17 @@
 										;(package-initialize)
 ;; org_mark_2020-01-23T20-40-42+00-00_mini12_B623E658-A6AA-46DF-AD9C-6EAC3BDC1BEE ends here
 
-;; [[file:~/.emacs.d/init.org::*Debug flag][Debug flag:1]]
+;; [[file:~/.emacs.d/init.org::org_mark_mini20.local_20220606T145002.735412][org_mark_mini20.local_20220606T145002.735412]]
+;;  setting to nil turns them off
+;; (setq debug-on-error 't)
+(setq debug-on-error nil)
+										;(setq debug-on-quit nil)
+;; org_mark_mini20.local_20220606T145002.735412 ends here
+
+;; [[file:~/.emacs.d/init.org::org_mark_mini20.local_20220606T145002.738615][org_mark_mini20.local_20220606T145002.738615]]
 (setq init-file-debug 'nil)
 (setq init-file-debug t)
-;; (require 'profiler)
-;; (profiler-start 'cpu+mem)
-;; (add-hook-lambda after-init-hook (profiler-stop))
-;; Debug flag:1 ends here
+;; org_mark_mini20.local_20220606T145002.738615 ends here
 
 ;; [[file:~/.emacs.d/init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_315EE687-FC28-4D41-810D-4FF19AA66CD4][org_mark_2020-01-23T20-40-42+00-00_mini12_315EE687-FC28-4D41-810D-4FF19AA66CD4]]
 (defun nullman/org-babel-generate-elisp-file (file &optional byte-compile force)
@@ -146,6 +150,14 @@ If org and no el or org file is newer then retangle the org file if noorg is not
     ;; (setq esup-child-max-depth mwb-esup-depth )
     (setq esup-child-current-depth 0)
     (when (file-newer-than-file-p org-file el-file)
+	  ;; (let ((org-att (file-attributes org-file) )
+	  ;; 		(el-time (file-attribute-access-time el-file))
+	  ;; 		(org-time (file-attribute-access-time org-att)))
+	  ;; 	(message "Generating .el from org for <%s> times %s %s"
+	  ;; 			 file-root-abs
+	  ;; 			 org-time
+	  ;; 			 el-time
+	  ;; 			 ))
       (cond (no-org
              (message "tangle <%s> to <%s> using regex replacement not org mode"
                       org-file el-file)

@@ -1,7 +1,7 @@
 #+ TITLE minimal emacs startup
 #+PROPERTY:header-args :cache yes :tangle yes :comments link
 #+STARTUP: content
-* Implement init preload
+* Implement init preload (early-init.el)
 :PROPERTIES:
 :header-args:    :tangle early-init.el :comments link
 :ID:       org_mark_2020-09-28T01-08-28+01-00_mini12.local:0952DED1-1095-4176-8826-251CEE37BDB2
@@ -189,18 +189,57 @@ As this is now ~/.emacs.d/init.el and not in ~/Library/Preferences Emacs sees th
 ;; You may delete these explanatory comments.
 ;(package-initialize)
 #+end_src
-** Debug flag
+** Debugging
 :PROPERTIES:
-:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:20E9D7CA-52FB-4C0D-94B7-380665846841
+:ID:       org_mark_mini20.local:20220606T145002.757242
 :END:
-	 #+begin_src emacs-lisp
+
+This slows things down so for debugging outside init. but I now don't like Backtrace mainly as trying to use emacs not edit it.
+However  for debugging init we don't want the backtrace
+*** Elisp
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220606T145002.756442
+:END:
+Set for init - can chang in init-mwb-hook-after-init.
+Later toggles in main hydra.
+#+NAME: org_mark_mini20.local_20220606T145002.735412
+#+begin_src emacs-lisp
+;;  setting to nil turns them off
+;; (setq debug-on-error 't)
+(setq debug-on-error nil)
+;(setq debug-on-quit nil)
+#+end_src
+*** use-package
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220606T145002.755825
+:END:
+True adds staistics - only set to nil when I actually use emacs and not just fiddle with init.
+#+NAME: org_mark_mini20.local_20220606T145002.738615
+#+begin_src emacs-lisp
 (setq init-file-debug 'nil)
 (setq init-file-debug t)
+ #+end_src
+*** Trace
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220606T145002.754955
+:END:
+#+NAME: org_mark_mini20.local_20220606T145002.738947
+#+begin_src emacs-lisp :tangle no
+;; Trace some function
+;; (require 'trace)
+;; (untrace-all)
+;; (trace-function-foreground 'iso-transl-define-keys)
+#+end_src
+*** Profiler
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220606T145002.753652
+:END:
+#+NAME: org_mark_mini20.local_20220606T145002.739139
+#+begin_src emacs-lisp :tangle no
 ;; (require 'profiler)
 ;; (profiler-start 'cpu+mem)
 ;; (add-hook-lambda after-init-hook (profiler-stop))
-	 #+end_src
-
+#+end_src
 ** Code to do loading
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:3A4B05D6-A440-46F1-8A2F-1AFF3B0CAA2D
@@ -343,6 +382,14 @@ If org and no el or org file is newer then retangle the org file if noorg is not
     ;; (setq esup-child-max-depth mwb-esup-depth )
     (setq esup-child-current-depth 0)
     (when (file-newer-than-file-p org-file el-file)
+	  ;; (let ((org-att (file-attributes org-file) )
+	  ;; 		(el-time (file-attribute-access-time el-file))
+	  ;; 		(org-time (file-attribute-access-time org-att)))
+	  ;; 	(message "Generating .el from org for <%s> times %s %s"
+	  ;; 			 file-root-abs
+	  ;; 			 org-time
+	  ;; 			 el-time
+	  ;; 			 ))
       (cond (no-org
              (message "tangle <%s> to <%s> using regex replacement not org mode"
                       org-file el-file)

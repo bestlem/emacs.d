@@ -26,6 +26,7 @@
  '(org-babel-python-mode 'python-mode t)
  '(org-bullets-bullet-list
    '("⦿" "◉" "◎" "○" "●"))
+ '(org-catch-invisible-edits 'smart)
  '(org-cycle-global-at-bob t)
  '(org-datetree-add-timestamp 'active t)
  '(org-hide-block-startup nil)

@@ -113,7 +113,7 @@ These are set by Aquamacs but might as well reinforce
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:D9CBE07A-A1B7-48CB-A163-039F8E86A954
 :END:
-**  Show in all windows
+** Show in all windows
 :PROPERTIES:
 :ID:       org_2020-12-06+00-00:DEF922FC-C688-4566-B30F-A0C3950B9EE7
 :END:
@@ -230,7 +230,7 @@ This is hardcoded. See all.org and desktop for other ways. Aquamacs just restore
 #+begin_src emacs-lisp
 (when (and window-system (not *aquamacs*))
   (set-frame-size (selected-frame) 230 50) ; in characters
-  (set-frame-position (selected-frame) 132 132))
+  (set-frame-position (selected-frame) 50 132))
 #+end_src
 
 * Colour theme

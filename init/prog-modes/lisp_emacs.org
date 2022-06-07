@@ -363,7 +363,7 @@ _c_ontinue (_C_ fast)      ^^^^                       _X_ global breakpoint
   ("N" #'edebug-next-breakpoint "next breakpoint" :column "break")
   ("c" #'edebug-set-conditional-breakpoint "conditional bp" :column "break")
   ("C" #'edebug-set-global-break-condition "global conditional bp"
-       :column "break")
+   :column "break")
 
   ;; navigation
   ("w" #'edebug-where "where" :column "common")
@@ -374,10 +374,10 @@ _c_ontinue (_C_ fast)      ^^^^                       _X_ global breakpoint
   ("s" #'edebug-stop "stop" :column "step")
   ("o" #'edebug-step-out "step out" :column "step")
   ("i" #'edebug-step-in "step in" :column "step")
-  ("f" #'edebug-forward "forward" :column "step")
+  ;; ("f" #'edebug-forward "forward" :column "step")
 
   ;; sexp oriented
-  ("l" #'edeug-forward-sexp "forward sexp" :column "sexp")
+  ("f" #'edebug-forward-sexp "forward sexp" :column "sexp")
   ("e" #'edebug-eval-expression "eval expression" :column "sexp")
   ("E" #'edebug-eval-last-sexp "eval expression" :column "sexp")
   ("r" #'edebug-previous-result "previous result" :column "sexp")

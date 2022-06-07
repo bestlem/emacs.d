@@ -230,7 +230,18 @@ This is hardcoded. See all.org and desktop for other ways. Aquamacs just restore
 #+begin_src emacs-lisp
 (when (and window-system (not *aquamacs*))
   (set-frame-size (selected-frame) 230 50) ; in characters
-  (set-frame-position (selected-frame) 50 132))
+  (set-frame-position (selected-frame) 45 132))
+#+end_src
+
+** Fringe
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220606T215453.350660
+:END:
+Move customization out
+#+NAME: org_mark_mini20.local_20220606T215453.331577
+#+begin_src emacs-lisp
+(use-feature emacs
+  :custom (fringe-mode '(nil . 0)))
 #+end_src
 
 * Colour theme

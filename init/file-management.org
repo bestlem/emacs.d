@@ -59,7 +59,7 @@ The best inits I found for this were [[http://pragmaticemacs.com/emacs/auto-save
  kept-old-versions 0     ; don't bother with old versions
  delete-old-versions "keep them all"   ; t is don't ask about deleting old versions - otyher non nil is don't delete
  version-control t       ; number backups
- vc-make-backup-files t) ; backup version controlled files
+ )
 #+end_src
 
 ** Do the backups

@@ -799,8 +799,8 @@ Needs to load immeduiately to load the other customization files
           ;; ("structured-data"
           ;;  ("nxml-"))
 
-          ("vc"
-           ("vc-" "magit-" "ediff-" "git-" "transient-"))
+          ;; ("vc"
+          ;;  ("vc-" "magit-" "ediff-" "git-" "transient-"))
           ;; ("emacs-base"
           ;;  ("make-backup" "minibuffer-"   "global-h" "cursor-type" "tool-bar-mode" "delete-old-"  "custom-" "undo-limit" "desktop-" "customize-"))
           ))

@@ -147,6 +147,7 @@ We have fn available so have it as hyper and then use Karabiner  (try iCue later
 I don't use the right hand modifier keys so not set separately.
 Things got changed on one run so set here and remove from customisation
 
+Note that ns- probably should be the ones used and mac- only for macport.
 #+NAME: org_mark_mini12.local_20201213T170849.929562
 #+begin_src emacs-lisp
 (if *aquamacs*

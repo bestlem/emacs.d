@@ -6,9 +6,9 @@
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210424T122854.198947
 :END:
- OK I caught the bug to create an org mode file to document my init files.
+OK I caught the bug to create an org mode file to document my init files.
 
- The reason is not for the pretty files that you see on the web or github but that I was writing a few comments and realised that org mode looks nicer for those (no comment marker ; on lines) and you can deal in text mode for documentation.
+The reason is not for the pretty files that you see on the web or github but that I was writing a few comments and realised that org mode looks nicer for those (no comment marker ; on lines) and you can deal in text mode for documentation.
 
 I would note that my programming style is to have lots of small functions. With org-mode I can execute code from a block and not from a tangle. Unfortunately for init files use-package wants you to pout all code into one lisp form so making comments away from code, so you have an incentive to use weaving - but then the top level code is not executable you have to tangle first.
 
@@ -32,6 +32,9 @@ There is now an alternate - which is a way to try other init setups
 :END:
 Basically loads org-mode using packaging etc. Note uses the minimal tangle so no weaving etc.
 The last thing it does is load init/org.all
+
+The only reason to do this rather than init.org is that you don't need to save the .el as well. But config.org has 156 commits and init.org has 31.
+Also the separate allows easy choice of alt-init.
 
 ** init
 :PROPERTIES:
@@ -72,12 +75,12 @@ I think can be moved out to modes or behaviours - the latter makes sense
 :ID:       org_mark_mini20.local:20210424T171159.511861
 :END:
 Well this can be the last - basically sets up my key bindings.\
-The one odd case is dealing with Aquamacs/macos differences which have to be done upfront.
+The one odd case is dealing with Aquamacs/macOS differences which have to be done upfront.
 *** Startup
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210424T171159.511203
 :END:
-Detailed of extr setup at end
+Detailed of extra setup at end
 *** Appearance
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210424T171159.510292
@@ -182,7 +185,7 @@ CLOSED: [2020-01-19 Sun 22:18]
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210424T122854.187351
 :END:
- Current babel code encodes files with spaces by http encoding so result is not the sanme as the start. I think that this is not required in tangle but that is a code change. Safest fix is to move init files but need to deal with customisation
+Current babel code encodes files with spaces by http encoding so result is not the same as the start. I think that this is not required in tangle but that is a code change. Safest fix is to move init files but need to deal with customisation
 I think newer org-mode fixes this.
 
 *** DONE Links
@@ -226,14 +229,14 @@ Start by tangle on save if in init dir [[https://emacs.stackexchange.com/a/20733
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210424T122854.182819
 :END:
- This is the directory emacs reads and writers support files from. This is a mess as some files are under version control and others are created on the fly. The ones on the fly can have the same name as packages and so stop loading (e.g. Tramp and Calc). There are several ways round this e.g. [[https://github.com/emacscollective/no-littering][No Littering]] Aquamacs does this by moving user-emacs-directory and putting the start dir on the load-path but also every possible directory so can't find it easily and hard codes paths and no use a directory so have to have our own const.
+This is the directory emacs reads and writers support files from. This is a mess as some files are under version control and others are created on the fly. The ones on the fly can have the same name as packages and so stop loading (e.g. Tramp and Calc). There are several ways round this e.g. [[https://github.com/emacscollective/no-littering][No Littering]] Aquamacs does this by moving user-emacs-directory and putting the start dir on the load-path but also every possible directory so can't find it easily and hard codes paths and no use a directory so have to have our own const.
 
-  Aquamacs does drop a lot into its directory and makes use-emacs-directory always this even if the config files are elsewhere.
+Aquamacs does drop a lot into its directory and makes use-emacs-directory always this even if the config files are elsewhere.
 
- Now text based things don't like spaces (programmers are lazy) I want a structured text editor
- The issue here is when tangling the references to files are encoded to remove spaces so the directory becomes ~/Library/Preferences/Aquamacs%20Emacs so riund tripping fails.
+Now text based things don't like spaces (programmers are lazy) I want a structured text editor.
+The issue here is when tangling the references to files are encoded to remove spaces so the directory becomes ~/Library/Preferences/Aquamacs%20Emacs so round tripping fails.
 
- On using no-littering - all it does is special case some things but not many so better either do Aquamacs way but use a new directory or deal on case by case basis. The latter might be needed for etc files.
+On using no-littering - all it does is special case some things but not many so better either do Aquamacs way but use a new directory or deal on case by case basis. The latter might be needed for etc files.
 
 **** DONE Need to move all init files into a path that has no spaces
 	  CLOSED: [2019-05-06 Mon 02:21]
@@ -245,7 +248,7 @@ Start by tangle on save if in init dir [[https://emacs.stackexchange.com/a/20733
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210424T122854.180477
 :END:
-:Startup files aquamacs looks in are site-start.el then init.el and in a directory order not including ~/.emacs.d/ (actually it does include this)(Aquamacs loads Preferences.el I just make that load init.el so I could use a more standard emacs note that would need to deal with customizations as Aquamacs already has set that.
+Startup files aquamacs looks in are site-start.el then init.el and in a directory order not including ~/.emacs.d/ (actually it does include this)(Aquamacs loads Preferences.el I just make that load init.el so I could use a more standard emacs note that would need to deal with customizations as Aquamacs already has set that.
 Also see [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Init-File.html][Emacs manual on init-files]]
 
 From  aquamacs-get-custom-file-dotemacs-warning
@@ -256,3 +259,5 @@ From  aquamacs-get-custom-file-dotemacs-warning
 ;; Consider moving your startup settings to the Preferences.el file, which
 ;; is loaded after `custom-file':
 
+
+#  LocalWords:  ibuffer progmodes starterkit

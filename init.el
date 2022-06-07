@@ -42,6 +42,55 @@
 (setq init-file-debug t)
 ;; org_mark_mini20.local_20220606T145002.738615 ends here
 
+;; [[file:~/.emacs.d/init.org::org_mark_mini20.local_20220313T215512.598628][org_mark_mini20.local_20220313T215512.598628]]
+(defvar mwb-message-offset (float-time) "Time of last message")
+
+(defun my-message-with-timestamp (old-func fmt-string &rest args)
+  "Prepend current timestamp (with microsecond precision) to a message"
+  (apply old-func
+         (concat (format-time-string "[%F %T] ")
+                 fmt-string)
+         args))
+
+(defun my-message-with-timediff (old-func fmt-string &rest args)
+  "Prepend difference in time to a message"
+
+  (let* ((now (float-time))
+         (diff (- now mwb-message-offset)))
+    (setq mwb-message-offset now)
+    (apply old-func
+           (if (> diff 0.1)
+               (concat (format "[%g] " diff)
+                       fmt-string)
+             fmt-string)
+           args)))
+
+
+(advice-add 'message :around #'my-message-with-timediff)
+
+(defun mwb-message-remove-timediff ()
+  (interactive)
+  (advice-remove 'message #'my-message-with-timediff)
+  (message "remove timestamp"))
+
+(defvar mwb-message-timestamp 'nil "true iff message should show timestamp")
+
+(defun toggle-mwb-message-timestamp ()
+  (interactive)
+  (if mwb-message-timestamp
+      (progn
+        (advice-remove 'message #'my-message-with-timestamp)
+        (setq mwb-message-timestamp 't)
+        (message "remove timestamp"))
+    (advice-add 'message :around #'my-message-with-timestamp)
+    (message "add timestamp")))
+
+
+(add-hook 'after-init-hook 'mwb-message-remove-timediff)
+
+;; (message "test")
+;; org_mark_mini20.local_20220313T215512.598628 ends here
+
 ;; [[file:~/.emacs.d/init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_315EE687-FC28-4D41-810D-4FF19AA66CD4][org_mark_2020-01-23T20-40-42+00-00_mini12_315EE687-FC28-4D41-810D-4FF19AA66CD4]]
 (defun nullman/org-babel-generate-elisp-file (file &optional byte-compile force)
   "Generate an emacs-lisp file from an org-babel FILE.

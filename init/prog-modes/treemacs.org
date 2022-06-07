@@ -23,7 +23,7 @@ I need to set the mouse - unfortunately it is in a minor mode map not global so 
   (let ((oldmap (cdr (assoc 'mac-key-mode-map minor-mode-map-alist)))
         (newmap (make-sparse-keymap)))
     (set-keymap-parent newmap oldmap)
-    (bind-key (kbd "<mouse-3>") #'treemacs-rightclick-menu newmap )
+    (define-key (kbd "<mouse-3>")  #'treemacs-rightclick-menu)
     (make-local-variable 'minor-mode-overriding-map-alist)
     (push `(mac-key-mode-map . ,newmap) minor-mode-overriding-map-alist)))
 #+end_src
@@ -103,11 +103,12 @@ Emacs 28 look at [[help:prog-context-menu][prog-context-menu]]
     (("w" treemacs-toggle-fixed-width "Toggle variable width" ))))
 
   :bind ( :map treemacs-mode-map
-			   ("<mouse-5>" . treemacs-rightclick-menu)
-               ("<mouse-2>" . treemacs-rightclick-menu)
-               ("<f5>" . treemacs-switch-workspace)
-               ("<C-f5>" . treemacs-edit-workspaces))
-  :hook (treemacs-mode . treemacs-mwb-mouse))
+		  ("<mouse-5>" . treemacs-rightclick-menu)
+          ("<mouse-2>" . treemacs-rightclick-menu)
+          ("<f5>" . treemacs-switch-workspace)
+          ("<C-f5>" . treemacs-edit-workspaces))
+  ;; :hook (treemacs-mode . treemacs-mwb-mouse)
+  )
 #+end_src
 
 * Main menu

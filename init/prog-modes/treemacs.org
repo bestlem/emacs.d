@@ -15,6 +15,7 @@ This is the visual tree to manage files etc
 ** Key hook
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210819T110926.744579
+:HEADER-ARGS: :tangle no
 :END:
 I need to set the mouse - unfortunately it is in a minor mode map not global so simple bind does not work
 #+NAME: org_mark_mini20.local_20210819T110926.728132
@@ -27,7 +28,6 @@ I need to set the mouse - unfortunately it is in a minor mode map not global so 
     (make-local-variable 'minor-mode-overriding-map-alist)
     (push `(mac-key-mode-map . ,newmap) minor-mode-overriding-map-alist)))
 #+end_src
-
 ** Context Menu
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220602T095242.843998
@@ -40,9 +40,7 @@ Emacs 28 look at [[help:prog-context-menu][prog-context-menu]]
 :END:
  #+NAME: org_mark_mini20.local_20210811T192501.283076
 #+begin_src emacs-lisp
-(use-package treemacs
-  :ensure t
-  ;; :mwb-load-path "fork/treemacs/src/elisp"
+(use-package-elpa treemacs
   :init
   (setq treemacs-width 50)
   :commands (treemacs treemacs-rightclick-menu)
@@ -52,13 +50,16 @@ Emacs 28 look at [[help:prog-context-menu][prog-context-menu]]
   (setq hydra-key-regex "\\[\\|]\\|[-\\[:alnum:] ~.,;:/|?<>={}*+#%@!&^⇧⌘⌥↑↓←→⌫⌦⏎'`()\"$]+?") ; add Mac key symbols
 
   (setq treemacs-persist-file (mwb-user-emacs-file "data/treemacs-persist"))
-  (with-eval-after-load 'treemacs
-	(add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?))
 
+  (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?)
 
   ;; The default width and height of the icons is 22 pixels. If you are
   ;; using a Hi-DPI display, uncomment this to double the icon size.
   ;;(treemacs-resize-icons 44)
+
+  ;; This seems to have changed and causes a bug
+  ;; https://github.com/Alexander-Miller/treemacs/issues/944
+  (treemacs-hide-gitignored-files-mode 1)
 
   (treemacs-follow-mode t)
 
@@ -73,8 +74,8 @@ Emacs 28 look at [[help:prog-context-menu][prog-context-menu]]
   :custom
   (treemacs-indent-guide-mode t)
   (treemacs-silent-refresh t)
-  ( treemacs-silent-filewatch t)
-  ( treemacs-tag-follow-delay 2.5)
+  (treemacs-silent-filewatch t)
+  (treemacs-tag-follow-delay 2.5)
   (treemacs-indent-guide-style 'line)
   (treemacs-user-header-line-format #'treemacs-header-buttons-format))
 #+end_src

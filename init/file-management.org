@@ -71,10 +71,12 @@ Aquamacs seems to turn this off sometimes in customization so need to investigat
  #+begin_src emacs-lisp
 (setq make-backup-files t)
  #+end_src
-** Where
+** TODO Where
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20210105T204218.554567
 :END:
+There are fixes in revision
+
 The default is the ~ on end of file.
 All the google searches say put in one directory
 But the GNU manual gives the best - in a subdirectory of where you are - OK Tramp and other machines and NFS etc might be different. Changed as backup-walker should be able to find old and thus don't need to use finder etc.

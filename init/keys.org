@@ -39,6 +39,7 @@
   - [[#macos-mouse][Macos mouse]]
   - [[#mouse-3][Mouse 3]]
   - [[#emacs-context-menu][Emacs context-menu]]
+  - [[#insert-at-point-using-mouse-to-select][Insert at point using mouse to select]]
 - [[#hydra][Hydra]]
   - [[#leader-keys][Leader keys]]
   - [[#ctrl-x-hydra][Ctrl-x hydra]]
@@ -580,7 +581,17 @@ Seems that Macports context menu adds nothing - except using a different NS call
                context-menu-minor))
     :init
     (context-menu-mode 1)))
+ #+end_src
+** Insert at point using mouse to select
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220609T084006.020767
+:END:
+Not exactly clear how this helps - taken from https://superuser.com/q/330849/11306
+#+NAME: org_mark_mini20.local_20220609T084006.000456
+#+begin_src emacs-lisp
+(setq mouse-yank-at-point t)
 #+end_src
+
 * Hydra
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:A41389A4-CD6E-44AD-A79A-C170F7936D9D

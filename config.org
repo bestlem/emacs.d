@@ -129,6 +129,7 @@ But this is working so don;t need to chnage until an actual bug + my org-mode se
 **** SSL  network connection
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:836EC728-DBED-4BB7-BC7C-6F39951A32BE
+:HEADER-ARGS: :tangle no
 :END:
 ***** TLS Setup - emacs 25
 :PROPERTIES:
@@ -245,8 +246,8 @@ Ideally I will use as per hemacs use-feature if on load-path and use-package if 
 
 ;; Enable use-package
 (eval-when-compile
-  (require 'use-package)
   (setq use-package-enable-imenu-support t)
+  (require 'use-package)
   (setq bind-key-describe-special-forms t)
   (setq use-package-always-defer t)
   (setq byte-compile-current-buffer t)
@@ -257,7 +258,6 @@ Ideally I will use as per hemacs use-feature if on load-path and use-package if 
     (setq use-package-verbose nil
           use-package-expand-minimally t)))
  #+end_src
-Override bind-keys that ?
 **** use-feature
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210625T104452.805391
@@ -326,6 +326,7 @@ Well does not show what takes time - just which file. So I use more files. It al
 *** Paradox
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210625T110216.854054
+:HEADER-ARGS: :tangle no
 :END:
 From centaur to make list-packages nicer.
 TODO: make this a new frame
@@ -500,8 +501,8 @@ Not really needed as should set load-path
   (use-package-as-one (symbol-name keyword) args
     #'use-package-normalize-mwb-paths))
 
-(defun use-package-handler/:mwb-load-path (name _keyword arg rest state)
-  (use-package-handler/:load-path name _keyword arg rest state))
+(defun use-package-handler/:mwb-load-path (name keyword arg rest state)
+  (use-package-handler/:load-path name keyword arg rest state))
 
 (setq use-package-keywords
       (mwb-insert-before-element :load-path :mwb-load-path  use-package-keywords))
@@ -805,7 +806,7 @@ There are somethings that Aquamacs does that I want to undo.
 e.g. key bindings that they do to stop modes changing them.
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_AD89749B-35DE-4103-925B-3420D46D933F
 #+begin_src emacs-lisp
-(when *aquamacs*
+(when (boundp 'osx-key-mode-map)
   (unbind-key "<end>" osx-key-mode-map)
   (unbind-key "<home>" osx-key-mode-map))
 #+end_src

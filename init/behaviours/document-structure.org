@@ -1,0 +1,225 @@
+#+TITLE:  Add Structure to text
+#+AUTHOR: Mark Bestley
+#+DATE:   09 Jun 2022
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+STARTUP: show2levels
+
+This contains all the helpers so see mad manipulate the structure of the document understanding its syntax.
+* Code
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220609T101507.128906
+:END:
+** Parentheses
+:PROPERTIES:
+:ID:       org_mark_2020-10-11T00-40-32+01-00_mini12.local:27461EE9-1768-4943-B3AE-65E50E8F41C7
+:END:
+*** Make parentheses pretty
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:9CBA29B7-2EB3-42F5-80C7-C3F7507D141B
+:END:
+Although that should be in prog mode
+#+NAME: org_mark_mini20.local_20210829T122201.450355
+#+begin_src emacs-lisp
+(use-package-elpa rainbow-delimiters
+  :delight rainbow-delimiters-mode
+  :hook (prog-mode . rainbow-delimiters-mode))
+#+end_src
+** Manipulate
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220609T101507.117993
+:END:
+Deal with code knowing its structure - also see lisp for lispy.
+** Smartparens
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:838D12E0-E4AA-4DD0-8F6E-56CDA89B5F0E
+:END:
+I have lispy working in racket
+Also its global mode messes up org-mode so disable - but it is somewhere in python
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_A84231FF-A68D-44B0-9010-3CD91C8B2DA4
+#+begin_src emacs-lisp
+(use-package-elpa smartparens
+  :commands sp-with-modes
+  sp-local-pair
+  smartparens-mode
+  turn-off-smartparens-mode
+  :diminish smartparens-mode
+  :bind (:map smartparens-mode-map
+		 ("M-(" . sp-wrap-round)
+		 ("M-[" . sp-wrap-square)
+		 ("M-{" . sp-wrap-curly)
+		 ("H-M-<backspace>" . sp-unwrap-sexp) ;; in macporst this is
+		 ;; what the M-delete maps to
+		 ("M-<backspace>" . sp-backward-unwrap-sexp)
+		 ;; from jp-smartparens
+		 ("M-<right>" . sp-forward-slurp-sexp)
+		 ("M-<left>" . sp-forward-barf-sexp)
+		 ("M-S-<right>" . sp-backward-slurp-sexp)
+		 ("M-S-<left>" . sp-backward-slurp-sexp)
+		 ("M-<up>" . sp-raise-sexp)
+		 ("C-k" . sp-kill-hybrid-sexp)
+		 ("C-M-f" . sp-forward-sexp)
+		 ("C-M-b" . sp-backward-sexp))
+  :config
+  (setq sp-show-pair-from-inside nil)
+  (require 'smartparens-config)
+  ;; (smartparens-global-mode)
+  )
+#+end_src
+**** Hydra
+:PROPERTIES:
+:ID:       org_mark_2020-03-30T15-04-16+01-00_mini12.local:88DD45E5-8559-4134-BCC2-05B98204D30C
+:END:
+From https://gist.githubusercontent.com/ptrv/7e27e0e18ae37d3f80aff7b9da749321/raw/0685c9b9b35b75886eb372b03f9fde601094d089/smartparens-hydra.el
+#+NAME: org_mark_2020-03-30T15-04-16+01-00_mini12.local_A1FA269E-859C-44DB-866A-C136AFD05F51
+#+begin_src emacs-lisp
+(defhydra ptrv/smartparens (:hint nil)
+  "
+Sexps (quit with _q_)
+^Nav^            ^Barf/Slurp^                 ^Depth^
+^---^------------^----------^-----------------^-----^-----------------
+_f_: forward     _→_:          slurp forward   _R_: splice
+_b_: backward    _←_:          barf forward    _r_: raise
+_u_: backward ↑  _C-<right>_:  slurp backward  _↑_: raise backward
+_d_: forward ↓   _C-<left>_:   barf backward   _↓_: raise forward
+_p_: backward ↓
+_n_: forward ↑
+^Kill^           ^Misc^                       ^Wrap^
+^----^-----------^----^-----------------------^----^------------------
+_w_: copy        _j_: join                    _(_: wrap with ( )
+_k_: kill        _s_: split                   _{_: wrap with { }
+^^               _t_: transpose               _'_: wrap with ' '
+^^               _c_: convolute               _\"_: wrap with \" \"
+^^               _i_: indent defun"
+  ("q" nil)
+  ;; Wrapping
+  ("(" (lambda (_) (interactive "P") (sp-wrap-with-pair "(")))
+  ("{" (lambda (_) (interactive "P") (sp-wrap-with-pair "{")))
+  ("[" (lambda (_) (interactive "P") (sp-wrap-with-pair "[")))
+  ("'" (lambda (_) (interactive "P") (sp-wrap-with-pair "'")))
+  ("\"" (lambda (_) (interactive "P") (sp-wrap-with-pair "\"")))
+  ;; Navigation
+  ("f" sp-forward-sexp )
+  ("b" sp-backward-sexp)
+  ("u" sp-backward-up-sexp)
+  ("d" sp-down-sexp)
+  ("p" sp-backward-down-sexp)
+  ("n" sp-up-sexp)
+  ;; Kill/copy
+  ("w" sp-copy-sexp)
+  ("k" sp-kill-sexp)
+  ;; Misc
+  ("t" sp-transpose-sexp)
+  ("j" sp-join-sexp)
+  ("s" sp-split-sexp)
+  ("c" sp-convolute-sexp)
+  ("i" sp-indent-defun)
+  ;; Depth changing
+  ("R" sp-splice-sexp)
+  ("r" sp-splice-sexp-killing-around)
+  ("<up>" sp-splice-sexp-killing-backward)
+  ("<down>" sp-splice-sexp-killing-forward)
+  ;; Barfing/slurping
+  ("<right>" sp-forward-slurp-sexp)
+  ("<left>" sp-forward-barf-sexp)
+  ("C-<left>" sp-backward-barf-sexp)
+  ("C-<right>" sp-backward-slurp-sexp))
+
+(bind-key "H-["  'ptrv/smartparens/body)
+#+end_src
+* TODO Folding
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:1928599E-6243-4314-835D-B5D932F7E372
+:END:
+Keeps changing - the issue is with comments before functions I want to collapse the lot. Plus with racket and ml comments are not in firts column so some (outshine) do not spot it.
+Current work to get org mode working better. see send to REPL.
+
+Also see this answer for an addition to highlight indent mode https://stackoverflow.com/a/4459159/151019
+** Hide show
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:E10913D4-7B93-4357-B95F-FA5044D80C3C
+:END:
+Let us set it up
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_E36E2091-3DAD-46AC-8634-EC11B5E795C7
+#+begin_src emacs-lisp
+(use-package hideshow
+    :diminish  hs-minor-mode
+    :bind (:map hs-minor-mode-map
+                ("<C-mouse-1>" . hs-toggle-hiding))
+    :init
+    ;; Hide the comments too when you do a 'hs-hide-all'
+    (setq hs-hide-comments nil)
+    ;; Set whether isearch opens folded comments, code, or both
+    ;; where x is code, comments, t (both), or nil (neither)
+    (setq hs-isearch-open 't)
+
+    (defun hs-mwb-show-one-level ()
+      "Show just the next level"
+      (interactive)
+      (hs-show-block)
+      (hs-hide-level 1))
+    :hook (prog-mode . hs-minor-mode))
+#+end_src
+*** Markers in Fringe
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210429T084502.949302
+:END:
+Put markers in the fringe which messed up lispy and is slow - I suspect not for elisp.
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_C0B47E60-5C02-4FCD-AE13-ABA380EA4866
+#+begin_src emacs-lisp
+(use-package hideshowvis
+:disabled
+    :mwb-load-path "site-lisp/hideshowvis"
+    :hook (prog-mode . hideshowvis-enable)
+    :config (hideshowvis-symbols))
+#+end_src
+*** Hydra
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210429T084502.946356
+:END:
+Use a hydra so don't need the odd keybindings
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_780EA095-1E1A-4E1C-956D-17C68D30AE73
+#+begin_src emacs-lisp
+(defhydra hydra-hs (:idle 1.0)
+  "
+Hide^^            ^Show^            ^Toggle^    ^Navigation^
+----------------------------------------------------------------
+_h_ hide all      _s_ show all      _t_oggle    _n_ext line
+_d_ hide block    _a_ show block              _p_revious line
+_l_ hide level
+
+_SPC_ cancel
+"
+  ("s" hs-show-all)
+  ("h" hs-hide-all)
+  ("a" hs-show-block)
+  ("d" hs-hide-block)
+  ("t" hs-toggle-hiding)
+  ("l" hs-hide-level)
+  ("n" forward-line)
+  ("p" (forward-line -1))
+  ("SPC" nil))
+
+(bind-key "H-h" 'hydra-hs/body)
+#+end_src
+** Outlining
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:8D4F7694-0606-4178-A927-DE9365C03B2E
+:END:
+Basically want to collapse/fold depending on comments.
+[[https://github.com/alphapapa/outshine][Outshine]] seems to be the only one still under developement, but dioes too much and has the problem that it looks for comments in colum 1 as does hideshow.
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_CCD484C1-6BB3-4AFD-8A66-0B2F7722A8B6
+#+begin_src emacs-lisp
+(use-package outshine
+  :ensure t
+  :hook (outline-minor-mode . outshine-mode)
+  :init
+  ;; (add-hook 'outline-minor-mode-hook #'outshine-hook-function)
+  :bind (:map outline-minor-mode-map
+              ("M-p" . outline-previous-visible-heading)
+              ("M-n" . outline-next-visible-heading)
+              ("<S-tab>" . outshine-cycle-buffer))
+  :preface
+  ;; (defvar outline-minor-mode-prefix "H-o")
+                                        ;  to set before loading note other package name
+  )
+#+end_src

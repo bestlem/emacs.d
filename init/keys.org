@@ -394,6 +394,11 @@ These are random and not organised by package
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:C8D7FB19-15CD-4E95-AA3F-786AE41105A7
 :END:
 Originally fit in with Visual C 6 (or earlier) keys. F1 help and can't redo in emacs. Just discovered that GNU say what F1-4 should be and seemed good for keyboard macros not my F7.
+Need keys for build but overridden per language.
+f5 has always been my main - build and go used to be build all but now do tests
+C-f5 now can be build and run app.
+A later thought is to use f5 as leader use key chords and then others for test
+
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_ABE6F5EB-5A3A-418A-9980-F45327576935
 #+begin_src emacs-lisp
 ;; (bind-key [f3] 'gdb)

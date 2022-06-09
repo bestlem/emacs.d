@@ -4,16 +4,14 @@
 #+DATE:   26 May 2021
 #+PROPERTY:header-args :cache yes :tangle yes :comments noweb
 #+STARTUP: overview
-* Indentation
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20210526T204810.693496
-:END:
 This is one of these things that you want  the editor to do.
 
 The key for return is bound so that the new line indents. Most indentation is done by the major mode but we can add guesses
 
+Indentation and tabs
+Look at smart-tabs-insinuate but aggressive indent means not needed, although if I did an Algol language again I might find that not so true.
 
-** Tabs
+* Tabs
 :PROPERTIES:
 :ID:       org_2020-11-29+00-00:3338E830-6C15-4A2B-ADF6-D31BAAB4807A
 :END:
@@ -24,7 +22,7 @@ So try smart-tabs - later
 First issue is we need to switch as many people use spaces so we need to guess indent levewls - python.el does this automatically. There is the [[https://www.emacswiki.org/emacs/GuessStyle][GuessStyle ]]but it is old and not maintained. [[https://github.com/jscheid/dtrt-indent][dtrt-indent]] seems more modern and has a maintainer but.... and comments on python worry - but is does tabs mode things and dtrt-indent can't deal well with files that mix hard tabs with spaces for indentation. Which is the case I really want but seems OK - however need to then think on what to do for (un)tabify
 dtrt-indent-mode does not set hard tabs for python - which I need so hack guess-style that does for wrongh python mode.
 
-*** Tab can complete
+** Tab can complete
 :PROPERTIES:
 :ID:       org_2020-11-30+00-00:EE7B6EBD-B2B6-4B79-9A24-65CFCB314BAE
 :END:
@@ -33,7 +31,7 @@ dtrt-indent-mode does not set hard tabs for python - which I need so hack guess-
 (setq tab-always-indent 'complete)
 #+end_src
 
-***  Basics
+**  Basics
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210526T204810.692856
 :END:
@@ -44,7 +42,7 @@ Probably the oldest code - yes tab-with should be a calculation but I did not kn
 (setq-default tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100))
 (setq indent-tabs-mode 't)
 #+end_src
-**** Making Backspace Properly Delete Tabs
+*** Making Backspace Properly Delete Tabs
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210115T193538.630184
 :END:
@@ -53,12 +51,12 @@ From https://dougie.io/emacs/indentation/#tldr-the-full-configuration
 #+begin_src emacs-lisp
 (setq backward-delete-char-untabify-method 'hungry)
 #+end_src
-** Guess
+* Guess
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210526T204810.692169
 :END:
 Don't use the defaults look at the file
-*** Guess indentation
+** Guess indentation
 :PROPERTIES:
 :ID:       org_2020-11-30+00-00:DB587002-CCA1-4A79-8F32-4E389CEE1126
 :END:
@@ -71,7 +69,7 @@ Don't use the defaults look at the file
   (setq dtrt-indent-run-after-smie t) ;; Run even if SMIE is active
   :hook (prog-mode . dtrt-indent-mode))
 #+end_src
-*** Guess Style
+** Guess Style
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210526T185848.660684
 :END:
@@ -85,11 +83,7 @@ Don't use the defaults look at the file
   )
 (global-guess-style-info-mode 1)        ; force the load
 #+end_src
-** Indent
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20210625T090940.642292
-:END:
-*** [[https://github.com/Malabarba/aggressive-indent-mode][Aggressive indent]]
+* [[https://github.com/Malabarba/aggressive-indent-mode][Aggressive indent]]
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210625T090940.640769
 :END:
@@ -134,3 +128,31 @@ If want to exclude then set (add-to-list 'aggressive-indent-excluded-modes 'html
 						;; "\\([;{}]\\|\\b\\(if\\|for\\|while\\)\\b\\)"
 						(thing-at-point 'line))))))
 #+end_src
+
+* Highlight indents
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:83292AA8-EE2B-4044-9E4B-99DDF6A034D1
+:END:
+I have wanted a good visual identification of indentation since I had the dos printer program in mid 80s. I *now* have it. https://github.com/DarthFennec/highlight-indent-guides
+
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_E4106683-C45F-422A-9DBC-6265837B502D
+  #+begin_src emacs-lisp
+(use-package highlight-indent-guides
+  :ensure t
+  :diminish highlight-indent-guides-mode
+  :init
+  (setq highlight-indent-guides-method 'fill)
+  (setq highlight-indent-guides-responsive 'stack)
+
+  ;; Indent character samples: ┃| ┆ ┊
+  (setq highlight-indent-guides-character ?\┃) ; as I use fill not used
+  ;; Leave these as switch light dark modes problematical
+  ;; (setq highlight-indent-guides-auto-odd-face-perc 50)
+  (setq highlight-indent-guides-auto-stack-odd-face-perc 50)
+  (setq highlight-indent-guides-auto-stack-even-face-perc 20)
+
+  ;; (setq highlight-indent-guides-auto-even-face-perc 30)
+  ;; (setq highlight-indent-guides-auto-character-face-perc 40)
+
+  :hook ((prog-mode yaml-mode nxml-mode json-mode ) . highlight-indent-guides-mode))
+ #+end_src

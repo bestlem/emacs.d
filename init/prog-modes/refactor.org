@@ -1,0 +1,21 @@
+#+TITLE:  Refactor
+#+AUTHOR: Mark Bestley
+#+DATE:   09 Jun 2022
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+STARTUP: show2levels
+
+This document is for a general framework but there are other mode specific ones so see in those.
+
+In practice I have not used this.
+
+
+* Refactor
+:PROPERTIES:
+:ID:       org_mark_2020-10-14T11-05-37+01-00_mini12.local:A69F6693-E4CF-4C02-B645-5D83516AFE64
+:END:
+From https://github.com/Wilfred/emacs-refactor
+#+NAME: org_mark_2020-10-14T11-05-37+01-00_mini12.local_D19502C6-D155-4612-B223-E1B3D318935B
+#+begin_src emacs-lisp
+(use-package-elpa emr
+  :commands emr-show-refactor-menu)
+#+end_src

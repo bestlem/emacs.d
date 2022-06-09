@@ -117,11 +117,11 @@ So again spaceline is best but is based off powerline - and I want just the one 
 
 So arat from not dealing with icon spacing (ie width) does all.
 
-* Packages
+* Support Packages
 :PROPERTIES:
 :ID:       org_mark_mini20o.local:20210602T212500.391684
 :END:
-
+Mainly things used for specific fields.
 ** Minions
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210625T080416.517119

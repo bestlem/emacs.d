@@ -1,0 +1,137 @@
+#+TITLE:  Simple configs no need for separate file
+#+AUTHOR: Mark Bestley
+#+DATE:   09 Jun 2022
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+STARTUP: show2levels
+
+This is for modes which do not need much configuration.
+
+* SQL
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:FA08DE52-A532-4D20-AB12-A3B358E3FC56
+:END:
+Not worth separating out.
+Note this is not the internal mode. It is from Emacs wiki as I like the interaction buffer better. Emacs' ones gave too many. Probably was my most used mode at work. As Java was Eclipse.
+Now I have no idea if it works
+#+NAME: org_mark_2020-11-05T12-42-05+00-00_mini12.local_CBD5D985-056C-4F30-B876-4311EB15D93A
+#+begin_src emacs-lisp
+(use-feature sql-mode
+  :commands sql-mode
+  :mwb-load-path "site-lisp/sql")
+
+
+;; (autoload 'sql "sql-mode"
+;;   "Start the interactive SQL interpreter in a new buffer." t)
+
+;; (autoload 'sql-mode "sql-mode"
+;;   "Mode for editing SQL files and running a SQL interpreter." t)
+
+;; (autoload 'sql-buffer "sql-mode"
+;;   "Create or move to the sql-mode \"*SQL commands*\" buffer." t)
+
+;; (setq auto-mode-alist (cons '("\\.sql$" . sql-mode) auto-mode-alist))
+#+end_src
+* Perl
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:FD5A12CE-2124-4469-A206-D1C16C2420F1
+:END:
+Possibly lost as I did have cperl at one time but from comments that might have been before heavy development
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_D396FD6D-BFB0-45D4-9DE2-B8E9CA24D4F5
+#+begin_src emacs-lisp
+   (setq auto-mode-alist
+		 (cons '("\\.pl$" . perl-mode) auto-mode-alist))
+   (setq auto-mode-alist
+		 (cons '("\\.pm$" . perl-mode) auto-mode-alist))
+
+   ;; set keys
+   ;(load-library "perldb")
+
+   (defun my-perl-mode-hook ()
+	 "My Perl settings"
+	 (define-key perl-mode-map [return] 'newline-and-indent )
+	 (define-key perl-mode-map [C-return] 'newline )
+	 (setq perl-indent-level 4)
+	 (setq perl-continued-statement-offset 4)
+	 (setq perl-continued-brace-offset -4)
+	 (setq perl-brace-offset 0)
+	 (setq perl-brace-imaginary-offset 0)
+	 (setq  perl-label-offset -2)
+	 (define-key perl-mode-map [f3] 'perldb )
+   ;  (setq perldb-command-name "/run/pd/packages/perl/5.003/bin/perl")
+   ;  (setq perldb-command-name "/sbcimp/run/pd/perl/prod/bin/perl")
+	 )
+   (add-hook 'perl-mode-hook 'my-perl-mode-hook)
+
+   ;; perl debug
+   ;; (defun my-perldb-mode-hook ()
+   ;;   (setq perldb-command-name "/run/pd/packages/perl/5.003/bin/perl")
+   ;; )
+   ;; (add-hook 'perldb-mode-hook 'my-perldb-mode-hook)
+#+end_src
+* Old unused
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220609T102124.595902
+:HEADER-ARGS:  :tangle no
+:END:
+This is all turned off just here if I want to go back.
+
+** REPL
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:558A449F-72D3-4F5C-BCE0-02C011944F6B
+:END:
+Yes you think of lisp, smalltalk but also Swift python, ML, Haskell. I never got on with it, I always wanted the whole program and seeing the ML course and Racket, it is not a major thing as you have to often start again which helps for repeatability.
+
+I want a key to send current buffer, especial in OrgSrc mode to REPL.
+[[https://github.com/kaz-yos/eval-in-repl][Eval in Repl]] seems a base but it in effect uses the keymap as to how to choose what to run. Ideally I would want f5 to do this in orgsrc mode, but a full send in normal mode.
+
+As it does the wkr by giving different functions to attach to a key not much use when package provide the correct dispatch
+
+Much more useful if you globally bound the key and a functions worked out what to do.
+
+As racket is broken and sml had oddities with ; and emacs really does not need it as you have **scratch* and immediate eval then .....
+
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_A713576B-1958-4B3A-B268-DC65DC07499C
+#+BEGIN_SRC emacs-lisp
+(use-package eval-in-repl
+  :disabled
+  :ensure t
+  :config
+  (setq mwb-repl-region-key "<f6>"))
+#+END_SRC
+*** emacs - ielm
+:PROPERTIES:
+:ID:       org_mark_2020-02-10T11-53-11+00-00_mini12:DF45202A-884C-4B11-866F-526417609CF2
+:END:
+This is simple and works. Extended by me to send whole buffer and not switch on key but mode.
+Have working base function
+BUT the problem is that if does selection of method by the keymap in each mode so each mode has to be bound. Better if it called one function that decided via a alist what to do. ALso need to set up send buffer, or defun or line or sexp. Might also have an issue it is too low level - e.g.
+
+Now turned off as not used
+#+NAME: org_mark_2020-02-10T11-53-11+00-00_mini12_F4F528CB-9078-4C05-B2A0-23ADCA372044
+#+BEGIN_SRC emacs-lisp
+(use-package  eval-in-repl-ielm
+  :config
+  ;; Evaluate expression in the current buffer.
+  (setq eir-ielm-eval-in-current-buffer t)
+  :bind (:map emacs-lisp-mode-map ( "<f6>". eir-eval-in-ielm)
+              :map Info-mode-map ( "<f6>". eir-eval-in-ielm)
+              :map lisp-interaction-mode-map ( "<f6>". eir-eval-in-ielm)))
+#+END_SRC
+However I can't use that for a send to buffer as the map from mode to function is via the keymap
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_D26ABD27-104F-449D-BF75-31B81F383CC5
+#+begin_src emacs-lisp :tangle no
+(setq eir--assoc '())
+
+(defun eir-mwb-send-to-repl ()
+  "Send the repl to the buffer looking up the major mode"
+  (interactive)
+  (funcall (cdr (assoc major-mode eir--assoc))))
+
+(defun eir-mwb-send-to-repl-define (mode function-name)
+  "send the last sexpr to the repl using the given function"
+  ;; (interactive "P")
+  (add-to-list 'eir--assoc (cons mode function-name)))
+
+(eir-mwb-send-to-repl-define 'emacs-lisp-mode 'eir-eval-in-ielm)
+(eir-mwb-send-to-repl-define 'inferior-emacs-lisp-mode 'eir-eval-in-ielm)
+#+end_src

@@ -31,3 +31,19 @@ Normal works for elisp and org mode but racket seems to need a rescan. So let's 
 #+begin_src emacs-lisp
 (setq imenu-auto-rescan t)
 #+end_src
+
+* Which function
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20211031T140445.090521
+:END:
+Shows the current function being edited.
+Setup for all prog modes
+#+NAME: org_mark_mini20.local_20210828T133944.980854
+#+begin_src emacs-lisp
+(use-feature which-func
+  :hook (prog-mode . which-function-mode))
+#+end_src
+** TODO Actually it is a global mode and works if imenu does
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220609T100315.987123
+:END:

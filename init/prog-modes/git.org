@@ -57,12 +57,31 @@ This is [[https://github.com/magit/with-editor][with-editor]] Magit calls it - o
 :END:
 jp-git from Jerry Peng and then rest from centuar
 To load the hydra needs to be available
-** Initial config
+*** Order of execution
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220609T080035.641984
+:END:
+Need to define some things befor the main one so make easier to read
+#+NAME: org_mark_mini20.local_20220609T080035.616929
+#+begin_src emacs-lisp
+<<magit-mwbstatus>>
+<<magit-use-package>>
+#+end_src
+*** TODO Add mouse clicks to expand on logs etc
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220608T201215.752652
+:END:
+*** TODO Show TODOs in magit
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220608T223234.262692
+:END:
+https://github.com/alphapapa/magit-todos
+** use-package
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220604T221255.578362
 :END:
 #+NAME: org_mark_mini20.local_20220604T121907.520562
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :noweb-ref magit-use-package :tangle no
 (use-package-elpa magit
   ;; :defer 2								; rather than a lot of commands
   :custom
@@ -149,12 +168,12 @@ Show choices in posframe
 :END:
 Calling magit status does a check for unsaved buffers. So lets save them first.
 #+NAME: org_mark_mini20.local_20210822T125828.204977
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :noweb-ref magit-mwbstatus :tangle no
 (defun mwb-magit-status ()
   "Save opened buffers in current project befor calling magit status."
   (interactive)
   (mwb-projectile-save-project-buffers)
-  (magit-status))
+  (magit-status-setup-buffer))
 #+end_src
 * Git timemachine
 :PROPERTIES:
@@ -346,42 +365,38 @@ Main use if for merge conflicts
   :diminish
   :commands smerge-mode
   :pretty-hydra
-  ((:title (mwb-icon-text "diff" "Smerge"  )
+  ((:title (mwb-icon-text "diff" "Smerge")
 	:color pink :quit-key "q")
-   ("Move"
-    (("n" smerge-next "next")
-     ("p" smerge-prev "previous"))
-    "Keep"
-    (("b" smerge-keep-base "base")
-     ("u" smerge-keep-upper "upper")
-     ("l" smerge-keep-lower "lower")
-     ("a" smerge-keep-all "all")
-     ("RET" smerge-keep-current "current")
-     ("C-m" smerge-keep-current "current"))
-    "Diff"
-    (("<" smerge-diff-base-upper "upper/base")
-     ("=" smerge-diff-upper-lower "upper/lower")
-     (">" smerge-diff-base-lower "upper/lower")
-     ("R" smerge-refine "refine")
-     ("E" smerge-ediff "ediff"))
-    "Other"
-    (("C" smerge-combine-with-next "combine")
-     ("r" smerge-resolve "resolve")
-     ("k" smerge-kill-current "kill")
-     ("ZZ" (lambda ()
-             (interactive)
-             (save-buffer)
-             (bury-buffer))
-      "Save and bury buffer" :exit t))))
+   ("Move" (("n" smerge-next "next")
+			("p" smerge-prev "previous"))
+	"Keep" (("b" smerge-keep-base "base")
+			("u" smerge-keep-upper "upper")
+			("l" smerge-keep-lower "lower")
+			("a" smerge-keep-all "all")
+			("RET" smerge-keep-current "current")
+			("C-m" smerge-keep-current "current"))
+	"Diff" (("<" smerge-diff-base-upper "upper/base")
+			("=" smerge-diff-upper-lower "upper/lower")
+			(">" smerge-diff-base-lower "upper/lower")
+			("R" smerge-refine "refine")
+			("E" smerge-ediff "ediff"))
+	"Other" (("C" smerge-combine-with-next "combine")
+			 ("r" smerge-resolve "resolve")
+			 ("k" smerge-kill-current "kill")
+			 ("ZZ" (lambda ()
+					 (interactive)
+					 (save-buffer)
+					 (bury-buffer))
+			  "Save and bury buffer" :exit t))))
   :bind (:map smerge-mode-map
-		 ("C-c m" . smerge-mode-hydra/body)
-		 ("<f5>" . smerge-mode-hydra/body))
+		 ("C-c m" . hydra-smerge-mode/body)
+		 ("<f5>" . hydra-smerge-mode/body))
   :hook ((find-file . (lambda ()
-                        (save-excursion
-                          (goto-char (point-min))
-                          (when (re-search-forward "^<<<<<<< " nil t)
-                            (smerge-mode 1)))))
-         (magit-diff-visit-file . (lambda ()
-                                    (when smerge-mode
-                                      (hydra-smerge/body))))))
+						(save-excursion
+						  (goto-char (point-min))
+						  (when (re-search-forward "^<<<<<<< " nil t)
+							(smerge-mode 1)))))
+		 (magit-diff-visit-file . (lambda ()
+									(when smerge-mode
+									  (hydra-smerge-mode/body))))))
 #+end_src

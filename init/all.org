@@ -47,7 +47,7 @@ Note should check on defconst
 :END:
 
 Various things to make management of init files easier
-Many taken from centuar
+Many taken from centaur
 
 ** recompile site-lisp
 :PROPERTIES:

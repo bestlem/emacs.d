@@ -92,12 +92,12 @@ One in emacs and has things built on it but not enabled
   ;; (add-hook 'python-mode-hook 'color-identifiers-mode)
   )
 #+end_src
-** TODO Org mode
+* TODO Org mode
 :PROPERTIES:
 :ID:       org_mark_2020-11-11T11-24-14+00-00_mini12.local:9705EACE-A73F-41E3-A5AB-8FD2BAB849B5
 :END:
 Need to set up execute (here or at start)
-** Xonsh
+* Xonsh
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:62195329-D8AA-4CC1-B7F4-4570BBDCF3A8
 :END:
@@ -107,4 +107,49 @@ There is now a xonsh mode
 (use-package xonsh-mode
   :mwb-load-path "fork/xonsh-mode"
   :mode "\\.xsh\\'")
+  #+end_src
+
+
+
+* Conda
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210127T110448.829285
+:END:
+Might be better in elpy etc as for the pythonic issue.
+#+NAME: org_mark_mini20.local_20210127T110448.825291
+ #+begin_src emacs-lisp
+(use-package conda
+  :mwb-load-path "fork/conda.el"
+  :demand
+  :after (python)
+  :commands conda-env-activate
+  :init
+  (setq conda-anaconda-home (expand-file-name "~/miniconda3/"))
+
+  :config
+  ;; If you want interactive shell support, include:
+
+  ;; MWB well no as it messes up xonsh
+  ;; (conda-env-initialize-interactive-shells)
+
+  ;; If you want eshell support, include:
+                                        ;(conda-env-initialize-eshell)
+
+  ;; In effect no as dirs are not a 1-1 match for envs
+  ;; If you want auto-activation, include:
+  ;; (conda-env-autoactivate-mode t)
+
+  ;; Activate the project/virtual env you want to use.
+  ;; Via M-x conda-env-activate RET analyticd-pysystemtrade
+  ;; or
+  ;; (conda-env-activate "analyticd-pysystemtrade")
+  ;; (conda-env-activate "base")
+
+  ;; we need a setup - e.g. code-snippets
+  (conda-env-activate (if (equal (file-name-nondirectory explicit-shell-file-name)
+                                 "xonsh")
+                          "xonsh"
+                        "base"))
+  (setq-default mode-line-format
+                (cons mode-line-format '(:exec conda-env-current-name))))
   #+end_src

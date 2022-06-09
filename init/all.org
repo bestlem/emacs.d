@@ -120,25 +120,12 @@ General emacs stuff - not common-setup used to have this but separate file might
 These tend to be settings of minor modes
 #+NAME: org_mark_mini20.local_20220425T102603.318816
 #+begin_src emacs-lisp
-(mwb-init-load  "init/behaviour"); odds mainly variables
 (mwb-init-load-directory "init/behaviours")
-(mwb-init-load "init/completion")
-(mwb-init-load  "init/ibuffer")  ;; could go to prog-modes
 #+end_src
 * Major modes
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:0E3CCAD4-14DB-4481-8235-F04F840DF4AD
 :END:
-** File  management (and icons)
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:21BA326F-D699-439A-BE4F-0F877907CCCE
-:END:
-Interfacing with the operating system
-These provide some tools for all the other modes so can't be in the modes sub directory.
-  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_A59FB0E5-7830-4DE9-886E-B3066C9EEE90
-  #+begin_src emacs-lisp
-  (mwb-init-load "init/file-management")
-  #+end_src
 ** Programming modes
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:3C0D8B60-3C14-4F89-84AB-6D54D08C2C36
@@ -159,14 +146,6 @@ Includes structured data and now anything that does not have dependency order
   (mwb-init-load "init/keys")
   #+end_src
 
-* Appearance
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:4E2542DC-19A8-480A-A0B2-EF1C192A77FB
-:END:
-   #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_FDEBBB87-4E2F-4E81-87B0-349A09B8D866
-   #+begin_src emacs-lisp
-   (mwb-init-load  "init/appearance")
-   #+end_src
 * Startup data
 :PROPERTIES:
 :ID:       org_mark_2020-10-22T09-50-00+01-00_mini12.local:CAF18BDF-1B4E-49DD-B4CE-F0A18829FDDC

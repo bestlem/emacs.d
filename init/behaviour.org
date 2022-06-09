@@ -9,6 +9,7 @@
 ** [[https://github.com/emacsmirror/gcmh][GCMH]]
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210830T145836.679819
+:HEADER-ARGS: :tangle no
 :END:
 The Garbage Collector Magic Hack
 This seems to be a more consistent way so can replace other bits

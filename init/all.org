@@ -30,6 +30,49 @@ Memory is now in gcmh
   (message "Emacs init-time %s" (emacs-init-time)))
 (add-hook 'after-init-hook #'init-mwb-hook-after-init)
 #+end_src
+
+* memory
+:PROPERTIES:
+:ID:       org_mark_2020-03-02T07-49-31+00-00_mini12.local:F19DE0CC-B946-4885-808E-36CB21A4AF3D
+:END:
+Currently using emacs defaults
+** [[https://github.com/emacsmirror/gcmh][GCMH]]
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210830T145836.679819
+:HEADER-ARGS: :tangle no
+:END:
+The Garbage Collector Magic Hack
+This seems to be a more consistent way so can replace other bits
+The only bit to stay is after-init
+Note that gcmh cannot explicitly reduce the memory it does this when it gcs, which might be wrong - it assumes you do not gc during a process.
+
+Note I now get a pizza wheel using the defaults ie might be better to have more often smaller gc
+#+NAME: org_2020-12-08+00-00_C06FD610-2FD2-4E60-94B2-33A789850588
+#+begin_src emacs-lisp
+(use-package-elpa  gcmh
+  :diminish
+  :defer 20
+  :config
+  ;; (setq gcmh-high-cons-threshold (* 128 1024 1024))
+                                        ; reduces as I got a 10G
+                                        ; monster
+  ;; (setq gcmh-low-cons-threshold (* 1024 1024))
+                                        ; originally 800000 - increas
+                                        ; because of gnus
+  (setq gcmh-verbose 't)
+  (setq gcmh-idle-delay 15)
+  (gcmh-mode 1))
+#+end_src
+
+** Instrument emacs
+:PROPERTIES:
+:ID:       org_2020-12-08+00-00:C8118A2B-2B63-4B30-BDA2-3A412B508657
+:END:
+Make emacs message when it gcs.
+#+NAME: org_2020-12-08+00-00_85933DF6-3CB1-4DBC-8EFD-F4E56D10934E
+#+begin_src emacs-lisp
+;; (setq garbage-collection-messages 't)
+#+end_src
 * Setting variables with a check on type
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:86E6A7B5-5C85-4429-AE49-FA5AE7AEF73D
@@ -117,6 +160,28 @@ Try macport now as on arm
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:EB57B856-C1F8-4E5E-82AF-2F8E154DBCA4
 :END:
 General emacs stuff - not common-setup used to have this but separate file might not make sense.
+** Encoding
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220610T203957.983005
+:END:
+Make it all UTF-8.  From http://ergoemacs.org/emacs/emacs_make_modern.html but some are in aquamacs  and https://github.com/anschwa/emacs.d
+#+NAME: org_mark_mini20.local_20220610T203957.965228
+#+begin_src emacs-lisp
+(setq locale-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+(set-language-environment "UTF-8")
+(set-default-coding-systems 'utf-8)
+
+#+end_src
+
+** Minor mode related
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220610T203957.981736
+:END:
+These can be grouped
 These tend to be settings of minor modes
 #+NAME: org_mark_mini20.local_20220425T102603.318816
 #+begin_src emacs-lisp

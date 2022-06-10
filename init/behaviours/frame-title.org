@@ -1,6 +1,5 @@
 #+TITLE:  Frame Title
 #+AUTHOR: Mark Bestley
-#+EMAIL:  git@bestley.co.uk
 #+DATE:   06 Jun 2021
 #+PROPERTY:header-args :cache yes :tangle yes :comments noweb
 #+STARTUP: overview
@@ -11,7 +10,10 @@
 :END:
 
 This is independent of mode and header line.
+
 It does use the same format except for character counts etc and seems not to like fonts. It does have a default icon at least in the mac port version.
+
+It is not part of appearance so don't put in general frame setup
 
 ** Static information
 :PROPERTIES:

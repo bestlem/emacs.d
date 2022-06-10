@@ -126,6 +126,19 @@ _k_: kill        _s_: split                   _{_: wrap with { }
 
 (bind-key "H-["  'ptrv/smartparens/body)
 #+end_src
+** Comments
+:PROPERTIES:
+:ID:       org_mark_2020-10-11T00-40-32+01-00_mini12.local:C282C8DC-D435-4A82-9997-64BE982AB24E
+:END:
+Aquamacs does its own binding to comment and uncomment region.
+#+NAME: org_mark_mini20.local_20220610T161050.783393
+#+begin_src emacs-lisp
+(use-package comment-dwim-2
+  :unless *aquamacs*
+  :ensure t
+  :commands comment-dwim-2 ;; need as mac binding
+  )
+#+end_src
 * TODO Folding
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:1928599E-6243-4314-835D-B5D932F7E372

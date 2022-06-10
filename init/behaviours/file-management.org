@@ -275,7 +275,44 @@ Make the message "/FILENAME has auto save data/" unmissable:
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:86DB2C97-15D2-4ADA-8AFA-13397998FDC8
 :END:
-
+** Find file
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220610T194258.282253
+:END:
+From very old init.
+*** File is in another buffer
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220610T194258.280097
+:END:
+if any existing buffer is visiting the file you want
+under another name, you get the existing buffer instead of a new buffer.
+#+NAME: org_mark_mini20.local_20220610T194258.251607
+#+begin_src emacs-lisp
+(setq find-file-existing-other-name t)
+#+end_src
+*** Use the full name
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220610T194258.278050
+:END:
+Work out correct name using links.
+This could explain the issue with packlage-quickstart/
+#+NAME: org_mark_mini20.local_20220610T194258.258934
+#+begin_src emacs-lisp
+(setq find-file-visit-truename t)	; visit a file under its true name
+#+end_src
+*** Dos to Unix line endings
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220610T194258.274436
+:END:
+#+NAME: org_mark_mini20.local_20220610T194258.259764
+#+begin_src emacs-lisp
+(defun dos-to-unix ()
+  "Replace \r\n with \n"
+  (interactive)
+  (save-excursion
+	(goto-char (point-min))
+	(replace-string "\r\n" "\n")))
+#+end_src
 ** Recent Files
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210830T180007.828713

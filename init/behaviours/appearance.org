@@ -251,6 +251,19 @@ Move customization out
 #+end_src
 
 
+* Frames
+:PROPERTIES:
+:ID:       org_2020-12-03+00-00:1B23DC2B-5C55-4813-92A9-04D1291698B2
+:END:
+Make a new popup frame
+#+NAME: org_2020-12-03+00-00_76F8853D-BB00-4F70-9F82-0AC74BA7B9A5
+#+begin_src emacs-lisp
+(defun mwb-new-frame (buffer_name &optional go-to-end)
+  (interactive)
+  (select-frame (make-frame))
+  (switch-to-buffer buffer_name)
+  (unless go-to-end (goto-char (point-max))))
+#+end_src
 * Colour theme
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:CD3D232B-6BDA-4CBC-BADF-BCEA9B8EBEC4
@@ -426,3 +439,28 @@ vivendi is dark
 :ID:       org_mark_mini20.local:20220604T093552.919193
 :END:
 See https://github.com/alphapapa/prism.el/issues/8 to add
+
+** Sounds
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210628T102012.945985
+:END:
+Stop emacs beeping so much
+From [[ https://www.reddit.com/r/emacs/comments/1a6z4n/can_i_make_emacs_beep_less/c8v5][reddit]]
+Reduce the number of times the bell rings. Turn off the bell for the listed functions.
+#+NAME: org_mark_mini20.local_20210628T102012.908898
+#+begin_src emacs-lisp
+(setq ring-bell-function
+      (lambda ()
+        (unless (memq this-command
+                      '(isearch-abort
+                        abort-recursive-edit
+                        exit-minibuffer
+                        keyboard-quit
+                        previous-line
+                        next-line
+                        scroll-down
+                        scroll-up
+                        cua-scroll-down
+                        cua-scroll-up))
+          (ding))))
+#+end_src

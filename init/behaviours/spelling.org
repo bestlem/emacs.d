@@ -4,7 +4,7 @@
 This is mainly taken from [[https://github.com/howardabrams/dot-files][Howard Abrams]]
 
 
-* Spell Checking
+* Flyspell
 :PROPERTIES:
 :ID:       org_mark_2020-09-29T11-53-58+01-00_mini12.local:A30A8887-7787-4301-BB7D-6ECB558906B7
 :END:
@@ -13,6 +13,8 @@ Spell checking with [[http://www.emacswiki.org/emacs/FlySpell][FlySpell]], which
 However enchant has an interface to the Apple dictionary
 
 Start for all text modes (but not for log files):
+
+Also note setting  `flyspell-maybe-correct-transposition` to the hook corrects simple transpositions.
 #+NAME: org_mark_mini20.local_20210830T145405.149131
 #+begin_src emacs-lisp
 (use-feature flyspell
@@ -40,3 +42,33 @@ Start for all text modes (but not for log files):
 ASpell automatically configures a personal dictionary  at =~/.aspell.en.pws=, so no need to configure that.
 
 A possibly nifty feature of aspell is the ability to spellcheck individual words in CamelCase that is used extensively in some code (for details, see [[http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html][this article]]). But I don't do camel case  😉
+* Double Letters
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:8023761D-AF45-4069-8EBB-AF88FA9F8CF1
+:END:
+Let's stop it. from [[https://emacs.stackexchange.com/a/13975/9874][Emacs SE]]
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_FD406B40-617C-43FD-872C-D71407BFE82C
+#+begin_src emacs-lisp
+(defun dcaps-to-scaps ()
+  "Convert word in DOuble CApitals to Single Capitals."
+  (interactive)
+  (and (= ?w (char-syntax (char-before)))
+	   (save-excursion
+		 (and (if (called-interactively-p)
+				  (skip-syntax-backward "w")
+				(= -3 (skip-syntax-backward "w")))
+			  (let (case-fold-search nil)
+				(looking-at "\\b[[:upper:]]\\{2\\}[[:lower:]]"))
+			  (capitalize-word 1)))))
+
+(define-minor-mode dubcaps-mode
+  "Toggle `dubcaps-mode'.  Converts words in DOuble CApitals to
+Single Capitals as you type. "
+  :init-value nil
+  :lighter (" DC")
+  (if dubcaps-mode
+	  (add-hook 'post-self-insert-hook #'dcaps-to-scaps nil 'local)
+	(remove-hook 'post-self-insert-hook #'dcaps-to-scaps 'local)))
+
+(add-hook 'text-mode-hook #'dubcaps-mode)
+#+end_src

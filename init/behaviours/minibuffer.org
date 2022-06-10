@@ -131,10 +131,12 @@ Well I don't know what the frame parameters are left and width can be proportion
 :END:
 #+NAME: org_2020-12-06+00-00_55BEC998-6943-4AEF-8ED3-4ED6611B0625
 #+begin_src emacs-lisp
-(setq minibuffer-prompt-properties
+(use-feature emacs
+  :custom
+  (minibuffer-prompt-properties
    '(read-only t
-     face minibuffer-prompt
-	 cursor-intangible t))
+	 face minibuffer-prompt
+	 cursor-intangible t)))
 #+end_src
 ** Kill it
 :PROPERTIES:
@@ -177,7 +179,48 @@ This has been a major annoyance since I began using emacs.
 
 (bind-key "H-q" 'keyboard-quit-context+)
 #+end_src
-* Newer
+** Sessions
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220607T170807.709547
+:END:
+Save registers et al but not the whole desktop.
+This is saving minibuffer information but can do more as told.
+#+NAME: org_mark_mini20.local_20220607T170807.684168
+#+begin_src emacs-lisp
+(use-feature savehist
+  :commands savehist-minibuffer-hook savehist-autosave
+  :demand
+  :unless *aquamacs*
+  :config
+  (setq savehist-additional-variables
+		'(kill-ring
+		  search-ring
+		  regexp-search-ring
+		  last-kbd-macro
+		  kmacro-ring
+		  shell-command-history
+          bookmark-alist
+		  Info-history-list
+		  register-alist))
+  (setq savehist-file (locate-user-emacs-file "savehist.el"))
+  (savehist-mode 1))
+#+end_src
+* Yes or no
+:PROPERTIES:
+:ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:3F1F190C-6747-4CF2-939E-14386756F579
+:END:
+  Does anyone type =yes= anymore?
+   #+NAME: org_mark_2020-10-01T11-27-32+01-00_mini12.local_B854EC7F-0938-4897-9815-3D77C26F2E4B
+   #+BEGIN_SRC elisp
+(unless *aquamacs*
+  (fset 'yes-or-no-p 'y-or-n-p))
+   #+END_SRC
+*** Some dialog
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220608T221604.421703
+:END:
+Either as use-dialog or perhaps better a popup
+* The collection of packages to do minibuffer completion
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210731T152331.776146
 :END:
@@ -372,7 +415,11 @@ Take action in selection buffer
 The display part as vertical list
 #+NAME: org_mark_mini20.local_20210801T174734.748739
 #+begin_src emacs-lisp
-(use-package-elpa selectrum :defer 2 :init (selectrum-mode +1))
+(use-package-elpa selectrum
+  :defer 2
+  :init (selectrum-mode +1)
+  :bind (:map selectrum-minibuffer-map
+		 ("C-<enter>" . exit-minibuffer)))
 #+end_src
 *** Prescient
 :PROPERTIES:

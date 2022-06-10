@@ -13,8 +13,15 @@ This covers what emacs looks like and how windows/frames/menus behave
 :ID:       org_2020-12-06+00-00:BAB32FAA-EF85-4768-8261-261141C1BCFF
 :END:
 Set the actual fonts to be used
+
 Altering the size of variable-font seems to change the size of fixed-font - How?
-Note this shows up in org-mode compare code to text - so have to make fixed-font a proportion of variable-font even though no direct comparison
+Note this shows up in org-mode compare code to text - so have to make fixed-font a proportion of variable-font even though no direct comparison.Do this for org-block-explicitly.
+Also does for other fixed-font faces in org mode. e.g. org-draw org-block-begin-line
+
+In org.el we have (defface org-block-begin-line '((t (:inherit org-meta-line))) but in emacs org-block-begin-line inherits from modus-themes-fixed-pitch
+In org- mode face-remapping-alist is  '((default variable-pitch default)) so everything inherits from this and the base size changes.
+So set the heights of the base fonts to explicit fonts
+
 #+NAME: org_2020-12-06+00-00_87B9331B-36CE-4ED5-B82C-E637E0A4BE9A
 #+begin_src emacs-lisp
 (require 'cl-lib)
@@ -23,7 +30,6 @@ Note this shows up in org-mode compare code to text - so have to make fixed-font
 (defun font-candidate (&rest fonts)
   "Return existing font which first match."
   (cl-find-if (lambda (f) (find-font (font-spec :name f))) fonts))
-
 
 (let ((font-found (font-candidate
                    "Jetbrains Mono"
@@ -36,14 +42,14 @@ Note this shows up in org-mode compare code to text - so have to make fixed-font
   (set-face-attribute 'default nil
                       :height 130
                       :family font-found)
-  ;; Monospaced typeface - not default
-  (set-face-attribute 'fixed-pitch nil :family font-found :height 0.8))
+  ;; Monospaced typeface - not default - don't need this but make it explicit.
+  (set-face-attribute 'fixed-pitch nil :family font-found :height 130))
 
 (let ((font-found (font-candidate
                    "Georgia"
                    "Times New Roman")))
   ;; Proportionately spaced typeface
-  (set-face-attribute 'variable-pitch nil :family font-found  :height 1.2)
+  (set-face-attribute 'variable-pitch nil :family font-found  :height 160)
   )
 #+end_src
 ** Buffer face
@@ -243,6 +249,7 @@ Move customization out
 (use-feature emacs
   :custom (fringe-mode '(nil . 0)))
 #+end_src
+
 
 * Colour theme
 :PROPERTIES:

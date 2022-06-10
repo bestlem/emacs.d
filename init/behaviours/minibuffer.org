@@ -124,6 +124,59 @@ Well I don't know what the frame parameters are left and width can be proportion
 		  #'mwb-mini-frame-completions-parameters)
 	))
 #+end_src
+
+** Faces
+:PROPERTIES:
+:ID:       org_2020-12-06+00-00:1F4101B0-7C06-4F8F-857A-A8B25A034CF2
+:END:
+#+NAME: org_2020-12-06+00-00_55BEC998-6943-4AEF-8ED3-4ED6611B0625
+#+begin_src emacs-lisp
+(setq minibuffer-prompt-properties
+   '(read-only t
+     face minibuffer-prompt
+	 cursor-intangible t))
+#+end_src
+** Kill it
+:PROPERTIES:
+:ID:       org_2020-12-06+00-00:DDCA46D9-A278-4657-A77D-2A95B5BCF660
+:END:
+Kill it from anywhewre from blog with-Emacs but take version from [[https://www.reddit.com/r/emacs/comments/ffbser/withemacs_quit_current_context/][Reddit]]
+This has been a major annoyance since I began using emacs.
+#+NAME: org_mark_2020-03-06T13-08-35+00-00_mini12.local_983EF586-334E-442B-B675-D73D0165A612
+#+begin_src emacs-lisp
+(defun keyboard-quit-context+ ()
+  "Quit current context.
+
+    This function is a combination of `keyboard-quit' and
+    `keyboard-escape-quit' with some parts omitted and some custom
+    behavior added."
+  (interactive)
+  (cond ((region-active-p)
+         ;; Avoid adding the region to the window selection.
+         (setq saved-region-selection nil)
+         (let (select-active-regions)
+           (deactivate-mark)))
+        ((eq last-command 'mode-exited) nil)
+        (current-prefix-arg
+         nil)
+        (defining-kbd-macro
+          (message
+           (substitute-command-keys
+            "Quit is ignored during macro defintion, use \\[kmacro-end-macro] if you want to stop macro definition"))
+          (cancel-kbd-macro-events))
+        ((active-minibuffer-window)
+         (when (get-buffer-window "*Completions*")
+           ;; hide completions first so point stays in active window when
+           ;; outside the minibuffer
+           (minibuffer-hide-completions))
+         (abort-recursive-edit))
+        (t
+		 ;; if we got this far just use the default so we don't miss
+         ;; any upstream changes
+         (keyboard-quit))))
+
+(bind-key "H-q" 'keyboard-quit-context+)
+#+end_src
 * Newer
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210731T152331.776146

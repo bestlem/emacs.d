@@ -6,6 +6,6 @@
 #+AUTHOR: `(user-full-name)`
 #+DATE:   `(format-time-string "%d %b %Y")`
 #+PROPERTY:header-args :cache yes :tangle yes :comments noweb
-#+STARTUP: overview
+#+STARTUP: show2levels
 
 $0

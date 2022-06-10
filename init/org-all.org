@@ -252,9 +252,10 @@ I have removed this from the noweb weave as it makes use of other files a pain b
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:EE29BA62-13AD-4C22-9ABB-AF723DCA7950
 :END:
 Setting up =visual-line-mode= and making all my paragraphs one single line, so that the lines wrap around nicely in the window according to their proportional-font size, instead of at a fixed character count, which does not work so nicely when characters have varying widths. I set up a hook that automatically enables =visual-line-mode= and =variable-pitch-mode= when entering org-mode. From [[https://raw.githubusercontent.com/zzamboni/dot-emacs/master/init.org][zzamboni]]
+However this code toggles and as I have already use set-word-wrap to do this for text-mode.
 #+NAME: org-mode-hooks-wrapping
 #+begin_src emacs-lisp :tangle no
-    (org-mode . visual-line-mode)
+    ;; (org-mode . visual-line-mode)
     (org-mode . variable-pitch-mode)
 #+end_src
 ** Folding visibility

@@ -41,12 +41,15 @@
 (defvar jp-window--title)
 (setq jp-window--title (with-faicon "windows" "Window Management" 1 -0.05))
 
-(pretty-hydra-define hydra-jp-window (:foreign-keys warn :title jp-window--title :quit-key "q")
+(pretty-hydra-define hydra-jp-window (:foreign-keys warn
+									  :exit t
+									  :title jp-window--title
+									  :quit-key "q")
   ("Actions"
    (("TAB" other-window "switch")
     ("x" ace-delete-window "delete")
     ("m" ace-delete-other-windows "maximize")
-    ("s" ace-swap-window "swap")
+    ("s" ace-swap-window "swap" )
     ("a" ace-select-window "select"))
 
    "Resize"

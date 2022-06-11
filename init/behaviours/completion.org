@@ -1,5 +1,6 @@
 #+TITLE Emacs configuration How emacs completes text
-#+PROPERTY:header-args :cache yes :tangle yes :comments link
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+STARTUP: show2levels
 
 This is completion for text in buffer
 * Semantic based
@@ -14,6 +15,11 @@ Add some from jweigley
 ** Company
 :PROPERTIES:
 :ID:       org_mark_2020-10-05T18-36-08+01-00_mini12.local:B1FF068E-6489-4EB1-8990-DA1D3E6262D2
+:HEADER-ARGS: :tangle no
+:END:
+*** Main setup
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220611T100354.884232
 :END:
 Much is taken for jojojames - the first attempted failed for racket as it did not combine the results; So that was coded differently.
 Later saw question on stacke exchnage and got a response that lead back to
@@ -97,7 +103,7 @@ Later saw question on stacke exchnage and got a response that lead back to
 	:config (company-prescient-mode 1))
   )
 #+end_src
-** Help
+*** Help
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210601T123210.332921
 :END:
@@ -112,6 +118,193 @@ Add company help
   (setq company-quickhelp-delay 1)
   )
 #+end_src
+
+*** Company math
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20210102T223321.240481
+:END:
+For Unicode
+#+NAME: org_mark_mini12.local_20210102T223321.222299
+#+begin_src emacs-lisp
+(use-package-elpa company-math
+  :demand
+  ;; :init
+  ;; (setq company-math-symbol-prefix "//")
+  :after (company))
+#+end_src
+
+** [[https://github.com/minad/corfu][Corfu]]
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220611T100735.604708
+:END:
+This works with plain emacs setup
+Much setup from https://github.com/jeremyf/dotemacs/blob/main/emacs.d/configuration.org
+https://www.lucacambiaghi.com/vanilla-emacs/readme.html#h:240FC4A5-CDED-4456-9EBA-9EDF05CE62B9
+[[https://kristofferbalintona.me/posts/corfu-kind-icon-and-corfu-doc][Corfu, Kind-icon, and Corfu-doc | Kristoffer Balintona]]
+
+*** Use package
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220611T102404.652648
+:END:
+#+NAME: org_mark_mini20.local_20220611T100735.587570
+#+begin_src emacs-lisp
+(use-package-elpa corfu
+  :demand
+  :custom
+  ;; (corfu-auto t)
+  ;; Enable auto completion
+  ;; (corfu-preselect-first nil)
+  ;; Disable candidate preselection
+
+  ;; (corfu-separator ?_) ;; Set to orderless separator, if not using space
+
+  ;; Works with `indent-for-tab-command'. Make sure tab doesn't indent when you
+  ;; want to perform completion
+  (tab-always-indent 'complete)
+  (completion-cycle-threshold nil)      ; Always show candidates in menu
+
+  (corfu-auto t)
+  (corfu-auto-prefix 2)
+  (corfu-auto-delay 0.25)
+
+  ;; (corfu-min-width 80)
+  ;; (corfu-max-width corfu-min-width)     ; Always have the same width
+  (corfu-count 14)
+  (corfu-scroll-margin 4)
+  (corfu-cycle nil)
+
+  ;; (corfu-echo-documentation nil)        ; Already use corfu-doc
+  (corfu-separator ?\s)                 ; Necessary for use with orderless
+  (corfu-quit-no-match 'separator)
+
+  (corfu-preview-current 'insert)       ; Preview current candidate?
+  (corfu-preselect-first t)             ; Preselect first candidate?
+
+
+  ;; Another key binding can be used, such as S-SPC.
+  ;; (:map corfu-map ("M-SPC" . corfu-insert-separator))
+
+  ;; Optionally use TAB for cycling, default is `corfu-complete'.
+  :bind (:map corfu-map
+		 ("<escape>". corfu-quit)
+		 ("<return>" . corfu-insert)
+		 ("M-d" . corfu-show-documentation)
+		 ("M-l" . 'corfu-show-location)
+		 ("C-<space>" . corfu-insert-separator)
+		 ("C-SPC" . corfu-insert-separator)
+	;;	 ("SPC" . corfu-insert-separator)
+		 ("TAB" . corfu-next)
+		 ([tab] . corfu-next)
+		 ("S-TAB" . corfu-previous)
+		 ([backtab] . corfu-previous))
+  :init
+  (global-corfu-mode))
+#+end_src
+*** Kind icon
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220611T102750.843783
+:END:
+#+NAME: org_mark_mini20.local_20220611T103022.797176
+#+begin_src emacs-lisp
+(use-package kind-icon
+  :after corfu :demand
+  :custom
+  (kind-icon-use-icons t)
+  (kind-icon-default-face 'corfu-default) ; Have background color be the same as `corfu' face background
+  (kind-icon-blend-background nil) ; Use midpoint color between foreground and background colors ("blended")?
+  (kind-icon-blend-frac 0.08)
+
+  ;; NOTE 2022-02-05: `kind-icon' depends `svg-lib' which creates a cache
+  ;; directory that defaults to the `user-emacs-directory'. Here, I change that
+  ;; directory to a location appropriate to `no-littering' conventions, a
+  ;; package which moves directories of other packages to sane locations.
+  ;; (svg-lib-icons-dir (no-littering-expand-var-file-name "svg-lib/cache/")) ; Change cache dir
+  :config
+  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter) ; Enable `kind-icon'
+  :init
+  ;; refresh kind icon cache to match theme
+  (with-eval-after-load 'modus-themes
+    (add-hook 'modus-themes-after-load-theme-hook #'(lambda () (interactive) (kind-icon-reset-cache))))
+  )
+#+end_src
+
+*** Cape
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220611T110717.050962
+:END:
+This is needed to mix the completions up.
+#+NAME: org_mark_mini20.local_20220611T110717.035997
+#+begin_src emacs-lisp
+;; Add extensions
+(use-package-elpa cape
+  :demand
+  ;; Bind dedicated completion commands
+  ;; Alternative prefix keys: C-c p, M-p, M-+, ...
+  :bind (("C-c p p" . completion-at-point) ;; capf
+		 ("C-c p t" . complete-tag)		   ;; etags
+		 ("C-c p d" . cape-dabbrev)		   ;; or dabbrev-completion
+		 ("C-c p h" . cape-history)
+		 ("C-c p f" . cape-file)
+		 ("C-c p k" . cape-keyword)
+		 ("C-c p s" . cape-symbol)
+		 ("C-c p a" . cape-abbrev)
+		 ("C-c p i" . cape-ispell)
+		 ("C-c p l" . cape-line)
+		 ("C-c p w" . cape-dict)
+		 ("C-c p \\" . cape-tex)
+		 ("C-c p _" . cape-tex)
+		 ("C-c p ^" . cape-tex)
+		 ("C-c p &" . cape-sgml)
+		 ("C-c p r" . cape-rfc1345))
+
+  :init
+  ;; Add `completion-at-point-functions', used by `completion-at-point'.
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions (cape-company-to-capf #'company-yasnippet))
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  ;;(add-to-list 'completion-at-point-functions #'cape-history)
+  ;;(add-to-list 'completion-at-point-functions #'cape-keyword)
+  ;;(add-to-list 'completion-at-point-functions #'cape-tex)
+  ;;(add-to-list 'completion-at-point-functions #'cape-sgml)
+  ;;(add-to-list 'completion-at-point-functions #'cape-rfc1345)
+  (add-to-list 'completion-at-point-functions #'cape-abbrev)
+  (add-to-list 'completion-at-point-functions #'cape-ispell)
+  ;;(add-to-list 'completion-at-point-functions #'cape-dict)
+  ;;(add-to-list 'completion-at-point-functions #'cape-symbol)
+  ;;(add-to-list 'completion-at-point-functions #'cape-line)
+  (setq-local completion-at-point-functions
+			  (list (cape-super-capf ;; #'cape-dabbrev
+					 (cape-company-to-capf #'company-yasnippet)
+					 #'cape-abbrev
+					 #'cape-keyword)))
+
+  (defun my/ignore-elisp-keywords (cand)
+	(or (not (keywordp cand))
+		(eq (char-after (car completion-in-region--data)) ?:)))
+  (defun my/setup-elisp ()
+	(setq-local completion-at-point-functions
+				(list
+				 (cape-super-capf
+				  #'elisp-completion-at-point
+				  #'cape-dabbrev)
+				 #'cape-file
+				 cape-dabbrev-min-length 5)))
+  (add-hook 'emacs-lisp-mode-hook #'my/setup-elisp))
+#+end_src
+
+*** Company
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220611T130121.895353
+:END:
+This is still needed but less to do.
+#+NAME: org_mark_mini20.local_20220611T130618.455572
+#+begin_src emacs-lisp
+(use-package-elpa company
+  :demand)
+#+end_src
+
+
+
 * Text expansion
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:15548A48-9E39-4C39-9010-C4B94096DA80
@@ -126,19 +319,18 @@ I suspect that emacs's inbuilt skeleton can do what I need but there are more ex
 
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_CA0CCF5A-02BB-401E-8186-F16136047A8F
 #+begin_src emacs-lisp
-(use-package yasnippet
-  :ensure t
+(use-package-elpa yasnippet
   :diminish yas-minor-mode
   :demand
   :after company
   :mode ((rx (or "/.emacs.d/data/snippets/"
                  (seq ".yasnippet" eol ))) . snippet-mode)
   :bind (:map snippet-mode-map
-              ("<f5>" . yas-load-snippet-buffer)
-              ("C-<f5>" . yas-load-snippet-buffer-and-close)
-              ;; :map yas-minor-mode-map
-              ;; ("<SPC>" . yas-maybe-expand)
-              )
+         ("<f5>" . yas-load-snippet-buffer)
+         ("C-<f5>" . yas-load-snippet-buffer-and-close)
+         ;; :map yas-minor-mode-map
+         ;; ("<SPC>" . yas-maybe-expand)
+         )
   ;; :bind (:map yas-minor-mode-map
   ;; ("SPC" . mwb-yas-expand)
 
@@ -159,23 +351,25 @@ I suspect that emacs's inbuilt skeleton can do what I need but there are more ex
   (yas-global-mode 1)
 
   ;; Add to company
-  (j-company-merge-backends)
-  ;; When yasnippet gets an empty prefix, (can happen in a grouped backend)
-  ;; don't trigger it if the prefix comes back with an empty string.
-  (advice-add 'company-yasnippet :around #'j-company-yasnippet)
+  (unless (fboundp #'cape-dabbrev)
+	(j-company-merge-backends)
 
-  (defun j-company-yasnippet (orig-fun &rest args)
-    "`company-mode' backend for `yasnippet'."
-    (interactive (list 'interactive))
-    (cl-case (nth 0 args)
-      (prefix
-       (and (bound-and-true-p yas-minor-mode)
-            (let ((company-symbol (company-grab-symbol)))
-              (if (string-equal company-symbol "")
-                  nil
-                company-symbol))))
-      (t
-       (apply orig-fun args))))
+	;; When yasnippet gets an empty prefix, (can happen in a grouped backend)
+	;; don't trigger it if the prefix comes back with an empty string.
+	(advice-add 'company-yasnippet :around #'j-company-yasnippet)
+
+	(defun j-company-yasnippet (orig-fun &rest args)
+      "`company-mode' backend for `yasnippet'."
+      (interactive (list 'interactive))
+      (cl-case (nth 0 args)
+		(prefix
+		 (and (bound-and-true-p yas-minor-mode)
+              (let ((company-symbol (company-grab-symbol)))
+				(if (string-equal company-symbol "")
+					nil
+                  company-symbol))))
+		(t
+		 (apply orig-fun args)))))
 
   :mode-hydra (snippet-mode
 			   (:idle 0.5)
@@ -241,16 +435,3 @@ This is another basic emacs thing.
    :bind (("M-/"   . hippie-expand)
           ("C-M-/" . dabbrev-completion)))
  #+END_SRC
-** Company math
-:PROPERTIES:
-:ID:       org_mark_mini12.local:20210102T223321.240481
-:END:
-For Unicode
-#+NAME: org_mark_mini12.local_20210102T223321.222299
-#+begin_src emacs-lisp
-(use-package-elpa company-math
-  :demand
-  ;; :init
-  ;; (setq company-math-symbol-prefix "//")
-  :after (company))
-#+end_src

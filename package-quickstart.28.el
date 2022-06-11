@@ -7617,6 +7617,19 @@ accessible)." t nil)
 
 
 )
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/svg-lib-0.2.5/svg-lib-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/svg-lib-0.2.5/svg-lib-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/svg-lib-0.2.5/svg-lib-autoloads.el") (car load-path))))
+
+
+
+(register-definition-prefixes "svg-lib" '("svg-lib-"))
+
+
+
+
+)
 (let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/all-the-icons-20220521.816/all-the-icons-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/all-the-icons-20220521.816/all-the-icons-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -11916,6 +11929,19 @@ Lisp-Extra-Font-Lock mode.
 
 
 )
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/kind-icon-0.1.5/kind-icon-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/kind-icon-0.1.5/kind-icon-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/kind-icon-0.1.5/kind-icon-autoloads.el") (car load-path))))
+
+
+
+(register-definition-prefixes "kind-icon" '("kind-icon-"))
+
+
+
+
+)
 (let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/keyfreq-20210630.1318/keyfreq-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/keyfreq-20210630.1318/keyfreq-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -16186,6 +16212,154 @@ Local bindings (`counsel-mode-map'):
 
 
 )
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/corfu-0.25/corfu-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/corfu-0.25/corfu-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/corfu-0.25/corfu-autoloads.el") (car load-path))))
+
+
+
+(autoload 'corfu-mode "corfu" "\
+Completion Overlay Region FUnction.
+
+This is a minor mode.  If called interactively, toggle the `Corfu
+mode' mode.  If the prefix argument is positive, enable the mode,
+and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `corfu-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+\(fn &optional ARG)" t nil)
+
+(put 'global-corfu-mode 'globalized-minor-mode t)
+
+(defvar global-corfu-mode nil "\
+Non-nil if Global Corfu mode is enabled.
+See the `global-corfu-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `global-corfu-mode'.")
+
+(custom-autoload 'global-corfu-mode "corfu" nil)
+
+(autoload 'global-corfu-mode "corfu" "\
+Toggle Corfu mode in all buffers.
+With prefix ARG, enable Global Corfu mode if ARG is positive;
+otherwise, disable it.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+Corfu mode is enabled in all buffers where `corfu--on' would do it.
+
+See `corfu-mode' for more information on Corfu mode.
+
+\(fn &optional ARG)" t nil)
+
+(register-definition-prefixes "corfu" '("corfu-"))
+
+
+
+(defvar corfu-history-mode nil "\
+Non-nil if Corfu-History mode is enabled.
+See the `corfu-history-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `corfu-history-mode'.")
+
+(custom-autoload 'corfu-history-mode "corfu-history" nil)
+
+(autoload 'corfu-history-mode "corfu-history" "\
+Update Corfu history and sort completions by history.
+
+This is a minor mode.  If called interactively, toggle the
+`Corfu-History mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='corfu-history-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+\(fn &optional ARG)" t nil)
+
+(register-definition-prefixes "corfu-history" '("corfu-history"))
+
+
+
+(defvar corfu-indexed-mode nil "\
+Non-nil if Corfu-Indexed mode is enabled.
+See the `corfu-indexed-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `corfu-indexed-mode'.")
+
+(custom-autoload 'corfu-indexed-mode "corfu-indexed" nil)
+
+(autoload 'corfu-indexed-mode "corfu-indexed" "\
+Prefix candidates with indices.
+
+This is a minor mode.  If called interactively, toggle the
+`Corfu-Indexed mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
+the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='corfu-indexed-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+\(fn &optional ARG)" t nil)
+
+(register-definition-prefixes "corfu-indexed" '("corfu-indexed--"))
+
+
+
+(autoload 'corfu-info-documentation "corfu-info" "\
+Show documentation of current candidate." t nil)
+
+(autoload 'corfu-info-location "corfu-info" "\
+Show location of current candidate." t nil)
+
+(register-definition-prefixes "corfu-info" '("corfu-info--restore-on-next-command"))
+
+
+
+(autoload 'corfu-quick-jump "corfu-quick" "\
+Jump to candidate using quick keys." t nil)
+
+(autoload 'corfu-quick-insert "corfu-quick" "\
+Insert candidate using quick keys." t nil)
+
+(autoload 'corfu-quick-complete "corfu-quick" "\
+Complete candidate using quick keys." t nil)
+
+(register-definition-prefixes "corfu-quick" '("corfu-quick"))
+
+
+
+
+)
 (let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/company-20220425.1145/company-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/company-20220425.1145/company-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -17573,6 +17747,170 @@ for more details on the DSL accepted by Cask.
 
 
 )
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/cape-20220610.1458/cape-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/cape-20220610.1458/cape-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/cape-20220610.1458/cape-autoloads.el") (car load-path))))
+
+
+
+(autoload 'cape-history "cape" "\
+Complete from Eshell, Comint or minibuffer history.
+See also `consult-history' for a more flexible variant based on
+`completing-read'. If INTERACTIVE is nil the function acts like a Capf.
+
+\(fn &optional INTERACTIVE)" t nil)
+
+(autoload 'cape-file "cape" "\
+Complete file name at point.
+See the user option `cape-file-directory-must-exist'.
+If INTERACTIVE is nil the function acts like a Capf.
+
+\(fn &optional INTERACTIVE)" t nil)
+
+(autoload 'cape-symbol "cape" "\
+Complete Elisp symbol at point.
+If INTERACTIVE is nil the function acts like a Capf.
+
+\(fn &optional INTERACTIVE)" t nil)
+
+(autoload 'cape-dabbrev "cape" "\
+Complete with Dabbrev at point.
+See the user options `cape-dabbrev-min-length' and
+`cape-dabbrev-check-other-buffers'.
+If INTERACTIVE is nil the function acts like a Capf.
+
+\(fn &optional INTERACTIVE)" t nil)
+
+(autoload 'cape-ispell "cape" "\
+Complete word at point with Ispell.
+If INTERACTIVE is nil the function acts like a Capf.
+
+\(fn &optional INTERACTIVE)" t nil)
+
+(autoload 'cape-dict "cape" "\
+Complete word from dictionary at point.
+See the custom option `cape-dict-file'.
+If INTERACTIVE is nil the function acts like a Capf.
+
+\(fn &optional INTERACTIVE)" t nil)
+
+(autoload 'cape-abbrev "cape" "\
+Complete abbreviation at point.
+If INTERACTIVE is nil the function acts like a Capf.
+
+\(fn &optional INTERACTIVE)" t nil)
+
+(autoload 'cape-line "cape" "\
+Complete current line from other lines.
+The buffers returned by `cape-line-buffer-function' are scanned for lines.
+If INTERACTIVE is nil the function acts like a Capf.
+
+\(fn &optional INTERACTIVE)" t nil)
+
+(autoload 'cape-super-capf "cape" "\
+Merge CAPFS and return new Capf which includes all candidates.
+
+\(fn &rest CAPFS)" nil nil)
+
+(autoload 'cape-company-to-capf "cape" "\
+Convert Company BACKEND function to Capf.
+VALID is the input comparator, see `cape--input-valid-p'.
+This feature is experimental.
+
+\(fn BACKEND &optional VALID)" nil nil)
+
+(autoload 'cape-interactive-capf "cape" "\
+Create interactive completion function from CAPF.
+
+\(fn CAPF)" nil nil)
+
+(autoload 'cape-wrap-buster "cape" "\
+Call CAPF and return a completion table with cache busting.
+The cache is busted when the input changes, where VALID is the input
+comparator, see `cape--input-valid-p'.
+
+\(fn CAPF &optional VALID)" nil nil)
+
+(autoload 'cape-wrap-properties "cape" "\
+Call CAPF and add additional completion PROPERTIES.
+Completion properties include for example :exclusive, :annotation-function and
+the various :company-* extensions. Furthermore a boolean :sort flag and a
+completion :category symbol can be specified.
+
+\(fn CAPF &rest PROPERTIES)" nil nil)
+
+(autoload 'cape-wrap-predicate "cape" "\
+Call CAPF and add an additional candidate PREDICATE.
+The PREDICATE is passed the candidate symbol or string.
+
+\(fn CAPF PREDICATE)" nil nil)
+
+(autoload 'cape-wrap-silent "cape" "\
+Call CAPF and silence it (no messages, no errors).
+
+\(fn CAPF)" nil nil)
+
+(autoload 'cape-wrap-case-fold "cape" "\
+Call CAPF and return a case insenstive completion table.
+If DONT-FOLD is non-nil return a case sensitive table instead.
+
+\(fn CAPF &optional DONT-FOLD)" nil nil)
+
+(autoload 'cape-wrap-noninterruptible "cape" "\
+Call CAPF and return a non-interruptible completion table.
+
+\(fn CAPF)" nil nil)
+
+(autoload 'cape-wrap-prefix-length "cape" "\
+Call CAPF and ensure that prefix length is greater or equal than LENGTH.
+If the prefix is long enough, enforce auto completion.
+
+\(fn CAPF LENGTH)" nil nil)
+
+(autoload 'cape-wrap-purify "cape" "\
+Call CAPF and ensure that it does not modify the buffer.
+
+\(fn CAPF)" nil nil)
+
+(autoload 'cape-wrap-accept-all "cape" "\
+Call CAPF and return a completion table which accepts every input.
+
+\(fn CAPF)" nil nil)
+ (autoload 'cape-capf-accept-all "cape")
+ (autoload 'cape-capf-buster "cape")
+ (autoload 'cape-capf-case-fold "cape")
+ (autoload 'cape-capf-noninterruptible "cape")
+ (autoload 'cape-capf-predicate "cape")
+ (autoload 'cape-capf-prefix-length "cape")
+ (autoload 'cape-capf-properties "cape")
+ (autoload 'cape-capf-purify "cape")
+ (autoload 'cape-capf-silent "cape")
+
+(register-definition-prefixes "cape" '("cape-"))
+
+
+ (autoload 'cape-tex "cape-char" nil t)
+ (autoload 'cape-sgml "cape-char" nil t)
+ (autoload 'cape-rfc1345 "cape-char" nil t)
+
+(register-definition-prefixes "cape-char" '("cape-char--define"))
+
+
+
+(autoload 'cape-keyword "cape-keyword" "\
+Complete programming language keyword at point.
+See the variable `cape-keyword-list'.
+If INTERACTIVE is nil the function acts like a capf.
+
+\(fn &optional INTERACTIVE)" t nil)
+
+(register-definition-prefixes "cape-keyword" '("cape-"))
+
+
+
+
+)
 (let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/calibredb-20220604.1655/calibredb-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/calibredb-20220604.1655/calibredb-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -18622,14 +18960,14 @@ mode.
 )
 (setq package-activated-list
 	  (append
-	   '(zoutline zenburn-theme yasnippet yasnippet-snippets yaml-mode xterm-color xr ws-butler compat with-editor posframe which-key which-key-posframe wgrep web-mode vlf vertico validate bind-key use-package use-package-hydra projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit-section magit treemacs-magit treemacs-icons-dired transient-posframe toc-org test-simple ivy swiper swift-mode f spinner markdown-mode lsp-mode swift-helpful all-the-icons powerline spaceline memoize spaceline-all-the-icons solarized-theme sml-mode smartparens sesman prescient selectrum selectrum-prescient rust-mode request load-relative loc-changes realgud rainbow-delimiters racket-mode queue python-mode pretty-hydra pos-tip popup epl pkg-info persistent-scratch parseclj parseedn paredit paradox packed outorg outshine osx-trash org-bullets orderless kv esxml nov mwim multiple-cursors modus-themes mmm-mode minions mini-frame math-symbol-lists material-theme marginalia makey major-mode-hydra macrostep list-utils iedit lispy lisp-extra-font-lock keyfreq json-snatcher hierarchy json-navigator json-mode ignoramus ibuffer-vc highlight-parentheses highlight-indent-guides elisp-refs helpful haskell-mode hardhat git-timemachine git-messenger git-gutter ggtags gcmh fsharp-mode free-keys flycheck flycheck-swift fish-mode expand-region eval-in-repl eros clang-format emr embark consult embark-consult elmacro dtrt-indent dockerfile-mode discover-my-major dired-hacks-utils dired-subtree diminish deadgrep counsel company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 cmake-mode clojure-mode cider cask-mode calibredb bison-mode benchmark-init beacon auto-compile auctex async amx all-the-icons-completion aggressive-indent)
+	   '(zoutline zenburn-theme yasnippet yasnippet-snippets yaml-mode xterm-color xr ws-butler compat with-editor posframe which-key which-key-posframe wgrep web-mode vlf vertico validate bind-key use-package use-package-hydra projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit-section magit treemacs-magit treemacs-icons-dired transient-posframe toc-org test-simple ivy swiper swift-mode f spinner markdown-mode lsp-mode swift-helpful svg-lib all-the-icons powerline spaceline memoize spaceline-all-the-icons solarized-theme sml-mode smartparens sesman prescient selectrum selectrum-prescient rust-mode request load-relative loc-changes realgud rainbow-delimiters racket-mode queue python-mode pretty-hydra pos-tip popup epl pkg-info persistent-scratch parseclj parseedn paredit paradox packed outorg outshine osx-trash org-bullets orderless kv esxml nov mwim multiple-cursors modus-themes mmm-mode minions mini-frame math-symbol-lists material-theme marginalia makey major-mode-hydra macrostep list-utils iedit lispy lisp-extra-font-lock kind-icon keyfreq json-snatcher hierarchy json-navigator json-mode ignoramus ibuffer-vc highlight-parentheses highlight-indent-guides elisp-refs helpful haskell-mode hardhat git-timemachine git-messenger git-gutter ggtags gcmh fsharp-mode free-keys flycheck flycheck-swift fish-mode expand-region eval-in-repl eros clang-format emr embark consult embark-consult elmacro dtrt-indent dockerfile-mode discover-my-major dired-hacks-utils dired-subtree diminish deadgrep counsel corfu company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 cmake-mode clojure-mode cider cask-mode cape calibredb bison-mode benchmark-init beacon auto-compile auctex async amx all-the-icons-completion aggressive-indent)
 	   package-activated-list))
 (progn
   (require 'info)
   (info-initialize)
   (setq Info-directory-list
 		(append
-		 '("/Users/mark/.emacs.d/elpa/28/auctex-13.1.3" "/Users/mark/.emacs.d/elpa/28/company-20220425.1145" "/Users/mark/.emacs.d/elpa/28/embark-20220527.2228" "/Users/mark/.emacs.d/elpa/28/haskell-mode-20220529.1859" "/Users/mark/.emacs.d/elpa/28/mmm-mode-20200908.2236" "/Users/mark/.emacs.d/elpa/28/modus-themes-20220601.1045" "/Users/mark/.emacs.d/elpa/28/orderless-20220527.2228" "/Users/mark/.emacs.d/elpa/28/racket-mode-20220530.1615" "/Users/mark/.emacs.d/elpa/28/swift-helpful-20220402.1433" "/Users/mark/.emacs.d/elpa/28/ivy-20220529.1130" "/Users/mark/.emacs.d/elpa/28/magit-20220603.1738" "/Users/mark/.emacs.d/elpa/28/magit-section-20220513.1429" "/Users/mark/.emacs.d/elpa/28/transient-20220527.2213" "/Users/mark/.emacs.d/elpa/28/dash-20220602.2113" "/Users/mark/.emacs.d/elpa/28/use-package-20210207.1926" "/Users/mark/.emacs.d/elpa/28/vertico-0.24" "/Users/mark/.emacs.d/elpa/28/with-editor-20220506.420" "/Users/mark/.emacs.d/elpa/28/compat-28.1.1.1")
+		 '("/Users/mark/.emacs.d/elpa/28/auctex-13.1.3" "/Users/mark/.emacs.d/elpa/28/company-20220425.1145" "/Users/mark/.emacs.d/elpa/28/corfu-0.25" "/Users/mark/.emacs.d/elpa/28/embark-20220527.2228" "/Users/mark/.emacs.d/elpa/28/haskell-mode-20220529.1859" "/Users/mark/.emacs.d/elpa/28/mmm-mode-20200908.2236" "/Users/mark/.emacs.d/elpa/28/modus-themes-20220601.1045" "/Users/mark/.emacs.d/elpa/28/orderless-20220527.2228" "/Users/mark/.emacs.d/elpa/28/racket-mode-20220530.1615" "/Users/mark/.emacs.d/elpa/28/swift-helpful-20220402.1433" "/Users/mark/.emacs.d/elpa/28/ivy-20220529.1130" "/Users/mark/.emacs.d/elpa/28/magit-20220603.1738" "/Users/mark/.emacs.d/elpa/28/magit-section-20220513.1429" "/Users/mark/.emacs.d/elpa/28/transient-20220527.2213" "/Users/mark/.emacs.d/elpa/28/dash-20220602.2113" "/Users/mark/.emacs.d/elpa/28/use-package-20210207.1926" "/Users/mark/.emacs.d/elpa/28/vertico-0.24" "/Users/mark/.emacs.d/elpa/28/with-editor-20220506.420" "/Users/mark/.emacs.d/elpa/28/compat-28.1.1.1")
 		 Info-directory-list)))
 
 ;; Local Variables:

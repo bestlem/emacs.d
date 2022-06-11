@@ -4,7 +4,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(orderless
+   '(cape
+	 kind-icon
+	 corfu
+	 orderless
 	 vertico
 	 osx-trash
 	 magit-section

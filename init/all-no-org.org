@@ -720,8 +720,8 @@ Needs to load immeduiately to load the other customization files
            ("modus-" "ibuffer-title-face" "ibuffer-marked-face" "ibuffer-deletion-face"))
           ;; ("completion"
           ;;  ("company-" "yas-"))
-          ("mac-based"
-           ("ns-" "mac-" "cua-"))
+          ;; ("mac-based"
+          ;;  ("ns-" "mac-" "cua-"))
           ;; ("flymake"
           ;;  ("flymake-" "flycheck-"))
           ;; ("fringe"

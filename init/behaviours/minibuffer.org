@@ -32,7 +32,7 @@ General purpose but used for the completion
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_378BD735-5E0C-4075-9ED5-A69FC65B29E4
 #+begin_src emacs-lisp
 (use-package-elpa prescient
-  :commands prescient-persist-mode
+  :commands prescient-persist-mode prescient-sort
   :config (prescient-persist-mode 1))
 #+end_src
 ** Find M-x commands

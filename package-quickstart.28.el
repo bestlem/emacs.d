@@ -103,6 +103,24 @@ See `yas-minor-mode' for more information on Yas minor mode.
 
 
 )
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/yasnippet-snippets-1.0/yasnippet-snippets-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/yasnippet-snippets-1.0/yasnippet-snippets-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/yasnippet-snippets-1.0/yasnippet-snippets-autoloads.el") (car load-path))))
+
+
+
+(autoload 'yasnippet-snippets-initialize "yasnippet-snippets" "\
+Load the `yasnippet-snippets' snippets directory." nil nil)
+
+(eval-after-load 'yasnippet '(yasnippet-snippets-initialize))
+
+(register-definition-prefixes "yasnippet-snippets" '("yasnippet-snippets-"))
+
+
+
+
+)
 (let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/yaml-mode-20220104.1503/yaml-mode-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/yaml-mode-20220104.1503/yaml-mode-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -949,6 +967,520 @@ it is disabled.
 \(fn &optional ARG)" t nil)
 
 (register-definition-prefixes "which-key-posframe" '("which-key-"))
+
+
+)
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/wgrep-2.3.3/wgrep-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/wgrep-2.3.3/wgrep-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/wgrep-2.3.3/wgrep-autoloads.el") (car load-path))))
+
+
+
+(autoload 'wgrep-setup "wgrep" "\
+Setup wgrep preparation." nil nil)
+
+(add-hook 'grep-setup-hook 'wgrep-setup)
+
+(register-definition-prefixes "wgrep" '("wgrep-"))
+
+
+
+(autoload 'wgrep-ack-and-a-half-setup "wgrep-ack" nil nil nil)
+
+(autoload 'wgrep-ack-setup "wgrep-ack" nil nil nil)
+
+(add-hook 'ack-and-a-half-mode-hook 'wgrep-ack-and-a-half-setup)
+
+(add-hook 'ack-mode-hook 'wgrep-ack-setup)
+
+(register-definition-prefixes "wgrep-ack" '("wgrep-ack-"))
+
+
+
+(autoload 'wgrep-ag-setup "wgrep-ag" nil nil nil)
+
+(add-hook 'ag-mode-hook 'wgrep-ag-setup)
+
+(register-definition-prefixes "wgrep-ag" '("wgrep-ag-"))
+
+
+
+(autoload 'wgrep-helm-setup "wgrep-helm" nil nil nil)
+
+(add-hook 'helm-grep-mode-hook 'wgrep-helm-setup)
+
+(add-hook 'helm-occur-mode-hook 'wgrep-helm-setup)
+
+(register-definition-prefixes "wgrep-helm" '("wgrep-helm-"))
+
+
+
+(autoload 'wgrep-pt-setup "wgrep-pt" nil nil nil)
+
+(add-hook 'pt-search-mode-hook 'wgrep-pt-setup)
+
+(register-definition-prefixes "wgrep-pt" '("wgrep-pt-unload-function"))
+
+
+
+(register-definition-prefixes "wgrep-subtest" '("wgrep-test--ag"))
+
+
+
+(register-definition-prefixes "wgrep-test" '("wgrep-test"))
+
+
+
+
+)
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/web-mode-17.2.2/web-mode-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/web-mode-17.2.2/web-mode-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/web-mode-17.2.2/web-mode-autoloads.el") (car load-path))))
+
+
+
+(autoload 'web-mode "web-mode" "\
+Major mode for editing web templates.
+
+\(fn)" t nil)
+
+(register-definition-prefixes "web-mode" '("web-mode-"))
+
+
+
+
+)
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/vlf-1.7.2/vlf-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/vlf-1.7.2/vlf-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/vlf-1.7.2/vlf-autoloads.el") (car load-path))))
+
+
+
+(autoload 'vlf "vlf" "\
+View Large FILE in batches.  When MINIMAL load just a few bytes.
+You can customize number of bytes displayed by customizing
+`vlf-batch-size'.
+Return newly created buffer.
+
+\(fn FILE &optional MINIMAL)" t nil)
+
+(register-definition-prefixes "vlf" '("vlf-"))
+
+
+
+(register-definition-prefixes "vlf-base" '("vlf-"))
+
+
+
+(autoload 'vlf-ediff-files "vlf-ediff" "\
+Run batch by batch ediff over FILE-A and FILE-B.
+Files are processed with VLF with BATCH-SIZE chunks.
+Requesting next or previous difference at the end or beginning
+respectively of difference list, runs ediff over the adjacent chunks.
+
+\(fn FILE-A FILE-B BATCH-SIZE)" t nil)
+
+(register-definition-prefixes "vlf-ediff" '("vlf-"))
+
+
+
+(register-definition-prefixes "vlf-follow" '("vlf-"))
+
+
+
+(autoload 'vlf-occur-load "vlf-occur" "\
+Load serialized `vlf-occur' results from current buffer." t nil)
+
+(register-definition-prefixes "vlf-occur" '("vlf-"))
+
+
+
+(register-definition-prefixes "vlf-search" '("vlf-"))
+
+
+
+(register-definition-prefixes "vlf-setup" '("dired-vlf" "vlf-"))
+
+
+
+(register-definition-prefixes "vlf-tune" '("vlf-"))
+
+
+
+(register-definition-prefixes "vlf-write" '("vlf-"))
+
+
+
+
+)
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/vertico-0.24/vertico-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/vertico-0.24/vertico-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/vertico-0.24/vertico-autoloads.el") (car load-path))))
+
+
+
+(defvar vertico-mode nil "\
+Non-nil if Vertico mode is enabled.
+See the `vertico-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `vertico-mode'.")
+
+(custom-autoload 'vertico-mode "vertico" nil)
+
+(autoload 'vertico-mode "vertico" "\
+VERTical Interactive COmpletion.
+
+This is a minor mode.  If called interactively, toggle the
+`Vertico mode' mode.  If the prefix argument is positive, enable
+the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='vertico-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+\(fn &optional ARG)" t nil)
+
+(register-definition-prefixes "vertico" '("vertico-"))
+
+
+
+(defvar vertico-buffer-mode nil "\
+Non-nil if Vertico-Buffer mode is enabled.
+See the `vertico-buffer-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `vertico-buffer-mode'.")
+
+(custom-autoload 'vertico-buffer-mode "vertico-buffer" nil)
+
+(autoload 'vertico-buffer-mode "vertico-buffer" "\
+Display Vertico in a buffer instead of the minibuffer.
+
+This is a minor mode.  If called interactively, toggle the
+`Vertico-Buffer mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='vertico-buffer-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+\(fn &optional ARG)" t nil)
+
+(register-definition-prefixes "vertico-buffer" '("vertico-buffer-"))
+
+
+
+(autoload 'vertico-directory-enter "vertico-directory" "\
+Enter directory or exit completion with current candidate." t nil)
+
+(autoload 'vertico-directory-up "vertico-directory" "\
+Delete N directories before point.
+
+\(fn &optional N)" t nil)
+
+(autoload 'vertico-directory-delete-char "vertico-directory" "\
+Delete N directories or chars before point.
+
+\(fn &optional N)" t nil)
+
+(autoload 'vertico-directory-delete-word "vertico-directory" "\
+Delete N directories or words before point.
+
+\(fn &optional N)" t nil)
+
+(autoload 'vertico-directory-tidy "vertico-directory" "\
+Tidy shadowed file name, see `rfn-eshadow-overlay'." nil nil)
+
+(register-definition-prefixes "vertico-directory" '("vertico-directory--completing-file-p"))
+
+
+
+(defvar vertico-flat-mode nil "\
+Non-nil if Vertico-Flat mode is enabled.
+See the `vertico-flat-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `vertico-flat-mode'.")
+
+(custom-autoload 'vertico-flat-mode "vertico-flat" nil)
+
+(autoload 'vertico-flat-mode "vertico-flat" "\
+Flat, horizontal display for Vertico.
+
+This is a minor mode.  If called interactively, toggle the
+`Vertico-Flat mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='vertico-flat-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+\(fn &optional ARG)" t nil)
+
+(register-definition-prefixes "vertico-flat" '("vertico-flat-"))
+
+
+
+(defvar vertico-grid-mode nil "\
+Non-nil if Vertico-Grid mode is enabled.
+See the `vertico-grid-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `vertico-grid-mode'.")
+
+(custom-autoload 'vertico-grid-mode "vertico-grid" nil)
+
+(autoload 'vertico-grid-mode "vertico-grid" "\
+Grid display for Vertico.
+
+This is a minor mode.  If called interactively, toggle the
+`Vertico-Grid mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='vertico-grid-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+\(fn &optional ARG)" t nil)
+
+(register-definition-prefixes "vertico-grid" '("vertico-grid-"))
+
+
+
+(defvar vertico-indexed-mode nil "\
+Non-nil if Vertico-Indexed mode is enabled.
+See the `vertico-indexed-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `vertico-indexed-mode'.")
+
+(custom-autoload 'vertico-indexed-mode "vertico-indexed" nil)
+
+(autoload 'vertico-indexed-mode "vertico-indexed" "\
+Prefix candidates with indices.
+
+This is a minor mode.  If called interactively, toggle the
+`Vertico-Indexed mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='vertico-indexed-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+\(fn &optional ARG)" t nil)
+
+(register-definition-prefixes "vertico-indexed" '("vertico-indexed--"))
+
+
+
+(defvar vertico-mouse-mode nil "\
+Non-nil if Vertico-Mouse mode is enabled.
+See the `vertico-mouse-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `vertico-mouse-mode'.")
+
+(custom-autoload 'vertico-mouse-mode "vertico-mouse" nil)
+
+(autoload 'vertico-mouse-mode "vertico-mouse" "\
+Mouse support for Vertico.
+
+This is a minor mode.  If called interactively, toggle the
+`Vertico-Mouse mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='vertico-mouse-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+\(fn &optional ARG)" t nil)
+
+(register-definition-prefixes "vertico-mouse" '("vertico-mouse--"))
+
+
+
+(defvar vertico-multiform-mode nil "\
+Non-nil if Vertico-Multiform mode is enabled.
+See the `vertico-multiform-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `vertico-multiform-mode'.")
+
+(custom-autoload 'vertico-multiform-mode "vertico-multiform" nil)
+
+(autoload 'vertico-multiform-mode "vertico-multiform" "\
+Configure Vertico in various forms per command.
+
+This is a minor mode.  If called interactively, toggle the
+`Vertico-Multiform mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='vertico-multiform-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+\(fn &optional ARG)" t nil)
+
+(register-definition-prefixes "vertico-multiform" '("vertico-multiform-"))
+
+
+
+(autoload 'vertico-quick-jump "vertico-quick" "\
+Jump to candidate using quick keys." t nil)
+
+(autoload 'vertico-quick-exit "vertico-quick" "\
+Exit with candidate using quick keys." t nil)
+
+(autoload 'vertico-quick-insert "vertico-quick" "\
+Insert candidate using quick keys." t nil)
+
+(register-definition-prefixes "vertico-quick" '("vertico-quick"))
+
+
+
+(autoload 'vertico-repeat-save "vertico-repeat" "\
+Save Vertico session for `vertico-repeat'.
+This function must be registered as `minibuffer-setup-hook'." nil nil)
+
+(autoload 'vertico-repeat-last "vertico-repeat" "\
+Repeat last Vertico completion SESSION.
+
+\(fn &optional SESSION)" t nil)
+
+(autoload 'vertico-repeat-select "vertico-repeat" "\
+Select a Vertico session from the session history and repeat it." t nil)
+
+(autoload 'vertico-repeat "vertico-repeat" "\
+Repeat last Vertico session.
+If prefix ARG is non-nil, offer completion menu to select from session history.
+
+\(fn &optional ARG)" t nil)
+
+(register-definition-prefixes "vertico-repeat" '("vertico-repeat-"))
+
+
+
+(defvar vertico-reverse-mode nil "\
+Non-nil if Vertico-Reverse mode is enabled.
+See the `vertico-reverse-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `vertico-reverse-mode'.")
+
+(custom-autoload 'vertico-reverse-mode "vertico-reverse" nil)
+
+(autoload 'vertico-reverse-mode "vertico-reverse" "\
+Reverse the Vertico display.
+
+This is a minor mode.  If called interactively, toggle the
+`Vertico-Reverse mode' mode.  If the prefix argument is positive,
+enable the mode, and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='vertico-reverse-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+\(fn &optional ARG)" t nil)
+
+(register-definition-prefixes "vertico-reverse" '("vertico-reverse-"))
+
+
+
+(defvar vertico-unobtrusive-mode nil "\
+Non-nil if Vertico-Unobtrusive mode is enabled.
+See the `vertico-unobtrusive-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `vertico-unobtrusive-mode'.")
+
+(custom-autoload 'vertico-unobtrusive-mode "vertico-unobtrusive" nil)
+
+(autoload 'vertico-unobtrusive-mode "vertico-unobtrusive" "\
+Unobtrusive display for Vertico.
+
+This is a minor mode.  If called interactively, toggle the
+`Vertico-Unobtrusive mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `(default-value \\='vertico-unobtrusive-mode)'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+\(fn &optional ARG)" t nil)
+
+(register-definition-prefixes "vertico-unobtrusive" '("vertico-unobtrusive--orig-count"))
+
+
 
 
 )
@@ -5838,6 +6370,40 @@ it is disabled.
 
 
 )
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/test-simple-1.3.0/test-simple-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/test-simple-1.3.0/test-simple-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/test-simple-1.3.0/test-simple-autoloads.el") (car load-path))))
+
+
+
+(autoload 'test-simple-start "test-simple" "\
+
+
+\(fn &optional TEST-START-MSG)" nil t)
+
+(autoload 'test-simple-clear "test-simple" "\
+Initialize and reset everything to run tests.
+You should run this before running any assertions.  Running more than once
+clears out information from the previous run.
+
+\(fn &optional TEST-INFO TEST-START-MSG)" t nil)
+
+(autoload 'test-simple-run "test-simple" "\
+Register command line to run tests non-interactively and bind key to run test.
+After calling this function, you can run test by key specified by `test-simple-runner-key'.
+
+It is preferable to write at the first line of test files as a comment, e.g,
+;;;; (test-simple-run \"emacs -batch -L %s -l %s\" (file-name-directory (locate-library \"test-simple.elc\")) buffer-file-name)
+
+Calling this function interactively, COMMAND-LINE-FORMATS is set above.
+
+\(fn &rest COMMAND-LINE-FORMATS)" t nil)
+
+(register-definition-prefixes "test-simple" '("assert-" "end-tests" "note" "test-simple-"))
+
+
+)
 (let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/ivy-20220529.1130/ivy-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/ivy-20220529.1130/ivy-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -8098,6 +8664,172 @@ Either remove or add the dbg! macro." t nil)
 
 
 )
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/load-relative-1.3.1/load-relative-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/load-relative-1.3.1/load-relative-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/load-relative-1.3.1/load-relative-autoloads.el") (car load-path))))
+
+
+
+(autoload '__FILE__ "load-relative" "\
+Return the string name of file/buffer that is currently begin executed.
+
+The first approach for getting this information is perhaps the
+most pervasive and reliable.  But it the most low-level and not
+part of a public API, so it might change in future
+implementations.  This method uses the name that is recorded by
+readevalloop of `lread.c' as the car of variable
+`current-load-list'.
+
+Failing that, we use `load-file-name' which should work in some
+subset of the same places that the first method works.  However
+`load-file-name' will be nil for code that is eval'd.  To cover
+those cases, we try function `buffer-file-name' which is initially
+correct, for eval'd code, but will change and may be wrong if the
+code sets or switches buffers after the initial execution.
+
+As a last resort, you can pass in SYMBOL which should be some
+symbol that has been previously defined if none of the above
+methods work we will use the file-name value find via
+`symbol-file'.
+
+\(fn &optional SYMBOL)" nil nil)
+
+(autoload 'find-file-noselect-relative "load-relative" "\
+Read relative FILENAME into a buffer and return the buffer.
+If a buffer exists visiting FILENAME, return that one, but
+verify that the file has not changed since visited or saved.
+The buffer is not selected, just returned to the caller.
+Optional second arg NOWARN non-nil means suppress any warning messages.
+Optional third arg RAWFILE non-nil means the file is read literally.
+Optional fourth arg WILDCARDS non-nil means do wildcard processing
+and visit all the matching files.  When wildcards are actually
+used and expanded, return a list of buffers that are visiting
+the various files.
+
+\(fn FILENAME &optional NOWARN RAWFILE WILDCARDS)" nil nil)
+
+(autoload 'with-relative-file "load-relative" "\
+Read the relative FILE into a temporary buffer and evaluate BODY
+in this buffer.
+
+\(fn FILE &rest BODY)" nil t)
+
+(function-put 'with-relative-file 'lisp-indent-function '1)
+
+(autoload 'load-relative "load-relative" "\
+Load an Emacs Lisp file relative to Emacs Lisp code that is in
+the process of being loaded or eval'd.
+
+FILE-OR-LIST is either a string or a list of strings containing
+files that you want to loaded.  If SYMBOL is given, the location of
+of the file of where that was defined (as given by `symbol-file' is used
+if other methods of finding __FILE__ don't work.
+
+\(fn FILE-OR-LIST &optional SYMBOL)" nil nil)
+
+(autoload 'require-relative "load-relative" "\
+Run `require' on an Emacs Lisp file relative to the Emacs Lisp code
+that is in the process of being loaded or eval'd.  The symbol used in require
+is the base file name (without directory or file extension) treated as a
+symbol.
+
+WARNING: it is best to to run this function before any
+buffer-setting or buffer changing operations.
+
+\(fn RELATIVE-FILE &optional OPT-FILE OPT-PREFIX)" nil nil)
+
+(autoload 'require-relative-list "load-relative" "\
+Run `require-relative' on each name in LIST which should be a list of
+strings, each string being the relative name of file you want to run.
+
+\(fn LIST &optional OPT-PREFIX)" nil t)
+
+(autoload 'provide-me "load-relative" "\
+Call `provide' with the feature's symbol name made from
+source-code's file basename sans extension.  For example if you
+write (provide-me) inside file ~/lisp/foo.el, this is the same as
+writing: (provide \\='foo).
+
+With a prefix, that prefix is prepended to the `provide' So in
+the previous example, if you write (provide-me \"bar-\") this is the
+same as writing (provide \\='bar-foo).
+
+\(fn &optional PREFIX)" nil t)
+
+(register-definition-prefixes "load-relative" '("autoload-relative"))
+
+
+)
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/loc-changes-1.2/loc-changes-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/loc-changes-1.2/loc-changes-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/loc-changes-1.2/loc-changes-autoloads.el") (car load-path))))
+
+
+
+(autoload 'loc-changes-goto-line "loc-changes" "\
+Position `point' at LINE-NUMBER of the current buffer. If
+COLUMN-NUMBER is given, position `point' at that column just
+before that column number within the line. Note that the beginning of
+the line starts at column 0, so the column number display will be one less
+than COLUMN-NUMBER. For example COLUMN-NUMBER 1 will set before the first
+column on the line and show 0.
+
+The Emacs `goto-line' docstring says it is the wrong to use that
+function in a Lisp program. So here is something that I proclaim
+is okay to use in a Lisp program.
+
+\(fn LINE-NUMBER &optional COLUMN-NUMBER)" t nil)
+
+(autoload 'loc-changes-add-and-goto "loc-changes" "\
+Add a marker at LINE-NUMBER and record LINE-NUMBER and its
+marker association in `loc-changes-alist'.
+
+\(fn LINE-NUMBER &optional OPT-BUFFER)" t nil)
+
+(autoload 'loc-changes-clear-buffer "loc-changes" "\
+Remove all location-tracking associations in BUFFER.
+
+\(fn &optional OPT-BUFFER)" t nil)
+
+(autoload 'loc-changes-reset-position "loc-changes" "\
+Update `loc-changes-alist' so that the line number of point is
+used to when aline number is requested.
+
+Updates any existing line numbers referred to in marks at this
+position.
+
+This may be useful for example in debugging if you save the
+buffer and then cause the debugger to reread/reevaluate the file
+so that its positions are will be reflected.
+
+\(fn &optional OPT-BUFFER NO-INSERT)" t nil)
+
+(register-definition-prefixes "loc-changes" '("loc-changes"))
+
+
+)
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/realgud-1.5.1/realgud-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/realgud-1.5.1/realgud-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/realgud-1.5.1/realgud-autoloads.el") (car load-path))))
+
+
+
+(defconst realgud--recursive-autoloads-file-name "realgud-recursive-autoloads.el" "\
+Where to store autoloads for subdirectory contents.")
+
+(defconst realgud--recursive-autoloads-base-directory (file-name-directory (if load-in-progress load-file-name buffer-file-name)))
+
+(with-demoted-errors "Error in RealGUD's autoloads: %s" (load (expand-file-name realgud--recursive-autoloads-file-name realgud--recursive-autoloads-base-directory) t t))
+
+(register-definition-prefixes "realgud" '("realgud--rebuild-recursive-autoloads"))
+
+
+
+
+)
 (let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/rainbow-delimiters-20210515.1254/rainbow-delimiters-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/rainbow-delimiters-20210515.1254/rainbow-delimiters-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -9481,6 +10213,53 @@ it is disabled.
 \(fn &optional ARG)" t nil)
 
 (register-definition-prefixes "org-bullets" '("org-bullets-"))
+
+
+)
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/orderless-20220527.2228/orderless-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/orderless-20220527.2228/orderless-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/orderless-20220527.2228/orderless-autoloads.el") (car load-path))))
+
+
+
+(autoload 'orderless-filter "orderless" "\
+Split STRING into components and find entries TABLE matching all.
+The predicate PRED is used to constrain the entries in TABLE.
+
+\(fn STRING TABLE &optional PRED)" nil nil)
+
+(autoload 'orderless-all-completions "orderless" "\
+Split STRING into components and find entries TABLE matching all.
+The predicate PRED is used to constrain the entries in TABLE.  The
+matching portions of each candidate are highlighted.
+This function is part of the `orderless' completion style.
+
+\(fn STRING TABLE PRED POINT)" nil nil)
+
+(autoload 'orderless-try-completion "orderless" "\
+Complete STRING to unique matching entry in TABLE.
+This uses `orderless-all-completions' to find matches for STRING
+in TABLE among entries satisfying PRED.  If there is only one
+match, it completes to that match.  If there are no matches, it
+returns nil.  In any other case it \"completes\" STRING to
+itself, without moving POINT.
+This function is part of the `orderless' completion style.
+
+\(fn STRING TABLE PRED POINT)" nil nil)
+
+(add-to-list 'completion-styles-alist '(orderless orderless-try-completion orderless-all-completions "Completion of multiple components, in any order."))
+
+(autoload 'orderless-ivy-re-builder "orderless" "\
+Convert STR into regexps for use with ivy.
+This function is for integration of orderless with ivy, use it as
+a value in `ivy-re-builders-alist'.
+
+\(fn STR)" nil nil)
+
+(register-definition-prefixes "orderless" '("orderless-"))
+
+
 
 
 )
@@ -14898,6 +15677,515 @@ don't actually start the search.
 
 
 )
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/counsel-0.13.4/counsel-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/counsel-0.13.4/counsel-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/counsel-0.13.4/counsel-autoloads.el") (car load-path))))
+
+
+
+(autoload 'counsel-company "counsel" "\
+Complete using `company-candidates'." t nil)
+
+(autoload 'counsel-irony "counsel" "\
+Inline C/C++ completion using Irony." t nil)
+
+(autoload 'counsel-describe-variable "counsel" "\
+Forward to `describe-variable'.
+
+Variables declared using `defcustom' are highlighted according to
+`ivy-highlight-face'." t nil)
+
+(autoload 'counsel-describe-function "counsel" "\
+Forward to `describe-function'.
+
+Interactive functions (i.e., commands) are highlighted according
+to `ivy-highlight-face'." t nil)
+
+(autoload 'counsel-describe-symbol "counsel" "\
+Forward to `describe-symbol'." t nil)
+
+(autoload 'counsel-set-variable "counsel" "\
+Set a variable SYM, with completion.
+
+When the selected variable is a `defcustom' with the type boolean
+or radio, offer completion of all possible values.
+
+Otherwise, offer a variant of `eval-expression', with the initial
+input corresponding to the chosen variable.
+
+With a prefix arg, restrict list to variables defined using
+`defcustom'.
+
+\(fn SYM)" t nil)
+
+(autoload 'counsel-apropos "counsel" "\
+Show all matching symbols.
+See `apropos' for further information on what is considered
+a symbol and how to search for them." t nil)
+
+(autoload 'counsel-info-lookup-symbol "counsel" "\
+Forward SYMBOL to `info-lookup-symbol' with ivy completion.
+With prefix arg MODE a query for the symbol help mode is offered.
+
+\(fn SYMBOL &optional MODE)" t nil)
+
+(autoload 'counsel-M-x "counsel" "\
+Ivy version of `execute-extended-command'.
+Optional INITIAL-INPUT is the initial input in the minibuffer.
+This function integrates with either the `amx' or `smex' package
+when available, in that order of precedence.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-command-history "counsel" "\
+Show the history of commands." t nil)
+
+(autoload 'counsel-load-library "counsel" "\
+Load a selected the Emacs Lisp library.
+The libraries are offered from `load-path'." t nil)
+
+(autoload 'counsel-find-library "counsel" "\
+Visit a selected the Emacs Lisp library.
+The libraries are offered from `load-path'." t nil)
+
+(autoload 'counsel-load-theme "counsel" "\
+Forward to `load-theme'.
+Usable with `ivy-resume', `ivy-next-line-and-call' and
+`ivy-previous-line-and-call'." t nil)
+
+(autoload 'counsel-descbinds "counsel" "\
+Show a list of all defined keys and their definitions.
+If non-nil, show only bindings that start with PREFIX.
+BUFFER defaults to the current one.
+
+\(fn &optional PREFIX BUFFER)" t nil)
+
+(autoload 'counsel-describe-face "counsel" "\
+Completion for `describe-face'." t nil)
+
+(autoload 'counsel-faces "counsel" "\
+Complete faces with preview.
+Actions are provided by default for describing or customizing the
+selected face." t nil)
+
+(autoload 'counsel-git "counsel" "\
+Find file in the current Git repository.
+INITIAL-INPUT can be given as the initial minibuffer input.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-git-grep "counsel" "\
+Grep for a string in the current Git repository.
+INITIAL-INPUT can be given as the initial minibuffer input.
+INITIAL-DIRECTORY, if non-nil, is used as the root directory for search.
+When CMD is a string, use it as a \"git grep\" command.
+When CMD is non-nil, prompt for a specific \"git grep\" command.
+
+\(fn &optional INITIAL-INPUT INITIAL-DIRECTORY CMD)" t nil)
+
+(autoload 'counsel-git-stash "counsel" "\
+Search through all available git stashes." t nil)
+
+(autoload 'counsel-git-change-worktree "counsel" "\
+Find the file corresponding to the current buffer on a different worktree." t nil)
+
+(autoload 'counsel-git-checkout "counsel" "\
+Call the \"git checkout\" command." t nil)
+
+(autoload 'counsel-git-log "counsel" "\
+Call the \"git log --grep\" shell command." t nil)
+
+(autoload 'counsel-find-file "counsel" "\
+Forward to `find-file'.
+When INITIAL-INPUT is non-nil, use it in the minibuffer during completion.
+
+\(fn &optional INITIAL-INPUT INITIAL-DIRECTORY)" t nil)
+
+(autoload 'counsel-dired "counsel" "\
+Forward to `dired'.
+When INITIAL-INPUT is non-nil, use it in the minibuffer during completion.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-recentf "counsel" "\
+Find a file on `recentf-list'." t nil)
+
+(autoload 'counsel-buffer-or-recentf "counsel" "\
+Find a buffer visiting a file or file on `recentf-list'." t nil)
+
+(autoload 'counsel-bookmark "counsel" "\
+Forward to `bookmark-jump' or `bookmark-set' if bookmark doesn't exist." t nil)
+
+(autoload 'counsel-bookmarked-directory "counsel" "\
+Ivy interface for bookmarked directories.
+
+With a prefix argument, this command creates a new bookmark which points to the
+current value of `default-directory'." t nil)
+
+(autoload 'counsel-file-register "counsel" "\
+Search file in register.
+
+You cannot use Emacs' normal register commands to create file
+registers.  Instead you must use the `set-register' function like
+so: `(set-register ?i \"/home/eric/.emacs.d/init.el\")'.  Now you
+can use `C-x r j i' to open that file." t nil)
+
+(autoload 'counsel-locate-action-extern "counsel" "\
+Pass X to `xdg-open' or equivalent command via the shell.
+
+\(fn X)" t nil)
+
+(autoload 'counsel-locate "counsel" "\
+Call a \"locate\" style shell command.
+INITIAL-INPUT can be given as the initial minibuffer input.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-tracker "counsel" nil t nil)
+
+(autoload 'counsel-fzf "counsel" "\
+Open a file using the fzf shell command.
+INITIAL-INPUT can be given as the initial minibuffer input.
+INITIAL-DIRECTORY, if non-nil, is used as the root directory for search.
+FZF-PROMPT, if non-nil, is passed as `ivy-read' prompt argument.
+
+\(fn &optional INITIAL-INPUT INITIAL-DIRECTORY FZF-PROMPT)" t nil)
+
+(autoload 'counsel-dpkg "counsel" "\
+Call the \"dpkg\" shell command." t nil)
+
+(autoload 'counsel-rpm "counsel" "\
+Call the \"rpm\" shell command." t nil)
+
+(autoload 'counsel-file-jump "counsel" "\
+Jump to a file below the current directory.
+List all files within the current directory or any of its sub-directories.
+INITIAL-INPUT can be given as the initial minibuffer input.
+INITIAL-DIRECTORY, if non-nil, is used as the root directory for search.
+
+\(fn &optional INITIAL-INPUT INITIAL-DIRECTORY)" t nil)
+
+(autoload 'counsel-dired-jump "counsel" "\
+Jump to a directory (see `dired-jump') below the current directory.
+List all sub-directories within the current directory.
+INITIAL-INPUT can be given as the initial minibuffer input.
+INITIAL-DIRECTORY, if non-nil, is used as the root directory for search.
+
+\(fn &optional INITIAL-INPUT INITIAL-DIRECTORY)" t nil)
+
+(autoload 'counsel-ag "counsel" "\
+Grep for a string in a root directory using ag.
+
+By default, the root directory is the first directory containing a .git subdirectory.
+
+INITIAL-INPUT can be given as the initial minibuffer input.
+INITIAL-DIRECTORY, if non-nil, is used as the root directory for search.
+EXTRA-AG-ARGS, if non-nil, is appended to `counsel-ag-base-command'.
+AG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument.
+CALLER is passed to `ivy-read'.
+
+With a `\\[universal-argument]' prefix argument, prompt for INITIAL-DIRECTORY.
+With a `\\[universal-argument] \\[universal-argument]' prefix argument, prompt additionally for EXTRA-AG-ARGS.
+
+\(fn &optional INITIAL-INPUT INITIAL-DIRECTORY EXTRA-AG-ARGS AG-PROMPT &key CALLER)" t nil)
+
+(autoload 'counsel-pt "counsel" "\
+Grep for a string in the current directory using pt.
+INITIAL-INPUT can be given as the initial minibuffer input.
+This uses `counsel-ag' with `counsel-pt-base-command' instead of
+`counsel-ag-base-command'.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-ack "counsel" "\
+Grep for a string in the current directory using ack.
+INITIAL-INPUT can be given as the initial minibuffer input.
+This uses `counsel-ag' with `counsel-ack-base-command' replacing
+`counsel-ag-base-command'.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-rg "counsel" "\
+Grep for a string in the current directory using rg.
+INITIAL-INPUT can be given as the initial minibuffer input.
+INITIAL-DIRECTORY, if non-nil, is used as the root directory for search.
+EXTRA-RG-ARGS string, if non-nil, is appended to `counsel-rg-base-command'.
+RG-PROMPT, if non-nil, is passed as `ivy-read' prompt argument.
+
+Example input with inclusion and exclusion file patterns:
+    require i -- -g*.el
+
+\(fn &optional INITIAL-INPUT INITIAL-DIRECTORY EXTRA-RG-ARGS RG-PROMPT)" t nil)
+
+(autoload 'counsel-grep "counsel" "\
+Grep for a string in the file visited by the current buffer.
+When non-nil, INITIAL-INPUT is the initial search pattern.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-grep-backward "counsel" "\
+Grep for a string in the file visited by the current buffer going
+backward similar to `swiper-backward'. When non-nil, INITIAL-INPUT is
+the initial search pattern.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-grep-or-swiper "counsel" "\
+Call `swiper' for small buffers and `counsel-grep' for large ones.
+When non-nil, INITIAL-INPUT is the initial search pattern.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-grep-or-swiper-backward "counsel" "\
+Call `swiper-backward' for small buffers and `counsel-grep-backward' for
+large ones.  When non-nil, INITIAL-INPUT is the initial search pattern.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel-recoll "counsel" "\
+Search for a string in the recoll database.
+You'll be given a list of files that match.
+Selecting a file will launch `swiper' for that file.
+INITIAL-INPUT can be given as the initial minibuffer input.
+
+\(fn &optional INITIAL-INPUT)" t nil)
+
+(autoload 'counsel--org-get-tags "counsel" nil nil nil)
+
+(autoload 'counsel-org-tag "counsel" "\
+Add or remove tags in `org-mode'." t nil)
+
+(autoload 'counsel-org-tag-agenda "counsel" "\
+Set tags for the current agenda item." t nil)
+
+(defalias 'counsel-org-goto #'counsel-outline)
+
+(autoload 'counsel-org-goto-all "counsel" "\
+Go to a different location in any org file." t nil)
+
+(autoload 'counsel-org-file "counsel" "\
+Browse all attachments for current Org file." t nil)
+
+(autoload 'counsel-org-entity "counsel" "\
+Complete Org entities using Ivy." t nil)
+
+(autoload 'counsel-org-capture "counsel" "\
+Capture something." t nil)
+
+(autoload 'counsel-org-agenda-headlines "counsel" "\
+Choose from headers of `org-mode' files in the agenda." t nil)
+
+(autoload 'counsel-org-link "counsel" "\
+Insert a link to an headline with completion." t nil)
+
+(autoload 'counsel-mark-ring "counsel" "\
+Browse `mark-ring' interactively.
+Obeys `widen-automatically', which see." t nil)
+
+(autoload 'counsel-evil-marks "counsel" "\
+Ivy replacement for `evil-show-marks'.
+By default, this function respects `counsel-evil-marks-exclude-registers'.
+When ARG is non-nil, display all active evil registers.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'counsel-package "counsel" "\
+Install or delete packages.
+
+Packages not currently installed are prefixed with \"+\", and
+selecting one of these will try to install it.
+Packages currently installed are prefixed with \"-\", and
+selecting one of these will try to delete it.
+
+Additional actions:\\<ivy-minibuffer-map>
+
+  \\[ivy-dispatching-done] d: Describe package
+  \\[ivy-dispatching-done] h: Visit package's homepage" t nil)
+
+(autoload 'counsel-tmm "counsel" "\
+Text-mode emulation of looking and choosing from a menu bar." t nil)
+
+(autoload 'counsel-yank-pop "counsel" "\
+Ivy replacement for `yank-pop'.
+With a plain prefix argument (\\[universal-argument]),
+temporarily toggle the value of `counsel-yank-pop-after-point'.
+Any other value of ARG has the same meaning as in `yank-pop', but
+`counsel-yank-pop-preselect-last' determines its default value.
+See also `counsel-yank-pop-filter' for how to filter candidates.
+
+Note: Duplicate elements of `kill-ring' are always deleted.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'counsel-register "counsel" "\
+Interactively choose a register." t nil)
+
+(autoload 'counsel-evil-registers "counsel" "\
+Ivy replacement for `evil-show-registers'." t nil)
+
+(autoload 'counsel-imenu "counsel" "\
+Jump to a buffer position indexed by imenu." t nil)
+
+(autoload 'counsel-list-processes "counsel" "\
+Offer completion for `process-list'.
+The default action deletes the selected process.
+An extra action allows to switch to the process buffer." t nil)
+
+(autoload 'counsel-minibuffer-history "counsel" "\
+Browse minibuffer history." t nil)
+
+(autoload 'counsel-esh-history "counsel" "\
+Browse Eshell history." t nil)
+
+(autoload 'counsel-shell-history "counsel" "\
+Browse shell history." t nil)
+
+(autoload 'counsel-slime-repl-history "counsel" "\
+Browse Slime REPL history." t nil)
+
+(autoload 'counsel-hydra-heads "counsel" "\
+Call a head of the current/last hydra." t nil)
+
+(autoload 'counsel-semantic "counsel" "\
+Jump to a semantic tag in the current buffer." t nil)
+
+(autoload 'counsel-semantic-or-imenu "counsel" nil t nil)
+
+(autoload 'counsel-outline "counsel" "\
+Jump to an outline heading with completion." t nil)
+
+(autoload 'counsel-ibuffer "counsel" "\
+Use ibuffer to switch to another buffer.
+NAME specifies the name of the buffer (defaults to \"*Ibuffer*\").
+
+\(fn &optional NAME)" t nil)
+
+(autoload 'counsel-switch-to-shell-buffer "counsel" "\
+Switch to a shell buffer, or create one." t nil)
+
+(autoload 'counsel-unicode-char "counsel" "\
+Insert COUNT copies of a Unicode character at point.
+COUNT defaults to 1.
+
+\(fn &optional COUNT)" t nil)
+
+(autoload 'counsel-colors-emacs "counsel" "\
+Show a list of all supported colors for a particular frame.
+
+You can insert or kill the name or hexadecimal RGB value of the
+selected color." t nil)
+
+(autoload 'counsel-colors-web "counsel" "\
+Show a list of all W3C web colors for use in CSS.
+
+You can insert or kill the name or hexadecimal RGB value of the
+selected color." t nil)
+
+(autoload 'counsel-fonts "counsel" "\
+Show a list of all supported font families for a particular frame.
+
+You can insert or kill the name of the selected font." t nil)
+
+(autoload 'counsel-kmacro "counsel" "\
+Interactively choose and run a keyboard macro.
+
+With prefix argument, run macro that many times.
+
+Macros are run using the current value of `kmacro-counter-value'
+and their respective counter format. Displayed next to each macro is
+the counter's format and initial value.
+
+One can use actions to copy the counter format or initial counter
+value of a macro, using them for a new macro." t nil)
+
+(autoload 'counsel-geiser-doc-look-up-manual "counsel" "\
+Search Scheme documentation." t nil)
+
+(autoload 'counsel-rhythmbox "counsel" "\
+Choose a song from the Rhythmbox library to play or enqueue.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'counsel-linux-app "counsel" "\
+Launch a Linux desktop application, similar to Alt-<F2>.
+When ARG is non-nil, ignore NoDisplay property in *.desktop files.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'counsel-wmctrl "counsel" "\
+Select a desktop window using wmctrl." t nil)
+
+(autoload 'counsel-switch-buffer "counsel" "\
+Switch to another buffer.
+Display a preview of the selected ivy completion candidate buffer
+in the current window." t nil)
+
+(autoload 'counsel-switch-buffer-other-window "counsel" "\
+Switch to another buffer in another window.
+Display a preview of the selected ivy completion candidate buffer
+in the current window." t nil)
+
+(autoload 'counsel-compile "counsel" "\
+Call `compile' completing with smart suggestions, optionally for DIR.
+
+Additional actions:
+
+\\{counsel-compile-map}
+
+\(fn &optional DIR)" t nil)
+
+(autoload 'counsel-compile-env "counsel" "\
+Update `counsel-compile-env' interactively." t nil)
+
+(autoload 'counsel-minor "counsel" "\
+Enable or disable minor mode.
+
+Disabled minor modes are prefixed with \"+\", and
+selecting one of these will enable it.
+Enabled minor modes are prefixed with \"-\", and
+selecting one of these will enable it.
+
+Additional actions:\\<ivy-minibuffer-map>
+
+  \\[ivy-dispatching-done] d: Go to minor mode definition
+  \\[ivy-dispatching-done] h: Describe minor mode" t nil)
+
+(autoload 'counsel-major "counsel" nil t nil)
+
+(autoload 'counsel-compilation-errors "counsel" "\
+Compilation errors." t nil)
+
+(autoload 'counsel-flycheck "counsel" "\
+Flycheck errors." t nil)
+
+(defvar counsel-mode nil "\
+Non-nil if counsel mode is enabled.
+See the `counsel-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `counsel-mode'.")
+
+(custom-autoload 'counsel-mode "counsel" nil)
+
+(autoload 'counsel-mode "counsel" "\
+Toggle Counsel mode on or off.
+Turn Counsel mode on if ARG is positive, off otherwise. Counsel
+mode remaps built-in emacs functions that have counsel
+replacements.
+
+Local bindings (`counsel-mode-map'):
+\\{counsel-mode-map}
+
+\(fn &optional ARG)" t nil)
+
+(register-definition-prefixes "counsel" '("counsel-" "ivy-function-called-at-point" "tmm-km-list"))
+
+
+
+
+)
 (let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/company-20220425.1145/company-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/company-20220425.1145/company-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -16409,6 +17697,32 @@ Major mode for editing flex files. (bison-mode by any other name)
 
 
 )
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/benchmark-init-20220414.1612/benchmark-init-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/benchmark-init-20220414.1612/benchmark-init-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/benchmark-init-20220414.1612/benchmark-init-autoloads.el") (car load-path))))
+
+
+
+(autoload 'benchmark-init/activate "benchmark-init" "\
+Activate benchmark-init and start collecting data." t nil)
+
+(register-definition-prefixes "benchmark-init" '("benchmark-init/"))
+
+
+
+(autoload 'benchmark-init/show-durations-tabulated "benchmark-init-modes" "\
+Show the benchmark results in a sorted table." t nil)
+
+(autoload 'benchmark-init/show-durations-tree "benchmark-init-modes" "\
+Show durations in call-tree." t nil)
+
+(register-definition-prefixes "benchmark-init-modes" '("benchmark-init/"))
+
+
+
+
+)
 (let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/beacon-20190104.1931/beacon-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/beacon-20190104.1931/beacon-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -16605,6 +17919,330 @@ Also see the related `auto-compile-on-save-mode'.
 \(fn &optional ARG)" t nil)
 
 (register-definition-prefixes "auto-compile" '("auto-compile-" "byte-compile-log-warning" "load" "mode-line-" "require" "save-buffers-kill-" "turn-on-auto-compile-mode"))
+
+
+)
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/auctex-13.1.3/auctex-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/auctex-13.1.3/auctex-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/auctex-13.1.3/auctex-autoloads.el") (car load-path))))
+
+
+
+(autoload 'bib-cite-minor-mode "bib-cite" "\
+Toggle bib-cite mode.
+When bib-cite mode is enabled, citations, labels and refs are highlighted
+when the mouse is over them.  Clicking on these highlights with [mouse-2]
+runs `bib-find', and [mouse-3] runs `bib-display'.
+
+\(fn ARG)" t nil)
+
+(autoload 'turn-on-bib-cite "bib-cite" "\
+Unconditionally turn on Bib Cite mode." nil nil)
+
+(register-definition-prefixes "bib-cite" '("LaTeX-" "bib-" "create-alist-from-list" "member-cis" "psg-" "search-directory-tree"))
+
+
+
+(defalias 'ConTeXt-mode #'context-mode)
+
+(autoload 'context-mode "context" "\
+Major mode in AUCTeX for editing ConTeXt files.
+
+Special commands:
+\\{ConTeXt-mode-map}
+
+Entering `context-mode' calls the value of `text-mode-hook',
+then the value of `TeX-mode-hook', and then the value
+of `ConTeXt-mode-hook'." t nil)
+
+(register-definition-prefixes "context" '("ConTeXt-" "TeX-ConTeXt-sentinel" "context-guess-current-interface"))
+
+
+
+(autoload 'context-en-mode "context-en" "\
+Major mode for editing files for ConTeXt using its english interface.
+
+Special commands:
+\\{ConTeXt-mode-map}
+
+Entering `context-mode' calls the value of `text-mode-hook',
+then the value of `TeX-mode-hook', and then the value
+of `ConTeXt-mode-hook'." t nil)
+
+(register-definition-prefixes "context-en" '("ConTeXt-"))
+
+
+
+(autoload 'context-nl-mode "context-nl" "\
+Major mode for editing files for ConTeXt using its dutch interface.
+
+Special commands:
+\\{ConTeXt-mode-map}
+
+Entering `context-mode' calls the value of `text-mode-hook',
+then the value of `TeX-mode-hook', and then the value
+of `ConTeXt-mode-hook'." t nil)
+
+(register-definition-prefixes "context-nl" '("ConTeXt-"))
+
+
+
+(autoload 'font-latex-setup "font-latex" "\
+Setup this buffer for LaTeX font-lock.  Usually called from a hook." nil nil)
+
+(register-definition-prefixes "font-latex" '("font-latex-"))
+
+
+
+(autoload 'BibTeX-auto-store "latex" "\
+This function should be called from `bibtex-mode-hook'.
+It will setup BibTeX to store keys in an auto file." nil nil)
+
+(add-to-list 'auto-mode-alist '("\\.drv\\'" . latex-mode) t)
+
+(add-to-list 'auto-mode-alist '("\\.hva\\'" . latex-mode))
+
+(autoload 'TeX-latex-mode "latex" "\
+Major mode in AUCTeX for editing LaTeX files.
+See info under AUCTeX for full documentation.
+
+Special commands:
+\\{LaTeX-mode-map}
+
+Entering LaTeX mode calls the value of `text-mode-hook',
+then the value of `TeX-mode-hook', and then the value
+of `LaTeX-mode-hook'." t nil)
+
+(add-to-list 'auto-mode-alist '("\\.dtx\\'" . doctex-mode))
+
+(autoload 'docTeX-mode "latex" "\
+Major mode in AUCTeX for editing .dtx files derived from `LaTeX-mode'.
+Runs `LaTeX-mode', sets a few variables and
+runs the hooks in `docTeX-mode-hook'.
+
+\(fn)" t nil)
+
+(defalias 'TeX-doctex-mode #'docTeX-mode)
+
+(register-definition-prefixes "latex" '("Bib" "LaTeX-" "TeX-" "docTeX-" "latex-math-mode"))
+
+
+
+(register-definition-prefixes "latex-flymake" '("LaTeX-"))
+
+
+
+(autoload 'multi-prompt "multi-prompt" "\
+Completing prompt for a list of strings.
+The first argument SEPARATOR should be the string (of length 1) to
+separate the elements in the list.  The second argument UNIQUE should
+be non-nil, if each element must be unique.  The remaining elements
+are the arguments to `completing-read'.  See that.
+
+\(fn SEPARATOR UNIQUE PROMPT TABLE &optional MP-PREDICATE REQUIRE-MATCH INITIAL HISTORY)" nil nil)
+
+(autoload 'multi-prompt-key-value "multi-prompt" "\
+Read multiple strings, with completion and key=value support.
+PROMPT is a string to prompt with, usually ending with a colon
+and a space.  TABLE is an alist.  The car of each element should
+be a string representing a key and the optional cdr should be a
+list with strings to be used as values for the key.
+
+See the documentation for `completing-read' for details on the
+other arguments: PREDICATE, REQUIRE-MATCH, INITIAL-INPUT, HIST,
+DEF, and INHERIT-INPUT-METHOD.
+
+The return value is the string as entered in the minibuffer.
+
+\(fn PROMPT TABLE &optional PREDICATE REQUIRE-MATCH INITIAL-INPUT HIST DEF INHERIT-INPUT-METHOD)" nil nil)
+
+(register-definition-prefixes "multi-prompt" '("multi-prompt-"))
+
+
+
+(autoload 'TeX-plain-tex-mode "plain-tex" "\
+Major mode in AUCTeX for editing plain TeX files.
+See info under AUCTeX for documentation.
+
+Special commands:
+\\{plain-TeX-mode-map}
+
+Entering `plain-tex-mode' calls the value of `text-mode-hook',
+then the value of `TeX-mode-hook', and then the value
+of `plain-TeX-mode-hook'." t nil)
+
+(autoload 'ams-tex-mode "plain-tex" "\
+Major mode in AUCTeX for editing AmS-TeX files.
+See info under AUCTeX for documentation.
+
+Special commands:
+\\{AmSTeX-mode-map}
+
+Entering `ams-tex-mode' calls the value of `text-mode-hook',
+then the value of `TeX-mode-hook', and then the value
+of `AmS-TeX-mode-hook'." t nil)
+
+(register-definition-prefixes "plain-tex" '("AmS" "plain-TeX-"))
+
+
+
+(autoload 'preview-install-styles "preview" "\
+Installs the TeX style files into a permanent location.
+This must be in the TeX search path.  If FORCE-OVERWRITE is greater
+than 1, files will get overwritten without query, if it is less
+than 1 or nil, the operation will fail.  The default of 1 for interactive
+use will query.
+
+Similarly FORCE-SAVE can be used for saving
+`preview-TeX-style-dir' to record the fact that the uninstalled
+files are no longer needed in the search path.
+
+\(fn DIR &optional FORCE-OVERWRITE FORCE-SAVE)" t nil)
+
+(autoload 'LaTeX-preview-setup "preview" "\
+Hook function for embedding the preview package into AUCTeX.
+This is called by `LaTeX-mode-hook' and changes AUCTeX variables
+to add the preview functionality." nil nil)
+
+(autoload 'preview-report-bug "preview" "\
+Report a bug in the preview-latex package." t nil)
+
+(register-definition-prefixes "preview" '("TeX-" "desktop-buffer-preview" "preview-"))
+
+
+
+(autoload 'TeX-tex-mode "tex" "\
+Major mode in AUCTeX for editing TeX or LaTeX files.
+Tries to guess whether this file is for plain TeX or LaTeX.
+
+The algorithm is as follows:
+
+   1) if the file is empty or `TeX-force-default-mode' is not set to nil,
+      `TeX-default-mode' is chosen
+   2) If \\documentstyle or \\begin{, \\section{, \\part{ or \\chapter{ is
+      found, `latex-mode' is selected.
+   3) Otherwise, use `plain-tex-mode'" t nil)
+
+(autoload 'TeX-auto-generate "tex" "\
+Generate style file for TEX and store it in AUTO.
+If TEX is a directory, generate style files for all files in the directory.
+
+\(fn TEX AUTO)" t nil)
+
+(autoload 'TeX-auto-generate-global "tex" "\
+Create global auto directory for global TeX macro definitions." t nil)
+
+(autoload 'TeX-submit-bug-report "tex" "\
+Submit a bug report on AUCTeX via mail.
+
+Don't hesitate to report any problems or inaccurate documentation.
+
+If you don't have setup sending mail from Emacs, please copy the
+output buffer into your mail program, as it gives us important
+information about your AUCTeX version and AUCTeX configuration." t nil)
+
+(register-definition-prefixes "tex" '("Bib" "ConTeXt-" "LaTeX-" "TeX-" "VirTeX-common-initialization" "docTeX-default-extension" "plain-TeX-auto-regexp-list" "tex-"))
+
+
+
+(autoload 'TeX-install-toolbar "tex-bar" "\
+Install toolbar buttons for TeX mode." t nil)
+
+(autoload 'LaTeX-install-toolbar "tex-bar" "\
+Install toolbar buttons for LaTeX mode." t nil)
+
+(register-definition-prefixes "tex-bar" '("TeX-bar-"))
+
+
+
+(autoload 'TeX-fold-mode "tex-fold" "\
+Minor mode for hiding and revealing macros and environments.
+
+Called interactively, with no prefix argument, toggle the mode.
+With universal prefix ARG (or if ARG is nil) turn mode on.
+With zero or negative ARG turn mode off.
+
+\(fn &optional ARG)" t nil)
+
+(defalias 'tex-fold-mode #'TeX-fold-mode)
+
+(register-definition-prefixes "tex-fold" '("TeX-fold-"))
+
+
+
+(autoload 'tex-font-setup "tex-font" "\
+Setup font lock support for TeX." nil nil)
+
+(register-definition-prefixes "tex-font" '("tex-"))
+
+
+
+(defalias 'Texinfo-mode #'texinfo-mode)
+
+(autoload 'TeX-texinfo-mode "tex-info" "\
+Major mode in AUCTeX for editing Texinfo files.
+
+Special commands:
+\\{Texinfo-mode-map}
+
+Entering Texinfo mode calls the value of `text-mode-hook' and then the
+value of `Texinfo-mode-hook'." t nil)
+
+(register-definition-prefixes "tex-info" '("Texinfo-" "texinfo-environment-regexp"))
+
+
+
+(register-definition-prefixes "tex-ispell" '("TeX-ispell-"))
+
+
+
+(autoload 'japanese-plain-tex-mode "tex-jp" "\
+Major mode in AUCTeX for editing Japanese plain TeX files.
+Set `japanese-TeX-mode' to t, and enter `TeX-plain-tex-mode'." t nil)
+
+(autoload 'japanese-latex-mode "tex-jp" "\
+Major mode in AUCTeX for editing Japanese LaTeX files.
+Set `japanese-TeX-mode' to t, and enter `TeX-latex-mode'." t nil)
+
+(register-definition-prefixes "tex-jp" '("TeX-" "japanese-"))
+
+
+ (require 'tex-site)
+
+(register-definition-prefixes "tex-site" '("AUCTeX-" "TeX-" "preview-TeX-style-dir"))
+
+
+
+(register-definition-prefixes "tex-style" '("LaTeX-"))
+
+
+
+(register-definition-prefixes "tex-wizard" '("TeX-wizard"))
+
+
+
+(autoload 'texmathp "texmathp" "\
+Determine if point is inside (La)TeX math mode.
+Returns t or nil.  Additional info is placed into `texmathp-why'.
+The functions assumes that you have (almost) syntactically correct (La)TeX in
+the buffer.
+See the variable `texmathp-tex-commands' about which commands are checked." t nil)
+
+(autoload 'texmathp-match-switch "texmathp" "\
+Search backward for any of the math switches.
+Limit searched to BOUND.
+
+\(fn BOUND)" nil nil)
+
+(register-definition-prefixes "texmathp" '("texmathp-"))
+
+
+ (autoload 'toolbarx-install-toolbar "toolbar-x")
+
+(register-definition-prefixes "toolbar-x" '("toolbarx-"))
+
+
 
 
 )
@@ -16984,14 +18622,14 @@ mode.
 )
 (setq package-activated-list
 	  (append
-	   '(zoutline zenburn-theme yasnippet yaml-mode xterm-color xr ws-butler compat with-editor posframe which-key which-key-posframe validate bind-key use-package use-package-hydra projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit-section magit treemacs-magit treemacs-icons-dired transient-posframe toc-org ivy swiper swift-mode f spinner markdown-mode lsp-mode swift-helpful all-the-icons powerline spaceline memoize spaceline-all-the-icons solarized-theme sml-mode smartparens sesman prescient selectrum selectrum-prescient rust-mode request rainbow-delimiters racket-mode queue python-mode pretty-hydra pos-tip popup epl pkg-info persistent-scratch parseclj parseedn paredit paradox packed outorg outshine osx-trash org-bullets kv esxml nov mwim multiple-cursors modus-themes mmm-mode minions mini-frame math-symbol-lists material-theme marginalia makey major-mode-hydra macrostep list-utils iedit lispy lisp-extra-font-lock keyfreq json-snatcher hierarchy json-navigator json-mode ignoramus ibuffer-vc highlight-parentheses highlight-indent-guides elisp-refs helpful haskell-mode hardhat git-timemachine git-messenger git-gutter ggtags gcmh fsharp-mode free-keys flycheck flycheck-swift fish-mode expand-region eval-in-repl eros clang-format emr embark consult embark-consult elmacro dtrt-indent dockerfile-mode discover-my-major dired-hacks-utils dired-subtree diminish deadgrep company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 cmake-mode clojure-mode cider cask-mode calibredb bison-mode beacon auto-compile async amx all-the-icons-completion aggressive-indent)
+	   '(zoutline zenburn-theme yasnippet yasnippet-snippets yaml-mode xterm-color xr ws-butler compat with-editor posframe which-key which-key-posframe wgrep web-mode vlf vertico validate bind-key use-package use-package-hydra projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit-section magit treemacs-magit treemacs-icons-dired transient-posframe toc-org test-simple ivy swiper swift-mode f spinner markdown-mode lsp-mode swift-helpful all-the-icons powerline spaceline memoize spaceline-all-the-icons solarized-theme sml-mode smartparens sesman prescient selectrum selectrum-prescient rust-mode request load-relative loc-changes realgud rainbow-delimiters racket-mode queue python-mode pretty-hydra pos-tip popup epl pkg-info persistent-scratch parseclj parseedn paredit paradox packed outorg outshine osx-trash org-bullets orderless kv esxml nov mwim multiple-cursors modus-themes mmm-mode minions mini-frame math-symbol-lists material-theme marginalia makey major-mode-hydra macrostep list-utils iedit lispy lisp-extra-font-lock keyfreq json-snatcher hierarchy json-navigator json-mode ignoramus ibuffer-vc highlight-parentheses highlight-indent-guides elisp-refs helpful haskell-mode hardhat git-timemachine git-messenger git-gutter ggtags gcmh fsharp-mode free-keys flycheck flycheck-swift fish-mode expand-region eval-in-repl eros clang-format emr embark consult embark-consult elmacro dtrt-indent dockerfile-mode discover-my-major dired-hacks-utils dired-subtree diminish deadgrep counsel company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 cmake-mode clojure-mode cider cask-mode calibredb bison-mode benchmark-init beacon auto-compile auctex async amx all-the-icons-completion aggressive-indent)
 	   package-activated-list))
 (progn
   (require 'info)
   (info-initialize)
   (setq Info-directory-list
 		(append
-		 '("/Users/mark/.emacs.d/elpa/28/company-20220425.1145" "/Users/mark/.emacs.d/elpa/28/embark-20220527.2228" "/Users/mark/.emacs.d/elpa/28/haskell-mode-20220529.1859" "/Users/mark/.emacs.d/elpa/28/mmm-mode-20200908.2236" "/Users/mark/.emacs.d/elpa/28/modus-themes-20220601.1045" "/Users/mark/.emacs.d/elpa/28/racket-mode-20220530.1615" "/Users/mark/.emacs.d/elpa/28/swift-helpful-20220402.1433" "/Users/mark/.emacs.d/elpa/28/ivy-20220529.1130" "/Users/mark/.emacs.d/elpa/28/magit-20220603.1738" "/Users/mark/.emacs.d/elpa/28/magit-section-20220513.1429" "/Users/mark/.emacs.d/elpa/28/transient-20220527.2213" "/Users/mark/.emacs.d/elpa/28/dash-20220602.2113" "/Users/mark/.emacs.d/elpa/28/use-package-20210207.1926" "/Users/mark/.emacs.d/elpa/28/with-editor-20220506.420" "/Users/mark/.emacs.d/elpa/28/compat-28.1.1.1")
+		 '("/Users/mark/.emacs.d/elpa/28/auctex-13.1.3" "/Users/mark/.emacs.d/elpa/28/company-20220425.1145" "/Users/mark/.emacs.d/elpa/28/embark-20220527.2228" "/Users/mark/.emacs.d/elpa/28/haskell-mode-20220529.1859" "/Users/mark/.emacs.d/elpa/28/mmm-mode-20200908.2236" "/Users/mark/.emacs.d/elpa/28/modus-themes-20220601.1045" "/Users/mark/.emacs.d/elpa/28/orderless-20220527.2228" "/Users/mark/.emacs.d/elpa/28/racket-mode-20220530.1615" "/Users/mark/.emacs.d/elpa/28/swift-helpful-20220402.1433" "/Users/mark/.emacs.d/elpa/28/ivy-20220529.1130" "/Users/mark/.emacs.d/elpa/28/magit-20220603.1738" "/Users/mark/.emacs.d/elpa/28/magit-section-20220513.1429" "/Users/mark/.emacs.d/elpa/28/transient-20220527.2213" "/Users/mark/.emacs.d/elpa/28/dash-20220602.2113" "/Users/mark/.emacs.d/elpa/28/use-package-20210207.1926" "/Users/mark/.emacs.d/elpa/28/vertico-0.24" "/Users/mark/.emacs.d/elpa/28/with-editor-20220506.420" "/Users/mark/.emacs.d/elpa/28/compat-28.1.1.1")
 		 Info-directory-list)))
 
 ;; Local Variables:

@@ -4,7 +4,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(osx-trash
+   '(orderless
+	 vertico
+	 osx-trash
 	 magit-section
 	 git-gutter
 	 calibredb
@@ -17,8 +19,6 @@
 	 dockerfile-mode
 	 with-editor
 	 emr
-	 selectrum-prescient
-	 selectrum
 	 embark-consult
 	 embark
 	 marginalia
@@ -58,9 +58,6 @@
 	 persistent-scratch
 	 amx
 	 dtrt-indent
-	 color-identifiers
-	 color-identifiers-mode
-	 srefactor
 	 flycheck-yamllint
 	 yaml-mode
 	 toc-org

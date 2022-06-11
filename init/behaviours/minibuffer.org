@@ -411,6 +411,7 @@ Take action in selection buffer
 ** Selectrum
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210801T174734.765653
+:HEADER-ARGS: :tang;le no
 :END:
 The display part as vertical list
 #+NAME: org_mark_mini20.local_20210801T174734.748739
@@ -435,4 +436,66 @@ To put in order
   (selectrum-prescient-mode 1)
   (prescient-persist-mode +1)
   :after selectrum)
+#+end_src
+** [[https://github.com/minad/vertico][Vertico]]
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220610T223433.980880
+:END:
+Seems to be replacing selectrum.
+#+NAME: org_mark_mini20.local_20220610T223433.967130
+#+begin_src emacs-lisp
+(use-package-elpa vertico
+  :defer 2
+  :init
+  (vertico-mode)
+
+  ;; Different scroll margin
+  ;; (setq vertico-scroll-margin 0)
+
+  ;; Show more candidates
+  (setq vertico-count 20)
+
+  ;; Grow and shrink the Vertico minibuffer
+  ;; (setq vertico-resize t)
+
+  ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
+  (setq vertico-cycle t)
+  (setq read-file-name-completion-ignore-case t
+      read-buffer-completion-ignore-case t
+      completion-ignore-case t)
+  )
+#+end_src
+** Orderless
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220610T225642.615445
+:END:
+Search for completions
+#+NAME: org_mark_mini20.local_20220610T225642.601196
+#+begin_src emacs-lisp
+(use-package-elpa orderless
+  :defer 1
+
+  :bind (:map vertico-map
+		 ("?" . minibuffer-completion-help)
+		 ("C-<return>" . minibuffer-force-complete-and-exit))
+  :init
+  ;; Define orderless style with initialism by default
+  ;; (orderless-define-completion-style	;
+  ;;     +orderless-with-initialism
+  ;;   (orderless-matching-styles '(orderless-initialism orderless-literal orderless-regexp)))
+
+  ;; Configure a custom style dispatcher (see the Consult wiki)
+  ;; (setq orderless-style-dispatchers '(+orderless-dispatch)
+  ;;       orderless-component-separator #'orderless-escapable-split-on-space)
+
+  (setq completion-styles '(substring orderless basic)
+		completion-category-defaults nil)
+  (setq completion-category-defaults
+        '((file (styles partial-completion))) )
+  ;; (setq completion-category-overrides '((file (styles partial-completion))
+  ;;                                       (command (styles +orderless-with-initialism))
+  ;; 		                                (variable (styles +orderless-with-initialism))
+  ;;                                       (symbol (styles +orderless-with-initialism)))
+  ;;       )
+  )
 #+end_src

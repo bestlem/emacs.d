@@ -149,10 +149,9 @@ Then again I don't use it as I fiddel with startup code so much (and have a GUI 
 Try macport now as on arm
  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_922BC8C2-56FC-46E7-B506-2CB94F2BB86A
  #+begin_src emacs-lisp
-(use-package server
+(use-feature server
   :disabled
   :unless *aquamacs*
-  :ensure nil
   :hook (after-init . server-mode))
  #+end_src
 * Emacs behaviour
@@ -257,8 +256,7 @@ Seems one of few in development and on github
 Well tried and treemacs screwed up
 #+NAME: org_mark_2020-10-09T10-33-48+01-00_mini12.local_3B37CB96-2AF0-4558-8B03-007D832A3898
 #+begin_src emacs-lisp
-(use-package workgroups2
-  :ensure t
+(use-package-elpa workgroups2
   :disabled
   :config (workgroups-mode 1)
   (setq wg-session-load-on-start t

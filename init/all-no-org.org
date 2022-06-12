@@ -102,8 +102,7 @@ Aquamacs puts a lot in ~/Library/Preferences/Emacs but Emacs 27 does not know th
 We gave up as it is just a set of people adding modes to it. There are not enough to be worth it. Do it myself. But use var as the default directory
 #+NAME: org_mark_mini20.local_20211029T224932.715909
 #+begin_src emacs-lisp :tangle no
-(use-package no-littering
-  :ensure t
+(use-package-elpa no-littering
   :disabled
   :unless *aquamacs*)
 #+end_src
@@ -409,11 +408,10 @@ These are needed as might be in my code
 Functional programming
 #+NAME: org_mark_2020-11-05T13-04-24+00-00_mini12.local_586F9C8C-30DC-441E-85EE-1A67DA609030
 #+begin_src emacs-lisp
-(use-package dash
-    :ensure t
-    :demand
-    :config
-    (global-dash-fontify-mode))
+(use-package-elpa dash
+  :demand
+  :config
+  (global-dash-fontify-mode))
 #+end_src
 ***** Hash maps
 :PROPERTIES:

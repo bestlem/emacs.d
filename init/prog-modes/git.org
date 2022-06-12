@@ -4,7 +4,7 @@
 
 Picked up from many places especially jerry peng  but then looked a centaur and this is very much like what I have already so add the rest
 
-* Old vc
+* General  vc
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220606T211816.151408
 :END:
@@ -50,6 +50,25 @@ This is [[https://github.com/magit/with-editor][with-editor]] Magit calls it - o
                 ("A-k" . with-editor-cancel)
                 ("A-s" . with-editor-finish)
                 ))
+#+end_src
+* Git files
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220612T093258.305716
+:END:
+Modes for editing files that configure git.
+#+NAME: org_mark_mini20.local_20220612T093258.285002
+#+begin_src emacs-lisp
+(use-package-elpa git-modes
+  :mode
+  ("/\\.?git/?config$" . gitconfig-mode)
+  ("/\\.gitmodules$" . gitconfig-mode)
+  ("/\\.gitignore$" . gitignore-mode)
+  ("/\\.git/info/exclude$" . gitignore-mode)
+  ("/git/ignore$" . gitignore-mode)
+  ("/.dockerignore\\'" . gitignore-mode)
+  ("/\\.gitattributes\\'" . gitattributes-mode)
+  ("/info/attributes\\'" . gitattributes-mode)
+  ("/git/attributes\\'" . gitattributes-mode))
 #+end_src
 * Magit
 :PROPERTIES:
@@ -101,16 +120,15 @@ https://github.com/alphapapa/magit-todos
   (jp-git
    (:color teal :quit-key "q"
 	:title (mwb-icon-string "git" "Git"))
-   ("Status" (("g" mwb-magit-status "status")
-			  ("s" mwb-magit-status "status")
+   ("Status" (("s" mwb-magit-status "status")
 			  ("l" magit-log-buffer-file "commit log (current file)")
 			  ("L" magit-log-current "commit log (project)")
 			  ("B" magit-blame-addition "blame"))
-	"Local" (("b" magit-branch "branch popup")
-			 ("r" magit-rebase "rebase popup"))
-	"Remote" (("f" magit-fetch "fetch popup")
-			  ("P" magit-push "push popup")
-			  ("F" magit-pull "pull popup"))
+	"Local" (("b" magit-branch "branch")
+			 ("r" magit-rebase "rebase"))
+	"Remote" (("f" magit-fetch "fetch")
+			  ("P" magit-push "push")
+			  ("F" magit-pull "pull"))
 	"Diff" (("d" magit-diff-buffer-file "diff buffer"))
 	"Magit" (("$" magit-process "process")))))
 #+end_src
@@ -185,11 +203,15 @@ I think works with other vcs
 (use-package-elpa git-timemachine
   :after magit
   :demand
-  :custom-face
-  (git-timemachine-minibuffer-author-face ((t (:inherit success))))
-  (git-timemachine-minibuffer-detail-face ((t (:inherit warning))))
+  ;; :custom-face dopes not theme like :custom and so saves to customization file.
+  ;; :custom-face
+  ;; (git-timemachine-minibuffer-author-face ((t (:inherit success))))
+  ;; (git-timemachine-minibuffer-detail-face ((t (:inherit warning))))
+  :config
+  (set-face-attribute 'git-timemachine-minibuffer-author-face nil :inherit 'success)
+  (set-face-attribute 'git-timemachine-minibuffer-detail-face nil :inherit 'warning)
   :bind (:map vc-prefix-map
-			  ("t" . git-timemachine))
+		 ("t" . git-timemachine))
   :pretty-hydra
   (jp-git
    ("Other"
@@ -203,6 +225,10 @@ I think works with other vcs
 
   :hook (before-revert . my/git-timmachine-check))
   #+end_src
+** TODO Add some form of menu or hydra to show that it is in use - and update the mode line
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220612T114243.221244
+:END:
 * Git messenger
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210814T100659.238603
@@ -349,10 +375,39 @@ Try git-gutter-fringe but seems to clash [[https://github.com/emacsorphanage/git
   ;; (set-face-foreground 'git-gutter:deleted "red")
 
   ;; (setq git-gutter-fr:side 'right-fringe)
-
   :custom
-  (git-gutter:hide-gutter t))
+  (git-gutter:hide-gutter t)
+
+  :pretty-hydra
+  (hydra-git-gutter
+
+   (:foreign-keys warn
+	:exit nil
+	:quit-key "q"
+	:title (mwb-icon-string "git" "Git Gutter"))
+   ("Move" (
+			("n" git-gutter:next-hunk "next hunk")
+			("p" git-gutter:previous-hunk "previous hunk")
+			("h" (progn (goto-char (point-min)) (git-gutter:next-hunk 1)) "first hunk")
+			("l" (progn (goto-char (point-min)) (git-gutter:previous-hunk 1)) "last hunk"))
+	"Modify" (("<SPC>" git-gutter:popup-hunk "popup hunk")
+			  ("s" git-gutter:stage-hunk "stage hunk")
+			  ("r" git-gutter:revert-hunk "revert hunk"))
+	"Current hunk" (("m" git-gutter:mark-hunk "Mark hunk")
+					("<end>" git-gutter:end-of-hunk "End of hunk")
+					;; ( mwbkey-home git-gutter:end-of-hunk "Begin of hunk" )
+					("u" git-gutter:popup-hunk "Popup hunk"))))
+  :pretty-hydra
+  (jp-git
+   ("Other"
+    (("g" hydra-git-gutter/body "gutter"))))
+  )
 #+end_src
+*** TODO Add a consult to move between hunks
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220612T114243.217186
+:END:
+See https://blog.binchen.org/posts/new-git-timemachine-ui-based-on-ivy-mode.html for an ivy version.
 * Smerge
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210813T230728.367536

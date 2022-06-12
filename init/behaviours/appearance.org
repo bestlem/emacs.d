@@ -127,7 +127,12 @@ These are set by Aquamacs but might as well reinforce
 #+begin_src emacs-lisp
 (global-hl-line-mode 1)
 #+end_src
-** Beacon mode
+** Show when switch to window
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220612T075833.813845
+:END:
+This is useful when I jump into a new buffer from e.g. deadgrep or helpful to show the line.
+*** Beacon mode
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:B70958EE-3BEB-441D-9544-871501B5EF25
 :END:
@@ -135,9 +140,9 @@ Beacon-mode: flash the cursor when switching buffers or scrolling  the goal is t
 but does not seem to work well
 #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_623E9D35-0844-41AB-8A86-98118716B519
 #+begin_src emacs-lisp
-(use-package beacon
-  :ensure t
+(use-package-elpa beacon
   :defer 5
+  :disabled
   :diminish beacon-mode
   :custom (beacon-blink-when-focused t)
   :init (eval-when-compile
@@ -153,6 +158,71 @@ but does not seem to work well
     (push mode beacon-dont-blink-major-modes))
   (setq beacon-blink-duration 1)
   (beacon-mode 1))
+#+end_src
+*** Pulse
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220612T075833.810247
+:END:
+Well I should have found earlier
+*** [[https://protesilaos.com/emacs/pulsar][Pulsar]]
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220612T075833.806452
+:END:
+Try this.
+#+NAME: org_mark_mini20.local_20220612T075833.786065
+#+begin_src emacs-lisp
+(use-package-elpa pulsar
+  :config
+  (setq pulsar-pulse-functions
+		;; NOTE 2022-04-09: The commented out functions are from before
+		;; the introduction of `pulsar-pulse-on-window-change'.  Try that
+		;; instead.
+		'(recenter-top-bottom
+		  move-to-window-line-top-bottom
+		  reposition-window
+		  ;; bookmark-jump
+		  ;; other-window
+		  ;; delete-window
+		  ;; delete-other-windows
+		  forward-page
+		  backward-page
+		  scroll-up-command
+		  scroll-down-command
+		  ;; windmove-right
+		  ;; windmove-left
+		  ;; windmove-up
+		  ;; windmove-down
+		  ;; windmove-swap-states-right
+		  ;; windmove-swap-states-left
+		  ;; windmove-swap-states-up
+		  ;; windmove-swap-states-down
+		  ;; tab-new
+		  ;; tab-close
+		  ;; tab-next
+		  org-next-visible-heading
+		  org-previous-visible-heading
+		  org-forward-heading-same-level
+		  org-backward-heading-same-level
+		  outline-backward-same-level
+		  outline-forward-same-level
+		  outline-next-visible-heading
+		  outline-previous-visible-heading
+		  outline-up-heading))
+
+  (setq pulsar-pulse-on-window-change t)
+  (setq pulsar-pulse t)
+  (setq pulsar-delay 0.055)
+  (setq pulsar-iterations 10)
+  (setq pulsar-face 'pulsar-magenta)
+  (setq pulsar-highlight-face 'pulsar-yellow)
+
+  (pulsar-global-mode 1)
+
+  ;; OR use the local mode for select mode hooks
+
+  ;; (dolist (hook '(org-mode-hook emacs-lisp-mode-hook))
+  ;; 	(add-hook hook #'pulsar-mode))
+  )
 #+end_src
 
 ** Hi line
@@ -401,8 +471,7 @@ One for writing code and the other for reading articles."
 
 ;; From emacs or local
 ;; (load-theme 'leuven t t)
-(use-package color-theme-modern
-  :ensure t
+(use-package-elpa color-theme-modern
   :config
   (load-theme 'high-contrast t t))
 

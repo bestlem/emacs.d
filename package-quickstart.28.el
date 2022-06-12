@@ -9569,6 +9569,69 @@ VARIABLES
 
 
 )
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/pulsar-0.3.1/pulsar-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/pulsar-0.3.1/pulsar-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/pulsar-0.3.1/pulsar-autoloads.el") (car load-path))))
+
+
+
+(autoload 'pulsar-pulse-line "pulsar" "\
+Temporarily highlight the current line.
+When `pulsar-pulse' is non-nil (the default) make the highlight
+pulse before fading away.  The pulse effect is controlled by
+`pulsar-delay' and `pulsar-iterations'.
+
+Also see `pulsar-highlight-line' for a highlight without the
+pulse effect." t nil)
+
+(autoload 'pulsar-highlight-line "pulsar" "\
+Temporarily highlight the current line.
+Unlike `pulsar-pulse-line', never pulse the current line.  Keep
+the highlight in place until another command is invoked.
+
+Use `pulsar-highlight-face' (it is the same as `pulsar-face' by
+default)." t nil)
+
+(autoload 'pulsar-highlight-dwim "pulsar" "\
+Temporarily highlight the current line or active region.
+The region may also be a rectangle.
+
+For lines, do the same as `pulsar-highlight-line'." t nil)
+
+(put 'pulsar-global-mode 'globalized-minor-mode t)
+
+(defvar pulsar-global-mode nil "\
+Non-nil if Pulsar-Global mode is enabled.
+See the `pulsar-global-mode' command
+for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `pulsar-global-mode'.")
+
+(custom-autoload 'pulsar-global-mode "pulsar" nil)
+
+(autoload 'pulsar-global-mode "pulsar" "\
+Toggle Pulsar mode in all buffers.
+With prefix ARG, enable Pulsar-Global mode if ARG is positive;
+otherwise, disable it.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+Pulsar mode is enabled in all buffers where `pulsar--on' would do it.
+
+See `pulsar-mode' for more information on Pulsar mode.
+
+\(fn &optional ARG)" t nil)
+
+(register-definition-prefixes "pulsar" '("pulsar-"))
+
+
+
+
+)
 (let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/pretty-hydra-20210221.834/pretty-hydra-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/pretty-hydra-20210221.834/pretty-hydra-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -12520,6 +12583,49 @@ Enable git timemachine for current buffer, switching to GIT-BRANCH.
 \(fn GIT-BRANCH)" t nil)
 
 (register-definition-prefixes "git-timemachine" '("git-timemachine-"))
+
+
+)
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/git-modes-20220422.1611/git-modes-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/git-modes-20220422.1611/git-modes-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/git-modes-20220422.1611/git-modes-autoloads.el") (car load-path))))
+
+
+
+(autoload 'gitattributes-mode "gitattributes-mode" "\
+A major mode for editing .gitattributes files.
+\\{gitattributes-mode-map}
+
+\(fn)" t nil)
+
+(dolist (pattern '("/\\.gitattributes\\'" "/info/attributes\\'" "/git/attributes\\'")) (add-to-list 'auto-mode-alist (cons pattern #'gitattributes-mode)))
+
+(register-definition-prefixes "gitattributes-mode" '("gitattributes-mode-"))
+
+
+
+(autoload 'gitconfig-mode "gitconfig-mode" "\
+A major mode for editing .gitconfig files.
+
+\(fn)" t nil)
+
+(dolist (pattern '("/\\.gitconfig\\'" "/\\.git/config\\'" "/modules/.*/config\\'" "/git/config\\'" "/\\.gitmodules\\'" "/etc/gitconfig\\'")) (add-to-list 'auto-mode-alist (cons pattern 'gitconfig-mode)))
+
+(register-definition-prefixes "gitconfig-mode" '("gitconfig-"))
+
+
+
+(autoload 'gitignore-mode "gitignore-mode" "\
+A major mode for editing .gitignore files.
+
+\(fn)" t nil)
+
+(dolist (pattern (list "/\\.gitignore\\'" "/info/exclude\\'" "/git/ignore\\'")) (add-to-list 'auto-mode-alist (cons pattern 'gitignore-mode)))
+
+(register-definition-prefixes "gitignore-mode" '("gitignore-mode-font-lock-keywords"))
+
+
 
 
 )
@@ -18098,7 +18204,7 @@ mode.
 )
 (setq package-activated-list
 	  (append
-	   '(zoutline zenburn-theme yasnippet yasnippet-snippets yaml-mode xterm-color xr ws-butler compat with-editor posframe which-key which-key-posframe wgrep web-mode vlf vertico validate bind-key use-package use-package-hydra projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit-section magit treemacs-magit treemacs-icons-dired transient-posframe toc-org test-simple ivy swiper swift-mode f spinner markdown-mode lsp-mode swift-helpful svg-lib all-the-icons powerline spaceline memoize spaceline-all-the-icons solarized-theme sml-mode smartparens sesman prescient selectrum selectrum-prescient rust-mode request load-relative loc-changes realgud rainbow-delimiters racket-mode queue python-mode pretty-hydra pos-tip popup epl pkg-info persistent-scratch parseclj parseedn paredit paradox packed outorg outshine osx-trash org-bullets orderless kv esxml nov mwim multiple-cursors modus-themes mmm-mode minions mini-frame math-symbol-lists material-theme marginalia makey major-mode-hydra macrostep list-utils iedit lispy lisp-extra-font-lock kind-icon keyfreq json-snatcher hierarchy json-navigator json-mode ignoramus ibuffer-vc highlight-parentheses highlight-indent-guides elisp-refs helpful hardhat git-timemachine git-messenger git-gutter ggtags gcmh fsharp-mode free-keys flycheck flycheck-swift fish-mode expand-region eval-in-repl eros clang-format emr embark consult embark-consult elmacro dtrt-indent dockerfile-mode discover-my-major dired-hacks-utils dired-subtree diminish deadgrep counsel corfu company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 cmake-mode clojure-mode cider cask-mode cape calibredb bison-mode benchmark-init beacon auto-compile auctex async amx all-the-icons-completion aggressive-indent)
+	   '(zoutline zenburn-theme yasnippet yasnippet-snippets yaml-mode xterm-color xr ws-butler compat with-editor posframe which-key which-key-posframe wgrep web-mode vlf vertico validate bind-key use-package use-package-hydra projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit-section magit treemacs-magit treemacs-icons-dired transient-posframe toc-org test-simple ivy swiper swift-mode f spinner markdown-mode lsp-mode swift-helpful svg-lib all-the-icons powerline spaceline memoize spaceline-all-the-icons solarized-theme sml-mode smartparens sesman prescient selectrum selectrum-prescient rust-mode request load-relative loc-changes realgud rainbow-delimiters racket-mode queue python-mode pulsar pretty-hydra pos-tip popup epl pkg-info persistent-scratch parseclj parseedn paredit paradox packed outorg outshine osx-trash org-bullets orderless kv esxml nov mwim multiple-cursors modus-themes mmm-mode minions mini-frame math-symbol-lists material-theme marginalia makey major-mode-hydra macrostep list-utils iedit lispy lisp-extra-font-lock kind-icon keyfreq json-snatcher hierarchy json-navigator json-mode ignoramus ibuffer-vc highlight-parentheses highlight-indent-guides elisp-refs helpful hardhat git-timemachine git-modes git-messenger git-gutter ggtags gcmh fsharp-mode free-keys flycheck flycheck-swift fish-mode expand-region eval-in-repl eros clang-format emr embark consult embark-consult elmacro dtrt-indent dockerfile-mode discover-my-major dired-hacks-utils dired-subtree diminish deadgrep counsel corfu company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 cmake-mode clojure-mode cider cask-mode cape calibredb bison-mode benchmark-init beacon auto-compile auctex async amx all-the-icons-completion aggressive-indent)
 	   package-activated-list))
 (progn
   (require 'info)

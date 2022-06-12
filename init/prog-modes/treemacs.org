@@ -27,7 +27,7 @@ More in startup
  #+NAME: org_mark_mini20.local_20210811T192501.283076
 #+begin_src emacs-lisp
 (use-package-elpa treemacs
-  :demand
+  ;;:demand
   :init
   (setq treemacs-width 50)
   :commands (treemacs treemacs-rightclick-menu)
@@ -122,8 +122,10 @@ Emacs 28 look at [[help:prog-context-menu][prog-context-menu]]
 :END:
 Treemacs' context menu does not work with emacs 28 context menu.
 Start with a main menu
+
+This takes long to load - well my init timers notice 0.2 secs and I don't use it so don't add.
 #+NAME: org_mark_mini20.local_20220601T114847.133569
-#+begin_src emacs-lisp :tangle no :noweb-ref treemacs-config
+#+begin_src emacs-lisp :tangle no
 (easy-menu-define treemacs-mode-menu treemacs-mode-map
   "Menu for `treemacs-mode'."
   `("Treemacs"

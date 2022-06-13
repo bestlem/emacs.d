@@ -8,7 +8,6 @@
 :END:
 
 Emacs 27 introduces early-init.el to go stuff before the graphics - basically package and some gui suppression
-This is taken from https://github.com/MatthewZMD/.emacs.d/blob/master/early-init.el and https://gitlab.com/protesilaos/dotfiles/blob/master/emacs/.emacs.d/emacs-init.org but many see the same
 
 ** TODO Startup
 :PROPERTIES:
@@ -494,16 +493,12 @@ Perhaps might need to sort by length as - is before . so lisp.org loads after li
 #+end_src
 ** The Load
 :PROPERTIES:
-:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:97D3202A-5B42-411F-9312-331821931E25
+:ID:       org_mark_mini20.local:20220613T182746.504886
 :END:
 Also switch between an alternate setup - ideally should be driven from command line but.....
 
 #+NAME: org_mark_mini12.local_20201213T195905.304356
 #+begin_src emacs-lisp
-;; (if (>= emacs-major-version 28)
-;; 	(load (concat (expand-file-name "alt/alt_init" mwb-user-emacs-directory) ".el"))
-;;   (mwb-init-load "config" "no-org"))
-
-;; (load (concat (expand-file-name "alt/alt_init" mwb-user-emacs-directory) ".el"))
-(mwb-init-load "init/all-no-org" "no-org")
+;; 	(load (concat (expand-file-name "alt/alt_init" mwb-user-emacs-directory) ".el")
+(mwb-init-load "config" "no-org")
 #+end_src

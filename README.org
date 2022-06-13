@@ -26,7 +26,7 @@ init.org contains the minimal amout to load otyher things so in essence should n
 
 There is now an alternate - which is a way to try other init setups
 
-** config.org
+** config.org nor init/all-in-one.org
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210424T122437.573251
 :END:
@@ -54,17 +54,13 @@ Ideally this should just controls the order of loading things but originally did
 :ID:       org_mark_mini20.local:20210424T155316.631696
 :END:
 This controls how emacs works. Sets up the environment for how other things work.
-This is behaviour.org , completion.org and then all the file in behaviours ibuffer is a mode and can be separated out.
-In general these are needed and can't be lazy loaded.
 Given latest insight to prog-modes - this is mainly minor modes that need to be available and not loaded after a major mode.
+They are all minor modes grouped by some commonality and are loaded from init/behaviours
 *** modes
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210424T155316.629706
 :END:
-Originally programming modes but these are all the modes. The load order dies not need to be determined.
-Much of progmodes.org can be put into individual modes or behaviours.
-In general any lazy loaded stuff can go here.
-Actually this looks like this is major mode specific stuff
+Originally programming modes but these are all the major modes. The load order dies not need to be determined.
 *** command completion
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210424T171159.512509
@@ -221,9 +217,10 @@ Start by tangle on save if in init dir [[https://emacs.stackexchange.com/a/20733
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210424T122854.183708
 :END:
- This file runs under Aquamacs, I use Aquamacs because it was the easiest distribution to set up in 2002. Nowadays with package loaders and starter kits this is not so needed.
+This file runs under Aquamacs, I use Aquamacs because it was the easiest distribution to set up in 2002. Nowadays with package loaders and starter kits this is not so needed.
  Aquamacs does have one advantage it uses Apple's spellchecker and that will not be rolled into GNU.
- Aquamacs though is old Aquamacs 3.4 GNU Emacs 25.3.50.1 Emacs is now on 26 and has been for over a year but if we just need new packages then version is OK.
+Aquamacs though is old Aquamacs 3.4 GNU Emacs 25.3.50.1 Emacs is now on 26 and has been for over a year but if we just need new packages then version is OK.
+Now in 2022 some packages need emacs 26.1 and so don't use.
 
 *** user-emacs-directory
 :PROPERTIES:

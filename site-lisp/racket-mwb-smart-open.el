@@ -25,10 +25,11 @@
 (require 'racket-parens)
 (require 'racket-ppss)
 (require 'racket-util)
+(require 'lispy)
 
 ;;;###autoload
 (define-minor-mode racket-mwb-smart-open-bracket-mode
-    "Minor mode to let you always type `[`' to insert `(` or `[` automatically.
+  "Minor mode to let you always type `[`' to insert `(` or `[` automatically.
 
 Alter to use lispy
 Behaves like the \"Automatically adjust opening square brackets\"
@@ -66,7 +67,7 @@ the variable `minor-mode-map-alist'."
   :keymap (racket--easy-keymap-define
            '(("[" racket-mwb-smart-open-bracket)))
   (unless (memq major-mode '(racket-mode racket-repl-mode))
-    (setq racket-smart-open-bracket-mode nil)
+    (defvar racket-smart-open-bracket-mode nil)
     (user-error "racket-smart-open-bracket-mode only works with with Racket Mode buffers")))
 
 (defconst racket--smart-open-bracket-data

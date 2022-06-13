@@ -2,51 +2,7 @@
 #+AUTHOR: Mark Bestley
 #+EMAIL:  emacs@bestley.co.uk
 #+PROPERTY:header-args :cache yes :tangle yes :comments noweb
-#+STARTUP: overview
-
-* Table of Contents                                                   :TOC:3:
-:PROPERTIES:
-:ID:       org_2020-12-08+00-00:43A5679B-7627-4459-9E27-050BEFAB7B84
-:VISIBILITY: all
-:END:
-- [[#global-key-bindings-musings][Global key bindings musings]]
-  - [[#how-to-bind][How to bind]]
-  - [[#keyboard-thoughts][Keyboard Thoughts]]
-- [[#mac-modifier-key-bindings][Mac modifier key Bindings]]
-- [[#key-based-code][Key based code]]
-  - [[#which-key][Which Key]]
-  - [[#display-keys-in-help-and-menus][Display keys in help and menus]]
-  - [[#freekeys][FreeKeys]]
-  - [[#log-keys][Log keys]]
-- [[#bindings-grouped-by-topic][Bindings grouped by topic]]
-  - [[#homeendpaging][Home/End/Paging]]
-  - [[#cua-bindings][Cua bindings]]
-  - [[#scrolling][Scrolling]]
-  - [[#deleting-and-return][Deleting and return]]
-  - [[#undo][undo]]
-  - [[#old-bindings][Old bindings]]
-  - [[#quickrun][quickrun]]
-  - [[#file-actions][File actions]]
-  - [[#buffer-related][Buffer related]]
-- [[#single-key-bindings][Single key bindings]]
-  - [[#function-keys][Function keys]]
-  - [[#hyper-key-bindings][Hyper key bindings]]
-  - [[#other][Other]]
-  - [[#toggle-treemode-as-needed-often][Toggle treemode as needed often]]
-  - [[#control-x-binding][Control x binding]]
-- [[#mouse][Mouse]]
-  - [[#imenu][iMenu]]
-  - [[#macos-mouse][Macos mouse]]
-  - [[#mouse-3][Mouse 3]]
-  - [[#emacs-context-menu][Emacs context-menu]]
-  - [[#insert-at-point-using-mouse-to-select][Insert at point using mouse to select]]
-- [[#hydra][Hydra]]
-  - [[#leader-keys][Leader keys]]
-  - [[#ctrl-x-hydra][Ctrl-x hydra]]
-  - [[#hydra-transpose][Hydra transpose]]
-  - [[#goto][Goto]]
-  - [[#search][Search]]
-  - [[#kitchin-hydras][Kitchin hydras]]
+#+STARTUP: show2levels
 
 * Global key bindings musings
 :PROPERTIES:

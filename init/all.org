@@ -191,6 +191,26 @@ These tend to be settings of minor modes
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:0E3CCAD4-14DB-4481-8235-F04F840DF4AD
 :END:
 Where there is common put them together. This part is really why I have separate files so I can deal with one thing at a time. But thing is more than one mode.
+** Support data
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220612T185002.003075
+:END:
+Some things are set for families of modes so give a function to hook.
+#+NAME: org_mark_mini20.local_20220612T185001.987359
+#+begin_src emacs-lisp
+(defconst mwb-lisp-modes '(lisp-mode
+						   lisp-data-mode
+						   lisp-interaction-mode
+						   racket-mode
+						   racket-xp-mode
+						   racket-repl-mode
+						   inferior-emacs-lisp-mode)
+  "Mode that are lisp like")
+(defconst mwb-braces-modes '(c-mode
+							 cpp-mode
+							 objc-mode
+							 ))
+#+end_src
 
 Lets just load them not explicitly - everything in prog-modes (a better name would be modes or config However leave as this breaks git history and I break enough - pity bazaar failed)
 #+NAME: org_mark_mini20.local_20210126T225208.743497

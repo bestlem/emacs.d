@@ -550,6 +550,17 @@ Need key setting menus.
 		str))))
 (use-package use-package-hydra :ensure t)
 #+end_src
+***** use-package-hydra
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220613T092246.220445
+:END:
+There are some non pretty ones
+#+NAME: org_mark_mini20.local_20220613T092246.202470
+#+begin_src emacs-lisp
+(use-package-elpa use-package-hydra
+  :demand
+  :after hydra)
+#+end_src
 ***** major mode hydra
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:B0B1AA76-E4F7-424D-A9EA-1E430BD90E28

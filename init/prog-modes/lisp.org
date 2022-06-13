@@ -57,7 +57,9 @@ Changes are now made directly to the package which is only now here
 (use-package lispy-mnemonic
   :mwb-load-path "site-lisp/lispy-mnemonic"
   ;; :init (lispy-mode 1)
+  :commands lispy-mnemonic-mode
   :hook ((emacs-lisp-mode
+          lisp-data-mode
           lisp-interaction-mode
           racket-mode
           racket-xp-mode

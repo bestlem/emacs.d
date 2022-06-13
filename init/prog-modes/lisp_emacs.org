@@ -455,8 +455,7 @@ Construct them visually
 Needs a hydra
 #+NAME: org_mark_2020-10-25T21-37-40+00-00_mini12.local_92CA5AF7-601D-4F23-87CA-0CFD95B24FE6
 #+begin_src emacs-lisp
-(use-package re-builder
-  :defer t
+(use-package-elpa re-builder
   :commands (re-builder)
   :config
   (setq reb-re-syntax 'rx))

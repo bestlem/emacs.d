@@ -9632,6 +9632,60 @@ See `pulsar-mode' for more information on Pulsar mode.
 
 
 )
+(let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/prism-20210804.417/prism-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/prism-20210804.417/prism-autoloads.el"))
+
+(add-to-list 'load-path (directory-file-name
+                         (or (file-name-directory "/Users/mark/.emacs.d/elpa/28/prism-20210804.417/prism-autoloads.el") (car load-path))))
+
+
+
+(autoload 'prism-mode "prism" "\
+Disperse lisp forms (and other non-whitespace-sensitive syntax) into a spectrum of colors according to depth.
+Depth is determined by list nesting.  Suitable for Lisp, C-like
+languages, etc.
+
+This is a minor mode.  If called interactively, toggle the `Prism
+mode' mode.  If the prefix argument is positive, enable the mode,
+and if it is zero or negative, disable the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `prism-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'prism-whitespace-mode "prism" "\
+Disperse whitespace-sensitive syntax into a spectrum of colors according to depth.
+Depth is determined by indentation and list nesting.  Suitable
+for Python, Haskell, etc.
+
+This is a minor mode.  If called interactively, toggle the
+`Prism-Whitespace mode' mode.  If the prefix argument is
+positive, enable the mode, and if it is zero or negative, disable
+the mode.
+
+If called from Lisp, toggle the mode if ARG is `toggle'.
+Enable the mode if ARG is nil, omitted, or is a positive number.
+Disable the mode if ARG is a negative number.
+
+To check whether the minor mode is enabled in the current buffer,
+evaluate `prism-whitespace-mode'.
+
+The mode's hook is called both when the mode is enabled and when
+it is disabled.
+
+\(fn &optional ARG)" t nil)
+
+(register-definition-prefixes "prism" '("prism-"))
+
+
+)
 (let ((load-true-file-name "/Users/mark/.emacs.d/elpa/28/pretty-hydra-20210221.834/pretty-hydra-autoloads.el")(load-file-name "/Users/mark/.emacs.d/elpa/28/pretty-hydra-20210221.834/pretty-hydra-autoloads.el"))
 
 (add-to-list 'load-path (directory-file-name
@@ -18204,7 +18258,7 @@ mode.
 )
 (setq package-activated-list
 	  (append
-	   '(zoutline zenburn-theme yasnippet yasnippet-snippets yaml-mode xterm-color xr ws-butler compat with-editor posframe which-key which-key-posframe wgrep web-mode vlf vertico validate bind-key use-package use-package-hydra projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit-section magit treemacs-magit treemacs-icons-dired transient-posframe toc-org test-simple ivy swiper swift-mode f spinner markdown-mode lsp-mode swift-helpful svg-lib all-the-icons powerline spaceline memoize spaceline-all-the-icons solarized-theme sml-mode smartparens sesman prescient selectrum selectrum-prescient rust-mode request load-relative loc-changes realgud rainbow-delimiters racket-mode queue python-mode pulsar pretty-hydra pos-tip popup epl pkg-info persistent-scratch parseclj parseedn paredit paradox packed outorg outshine osx-trash org-bullets orderless kv esxml nov mwim multiple-cursors modus-themes mmm-mode minions mini-frame math-symbol-lists material-theme marginalia makey major-mode-hydra macrostep list-utils iedit lispy lisp-extra-font-lock kind-icon keyfreq json-snatcher hierarchy json-navigator json-mode ignoramus ibuffer-vc highlight-parentheses highlight-indent-guides elisp-refs helpful hardhat git-timemachine git-modes git-messenger git-gutter ggtags gcmh fsharp-mode free-keys flycheck flycheck-swift fish-mode expand-region eval-in-repl eros clang-format emr embark consult embark-consult elmacro dtrt-indent dockerfile-mode discover-my-major dired-hacks-utils dired-subtree diminish deadgrep counsel corfu company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 cmake-mode clojure-mode cider cask-mode cape calibredb bison-mode benchmark-init beacon auto-compile auctex async amx all-the-icons-completion aggressive-indent)
+	   '(zoutline zenburn-theme yasnippet yasnippet-snippets yaml-mode xterm-color xr ws-butler compat with-editor posframe which-key which-key-posframe wgrep web-mode vlf vertico validate bind-key use-package use-package-hydra projectile dash s avy ace-window pfuture lv hydra ht cfrs treemacs treemacs-projectile transient git-commit magit-section magit treemacs-magit treemacs-icons-dired transient-posframe toc-org test-simple ivy swiper swift-mode f spinner markdown-mode lsp-mode swift-helpful svg-lib all-the-icons powerline spaceline memoize spaceline-all-the-icons solarized-theme sml-mode smartparens sesman prescient selectrum selectrum-prescient rust-mode request load-relative loc-changes realgud rainbow-delimiters racket-mode queue python-mode pulsar prism pretty-hydra pos-tip popup epl pkg-info persistent-scratch parseclj parseedn paredit paradox packed outorg outshine osx-trash org-bullets orderless kv esxml nov mwim multiple-cursors modus-themes mmm-mode minions mini-frame math-symbol-lists material-theme marginalia makey major-mode-hydra macrostep list-utils iedit lispy lisp-extra-font-lock kind-icon keyfreq json-snatcher hierarchy json-navigator json-mode ignoramus ibuffer-vc highlight-parentheses highlight-indent-guides elisp-refs helpful hardhat git-timemachine git-modes git-messenger git-gutter ggtags gcmh fsharp-mode free-keys flycheck flycheck-swift fish-mode expand-region eval-in-repl eros clang-format emr embark consult embark-consult elmacro dtrt-indent dockerfile-mode discover-my-major dired-hacks-utils dired-subtree diminish deadgrep counsel corfu company company-quickhelp company-prescient company-posframe company-math comment-dwim-2 cmake-mode clojure-mode cider cask-mode cape calibredb bison-mode benchmark-init beacon auto-compile auctex async amx all-the-icons-completion aggressive-indent)
 	   package-activated-list))
 (progn
   (require 'info)

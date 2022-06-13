@@ -101,20 +101,6 @@ Example to show them all
 (dolist (ele '(material wicon octicon faicon fileicon alltheicon))
   (all-the-icons-insert-icons-for ele))
 #+end_example
-* Structure
-:PROPERTIES:
-:ID:       org_mark_2020-10-03T14-51-52+01-00_mini12.local:2E4982D0-8D77-435D-8651-A796B057CCD7
-:END:
-Show depending on the data
-** Parentheses
-:PROPERTIES:
-:ID:       org_mark_2020-10-03T14-51-52+01-00_mini12.local:754AAB64-605A-4908-B996-EC39FE3B1A50
-:END:
-These are set by Aquamacs but might as well reinforce
-#+NAME: org_mark_2020-10-03T14-51-52+01-00_mini12.local_710A037E-01EF-44EC-9777-90F0194127E9
-#+begin_src emacs-lisp
-(show-paren-mode t)
-#+end_src
 * Show current line for errors etc
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:D9CBE07A-A1B7-48CB-A163-039F8E86A954
@@ -320,7 +306,6 @@ Move customization out
   :custom (fringe-mode '(nil . 0)))
 #+end_src
 
-
 * Frames
 :PROPERTIES:
 :ID:       org_2020-12-03+00-00:1B23DC2B-5C55-4813-92A9-04D1291698B2
@@ -503,12 +488,6 @@ vivendi is dark
   (modus-themes-load-vivendi)
   )
 #+end_src
-*** TODO Prism
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20220604T093552.919193
-:END:
-See https://github.com/alphapapa/prism.el/issues/8 to add
-
 ** Sounds
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210628T102012.945985

@@ -81,7 +81,8 @@ Flycheck just checks for space - ie emacs hidden buffers.
 
 See Info node `(elisp)Buffer Names' for information about
 ephemeral buffers."
-  (string-prefix-p " " (buffer-name)))
+  (or (string-prefix-p " " (buffer-name))
+	  (string-prefix-p "*Org Src " (buffer-name))))
 #+end_src
 **** Disable modes
 :PROPERTIES:

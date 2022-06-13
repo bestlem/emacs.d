@@ -504,6 +504,7 @@ Reduce the number of times the bell rings. Turn off the bell for the listed func
                         abort-recursive-edit
                         exit-minibuffer
                         keyboard-quit
+                        flycheck-mode
                         previous-line
                         next-line
                         scroll-down

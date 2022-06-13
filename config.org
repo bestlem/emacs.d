@@ -757,7 +757,7 @@ Needs to load immeduiately to load the other customization files
           ))
   (setq initsplit-customizations-alist
         '(
-          ("\\`\\(gnus\\|nn\\|message\\|mail\\|mm-\\|smtp\\|send-mail\\|check-mail\\|spam\\|sc-\\)" "gnus-settings.el" nil t)
+          ("\\`\\(gnus\\|nn\\|canlock-\\|message\\|mail\\|mm-\\|smtp\\|send-mail\\|check-mail\\|spam\\|sc-\\)" "gnus-settings.el" nil t)
           ("\\`\\(org-\\|hl-todo-\\|deft-\\|cfw:\\)" "org-settings.el" nil t)))
   :custom
   ;; Set here and not in custom as the values need evaluation of the running environment
@@ -767,6 +767,7 @@ Needs to load immeduiately to load the other customization files
     (unless (string-equal system-type "darwin") "mac")
     (unless (>= emacs-major-version 26) "modus")
     (unless (string-equal system-type "windows") "MSWindows"))))
+
 #+end_src
 ** Key bindings
 :PROPERTIES:

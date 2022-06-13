@@ -37,7 +37,7 @@ Although that should be in prog mode
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220612T130916.315429
 :END:
-Use prism which is sort of descended from rainbow-delimiters.
+Use prism which is sort of descended from rainbow-mode.
 See https://github.com/alphapapa/prism.el/issues/8 to add
 #+NAME: org_mark_mini20.local_20220612T124244.221077
 #+begin_src emacs-lisp
@@ -45,21 +45,45 @@ See https://github.com/alphapapa/prism.el/issues/8 to add
   :commands prism-mode prism-whitespace-mode
   :config
   (setq prism-comments nil)             ; non-nil distorts colours
-  (setq prism-num-faces 8)
+  (setq prism-num-faces 16)
+
+  (cond ((eq prism-num-faces 8)  (prism-set-colors
+								   :desaturations '(0) ; may lower the contrast ratio
+								   :lightens '(0)	   ; same
+								   :colors (modus-themes-with-colors
+											 `(,fg-special-cold
+											   ,magenta
+											   ,magenta-alt-other
+											   ,cyan-alt-other
+											   ,fg-main
+											   ,blue-alt
+											   ,red-alt-other
+											   ,cyan))))
+		((eq prism-num-faces 16) (prism-set-colors
+								   :desaturations '(0) ; do not change---may lower the contrast ratio
+								   :lightens '(0)      ; same
+								   :colors (modus-themes-with-colors
+											 (list fg-main
+												   magenta
+												   cyan-alt-other
+												   magenta-alt-other
+												   blue
+												   magenta-alt
+												   cyan-alt
+												   red-alt-other
+												   green
+												   fg-main
+												   cyan
+												   yellow
+												   blue-alt
+												   red-alt
+												   green-alt-other
+												   fg-special-warm))))
+		(t 'nil))
+
 
   ;; for 8 colours
-  (prism-set-colors
-   :desaturations '(0)                  ; may lower the contrast ratio
-   :lightens '(0)                       ; same
-   :colors (modus-themes-with-colors
-             `(,fg-special-cold
-               ,magenta
-               ,magenta-alt-other
-               ,cyan-alt-other
-               ,fg-main
-               ,blue-alt
-               ,red-alt-other
-               ,cyan))))
+  )
 #+end_src
 *** Setup the format
 :PROPERTIES:

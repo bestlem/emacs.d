@@ -7,7 +7,7 @@
  '(modus-themes-completions
    '((matches extrabold background intense)
 	 (selection semibold accented intense)
-	 (popup accented)))
+	 (popup text-also accented intense)))
  '(modus-themes-fringes 'subtle)
  '(modus-themes-headings
    '((t rainbow-highlight bold background variable-pitch 1.25)))
@@ -16,7 +16,7 @@
  '(modus-themes-intense-markup t)
  '(modus-themes-italic-constructs t)
  '(modus-themes-lang-checkers
-   '(straight-underline text-also))
+   '(straight-underline background))
  '(modus-themes-mixed-fonts t)
  '(modus-themes-mode-line
    '(accented))
@@ -28,5 +28,5 @@
  '(modus-themes-region
    '(bg-only accented))
  '(modus-themes-syntax
-   '(yellow-comments green-strings alt-syntax))
+   '(green-strings alt-syntax))
  '(modus-themes-variable-pitch-ui nil))

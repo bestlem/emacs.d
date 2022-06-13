@@ -413,8 +413,12 @@ This is actually from Modi's  [[https://github.com/kaushalmodi/.emacs.d/blob/7ca
 :END:
 Partially disabled from https://github.com/IvanMalison/dotfiles/tree/master/dotfiles/emacs.d
 Original just stops check for all the package and documentation heading. Need to make it not check for undefined in *xxx* buffers
+
+I then did this in flycheck setup.
+However I want to deal with org src stuff so needs to hack flycheck.
+So ignore this.
 #+NAME: org_2020-12-02+00-00_7F1FCFB3-782A-4154-AF60-ABEDAAD3F4C5
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (defun imalison:maybe-remove-flycheck-checkdoc-checker ()
   (when (s-starts-with? "*" (buffer-name))
     (flycheck-disable-checker 'emacs-lisp-checkdoc)))

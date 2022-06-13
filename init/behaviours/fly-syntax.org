@@ -1,6 +1,6 @@
 #+TITLE Emacs configuration org Check on the fly
 #+PROPERTY:header-args :cache yes :tangle yes  :comments link
-
+#+STARTUP: show2levels
 * Report on the fly
 :PROPERTIES:
 :ID:       org_mark_2020-11-09T11-32-01+00-00_mini12.local:0ECCD41D-B2B9-4183-A618-D1256CA9090F
@@ -37,21 +37,31 @@ Added things from centaur. Especially for emacs-lisp
   <<flycheck-init>>
   :config
   (global-flycheck-mode)
+  <<flycheck-config>>
   <<flycheck-hydra>>)
 #+end_src
 *** Set modes for which it is used
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210504T172051.622727
 :END:
-I don't like `global-flycheck-mode' everywhere  some modes, such as elisp mode; don't need.
+I don't like `global-flycheck-mode' everywhere  some modes,
 
- racket seems to have issues with this and company
+I get issues with org-src editing as for elisp we don't have the whole context.
+
+racket uses its own checker.
 **** Disable some checkers
 :PROPERTIES:
+:ID:       org_mark_mini20.local:20220613T131116.470481
+:END:
+Originally I disabled just emacs-lisp-checkdoc both here and in [[file:~/.emacs.d/init/prog-emacs/lisp_emacs.org][lisp_emacs]] but now I want to disable all in org src buffers and the only way I can see is replace flycheck-ephemeral-buffer-p in flycheck itself.
+***** Just disable checkdoc.
+:PROPERTIES:
 :ID:       org_mark_mini20.local:20210504T172051.621095
+:HEADER-ARGS: :tangle no
 :END:
 This is to stop check for full package level emacs lisp documentation. But really only need that in org-src
 
+But I did this in emacs-lisp file.
 #+NAME: org_mark_mini20.local_20210504T172051.605822
 #+begin_src emacs-lisp :tangle no :noweb-ref flycheck-init
 (defun -mwb-org-src-hook-flycheck-fn ()
@@ -59,11 +69,26 @@ This is to stop check for full package level emacs lisp documentation. But reall
 
 (add-hook 'org-src-mode-hook #'-mwb-org-src-hook-flycheck-fn )
 #+end_src
+***** Alter flycheck-ephemeral-buffer-p
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220613T131116.462432
+:END:
+Flycheck just checks for space - ie emacs hidden buffers.
+#+NAME: org_mark_mini20.local_20220613T131116.443867
+#+begin_src emacs-lisp :tangle no :noweb-ref flycheck-config
+(defun flycheck-ephemeral-buffer-p ()
+  "Determine whether the current buffer is an ephemeral buffer.
+
+See Info node `(elisp)Buffer Names' for information about
+ephemeral buffers."
+  (string-prefix-p " " (buffer-name)))
+#+end_src
 **** Disable modes
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210504T172342.698972
 :END:
 Found the correct way https://emacs.stackexchange.com/a/21046/9874
+Note the not at the start.
 #+NAME: org_mark_mini20.local_20210504T172342.686752
 #+begin_src emacs-lisp :tangle no :noweb-ref flycheck-init
 (setq flycheck-global-modes '(not

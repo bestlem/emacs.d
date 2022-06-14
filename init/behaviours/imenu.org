@@ -41,9 +41,6 @@ Setup for all prog modes
 #+NAME: org_mark_mini20.local_20210828T133944.980854
 #+begin_src emacs-lisp
 (use-feature which-func
-  :hook (prog-mode . which-function-mode))
+  :demand
+  :config (which-func-mode))
 #+end_src
-** TODO Actually it is a global mode and works if imenu does
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20220609T100315.987123
-:END:

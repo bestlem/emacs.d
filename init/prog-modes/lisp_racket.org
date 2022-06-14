@@ -26,6 +26,7 @@ Got odd behaviour on completion last letter underlined and stuff in echo area, i
 The racket-mode version seems to invoke quail which confused me - it might stop company but I am not sure
 Also see [[https://github.com/david-christiansen/dr-racket-like-unicode/blob/master/dr-racket-like-unicode.el][this mode]] that can do a completion - also look at abbrev
 Trying company math ie //gamma
+Now see rfc completion in cape. Basically &<letter>*
 *** Completions
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20201221T122900.927064

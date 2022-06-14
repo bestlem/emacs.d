@@ -403,11 +403,6 @@ Try git-gutter-fringe but seems to clash [[https://github.com/emacsorphanage/git
     (("g" hydra-git-gutter/body "gutter"))))
   )
 #+end_src
-*** TODO Add a consult to move between hunks
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20220612T114243.217186
-:END:
-See https://blog.binchen.org/posts/new-git-timemachine-ui-based-on-ivy-mode.html for an ivy version.
 * Smerge
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210813T230728.367536

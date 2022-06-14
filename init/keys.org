@@ -73,7 +73,7 @@ The latest MS [[https://docs.microsoft.com/en-us/visualstudio/ide/default-keyboa
 :END:
 Following Xah Lee's comments and seeing [[http://xahlee.info/kbd/space-cadet_keyboard.html][The Space Cadet Keyboard]] which is what emacs was implemented on and they keys outwards of space are control, Meta, Special and Hyper. So I tried binding so it went control, meta, super and caps lock as hyper but I am too used to the Apple binding so went back to Command, Meta and control with caps lock as hyper (and right Windows key). However the control key is difficult to hit.
 
-**** TODO Xah Lee bracket binding
+**** Xah Lee bracket binding
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:0B6A7551-799C-4E98-8C70-D25F6B1ECF97
 :END:
@@ -813,6 +813,8 @@ How does this work with ivy
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:A15CC8C1-7203-4FD0-8E6B-F0923D40F40D
 :END:
 Aquamacs also messes around with isearch and the two don't exactly match. Which might be a good thing
+cmd-f is now consult - shows in minibuffer
+Look at [[https://github.com/radian-software/ctrlf][ctrlf]] this is more like isearch.
 ** Kitchin hydras
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:CA320A7E-C8CE-4C9D-B24B-C7FFE5F04B9C

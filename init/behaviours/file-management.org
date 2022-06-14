@@ -1,7 +1,7 @@
 #+TITLE Emacs configuration - file management
 #+PROPERTY:header-args :cache yes :tangle yes :comments link
 #+STARTUP: content
-* TODO Trash
+*  Trash
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:D2691EE6-AB96-4EB1-A369-A3CDACD148E2
 :END:
@@ -95,9 +95,6 @@ Now changed to one directory as I have found backup-walker
 		(".*" . "~/.cache/emacs/backups")
 		;; ("." . ".~")
 		))
-
-;; (setq tramp-backup-directory-alist `((,(rx (zero-or-more anything))
-;;                                        . my/tramp-backup-directory)))
 #+end_src
 ** Backup on save
 :PROPERTIES:
@@ -363,12 +360,9 @@ The problem is that we have regex
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:D8E61D05-2A53-45CF-A59D-EC1D1883BAC5
 :END:
-#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_0D6F8AAE-7969-4A3F-BF32-C60F266749AB
 From original not certain how used now.
 #+NAME: org_mark_2020-10-01T11-27-32+01-00_mini12.local_CD86B2AF-5CC6-4C90-AFED-8A52D571E7A2
 #+begin_src emacs-lisp
-;; Transparently open compressed files
-(auto-compression-mode t)
 
 ;; Old commented out code - need to review
 
@@ -382,6 +376,10 @@ From original not certain how used now.
 ;; 	  (cons '("\\.gz$" . uncompress-while-visiting) auto-mode-alist))
 ;; (setq auto-mode-alist
 ;;       (cons '("\\.tgz$" . uncompress-while-visiting) auto-mode-alist))
+
+
+;; Transparently open compressed files
+(auto-compression-mode t)
 #+end_src
 
 * Project management

@@ -128,7 +128,7 @@ Set this up so can use weave to load extra code. Originally in a .el file but I 
 Modified to deal with lispy - lispy does not quite do it e.g. [ on a region does not leave space after (
 #+NAME: org_mark_mini12.local_20210104T233820.572671
 #+begin_src emacs-lisp
-(use-package racket-mwb-smart-open
+(use-feature racket-mwb-smart-open
     :after racket-mode
     :demand t
     :diminish racket-mwb-smart-open-bracket-mode)

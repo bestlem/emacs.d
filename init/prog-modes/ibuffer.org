@@ -25,7 +25,7 @@ On really forcing loading etc this still loads immediately after-init but should
    The overall load.
    #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_8FD96F98-B122-4E26-BC6D-62735E12E33F
    #+begin_src emacs-lisp
-(use-package ibuffer
+(use-feature ibuffer
   :bind (("C-x C-b" . ibuffer)
          ("A-M-b" . ibuffer)
          :map ibuffer-mode-map

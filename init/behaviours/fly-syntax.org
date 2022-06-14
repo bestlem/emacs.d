@@ -12,7 +12,7 @@
   Need to start from scratch. I do have it for emacs but as code in org mode not an elisp file a bit of a waste
   #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_57ABBF6F-52E5-4B09-81FB-4B71119DE3DC
   #+begin_src emacs-lisp
-(use-package flymake
+(use-feature flymake
   ;; :unless (version< emacs-version "26.1")
   :disabled
   :diminish

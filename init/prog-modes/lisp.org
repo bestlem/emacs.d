@@ -54,7 +54,7 @@ It assumes things like clojure
 Changes are now made directly to the package which is only now here
 #+NAME: org_mark_mini20.local_20210829T122427.146425
 #+begin_src emacs-lisp
-(use-package lispy-mnemonic
+(use-feature lispy-mnemonic
   :mwb-load-path "site-lisp/lispy-mnemonic"
   ;; :init (lispy-mode 1)
   :commands lispy-mnemonic-mode

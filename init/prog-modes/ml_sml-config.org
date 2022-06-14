@@ -41,7 +41,7 @@ Make this one file as loading is now all files.
 Separated out
 #+NAME: org_mark_2020-11-10T11-48-28+00-00_mini12.local_8FC71439-07B8-480C-A285-3C0F6AA4192C
 #+begin_src emacs-lisp
-(use-package ob-sml
+(use-feature ob-sml
   :demand
   :after (sml-mode org-mode)
   :mwb-load-path "fork/ob-sml")
@@ -206,12 +206,12 @@ Setup smartparens to allow insert of comments
 Hmm prob OK for the code, but my tests ar a large thing not one expr + you need to send the ; separately
 
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_3ADF6D5F-A5EB-4041-A8B4-17DD2B99F4F6
-#+BEGIN_SRC emacs-lisp
-(use-package eval-in-repl-sml
+#+BEGIN_SRC emacs-lisp :tangle no
+(use-feature eval-in-repl-sml
   :demand t
-:after (sml-mode)
+  :after (sml-mode)
   :config
   ;; Evaluate expression in the current buffer.
   :bind (:map sml-mode-map ("<f6>" . eir-eval-in-sml)
-	      ("H-;" . eir-send-to-sml-semicolon )))
+	     ("H-;" . eir-send-to-sml-semicolon )))
 #+END_SRC

@@ -74,13 +74,13 @@ Don't use the defaults look at the file
 :END:
 #+NAME: org_mark_mini20.local_20210526T195505.023756
 #+begin_src emacs-lisp
-(use-package guess-style
+(use-feature guess-style
   :mwb-load-path "fork/guess-style"
   :commands guess-style-guess-all
   guess-style-info-mode
   global-guess-style-info-mode
   )
-(global-guess-style-info-mode 1)        ; force the load
+(global-guess-style-info-mode 1)
 #+end_src
 * [[https://github.com/Malabarba/aggressive-indent-mode][Aggressive indent]]
 :PROPERTIES:

@@ -65,7 +65,7 @@ Other issue is for pure python in hard tab files - something sets the offset to 
 One in emacs and has things built on it but not enabled
 #+NAME: org_mark_2020-11-24T21-22-09+00-00_mini12.local_D8E951D0-C15C-4B10-AAC8-8DAF8382B214
 #+begin_src emacs-lisp
-(use-package python
+(use-feature python
   :disabled
   :mode
   ("\\.py\\'" . python-mode)
@@ -103,7 +103,7 @@ Need to set up execute (here or at start)
 There is now a xonsh mode
   #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_59880E6F-AD42-47DF-B04B-957600115D5D
   #+begin_src emacs-lisp
-(use-package xonsh-mode
+(use-feature xonsh-mode
   :mwb-load-path "fork/xonsh-mode"
   :mode "\\.xsh\\'")
   #+end_src
@@ -117,7 +117,7 @@ There is now a xonsh mode
 Might be better in elpy etc as for the pythonic issue.
 #+NAME: org_mark_mini20.local_20210127T110448.825291
  #+begin_src emacs-lisp
-(use-package conda
+(use-feature conda
   :mwb-load-path "fork/conda.el"
   :demand
   :after (python)

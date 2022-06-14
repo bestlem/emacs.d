@@ -45,7 +45,7 @@ Need a function to save an then do things
 :END:
 #+NAME: org_mark_mini20.local_20210724T104659.188563
 #+begin_src emacs-lisp
-(use-package emacs-lisp-mode
+(use-feature emacs-lisp-mode
   :bind (:map emacs-lisp-mode-map
 			  ("<f5>" . eval-buffer))
   :mode-hydra ((:idle 0.5)
@@ -106,7 +106,7 @@ The one thing I wanted ot for this time was to break an expression to a work per
     :disabled
     :demand                             ; need as not enough exposed to autoload
     :commands srefactor-lisp-format-sexp
-    :config (use-package srefactor-lisp))
+    :config (use-feature srefactor-lisp))
 #+end_src
 ** Extra font lock
 :PROPERTIES:

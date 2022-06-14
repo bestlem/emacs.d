@@ -10,7 +10,7 @@ But I seem to have lost all the mode associations
 So from jweigley
 #+NAME: org_mark_2020-11-23T16-09-29+00-00_mini12.local_891BF4BB-0615-4FC6-8454-E8519C3B009E
 #+begin_src emacs-lisp
-(use-package nxml-mode
+(use-feature nxml-mode
   :commands nxml-mode
   :bind (:map nxml-mode-map
               ("<return>" . newline-and-indent)
@@ -75,7 +75,7 @@ This is the standard mode
 	 See as a tree.
      #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_15E789B8-CDC5-4AEF-97F8-40F5C631D5D8
      #+begin_src emacs-lisp
-(use-package json-navigator
+(use-feature json-navigator
   :demand
   :after json-mode)
   #+end_src

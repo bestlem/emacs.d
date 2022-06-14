@@ -268,7 +268,7 @@ ALso see https://github.com/amno1/org-hide-properties
 :END:
 #+NAME: org_mark_mini20.local_20220605T223855.714238
 #+begin_src emacs-lisp
-(use-package org-hide-properties
+(use-feature org-hide-properties
   :mwb-load-path "fork/org-hide-properties"
   :hook (org-mode . org-hide-properties-mode)
   :config
@@ -285,7 +285,7 @@ TODO add property drawers
 The original has been updated
 #+NAME: org_mark_mini20.local_20210422T091310.076424
 #+begin_src emacs-lisp :tangle no :noweb-ref org-config
-(use-package ob-hide-markers
+(use-feature ob-hide-markers
   :disabled
   :mwb-load-path "fork/org-babel-hide-markers-mode"
   :hook (org-font-lock . org-babel-hide-markers-mode)
@@ -1524,7 +1524,7 @@ I should start using this
 Again from jerrypnz
 #+NAME: org_mark_2020-01-23T20-21-34+00-00_mini12_951A79B2-540A-4A60-B3FA-7EEA9F02A656
 #+begin_src emacs-lisp
-(use-package org-capture
+(use-feature org-capture
   ;; :after (org)
   :commands (org-capture)
   :bind (("<f13>" . org-capture)
@@ -1557,7 +1557,7 @@ I don't use but the hook is there. Main setup from Jerry Peng, needed as in org 
 Also in org-mouse so must be loaded
 #+NAME: org_mark_2020-01-23T20-21-34+00-00_mini12_D54091C8-6480-46A6-B79B-3350E35DA246
 #+begin_src emacs-lisp
-(use-package org-agenda
+(use-feature org-agenda
   :after (org)
   :commands (org-agenda)
   :config

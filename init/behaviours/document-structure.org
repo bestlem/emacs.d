@@ -227,7 +227,7 @@ Also see this answer for an addition to highlight indent mode https://stackoverf
 Let us set it up
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_E36E2091-3DAD-46AC-8634-EC11B5E795C7
 #+begin_src emacs-lisp
-(use-package hideshow
+(use-feature hideshow
     :diminish  hs-minor-mode
     :bind (:map hs-minor-mode-map
                 ("<C-mouse-1>" . hs-toggle-hiding))
@@ -252,7 +252,7 @@ Let us set it up
 Put markers in the fringe which messed up lispy and is slow - I suspect not for elisp.
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_C0B47E60-5C02-4FCD-AE13-ABA380EA4866
 #+begin_src emacs-lisp
-(use-package hideshowvis
+(use-feature hideshowvis
 :disabled
     :mwb-load-path "site-lisp/hideshowvis"
     :hook (prog-mode . hideshowvis-enable)

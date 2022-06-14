@@ -140,7 +140,7 @@ This is [[https://github.com/lewang/backup-walker][Backup Walker]]
 
 #+NAME: org_mark_mini20.local_20210605T200354.625130
 #+begin_src emacs-lisp
-(use-package backup-walker
+(use-feature backup-walker
   :mwb-load-path "fork/backup-walker"
   :commands backup-walker-start)
   #+end_src
@@ -399,7 +399,7 @@ This provides a cover for ripgrep.
 Now use a fork to allow search of ignored files.
 #+NAME: org_mark_mini20.local_20220527T140337.009175
 #+begin_src emacs-lisp
-(use-package deadgrep
+(use-feature deadgrep
   :commands deadgrep
   :mwb-load-path "fork/deadgrep"
   :bind (

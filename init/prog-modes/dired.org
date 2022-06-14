@@ -40,7 +40,7 @@ Need to allow more to expand - especially for macports
 Take from jweigley then find a hydra and prettify it.
 #+NAME: org_mark_2020-11-27T01-10-38+00-00_mini12.local_8A575AE6-49B6-4503-835E-19A6739AB60C
 #+begin_src emacs-lisp
-(use-package dired
+(use-feature dired
   :commands dired
   :bind (:map dired-mode-map
               ("j" . dired)
@@ -283,7 +283,7 @@ Originally oraemacs via jweigley
 Part of emacs but not loaded automatically by emacs.
 #+NAME: org_mark_2020-11-27T01-10-38+00-00_mini12.local_CA35C2DA-DA84-43A8-8E14-9DDCADEF692C
 #+begin_src emacs-lisp
-(use-package dired-x
+(use-feature dired-x
     :after dired
     :demand
     :init (setq-default dired-omit-files-p t)

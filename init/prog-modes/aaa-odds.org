@@ -179,7 +179,7 @@ BUT the problem is that if does selection of method by the keymap in each mode s
 Now turned off as not used
 #+NAME: org_mark_2020-02-10T11-53-11+00-00_mini12_F4F528CB-9078-4C05-B2A0-23ADCA372044
 #+BEGIN_SRC emacs-lisp
-(use-package  eval-in-repl-ielm
+(use-feature  eval-in-repl-ielm
   :config
   ;; Evaluate expression in the current buffer.
   (setq eir-ielm-eval-in-current-buffer t)

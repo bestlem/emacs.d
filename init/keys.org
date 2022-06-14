@@ -287,7 +287,7 @@ I suspect not touched since before ages. But need for macport
 Use Aquamacs'
 #+NAME: org_mark_mini12.local_20210102T131152.591658
 #+begin_src emacs-lisp
-(use-package aquamacs-redo
+(use-feature aquamacs-redo
     :unless *aquamacs*
     :demand t
     :bind ("A-z" . aquamacs-undo)
@@ -513,7 +513,7 @@ Try with an enhanced one but test to mouse-4 which might have issues with treema
 #+NAME: org_mark_mini12.local_20201213T170631.361457
 #+begin_src emacs-lisp
 (unless (or *emacs/>=28p* *aquamacs*)
-  (use-package mouse3
+  (use-feature mouse3
 	:demand
 	:mwb-load-path "site-lisp/Emacs_wiki"
 	:preface (unbind-key [mouse-3] macos-key-map)

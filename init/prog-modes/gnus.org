@@ -12,7 +12,7 @@
 Not valid lisp
 #+NAME: org_mark_mini12.local_20210110T204217.428432
 #+begin_src emacs-lisp
-(use-package gnus
+(use-feature gnus
     :commands gnus
     :preface
 <<gnus-preface>>
@@ -190,7 +190,7 @@ Put groups in order by my ranking (comes from NeXT news setup)
 Add a hydra https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/gnus-guide-en.org
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_2008EC6E-C927-4D6C-8F4A-F72FF33E521F
 #+begin_src emacs-lisp
-(use-package gnus-group
+(use-feature gnus-group
     :after gnus
 
     :mode-hydra (gnus-group-mode
@@ -333,7 +333,7 @@ Show nice characters for structure
 :END:
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_9DE6155E-257B-4E50-8963-F6F79E307C6A
 #+begin_src emacs-lisp
-(use-package gnus-sum
+(use-feature gnus-sum
     :mode-hydra (gnus-summary-mode
                  (:color blue)
                  ("Thread"
@@ -370,7 +370,7 @@ Show nice characters for structure
 From same place as above
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_E6250F15-2AC9-4CCC-8AC3-CFE8494CAD37
 #+begin_src emacs-lisp
-(use-package gnus-art
+(use-feature gnus-art
     :mode-hydra
   ("Reply"
    (("f" gnus-summary-followup-with-original "Forward to group")

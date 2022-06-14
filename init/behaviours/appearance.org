@@ -219,7 +219,7 @@ Try to highlight the line but it is messed up see https://emacs.stackexchange.co
 but the answer below has an interesting suggestion
 #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_68F04D98-3C61-4F98-9CC1-F4E152D2A007
 #+begin_src emacs-lisp
-(use-package hl-line
+(use-feature hl-line
   :defer 5
   :if window-system
   :preface

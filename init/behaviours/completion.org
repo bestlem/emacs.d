@@ -204,7 +204,7 @@ https://www.lucacambiaghi.com/vanilla-emacs/readme.html#h:240FC4A5-CDED-4456-9EB
 :END:
 #+NAME: org_mark_mini20.local_20220611T103022.797176
 #+begin_src emacs-lisp
-(use-package kind-icon
+(use-package-elpa kind-icon
   :after corfu :demand
   :custom
   (kind-icon-use-icons t)
@@ -424,7 +424,7 @@ Simple text replacement. From John Wiegley
 Also run the script from https://www.emacswiki.org/emacs/autocorrection_abbrev_defs to load a fix for typos but note I had to edit out the one for i as that will be lowercase in programming.
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_9B504DE4-BB8F-491A-83E8-60EC58B1D93C
 #+BEGIN_SRC emacs-lisp
-(use-package abbrev
+(use-feature abbrev
   :diminish
   :hook
   ((text-mode prog-mode erc-mode LaTeX-mode) . abbrev-mode)
@@ -448,7 +448,7 @@ Also run the script from https://www.emacswiki.org/emacs/autocorrection_abbrev_d
 This is another basic emacs thing.
  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_8B3666B4-3C4A-4546-9A17-9CAB5BC65623
  #+BEGIN_SRC emacs-lisp
- (use-package hippie-exp
+ (use-feature hippie-exp
    :bind (("M-/"   . hippie-expand)
           ("C-M-/" . dabbrev-completion)))
  #+END_SRC

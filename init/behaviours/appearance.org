@@ -208,7 +208,8 @@ Try this.
 
   ;; (dolist (hook '(org-mode-hook emacs-lisp-mode-hook))
   ;; 	(add-hook hook #'pulsar-mode))
-  )
+  :hook (consult-after-jump . pulsar-recenter-top)
+  (consult-after-jump . pulsar-reveal-entry))
 #+end_src
 
 ** Hi line

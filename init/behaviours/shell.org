@@ -58,10 +58,9 @@ As noted the aquamacs way might be better. But at the moment all disabled.
 #+NAME: org_mark_mini20.local_20210122T193718.254955
 #+begin_src emacs-lisp
 (setq exec-path-from-shell-debug nil)
-(use-package exec-path-from-shell
+(use-package-elpa exec-path-from-shell
   :disabled
   :when  (and (not *aquamacs*) (memq window-system '(mac ns x)))
-  :ensure t
   :init
   (setq exec-path-from-shell-variables '("PATH" "MANPATH" "CONDA_PREFIX"))
   :config
@@ -147,8 +146,7 @@ It is dealing with bashism - see makem.sh for some.
 Well the compilation buffer does not do much but there are ways for it to recognize more things e.g. ansi-color and now [[https://github.com/atomontage/xterm-color#usage][xterm-color]]
 #+NAME: org_mark_mini20.local_20210124T201155.641142
 #+begin_src emacs-lisp
-(use-package xterm-color
-  :ensure t
+(use-package-elpa xterm-color
   :defines (compilation-environment
             eshell-preoutput-filter-functions
             eshell-output-filter-functions)

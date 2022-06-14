@@ -165,8 +165,7 @@ Sometimes you might want to exclude specific files from super-save. You can achi
 
 #+NAME: org_mark_mini20.local_20210120T104054.741884
 #+begin_src emacs-lisp :tangle no
-(use-package super-save
-    :ensure t
+(use-package-elpa super-save
     :disabled
     :diminish
     :commands super-save-mode
@@ -416,10 +415,10 @@ Now use a fork to allow search of ignored files.
 :END:
 Might allow search in ignore files. It is more flexible but display is not as easy to use as you don't switch to found buffer and cannot tab to fold items
 #+NAME: org_mark_mini20.local_20210620T213143.089059
-#+begin_src emacs-lisp
-(use-package rg
+#+begin_src emacs-lisp :tangle :no
+(use-package-elpa rg
   :disabled
-  :ensure t)
+  )
 #+end_src
 ** Projectile
 :PROPERTIES:

@@ -1,60 +1,6 @@
 #+TITLE Emacs configuration org Mode - all the complete things
 #+PROPERTY:header-args :cache yes :tangle yes :comments noweb
-#+STARTUP: content
-* Table of Contents                                                   :TOC_4:
-:PROPERTIES:
-:ID:       org_mark_2020-10-24T15-08-22+01-00_mini12.local:8844FA08-DB9D-44FB-AE4D-189DDA7A2EAA
-:VISIBILITY: all
-:END:
-- [[#notes-on-using-org-mode][Notes on using org mode]]
-  - [[#use-package-issues][use package issues]]
-  - [[#noweb-issues][Noweb issues]]
-  - [[#grettke][Grettke]]
-  - [[#save-org-files-saved-in-dropbox-dir-automatically-nb-not-emacs-autosave][Save org files saved in dropbox dir automatically (NB not emacs autosave)]]
-  - [[#load-and-setup-org-mode][Load and setup org mode]]
-- [[#the-use-package-setup][The use package setup]]
-  - [[#support-functions][Support functions]]
-  - [[#use-package][use-package]]
-  - [[#key-bindings][Key bindings]]
-  - [[#hack-around][Hack around]]
-    - [[#org-capture][Org capture]]
-  - [[#tangle-on-save][Tangle on save]]
-  - [[#line-wrapping][Line wrapping]]
-  - [[#folding-visibility][Folding visibility]]
-  - [[#hide-property-drawers][Hide property drawers]]
-    - [[#manual-attempt][Manual attempt]]
-    - [[#melpa-code][MELPA code]]
-  - [[#hide--lines][Hide #+ lines]]
-  - [[#footnotes][Footnotes]]
-  - [[#babel-initialisation][Babel initialisation]]
-    - [[#grettke-babel][Grettke babel]]
-      - [[#minimal-config][Minimal config]]
-      - [[#fundamentals][Fundamentals]]
-      - [[#literate-programming][Literate Programming]]
-      - [[#helper-functions][Helper Functions]]
-      - [[#identity][Identity]]
-      - [[#tangling][Tangling]]
-      - [[#evaluating][Evaluating]]
-      - [[#weaving][Weaving]]
-    - [[#my-changes][My changes]]
-      - [[#tangling-1][Tangling]]
-      - [[#post-tangle][Post tangle]]
-      - [[#jump-to-generated-code][Jump to generated code]]
-  - [[#archive][Archive]]
-  - [[#main-mode-hydra][Main mode hydra]]
-- [[#setup-outside-use-package][Setup outside use-package]]
-  - [[#imenu-to-provide-info-for-treemacs-and-contextual-menu][Imenu to provide info for treemacs and contextual menu]]
-  - [[#prettify][Prettify]]
-    - [[#circular-bullets][Circular bullets]]
-      - [[#add-the-keywords-to-be-changed][Add the keywords to be changed]]
-    - [[#indent-other-text][Indent other text]]
-  - [[#table-of-contents-setup][Table of Contents setup]]
-  - [[#refile][Refile]]
-    - [[#code][Code]]
-    - [[#hydra][Hydra]]
-  - [[#capture][Capture]]
-  - [[#agenda][Agenda]]
-
+#+STARTUP: show2levels
 * Notes on using org mode
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:6810C5AF-469D-4E0E-BD24-8F6301313A91
@@ -1482,8 +1428,7 @@ Basically set to variable pitch font but note Aquamacs has a way (different of c
 From [[http://www.howardism.org/Technical/Emacs/orgmode-wordprocessor.html][here]]
  #+NAME: org_mark_2020-01-23T20-21-34+00-00_mini12_BD3DD793-C3F1-46EE-A7C2-72CA21C5066E
  #+begin_src emacs-lisp
-(use-package org-bullets
-  :ensure t
+(use-package-elpa org-bullets
   :hook (org-mode . org-bullets-mode))
  #+end_src
 
@@ -1509,10 +1454,9 @@ From [[http://www.howardism.org/Technical/Emacs/orgmode-wordprocessor.html][here
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:E1789BA1-AF3F-441B-95B6-1FD7ADABD862
 :END:
 	#+begin_src emacs-lisp
-(use-package org-indent
+(use-feature org-indent
   :after (org)
   :demand
-  :ensure nil
   :diminish)
 	#+end_src
 ** Table of Contents setup
@@ -1521,11 +1465,10 @@ From [[http://www.howardism.org/Technical/Emacs/orgmode-wordprocessor.html][here
 :END:
 This package [[https://github.com/snosov1/toc-org][toc-org]] seems it might be useful
 
-I think using treemacs is nearer what I need as puts menu in other window - although length matters
+I think using treemacs is nearer what I need as puts menu in other window - although length matters. Also set the startup to show 2 levels.
 #+NAME: org_mark_2020-10-24T15-08-22+01-00_mini12.local_E0715861-9815-4AA9-8E93-095091F21C56
 #+begin_src emacs-lisp
-(use-package toc-org
-  :ensure t
+(use-package-elpa toc-org
   :hook (org-mode . toc-org-mode))
 #+end_src
 

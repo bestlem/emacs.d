@@ -1,9 +1,8 @@
 #+TITLE:  Help
 #+AUTHOR: Mark Bestley
-#+EMAIL:  git@bestley.co.uk
 #+DATE:   07 Jul 2021
 #+PROPERTY:header-args :cache yes :tangle yes :comments noweb
-#+STARTUP: overview
+#+STARTUP: show2levels
 * Overview
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210707T125803.377704
@@ -63,7 +62,6 @@ Although that causes loading issues so done here. This also means the helpful ge
 This package helps to discover the major mode bindings. I use it very occasionally and hence not binding it to any modal binding.
 #+NAME: org_mark_mini20.local_20210526T204803.473143
 #+begin_src emacs-lisp
-(use-package discover-my-major
-  :commands (discover-my-mode discover-my-major)
-  :ensure t)
+(use-package-elpa discover-my-major
+  :commands (discover-my-mode discover-my-major))
 #+end_src

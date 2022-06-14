@@ -62,8 +62,7 @@ Don't use the defaults look at the file
 :END:
 #+NAME: org_2020-11-29+00-00_5DF7AA9A-5AD2-4C8E-8FFE-5D878310646D
 #+begin_src emacs-lisp
-(use-package dtrt-indent
-  :ensure t
+(use-package-elpa dtrt-indent
   :diminish
   :init
   (setq dtrt-indent-run-after-smie t) ;; Run even if SMIE is active
@@ -94,8 +93,7 @@ If want to exclude then set (add-to-list 'aggressive-indent-excluded-modes 'html
 
 #+NAME: org_mark_mini20.local_20210625T090940.620775
 #+begin_src emacs-lisp
-(use-package aggressive-indent
-  :ensure t
+(use-package-elpa aggressive-indent
   :hook
   (prog-mode . aggressive-indent-mode)
   ;; (python-mode . (lambda () (aggressive-indent-mode -1)))
@@ -137,8 +135,7 @@ I have wanted a good visual identification of indentation since I had the dos pr
 
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_E4106683-C45F-422A-9DBC-6265837B502D
   #+begin_src emacs-lisp
-(use-package highlight-indent-guides
-  :ensure t
+(use-package-elpa highlight-indent-guides
   :diminish highlight-indent-guides-mode
   :init
   (setq highlight-indent-guides-method 'fill)

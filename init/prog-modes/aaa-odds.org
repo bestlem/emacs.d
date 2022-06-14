@@ -163,9 +163,8 @@ As racket is broken and sml had oddities with ; and emacs really does not need i
 
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_A713576B-1958-4B3A-B268-DC65DC07499C
 #+BEGIN_SRC emacs-lisp
-(use-package eval-in-repl
+(use-package-elpa eval-in-repl
   :disabled
-  :ensure t
   :config
   (setq mwb-repl-region-key "<f6>"))
 #+END_SRC

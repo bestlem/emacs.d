@@ -17,9 +17,8 @@
 [[https://github.com/rolandwalker/hardhat][Hardhat]] provides an extra layer of protection in your work. If you visit a file which looks unsafe to edit, Emacs will make the buffer read-only -- even when the underlying file is writable.
 #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_5C4ABBCE-2400-4CD9-8740-96E9FD163C43
 #+begin_src emacs-lisp
-(use-package hardhat                    ; Protect user-writable files
+(use-package-elpa hardhat                    ; Protect user-writable files
   :demand
-  :ensure t
   :init (setq hardhat-basename-protected-regexps
               '("~\\'"
                 "\\.lock\\'"
@@ -72,6 +71,12 @@
   (global-hardhat-mode)
   (validate-setq hardhat-mode-lighter "Ⓗ"))
 #+end_src
+*** Separate out my additions
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220614T120500.373254
+:END:
+ie move to config and setup as two parts.
+and/ot move to :custom
 ** Buffer switch
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:4551A020-6DAB-4E1D-A70F-60DF7729834F

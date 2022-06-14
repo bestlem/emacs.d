@@ -102,8 +102,7 @@ Plus the lisp formatting is not autoloaded
 The one thing I wanted ot for this time was to break an expression to a work per line and it does not. But lispy multiple lines did.
 #+NAME: org_mark_2020-11-24T18-08-50+00-00_mini12.local_BA7E1106-4E0E-4D38-B512-2C59194F3F4D
 #+begin_src emacs-lisp :tangle no
-(use-package srefactor
-    :ensure t
+(use-package-elpa srefactor
     :disabled
     :demand                             ; need as not enough exposed to autoload
     :commands srefactor-lisp-format-sexp
@@ -115,8 +114,7 @@ The one thing I wanted ot for this time was to break an expression to a work per
 :END:
 #+NAME: org_mark_2020-10-14T11-05-37+01-00_mini12.local_FA432C27-28F7-4E01-B4C3-A28516C3DFB4
 #+begin_src emacs-lisp
-(use-package lisp-extra-font-lock
-  :ensure t
+(use-package-elpa lisp-extra-font-lock
   :hook (emacs-lisp-mode . lisp-extra-font-lock-mode))
 #+end_src
 ** Filling
@@ -175,8 +173,7 @@ This is Fuco's hack
 :END:
 	Dependencies because lispy etc and macrostep use the same keys
 	#+begin_src emacs-lisp
-(use-package macrostep
-  :ensure t
+(use-package-elpa macrostep
   :after (emacs-lisp lispy-mnemonic lispy)
   :hook (before-save . macrostep-collapse-all)
 
@@ -217,7 +214,7 @@ and the hydra is from https://sriramkswamy.github.io/dotemacs/ . Note it expands
 :END:
 Seen but not used yet [[https://github.com/ScottyB/edebug-x][edebug-x]]
 	#+begin_src emacs-lisp
-	(use-package edebug-x :disabled :ensure t)
+	;;(use-package-elpa edebug-x :disabled )
 	#+end_src
 ** Kaushal Modi edebug hydra
 :PROPERTIES:
@@ -432,7 +429,7 @@ So ignore this.
 
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_9EC9B695-2F8B-4E9B-B42A-199CF68F6E58
 #+begin_src emacs-lisp
-(use-package cask-mode :ensure t)
+(use-package-elpa cask-mode)
 #+end_src
 
 * Regular expressions
@@ -448,8 +445,9 @@ They are not understanable so these help
 And this is the reverse
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_7B9B113B-829F-4036-A58B-4935E812ACA1
 #+begin_src emacs-lisp
-(use-package xr
-  :ensure t)
+(use-package-elpa xr
+  :commands xr-pp xr xr-pp-rx-to-str xr-lint
+  )
 #+end_src
 ** TODO Rebuilder
 :PROPERTIES:

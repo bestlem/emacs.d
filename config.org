@@ -300,9 +300,8 @@ I have tried both but neither work well on my init.
 This seemed to go too far - digging into some code e.g. vc-git
 #+NAME: org_mark_mini20.local_20220606T173756.092098
 #+begin_src emacs-lisp :tangle no
-(use-package esup
+(use-package-elpa esup
   :disabled
-  :ensure t
   ;; To use MELPA Stable use ":pin mepla-stable",
   :init
   ;; (setq esup-depth 0)
@@ -420,7 +419,7 @@ Functional programming
 Cover functions [[https://github.com/Wilfred/ht.el][ht]]
 #+NAME: org_mark_mini12.local_20201223T233131.592735
 #+begin_src emacs-lisp
-(use-package ht :ensure t :demand )
+(use-package-elpa ht :demand)
 #+end_src
 ***** Rx
 :PROPERTIES:
@@ -458,10 +457,9 @@ Need to alter list
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:EFE2E658-C575-4F10-BEEA-60B7FA5D9A7A
 :END:
 #+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_38580E30-B5CF-45B3-850B-07E27178252F
-#+begin_src emacs-lisp
-(use-package use-package-chords
+#+begin_src emacs-lisp :tangle no
+(use-package-elpa use-package-chords
   :disabled
-  :ensure t
   :config (key-chord-mode 1))
 #+end_src
 **** use-package load path
@@ -535,9 +533,8 @@ Need key setting menus.
 :END:
 #+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_4EC591E8-D02C-4F21-97C1-80F28A75490F
 #+begin_src emacs-lisp
-(use-package hydra
+(use-package-elpa hydra
   :demand
-  :ensure t
   :config (setq hydra-look-for-remap t
 				lv-use-padding t)
   (defun lv--pad-to-center (str width)
@@ -548,7 +545,6 @@ Need key setting menus.
 		  (mapconcat (lambda (s)
 					   (concat (make-string padding-length ?\ ) s)) strs "\n")
 		str))))
-(use-package use-package-hydra :ensure t)
 #+end_src
 ***** use-package-hydra
 :PROPERTIES:
@@ -567,8 +563,7 @@ There are some non pretty ones
 :END:
 #+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_7958B394-66F9-4AF5-8C22-10F1CAB276B3
 #+begin_src emacs-lisp
-(use-package major-mode-hydra
-  :ensure t
+(use-package-elpa major-mode-hydra
   :demand
   :bind ("H-a" . major-mode-hydra)
   :config
@@ -596,9 +591,7 @@ Treemacs icons are better but they are purely keyed off file extensions. All the
 :END:
 #+NAME: org_mark_mini20.local_20210602T212702.682113
 #+begin_src emacs-lisp
-(use-package all-the-icons
-  :ensure t
-  :demand
+(use-package-elpa all-the-icons
   :commands (all-the-icons-faicon
 			 all-the-icons-fileicon
 			 all-the-icons-material

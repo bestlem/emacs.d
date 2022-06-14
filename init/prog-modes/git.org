@@ -44,12 +44,11 @@ There are various custom settings - lets remove from settings
 This is [[https://github.com/magit/with-editor][with-editor]] Magit calls it - only exposed so I can play with keys
 #+NAME: org_mark_mini12.local_20201224T204932.248625
 #+begin_src emacs-lisp
-(use-package with-editor
-    :ensure t
-    :bind (:map with-editor-mode-map
-                ("A-k" . with-editor-cancel)
-                ("A-s" . with-editor-finish)
-                ))
+(use-package-elpa with-editor
+  :bind (:map with-editor-mode-map
+         ("A-k" . with-editor-cancel)
+         ("A-s" . with-editor-finish)
+         ))
 #+end_src
 * Git files
 :PROPERTIES:

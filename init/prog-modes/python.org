@@ -28,15 +28,14 @@ Other issue is for pure python in hard tab files - something sets the offset to 
 
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_26CAE374-0A00-4CBD-A31D-D465AE7AD800
 #+begin_src emacs-lisp
-(use-package python-mode
-  :ensure t
+(use-package-elpa python-mode
   ;;:disabled
   ;;  add as multiple python-modes so need to force a bit
   :mode ("\\.py\\'" . python-mode)
   :interpreter ("python" . python-mode)
   :bind (:map python-mode-map
-              ("<f5>" . py-execute-buffer)
-              ("C-c C-z" . python-shell))
+         ("<f5>" . py-execute-buffer)
+         ("C-c C-z" . python-shell))
   :init
   (setq py--imenu-create-index-p t)
   :config

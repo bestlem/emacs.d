@@ -207,9 +207,8 @@ _k_: kill        _s_: split                   _{_: wrap with { }
 Aquamacs does its own binding to comment and uncomment region.
 #+NAME: org_mark_mini20.local_20220610T161050.783393
 #+begin_src emacs-lisp
-(use-package comment-dwim-2
+(use-package-elpa comment-dwim-2
   :unless *aquamacs*
-  :ensure t
   :commands comment-dwim-2 ;; need as mac binding
   )
 #+end_src
@@ -296,17 +295,13 @@ Basically want to collapse/fold depending on comments.
 [[https://github.com/alphapapa/outshine][Outshine]] seems to be the only one still under developement, but dioes too much and has the problem that it looks for comments in colum 1 as does hideshow.
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_CCD484C1-6BB3-4AFD-8A66-0B2F7722A8B6
 #+begin_src emacs-lisp
-(use-package outshine
-  :ensure t
+(use-package-elpa outshine
   :hook (outline-minor-mode . outshine-mode)
   :init
   ;; (add-hook 'outline-minor-mode-hook #'outshine-hook-function)
   :bind (:map outline-minor-mode-map
-              ("M-p" . outline-previous-visible-heading)
-              ("M-n" . outline-next-visible-heading)
-              ("<S-tab>" . outshine-cycle-buffer))
-  :preface
-  ;; (defvar outline-minor-mode-prefix "H-o")
-                                        ;  to set before loading note other package name
+         ("M-p" . outline-previous-visible-heading)
+         ("M-n" . outline-next-visible-heading)
+         ("<S-tab>" . outshine-cycle-buffer))
   )
 #+end_src

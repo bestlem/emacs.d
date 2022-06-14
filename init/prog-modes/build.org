@@ -15,48 +15,45 @@ This also takes time to load. Need to sort out config entries and gradele-mode n
  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_8FC0E8CB-72D8-4306-96E3-F856F8917088
  #+begin_src emacs-lisp
 
- ;; gradle and other java
- ;; from http://www.coli.uni-saarland.de/~slemaguer/emacs/main.html#orgac34543
+;; gradle and other java
+;; from http://www.coli.uni-saarland.de/~slemaguer/emacs/main.html#orgac34543
 
- (use-package groovy-mode
-   :disabled
-
-   :ensure t
-   :mode ("\.groovy$" "\.gradle$")
-   :interpreter ("gradle" "groovy")
-   :init
-   (autoload 'run-groovy "inf-groovy" "Run an inferior Groovy process")
-   (autoload 'inf-groovy-keys "inf-groovy" "Set local key defs for inf-groovy in groovy-mode")
-   ;; Subpackages
-   (use-package groovy-imports :ensure t)
-   ;; Some keys for
-   (add-hook 'groovy-mode-hook
-			 '(lambda ()
-				(inf-groovy-keys))))
+(use-package-elpa groovy-mode
+  :disabled
+  :mode ("\.groovy$" "\.gradle$")
+  :interpreter ("gradle" "groovy")
+  :init
+  (autoload 'run-groovy "inf-groovy" "Run an inferior Groovy process")
+  (autoload 'inf-groovy-keys "inf-groovy" "Set local key defs for inf-groovy in groovy-mode")
+  ;; Subpackages
+  (use-package-elpa groovy-imports)
+  ;; Some keys for
+  (add-hook 'groovy-mode-hook
+			'(lambda ()
+			   (inf-groovy-keys))))
 
 
- ;; ;; This does work with Aquamacs
- ;; (add-to-list 'auto-mode-alist (cons "\\.gradle\\'" 'groovy-mode))
- ;; (add-to-list 'auto-mode-alist (cons "\\.groovy\\'" 'groovy-mode))
- ;; ;; This _might_ not work with Aquamacs (not sure what value it offers)
- ;; ;(add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
- ;; ;(add-to-list 'interpreter-mode-alist '("gradle" . groovy-mode))
+;; ;; This does work with Aquamacs
+;; (add-to-list 'auto-mode-alist (cons "\\.gradle\\'" 'groovy-mode))
+;; (add-to-list 'auto-mode-alist (cons "\\.groovy\\'" 'groovy-mode))
+;; ;; This _might_ not work with Aquamacs (not sure what value it offers)
+;; ;(add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
+;; ;(add-to-list 'interpreter-mode-alist '("gradle" . groovy-mode))
 
- ;; ;;; make Groovy mode electric by default.
- ;; (add-hook 'groovy-mode-hook
- ;;           '(lambda ()
- ;;              (require 'groovy-electric)
- ;;              (groovy-electric-mode)))
- ;; (require 'gradle)
+;; ;;; make Groovy mode electric by default.
+;; (add-hook 'groovy-mode-hook
+;;           '(lambda ()
+;;              (require 'groovy-electric)
+;;              (groovy-electric-mode)))
+;; (require 'gradle)
 
- (use-package gradle-mode
-   :ensure t
-   :diminish
-   :disabled
-   :config
-   (setq gradle-gradlew-executable "./gradlew"
-		 gradle-use-gradlew t)
-   (gradle-mode))
+(use-package-elpa gradle-mode
+  :diminish
+  :disabled
+  :config
+  (setq gradle-gradlew-executable "./gradlew"
+		gradle-use-gradlew t)
+  (gradle-mode))
  #+end_src
 * make
 :PROPERTIES:
@@ -64,8 +61,8 @@ This also takes time to load. Need to sort out config entries and gradele-mode n
 :END:
 #+NAME: org_mark_mini20.local_20210828T122054.531791
 #+begin_src emacs-lisp
-(use-package make-mode
-  :ensure nil
+(use-package-elpa make-mode
+  :commands makefile-mode
   :mode
   ("Imakefile\\'" . makefile-imake-mode)
   ("Makeppfile\\(?:\\.mk\\)?\\'" . makefile-makepp-mode)
@@ -82,8 +79,7 @@ This also takes time to load. Need to sort out config entries and gradele-mode n
 :END:
 #+NAME: org_mark_mini20.local_20210828T122054.532611
 #+begin_src emacs-lisp
-(use-package cmake-mode
-  :ensure t
+(use-package-elpa cmake-mode
   :mode
   ("\\.cmake\\'" . cmake-mode)
   ("CMakeLists\\.txt\\'" . cmake-mode)

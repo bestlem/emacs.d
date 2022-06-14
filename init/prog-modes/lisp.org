@@ -43,9 +43,9 @@ Set compat so that the keys for these modes work. But macrostep does not - see i
 It assumes things like clojure
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_40BCC324-5430-4939-9EA3-7F0E0F4A5F4F
 #+begin_src emacs-lisp
-(use-package clojure-mode
+(use-package-elpa clojure-mode
   :disabled
-    :ensure t)
+)
 #+end_src
 *** and interaction hydra and easier key bindings
 :PROPERTIES:
@@ -74,7 +74,6 @@ Instead of displaying the results in a separate buffer (like the iElm does), The
 However it does it by remapping the eval keys so interferes with lispy so need to sort that out. Best idea is make it one of the possible parts of lispy-mnemonic eval. lispy itself users cider to do this but I don't use Clojure. lispy now does this itself.
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_815540E7-FB45-497F-859D-E916895E98AC
 #+BEGIN_SRC emacs-lisp
-(use-package eros
-  :ensure t
+(use-package-elpa eros
   :commands eros--eval-overlay)
 #+END_SRC

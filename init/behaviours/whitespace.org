@@ -1,9 +1,8 @@
 #+TITLE:  Whitespace
 #+AUTHOR: Mark Bestley
-#+EMAIL:  @bestley.co.uk
 #+DATE:   02 May 2022
 #+PROPERTY:header-args :cache yes :tangle yes :comments noweb
-#+STARTUP: overview
+#+STARTUP: show2levels
 
 Only do it on my edits
 * Whitespace at end of line uses [[https://github.com/lewang/ws-butler][ws-butler]]
@@ -16,8 +15,7 @@ Trimming only happens when saving.
 #+end_quote
 #+NAME: org_2020-12-08+00-00_3CD0E180-0745-4B05-9BCE-0FB50626F9F9
 #+begin_src emacs-lisp
-(use-package ws-butler
-  :ensure t
+(use-package-elpa ws-butler
   :diminish ws-butler-mode
   :hook ((prog-mode org-mode) . ws-butler-mode ))
 #+end_src

@@ -65,8 +65,7 @@ by using nxml's indentation rules."
 This is the standard mode
   #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_61706197-9647-456A-9F2C-0A91722F017C
   #+begin_src emacs-lisp
- (use-package json-mode
-   :ensure t
+ (use-package-elpa json-mode
    :mode "\\.json$")
   #+end_src
 ** Visualisation
@@ -76,9 +75,9 @@ This is the standard mode
 	 See as a tree.
      #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_15E789B8-CDC5-4AEF-97F8-40F5C631D5D8
      #+begin_src emacs-lisp
-	 (use-package json-navigator
-	   :after json-mode
-	   :ensure t)
+(use-package json-navigator
+  :demand
+  :after json-mode)
   #+end_src
 * Config file
 :PROPERTIES:
@@ -97,8 +96,7 @@ This is the standard mode
 Setup From grettke Mode from https://github.com/yoshiki/yaml-mode
 #+NAME: org_mark_2020-10-26T12-58-28+00-00_mini12.local_7834085F-27FE-48FF-A1FC-BE8B8E52F59F
 #+BEGIN_SRC emacs-lisp
-(use-package yaml-mode
-  :ensure t
+(use-package-elpa yaml-mode
   :config
   (defun yaml-next-field ()
     "Jump to next yaml field.
@@ -140,11 +138,9 @@ URL: `https://stackoverflow.com/questions/12648388/emacs-yaml-editing'"
 :ID:       org_mark_2020-10-26T12-58-28+00-00_mini12.local:AFFF64BD-F09E-4EA7-BE6F-29A32D33237C
 :END:
 But there is no easy installable version of the executable - wait till I use more
-
 #+NAME: org_mark_2020-10-26T12-58-28+00-00_mini12.local_1AFAF3D8-0DA1-42A1-8D46-1549F325CC57
 #+begin_src emacs-lisp
-(use-package flycheck-yamllint
-  :ensure t
+(use-package-elpa flycheck-yamllint
   :disabled
   :after (yaml-mode flycheck-mode)
   :hook (flycheck-mode . flycheck-yamllint-setup )

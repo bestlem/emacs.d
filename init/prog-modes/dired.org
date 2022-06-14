@@ -313,8 +313,7 @@ Show directories in line not at bottom
 Use tab to show/hide
 #+NAME: org_mark_mini12.local_20210110T010949.854060
 #+begin_src emacs-lisp
-(use-package dired-subtree
-  :ensure t
+(use-package-elpa dired-subtree
   :after dired
   :config
   (setq dired-subtree-use-backgrounds nil)
@@ -337,9 +336,8 @@ From Greg Hendershott
 But treemacs gets prettier coloured icons
 #+NAME: org_2020-11-30+00-00_6A809D36-52F1-4E8A-9634-2A75404F6CEC
 #+begin_src emacs-lisp :tangle no
-(use-package all-the-icons-dired
+(use-package-elpa all-the-icons-dired
   :disabled
-  :ensure t
   :hook (dired-mode . all-the-icons-dired-mode))
 #+end_src
 
@@ -353,7 +351,6 @@ Use icons from treemacs
 (use-package-elpa treemacs-icons-dired
   :after treemacs dired
   :demand
-  :ensure t
   :config (treemacs-icons-dired-mode))
 #+end_src
 

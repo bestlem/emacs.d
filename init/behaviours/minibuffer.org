@@ -251,7 +251,6 @@ Replace isearch but not so easy as consult-line plus can leave the progress mark
 #+begin_src emacs-lisp
 (when *emacs/>=26p*
   (use-package-elpa consult
-	:defer 0.5
 	:init
 	(setq register-preview-delay 0
 		  register-preview-function #'consult-register-format)
@@ -339,8 +338,6 @@ Add decoration/information
 #+begin_src emacs-lisp
 (use-package-elpa marginalia
   :commands marginalia-mode
-  :init
-  (marginalia-mode)
   :config
   (setq marginalia-annotators
 		'(marginalia-annotators-heavy marginalia-annotators-light))

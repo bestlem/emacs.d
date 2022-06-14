@@ -147,7 +147,7 @@ https://www.lucacambiaghi.com/vanilla-emacs/readme.html#h:240FC4A5-CDED-4456-9EB
 #+NAME: org_mark_mini20.local_20220611T100735.587570
 #+begin_src emacs-lisp
 (use-package-elpa corfu
-  :demand
+  :defer 5
   :custom
   ;; (corfu-auto t)
   ;; Enable auto completion

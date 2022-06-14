@@ -102,6 +102,13 @@ https://github.com/alphapapa/magit-todos
 #+begin_src emacs-lisp :noweb-ref magit-use-package :tangle no
 (use-package-elpa magit
   ;; :defer 2								; rather than a lot of commands
+  ;; Need as now not a hydra
+  :commands (magit-process-buffer
+             magit-status
+             magit-log-buffer-file
+             magit-log-current
+             magit-blame-addition
+             magit-diff-buffer-file)
   :custom
   (magit-diff-refine-hunk t)
   (magit-repository-directories '(("~/src/" . 2)
@@ -114,22 +121,7 @@ https://github.com/alphapapa/magit-todos
   ;; (setq magit-completing-read-function 'ivy-completing-read)
   (setq magit-completing-read-function 'magit-builtin-completing-read)
   (transient-bind-q-to-quit)
-
-  :pretty-hydra
-  (jp-git
-   (:color teal :quit-key "q"
-	:title (mwb-icon-string "git" "Git"))
-   ("Status" (("s" mwb-magit-status "status")
-			  ("l" magit-log-buffer-file "commit log (current file)")
-			  ("L" magit-log-current "commit log (project)")
-			  ("B" magit-blame-addition "blame"))
-	"Local" (("b" magit-branch "branch")
-			 ("r" magit-rebase "rebase"))
-	"Remote" (("f" magit-fetch "fetch")
-			  ("P" magit-push "push")
-			  ("F" magit-pull "pull"))
-	"Diff" (("d" magit-diff-buffer-file "diff buffer"))
-	"Magit" (("$" magit-process "process")))))
+  )
 #+end_src
 ** posframe
 :PROPERTIES:
@@ -200,8 +192,6 @@ I think works with other vcs
 #+NAME: org_mark_mini12.local_20201223T212747.790111
 #+begin_src emacs-lisp
 (use-package-elpa git-timemachine
-  :after magit
-  :demand
   ;; :custom-face dopes not theme like :custom and so saves to customization file.
   ;; :custom-face
   ;; (git-timemachine-minibuffer-author-face ((t (:inherit success))))
@@ -211,10 +201,6 @@ I think works with other vcs
   (set-face-attribute 'git-timemachine-minibuffer-detail-face nil :inherit 'warning)
   :bind (:map vc-prefix-map
 		 ("t" . git-timemachine))
-  :pretty-hydra
-  (jp-git
-   ("Other"
-	(("t" git-timemachine "time machine"))))
   :commands (git-timemachine)
 
   :preface
@@ -236,7 +222,6 @@ I think works with other vcs
 #+NAME: org_mark_mini20.local_20210814T100659.226333
 #+begin_src emacs-lisp
 (use-package-elpa git-messenger
-  :after magit
   :bind (:map vc-prefix-map
 			  ("p" . git-messenger:popup-message)
 			  :map git-messenger-map
@@ -397,9 +382,26 @@ Try git-gutter-fringe but seems to clash [[https://github.com/emacsorphanage/git
 					;; ( mwbkey-home git-gutter:end-of-hunk "Begin of hunk" )
 					("u" git-gutter:popup-hunk "Popup hunk"))))
   :pretty-hydra
-  (jp-git
-   ("Other"
-    (("g" hydra-git-gutter/body "gutter"))))
+
+  )
+#+end_src
+* Hydra
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220614T151632.104571
+:END:
+This is called from the main menu and thus not dependant on any of the git modes. So need to make it upfront.
+#+NAME: org_mark_mini20.local_20220614T151632.090506
+#+begin_src emacs-lisp
+(pretty-hydra-define jp-git
+  (:color teal :quit-key "q"
+   :title (mwb-icon-string "git" "Git"))
+  ("Status" (("s" mwb-magit-status "status")
+			 ("l" magit-log-buffer-file "commit log (current file)")
+			 ("L" magit-log-current "commit log (project)")
+			 ("B" magit-blame-addition "blame"))
+   "Diff" (("d" magit-diff-buffer-file "diff buffer"))
+   "Other" (("g" hydra-git-gutter/body "Git gutter")
+			("t" git-timemachine "time machine")))
   )
 #+end_src
 * Smerge

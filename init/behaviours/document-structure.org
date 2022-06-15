@@ -63,8 +63,8 @@ See https://github.com/alphapapa/prism.el/issues/8 to add
 								   :desaturations '(0) ; do not change---may lower the contrast ratio
 								   :lightens '(0)      ; same
 								   :colors (modus-themes-with-colors
-											 (list fg-main
-												   magenta
+											 (list magenta
+												   fg-main
 												   cyan-alt-other
 												   magenta-alt-other
 												   blue
@@ -78,7 +78,8 @@ See https://github.com/alphapapa/prism.el/issues/8 to add
 												   blue-alt
 												   red-alt
 												   green-alt-other
-												   fg-special-warm))))
+												   fg-special-warm)))
+		 )
 		(t 'nil))
 
 

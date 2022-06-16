@@ -36,7 +36,7 @@ On really forcing loading etc this still loads immediately after-init but should
         ibuffer-show-empty-filter-groups nil
         ibuffer-default-sorting-mode 'filename/process)
   :config
-  (use-package-elpa ibuffer-vc)   ; need as some config code depends on this
+  (use-package-elpa ibuffer-vc :demand)   ; need as some config code depends on this
   (require 'ibuf-ext)             ; fiddle the mess to get an internal variable setup
   <<ibuffer-config>>
   :hook (ibuffer . major-mode-hydras/ibuffer-mode/body))

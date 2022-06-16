@@ -557,26 +557,6 @@ There are some non pretty ones
   :demand
   :after hydra)
 #+end_src
-***** major mode hydra
-:PROPERTIES:
-:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:B0B1AA76-E4F7-424D-A9EA-1E430BD90E28
-:END:
-#+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_7958B394-66F9-4AF5-8C22-10F1CAB276B3
-#+begin_src emacs-lisp
-(use-package-elpa major-mode-hydra
-  :demand
-  :bind ("H-a" . major-mode-hydra)
-  :config
-  (progn
-    (setq major-mode-hydra-invisible-quit-key "q")
-    (defun jp-major-mode-hydra-title-generator (_)
-      `(with-mode-icon major-mode
-                       (propertize (s-concat (format-mode-line mode-name) " Commands")
-                                   'face '(:weight bold :height 1.1))
-                       1.1))
-    (setq major-mode-hydra-title-generator #'jp-major-mode-hydra-title-generator)))
-#+end_src
-
 ***** Show icons
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20201224T121457.223827
@@ -605,9 +585,11 @@ Treemacs icons are better but they are purely keyed off file extensions. All the
 :END:
 #+NAME: org_mark_mini20.local_20210602T212702.684671
 #+begin_src emacs-lisp
-(use-package jp-icons
+(message "start jp-icons")
+(use-feature jp-icons
   :demand
   :mwb-load-path "site-lisp/jerrypnz")
+(message "end jp-icons")
 #+end_src
 
 ****** My icon code
@@ -617,6 +599,26 @@ Treemacs icons are better but they are purely keyed off file extensions. All the
 #+NAME: org_mark_mini20.local_20210801T222229.905961
 #+begin_src emacs-lisp
 (use-feature mwb-icons :demand)
+#+end_src
+
+***** major mode hydra
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:B0B1AA76-E4F7-424D-A9EA-1E430BD90E28
+:END:
+#+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_7958B394-66F9-4AF5-8C22-10F1CAB276B3
+#+begin_src emacs-lisp
+(use-package-elpa major-mode-hydra
+  :demand
+  :bind ("H-a" . major-mode-hydra)
+  :config
+  (progn
+    (setq major-mode-hydra-invisible-quit-key "q")
+    (defun jp-major-mode-hydra-title-generator (_)
+      `(with-mode-icon major-mode
+		       (propertize (s-concat (format-mode-line mode-name) " Commands")
+				   'face '(:weight bold :height 1.1))
+		       1.1))
+    (setq major-mode-hydra-title-generator #'jp-major-mode-hydra-title-generator)))
 #+end_src
 
 ** Customisation file
@@ -654,7 +656,7 @@ Also while we are here let's improve customisation fully.
 The emacs basic version. Need it for dependency load use by initsplit
 #+NAME: org_mark_2020-10-29T09-11-06+00-00_mini12.local_87F0132E-8CB1-4665-BADC-9CAF45256776
 #+begin_src emacs-lisp
-(use-package cus-edit
+(use-feature cus-edit
   ;; aquamacs has already done this
   :demand)
 #+end_src
@@ -665,7 +667,7 @@ The emacs basic version. Need it for dependency load use by initsplit
 More Drew Adams https://www.emacswiki.org/emacs/CustomizingAndSaving#CustomizePlus
 #+NAME: org_mark_2020-10-29T09-11-06+00-00_mini12.local_D3E6606B-7E85-4FD1-BA2D-3B40885ED97B
 #+begin_src emacs-lisp
-(use-package cus-edit+
+(use-feature cus-edit+
   :disabled                             ; messes up switch-to-buffers advice
 
   :after cus-edit
@@ -832,10 +834,10 @@ Deal with stuff done by Aquamacs
 #+NAME: org_mark_2020-10-01T14-52-55+01-00_mini12.local_2D8F5C87-38BB-47E2-A162-03E5E42630F4
 #+begin_src emacs-lisp
 (unless *aquamacs*
-  (use-package redo+
+  (use-feature redo+
     :demand
     :mwb-load-path "site-lisp/Emacs_wiki")
-  (use-package mac-key-mode
+  (use-feature mac-key-mode
     :demand
     :diminish
     :config (mac-key-mode 1)
@@ -878,7 +880,16 @@ Both Aquamacs and mac-keys-mode introduce a map for macOS keys. Unfortunately it
                         'osx-key-mode-map
                       'mac-key-mode-map))
 #+end_src
-
+*** Put system clipboard into emacs kill ring
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220616T080436.889045
+:END:
+From radian. If you have something on the system clipboard, and then kill something in Emacs, then by default whatever you had on the system clipboard is gone and there is no way to get it back.
+Setting the following option makes it so that when you kill something in Emacs, whatever was previously on the system clipboard is pushed into the kill ring. This way, you can paste it with `yank-pop'.
+#+NAME: org_mark_mini20.local_20220616T080436.865371
+#+begin_src emacs-lisp
+(setq save-interprogram-paste-before-kill t)
+#+end_src
 ** Org Mode base setup
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:D93E7BE4-C5B1-419E-B03F-B2D4980DAF02

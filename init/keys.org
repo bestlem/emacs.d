@@ -1,8 +1,7 @@
 #+TITLE:  Keys
 #+AUTHOR: Mark Bestley
-#+EMAIL:  emacs@bestley.co.uk
 #+PROPERTY:header-args :cache yes :tangle yes :comments noweb
-#+STARTUP: show2levels
+#+STARTUP: content
 
 * Global key bindings musings
 :PROPERTIES:
@@ -338,6 +337,25 @@ This is the override of save etc to the mode maps
 ;; macport makes A-u µ
 (bind-key  "A-u" 'revert-buffer-no-confirm macos-key-map)
 #+end_src
+** TODO Customise
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220615T104011.284037
+:END:
+The mouse in non Aquamacs (or just since 26) is not easy to do the widgets.
+Look at custom-field-keymap and add keys other than ret so can fo with left hand.
+** Upper case et al work on regions
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220616T081605.621814
+:END:
+From radian.
+When region is active, make `capitalize-word' and friends act on  it.
+Esc-U is one of the first emacs keys I learnt.
+#+NAME: org_mark_mini20.local_20220616T081605.580993
+#+begin_src emacs-lisp
+(bind-key "M-c" #'capitalize-dwim)
+(bind-key "M-l" #'downcase-dwim)
+(bind-key "M-u" #'upcase-dwim)
+#+end_src
 * Single key bindings
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:7A9AB89E-F4F2-4508-8FD9-FCB30C5AE861
@@ -642,14 +660,14 @@ Remove need for C-x keys
 #+NAME: org_mark_mini20.local_20220601T145842.163332
 #+begin_src emacs-lisp
 (pretty-hydra-define x-hydra-readonly (:title "^X functions"
-											  :color blue
-											  :timeout 2)
+									   :color blue
+									   :timeout 2)
   ("Files"
    (("b" consult-buffer "switch buffer")
 	("f" mac-key-open-file "find-file")
 	("r" consult-recent-file "recentf")
-	("w" write-file "write file")
-	("x" nil "cancel" :color blue))))
+	("w" write-file "write file"))
+   "Buffers" (("x" exchange-point-and-mark "exchange-point-and-mark" ))))
 #+end_src
 ** Hydra transpose
 :PROPERTIES:
@@ -782,8 +800,6 @@ Mainly from consult
               ("<right>" . isearch-forward-exit-minibuffer)))
 
 #+end_src
-
-
 
 
 *** Let search continue with arrows

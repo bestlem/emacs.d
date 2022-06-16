@@ -22,18 +22,10 @@
   (load (mwb-user-emacs-file "early-init")))
 ;; org_mark_2020-09-28T01-08-28+01-00_mini12.local_E7D671F1-9D29-4FF6-A8E5-8884826E6E4B ends here
 
-;; [[file:~/.emacs.d/init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_B623E658-A6AA-46DF-AD9C-6EAC3BDC1BEE][org_mark_2020-01-23T20-40-42+00-00_mini12_B623E658-A6AA-46DF-AD9C-6EAC3BDC1BEE]]
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
-										;(package-initialize)
-;; org_mark_2020-01-23T20-40-42+00-00_mini12_B623E658-A6AA-46DF-AD9C-6EAC3BDC1BEE ends here
-
 ;; [[file:~/.emacs.d/init.org::org_mark_mini20.local_20220606T145002.735412][org_mark_mini20.local_20220606T145002.735412]]
 ;;  setting to nil turns them off
-;; (setq debug-on-error 't)
-(setq debug-on-error nil)
+(setq debug-on-error t)
+;; (setq debug-on-error nil)
 										;(setq debug-on-quit nil)
 ;; org_mark_mini20.local_20220606T145002.735412 ends here
 

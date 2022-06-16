@@ -42,14 +42,24 @@ Also from doom via https://github.com/xenodium/dotsies/blob/main/emacs/early-ini
 :END:
 Package initialize occurs automatically, before `user-init-file' is loaded, but after `early-init-file'. emacs handles package initialization, so we must prevent Emacs from doing it early!
 But if using package we do want it done - early-init turn off is for straight.el etc
-#+NAME: org_mark_2020-09-28T01-08-28+01-00_mini12.local_407877DD-DF72-4900-9475-7723E8D855A2
+#+NAME:
+*** Straight
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220614T202654.959342
+:END:
+#+NAME: org_mark_mini20.local_20220614T202654.939619
 #+begin_src emacs-lisp
-;;(setq package-enable-at-startup nil)
+(setq package-enable-at-startup nil)
 #+end_src
 
-*** Set paths
+*** Package manager
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220614T202601.874691
+:END:
+**** Set paths
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210625T123956.569254
+:HEADER-ARGS: :tangle no
 :END:
 Set the path to packages
 #+NAME: org_mark_2020-09-28T01-08-28+01-00_mini12.local_0E90CFE6-BBAC-4DA3-8461-12811764098F
@@ -58,7 +68,7 @@ Set the path to packages
       (expand-file-name
        (format "elpa/%s" emacs-major-version) user-emacs-directory))
 #+end_src
-*** Set package quickload by version
+**** Set package quickload by version
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210625T123956.568444
 :END:
@@ -181,7 +191,7 @@ For Emacs < 27 we need early -init
 :END:
 As this is now ~/.emacs.d/init.el and not in ~/Library/Preferences Emacs sees this as startup and adds the package-initialise. So need to add here to stop init.el changing and being see in github
 #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_B623E658-A6AA-46DF-AD9C-6EAC3BDC1BEE
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
@@ -204,9 +214,10 @@ Later toggles in main hydra.
 #+NAME: org_mark_mini20.local_20220606T145002.735412
 #+begin_src emacs-lisp
 ;;  setting to nil turns them off
-;; (setq debug-on-error 't)
-(setq debug-on-error nil)
-;(setq debug-on-quit nil)
+(setq debug-on-error t)
+;; (setq debug-on-error nil)
+										;(setq debug-on-quit nil)
+
 #+end_src
 *** use-package
 :PROPERTIES:

@@ -117,9 +117,10 @@ In this case var and overlap no-littering
   (setq user-emacs-directory (mwb-user-emacs-file "var/")))
 #+end_src
 
-** Packaging
+** PackageManager
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:9ACB4F21-BFAB-4D2F-A271-1D8D9B9625FB
+:header-args:  :tangle no
 :END:
 Loading other code. Using emacs internal packagemenager and use-package.
 
@@ -225,6 +226,71 @@ Don't need package-initialize as use package does it all? per https://www.youtub
   (package-initialize))
 (message "Setting up package manager...(done)")
 #+end_src
+** Straight
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220614T204548.065961
+:END:
+Lets try straight,
+Allows some forks and emacs_wiki to be dealt with as standard.
+*** Directories
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220614T210326.131237
+:END:
+#+NAME: org_mark_mini20.local_20220614T210326.105802
+#+begin_src emacs-lisp
+(defvar mwb-emacs-work-dir (expand-file-name "~/.local/emacs" )
+  "Directory on local machine wwhere emacs outside start directory.")
+
+(defvar mwb-emacs-eln-cache-dir (expand-file-name "eln-cache" mwb-emacs-work-dir))
+(make-directory mwb-emacs-eln-cache-dir t)
+
+
+(defvar mwb-straight-profile
+  (expand-file-name "straight-pkgs.el" mwb-user-emacs-directory)
+  "File for containging versions of packages from straight")
+
+
+(defvar straight-base-dir)
+(defvar straight-profiles)
+(setq straight-base-dir mwb-emacs-work-dir)
+(setq straight-profiles `((nil . ,mwb-straight-profile)))
+
+
+(defvar native-comp-eln-load-path)
+(setq native-comp-eln-load-path (cons mwb-emacs-eln-cache-dir (cdr native-comp-eln-load-path)))
+#+end_src
+*** Setup
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220614T210326.130274
+:END:
+#+NAME: org_mark_mini20.local_20220614T204548.040188
+#+begin_src emacs-lisp
+;; Bootstrap the package manager, straight.el.
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name
+        "straight/repos/straight.el/bootstrap.el"
+        (or (bound-and-true-p straight-base-dir)
+            user-emacs-directory)))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+#+end_src
+*** el-patch
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220615T202800.326620
+:END:
+Allow override of methods. From https://github.com/radian-software/el-patch
+#+NAME: org_mark_mini20.local_20220615T202800.301892
+#+begin_src emacs-lisp
+(straight-use-package 'el-patch)
+#+end_src
 
 ** Macros to set up how modes are set up
 :PROPERTIES:
@@ -239,16 +305,18 @@ include use-package setup from <https://github.com/CachesToCaches/getting_starte
 Ideally I will use as per hemacs use-feature if on load-path and use-package if from elpa by setting ensure t - however too late so add use-elpa-package
  #+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_77FB1165-1A41-4244-818F-7BFAF0F191FB
  #+begin_src emacs-lisp
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
+;; (unless (package-installed-p 'use-package)
+;;   (package-refresh-contents)
+;;   (package-install 'use-package))
+(straight-use-package 'use-package)
 
 ;; Enable use-package
 (eval-when-compile
   (setq use-package-enable-imenu-support t)
   (require 'use-package)
   (setq bind-key-describe-special-forms t)
-  (setq use-package-always-defer t)
+  ;; (setq use-package-always-defer t)
+  (setq straight-use-package-by-default t)
   (setq byte-compile-current-buffer t)
   (if init-file-debug
       (setq use-package-verbose t
@@ -270,6 +338,8 @@ Use package just off load-path
 (defmacro use-feature (name &rest args)
   (declare (indent 1))
   `(use-package ,name
+	 :ensure nil
+	 :straight nil
      ,@args))
 #+end_src
 **** use-package-elpa
@@ -615,9 +685,9 @@ Treemacs icons are better but they are purely keyed off file extensions. All the
     (setq major-mode-hydra-invisible-quit-key "q")
     (defun jp-major-mode-hydra-title-generator (_)
       `(with-mode-icon major-mode
-		       (propertize (s-concat (format-mode-line mode-name) " Commands")
-				   'face '(:weight bold :height 1.1))
-		       1.1))
+                       (propertize (s-concat (format-mode-line mode-name) " Commands")
+                                   'face '(:weight bold :height 1.1))
+                       1.1))
     (setq major-mode-hydra-title-generator #'jp-major-mode-hydra-title-generator)))
 #+end_src
 

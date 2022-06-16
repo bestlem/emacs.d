@@ -12,15 +12,9 @@
 	  auto-window-vscroll nil)
 ;; org_mark_2020-01-23T20-40-42+00-00_mini12_EC7FD451-253D-4F87-90DC-AD484305487F ends here
 
-;; [[file:~/.emacs.d/init.org::org_mark_2020-09-28T01-08-28+01-00_mini12.local_407877DD-DF72-4900-9475-7723E8D855A2][org_mark_2020-09-28T01-08-28+01-00_mini12.local_407877DD-DF72-4900-9475-7723E8D855A2]]
-;;(setq package-enable-at-startup nil)
-;; org_mark_2020-09-28T01-08-28+01-00_mini12.local_407877DD-DF72-4900-9475-7723E8D855A2 ends here
-
-;; [[file:~/.emacs.d/init.org::org_mark_2020-09-28T01-08-28+01-00_mini12.local_0E90CFE6-BBAC-4DA3-8461-12811764098F][org_mark_2020-09-28T01-08-28+01-00_mini12.local_0E90CFE6-BBAC-4DA3-8461-12811764098F]]
-(setq package-user-dir
-      (expand-file-name
-       (format "elpa/%s" emacs-major-version) user-emacs-directory))
-;; org_mark_2020-09-28T01-08-28+01-00_mini12.local_0E90CFE6-BBAC-4DA3-8461-12811764098F ends here
+;; [[file:~/.emacs.d/init.org::org_mark_mini20.local_20220614T202654.939619][org_mark_mini20.local_20220614T202654.939619]]
+(setq package-enable-at-startup nil)
+;; org_mark_mini20.local_20220614T202654.939619 ends here
 
 ;; [[file:~/.emacs.d/init.org::org_mark_mini20.local_20210625T123956.553714][org_mark_mini20.local_20210625T123956.553714]]
 (setq package-quickstart-file

@@ -36,6 +36,108 @@ Also from doom via https://github.com/xenodium/dotsies/blob/main/emacs/early-ini
 	   auto-window-vscroll nil)
  #+end_src
 
+** Directories
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220616T101718.182125
+:END:
+Some of this needs to be here as package and eln-cache are used early.
+
+We need to sort out paths - ideally after init timers etc but we also need them to load early-init so timer is less accurate but then it is wrong for aquamacs anyway
+*** Set where the init file is
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:5F44E496-0565-4D23-9D8B-128A663B9280
+:END:
+In constant mwb-user-emacs-directory
+#+NAME: org_mark_mini20.local_20220521T104243.397754
+#+begin_src emacs-lisp
+;; Need the directory from here.
+(defconst mwb-user-emacs-directory
+  (file-name-directory (or load-file-name buffer-file-name)))
+#+end_src
+*** Other emacs files
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220616T101718.179659
+:END:
+We want some stuff not under .emacs.d so if on dropbox then this is not.
+This is the root position.
+#+NAME: org_mark_mini20.local_20220616T101718.145323
+#+begin_src emacs-lisp
+(defvar mwb-emacs-work-dir (expand-file-name "~/.local/emacs" )
+  "Directory on local machine wwhere emacs outside start directory.")
+#+end_src
+*** Eln-cache - native compile
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220605T094912.471464
+:END:
+This could be moved outside of .emacs.d - When I use multiple machines etc.
+See https://github.com/jimeh/.emacs.d/blob/master/early-init.el and jerrypnz
+NOTE the method for setting the eln-cache dir depends on the emacs version.
+#+NAME: org_mark_mini20.local_20220616T101718.152005
+#+begin_src emacs-lisp
+(defvar mwb-emacs-eln-cache-dir
+  (expand-file-name "eln-cache" mwb-emacs-work-dir))
+(make-directory mwb-emacs-eln-cache-dir t)
+
+(if (fboundp 'startup-redirect-eln-cache)
+	(startup-redirect-eln-cache mwb-emacs-eln-cache-dir)
+  (add-to-list 'native-comp-eln-load-path mwb-emacs-eln-cache-dir))
+#+end_src
+*** Where my init code is
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:F550A4FA-B16B-4FD2-B11F-9F7DB4F82859
+:END:
+  See [[http://ergoemacs.org/emacs/organize_your_dot_emacs.html][Xah Lee get directory name for file]] for possible work around for user-emacs-directory. Except in some cases I do want the directory so break it up
+  #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_86BD52C1-8055-4BB2-834D-2F088719C835
+  #+begin_src emacs-lisp
+(defun mwb-user-emacs-file (name)
+	"Return an absolute per-user Emacs-specific file name around where the init file is.
+  It is basically locate-user-emacs-file but I have followed Aquamacs is setting that not where my init.el file is.
+  Main reason to use is so that I can put init under version control and the rest go elsewhere."
+	(expand-file-name name mwb-user-emacs-directory))
+  #+end_src
+*** Package manager
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220614T202601.874691
+:HEADER-ARGS: :tangle no
+:END:
+**** Set paths
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210625T123956.569254
+:HEADER-ARGS: :tangle no
+:END:
+Set the path to packages
+#+NAME: org_mark_2020-09-28T01-08-28+01-00_mini12.local_0E90CFE6-BBAC-4DA3-8461-12811764098F
+#+begin_src emacs-lisp
+(setq package-user-dir
+      (expand-file-name
+       (format "elpa/%s" emacs-major-version) mwb-user-emacs-directory))
+#+end_src
+**** Set package quickload by version
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210625T123956.568444
+:END:
+#+NAME: org_mark_mini20.local_20210625T123956.553714
+#+begin_src emacs-lisp
+(setq package-quickstart-file
+	  (expand-file-name
+	   (format "package-quickstart.%d.el" emacs-major-version)
+	   mwb-user-emacs-directory))
+#+end_src
+*** Straight
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220616T104529.463245
+:END:
+#+NAME: org_mark_mini20.local_20220616T104529.439075
+#+begin_src emacs-lisp
+(defvar mwb-straight-profile
+  (expand-file-name "straight-pkgs.el" mwb-user-emacs-directory)
+  "File for containging versions of packages from straight")
+
+(defvar straight-base-dir)
+(defvar straight-profiles)
+(setq straight-base-dir mwb-emacs-work-dir)
+(setq straight-profiles `((nil . ,mwb-straight-profile)))
+#+end_src
 ** Package
 :PROPERTIES:
 :ID:       org_mark_2020-09-28T01-08-28+01-00_mini12.local:D069442D-B7AF-4771-800A-87C4F3376AF0
@@ -51,47 +153,6 @@ But if using package we do want it done - early-init turn off is for straight.el
 #+begin_src emacs-lisp
 (setq package-enable-at-startup nil)
 #+end_src
-
-*** Package manager
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20220614T202601.874691
-:END:
-**** Set paths
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20210625T123956.569254
-:HEADER-ARGS: :tangle no
-:END:
-Set the path to packages
-#+NAME: org_mark_2020-09-28T01-08-28+01-00_mini12.local_0E90CFE6-BBAC-4DA3-8461-12811764098F
-#+begin_src emacs-lisp
-(setq package-user-dir
-      (expand-file-name
-       (format "elpa/%s" emacs-major-version) user-emacs-directory))
-#+end_src
-**** Set package quickload by version
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20210625T123956.568444
-:END:
-#+NAME: org_mark_mini20.local_20210625T123956.553714
-#+begin_src emacs-lisp
-(setq package-quickstart-file
-	  (expand-file-name
-	   (format "package-quickstart.%d.el" emacs-major-version)
-	   user-emacs-directory))
-#+end_src
-*** Eln-cache - native compile
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20220605T094912.471464
-:END:
-This could be moved outside of .emacs.d - When I use multiple machines etc.
-See https://github.com/jimeh/.emacs.d/blob/master/early-init.el
-Also
-; Put eln-cache dir in cache directory
-;; NOTE the method for setting the eln-cache dir depends on the emacs version
-(when (fboundp 'startup-redirect-eln-cache)
-  (if (version< emacs-version "29")
-      (add-to-list 'native-comp-eln-load-path (convert-standard-filename (expand-file-name ".local/temp/cache/eln-cache/" user-emacs-directory)))
-    (startup-redirect-eln-cache (convert-standard-filename (expand-file-name ".local/temp/cache/eln-cache/" user-emacs-directory)))))
 
 ** Graphical suppression
 :PROPERTIES:
@@ -141,39 +202,6 @@ This variable tells Emacs to prefer the .el file if itq’s newer, even if there
   :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:026AF0E8-C6EC-470F-906D-602EF7F08477
   :END:
 All this is tangled into init.el which is also under git.
-
-** Where the files are
-:PROPERTIES:
-:ID:       org_mark_2020-09-28T01-08-28+01-00_mini12.local:EC710A48-6A42-4CEE-BF2B-BBA63EA929B1
-:END:
-We need to sort out paths - ideally after init timers etc but we also need them to load early-init so timer is less accurate but then it is wrong for aquamacs anyway
-*** Set where the init file is
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:5F44E496-0565-4D23-9D8B-128A663B9280
-:END:
-In constant mwb-user-emacs-directory
-#+NAME: org_mark_mini20.local_20220521T104243.397754
-#+begin_src emacs-lisp
- ;; Need the directory from here.
- (defun mwb-get-directory-of-current-file ()
-   "Return the full directory path of the caller's file location."
-   (file-name-directory (or load-file-name buffer-file-name))
-   )
- (defconst mwb-user-emacs-directory (mwb-get-directory-of-current-file))
-#+end_src
-*** Where my init code is
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:F550A4FA-B16B-4FD2-B11F-9F7DB4F82859
-:END:
-  See [[http://ergoemacs.org/emacs/organize_your_dot_emacs.html][Xah Lee get directory name for file]] for possible work around for user-emacs-directory. Except in some cases I do want the directory so break it up
-  #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_86BD52C1-8055-4BB2-834D-2F088719C835
-  #+begin_src emacs-lisp
-(defun mwb-user-emacs-file (name)
-	"Return an absolute per-user Emacs-specific file name around where the init file is.
-  It is basically locate-user-emacs-file but I have followed Aquamacs is setting that not where my init.el file is.
-  Main reason to use is so that I can put init under version control and the rest go elsewhere."
-	(expand-file-name name mwb-user-emacs-directory))
-  #+end_src
 
 ** Early init
 :PROPERTIES:

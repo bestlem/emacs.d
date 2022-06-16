@@ -232,33 +232,6 @@ Don't need package-initialize as use package does it all? per https://www.youtub
 :END:
 Lets try straight,
 Allows some forks and emacs_wiki to be dealt with as standard.
-*** Directories
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20220614T210326.131237
-:END:
-#+NAME: org_mark_mini20.local_20220614T210326.105802
-#+begin_src emacs-lisp
-(defvar mwb-emacs-work-dir (expand-file-name "~/.local/emacs" )
-  "Directory on local machine wwhere emacs outside start directory.")
-
-(defvar mwb-emacs-eln-cache-dir (expand-file-name "eln-cache" mwb-emacs-work-dir))
-(make-directory mwb-emacs-eln-cache-dir t)
-
-
-(defvar mwb-straight-profile
-  (expand-file-name "straight-pkgs.el" mwb-user-emacs-directory)
-  "File for containging versions of packages from straight")
-
-
-(defvar straight-base-dir)
-(defvar straight-profiles)
-(setq straight-base-dir mwb-emacs-work-dir)
-(setq straight-profiles `((nil . ,mwb-straight-profile)))
-
-
-(defvar native-comp-eln-load-path)
-(setq native-comp-eln-load-path (cons mwb-emacs-eln-cache-dir (cdr native-comp-eln-load-path)))
-#+end_src
 *** Setup
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220614T210326.130274

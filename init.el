@@ -1,22 +1,5 @@
 ;; -*- lexical-binding: t -*-
 ;; This is a generated file do not edit
-;; [[file:~/.emacs.d/init.org::org_mark_mini20.local_20220521T104243.397754][org_mark_mini20.local_20220521T104243.397754]]
-;; Need the directory from here.
-(defun mwb-get-directory-of-current-file ()
-  "Return the full directory path of the caller's file location."
-  (file-name-directory (or load-file-name buffer-file-name))
-  )
-(defconst mwb-user-emacs-directory (mwb-get-directory-of-current-file))
-;; org_mark_mini20.local_20220521T104243.397754 ends here
-
-;; [[file:~/.emacs.d/init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_86BD52C1-8055-4BB2-834D-2F088719C835][org_mark_2020-01-23T20-40-42+00-00_mini12_86BD52C1-8055-4BB2-834D-2F088719C835]]
-(defun mwb-user-emacs-file (name)
-  "Return an absolute per-user Emacs-specific file name around where the init file is.
-  It is basically locate-user-emacs-file but I have followed Aquamacs is setting that not where my init.el file is.
-  Main reason to use is so that I can put init under version control and the rest go elsewhere."
-  (expand-file-name name mwb-user-emacs-directory))
-;; org_mark_2020-01-23T20-40-42+00-00_mini12_86BD52C1-8055-4BB2-834D-2F088719C835 ends here
-
 ;; [[file:~/.emacs.d/init.org::org_mark_2020-09-28T01-08-28+01-00_mini12.local_E7D671F1-9D29-4FF6-A8E5-8884826E6E4B][org_mark_2020-09-28T01-08-28+01-00_mini12.local_E7D671F1-9D29-4FF6-A8E5-8884826E6E4B]]
 (when (version< emacs-version "27")
   (load (mwb-user-emacs-file "early-init")))

@@ -291,6 +291,7 @@ This is needed to mix the completions up.
 	(setq-local completion-at-point-functions
 				(list
 				 (cape-super-capf
+				  (cape-company-to-capf #'company-yasnippet)
 				  #'elisp-completion-at-point
 				  #'cape-dabbrev)
 				 #'cape-file)

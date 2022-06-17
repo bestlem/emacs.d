@@ -726,13 +726,11 @@ Emacs 27 uses a different format from 25(Aquamacs) so patch it - or is it the Ma
 Solution from [[https://emacs.stackexchange.com/a/3657/9874][Emacs SX]]
 #+NAME: org_2020-12-03+00-00_23C17B69-4464-4E75-9F44-82B3DFE37B79
 #+begin_src emacs-lisp
-(when *aquamacs*
-  (advice-add 'custom-save-all :around
-              (lambda (orig)
-                (let ((print-quoted t))
-                  (funcall orig)))))
+(advice-add 'custom-save-all :around
+            (lambda (orig)
+              (let ((print-quoted t))
+                (funcall orig))))
 #+end_src
-
 *** Initsplit
 :PROPERTIES:
 :ID:       org_mark_2020-10-28T22-44-31+00-00_mini12.local:F570566C-F55D-4BBF-B7B9-16917621FC82

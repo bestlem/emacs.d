@@ -768,51 +768,50 @@ Mainly from consult
   (interactive)
   (consult-line (thing-at-point 'symbol)))
 #+end_src
-**** Hydra
+*** Hydra
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210811T144548.706167
 :END:
 #+NAME: org_mark_mini20.local_20210811T144548.688365
 #+begin_src emacs-lisp
-(bind-key "<f4>"
-          (pretty-hydra-define hydra-search
-            (:title (mwb-icon-text "search" "Search")
-             :foreign-keys warn
-             :quit-key "q"
-             :exit t
-             :idle 0.5)
-            ("Project"
-             (("<f5>" deadgrep "Deadgrep")
-              ("r" consult-ripgrep "Counsel ripgrep"))
-             "Global"
-             (("L" consult-locate "Locate")
-              ("M-w" eww-search-words "Web"))
-             "Directory"
-             (("g" consult-grep "grep")
-              ("G" consult-git-grep "grep using git")
-              ("f" consult-find "Find"))
-             "Current Buffer"
-             (("l" consult-line "Line")
-              ("k" consult-keep-lines "Keep Lines")
-              ("u" consult-focus-lines "Focus Lines")
-              ("e" consult-isearch-forward "consult Incremental search")
-              ("<f4>" consult-line  "Line")
-              ("o" occur "Occur")
-              ("<f3>" consult-line-symbol-at-point "isearch point")
-			  ("." consult-line-thing-at-point "isearch point")
-              ("_" isearch-forward-symbol "isearch symbol")
-              ("w" isearch-forward-word "Isearch word"))
-             "Buffers"
-             (("m"  consult-multi-occur "Multi occur"))
-             "Highlight"
-             (("h." highlight-symbol-at-point "Point")
-              ("hf" hi-lock-find-patterns "Lock Pattern")
-              ("hl" highlight-lines-matching-regexp "Lines")
-              ("hp" highlight-phrase "Phrase")
-              ("hr" highlight-regexp "regexp")
-              ("hu" unhighlight-regexp "Unhighlight")
-              ("hw" hi-lock-write-interactive-patterns "Write patterns")))))
+(pretty-hydra-define hydra-search
+  (:title (mwb-icon-text "search" "Search")
+   :foreign-keys warn
+   :quit-key "q"
+   :exit t
+   :idle 0.5)
+  ("Project" (("<f5>" deadgrep "Deadgrep")
+			  ("r" consult-ripgrep "Counsel ripgrep"))
+   "Global" (("L" consult-locate "Locate")
+			 ("M-w" eww-search-words "Web"))
+   "Directory" (("g" consult-grep "grep")
+				("G" consult-git-grep "grep using git")
+				("f" consult-find "Find"))
+   "Current Buffer" (("l" consult-line "Line")
+					 ("k" consult-keep-lines "Keep Lines")
+					 ("u" consult-focus-lines "Focus Lines")
+					 ("e" consult-isearch-forward "consult Incremental search")
+					 ("<f4>" consult-line  "Line")
+					 ("o" occur "Occur")
+					 ("<f3>" ctrlf-forward-default "isearch")
+					 ("." consult-line-thing-at-point "isearch point")
+					 ("_" isearch-forward-symbol "isearch symbol")
+					 ("w" isearch-forward-word "Isearch word"))
+   "Buffers" (("m"  consult-multi-occur "Multi occur"))
+   "Highlight" (("h." highlight-symbol-at-point "Point")
+				("hf" hi-lock-find-patterns "Lock Pattern")
+				("hl" highlight-lines-matching-regexp "Lines")
+				("hp" highlight-phrase "Phrase")
+				("hr" highlight-regexp "regexp")
+				("hu" unhighlight-regexp "Unhighlight")
+				("hw" hi-lock-write-interactive-patterns "Write patterns"))))
+(bind-key "<f4>" 'hydra-search/body)
 #+end_src
+
+#+RESULTS[78fc5fc245af10de56c6742bbb4a9ff0ff8e658e]: org_mark_mini20.local_20210811T144548.688365
+#+begin_EXAMPLE
+hydra-search/body
+#+end_EXAMPLE
 
 *** isearch map
 :PROPERTIES:

@@ -5,7 +5,7 @@
 :PROPERTIES:
 :ID:       org_mark_2020-11-09T11-32-01+00-00_mini12.local:0ECCD41D-B2B9-4183-A618-D1256CA9090F
 :END:
-**  Flymake
+** Flymake
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:6D225364-60B5-4C41-A802-CFBE5E7E6F2A
 :END:
@@ -82,7 +82,9 @@ Flycheck just checks for space - ie emacs hidden buffers.
 See Info node `(elisp)Buffer Names' for information about
 ephemeral buffers."
   (or (string-prefix-p " " (buffer-name))
-	  (string-prefix-p "*Org Src " (buffer-name))))
+	  (string-prefix-p "*Org Src " (buffer-name))
+	  (string-prefix-p "*scratch" (buffer-name))
+	  ))
 #+end_src
 **** Disable modes
 :PROPERTIES:
@@ -147,4 +149,4 @@ Flycheck runs in a new emacs and by default has only emacs as load-path. I want 
   ("v" flycheck-verify-setup))
 
 (bind-key "H-c" 'hydra-flycheck/body)
-	 #+end_src
+#+end_src

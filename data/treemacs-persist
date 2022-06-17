@@ -11,6 +11,8 @@
  - path :: ~/src/ThirdParty/emacs-init
 ** emacs-mac
  - path :: ~/src/ThirdParty/emacs-mac
+** emacs
+ - path :: ~/.local/emacs
 * Racket
 ** my realm
  - path :: ~/src/Racket/realm
@@ -39,6 +41,8 @@
  - path :: ~/src/cpp/macports-ports
 ** my-macports
  - path :: ~/src/my-macports
+** bee-host
+ - path :: ~/src/cpp/bee-host
 * Odds
 ** py-bash-completion
  - path :: ~/src/python/py-bash-completion

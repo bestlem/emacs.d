@@ -211,7 +211,7 @@ However this code toggles and as I have already use set-word-wrap to do this for
 This describes how the org file is shown I think 9.4 altered this
 #+name: org-custom
 #+begin_src emacs-lisp :tangle no
-(org-startup-folded 'fold)
+(org-startup-folded 'content)
 #+end_src
 ** TODO Hide property drawers
 :PROPERTIES:

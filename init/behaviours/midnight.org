@@ -1,23 +1,51 @@
 #+TITLE:  Midnight
 #+AUTHOR: Mark Bestley
-#+EMAIL:  emacs@bestley.co.uk
 #+DATE:   26 Jan 2021
-#+TAGS:
 #+PROPERTY:header-args :cache yes :tangle yes :comments noweb
-#+STARTUP: showall
 
-* Midnight mode
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20210126T142916.732019
-:END:
+
 midnight-mode purges buffers which haven’t been displayed in 3 days.
 And runs other things on midnight-hook
-** Save amx
+* Save max
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20211030T104455.475471
 :END:
-The amx file seems not to bne updates as well as it could so lets save it
-** Setup
+The amx file seems not to be updating  as well as it could so lets save it.
+
+* Delete old files
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220617T161917.741509
+:END:
+#+NAME: org_mark_mini20.local_20220617T161917.728780
+#+begin_src emacs-lisp
+(defun mwb-data-old-files (dir days)
+  "Return names of files in DIR that are have not been modified for DAYS."
+  (let* ((curr-time (time-convert after-init-time 'integer)))
+	(f-entries dir
+			   (lambda (f) (> (- curr-time
+							(time-convert (f-modification-time f) 'integer))
+						 (* days 24 60 60))))))
+(defun mwb-midnight-delete-files ()
+  "Delete old files in auto-save
+
+Ideally should look at the actual auto-save file and delete all not in them."
+  (let* ((days 21)
+		 (unwanted (mwb-data-old-files mwb-init-backup-unwanted-directory days))
+		 (auto-save-list (mwb-data-old-files mwb-init-auto-save-list-directory days))
+		 (auto-save-files (mwb-data-old-files mwb-init-auto-save-directory days)))
+	(dolist (coll (list unwanted auto-save-list auto-save-files))
+	  (when coll
+		(dolist (file coll t)
+		  (message "delete %s" file)
+		  (delete-file file))))))
+#+end_src
+
+** backup files
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220618T132458.599096
+:END:
+Look [[https://github.com/chadbraunduin/backups-mode/blob/master/scripts/show-orphaned.sh][here]] for a script to delete backupfiles that are for files you do not have anymore
+* Setup
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20211030T104455.472483
 :END:
@@ -27,11 +55,16 @@ The amx file seems not to bne updates as well as it could so lets save it
   :defer 30
   :config
   (midnight-delay-set 'midnight-delay "06:15")
-  (defun add-to-clean-buffer-regex (str)
+  (defun mwb-midnight--add-to-clean-buffer-regex (str)
 	(add-to-list 'clean-buffer-list-kill-regexps
-				 (rx-to-string `(seq line-start "*" ,str " "))))
-  (add-to-clean-buffer-regex "deadgrep")
-  (add-to-clean-buffer-regex "helpful")
+				 (rx-to-string `(seq line-start "*" ,str " ")))
+    (add-to-list 'clean-buffer-list-kill-regexps
+				 (rx (seq bos "magit"
+                          (opt "-" (one-or-more nonl))
+	                      ": ")))
+    )
+  (mwb-midnight--add-to-clean-buffer-regex "deadgrep")
+  (mwb-midnight--add-to-clean-buffer-regex "helpful")
   (midnight-mode 1)
   (add-hook 'midnight-hook
             (if (bound-and-true-p gcmh-mode)
@@ -41,5 +74,7 @@ The amx file seems not to bne updates as well as it could so lets save it
   ;; (add-hook 'midnight-hook #'garbage-collect 99)
   ;; at end
   (add-hook 'midnight-hook #'amx-save-to-file)
+  (add-hook 'midnight-hook #'mwb-midnight-delete-files)
   )
+
 #+end_src

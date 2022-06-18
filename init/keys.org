@@ -793,7 +793,7 @@ Mainly from consult
 					 ("e" consult-isearch-forward "consult Incremental search")
 					 ("<f3>" consult-line  "Line")
 					 ("o" occur "Occur")
-					 ("<f4>" ctrlf-forward-default "isearch")
+					 ("<f4>" bsp-ctrlf-region-forward "isearch")
 					 ("." consult-line-thing-at-point "isearch point")
 					 ("_" isearch-forward-symbol "isearch symbol")
 					 ("w" isearch-forward-word "Isearch word"))

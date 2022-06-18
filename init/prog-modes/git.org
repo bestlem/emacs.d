@@ -223,15 +223,12 @@ I think works with other vcs
 #+begin_src emacs-lisp
 (use-package-elpa git-messenger
   :bind (:map vc-prefix-map
-			  ("p" . git-messenger:popup-message)
-			  :map git-messenger-map
-			  ("m" . git-messenger:copy-message))
+		 ("p" . git-messenger:popup-message)
+		 :map git-messenger-map
+		 ("m" . git-messenger:copy-message))
+  :commands  git-messenger:popup-message
   :init (setq git-messenger:show-detail t
               git-messenger:use-magit-popup t)
-  :pretty-hydra
-  (jp-git
-   ("Other"
-	(("m" git-messenger:popup-message "messenger"))))
   :config
   (with-no-warnings
     (with-eval-after-load 'hydra
@@ -401,8 +398,8 @@ This is called from the main menu and thus not dependant on any of the git modes
 			 ("B" magit-blame-addition "blame"))
    "Diff" (("d" magit-diff-buffer-file "diff buffer"))
    "Other" (("g" hydra-git-gutter/body "Git gutter")
-			("t" git-timemachine "time machine")))
-  )
+			("t" git-timemachine "time machine")
+			("m" git-messenger:popup-message "messenger"))))
 #+end_src
 * Smerge
 :PROPERTIES:

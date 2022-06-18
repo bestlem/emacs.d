@@ -239,6 +239,7 @@ Allows some forks and emacs_wiki to be dealt with as standard.
 #+NAME: org_mark_mini20.local_20220614T204548.040188
 #+begin_src emacs-lisp
 ;; Bootstrap the package manager, straight.el.
+(setq straight-vc-git-default-protocol 'ssh)
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name

@@ -71,6 +71,35 @@ Aquamacs seems to turn this off sometimes in customization so need to investigat
  #+begin_src emacs-lisp
 (setq make-backup-files t)
  #+end_src
+**  Backup directories
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220616T214644.328833
+:END:
+Set up a few variables.
+#+NAME: org_mark_mini20.local_20220616T214644.307766
+#+begin_src emacs-lisp
+(defconst mwb-init-auto-save-directory
+  (f-join mwb-emacs-work-dir "auto-save-dir")
+  "Directory the auto-saved files go in.")
+(defconst mwb-init-auto-save-list-directory
+  (f-join mwb-emacs-work-dir "auto-save-list")
+  "Directory the files that say what the auto-saved files are go in.")
+
+(defconst mwb-init-backup-directory
+  (f-join mwb-emacs-work-dir "backups")
+  "Directory the backups to keep go in.")
+(defconst mwb-init-backup-unwanted-directory
+  (f-join mwb-emacs-work-dir "unwanted")
+  "Directory the backups of files I don't want go in.")
+
+(dolist (dir (list mwb-init-auto-save-directory
+                   mwb-init-backup-directory
+                   mwb-init-auto-save-directory
+				   mwb-init-auto-save-list-directory
+                   ))
+  (when (not (file-exists-p dir))
+	(make-directory dir t)))
+#+end_src
 ** TODO Where
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20210105T204218.554567
@@ -90,12 +119,16 @@ Now changed to one directory as I have found backup-walker
 			   "drafts"
 			   "archive/sent"
 			   ".newsrc"
+			   "treemacs-persist"
+			   "COMMIT_EDITMSG"
+			   "/tmp/"
 			   (seq "emacs.d/init/" (one-or-more anything) ".el" eos)))
-         . "~/tmp/emacs_unwanted")
-		(".*" . "~/.cache/emacs/backups")
-		;; ("." . ".~")
-		))
+         . ,mwb-init-backup-unwanted-directory)
+		("." . ,mwb-init-backup-directory))
+	  ;; ("." . ".~")
+	  )
 #+end_src
+
 ** Backup on save
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:EBBF14AB-888E-4043-8ADB-8DE11ACDBC46
@@ -179,26 +212,33 @@ Sometimes you might want to exclude specific files from super-save. You can achi
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210120T104054.759177
 :END:
+Auto-saves are for dealing with files that have not been saved yet. After =auto-save-timeout= idle the files are saved to a file beginning and ending with #. The default is for tramp files save in one directory and for others in the current directory. So I have put all in the one place.
+As per emacs code comment
+#begin_quote
+The default value is set up to put the auto-save file into the
+temporary directory (see the variable `temporary-file-directory') for
+editing a remote file.
+#end_quote
+
+*** Set the auto-saves up
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220616T231153.081333
+:END:
 Taken from jweigley and expanded
 But then note super-save
 Also odds/main.org
 #+NAME: org_mark_mini20.local_20210120T014441.002252
 #+begin_src emacs-lisp
-(defvar auto-save-directory
-  (expand-file-name "~/.local/emacs/auto-save-dir/" )
-  "Directory the auto-save bits go in. The default was temporary-file-directory")
-
-(setq auto-save-file-name-transforms `((".*" ,auto-save-directory t)))
-
-(when (not (file-exists-p auto-save-directory))
-  (make-directory auto-save-directory t))
-
+(setq auto-save-file-name-transforms
+      `(( ".*"
+          ,(file-name-as-directory mwb-init-auto-save-directory) t)))
 (setq auto-save-interval 64
-      auto-save-list-file-prefix  (expand-file-name "~/.local/emacs/auto-save-list/.saves-" )
-      auto-save-timeout 2
-      auto-save-default 't)
+	  auto-save-list-file-prefix
+	  (expand-file-name ".saves-" mwb-init-auto-save-list-directory)
+	  auto-save-timeout 2
+	  auto-save-default 't)
 #+end_src
-*** Turn off auto-save and backups
+*** Turn off auto-save and backups for secrecy
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210120T104054.758295
 :END:
@@ -267,6 +307,7 @@ Make the message "/FILENAME has auto save data/" unmissable:
 
 (add-hook 'find-file-hook #'leuven--recover-this-file)
 #+end_src
+
 * Files
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:86DB2C97-15D2-4ADA-8AFA-13397998FDC8

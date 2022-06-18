@@ -2,7 +2,7 @@
 
 ;; Copyright (C) 2021 Mark Bestley
 
-;; Author: Mark Bestley <$(2:gnus@bestley.co.uk)>
+;; Author: Mark Bestley <emacs@bestley.co.uk>
 ;; Created: 27 Aug 2021
 ;; Version: 0.1
 ;; Package-Requires: (dependencies)
@@ -35,7 +35,7 @@
 ;;; Code:
 
 (defgroup mwb-fns nil
-  "Various functions I need"
+  "Various functions I need."
   :group 'mwb)
 
 (defun mwb-mapcar* (func arglist)

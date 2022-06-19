@@ -1,4 +1,4 @@
-#+PROPERTY: header-args :tangle "./org-lp-fundamental-tgl.el" :results output silent
+#+PROPERTY: header-args :tangle yes :results output silent  :comments noweb
 #+OPTIONS: toc:3
 
 Never compile this.
@@ -10,7 +10,7 @@ Never compile this.
 
 * Org-Mode Fundamentals
 :PROPERTIES:
-:ID:       orgmode:gcr:vela:7E71A009-4DD3-4296-9851-293BC71D2DFF
+:ID:       org_2020-12-10+00-00:28CB7CC9-F76D-4EFF-A30C-5F16446482FD
 :END:
 
 Configure Org-Mode core functionality to compile this system.
@@ -86,147 +86,7 @@ Help configure Org-Mode.
 
 #+NAME: org_gcr_2017-05-12_mara_21BEDC86-D1A3-43FC-85AC-8FF54D161E2F
 #+BEGIN_SRC emacs-lisp
-
-(defun gcr--org-timestamp ()
-  "Produces a full ISO 8601 format timestamp."
-  (interactive)
-  (let* ((timestamp-without-timezone (format-time-string "%Y-%m-%dT%T"))
-         (timezone-name-in-numeric-form (format-time-string "%z"))
-         (timezone-utf-offset
-          (concat (substring timezone-name-in-numeric-form 0 3)
-                  ":"
-                  (substring timezone-name-in-numeric-form 3 5)))
-         (timestamp (concat timestamp-without-timezone
-                            timezone-utf-offset)))
-    timestamp))
-
-(defun gcr--org-timestamp-no-colons ()
-  "Produces a full ISO 8601 format timestamp with colons replaced by hyphens."
-  (interactive)
-  (let* ((timestamp (gcr--org-timestamp))
-         (timestamp-no-colons (replace-regexp-in-string ":" "-" timestamp)))
-    timestamp-no-colons))
-
-(defun help/set-org-babel-default-header-args (property value)
-  "Easily set system header arguments in org mode.
-
-PROPERTY is the system-wide value that you would like to modify.
-
-VALUE is the new value you wish to store.
-
-Attribution: URL `http://orgmode.org/manual/System_002dwide-header-arguments.html#System_002dwide-header-arguments'"
-  (setq org-babel-default-header-args
-        (cons (cons property value)
-              (assq-delete-all property org-babel-default-header-args))))
-
-(defun help/set-org-babel-default-inline-header-args (property value)
-  "See `help/set-org-babel-default-header-args'; same but for inline header args."
-  (setq org-babel-default-inline-header-args
-        (cons (cons property value)
-              (assq-delete-all property org-babel-default-inline-header-args))))
-
-(defun help/set-org-babel-default-header-args:R (property value)
-  "See `help/set-org-babel-default-header-args'; same but for R.
-
-This is a copy and paste. Additional languages would warrant a refactor."
-  (setq org-babel-default-header-args:R
-        (cons (cons property value)
-              (assq-delete-all property org-babel-default-header-args:R))))
-
-(defun help/set-org-babel-default-header-args:ditaa (property value)
-  "See `help/set-org-babel-default-header-args'; same but for ditaa.
-
-This is a copy and paste. Additional languages would warrant a refactor."
-  (setq org-babel-default-header-args:ditaa
-        (cons (cons property value)
-              (assq-delete-all property org-babel-default-header-args:ditaa))))
-
-(defun help/set-org-babel-default-header-args:dot (property value)
-  "See `help/set-org-babel-default-header-args'; same but for dot.
-
-This is a copy and paste. Additional languages would warrant a refactor."
-  (setq org-babel-default-header-args:dot
-        (cons (cons property value)
-              (assq-delete-all property org-babel-default-header-args:dot))))
-
-(defun help/set-org-babel-default-header-args:plantuml (property value)
-  "See `help/set-org-babel-default-header-args'; same but for plantuml.
-
-This is a copy and paste. Additional languages would warrant a refactor."
-  (setq org-babel-default-header-args:plantuml
-        (cons (cons property value)
-              (assq-delete-all property org-babel-default-header-args:plantuml))))
-
-(defun help/org-toggle-macro-markers ()
-  (interactive)
-  (let ((old org-hide-macro-markers)
-        (new (not org-hide-macro-markers)))
-    (setq org-hide-macro-markers new)
-    (message "Just changed org-hide-macro-markers from %s to %s" old new)
-    (font-lock-mode)
-    (font-lock-mode)))
-
-(defun help/org-prp-hdln ()
-  "Visit every Headline. If it doesn't have an ID property then add one and
-  assign it a UUID. Attribution: URL
-  `http://article.gmane.org/gmane.emacs.orgmode/99738'. It is OK to leave the
-  colon separator in here because these are never used as Source-Blocks and
-  the rest of the code expects the colon separator."
-  (interactive)
-  (save-excursion
-    (goto-char (point-min))
-    (dolist (p (nreverse
-                (org-element-map (org-element-parse-buffer 'headline) 'headline
-                  (lambda (headline) (org-element-property :begin headline)))))
-      (goto-char p)
-      (org-id-get-create))
-    (save-buffer)))
-
-(defun help/org-id-new ()
-  "Re-purposing `org-id' hit a snag when colons were forbidden in Source-Block
-  names. Adding support for a user-defined Org-Id separator would have fixed
-  this but with no benefit to Org-Id. So this function removes the colon
-  instead.
- "
-  (interactive)
-  (let* ((gend (org-id-new))
-         (newid (replace-regexp-in-string ":" "_" gend)))
-    newid))
-
-(defun help/org-prp-src-blk ()
-  "If it doesn't have a NAME property then add one and
-   assign it a UUID. Attribution: URL `http://article.gmane.org/gmane.emacs.orgmode/99740'"
-  (interactive)
-  (help/org-2every-src-block
-   #'(lambda (element)
-       (if (not (org-element-property :name element))
-           (let ((i (org-get-indentation)))
-             (beginning-of-line)
-             (save-excursion (insert "#+NAME: " (help/org-id-new) "\n"))
-             (indent-to i)
-             (forward-line 2))))))
-
-(defconst help/org-special-pre "^\s*#[+]")
-
-(defun help/org-2every-src-block (fn)
-  "Visit every Source-Block and evaluate `FN'."
-  (interactive)
-  (save-excursion
-    (goto-char (point-min))
-    (let ((case-fold-search t))
-      (while (re-search-forward (concat help/org-special-pre "BEGIN_SRC") nil t)
-        (let ((element (org-element-at-point)))
-          (when (eq (org-element-type element) 'src-block)
-            (funcall fn element)))))
-    (save-buffer)))
-
-(defun help/org-babel-demarcate-block ()
-  "Add a NAME property then assign it a UUID."
-  (interactive)
-  (org-babel-demarcate-block)
-  (insert "#+name: " (help/org-id-new))
-  (beginning-of-line)
-  (insert "\n"))
+(require 'grettke)
 #+END_SRC
 
 *** Identity
@@ -487,29 +347,31 @@ Set permission of tangled files
 
 Org-Mode may use all of the listed languages.
 
+I warnt different settings.
 #+NAME: org_gcr_2017-05-12_mara_54FEB960-2B87-41E3-A4E4-6DE9DED9B1BD
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
    (org . t)
-   ;;
+   ;; (sml . t)
    (C . t)
-   (R . t)
-   (python . t)
-   (sass . t)
+   ;; (R . t)
+   ;; (python . t)
+   ;; (sass . t)
    (scheme . t)
    (sql . t)
-   (js . t)
+   ;; (js . t)
    ;;
-   (latex . t)
+   ;; (latex . t)
    ;;
    (makefile . t)
    (shell . t)
    ;;
-   (ditaa . t)
-   (dot . t)
-   (plantuml . t)))
+   ;; (ditaa . t)
+   ;; (dot . t)
+   ;; (plantuml . t)
+   ))
 #+END_SRC
 **** cache
 :PROPERTIES:

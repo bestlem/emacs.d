@@ -1,6 +1,7 @@
 ;;; grettke ---  Functions from  grettke -*- lexical-binding: t -*-
 
-;; Copyright Grant Rettke
+;; Copyright Grant Rettke 2019
+;;           Mark Bestley 2022
 ;; Version: 0.1
 ;; Package-Requires: (dependencies)
 
@@ -27,19 +28,49 @@
 
 ;;
 (require 'org)
+(require 'org-element)
+
+(defvar org-babel-default-header-args:R)
+(defvar org-babel-default-header-args:posh)
+(defvar org-babel-default-header-args:python)
+(defvar org-babel-default-header-args:plantuml)
+(defvar org-babel-default-header-args:dot)
+(defvar org-babel-default-header-args:ditaa)
+
 ;;; Code:
 
 (defun help/display-system-info ()
+  "Show the version of org etc."
   (interactive)
   (message "<<<Org Information>>>\nThis buffer file: %s\nAs Of: %s\nOrg-Version: %s\nOrg-Git-Version:%s\nEmacs-Version: %s\nNoweb wrap start and stop delimeters: '%s' and '%s'\norg-babel-default-header-args:\n"
            buffer-file-name
-           (help/get-timestamp)
+		   (gcr--org-timestamp-no-colons)
            (org-version)
            (org-git-version)
            (emacs-version)
            org-babel-noweb-wrap-start
            org-babel-noweb-wrap-end)
   (pp org-babel-default-header-args))
+
+(defun gcr--org-timestamp ()
+  "Produces a full ISO 8601 format timestamp."
+  (interactive)
+  (let* ((timestamp-without-timezone (format-time-string "%Y-%m-%dT%T"))
+         (timezone-name-in-numeric-form (format-time-string "%z"))
+         (timezone-utf-offset
+          (concat (substring timezone-name-in-numeric-form 0 3)
+                  ":"
+                  (substring timezone-name-in-numeric-form 3 5)))
+         (timestamp (concat timestamp-without-timezone
+                            timezone-utf-offset)))
+    timestamp))
+
+(defun gcr--org-timestamp-no-colons ()
+  "Produces a full ISO 8601 format timestamp with colons replaced by hyphens."
+  (interactive)
+  (let* ((timestamp (gcr--org-timestamp))
+         (timestamp-no-colons (replace-regexp-in-string ":" "-" timestamp)))
+    timestamp-no-colons))
 
 (defun help/set-org-babel-default-header-args (property value)
   "Easily set system header arguments in org mode.
@@ -54,7 +85,9 @@ Attribution: URL `http://orgmode.org/manual/System_002dwide-header-arguments.htm
               (assq-delete-all property org-babel-default-header-args))))
 
 (defun help/set-org-babel-default-inline-header-args (property value)
-  "See `help/set-org-babel-default-header-args'; same but for inline header args."
+  "See `help/set-org-babel-default-header-args'; same but for inline header args.
+
+Set the name PROPERTY to VALUE."
   (setq org-babel-default-inline-header-args
         (cons (cons property value)
               (assq-delete-all property org-babel-default-inline-header-args))))
@@ -62,6 +95,7 @@ Attribution: URL `http://orgmode.org/manual/System_002dwide-header-arguments.htm
 (defun help/set-org-babel-default-header-args:R (property value)
   "See `help/set-org-babel-default-header-args'; same but for R.
 
+Set the name PROPERTY to VALUE.
 This is a copy and paste. Additional languages would warrant a refactor."
   (setq org-babel-default-header-args:R
         (cons (cons property value)
@@ -70,6 +104,7 @@ This is a copy and paste. Additional languages would warrant a refactor."
 (defun help/set-org-babel-default-header-args:ditaa (property value)
   "See `help/set-org-babel-default-header-args'; same but for ditaa.
 
+Set the name PROPERTY to VALUE.
 This is a copy and paste. Additional languages would warrant a refactor."
   (setq org-babel-default-header-args:ditaa
         (cons (cons property value)
@@ -78,6 +113,7 @@ This is a copy and paste. Additional languages would warrant a refactor."
 (defun help/set-org-babel-default-header-args:dot (property value)
   "See `help/set-org-babel-default-header-args'; same but for dot.
 
+Set the name PROPERTY to VALUE.
 This is a copy and paste. Additional languages would warrant a refactor."
   (setq org-babel-default-header-args:dot
         (cons (cons property value)
@@ -86,12 +122,16 @@ This is a copy and paste. Additional languages would warrant a refactor."
 (defun help/set-org-babel-default-header-args:plantuml (property value)
   "See `help/set-org-babel-default-header-args'; same but for plantuml.
 
+Set the name PROPERTY to VALUE.
 This is a copy and paste. Additional languages would warrant a refactor."
   (setq org-babel-default-header-args:plantuml
         (cons (cons property value)
               (assq-delete-all property org-babel-default-header-args:plantuml))))
 
 (defun help/org-toggle-macro-markers ()
+  "Toggle =org-hide-macro-markers=.
+
+Non-nil mean font-lock should hide the brackets marking macro calls."
   (interactive)
   (let ((old org-hide-macro-markers)
         (new (not org-hide-macro-markers)))
@@ -101,11 +141,14 @@ This is a copy and paste. Additional languages would warrant a refactor."
     (font-lock-mode)))
 
 (defun help/org-prp-hdln ()
-  "Visit every Headline. If it doesn't have an ID property then add one and
-  assign it a UUID. Attribution: URL
-  `http://article.gmane.org/gmane.emacs.orgmode/99738'. It is OK to leave the
-  colon separator in here because these are never used as Source-Blocks and
-  the rest of the code expects the colon separator."
+  "Visit every Headline and add an ID if needed.
+
+If it doesn't have an ID property then add one and assign it
+a UUID. Attribution: URL
+`http://article.gmane.org/gmane.emacs.orgmode/99738'. It is OK to
+leave the colon separator in here because these are never used as
+Source-Blocks and the rest of the code expects the
+colon separator."
   (interactive)
   (save-excursion
     (goto-char (point-min))
@@ -117,24 +160,24 @@ This is a copy and paste. Additional languages would warrant a refactor."
     (save-buffer)))
 
 (defun help/org-id-new ()
-  "Re-purposing `org-id' hit a snag when colons were forbidden in Source-Block
-  names. Adding support for a user-defined Org-Id separator would have fixed
-  this but with no benefit to Org-Id. So this function removes the colon
-  instead.
- "
+  "Remove colons from Org-Id.
+Re-purposing `org-id' hit a snag when colons were forbidden in
+Source-Block names. Adding support for a user-defined Org-Id
+separator would have fixed this but with no benefit to Org-Id.
+So this function removes the colon instead."
   (interactive)
   (let* ((gend (org-id-new))
          (newid (replace-regexp-in-string ":" "_" gend)))
     newid))
 
 (defun help/org-prp-src-blk ()
-  "If it doesn't have a NAME property then add one and
-   assign it a UUID. Attribution: URL `http://article.gmane.org/gmane.emacs.orgmode/99740'"
+  "If it doesn't have a NAME property then add one.
+Assign it a UUID. Attribution: URL `http://article.gmane.org/gmane.emacs.orgmode/99740'"
   (interactive)
   (help/org-2every-src-block
    #'(lambda (element)
        (if (not (org-element-property :name element))
-           (let ((i (org-get-indentation)))
+           (let ((i (current-indentation)))
             (beginning-of-line)
             (save-excursion (insert "#+NAME: " (help/org-id-new) "\n"))
             (indent-to i)

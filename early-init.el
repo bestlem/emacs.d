@@ -41,17 +41,6 @@
   (expand-file-name name mwb-user-emacs-directory))
 ;; org_mark_2020-01-23T20-40-42+00-00_mini12_86BD52C1-8055-4BB2-834D-2F088719C835 ends here
 
-;; [[file:~/.emacs.d/init.org::org_mark_mini20.local_20220616T104529.439075][org_mark_mini20.local_20220616T104529.439075]]
-(defvar mwb-straight-profile
-  (expand-file-name "straight-pkgs.el" mwb-user-emacs-directory)
-  "File for containging versions of packages from straight")
-
-(defvar straight-base-dir)
-(defvar straight-profiles)
-(setq straight-base-dir mwb-emacs-work-dir)
-(setq straight-profiles `((nil . ,mwb-straight-profile)))
-;; org_mark_mini20.local_20220616T104529.439075 ends here
-
 ;; [[file:~/.emacs.d/init.org::org_mark_mini20.local_20220614T202654.939619][org_mark_mini20.local_20220614T202654.939619]]
 (setq package-enable-at-startup nil)
 ;; org_mark_mini20.local_20220614T202654.939619 ends here

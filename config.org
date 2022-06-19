@@ -232,14 +232,31 @@ Don't need package-initialize as use package does it all? per https://www.youtub
 :END:
 Lets try straight,
 Allows some forks and emacs_wiki to be dealt with as standard.
-*** Setup
+
+*** Set variables
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220616T104529.463245
+:END:
+#+NAME: org_mark_mini20.local_20220616T104529.439075
+#+begin_src emacs-lisp
+(defvar mwb-straight-profile
+  (expand-file-name "straight-pkgs.el" mwb-user-emacs-directory)
+  "File for containging versions of packages from straight")
+
+(defvar straight-base-dir)
+(defvar straight-profiles)
+(setq straight-base-dir mwb-emacs-work-dir)
+(setq straight-profiles `((nil . ,mwb-straight-profile)))
+
+(setq straight-vc-git-default-protocol 'ssh)
+#+end_src
+*** Bootstrap
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220614T210326.130274
 :END:
 #+NAME: org_mark_mini20.local_20220614T204548.040188
 #+begin_src emacs-lisp
 ;; Bootstrap the package manager, straight.el.
-(setq straight-vc-git-default-protocol 'ssh)
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name

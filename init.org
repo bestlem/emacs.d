@@ -123,21 +123,6 @@ Set the path to packages
 	   (format "package-quickstart.%d.el" emacs-major-version)
 	   mwb-user-emacs-directory))
 #+end_src
-*** Straight
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20220616T104529.463245
-:END:
-#+NAME: org_mark_mini20.local_20220616T104529.439075
-#+begin_src emacs-lisp
-(defvar mwb-straight-profile
-  (expand-file-name "straight-pkgs.el" mwb-user-emacs-directory)
-  "File for containging versions of packages from straight")
-
-(defvar straight-base-dir)
-(defvar straight-profiles)
-(setq straight-base-dir mwb-emacs-work-dir)
-(setq straight-profiles `((nil . ,mwb-straight-profile)))
-#+end_src
 ** Package
 :PROPERTIES:
 :ID:       org_mark_2020-09-28T01-08-28+01-00_mini12.local:D069442D-B7AF-4771-800A-87C4F3376AF0
@@ -207,7 +192,7 @@ All this is tangled into init.el which is also under git.
 :PROPERTIES:
 :ID:       org_mark_2020-09-28T01-08-28+01-00_mini12.local:4AA8B45F-675E-4673-91C4-D60292B1B349
 :END:
-For Emacs < 27 we need early -init
+For Emacs < 27 we need early -init. All my fancy directory stuff is in early-init so we don't know where to find this so hard code :(
 #+NAME: org_mark_2020-09-28T01-08-28+01-00_mini12.local_E7D671F1-9D29-4FF6-A8E5-8884826E6E4B
 #+begin_src emacs-lisp
 (when (version< emacs-version "27")

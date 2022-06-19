@@ -531,9 +531,8 @@ Try with an enhanced one but test to mouse-4 which might have issues with treema
 #+NAME: org_mark_mini12.local_20201213T170631.361457
 #+begin_src emacs-lisp
 (unless (or *emacs/>=28p* *aquamacs*)
-  (use-feature mouse3
+  (use-package-elpa mouse3
 	:demand
-	:mwb-load-path "site-lisp/Emacs_wiki"
 	:preface (unbind-key [mouse-3] macos-key-map)
 	:custom (mouse3-menu-always-flag t)
 	:bind (("<mouse-4>" . 'mouse3-action-wo-save-then-kill))))
@@ -602,6 +601,8 @@ Tried inherit to set f19 s as mode dependant but seems not to work with pretty h
 :END:
 #+NAME: org_2020-12-05+00-00_94E1455C-7F91-48B1-BF7B-EA3753E7BDCB
 #+begin_src emacs-lisp
+(use-package zoom-frm
+  :straight (:host github :repo "emacsmirror/zoom-frm" :branch "master"))
 (require 'jp-window)
 (pretty-hydra-define hydra-mwb-main
   (:title (with-octicon "tools" "Global tools" 1 -0.05)

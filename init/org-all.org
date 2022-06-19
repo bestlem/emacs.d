@@ -219,7 +219,7 @@ This describes how the org file is shown I think 9.4 altered this
 :END:
 From [[https://stackoverflow.com/a/17492723/151019][SO]] override org function
 OK need to hide #+name and also make the properties visible
-ALso see https://github.com/amno1/org-hide-properties
+ALso see https://github.com/amno1/org-hide-properties or https://github.com/org-roam/org-roam/wiki/User-contributed-Tricks
 *** Manual attempt
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220605T223855.748968
@@ -268,8 +268,8 @@ ALso see https://github.com/amno1/org-hide-properties
 :END:
 #+NAME: org_mark_mini20.local_20220605T223855.714238
 #+begin_src emacs-lisp
-(use-feature org-hide-properties
-  :mwb-load-path "fork/org-hide-properties"
+(use-package-elpa org-hide-properties
+  :straight (:host github :repo  "amno1/org-hide-properties" )
   :hook (org-mode . org-hide-properties-mode)
   :config
   (major-mode-hydra-define+ org-mode nil
@@ -285,9 +285,8 @@ TODO add property drawers
 The original has been updated
 #+NAME: org_mark_mini20.local_20210422T091310.076424
 #+begin_src emacs-lisp :tangle no :noweb-ref org-config
-(use-feature ob-hide-markers
+(use-package-elpa ob-hide-markers
   :disabled
-  :mwb-load-path "fork/org-babel-hide-markers-mode"
   :hook (org-font-lock . org-babel-hide-markers-mode)
   :init
   (setq org-babel-hide-markers-line t)
@@ -302,7 +301,6 @@ Need to set up an auto-sort
 #+begin_src emacs-lisp :noweb-ref org-config :tangle no
 (setq org-footnote-auto-adjust t)
 #+end_src
-
 
 
 ** Babel initialisation

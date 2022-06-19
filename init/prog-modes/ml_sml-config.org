@@ -41,10 +41,9 @@ Make this one file as loading is now all files.
 Separated out
 #+NAME: org_mark_2020-11-10T11-48-28+00-00_mini12.local_8FC71439-07B8-480C-A285-3C0F6AA4192C
 #+begin_src emacs-lisp
-(use-feature ob-sml
+(use-package-elpa ob-sml
   :demand
-  :after (sml-mode org-mode)
-  :mwb-load-path "fork/ob-sml")
+  :after (sml-mode org-mode))
 #+end_src
 
 ** Config

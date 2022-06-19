@@ -211,7 +211,7 @@ For Emacs < 27 we need early -init
 #+NAME: org_mark_2020-09-28T01-08-28+01-00_mini12.local_E7D671F1-9D29-4FF6-A8E5-8884826E6E4B
 #+begin_src emacs-lisp
 (when (version< emacs-version "27")
-  (load (mwb-user-emacs-file "early-init")))
+  (load (expand-file-name "~/.emacs.d/early-init")))
 #+end_src
 ** package
 :PROPERTIES:

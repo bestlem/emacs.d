@@ -34,14 +34,14 @@ Cover method for gnus to create new frame
 
 #+NAME: org_mark_mini12.local_20210111T165218.684308
 #+begin_src emacs-lisp :tangle no :noweb-ref gnus-preface
-(require 'zoom-frm)
+;; (require 'zoom-frm)
 (defun gnus-mwb ()
   "Cover gnus command to put it in a new frame"
   (interactive)
   (select-frame (make-frame-command))
   (gnus)
-  (zoom-frm-in)
-  (zoom-frm-in)
+  ;; (zoom-frm-in)
+  ;; (zoom-frm-in)
   )
 #+end_src
 **** Kill frame on exit

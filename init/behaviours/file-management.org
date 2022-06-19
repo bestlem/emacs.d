@@ -170,11 +170,9 @@ Comes from gnus setup
 :ID:       org_mark_mini20.local:20210605T200354.655882
 :END:
 This is [[https://github.com/lewang/backup-walker][Backup Walker]]
-
 #+NAME: org_mark_mini20.local_20210605T200354.625130
 #+begin_src emacs-lisp
-(use-feature backup-walker
-  :mwb-load-path "fork/backup-walker"
+(use-package-elpa backup-walker
   :commands backup-walker-start)
   #+end_src
 ** Super save
@@ -440,11 +438,10 @@ This provides a cover for ripgrep.
 Now use a fork to allow search of ignored files.
 #+NAME: org_mark_mini20.local_20220527T140337.009175
 #+begin_src emacs-lisp
-(use-feature deadgrep
+(use-package-elpa deadgrep
+  :straight (:fork (:repo "bestlem/deadgrep"))
   :commands deadgrep
-  :mwb-load-path "fork/deadgrep"
-  :bind (
-		 :map deadgrep-mode-map
+  :bind (:map deadgrep-mode-map
 		 ("<double-mouse-1>" . deadgrep-visit-result-other-window)
 		 ("<mouse-2>" . deadgrep-toggle-file-results))
   :config (unless (executable-find "rg")

@@ -711,11 +711,9 @@ The emacs basic version. Need it for dependency load use by initsplit
 More Drew Adams https://www.emacswiki.org/emacs/CustomizingAndSaving#CustomizePlus
 #+NAME: org_mark_2020-10-29T09-11-06+00-00_mini12.local_D3E6606B-7E85-4FD1-BA2D-3B40885ED97B
 #+begin_src emacs-lisp
-(use-feature cus-edit+
+(use-package-elpa cus-edit+
   :disabled                             ; messes up switch-to-buffers advice
-
   :after cus-edit
-  :mwb-load-path "site-lisp/emacs_wiki"
   :config
   (customize-toggle-outside-change-updates 99))
 #+end_src
@@ -876,9 +874,7 @@ Deal with stuff done by Aquamacs
 #+NAME: org_mark_2020-10-01T14-52-55+01-00_mini12.local_2D8F5C87-38BB-47E2-A162-03E5E42630F4
 #+begin_src emacs-lisp
 (unless *aquamacs*
-  (use-feature redo+
-    :demand
-    :mwb-load-path "site-lisp/Emacs_wiki")
+  (use-package-elpa redo+ :demand)
   (use-feature mac-key-mode
     :demand
     :diminish

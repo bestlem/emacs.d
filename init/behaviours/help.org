@@ -17,9 +17,8 @@ Basically help-fns+ is not what I want even then it is just f1-c
 This will be fun as it uses *Help* and I use *Helpful*
 #+NAME: org_2020-12-08+00-00_F53AC824-5902-4E24-B6C7-AC4EC2BA328B
 #+begin_src emacs-lisp :tangle no
-(use-feature help-fns+
-  :defer 15
-  )
+(use-package-elpa help-fns+
+  :defer 15)
 #+end_src
 * Helpful
 :PROPERTIES:

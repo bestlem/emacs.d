@@ -60,12 +60,6 @@ This will work around a line or for a region from
 :ID:       org_mark_mini20.local:20220502T143604.436952
 :END:
 https://github.com/jcpetkovich/shrink-whitespace.el But this removes all sorts of whitespace and is not useful for code
-#+NAME: org_mark_mini20.local_20220502T134543.147811
-#+begin_src emacs-lisp :tangle no
-(use-feature shrink-whitespace
-  :mwb-load-path "fork/shrink-whitespace"
-  :commands shrink-whitespace)
-#+end_src
 ** Own attempt
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220502T143604.435179

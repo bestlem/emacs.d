@@ -2,7 +2,7 @@
 ;; This is a generated file do not edit
 ;; [[file:~/.emacs.d/init.org::org_mark_2020-09-28T01-08-28+01-00_mini12.local_E7D671F1-9D29-4FF6-A8E5-8884826E6E4B][org_mark_2020-09-28T01-08-28+01-00_mini12.local_E7D671F1-9D29-4FF6-A8E5-8884826E6E4B]]
 (when (version< emacs-version "27")
-  (load (mwb-user-emacs-file "early-init")))
+  (load (expand-file-name "~/.emacs.d/early-init")))
 ;; org_mark_2020-09-28T01-08-28+01-00_mini12.local_E7D671F1-9D29-4FF6-A8E5-8884826E6E4B ends here
 
 ;; [[file:~/.emacs.d/init.org::org_mark_mini20.local_20220606T145002.735412][org_mark_mini20.local_20220606T145002.735412]]

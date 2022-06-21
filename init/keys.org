@@ -587,6 +587,10 @@ Tried inherit to set f19 s as mode dependant but seems not to work with pretty h
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210812T114450.516655
 :END:
+**** Edit in tangling and detangling code.
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220619T191445.972228
+:END:
 #+NAME: org_mark_mini20.local_20210812T114450.499147
 #+begin_src emacs-lisp
 (defun mwb-special-in-hydra ()
@@ -594,6 +598,18 @@ Tried inherit to set f19 s as mode dependant but seems not to work with pretty h
   (cond ((eq major-mode 'org-mode) (org-edit-special))
 		((bound-and-true-p org-src-mode) (org-edit-src-exit))
 		(t (org-babel-tangle-jump-to-org))))
+#+end_src
+**** Load Smartparens
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220619T191445.971330
+:END:
+#+NAME: org_mark_mini20.local_20220619T191445.952904
+#+begin_src emacs-lisp
+(defun mwb-init--call-smartparens ()
+  (interactive)
+  (unless (fboundp 'ptrv/smartparens/body)
+	(require 'smartparens))
+  (ptrv/smartparens/body))
 #+end_src
 *** Main map
 :PROPERTIES:
@@ -608,17 +624,16 @@ Tried inherit to set f19 s as mode dependant but seems not to work with pretty h
   (:title (with-octicon "tools" "Global tools" 1 -0.05)
    :color teal
    :idle 1.0)
-  ("Hydrae"
-   (("C" hydra-flycheck/body "Flycheck")
-    ("g" jp-git/body "git...")
-    ("h" hydra-hs/body "Hide/show...")
-    ("n" hydra-navigate/body "Navigate")
-    ("P" hydra-projectile/body "projectile")
-    ("t" hydra-transpose/body "Transpose")
-    ("x" x-hydra-readonly/body "C-X fns")
-    ("<f19>" major-mode-hydra "Major mode")
-    ("[" ptrv/smartparens/body "Smartparens")
-    ("l" hydra-goto/body "Go to"))
+  ("Hydrae" (("C" hydra-flycheck/body "Flycheck")
+			 ("g" jp-git/body "git...")
+			 ("h" hydra-hs/body "Hide/show...")
+			 ("n" hydra-navigate/body "Navigate")
+			 ("P" hydra-projectile/body "projectile")
+			 ("t" hydra-transpose/body "Transpose")
+			 ("x" x-hydra-readonly/body "C-X fns")
+			 ("<f19>" major-mode-hydra "Major mode")
+			 ("[" mwb-init--call-smartparens "Smartparens")
+			 ("l" hydra-goto/body "Go to"))
    "Windows"
    (("F" other-frame "Switch Frame")
     ("m" (mwb-new-frame "*Messages*") "Messages")
@@ -629,7 +644,7 @@ Tried inherit to set f19 s as mode dependant but seems not to work with pretty h
    "Current buffer"
    (("L" linum-mode "line number" :toggle t)
     ("c" insert-char "insert char")
-	("o" xah-clean-whitespace "Remove Blank lines")
+    ("o" xah-clean-whitespace "Remove Blank lines")
     ("TAB" hs-mwb-show-one-level "show one level")
     ("C-<tab>" hs-toggle-hiding "Toggle hide-show")
     ("f" refill-mode "Auto refill mode ")
@@ -637,7 +652,7 @@ Tried inherit to set f19 s as mode dependant but seems not to work with pretty h
     ("i" consult-imenu "imenu"))
    "Actions"
    (("de" toggle-debug-on-error "debug on error" :toggle (default-value 'debug-on-error))
-	("dq" toggle-debug-on-quit "debug on quit" :toggle (default-value 'debug-on-quit))
+    ("dq" toggle-debug-on-quit "debug on quit" :toggle (default-value 'debug-on-quit))
     ("D" hyd-dired-common/body "Open dired frame")
     ("M" toggle-mwb-message-timestamp :toggle mwb-message-timestamp)
     ("p" hydra-straight-helper/body "straight ...")

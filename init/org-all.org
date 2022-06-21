@@ -527,7 +527,7 @@ From [[http://www.howardism.org/Technical/Emacs/orgmode-wordprocessor.html][here
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210507T132612.415034
 :END:
-
+Appear as Unicode bullets.
 	#+begin_src emacs-lisp
 (font-lock-add-keywords
  'org-mode

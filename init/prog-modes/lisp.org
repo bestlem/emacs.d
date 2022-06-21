@@ -58,13 +58,8 @@ Changes are now made directly to the package which is only now here
   :mwb-load-path "site-lisp/lispy-mnemonic"
   ;; :init (lispy-mode 1)
   :commands lispy-mnemonic-mode
-  :hook ((emacs-lisp-mode
-          lisp-data-mode
-          lisp-interaction-mode
-          racket-mode
-          racket-xp-mode
-          racket-repl-mode
-          inferior-emacs-lisp-mode) . lispy-mnemonic-mode))
+  :init
+  (mwb-add-hook-fn (mwb-lisp-hooks) #'lispy-mnemonic-mode ))
  #+end_src
 ** Evaluation
 :PROPERTIES:

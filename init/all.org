@@ -159,20 +159,61 @@ Try macport now as on arm
 :ID:       org_mark_mini20.local:20220612T185002.003075
 :END:
 Some things are set for families of modes so give a function to hook.
+The intern code is from jojojames
+The lisp list from `sp-lisp-modes`, but I can't use that as smartparens is not usually loaded.
 #+NAME: org_mark_mini20.local_20220612T185001.987359
 #+begin_src emacs-lisp
-(defconst mwb-lisp-modes '(lisp-mode
-						   lisp-data-mode
-						   lisp-interaction-mode
-						   racket-mode
-						   racket-xp-mode
-						   racket-repl-mode
-						   inferior-emacs-lisp-mode)
+(defconst mwb-lisp-modes '(
+                           cider-repl-mode
+                           clojure-mode
+                           clojurec-mode
+                           clojurescript-mode
+                           clojurex-mode
+                           common-lisp-mode
+                           emacs-lisp-mode
+                           eshell-mode
+                           fennel-mode
+                           fennel-repl-mode
+                           geiser-repl-mode
+                           gerbil-mode
+                           inf-clojure-mode
+                           inferior-emacs-lisp-mode
+                           inferior-lisp-mode
+                           inferior-scheme-mode
+                           lisp-interaction-mode
+                           lisp-mode
+                           monroe-mode
+                           racket-mode
+                           racket-repl-mode
+                           scheme-interaction-mode
+                           scheme-mode
+                           slime-repl-mode
+                           sly-mrepl-mode
+                           stumpwm-mode)
   "Mode that are lisp like")
 (defconst mwb-braces-modes '(c-mode
 							 cpp-mode
 							 objc-mode
 							 ))
+
+(defun mwb-lisp-hooks ()
+  "Return hooks that are lispy."
+  (mapcar (lambda (mode)
+            (intern (concat (symbol-name mode) "-hook")))
+          mwb-lisp-modes))
+
+(defun mwb-braces-hooks ()
+  "Return hooks that have braces."
+  (mapcar (lambda (mode)
+            (intern (concat (symbol-name mode) "-hook")))
+          mwb-braces-modes))
+
+(defun mwb-add-hook-fn (hooks fn)
+  (dolist (h hooks)
+	(message "hook %s fn %s" h fn)
+	(add-hook h fn)))
+
+
 #+end_src
 
 

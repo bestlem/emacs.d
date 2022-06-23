@@ -172,7 +172,7 @@ This cuts out all diminish issues but also see https://www.manueluberti.eu/emacs
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210606T165448.625918
 :END:
-This is problematic as the only autoloads are the actual themse which I do not want.
+This is problematic as the only autoloads are the actual themes which I do not want.
 So have to lump as one and put in config.
 #+NAME: org_mark_mini20.local_20210706T132917.944916
 #+begin_src emacs-lisp
@@ -180,10 +180,7 @@ So have to lump as one and put in config.
   :defer 1
   :init
   (setq powerline-default-separator nil) ; no chevrons etc
-  :config
-  <<spaceline-all-the-icons>>
-  <<spaceline-mwb>>
-  )
+)
   #+end_src
 #+end_src
 ** All the icons
@@ -191,17 +188,18 @@ So have to lump as one and put in config.
 :ID:       org_mark_mini20.local:20210606T165448.624436
 :END:
 #+NAME: spaceline-all-the-icons
-#+begin_src emacs-lisp :tangle no
-(use-package-elpa spaceline-all-the-icons :demand)
+#+begin_src emacs-lisp
+(use-package-elpa spaceline-all-the-icons :demand :after spaceline)
 #+end_src
 ** My version
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210620T171618.632190
 :END:
 #+NAME: spaceline-mwb
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 (use-feature spaceline-mwb
   :demand
+  :after spaceline-all-the-icons
   :config (spaceline-mwb-theme))
 #+end_src
 

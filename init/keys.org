@@ -136,23 +136,28 @@ Package [[https://github.com/justbur/emacs-which-key][which-key]] shows after a 
 It was disabled as it calls iso-transl to wreck A-/ bindings but fix iso-transl as above so back
    #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_E1F20E36-2E4C-47E8-B20E-F08B7B7F9C77
    #+begin_src emacs-lisp
-(use-package-elpa which-key
-  :defer 20
-  :config
-  (setq ;; which-key-sort-order 'which-key-key-order-alpha
-   which-key-sort-order 'which-key-description-order
-   which-key-side-window-max-width 0.33
-   which-key-idle-delay 1)
-  ;; (setq which-key-popup-type 'frame) ; fails to f19-f19 otherwise interesting
-  (which-key-mode)
-  (if (>= emacs-major-version 27)
-      (use-package-elpa which-key-posframe
-        :demand
-        :config
-        (which-key-posframe-mode 1))
-    (which-key-setup-side-window-right-bottom))
-  :diminish which-key-mode)
+   (use-package-elpa which-key
+     :defer 20
+     :config
+     (setq ;; which-key-sort-order 'which-key-key-order-alpha
+      which-key-sort-order 'which-key-description-order
+      which-key-side-window-max-width 0.33
+      which-key-idle-delay 1)
+     ;; (setq which-key-popup-type 'frame) ; fails to f19-f19 otherwise interesting
+     (which-key-mode)
+     :diminish which-key-mode)
    #+end_src
+
+*** Posframe
+Make which key popup.
+#+begin_src emacs-lisp
+(use-package-elpa which-key-posframe
+  :demand
+  :after which-key
+  :config
+  (which-key-posframe-mode 1))
+(which-key-setup-side-window-right-bottom)
+#+end_src
 ** Display keys in help and menus
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:07E735E7-F73B-475D-96E1-7D24627B32DF

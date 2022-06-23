@@ -83,6 +83,7 @@
  ("minions" . "19dae1c41542777cb5b0311b6e2e77f43e2fd407")
  ("modus-themes" . "e342e3568c8a3a1cc20714c774bbe9df68489b32")
  ("mwim.el" . "b4f3edb4c0fb8f8b71cecbf8095c2c25a8ffbf85")
+ ("nongnu-elpa" . "7c53c3bc83a43d0cf09ade1379f9be7414ff3972")
  ("nov.el" . "8f5b42e9d9f304b422c1a7918b43ee323a7d3532")
  ("ob-sml" . "958165c92b6cff6cada5c85c8ae5887806b8451b")
  ("orderless" . "8b9af2796fa0eb87eea4140bc08d16880a493803")
@@ -114,7 +115,7 @@
  ("spaceline" . "9a81afa52738544ad5e8b71308a37422ca7e25ba")
  ("spaceline-all-the-icons.el" . "5afd48c10f1bd42d9b9648c5e64596b72f3e9042")
  ("spinner" . "34905eae12a236753fa88abc831eff1e41e8576e")
- ("straight.el" . "4517e118ee43f849f708025dbb2cf4f281793121")
+ ("straight.el" . "d08bf0953ad774fe7746affa695554fdf0a63cee")
  ("svg-lib" . "5ff87b7f9a85e728360a63d8e4ae7aaa7eccf7d3")
  ("swift-helpful" . "fe5c4a97fabbc89bd4761cfe4f8f8ce6f6d89703")
  ("swift-mode" . "c92e780530950a2cd6e501baf48c96ae4d8214a6")
@@ -137,4 +138,4 @@
  ("yasnippet" . "5cbdbf0d2015540c59ed8ee0fcf4788effdf75b6")
  ("zoom-frm" . "8f7ee71cb8d346112bb1cb029f363120dd587f1c")
  ("zoutline" . "32857c6c4b9b0bcbed14d825a10b91a98d5fed0a"))
-:beta
+:gamma

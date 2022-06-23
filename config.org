@@ -237,6 +237,14 @@ Allows some forks and emacs_wiki to be dealt with as standard.
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220616T104529.463245
 :END:
+
+**** Bootstrap
+To use a forked straight.el
+#+begin_src emacs-lisp
+(setq straight-repository-user "bestlem")
+(setq straight-repository-branch "work")
+#+end_src
+**** Running
 #+NAME: org_mark_mini20.local_20220616T104529.439075
 #+begin_src emacs-lisp
 (defvar mwb-straight-profile
@@ -247,7 +255,7 @@ Allows some forks and emacs_wiki to be dealt with as standard.
 (defvar straight-profiles)
 (setq straight-base-dir mwb-emacs-work-dir)
 (setq straight-profiles `((nil . ,mwb-straight-profile)))
-
+(setq straight-use-version-specific-build-dir t)
 (setq straight-vc-git-default-protocol 'ssh)
 #+end_src
 *** Bootstrap

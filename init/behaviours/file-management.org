@@ -33,7 +33,7 @@ And I hear a sound on deletes so Finder is being used. Fixed with -F argument
   (if *emacs/mac-port-p*
 	  (setq mac_system_move_file_to_trash_use_finder t)
 	(use-package-elpa osx-trash
-	  :defer 1
+	  :defer 0.5
 	  :config (osx-trash-setup))))
 #+end_src
 * Backups
@@ -439,11 +439,12 @@ Now use a fork to allow search of ignored files.
 #+NAME: org_mark_mini20.local_20220527T140337.009175
 #+begin_src emacs-lisp
 (use-package-elpa deadgrep
-  :straight (:fork (:repo "bestlem/deadgrep"))
+  :straight (:fork (:repo "bestlem/deadgrep" :branch "work"))
   :commands deadgrep
   :bind (:map deadgrep-mode-map
 		 ("<double-mouse-1>" . deadgrep-visit-result-other-window)
-		 ("<mouse-2>" . deadgrep-toggle-file-results))
+		 ("<mouse-2>" . deadgrep-toggle-file-results)
+		 ("<escape>" . deadgrep-kill-process))
   :config (unless (executable-find "rg")
 			(warning "Please install ripgrep ...")))
 #+end_src

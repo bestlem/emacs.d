@@ -26,6 +26,20 @@ This will be fun as it uses *Help* and I use *Helpful*
 :END:
 Let's use [[https://github.com/Wilfred/helpful][Helpful]] But bind the keys in keys.org
 Although that causes loading issues so done here. This also means the helpful gets loaded.
+Note helpful uses its own elisp references elisp-refs - see lisp_emacs for that.
+** emacs-lisp-references
+As a Branch needs to be set before help.
+*** elisp-xref
+Used by helpful and might be more use elsewhere.
+#+begin_src emacs-lisp
+(use-package-elpa elisp-refs
+  :straight (:fork (:repo "bestlem/elisp-refs" :branch "work"))
+  :bind (:map elisp-refs-mode-map
+		 ("<double-mouse-1>" . elisp-refs-visit-match-other-window)
+		 ("<next>" . elisp-refs-next-match)
+		 ("<prior>" . elisp-refs-prev-match)))
+#+end_src
+** helpful
 #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_20EF0E45-D1C2-493C-B710-6E2B48D98DB9
 #+begin_src emacs-lisp
 (use-package-elpa helpful

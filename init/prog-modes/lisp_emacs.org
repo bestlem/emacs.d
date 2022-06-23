@@ -625,3 +625,7 @@ The first in the list is the last to be evaluated and is before all the others."
 	(add-to-list 'imenu-generic-expression pattern)))
 (add-hook 'emacs-lisp-mode-hook 'hemacs-imenu-elisp-expressions)
 #+end_src
+* Cross reference
+** elisp-xref
+Used by helpful and might be more use elsewhere.
+Unfortunately as using a fork I need to put it before helpful.

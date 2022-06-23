@@ -133,10 +133,15 @@ Recompile emacs lisp  if already compiled on save but also on load.
 :END:
 Let help find the C code.
 ;;;; Set C Directory
-;; NOTE this assumes that the C source files are included with emacs.
-;; This depends on the build process used.
-;; For one example see https://github.com/mclear-tools/build-emacs-macos
-(setq find-function-C-source-directory "/Applications/Emacs.app/Contents/Resources/src")
+NOTE this assumes that the C source files are included with emacs. Or it is my main machine,
+This depends on the build process used.
+For one example see https://github.com/mclear-tools/build-emacs-macos
+#+begin_src emacs-lisp
+(setq find-function-C-source-directory
+	  (cond (*emacs/mac-port-p* "/Users/mark/src/ThirdParty/emacs-mac/src/")
+			(t "/Applications/Emacs.app/Contents/Resources/src")))
+#+end_src
+
 
 * Emacs server
 :PROPERTIES:
@@ -149,10 +154,9 @@ Then again I don't use it as I fiddel with startup code so much (and have a GUI 
 Try macport now as on arm
  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_922BC8C2-56FC-46E7-B506-2CB94F2BB86A
  #+begin_src emacs-lisp
-(use-feature server
-  :disabled
-  :unless *aquamacs*
-  :hook (after-init . server-mode))
+ (use-feature server
+   :unless (or *macport* *aquamacs*)
+   :hook (after-init . server-start))
  #+end_src
 * Support data
 :PROPERTIES:
@@ -210,10 +214,7 @@ The lisp list from `sp-lisp-modes`, but I can't use that as smartparens is not u
 
 (defun mwb-add-hook-fn (hooks fn)
   (dolist (h hooks)
-	(message "hook %s fn %s" h fn)
 	(add-hook h fn)))
-
-
 #+end_src
 
 

@@ -611,14 +611,41 @@ Tried inherit to set f19 s as mode dependant but seems not to work with pretty h
 	(require 'smartparens))
   (ptrv/smartparens/body))
 #+end_src
+**** Ace-window
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220621T085721.234804
+:END:
+Used for some window management in the hydras.
+#+NAME: org_mark_mini20.local_20220621T085721.215336
+#+begin_src emacs-lisp
+(use-package-elpa ace-window
+  :commands ace-window
+  ace-delete-window
+  ace-swap-window
+  ace-delete-other-windows
+  ace-select-window
+  )
+#+end_src
+**** Zoom functions
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220621T090048.820171
+:END:
+#+NAME: org_mark_mini20.local_20220621T090048.801066
+#+begin_src emacs-lisp
+(use-package-elpa zoom-frm
+  :commands
+  zoom-in
+  zoom-in/out
+  zoom-out)
+
+#+end_src
 *** Main map
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210812T103208.412764
 :END:
 #+NAME: org_2020-12-05+00-00_94E1455C-7F91-48B1-BF7B-EA3753E7BDCB
 #+begin_src emacs-lisp
-(use-package zoom-frm
-  :straight (:host github :repo "emacsmirror/zoom-frm" :branch "master"))
+
 (require 'jp-window)
 (pretty-hydra-define hydra-mwb-main
   (:title (with-octicon "tools" "Global tools" 1 -0.05)

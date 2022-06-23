@@ -237,15 +237,17 @@ Replace isearch but not so easy as consult-line plus can leave the progress mark
 #+NAME: org_mark_mini20.local_20210804T165415.264578
 #+begin_src emacs-lisp
 (use-package-elpa ctrlf
+  :straight (:fork (:repo "bestlem/ctrlf" :branch "work"))
   :init (ctrlf-mode 1)
   :bind (:map ctrlf-minibuffer-mode-map
 		 ("C-<f3>" . ctrlf-backward-alternate)
 		 ("<f3>" . ctrlf-forward-alternate)
-		 ("<f4>" . bsp-ctrlf-region-forward)
+		 ("<f4>" . ctrlf-forward-default)
 		 ("C-<f4>" . ctrlf-backward-default))
   :custom (ctrlf-auto-recenter t)
   :commands (ctrlf-backward-default
 			 ctrlf-forward-default
+			 ctrlf-forward
 			 ctrlf-forward-alternate
 			 ctrlf-backward-alternate
 			 ctrlf-forward-symbol

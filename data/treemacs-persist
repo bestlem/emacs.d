@@ -46,6 +46,8 @@
 * Odds
 ** py-bash-completion
  - path :: ~/src/python/py-bash-completion
+** xonsh
+ - path :: ~/src/python/xonsh
 * Swift
 ** SwiftUITutorial-Landmarks
  - path :: ~/src/Swift/SwiftUITutorial-Landmarks

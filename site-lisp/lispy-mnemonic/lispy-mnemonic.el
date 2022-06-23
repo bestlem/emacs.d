@@ -365,4 +365,4 @@
 				(lispy-mnemonic--restore-bindings)))
 
 (provide 'lispy-mnemonic)
-;;; lispy-mnemonic ends here
+;;; lispy-mnemonic.el ends here

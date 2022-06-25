@@ -117,115 +117,6 @@ In this case var and overlap no-littering
   (setq user-emacs-directory (mwb-user-emacs-file "var/")))
 #+end_src
 
-** PackageManager
-:PROPERTIES:
-:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:9ACB4F21-BFAB-4D2F-A271-1D8D9B9625FB
-:header-args:  :tangle no
-:END:
-Loading other code. Using emacs internal packagemenager and use-package.
-
-This file does too much for error trapping and needs. We only need the SSL, package manager and use-package and the rest can go after org mode.
-But this is working so don;t need to chnage until an actual bug + my org-mode setup is the most complex bit. So these extra things go before org-all.
-**** SSL  network connection
-:PROPERTIES:
-:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:836EC728-DBED-4BB7-BC7C-6F39951A32BE
-:HEADER-ARGS: :tangle no
-:END:
-***** TLS Setup - emacs 25
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20211029T224242.291574
-:END:
-Basically we need gnutls to connect via SSL as certificates have changed
-From https://github.com/paolodedios/dot-files/blob/1a7b4500c8ce07d0d473dbf714a2303f4d440ef5/.emacs.d/init.el
-Configure GnuTLS
-
-GnuTLS requires additional configuration on Emacs 25+ on macOS to prevent it from crashing when loading package repositories.
-
-@see https://github.com/davidswelt/aquamacs-emacs/issues/133
-@see https://github.com/davidswelt/aquamacs-emacs/issues/149
-@see https://www.reddit.com/r/emacs/comments/8sykl1/emacs_tls_defaults_are_downright_dangerous/
-@see https://www.gnu.org/software/emacs/manual/html_node/emacs-gnutls/Help-For-Users.html
-
-@note starttls.el and tls.el have been moved to obsolete in the master branch (what will be Emacs 27).
-To work with Emacs 27 package is in early-init.el
-#+NAME: org_mark_mini20.local_20211029T224242.255722
-#+begin_src emacs-lisp
-(unless *emacs/>=27p*
-  (require 'tls)
-
-  (with-eval-after-load 'tls
-    ;; Add the gnutls CA certificate file
-    (push "/private/etc/ssl/cert.pem"                gnutls-trustfiles)
-    ;; Add the curl CA certificate file from Macports
-    (push "/opt/local/share/curl/curl-ca-bundle.crt" gnutls-trustfiles)
-    )
-
-  ;; Validate TLS certificates
-  (setq gnutls-verify-error           t)
-
-  ;; Increase prime bits on TLS keys
-  (setq gnutls-min-prime-bits      2048)
-
-  ;; Network Security Module settings
-  ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Network-Security.html
-  (setq network-security-level  'medium)
-  (setq nsm-save-host-names           t)
-
-  ;; Set tls-checktrust to `'ask` instead of `t` to allow user to determine
-  ;; whether or not to trust a certificate.
-  (setq tls-checktrust             'ask)
-
-  ;; mwb hacks
-  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
-
-  ;; Update the tls-program invocation command line string
-  ;;
-  ;; Add `--priority` flag to  prevents the 3des certificate from being used.
-  ;; Add `:%%PROFILE_MEDIUM` to ban intermediate SHA1 certificates.
-  ;; Add `--ocsp` flag to require certificate revocation check
-  ;;
-  ;; Add `--insecure` flag as a temporary workaround for the expired certificate
-  ;; on marmalade.org from hanging Aquamacs.
-  (setq tls-program
-        '("gnutls-cli -p %p --dh-bits=2048 --ocsp --x509cafile=%t --insecure \
-	 --priority='SECURE192:+SECURE128:-VERS-ALL:+VERS-TLS1.2:%%PROFILE_MEDIUM' %h")))
-	 #+end_src
-**** Package Manager
-:PROPERTIES:
-:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:1FAA7B31-FA5B-4485-B186-B85EDF3E5426
-:END:
-Initialize packages immediately and not after init.el is read post startup
-Note that Aquuamacs set these repositories.
-Don't need package-initialize as use package does it all? per https://www.youtube.com/watch?v=2TSKxxYEbII but see this [[https://emacs.stackexchange.com/a/16832/9874][Emacs SE]] saying you might want to add a t parameter to that but then takes little tome so just put it in.
-#+NAME: org_2020-12-05+00-00_785404EE-EF1F-48D8-AE5B-B2B3C4088D5E
-#+begin_src emacs-lisp
-(message "Setting up package manager")
-(require 'package)
-
-;; Defined in Emacs 27 and above.
-(defvar package-quickstart)
-
-;; common code
-;;  package-archives is an assoc so dups don't matter just look at the front
-(setq package-archives '())
-(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-
-;; Activate all packages (in particular autoloads).
-;; Use `package-quickstart' feature in Emacs 27 so we only need to
-;; `package-initialize' if on Emacs 26 and below.
-;; Take a look at $EMACS_CODEBASE/lisp/startup.el to refresh your memory.
-;; The gist is that `package-activate-all' is called in Emacs 27 which
-;; reads `package-quickstart'.
-(if (>= emacs-major-version 27)
-    (setq package-quickstart t)
-  (package-initialize)
-  (message "Packages initialised"))
-(unless (bound-and-true-p package--initialized) ; To avoid warnings in 27
-  (setq package-enable-at-startup nil)          ; To prevent initializing twice
-  (package-initialize))
-(message "Setting up package manager...(done)")
-#+end_src
 ** Straight
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220614T204548.065961
@@ -239,12 +130,19 @@ Allows some forks and emacs_wiki to be dealt with as standard.
 :END:
 
 **** Bootstrap
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220625T102847.616482
+:END:
 To use a forked straight.el
+#+NAME: org_mark_mini20.local_20220625T102847.585074
 #+begin_src emacs-lisp
 (setq straight-repository-user "bestlem")
 (setq straight-repository-branch "work")
 #+end_src
 **** Running
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220625T102847.611492
+:END:
 #+NAME: org_mark_mini20.local_20220616T104529.439075
 #+begin_src emacs-lisp
 (defvar mwb-straight-profile
@@ -265,6 +163,7 @@ To use a forked straight.el
 #+NAME: org_mark_mini20.local_20220614T204548.040188
 #+begin_src emacs-lisp
 ;; Bootstrap the package manager, straight.el.
+(message "Bootstrapping straight...")
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name
@@ -280,6 +179,7 @@ To use a forked straight.el
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
+(message "Bootstrapping straight...done")
 #+end_src
 *** el-patch
 :PROPERTIES:
@@ -978,7 +878,44 @@ occur before loading Org-Mode. *Never* remove this from a submitted ECM.
 #+BEGIN_SRC emacs-lisp
 (setq org-enforce-todo-checkbox-dependencies t)
 #+END_SRC
+*** Minimal org setup
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220625T121802.200295
+:END:
+**** Grettke babel
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220625T120634.227000
+:END:
+This is not tangled in place but picked up by weaving
+Put now into files grettke.el for helper functions and org-lp-fundamental for the explanations. The latter is copied from https://github.com/grettke/myamacs and a few changes - helper functions and similar to grettke.el and suppers some chnes as I have different needs.
+***** Load org
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220625T123220.289062
+:END:
+#+NAME: org_mark_mini20.local_20220625T123220.259788
+#+begin_src emacs-lisp
+(use-package-elpa org-mode
+  :commands org-mode)
+#+end_src
+***** Helper Functions
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220625T120634.224960
+:END:
+Help configure Org-Mode.
 
+#+NAME: org_gcr_2017-05-12_mara_21BEDC86-D1A3-43FC-85AC-8FF54D161E2F
+#+BEGIN_SRC emacs-lisp
+(require 'grettke)
+#+END_SRC
+
+***** The actual set-up of org-babel
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220625T121802.198236
+:END:
+#+NAME: org_mark_mini20.local_20220625T121802.177751
+#+begin_src emacs-lisp
+(mwb-init-load "init/org-lp-fundamental"  "no-org")
+#+end_src
 
 ** Complex Org Mode
 :PROPERTIES:
@@ -1026,12 +963,11 @@ is already narrowed."
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:D04B3869-70E6-42A2-A052-584E36C9DAB7
 :END:
 This needs the full expansion
+Well this is messed up - there need to be some variables set for noweb and they are done in org-all so it needs a proper header.
 #+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_2869E62E-0E38-4C7C-BFBC-70095F484FC1
 #+begin_src emacs-lisp
 (mwb-init-load "init/org-all")
 #+end_src
-
-
 ** The remaining setup with complete org file processing
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:35D80650-3C0F-4147-8B3A-3BC84158367B

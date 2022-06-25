@@ -22,7 +22,10 @@ I would note that my programming style is to have lots of small functions. With 
 :END:
 generates init.el and early-init.el (if emacs > 26). These .el files need to be in source code control as they need to run the startup. They include a minimal tangle method, this does not allow weaving or other controls. This minimal method is used on config.org (init.org currently could use this as well)
 
-init.org contains the minimal amout to load otyher things so in essence should not need to be edited.-originally put this text in here.
+However I messed up config.org now uses tangle properties in the heading so the nullman export does not really work. Also I note nullman has now commented out his code and it had an error.
+So choice is as org-mode in emacs is new enough the use this. or delete the package section in config so all works again,
+
+init.org contains the minimal amout to load other things so in essence should not need to be edited.-originally put this text in here.
 
 There is now an alternate - which is a way to try other init setups
 

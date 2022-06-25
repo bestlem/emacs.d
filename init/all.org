@@ -136,6 +136,7 @@ Let help find the C code.
 NOTE this assumes that the C source files are included with emacs. Or it is my main machine,
 This depends on the build process used.
 For one example see https://github.com/mclear-tools/build-emacs-macos
+#+NAME: org_mark_mini20.local_20220625T103004.465231
 #+begin_src emacs-lisp
 (setq find-function-C-source-directory
 	  (cond (*emacs/mac-port-p* "/Users/mark/src/ThirdParty/emacs-mac/src/")
@@ -155,7 +156,8 @@ Try macport now as on arm
  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_922BC8C2-56FC-46E7-B506-2CB94F2BB86A
  #+begin_src emacs-lisp
  (use-feature server
-   :unless (or *macport* *aquamacs*)
+   ;; :unless (or *macport* *aquamacs*)
+   :if *macport*
    :hook (after-init . server-start))
  #+end_src
 * Support data

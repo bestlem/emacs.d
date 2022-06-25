@@ -1,5 +1,5 @@
 #+TITLE Emacs configuration git
-#+PROPERTY:header-args :cache yes :tangle yes  :comments link
+#+PROPERTY:header-args :cache yes :tangle yes  :comments noweb :noweb tangle
 #+STARTUP: content
 
 Picked up from many places especially jerry peng  but then looked a centaur and this is very much like what I have already so add the rest
@@ -85,10 +85,6 @@ Need to define some things befor the main one so make easier to read
 <<magit-mwbstatus>>
 <<magit-use-package>>
 #+end_src
-*** TODO Add mouse clicks to expand on logs etc
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20220608T201215.752652
-:END:
 *** TODO Show TODOs in magit
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220608T223234.262692
@@ -99,16 +95,16 @@ https://github.com/alphapapa/magit-todos
 :ID:       org_mark_mini20.local:20220604T221255.578362
 :END:
 #+NAME: org_mark_mini20.local_20220604T121907.520562
-#+begin_src emacs-lisp :noweb-ref magit-use-package :tangle no
+#+begin_src emacs-lisp  :tangle no :noweb-ref magit-use-package
 (use-package-elpa magit
   ;; :defer 2								; rather than a lot of commands
   ;; Need as now not a hydra
   :commands (magit-process-buffer
-             magit-status
-             magit-log-buffer-file
-             magit-log-current
-             magit-blame-addition
-             magit-diff-buffer-file)
+			 magit-status
+			 magit-log-buffer-file
+			 magit-log-current
+			 magit-blame-addition
+			 magit-diff-buffer-file)
   :custom
   (magit-diff-refine-hunk t)
   (magit-repository-directories '(("~/src/" . 2)
@@ -121,7 +117,8 @@ https://github.com/alphapapa/magit-todos
   ;; (setq magit-completing-read-function 'ivy-completing-read)
   (setq magit-completing-read-function 'magit-builtin-completing-read)
   (transient-bind-q-to-quit)
-  )
+  :bind (:map magit-blame-read-only-mode-map
+		 ("<double-mouse-1" . magit-show-commit)))
 #+end_src
 ** posframe
 :PROPERTIES:
@@ -171,6 +168,7 @@ Show choices in posframe
       (advice-add #'transient--show :after #'my-transient-posframe--render-buffer))
     ))
 #+end_src
+
 ** Prepare for status
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210822T125828.245709
@@ -361,26 +359,28 @@ Try git-gutter-fringe but seems to clash [[https://github.com/emacsorphanage/git
 
   :pretty-hydra
   (hydra-git-gutter
-
    (:foreign-keys warn
 	:exit nil
 	:quit-key "q"
 	:title (mwb-icon-string "git" "Git Gutter"))
-   ("Move" (
-			("n" git-gutter:next-hunk "next hunk")
+   ("Move" (("n" git-gutter:next-hunk "next hunk")
 			("p" git-gutter:previous-hunk "previous hunk")
-			("h" (progn (goto-char (point-min)) (git-gutter:next-hunk 1)) "first hunk")
-			("l" (progn (goto-char (point-min)) (git-gutter:previous-hunk 1)) "last hunk"))
+			("h" (progn (goto-char (point-min))
+						(git-gutter:next-hunk 1)) "first hunk")
+			("1" (progn (goto-char (point-min))
+						(git-gutter:next-hunk 1)) "first hunk")
+			("!" (progn (goto-char (point-min))
+						(git-gutter:next-hunk 1)) "first hunk")
+			("l" (progn (goto-char (point-min))
+						(git-gutter:previous-hunk 1)) "last hunk"))
 	"Modify" (("<SPC>" git-gutter:popup-hunk "popup hunk")
 			  ("s" git-gutter:stage-hunk "stage hunk")
 			  ("r" git-gutter:revert-hunk "revert hunk"))
 	"Current hunk" (("m" git-gutter:mark-hunk "Mark hunk")
 					("<end>" git-gutter:end-of-hunk "End of hunk")
 					;; ( mwbkey-home git-gutter:end-of-hunk "Begin of hunk" )
-					("u" git-gutter:popup-hunk "Popup hunk"))))
-  :pretty-hydra
-
-  )
+					("u" git-gutter:popup-hunk "Popup hunk")
+					("<return>" git-gutter:popup-hunk "Popup hunk")))))
 #+end_src
 * Hydra
 :PROPERTIES:

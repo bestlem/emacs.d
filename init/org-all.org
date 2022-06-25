@@ -1,5 +1,5 @@
 #+TITLE Emacs configuration org Mode - all the complete things
-#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb :noweb no-export
 #+STARTUP: show2levels
 * Notes on using org mode
 :PROPERTIES:
@@ -51,6 +51,12 @@ org-mode is a pain as we need a newer than aquamacs supplies and also there are 
 Aug 2019 got an error in cut subtree so revert to org mode with Aquamacs and lost formatting of code blocks. (and will get name changes in links in generated files) but seems OK now.
 
 Now jump to back to src issues. They go back to the code block that contains the noweb <<>> Not the named block
+** Load order can change if .el not there
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220625T120510.607956
+:END:
+Need to make the order defined - basically mwb-init-load could load org early and that seems to mess up org-mode-hook.
+So put minimal org-mode into config.org which is not tangle via org mode.
 
 * The use package setup
 :PROPERTIES:
@@ -316,26 +322,6 @@ Code block behaviour - but also see customization for appearance
 	   org-edit-src-content-indentation 0
 	   org-startup-indented t)
  #+end_src
-*** Grettke babel
- :PROPERTIES:
-      :header-args: :noweb-ref org-grettke :tangle no
-      :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:547FD263-C9C1-4384-850B-989B61F4E03D
-      :END:
- This is not tangled in place but picked up by weaving
- Put now into files grettke.el for helper functions and org-lp-fundamental for the explanations. The latter is copied from https://github.com/grettke/myamacs and a few changes - helper functions and similar to grettke.el and suppers some chnes as I have different needs.
-
-**** Helper Functions
-   :PROPERTIES:
-   :ID:       orgmode:gcr:vela:B14776FD-6835-4D1D-BCD3-50D56555423C
-   :END:
-
-Help configure Org-Mode.
-
-#+NAME: org_gcr_2017-05-12_mara_21BEDC86-D1A3-43FC-85AC-8FF54D161E2F
-#+BEGIN_SRC emacs-lisp
-(require 'grettke)
-#+END_SRC
-
 *** My changes
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220206T102457.700416
@@ -558,7 +544,7 @@ This package [[https://github.com/snosov1/toc-org][toc-org]] seems it might be u
 
 I think using treemacs is nearer what I need as puts menu in other window - although length matters. Also set the startup to show 2 levels.
 #+NAME: org_mark_2020-10-24T15-08-22+01-00_mini12.local_E0715861-9815-4AA9-8E93-095091F21C56
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package-elpa toc-org
   :hook (org-mode . toc-org-mode))
 #+end_src

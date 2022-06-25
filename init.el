@@ -1,23 +1,23 @@
-;; -*- lexical-binding: t -*-
+;; -*- lexical-binding:t;coding: utf-8 -*-
 ;; This is a generated file do not edit
-;; [[file:~/.emacs.d/init.org::org_mark_2020-09-28T01-08-28+01-00_mini12.local_E7D671F1-9D29-4FF6-A8E5-8884826E6E4B][org_mark_2020-09-28T01-08-28+01-00_mini12.local_E7D671F1-9D29-4FF6-A8E5-8884826E6E4B]]
+;; [[file:init.org::org_mark_2020-09-28T01-08-28+01-00_mini12.local_E7D671F1-9D29-4FF6-A8E5-8884826E6E4B][org_mark_2020-09-28T01-08-28+01-00_mini12.local_E7D671F1-9D29-4FF6-A8E5-8884826E6E4B]]
 (when (version< emacs-version "27")
   (load (expand-file-name "~/.emacs.d/early-init")))
 ;; org_mark_2020-09-28T01-08-28+01-00_mini12.local_E7D671F1-9D29-4FF6-A8E5-8884826E6E4B ends here
 
-;; [[file:~/.emacs.d/init.org::org_mark_mini20.local_20220606T145002.735412][org_mark_mini20.local_20220606T145002.735412]]
+;; [[file:init.org::org_mark_mini20.local_20220606T145002.735412][org_mark_mini20.local_20220606T145002.735412]]
 ;;  setting to nil turns them off
 (setq debug-on-error t)
 ;; (setq debug-on-error nil)
 										;(setq debug-on-quit nil)
 ;; org_mark_mini20.local_20220606T145002.735412 ends here
 
-;; [[file:~/.emacs.d/init.org::org_mark_mini20.local_20220606T145002.738615][org_mark_mini20.local_20220606T145002.738615]]
+;; [[file:init.org::org_mark_mini20.local_20220606T145002.738615][org_mark_mini20.local_20220606T145002.738615]]
 (setq init-file-debug 'nil)
 (setq init-file-debug t)
 ;; org_mark_mini20.local_20220606T145002.738615 ends here
 
-;; [[file:~/.emacs.d/init.org::org_mark_mini20.local_20220313T215512.598628][org_mark_mini20.local_20220313T215512.598628]]
+;; [[file:init.org::org_mark_mini20.local_20220313T215512.598628][org_mark_mini20.local_20220313T215512.598628]]
 (defvar mwb-message-offset (float-time) "Time of last message")
 
 (defun my-message-with-timestamp (old-func fmt-string &rest args)
@@ -66,7 +66,7 @@
 ;; (message "test")
 ;; org_mark_mini20.local_20220313T215512.598628 ends here
 
-;; [[file:~/.emacs.d/init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_315EE687-FC28-4D41-810D-4FF19AA66CD4][org_mark_2020-01-23T20-40-42+00-00_mini12_315EE687-FC28-4D41-810D-4FF19AA66CD4]]
+;; [[file:init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_315EE687-FC28-4D41-810D-4FF19AA66CD4][org_mark_2020-01-23T20-40-42+00-00_mini12_315EE687-FC28-4D41-810D-4FF19AA66CD4]]
 (defun nullman/org-babel-generate-elisp-file (file &optional byte-compile force)
   "Generate an emacs-lisp file from an org-babel FILE.
 
@@ -130,10 +130,10 @@ is non-nil."
                 (delete-region (line-beginning-position) (progn (forward-line) (point)))
                 (unless (bobp)
                   (newline))
-                (when (fboundp 'org-link-escape)
-                  (insert (format ";; [[file:%s::*%s][%s:%s]]\n" file-org (org-link-escape heading) heading count))
-                  (setq end-comment (format ";; %s:%s ends here\n" heading count))
-                  (cl-incf (cddr (assoc level headings-counts))))
+                ;; (when (fboundp 'org-link-escape)
+                ;;   (insert (format ";; [[file:%s::*%s][%s:%s]]\n" file-org (org-link-escape heading) heading count))
+                ;;   (setq end-comment (format ";; %s:%s ends here\n" heading count))
+                ;;   (cl-incf (cddr (assoc level headings-counts))))
                 (setq code t)))
              ;; end of tangled source block
              ((and code
@@ -158,7 +158,7 @@ is non-nil."
     ))
 ;; org_mark_2020-01-23T20-40-42+00-00_mini12_315EE687-FC28-4D41-810D-4FF19AA66CD4 ends here
 
-;; [[file:~/.emacs.d/init.org::org_mark_mini20.local_20210126T224850.526804][org_mark_mini20.local_20210126T224850.526804]]
+;; [[file:init.org::org_mark_mini20.local_20210126T224850.526804][org_mark_mini20.local_20210126T224850.526804]]
 (setq mwb-esup-depth 1)                 ; Some attempt at benchmarking
 
 (defun mwb-init--load (file-root-abs &optional no-org)
@@ -202,12 +202,12 @@ If org and no el or org file is newer then retangle the org file if noorg is not
                (message msg))))))
 ;; org_mark_mini20.local_20210126T224850.526804 ends here
 
-;; [[file:~/.emacs.d/init.org::org_mark_mini20.local_20210126T224850.527570][org_mark_mini20.local_20210126T224850.527570]]
+;; [[file:init.org::org_mark_mini20.local_20210126T224850.527570][org_mark_mini20.local_20210126T224850.527570]]
 (defun mwb-init-load (file-root &optional no-org)
   (mwb-init--load (expand-file-name file-root mwb-user-emacs-directory) no-org))
 ;; org_mark_mini20.local_20210126T224850.527570 ends here
 
-;; [[file:~/.emacs.d/init.org::org_mark_mini20.local_20210126T224850.527835][org_mark_mini20.local_20210126T224850.527835]]
+;; [[file:init.org::org_mark_mini20.local_20210126T224850.527835][org_mark_mini20.local_20210126T224850.527835]]
 (defun mwb-init-load-directory (rel-dir-name)
   "Load up all the files using the init loaded from a directory"
   (let* ((directory-name (expand-file-name rel-dir-name mwb-user-emacs-directory))
@@ -220,7 +220,7 @@ If org and no el or org file is newer then retangle the org file if noorg is not
       (mwb-init--load (expand-file-name (file-name-sans-extension f) directory-name)))))
 ;; org_mark_mini20.local_20210126T224850.527835 ends here
 
-;; [[file:~/.emacs.d/init.org::org_mark_mini12.local_20201213T195905.304356][org_mark_mini12.local_20201213T195905.304356]]
+;; [[file:init.org::org_mark_mini12.local_20201213T195905.304356][org_mark_mini12.local_20201213T195905.304356]]
 ;; 	(load (concat (expand-file-name "alt/alt_init" mwb-user-emacs-directory) ".el")
 (mwb-init-load "config" "no-org")
 ;; org_mark_mini12.local_20201213T195905.304356 ends here

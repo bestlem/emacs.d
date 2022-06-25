@@ -404,10 +404,10 @@ is non-nil."
                 (delete-region (line-beginning-position) (progn (forward-line) (point)))
                 (unless (bobp)
                   (newline))
-                (when (fboundp 'org-link-escape)
-                  (insert (format ";; [[file:%s::*%s][%s:%s]]\n" file-org (org-link-escape heading) heading count))
-                  (setq end-comment (format ";; %s:%s ends here\n" heading count))
-                  (cl-incf (cddr (assoc level headings-counts))))
+                ;; (when (fboundp 'org-link-escape)
+                ;;   (insert (format ";; [[file:%s::*%s][%s:%s]]\n" file-org (org-link-escape heading) heading count))
+                ;;   (setq end-comment (format ";; %s:%s ends here\n" heading count))
+                ;;   (cl-incf (cddr (assoc level headings-counts))))
                 (setq code t)))
              ;; end of tangled source block
              ((and code

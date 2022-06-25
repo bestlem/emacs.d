@@ -90,7 +90,6 @@
  ("org" . "620fb240502190e3c85128afee34e92c2c557b2e")
  ("org-bullets" . "767f55feb58b840a5a04eabfc3fbbf0d257c4792")
  ("org-hide-properties" . "52d8c1da80d5fd48980a176c1d615af2d4c42bd5")
- ("org-mode" . "620fb240502190e3c85128afee34e92c2c557b2e")
  ("osx-trash" . "af74a2055a15bf4182d8196600f7decd66eec634")
  ("outorg" . "ef0f86f4b893b30be8bcf8b43a5ec357a6c70f07")
  ("outshine" . "bf1eed10dd7a89b63d0fc014944033db397c1e23")

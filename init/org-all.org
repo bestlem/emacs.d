@@ -219,6 +219,15 @@ This describes how the org file is shown I think 9.4 altered this
 #+begin_src emacs-lisp :tangle no
 (org-startup-folded 'content)
 #+end_src
+** Folding unhide on search
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220625T173650.554480
+:END:
+This is new in org version 9.6
+#+NAME: org_mark_mini20.local_20220625T173650.532142
+#+begin_src emacs-lisp
+(setq org-fold-core-style 'overlays)
+#+end_src
 ** TODO Hide property drawers
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210131T001131.889643

@@ -523,6 +523,7 @@ Also switch between an alternate setup - ideally should be driven from command l
 
 #+NAME: org_mark_mini12.local_20201213T195905.304356
 #+begin_src emacs-lisp
-;; 	(load (concat (expand-file-name "alt/alt_init" mwb-user-emacs-directory) ".el")
 (mwb-init-load "config" "no-org")
+;; (load (concat (expand-file-name "alt/alt_init" mwb-user-emacs-directory) ".el"))
+;;(load (concat (expand-file-name "alt/straight" mwb-user-emacs-directory) ".el"))
 #+end_src

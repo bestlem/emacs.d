@@ -1,6 +1,7 @@
 ;;; lispy-mnemonic.el --- Mnemonic key bindings for Lispy. -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2015 Tim Krones
+;; 2019-20222 Mark Bestley
 
 ;; Author: Tim Krones <t.krones@gmx.net>
 ;; Version: 0.1

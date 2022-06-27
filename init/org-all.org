@@ -107,7 +107,6 @@ It is now for subtree todo refile and links
   <<org-config>>
   <<org-mode-hydrae-refile>>
 
-  <<org-grettke>>
   <<org-mine>>
   :custom
   <<org-custom>>
@@ -214,19 +213,39 @@ However this code toggles and as I have already use set-word-wrap to do this for
 :PROPERTIES:
 :ID:       org_mark_2020-10-25T11-37-05+00-00_mini12.local:B48F7EEE-0A50-4EC9-8416-C09AC65B509B
 :END:
+*** Startup
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220627T115411.767788
+:END:
 This describes how the org file is shown I think 9.4 altered this
-#+name: org-custom
-#+begin_src emacs-lisp :tangle no
-(org-startup-folded 'content)
+#+NAME: org_mark_mini20.local_20220627T115411.731459
+#+begin_src emacs-lisp :tangle no :noweb-ref org-custom
+(org-startup-folded 'overview)
 #+end_src
-** Folding unhide on search
+*** Folding unhide on search
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220625T173650.554480
 :END:
-This is new in org version 9.6
+This is new in org version 9.6 but appears in 9.5.4: 🫢
 #+NAME: org_mark_mini20.local_20220625T173650.532142
-#+begin_src emacs-lisp
-(setq org-fold-core-style 'overlays)
+#+begin_src emacs-lisp :tangle no :noweb-ref org-custom
+(org-fold-core-style 'overlays)
+#+end_src
+*** Edit in invisible region
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220627T115411.765389
+:END:
+#+NAME: org_mark_mini20.local_20220627T115411.739742
+#+begin_src emacs-lisp :tangle no :noweb-ref org-custom
+(org-fold-catch-invisible-edits 'smart)
+#+end_src
+*** Allow cycle at beginning of buffer
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220627T122757.439066
+:END:
+#+NAME: org_mark_mini20.local_20220627T122757.416935
+#+begin_src emacs-lisp :tangle no :noweb-ref org-custom
+(org-cycle-global-at-bob t)
 #+end_src
 ** TODO Hide property drawers
 :PROPERTIES:
@@ -322,6 +341,11 @@ Need to set up an auto-sort
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:1972881C-34EE-46DE-BB07-8C34C8CC0094
 :END:
+
+*** Set variables
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220627T124955.787932
+:END:
 Code block behaviour - but also see customization for appearance
  #+NAME: org_mark_2020-01-23T20-21-34+00-00_mini12_F0D54908-6A04-45A1-BF64-E082C9DE207E
  #+begin_src emacs-lisp :tangle no :noweb-ref org-config
@@ -331,7 +355,8 @@ Code block behaviour - but also see customization for appearance
 	   org-edit-src-content-indentation 0
 	   org-startup-indented t)
  #+end_src
-*** My changes
+
+*** My changes to Grettke
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220206T102457.700416
 :header-args: :noweb-ref org-mine :tangle no
@@ -443,6 +468,14 @@ All google seems to point via the gist quoted in [[https://emacs.stackexchange.c
 But org mode keepos changing and functions go missing so does not work but a fix [[https://github.com/daviderestivo/galactic-emacs/blob/master/lisp/org-archive-subtree.el][Here]]
 
 See file:../site-lisp/mwb/init-mwb-org.el
+*** Location
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220627T115411.761111
+:END:
+#+NAME: org_mark_mini20.local_20220627T115411.743195
+#+begin_src emacs-lisp :tangle no :noweb-ref org-custom
+(org-archive-location "archive/%s_archive::")
+#+end_src
 ** Main mode hydra
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:D4058350-C97F-4A1D-858C-70008D09A2FF
@@ -485,6 +518,14 @@ Using new pretty mode hydra.
    ("f" org-footnote-action "Footnote"))))
 
 #+end_src
+** Imenu to provide info for treemacs and contextual menu
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220627T115937.590135
+:END:
+#+NAME: org_mark_mini20.local_20220627T115937.571651
+#+begin_src emacs-lisp :tangle no :noweb-ref org-custom
+(org-imenu-depth 6)
+#+end_src
 * Setup outside use-package
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:2DC0229D-C398-4D28-B321-23AFDA2DA87A
@@ -492,14 +533,6 @@ Using new pretty mode hydra.
 This is after org-mode has been loaded and set up
 Not :after does not work as org-mode has been loaded early. So just rely on file order
 Possibly all this could go in a config control by properties
-** Imenu to provide info for treemacs and contextual menu
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:793DB60B-CF8D-4A9B-8AA1-1A16077CBCB1
-:END:
-  #+NAME: org_mark_2020-01-23T20-21-34+00-00_mini12_12513515-1117-4C44-86E5-C9E98808513C
-  #+begin_src emacs-lisp
-  (setq org-imenu-depth 6)
-  #+end_src
 ** Prettify
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:722CBA7A-79F6-4695-B710-ACF8F3C1F219

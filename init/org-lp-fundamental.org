@@ -175,7 +175,8 @@ as their origin document.
       (interactive)
       (indent-region (point-min) (point-max) nil)
       (save-buffer))
-    (add-hook 'org-babel-post-tangle-hook #'help/org-babel-post-tangle-hook-fn)
+    ;;(add-hook 'org-babel-post-tangle-hook #'help/org-babel-post-tangle-hook-fn)
+
         #+END_SRC
 
 **** comments

@@ -22,14 +22,10 @@
 	 ("XXX+" . "#972500")
 	 ("REVIEW" . "#005a5f")
 	 ("DEPRECATED" . "#201f55")))
- '(org-archive-location "archive/%s_archive::")
- '(org-babel-python-mode 'python-mode t)
+ '(org-babel-python-mode 'python-mode)
  '(org-bullets-bullet-list
    '("⦿" "◉" "◎" "○" "●"))
- '(org-catch-invisible-edits 'smart)
- '(org-cycle-global-at-bob t)
  '(org-datetree-add-timestamp 'active t)
- '(org-fold-catch-invisible-edits 'show)
  '(org-hide-block-startup nil)
  '(org-log-done 'time)
  '(org-modules

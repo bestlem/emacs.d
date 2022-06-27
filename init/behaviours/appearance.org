@@ -1,6 +1,5 @@
 #+TITLE Emacs configuration - appearance
-#+PROPERTY:header-args :cache yes :tangle yes :comments link
-#+STARTUP: content
+#+PROPERTY:header-args :cache yes :tangle yes
 
 This covers what emacs looks like and how windows/frames/menus behave
 
@@ -69,15 +68,72 @@ Remove from mode line
 :END:
 I seem only to do this for macport
 Or better from fira code https://github.com/tonsky/FiraCode/wiki/Emacs-instructions#using-prettify-symbols
-emacs-27 has another way
-#+NAME: org_mark_2020-10-03T11-41-17+01-00_mini12.local_7F1CA278-5EFF-4B83-BB74-2E3F161154E8
+emacs-27 has another way.
+A summary from https://www.masteringemacs.org/article/unicode-ligatures-color-emoji with note in his package re [[https://github.com/mickeynp/ligature.el/issues/29][mac]] It works but not for all.
+The macport can't be used for normal emacs as it uses C code.
+*** Macport
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220627T102146.142734
+:END:
+The easiest way.
+#+NAME: org_mark_mini20.local_20220627T102146.098153
 #+begin_src emacs-lisp
 (if (fboundp 'mac-auto-operator-composition-mode)
     (mac-auto-operator-composition-mode 1)
   ;; (use-package-elpa fira-code-mode
   ;;   :custom (fira-code-mode-disabled-ligatures '("[]" "x")) ; ligatures you don't want
   ;;   :hook prog-mode)
+
   )
+#+end_src
+*** Ligature.el
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220627T102146.132276
+:END:
+#+NAME: org_mark_mini20.local_20220627T102146.106862
+#+begin_src emacs-lisp
+(use-package-elpa ligature
+  :straight (:host github :repo "mickeynp/ligature.el")
+  :unless *macport*
+  :config
+  (defvar ligatures-jetbrains
+	`(("-" ,(regexp-opt '("-|" "-~" "---" "-<<" "-<" "--" "->" "->>" "-->")))
+	  ("/" ,(regexp-opt '("/**" "/*" "///" "/=" "/==" "/>" "//")))
+	  ("*" ,(regexp-opt '("*>" "***" "*/")))
+	  ("<" ,(regexp-opt '("<-" "<<-" "<=>" "<=" "<|" "<||" "<|||" "<|>" "<:" "<>" "<-<"
+						  "<<<" "<==" "<<=" "<=<" "<==>" "<-|" "<<" "<~>" "<=|" "<~~" "<~"
+						  "<$>" "<$" "<+>" "<+" "</>" "</" "<*" "<*>" "<->" "<!--")))
+	  (":" ,(regexp-opt '(":>" ":<" ":::" "::" ":?" ":?>" ":=" "::=")))
+	  ("=" ,(regexp-opt '("=>>" "==>" "=/=" "=!=" "=>" "===" "=:=" "==")))
+	  ("!" ,(regexp-opt '("!==" "!!" "!=")))
+	  (">" ,(regexp-opt '(">]" ">:" ">>-" ">>=" ">=>" ">>>" ">-" ">=")))
+	  ("&" ,(regexp-opt '("&&&" "&&")))
+	  ("|" ,(regexp-opt '("|||>" "||>" "|>" "|]" "|}" "|=>" "|->" "|=" "||-" "|-" "||=" "||")))
+	  ("." ,(regexp-opt '(".." ".?" ".=" ".-" "..<" "...")))
+	  ("+" ,(regexp-opt '("+++" "+>" "++")))
+	  ("[" ,(regexp-opt '("[||]" "[<" "[|")))
+	  ("{" ,(regexp-opt '("{|")))
+	  ("?" ,(regexp-opt '("??" "?." "?=" "?:")))
+	  ("#" ,(regexp-opt '("####" "###" "#[" "#{" "#=" "#!" "#:" "#_(" "#_" "#?" "#(" "##")))
+	  (";" ,(regexp-opt '(";;")))
+	  ("_" ,(regexp-opt '("_|_" "__")))
+	  ("\\" ,(regexp-opt '("\\" "\\/")))
+	  ("~" ,(regexp-opt '("~~" "~~>" "~>" "~=" "~-" "~@")))
+	  ("$" ,(regexp-opt '("$>")))
+	  ("^" ,(regexp-opt '("^=")))
+	  ("]" ,(regexp-opt '("]#"))))
+    "from https://github.com/JetBrains/JetBrainsMono/issues/280")
+  ;; Enable the "www" ligature in every possible major mode
+  (ligature-set-ligatures 't '("www"))
+  ;; Enable traditional ligature support in eww-mode, if the
+  ;; `variable-pitch' face supports it
+  (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
+  ;; Enable all ligatures in programming modes
+  (ligature-set-ligatures 'prog-mode ligatures-jetbrains)
+  (ligature-set-ligatures 'org-mode ligatures-jetbrains)
+  ;; Enables ligature checks globally in all buffers. You can also do it
+  ;; per mode with `ligature-mode'.
+  (global-ligature-mode t))
 #+end_src
 ** Prettify Symbols
 :PROPERTIES:

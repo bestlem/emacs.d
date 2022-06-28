@@ -29,5 +29,5 @@
    '("^From:" "^Newsgroups:" "^Subject:" "^Date:" "^Followup-To:" "^Reply-To:" "^Summary:" "^Keywords:" "^To:" "^[BGF]?Cc:" "^Posted-To:" "^Mail-Copies-To:" "^Mail-Followup-To:" "^Apparently-To:" "^Gnus-Warning:" "^Resent-From:"))
  '(mail-default-directory "~/.emacs.d/var/Mail")
  '(message-auto-save-directory "~/.emacs.d/var/gnus/Mail")
- '(message-directory "~/.emacs.d/var/Mail/" t)
+ '(message-directory "~/.emacs.d/var/Mail/")
  '(nnmail-message-id-cache-file "~/.emacs.d/var/gnus/.nnmail-cache"))

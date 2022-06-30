@@ -78,9 +78,10 @@ NOTE the method for setting the eln-cache dir depends on the emacs version.
   (expand-file-name "eln-cache" mwb-emacs-work-dir))
 (make-directory mwb-emacs-eln-cache-dir t)
 
-(if (fboundp 'startup-redirect-eln-cache)
-	(startup-redirect-eln-cache mwb-emacs-eln-cache-dir)
-  (add-to-list 'native-comp-eln-load-path mwb-emacs-eln-cache-dir))
+(when (>= emacs-major-version 28)
+  (if (fboundp 'startup-redirect-eln-cache)
+	  (startup-redirect-eln-cache mwb-emacs-eln-cache-dir)
+	(add-to-list 'native-comp-eln-load-path mwb-emacs-eln-cache-dir)))
 #+end_src
 *** Where my init code is
 :PROPERTIES:
@@ -523,7 +524,8 @@ Also switch between an alternate setup - ideally should be driven from command l
 
 #+NAME: org_mark_mini12.local_20201213T195905.304356
 #+begin_src emacs-lisp
-(mwb-init-load "config" "no-org")
-;; (load (concat (expand-file-name "alt/alt_init" mwb-user-emacs-directory) ".el"))
-;;(load (concat (expand-file-name "alt/straight" mwb-user-emacs-directory) ".el"))
+(when (>= emacs-major-version 27)
+  ;; (load (concat (expand-file-name "alt/alt_init" mwb-user-emacs-directory) ".el"))
+  ;;(load (concat (expand-file-name "alt/straight" mwb-user-emacs-directory) ".el"))
+  (mwb-init-load "config" "no-org"))
 #+end_src

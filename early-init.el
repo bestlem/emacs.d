@@ -28,9 +28,10 @@
   (expand-file-name "eln-cache" mwb-emacs-work-dir))
 (make-directory mwb-emacs-eln-cache-dir t)
 
-(if (fboundp 'startup-redirect-eln-cache)
-	(startup-redirect-eln-cache mwb-emacs-eln-cache-dir)
-  (add-to-list 'native-comp-eln-load-path mwb-emacs-eln-cache-dir))
+(when (>= emacs-major-version 28)
+  (if (fboundp 'startup-redirect-eln-cache)
+	  (startup-redirect-eln-cache mwb-emacs-eln-cache-dir)
+	(add-to-list 'native-comp-eln-load-path mwb-emacs-eln-cache-dir)))
 ;; org_mark_mini20.local_20220616T101718.152005 ends here
 
 ;; [[file:init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_86BD52C1-8055-4BB2-834D-2F088719C835][org_mark_2020-01-23T20-40-42+00-00_mini12_86BD52C1-8055-4BB2-834D-2F088719C835]]

@@ -676,7 +676,8 @@ Needs to load immeduiately to load the other customization files
   (setq initsplit-customizations-alist
         '(
           ("\\`\\(gnus\\|nn\\|canlock-\\|message\\|mail\\|mm-\\|smtp\\|send-mail\\|check-mail\\|spam\\|sc-\\)" "gnus-settings.el" nil t)
-          ("\\`\\(org-\\|hl-todo-\\|deft-\\|cfw:\\)" "org-settings.el" nil t)))
+          ;; ("\\`\\(org-\\|hl-todo-\\|deft-\\|cfw:\\)" "org-settings.el" nil t)
+          ))
   :custom
   ;; Set here and not in custom as the values need evaluation of the running environment
   (initsplit-ignore-prefixes

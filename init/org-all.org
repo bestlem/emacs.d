@@ -51,13 +51,6 @@ org-mode is a pain as we need a newer than aquamacs supplies and also there are 
 Aug 2019 got an error in cut subtree so revert to org mode with Aquamacs and lost formatting of code blocks. (and will get name changes in links in generated files) but seems OK now.
 
 Now jump to back to src issues. They go back to the code block that contains the noweb <<>> Not the named block
-** Load order can change if .el not there
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20220625T120510.607956
-:END:
-Need to make the order defined - basically mwb-init-load could load org early and that seems to mess up org-mode-hook.
-So put minimal org-mode into config.org which is not tangle via org mode.
-
 * The use package setup
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:411C4ABA-EFFC-4E73-9C0F-5E936AC5B73B
@@ -109,6 +102,8 @@ It is now for subtree todo refile and links
 
   <<org-mine>>
   :custom
+  (org-modules
+   '(org-crypt org-tempo org-id org-mouse))
   <<org-custom>>
 
   :config
@@ -140,12 +135,7 @@ Put the bind bit in noweb
  )
 #+end_src
 
-** Hack around
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:163000D5-C193-4FB4-A502-C78FD1FB08AB
-:END:
-basically can't edit the above as tangle - this is ironically the best suggestion for wring in code with outshine and not org mode
-*** Org capture
+** Org capture
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:3D4D14AB-E281-45E0-A18E-0590E25E74A4
 :END:
@@ -182,33 +172,6 @@ From http://doc.norang.ca/org-mode.html#Capture
         ))
 #+end_src
 
-** TODO Tangle on save
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:42D6E858-998F-48DE-8D73-799C228FF91E
-:END:
-This code is unreadable the consts would make more sense not being there as they would then match the documentation
-I have removed this from the noweb weave as it makes use of other files a pain but put back as this needs more. Including the noweb bit picks up several bits
-#+NAME: org-mode-hooks
-	#+begin_src emacs-lisp :tangle no
-(org-mode . (lambda ()
-              (add-hook
-               'after-save-hook
-               'org-babel-tangle
-               'run-at-end
-               'only-in-org-mode)))
-	#+end_src
-
-** Line wrapping
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:EE29BA62-13AD-4C22-9ABB-AF723DCA7950
-:END:
-Setting up =visual-line-mode= and making all my paragraphs one single line, so that the lines wrap around nicely in the window according to their proportional-font size, instead of at a fixed character count, which does not work so nicely when characters have varying widths. I set up a hook that automatically enables =visual-line-mode= and =variable-pitch-mode= when entering org-mode. From [[https://raw.githubusercontent.com/zzamboni/dot-emacs/master/init.org][zzamboni]]
-However this code toggles and as I have already use set-word-wrap to do this for text-mode.
-#+NAME: org-mode-hooks-wrapping
-#+begin_src emacs-lisp :tangle no
-    ;; (org-mode . visual-line-mode)
-    (org-mode . variable-pitch-mode)
-#+end_src
 ** Folding visibility
 :PROPERTIES:
 :ID:       org_mark_2020-10-25T11-37-05+00-00_mini12.local:B48F7EEE-0A50-4EC9-8416-C09AC65B509B
@@ -257,13 +220,82 @@ Need to set up an auto-sort
 (setq org-footnote-auto-adjust t)
 #+end_src
 
-
-** Babel initialisation
+** Attempt at Wysiwyg
 :PROPERTIES:
-:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:1972881C-34EE-46DE-BB07-8C34C8CC0094
+:ID:       org_mark_mini20.local:20220628T143718.878565
 :END:
+*** Entities
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220628T143718.871903
+:END:
+Show entities as UTF-8 e.g. \alpha
+#+NAME: org_mark_mini20.local_20220628T143718.821728
+#+begin_src emacs-lisp :tangle no :noweb-ref org-custom
+(org-pretty-entities t)
+#+end_src
+*** Emphasis markers
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220628T143718.867406
+:END:
+e.g.  =verbatim= _underline_ ~code~ /italic/ *bold* +strike-through+
+#+NAME: org_mark_mini20.local_20220628T144349.679603
+#+begin_src emacs-lisp :tangle no :noweb-ref org-custom
+(org-hide-emphasis-markers t)
+#+end_src
+*** Super/sub scripts
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220628T143718.859984
+:END:
+Force use of {} as _ is often there as variable name  x^{2} x_{0}
+#+NAME: org_mark_mini20.local_20220628T143718.833999
+#+begin_src emacs-lisp :tangle no :noweb-ref org-custom
+(org-pretty-entities-include-sub-superscripts t)
+(org-use-sub-superscripts '{})
+#+end_src
 
-*** Set variables
+*** Variable Pitch
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:EE29BA62-13AD-4C22-9ABB-AF723DCA7950
+:END:
+Setting up =visual-line-mode= and making all my paragraphs one single line, so that the lines wrap around nicely in the window according to their proportional-font size, instead of at a fixed character count, which does not work so nicely when characters have varying widths. I set up a hook that automatically enables =visual-line-mode= and =variable-pitch-mode= when entering org-mode. From [[https://raw.githubusercontent.com/zzamboni/dot-emacs/master/init.org][zzamboni]]
+However this code toggles and as I have already use set-word-wrap to do this for text-mode.
+#+NAME: org-mode-hooks-wrapping
+#+begin_src emacs-lisp :tangle no
+    ;; (org-mode . visual-line-mode)
+    (org-mode . variable-pitch-mode)
+#+end_src
+** Structure editing
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220628T211525.165723
+:END:
+*** Paste subtrees
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220628T145406.654439
+:END:
+Make subtree cut and paste adjust to current level.
+#+NAME: org_mark_mini20.local_20220628T145406.632284
+#+begin_src emacs-lisp :tangle no :noweb-ref org-custom
+(org-yank-adjusted-subtrees t)
+#+end_src
+** Tangle
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220628T220421.764169
+:END:
+*** Org src
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220628T211525.156125
+:END:
+If code is being edited jump to this buffer.
+#+NAME: org_mark_mini20.local_20220628T211525.132419
+#+begin_src emacs-lisp :tangle no :noweb-ref org-custom
+(org-src-ask-before-returning-to-edit-buffer nil)
+#+end_src
+Use the same window for org src editing
+#+NAME: org_mark_mini20.local_20220628T211525.138467
+#+begin_src emacs-lisp :tangle no :noweb-ref org-custom
+(org-src-window-setup 'current-window)
+#+end_src
+**** Set variables
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220627T124955.787932
 :END:
@@ -278,13 +310,7 @@ Code block behaviour - but also see customization for appearance
 	  )
  #+end_src
 
-*** My changes to Grettke
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20220206T102457.700416
-:header-args: :noweb-ref org-mine :tangle no
-:END:
-
-**** Evaluating
+*** Evaluating
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220619T143614.114358
 :END:
@@ -314,7 +340,17 @@ My languages
    ;; (plantuml . t)
    ))
 #+END_SRC
-**** Identity
+
+***** Python
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220628T213657.295236
+:END:
+Use the non GNU python-mode.
+#+NAME: org_mark_mini20.local_20220628T213657.264866
+#+begin_src emacs-lisp :tangle no :noweb-ref org-custom
+(org-babel-python-mode 'python-mode)
+#+end_src
+*** Identity
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220619T135120.154326
 :END:
@@ -328,12 +364,12 @@ Two issues - grettke's are too long for my normal screen (but a fix would be hid
 (setq org-id-method 'ts)
 #+END_SRC
 
-**** Post tangle
+*** Post tangle
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220206T102457.695907
 :END:
 As grettke's code  updates the whole buffer and saves either add to the same function or make the save to be the last (I chose the latter
-***** Add header
+**** Add header
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220206T120941.917997
 :END:
@@ -341,7 +377,6 @@ From my [[https://emacs.stackexchange.com/q/50488/9874][SO question]] and based 
 #+NAME: org_mark_mini20.local_20220206T120941.889585
 #+begin_src emacs-lisp
 (defun mwbinit-add-tangle-headers ()
-  (message "Babel in %s" (buffer-file-name))
   (cond
    ((f-ext? (buffer-file-name) "py")
 	(goto-char (point-min))
@@ -353,7 +388,7 @@ From my [[https://emacs.stackexchange.com/q/50488/9874][SO question]] and based 
    (t
 	nil)))
 #+end_src
-***** Indent and save
+**** Indent and save
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220206T120941.916978
 :END:
@@ -375,12 +410,52 @@ From my [[https://emacs.stackexchange.com/q/50488/9874][SO question]] and based 
   (save-buffer))
 (add-hook 'org-babel-post-tangle-hook #'mwb/org-babel-post-tangle-hook-fn)
 #+END_SRC
-**** Jump to generated code
+
+***** TODO Tangle on save
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:42D6E858-998F-48DE-8D73-799C228FF91E
+:END:
+This code is unreadable the consts would make more sense not being there as they would then match the documentation
+I have removed this from the noweb weave as it makes use of other files a pain but put back as this needs more. Including the noweb bit picks up several bits
+#+NAME: org-mode-hooks
+	#+begin_src emacs-lisp :tangle no
+(org-mode . (lambda ()
+              (add-hook
+               'after-save-hook
+               'org-babel-tangle
+               'run-at-end
+               'only-in-org-mode)))
+	#+end_src
+
+*** Jump to generated code
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220605T134305.890136
 :END:
 Go from org file to the generated - really only need as noweb the code in edit src is not real. From [[https://emacs.stackexchange.com/a/69591/9874][SO]]
 See file:../site-lisp/mwb/init-mwb-org.el
+
+** Todo
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220628T220421.760968
+:END:
+*** Keywords
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220628T220421.757220
+:END:
+Set the keywords - ie life cycle.
+#+NAME: org_mark_mini20.local_20220628T220421.730792
+#+begin_src emacs-lisp :tangle no :noweb-ref org-custom
+(org-todo-keywords
+   '((sequence "TODO" "DONE(!)" "LEAVE(@)")))
+#+end_src
+*** Add timestamp for done
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220628T220421.752549
+:END:
+#+NAME: org_mark_mini20.local_20220628T220421.734831
+#+begin_src emacs-lisp :tangle no :noweb-ref org-custom
+(org-log-done 'time)
+#+end_src
 ** Archive
 :PROPERTIES:
 :ID:       org_2020-12-08+00-00:C0A61800-DCE8-4C03-96B8-944F662CBA2A
@@ -550,7 +625,7 @@ ALso see https://github.com/amno1/org-hide-properties or https://github.com/org-
 #+end_src
 **** MELPA code
 :PROPERTIES:
-:ID:       org_mark_mini20.local:20220605T223855.748251
+:ID:       org_mark_mini20.local:20220628T134505.243792
 :END:
 #+NAME: org_mark_mini20.local_20220605T223855.714238
 #+begin_src emacs-lisp :tangle no
@@ -570,13 +645,40 @@ Taken from https://github.com/amno1/org-babel-hide-markers-mode and my version a
 TODO add property drawers
 The original has been updated
 #+NAME: org_mark_mini20.local_20210422T091310.076424
-#+begin_src emacs-lisp :tangle no :noweb-ref org-config
+#+begin_src emacs-lisp
 (use-package-elpa ob-hide-markers
   :disabled
   :hook (org-font-lock . org-babel-hide-markers-mode)
   :init
   (setq org-babel-hide-markers-line t)
   :diminish org-babel-hide-markers-mode)
+#+end_src
+** org-modern
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220628T120220.489059
+:END:
+This can now be all done with one mode.
+#+NAME: org_mark_mini20.local_20220628T120220.473461
+#+begin_src emacs-lisp
+(use-package-elpa org-modern
+  :after org
+  :demand
+  :config
+  (global-org-modern-mode))
+#+end_src
+*** Indent
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220628T124925.641454
+:END:
+Normal org-indent does not work. See [[https://github.com/minad/org-modern/issues/7][org-modern issue]]
+#+NAME: org_mark_mini20.local_20220628T124925.624904
+#+begin_src emacs-lisp
+(use-package-elpa org-modern-indent
+  :straight (:host github :repo "jdtsmith/org-modern-indent")
+  ;; :straight or :load-path here, to taste
+  :custom (org-startup-indented t)
+  :hook
+  (org-indent-mode . org-modern-indent-mode))
 #+end_src
 ** Table of Contents setup
 :PROPERTIES:

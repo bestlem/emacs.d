@@ -34,6 +34,10 @@
 	(add-to-list 'native-comp-eln-load-path mwb-emacs-eln-cache-dir)))
 ;; org_mark_mini20.local_20220616T101718.152005 ends here
 
+;; [[file:init.org::org_mark_mini20.local_20220701T091932.459484][org_mark_mini20.local_20220701T091932.459484]]
+(setq native-comp-async-report-warnings-errors 'silent)
+;; org_mark_mini20.local_20220701T091932.459484 ends here
+
 ;; [[file:init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_86BD52C1-8055-4BB2-834D-2F088719C835][org_mark_2020-01-23T20-40-42+00-00_mini12_86BD52C1-8055-4BB2-834D-2F088719C835]]
 (defun mwb-user-emacs-file (name)
   "Return an absolute per-user Emacs-specific file name around where the init file is.

@@ -1,6 +1,7 @@
 #+ TITLE minimal emacs startup
-#+PROPERTY:header-args :cache yes :tangle yes :comments link
+#+PROPERTY:header-args :tangle yes :comments link
 #+STARTUP: content
+
 * Implement init preload (early-init.el)
 :PROPERTIES:
 :header-args:    :tangle early-init.el :comments link
@@ -82,6 +83,11 @@ NOTE the method for setting the eln-cache dir depends on the emacs version.
   (if (fboundp 'startup-redirect-eln-cache)
 	  (startup-redirect-eln-cache mwb-emacs-eln-cache-dir)
 	(add-to-list 'native-comp-eln-load-path mwb-emacs-eln-cache-dir)))
+#+end_src
+Ignore warnings as we can't do much about them as most code is not written by me.
+#+NAME: org_mark_mini20.local_20220701T091932.459484
+#+begin_src emacs-lisp
+(setq native-comp-async-report-warnings-errors 'silent)
 #+end_src
 *** Where my init code is
 :PROPERTIES:
@@ -294,7 +300,6 @@ Show message with timestamp - commented out
              fmt-string)
            args)))
 
-
 (advice-add 'message :around #'my-message-with-timediff)
 
 (defun mwb-message-remove-timediff ()
@@ -309,14 +314,13 @@ Show message with timestamp - commented out
   (if mwb-message-timestamp
       (progn
         (advice-remove 'message #'my-message-with-timestamp)
-        (setq mwb-message-timestamp 't)
+        (setq mwb-message-timestamp 'nil)
         (message "remove timestamp"))
     (advice-add 'message :around #'my-message-with-timestamp)
+	(setq mwb-message-timestamp t)
     (message "add timestamp")))
 
-
 (add-hook 'after-init-hook 'mwb-message-remove-timediff)
-
 ;; (message "test")
 #+end_src
 ** Code to do loading

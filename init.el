@@ -40,7 +40,6 @@
              fmt-string)
            args)))
 
-
 (advice-add 'message :around #'my-message-with-timediff)
 
 (defun mwb-message-remove-timediff ()
@@ -55,14 +54,13 @@
   (if mwb-message-timestamp
       (progn
         (advice-remove 'message #'my-message-with-timestamp)
-        (setq mwb-message-timestamp 't)
+        (setq mwb-message-timestamp 'nil)
         (message "remove timestamp"))
     (advice-add 'message :around #'my-message-with-timestamp)
+	(setq mwb-message-timestamp t)
     (message "add timestamp")))
 
-
 (add-hook 'after-init-hook 'mwb-message-remove-timediff)
-
 ;; (message "test")
 ;; org_mark_mini20.local_20220313T215512.598628 ends here
 

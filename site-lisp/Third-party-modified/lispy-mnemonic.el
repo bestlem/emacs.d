@@ -304,7 +304,9 @@
 (bind-key "C-;" 'lispy-describe-inline lispy-mnemonic-mode-map)
 (bind-key "C-." 'lispy-kill-at-point lispy-mnemonic-mode-map)
 (bind-key "M-<delete>" 'lispy-kill-at-point lispy-mnemonic-mode-map)
-(bind-key "H-M-<backspace>" 'lispy-kill-at-point lispy-mnemonic-mode-map) ;well M-<delete
+(bind-key "H-M-<backspace>" 'lispy-kill-at-point lispy-mnemonic-mode-map) ;well
+										;M-<delete
+(bind-key mwbkey-delete 'lispy-delete lispy-mnemonic-mode-map)
 (bind-key "C-1" 'lispy-string-oneline lispy-mnemonic-mode-map)
 ;; (bind-key "M-n" 'lispy-forward lispy-mnemonic-mode-map)
 ;; (bind-key "M-p" 'lispy-backward lispy-mnemonic-mode-map)
@@ -323,7 +325,7 @@
 ;; a-z
 
 (lispy-define-key lispy-mnemonic-mode-map (kbd "a") 'hydra-lispy-mwb-alter/body)
-;; (lispy-define-key lispy-mnemonic-mode-map (kbd "e") 'mwb-lispy-eval) ; noe
+;; (lispy-define-key lispy-mnemonic-mode-map (kbd "e") 'mwb-lispy-eval) ; one
 ;; in lispy
 ;; (lispy-define-key lispy-mnemonic-mode-map (kbd "e") 'hydra-lispy-eval/body)
 ;; (lispy-define-key lispy-mnemonic-mode-map (kbd "g") 'hydra-lispy-goto/body)

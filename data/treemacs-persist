@@ -1,18 +1,18 @@
 * Default Workspace
-** Aquamacs Emacs My init .emacs.d
+** My init .emacs.d
  - path :: ~/.emacs.d
 ** dotfiles
  - path :: ~/SyncServices/Dropbox/env/dotfiles
 ** Org
  - path :: ~/SyncServices/Dropbox/Docs/org
-** aquamacs-emacs code
- - path :: ~/src/macos/aquamacs-emacs
+** Local out of .emacs.d
+ - path :: ~/.local/emacs
 ** emacs-init
  - path :: ~/src/ThirdParty/emacs-init
-** emacs-mac
+** aquamacs-emacs code
+ - path :: ~/src/macos/aquamacs-emacs
+** emacs-macport-code
  - path :: ~/src/ThirdParty/emacs-mac
-** emacs
- - path :: ~/.local/emacs
 * Racket
 ** my realm
  - path :: ~/src/Racket/realm
@@ -41,11 +41,7 @@
  - path :: ~/src/cpp/macports-ports
 ** my-macports
  - path :: ~/src/my-macports
-** bee-host
- - path :: ~/src/cpp/bee-host
 * Odds
-** py-bash-completion
- - path :: ~/src/python/py-bash-completion
 ** xonsh
  - path :: ~/src/python/xonsh
 * Swift

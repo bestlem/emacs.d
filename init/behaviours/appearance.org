@@ -302,7 +302,6 @@ but the answer below has an interesting suggestion
 :ID:       org_mark_mini20.local:20210802T104243.799441
 :END:
 Reveal invisible text around point.
-Hopefully searches will expand org-mode
 #+NAME: org_mark_mini20.local_20210802T104243.783283
 #+begin_src emacs-lisp
 (use-feature reveal

@@ -213,8 +213,9 @@ mwin might have mode aware
 #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_DBEC557B-9FAB-458C-AACF-C315E3DCB0FB
 #+begin_src emacs-lisp
 (use-package-elpa mwim
-  ;; :demand                        ; Need to get binds to work
   :commands (mwim-beginning mwim-end)
+  :bind (([remap move-beginning-of-line] . mwin-beginning)
+         ([remap move-end-of-line] . mwin-end))
   :init
   (bind-key mwbkey-home 'mwim-beginning)
   (bind-key mwbkey-end 'mwim-end))

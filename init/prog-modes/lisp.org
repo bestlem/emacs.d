@@ -18,10 +18,9 @@ Set compat so that the keys for these modes work. But macrostep does not - see i
 #+NAME: org_mark_mini20.local_20211031T180900.567355
 #+begin_src emacs-lisp
 (use-package-elpa lispy
-  ;;:mwb-load-path "fork/lispy"
   :commands lispy-mode
   :bind (:map lispy-mode-map
-			  ("<backspace>" . lispy-delete-backward))
+		 ("<backspace>" . lispy-delete-backward))
   :init
   (setq lispy-visit-method 'projectile
 		lispy-safe-copy t

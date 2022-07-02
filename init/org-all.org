@@ -67,8 +67,8 @@ It is now for subtree todo refile and links
 #+begin_src emacs-lisp
 (defun my/org-edit-src-exit ()
   (interactive)
-  (org-edit-src-save)
-  (org-edit-src-exit))
+  (org-edit-src-exit)
+  (mwb/mac-key-save-buffer-force-backup))
 #+end_src
 ** use-package
 :PROPERTIES:
@@ -124,12 +124,8 @@ Put the bind bit in noweb
  :map org-mode-map
  ("<f5>" . org-ctrl-c-ctrl-c)
  :map org-src-mode-map
- ("H-s" . org-edit-src-exit)
- ;; ("A-s" . org-edit-src-save)
-										; I press by mistake but it makes
-                                        ; sense now save not save and exit
- ("A-s" . my/org-edit-src-exit)
- ("A-k". org-edit-src-abort)
+ ([remap save-buffer] . my/org-edit-src-exit)
+ ([remap bury-buffer] . org-edit-src-abort)
  ;; :map org-capture-mode-map
  ;; ("<f12>" . org-capture-finalize)
  )
@@ -751,9 +747,9 @@ Again from jerrypnz
   :bind (("<f13>" . org-capture)
 		 ("C-<f13>" . open-org-notes)
 		 :map org-capture-mode-map
-		 ("A-s" . org-capture-finalize)
-		 ("A-k" . org-capture-kill)
-		 ("A-w" . org-capture-refile))
+		 ("s-s" . org-capture-finalize)
+		 ("s-k" . org-capture-kill)
+		 ("s-w" . org-capture-refile))
   :preface
   (defun open-org-notes ()
 	(interactive)

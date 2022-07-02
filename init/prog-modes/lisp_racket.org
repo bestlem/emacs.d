@@ -53,7 +53,7 @@ This is the minimal setup and does not need changing
   :bind (:map racket-mode-map
 			  ("<f5>" . racket-mwb-run-hydra)
 			  ("<C-f5>" . racket-mwb-run)
-			  ("A-<f5>" . racket-mwb-raco-all-tests)
+			  ("s-<f5>" . racket-mwb-raco-all-tests)
 			  ("S-<f5>" . racket-mwb-raco-test)
 			  ("M-l" . racket-insert-lambda)
 			  ("M-`" . racket-insert-lambda)

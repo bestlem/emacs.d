@@ -688,129 +688,14 @@ Needs to load immeduiately to load the other customization files
     (unless (string-equal system-type "windows") "MSWindows"))))
 
 #+end_src
-** Key bindings
+** Key setup
 :PROPERTIES:
-:ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:0EFA9EE3-5983-433A-854A-8A72FEB39FFC
+:ID:       org_mark_mini20.local:20220701T033523.884122
 :END:
-These differ. Even on my Mac the home key is <home> on Aquamacs and <H-left> on Carbon emacs and <home> on Plain Emacs + also terminal + MS-windows.
-So I want to set my own values to use as bindings occur.
-
-Ideally this should (and was in keys.org which is run after idle or at least late) but I need the mac-key-mode keymap before org according to notes re A-s for org-src-mode -  I do need it for some key bindings.
-
-First need to set the environment as Aquamacs has already done this
-
-Emacs 27 mac - calls iso-transl at some time sp messes up Alt key bindings -
-Also the bindings are less and the menu is less so might be best to copy oskeys.el from Aquamacs and use super as command. Note that would need aquamacs redo etc.
-
-Mouse3 might also give a more interesting menu + the extra bit of standard Emacs mouse extend selection plus I want a different menu for say treemacs.
-
-*** iso-transl
-:PROPERTIES:
-:ID:       org_2020-12-10+00-00:304665E1-9D39-4752-8195-F6A48D215B59
-:END:
-This inbuilt emacs package provides bindings for odd characters using a C-x 8 map - but it also biunds them to Alt key which wrechis things like A-C which is now ¢
-
-Aquamacs patched iso-transl.el so it is now a mode and can be turned on and off.
-
-I am not the only one to suffer see [[https://emacs.stackexchange.com/q/17508/9874][Emacs SX question]] and also [[https://emacs.stackexchange.com/q/61415/9874][my question]]
-
-So lets try to patch iso-transl. I copied the Aquamacs one and then merged with macport emacs 27.1, now try to load first
-
-#+NAME: org_2020-12-11+00-00_CC01A657-95E4-4A31-8FCC-B45CCB63A851
+As mac-key-mode is a minor needs to be before org-mode.
+#+NAME: org_mark_mini20.local_20220701T033523.860467
 #+begin_src emacs-lisp
-(unless *aquamacs*
-  (use-feature iso-transl
-    :demand
-    :config
-    (dolist (transl-char iso-transl-char-map)
-      (let ((vec (vconcat (car transl-char))))
-        (aset vec 0 (logior (aref vec 0) ?\A-\^@))
-        (define-key key-translation-map vec nil)))))
-#+end_src
-*** Aquamacs unbind
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:628BE0A1-2280-4914-98A9-12830F84FEF8
-:END:
-There are somethings that Aquamacs does that I want to undo.
-e.g. key bindings that they do to stop modes changing them.
-#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_AD89749B-35DE-4103-925B-3420D46D933F
-#+begin_src emacs-lisp
-(when (boundp 'osx-key-mode-map)
-  (unbind-key "<end>" osx-key-mode-map)
-  (unbind-key "<home>" osx-key-mode-map))
-#+end_src
-
-*** Emacs unbind
-:PROPERTIES:
-:ID:       org_mark_mini12.local:20210104T232217.148653
-:END:
-C-down-mouse-1 gets bound to a menu
-#+NAME: org_mark_mini12.local_20210104T232217.110040
-#+begin_src emacs-lisp
-(unless *aquamacs*
-  (unbind-key "<C-down-mouse-1>"))
-#+end_src
-*** Set bindings
-:PROPERTIES:
-:ID:       org_mark_2020-10-01T14-52-55+01-00_mini12.local:E7A35B8E-8937-4EA2-939A-CDEAE681B190
-:END:
-Deal with stuff done by Aquamacs
-#+NAME: org_mark_2020-10-01T14-52-55+01-00_mini12.local_2D8F5C87-38BB-47E2-A162-03E5E42630F4
-#+begin_src emacs-lisp
-(unless *aquamacs*
-  (use-package-elpa redo+ :demand)
-  (use-feature mac-key-mode
-    :demand
-    :diminish
-    :config (mac-key-mode 1)
-    (unbind-key "<C-down-mouse-1>" mac-key-mode-map)))
-#+end_src
-
-*** Name keys
-:PROPERTIES:
-:ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:069F9DA8-F579-40AF-86F2-ECE349FF6181
-:END:
-#+NAME: org_mark_2020-10-01T11-27-32+01-00_mini12.local_956A48EE-5DDA-4C11-B931-C857DED78CEB
-#+begin_src emacs-lisp
-;; Set best default names - begin with aquamacs and NS emacs
-(setq mwbkey-home "<home>"
-      mwbkey-end "<end>"
-      mwbkey-page-up "<prior>"
-      mwbkey-page-down "<next>"
-      mwbkey-insert "<f18>"             ; This is a karabinier bind as insert
-                                        ; on Aquamacs is help- it really should
-                                        ; be fn
-      mwbkey-delete "<kp-delete>")
-
-(if *macport*
-    (setq mwbkey-home "H-<left>"
-          mwbkey-end "H-<right>"
-          mwbkey-page-up "H-<up>"
-          mwbkey-page-down "H-<down>"
-          mwbkey-insert "<f18>"
-          mwbkey-delete "<H-backspace>"))
-#+end_src
-
-*** Choose mode map.
-:PROPERTIES:
-:ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:27CB584A-8AD0-44AD-B508-D9765EBFD3A4
-:END:
-Both Aquamacs and mac-keys-mode introduce a map for macOS keys. Unfortunately it is not the same one. So lets add indirection.
-#+NAME: org_mark_2020-10-01T11-27-32+01-00_mini12.local_EDE062E4-8660-4455-B106-B376CA99E96C
-#+begin_src emacs-lisp
-(setq macos-key-map (if *aquamacs*
-                        'osx-key-mode-map
-                      'mac-key-mode-map))
-#+end_src
-*** Put system clipboard into emacs kill ring
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20220616T080436.889045
-:END:
-From radian. If you have something on the system clipboard, and then kill something in Emacs, then by default whatever you had on the system clipboard is gone and there is no way to get it back.
-Setting the following option makes it so that when you kill something in Emacs, whatever was previously on the system clipboard is pushed into the kill ring. This way, you can paste it with `yank-pop'.
-#+NAME: org_mark_mini20.local_20220616T080436.865371
-#+begin_src emacs-lisp
-(setq save-interprogram-paste-before-kill t)
+(mwb-init-load "init/keys" "no-org")
 #+end_src
 ** Org Mode base setup
 :PROPERTIES:

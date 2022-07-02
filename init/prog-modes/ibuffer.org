@@ -27,7 +27,7 @@ On really forcing loading etc this still loads immediately after-init but should
    #+begin_src emacs-lisp
 (use-feature ibuffer
   :bind (("C-x C-b" . ibuffer)
-         ("A-M-b" . ibuffer)
+         ("M-s-b" . ibuffer)
          :map ibuffer-mode-map
          ("?" . major-mode-hydras/ibuffer-mode/body))
   :init

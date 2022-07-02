@@ -1,6 +1,6 @@
 #+TITLE:  Keys
 #+AUTHOR: Mark Bestley
-#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb :noweb no
 #+STARTUP: content
 
 * Global key bindings musings
@@ -30,11 +30,16 @@ There is a general idea as in the SO answer quoted above as to put your keys int
 Aquamacs works with the A-s issue as it loads osx-mode-map early. I loaded mac-kep-map quite early but it is after org-mode so I can't override that key. In both cases visual-line-mode is loaded first then Aquamacs has tabbar and keyboard emulation and mac-key-mode has isearch and then outline and org modes. Note that Aquamacs does at start of osxkey-mode mess with isearch (ah does that affect swiper)
 
 So quick hack is put mac-key-mode before org-mode, so has to be in config which is better than behaviour logically - and the org setup for keybindings is simple so does not need org mode.
+
+Looking at GNU emacs code - in 2008 they added mac key definitions. That and several others use super key not Alt - Aquamacs can do either.
+
+So I need to review what is in use and perhaps do it globally
+
 *** Key representation
 :PROPERTIES:
 :ID:       org_mark_2020-02-09T19-36-52+00-00_mini12:AB151351-1B6E-4D39-AF9D-74CDDA7DB10E
 :END:
-There is a difference between bind and general in how they report the bindings. general always puts the string through kbd bind does not. The difference is in getting the description. Aquamacs is patched to show the Apple key symbols but bind only shows them if the string is passed through kbd. This can be patched. However Aquamacs is not fully patched, if an of the key is in <> e.g. <f1> then it does not try to reformat the string. (I think emacs 28 fixes this as modifiers are now outside the <>).
+There is a difference between bind and general in how they report the bindings. general always puts the string through kbd bind does not. The difference is in getting the description. Aquamacs is patched to show the Apple key symbols but bind only shows them if the string is passed through kbd. This can be patched. However Aquamacs is not fully patched, if any of the key is in <> e.g. <f1> then it does not try to reformat the string. (I think emacs 28 fixes this as modifiers are now outside the <>).
 *** Emacs versions
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210819T115433.266731
@@ -95,30 +100,262 @@ And as per Yah Lee it might be better to not use chords - ie two key presses e.g
 :END:
 This seems bound to <help> - shades of NeXT
 
-* Mac modifier key Bindings
+*** Review Alt key mapping
 :PROPERTIES:
-:ID:       org_mark_mini12.local:20201213T170849.967233
+:ID:       org_mark_mini20.local:20220630T120530.512226
 :END:
-We have fn available so have it as hyper and then use Karabiner  (try iCue later) to map Caps Lock and Window key to hyper. Super is used sometimes so I think is confusing and as noted sequence of keys (emacs key-chord and hydra) is better.
-I don't use the right hand modifier keys so not set separately.
-Things got changed on one run so set here and remove from customisation
+So look at keys: ✓ denotes the best, x is what is provided. Default to GNU as that is set.
+|-----------+------+-----+----+---------------------------------------------|
+| key       | Aqua | Gnu | me | Function                                    |
+|-----------+------+-----+----+---------------------------------------------|
+| a         | x    | ✓   | x  | mark-whole-buffer                           |
+| b         |      |     | ✓  | consult-buffer                              |
+| c         |      | x   |    | ns-copy-including-secondary                 |
+|           | x    |     | ✓  | clipboard-kill-ring-save                    |
+| d         |      | x   |    | isearch-repeat-backward                     |
+| e         | x    |     |    | aquamacs-use-selection-for-find             |
+|           |      | x   |    | search-yank-kill                            |
+| f         |      |     | ✓  | consult-line                                |
+|           | x    | x   |    | isearch-forward                             |
+| g         |      | x   | x  | isearch-repeat-forward                      |
+|           | x    |     |    | aquamacs-repeat-isearch                     |
+| h         | x    | ✓   |    | ns-do-hide-emacs (macport defaults)         |
+| i         |      |     | x  | mac-key-show-in-finder                      |
+| j         |      | ✓   |    | exchange-point-and-mark    (C-x C-x)        |
+| k         |      | x   |    | kill-current-buffer                         |
+|           |      |     | ✓  | bury-buffer                                 |
+| l         | x    | ✓   |    | goto-line                                   |
+| m         |      | x   | x  | iconify-frame                               |
+|           | ✓    |     |    | iconify-or-deiconify-frame                  |
+| n         |      | ✓   |    | make-frame                                  |
+|           | x    |     |    | new-empty-buffer-other-frame                |
+| o         |      | ✓   |    | ns-open-file-using-panel                    |
+|           | x    |     |    | mac-key-open-file                           |
+| p         | x    |     |    | aquamacs-print                              |
+|           |      | ✓   |    | ns-print-buffer                             |
+|           |      |     | x  | print-buffer                                |
+| q         |      | ✓   | x  | save-buffers-kill-emacs                     |
+|           | x    |     |    | aquamacs-save-buffers-kill-emacs            |
+| r         |      |     |    |                                             |
+| s         |      | x   | x  | save-buffer                                 |
+|           |      |     |    | mwb/mac-key-save-buffer-force-backup        |
+|           | x    |     |    | mac-key-save-file                           |
+| t         |      | ✓   |    | ns-popup-font-panel                         |
+|           |      |     | x  | mac-font-panel-mode                         |
+|           | x    |     |    | new-tab                                     |
+| u         |      | x   |    | revert-buffer                               |
+|           |      |     | ✓  | revert-buffer-no-confirm                    |
+| v         |      | x   |    | yank                                        |
+|           | x    |     |    | cua-paste                                   |
+|           |      |     | ✓  | clipboard-yank                              |
+| w         |      | ✓   |    | delete-frame                                |
+|           |      |     | x  | mac-key-close-window                        |
+|           | x    |     |    | close-window                                |
+| x         | x    |     | ✓  | clipboard-kill-region                       |
+|           |      | x   |    | kill-region                                 |
+| y         |      | ✓   |    | ns-paste-secondary                          |
+| z         |      | x   |    | undo                                        |
+|           |      |     | x  | undo - from redo+                           |
+|           | x    |     |    | aquamacs-undo                               |
+|           |      |     |    | undo-fu                                     |
+| +         |      | ✓   |    | text-scale-adjust                           |
+|           | x    |     |    | zoom-font                                   |
+|           |      |     | x  | zoom-in                                     |
+| -         |      | ✓   |    | text-scale-adjust                           |
+|           | x    |     |    | zoom-font-out                               |
+|           |      |     | x  | zoom-out                                    |
+| ?         |      | ✓   | x  | info                                        |
+|           | x    |     |    | aquamacs-user-help                          |
+| :         |      | ✓   |    | ispell                                      |
+|           | x    |     |    | spellchecker-panel-or-ispell                |
+| ;         | x    |     |    | spellcheck-now                              |
+| ,         | x    | ✓   |    | customize                                   |
+| .         | x    |     | ✓  | keyboard-quit                               |
+| /         |      |     | ✓  | comment-dwim-2                              |
+| \         | x    |     |    | comment-or-uncomment-region-or-line         |
+| ^         |      | ✓   |    | kill-some-buffers                           |
+| C         |      | ✓   |    | ns-popup-color-panel    (should be s-t)     |
+| D         |      | ✓   |    | dired                                       |
+| E         |      | ✓   |    | edit-abbrevs                                |
+| F         |      | x   |    | isearch-backward                            |
+|           |      |     |    | consult-line backward                       |
+| G         |      |     | x  | isearch-repeat-backward                     |
+|           | x    |     |    | aquamacs-repeat-isearch-backward            |
+| H         |      | ✓   |    | ns-do-hide-others                           |
+| L         |      | ✓   |    | shell-command                               |
+| M         |      | ?   |    | manual-entry                                |
+| N         | x    |     |    | make-frame-command                          |
+| O         | x    |     |    | mac-key-open-file-other-frame               |
+| S         |      | ✓   |    | ns-write-file-using-panel                   |
+|           |      |     | x  | mac-key-save-as                             |
+|           | x    |     |    | mac-key-save-file-as                        |
+| T         | ✓    |     |    | mac-font-panel-mode                         |
+| W         |      |     | x  | delete-frame                                |
+|           | x    |     |    | close-window                                |
+| Z         |      |     | ✓  | redo                                        |
+|           | x    |     |    | aquamacs-redo                               |
+| <mouse-1> |      |     | ✓  | browse-url-at-mouse                         |
+| M-c       | x    |     |    | aquamacs-clipboard-kill-ring-save-secondary |
+| C-<space> | ✓    |     |    | set-mark                                    |
+|           |      | x   |    | ns-do-show-character-palette                |
+| M-\       | x    |     |    | uncomment-region-or-line                    |
+|           |      |     | x  | pops up 1password                           |
+| C-\       | x    |     |    | toggle-mac-option-modifier                  |
+| C-q       | ✓    |     |    | kill-emacs                                  |
+|           |      |     | x  | macOS sleep                                 |
+|-----------+------+-----+----+---------------------------------------------|
 
-Note that ns- probably should be the ones used and mac- only for macport.
-#+NAME: org_mark_mini12.local_20201213T170849.929562
+
+*** Key bindings
+:PROPERTIES:
+:ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:0EFA9EE3-5983-433A-854A-8A72FEB39FFC
+:END:
+These differ. Even on my Mac the home key is <home> on Aquamacs and <H-left> on Carbon emacs and <home> on Plain Emacs + also terminal + MS-windows.
+So I want to set my own values to use as bindings occur. Fix is to use remap - which has been done. The only exception seems to be the keypad delete, so hard code here.
+
+The cmd key binding map. GNU puts this in the global map. Aquamacs uses osx-mode-map and Macport needs mac-key-mode (which was in Carbon emacs) , so no one way.
+This requires a variable to hold the keymap - which on review just affects keys.org.
+The other issue is that the two modes are minor-modes and can interfere with other minor-modes as the order depends on the order to load. Typically to cause most issue the map I want to change is org-src-mode which is loaded by org-mode and so any change like: ⌘S has to be in a minor mode loaded before org-mode. (Aquamacs has some keys it puts into the global map but not ⌘S.
+
+Note in etc/TODO is that the s- bindings are post emacs 22 before then they uses A- So this is a GNU cock-up.
+
+Ideally this should (and was in keys.org which is run after idle or at least late) but I need the mac-key-mode keymap before org according to notes re A-s for org-src-mode -  I do need it for some key bindings. together with above then keys.org needs loading before org-mode. As it is a simple file - no noweb then can use plain tangling - alternative is use global map as GNU/emacs does but macport does not. Or for odd keys make them run a function that depends on mode, which is easy for ⌘S as it calls my code but worse for documentation.
+
+First need to set the environment as Aquamacs has already done this
+
+Emacs 27 mac - calls iso-transl at some time (which-key does in traversing keymaps and one of then copies itself to A- map) so messes up Alt key bindings - A solution is to use s- as the command key and not use the A- map at all.
+Also the bindings are less and the menu is less so might be best to copy oskeys.el from Aquamacs and use super as command. Note that would need aquamacs redo etc. But macports needs mac-key-mode so use that converted to s-
+
+Mouse3 might also give a more interesting menu + the extra bit of standard Emacs mouse extend selection plus I want a different menu for say treemacs. There is now a plainer context menu in GUN Emacs
+
+**** Conclusion
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220701T030021.797607
+:END:
+keys.org has to be before other things so the delete key can be overridden - ie set to macports or not in one place. (Possibly not they all are based on [deletechar] - that change was in 2001 so my original mapping was begore then, but Aquamacs does this as well so leave.)
+
+Macports needs mac-key-mode so might as well use in all cases. Thus might as well stick with A- and not use GNU global mode but can change all to s- and remove my iso-transl hack.
+
+Using a minor mode map means it needs to be loaded before other minors that alter the keys - e.g. org-src-mode . Which means that keys.org has to be non noweb, which is no problem.
+
+* Undo bindings that are problematic
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220701T094925.506916
+:END:
+** iso-transl
+:PROPERTIES:
+:ID:       org_2020-12-10+00-00:304665E1-9D39-4752-8195-F6A48D215B59
+:END:
+This inbuilt emacs package provides bindings for odd characters using a C-x 8 map - but it also biunds them to Alt key which wrechis things like A-C which is now ¢
+
+Aquamacs patched iso-transl.el so it is now a mode and can be turned on and off.
+
+I am not the only one to suffer see [[https://emacs.stackexchange.com/q/17508/9874][Emacs SX question]] and also [[https://emacs.stackexchange.com/q/61415/9874][my question]]
+
+So lets try to patch iso-transl. I copied the Aquamacs one and then merged with macport emacs 27.1, now try to load first
+
+#+NAME: org_2020-12-11+00-00_CC01A657-95E4-4A31-8FCC-B45CCB63A851
+#+begin_src emacs-lisp :tangle no
+(unless *aquamacs*
+  (use-feature iso-transl
+    :demand
+    :config
+    (dolist (transl-char iso-transl-char-map)
+      (let ((vec (vconcat (car transl-char))))
+        (aset vec 0 (logior (aref vec 0) ?\A-\^@))
+        (define-key key-translation-map vec nil)))))
+#+end_src
+** Aquamacs unbind
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:628BE0A1-2280-4914-98A9-12830F84FEF8
+:END:
+There are somethings that Aquamacs does that I want to undo.
+e.g. key bindings that they do to stop modes changing them.
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_AD89749B-35DE-4103-925B-3420D46D933F
 #+begin_src emacs-lisp
-(if *aquamacs*
-    (setq ns-function-modifier 'hyper
-          ns-alternate-modifier 'meta
-          ns-right-alternate-modifier nil
-          ns-right-command-modifier 'super
-          )
-  (setq mac-function-modifier 'hyper
-        mac-option-modifier 'meta
-        mac-command-modifier 'alt
-        mac-right-option-modifier nil
-        mac-right-command-modifier 'super
-        )
-  )
+(when (boundp 'osx-key-mode-map)
+  (unbind-key "<end>" osx-key-mode-map)
+  (unbind-key "<home>" osx-key-mode-map))
+#+end_src
+
+** Emacs unbind
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20210104T232217.148653
+:END:
+C-down-mouse-1 gets bound to a menu
+#+NAME: org_mark_mini12.local_20210104T232217.110040
+#+begin_src emacs-lisp
+(unless *aquamacs*
+  (unbind-key "<C-down-mouse-1>"))
+#+end_src
+* Main setup of key mode
+:PROPERTIES:
+:ID:       org_mark_2020-10-01T14-52-55+01-00_mini12.local:E7A35B8E-8937-4EA2-939A-CDEAE681B190
+:END:
+** Redo
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220701T094925.503757
+:END:
+Deal with stuff done by Aquamacs and original mac-key-mode
+#+NAME: org_mark_2020-10-01T14-52-55+01-00_mini12.local_2D8F5C87-38BB-47E2-A162-03E5E42630F4
+#+begin_src emacs-lisp
+(use-package-elpa redo+
+  :if *aquamacs*
+  :demand)
+#+end_src
+** Mac key mode
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220701T094925.499637
+:END:
+Do the main bindings
+#+NAME: org_mark_mini20.local_20220701T094925.469704
+#+begin_src emacs-lisp
+(use-feature mac-key-mode
+  :unless *aquamacs*
+  :straight (:host github :repo "bestlem/mac-key-mode") ; not a fork as this is old
+  :demand
+  :diminish
+  :config (mac-key-mode 1)
+  (unbind-key "<C-down-mouse-1>" mac-key-mode-map))
+#+end_src
+
+** Choose mode map
+:PROPERTIES:
+:ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:27CB584A-8AD0-44AD-B508-D9765EBFD3A4
+:END:
+Both Aquamacs and mac-keys-mode introduce a map for macOS keys. Unfortunately it is not the same one. So lets add indirection.
+#+NAME: org_mark_2020-10-01T11-27-32+01-00_mini12.local_EDE062E4-8660-4455-B106-B376CA99E96C
+#+begin_src emacs-lisp
+(setq macos-key-map (if *aquamacs*
+                        'osx-key-mode-map
+                      'mac-key-mode-map))
+#+end_src
+* Name keys
+:PROPERTIES:
+:ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:069F9DA8-F579-40AF-86F2-ECE349FF6181
+:END:
+Now unused so just documentation.
+However needed for navigation. But can do directly as macport has the problem.
+No home end needed for mwin as can't do a rebind. Also lispy-delete. Issue is the base globale map is deletechar and mapped to C-d not a delete so can't rebind.
+#+NAME: org_mark_mini20.local_20220630T234727.947741
+#+begin_src emacs-lisp
+;; Set best default names - begin with aquamacs and NS emacs
+(setq mwbkey-home "<home>"
+      mwbkey-end "<end>"
+      mwbkey-page-up "<prior>"
+      mwbkey-page-down "<next>"
+      mwbkey-insert "<f18>"             ; This is a karabinier bind as insert
+                                        ; on Aquamacs is help- it really should
+                                        ; be fn
+      mwbkey-delete "<kp-delete>")
+
+(if *macport*
+    (setq mwbkey-home "H-<left>"
+          mwbkey-end "H-<right>"
+          mwbkey-page-up "H-<up>"
+          mwbkey-page-down "H-<down>"
+          mwbkey-insert "<f18>"
+          mwbkey-delete "<H-backspace>"))
 #+end_src
 
 * Key based code
@@ -160,7 +397,6 @@ Make which key popup.
   :after which-key
   :config
   (which-key-posframe-mode 1))
-(which-key-setup-side-window-right-bottom)
 #+end_src
 ** Display keys in help and menus
 :PROPERTIES:
@@ -219,6 +455,24 @@ Show the frequency of keys
 :ID:       org_2020-12-08+00-00:933FF670-72A1-4807-B31D-2702C695F22E
 :END:
 This does the actual binding
+** MacOS behaviour
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220701T113506.420739
+:END:
+*** Hide
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220701T113506.416143
+:END:
+s-h seems just to work
+*** Window
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220701T205227.980965
+:END:
+Delete the frame
+#+NAME: org_mark_mini20.local_20220701T205227.944357
+#+begin_src emacs-lisp
+(bind-key "s-w" 'delete-frame macos-key-map)
+#+end_src
 ** Home/End/Paging
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:B05228E7-9F92-462C-95B3-D0C74C4A9F46
@@ -236,27 +490,6 @@ This does the actual binding
 (bind-key [C-kp-home] 'beginning-of-buffer)
 (bind-key [S-kp-next] 'scroll-other-window-down)
 (bind-key [S-kp-prior] 'scroll-other-window)
-#+end_src
-** Cua bindings
-:PROPERTIES:
-:ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:D0079FD5-B3EE-47A0-8279-5448DF4CE51F
-:END:
-#+NAME: org_mark_2020-10-01T11-27-32+01-00_mini12.local_A4D766AC-9C2C-4FA6-BE37-7E4D822DA0E7
-#+begin_src emacs-lisp
-;; Apple and cua bindings
-(when *aquamacs*
-  ;; Aquamacs thinks the insert key is <help>
-  (bind-key [S-kp-delete] 'cua-cut-region)
-  ;; Cocoa emacs does not recognise this key
-  (bind-key [S-kp-insert] 'cua-paste)
-  (bind-key [C-kp-insert] 'cua-copy-region)
-  (bind-key "H-<return>" 'cua-set-rectangle-mark cua-global-keymap)
-  (unbind-key "C-<return>" cua-global-keymap)
-  ;; Aquamacs defaults these to same
-  ;;(bind-key [C-end] 'end-of-buffer )
-  ;;(bind-key [C-home] 'beginning-of-buffer )
-  )
-
 #+end_src
 ** Scrolling
 :PROPERTIES:
@@ -278,28 +511,99 @@ I suspect not touched since before ages. But need for macport
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:FB038850-533F-4334-9607-5BC975283E81
 :END:
+The H-backspace is a macport issue and I have seen it declared once.
+The other backspace bindings are mine and date from 1995 so might have been needed on early emacs. Note that c-backspace-function uses  backward-delete-char-untabify
   #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_DD9F56DD-C914-46B4-B26D-131CC2ABAD7F
   #+begin_src emacs-lisp
-  ;; (bind-key [C-return] 'newline-and-indent )
-  ;;(bind-key [C-backspace] 'backward-delete-char-untabify )
-(bind-key mwbkey-delete 'delete-char)
+;; (bind-key [C-return] 'newline-and-indent )
+;;(bind-key [C-backspace] 'backward-delete-char-untabify )
+(when *macport*
+  (bind-key (if *macport* "H-<backspace>" "<kp-delete>") 'delete-char))
 (bind-key "<backspace>" 'backward-delete-char-untabify)
 
   ;;(bind-key [?\A-backspace] 'undo )
   #+end_src
 
+** Point and mark
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220701T113506.405629
+:END:
+exchange-point-and-mark ^x-^x is set in s- map by GNU
+#+NAME: org_mark_mini20.local_20220701T113506.380264
+#+begin_src emacs-lisp
+(when *macport*
+  (bind-key "s-j" 'exchange-point-and-mark))
+#+end_src
+
+** Cut and paste
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220701T205227.978377
+:END:
+*** Put system clipboard into emacs kill ring
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220701T205227.975004
+:END:
+From radian. If you have something on the system clipboard, and then kill something in Emacs, then by default whatever you had on the system clipboard is gone and there is no way to get it back.
+Setting the following option makes it so that when you kill something in Emacs, whatever was previously on the system clipboard is pushed into the kill ring. This way, you can paste it with `yank-pop'.
+#+NAME: org_mark_mini20.local_20220701T214937.135037
+#+begin_src emacs-lisp
+(use-feature emacs
+  :custom
+  (set-mark-command-repeat-pop t)
+  (save-interprogram-paste-before-kill t)
+  (kill-do-not-save-duplicates t)
+  (yank-pop-change-selection t))
+#+end_src
+**** Cua bindings
+:PROPERTIES:
+:ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:D0079FD5-B3EE-47A0-8279-5448DF4CE51F
+:END:
+#+NAME: org_mark_2020-10-01T11-27-32+01-00_mini12.local_A4D766AC-9C2C-4FA6-BE37-7E4D822DA0E7
+#+begin_src emacs-lisp
+;; Apple and cua bindings
+(when *aquamacs*
+  ;; Aquamacs thinks the insert key is <help>
+  (bind-key [S-kp-delete] 'cua-cut-region)
+  ;; Cocoa emacs does not recognise this key
+  (bind-key [S-kp-insert] 'cua-paste)
+  (bind-key [C-kp-insert] 'cua-copy-region)
+  (bind-key "H-<return>" 'cua-set-rectangle-mark cua-global-keymap)
+  (unbind-key "C-<return>" cua-global-keymap)
+  ;; Aquamacs defaults these to same
+  ;;(bind-key [C-end] 'end-of-buffer )
+  ;;(bind-key [C-home] 'beginning-of-buffer )
+  )
+
+#+end_src
+**** Secondary
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220701T205455.206082
+:END:
+#+NAME: org_mark_mini20.local_20220701T205455.175864
+#+begin_src emacs-lisp
+(bind-key "s-y" 'ns-paste-secondary macos-key-map)
+#+end_src
 ** undo
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20210102T015452.201351
 :END:
-Use Aquamacs'
+Use Aquamacs' which is redo+
 #+NAME: org_mark_mini12.local_20210102T131152.591658
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-feature aquamacs-redo
-    :unless *aquamacs*
-    :demand t
-    :bind ("A-z" . aquamacs-undo)
-    )
+  :unless *aquamacs*
+  :commands aquamacs-undo
+  :demand
+  (bind-key "s-z" aquamacs-undo macos-key-map))
+#+end_src
+See [[http://xahlee.info/emacs/emacs/emacs_best_redo_mode.html][xahlee]] so try undo-fu.
+#+NAME: org_mark_mini20.local_20220701T220249.842682
+#+begin_src emacs-lisp
+(use-package-elpa undo-fu
+  :unless *aquamacs*
+  :bind (:map mac-key-mode-map
+		 ("s-z" . 'undo-fu-only-undo)
+		 ("s-Z" . 'undo-fu-only-redo)))
 #+end_src
 
 ** Old bindings
@@ -307,8 +611,6 @@ Use Aquamacs'
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:9DC3CE51-289C-4767-A1DE-E461A402C58F
 :END:
 These will be old NeXT Pizza bindings
-
-
      ;(global-set-key [?\A-=] 'what-line )
      ;(global-set-key [?\M-g] 'goto-line)
      ;(global-set-key [?\A-g] 'goto-line)
@@ -322,36 +624,52 @@ These will be old NeXT Pizza bindings
 Runs the current buffer through a compiler or interpreter. There are also functions to do for a method. Includes C, Racket, Python, Julia. However all through a batch command so not into REPL and not really through make.
 See https://github.com/syohex/emacs-quickrun but assumes a lot. Better look at org mode and repls.
 
-** File actions
+** Buffers
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220701T141643.189106
+:END:
+
+*** Files
 :PROPERTIES:
 :ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:72150B6F-1352-4EC2-AD0F-B5B273269885
 :END:
 This is the override of save etc to the mode maps
+Rebind just
 #+NAME: org_mark_2020-10-01T11-27-32+01-00_mini12.local_1707CDE5-818A-4399-863A-F81E8653D8F6
 #+begin_src emacs-lisp
 (bind-key [remap mac-key-save-file] 'mwb/mac-key-save-buffer-force-backup macos-key-map)
 (bind-key [remap save-buffer] 'mwb/mac-key-save-buffer-force-backup macos-key-map)
+(require 'mac-extra-functions)
+(bind-key "s-o" 'mac-key-open-file macos-key-map)
+(bind-key "s-O" 'mac-key-open-file-other-frame macos-key-map)
 #+end_src
-** Buffer related
+*** Buffer related
 :PROPERTIES:
 :ID:       org_mark_2020-09-24T21-45-16+01-00_mini12.local:6D014266-E049-4521-A263-7154358EAD5D
 :END:
 #+NAME: org_mark_2020-09-24T21-45-16+01-00_mini12.local_427A6531-52EE-4F7E-A5E8-B2841C9B166A
 #+begin_src emacs-lisp
 ;; (bind-key "A-b" 'ivy-switch-buffer macos-key-map)
-(bind-key "A-M-k" 'bjm/kill-this-buffer macos-key-map)
+(bind-key "M-s-k" 'bjm/kill-this-buffer macos-key-map)
 (bind-key "C-x k" 'bjm/kill-this-buffer macos-key-map)
-(bind-key "A-k" 'bury-buffer macos-key-map)
+(bind-key "s-k" 'bury-buffer macos-key-map)
 ;; (bind-chord "kk" #'er-switch-to-previous-buffer macos-key-map)
-;; macport makes A-u µ
-(bind-key  "A-u" 'revert-buffer-no-confirm macos-key-map)
+(unless *macport*
+  (bind-key "s-p" 'ns-print-buffer macos-key-map))
+(bind-key  "s-u" 'revert-buffer-no-confirm macos-key-map)
+#+end_src
+Stuff in ns-win so not macports
+#+NAME: org_mark_mini20.local_20220702T104450.180229
+#+begin_src emacs-lisp
+(when *macport*
+  (bind-key "s-^" 'kill-some-buffers macos-key-map))
 #+end_src
 ** TODO Customise
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220615T104011.284037
 :END:
 The mouse in non Aquamacs (or just since 26) is not easy to do the widgets.
-Look at custom-field-keymap and add keys other than ret so can fo with left hand.
+Look at custom-field-keymap and add keys other than ret so can work with left hand.
 ** Upper case et al work on regions
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220616T081605.621814
@@ -364,6 +682,23 @@ Esc-U is one of the first emacs keys I learnt.
 (bind-key "M-c" #'capitalize-dwim)
 (bind-key "M-l" #'downcase-dwim)
 (bind-key "M-u" #'upcase-dwim)
+#+end_src
+
+** Zoom functions
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220621T090048.820171
+:END:
+#+NAME: org_mark_mini20.local_20220621T090048.801066
+I just want the font to change. But seems only to do a buffer.
+#+NAME: org_mark_mini20.local_20220702T143714.749527
+#+begin_src emacs-lisp
+(if *aquamacs*
+	(progn (bind-key "s-<kp-add>" 'zoom-font macos-key-map)
+		   (bind-key "s-<kp-subtract>" 'zoom-font-out macos-key-map))
+  (progn (setq text-scale-mode-step 1.05)
+		 (bind-key "s-<kp-add>" 'text-scale-increase macos-key-map)
+		 (bind-key "s-<kp-subtract>" 'text-scale-decrease macos-key-map)
+		 (bind-key "s-<kp-0>" 'text-scale-mode macos-key-map)))
 #+end_src
 * Single key bindings
 :PROPERTIES:
@@ -430,21 +765,27 @@ A later thought is to use f5 as leader use key chords and then others for test
 
 ** Other
 :PROPERTIES:
-:ID:       org_mark_2020-09-24T21-45-16+01-00_mini12.local:5850CC8F-7956-45D4-8CDA-2CB4C152A34C
+:ID:       org_mark_mini20.local:20220702T144257.960600
 :END:
-#+NAME: org_mark_2020-09-24T21-45-16+01-00_mini12.local_AF417D0A-EE73-4B8C-9B57-B7DFFFB19E40
+#+NAME: org_mark_mini20.local_20220702T144257.931599
 #+begin_src emacs-lisp
-(bind-key "A-M-u" 'ediff-revision macos-key-map)
-(if *aquamacs*
-    (progn
-      (bind-key "A-<kp-add>" 'zoom-font macos-key-map)
-      (bind-key "A-<kp-subtract>" 'zoom-font-out macos-key-map)
-      (bind-key "A-/" 'comment-or-uncomment-region-or-line macos-key-map))
+(bind-key "M-s-u" 'ediff-revision macos-key-map)
+(bind-key "s-/"
+		  (if *aquamacs*
+			  (if *aquamacs*
+				  'comment-or-uncomment-region-or-line
+				'comment-dwim-2)
+			macos-key-map))
+(unless *macport*
+  (bind-key "s-p" 'ns-print-buffer macos-key-map))
 
-  (progn
-    (bind-key "A-<kp-add>" 'zoom-in macos-key-map)
-    (bind-key "A-<kp-subtract>" 'zoom-out macos-key-map)
-    (bind-key "A-/" 'comment-dwim-2 macos-key-map)))
+(bind-key "s-t"
+          (if *macport* 'mac-font-panel-mode 'ns-popup-font-panel)
+          macos-key-map )
+(when *macport*
+  (bind-key "s-D" 'dired)
+  (bind-key "s-E" 'edit-abbrevs)
+  (bind-key "s-L" 'shell-command))
 #+end_src
 ** Toggle treemode as needed often
 :PROPERTIES:
@@ -452,7 +793,7 @@ A later thought is to use f5 as leader use key chords and then others for test
 :END:
 #+NAME: org_mark_mini20.local_20210812T103208.394575
 #+begin_src emacs-lisp
-(bind-key "A-M-t" 'treemacs)
+(bind-key "M-s-t" 'treemacs)
 #+end_src
 ** Control x binding
 :PROPERTIES:
@@ -489,6 +830,33 @@ From [[https://github.com/abo-abo/hydra/wiki/Emacs][Hydra wiki - Find file with 
 (bind-key "x" #'mwb-x-key)
 #+end_src
 
+* Mac modifier key Bindings
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201213T170849.967233
+:END:
+We have fn available so have it as hyper and then use Karabiner  (try iCue later) to map Caps Lock and Window key to hyper. Super is used sometimes so I think is confusing and as noted sequence of keys (emacs key-chord and hydra) is better.
+I don't use the right hand modifier keys so not set separately.
+Things got changed on one run so set here and remove from customisation
+
+Note that ns- probably should be the ones used and mac- only for macport. Later emacs have aliased the mac- to ns- so can use mac- in all cases.
+#+NAME: org_mark_mini12.local_20201213T170849.929562
+#+begin_src emacs-lisp
+(if *aquamacs*
+    (setq ns-function-modifier 'hyper
+          ns-alternate-modifier 'meta
+          ns-command-modifier 'super
+          ns-right-alternate-modifier nil
+          ns-right-command-modifier 'alt
+          )
+  (setq mac-function-modifier 'hyper
+        mac-option-modifier 'meta
+        mac-command-modifier 'super
+        mac-right-option-modifier nil
+        mac-right-command-modifier 'alt
+        )
+  )
+#+end_src
+
 * Mouse
 :PROPERTIES:
 :ID:       org_mark_2020-10-17T19-55-57+01-00_mini12.local:6D65DE51-07D2-4306-9156-B8E684BC67C3
@@ -519,6 +887,20 @@ Sort the imenu found options in the mouse menu
 #+NAME: org_mark_mini20.local_20210204T124122.783791
 #+begin_src emacs-lisp
 (setq imenu-sort-function 'imenu--sort-by-name)
+#+end_src
+
+** mac-key-map
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220702T101540.282405
+:END:
+#+NAME: org_mark_mini20.local_20220702T101540.255108
+#+begin_src emacs-lisp
+(use-feature emacs
+  :demand
+  :after mac-key-mode
+  :bind (:map mac-key-mode-map
+		 ("s-<mouse-1>" . browse-url-at-mouse))
+  )
 #+end_src
 ** Macos mouse
 :PROPERTIES:
@@ -634,19 +1016,6 @@ Used for some window management in the hydras.
   ace-delete-other-windows
   ace-select-window
   )
-#+end_src
-**** Zoom functions
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20220621T090048.820171
-:END:
-#+NAME: org_mark_mini20.local_20220621T090048.801066
-#+begin_src emacs-lisp
-(use-package-elpa zoom-frm
-  :commands
-  zoom-in
-  zoom-in/out
-  zoom-out)
-
 #+end_src
 *** Main map
 :PROPERTIES:
@@ -884,7 +1253,6 @@ hydra-search/body
               ("<right>" . isearch-forward-exit-minibuffer)))
 
 #+end_src
-
 
 *** Let search continue with arrows
 :PROPERTIES:

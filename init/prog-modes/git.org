@@ -46,8 +46,8 @@ This is [[https://github.com/magit/with-editor][with-editor]] Magit calls it - o
 #+begin_src emacs-lisp
 (use-package-elpa with-editor
   :bind (:map with-editor-mode-map
-         ("A-k" . with-editor-cancel)
-         ("A-s" . with-editor-finish)
+         ("s-k" . with-editor-cancel)
+         ("s-s" . with-editor-finish)
          ))
 #+end_src
 * Git files

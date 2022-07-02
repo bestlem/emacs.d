@@ -1,6 +1,5 @@
 #+TITLE Emacs configuration after org
-#+PROPERTY:header-args :cache yes :tangle yes :comments link
-#+STARTUP: content
+#+PROPERTY:header-args :cache yes :tangle yes
 * Main Load
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:5A4CBEFD-074A-4547-815A-F5E0A16E4BA1
@@ -17,10 +16,11 @@ We need the environment set up before we load files. Appearance and keys are lat
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:9D8E9437-08ED-4247-BFC3-9B5BEE178468
 :END:
 Run this immediately after init to set a more reasonable setup
-Memory is now in gcmh
+Memory is now in gcmh and out again.
 #+NAME: org_mark_mini20.local_20220313T215313.571669
 #+begin_src emacs-lisp
 (defun init-mwb-hook-after-init ()
+  (interactive)
   (setq debug-on-error nil)
   (setq debug-on-quit nil)
   (setq file-name-handler-alist file-name-handler-alist-old
@@ -262,17 +262,6 @@ Lets just load them not explicitly - everything in prog-modes (a better name wou
 #+begin_src emacs-lisp
 (mwb-init-load-directory "init/prog-modes/")
 #+end_src
-* Key binding
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:BF4F840D-AE27-4C9B-B83E-CCFAC0C0E8DB
-:END:
-  No comments as just open the files.
-  But can be added later
-  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_FEA89BFB-F2A3-4C2C-8B2D-944D09F1D38D
-  #+begin_src emacs-lisp
-  (mwb-init-load "init/keys")
-  #+end_src
-
 * Startup data
 :PROPERTIES:
 :ID:       org_mark_2020-10-22T09-50-00+01-00_mini12.local:CAF18BDF-1B4E-49DD-B4CE-F0A18829FDDC

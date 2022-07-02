@@ -333,8 +333,8 @@ Replace isearch but not so easy as consult-line plus can leave the progress mark
 		   ("M-s e" . consult-isearch) ;; orig. isearch-edit-string
 		   ("M-s l" . consult-line)
 		   :map mac-key-mode-map
-		   ("A-f" . consult-line)
-		   ("A-b" . consult-buffer))))
+		   ("s-f" . consult-line)
+		   ("s-b" . consult-buffer))))
 #+end_src
 ** All-the-icons-completion
 :PROPERTIES:

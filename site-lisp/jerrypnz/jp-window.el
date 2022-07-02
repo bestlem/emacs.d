@@ -11,7 +11,7 @@
 (require 'pretty-hydra)
 (require 'ace-window)
 ;; (require 'move-border)
-(require 'zoom-frm)
+;; (require 'zoom-frm)
 (require 'jp-icons)
 
 (defun jp-zoom-default ()
@@ -67,11 +67,7 @@
     ("v" split-window-below "vertically")
     ("V" split-window-vertically-instead "vertically instead"))
 
-   "Zoom"
-   (("+" zoom-in "in")
-    ("=" zoom-in)
-    ("-" zoom-out "out")
-    ("0" jp-zoom-default "reset"))))
+   ))
 
 (provide 'jp-window)
 ;;; jp-window.el ends here

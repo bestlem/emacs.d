@@ -54,6 +54,17 @@ Other issue is for pure python in hard tab files - something sets the offset to 
 
   (setq-default pdb-command-name "python3 -m pdb")
   (setq-default python-shell-interpreter "python3")
+  :custom
+  (py-comment-auto-fill-p t)
+  (py-company-pycomplete-p nil)
+  (py-electric-comment-p t)
+  (py-empty-line-closes-p t)
+  (py-execute-no-temp-p t)
+  (py-imenu-show-method-args-p t)
+  (py-smart-indentation t)
+  (py-split-window-on-execute t)
+  (py-split-windows-on-execute-function 'split-window-horizontally)
+  (py-tab-shifts-region-p t)
   :hook (python-mode . py-hook-mwb)
   )
 #+end_src

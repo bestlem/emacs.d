@@ -152,6 +152,7 @@ To use a forked straight.el
 (defvar straight-base-dir)
 (defvar straight-profiles)
 (setq straight-base-dir mwb-emacs-work-dir)
+(setq mwb-straight-local-repos (expand-file-name "local-repos" mwb-emacs-work-dir))
 (setq straight-profiles `((nil . ,mwb-straight-profile)))
 (setq straight-use-version-specific-build-dir t)
 (setq straight-vc-git-default-protocol 'ssh)
@@ -573,8 +574,10 @@ Also while we are here let's improve customisation fully.
  Note initsplit needs to be in here or we load it twice. Twice is OK depending if there are no other things needed to be in early load.
  #+NAME: org_mark_2020-11-03T11-29-59+00-00_mini12.local_91DE0DF5-1D10-4E57-A864-CC60F44BFC5B
  #+begin_src emacs-lisp
- (setq custom-file (mwb-user-emacs-file "custom.el"))
- (load custom-file 'noerror)
+(setq custom-file
+	  (mwb-user-emacs-file
+	   (if *aquamacs* "aquamacs-custom.el" "custom.el")))
+(load custom-file 'noerror)
  #+end_src
 *** cus-edit
 :PROPERTIES:
@@ -625,7 +628,7 @@ I could keep as a set.
 But hack an load it directly
 Needs to load immeduiately to load the other customization files
 #+NAME: org_mark_2020-10-29T09-11-06+00-00_mini12.local_04FB6D16-A43C-4D7C-9767-4C79FC0FABDD
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-feature initsplit
   :demand
   :init

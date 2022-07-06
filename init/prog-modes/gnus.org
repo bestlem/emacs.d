@@ -10,6 +10,7 @@
 :ID:       org_mark_mini12.local:20210110T204217.459337
 :END:
 Not valid lisp
+use-package outline.
 #+NAME: org_mark_mini12.local_20210110T204217.428432
 #+begin_src emacs-lisp
 (use-feature gnus
@@ -20,6 +21,8 @@ Not valid lisp
     <<gnus-init>>
     :config
     <<gnus-config>>
+    :custom
+   <<gnus-custom>>
     )
 #+end_src
 *** Preface
@@ -70,11 +73,27 @@ Cover method for gnus to create new frame
 (setq gnus-dribble-directory (expand-file-name "~/tmp/emacs_unwanted"))
 (setq gnus-kill-save-kill-file t)
 (setq gnus-server-browse-in-group-buffer t)
-(setq gnus-verbose 10)
 (setq gnus-read-active-file nil)
 
 (setq gnus-visual t
 	  gnus-large-newsgroup 4000)
+#+end_src
+#+NAME: org_mark_mini20.local_20220706T195409.877150
+#+begin_src emacs-lisp :tangle no :noweb-ref gnus-custom
+(gnus-suppress-duplicates t)
+#+end_src
+*** Directories
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220706T194343.324974
+:END:
+#+NAME: org_mark_mini20.local_20220706T194343.304616
+#+begin_src emacs-lisp :tangle no :noweb-ref guns-custom
+(gnus-directory "~/Library/Preferences/Aquamacs Emacs/News")
+(gnus-home-directory "~/.emacs.d/var/gnus")
+(mail-default-directory "~/.emacs.d/var/Mail")
+(message-auto-save-directory "~/.emacs.d/var/gnus/Mail")
+(message-directory "~/.emacs.d/var/Mail/")
+(nnmail-message-id-cache-file "~/.emacs.d/var/gnus/.nnmail-cache")
 #+end_src
 *** Scoring
 :PROPERTIES:
@@ -93,14 +112,29 @@ Cover method for gnus to create new frame
 		(gnus-catchup-mark (subject -1))
 		(gnus-spam-mark (from -50))))
 #+end_src
-*** User name
+*** User names
 :PROPERTIES:
 :ID:       org_mark_mini12.local:20210110T211235.401748
 :END:
 #+NAME: org_mark_mini12.local_20210110T211235.367533
-#+begin_src emacs-lisp :tangle no :noweb-ref gnus-init
-(setq user-full-name "Mark Bestley")
-(setq user-mail-address "gnus@bestley.co.uk")
+#+begin_src emacs-lisp :tangle no :noweb-ref gnus-custom
+(user-full-name  "Mark Bestley")
+(user-mail-address "gnus@bestley.co.uk")
+(gnus-posting-styles
+ '((".*"
+	(signature "Mark"))
+   ("bar\\.baen\\.com"
+	(address "baen@bestley.co.uk")
+	(signature "Mark"))
+   ("baensbar\\.net"
+	(address "baen@bestley.co.uk")
+	(signature "Mark"))
+   ("aquamacs"
+	(address "aquamacs@bestley.co.uk"))
+   ("macports"
+	(address "macports@bestley.co.uk"))
+   ("racket"
+	(address "racket@bestley.co.uk"))))
 #+end_src
 *** Emacs close
 :PROPERTIES:
@@ -116,6 +150,14 @@ Save the status if emacs shuts down with gnus open
 		(let (gnus-interactive-exit)
 		  (gnus-group-exit)))))
 (add-hook 'kill-emacs-hook 'exit-gnus-on-exit)
+#+end_src
+*** Gnus exit
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220706T195409.906458
+:END:
+#+NAME: org_mark_mini20.local_20220706T195409.882325
+#+begin_src emacs-lisp :tangle no :noweb-ref gnus-custom
+(gnus-interactive-exit nil)
 #+end_src
 ** Backups
 :PROPERTIES:
@@ -147,6 +189,16 @@ There might also be gwene for RSS
                                         (nntp "baensbar.net")))
 (setq gnus-select-method '(nntp "news.eternal-september.org"))
   #+end_src
+
+**** Cancel
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220706T195409.902902
+:END:
+Id yourself for cancellation
+#+NAME: org_mark_mini20.local_20220706T195409.885034
+#+begin_src emacs-lisp :tangle no :noweb-ref gnus-custom
+(canlock-password "5bc496f914e12916cdaf3640fdc97aa6b23f0fe3")
+#+end_src
 
 *** Fastmail
 :PROPERTIES:
@@ -191,26 +243,27 @@ Add a hydra https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blo
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_2008EC6E-C927-4D6C-8F4A-F72FF33E521F
 #+begin_src emacs-lisp
 (use-feature gnus-group
-    :after gnus
-
-    :mode-hydra (gnus-group-mode
-                 (:color pink)
-                 ("List groups"
-                  (("a" gnus-group-list-active "All")
-                   ("L" gnus-group-list-all-groups "Subscribed")
-                   ("l" gnus-group-list-groups "Unread"))
-                  "One Group"
-                  (("c" gnus-topic-catchup-current "Mark all Read")
-                   ("#" gnus-topic-mark-topic "Mark topic"))
-                  "All"
-                  (;; ("G" dianyou-group-make-nnir-group)
-                   ("g" gnus-group-get-new-news "Refresh")
-                   ("^" gnus-group-enter-server-mode "Servers")
-                   ;; ("m" gnus-group-new-mail )
-                   ("x" gnus-group-exit "Exit" :exit t ))
-                  "Levels"
-                  (("S" gnus-group-sort-by-level)
-                   ("s" (lambda () (interactive) (gnus-group-set-current-level)))))))
+  :after gnus
+  :custom (gnus-group-sort-function
+		   '(gnus-group-sort-by-level))
+  :mode-hydra (gnus-group-mode
+               (:color pink)
+               ("List groups"
+                (("a" gnus-group-list-active "All")
+                 ("L" gnus-group-list-all-groups "Subscribed")
+                 ("l" gnus-group-list-groups "Unread"))
+                "One Group"
+                (("c" gnus-topic-catchup-current "Mark all Read")
+                 ("#" gnus-topic-mark-topic "Mark topic"))
+                "All"
+                (;; ("G" dianyou-group-make-nnir-group)
+                 ("g" gnus-group-get-new-news "Refresh")
+                 ("^" gnus-group-enter-server-mode "Servers")
+                 ;; ("m" gnus-group-new-mail )
+                 ("x" gnus-group-exit "Exit" :exit t ))
+                "Levels"
+                (("S" gnus-group-sort-by-level)
+                 ("s" (lambda () (interactive) (gnus-group-set-current-level)))))))
 #+end_src
 * Summary buffer
 :PROPERTIES:
@@ -371,7 +424,25 @@ From same place as above
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_E6250F15-2AC9-4CCC-8AC3-CFE8494CAD37
 #+begin_src emacs-lisp
 (use-feature gnus-art
-    :mode-hydra
+  :custom (gnus-article-skip-boring t)
+  (gnus-visible-headers
+   '("^From:"
+	 "^Newsgroups:"
+	 "^Subject:"
+	 "^Date:"
+	 "^Followup-To:"
+	 "^Reply-To:"
+	 "^Summary:"
+	 "^Keywords:"
+	 "^To:"
+	 "^[BGF]?Cc:"
+	 "^Posted-To:"
+	 "^Mail-Copies-To:"
+	 "^Mail-Followup-To:"
+	 "^Apparently-To:"
+	 "^Gnus-Warning:"
+	 "^Resent-From:"))
+  :mode-hydra
   ("Reply"
    (("f" gnus-summary-followup-with-original "Forward to group")
     ("F" gnus-summary-mail-forward "Mail Forward")

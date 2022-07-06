@@ -33,8 +33,6 @@
 * C based
 ** rftg
  - path :: ~/src/cpp/rftg
-** simutrans
- - path :: ~/src/cpp/simutrans
 ** test_gtk
  - path :: ~/src/cpp/test_gtk
 ** macports-ports

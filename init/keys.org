@@ -307,12 +307,13 @@ Deal with stuff done by Aquamacs and original mac-key-mode
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220701T094925.499637
 :END:
-Do the main bindings
+Do the main bindings. Needed for macport so use for GNU as well.
 #+NAME: org_mark_mini20.local_20220701T094925.469704
 #+begin_src emacs-lisp
 (use-feature mac-key-mode
   :unless *aquamacs*
-  :straight (:host github :repo "bestlem/mac-key-mode") ; not a fork as this is old
+  :straight (:host github :repo "bestlem/mac-key-mode"
+             :local-repo "../local-repos/mac-key-mode") ; not a fork as this is old
   :demand
   :diminish
   :config (mac-key-mode 1)

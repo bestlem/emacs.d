@@ -75,7 +75,7 @@ This is the standard mode
 	 See as a tree.
      #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_15E789B8-CDC5-4AEF-97F8-40F5C631D5D8
      #+begin_src emacs-lisp
-(use-feature json-navigator
+(use-package-elpa json-navigator
   :demand
   :after json-mode)
   #+end_src

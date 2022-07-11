@@ -30,6 +30,8 @@
  - path :: ~/src/Racket/aoc21
 ** racket-docker
  - path :: ~/src/Racket/racket-docker
+** PillowData
+ - path :: ~/src/ThirdParty/PillowData
 * C based
 ** rftg
  - path :: ~/src/cpp/rftg

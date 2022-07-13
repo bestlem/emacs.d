@@ -30,8 +30,6 @@
  - path :: ~/src/Racket/aoc21
 ** racket-docker
  - path :: ~/src/Racket/racket-docker
-** PillowData
- - path :: ~/src/ThirdParty/PillowData
 * C based
 ** rftg
  - path :: ~/src/cpp/rftg
@@ -44,6 +42,8 @@
 * Odds
 ** xonsh
  - path :: ~/src/python/xonsh
+** PillowData
+ - path :: ~/src/ThirdParty/PillowData
 * Swift
 ** SwiftUITutorial-Landmarks
  - path :: ~/src/Swift/SwiftUITutorial-Landmarks

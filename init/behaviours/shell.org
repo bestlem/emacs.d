@@ -194,8 +194,7 @@ From https://github.com/grettke/lolsmacs/blob/master/lolsmacs.el
 
 Here is the scenario for this style of Comint configuration:
 
-You are doing a lot of interactive work via various Comint-supported buffers. You are working in one buffer (the one with focus) while the others are doing their own thing. They are probably doing work and output is scrolling by and that is fine because you are not reading it. In the
-buffer you are working in though, you want to go back and read something. So although it its process continues to output information, you want to keep the cursor in the same spot. Then when you are ready to type a command (suppose you know the output has stopped) to do something else, when you type the cursor will go to the end of the buffer. That is why you prevent the focused buffer from auto-scrolling and moving the mark, and leave the other ones alone.
+You are doing a lot of interactive work via various Comint-supported buffers. You are working in one buffer (the one with focus) while the others are doing their own thing. They are probably doing work and output is scrolling by and that is fine because you are not reading it. In the buffer you are working in though, you want to go back and read something. So although it its process continues to output information, you want to keep the cursor in the same spot. Then when you are ready to type a command (suppose you know the output has stopped) to do something else, when you type the cursor will go to the end of the buffer. That is why you prevent the focused buffer from auto-scrolling and moving the mark, and leave the other ones alone.
 
 #+NAME: org_mark_2020-10-11T00-40-32+01-00_mini12.local_0963EB06-7A75-414C-BBC9-C032966D9019
 #+begin_src emacs-lisp

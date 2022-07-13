@@ -51,23 +51,23 @@ This is the minimal setup and does not need changing
 #+begin_src emacs-lisp
 (use-package-elpa racket-mode
   :bind (:map racket-mode-map
-			  ("<f5>" . racket-mwb-run-hydra)
-			  ("<C-f5>" . racket-mwb-run)
-			  ("s-<f5>" . racket-mwb-raco-all-tests)
-			  ("S-<f5>" . racket-mwb-raco-test)
-			  ("M-l" . racket-insert-lambda)
-			  ("M-`" . racket-insert-lambda)
-			  ;; ("<C-return>" . eir-eval-in-racket)
-			  ("<f6>" . racket-send-definition)
-			  ("<C-return>" . racket-mwb-send-to-repl)
+		 ("<f5>" . racket-mwb-run-hydra)
+		 ("<C-f5>" . racket-mwb-run)
+		 ("s-<f5>" . racket-mwb-raco-all-tests)
+		 ("S-<f5>" . racket-mwb-raco-test)
+		 ("M-l" . racket-insert-lambda)
+		 ("M-`" . racket-insert-lambda)
+		 ;; ("<C-return>" . eir-eval-in-racket)
+		 ("<f6>" . racket-send-definition)
+		 ("<C-return>" . racket-mwb-send-to-repl)
 										;("H-A" . hydra-paredit/body)
-			  :map racket-repl-mode-map
-			  ("<f5>" . racket-mwb-run-hydra)
-			  ("M-l" . racket-insert-lambda)
-	          ("<f1> <f1>" . racket-repl-describe)
-			  :map racket-xp-mode-map
-			  ("<f1> <f1>" . racket-xp-describe)
-			  ("<f8>"  . racket-xp-next-error))
+		 :map racket-repl-mode-map
+		 ("<f5>" . racket-mwb-run-hydra)
+		 ("M-l" . racket-insert-lambda)
+	     ("<f1> <f1>" . racket-repl-describe)
+		 :map racket-xp-mode-map
+		 ("<f1> <f1>" . racket-xp-describe)
+		 ("<f8>"  . racket-xp-next-error))
   :mode (rx (seq ".racket" string-end))
   :init
   (setq racket-program "/Applications/Racket v8.5/bin/racket"
@@ -77,22 +77,21 @@ This is the minimal setup and does not need changing
   ;; From   https://stackoverflow.com/questions/37571164/emacs-company-mode-completion-not-working
   (defun my-racket-mode-hook ()
     (my-all-racket-mode-hook)
-    (racket-xp-mode))
+	(racket-xp-mode)
+    (setq-local completion-at-point-functions
+				(list
+				 (cape-super-capf
+				  (cape-company-to-capf #'company-yasnippet)
+				  #'racket-xp-complete-at-point
+				  #'cape-dabbrev)
+				 #'cape-sgml
+				 )
+				;; cape-dabbrev-min-length 5
+				)
+	)
+
 
   (defun my-all-racket-mode-hook ()
-	;; (set (make-local-variable 'company-backends)
-	;; 	 '((company-capf :with company-yasnippet)
-	;; 	   (company-dabbrev-code company-keywords company-files)
-	;; 	   company-dabbrev))
-
-	(setq-local company-transformers '(delete-dups)
-				company-backends '((company-capf :with company-yasnippet company-dabbrev-code)
-								   (;; company-capf
-									company-math-symbols-unicode
-									;; company-dabbrev
-									;; company-yasnippet
-									)))
-	(company-mode 1)
 	;;(smartparens-strict-mode 1)
 	;; (racket-unicode-input-method-enable)
 	(racket-mwb-smart-open-bracket-mode))

@@ -295,6 +295,7 @@
 
 ;; swap
 (bind-key "[" 'lispy-brackets lispy-mnemonic-mode-map)
+(bind-key ")" 'lispy-wrap-round lispy-mnemonic-mode-map)
 (bind-key "(" 'lispy-parens lispy-mnemonic-mode-map)
 ;; (bind-key "H-d" 'hydra-lispy-debug/body lispy-mnemonic-mode-map)
 ;; (bind-key "H-m" 'hydra-lispy-mark/body lispy-mnemonic-mode-map)

@@ -494,6 +494,8 @@ So take from projectile
   :config
   ;; racket
   (add-to-list 'projectile-globally-ignored-directories "compiled")
+  (add-to-list 'projectile-globally-ignored-directories "straight/repos")
+  (add-to-list 'projectile-globally-ignored-directories "ThirdParty/emacs-init")
 
   (projectile-mode 1)
   (defhydra hydra-projectile-other-window (:color teal)

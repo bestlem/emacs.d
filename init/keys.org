@@ -773,16 +773,15 @@ A later thought is to use f5 as leader use key chords and then others for test
 (bind-key "M-s-u" 'ediff-revision macos-key-map)
 (bind-key "s-/"
 		  (if *aquamacs*
-			  (if *aquamacs*
-				  'comment-or-uncomment-region-or-line
-				'comment-dwim-2)
-			macos-key-map))
+			  'comment-or-uncomment-region-or-line
+			'comment-dwim-2)
+		  macos-key-map)
 (unless *macport*
   (bind-key "s-p" 'ns-print-buffer macos-key-map))
 
 (bind-key "s-t"
-          (if *macport* 'mac-font-panel-mode 'ns-popup-font-panel)
-          macos-key-map )
+		  (if *macport* 'mac-font-panel-mode 'ns-popup-font-panel)
+		  macos-key-map)
 (when *macport*
   (bind-key "s-D" 'dired)
   (bind-key "s-E" 'edit-abbrevs)

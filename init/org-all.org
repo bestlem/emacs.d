@@ -531,7 +531,7 @@ Possibly all this could go in a config control by properties
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:722CBA7A-79F6-4695-B710-ACF8F3C1F219
 :END:
 Make org mode look prettier. See also the customization
-Basically set to variable pitch font but note Aquamacs has a way (different of course to do this)
+Basically set to variable pitch font but note Aquamacs has a way (different of course to do this). What emacs variable pitch mode does is set default to variable font. Then fixed is a derived from that. This is confusing for org-src as the font there is not the same as default.
 *** Circular bullets
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:00807D90-E9FE-4A4E-ABAE-4EF867BE97EA
@@ -649,7 +649,7 @@ The original has been updated
   (setq org-babel-hide-markers-line t)
   :diminish org-babel-hide-markers-mode)
 #+end_src
-** org-modern
+** [[https://github.com/minad/org-modern][org-modern]]
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220628T120220.489059
 :END:

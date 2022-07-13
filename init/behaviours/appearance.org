@@ -7,20 +7,55 @@ This covers what emacs looks like and how windows/frames/menus behave
 :PROPERTIES:
 :ID:       org_mark_2020-02-10T11-53-11+00-00_mini12:0A89487A-9396-43C4-9F45-0B2DBEBD41FE
 :END:
-** Fonts
+** Issues
 :PROPERTIES:
 :ID:       org_2020-12-06+00-00:BAB32FAA-EF85-4768-8261-261141C1BCFF
 :END:
 Set the actual fonts to be used
-
+*** Sizes
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220712T230449.919839
+:END:
 Altering the size of variable-font seems to change the size of fixed-font - How?
 Note this shows up in org-mode compare code to text - so have to make fixed-font a proportion of variable-font even though no direct comparison.Do this for org-block-explicitly.
 Also does for other fixed-font faces in org mode. e.g. org-draw org-block-begin-line
 
-In org.el we have (defface org-block-begin-line '((t (:inherit org-meta-line))) but in emacs org-block-begin-line inherits from modus-themes-fixed-pitch
-In org- mode face-remapping-alist is  '((default variable-pitch default)) so everything inherits from this and the base size changes.
-So set the heights of the base fonts to explicit fonts
 
+
+In org- mode face-remapping-alist is  '((default variable-pitch default)) so everything inherits from this and the base size changes.
+Others e.g. nov for ebooks leave default as the mono font and then set an explicit variable font.
+So set the heights of the base fonts to explicit fonts but that breaks increase size so need to fiddle.
+For Org mode (actually variable-pitch-mode) set fixed-pitch so a percentage of variable.
+Also for fun the size of various mono fonts differs e.g. Fira code is big.
+*** Inheritance
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220712T233317.689031
+:END:
+In org.el we have (defface org-block-begin-line '((t (:inherit org-meta-line))) but in emacs org-block-begin-line inherits from modus-themes-fixed-pitch This seems to have gone now.
+*** Ligatures
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220712T230449.916472
+:END:
+Macports is the best way but even then implemnentation is iffy. I chose Noto Sans Mono as looked best but its ligatures don't seem to be there.
+JetBrains Mono and Fira Code work, the latter is best, even in Macport not all ligatures listed show, in plain emacs just seems not to work - although at some stage it did.
+Possibly when doing a language where it matters set the fonts for comments and default to differ.
+*** Italics
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220712T231447.738199
+:END:
+Not all mono fonts have italics - emacs fiddles them, SO box drawing fails.
+Only Jetbrains, Menlo and courier have this.
+
+*** Conclusion
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220712T231447.729867
+:END:
+To get Box drawing e.g. org-tables and treemacs can't use fira-code or noto sans mono.
+So Jetbrains Mono. (actually Jetbrains Mono Slashed to get 0 with a slash not a dot)
+** Setup
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220712T230449.911079
+:END:
 #+NAME: org_2020-12-06+00-00_87B9331B-36CE-4ED5-B82C-E637E0A4BE9A
 #+begin_src emacs-lisp
 (require 'cl-lib)
@@ -31,24 +66,30 @@ So set the heights of the base fonts to explicit fonts
   (cl-find-if (lambda (f) (find-font (font-spec :name f))) fonts))
 
 (let ((font-found (font-candidate
+				   "Jetbrains Mono Slashed"
                    "Jetbrains Mono"
+                   "Jetbrains Mono NL" 	; no ligatures
                    "Fira Code"
+                   "Noto Sans Mono"
+                   "Jetbrains Mono"
                    "Consolas-10:weight=normal"
                    "DejaVu Sans Mono-10:weight=normal"
                    "Courier")))
 
   ;; Main typeface
   (set-face-attribute 'default nil
-                      :height 140
+                      :height 130
                       :family font-found)
   ;; Monospaced typeface - not default - don't need this but make it explicit.
-  (set-face-attribute 'fixed-pitch nil :family font-found :height 140))
+  (set-face-attribute 'fixed-pitch nil :family font-found :height (/ 1 1.2)
+					  ))
 
 (let ((font-found (font-candidate
+				   
                    "Georgia"
                    "Times New Roman")))
   ;; Proportionately spaced typeface
-  (set-face-attribute 'variable-pitch nil :family font-found  :height 160)
+  (set-face-attribute 'variable-pitch nil :family font-found  :height 1.2)
   )
 #+end_src
 ** Buffer face
@@ -564,7 +605,7 @@ vivendi is dark
   (modus-themes-syntax '(green-strings alt-syntax))
   (modus-themes-variable-pitch-ui nil))
 #+end_src
-** Sounds
+* Sounds
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210628T102012.945985
 :END:

@@ -1,5 +1,5 @@
 #+TITLE Emacs configuration - appearance
-#+PROPERTY:header-args :cache yes :tangle yes
+#+PROPERTY:header-args :tangle yes
 
 This covers what emacs looks like and how windows/frames/menus behave
 
@@ -85,7 +85,7 @@ So Jetbrains Mono. (actually Jetbrains Mono Slashed to get 0 with a slash not a 
 					  ))
 
 (let ((font-found (font-candidate
-				   
+				   "Palatino"
                    "Georgia"
                    "Times New Roman")))
   ;; Proportionately spaced typeface

@@ -8,19 +8,26 @@
 :ID:       org_mark_mini20.local:20210430T161141.960043
 :END:
 Setup is used in many modes.
-#+NAME: org_mark_mini20.local_20210430T161141.957796
+#+NAME: org_mark_mini20.local_20220714T180325.278475
+#+begin_src emacs-lisp
+(use-feature imenu
+  :custom
+  (imenu-sort-function #'imenu--sort-by-name))
+#+end_src
+
 * Add to menubar
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210831T062026.341629
 :END:
 #+NAME: org_mark_mini20.local_20210831T062026.317944
+From https://www.emacswiki.org/emacs/ImenuMode
+#+NAME: org_mark_mini20.local_20220714T132326.969130
 #+begin_src emacs-lisp
 (defun imenu-mwb-hook-function ()
   "Add iMenu to menubar"
-  (imenu-add-to-menubar "Imenu"))
+  (condition-case nil (imenu-add-to-menubar "Imenu") (error nil)))
 
-(dolist (elt '(org-mode-hook prog-mode-hook))
-  (add-hook elt 'imenu-mwb-hook-function))
+(add-hook 'font-lock-mode-hook #'imenu-mwb-hook-function)
 #+end_src
 * Force rescan
 :PROPERTIES:

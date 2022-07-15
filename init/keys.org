@@ -879,16 +879,6 @@ I think start with Aquamacs copy using non Aquamacs functions and then try to pu
 
 Emacs 28 now has context-menu-function . Which seems much simpler. However read what add-hook does when passing in local. It uses a special value to say call the global value.
 
-** iMenu
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20210204T124122.808094
-:END:
-Sort the imenu found options in the mouse menu
-#+NAME: org_mark_mini20.local_20210204T124122.783791
-#+begin_src emacs-lisp
-(setq imenu-sort-function 'imenu--sort-by-name)
-#+end_src
-
 ** mac-key-map
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220702T101540.282405

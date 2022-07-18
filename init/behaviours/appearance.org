@@ -27,6 +27,15 @@ Others e.g. nov for ebooks leave default as the mono font and then set an explic
 So set the heights of the base fonts to explicit fonts but that breaks increase size so need to fiddle.
 For Org mode (actually variable-pitch-mode) set fixed-pitch so a percentage of variable.
 Also for fun the size of various mono fonts differs e.g. Fira code is big.
+*** Variable pitch design
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220716T102918.122846
+:END:
+I need to override it.
+Variable pitch has to be larger so works if default is not changed.
+I don't think I can use it for code - I have in the past but I think Palatino does not work.
+Variable-pitch mode needs to be replaced so default is variable-pitch as now but need to change fixed pitch.
+
 *** Inheritance
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220712T233317.689031
@@ -52,11 +61,16 @@ Only Jetbrains, Menlo and courier have this.
 :END:
 To get Box drawing e.g. org-tables and treemacs can't use fira-code or noto sans mono.
 So Jetbrains Mono. (actually Jetbrains Mono Slashed to get 0 with a slash not a dot)
+Alternative - for later - use a different font for italic.
 ** Setup
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220712T230449.911079
 :END:
-#+NAME: org_2020-12-06+00-00_87B9331B-36CE-4ED5-B82C-E637E0A4BE9A
+*** Helper code
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220717T100340.588696
+:END:
+#+NAME: org_mark_mini20.local_20220717T100340.570382
 #+begin_src emacs-lisp
 (require 'cl-lib)
 (require 'cl-seq)
@@ -64,33 +78,82 @@ So Jetbrains Mono. (actually Jetbrains Mono Slashed to get 0 with a slash not a 
 (defun font-candidate (&rest fonts)
   "Return existing font which first match."
   (cl-find-if (lambda (f) (find-font (font-spec :name f))) fonts))
-
+#+end_src
+*** Constants
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220717T095708.559733
+:END:
+Variables used in switch modes and fonts
+#+NAME: org_mark_mini20.local_20220717T095708.007517
+#+begin_src emacs-lisp
+(defconst mwb-init-variable-pitch-factor 1.2
+  "Increase in height of variable font over default/fixed font.")
+#+end_src
+**** Setup
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220717T095708.556115
+:END:
+#+NAME: org_2020-12-06+00-00_87B9331B-36CE-4ED5-B82C-E637E0A4BE9A
+Set the fonts.
+#+NAME: org_mark_mini20.local_20220717T132133.515570
+#+begin_src emacs-lisp
 (let ((font-found (font-candidate
 				   "Jetbrains Mono Slashed"
-                   "Jetbrains Mono"
-                   "Jetbrains Mono NL" 	; no ligatures
-                   "Fira Code"
-                   "Noto Sans Mono"
-                   "Jetbrains Mono"
-                   "Consolas-10:weight=normal"
-                   "DejaVu Sans Mono-10:weight=normal"
-                   "Courier")))
+				   "Jetbrains Mono"
+				   "Jetbrains Mono NL"	; no ligatures
+				   "Fira Code"
+				   "Noto Sans Mono"
+				   "Jetbrains Mono"
+				   "Consolas-10:weight=normal"
+				   "DejaVu Sans Mono-10:weight=normal"
+				   "Courier")))
 
   ;; Main typeface
   (set-face-attribute 'default nil
-                      :height 130
-                      :family font-found)
+					  :height 130
+					  :family font-found)
   ;; Monospaced typeface - not default - don't need this but make it explicit.
-  (set-face-attribute 'fixed-pitch nil :family font-found :height (/ 1 1.2)
-					  ))
+  (set-face-attribute 'fixed-pitch nil
+					  :family font-found
+					  :height 1.0))
 
 (let ((font-found (font-candidate
 				   "Palatino"
-                   "Georgia"
-                   "Times New Roman")))
+				   "Georgia"
+				   "Times New Roman")))
   ;; Proportionately spaced typeface
-  (set-face-attribute 'variable-pitch nil :family font-found  :height 1.2)
-  )
+  (set-face-attribute 'variable-pitch nil
+					  :family font-found
+					  :height mwb-init-variable-pitch-factor))
+#+end_src
+**** Manage variable-pitch-mode
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220717T105113.525840
+:END:
+After various hacks there is no reliable flag to show ~variable-pitch-mode~ is et or not so have to use your own.
+Also ~variable-pitch-mode~ is stateful so if it goes wrong it goes wrong and difficult to unset.
+#+NAME: org_mark_mini20.local_20220717T105113.508809
+#+begin_src emacs-lisp
+(defvar mwb-variable-pitch-cookie nil
+  "Hold the cookie from face remap so can unset.")
+(make-local-variable 'mwb-variable-pitch-cookie)
+
+(defun mwb-variable-pitch (&optional arg)
+  "Function to advise variable-pitch-mode to deal with fixed-fonts."
+  (if mwb-variable-pitch-cookie
+	  (progn
+		(message "UnSetting variable pitch")
+		(face-remap-remove-relative mwb-variable-pitch-cookie)
+		(setq mwb-variable-pitch-cookie nil))
+	(progn (message "Setting variable pitch")
+		   (setq mwb-variable-pitch-cookie
+				 (face-remap-add-relative
+				  'fixed-pitch
+				  :height (/ 1.0 mwb-init-variable-pitch-factor))))))
+
+;; (advice-remove 'variable-pitch-mode #'mwb-variable-pitch)
+(advice-add 'variable-pitch-mode
+			:after #'mwb-variable-pitch)
 #+end_src
 ** Buffer face
 :PROPERTIES:

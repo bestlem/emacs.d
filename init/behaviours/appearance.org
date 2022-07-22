@@ -134,9 +134,8 @@ After various hacks there is no reliable flag to show ~variable-pitch-mode~ is e
 Also ~variable-pitch-mode~ is stateful so if it goes wrong it goes wrong and difficult to unset.
 #+NAME: org_mark_mini20.local_20220717T105113.508809
 #+begin_src emacs-lisp
-(defvar mwb-variable-pitch-cookie nil
+(defvar-local mwb-variable-pitch-cookie nil
   "Hold the cookie from face remap so can unset.")
-(make-local-variable 'mwb-variable-pitch-cookie)
 
 (defun mwb-variable-pitch (&optional arg)
   "Function to advise variable-pitch-mode to deal with fixed-fonts."

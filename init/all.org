@@ -73,6 +73,31 @@ Make emacs message when it gcs.
 #+begin_src emacs-lisp
 ;; (setq garbage-collection-messages 't)
 #+end_src
+
+** Show memory use
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220716T224722.424478
+:END:
+From [[https://www.reddit.com/r/emacs/comments/ck4zb3/trying_to_understand_emacs_memory_usage_and/evji1n7/][alphapapa]]
+#+NAME: org_mark_mini20.local_20220716T224722.400227
+#+begin_src emacs-lisp
+(defun ap/garbage-collect ()
+  "Run `garbage-collect' and print stats about memory usage."
+  (interactive)
+  (message (cl-loop for (type size used free) in (garbage-collect)
+                    for used = (* used size)
+                    for free = (* (or free 0) size)
+                    for total = (file-size-human-readable (+ used free))
+                    for used = (file-size-human-readable used)
+                    for free = (file-size-human-readable free)
+                    concat (format "%s: %s + %s = %s\n" type used free total))))
+#+end_src
+
+#+RESULTS[bb5f47ba8d2eadf96ea65aac260e9e61e1c42162]:
+#+begin_EXAMPLE
+ap/garbage-collect
+#+end_EXAMPLE
+
 * Setting variables with a check on type
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:86E6A7B5-5C85-4429-AE49-FA5AE7AEF73D

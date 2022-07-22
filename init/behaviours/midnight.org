@@ -69,7 +69,7 @@ Look [[https://github.com/chadbraunduin/backups-mode/blob/master/scripts/show-or
   (add-hook 'midnight-hook
             (if (bound-and-true-p gcmh-mode)
                 #'gcmh-idle-garbage-collect
-              #'garbage-collect)
+              #'ap/garbage-collect)
             99)
   ;; (add-hook 'midnight-hook #'garbage-collect 99)
   ;; at end

@@ -21,7 +21,6 @@ Note this shows up in org-mode compare code to text - so have to make fixed-font
 Also does for other fixed-font faces in org mode. e.g. org-draw org-block-begin-line
 
 
-
 In org- mode face-remapping-alist is  '((default variable-pitch default)) so everything inherits from this and the base size changes.
 Others e.g. nov for ebooks leave default as the mono font and then set an explicit variable font.
 So set the heights of the base fonts to explicit fonts but that breaks increase size so need to fiddle.
@@ -72,12 +71,9 @@ Alternative - for later - use a different font for italic.
 :END:
 #+NAME: org_mark_mini20.local_20220717T100340.570382
 #+begin_src emacs-lisp
-(require 'cl-lib)
-(require 'cl-seq)
-
-(defun font-candidate (&rest fonts)
-  "Return existing font which first match."
-  (cl-find-if (lambda (f) (find-font (font-spec :name f))) fonts))
+(defun font-candidate (fonts)
+  "Return existing font from list FONTS which first match."
+  (seq-find (lambda (f) (find-font (font-spec :name f))) fonts))
 #+end_src
 *** Constants
 :PROPERTIES:
@@ -89,6 +85,48 @@ Variables used in switch modes and fonts
 (defconst mwb-init-variable-pitch-factor 1.2
   "Increase in height of variable font over default/fixed font.")
 #+end_src
+#+NAME: org_mark_mini20.local_20220730T163608.031215
+**** Possible fixed fonts
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220730T163922.499389
+:END:
+#+NAME: org_mark_mini20.local_20220730T163922.469917
+#+begin_src emacs-lisp
+(defvar mwb-init-fixed-font-candidates
+  '("Jetbrains Mono Slashed"
+	"Jetbrains Mono"
+	"Jetbrains Mono NL"					; no ligatures
+	"Fira Code"
+	"Jetbrains Mono"
+	"Consolas-10:weight=normal"
+	"DejaVu Sans Mono-10:weight=normal"
+	"Courier")
+  "List the possible fixed fonts.")
+#+end_src
+***** Add non ligature if not good ligature platform
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220730T164055.134297
+:END:
+#+NAME: org_mark_mini20.local_20220730T164055.109853
+Noto mono leaves gaps in vertical lines so no.
+#+NAME: org_mark_mini20.local_20220730T175051.478288
+#+begin_src emacs-lisp :tangle no
+(when *emacs/mac-cocoa-p*
+  (add-to-list 'mwb-init-fixed-font-candidates "Noto Sans Mono"))
+#+end_src
+**** Variable Fonts
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220730T163922.494850
+:END:
+#+NAME: org_mark_mini20.local_20220730T163922.475750
+#+begin_src emacs-lisp
+(defvar mwb-init-variable-font-candidates
+  '("Palatino"
+	"Georgia"
+	"Times New Roman"
+	)
+  "List the possible variable fonts.")
+#+end_src
 **** Setup
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220717T095708.556115
@@ -97,17 +135,7 @@ Variables used in switch modes and fonts
 Set the fonts.
 #+NAME: org_mark_mini20.local_20220717T132133.515570
 #+begin_src emacs-lisp
-(let ((font-found (font-candidate
-				   "Jetbrains Mono Slashed"
-				   "Jetbrains Mono"
-				   "Jetbrains Mono NL"	; no ligatures
-				   "Fira Code"
-				   "Noto Sans Mono"
-				   "Jetbrains Mono"
-				   "Consolas-10:weight=normal"
-				   "DejaVu Sans Mono-10:weight=normal"
-				   "Courier")))
-
+(let ((font-found (font-candidate mwb-init-fixed-font-candidates)))
   ;; Main typeface
   (set-face-attribute 'default nil
 					  :height 130
@@ -117,10 +145,7 @@ Set the fonts.
 					  :family font-found
 					  :height 1.0))
 
-(let ((font-found (font-candidate
-				   "Palatino"
-				   "Georgia"
-				   "Times New Roman")))
+(let ((font-found (font-candidate mwb-init-variable-font-candidates)))
   ;; Proportionately spaced typeface
   (set-face-attribute 'variable-pitch nil
 					  :family font-found

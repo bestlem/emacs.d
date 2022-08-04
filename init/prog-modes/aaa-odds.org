@@ -6,6 +6,12 @@
 
 This is for modes which do not need much configuration.
 
+* TODO Devdocs
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220801T080651.068180
+:END:
+Should be a behaviour but easiest to note here, See centaur but the ~devdocs-major-mode-docs-alist~ should be in individual languages - mainly so can do versions,
+Dash might be better but emacs on macOS seems to have no interface and opens in a web browser although [[dash-alfred.el][dash-alfred]] might work.
 * Bison
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20211214T191128.917819

@@ -424,6 +424,7 @@ From same place as above
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_E6250F15-2AC9-4CCC-8AC3-CFE8494CAD37
 #+begin_src emacs-lisp
 (use-feature gnus-art
+  :after gnus
   :custom (gnus-article-skip-boring t)
   (gnus-visible-headers
    '("^From:"
@@ -442,24 +443,23 @@ From same place as above
 	 "^Apparently-To:"
 	 "^Gnus-Warning:"
 	 "^Resent-From:"))
-  :mode-hydra
-  ("Reply"
-   (("f" gnus-summary-followup-with-original "Forward to group")
-    ("F" gnus-summary-mail-forward "Mail Forward")
-    ("r" gnus-article-reply "Reply")
-    ("R" gnus-article-reply-with-original "Reply with original")
-    ("w" gnus-article-wide-reply "Reply to all")
-    ("W" gnus-article-wide-reply-with-original "Reply to all with original"))
-   "Enhance"
-   (("o" gnus-mime-save-part "Save attachment")
-    ;; ("v" w3mext-open-with-mplayer)
-    ;; ("d" w3mext-download-rss-stream)
-    ;; ("b" w3mext-open-link-or-image-or-url)
-    ("b" gnus-article-browse-html-article "Browse in web")
-    ;; ("g" w3m-lnum-goto)
-    )) )
-
-(add-hook 'message-mode-hook #'mwb-auto-fill-80)
+  :config
+  (major-mode-hydra-define gnus-article-mode
+	(:title "Gnus Article")
+	("Followup" (("f" gnus-article-followup-with-original "Follow up and yank"))
+	 "Reply" (("F" gnus-summary-mail-forward "Mail Forward")
+			  ("r" gnus-article-reply "Reply")
+			  ("R" gnus-article-reply-with-original "Reply with original")
+			  ("w" gnus-article-wide-reply "Reply to all")
+			  ("W" gnus-article-wide-reply-with-original "Reply to all with original"))
+	 "Enhance" (("o" gnus-mime-save-part "Save attachment")
+				;; ("v" w3mext-open-with-mplayer)
+				;; ("d" w3mext-download-rss-stream)
+				;; ("b" w3mext-open-link-or-image-or-url)
+				("b" gnus-article-browse-html-article "Browse in web")
+				;; ("g" w3m-lnum-goto)
+				)))
+  (add-hook 'message-mode-hook #'mwb-auto-fill-80))
 #+end_src
 * Old setup
 :PROPERTIES:

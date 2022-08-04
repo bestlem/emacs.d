@@ -232,11 +232,11 @@ Mouse3 might also give a more interesting menu + the extra bit of standard Emacs
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220701T030021.797607
 :END:
-keys.org has to be before other things so the delete key can be overridden - ie set to macports or not in one place. (Possibly not they all are based on [deletechar] - that change was in 2001 so my original mapping was begore then, but Aquamacs does this as well so leave.)
+keys.org has to be before other things so the delete key can be overridden - ie set to macports or not in one place. (Possibly not they all are based on [deletechar] - that change was in 2001 so my original mapping was before then, but Aquamacs does this as well so leave.)
 
 Macports needs mac-key-mode so might as well use in all cases. Thus might as well stick with A- and not use GNU global mode but can change all to s- and remove my iso-transl hack.
 
-Using a minor mode map means it needs to be loaded before other minors that alter the keys - e.g. org-src-mode . Which means that keys.org has to be non noweb, which is no problem.
+Using a minor mode map means it needs to be loaded before other minors that alter the keys - e.g. org-src-mode . Which means that keys.org has to be non noweb, which is no problem. On furthe look minior-mode-alist order could be modified. See [[https://emacs.stackexchange.com/questions/13447/how-to-set-a-rule-for-the-order-of-minor-mode-map-alist?noredirect=1&lq=1][Emacs SE]]'
 
 * Undo bindings that are problematic
 :PROPERTIES:
@@ -253,6 +253,8 @@ Aquamacs patched iso-transl.el so it is now a mode and can be turned on and off.
 I am not the only one to suffer see [[https://emacs.stackexchange.com/q/17508/9874][Emacs SX question]] and also [[https://emacs.stackexchange.com/q/61415/9874][my question]]
 
 So lets try to patch iso-transl. I copied the Aquamacs one and then merged with macport emacs 27.1, now try to load first
+
+Not needed now as I now use super not alt.
 
 #+NAME: org_2020-12-11+00-00_CC01A657-95E4-4A31-8FCC-B45CCB63A851
 #+begin_src emacs-lisp :tangle no
@@ -517,12 +519,11 @@ The other backspace bindings are mine and date from 1995 so might have been need
   #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_DD9F56DD-C914-46B4-B26D-131CC2ABAD7F
   #+begin_src emacs-lisp
 ;; (bind-key [C-return] 'newline-and-indent )
-;;(bind-key [C-backspace] 'backward-delete-char-untabify )
-(when *macport*
-  (bind-key (if *macport* "H-<backspace>" "<kp-delete>") 'delete-char))
-(bind-key "<backspace>" 'backward-delete-char-untabify)
+;;(bind-key [?\A-backspace] 'undo )
 
-  ;;(bind-key [?\A-backspace] 'undo )
+;;(bind-key [C-backspace] 'backward-delete-char-untabify )
+(bind-key (if *macport* "H-<backspace>" "<kp-delete>") 'delete-char)
+(bind-key "<backspace>" 'backward-delete-char-untabify)
   #+end_src
 
 ** Point and mark
@@ -1106,11 +1107,12 @@ Remove need for C-x keys
 #+NAME: org_mark_mini20.local_20220601T145842.163332
 #+begin_src emacs-lisp
 (pretty-hydra-define x-hydra-readonly (:title "^X functions"
-									   :color blue
-									   :timeout 2)
-  ("Files"
+									   :color blue)
+  ("Files"q
    (("b" consult-buffer "switch buffer")
 	("f" mac-key-open-file "find-file")
+	("F" sudo-edit-find-file "sudo-edit-find-file")
+	("S" sudo-edit "Sudo current file")
 	("r" consult-recent-file "recentf")
 	("w" write-file "write file"))
    "Buffers" (("x" exchange-point-and-mark "exchange-point-and-mark" ))))

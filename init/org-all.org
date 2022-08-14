@@ -253,8 +253,11 @@ Force use of {} as _ is often there as variable name  x^{2} x_{0}
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:EE29BA62-13AD-4C22-9ABB-AF723DCA7950
 :END:
-Setting up =visual-line-mode= and making all my paragraphs one single line, so that the lines wrap around nicely in the window according to their proportional-font size, instead of at a fixed character count, which does not work so nicely when characters have varying widths. I set up a hook that automatically enables =visual-line-mode= and =variable-pitch-mode= when entering org-mode. From [[https://raw.githubusercontent.com/zzamboni/dot-emacs/master/init.org][zzamboni]]
-However this code toggles and as I have already use set-word-wrap to do this for text-mode.
+From [[https://raw.githubusercontent.com/zzamboni/dot-emacs/master/init.org][zzamboni]]
+#+begin_quote
+Setting up =visual-line-mode= and making all my paragraphs one single line, so that the lines wrap around nicely in the window according to their proportional-font size, instead of at a fixed character count, which does not work so nicely when characters have varying widths. I set up a hook that automatically enables =visual-line-mode= and =variable-pitch-mode= when entering org-mode.
+#+end_quote
+However this code toggles and as I have already use set-word-wrap in text-mode-hook  to do this for text-mode.
 #+NAME: org-mode-hooks-wrapping
 #+begin_src emacs-lisp :tangle no
     ;; (org-mode . visual-line-mode)
@@ -641,7 +644,7 @@ Taken from https://github.com/amno1/org-babel-hide-markers-mode and my version a
 TODO add property drawers
 The original has been updated
 #+NAME: org_mark_mini20.local_20210422T091310.076424
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package-elpa ob-hide-markers
   :disabled
   :hook (org-font-lock . org-babel-hide-markers-mode)

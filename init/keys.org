@@ -1108,7 +1108,7 @@ Remove need for C-x keys
 #+begin_src emacs-lisp
 (pretty-hydra-define x-hydra-readonly (:title "^X functions"
 									   :color blue)
-  ("Files"q
+  ("Files"
    (("b" consult-buffer "switch buffer")
 	("f" mac-key-open-file "find-file")
 	("F" sudo-edit-find-file "sudo-edit-find-file")

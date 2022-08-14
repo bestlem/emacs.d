@@ -13,28 +13,73 @@ So from jweigley
 (use-feature nxml-mode
   :commands nxml-mode
   :bind (:map nxml-mode-map
-              ("<return>" . newline-and-indent)
-              ("C-c M-h"  . tidy-xml-buffer))
-  :mode (rx (seq "." (or "opml" "fsproj") string-end))
+		 ("<return>" . newline-and-indent)
+		 ("C-c M-h" . tidy-xml-buffer))
+  :mode (rx (seq "." (or "opml"
+						 "fsproj"
+						 "xml"
+						 "xsd"
+						 "sch"
+						 "rng"
+						 "xslt"
+						 "svg"
+						 "rss"
+						 "inx")
+				 string-end))
+  :magic ("<\\?xml " . nxml-mode)
   :preface
   (defun tidy-xml-buffer ()
-    (interactive)
-    (save-excursion
-      (call-process-region (point-min) (point-max) "tidy" t t nil
-                           "-xml" "-i" "-wrap" "0" "-omit" "-q" "-utf8")))
+	(interactive)
+	(save-excursion
+	  (call-process-region (point-min)
+						   (point-max)
+						   "tidy" t t nil
+						   "-xml" "-i" "-wrap" "0" "-omit" "-q" "-utf8")))
+
   :init
   (defalias 'xml-mode 'nxml-mode)
   :config
-  (setq nxml-slash-auto-complete-flag t) ; my one liner
+  (setq nxml-slash-auto-complete-flag t)
+										; my one liner
+  (setq nxml-bind-meta-tab-to-complete-flag t)
   (autoload 'sgml-skip-tag-forward "sgml-mode")
   (add-to-list 'hs-special-modes-alist
-               '(nxml-mode
-                 "<!--\\|<[^/>]*[^/]>"
-                 "-->\\|</[^/>]*[^/]>"
-                 "<!--"
-                 sgml-skip-tag-forward
-                 nil)))
+			   '(nxml-mode
+				 "<!--\\|<[^/>]*[^/]>"
+				 "-->\\|</[^/>]*[^/]>"
+				 "<!--"
+				 sgml-skip-tag-forward
+				 nil))
+  ;; Make spelling look at tags https://www.emacswiki.org/emacs/NxmlMode
+  (add-to-list 'flyspell-prog-text-faces 'nxml-text-face)
+
+  ;; Show xpath
+  (defun nxml-where ()
+    "Display the hierarchy of XML elements the point is on as a path."
+    (interactive)
+    (let ((path nil))
+      (save-excursion
+        (save-restriction
+          (widen)
+          (while (and (< (point-min) (point)) ;; Doesn't error if point is at beginning of buffer
+                      (condition-case nil
+                          (progn
+                            (nxml-backward-up-element) ; always returns nil
+                            t)
+                        (error nil)))
+            (setq path (cons (xmltok-start-tag-local-name) path)))
+          (if (called-interactively-p t)
+              (message "/%s" (mapconcat 'identity path "/"))
+            (format "/%s" (mapconcat 'identity path "/")))))))
+  (add-hook 'which-func-functions 'nxml-where)
+
+  )
 #+end_src
+
+** Pretty print
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220804T095259.795159
+:END:
 Just a pretty print
 From http://blog.bookworm.at/2007/03/pretty-print-xml-with-emacs.html
  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_2D695AD2-8485-4365-A27F-FF3E95FAB69B
@@ -54,6 +99,19 @@ by using nxml's indentation rules."
       (indent-region begin end))
   (message "Ah, much better!"))
  #+end_src
+
+** rnc mode
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220804T095259.786350
+:END:
+Edit  the RELAX NG compact schemas for nxml. (This must have been in my old emacs but seems to be lost)
+#+NAME: org_mark_mini20.local_20220804T095259.770874
+#+begin_src emacs-lisp
+(use-package-elpa rnc-mode
+  :commands rnc-mode
+  :init
+  (setq rnc-indent-level 3))
+#+end_src
 * Json
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:BB5E4DA3-3168-4AA7-9B08-6B3E11930CB2
@@ -65,16 +123,18 @@ by using nxml's indentation rules."
 This is the standard mode
   #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_61706197-9647-456A-9F2C-0A91722F017C
   #+begin_src emacs-lisp
- (use-package-elpa json-mode
-   :mode "\\.json$")
+(use-package-elpa json-mode
+  :mode (rx  (seq  ".json" string-end)))
   #+end_src
 ** Visualisation
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:1F9A0E96-B7A9-45BC-BFC4-A1BD0B149E7A
 :END:
-	 See as a tree.
-     #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_15E789B8-CDC5-4AEF-97F8-40F5C631D5D8
+See as a tree.
+Loading issue see https://github.com/DamienCassou/json-navigator/issues/22
+#+NAME: org_mark_mini20.local_20220727T183214.995481
      #+begin_src emacs-lisp
+(add-to-list 'straight-built-in-pseudo-packages 'hierarchy)
 (use-package-elpa json-navigator
   :demand
   :after json-mode)

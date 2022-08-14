@@ -181,6 +181,13 @@ There are things like multiple-cursors but iedit sounds simpler
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:BE5A6CDF-F170-4698-B347-4B501EE71EB5
 :END:
+
+** TODO Hyperspace
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220804T094921.792192
+:END:
+https://codeberg.org/emacs-weirdware/hyperspace
+Use an external search but note I need to write helpers to allow search at point etc.
 ** Expand region
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:CF24C2F4-0089-45C0-A3CE-72AAFBE47D97

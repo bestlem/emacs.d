@@ -490,8 +490,11 @@ So take from projectile
 			 projectile-ag
 			 projectile-recentf)
   :init
-  (setq projectile-known-projects-file (concat user-emacs-directory "projectile/projectile-bookmarks.eld"))
-  (setq projectile-cache-file (concat user-emacs-directory "projectile/projectile.cache"))
+  (let ((root (f-join user-emacs-directory "projectile")))
+	(unless (file-directory-p root)
+	  (f-mkdir root))
+	(setq projectile-known-projects-file (f-join root "projectile-bookmarks.eld"))
+	(setq projectile-cache-file (f-join root "projectile.cache")))
   (setq projectile-enable-caching t)
   (setq projectile-completion-system 'auto)
   :custom
@@ -501,10 +504,14 @@ So take from projectile
 
   :config
   ;; racket
-  (add-to-list 'projectile-globally-ignored-directories "compiled")
-  (add-to-list 'projectile-globally-ignored-directories "straight/repos")
-  (add-to-list 'projectile-globally-ignored-directories "ThirdParty/emacs-init")
+  (add-to-list 'projectile-globally-ignored-directories "*compiled")
+  ;; (add-to-list 'projectile-globally-ignored-directories "straight/repos")
+  ;; (add-to-list 'projectile-globally-ignored-directories "ThirdParty/emacs-init")
 
+  ;; ignore some of my projects
+  (defun mwb-projectile-ignore-project (path)
+	(string-match (rx (or "straight/repos" "ThirdParty/emacs-init")) path))
+  (setq projectile-ignored-project-function #'mwb-projectile-ignore-project)
   (projectile-mode 1)
   (defhydra hydra-projectile-other-window (:color teal)
     "projectile-other-window"

@@ -148,6 +148,8 @@ Hydra from From https://gist.githubusercontent.com/ptrv/7e27e0e18ae37d3f80aff7b9
   :config
   (setq sp-show-pair-from-inside nil)
   (require 'smartparens-config)
+  (sp-local-pair '(xml-mode nxml-mode php-mode) "<!--" "-->"
+                 :post-handlers '(("| " "SPC")))
   ;; (smartparens-global-mode)
   :hydra (ptrv/smartparens
 		  (:hint nil)

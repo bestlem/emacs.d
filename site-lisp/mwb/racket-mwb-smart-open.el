@@ -65,7 +65,7 @@ the binding for the `[`' key in the map for
 the variable `minor-mode-map-alist'."
   :lighter " RacketMwbSmartOpen"
   :keymap (racket--easy-keymap-define
-           '(("[" racket-mwb-smart-open-bracket)))
+           '((")" racket-mwb-smart-open-bracket)))
   (unless (memq major-mode '(racket-mode racket-repl-mode))
     (defvar racket-smart-open-bracket-mode nil)
     (user-error "racket-smart-open-bracket-mode only works with with Racket Mode buffers")))

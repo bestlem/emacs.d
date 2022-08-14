@@ -39,6 +39,11 @@ Ok I lose the :with of having yasnippet and racket mode completions but get one 
 Change from lispy to smartparens. The delete-selection issue is too much. I keep typing on a selected region
 And back again: 😤
 But formatting is a problem
+*** Help/describe
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220714T143350.714361
+:END:
+The ~racket-xp-describe~ cannot find things if in typed racket so need to help the interim screen.
 
 * Racket mode load
 :PROPERTIES:
@@ -67,7 +72,10 @@ This is the minimal setup and does not need changing
 	     ("<f1> <f1>" . racket-repl-describe)
 		 :map racket-xp-mode-map
 		 ("<f1> <f1>" . racket-xp-describe)
-		 ("<f8>"  . racket-xp-next-error))
+		 ("<f8>"  . racket-xp-next-error)
+		 :map racket-describe-mode-map
+		 ("<f1>" . racket-describe-search)
+		 )
   :mode (rx (seq ".racket" string-end))
   :init
   (setq racket-program "/Applications/Racket v8.5/bin/racket"
@@ -89,7 +97,6 @@ This is the minimal setup and does not need changing
 				;; cape-dabbrev-min-length 5
 				)
 	)
-
 
   (defun my-all-racket-mode-hook ()
 	;;(smartparens-strict-mode 1)

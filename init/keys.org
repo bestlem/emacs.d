@@ -1018,6 +1018,7 @@ Used for some window management in the hydras.
 (require 'jp-window)
 (pretty-hydra-define hydra-mwb-main
   (:title (with-octicon "tools" "Global tools" 1 -0.05)
+   :quit-key ("q" "ESC")
    :color teal
    :idle 1.0)
   ("Hydrae" (("C" hydra-flycheck/body "Flycheck")
@@ -1037,15 +1038,15 @@ Used for some window management in the hydras.
     ("0" delete-window "Delete Window")
     (")" delete-window "Delete Window")
     ("|" split-window-right "horizontally"))
-   "Current buffer"
-   (("L" linum-mode "line number" :toggle t)
-    ("c" insert-char "insert char")
-    ("o" xah-clean-whitespace "Remove Blank lines")
-    ("TAB" hs-mwb-show-one-level "show one level")
-    ("C-<tab>" hs-toggle-hiding "Toggle hide-show")
-    ("f" refill-mode "Auto refill mode ")
-    ("r" backup-walker-start "Backup Walker")
-    ("i" consult-imenu "imenu"))
+   "Current buffer" (("L" linum-mode "line number" :toggle t)
+					 ("c" insert-char "insert char")
+					 ("o" xah-clean-whitespace "Remove Blank lines")
+					 ("TAB" hs-mwb-show-one-level "show one level")
+					 ("C-<tab>" hs-toggle-hiding "Toggle hide-show")
+					 ("f" refill-mode "Auto refill mode ")
+					 ("BW" backup-walker-start "Backup Walker")
+					 ("r" rainbow-mode "rainbow" :toggle t)
+					 ("i" consult-imenu "imenu"))
    "Actions"
    (("de" toggle-debug-on-error "debug on error" :toggle (default-value 'debug-on-error))
     ("dq" toggle-debug-on-quit "debug on quit" :toggle (default-value 'debug-on-quit))
@@ -1055,13 +1056,12 @@ Used for some window management in the hydras.
     ("q" keyboard-quit-context+ "Quit minibuffer etc")
     ("S" org-babel-detangle "Detangle")
     ("e" iedit-mode "iedit"))
-   "Change Buffers"
-   (("b" consult-buffer "Switch Buffer")
-    ("B" counsel-bookmark "Jump to bookmark")
-    ("s" mwb-special-in-hydra "org edit")
-    ("w" narrow-or-widen-dwim "Narrow or Widen")
-    ;; ("s" org-babel-tangle-jump-to-org "Back to org")
-    ("j" dired-jump "Dired jump"))))
+   "Change Buffers" (("b" consult-buffer "Switch Buffer")
+					 ("BM" counsel-bookmark "Jump to bookmark")
+					 ("s" mwb-special-in-hydra "org edit")
+					 ("w" narrow-or-widen-dwim "Narrow or Widen")
+					 ;; ("s" org-babel-tangle-jump-to-org "Back to org")
+					 ("j" dired-jump "Dired jump"))))
 (bind-key "<f19>"  'hydra-mwb-main/body)
 #+end_src
 ** Straight hydra
@@ -1106,8 +1106,10 @@ _R_ebuild package |_P_ull package  |_V_ersions thaw  |_W_atcher quit    |prun_e_
 Remove need for C-x keys
 #+NAME: org_mark_mini20.local_20220601T145842.163332
 #+begin_src emacs-lisp
-(pretty-hydra-define x-hydra-readonly (:title "^X functions"
-									   :color blue)
+(pretty-hydra-define x-hydra-readonly
+  (:title "^X functions"
+   :quit-key ("q" "ESC")
+   :color blue)
   ("Files"
    (("b" consult-buffer "switch buffer")
 	("f" mac-key-open-file "find-file")
@@ -1146,10 +1148,10 @@ Goto is based on consult's map and Kitchin hydra
 #+begin_src emacs-lisp
 (pretty-hydra-define hydra-goto
   (:title (mwb-icon-text "directions" "Goto")
-          :foreign-keys warn
-          :quit-key "q"
-          :exit t
-          :idle 0.5)
+   :foreign-keys warn
+   :quit-key ("q" "ESC")
+   :exit t
+   :idle 0.5)
   ("goto"
    (("g" consult-goto-line))
    "Structure"
@@ -1190,7 +1192,7 @@ Mainly from consult
 (pretty-hydra-define hydra-search
   (:title (mwb-icon-text "search" "Search")
    :foreign-keys warn
-   :quit-key "q"
+   :quit-key ("q" "ESC")
    :exit t
    :idle 0.5)
   ("Project" (("<f5>" deadgrep "Deadgrep")
@@ -1220,12 +1222,6 @@ Mainly from consult
 				("hw" hi-lock-write-interactive-patterns "Write patterns"))))
 (bind-key "<f4>" 'hydra-search/body)
 #+end_src
-
-#+RESULTS[78fc5fc245af10de56c6742bbb4a9ff0ff8e658e]: org_mark_mini20.local_20210811T144548.688365
-#+begin_EXAMPLE
-hydra-search/body
-#+end_EXAMPLE
-
 *** isearch map
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210802T082202.482760

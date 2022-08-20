@@ -692,6 +692,16 @@ vivendi is dark
   (modus-themes-syntax '(green-strings alt-syntax))
   (modus-themes-variable-pitch-ui nil))
 #+end_src
+* Show color definitions
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220819T093521.795180
+:END:
+If we have a color shown as RGB value then make it the colour.
+#+NAME: org_mark_mini20.local_20220819T093521.777078
+#+begin_src emacs-lisp
+(use-package-elpa rainbow-mode
+  :commands rainbow-mode)
+#+end_src
 * Sounds
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210628T102012.945985

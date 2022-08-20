@@ -772,39 +772,6 @@ This all can be written using latest org mode allowing weaving etc.
 This file (org-all) uses noweb weaving so must be loaded via a proper org babel
 
 But has requirements like hydra
-*** Narrow-widen
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20210830T131813.182296
-:END:
-Mainly from [[https://endlessparentheses.com/emacs-narrow-or-widen-dwim.html][here]] via greghendershot
-This basically cuts down what is visible. Need to extend so can do more but see how it works first.
-#+NAME: org_mark_mini20.local_20210830T131813.146706
-#+begin_src emacs-lisp
-(defun narrow-or-widen-dwim (p)
-  "Widen if buffer is narrowed, narrow-dwim otherwise.
-Dwim means: region, org-src-block, org-subtree, or
-defun, whichever applies first. Narrowing to
-org-src-block actually calls `org-edit-src-code'.
-
-With prefix P, don't widen, just narrow even if buffer
-is already narrowed."
-  (interactive "P")
-  (declare (interactive-only))
-  (cond ((and (buffer-narrowed-p) (not p)) (widen))
-        ((region-active-p)
-         (narrow-to-region (region-beginning)
-                           (region-end)))
-        ((derived-mode-p 'org-mode)
-         ;; `org-edit-src-code' is not a real narrowing
-         ;; command. Remove this first conditional if
-         ;; you don't want it.
-         (cond ((ignore-errors (org-edit-src-code) t))
-               ((ignore-errors (org-narrow-to-block) t))
-               (t (org-narrow-to-subtree))))
-        ;; ((derived-mode-p 'latex-mode)
-        ;;  (LaTeX-narrow-to-environment))
-        (t (narrow-to-defun))))
-#+end_src
 *** Remainder of org
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:D04B3869-70E6-42A2-A052-584E36C9DAB7

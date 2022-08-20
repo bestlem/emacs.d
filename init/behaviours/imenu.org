@@ -49,5 +49,28 @@ Setup for all prog modes
 #+begin_src emacs-lisp
 (use-feature which-func
   :demand
-  :config (which-func-mode))
+  :after imenu
+  :custom (which-func-non-auto-modes '(treemacs-mode))
+  :config
+
+  ;; for debug shows the mode causing the error.
+  (defun which-func-ff-hook ()
+	"`after-change-major-mode-hook' for Which Function mode.
+It creates the Imenu index for the buffer, if necessary."
+	(which-func-try-to-enable)
+
+	(condition-case err
+		(if (and which-func-mode
+				 (not (member major-mode which-func-non-auto-modes))
+				 (or (null which-func-maxout)
+					 (< buffer-saved-size which-func-maxout)
+					 (= which-func-maxout 0)))
+			(setq imenu--index-alist
+                  (save-excursion (funcall imenu-create-index-function))))
+      (imenu-unavailable
+       (setq which-func-mode nil))
+      (error
+       (message "which-func-ff-hook error: %S in mode %s" err major-mode)
+       (setq which-func-mode nil))))
+  (which-function-mode))
 #+end_src

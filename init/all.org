@@ -143,7 +143,7 @@ TODO: exclude sopme directories - especially modus-themes and treemacs as they n
 Recompile emacs lisp  if already compiled on save but also on load.
 #+NAME: org_mark_mini20.local_20210822T130010.997493
 #+begin_src emacs-lisp
-(when *emacs/>=28p*
+(when (= emacs-major-version 28)
   (use-package-elpa auto-compile
     :defer 15
     :config
@@ -182,7 +182,7 @@ Try macport now as on arm
  #+begin_src emacs-lisp
  (use-feature server
    ;; :unless (or *macport* *aquamacs*)
-   :if *macport*
+   :unless *macport*
    :hook (after-init . server-start))
  #+end_src
 * Support data

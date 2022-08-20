@@ -1,7 +1,8 @@
 #+TITLE Emacs configuration - file management
-#+PROPERTY:header-args :cache yes :tangle yes :comments link
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
 #+STARTUP: content
-*  Trash
+
+* Trash
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:D2691EE6-AB96-4EB1-A369-A3CDACD148E2
 :END:
@@ -379,21 +380,25 @@ The problem is that we have regex
 	(setq recentf-save-file (mwb-user-emacs-file "var/recentf-save.el")))
   :config
   (setq recentf-exclude '("COMMIT_MSG"
-						  "COMMIT_EDITMSG"
-						  "github.*txt$"
-						  "^/var/folders\\.*"
-						  "COMMIT_EDITMSG\\'"
-						  ".recentf"
-						  "~$"
-						  ".~/"
-						  ".*-autoloads\\.el\\'"
-						  ".*png$"
-						  ".*cache$"
-						  "SessionDesktop\\.el"
-						  "treemacs-persist"
-						  "^/Volumes/"))
+			  "COMMIT_EDITMSG"
+			  "github.*txt$"
+			  "^/var/folders\\.*"
+			  "COMMIT_EDITMSG\\'"
+			  ".recentf"
+			  "~$"
+			  ".~/"
+			  ".*-autoloads\\.el\\'"
+			  ".*png$"
+			  ".*cache$"
+			  "SessionDesktop\\.el"
+			  "treemacs-persist"
+			  "~/.local/emacs/straight/repos/"
+			  "~/src/ThirdParty/emacs-init/"
+			  "/Applications/MacPorts/Emacs"
+			  "^/Volumes/"))
   (recentf-mode 1))
 #+end_src
+
 ** TODO Compressed files
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:D8E61D05-2A53-45CF-A59D-EC1D1883BAC5
@@ -463,7 +468,7 @@ Now use a fork to allow search of ignored files.
 :END:
 Might allow search in ignore files. It is more flexible but display is not as easy to use as you don't switch to found buffer and cannot tab to fold items
 #+NAME: org_mark_mini20.local_20210620T213143.089059
-#+begin_src emacs-lisp :tangle :no
+#+begin_src emacs-lisp :tangle no
 (use-package-elpa rg
   :disabled
   )

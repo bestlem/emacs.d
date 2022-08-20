@@ -193,6 +193,7 @@ Use an external search but note I need to write helpers to allow search at point
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:CF24C2F4-0089-45C0-A3CE-72AAFBE47D97
 :END:
 The hydra did not add anything. Just keep hitting f2
+
 #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_95AB0DCA-FC55-45BB-A888-847322BD6CA0
 #+begin_src emacs-lisp
 (use-package-elpa expand-region
@@ -203,6 +204,12 @@ The hydra did not add anything. Just keep hitting f2
   ("<C-f2>" . er/contract-region)
   :custom (expand-region-show-usage-message nil))
 #+end_src
+*** TODO python mode
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220819T153522.603763
+:END:
+Does not work - try renaming the python test to python mode and run them
+
 ** Begin end line
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:79C47FC8-B71F-40B4-84F3-DB78319B9E33

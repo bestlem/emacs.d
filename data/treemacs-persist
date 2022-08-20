@@ -13,6 +13,8 @@
  - path :: ~/src/macos/aquamacs-emacs
 ** emacs-macport-code
  - path :: ~/src/ThirdParty/emacs-mac
+** xonsh
+ - path :: ~/src/python/xonsh
 * Racket
 ** my realm
  - path :: ~/src/Racket/realm
@@ -43,9 +45,6 @@
  - path :: ~/src/cpp/macports-ports
 ** my-macports
  - path :: ~/src/my-macports
-* Odds
-** xonsh
- - path :: ~/src/python/xonsh
 * Swift
 ** SwiftUITutorial-Landmarks
  - path :: ~/src/Swift/SwiftUITutorial-Landmarks

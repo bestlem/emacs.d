@@ -6,7 +6,23 @@ This is a minimal setup as not doing any real work.
 Look at howardabrams for a more detailed setup.
 Can't choose between elpy and jedi etc.
 
+* Which mode
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220815T132525.351269
+:END:
 Now I used python's python mode not the one in emacs. The latter has been improved and so perhaps I could change
+
+** Issues
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220815T132525.348507
+:END:
+The biggest issue is that the keymap is called the same for both and the last to load is the one used.
+Both using python-mode is a pain.
+
+** Why emacs python
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220815T132525.345640
+:END:
 
 The problem is conda uses pythonic which has a require 'python and so always loads the emacs one.
 And xonsh mode uses python.el as well
@@ -14,7 +30,12 @@ But python.el sets tab-width to 8 for no reason - I found out using drtr-indent 
 
 So it is a mess
 
-When really use python then start from elpy or similar. - well maybe not.
+** Conclusion
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220815T132525.339507
+:END:
+When really use python then start from elpy or similar. - well maybe not. Not that python-mode has a lot built in.
+
 First patch conda.el and xonsh to other python-mode then if OK leave otherwise look at Microsoft Language Server for full working.
 
 * Python mode
@@ -61,10 +82,13 @@ Other issue is for pure python in hard tab files - something sets the offset to 
   (py-empty-line-closes-p t)
   (py-execute-no-temp-p t)
   (py-imenu-show-method-args-p t)
+  (py-electric-yank-active-p t)
+  (py-prompt-on-changed-p 'nil)
   (py-smart-indentation t)
   (py-split-window-on-execute t)
   (py-split-windows-on-execute-function 'split-window-horizontally)
   (py-tab-shifts-region-p t)
+  ;; (py-outline-minor-mode-p 'nil)        ; set as tab is not working
   :hook (python-mode . py-hook-mwb)
   )
 #+end_src
@@ -112,9 +136,12 @@ Need to set up execute (here or at start)
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:62195329-D8AA-4CC1-B7F4-4570BBDCF3A8
 :END:
 There is now a xonsh mode
-  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_59880E6F-AD42-47DF-B04B-957600115D5D
+I modified to use python's python-mode
+  #+NAME: org_mark_mini20.local_20220815T132525.327650
   #+begin_src emacs-lisp
 (use-package-elpa xonsh-mode
+  :straight (:fork (:repo "bestlem/xonsh-mode" :branch "python-mode")
+			 :local-repo  "../local-repos/xonsh-mode")
   :mode "\\.xsh\\'")
   #+end_src
 
@@ -129,8 +156,10 @@ Take this out until I do python again. conda.el uses pythonic-activate and that 
 #+NAME: org_mark_mini20.local_20210127T110448.825291
  #+begin_src emacs-lisp :tangle no
 (use-package-elpa conda
+  :straight (:fork (:repo "bestlem/conda.el" :branch "python-mode")
+			 :local-repo  "../local-repos/conda.el")
   :demand
-  :after (python)
+  :after (any python python-mode)
   :commands conda-env-activate
   :init
   (setq conda-anaconda-home (expand-file-name "~/miniconda3/"))
@@ -155,10 +184,10 @@ Take this out until I do python again. conda.el uses pythonic-activate and that 
   ;; (conda-env-activate "base")
 
   ;; we need a setup - e.g. code-snippets
-  (conda-env-activate (if (equal (file-name-nondirectory explicit-shell-file-name)
-                                 "xonsh")
-                          "xonsh"
-                        "base"))
+  ;; (conda-env-activate (if (equal (file-name-nondirectory explicit-shell-file-name)
+  ;;                                "xonsh")
+  ;;                         "xonsh"
+  ;;                       "base"))
   ;; (setq-default mode-line-format
   ;;               (cons mode-line-format '(:exec conda-env-current-name)))
   )

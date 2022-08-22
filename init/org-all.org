@@ -83,7 +83,7 @@ It is now for subtree todo refile and links
   (setq org-datetree-add-timestamp (quote active)
         org-default-notes-file "~/SyncServices/Dropbox/Docs/org/notes.org"
         org-directory "/Users/mark/SyncServices/Dropbox/Docs/org"
-        org-support-shift-select 'always
+        org-support-shift-select t
         ;;          org-use-speed-commands t
         )
   :hook

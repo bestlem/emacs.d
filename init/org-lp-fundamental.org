@@ -7,7 +7,6 @@ Never compile this.
 #+BEGIN_SRC emacs-lisp :comments no
 ;; -*- lexical-binding: t; no-byte-compile: t; coding: utf-8 -*-
 #+END_SRC
-
 * Org-Mode Fundamentals
 :PROPERTIES:
 :ID:       org_2020-12-10+00-00:28CB7CC9-F76D-4EFF-A30C-5F16446482FD
@@ -22,11 +21,6 @@ Start EMACS with this command:
 #+BEGIN_EXAMPLE
 emacs --debug-init --no-init-file --no-splash --background-color white --foreground-color black --vertical-scroll-bars --eval '(switch-to-buffer "*Messages*")' --name FND-TEST --title FND-TEST --load ~/src/help/.org-mode-fundamentals.emacs.el &
 #+END_EXAMPLE
-
-#+NAME: org_gcr_2017-05-12_mara_71A4A257-9A13-457A-B504-888D8131A206
-#+BEGIN_SRC emacs-lisp
-;; (load-file "~/src/help/.org-mode-ecm.emacs.el")
-#+END_SRC
 
 ** Literate Programming
 :PROPERTIES:
@@ -810,7 +804,7 @@ Diagramming languages require =RESULTS= output for exporting.
 MWB -- ned to set this afer org-babel-load-languages
 
 #+NAME: org_gcr_2017-05-12_mara_28D5D5A9-5CC8-4B6C-887F-A02F9D416B0D
-#+BEGIN_SRC emacs-lisp :tangle :noweb
+#+BEGIN_SRC emacs-lisp :tangle no
 (help/set-org-babel-default-header-args:ditaa :wrap "RESULTS")
 (help/set-org-babel-default-header-args:dot :wrap "RESULTS")
 (help/set-org-babel-default-header-args:plantuml :wrap "RESULTS")

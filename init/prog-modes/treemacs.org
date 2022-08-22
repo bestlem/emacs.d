@@ -35,21 +35,7 @@ More in startup
   <<treemacs-mode-hydra>>
   :bind
   <<treemacs-bind>>
-  :config
-  (setq treemacs--no-messages nil)
 
-  (setq hydra-key-regex "\\[\\|]\\|[-\\[:alnum:] ~.,;:/|?<>={}*+#%@!&^⇧⌘⌥↑↓←→⌫⌦⏎'`()\"$]+?") ; add Mac key symbols
-
-  (setq treemacs-persist-file (mwb-user-emacs-file "data/treemacs-persist"))
-
-  (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?)
-
-  ;; The default width and height of the icons is 22 pixels. If you are
-  ;; using a Hi-DPI display, uncomment this to double the icon size.
-  ;;(treemacs-resize-icons 44)
-
-  (treemacs-follow-mode t)
-  (treemacs-fringe-indicator-mode t)
 
   :custom
   (treemacs-indent-guide-mode t)
@@ -57,9 +43,26 @@ More in startup
   (treemacs-silent-refresh t)
   (treemacs-silent-filewatch t)
   (treemacs-tag-follow-delay 2.5)
-  (treemacs-user-header-line-format #'treemacs-header-buttons-format))
-  :config
-  <<treemacs-config>>
+  (treemacs-user-header-line-format #'treemacs-header-buttons-format)
+
+:config
+(setq treemacs--no-messages nil)
+
+(setq hydra-key-regex "\\[\\|]\\|[-\\[:alnum:] ~.,;:/|?<>={}*+#%@!&^⇧⌘⌥↑↓←→⌫⌦⏎'`()\"$]+?") ; add Mac key symbols
+
+(setq treemacs-persist-file (mwb-user-emacs-file "data/treemacs-persist"))
+
+(add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?)
+
+;; The default width and height of the icons is 22 pixels. If you are
+;; using a Hi-DPI display, uncomment this to double the icon size.
+;;(treemacs-resize-icons 44)
+
+(treemacs-follow-mode t)
+(treemacs-fringe-indicator-mode t)
+
+<<treemacs-config>>
+)
 #+end_src
 
 * Support functions
@@ -95,9 +98,9 @@ Emacs 28 look at [[help:prog-context-menu][prog-context-menu]]
 #+NAME: org_mark_mini20.local_20210811T192501.298758
 #+begin_src emacs-lisp :tangle no :noweb-ref treemacs-bind
 (:map treemacs-mode-map
- ("<mouse-5>" . treemacs-rightclick-menu)
- ("<mouse-2>" . treemacs-rightclick-menu)
+ ;;("<mouse-5>" . treemacs-rightclick-menu)
  ("<f5>" . treemacs-switch-workspace)
+ ("<mouse-2>" . treemacs-rightclick-menu)
  ("<C-f5>" . treemacs-edit-workspaces))
 #+end_src
 
@@ -106,7 +109,7 @@ Emacs 28 look at [[help:prog-context-menu][prog-context-menu]]
 :ID:       org_mark_mini20.local:20220609T123743.420323
 :END:
 #+NAME: org_mark_mini20.local_20220609T123743.407283
-#+begin_src emacs-lisp :tangle no :noweb-ref treemacs-hydra
+#+begin_src emacs-lisp :tangle no :noweb-ref treemacs-mode-hydra
 (treemacs-mode
  ("Project" (("c" treemacs-add-project-to-workspace "Create Project")
 			 ("d" treemacs-remove-project-from-workspace "Delete Project"))

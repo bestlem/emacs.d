@@ -40,7 +40,7 @@ Although that should be in prog mode
 Use prism which is sort of descended from rainbow-mode.
 See https://github.com/alphapapa/prism.el/issues/8 to add
 #+NAME: org_mark_mini20.local_20220612T124244.221077
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package-elpa prism
   :commands prism-mode prism-whitespace-mode
   :config

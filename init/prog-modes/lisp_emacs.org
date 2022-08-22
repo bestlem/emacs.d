@@ -626,6 +626,12 @@ The first in the list is the last to be evaluated and is before all the others."
 (add-hook 'emacs-lisp-mode-hook 'hemacs-imenu-elisp-expressions)
 #+end_src
 * Cross reference
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220820T213838.759164
+:END:
 ** elisp-xref
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220820T213838.757362
+:END:
 Used by helpful and might be more use elsewhere.
 Unfortunately as using a fork I need to put it before helpful.

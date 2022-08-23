@@ -89,7 +89,6 @@
  ("nov.el" . "cb5f45cbcfbcf263cdeb2d263eb15edefc8b07cb")
  ("ob-sml" . "958165c92b6cff6cada5c85c8ae5887806b8451b")
  ("orderless" . "8b9af2796fa0eb87eea4140bc08d16880a493803")
- ("org" . "3303a54d74805cdd2b6eda37285f259949f7ba2e")
  ("org-modern" . "c82b50a61d04571e11c242fb91944753d8bf945c")
  ("org-modern-indent" . "ff10d3dd2f1acb95ab30b0b836602d12c5b7e16b")
  ("osx-trash" . "af74a2055a15bf4182d8196600f7decd66eec634")

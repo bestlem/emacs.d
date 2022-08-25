@@ -1,5 +1,5 @@
 #+TITLE Emacs configuration org Mode - all the complete things
-#+PROPERTY:header-args :cache yes :tangle yes :comments noweb :noweb no-export
+#+PROPERTY:header-args :tangle yes :comments noweb :noweb no-export
 #+STARTUP: show2levels
 * Notes on using org mode
 :PROPERTIES:
@@ -16,7 +16,7 @@ This is a large config and might be easier to document if not all put in a use-p
 This config gets long so difficult to see in one block
 
 There is an issue that pretty-hydra marks everything as a command so if I call something in another package then not found.
-use-package fix is put the other use-packae before it in the file - so reorder file or use weaving to put that first.
+use-package fix is put the other use-package before it in the file - so reorder file or use weaving to put that first.
 However major-mode-hydra+ fixes this at source.
 ** Noweb issues
 :PROPERTIES:
@@ -74,11 +74,11 @@ It is now for subtree todo refile and links
 :PROPERTIES:
 :ID:       org_2020-12-08+00-00:D690B0FD-0E4B-44ED-A01E-7FEC29D8E7F4
 :END:
-  #+NAME: org_mark_2020-01-23T20-21-34+00-00_mini12_72F56F5E-3D65-491F-B68F-CDCFF334FFB6
-  #+begin_src emacs-lisp :noweb tangle
+  #+NAME: org_mark_mini20.local_20220822T204635.507725
+  #+begin_src emacs-lisp :noweb yes
 (use-feature org
   :bind
-  <<key-binds>>
+  <<org-key-binds>>
   :config
   (setq org-datetree-add-timestamp (quote active)
         org-default-notes-file "~/SyncServices/Dropbox/Docs/org/notes.org"
@@ -93,7 +93,7 @@ It is now for subtree todo refile and links
   :preface (declare-function org-hide-properties-mode "org-hide-properties")
   :mode-hydra
   <<org-mode-hydra>>
-  ;;<<org-mode-hydrae-code>>
+  
   :config
   (require 'init-mwb-org)
 
@@ -102,8 +102,7 @@ It is now for subtree todo refile and links
 
   <<org-mine>>
   :custom
-  (org-modules
-   '(org-crypt org-tempo org-id org-mouse))
+  (org-modules  '(org-crypt org-tempo org-id org-mouse))
   <<org-custom>>
 
   :config
@@ -115,8 +114,8 @@ It is now for subtree todo refile and links
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:7CFDEDFE-FB36-47D9-8D94-0CDC83AF71CC
 :END:
 Put the bind bit in noweb
-#+NAME: key-binds
-#+begin_src emacs-lisp :tangle no
+#+NAME: org_mark_mini20.local_20220822T214638.618650
+#+begin_src emacs-lisp :tangle no :noweb-ref  org-key-binds
 (
  ;; ("H-s" . org-babel-tangle-jump-to-org)
  ;; ("H-S-s" . org-babel-detangle)
@@ -340,15 +339,6 @@ My languages
    ))
 #+END_SRC
 
-***** Python
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20220628T213657.295236
-:END:
-Use the non GNU python-mode.
-#+NAME: org_mark_mini20.local_20220628T213657.264866
-#+begin_src emacs-lisp :tangle no :noweb-ref org-custom
-(org-babel-python-mode 'python-mode)
-#+end_src
 *** Identity
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220619T135120.154326
@@ -477,7 +467,7 @@ See file:../site-lisp/mwb/init-mwb-org.el
 :ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:D4058350-C97F-4A1D-858C-70008D09A2FF
 :END:
 Using new pretty mode hydra.
-#+NAME: org_2020-12-07+00-00_005A3AAF-4168-444A-8AD4-BCA80924C59A
+#+NAME: org_mark_mini20.local_20220822T204918.284965
 #+begin_src emacs-lisp :tangle no :noweb-ref org-mode-hydra
 (org-mode
  (:idle 1.0)

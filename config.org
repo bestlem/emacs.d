@@ -196,9 +196,10 @@ Allow override of methods. From https://github.com/radian-software/el-patch
 :ID:       org_mark_mini20.local:20220823T194757.884518
 :END:
 Needed for json-navigator.
-But I think leep org as the one in emacs.
+But I think keep org as the one in emacs.
+Unfortunalt expand-region uses the newer one
 #+NAME: org_mark_mini20.local_20220823T194757.853487
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (add-to-list 'straight-built-in-pseudo-packages 'org)
 #+end_src
 ** Macros to set up how modes are set up
@@ -740,7 +741,7 @@ occur before loading Org-Mode. *Never* remove this from a submitted ECM.
 :END:
 #+NAME: org_mark_mini20.local_20220625T123220.259788
 #+begin_src emacs-lisp
-(use-feature org
+(use-package-elpa org
   :commands org-mode)
 #+end_src
 *** Grettke babel

@@ -343,7 +343,7 @@ Also gets used by spaceline-all-the-icons.
 Try git-gutter-fringe but seems to clash [[https://github.com/emacsorphanage/git-gutter-fringe/issues/9][with flycheck]].
 #+NAME: org_mark_mini20.local_20210823T133333.243027
 #+begin_src emacs-lisp
-(use-package-elpa git-gutter
+(use-package-elpa git-gutter-fringe
   :defer 2
   :config
   (global-git-gutter-mode 1)
@@ -354,8 +354,19 @@ Try git-gutter-fringe but seems to clash [[https://github.com/emacsorphanage/git
   ;; (set-face-foreground 'git-gutter:deleted "red")
 
   ;; (setq git-gutter-fr:side 'right-fringe)
+
+  (defun git-gutter-fr-mwb-hook-fn ()
+	(setq right-fringe-width 10))
+
+  (add-hook 'git-gutter-mode-hook #'git-gutter-fr-mwb-hook-fn)
+
   :custom
   (git-gutter:hide-gutter t)
+  (git-gutter-fr:side 'right-fringe)
+  (git-gutter:modified-sign "  ") ;; two space
+  (git-gutter:added-sign "++")    ;; multiple character is OK
+  (git-gutter:deleted-sign "--")
+  (git-gutter:update-interval 2)
 
   :pretty-hydra
   (hydra-git-gutter
@@ -437,8 +448,8 @@ Main use if for merge conflicts
 					 (bury-buffer))
 			  "Save and bury buffer" :exit t))))
   :bind (:map smerge-mode-map
-		 ("C-c m" . hydra-smerge-mode/body)
-		 ("<f5>" . hydra-smerge-mode/body))
+		 ("C-c m" . smerge-mode-hydra/body)
+		 ("<f5>" . smerge-mode-hydra/body))
   :hook ((find-file . (lambda ()
 						(save-excursion
 						  (goto-char (point-min))

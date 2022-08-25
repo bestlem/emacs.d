@@ -113,7 +113,7 @@ The one thing I wanted ot for this time was to break an expression to a work per
 :ID:       org_mark_2020-10-14T11-05-37+01-00_mini12.local:88799E8A-FACD-4227-BF70-7FFD40FC2CF1
 :END:
 #+NAME: org_mark_2020-10-14T11-05-37+01-00_mini12.local_FA432C27-28F7-4E01-B4C3-A28516C3DFB4
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package-elpa lisp-extra-font-lock
   :hook (emacs-lisp-mode . lisp-extra-font-lock-mode))
 #+end_src

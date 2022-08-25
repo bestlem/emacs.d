@@ -40,7 +40,7 @@ Although that should be in prog mode
 Use prism which is sort of descended from rainbow-mode.
 See https://github.com/alphapapa/prism.el/issues/8 to add
 #+NAME: org_mark_mini20.local_20220612T124244.221077
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 (use-package-elpa prism
   :commands prism-mode prism-whitespace-mode
   :config
@@ -231,7 +231,11 @@ Also see this answer for an addition to highlight indent mode https://stackoverf
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:E10913D4-7B93-4357-B95F-FA5044D80C3C
 :END:
 Let us set it up
-#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_E36E2091-3DAD-46AC-8634-EC11B5E795C7
+*** Hide Show basic
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220824T134516.597877
+:END:
+#+NAME: org_mark_mini20.local_20220824T134516.584310
 #+begin_src emacs-lisp
 (use-feature hideshow
     :diminish  hs-minor-mode
@@ -256,12 +260,25 @@ Let us set it up
 :ID:       org_mark_mini20.local:20210429T084502.949302
 :END:
 Put markers in the fringe which messed up lispy and is slow - I suspect not for elisp.
-#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_C0B47E60-5C02-4FCD-AE13-ABA380EA4866
+#+NAME: org_mark_mini20.local_20220824T134532.207188
 #+begin_src emacs-lisp
 (use-package-elpa hideshowvis
-  :disabled
-  :hook (prog-mode . hideshowvis-enable)
-  :config (hideshowvis-symbols))
+  :straight (:fork (:repo "bestlem/hideshowvis" :branch "work")
+             :local-repo  "../local-repos/hideshowvis")
+  :commands (hideshowvis-enable)
+  :init
+  (defun hideshowvis-mwb-enable ()
+    (interactive)
+    (when (hideshowvis-enable)
+      (hideshowvis-symbols-mode 1)))
+
+  :hook (prog-mode . hideshowvis-mwb-enable)
+  ;; :config (hideshowvis-symbols)
+  :custom-face (hideshowvis-hidden-region-face
+                ((t
+                  (:box (:line-width (2 . 2) :color "white" :style released-button)
+                   :inherit custom-button-mouse))))
+  )
 #+end_src
 *** Hydra
 :PROPERTIES:
@@ -270,27 +287,18 @@ Put markers in the fringe which messed up lispy and is slow - I suspect not for 
 Use a hydra so don't need the odd keybindings
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_780EA095-1E1A-4E1C-956D-17C68D30AE73
 #+begin_src emacs-lisp
-(defhydra hydra-hs (:idle 1.0)
-  "
-Hide^^            ^Show^            ^Toggle^    ^Navigation^
-----------------------------------------------------------------
-_h_ hide all      _s_ show all      _t_oggle    _n_ext line
-_d_ hide block    _a_ show block              _p_revious line
-_l_ hide level
-
-_SPC_ cancel
-"
-  ("s" hs-show-all)
-  ("h" hs-hide-all)
-  ("a" hs-show-block)
-  ("d" hs-hide-block)
-  ("t" hs-toggle-hiding)
-  ("l" hs-hide-level)
-  ("n" forward-line)
-  ("p" (forward-line -1))
-  ("SPC" nil))
-
-(bind-key "H-h" 'hydra-hs/body)
+(pretty-hydra-define hydra-hs (:title "Hide Show"
+                               :foreign-keys run
+                               :idle 1.0
+                               :quit-key ("q"  "ESC"))
+  ("Hide" (("h" hs-hide-all "All")
+		   ("d" hs-hide-block "Block")
+		   ("l" hs-hide-level "Level"))
+   "Show" (("s" hs-show-all "All")
+		   ("a" hs-show-block "Bock"))
+   "Toggle" (("t" hs-toggle-hiding "Toggle" :toggle t))
+   "Navigate" (("n" forward-line "Next")
+			   ("p" (forward-line -1) "Previous"))))
 #+end_src
 ** Outlining
 :PROPERTIES:

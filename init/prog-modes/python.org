@@ -155,9 +155,19 @@ I modified to use python's python-mode
 			 :local-repo "../local-repos/xonsh-mode")
   :mode "\\.xsh\\'"
   :init
-  (let* ((python (alist-get 'python-mode hs-special-modes-alist))
-		 (new (cons 'xonsh-mode python)))
-	(add-to-list 'hs-special-modes-alist new)))
+  ;; Need to hard code and not copy python as python.el sets in python-mode
+  ;; which is called after xonsh-mode
+  (add-to-list
+   'hs-special-modes-alist
+   '(xonsh-mode
+     "\\s-*\\_<\\(?:def\\|class\\)\\_>"
+     ;; Use the empty string as end regexp so it doesn't default to
+     ;; "\\s)".  This way parens at end of defun are properly hidden.
+     ""
+     "#"
+     python-hideshow-forward-sexp-function
+     nil))
+  )
   #+end_src
 
 

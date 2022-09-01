@@ -243,7 +243,9 @@ Replace isearch but not so easy as consult-line plus can leave the progress mark
 		 ("C-<f3>" . ctrlf-backward-alternate)
 		 ("<f3>" . ctrlf-forward-alternate)
 		 ("<f4>" . ctrlf-forward-default)
-		 ("C-<f4>" . ctrlf-backward-default))
+		 ("<f5>" . ctrlf-backward-default)
+		 ("C-<f4>" . ctrlf-backward-default)
+		 ("S-<f4>" . ctrlf-backward-default))
   :custom (ctrlf-auto-recenter t)
   :commands (ctrlf-backward-default
 			 ctrlf-forward-default

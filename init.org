@@ -137,7 +137,7 @@ Set the path to packages
 Package initialize occurs automatically, before `user-init-file' is loaded, but after `early-init-file'. emacs handles package initialization, so we must prevent Emacs from doing it early!
 But if using package we do want it done - early-init turn off is for straight.el etc
 #+NAME:
-*** Straight
+*** Non package.el
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220614T202654.959342
 :END:
@@ -531,5 +531,9 @@ Also switch between an alternate setup - ideally should be driven from command l
 (when (>= emacs-major-version 27)
   ;; (load (concat (expand-file-name "alt/alt_init" mwb-user-emacs-directory) ".el"))
   ;;(load (concat (expand-file-name "alt/straight" mwb-user-emacs-directory) ".el"))
-  (mwb-init-load "config" "no-org"))
+  ;;(mwb-init-load "config" "no-org"))
+
+  (load (concat (expand-file-name "alt/elpaca" mwb-user-emacs-directory) ".el"))
+
+  )
 #+end_src

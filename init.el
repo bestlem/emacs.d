@@ -222,5 +222,9 @@ If org and no el or org file is newer then retangle the org file if noorg is not
 (when (>= emacs-major-version 27)
   ;; (load (concat (expand-file-name "alt/alt_init" mwb-user-emacs-directory) ".el"))
   ;;(load (concat (expand-file-name "alt/straight" mwb-user-emacs-directory) ".el"))
-  (mwb-init-load "config" "no-org"))
+  ;;(mwb-init-load "config" "no-org"))
+
+  (load (concat (expand-file-name "alt/elpaca" mwb-user-emacs-directory) ".el"))
+
+  )
 ;; org_mark_mini12.local_20201213T195905.304356 ends here

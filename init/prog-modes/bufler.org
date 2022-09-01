@@ -1,0 +1,138 @@
+#+TITLE:  Bufler
+#+AUTHOR: Mark Bestley
+#+DATE:   28 Aug 2022
+#+PROPERTY:header-args :tangle yes
+Well the grouping is simpler than ibuffer but took me half a day to understand. You need to repeat directories in the group that filters and then again in the dir command and. You also need an else case otherwise buffers just get tacked onto the end of the list when they are different to the last header.
+Found it - in the top group for special which is a negation - there is ~auto-file~ which gets ll files but then as gets negated this is all non file backed buffers.
+
+I don't use ibuffer much - the main is to find unsaved buffers. bufler does not have a filter so can't be done. (Although I suppose I could switch bufler-groups but no predicate for dirty buffer) - the bufler notes.org says that variables should be buffer local to allow multiple bufler buffers - which means I could create another view on a different key.
+
+Also my iBuffer closes certain groups - I now see that is copied extra code so an extension to both.
+Bufler hack
+1) Have a list of strings that begin groups.
+2) Search for string at beginning of line.
+3) Use ~magit-section-hide~ on ~(magit-current-section)~
+
+Also work seems to have stopped the author is doing a sort but that branch is Oct 2021
+* Use-package
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220828T181203.235621
+:END:
+Mainly from alphapapa and jerrypnz
+
+#+NAME: org_mark_mini20.local_20220828T160715.054498
+#+begin_src emacs-lisp
+(use-package-elpa bufler
+  :bind (("C-x C-b" . bufler)
+		 ("C-s-b" . bufler))
+
+  :custom
+  (bufler-initial-face-depth 2)
+  (bufler-column-name-modified-buffer-sigil "🛑")
+  (bufler-groups
+   (bufler-defgroups
+	 (group ;; Subgroup collecting all named workspaces.
+	  (auto-workspace))
+
+	 (group (group-or "Elfeed"
+					  (mode-match "*Elfeed*" (rx bos "elfeed-"))
+					  (name-match "elfeed config" (rx bos "elfeed." (or "el" "org")))))
+	 (group
+	  ;; Subgroup collecting all special buffers (i.e. ones that are not
+	  ;; file-backed), except `magit-status-mode' buffers (which are allowed to fall
+	  ;; through to other groups, so they end up grouped with their project
+	  ;; buffers).
+	  ;;  Comment from other source - looks like the code also moves org and dired
+	  (group-not "*Special*"
+				 (group-or "*Special*"
+						   (name-match "Org Src " (rx bos "*Org Src"))
+						   (mode-match "Magit" (rx bos "magit-status"))
+						   (mode-match "Forge" (rx bos "forge-"))
+						   (mode-match "Org" (rx bos "org-"))
+						   (auto-file)
+						   (mode-match "Dired" (rx bos "dired-"))))
+	  (group
+	   (name-match "**Emacs**"
+				   (rx bos "*" (or "Messages" "Warnings" "scratch" "Backtrace") "*")))
+	  (group
+	   (group-or "*Help/Info*"
+				 (mode-match "*Help*" (rx bos "help-"))
+				 (mode-match "*Help*" (rx bos "helpful-"))
+				 (mode-match "*Info*" (rx bos "info-")))
+	   (auto-mode))
+	  (group ; Subgroup collecting all other Magit buffers, grouped by directory.
+	   (mode-match "*Magit* (non-status)" (rx bos (or "magit" "forge") "-"))
+	   (auto-directory))
+	  (group
+	   (mode-match "*Helm*" (rx bos "helm-")))
+	  ;; Remaining special buffers are grouped automatically by mode.
+	  (auto-mode))
+	 (group ;; Subgroup collecting buffers in `org-directory'
+	  ;; (or "~/org" if `org-directory' is not yet defined).
+	  (dir (if (bound-and-true-p org-directory)
+			   org-directory
+			 "~/org"))
+	  (group
+	   ;; Subgroup collecting indirect Org buffers, grouping them by file.
+	   ;; This is very useful when used with `org-tree-to-indirect-buffer'.
+	   (auto-indirect)
+	   (auto-file))
+	  ;; Group remaining buffers by whether they're file backed, then by mode.
+	  (group-not "*special*" (auto-file))
+	  (auto-mode))
+
+	 (group (group-or "Emacs Init"
+					  (dir "~/.emacs.d")
+					  (dir "/usr/share/emacs")
+					  (dir "~/src/emacs")
+					  (dir "~/src/emacs/emacs")
+					  (dir (f-join straight-base-dir "straight" "local-repos"))
+					  (dir "~/src/archive/emacs"))
+			(group  (dir "~/.emacs.d"))
+			(group  (auto-projectile)))
+
+	 (group (group-or "Emacs other"
+					  (dir (f-join straight-base-dir "straight"))
+					  (dir mwb-emacs-work-dir)
+					  (dir "~/src/ThirdParty/emacs-init")
+					  (dir "/Applications/MacPorts/Emacs.app")
+					  (dir "/Applications/MacPorts/EmacsMac.app"))
+			(group (dir (f-join straight-base-dir "straight")) (auto-projectile))
+			(group (dir mwb-emacs-work-dir) (auto-directory))
+			(group (dir "~/src/ThirdParty/emacs-init") (auto-projectile))
+			(group (dir "/Applications/MacPorts"))
+			(auto-projectile))
+
+	 ;; (group (group-or "Emacs" (dir "/usr/share/emacs")
+	 ;; 				   (dir "~/src/emacs")
+	 ;; 				   (dir "~/src/emacs/emacs")
+	 ;; 				   (dir "~/src/archive/emacs")
+	 ;; 				   ;; "editable non init"
+	 ;; 				   (dir mwb-straight-local-repos)
+	 ;; 				   (dir (f-join straight-base-dir "straight"))))
+	 ;; (group-or "Non editable"
+	 ;; 			(dir (f-join straight-base-dir "straight"))
+	 ;; 			(dir mwb-emacs-work-dir))
+
+	 (group (group-or "Config"
+					  (dir "~/SyncServices/Dropbox/env/dotfiles")
+					  (dir '("~/.config" "~/.homesick/repos/main"))
+					  (dir "~/.local/bin"))
+			(auto-directory))
+	 ;; (group
+	 ;;  (auto-parent-project)
+	 ;;  (auto-indirect))
+	 (group
+	  ;; Subgroup collecting buffers in a projectile project.
+      (auto-projectile))
+	 (group
+	  ;; Subgroup collecting buffers in a version-control project,
+	  ;; grouping them by directory.
+      (auto-project))
+	 ;; Group remaining buffers by directory, then major mode.
+	 (auto-directory)
+	 (auto-mode))
+   ))
+#+end_src
+
+#  LocalWords:  bufler ibuffer

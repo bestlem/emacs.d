@@ -232,7 +232,13 @@ Show entities as UTF-8 e.g. \alpha
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220628T143718.867406
 :END:
-e.g.  =verbatim= _underline_ ~code~ /italic/ *bold* +strike-through+
+e.g.
+=verbatim= =
+_underline_ _
+~code~ ~
+/italic/ /
+*bold*  *
++strike-through+ +
 #+NAME: org_mark_mini20.local_20220628T144349.679603
 #+begin_src emacs-lisp :tangle no :noweb-ref org-custom
 (org-hide-emphasis-markers t)

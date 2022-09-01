@@ -121,8 +121,9 @@ Noto mono leaves gaps in vertical lines so no.
 #+NAME: org_mark_mini20.local_20220730T163922.475750
 #+begin_src emacs-lisp
 (defvar mwb-init-variable-font-candidates
-  '("Palatino"
+  '(
 	"Georgia"
+	"Palatino" ; Italic not showing
 	"Times New Roman"
 	)
   "List the possible variable fonts.")

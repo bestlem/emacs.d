@@ -3,17 +3,17 @@
 (declare-function elpaca-generate-autoloads "elpaca")
 (defvar elpaca-directory (expand-file-name "elpaca/" mwb-emacs-work-dir))
 
-(defvar elpaca-mwb-build-dir (expand-file-name
-							  (concat "build-" emacs-version "/elpaca")
-							  elpaca-directory))
+(defvar elpaca-builds-directory (expand-file-name
+								 (concat "build-" emacs-version "/elpaca")
+								 elpaca-directory))
 
 ;; (unless (file-directory-p elpaca-mwb-build-dir)
 ;;   (make-directory elpaca-mwb-build-dir t))
 
 
 (when-let ((elpaca-repo (expand-file-name "repos/elpaca/" elpaca-directory))
-					;(elpaca-build elpaca-mwb-build-dir)
-	   (elpaca-build (expand-file-name "builds/elpaca/" elpaca-directory))
+		   (elpaca-build elpaca-builds-directory)
+		   ;; (elpaca-build (expand-file-name "builds/elpaca/" elpaca-directory))
            (elpaca-target (if (file-exists-p elpaca-build) elpaca-build elpaca-repo))
            (elpaca-url  "https://www.github.com/progfolio/elpaca.git")
            ((add-to-list 'load-path elpaca-target))

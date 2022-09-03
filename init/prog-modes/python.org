@@ -1,0 +1,219 @@
+#+TITLE Emacs configuration org python configuration
+#+PROPERTY:header-args :cache yes :tangle yes  :comments link
+
+This is a minimal setup as not doing any real work.
+
+Look at howardabrams for a more detailed setup.
+Can't choose between elpy and jedi etc.
+
+* Which mode
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220815T132525.351269
+:END:
+Now I used python's python mode not the one in emacs. The latter has been improved and so perhaps I could change
+
+** Issues
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220815T132525.348507
+:END:
+The biggest issue is that the keymap is called the same for both and the last to load is the one used.
+Both using python-mode is a pain.
+
+** Why emacs python
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220815T132525.345640
+:END:
+
+The problem is conda uses pythonic which has a require 'python and so always loads the emacs one.
+And xonsh mode uses python.el as well
+But python.el sets tab-width to 8 for no reason - I found out using drtr-indent which does not load my hook. For an explanation see SO questions [[https://emacs.stackexchange.com/questions/17563/trouble-adjusting-tab-width][simple]] and [[https://stackoverflow.com/q/60123265/151019][more vitriolic]] But so does python-mode.el
+
+So it is a mess
+
+** Fix for code using python-mode
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220823T093136.393267
+:END:
+I note this example for something else
+#+begin_example
+ (or (require 'loaddefs-gen nil 'noerror)
+        (require 'autoload))
+        #+end_example
+So could do that with python-mode then python and then test if a py- variable exists.
+
+** Conclusion
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220815T132525.339507
+:END:
+When really use python then start from elpy or similar. - well maybe not. Not that python-mode has a lot built in.
+
+First patch conda.el and xonsh to other python-mode then if OK leave otherwise look at Microsoft Language Server for full working.
+
+* Python mode
+:PROPERTIES:
+:ID:       org_mark_2020-11-24T21-22-09+00-00_mini12.local:F61D3DCD-D95F-45D0-8D2C-DC2C01096167
+:END:
+Full dancing one from python
+Unfortunately conda and xonsh require the other so I hack them
+
+Other issue is for pure python in hard tab files - something sets the offset to 8 (xonsh-mode seems OK) So if I do more python work I need to sort this out. I have 3 things guessing dtrt which does guess 8, guess-style and python-mode But us python-mode sets tab-with to py-indent-offset then it is py-guess-indent-offset doing the wrong thing.
+
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_26CAE374-0A00-4CBD-A31D-D465AE7AD800
+#+begin_src emacs-lisp :tangle no
+(use-package-elpa python-mode
+  ;;:disabled
+  ;;  add as multiple python-modes so need to force a bit
+  :mode ("\\.py\\'" . python-mode)
+  :interpreter ("python" . python-mode)
+  :bind (:map python-mode-map
+         ("<f5>" . py-execute-buffer)
+         ("C-c C-z" . python-shell))
+  :init
+  (setq py--imenu-create-index-p t)
+  :config
+  (setq org-babel-python-mode 'python-mode)
+  (setq expand-region-preferred-python-mode 'python-mode)
+
+  (defun py-hook-mwb ()
+    ;; (setq tab-width 4)
+    (aggressive-indent-mode -1)
+    (smartparens-mode 1)
+    (guess-style-guess-all)
+    ;; (mwb-prog-auto-fill-80)
+    )
+                                        ;(setq-default python-indent 4)
+                                        ;(setq-default python-indent-offset 4)
+
+  (setq-default pdb-command-name "python3 -m pdb")
+  (setq-default python-shell-interpreter "python3")
+  :custom
+  (py-comment-auto-fill-p t)
+  (py-company-pycomplete-p nil)
+  (py-electric-comment-p t)
+  (py-empty-line-closes-p t)
+  (py-execute-no-temp-p t)
+  (py-imenu-show-method-args-p t)
+  (py-electric-yank-active-p t)
+  (py-prompt-on-changed-p 'nil)
+  (py-smart-indentation t)
+  (py-split-window-on-execute t)
+  (py-split-windows-on-execute-function 'split-window-horizontally)
+  (py-tab-shifts-region-p t)
+  ;; (py-outline-minor-mode-p 'nil)        ; set as tab is not working
+  :hook (python-mode . py-hook-mwb)
+  )
+#+end_src
+
+* Python.el
+:PROPERTIES:
+:ID:       org_mark_2020-11-24T21-22-09+00-00_mini12.local:5313A1ED-609C-49B1-9C6B-C6A1279D4873
+:END:
+One in emacs and has things built on it but not enabled
+#+NAME: org_mark_2020-11-24T21-22-09+00-00_mini12.local_D8E951D0-C15C-4B10-AAC8-8DAF8382B214
+#+begin_src emacs-lisp
+(use-feature python
+  :mode
+  ("\\.py\\'" . python-mode)
+  ("\\.wsgi$" . python-mode)
+
+  :interpreter ("python3" . python-mode)
+
+  :bind ("<f5>" . python-shell-send-buffer)
+  :init
+  (setq-default indent-tabs-mode 't)
+  (setq org-babel-python-mode 'python-mode)
+  (setq expand-region-preferred-python-mode 'python)
+
+  (defun python-hook-mwb ()
+    (setq tab-width 4)
+    (aggressive-indent-mode -1)
+    (smartparens-mode 1)
+    (mwb-prog-auto-fill-80)
+    )
+  :config
+  (setq python-indent-offset 4)
+  (setq python-indent-guess-indent-offset nil)
+  ;; (add-hook 'python-mode-hook 'color-identifiers-mode)
+  :hook (python-mode . python-hook-mwb)
+  )
+#+end_src
+* TODO Org mode
+:PROPERTIES:
+:ID:       org_mark_2020-11-11T11-24-14+00-00_mini12.local:9705EACE-A73F-41E3-A5AB-8FD2BAB849B5
+:END:
+Need to set up execute (here or at start)
+* Xonsh
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:62195329-D8AA-4CC1-B7F4-4570BBDCF3A8
+:END:
+There is now a xonsh mode
+I modified to use python's python-mode
+  #+NAME: org_mark_mini20.local_20220815T132525.327650
+  #+begin_src emacs-lisp
+(use-package-elpa xonsh-mode
+  :straight (:fork (:repo "bestlem/xonsh-mode" :branch "python-mode")
+			 :local-repo "../local-repos/xonsh-mode")
+  :mode "\\.xsh\\'"
+  :init
+  ;; Need to hard code and not copy python as python.el sets in python-mode
+  ;; which is called after xonsh-mode
+  (add-to-list
+   'hs-special-modes-alist
+   '(xonsh-mode
+     "\\s-*\\_<\\(?:def\\|class\\)\\_>"
+     ;; Use the empty string as end regexp so it doesn't default to
+     ;; "\\s)".  This way parens at end of defun are properly hidden.
+     ""
+     "#"
+     python-hideshow-forward-sexp-function
+     nil))
+  )
+  #+end_src
+
+
+
+* Conda
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210127T110448.829285
+:END:
+Might be better in elpy etc as for the pythonic issue.
+Take this out until I do python again. conda.el uses pythonic-activate and that calls emacs's own python.
+#+NAME: org_mark_mini20.local_20210127T110448.825291
+ #+begin_src emacs-lisp :tangle no
+(use-package-elpa conda
+  :straight (:fork (:repo "bestlem/conda.el" :branch "python-mode")
+			 :local-repo  "../local-repos/conda.el")
+  :demand
+  :after (any python python-mode)
+  :commands conda-env-activate
+  :init
+  (setq conda-anaconda-home (expand-file-name "~/miniconda3/"))
+
+  :config
+  ;; If you want interactive shell support, include:
+
+  ;; MWB well no as it messes up xonsh
+  ;; (conda-env-initialize-interactive-shells)
+
+  ;; If you want eshell support, include:
+                                        ;(conda-env-initialize-eshell)
+
+  ;; In effect no as dirs are not a 1-1 match for envs
+  ;; If you want auto-activation, include:
+  ;; (conda-env-autoactivate-mode t)
+
+  ;; Activate the project/virtual env you want to use.
+  ;; Via M-x conda-env-activate RET analyticd-pysystemtrade
+  ;; or
+  ;; (conda-env-activate "analyticd-pysystemtrade")
+  ;; (conda-env-activate "base")
+
+  ;; we need a setup - e.g. code-snippets
+  ;; (conda-env-activate (if (equal (file-name-nondirectory explicit-shell-file-name)
+  ;;                                "xonsh")
+  ;;                         "xonsh"
+  ;;                       "base"))
+  ;; (setq-default mode-line-format
+  ;;               (cons mode-line-format '(:exec conda-env-current-name)))
+  )
+  #+end_src

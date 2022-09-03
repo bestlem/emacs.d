@@ -1,0 +1,73 @@
+#+TITLE Emacs configuration - lisp
+#+PROPERTY:header-args :cache yes :tangle yes  :comments link
+#+STARTUP: content
+* Lisp running environments
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:E97B88C8-A249-4DEC-BAE3-41153EA01D6C
+:END:
+These are for all () languages but could extend to more as many things are for all structured ASTs or simply brackets.
+** Add lisp interaction mode
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:A16BFB14-4F82-4EB0-B023-7A33C85B0A60
+:END:
+*** Lispy
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:D552CE38-20B0-4316-93B7-8882FF8564E9
+:END:
+Set compat so that the keys for these modes work. But macrostep does not - see its hydra
+#+NAME: org_mark_mini20.local_20211031T180900.567355
+#+begin_src emacs-lisp
+(use-package-elpa lispy
+  :commands lispy-mode
+  :bind (:map lispy-mode-map
+		 ("<backspace>" . lispy-delete-backward))
+  :init
+  (setq lispy-visit-method 'projectile
+		lispy-safe-copy t
+		lispy-safe-paste t
+		lispy-safe-delete t
+		lispy-safe-actions-no-pull-delimiters-into-comments t)
+  :custom (lispy-eval-display-style "overlay")
+  :config
+  (setq lispy-compat '(edebug macrostep)
+		lispy-safe-paste t)
+  (diminish 'eldoc-mode)
+  (bind-key mwbkey-delete 'lispy-delete lispy-mode-map)
+  :hook (lispy-mode . turn-off-smartparens-mode))
+	 #+end_src
+*** Get lispy test working
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:E0166176-C140-490E-97BD-236630509D5C
+:END:
+It assumes things like clojure
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_40BCC324-5430-4939-9EA3-7F0E0F4A5F4F
+#+begin_src emacs-lisp
+(use-package-elpa clojure-mode
+  :disabled
+)
+#+end_src
+*** and interaction hydra and easier key bindings
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:E63D4DBA-0F28-4311-8FC8-2D387D350185
+:END:
+Changes are now made directly to the package which is only now here
+#+NAME: org_mark_mini20.local_20210829T122427.146425
+#+begin_src emacs-lisp
+(use-feature lispy-mnemonic
+  :mwb-load-path "site-lisp/lispy-mnemonic"
+  ;; :init (lispy-mode 1)
+  :commands lispy-mnemonic-mode
+  :init
+  (mwb-add-hook-fn (mwb-lisp-hooks) #'lispy-mnemonic-mode ))
+ #+end_src
+** Evaluation
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:1A57188F-FBC8-400C-BBB4-740993B7481D
+:END:
+Instead of displaying the results in a separate buffer (like the iElm does), The [[https://github.com/xiongtx/eros][EROS project]] displays the results temporarily  /in the buffer/ in an overlay.  No need to do anything special:
+However it does it by remapping the eval keys so interferes with lispy so need to sort that out. Best idea is make it one of the possible parts of lispy-mnemonic eval. lispy itself users cider to do this but I don't use Clojure. lispy now does this itself.
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_815540E7-FB45-497F-859D-E916895E98AC
+#+BEGIN_SRC emacs-lisp
+(use-package-elpa eros
+  :commands eros--eval-overlay)
+#+END_SRC

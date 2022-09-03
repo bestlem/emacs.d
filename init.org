@@ -1,0 +1,535 @@
+#+ TITLE minimal emacs startup
+#+PROPERTY:header-args :tangle yes :comments link
+#+STARTUP: content
+
+* Implement init preload (early-init.el)
+:PROPERTIES:
+:header-args:    :tangle early-init.el :comments link
+:ID:       org_mark_2020-09-28T01-08-28+01-00_mini12.local:0952DED1-1095-4176-8826-251CEE37BDB2
+:END:
+
+Emacs 27 introduces early-init.el to go stuff before the graphics - basically package and some gui suppression
+
+** TODO Startup
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:B524CE3C-6A8D-49DA-85A5-8504DC43F0D6
+:END:
+These are speedup and safety changes but note that  Aquamacs has probably already taken most of the time.
+
+Elisps and init files have two ways of doing this. One is to put the whole init inside a let block but I want each src block to be runnable from the org file so not good. The other is to set and copy old values at the beginning then use an end hook to put them back. A long term alternative is to make the loader function do that work.
+
+The time is probably not that useful - build on Aquamacs instead and there is an emacs profiler. (the profiler for startup files only really work if there is one init file) I did get the Aquamacs nightly and that is much slower and displaying menus is an issue. I have changed accessibility in System Preferences->Privacy so we will see. Probably wait until emacs 27 is out and use a plain emacs and see about spell checking
+
+The file-name-handler-alist is probably needed as some of the hooks slow things heavily
+
+This is from [[ https://github.com/jwiegley/dot-emacs/blob/master/init.el#L1013][John Wiegley]]
+Also from doom via https://github.com/xenodium/dotsies/blob/main/emacs/early-init.el
+ #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_EC7FD451-253D-4F87-90DC-AD484305487F
+ #+begin_src emacs-lisp
+ ;;(defconst emacs-start-time (current-time))
+
+ (defvar file-name-handler-alist-old file-name-handler-alist)
+
+ (setq file-name-handler-alist nil
+	   message-log-max 16384
+	   gc-cons-threshold 402653184
+	   gc-cons-percentage 0.6
+	   auto-window-vscroll nil)
+ #+end_src
+
+** Directories
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220616T101718.182125
+:END:
+Some of this needs to be here as package and eln-cache are used early.
+
+We need to sort out paths - ideally after init timers etc but we also need them to load early-init so timer is less accurate but then it is wrong for aquamacs anyway
+*** Set where the init file is
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:5F44E496-0565-4D23-9D8B-128A663B9280
+:END:
+In constant mwb-user-emacs-directory
+#+NAME: org_mark_mini20.local_20220521T104243.397754
+#+begin_src emacs-lisp
+;; Need the directory from here.
+(defconst mwb-user-emacs-directory
+  (file-name-directory (or load-file-name buffer-file-name)))
+#+end_src
+*** Other emacs files
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220616T101718.179659
+:END:
+We want some stuff not under .emacs.d so if on dropbox then this is not.
+This is the root position.
+#+NAME: org_mark_mini20.local_20220616T101718.145323
+#+begin_src emacs-lisp
+(defvar mwb-emacs-work-dir (expand-file-name "~/.local/emacs" )
+  "Directory on local machine wwhere emacs outside start directory.")
+#+end_src
+*** Eln-cache - native compile
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220605T094912.471464
+:END:
+This could be moved outside of .emacs.d - When I use multiple machines etc.
+See https://github.com/jimeh/.emacs.d/blob/master/early-init.el and jerrypnz
+NOTE the method for setting the eln-cache dir depends on the emacs version.
+#+NAME: org_mark_mini20.local_20220616T101718.152005
+#+begin_src emacs-lisp
+(defvar mwb-emacs-eln-cache-dir
+  (expand-file-name "eln-cache" mwb-emacs-work-dir))
+(make-directory mwb-emacs-eln-cache-dir t)
+
+(when (>= emacs-major-version 28)
+  (if (fboundp 'startup-redirect-eln-cache)
+	  (startup-redirect-eln-cache mwb-emacs-eln-cache-dir)
+	(add-to-list 'native-comp-eln-load-path mwb-emacs-eln-cache-dir)))
+#+end_src
+Ignore warnings as we can't do much about them as most code is not written by me.
+#+NAME: org_mark_mini20.local_20220701T091932.459484
+#+begin_src emacs-lisp
+(setq native-comp-async-report-warnings-errors 'silent)
+#+end_src
+*** Where my init code is
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:F550A4FA-B16B-4FD2-B11F-9F7DB4F82859
+:END:
+  See [[http://ergoemacs.org/emacs/organize_your_dot_emacs.html][Xah Lee get directory name for file]] for possible work around for user-emacs-directory. Except in some cases I do want the directory so break it up
+  #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_86BD52C1-8055-4BB2-834D-2F088719C835
+  #+begin_src emacs-lisp
+(defun mwb-user-emacs-file (name)
+	"Return an absolute per-user Emacs-specific file name around where the init file is.
+  It is basically locate-user-emacs-file but I have followed Aquamacs is setting that not where my init.el file is.
+  Main reason to use is so that I can put init under version control and the rest go elsewhere."
+	(expand-file-name name mwb-user-emacs-directory))
+  #+end_src
+*** Package manager
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220614T202601.874691
+:HEADER-ARGS: :tangle no
+:END:
+**** Set paths
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210625T123956.569254
+:HEADER-ARGS: :tangle no
+:END:
+Set the path to packages
+#+NAME: org_mark_2020-09-28T01-08-28+01-00_mini12.local_0E90CFE6-BBAC-4DA3-8461-12811764098F
+#+begin_src emacs-lisp
+(setq package-user-dir
+      (expand-file-name
+       (format "elpa/%s" emacs-major-version) mwb-user-emacs-directory))
+#+end_src
+**** Set package quickload by version
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210625T123956.568444
+:END:
+#+NAME: org_mark_mini20.local_20210625T123956.553714
+#+begin_src emacs-lisp
+(setq package-quickstart-file
+	  (expand-file-name
+	   (format "package-quickstart.%d.el" emacs-major-version)
+	   mwb-user-emacs-directory))
+#+end_src
+** Package
+:PROPERTIES:
+:ID:       org_mark_2020-09-28T01-08-28+01-00_mini12.local:D069442D-B7AF-4771-800A-87C4F3376AF0
+:END:
+Package initialize occurs automatically, before `user-init-file' is loaded, but after `early-init-file'. emacs handles package initialization, so we must prevent Emacs from doing it early!
+But if using package we do want it done - early-init turn off is for straight.el etc
+#+NAME:
+*** Straight
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220614T202654.959342
+:END:
+#+NAME: org_mark_mini20.local_20220614T202654.939619
+#+begin_src emacs-lisp
+(setq package-enable-at-startup nil)
+#+end_src
+
+** Graphical suppression
+:PROPERTIES:
+:ID:       org_mark_2020-09-28T01-08-28+01-00_mini12.local:11552906-7CE1-4A2D-90DF-111015341ACB
+:END:
+Fiddle with suppressing graphics. I do want some of these
+#+NAME: org_mark_2020-09-28T01-08-28+01-00_mini12.local_19B4CE88-E1D4-4E44-91B7-AD3D8E74C2D3
+#+begin_src emacs-lisp
+;;(menu-bar-mode -1)
+(unless (and (display-graphic-p) (eq system-type 'darwin))
+  (push '(menu-bar-lines . 0) default-frame-alist))
+(push '(tool-bar-lines . 0) default-frame-alist)
+;;(push '(vertical-scroll-bars) default-frame-alist)
+(setq tool-bar-mode nil)
+(setq mode-line-format nil)
+#+end_src
+*** Frame size change on font
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220605T094912.469185
+:END:
+From doomemacs
+Resizing the Emacs frame can be a terribly expensive part of changing the font. By inhibiting this, we easily halve startup times with fonts that are larger than the system default.
+#+NAME: org_mark_mini20.local_20220605T094912.452123
+#+begin_src emacs-lisp
+(setq orig-frame-inhibit-implied-resize frame-inhibit-implied-resize)
+(setq frame-inhibit-implied-resize t)
+#+end_src
+
+** Emacs lisp
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210810T184947.222205
+:END:
+Control a bit of loading
+*** Use source where newer
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210810T184947.221385
+:END:
+This variable tells Emacs to prefer the .el file if itq’s newer, even if there is a corresponding .elc
+#+NAME: org_mark_mini20.local_20210811T183548.057306
+#+begin_src emacs-lisp
+(setq load-prefer-newer t)
+#+end_src
+
+* Implement init environment (init.el)
+:PROPERTIES:
+  :header-args:    :tangle init.el :comments link
+  :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:026AF0E8-C6EC-470F-906D-602EF7F08477
+  :END:
+All this is tangled into init.el which is also under git.
+
+** Early init
+:PROPERTIES:
+:ID:       org_mark_2020-09-28T01-08-28+01-00_mini12.local:4AA8B45F-675E-4673-91C4-D60292B1B349
+:END:
+For Emacs < 27 we need early -init. All my fancy directory stuff is in early-init so we don't know where to find this so hard code :(
+#+NAME: org_mark_2020-09-28T01-08-28+01-00_mini12.local_E7D671F1-9D29-4FF6-A8E5-8884826E6E4B
+#+begin_src emacs-lisp
+(when (version< emacs-version "27")
+  (load (expand-file-name "~/.emacs.d/early-init")))
+#+end_src
+** package
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:A5028037-4023-4BE2-AFD4-68CCEDF2F249
+:END:
+As this is now ~/.emacs.d/init.el and not in ~/Library/Preferences Emacs sees this as startup and adds the package-initialise. So need to add here to stop init.el changing and being see in github
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_B623E658-A6AA-46DF-AD9C-6EAC3BDC1BEE
+#+begin_src emacs-lisp :tangle no
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+;(package-initialize)
+#+end_src
+** Debugging
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220606T145002.757242
+:END:
+
+This slows things down so for debugging outside init. but I now don't like Backtrace mainly as trying to use emacs not edit it.
+However  for debugging init we don't want the backtrace
+*** Elisp
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220606T145002.756442
+:END:
+Set for init - can chang in init-mwb-hook-after-init.
+Later toggles in main hydra.
+#+NAME: org_mark_mini20.local_20220606T145002.735412
+#+begin_src emacs-lisp
+;;  setting to nil turns them off
+(setq debug-on-error t)
+;; (setq debug-on-error nil)
+										;(setq debug-on-quit nil)
+
+#+end_src
+*** use-package
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220606T145002.755825
+:END:
+True adds staistics - only set to nil when I actually use emacs and not just fiddle with init.
+#+NAME: org_mark_mini20.local_20220606T145002.738615
+#+begin_src emacs-lisp
+(setq init-file-debug 'nil)
+(setq init-file-debug t)
+ #+end_src
+*** Trace
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220606T145002.754955
+:END:
+#+NAME: org_mark_mini20.local_20220606T145002.738947
+#+begin_src emacs-lisp :tangle no
+;; Trace some function
+;; (require 'trace)
+;; (untrace-all)
+;; (trace-function-foreground 'iso-transl-define-keys)
+#+end_src
+*** Profiler
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220606T145002.753652
+:END:
+#+NAME: org_mark_mini20.local_20220606T145002.739139
+#+begin_src emacs-lisp :tangle no
+;; (require 'profiler)
+;; (profiler-start 'cpu+mem)
+;; (add-hook-lambda after-init-hook (profiler-stop))
+#+end_src
+
+*** Message
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:3247611A-A6FB-40F6-9BB1-7B0772C213DE
+:END:
+Show message with timestamp - commented out
+#+NAME: org_mark_mini20.local_20220313T215512.598628
+#+begin_src emacs-lisp
+(defvar mwb-message-offset (float-time) "Time of last message")
+
+(defun my-message-with-timestamp (old-func fmt-string &rest args)
+  "Prepend current timestamp (with microsecond precision) to a message"
+  (apply old-func
+         (concat (format-time-string "[%F %T] ")
+                 fmt-string)
+         args))
+
+(defun my-message-with-timediff (old-func fmt-string &rest args)
+  "Prepend difference in time to a message"
+
+  (let* ((now (float-time))
+         (diff (- now mwb-message-offset)))
+    (setq mwb-message-offset now)
+    (apply old-func
+           (if (> diff 0.1)
+               (concat (format "[%g] " diff)
+                       fmt-string)
+             fmt-string)
+           args)))
+
+(advice-add 'message :around #'my-message-with-timediff)
+
+(defun mwb-message-remove-timediff ()
+  (interactive)
+  (advice-remove 'message #'my-message-with-timediff)
+  (message "remove timestamp"))
+
+(defvar mwb-message-timestamp 'nil "true iff message should show timestamp")
+
+(defun toggle-mwb-message-timestamp ()
+  (interactive)
+  (if mwb-message-timestamp
+      (progn
+        (advice-remove 'message #'my-message-with-timestamp)
+        (setq mwb-message-timestamp 'nil)
+        (message "remove timestamp"))
+    (advice-add 'message :around #'my-message-with-timestamp)
+	(setq mwb-message-timestamp t)
+    (message "add timestamp")))
+
+(add-hook 'after-init-hook 'mwb-message-remove-timediff)
+;; (message "test")
+#+end_src
+** Code to do loading
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:3A4B05D6-A440-46F1-8A2F-1AFF3B0CAA2D
+:END:
+  Need to get the correct directory
+
+  Function to load the code for this part of the init.
+  Currently it just loads the .el of that name so could just be (load "mwb-init-load"). I now tangle all org-mode buffers on save. Eventually it will get the data from mwb-init-load.org and tangle it and use that.
+
+*** Helper functions
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:438D5698-5B55-4E44-8E21-3F2F1FDC8DBF
+:END:
+Thse are required elisp for initialisation
+
+**** Non org mode expander
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:7F3FFC0C-4CF3-45B1-B0DB-C268A0350E9D
+:END:
+This is from nullman's init files]]  withn a rename to show it is not part of org.
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_315EE687-FC28-4D41-810D-4FF19AA66CD4
+#+begin_src emacs-lisp
+
+(defun nullman/org-babel-generate-elisp-file (file &optional byte-compile force)
+  "Generate an emacs-lisp file from an org-babel FILE.
+
+Additionally, byte compile the file if BYTE-COMPILE is
+non-nil.
+
+Process file even if timestamp is not newer than target if FORCE
+is non-nil."
+  (let* ((case-fold-search t)
+         (file-base (expand-file-name (file-name-sans-extension file)))
+         (file-org (concat file-base ".org"))
+         (file-elisp (concat file-base ".el"))
+         (file-comp (concat file-base ".elc"))
+         (heading-regexp "^\*+ ")
+         (heading-comment-regexp "^\*+ COMMENT ")
+         (begin-regexp "^[ \t]*#\\+BEGIN_SRC emacs-lisp")
+         (begin-tangle-regexp "^[ \t]*#\\+BEGIN_SRC .*:tangle ")
+         (end-regexp "^[ \t]*#\\+END_SRC")
+         (indent-regexp "^  "))
+    ;; generate elisp file if needed
+    (when (or force
+              (not (file-exists-p file-elisp))
+              (file-newer-than-file-p file-org file-elisp))
+      (message "Nullman Writing %s..." file-elisp)
+      (with-temp-file file-elisp
+        (insert-file-contents file)
+        (goto-char (point-min))
+        (let (code
+              headings-counts
+              (level 1)
+              (comment-level 0)
+              (end-comment ""))
+          (while (not (eobp))
+            (cond
+             ;; comment heading
+             ((let ((case-fold-search nil))
+                (looking-at heading-comment-regexp))
+              (setq level (/ (- (match-end 0) (line-beginning-position) 8) 2))
+              (when (or (zerop comment-level)
+                        (< level comment-level))
+                (setq comment-level level))
+              (delete-region (line-beginning-position) (progn (forward-line) (point))))
+             ;; normal heading
+             ((looking-at heading-regexp)
+              (setq level (/ (- (match-end 0) (line-beginning-position)) 2))
+              (when (or (zerop comment-level)
+                        (<= level comment-level))
+                (setq comment-level 0)
+                (if (assoc level headings-counts)
+                    (setf (cdr (assoc level headings-counts))
+                          (cons (buffer-substring-no-properties (match-end 0) (line-end-position)) 1))
+                  (setq headings-counts (append headings-counts (list (cons level (cons "No heading" 1)))))))
+              (delete-region (line-beginning-position) (progn (forward-line) (point))))
+             ;; start of tangled source block
+             ((and (looking-at begin-regexp)
+                   (zerop comment-level)
+                   (not (looking-at begin-tangle-regexp))) ; skip blocks with their own tangle directive
+              (let* ((heading-count (cdr (assoc level headings-counts)))
+                     (heading (car heading-count))
+                     (count (cdr heading-count)))
+                (delete-region (line-beginning-position) (progn (forward-line) (point)))
+                (unless (bobp)
+                  (newline))
+                ;; (when (fboundp 'org-link-escape)
+                ;;   (insert (format ";; [[file:%s::*%s][%s:%s]]\n" file-org (org-link-escape heading) heading count))
+                ;;   (setq end-comment (format ";; %s:%s ends here\n" heading count))
+                ;;   (cl-incf (cddr (assoc level headings-counts))))
+                (setq code t)))
+             ;; end of tangled source block
+             ((and code
+                   (looking-at end-regexp))
+              (delete-region (line-beginning-position) (progn (forward-line) (point)))
+              (insert end-comment)
+              (setq code nil
+                    end-comment ""))
+             ;; inside tangled source block
+             (code
+              (when (looking-at indent-regexp)
+                (delete-char (if (boundp 'org-edit-src-content-indentation)
+                                 org-edit-src-content-indentation
+                               2)))
+              (forward-line))
+             ;; outside tangled source block
+             (t
+              (delete-region (line-beginning-position) (progn (forward-line) (point))))))
+          (time-stamp))
+        (message "Nullman Wrote %s..." file-elisp)))
+
+    ))
+#+end_src
+
+**** The loader
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:E5C792B6-CEE6-49E0-BB4B-F0C9636159E8
+:END:
+ Actually load the init files, protect is aquamacs macro to carch errors also see [[https://emacs.stackexchange.com/a/671/9874][Stack Exchange answer]]
+***** Internal loader function
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210126T224850.541695
+:END:
+Does the actual work
+
+#+NAME: org_mark_mini20.local_20210126T224850.526804
+#+begin_src emacs-lisp
+(setq mwb-esup-depth 1)                 ; Some attempt at benchmarking
+
+(defun mwb-init--load (file-root-abs &optional no-org)
+  "Load the relevant code.
+<file-root> is an absolute file root
+Look for <file-root>.org and <file-root>.el files.
+If org and no el or org file is newer then retangle the org file if noorg is not nil then use nullmans expand then load <file-root>.el "
+  (let* ((org-file
+          (concat file-root-abs ".org"))
+         (el-file
+          (concat file-root-abs ".el")))
+    (setq esup-depth mwb-esup-depth)
+    ;; (setq esup-child-max-depth mwb-esup-depth )
+    (setq esup-child-current-depth 0)
+    (when (file-newer-than-file-p org-file el-file)
+	  ;; (let ((org-att (file-attributes org-file) )
+	  ;; 		(el-time (file-attribute-access-time el-file))
+	  ;; 		(org-time (file-attribute-access-time org-att)))
+	  ;; 	(message "Generating .el from org for <%s> times %s %s"
+	  ;; 			 file-root-abs
+	  ;; 			 org-time
+	  ;; 			 el-time
+	  ;; 			 ))
+      (cond (no-org
+             (message "tangle <%s> to <%s> using regex replacement not org mode"
+                      org-file el-file)
+             (nullman/org-babel-generate-elisp-file org-file el-file))
+            (t
+             (require 'org)
+             (message "This loaded an org mode but from the system - best to restart")
+             (message "tangle <%s> to <%s> using org version %s"
+                      org-file el-file org-version)
+             (org-babel-tangle-file org-file el-file))))
+
+    (condition-case err
+        (load el-file)
+      (error (let ((msg (format-message "Error loading %s: \"%s\""
+                                        el-file
+                                        (error-message-string err))))
+               (warn msg)
+               (message msg))))))
+#+end_src
+***** Load one file
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210126T224850.540945
+:END:
+Use in the main init
+#+NAME: org_mark_mini20.local_20210126T224850.527570
+#+begin_src emacs-lisp
+(defun mwb-init-load (file-root &optional no-org)
+  (mwb-init--load (expand-file-name file-root mwb-user-emacs-directory) no-org))
+#+end_src
+***** Load all the files from a directory.
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210126T224850.539290
+:END:
+Perhaps might need to sort by length as - is before . so lisp.org loads after lisp-emacs.org. Currently use _ as separator.
+#+NAME: org_mark_mini20.local_20210126T224850.527835
+#+begin_src emacs-lisp
+(defun mwb-init-load-directory (rel-dir-name)
+  "Load up all the files using the init loaded from a directory"
+  (let* ((directory-name (expand-file-name rel-dir-name mwb-user-emacs-directory))
+         (files (directory-files
+                 directory-name
+                 nil
+                 (rx-to-string '(seq any ".org" eol)))))
+
+    (dolist (f files)
+      (mwb-init--load (expand-file-name (file-name-sans-extension f) directory-name)))))
+#+end_src
+** The Load
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220613T182746.504886
+:END:
+Also switch between an alternate setup - ideally should be driven from command line but.....
+
+#+NAME: org_mark_mini12.local_20201213T195905.304356
+#+begin_src emacs-lisp
+(when (>= emacs-major-version 27)
+  ;; (load (concat (expand-file-name "alt/alt_init" mwb-user-emacs-directory) ".el"))
+  ;;(load (concat (expand-file-name "alt/straight" mwb-user-emacs-directory) ".el"))
+  (mwb-init-load "config" "no-org"))
+#+end_src

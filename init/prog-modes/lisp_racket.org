@@ -1,0 +1,303 @@
+#+TITLE:Racket
+#+AUTHOR: Mark Bestley
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+STARTUP: overview
+
+* Implementation of mode
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210830T195229.448446
+:END:
+Structure - as this is controlling a major mode which is called on load then autoloads aren't really needed so can put functions etc in config - as shown by originally racket-support.elsewhere
+* Issues
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201221T122900.930444
+:END:
+*** racket-unicode-input-method-enable
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201221T122900.928787
+:END:
+Tried hook for racket-unicode-input-method-enable but this conflicks with lispy.
+
+Got odd behaviour on completion last letter underlined and stuff in echo area, it took me a long time to see it was all greek - it was quail - used for racket-unicode-input-method-enable to allow you to enter Greek letters
+*** TODO Unicode
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201213T235255.178814
+:END:
+The racket-mode version seems to invoke quail which confused me - it might stop company but I am not sure
+Also see [[https://github.com/david-christiansen/dr-racket-like-unicode/blob/master/dr-racket-like-unicode.el][this mode]] that can do a completion - also look at abbrev
+Trying company math ie //gamma
+Now see rfc completion in cape. Basically &<letter>*
+*** Completions
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201221T122900.927064
+:END:
+Ok I lose the :with of having yasnippet and racket mode completions but get one or the other which is acceptable. In effect yasnippet if not in a form and racket elsewhere. (Strictly racket first then if none yasnippet )
+*** smart editing
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210830T195229.445424
+:END:
+Change from lispy to smartparens. The delete-selection issue is too much. I keep typing on a selected region
+And back again: 😤
+But formatting is a problem
+*** Help/describe
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220714T143350.714361
+:END:
+The ~racket-xp-describe~ cannot find things if in typed racket so need to help the interim screen.
+
+* Racket mode load
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201221T122900.924619
+:END:
+Break up so code can be tested but also allow weaving.
+This is the minimal setup and does not need changing
+
+#+NAME: org_mark_mini12.local_20201213T220930.519021
+#+begin_src emacs-lisp
+(use-package-elpa racket-mode
+  :bind (:map racket-mode-map
+		 ("<f5>" . racket-mwb-run-hydra)
+		 ("<C-f5>" . racket-mwb-run)
+		 ("s-<f5>" . racket-mwb-raco-all-tests)
+		 ("S-<f5>" . racket-mwb-raco-test)
+		 ("M-l" . racket-insert-lambda)
+		 ("M-`" . racket-insert-lambda)
+		 ;; ("<C-return>" . eir-eval-in-racket)
+		 ("<f6>" . racket-send-definition)
+		 ("<C-return>" . racket-mwb-send-to-repl)
+										;("H-A" . hydra-paredit/body)
+		 :map racket-repl-mode-map
+		 ("<f5>" . racket-mwb-run-hydra)
+		 ("M-l" . racket-insert-lambda)
+	     ("<f1> <f1>" . racket-repl-describe)
+		 :map racket-xp-mode-map
+		 ("<f1> <f1>" . racket-xp-describe)
+		 ("<f8>"  . racket-xp-next-error)
+		 :map racket-describe-mode-map
+		 ("<f1>" . racket-describe-search)
+		 )
+  :mode (rx (seq ".racket" string-end))
+  :init
+  (setq racket-program "/Applications/Racket v8.5/bin/racket"
+        racket-images-inline t)
+  (setq racket-repl-buffer-name-function
+        #'racket-repl-buffer-name-project)
+  ;; From   https://stackoverflow.com/questions/37571164/emacs-company-mode-completion-not-working
+  (defun my-racket-mode-hook ()
+    (my-all-racket-mode-hook)
+	(racket-xp-mode)
+    (setq-local completion-at-point-functions
+				(list
+				 (cape-super-capf
+				  (cape-company-to-capf #'company-yasnippet)
+				  #'racket-xp-complete-at-point
+				  #'cape-dabbrev)
+				 #'cape-sgml
+				 )
+				;; cape-dabbrev-min-length 5
+				)
+	)
+
+  (defun my-all-racket-mode-hook ()
+	;;(smartparens-strict-mode 1)
+	;; (racket-unicode-input-method-enable)
+	(racket-mwb-smart-open-bracket-mode))
+
+  (defun racket-mwb-send-to-repl ()
+	"Send region or last sexp"
+	(if (region-active-p)
+		(racket-send-region)
+      (racket-send-last-sexp)))
+
+  ;;  This is broken as it used racket internals - maybe racket itself
+  ;;(require 'eval-in-repl-racket)
+
+  :hook
+  (racket-mode . my-racket-mode-hook)
+  (racket-repl-mode . my-all-racket-mode-hook))
+#+end_src
+* After load
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210429T080050.292908
+:END:
+Set this up so can use weave to load extra code. Originally in a .el file but I want to see commenting.
+#+NAME: org_mark_mini20.local_20210429T080050.281031
+#+begin_src emacs-lisp
+(with-eval-after-load 'racket-mode
+  <<config>>
+  )
+#+end_src
+** racket smart open bracket
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20210104T233820.588011
+:END:
+Modified to deal with lispy - lispy does not quite do it e.g. [ on a region does not leave space after (
+#+NAME: org_mark_mini12.local_20210104T233820.572671
+#+begin_src emacs-lisp
+(use-feature racket-mwb-smart-open
+    :after racket-mode
+    :demand t
+    :diminish racket-mwb-smart-open-bracket-mode)
+#+end_src
+
+** Racket test and run
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210427T091817.214065
+:END:
+I want to add the flags to racket-test to deal with "Context (plain; to see better errortrace context, re-run with C-u prefix):". This means calling racket--repl-run.
+When it works best to add as issue to the mode
+
+*** Run all tests
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210429T083233.526375
+:END:
+Runs all the test modules in the directory  using raco test -drdr
+#+NAME: org_mark_mini20.local_20210429T083233.512138
+#+begin_src emacs-lisp :tangle no :noweb-ref config
+(defun racket-mwb-raco-all-tests ()
+  "Do \"raco test --drdr .\" in a shell buffer to run the
+  \"test\" submodules of all in the current directory."
+  (interactive)
+  (mwb-projectile-save-project-buffers)
+  (racket--shell
+   (concat
+	"racket -l raco test --drdr "
+	(projectile-project-root))))
+#+end_src
+
+*** Test as file
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210429T083346.614112
+:END:
+Run test via raco
+#+NAME: org_mark_mini20.local_20210429T083346.597384
+#+begin_src emacs-lisp :tangle no :noweb-ref config
+(defun racket-mwb-raco-test ()
+  "Run current buffer through raco test but save buffers first"
+  (interactive)
+  (mwb-projectile-save-project-buffers)
+  (racket-raco-test))
+#+end_src
+*** Clear REPL buffer
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210507T225817.527094
+:END:
+#+NAME: org_mark_mini20.local_20210507T225817.512408
+#+begin_src emacs-lisp :tangle no :noweb-ref config
+(defun racket-mwb-clear-repl ()
+  (pcase (get-buffer "*Racket REPL*")
+	('() nil) ;; <=======
+	(buf (with-current-buffer buf
+		   (comint-kill-region (point-min) (point-max))
+		   ;; (delete-region (point-min) (point-max))
+		   ))))
+#+end_src
+*** Test frame
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210505T133138.746429
+:END:
+Main function to run tests - takes parameter to denote how deep to instrument.
+#+NAME: org_mark_mini20.local_20210505T133138.731277
+#+begin_src emacs-lisp :tangle no :noweb-ref config
+(defun racket-mwb--test (instrument-level)
+  "Run the \"test\" submodule.
+
+ A mix of racket-run and racket-test but also zapping the REPL buffer"
+  (interactive)
+  (mwb-projectile-save-project-buffers)
+  (racket-mwb-clear-repl)
+  (let ((mod-path (list (racket--buffer-file-name) 'test))
+		(buf (current-buffer)))
+	(racket--repl-run mod-path '() instrument-level)))
+#+end_src
+***  Test with error trace
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210504T162256.000938
+:END:
+Run tests with error context to show error. This will slow running down so is not the default.
+#+NAME: org_mark_mini20.local_20210504T162255.984619
+#+begin_src emacs-lisp :tangle no :noweb-ref config
+(defun racket-mwb-test-errortrace ()
+  "Run the \"test\" submodule. with errortrace"
+  (interactive)
+  (racket-mwb--test 'high))
+#+end_src
+***  Test
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210505T133138.745214
+:END:
+Run tests with no error context to show error.
+#+NAME: org_mark_mini20.local_20210505T133138.732464
+#+begin_src emacs-lisp :tangle no :noweb-ref config
+(defun racket-mwb-test ()
+  "Run the \"test\" submodule. "
+  (interactive)
+  (racket-mwb--test 'medium))
+#+end_src
+*** Run hydra
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210504T113432.050129
+:END:
+#+NAME: org_mark_mini20.local_20210504T113432.039283
+#+begin_src emacs-lisp :tangle no :noweb-ref config
+(pretty-hydra-define hydra-racket-run
+  (:foreign-keys run
+                 :title (mwb-icon-string "rkt" "Racket Run")
+                 :quit-key "<f12>"
+                 :exit t)
+  ("Test"
+   (("<f4>" racket-mwb-raco-all-tests  "Run all Tests across files")
+	("<f5>" racket-test "Test")
+    ("<f6>" racket-mwb-test-errortrace "Test Errortrace"))
+   "Run"
+   (("<f9>" racket-run-and-switch-to-repl "run and REPL")
+    ("<f7>" racket-run "Run")
+    ("<f8>" racket-run-with-errortrace "Run with errortrace")
+	("<f9>" racket-run-with-debugging "Run with debugging"))
+   "Quit"
+   (("<f12>" nil "Quit" :exit t))))
+#+end_src
+*** Run a hydra
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210504T113432.048691
+:END:
+We want to save the current project and then do something
+#+NAME: org_mark_mini20.local_20210504T113432.039755
+#+begin_src emacs-lisp :tangle no :noweb-ref config
+(defun racket-mwb-run-hydra ()
+  (interactive)
+  (mwb-projectile-save-project-buffers)
+  (hydra-racket-run/body))
+#+end_src
+** Hydra for mode
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210428T110325.379266
+:END:
+Provide something to hang all things off.
+#+NAME: org_mark_mini20.local_20210428T110325.362631
+#+begin_src emacs-lisp :tangle no :noweb-ref config
+(major-mode-hydra-define racket-mode nil
+  ("Run"
+   (("b" racket-run "run")
+    ("B" racket-run-and-switch-to-repl "run and REPL")
+    ("sr" racket-send-region "Region to REPL")
+    ("ss" racket-send-last-sexp "sexp to REPL")
+    ("rr" (lambda () (interactive) (racket-run 4)) "Run with errortrace")
+    ("re" (lambda () (interactive) (racket-run 2)) "Run with errortrace 2")
+    ("ri" (lambda () (interactive) (racket-run 16)) "Instrument for debug"))
+   "Edit"
+   (("ea" hydra-lispy-mwb-alter/body "Alter...")
+    ("er" hydra-lispy-mwb-mark/body "Region...")
+    ("eg" hydra-lispy-mwb-goto/body "Goto..."))
+"Test"
+   (("T" racket-test "Test")
+    ("t" racket-mwb-raco-test "Raco Test")
+    ("p" racket-mwb-raco-all-tests "All Tests in project")
+    ("c" racket-check-syntax-mode "Check syntax"))
+   "Fold"
+   (("ht" racket-fold-all-tests "Hide tests")
+    ("hs" racket-unfold-all-tests "Show tests")
+    ("hh" hydra-hs/body "Hide-show..."))
+   "Navigate"
+   (("[" ptrv/smartparens/body "Smartparens..."))))
+#+end_src

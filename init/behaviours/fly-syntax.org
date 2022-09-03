@@ -1,0 +1,152 @@
+#+TITLE Emacs configuration org Check on the fly
+#+PROPERTY:header-args :cache yes :tangle yes  :comments link
+#+STARTUP: show2levels
+* Report on the fly
+:PROPERTIES:
+:ID:       org_mark_2020-11-09T11-32-01+00-00_mini12.local:0ECCD41D-B2B9-4183-A618-D1256CA9090F
+:END:
+** Flymake
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:6D225364-60B5-4C41-A802-CFBE5E7E6F2A
+:END:
+  Need to start from scratch. I do have it for emacs but as code in org mode not an elisp file a bit of a waste
+  #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_57ABBF6F-52E5-4B09-81FB-4B71119DE3DC
+  #+begin_src emacs-lisp
+(use-feature flymake
+  ;; :unless (version< emacs-version "26.1")
+  :disabled
+  :diminish
+  :hook ((sh-mode json-mode nxml-mode python-mode emacs-lisp-mode lisp-interaction-mode) . flymake-mode-on)
+  :config (flymake-mode-on))
+  #+end_src
+** Flycheck
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:2D0EB2E3-8745-45CE-9B24-937DB5282589
+:END:
+I have seen comments that for emacs <26 this is definitely better
+Added things from centaur. Especially for emacs-lisp
+
+#+NAME: org_mark_mini20.local_20210622T192842.412752
+#+begin_src emacs-lisp
+(use-package-elpa flycheck
+  ;; :when (version< emacs-version "26.1")
+  :defer 0.5
+  :diminish
+  :init
+  (setq flycheck-display-errors-delay 0.3)
+  <<flycheck-init>>
+  :config
+  (global-flycheck-mode)
+  <<flycheck-config>>
+  <<flycheck-hydra>>)
+#+end_src
+*** Set modes for which it is used
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210504T172051.622727
+:END:
+I don't like `global-flycheck-mode' everywhere  some modes,
+
+I get issues with org-src editing as for elisp we don't have the whole context.
+
+racket uses its own checker.
+**** Disable some checkers
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220613T131116.470481
+:END:
+Originally I disabled just emacs-lisp-checkdoc both here and in [[file:~/.emacs.d/init/prog-emacs/lisp_emacs.org][lisp_emacs]] but now I want to disable all in org src buffers and the only way I can see is replace flycheck-ephemeral-buffer-p in flycheck itself.
+***** Just disable checkdoc.
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210504T172051.621095
+:HEADER-ARGS: :tangle no
+:END:
+This is to stop check for full package level emacs lisp documentation. But really only need that in org-src
+
+But I did this in emacs-lisp file.
+#+NAME: org_mark_mini20.local_20210504T172051.605822
+#+begin_src emacs-lisp :tangle no :noweb-ref flycheck-init
+(defun -mwb-org-src-hook-flycheck-fn ()
+  (setq flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
+
+(add-hook 'org-src-mode-hook #'-mwb-org-src-hook-flycheck-fn )
+#+end_src
+***** Alter flycheck-ephemeral-buffer-p
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220613T131116.462432
+:END:
+Flycheck just checks for space - ie emacs hidden buffers.
+#+NAME: org_mark_mini20.local_20220613T131116.443867
+#+begin_src emacs-lisp :tangle no :noweb-ref flycheck-config
+(defun flycheck-ephemeral-buffer-p ()
+  "Determine whether the current buffer is an ephemeral buffer.
+
+See Info node `(elisp)Buffer Names' for information about
+ephemeral buffers."
+  (or (string-prefix-p " " (buffer-name))
+	  (string-prefix-p "*Org Src " (buffer-name))
+	  (string-prefix-p "*scratch" (buffer-name))
+	  ))
+#+end_src
+**** Disable modes
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210504T172342.698972
+:END:
+Found the correct way https://emacs.stackexchange.com/a/21046/9874
+Note the not at the start.
+#+NAME: org_mark_mini20.local_20210504T172342.686752
+#+begin_src emacs-lisp :tangle no :noweb-ref flycheck-init
+(setq flycheck-global-modes '(not
+							  text-mode
+							  outline-mode
+							  fundamental-mode
+							  lisp-interaction-mode
+							  org-mode
+							  diff-mode
+							  ;; shell-mode
+							  eshell-mode
+							  ;; term-mode
+							  ;; vterm-mode
+							  racket-mode
+							  ))
+
+#+end_src
+**** Load-path
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210622T193832.857681
+:END:
+Flycheck runs in a new emacs and by default has only emacs as load-path. I want it to have all the ones I have in init.
+
+#+NAME: org_mark_mini20.local_20210622T193832.844090
+#+begin_src emacs-lisp :tangle no :noweb-ref flycheck-init
+(setq flycheck-emacs-lisp-load-path 'inherit)
+#+end_src
+*** Hydra to control
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:48CD7AF6-DA56-471F-98EF-51C816A565FFy
+:END:
+#+NAME: flycheck-hydra
+#+begin_src emacs-lisp :tangle no
+(defhydra hydra-flycheck (:color blue)
+  "
+  ^
+  ^Flycheck^          ^Errors^            ^Checker^
+  ^────────^──────────^──────^────────────^───────^─────
+  _q_ quit            _<_ previous        _?_ describe
+  _M_ manual          _>_ next            _d_ disable
+  _v_ verify setup    _f_ check           _m_ mode
+  ^^                  _l_ list            _s_ select
+  ^^                  ^^                  ^^
+  "
+  ("q" nil)
+  ("<" flycheck-previous-error :color pink)
+  (">" flycheck-next-error :color pink)
+  ("?" flycheck-describe-checker)
+  ("M" flycheck-manual)
+  ("d" flycheck-disable-checker)
+  ("f" flycheck-buffer)
+  ("l" flycheck-list-errors)
+  ("m" flycheck-mode)
+  ("s" flycheck-select-checker)
+  ("v" flycheck-verify-setup))
+
+(bind-key "H-c" 'hydra-flycheck/body)
+#+end_src

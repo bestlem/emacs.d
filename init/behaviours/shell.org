@@ -1,0 +1,206 @@
+#+TITLE:  Shell
+#+AUTHOR: Mark Bestley
+#+EMAIL:  emacs@bestley.co.uk
+#+DATE:   26 Jan 2021
+#+TAGS:
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+STARTUP: content
+* Shell overview
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210126T234849.670643
+:END:
+Emacs runs subshells but not just interactive but also as part of comilation mode
+Shells are required for 3 things
+1) Communication with processes - need the environment
+2) Compilation buffer
+3) Shell - which I do not often use
+
+** Issues
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210126T234849.668987
+:END:
+I use conda - and conda.el seems to force conda to be loaded
+:ID:       org_mark_mini20.local:20210124T201155.667580
+:END:
+
+* Shell variables
+:PROPERTIES:
+:ID:       org_mark_2020-11-05T13-13-44+00-00_mini12.local:C99A151C-9456-41BC-8872-1C8227529551
+:END:
+This is getting the current values into emacs
+
+I have not really run shell so not often needed. But the Aquamacs does it - it actually copies all env variables from login shell - it uses bash. If I want to keep fish I suspect I ought to modify the Aquamacs code, but then on other platforms the environment might be OK - In essence so we throw away the starting environment. Some like DISPLAY might really matter.
+
+Arg it is not nice.
+
+I use fish shell and can make M-x shell run that by setting explicit-shell-file-name
+However things inside Emacs might use shell for other things and they expect a POSIX shell.
+What is missing is getting the environment variables.
+Another issue is that xonsh does not understand escaped spaces which shell-command does it needs the windows treatment. (and as not using a GPL shell or OS Emacs won't fix that)
+*** Aquamacs
+:PROPERTIES:
+:ID:       org_mark_2020-11-05T13-13-44+00-00_mini12.local:0D944CF7-686E-4CCF-B006-6B0C4FF5F5CA
+:END:
+Aquamacs does this but uses shell-file-name - which is set in C - originally /bin/sh but some code changes this to /bin/bash guess at getenv("SHELL") and looks for csh or sh based shells.
+
+But seems to time out as can't find file so try again
+Aquamacs uses shell-file-name and prints using printenv to a file and plays with that exec... uses printf
+#+NAME: org_2020-11-30+00-00_B553F58A-AA4F-4CD6-9808-657494C3D2EC
+#+begin_src emacs-lisp
+(when *aquamacs* (mac-read-environment-vars-from-shell-2))
+#+end_src
+
+*** Get environment - exec-path-from-shell
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210122T193718.269509
+:END:
+As noted the aquamacs way might be better. But at the moment all disabled.
+#+NAME: org_mark_mini20.local_20210122T193718.254955
+#+begin_src emacs-lisp
+(setq exec-path-from-shell-debug nil)
+(use-package-elpa exec-path-from-shell
+  :disabled
+  :when  (and (not *aquamacs*) (memq window-system '(mac ns x)))
+  :init
+  (setq exec-path-from-shell-variables '("PATH" "MANPATH" "CONDA_PREFIX"))
+  :config
+  (exec-path-from-shell-initialize))
+#+end_src
+*** Other
+:PROPERTIES:
+:ID:       org_mark_2020-11-05T13-13-44+00-00_mini12.local:A87E0049-2F9A-4D2E-898D-E0C1BD5BDAEC
+:END:
+exec-path-from-shell does work with more shells including fish - but requires you to name variables needed - which might be OK
+It calls the shell in exec-path-from-shell-shell-name otherwise shell-file-name otherwise (getenv "SHELL"). Then calls sh from fish so printf works.
+Now I remember writing my own printenv as env|sort - looking at man page printenv is older but env is POSIX. printf is later but might not work with UTF-8
+*** Emacs
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210608T162151.310188
+:END:
+Some compilation (e.g. using cask) wants to know what Emacs is so set  it
+#+NAME: org_mark_mini20.local_20210608T162151.298139
+#+begin_src emacs-lisp
+(setenv "EMACS"
+		(expand-file-name invocation-name invocation-directory))
+#+end_src
+** Starting a shell
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210608T162151.309300
+:END:
+*** Spaces in command line
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210214T131312.687097
+:END:
+emacs shell-command or something like that assumes a posix shell and escapes spaces by using \  xonsh does not like that and want the caller to enclose the whole string in quotes.  Annoyingly emacs does do this for Windows
+
+*** xonsh lack of reading startup files
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210214T131312.685125
+:END:
+It does not read files unless you are actually typing
+
+*** TODO Conclusion
+:PROPERTIES:
+:ID:       org_mark_2020-11-05T13-13-44+00-00_mini12.local:80FFD29A-D2AE-4C6D-8C49-D805314C5A1C
+:END:
+So tends to imply I need to change my Mac to be zsh - fish does not set SHELL to be more confusing and/or mod Aquamacs code for fish or keep exec.... and look at which variables get used. exec is OK until I have non simple characters
+
+Fun will occur with other OS.
+
+There are other things to be set `exec-path' and eshell-path-env - Aquamacs sort of does the former only.
+
+Also see https://wiki.archlinux.org/index.php/Fish for making bash as default then run fish
+
+Oh give up and hard code where needed
+
+And drifted back to xonsh to give more control - and bite the bullet and debug all issues.
+I think that eventually  xonsh for interactive and dash for simple including compilation - compile
+Spaces and xonsh lack of reading startup files  put me back to a POSIX shell for running non interactive shells.- unfortunately Apple makes sh a link to bash - not dash. So I will use zsh
+
+* Set shell
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210124T201155.666279
+:END:
+At the moment setting all to one shell. So get xonsh working. I tried to make compilation use dash but conda.el wants to set conda.
+I suspect the ideal is set compilation to sh (well macOS stuffed that as that is /bin/bash - better dash) shell-file-name is the one used in compilation
+It is dealing with bashism - see makem.sh for some.
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210122T193718.270790
+:END:
+#+NAME: org_mark_mini20.local_20210122T193718.254522
+#+begin_src emacs-lisp
+(let (;; (my-shell "/Users/mark/miniconda3/envs/xonsh/bin/xonsh")
+      ;; (my-shell "/opt/local/bin/fish" )
+      (my-shell "/bin/zsh")
+      ;; (my-shell "/bin/dash")
+      )
+  (setq explicit-qshell-file-name "/opt/local/bin/xonsh")
+  (setq exec-path-from-shell-shell-name my-shell)
+  (setq shell-file-name my-shell))
+#+end_src
+
+** Display the shell
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210124T201155.663772
+:END:
+Well the compilation buffer does not do much but there are ways for it to recognize more things e.g. ansi-color and now [[https://github.com/atomontage/xterm-color#usage][xterm-color]]
+#+NAME: org_mark_mini20.local_20210124T201155.641142
+#+begin_src emacs-lisp
+(use-package-elpa xterm-color
+  :defines (compilation-environment
+            eshell-preoutput-filter-functions
+            eshell-output-filter-functions)
+  :functions (compilation-filter my-advice-compilation-filter)
+  :commands xterm-color-filter
+  :init
+  ;; For shell and interpreters
+  (setq comint-output-filter-functions
+        (remove 'ansi-color-process-output comint-output-filter-functions))
+  (setq comint-terminfo-terminal "xterm-256color")
+  (add-hook 'comint-preoutput-filter-functions 'xterm-color-filter)
+  (defun my-xterm-shell-hook-function ()
+    (setenv "TERM" "xterm-256color")
+    ;; Disable font-locking to improve performance
+    (font-lock-mode -1)
+    ;; Prevent font-locking from being re-enabled
+    (make-local-variable 'font-lock-function)
+    (setq font-lock-function #'ignore))
+  (add-hook 'shell-mode-hook #'my-xterm-shell-hook-function)
+
+  ;; For eshell
+  (with-eval-after-load 'esh-mode
+    (add-hook 'eshell-before-prompt-hook
+              (lambda ()
+                (setq xterm-color-preserve-properties t)))
+    (add-to-list 'eshell-preoutput-filter-functions 'xterm-color-filter)
+    (setq eshell-output-filter-functions
+          (remove 'eshell-handle-ansi-color eshell-output-filter-functions)))
+
+  ;; For compilation buffers
+  (setq compilation-environment '("TERM=xterm-256color"))
+  (defun my-advice-compilation-filter (f proc string)
+    (funcall f proc
+             (if (eq major-mode 'rg-mode) ; compatible with `rg'
+                 string
+               (xterm-color-filter string))))
+  (advice-add 'compilation-filter :around #'my-advice-compilation-filter)
+  (advice-add 'gud-filter :around #'my-advice-compilation-filter))
+#+end_src
+** Compilation
+:PROPERTIES:
+:ID:       org_mark_2020-10-11T00-40-32+01-00_mini12.local:94ACA493-0B43-4754-B711-8F75275EE9B1
+:END:
+From https://github.com/grettke/lolsmacs/blob/master/lolsmacs.el
+
+Here is the scenario for this style of Comint configuration:
+
+You are doing a lot of interactive work via various Comint-supported buffers. You are working in one buffer (the one with focus) while the others are doing their own thing. They are probably doing work and output is scrolling by and that is fine because you are not reading it. In the buffer you are working in though, you want to go back and read something. So although it its process continues to output information, you want to keep the cursor in the same spot. Then when you are ready to type a command (suppose you know the output has stopped) to do something else, when you type the cursor will go to the end of the buffer. That is why you prevent the focused buffer from auto-scrolling and moving the mark, and leave the other ones alone.
+
+#+NAME: org_mark_2020-10-11T00-40-32+01-00_mini12.local_0963EB06-7A75-414C-BBC9-C032966D9019
+#+begin_src emacs-lisp
+(setq comint-scroll-to-bottom-on-input 'this)
+;(setq comint-scroll-to-bottom-on-output 'all)
+(setq comint-move-point-for-output 'this)
+(setq comint-scroll-show-maximum-output t)
+(setq comint-prompt-read-only t)
+#+end_src

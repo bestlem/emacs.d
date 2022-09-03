@@ -1,0 +1,76 @@
+#+TITLE:  Frame Title
+#+AUTHOR: Mark Bestley
+#+DATE:   06 Jun 2021
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+STARTUP: overview
+
+* Frame Title
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210606T230814.842085
+:END:
+
+This is independent of mode and header line.
+
+It does use the same format except for character counts etc and seems not to like fonts. It does have a default icon at least in the mac port version.
+
+It is not part of appearance so don't put in general frame setup
+
+** Static information
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210607T082054.250912
+:END:
+Calculate once
+#+NAME: org_mark_mini20.local_20210607T082054.238423
+#+begin_src emacs-lisp
+(defvar my-app-name
+  (cond (*macport* "EmacsMac.app")
+		(*aquamacs* "Aquamacs.app")
+		(*emacs/mac-ns-p* "Emacs.app")
+		(t "Unknown emacs app"))
+  "A name of the emacs we are running"
+  )
+#+end_src
+** The function
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210606T230814.841124
+:END:
+This calculates the string to be evaluated
+#+NAME: org_mark_mini20.local_20210606T230814.834788
+#+begin_src emacs-lisp
+(defun mwb-frame-title-format ()
+  "Return frame title with current project name, where applicable."
+  (concat
+   my-app-name
+   " - "
+   (let ((file buffer-file-name))
+	 (if file
+		 (if (and (bound-and-true-p projectile-mode)
+				  (projectile-project-p))
+			 (concat
+			  (format "[%s] " (projectile-project-name))
+			  (replace-regexp-in-string
+			   (format "^%s" (projectile-project-p)) "" (file-truename file)))
+		   (abbreviate-file-name file))
+	   "%b"))))
+#+end_src
+
+** Act on it
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210606T230814.840218
+:END:
+#+NAME: org_mark_mini20.local_20210606T230814.835597
+#+begin_src emacs-lisp
+(defun mwb-activate-form-title ()
+  (when (display-graphic-p)
+	(setq frame-title-format '((:eval (mwb-frame-title-format))))))
+#+end_src
+
+** When
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210606T230814.839213
+:END:
+
+#+NAME: org_mark_mini20.local_20210606T230814.836007
+#+begin_src emacs-lisp
+(add-hook 'after-init-hook 'mwb-activate-form-title)
+#+end_src

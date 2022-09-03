@@ -1,0 +1,637 @@
+#+TITLE Emacs configuration -  emacs lisp
+#+PROPERTY:header-args :cache yes :tangle yes  :comments link
+#+STARTUP: content
+
+Emacs lisp specific extras
+
+* Hydra
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210724T104659.216246
+:END:
+
+** Support
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210724T104659.213041
+:END:
+Need a function to save an then do things
+#+NAME: org_mark_mini20.local_20210724T104659.187112
+#+begin_src emacs-lisp
+(defun elisp-mwb-run-hydra ()
+  (interactive)
+  (mwb-projectile-save-project-buffers)
+  (hydra-elisp-compile/body))
+#+end_src
+
+** Compile Hydra
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210724T104906.121238
+:END:
+#+NAME: org_mark_mini20.local_20210724T104906.096473
+#+begin_src emacs-lisp
+(pretty-hydra-define hydra-elisp-compile
+  (:foreign-keys run
+				 :title (mwb-icon-string "el" "Emacs Lips Compile")
+				 :exit t)
+  ("compile"
+   (("c" emacs-lisp-byte-compile "Compile")
+	("l" emacs-lisp-byte-compile-and-load "Compile and Load")
+	("r" byte-recompile-directory "Byte Recompile Directory")
+	("x" disassemble "Disassemble"))))
+#+end_src
+
+** Major mode hydra
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210724T105126.330418
+:END:
+#+NAME: org_mark_mini20.local_20210724T104659.188563
+#+begin_src emacs-lisp
+(use-feature emacs-lisp-mode
+  :bind (:map emacs-lisp-mode-map
+			  ("<f5>" . eval-buffer))
+  :mode-hydra ((:idle 0.5)
+               ("Eval"
+                (("b" eval-buffer "buffer")
+                 ("<f5>" eval-buffer nil)
+                 ("d" eval-defun "defun [well top level form]")
+                 ;; ("r" eval-region "region") ; lispy-eval
+                 ("I" ielm "ielm")
+				 ("c" elisp-mwb-run-hydra "compile")
+                 ;; ("f" matcha-elisp-eval-current-form-sp "form")
+                 ;; ("x" matcha-goto-scratch "*Scratch*")
+                 )
+                "Test"
+                (("t" ert "prompt")
+                 ("T" (ert t) "all")
+                 ("F" (ert :failed) "failed"))
+                "Edit"
+                (("a" hydra-lispy-mwb-alter/body "Alter...")
+				 ("r" hydra-lispy-mwb-mark/body "Region...")
+				 ("g" hydra-lispy-mwb-goto/body "Goto...")
+				 ("f" emr-show-refactor-menu "Refactor..."))
+                "Debug"
+                (("m" sk/hydra-macro-step/body "Macrostep...")
+                 ("E" modi/toggle-edebug "Toggle edebug")
+                 ("e" hydra-edebug/body "edebug hydra")
+                 ("q" cancel-debug-on-entry "Cancel Debug on Entry")
+                 ("D" debug-on-entry "Debug on Entry"))
+                ;; ["Watch"
+                ;;  ("w" debug-watch "Watch")
+                ;;  ("W" cancel-debug-watch  "Cancel Watch")]
+				)))
+
+#+end_src
+
+* Formatting
+:PROPERTIES:
+:ID:       org_mark_2020-03-02T07-49-31+00-00_mini12.local:B2DA6147-D1C4-4D09-9702-371808CB3424
+:END:
+** Formatter
+:PROPERTIES:
+:ID:       org_mark_2020-11-24T18-08-50+00-00_mini12.local:94566E0B-CB36-4CFF-84ED-8E1C9460ABB5
+:END:
+I am not certain this is needed now as other things do this. Aggressive indent for example
+However I had a lot of strings so tried.
+
+Actually best to uise lispy multiple line.
+*** [[https://github.com/tuhdo/semantic-refactor][Semantic Refactor]]
+:PROPERTIES:
+:ID:       org_mark_2020-11-24T18-08-50+00-00_mini12.local:CB649654-2804-4D51-8437-55D5DC0A68F6
+:END:
+Just for lisp But seems no better
+Plus the lisp formatting is not autoloaded
+The one thing I wanted ot for this time was to break an expression to a work per line and it does not. But lispy multiple lines did.
+#+NAME: org_mark_2020-11-24T18-08-50+00-00_mini12.local_BA7E1106-4E0E-4D38-B512-2C59194F3F4D
+#+begin_src emacs-lisp :tangle no
+(use-package-elpa srefactor
+    :disabled
+    :demand                             ; need as not enough exposed to autoload
+    :commands srefactor-lisp-format-sexp
+    :config (use-feature srefactor-lisp))
+#+end_src
+** Extra font lock
+:PROPERTIES:
+:ID:       org_mark_2020-10-14T11-05-37+01-00_mini12.local:88799E8A-FACD-4227-BF70-7FFD40FC2CF1
+:END:
+#+NAME: org_mark_2020-10-14T11-05-37+01-00_mini12.local_FA432C27-28F7-4E01-B4C3-A28516C3DFB4
+#+begin_src emacs-lisp :tangle no
+(use-package-elpa lisp-extra-font-lock
+  :hook (emacs-lisp-mode . lisp-extra-font-lock-mode))
+#+end_src
+** Filling
+:PROPERTIES:
+:ID:       org_mark_2020-03-02T07-49-31+00-00_mini12.local:E19FC44E-6C80-4DD8-BBFA-99156DD9884D
+:END:
+We want to wrap comments.
+#+NAME: org_mark_2020-03-02T07-49-31+00-00_mini12.local_40B17E22-5242-4E2A-86DA-FBA14F107693
+#+begin_src emacs-lisp
+(add-hook 'emacs-lisp-mode-hook 'mwb-prog-auto-fill-80)
+#+end_src
+** Indentation
+:PROPERTIES:
+:ID:       org_2020-12-08+00-00:EDF64D9A-1F1B-4159-A7F8-F7376886A48E
+:END:
+I don't like plist formatting so from this [[https://stackoverflow.com/questions/22166895/customize-elisp-plist-indentation][SO question]] I chose the simple common lisp
+But then this [[https://emacs.stackexchange.com/a/52789/9874][SO answer to a different question]] looks better.
+Read [[https://www.reddit.com/r/emacs/comments/d7x7x8/finally_fixing_indentation_of_quoted_lists][reddit]] for discussion. But note that lispy does not use calculate-lisp-indent.
+The obvious issue for me is hydra defines. (I note lispy does try but just for defhydra and I need pretty hydra and in use-package.
+So use [[https://github.com/Fuco1/.emacs.d/blob/af82072196564fa57726bdbabf97f1d35c43b7f7/site-lisp/redef.el#L12-L94][Fuco's hack]]
+Code is too long so put in actual lisp. 'mwb-redef-emacs-lisp'.
+*** Extra Code
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220604T112037.484513
+:END:
+#+NAME: org_mark_mini20.local_20220604T112037.464497
+#+begin_src emacs-lisp
+(use-feature mwb-redef-emacs-lisp
+  :demand
+  :after lisp-mode)
+#+end_src
+*** common-lisp-indent
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210123T234427.949964
+:END:
+Not used as messes to much
+#+NAME: org_2020-12-08+00-00_67C53BD2-DAF3-4B25-80DB-ADB3958F1820
+#+begin_src emacs-lisp :tangle no
+(setq lisp-indent-function 'common-lisp-indent-function)
+#+end_src
+*** Override calculate-lisp-indent
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210123T234427.948316
+:END:
+Indenting data (ie lists) not as functions.
+From https://www.reddit.com/r/emacs/comments/d7x7x8/finally_fixing_indentation_of_quoted_lists/
+*** Override lisp-indent-function
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220604T112133.317712
+:END:
+This is Fuco's hack
+
+* See macros
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:87193D42-251A-408C-80B7-839BF6CFCE81
+:END:
+	Dependencies because lispy etc and macrostep use the same keys
+	#+begin_src emacs-lisp
+(use-package-elpa macrostep
+  :after (emacs-lisp lispy-mnemonic lispy)
+  :hook (before-save . macrostep-collapse-all)
+
+  :commands (macrostep-expand
+			 macrostep-mode)
+  ;;:config (set macrostep-expand-in-separate-buffer t)
+  :bind
+  (:map emacs-lisp-mode-map
+		("C-c C-e" . macrostep-expand))
+  (:map lisp-interaction-mode-map
+		("C-c C-e" . macrostep-expand)))
+	#+end_src
+and the hydra is from https://sriramkswamy.github.io/dotemacs/ . Note it expands what is at current point,
+*
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_6CEAF9C9-8E76-4E4D-AB8D-2255FB8A5D42
+#+begin_src emacs-lisp
+(defhydra sk/hydra-macro-step (:pre (macrostep-expand)
+                                    :color pink
+                                    :hint nil)
+  "
+ _e_: expand    _j_: next macro    _C_: collapse all
+ _c_: collapse  _k_: prev macro    _q_: quit
+"
+  ("e" macrostep-expand)
+  ("c" macrostep-collapse)
+  ("j" macrostep-next-macro)
+  ("k" macrostep-prev-macro)
+  ("C" macrostep-collapse-all)
+  ("q" macrostep-collapse-all :color blue))
+#+end_src
+* Extra debugging
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:89E63DE0-5A33-4D24-B08B-F0957A1D5311
+:END:
+** edebug-x
+:PROPERTIES:
+:ID:       org_mark_2020-10-28T08-11-21+00-00_mini12.local:BBEFF5C5-1FED-4CAE-9EC0-E6FC2491C367
+:END:
+Seen but not used yet [[https://github.com/ScottyB/edebug-x][edebug-x]]
+	#+begin_src emacs-lisp
+	;;(use-package-elpa edebug-x :disabled )
+	#+end_src
+** Kaushal Modi edebug hydra
+:PROPERTIES:
+:ID:       org_mark_2020-10-28T08-11-21+00-00_mini12.local:983EA75B-7D8E-4372-845B-D7CA7ED40D99
+:END:
+[[https://github.com/kaushalmodi/.emacs.d][His init]] but getting errors so try another
+But add his functions as called from top level
+*** Functions
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201218T062750.205110
+:END:
+#+NAME: org_mark_mini12.local_20201218T062750.172372
+Not tangles as edebug can be set otherwhere so list is wrong - could be fixed by making this an advice on edebug-defun
+#+NAME: org_mark_mini20.local_20220603T120021.657510
+#+begin_src emacs-lisp :tangle no
+;;  mainly from setup-elisp.el
+
+;; Solution to toggle debug on a function whether it is defined inside or
+;; outside a `use-package' wrapper
+;; http://emacs.stackexchange.com/q/76w43/115
+
+;; Edebug a defun or defmacro
+(defvar modi/fns-in-edebug nil
+  "List of functions for which `edebug' is instrumented.")
+
+(defconst modi/fns-regexp (concat "([[:blank:]]*"
+                                  "\\(cl-\\)*"
+                                  "\\(defun\\|defmacro\\|defsubst\\)"
+                                  "\\**"
+                                  "[[:blank:]]+"
+                                  "\\(?1:\\(\\w\\|\\s_\\)+\\)\\_>") ; word or symbol char
+  "Regexp to find defun or defmacro definition.")
+
+(defun modi/toggle-edebug ()
+  (interactive)
+  (save-excursion
+    (re-search-backward modi/fns-regexp)
+    (let ((start (point))
+          (fn (match-string 1))
+          end
+          selection)
+      (message "Parsed: %s fns-in-edebug: %s" fn modi/fns-in-edebug)
+      (forward-sexp 1)
+      (setq end (point))
+      (if (member fn modi/fns-in-edebug)
+          ;; If the function is already being edebugged, uninstrument it
+          (progn
+            (setq modi/fns-in-edebug (delete fn modi/fns-in-edebug))
+            (eval-buffer)
+            (setq-default eval-expression-print-length 12)
+            (setq-default eval-expression-print-level  4)
+            (message "Edebug disabled: %s" fn))
+        ;; If the function is not being edebugged, instrument it
+        (save-restriction
+          (narrow-to-region start end)
+          (add-to-list 'modi/fns-in-edebug fn)
+          (setq-default eval-expression-print-length nil)
+          (setq-default eval-expression-print-level  nil)
+          (edebug-defun)
+          (message "Edebug: %s" fn))))))
+
+#+end_src
+*** Hydra
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201218T062750.198857
+:END:
+Not used as gets error
+#+NAME: org_mark_mini12.local_20201218T062750.173480
+#+begin_src emacs-lisp :tangle no
+
+(defhydra hydra-edebug (:color amaranth
+                               :hint  nil)
+  "
+    EDEBUG MODE
+^^_<SPC>_ step             ^^_f_ forward sexp         _b_reakpoint set                previous _r_esult      _w_here                    ^^_d_ebug backtrace
+^^_n_ext                   ^^goto _h_ere              _u_nset breakpoint              _e_val expression      bounce _p_oint             _q_ top level (_Q_ nonstop)
+_g_o (_G_ nonstop)         ^^_I_nstrument callee      next _B_reakpoint               _E_val list            _v_iew outside             ^^_a_bort recursive edit
+_t_race (_T_ fast)         step _i_n/_o_ut            _x_ conditional breakpoint      eval _l_ast sexp       toggle save _W_indows      ^^_S_top
+_c_ontinue (_C_ fast)      ^^^^                       _X_ global breakpoint
+"
+  ("<SPC>" edebug-step-mode)
+  ("n"     edebug-next-mode)
+  ("g"     edebug-go-mode)
+  ("G"     edebug-Go-nonstop-mode)
+  ("t"     edebug-trace-mode)
+  ("T"     edebug-Trace-fast-mode)
+  ("c"     edebug-continue-mode)
+  ("C"     edebug-Continue-fast-mode)
+
+  ("f"     edebug-forward-sexp)
+  ("h"     edebug-goto-here)
+  ("I"     edebug-instrument-callee)
+  ("i"     edebug-step-in)
+  ("o"     edebug-step-out)
+
+  ;; breakpoints
+  ("b"     edebug-set-breakpoint)
+  ("u"     edebug-unset-breakpoint)
+  ("B"     edebug-next-breakpoint)
+  ("x"     edebug-set-conditional-breakpoint)
+  ("X"     edebug-set-global-break-condition)
+
+  ;; evaluation
+  ("r"     edebug-previous-result)
+  ("e"     edebug-eval-expression)
+  ("l"     edebug-eval-last-sexp)
+  ("E"     edebug-visit-eval-list)
+
+  ;; views
+  ("w"     edebug-where)
+  ("p"     edebug-bounce-point)
+  ("v"     edebug-view-outside) ; maybe obsolete??
+  ("P"     edebug-view-outside) ; same as v
+  ("W"     edebug-toggle-save-windows)
+
+  ("d"     edebug-backtrace)
+
+  ;; quitting and stopping
+  ("q"     top-level :color blue)
+  ("Q"     edebug-top-level-nonstop :color blue)
+  ("a"     abort-recursive-edit :color blue)
+  ("S"     edebug-stop :color blue))
+(with-eval-after-load 'edebug
+  (bind-key "?" #'hydra-edebug/body edebug-mode-map))
+#+end_src
+** Grinberg edebug hydra
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201215T002056.921411
+:END:
+[[https://github.com/rgrinberg/edebug-hydra][This]]  is simpler - well has no extra lisp so might work
+#+NAME: org_mark_mini12.local_20201215T002056.896613
+#+begin_src emacs-lisp
+(defhydra hydra-edebug (:hint t :foreign-keys run)
+
+  ("q" nil "quit")
+  ("b" #'edebug-backtrace "backtrace" :column "common")
+  ("-" #'negative-argument "neg argument" :column "common")
+
+  ;; breaking
+  ("I" #'edebug-instrument-callee "instrument callee" :column "break")
+  ("x" #'edebug-set-breakpoint "set breakpoint" :column "break")
+  ("X" #'edebug-unset-breakpoint "unset breakpoint" :column "break")
+  ("N" #'edebug-next-breakpoint "next breakpoint" :column "break")
+  ("c" #'edebug-set-conditional-breakpoint "conditional bp" :column "break")
+  ("C" #'edebug-set-global-break-condition "global conditional bp"
+   :column "break")
+
+  ;; navigation
+  ("w" #'edebug-where "where" :column "common")
+  ("z" #'edebug-bounce-point "bounce point" :column "common")
+
+  ;; stepping
+  ("h" #'edebug-goto-here "continue until point" :column "step")
+  ("s" #'edebug-stop "stop" :column "step")
+  ("o" #'edebug-step-out "step out" :column "step")
+  ("i" #'edebug-step-in "step in" :column "step")
+  ;; ("f" #'edebug-forward "forward" :column "step")
+
+  ;; sexp oriented
+  ("f" #'edebug-forward-sexp "forward sexp" :column "sexp")
+  ("e" #'edebug-eval-expression "eval expression" :column "sexp")
+  ("E" #'edebug-eval-last-sexp "eval expression" :column "sexp")
+  ("r" #'edebug-previous-result "previous result" :column "sexp")
+  (";" #'edebug-visit-eval-list "visit eval list" :column "sexp")
+
+  ;; exiting
+  ("Q" #'edebug-top-level-nonstop "toplevel non stop" :column "common")
+  ("S" #'edebug-stop "edebug stop" :column "common")
+
+  ;; modes
+  ("1" #'edebug-Go-nonstop-mode "go nonstop" :column "modes")
+  ("2" #'edebug-go-mode "go until break" :column "modes")
+  ("3" #'edebug-step-mode "step mode" :column "modes")
+  ("4" #'edebug-next-mode "next mode" :column "modes")
+  ("5" #'edebug-continue-mode "continue" :column "modes")
+  ("6" #'edebug-Continue-fast-mode "continue fast" :column "modes")
+  ("7" #'edebug-trace-mode "trace" :column "modes")
+  ("8" #'edebug-Trace-fast-mode "trace fast" :column "modes"))
+#+end_src
+*** Bind it
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210825T102536.195886
+:END:
+This is actually from Modi's  [[https://github.com/kaushalmodi/.emacs.d/blob/7ca71081a8c32eb895e75dd2b460d772b774b152/setup-files/setup-elisp.el][setup]]
+#+NAME: org_mark_mini20.local_20210825T102536.172923
+#+begin_src emacs-lisp
+(with-eval-after-load 'edebug
+  (bind-key "?" #'hydra-edebug/body edebug-mode-map))
+#+end_src
+* Flycheck
+:PROPERTIES:
+:ID:       org_2020-12-02+00-00:8AED05A2-E475-45E7-9FE1-2D0C6CBC3F2E
+:END:
+Partially disabled from https://github.com/IvanMalison/dotfiles/tree/master/dotfiles/emacs.d
+Original just stops check for all the package and documentation heading. Need to make it not check for undefined in *xxx* buffers
+
+I then did this in flycheck setup.
+However I want to deal with org src stuff so needs to hack flycheck.
+So ignore this.
+#+NAME: org_2020-12-02+00-00_7F1FCFB3-782A-4154-AF60-ABEDAAD3F4C5
+#+begin_src emacs-lisp :tangle no
+(defun imalison:maybe-remove-flycheck-checkdoc-checker ()
+  (when (s-starts-with? "*" (buffer-name))
+    (flycheck-disable-checker 'emacs-lisp-checkdoc)))
+(add-hook 'flycheck-mode-hook 'imalison:maybe-remove-flycheck-checkdoc-checker)
+#+end_src
+* Cask
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:A7E444B1-B2D1-477A-A3E2-A7518E90193E
+:END:
+[[https://github.com/Wilfred/cask-mode][cask-mode]] is a mode for editing [[https://cask.readthedocs.io/en/latest/][cask]] files. Cask is an emacs project management tool. ie contolling dependencies, and running tests like maven etc.
+
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_9EC9B695-2F8B-4E9B-B42A-199CF68F6E58
+#+begin_src emacs-lisp
+(use-package-elpa cask-mode)
+#+end_src
+
+* Regular expressions
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:228658D3-54BA-4A19-886D-E0EA8D21B68D
+:END:
+They are not understanable so these help
+
+** Xr
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:A6466B59-FC11-4679-8AA9-5CED7A0479C6
+:END:
+And this is the reverse
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_7B9B113B-829F-4036-A58B-4935E812ACA1
+#+begin_src emacs-lisp
+(use-package-elpa xr
+  :commands xr-pp xr xr-pp-rx-to-str xr-lint
+  )
+#+end_src
+** TODO Rebuilder
+:PROPERTIES:
+:ID:       org_mark_2020-10-25T21-37-40+00-00_mini12.local:C249F91B-5718-46E8-996C-33C52996FC3B
+:END:
+Construct them visually
+Needs a hydra
+#+NAME: org_mark_2020-10-25T21-37-40+00-00_mini12.local_92CA5AF7-601D-4F23-87CA-0CFD95B24FE6
+#+begin_src emacs-lisp
+(use-package-elpa re-builder
+  :commands (re-builder)
+  :config
+  (setq reb-re-syntax 'rx))
+#+end_src
+* Keyboard Macros
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:E9B6E3E8-67D0-4CDE-BB96-BE2B4A67C96E
+:END:
+Well not really lisp but much can be converted to it
+** Show as emacs lisp
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:E245B723-C582-4F69-81C5-297385A3B89D
+:END:
+*** TODO Put these together
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:8AAA8C94-F704-4379-A330-637D1AE0F099
+:END:
+*** Load the converter to elisp
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:6504C53C-4A9B-40A2-B2DE-8FEA72ED025C
+:END:
+#+NAME: org_mark_mini20.local_20220604T163149.473995
+#+begin_src emacs-lisp
+(use-package-elpa elmacro
+  :commands (elmacro-mode
+			 elmacro-show-last-macro
+			 elmacro-show-last-commands
+			 elmacro-mode-on))
+#+end_src
+*** Hydra for macros
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:AAFEA2AA-603E-4FDA-8D33-A57C9CDC5077
+:END:
+From [[https://github.com/abo-abo/hydra/wiki/Macro][Hydra wiki]] and [[https://github.com/edil3ra/emacs_save/blob/master/settings.org][another init file]] but not the latter seems to have some odd entries as well so an edit of the two
+	  #+begin_src emacs-lisp
+(defhydra hydra-keyboard-macros
+  (:hint nil
+         :color pink
+         :pre
+         (progn
+           (elmacro-mode 1)
+           (elmacro-mode-on)
+           (when defining-kbd-macro
+             (kmacro-end-macro 1))))
+  "
+              ^Create-Cycle^         ^Basic^          ^Insert^        ^Save^         ^Edit^
+            ╭─────────────────────────────────────────────────────────────────────────╯
+                    ^_p_^           [_e_] execute    [_i_] insert    [_b_] name      [_'_] previous
+                    ^^↑^^           [_d_] delete     [_c_] set       [_K_] key       [_,_] last
+             _<f3>_ ←   → _e_       [_o_] edit       [_a_] add       [_x_] register  [_._] losage
+                    ^^↓^^           [_r_] region     [_f_] format    [_B_] defun     [_v_] view
+                    ^_k_^           [_m_] step                                   [_l_] prev lisp
+                   ^^   ^^          [_s_] swap                                   [_L_] commands
+            "
+  ("<f3>" kmacro-start-macro :color blue)
+  ("e" kmacro-end-or-call-macro-repeat)
+  ("E" kmacro-end-or-call-macro-repeat :color blue)
+
+  ("p" kmacro-cycle-ring-previous)
+  ("k" kmacro-cycle-ring-next)
+  ("r" apply-macro-to-region-lines)
+  ("d" kmacro-delete-ring-head)
+  ("o" kmacro-edit-macro-repeat)
+  ("m" kmacro-step-edit-macro)
+  ("s" kmacro-swap-ring)
+  ("i" kmacro-insert-counter)
+  ("c" kmacro-set-counter)
+  ("a" kmacro-add-counter)
+  ("f" kmacro-set-format)
+  ("b" kmacro-name-last-macro)
+  ("K" kmacro-bind-to-key)
+  ("B" insert-kbd-macro)
+  ("x" kmacro-to-register)
+  ("'" (lambda ()
+         (interactive)
+         (kmacro-edit-macro)
+         (hydra-keyboard-macros/body)) :color blue)
+  ("," edit-kbd-macro)
+  ("." kmacro-edit-lossage)
+  ("u" universal-argument)
+  ("v" kmacro-view-macro)
+  ("V" kmacro-view-ring-2nd-repeat)
+  ("l" elmacro-show-last-macro)
+  ("L" elmacro-show-last-commands)
+  ("q" nil :color blue))
+
+(bind-key "<f3>" 'hydra-keyboard-macros/body)
+	  #+end_src
+* imenu
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210702T115348.583868
+:END:
+Mainly ways to add more to the menu.
+From https://github.com/alezost/emacs-utils/blob/master/utl-imenu.el
+also hemacs and greg hendersolt
+** Sections
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210702T115348.582525
+:END:
+If you have sections in lisp/elisp files that begin with ";;;", you may use the following code to add "Sections" entry in `imenu':
+
+(add-hook 'emacs-lisp-mode-hook 'utl-imenu-add-sections)
+(add-hook 'lisp-mode-hook 'utl-imenu-add-sections)
+
+
+
+
+
+#+NAME: org_mark_mini20.local_20210702T115348.557748
+#+begin_src emacs-lisp
+(defvar utl-imenu-sections-re "^;;; \\(.+\\)$"
+  "Regexp used for \"Sections\" imenu entries.")
+
+(defvar utl-imenu-sections-group "Sections"
+  "Group name in imenu index of \"Sections\" entries.
+If nil, put the entries in a top level.  See MENU-TITLE in
+`imenu-generic-expression' variable for details.")
+
+;;;###autoload
+(defun utl-imenu-add-sections (&optional regexp)
+  "Add REGEXP as a \"Sections\" element to `imenu-generic-expression'.
+If REGEXP is nil, use `utl-imenu-sections-re'."
+  (add-to-list
+   'imenu-generic-expression
+   (list utl-imenu-sections-group (or regexp utl-imenu-sections-re) 1)
+   t))
+#+end_src
+** Add hook
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210702T115348.580846
+:END:
+#+NAME: org_mark_mini20.local_20210702T115348.558787
+This adds expressions to the imenu list. They are added in reverse order and before others.
+use-package is part of use-package itself.
+#+NAME: org_mark_mini20.local_20220531T171427.003876
+#+begin_src emacs-lisp
+(defun hemacs-imenu-elisp-expressions ()
+  "Add each item in packages to the list of imenu expressions.
+The first in the list is the last to be evaluated and is before all the others."
+  (dolist (pattern `(("Ert tests" "\\(^(ert-deftest +\\)\\(\\_<.+\\_>\\)" 2)
+                     ("Segments" ,(rx (seq bol "(spaceline-define-segment"
+									   (zero-or-more (or (syntax whitespace) "\n"))
+									   (group
+										(one-or-more (or (syntax word)
+													  (syntax symbol))))
+									   ))
+					  1)
+					 ("Package elpa"
+					  ,(rx (seq bol "(use-package-elpa"
+							(group
+							 (one-or-more (or (syntax word)
+										   (syntax symbol))))
+							))
+					  1)
+					 ("Hydrae" ,(rx (seq bol "( "
+									 (or "defhydra" "pretty-hydra-define")
+									 (group
+									  (one-or-more (or (syntax word)
+													(syntax symbol))))
+									 ))
+					  1)
+					 ("Features" "^(use-feature \\(.+\\)$" 1)
+					 ("Sections" "^;;; \\(.+\\)$" 1)
+					 ))
+	(add-to-list 'imenu-generic-expression pattern)))
+(add-hook 'emacs-lisp-mode-hook 'hemacs-imenu-elisp-expressions)
+#+end_src
+* Cross reference
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220820T213838.759164
+:END:
+** elisp-xref
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220820T213838.757362
+:END:
+Used by helpful and might be more use elsewhere.
+Unfortunately as using a fork I need to put it before helpful.

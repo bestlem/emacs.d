@@ -1,0 +1,75 @@
+#+TITLE:  Ebooks
+#+AUTHOR: Mark Bestley
+#+EMAIL:  @bestley.co.uk
+#+DATE:   18 Apr 2022
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+STARTUP: overview
+
+* Epub reading
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220604T172912.415510
+:END:
+[[https://depp.brause.cc/nov.el/][From]]
+#+NAME: org_mark_mini20.local_20220418T102925.928951
+#+begin_src emacs-lisp
+(use-package-elpa nov
+  :mode ((rx ".epub" string-end) . nov-mode)
+  :preface
+  (defun my-nov-setup ()
+	(visual-line-mode 1)
+	;; (face-remap-add-relative 'variable-pitch
+	;; 						 :family "Times New Roman"
+	;; 						 :height 1.5)
+	(setq line-spacing 0.5))
+
+  :hook (nov-mode . my-nov-setup))
+#+end_src
+
+* Calibre
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220418T104532.783789
+:END:
+From https://github.com/chenyanming/calibredb.el and also https://dindi.garjola.net/calibredb-view.html
+#+NAME: org_mark_mini20.local_20220418T104532.780552
+#+begin_src emacs-lisp
+(use-package-elpa calibredb
+  :commands calibredb
+  :config
+  (setq calibredb-root-dir "~/SyncServices/Dropbox/Books/calibre_transfer")
+  (setq calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir))
+  (setq calibredb-library-alist '(("~/SyncServices/Dropbox/Books/calibre_transfer")
+								  ("~/SyncServices/Google Drive/calibre/calibre_computing")
+								  ("~/SyncServices/Google Drive/calibre/games")
+								  ("~/SyncServices/Google Drive/calibre/fiction")
+								  ("http://opds.oreilly.com/opds/")
+								  ("https://bookserver.archive.org/catalog/")
+								  ("http://arxiv.maplepop.com/catalog/")
+								  ("https://m.gutenberg.org/ebooks.opds/")
+								  ("http://www.feedbooks.com/catalog.atom")
+								  ("https://tatsu-zine.com/catalogs.opds")
+								  ("http://aozora.textlive.net/catalog.opds")))
+  ;; (setq calibredb-format-all-the-icons t)
+  (setq sql-sqlite-program "/opt/local/bin/sqlite3")
+  (setq calibredb-program "/Applications/calibre.app/Contents/MacOS/calibredb")
+
+  ;; From other source
+  (defun my/calibredb-open-file-with-emacs (&optional candidate)
+	"Open file with Emacs.
+Optional argument CANDIDATE is the selected item."
+	(interactive "P")
+	(unless candidate
+	  (setq candidate (car (calibredb-find-candidate-at-point))))
+	(find-file (calibredb-get-file-path candidate t)))
+
+  :mode-hydra
+  ((calibredb-search-mode)
+   (:color teal :quit-key "q"
+		   :title (mwb-icon-string "epub" "Calibre"))
+   ("Libraries"
+	(("L" calibredb-library-list "Switch Library"))
+	"View"
+	(("," calibredb-quick-look "Quick Look")
+	 ("v" calibredb-view "View")
+	 ("V" calibredb-open-file-with-default-tool "Read external")
+	 ("r" my/calibredb-open-file-with-emacs "Read in emacs")))))
+#+end_src

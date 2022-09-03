@@ -1,0 +1,461 @@
+#+TITLE Emacs configuration git
+#+PROPERTY:header-args :cache yes :tangle yes  :comments noweb :noweb tangle
+#+STARTUP: content
+
+Picked up from many places especially jerry peng  but then looked a centaur and this is very much like what I have already so add the rest
+
+* General  vc
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220606T211816.151408
+:END:
+There are various custom settings - lets remove from settings
+#+NAME: org_mark_mini20.local_20220606T211816.134622
+#+begin_src emacs-lisp
+(use-feature vc
+  :custom
+  (vc-make-backup-files t)
+  (vc-annotate-background nil)
+  (vc-annotate-background-mode nil)
+  (vc-annotate-color-map
+   '((20 . "#a60000")
+	 (40 . "#721045")
+	 (60 . "#8f0075")
+	 (80 . "#972500")
+	 (100 . "#813e00")
+	 (120 . "#70480f")
+	 (140 . "#5d3026")
+	 (160 . "#184034")
+	 (180 . "#005e00")
+	 (200 . "#315b00")
+	 (220 . "#005a5f")
+	 (240 . "#30517f")
+	 (260 . "#00538b")
+	 (280 . "#093060")
+	 (300 . "#0031a9")
+	 (320 . "#2544bb")
+	 (340 . "#0000c0")
+	 (360 . "#5317ac")))
+  '(vc-annotate-very-old-color "#0046FF" t) )
+#+end_src
+* Commit editor
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201224T001534.667034
+:END:
+This is [[https://github.com/magit/with-editor][with-editor]] Magit calls it - only exposed so I can play with keys
+#+NAME: org_mark_mini12.local_20201224T204932.248625
+#+begin_src emacs-lisp
+(use-package-elpa with-editor
+  :bind (:map with-editor-mode-map
+         ("s-k" . with-editor-cancel)
+         ("s-s" . with-editor-finish)
+         ))
+#+end_src
+* Git files
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220612T093258.305716
+:END:
+Modes for editing files that configure git.
+#+NAME: org_mark_mini20.local_20220612T093258.285002
+#+begin_src emacs-lisp
+(use-package-elpa git-modes
+  :mode
+  ("/\\.?git/?config$" . gitconfig-mode)
+  ("/\\.gitmodules$" . gitconfig-mode)
+  ("/\\.gitignore$" . gitignore-mode)
+  ("/\\.git/info/exclude$" . gitignore-mode)
+  ("/git/ignore$" . gitignore-mode)
+  ("/.dockerignore\\'" . gitignore-mode)
+  ("/\\.gitattributes\\'" . gitattributes-mode)
+  ("/info/attributes\\'" . gitattributes-mode)
+  ("/git/attributes\\'" . gitattributes-mode))
+#+end_src
+* Magit
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201222T214721.127535
+:END:
+jp-git from Jerry Peng and then rest from centuar
+To load the hydra needs to be available
+*** Order of execution
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220609T080035.641984
+:END:
+Need to define some things befor the main one so make easier to read
+#+NAME: org_mark_mini20.local_20220609T080035.616929
+#+begin_src emacs-lisp
+<<magit-mwbstatus>>
+<<magit-use-package>>
+#+end_src
+*** TODO Show TODOs in magit
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220608T223234.262692
+:END:
+https://github.com/alphapapa/magit-todos
+** use-package
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220604T221255.578362
+:END:
+#+NAME: org_mark_mini20.local_20220604T121907.520562
+#+begin_src emacs-lisp  :tangle no :noweb-ref magit-use-package
+(use-package-elpa magit
+  ;; :defer 2								; rather than a lot of commands
+  ;; Need as now not a hydra
+  :commands (magit-process-buffer
+			 magit-status
+			 magit-log-buffer-file
+			 magit-log-current
+			 magit-blame-addition
+			 magit-diff-buffer-file)
+  :custom
+  (magit-diff-refine-hunk t)
+  (magit-repository-directories '(("~/src/" . 2)
+								  (org-directory . 0)))
+  (magit-log-margin
+   '(t "%Y-%m-%d %H:%M " magit-log-margin-width t 18))
+  (magit-status-margin
+   '(t age magit-log-margin-width nil 18))
+  :config
+  ;; (setq magit-completing-read-function 'ivy-completing-read)
+  (setq magit-completing-read-function 'magit-builtin-completing-read)
+  (transient-bind-q-to-quit)
+  :bind (:map magit-blame-read-only-mode-map
+		 ("<double-mouse-1" . magit-show-commit)))
+#+end_src
+** posframe
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210115T132445.517593
+:END:
+Show choices in posframe
+#+NAME: org_mark_mini20.local_20210115T132445.501529
+#+begin_src emacs-lisp
+(when *emacs/>=26p*
+  (use-package-elpa transient-posframe
+    :demand
+    :after magit
+    :init
+    (setq transient-posframe-border-width 3
+          transient-posframe-min-height 22
+          transient-posframe-min-width nil
+          transient-posframe-parameters '((left-fringe . 8)
+                                          (right-fringe . 8)))
+    :config
+    (transient-posframe-mode)
+    (with-no-warnings
+      (defun my-transient-posframe--show-buffer (buffer _alist)
+        "Show BUFFER in posframe and we do not use _ALIST at this period."
+        (when (posframe-workable-p)
+          (let ((posframe (posframe-show
+                           buffer
+			               :font transient-posframe-font
+			               :position (point)
+			               :poshandler transient-posframe-poshandler
+			               :background-color (face-attribute 'transient-posframe :background nil t)
+			               :foreground-color (face-attribute 'transient-posframe :foreground nil t)
+			               :min-width (or transient-posframe-min-width (round (* (frame-width) 0.62)))
+			               :min-height transient-posframe-min-height
+                           :lines-truncate t
+			               :internal-border-width transient-posframe-border-width
+			               :internal-border-color (face-attribute 'transient-posframe-border :background nil t)
+			               :override-parameters transient-posframe-parameters)))
+            (frame-selected-window posframe))))
+      (advice-add #'transient-posframe--show-buffer :override #'my-transient-posframe--show-buffer)
+
+      (defun my-transient-posframe--render-buffer ()
+        (with-current-buffer (get-buffer-create transient--buffer-name)
+          (goto-char (point-min))
+          (insert (propertize "\n" 'face '(:height 0.3)))
+          (goto-char (point-max))
+          (insert (propertize "\n\n" 'face '(:height 0.3)))))
+      (advice-add #'transient--show :after #'my-transient-posframe--render-buffer))
+    ))
+#+end_src
+
+** Prepare for status
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210822T125828.245709
+:END:
+Calling magit status does a check for unsaved buffers. So lets save them first.
+#+NAME: org_mark_mini20.local_20210822T125828.204977
+#+begin_src emacs-lisp :noweb-ref magit-mwbstatus :tangle no
+(defun mwb-magit-status ()
+  "Save opened buffers in current project befor calling magit status."
+  (interactive)
+  (mwb-projectile-save-project-buffers)
+  (magit-status-setup-buffer))
+#+end_src
+* Git timemachine
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201222T214721.121908
+:END:
+I think works with other vcs
+#+NAME: org_mark_mini12.local_20201223T212747.790111
+#+begin_src emacs-lisp
+(use-package-elpa git-timemachine
+  ;; :custom-face dopes not theme like :custom and so saves to customization file.
+  ;; :custom-face
+  ;; (git-timemachine-minibuffer-author-face ((t (:inherit success))))
+  ;; (git-timemachine-minibuffer-detail-face ((t (:inherit warning))))
+  :config
+  (set-face-attribute 'git-timemachine-minibuffer-author-face nil :inherit 'success)
+  (set-face-attribute 'git-timemachine-minibuffer-detail-face nil :inherit 'warning)
+  :bind (:map vc-prefix-map
+		 ("t" . git-timemachine))
+  :commands (git-timemachine)
+
+  :preface
+  (defun my/git-timmachine-check ()
+	(when (bound-and-true-p git-timemachine-mode)
+	  (user-error "Cannot revert the timemachine buffer")))
+
+  :hook (before-revert . my/git-timmachine-check))
+  #+end_src
+** TODO Add some form of menu or hydra to show that it is in use - and update the mode line
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220612T114243.221244
+:END:
+* Git messenger
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210814T100659.238603
+:END:
+ Pop up last commit information of current line
+#+NAME: org_mark_mini20.local_20210814T100659.226333
+#+begin_src emacs-lisp
+(use-package-elpa git-messenger
+  :bind (:map vc-prefix-map
+		 ("p" . git-messenger:popup-message)
+		 :map git-messenger-map
+		 ("m" . git-messenger:copy-message))
+  :commands  git-messenger:popup-message
+  :init (setq git-messenger:show-detail t
+              git-messenger:use-magit-popup t)
+  :config
+  (with-no-warnings
+    (with-eval-after-load 'hydra
+      (defhydra git-messenger-hydra (:color blue)
+        ("s" git-messenger:popup-show "show")
+        ("c" git-messenger:copy-commit-id "copy hash")
+        ("m" git-messenger:copy-message "copy message")
+        ("," (catch 'git-messenger-loop (git-messenger:show-parent)) "go parent")
+        ("q" git-messenger:popup-close "quit")))
+
+    (defun my-git-messenger:format-detail (vcs commit-id author message)
+      (if (eq vcs 'git)
+          (let ((date (git-messenger:commit-date commit-id))
+                (colon (propertize ":" 'face 'font-lock-comment-face)))
+            (concat
+             (format "%s%s %s \n%s%s %s\n%s  %s %s \n"
+                     (propertize "Commit" 'face 'font-lock-keyword-face) colon
+                     (propertize (substring commit-id 0 8) 'face 'font-lock-comment-face)
+                     (propertize "Author" 'face 'font-lock-keyword-face) colon
+                     (propertize author 'face 'font-lock-string-face)
+                     (propertize "Date" 'face 'font-lock-keyword-face) colon
+                     (propertize date 'face 'font-lock-string-face))
+             (propertize (make-string 38 ?─) 'face 'font-lock-comment-face)
+             message
+             (propertize "\nPress q to quit" 'face '(:inherit (font-lock-comment-face italic)))))
+        (git-messenger:format-detail vcs commit-id author message)))
+
+    (defun my-git-messenger:popup-message ()
+      "Popup message with `posframe', `pos-tip', `lv' or `message', and dispatch actions with `hydra'."
+      (interactive)
+      (let* ((hydra-hint-display-type 'message)
+             (vcs (git-messenger:find-vcs))
+             (file (buffer-file-name (buffer-base-buffer)))
+             (line (line-number-at-pos))
+             (commit-info (git-messenger:commit-info-at-line vcs file line))
+             (commit-id (car commit-info))
+             (author (cdr commit-info))
+             (msg (git-messenger:commit-message vcs commit-id))
+             (popuped-message (if (git-messenger:show-detail-p commit-id)
+                                  (my-git-messenger:format-detail vcs commit-id author msg)
+                                (cl-case vcs
+                                  (git msg)
+                                  (svn (if (string= commit-id "-")
+                                           msg
+                                         (git-messenger:svn-message msg)))
+                                  (hg msg)))))
+        (setq git-messenger:vcs vcs
+              git-messenger:last-message msg
+              git-messenger:last-commit-id commit-id)
+        (run-hook-with-args 'git-messenger:before-popup-hook popuped-message)
+        (git-messenger-hydra/body)
+        (cond ((and (fboundp 'posframe-workable-p) (posframe-workable-p))
+               (let ((buffer-name "*git-messenger*"))
+                 (posframe-show buffer-name
+                                :string (concat (propertize "\n" 'face '(:height 0.3))
+                                                popuped-message
+                                                "\n"
+                                                (propertize "\n" 'face '(:height 0.3)))
+                                :left-fringe 8
+                                :right-fringe 8
+                                :internal-border-width 1
+                                :internal-border-color (face-foreground 'font-lock-comment-face nil t)
+                                :background-color (face-background 'tooltip nil t))
+                 (unwind-protect
+                     (push (read-event) unread-command-events)
+                   (posframe-hide buffer-name))))
+              ((and (fboundp 'pos-tip-show) (display-graphic-p))
+               (pos-tip-show popuped-message))
+              ((fboundp 'lv-message)
+               (lv-message popuped-message)
+               (unwind-protect
+                   (push (read-event) unread-command-events)
+                 (lv-delete-window)))
+              (t (message "%s" popuped-message)))
+        (run-hook-with-args 'git-messenger:after-popup-hook popuped-message)))
+    (advice-add #'git-messenger:popup-close :override #'ignore)
+    (advice-add #'git-messenger:popup-message :override #'my-git-messenger:popup-message)))
+#+end_src
+* Show changes since last checkin
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201223T212427.542343
+:END:
+diff-hl seems the more all round as uses vc but then it puts a mess in fringe
+So switch to git-gutter but try git-gutter-fringe which id GUIO only as I might want linum mode (and I suspect hide show) in fringe
+** [[https://github.com/dgutov/diff-hl][diff-hl]]
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220203T125913.915203
+:END:
+Does not need magit
+Use git-gutter instead
+#+NAME: org_mark_mini12.local_20201223T212427.538014
+#+begin_src emacs-lisp :tangle no
+(use-package-elpa diff-hl
+  :after magit
+  :demand
+  :commands (diff-hl-next-hunk diff-hl-previous-hunk diff-hl-revert-hunk )
+  :hook ((magit-post-refresh . diff-hl-magit-post-refresh)
+		 (magit-pre-refresh . diff-hl-magit-pre-refresh))
+  :pretty-hydra (jp-git
+                 ("Diff"
+                  (("n" diff-hl-next-hunk "next hunk" :exit nil)
+                   ("p" diff-hl-previous-hunk "previous hunk" :exit nil)
+                   ("u" diff-hl-revert-hunk "revert hunk" :exit nil))))
+  :config
+  (global-diff-hl-mode)
+  (diff-hl-flydiff-mode))
+#+end_src
+** Git gutter
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210823T133333.265928
+:END:
+Seems to have the same function as diff-hl but does it in realtime. This is commented in git-gutter readme. "diff-hl is similar tool based on vc."
+Also gets used by spaceline-all-the-icons.
+Try git-gutter-fringe but seems to clash [[https://github.com/emacsorphanage/git-gutter-fringe/issues/9][with flycheck]].
+#+NAME: org_mark_mini20.local_20210823T133333.243027
+#+begin_src emacs-lisp
+(use-package-elpa git-gutter-fringe
+  :defer 2
+  :config
+  (global-git-gutter-mode 1)
+
+  ;; (set-face-background 'git-gutter-fr:modified "purple")
+  ;; background color
+  ;; (set-face-foreground 'git-gutter:added "green")
+  ;; (set-face-foreground 'git-gutter:deleted "red")
+
+  ;; (setq git-gutter-fr:side 'right-fringe)
+
+  (defun git-gutter-fr-mwb-hook-fn ()
+	(setq right-fringe-width 10))
+
+  (add-hook 'git-gutter-mode-hook #'git-gutter-fr-mwb-hook-fn)
+
+  :custom
+  (git-gutter:hide-gutter t)
+  (git-gutter-fr:side 'right-fringe)
+  (git-gutter:modified-sign "  ") ;; two space
+  (git-gutter:added-sign "++")    ;; multiple character is OK
+  (git-gutter:deleted-sign "--")
+  (git-gutter:update-interval 2)
+
+  :pretty-hydra
+  (hydra-git-gutter
+   (:foreign-keys warn
+	:exit nil
+	:quit-key "q"
+	:title (mwb-icon-string "git" "Git Gutter"))
+   ("Move" (("n" git-gutter:next-hunk "next hunk")
+			("p" git-gutter:previous-hunk "previous hunk")
+			("h" (progn (goto-char (point-min))
+						(git-gutter:next-hunk 1)) "first hunk")
+			("1" (progn (goto-char (point-min))
+						(git-gutter:next-hunk 1)) "first hunk")
+			("!" (progn (goto-char (point-min))
+						(git-gutter:next-hunk 1)) "first hunk")
+			("l" (progn (goto-char (point-min))
+						(git-gutter:previous-hunk 1)) "last hunk"))
+	"Modify" (("<SPC>" git-gutter:popup-hunk "popup hunk")
+			  ("s" git-gutter:stage-hunk "stage hunk")
+			  ("r" git-gutter:revert-hunk "revert hunk"))
+	"Current hunk" (("m" git-gutter:mark-hunk "Mark hunk")
+					("<end>" git-gutter:end-of-hunk "End of hunk")
+					;; ( mwbkey-home git-gutter:end-of-hunk "Begin of hunk" )
+					("u" git-gutter:popup-hunk "Popup hunk")
+					("<return>" git-gutter:popup-hunk "Popup hunk")))))
+#+end_src
+* Hydra
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220614T151632.104571
+:END:
+This is called from the main menu and thus not dependant on any of the git modes. So need to make it upfront.
+#+NAME: org_mark_mini20.local_20220614T151632.090506
+#+begin_src emacs-lisp
+(pretty-hydra-define jp-git
+  (:color teal :quit-key "q"
+   :title (mwb-icon-string "git" "Git"))
+  ("Status" (("s" mwb-magit-status "status")
+			 ("l" magit-log-buffer-file "commit log (current file)")
+			 ("L" magit-log-current "commit log (project)")
+			 ("B" magit-blame-addition "blame"))
+   "Diff" (("d" magit-diff-buffer-file "diff buffer"))
+   "Other" (("g" hydra-git-gutter/body "Git gutter")
+			("t" git-timemachine "time machine")
+			("m" git-messenger:popup-message "messenger"))))
+#+end_src
+* Smerge
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210813T230728.367536
+:END:
+A minor mode that shows the differences
+Main use if for merge conflicts
+#+NAME: org_mark_mini20.local_20210814T191833.218656
+#+begin_src emacs-lisp
+(use-package-elpa smerge-mode
+  :diminish
+  :commands smerge-mode
+  :pretty-hydra
+  ((:title (mwb-icon-text "diff" "Smerge")
+	:color pink :quit-key "q")
+   ("Move" (("n" smerge-next "next")
+			("p" smerge-prev "previous"))
+	"Keep" (("b" smerge-keep-base "base")
+			("u" smerge-keep-upper "upper")
+			("l" smerge-keep-lower "lower")
+			("a" smerge-keep-all "all")
+			("RET" smerge-keep-current "current")
+			("C-m" smerge-keep-current "current"))
+	"Diff" (("<" smerge-diff-base-upper "upper/base")
+			("=" smerge-diff-upper-lower "upper/lower")
+			(">" smerge-diff-base-lower "upper/lower")
+			("R" smerge-refine "refine")
+			("E" smerge-ediff "ediff"))
+	"Other" (("C" smerge-combine-with-next "combine")
+			 ("r" smerge-resolve "resolve")
+			 ("k" smerge-kill-current "kill")
+			 ("ZZ" (lambda ()
+					 (interactive)
+					 (save-buffer)
+					 (bury-buffer))
+			  "Save and bury buffer" :exit t))))
+  :bind (:map smerge-mode-map
+		 ("C-c m" . smerge-mode-hydra/body)
+		 ("<f5>" . smerge-mode-hydra/body))
+  :hook ((find-file . (lambda ()
+						(save-excursion
+						  (goto-char (point-min))
+						  (when (re-search-forward "^<<<<<<< " nil t)
+							(smerge-mode 1)))))
+		 (magit-diff-visit-file . (lambda ()
+									(when smerge-mode
+									  (hydra-smerge-mode/body))))))
+#+end_src

@@ -1,0 +1,811 @@
+#+TITLE Emacs configuration org Mode - all the complete things
+#+PROPERTY:header-args :tangle yes :comments noweb :noweb no-export
+#+STARTUP: show2levels
+* Notes on using org mode
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:6810C5AF-469D-4E0E-BD24-8F6301313A91
+:END:
+This is my first attempt at learning it.
+The config is a mess as I pick up on things.
+I was going to leave this to last so could make changes as I used org. However as I kept editing it I realised that I needed to comment and than was better in literate programming so this is the first non key file to be done.
+This is a large config and might be easier to document if not all put in a use-package (or break my rule and let some parts not be complete lisp)
+** DONE use package issues
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:1C8523CC-5CB5-4EA3-A010-6881059B6B32
+:END:
+This config gets long so difficult to see in one block
+
+There is an issue that pretty-hydra marks everything as a command so if I call something in another package then not found.
+use-package fix is put the other use-package before it in the file - so reorder file or use weaving to put that first.
+However major-mode-hydra+ fixes this at source.
+** Noweb issues
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:757C060B-ED8C-49CB-9096-EA146141E59F
+:END:
+noweb allows me to totally reorder the org file so better reading so support code can be in an appendix etc.
+However org-babel-detangle cannot deal with detangling as it looks for the whole file and tries to do a block at a time - which does not work with embedded blocks. After days debugging this (well several attempts until it clicked) I found confirmation https://news.ycombinator.com/item?id=17653473
+One fix might be to just detangle the current block.
+
+Ok detangle does not work
+org-babel-tangle-jump-to-org does mainly if :comments noweb is in the org :Properties: and the blocks have unique names but :noweb-ref names don't work as they produce a different link formar and reverse-search is not 100% see its info.
+
+** Grettke
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:111E7DB2-5383-4E1F-9B6E-EE14CBFE8671
+:END:
+This seems one of the most complete literate programming setups and he does have weave but no examples with links. He does say a few things so lets try.
+As everything is after loading of org dump in a config section after the rest.
+From https://github.com/grettke/help but current is https://github.com/grettke/myamacs but undocumented.
+
+** TODO Save org files saved in dropbox dir automatically (NB not emacs autosave)
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:8A5AC122-42AB-4B05-BEEE-ED6A16F5A966
+:END:
+See https://www.reddit.com/r/emacs/comments/9e5h4f/is_there_a_way_to_autosave_org_note_buffers/ and real-auto-save-mode and the hook
+** Load and setup org mode
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:DA0B129D-3E54-4C67-94D2-B9D303434BAF
+:END:
+org-mode is a pain as we need a newer than aquamacs supplies and also there are recommendations to use an even later version. Also re packaging emacs package.el reads already built stuff others e.g. straight.el don't and that could be a problem with org-mode. There are reasons not to use the org repo but Elpa - [[https://www.reddit.com/r/emacs/comments/5sx7j0/how_do_i_get_usepackage_to_ignore_the_bundled/ddix2ta/?utm_source=share&utm_medium=web2x][from Reddit]] basically possible security issues so I am with ELPA and missing org-contrib.
+
+Aug 2019 got an error in cut subtree so revert to org mode with Aquamacs and lost formatting of code blocks. (and will get name changes in links in generated files) but seems OK now.
+
+Now jump to back to src issues. They go back to the code block that contains the noweb <<>> Not the named block
+* The use package setup
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:411C4ABA-EFFC-4E73-9C0F-5E936AC5B73B
+:END:
+This is the main setup that includes other things
+Note Hydra is not really used after just a couple of weeks.
+It is now for subtree todo refile and links
+
+** Support functions
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210830T173642.889781
+:END:
+#+NAME: org_mark_mini20.local_20210830T173642.840556
+#+begin_src emacs-lisp
+(defun my/org-edit-src-exit ()
+  (interactive)
+  (org-edit-src-exit)
+  (mwb/mac-key-save-buffer-force-backup))
+#+end_src
+** use-package
+:PROPERTIES:
+:ID:       org_2020-12-08+00-00:D690B0FD-0E4B-44ED-A01E-7FEC29D8E7F4
+:END:
+  #+NAME: org_mark_mini20.local_20220822T204635.507725
+  #+begin_src emacs-lisp :noweb yes
+(use-feature org
+  :bind
+  <<org-key-binds>>
+  :config
+  (setq org-datetree-add-timestamp (quote active)
+        org-default-notes-file "~/SyncServices/Dropbox/Docs/org/notes.org"
+        org-directory "/Users/mark/SyncServices/Dropbox/Docs/org"
+        org-support-shift-select t
+        ;;          org-use-speed-commands t
+        )
+  :hook
+  <<org-mode-hooks>>
+  <<org-mode-hooks-wrapping>>
+  :functions org-hide-properties-mode
+  :preface (declare-function org-hide-properties-mode "org-hide-properties")
+  :mode-hydra
+  <<org-mode-hydra>>
+  
+  :config
+  (require 'init-mwb-org)
+
+  <<org-config>>
+  <<org-mode-hydrae-refile>>
+
+  <<org-mine>>
+  :custom
+  (org-modules  '(org-crypt org-tempo org-id org-mouse))
+  <<org-custom>>
+
+  :config
+  <<org-extras>>
+  )
+  #+end_src
+** Key bindings
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:7CFDEDFE-FB36-47D9-8D94-0CDC83AF71CC
+:END:
+Put the bind bit in noweb
+#+NAME: org_mark_mini20.local_20220822T214638.618650
+#+begin_src emacs-lisp :tangle no :noweb-ref  org-key-binds
+(
+ ;; ("H-s" . org-babel-tangle-jump-to-org)
+ ;; ("H-S-s" . org-babel-detangle)
+ ;; actually update but can't deal with weave
+ :map org-mode-map
+ ("<f5>" . org-ctrl-c-ctrl-c)
+ :map org-src-mode-map
+ ([remap save-buffer] . my/org-edit-src-exit)
+ ([remap bury-buffer] . org-edit-src-abort)
+ ;; :map org-capture-mode-map
+ ;; ("<f12>" . org-capture-finalize)
+ )
+#+end_src
+
+** Org capture
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:3D4D14AB-E281-45E0-A18E-0590E25E74A4
+:END:
+From http://doc.norang.ca/org-mode.html#Capture
+#+NAME: org_mark_2020-01-23T20-21-34+00-00_mini12_065E6C30-63CE-4A91-B3FC-182E8D209A06
+#+begin_src emacs-lisp
+
+;; ;; Capture templates for: TODO tasks, Notes, appointments, phone calls, meetings, and org-protocol
+;; (setq org-capture-templates
+;;       (quote (("t" "todo" entry (file "~/git/org/refile.org")
+;;                "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
+;;               ("r" "respond" entry (file "~/git/org/refile.org")
+;;                "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
+;;               ("n" "note" entry (file "~/git/org/refile.org")
+;;                "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
+;;               ("j" "Journal" entry (file+datetree "~/git/org/diary.org")
+;;                "* %?\n%U\n" :clock-in t :clock-resume t)
+;;               ("w" "org-protocol" entry (file "~/git/org/refile.org")
+;;                "* TODO Review %c\n%U\n" :immediate-finish t)
+;;               ("m" "Meeting" entry (file "~/git/org/refile.org")
+;;                "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
+;;               ("p" "Phone call" entry (file "~/git/org/refile.org")
+;;                "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
+;;               ("h" "Habit" entry (file "~/git/org/refile.org")
+;;                "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n"))))
+
+
+(setq org-capture-templates
+      '(("n" "Thought or Note"  entry
+         (file org-default-notes-file)
+         "* %?\n\n  %i\n\n  See: %a" :empty-lines 1)
+        ("t" "todo" entry (file org-default-notes-file)
+         "* TODO %?\n%U\n%a\n" )
+        ))
+#+end_src
+
+** Folding visibility
+:PROPERTIES:
+:ID:       org_mark_2020-10-25T11-37-05+00-00_mini12.local:B48F7EEE-0A50-4EC9-8416-C09AC65B509B
+:END:
+*** Startup
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220627T115411.767788
+:END:
+This describes how the org file is shown I think 9.4 altered this
+#+NAME: org_mark_mini20.local_20220627T115411.731459
+#+begin_src emacs-lisp :tangle no :noweb-ref org-custom
+(org-startup-folded 'overview)
+#+end_src
+*** Folding unhide on search
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220625T173650.554480
+:END:
+This is new in org version 9.6 but appears in 9.5.4: 🫢
+#+NAME: org_mark_mini20.local_20220625T173650.532142
+#+begin_src emacs-lisp :tangle no :noweb-ref org-custom
+(org-fold-core-style 'overlays)
+#+end_src
+*** Edit in invisible region
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220627T115411.765389
+:END:
+#+NAME: org_mark_mini20.local_20220627T115411.739742
+#+begin_src emacs-lisp :tangle no :noweb-ref org-custom
+(org-fold-catch-invisible-edits 'smart)
+#+end_src
+*** Allow cycle at beginning of buffer
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220627T122757.439066
+:END:
+#+NAME: org_mark_mini20.local_20220627T122757.416935
+#+begin_src emacs-lisp :tangle no :noweb-ref org-custom
+(org-cycle-global-at-bob t)
+#+end_src
+** Footnotes
+:PROPERTIES:
+:ID:       org_mark_2020-03-06T13-08-35+00-00_mini12.local:31819091-6339-413D-9DD1-C248C5F6520B
+:END:
+Need to set up an auto-sort
+#+NAME: org_mark_2020-03-06T13-08-35+00-00_mini12.local_632B9653-A2FD-4226-A130-A0260FCD9B66
+#+begin_src emacs-lisp :noweb-ref org-config :tangle no
+(setq org-footnote-auto-adjust t)
+#+end_src
+
+** Attempt at Wysiwyg
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220628T143718.878565
+:END:
+*** Entities
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220628T143718.871903
+:END:
+Show entities as UTF-8 e.g. \alpha
+#+NAME: org_mark_mini20.local_20220628T143718.821728
+#+begin_src emacs-lisp :tangle no :noweb-ref org-custom
+(org-pretty-entities t)
+#+end_src
+*** Emphasis markers
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220628T143718.867406
+:END:
+e.g.
+=verbatim= =
+_underline_ _
+~code~ ~
+/italic/ /
+*bold*  *
++strike-through+ +
+#+NAME: org_mark_mini20.local_20220628T144349.679603
+#+begin_src emacs-lisp :tangle no :noweb-ref org-custom
+(org-hide-emphasis-markers t)
+#+end_src
+*** Super/sub scripts
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220628T143718.859984
+:END:
+Force use of {} as _ is often there as variable name  x^{2} x_{0}
+#+NAME: org_mark_mini20.local_20220628T143718.833999
+#+begin_src emacs-lisp :tangle no :noweb-ref org-custom
+(org-pretty-entities-include-sub-superscripts t)
+(org-use-sub-superscripts '{})
+#+end_src
+
+*** Variable Pitch
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:EE29BA62-13AD-4C22-9ABB-AF723DCA7950
+:END:
+From [[https://raw.githubusercontent.com/zzamboni/dot-emacs/master/init.org][zzamboni]]
+#+begin_quote
+Setting up =visual-line-mode= and making all my paragraphs one single line, so that the lines wrap around nicely in the window according to their proportional-font size, instead of at a fixed character count, which does not work so nicely when characters have varying widths. I set up a hook that automatically enables =visual-line-mode= and =variable-pitch-mode= when entering org-mode.
+#+end_quote
+However this code toggles and as I have already use set-word-wrap in text-mode-hook  to do this for text-mode.
+#+NAME: org-mode-hooks-wrapping
+#+begin_src emacs-lisp :tangle no
+    ;; (org-mode . visual-line-mode)
+    (org-mode . variable-pitch-mode)
+#+end_src
+** Structure editing
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220628T211525.165723
+:END:
+*** Paste subtrees
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220628T145406.654439
+:END:
+Make subtree cut and paste adjust to current level.
+#+NAME: org_mark_mini20.local_20220628T145406.632284
+#+begin_src emacs-lisp :tangle no :noweb-ref org-custom
+(org-yank-adjusted-subtrees t)
+#+end_src
+** Tangle
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220628T220421.764169
+:END:
+*** Org src
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220628T211525.156125
+:END:
+If code is being edited jump to this buffer.
+#+NAME: org_mark_mini20.local_20220628T211525.132419
+#+begin_src emacs-lisp :tangle no :noweb-ref org-custom
+(org-src-ask-before-returning-to-edit-buffer nil)
+#+end_src
+Use the same window for org src editing
+#+NAME: org_mark_mini20.local_20220628T211525.138467
+#+begin_src emacs-lisp :tangle no :noweb-ref org-custom
+(org-src-window-setup 'current-window)
+#+end_src
+**** Set variables
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220627T124955.787932
+:END:
+Code block behaviour - but also see customization for appearance
+ #+NAME: org_mark_2020-01-23T20-21-34+00-00_mini12_F0D54908-6A04-45A1-BF64-E082C9DE207E
+ #+begin_src emacs-lisp :tangle no :noweb-ref org-config
+(setq org-src-fontify-natively t
+	  org-src-tab-acts-natively t
+	  org-confirm-babel-evaluate nil
+	  org-edit-src-content-indentation 0
+	  ;; org-startup-indented t
+	  )
+ #+end_src
+
+*** Evaluating
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220619T143614.114358
+:END:
+My languages
+#+NAME: org_mark_mini20.local_20220619T143246.381888
+#+BEGIN_SRC emacs-lisp
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (org . t)
+   ;; (sml . t)
+   (C . t)
+   ;; (R . t)
+   (python . t)
+   ;; (sass . t)
+   (scheme . t)
+   (sql . t)
+   ;; (js . t)
+   ;;
+   ;; (latex . t)
+   ;;
+   (makefile . t)
+   (shell . t)
+   ;;
+   ;; (ditaa . t)
+   ;; (dot . t)
+   ;; (plantuml . t)
+   ))
+#+END_SRC
+
+*** Identity
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220619T135120.154326
+:END:
+Two issues - grettke's are too long for my normal screen (but a fix would be hide names. Other is that the time only gets set when emacs is restarted.
+#+NAME: org_mark_mini20.local_20220619T135120.123432
+#+BEGIN_SRC emacs-lisp
+(setq org-id-prefix (concat "org_" (user-real-login-name)
+                            ;; "_" (help/get-timestamp-no-colons)
+                            "_" (system-name)
+                            ))
+(setq org-id-method 'ts)
+#+END_SRC
+
+*** Post tangle
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220206T102457.695907
+:END:
+As grettke's code  updates the whole buffer and saves either add to the same function or make the save to be the last (I chose the latter
+**** Add header
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220206T120941.917997
+:END:
+From my [[https://emacs.stackexchange.com/q/50488/9874][SO question]] and based on the first part of [[https://emacs.stackexchange.com/a/55728/9874][this answer]]
+#+NAME: org_mark_mini20.local_20220206T120941.889585
+#+begin_src emacs-lisp
+(defun mwbinit-add-tangle-headers ()
+  (cond
+   ((f-ext? (buffer-file-name) "py")
+	(goto-char (point-min))
+	(insert "# This is a generated file do not edit\n"))
+   ((f-ext? (buffer-file-name) "el")
+	(goto-char (point-min))
+	(insert ";; -*- lexical-binding:t;coding: utf-8 -*-\n")
+	(insert ";; This is a generated file do not edit\n"))
+   (t
+	nil)))
+#+end_src
+**** Indent and save
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220206T120941.916978
+:END:
+- Post tangle actions (grettke)
+  - Indentation
+    - At first glance this is surprising! The author should be responsible for
+      the indentation, right? Yes, that is right. But there is one exception:
+      using ~:noweb-ref~ source block concatenation. [[http://orgmode.org/manual/noweb_002dref.html][It]] is powerful and elegant.
+      But the source blocks are indented on their own line. It forces any
+      reader format it to make any sense of it. That is a poor start to using
+      the tangled files. So tangled files get indented.
+- Headers
+#+NAME: org_mark_mini20.local_20220206T121247.727128
+#+BEGIN_SRC emacs-lisp
+(defun mwb/org-babel-post-tangle-hook-fn ()
+  (interactive)
+  (mwbinit-add-tangle-headers)
+  (indent-region (point-min) (point-max) nil)
+  (save-buffer))
+(add-hook 'org-babel-post-tangle-hook #'mwb/org-babel-post-tangle-hook-fn)
+#+END_SRC
+
+***** TODO Tangle on save
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:42D6E858-998F-48DE-8D73-799C228FF91E
+:END:
+This code is unreadable the consts would make more sense not being there as they would then match the documentation
+I have removed this from the noweb weave as it makes use of other files a pain but put back as this needs more. Including the noweb bit picks up several bits
+#+NAME: org-mode-hooks
+	#+begin_src emacs-lisp :tangle no
+(org-mode . (lambda ()
+              (add-hook
+               'after-save-hook
+               'org-babel-tangle
+               'run-at-end
+               'only-in-org-mode)))
+	#+end_src
+
+*** Jump to generated code
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220605T134305.890136
+:END:
+Go from org file to the generated - really only need as noweb the code in edit src is not real. From [[https://emacs.stackexchange.com/a/69591/9874][SO]]
+See file:../site-lisp/mwb/init-mwb-org.el
+
+** Todo
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220628T220421.760968
+:END:
+*** Keywords
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220628T220421.757220
+:END:
+Set the keywords - ie life cycle.
+#+NAME: org_mark_mini20.local_20220628T220421.730792
+#+begin_src emacs-lisp :tangle no :noweb-ref org-custom
+(org-todo-keywords
+   '((sequence "TODO" "DONE(!)" "LEAVE(@)")))
+#+end_src
+*** Add timestamp for done
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220628T220421.752549
+:END:
+#+NAME: org_mark_mini20.local_20220628T220421.734831
+#+begin_src emacs-lisp :tangle no :noweb-ref org-custom
+(org-log-done 'time)
+#+end_src
+** Archive
+:PROPERTIES:
+:ID:       org_2020-12-08+00-00:C0A61800-DCE8-4C03-96B8-944F662CBA2A
+:END:
+I want separate archive files with the same structure as original
+All google seems to point via the gist quoted in [[https://emacs.stackexchange.com/questions/49079/issue-archiving-when-maintaining-org-mode-subtree-structure][SO]] but [[https://fuco1.github.io/2017-04-20-Archive-subtrees-under-the-same-hierarchy-as-original-in-the-archive-files.html][Fuco1's]] looks simpler
+But org mode keepos changing and functions go missing so does not work but a fix [[https://github.com/daviderestivo/galactic-emacs/blob/master/lisp/org-archive-subtree.el][Here]]
+
+See file:../site-lisp/mwb/init-mwb-org.el
+*** Location
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220627T115411.761111
+:END:
+#+NAME: org_mark_mini20.local_20220627T115411.743195
+#+begin_src emacs-lisp :tangle no :noweb-ref org-custom
+(org-archive-location "archive/%s_archive::")
+#+end_src
+** Main mode hydra
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:D4058350-C97F-4A1D-858C-70008D09A2FF
+:END:
+Using new pretty mode hydra.
+#+NAME: org_mark_mini20.local_20220822T204918.284965
+#+begin_src emacs-lisp :tangle no :noweb-ref org-mode-hydra
+(org-mode
+ (:idle 1.0)
+ ("Edit Subtree"
+  (("x" org-cut-subtree "Cut")
+   ("w" org-copy-subtree "Copy")
+   ("y" org-paste-subtree "Paste")
+   ("Y" org-yank "Yank")
+   ("W" org-clone-subtree-with-time-shift "Clone"))
+  "Visibility"
+  (("va" outline-show-all "All")
+   ("vm" org-babel-hide-markers-mode "Markers")
+;;   ("vp" org-hide-properties-mode "Properties" :toggle t)
+   )
+  "Babel"
+  (("e" org-babel-execute-src-block "Execute Source Block")
+   ("'" org-edit-src-code "Edit Source")
+   ("s" sv-org-babel-tangle-jump-to-src "Jump to generated code" )
+   ("b" org-babel-tangle "Tangle"))
+  "Insert"
+  (("m" org-meta-return "Heading")
+   ("M" org-insert-heading-respect-content "Heading Under")
+
+   ("T" org-insert-todo-heading-respect-content "Todo Under"))
+  "Org"
+  (("a" org-archive-subtree "Archive subtree")
+   ("c" org-capture "Capture")
+   ("R" org-refile "Refile")
+   ("r" hydra-org-refile/body "Refile Hydra")
+   ("t" org-todo "Todo"))
+  "Links"
+  (("l" org-store-link "Store")
+   ("i" org-insert-link "Insert")
+   ("f" org-footnote-action "Footnote"))))
+
+#+end_src
+** Imenu to provide info for treemacs and contextual menu
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220627T115937.590135
+:END:
+#+NAME: org_mark_mini20.local_20220627T115937.571651
+#+begin_src emacs-lisp :tangle no :noweb-ref org-custom
+(org-imenu-depth 6)
+#+end_src
+* Setup outside use-package
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:2DC0229D-C398-4D28-B321-23AFDA2DA87A
+:END:
+This is after org-mode has been loaded and set up
+Not :after does not work as org-mode has been loaded early. So just rely on file order
+Possibly all this could go in a config control by properties
+** Prettify Old
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:722CBA7A-79F6-4695-B710-ACF8F3C1F219
+:END:
+Make org mode look prettier. See also the customization
+Basically set to variable pitch font but note Aquamacs has a way (different of course to do this). What emacs variable pitch mode does is set default to variable font. Then fixed is a derived from that. This is confusing for org-src as the font there is not the same as default.
+*** Circular bullets
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:00807D90-E9FE-4A4E-ABAE-4EF867BE97EA
+:END:
+From [[http://www.howardism.org/Technical/Emacs/orgmode-wordprocessor.html][here]]
+ #+NAME: org_mark_2020-01-23T20-21-34+00-00_mini12_BD3DD793-C3F1-46EE-A7C2-72CA21C5066E
+ #+begin_src emacs-lisp :tangle no
+(use-package-elpa org-bullets
+  :hook (org-mode . org-bullets-mode))
+ #+end_src
+
+**** Add the keywords to be changed
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210507T132612.415034
+:END:
+Appear as Unicode bullets.
+	#+begin_src emacs-lisp
+(font-lock-add-keywords
+ 'org-mode
+ '(("^ +\\([-*]\\) "
+    (0
+     (prog1
+         ()
+       (compose-region
+        (match-beginning 1)
+        (match-end 1)
+        "•"))))))
+	#+end_src
+*** Indent other text
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:E1789BA1-AF3F-441B-95B6-1FD7ADABD862
+:END:
+	#+begin_src emacs-lisp :tangle no
+(use-feature org-indent
+  :after (org)
+  :demand
+  :diminish)
+	#+end_src
+*** TODO Hide property drawers
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210131T001131.889643
+:END:
+From [[https://stackoverflow.com/a/17492723/151019][SO]] override org function
+OK need to hide #+name and also make the properties visible
+ALso see https://github.com/amno1/org-hide-properties or https://github.com/org-roam/org-roam/wiki/User-contributed-Tricks
+**** Manual attempt
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220605T223855.748968
+:END:
+#+NAME: org_mark_mini20.local_20220605T223855.713284
+#+begin_src emacs-lisp :tangle no
+(defun org-cycle-hide-drawers (state)
+  "Re-hide all drawers after a visibility state change."
+  (when (and (derived-mode-p 'org-mode)
+             (not (memq state '(overview folded contents))))
+    (save-excursion
+      (let* ((globalp (memq state '(contents all)))
+             (beg (if globalp
+                      (point-min)
+                    (point)))
+             (end (if globalp
+                      (point-max)
+                    (if (eq state 'children)
+                        (save-excursion
+                          (outline-next-heading)
+                          (point))
+                      (org-end-of-subtree t)))))
+        (goto-char beg)
+        (while (re-search-forward org-drawer-regexp end t)
+          (save-excursion
+            (beginning-of-line 1)
+            (when (looking-at org-drawer-regexp)
+              (let* ((start (1- (match-beginning 0)))
+                     (limit
+                      (save-excursion
+                        (outline-next-heading)
+                        (point)))
+                     (msg (format
+                           (concat
+                            "org-cycle-hide-drawers:  "
+                            "`:END:`"
+                            " line missing at position %s")
+                           (1+ start))))
+                (if (re-search-forward "^[ \t]*:END:" limit t)
+                    (outline-flag-region start (point-at-eol) t)
+                  (user-error msg))))))))))
+#+end_src
+**** MELPA code
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220628T134505.243792
+:END:
+#+NAME: org_mark_mini20.local_20220605T223855.714238
+#+begin_src emacs-lisp :tangle no
+(use-package-elpa org-hide-properties
+  :straight (:host github :repo  "amno1/org-hide-properties" )
+  :hook (org-mode . org-hide-properties-mode)
+  :config
+  (major-mode-hydra-define+ org-mode nil
+    ("Visibility" (("vp" org-hide-properties-mode "Properties" :toggle t)))
+    ))
+#+end_src
+*** TODO Hide #+ lines
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210422T091310.119974
+:END:
+Taken from https://github.com/amno1/org-babel-hide-markers-mode and my version adds #+NAME
+TODO add property drawers
+The original has been updated
+#+NAME: org_mark_mini20.local_20210422T091310.076424
+#+begin_src emacs-lisp :tangle no
+(use-package-elpa ob-hide-markers
+  :disabled
+  :hook (org-font-lock . org-babel-hide-markers-mode)
+  :init
+  (setq org-babel-hide-markers-line t)
+  :diminish org-babel-hide-markers-mode)
+#+end_src
+** [[https://github.com/minad/org-modern][org-modern]]
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220628T120220.489059
+:END:
+This can now be all done with one mode.
+#+NAME: org_mark_mini20.local_20220628T120220.473461
+#+begin_src emacs-lisp
+(use-package-elpa org-modern
+  :after org
+  :demand
+  :config
+  (global-org-modern-mode))
+#+end_src
+*** Indent
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220628T124925.641454
+:END:
+Normal org-indent does not work. See [[https://github.com/minad/org-modern/issues/7][org-modern issue]]
+#+NAME: org_mark_mini20.local_20220628T124925.624904
+#+begin_src emacs-lisp
+(use-package-elpa org-modern-indent
+  :straight (:host github :repo "jdtsmith/org-modern-indent")
+  ;; :straight or :load-path here, to taste
+  :custom (org-startup-indented t)
+  :hook
+  (org-indent-mode . org-modern-indent-mode))
+#+end_src
+** Table of Contents setup
+:PROPERTIES:
+:ID:       org_mark_2020-10-24T15-08-22+01-00_mini12.local:22E4475E-BC4D-4C25-8B48-2F5E01060BDA
+:END:
+This package [[https://github.com/snosov1/toc-org][toc-org]] seems it might be useful
+
+I think using treemacs is nearer what I need as puts menu in other window - although length matters. Also set the startup to show 2 levels.
+#+NAME: org_mark_2020-10-24T15-08-22+01-00_mini12.local_E0715861-9815-4AA9-8E93-095091F21C56
+#+begin_src emacs-lisp :tangle no
+(use-package-elpa toc-org
+  :hook (org-mode . toc-org-mode))
+#+end_src
+
+** Refile
+:PROPERTIES:
+:ID:       org_2020-12-07+00-00:8823DE6D-7329-4D19-BF21-8438FE1A7CED
+:END:
+
+Based off https://mollermara.com/blog/Fast-refiling-in-org-mode-with-hydras/ to refile to separate files. No doubt will extend in future and follow the later bits.
+*** Code
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:F95400D0-B750-4B14-A1F5-78BF1E070185
+:END:
+#+NAME: org_2020-12-07+00-00_51802C21-7B36-41FE-A88F-FC25E7EB96C1
+#+begin_src emacs-lisp
+(defun my/refile (file headline &optional arg)
+  (let ((pos (save-excursion
+               (find-file (expand-file-name file org-directory))
+               (org-find-exact-headline-in-buffer headline))))
+    (org-refile arg nil (list headline file nil pos)))
+  (switch-to-buffer (current-buffer)))
+#+end_src
+
+*** Hydra
+:PROPERTIES:
+:ID:       org_2020-12-07+00-00:5419E547-16A1-40F2-9B8A-6A5B504454F2
+:END:
+I am not certain how to add a name in the use-package so use plain macro in :config Also easier to create if legal elisp
+#+NAME: org_2020-12-07+00-00_B84C6815-0FA6-43AA-8D0E-121C3C3E77BC
+#+begin_src emacs-lisp
+(pretty-hydra-define hydra-org-refile
+  (:color pink :quit-key "q")
+  ("Archive"
+   ( ("a" org-archive-subtree "Archive subtree"))
+   "Shopping"
+   (("g" (my/refile "shopping.org" "Groceries") "Groceries")
+    ("s" (my/refile "shopping.org" "Other") "Other shopping"))
+   "computer"
+   (("e" (my/refile "dev_todo.org" "Emacs") "Emacs tasks")
+    ("p" (my/refile "dev_todo.org" "Programming") "Prog tasks")
+    ("r" (my/refile "dev_todo.org" "Racket") "Racket tasks"))
+   "Other"
+   (("b" (my/refile "bookmarks.org" "General") "Bookmarks")
+    ("f" (my/refile "bookmarks.org" "Fiction") "Fiction")
+    )))
+#+end_src
+
+** Capture
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:A1CCBFF3-51A3-4B75-9EED-179DB3DD0940
+:END:
+I should start using this
+Again from jerrypnz
+#+NAME: org_mark_2020-01-23T20-21-34+00-00_mini12_951A79B2-540A-4A60-B3FA-7EEA9F02A656
+#+begin_src emacs-lisp
+(use-feature org-capture
+  ;; :after (org)
+  :commands (org-capture)
+  :bind (("<f13>" . org-capture)
+		 ("C-<f13>" . open-org-notes)
+		 :map org-capture-mode-map
+		 ("s-s" . org-capture-finalize)
+		 ("s-k" . org-capture-kill)
+		 ("s-w" . org-capture-refile))
+  :preface
+  (defun open-org-notes ()
+	(interactive)
+	(find-file org-default-notes-file))
+  :config
+  (setq org-capture-templates
+		`(("t" "TODO" entry (file org-default-notes-file)
+		   "* TODO %?\n%u\n")
+		  ("p" "Project" entry (file org-default-notes-file)
+		   "* %? [%] :PROJECT:\n%u\n")
+		  ("m" "Meeting" entry (file org-default-notes-file)
+		   "* Meeting notes for %? :MEETING:\n%t" :clock-in t :clock-resume t)
+		  ("n" "Notes" entry (file org-default-notes-file)
+		   "* %? \n%t"))))
+#+end_src
+
+** Agenda
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-21-34+00-00_mini12:E8D53E27-7D3B-403A-9179-D415A9B2581A
+:END:
+I don't use but the hook is there. Main setup from Jerry Peng, needed as in org hydra and might as well setup up.
+Also in org-mouse so must be loaded
+#+NAME: org_mark_2020-01-23T20-21-34+00-00_mini12_D54091C8-6480-46A6-B79B-3350E35DA246
+#+begin_src emacs-lisp
+(use-feature org-agenda
+  :after (org)
+  :commands (org-agenda)
+  :config
+  (progn
+    (setq org-agenda-restore-windows-after-quit t)
+    (setq org-agenda-window-setup 'only-window)
+
+    (advice-add 'org-agenda-quit :before 'org-save-all-org-buffers)
+
+    (setq org-agenda-custom-commands
+          '(
+            ("s" "Someday"
+             ((tags "+someday/TODO"
+               ((org-agenda-overriding-header "Maybe Someday:")))))))
+
+    (setq org-agenda-files (list  org-directory
+                                  ))
+
+    (setq org-agenda-category-icon-alist
+          `(("Emacs" ,(list (all-the-icons-fileicon "emacs" :height 0.8 :v-adjust 0.05))
+             nil nil :ascent center)
+            ("Projects" ,(list (all-the-icons-octicon "repo" :v-adjust 0.05))
+             nil nil :ascent center)
+
+            ("Inbox" ,(list (all-the-icons-faicon "inbox" :height 0.9 :v-adjust 0.05))
+             nil nil :ascent center)
+            ("Personal" ,(list (all-the-icons-faicon "user" :height 0.95 :v-adjust 0.05))
+             nil nil :ascent center)))
+
+    (setq org-agenda-sorting-strategy
+          '((agenda habit-down time-up priority-down category-keep)
+            (todo category-keep timestamp-down)
+            (tags category-keep timestamp-down)
+            (search category-keep)))))
+#+end_src

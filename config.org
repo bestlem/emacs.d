@@ -1,0 +1,799 @@
+
+#+TITLE Emacs configuration setup
+#+PROPERTY:header-args :cache yes :tangle yes :comments link
+#+STARTUP: content
+This file has no complex weaving and so can be tangled without using org-mode.
+* Init environment
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:714AABB4-0858-48B3-BFDB-0F9D17A40C40
+:END:
+The minimum setup needed to load the rest.
+** Various constants
+:PROPERTIES:
+:ID:       org_mark_2020-02-20T21-36-43+00-00_mini12.local:EC43B9AE-44B4-4FBB-9E63-AC26BB45592E
+:END:
+*** Emacs versions
+:PROPERTIES:
+:ID:       org_mark_2020-09-29T11-53-58+01-00_mini12.local:433ED4F4-38B0-44D9-8067-0EF36DB709FB
+:END:
+What type of Emacs and system do we have
+The ** names are not emacs standard so told should use -p instead.
+Add more based on [[https://github.com/seagle0128/.emacs.d][Centaur Emacs]]
+#+NAME: org_mark_mini20.local_20210124T194254.507579
+#+begin_src emacs-lisp
+(message "Setup consts - start config.org")
+(defconst *aquamacs* (featurep 'aquamacs)
+  "True iff we are in aquamacs")
+(defconst *macport* (boundp 'mac-carbon-version-string)
+  "True iff we are in Mitsuharu Yamamoto's port")
+
+(defconst *sys/win32p*
+  (eq system-type 'windows-nt)
+  "Are we running on a WinTel system?")
+
+(defconst *sys/linuxp*
+  (eq system-type 'gnu/linux)
+  "Are we running on a GNU/Linux system?")
+
+(defconst *sys/macp*
+  (eq system-type 'darwin)
+  "Are we running on a Mac system?")
+
+(defconst *emacs/mac-x-p*
+  (and (display-graphic-p) *sys/macp*)
+  "Are we running under X on a Mac system?")
+
+(defconst *emacs/mac-ns-p*
+  (eq window-system 'ns)
+  "Are we running on a GNUstep or Macintosh Cocoa display?")
+
+(defconst *emacs/mac-cocoa-p*
+  (featurep 'cocoa)
+  "Are we running with Cocoa on a Mac system?")
+
+(defconst *emacs/mac-port-p*
+  (eq window-system 'mac)
+  "Are we running a macport build on a Mac system?")
+
+(defconst *emacs/linux-x-p*
+  (and (display-graphic-p) *sys/linuxp*)
+  "Are we running under X on a GNU/Linux system?")
+
+(defconst *sys/cygwinp*
+  (eq system-type 'cygwin)
+  "Are we running on a Cygwin system?")
+
+(defconst *sys/rootp*
+  (string-equal "root" (getenv "USER"))
+  "Are you using ROOT user?")
+
+(defconst *emacs/>=25p*
+  (>= emacs-major-version 25)
+  "Emacs is 25 or above.")
+
+(defconst *emacs/>=26p*
+  (>= emacs-major-version 26)
+  "Emacs is 26 or above.")
+
+(defconst *emacs/>=27p*
+  (>= emacs-major-version 27)
+  "Emacs is 27 or above.")
+
+(defconst *emacs/>=28p*
+  (>= emacs-major-version 28)
+  "Emacs is 28 or above.")
+
+;;  well this is true for all installed one
+(defconst *emacs/>=25.3p*
+  (or *emacs/>=26p*
+      (and (= emacs-major-version 25) (>= emacs-minor-version 3)))
+  "Emacs is 25.3 or above.")
+
+#+end_src
+*** Directories
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20211029T224932.745031
+:END:
+**** Where things are put
+:PROPERTIES:
+:ID:       org_mark_2020-09-29T11-53-58+01-00_mini12.local:63AB1DE7-5C65-415D-96D0-7DAF0E0BC2BA
+:END:
+Aquamacs puts a lot in ~/Library/Preferences/Emacs but Emacs 27 does not know that so we want to keep some of the crap out of .Emacs.d So try no littering.
+We gave up as it is just a set of people adding modes to it. There are not enough to be worth it. Do it myself. But use var as the default directory
+#+NAME: org_mark_mini20.local_20211029T224932.715909
+#+begin_src emacs-lisp :tangle no
+(use-package-elpa no-littering
+  :disabled
+  :unless *aquamacs*)
+#+end_src
+***** Use Aquamacs hack and put user-Emacs-directory elsewhere
+:PROPERTIES:
+:ID:       org_mark_2020-10-10T14-59-33+01-00_mini12.local:0A357D06-99EB-4ACF-8F3E-646665D1053F
+:END:
+In this case var and overlap no-littering
+#+NAME: org_mark_2020-10-10T14-59-33+01-00_mini12.local_DB515763-D42A-4AC9-B13B-49CCF27056D8
+#+begin_src emacs-lisp
+(unless *aquamacs*
+  (setq user-emacs-directory (mwb-user-emacs-file "var/")))
+#+end_src
+
+** Straight
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220614T204548.065961
+:END:
+Lets try straight,
+Allows some forks and emacs_wiki to be dealt with as standard.
+
+*** Set variables
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220616T104529.463245
+:END:
+
+**** Bootstrap
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220625T102847.616482
+:END:
+To use a forked straight.el
+#+NAME: org_mark_mini20.local_20220625T102847.585074
+#+begin_src emacs-lisp
+(setq straight-repository-user "bestlem")
+(setq straight-repository-branch "work")
+#+end_src
+**** Running
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220625T102847.611492
+:END:
+#+NAME: org_mark_mini20.local_20220616T104529.439075
+#+begin_src emacs-lisp
+(defvar mwb-straight-profile
+  (expand-file-name "straight-pkgs.el" mwb-user-emacs-directory)
+  "File for containging versions of packages from straight")
+
+(defvar straight-base-dir)
+(defvar straight-profiles)
+(setq straight-base-dir mwb-emacs-work-dir)
+(setq mwb-straight-local-repos (expand-file-name "local-repos" mwb-emacs-work-dir))
+(setq straight-profiles `((nil . ,mwb-straight-profile)))
+(setq straight-use-version-specific-build-dir t)
+(setq straight-vc-git-default-protocol 'ssh)
+#+end_src
+*** Bootstrap
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220614T210326.130274
+:END:
+#+NAME: org_mark_mini20.local_20220614T204548.040188
+#+begin_src emacs-lisp
+;; Bootstrap the package manager, straight.el.
+(message "Bootstrapping straight...")
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name
+        "straight/repos/straight.el/bootstrap.el"
+        (or (bound-and-true-p straight-base-dir)
+            user-emacs-directory)))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+(message "Bootstrapping straight...done")
+#+end_src
+*** el-patch
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220615T202800.326620
+:END:
+Allow override of methods. From https://github.com/radian-software/el-patch
+#+NAME: org_mark_mini20.local_20220615T202800.301892
+#+begin_src emacs-lisp
+(straight-use-package 'el-patch)
+#+end_src
+*** Mark package as in emacs and not do a search in ELPA
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220823T194757.884518
+:END:
+Needed for json-navigator.
+But I think keep org as the one in emacs.
+Unfortunalt expand-region uses the newer one
+#+NAME: org_mark_mini20.local_20220823T194757.853487
+#+begin_src emacs-lisp :tangle no
+(add-to-list 'straight-built-in-pseudo-packages 'org)
+#+end_src
+** Macros to set up how modes are set up
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:A3665416-954F-4BD9-B55F-86949CFA7719
+:END:
+Basically use-package and helpers - strictly some of these can be left to later.
+*** use-package
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:3D4EAA9E-BE50-474E-8111-F20ACA6A1703
+:END:
+include use-package setup from <https://github.com/CachesToCaches/getting_started_with_use_package/blob/master/init-use-package.el>
+Ideally I will use as per hemacs use-feature if on load-path and use-package if from elpa by setting ensure t - however too late so add use-elpa-package
+ #+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_77FB1165-1A41-4244-818F-7BFAF0F191FB
+ #+begin_src emacs-lisp
+;; (unless (package-installed-p 'use-package)
+;;   (package-refresh-contents)
+;;   (package-install 'use-package))
+(straight-use-package 'use-package)
+
+;; Enable use-package
+(eval-when-compile
+  (setq use-package-enable-imenu-support t)
+  (require 'use-package)
+  (setq bind-key-describe-special-forms t)
+  ;; (setq use-package-always-defer t)
+  (setq straight-use-package-by-default t)
+  (setq byte-compile-current-buffer t)
+  (if init-file-debug
+      (setq use-package-verbose t
+            use-package-expand-minimally nil
+            use-package-compute-statistics t)
+    (setq use-package-verbose nil
+          use-package-expand-minimally t)))
+ #+end_src
+**** use-feature
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210625T104452.805391
+:END:
+Use package just off load-path
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210625T104400.030616
+:END:
+#+NAME: org_mark_mini20.local_20210625T104400.003367
+#+begin_src emacs-lisp
+(defmacro use-feature (name &rest args)
+  (declare (indent 1))
+  `(use-package ,name
+	 :ensure nil
+	 :straight nil
+     ,@args))
+#+end_src
+**** use-package-elpa
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210625T104452.804093
+:END:
+use-package using :ensure t
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210625T104400.029445
+:END:
+#+NAME: org_mark_mini20.local_20210625T104400.003994
+#+begin_src emacs-lisp
+(defmacro use-package-elpa (name &rest args)
+  (declare (indent 1))
+  `(use-package ,name
+	 :ensure t
+     ,@args))
+#+end_src
+*** Profile/Benchmark init
+:PROPERTIES:
+:ID:       org_mark_2020-11-12T14-43-30+00-00_mini12.local:CCEFA537-D499-4E55-8B0C-62DA4221E19B
+:END:
+I have tried both but neither work well on my init.
+**** Esup
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220606T173756.127839
+:END:
+This seemed to go too far - digging into some code e.g. vc-git
+#+NAME: org_mark_mini20.local_20220606T173756.092098
+#+begin_src emacs-lisp :tangle no
+(use-package-elpa esup
+  :disabled
+  ;; To use MELPA Stable use ":pin mepla-stable",
+  :init
+  ;; (setq esup-depth 0)
+  :commands (esup))
+#+end_src
+**** Benchmark-init
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220606T173756.124328
+:END:
+[[https://github.com/dholm/benchmark-init-el][Github]]
+Run `benchmark-init/show-durations-tree` or `benchmark-init/show-durations-tabulated`
+Well does not show what takes time - just which file. So I use more files. It also misses the slow bit as this config needs use-package and package init forst so make it a fork and use require.
+#+NAME: org_mark_mini20.local_20220606T173756.094527
+#+begin_src emacs-lisp :tangle no
+(use-package-elpa benchmark-init
+  :config
+  ;; To disable collection of benchmark data after init is done.
+  (add-hook 'after-init-hook 'benchmark-init/deactivate))
+#+end_src
+*** Extras needed for loading
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:8EEFB5D5-EB93-442F-8ECA-CB62A943A310
+:END:
+ These are used in the use-package macro
+**** Async
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20211104T083255.480572
+:END:
+#+NAME: org_mark_mini20.local_20211104T083255.461863
+#+begin_src emacs-lisp  :tangle no
+(use-package-elpa async
+  :demand
+  :init
+  ;; Fix dired-async-mode with sudo buffers
+  ;; https://github.com/jwiegley/emacs-async/issues/91
+  (setq async-quiet-switch "-q")
+  (async-bytecomp-package-mode)
+  ;; (dired-async-mode)
+  )
+
+#+end_src
+**** Diminish
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:960EBB57-7FC4-47DB-81FE-C0A425520C00
+:END:
+ Mark if the mode being setup should not show in the mode/status line.
+  #+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_B22D3C47-20C6-4BA0-8F8A-9B7618FF2171
+  #+begin_src emacs-lisp
+  (use-package-elpa diminish   :demand)
+  #+end_src
+
+**** Emacs lisp additions
+:PROPERTIES:
+:ID:       org_mark_2020-11-05T13-04-24+00-00_mini12.local:8B285FB0-8B33-4187-AC49-3CDC90FCCA9B
+:END:
+These are needed as might be in my code
+***** Dash
+:PROPERTIES:
+:ID:       org_mark_2020-11-05T13-04-24+00-00_mini12.local:E429BF67-CB7F-4368-AC12-9B7F50F264DB
+:END:
+Functional programming
+#+NAME: org_mark_2020-11-05T13-04-24+00-00_mini12.local_586F9C8C-30DC-441E-85EE-1A67DA609030
+#+begin_src emacs-lisp
+(use-package-elpa dash
+  :demand
+  :config
+  (global-dash-fontify-mode))
+#+end_src
+***** Hash maps
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201223T233131.626783
+:END:
+Cover functions [[https://github.com/Wilfred/ht.el][ht]]
+#+NAME: org_mark_mini12.local_20201223T233131.592735
+#+begin_src emacs-lisp
+(use-package-elpa ht :demand)
+#+end_src
+***** Rx
+:PROPERTIES:
+:ID:       org_mark_2020-11-05T13-04-24+00-00_mini12.local:67FA0648-E483-44F4-91B6-0A44F2D09008
+:END:
+Convert a set of function calls to an RE. (it is part of emacs.
+#+NAME: org_mark_2020-11-05T13-04-24+00-00_mini12.local_B657936A-CBB7-4CE2-8BD9-8B2216C68A90
+#+BEGIN_SRC emacs-lisp
+(use-feature rx :demand)
+#+END_SRC
+***** F
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220223T081525.650258
+:END:
+File handling - seem to use it and after a few years I managed to get it not loaded so had to do explicitly
+#+NAME: org_mark_mini20.local_20220223T081525.623390
+#+begin_src emacs-lisp
+(use-package-elpa f :demand)
+#+end_src
+**** Elisp code
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:8A9FE4DD-E2ED-4457-B819-F32FF65A28A9
+:END:
+Need to alter list
+#+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_F280AA26-0D29-4282-8182-17F8DAA8A297
+#+begin_src emacs-lisp
+(defun mwb-insert-before-element (find-element new-element list)
+  "Find FIND-ELEMENT and then insert NEW-ELEMENT before it in LIST."
+  (let ((i (-elem-index find-element list)))
+    (-insert-at i new-element list)))
+#+end_src
+
+**** Key chords
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:EFE2E658-C575-4F10-BEEA-60B7FA5D9A7A
+:END:
+#+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_38580E30-B5CF-45B3-850B-07E27178252F
+#+begin_src emacs-lisp :tangle no
+(use-package-elpa use-package-chords
+  :disabled
+  :config (key-chord-mode 1))
+#+end_src
+**** use-package load path
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:25E6B29E-1FD7-4FB8-BA7C-5546A45CFA00
+:END:
+The code is relative to this file and not user-emacs-directory
+So add :mwb-load-path as a new key to use-package
+Note that this is making the addition explicit so for example the aquamacs path does not get added in Aquamacs.
+Not really needed as should set load-path
+#+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_A19E700E-BA25-4246-8752-B775A2177D5D
+#+begin_src emacs-lisp
+(defun use-package-normalize-mwb-paths (label arg &optional recursed)
+  "Normalize a list of filesystem paths."
+  (cond
+   ((and arg (or (use-package-non-nil-symbolp arg) (functionp arg)))
+    (let ((value (use-package-normalize-value label arg)))
+      (use-package-normalize-paths label (eval value))))
+   ((stringp arg)
+    (let ((path (if (file-name-absolute-p arg)
+                    arg
+                  (mwb-user-emacs-file arg))))
+      (list path)))
+   ((and (not recursed) (listp arg) (listp (cdr arg)))
+    (mapcar #'(lambda (x)
+                (car (use-package-normalize-paths label x t))) arg))
+   (t
+    (use-package-error
+     (concat label " wants a directory path, or list of paths")))))
+
+
+;;;; :mwb-load-path
+
+(defun use-package-normalize/:mwb-load-path (_name keyword args)
+  (use-package-as-one (symbol-name keyword) args
+    #'use-package-normalize-mwb-paths))
+
+(defun use-package-handler/:mwb-load-path (name keyword arg rest state)
+  (use-package-handler/:load-path name keyword arg rest state))
+
+(setq use-package-keywords
+      (mwb-insert-before-element :load-path :mwb-load-path  use-package-keywords))
+#+end_src
+
+**** load-path
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:BBB5C272-C2B4-4F38-948C-ED758D56E6A4
+:END:
+Setup for elisp  used by normal load not org tangle
+Note that if a subdirectory is just for one thing then use keyword mwb-load-path in use-package. Non Aquamacs does not set all sub-directories on load path.
+#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_CC0BEB6F-84DC-4320-9455-9906069CD4C9
+#+begin_src emacs-lisp
+(defun add-subdirs-to-load-path ()
+  "Add subdirectories to `load-path'."
+  (interactive)
+  (let ((default-directory (mwb-user-emacs-file "site-lisp")))
+    (normal-top-level-add-subdirs-to-load-path)))
+
+(add-to-list 'load-path (mwb-user-emacs-file "site-lisp"))
+(add-subdirs-to-load-path)
+#+end_src
+
+**** Hydra
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:F4B80C2A-6E55-4DAA-A894-CEAAF485CEEB
+:END:
+Need key setting menus.
+***** Original
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201224T121457.227057
+:END:
+#+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_4EC591E8-D02C-4F21-97C1-80F28A75490F
+#+begin_src emacs-lisp
+(use-package-elpa hydra
+  :demand
+  :config (setq hydra-look-for-remap t
+				lv-use-padding t)
+  (defun lv--pad-to-center (str width)
+	"Pad STR with spaces on the left to be centered to WIDTH."
+	(let* ((strs (split-string str "\n"))
+		   (padding-length (/ (- width (apply 'max (mapcar 'length strs))) 2)))
+	  (if (> padding-length 0)
+		  (mapconcat (lambda (s)
+					   (concat (make-string padding-length ?\ ) s)) strs "\n")
+		str))))
+#+end_src
+***** use-package-hydra
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220613T092246.220445
+:END:
+There are some non pretty ones
+#+NAME: org_mark_mini20.local_20220613T092246.202470
+#+begin_src emacs-lisp
+(use-package-elpa use-package-hydra
+  :demand
+  :after hydra)
+#+end_src
+***** Show icons
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20201224T121457.223827
+:END:
+The functions are from jerrypnz for use in pretty hydra headers.
+Treemacs icons are better but they are purely keyed off file extensions. All the icons has a look up from mode to icon, treemacs does not.
+#+NAME: org_mark_mini12.local_20201224T121457.192342
+
+****** All the icons
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210602T212702.710382
+:END:
+#+NAME: org_mark_mini20.local_20210602T212702.682113
+#+begin_src emacs-lisp
+(use-package-elpa all-the-icons
+  :commands (all-the-icons-faicon
+			 all-the-icons-fileicon
+			 all-the-icons-material
+			 all-the-icons-octicon
+			 all-the-icons-icon-for-mode))
+#+end_src
+
+****** jp named functions for icons
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210602T212702.709213
+:END:
+#+NAME: org_mark_mini20.local_20210602T212702.684671
+#+begin_src emacs-lisp
+(message "start jp-icons")
+(use-feature jp-icons
+  :demand
+  :mwb-load-path "site-lisp/jerrypnz")
+(message "end jp-icons")
+#+end_src
+
+****** My icon code
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210801T222229.925338
+:END:
+#+NAME: org_mark_mini20.local_20210801T222229.905961
+#+begin_src emacs-lisp
+(use-feature mwb-icons :demand)
+#+end_src
+
+***** major mode hydra
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:B0B1AA76-E4F7-424D-A9EA-1E430BD90E28
+:END:
+#+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_7958B394-66F9-4AF5-8C22-10F1CAB276B3
+#+begin_src emacs-lisp
+(use-package-elpa major-mode-hydra
+  :demand
+  :bind ("H-a" . major-mode-hydra)
+  :config
+  (progn
+    (setq major-mode-hydra-invisible-quit-key "q")
+    (defun jp-major-mode-hydra-title-generator (_)
+      `(with-mode-icon major-mode
+                       (propertize (s-concat (format-mode-line mode-name) " Commands")
+                                   'face '(:weight bold :height 1.1))
+                       1.1))
+    (setq major-mode-hydra-title-generator #'jp-major-mode-hydra-title-generator)))
+#+end_src
+
+** Customisation file
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:A28603F3-9100-4C41-855A-5D202E7ACFE3
+:END:
+Yes Aquamacs does this but in a directory with a space. So put with code so can be under source code control and user-emacs-directory is not.
+
+I like to make commits see what they are about. The customization file is just a dump. Initsplit can split it up but seemed buggy, basically if you get a regex wrong it blows up.
+Not much documentation So copy from the only 2 jwigeley and https://github.com/dabrahams/dotemacs
+Also while we are here let's improve customisation fully.
+*** Set the customise Directory
+:PROPERTIES:
+:ID:       org_mark_2020-10-26T12-58-28+00-00_mini12.local:D165DFFB-4E7B-4091-AE48-8C856E1EEBBE
+:END:
+#+NAME: org_mark_2020-10-26T12-58-28+00-00_mini12.local_5C04392C-E9A6-4460-A6F8-EA73352395E5
+#+begin_src emacs-lisp
+(setq mwb-init-customize-directory (mwb-user-emacs-file "settings/"))
+#+end_src
+*** Load the main custom file
+:PROPERTIES:
+:ID:       org_mark_2020-10-26T12-58-28+00-00_mini12.local:A6265F12-4BAF-49FD-9576-6F8734A5EF50
+:END:
+ #+NAME: org_mark_2020-10-26T12-58-28+00-00_mini12.local_4193D052-7CCE-4F3E-A98F-7D958AB4E692
+ Note initsplit needs to be in here or we load it twice. Twice is OK depending if there are no other things needed to be in early load.
+ #+NAME: org_mark_2020-11-03T11-29-59+00-00_mini12.local_91DE0DF5-1D10-4E57-A864-CC60F44BFC5B
+ #+begin_src emacs-lisp
+(setq custom-file
+	  (mwb-user-emacs-file
+	   (if *aquamacs* "aquamacs-custom.el" "custom.el")))
+(load custom-file 'noerror)
+ #+end_src
+*** cus-edit
+:PROPERTIES:
+:ID:       org_mark_2020-10-29T09-11-06+00-00_mini12.local:8903AD91-0364-4F47-8611-7D993C6A40D5
+:END:
+The emacs basic version. Need it for dependency load use by initsplit
+#+NAME: org_mark_2020-10-29T09-11-06+00-00_mini12.local_87F0132E-8CB1-4665-BADC-9CAF45256776
+#+begin_src emacs-lisp
+(use-feature cus-edit
+  ;; aquamacs has already done this
+  :demand)
+#+end_src
+*** cus-edit+
+:PROPERTIES:
+:ID:       org_mark_2020-10-29T09-11-06+00-00_mini12.local:77206F44-BCA1-43A4-B903-DE073068E4EC
+:END:
+More Drew Adams https://www.emacswiki.org/emacs/CustomizingAndSaving#CustomizePlus
+#+NAME: org_mark_2020-10-29T09-11-06+00-00_mini12.local_D3E6606B-7E85-4FD1-BA2D-3B40885ED97B
+#+begin_src emacs-lisp
+(use-package-elpa cus-edit+
+  :disabled                             ; messes up switch-to-buffers advice
+  :after cus-edit
+  :config
+  (customize-toggle-outside-change-updates 99))
+#+end_src
+*** Quoting format
+:PROPERTIES:
+:ID:       org_2020-12-03+00-00:79A02A64-E7EF-4DC0-80C1-73C792302866
+:END:
+Emacs 27 uses a different format from 25(Aquamacs) so patch it - or is it the Mac Port
+Solution from [[https://emacs.stackexchange.com/a/3657/9874][Emacs SX]]
+#+NAME: org_2020-12-03+00-00_23C17B69-4464-4E75-9F44-82B3DFE37B79
+#+begin_src emacs-lisp
+(advice-add 'custom-save-all :around
+            (lambda (orig)
+              (let ((print-quoted t))
+                (funcall orig))))
+#+end_src
+*** Initsplit
+:PROPERTIES:
+:ID:       org_mark_2020-10-28T22-44-31+00-00_mini12.local:F570566C-F55D-4BBF-B7B9-16917621FC82
+:END:
+Now initsplit
+Bootstrapping is fun.
+Needs in initsplit to load twice to get stuff in initsplit, but then I put all of initsplit in a settings file. ooops - it does not load.
+Obvious way is to put in the root custom file - but I want that to die.
+I could keep as a set.
+But hack an load it directly
+Needs to load immeduiately to load the other customization files
+#+NAME: org_mark_2020-10-29T09-11-06+00-00_mini12.local_04FB6D16-A43C-4D7C-9767-4C79FC0FABDD
+#+begin_src emacs-lisp :tangle no
+(use-feature initsplit
+  :demand
+  :init
+  (setq initsplit-pretty-print t)
+  (setq initsplit-default-directory mwb-init-customize-directory)
+  (setq initsplit-load-function 'initsplit-load-if-exists-and-does-not-match)
+  ;; (load (expand-file-name "initsplit-settings.el"
+  ;; mwb-init-customize-directory))
+  ;; set here so no need to load twice
+  ;;  initsplit-known-p will not save to files that have not been loaded and exist
+  (setq initsplit-simple-customizations
+        '(
+          ;; ("unknown"
+          ;;  ("awesome-" "highlight-tails" "ansi-color" "xterm-color" "highlight-tail"))
+          ("aquamacs"
+           ("aquamacs-" "tabbar-" "auto-word-wrap-default-function"
+            "global-hi-line-mode" "toolbar-mode" "visual-line-mode"))
+          ("modus"
+           ("modus-" "ibuffer-title-face" "ibuffer-marked-face" "ibuffer-deletion-face"))
+          ;; ("completion"
+          ;;  ("company-" "yas-"))
+          ;; ("mac-based"
+          ;;  ("ns-" "mac-" "cua-"))
+          ;; ("flymake"
+          ;;  ("flymake-" "flycheck-"))
+          ;; ("fringe"
+          ;;  ("fringe-"))
+          ;; ("hardhat"
+          ;;  ("hardhat-"))
+          ;; ("ibuffer"
+          ;;  ("ibuffer-"))
+          ;; ("initsplit"
+          ;;  ("initsplit-"))
+          ;; ("package"
+          ;;  ("package-"))
+          ("python"
+           ("python" "py-"))
+          ;; ("shell"
+          ;;  ("exec-path-" "explicit-shell-file-name"))
+          ;; ("structured-data"
+          ;;  ("nxml-"))
+
+          ;; ("vc"
+          ;;  ("vc-" "magit-" "ediff-" "git-" "transient-"))
+          ;; ("emacs-base"
+          ;;  ("make-backup" "minibuffer-"   "global-h" "cursor-type" "tool-bar-mode" "delete-old-"  "custom-" "undo-limit" "desktop-" "customize-"))
+          ))
+  (setq initsplit-customizations-alist
+        '(
+          ("\\`\\(gnus\\|nn\\|canlock-\\|message\\|mail\\|mm-\\|smtp\\|send-mail\\|check-mail\\|spam\\|sc-\\)" "gnus-settings.el" nil t)
+          ;; ("\\`\\(org-\\|hl-todo-\\|deft-\\|cfw:\\)" "org-settings.el" nil t)
+          ))
+  :custom
+  ;; Set here and not in custom as the values need evaluation of the running environment
+  (initsplit-ignore-prefixes
+   (list
+    (unless *aquamacs* "aquamacs")
+    (unless (string-equal system-type "darwin") "mac")
+    (unless (>= emacs-major-version 26) "modus")
+    (unless (string-equal system-type "windows") "MSWindows"))))
+
+#+end_src
+** Key setup
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220701T033523.884122
+:END:
+As mac-key-mode is a minor needs to be before org-mode.
+#+NAME: org_mark_mini20.local_20220701T033523.860467
+#+begin_src emacs-lisp
+(mwb-init-load "init/keys" "no-org")
+#+end_src
+** Org Mode base setup
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:D93E7BE4-C5B1-419E-B03F-B2D4980DAF02
+:END:
+This is so the file can be processed by nullman's expand - basically no noweb weaving.
+*** Need to set before load
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20211028T133119.373871
+:END:
+With some variables set from https://github.com/grettke/help as these are customisation variables they need to be before org.el.
+
+Allow single-character alphabetical bullet lists. This configuration must occur
+before loading Org-Mode. *Never* remove this from a submitted ECM.
+
+#+NAME: org_gcr_2017-05-12_mara_050624C5-3BC5-4049-B070-F0A6736EB754
+#+BEGIN_SRC emacs-lisp
+(setq org-list-allow-alphabetical t)
+#+END_SRC
+Unchecked boxes prevent marking the parent as done. This configuration must
+occur before loading Org-Mode. *Never* remove this from a submitted ECM.
+
+#+NAME: org_gcr_2017-05-12_mara_7A650900-7023-4EA7-B2DB-CAB39437E9F3
+#+BEGIN_SRC emacs-lisp
+(setq org-enforce-todo-checkbox-dependencies t)
+#+END_SRC
+*** Load org
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220625T123220.289062
+:END:
+#+NAME: org_mark_mini20.local_20220625T123220.259788
+#+begin_src emacs-lisp
+(use-package-elpa org
+  :commands org-mode)
+#+end_src
+*** Grettke babel
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220625T120634.227000
+:END:
+This is not tangled in place but picked up by weaving
+Put now into files grettke.el for helper functions and org-lp-fundamental for the explanations. The latter is copied from https://github.com/grettke/myamacs and a few changes - helper functions and similar to grettke.el and suppers some chnes as I have different needs.
+**** Helper Functions
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220625T120634.224960
+:END:
+Help configure Org-Mode.
+
+#+NAME: org_gcr_2017-05-12_mara_21BEDC86-D1A3-43FC-85AC-8FF54D161E2F
+#+BEGIN_SRC emacs-lisp
+(require 'grettke)
+#+END_SRC
+
+**** The actual set-up of org-babel
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220625T121802.198236
+:END:
+#+NAME: org_mark_mini20.local_20220625T121802.177751
+#+begin_src emacs-lisp
+(mwb-init-load "init/org-lp-fundamental"  "no-org")
+#+end_src
+
+** Complex Org Mode
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:913C5D29-620D-4FB7-9D2E-31D3FE538503
+:END:
+This all can be written using latest org mode allowing weaving etc.
+This file (org-all) uses noweb weaving so must be loaded via a proper org babel
+
+But has requirements like hydra
+*** Remainder of org
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:D04B3869-70E6-42A2-A052-584E36C9DAB7
+:END:
+This needs the full expansion
+Well this is messed up - there need to be some variables set for noweb and they are done in org-all so it needs a proper header.
+#+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_2869E62E-0E38-4C7C-BFBC-70095F484FC1
+#+begin_src emacs-lisp
+(mwb-init-load "init/org-all")
+#+end_src
+** The remaining setup with complete org file processing
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:35D80650-3C0F-4147-8B3A-3BC84158367B
+:END:
+Now get the rest which can be expanded by org.
+#+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_0F0B98B4-9FFF-497E-9DE1-DD93A3CCA73A
+#+begin_src emacs-lisp
+(mwb-init-load "init/all")
+#+end_src

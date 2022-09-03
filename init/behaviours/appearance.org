@@ -1,0 +1,730 @@
+#+TITLE Emacs configuration - appearance
+#+PROPERTY:header-args :tangle yes
+
+This covers what emacs looks like and how windows/frames/menus behave
+
+* Fonts
+:PROPERTIES:
+:ID:       org_mark_2020-02-10T11-53-11+00-00_mini12:0A89487A-9396-43C4-9F45-0B2DBEBD41FE
+:END:
+** Issues
+:PROPERTIES:
+:ID:       org_2020-12-06+00-00:BAB32FAA-EF85-4768-8261-261141C1BCFF
+:END:
+Set the actual fonts to be used
+*** Sizes
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220712T230449.919839
+:END:
+Altering the size of variable-font seems to change the size of fixed-font - How?
+Note this shows up in org-mode compare code to text - so have to make fixed-font a proportion of variable-font even though no direct comparison.Do this for org-block-explicitly.
+Also does for other fixed-font faces in org mode. e.g. org-draw org-block-begin-line
+
+
+In org- mode face-remapping-alist is  '((default variable-pitch default)) so everything inherits from this and the base size changes.
+Others e.g. nov for ebooks leave default as the mono font and then set an explicit variable font.
+So set the heights of the base fonts to explicit fonts but that breaks increase size so need to fiddle.
+For Org mode (actually variable-pitch-mode) set fixed-pitch so a percentage of variable.
+Also for fun the size of various mono fonts differs e.g. Fira code is big.
+*** Variable pitch design
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220716T102918.122846
+:END:
+I need to override it.
+Variable pitch has to be larger so works if default is not changed.
+I don't think I can use it for code - I have in the past but I think Palatino does not work.
+Variable-pitch mode needs to be replaced so default is variable-pitch as now but need to change fixed pitch.
+
+*** Inheritance
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220712T233317.689031
+:END:
+In org.el we have (defface org-block-begin-line '((t (:inherit org-meta-line))) but in emacs org-block-begin-line inherits from modus-themes-fixed-pitch This seems to have gone now.
+*** Ligatures
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220712T230449.916472
+:END:
+Macports is the best way but even then implemnentation is iffy. I chose Noto Sans Mono as looked best but its ligatures don't seem to be there.
+JetBrains Mono and Fira Code work, the latter is best, even in Macport not all ligatures listed show, in plain emacs just seems not to work - although at some stage it did.
+Possibly when doing a language where it matters set the fonts for comments and default to differ.
+*** Italics
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220712T231447.738199
+:END:
+Not all mono fonts have italics - emacs fiddles them, SO box drawing fails.
+Only Jetbrains, Menlo and courier have this.
+
+*** Conclusion
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220712T231447.729867
+:END:
+To get Box drawing e.g. org-tables and treemacs can't use fira-code or noto sans mono.
+So Jetbrains Mono. (actually Jetbrains Mono Slashed to get 0 with a slash not a dot)
+Alternative - for later - use a different font for italic.
+** Setup
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220712T230449.911079
+:END:
+*** Helper code
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220717T100340.588696
+:END:
+#+NAME: org_mark_mini20.local_20220717T100340.570382
+#+begin_src emacs-lisp
+(defun font-candidate (fonts)
+  "Return existing font from list FONTS which first match."
+  (seq-find (lambda (f) (find-font (font-spec :name f))) fonts))
+#+end_src
+*** Constants
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220717T095708.559733
+:END:
+Variables used in switch modes and fonts
+#+NAME: org_mark_mini20.local_20220717T095708.007517
+#+begin_src emacs-lisp
+(defconst mwb-init-variable-pitch-factor 1.2
+  "Increase in height of variable font over default/fixed font.")
+#+end_src
+#+NAME: org_mark_mini20.local_20220730T163608.031215
+**** Possible fixed fonts
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220730T163922.499389
+:END:
+#+NAME: org_mark_mini20.local_20220730T163922.469917
+#+begin_src emacs-lisp
+(defvar mwb-init-fixed-font-candidates
+  '("Jetbrains Mono Slashed"
+	"Jetbrains Mono"
+	"Jetbrains Mono NL"					; no ligatures
+	"Fira Code"
+	"Jetbrains Mono"
+	"Consolas-10:weight=normal"
+	"DejaVu Sans Mono-10:weight=normal"
+	"Courier")
+  "List the possible fixed fonts.")
+#+end_src
+***** Add non ligature if not good ligature platform
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220730T164055.134297
+:END:
+#+NAME: org_mark_mini20.local_20220730T164055.109853
+Noto mono leaves gaps in vertical lines so no.
+#+NAME: org_mark_mini20.local_20220730T175051.478288
+#+begin_src emacs-lisp :tangle no
+(when *emacs/mac-cocoa-p*
+  (add-to-list 'mwb-init-fixed-font-candidates "Noto Sans Mono"))
+#+end_src
+**** Variable Fonts
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220730T163922.494850
+:END:
+#+NAME: org_mark_mini20.local_20220730T163922.475750
+#+begin_src emacs-lisp
+(defvar mwb-init-variable-font-candidates
+  '(
+	"Georgia"
+	"Palatino" ; Italic not showing
+	"Times New Roman"
+	)
+  "List the possible variable fonts.")
+#+end_src
+**** Setup
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220717T095708.556115
+:END:
+#+NAME: org_2020-12-06+00-00_87B9331B-36CE-4ED5-B82C-E637E0A4BE9A
+Set the fonts.
+#+NAME: org_mark_mini20.local_20220717T132133.515570
+#+begin_src emacs-lisp
+(let ((font-found (font-candidate mwb-init-fixed-font-candidates)))
+  ;; Main typeface
+  (set-face-attribute 'default nil
+					  :height 130
+					  :family font-found)
+  ;; Monospaced typeface - not default - don't need this but make it explicit.
+  (set-face-attribute 'fixed-pitch nil
+					  :family font-found
+					  :height 1.0))
+
+(let ((font-found (font-candidate mwb-init-variable-font-candidates)))
+  ;; Proportionately spaced typeface
+  (set-face-attribute 'variable-pitch nil
+					  :family font-found
+					  :height mwb-init-variable-pitch-factor))
+#+end_src
+**** Manage variable-pitch-mode
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220717T105113.525840
+:END:
+After various hacks there is no reliable flag to show ~variable-pitch-mode~ is et or not so have to use your own.
+Also ~variable-pitch-mode~ is stateful so if it goes wrong it goes wrong and difficult to unset.
+#+NAME: org_mark_mini20.local_20220717T105113.508809
+#+begin_src emacs-lisp
+(defvar-local mwb-variable-pitch-cookie nil
+  "Hold the cookie from face remap so can unset.")
+
+(defun mwb-variable-pitch (&optional arg)
+  "Function to advise variable-pitch-mode to deal with fixed-fonts."
+  (if mwb-variable-pitch-cookie
+	  (progn
+		(message "UnSetting variable pitch")
+		(face-remap-remove-relative mwb-variable-pitch-cookie)
+		(setq mwb-variable-pitch-cookie nil))
+	(progn (message "Setting variable pitch")
+		   (setq mwb-variable-pitch-cookie
+				 (face-remap-add-relative
+				  'fixed-pitch
+				  :height (/ 1.0 mwb-init-variable-pitch-factor))))))
+
+;; (advice-remove 'variable-pitch-mode #'mwb-variable-pitch)
+(advice-add 'variable-pitch-mode
+			:after #'mwb-variable-pitch)
+#+end_src
+** Buffer face
+:PROPERTIES:
+:ID:       org_mark_2020-02-10T11-53-11+00-00_mini12:8BD8443B-8175-4615-9E81-4327864CB523
+:END:
+Remove from mode line
+#+NAME: org_mark_2020-02-10T11-53-11+00-00_mini12_FF91EEFC-2D6E-4E05-9F12-2F30E53177D4
+#+begin_src emacs-lisp
+;; Remove BufFace from mode line
+(eval-after-load "face-remap"
+  '(diminish 'buffer-face-mode))
+  #+end_src
+** Ligatures
+:PROPERTIES:
+:ID:       org_mark_2020-10-03T11-41-17+01-00_mini12.local:B6D6F861-4367-42CD-B6BB-D49FFC135F7D
+:END:
+I seem only to do this for macport
+Or better from fira code https://github.com/tonsky/FiraCode/wiki/Emacs-instructions#using-prettify-symbols
+emacs-27 has another way.
+A summary from https://www.masteringemacs.org/article/unicode-ligatures-color-emoji with note in his package re [[https://github.com/mickeynp/ligature.el/issues/29][mac]] It works but not for all.
+The macport can't be used for normal emacs as it uses C code.
+*** Macport
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220627T102146.142734
+:END:
+The easiest way.
+#+NAME: org_mark_mini20.local_20220627T102146.098153
+#+begin_src emacs-lisp
+(if (fboundp 'mac-auto-operator-composition-mode)
+    (mac-auto-operator-composition-mode 1)
+  ;; (use-package-elpa fira-code-mode
+  ;;   :custom (fira-code-mode-disabled-ligatures '("[]" "x")) ; ligatures you don't want
+  ;;   :hook prog-mode)
+
+  )
+#+end_src
+*** Ligature.el
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220627T102146.132276
+:END:
+#+NAME: org_mark_mini20.local_20220627T102146.106862
+#+begin_src emacs-lisp
+(use-package-elpa ligature
+  :straight (:host github :repo "mickeynp/ligature.el")
+  :unless *macport*
+  :config
+  (defvar ligatures-jetbrains
+	`(("-" ,(regexp-opt '("-|" "-~" "---" "-<<" "-<" "--" "->" "->>" "-->")))
+	  ("/" ,(regexp-opt '("/**" "/*" "///" "/=" "/==" "/>" "//")))
+	  ("*" ,(regexp-opt '("*>" "***" "*/")))
+	  ("<" ,(regexp-opt '("<-" "<<-" "<=>" "<=" "<|" "<||" "<|||" "<|>" "<:" "<>" "<-<"
+						  "<<<" "<==" "<<=" "<=<" "<==>" "<-|" "<<" "<~>" "<=|" "<~~" "<~"
+						  "<$>" "<$" "<+>" "<+" "</>" "</" "<*" "<*>" "<->" "<!--")))
+	  (":" ,(regexp-opt '(":>" ":<" ":::" "::" ":?" ":?>" ":=" "::=")))
+	  ("=" ,(regexp-opt '("=>>" "==>" "=/=" "=!=" "=>" "===" "=:=" "==")))
+	  ("!" ,(regexp-opt '("!==" "!!" "!=")))
+	  (">" ,(regexp-opt '(">]" ">:" ">>-" ">>=" ">=>" ">>>" ">-" ">=")))
+	  ("&" ,(regexp-opt '("&&&" "&&")))
+	  ("|" ,(regexp-opt '("|||>" "||>" "|>" "|]" "|}" "|=>" "|->" "|=" "||-" "|-" "||=" "||")))
+	  ("." ,(regexp-opt '(".." ".?" ".=" ".-" "..<" "...")))
+	  ("+" ,(regexp-opt '("+++" "+>" "++")))
+	  ("[" ,(regexp-opt '("[||]" "[<" "[|")))
+	  ("{" ,(regexp-opt '("{|")))
+	  ("?" ,(regexp-opt '("??" "?." "?=" "?:")))
+	  ("#" ,(regexp-opt '("####" "###" "#[" "#{" "#=" "#!" "#:" "#_(" "#_" "#?" "#(" "##")))
+	  (";" ,(regexp-opt '(";;")))
+	  ("_" ,(regexp-opt '("_|_" "__")))
+	  ("\\" ,(regexp-opt '("\\" "\\/")))
+	  ("~" ,(regexp-opt '("~~" "~~>" "~>" "~=" "~-" "~@")))
+	  ("$" ,(regexp-opt '("$>")))
+	  ("^" ,(regexp-opt '("^=")))
+	  ("]" ,(regexp-opt '("]#"))))
+    "from https://github.com/JetBrains/JetBrainsMono/issues/280")
+  ;; Enable the "www" ligature in every possible major mode
+  (ligature-set-ligatures 't '("www"))
+  ;; Enable traditional ligature support in eww-mode, if the
+  ;; `variable-pitch' face supports it
+  (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
+  ;; Enable all ligatures in programming modes
+  (ligature-set-ligatures 'prog-mode ligatures-jetbrains)
+  (ligature-set-ligatures 'org-mode ligatures-jetbrains)
+  ;; Enables ligature checks globally in all buffers. You can also do it
+  ;; per mode with `ligature-mode'.
+  (global-ligature-mode t))
+#+end_src
+** Prettify Symbols
+:PROPERTIES:
+:ID:       org_mark_2020-11-21T10-10-49+00-00_mini12.local:3AC8A96E-3DDF-464E-B426-DBF7DD4F6739
+:END:
+This is not the same as ligatures - or at least shows a symbol instead of a word.. The obvious example is lambda get shown as λ This is mode specific
+There is also more a mode called pretty-mode but not looked into that yet - for an  [[http://www.modernemacs.com/post/prettify-mode/][overview]]
+#+NAME: org_mark_2020-11-21T10-10-49+00-00_mini12.local_3FBB9B67-C979-4999-BF9C-3600555103A5
+#+begin_src emacs-lisp
+(global-prettify-symbols-mode 1)
+#+end_src
+** Icons
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210708T220551.722023
+:END:
+Mainly use all-the-icons but treemacs has some as well, unfortunately only available by extension
+
+Example to show them all
+#+begin_example emacs-lisp
+(dolist (ele '(material wicon octicon faicon fileicon alltheicon))
+  (all-the-icons-insert-icons-for ele))
+#+end_example
+* Show current line for errors etc
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:D9CBE07A-A1B7-48CB-A163-039F8E86A954
+:END:
+** Show in all windows
+:PROPERTIES:
+:ID:       org_2020-12-06+00-00:DEF922FC-C688-4566-B30F-A0C3950B9EE7
+:END:
+#+NAME: org_2020-12-06+00-00_ED76EDBB-36A7-42DC-AD9E-331015F74649
+#+begin_src emacs-lisp
+(global-hl-line-mode 1)
+#+end_src
+** Show when switch to window
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220612T075833.813845
+:END:
+This is useful when I jump into a new buffer from e.g. deadgrep or helpful to show the line.
+*** Beacon mode
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:B70958EE-3BEB-441D-9544-871501B5EF25
+:END:
+Beacon-mode: flash the cursor when switching buffers or scrolling  the goal is to make it easy to find the cursor
+but does not seem to work well
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_623E9D35-0844-41AB-8A86-98118716B519
+#+begin_src emacs-lisp
+(use-package-elpa beacon
+  :defer 5
+  :disabled
+  :diminish beacon-mode
+  :custom (beacon-blink-when-focused t)
+  :init (eval-when-compile
+          ;; Silence missing function warnings
+          (declare-function beacon-mode "beacon.el"))
+  :config
+  (defun maybe-recenter-current-window ()
+    (when (and (equal (current-buffer) (window-buffer (selected-window)))
+               (not (eq recenter-last-op 'middle)))
+      (recenter-top-bottom)))
+  (add-hook 'beacon-before-blink-hook #'maybe-recenter-current-window)
+  (dolist (mode '(comint-mode term-mode))
+    (push mode beacon-dont-blink-major-modes))
+  (setq beacon-blink-duration 1)
+  (beacon-mode 1))
+#+end_src
+*** Pulse
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220612T075833.810247
+:END:
+Well I should have found earlier
+*** [[https://protesilaos.com/emacs/pulsar][Pulsar]]
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220612T075833.806452
+:END:
+Try this.
+#+NAME: org_mark_mini20.local_20220612T075833.786065
+#+begin_src emacs-lisp
+(use-package-elpa pulsar
+  :config
+  (setq pulsar-pulse-functions
+		;; NOTE 2022-04-09: The commented out functions are from before
+		;; the introduction of `pulsar-pulse-on-window-change'.  Try that
+		;; instead.
+		'(recenter-top-bottom
+		  move-to-window-line-top-bottom
+		  reposition-window
+		  ;; bookmark-jump
+		  ;; other-window
+		  ;; delete-window
+		  ;; delete-other-windows
+		  forward-page
+		  backward-page
+		  scroll-up-command
+		  scroll-down-command
+		  ;; windmove-right
+		  ;; windmove-left
+		  ;; windmove-up
+		  ;; windmove-down
+		  ;; windmove-swap-states-right
+		  ;; windmove-swap-states-left
+		  ;; windmove-swap-states-up
+		  ;; windmove-swap-states-down
+		  ;; tab-new
+		  ;; tab-close
+		  ;; tab-next
+		  org-next-visible-heading
+		  org-previous-visible-heading
+		  org-forward-heading-same-level
+		  org-backward-heading-same-level
+		  outline-backward-same-level
+		  outline-forward-same-level
+		  outline-next-visible-heading
+		  outline-previous-visible-heading
+		  outline-up-heading))
+
+  (setq pulsar-pulse-on-window-change t)
+  (setq pulsar-pulse t)
+  (setq pulsar-delay 0.055)
+  (setq pulsar-iterations 10)
+  (setq pulsar-face 'pulsar-magenta)
+  (setq pulsar-highlight-face 'pulsar-yellow)
+
+  (pulsar-global-mode 1)
+
+  ;; OR use the local mode for select mode hooks
+
+  ;; (dolist (hook '(org-mode-hook emacs-lisp-mode-hook))
+  ;; 	(add-hook hook #'pulsar-mode))
+  :hook (consult-after-jump . pulsar-recenter-top)
+  (consult-after-jump . pulsar-reveal-entry))
+#+end_src
+
+** Hi line
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:442D1703-A14F-4EAD-9B24-C86D48FA84F3
+:END:
+Try to highlight the line but it is messed up see https://emacs.stackexchange.com/a/10463/9874
+but the answer below has an interesting suggestion
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_68F04D98-3C61-4F98-9CC1-F4E152D2A007
+#+begin_src emacs-lisp
+(use-feature hl-line
+  :defer 5
+  :if window-system
+  :preface
+  (defun my-hl-line-range-function ()
+    (cons (line-end-position) (line-beginning-position 2)))
+  (setq hl-line-range-function #'my-hl-line-range-function)
+
+  :config
+  ;; (set-face-attribute 'hl-line nil :inherit nil :background "gray")
+  (setq global-hl-line-sticky-flag t)
+  (global-hl-line-mode 1)
+  )
+#+end_src
+** Cursor
+:PROPERTIES:
+:ID:       org_2020-12-06+00-00:EDE96684-EE33-40DE-A91E-562828DC1942
+:END:
+#+NAME: org_2020-12-06+00-00_C6FEED37-790D-4D9A-A322-BB50D7DAB9CA
+#+begin_src emacs-lisp
+(setq cursor-type 'box)
+#+end_src
+** Reveal
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210802T104243.799441
+:END:
+Reveal invisible text around point.
+#+NAME: org_mark_mini20.local_20210802T104243.783283
+#+begin_src emacs-lisp
+(use-feature reveal
+  :defer 1
+  :config (global-reveal-mode 1))
+#+end_src
+* Windows
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:2DFC202B-3FB4-41C4-BFE6-9718ECD07F63
+:END:
+I think I now want mainly one window and have splits but tabs are useful.
+
+** Stop special buffers opening in new window
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:B1304247-BC2C-4292-808D-F38E6D972F3F
+:END:
+ It is an aquamacs setting see [[https://www.emacswiki.org/emacs/AquamacsFAQ#toc19][FAQ]]
+#+NAME: org_mark_mini20.local_20220227T105918.508004
+#+begin_src emacs-lisp
+(when *aquamacs*
+  (one-buffer-one-frame-mode -1)
+  (setq special-display-regexps nil))
+#+end_src
+** TODO Context help
+:PROPERTIES:
+:ID:       org_mark_2020-10-09T10-33-48+01-00_mini12.local:4FC3755A-A7F5-45B0-BD0D-8DCBFEC5D4CC
+:END:
+Emacs has a way of showing help. It seems to write to echo area thus overwriting what I want.
+
+So lets try in popup
+Still occurs in minibuffer
+#+NAME: org_mark_2020-10-09T10-33-48+01-00_mini12.local_F3337078-A807-4F76-AD91-93BE3B6DF2C3
+#+begin_src emacs-lisp
+(tooltip-mode nil)
+#+end_src
+
+** Set size
+:PROPERTIES:
+:ID:       org_mark_2020-11-05T09-18-27+00-00_mini12.local:2DB4E6E9-344A-45B9-B67E-C021EC6EC9DB
+:END:
+This is hardcoded. See all.org and desktop for other ways. Aquamacs just restores frames using revive.
+#+NAME: org_mark_2020-11-05T09-18-27+00-00_mini12.local_000987D2-DC8C-4944-AA63-B8D987C1FD5D
+#+begin_src emacs-lisp
+(when (and window-system (not *aquamacs*))
+  (set-frame-size (selected-frame) 230 50) ; in characters
+  (set-frame-position (selected-frame) 45 132))
+#+end_src
+
+** Fringe
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220606T215453.350660
+:END:
+Move customization out
+#+NAME: org_mark_mini20.local_20220606T215453.331577
+#+begin_src emacs-lisp
+(use-feature emacs
+  :custom (fringe-mode '(nil . 0)))
+#+end_src
+
+* Frames
+:PROPERTIES:
+:ID:       org_2020-12-03+00-00:1B23DC2B-5C55-4813-92A9-04D1291698B2
+:END:
+Make a new popup frame
+#+NAME: org_2020-12-03+00-00_76F8853D-BB00-4F70-9F82-0AC74BA7B9A5
+#+begin_src emacs-lisp
+(defun mwb-new-frame (buffer_name &optional go-to-end)
+  (interactive)
+  (select-frame (make-frame))
+  (switch-to-buffer buffer_name)
+  (unless go-to-end (goto-char (point-max))))
+#+end_src
+* Colour theme
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:CD3D232B-6BDA-4CBC-BADF-BCEA9B8EBEC4
+:END:
+Aquamacs is stuck with old color themes not the cusomisable ones.
+
+** Control my way of choosing
+:PROPERTIES:
+:ID:       org_2020-12-06+00-00:326043C3-12B2-4F79-988D-93708CA4B055
+:END:
+So put the choice here - comment out one of last two
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_31D76745-657A-4FFE-A6AB-1077D1192D80
+#+begin_src emacs-lisp
+(if (< emacs-major-version 26)
+    (progn
+      <<theme-old>>
+      )
+  (progn
+    (setq custom-enabled-themes nil)
+     (setq custom-safe-themes t) ; nochecks
+    ;;       '("d4a89e8d54783f8d45c2c68cc6641ea2427f563405fde1f083191b10746fe59f" default))
+
+    ;;<<theme-25>>
+    <<theme-modus>>
+
+    ))
+#+end_src
+
+** Fixup Themes
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210607T075745.192824
+:END:
+For my setup header-line needs to inherit from mode-line
+
+#+NAME: org_mark_mini20.local_20210607T075745.170443
+#+begin_src emacs-lisp
+(defun mwb-themes-custom-faces-fixup (&rest _)
+  "Some faces should have inheritance"
+  (set-face-attribute 'header-line nil :inherit 'mode-line)
+  (set-face-attribute 'mode-line-emphasis nil :inherit 'mode-line)
+  )
+
+;; (add-hook 'modus-themes-after-load-theme-hook
+;; #'my-modus-themes-custom-faces)
+(advice-add   'enable-theme :after 'mwb-themes-custom-faces-fixup)
+#+end_src
+** Aquamacs Theme subpart
+:PROPERTIES:
+:ID:       org_mark_2020-10-11T17-50-37+01-00_mini12.local:1BFA8790-4910-4422-A0B6-0425767328AD
+:END:
+#+name: theme-old
+#+begin_src emacs-lisp :tangle no
+(require 'color-theme)
+(eval-after-load "color-theme"
+  '(progn
+     (color-theme-initialize)
+     (color-theme-jsc-dark)
+     (set-face-attribute 'font-lock-keyword-face nil :background 'unspecified)
+     (set-face-attribute 'mode-line nil
+      :foreground "white" :background "#323232")
+     (set-face-attribute 'mode-line-inactive nil
+      :foreground "#bfc0c4" :background "black" :box 'unspecified)
+     (set-face-attribute 'mode-line-buffer-id nil
+      :foreground 'unspecified
+      :background 'unspecified)
+     (set-face-attribute 'mode-line-emphasis nil :inherit 'mode-line)
+     (set-face-attribute 'mode-line-highlight nil :inherit 'mode-line)
+     ;; (custom-set-faces
+     ;;  '(org-block
+     ;;     ((t
+     ;;       (:inherit shadow :extend t :background "midnight blue" :foreground "white" :family "Fira Code"))))
+     ;;  '(org-block-begin-line
+     ;;     ((t
+     ;;       (:inherit org-meta-line :foreground "cyan" :weight normal))))
+     ;;  '(org-block-end-line
+     ;;     ((t
+     ;;       (:inherit org-block-begin-line :foreground "cyan")))))
+
+     ;; (color-theme-high-contrast)
+     ;; (custom-set-faces
+     ;;  '(org-block
+     ;;    ((t
+     ;;      (:inherit shadow :extend t :background "lemon chiffon" :foreground "black" :family "Fira Code"))))
+     ;;  '(org-block-begin-line
+     ;;    ((t
+     ;;      (:inherit org-meta-line :foreground "blue" :weight normal))))
+     ;;  '(org-block-end-line
+     ;;    ((t
+     ;;      (:inherit org-block-begin-line :foreground "blue"))))
+     ;;  )
+     ))
+
+#+end_src
+** New themes subpart
+:PROPERTIES:
+:ID:       org_2020-12-06+00-00:2DE8AEF4-0339-4B2E-885A-627140CF1894
+:END:
+
+The new way seems to be the only supported one but one theme can mess up another e.g. changing background incompletely. So lets have choice of general and also do the documented modus only way
+*** General
+:PROPERTIES:
+:ID:       org_2020-12-06+00-00:1E62F0F5-3E08-4D41-906B-B6807657A157
+:END:
+
+It turns out Emacs supports multiple themes being active at the same time, which I’m sure is convenient sometimes but becomes a right nuisance when attempting to switch themes IMO. Add a utility function to disable all currently enabled themes first.
+
+#+NAME: org_mark_2020-10-13T18-22-15+01-00_mini12.local_76567F98-E4B9-425F-8683-FF8850619A08
+#+begin_src emacs-lisp :tangle no :noweb-ref theme-25
+(defvar quick-switch-themes
+  (let ((themes-list (list 'modus-vivendi
+                           ;; 'mwbtheme-leuven
+                           'high-contrast
+                           'modus-operandi)))
+    (nconc themes-list themes-list))
+  "A circular list of themes to keep switching between.
+Make sure that the currently enabled theme is at the head of this
+list always.
+
+A nil value implies no custom theme should be enabled.")
+
+(defun quick-switch-themes* ()
+  "Switch between to commonly used faces in Emacs.
+One for writing code and the other for reading articles."
+  (interactive)
+  (if-let* ((next-theme (cadr quick-switch-themes)))
+      (progn (when-let* ((current-theme (car quick-switch-themes)))
+               (disable-theme (car quick-switch-themes)))
+             (if (custom-theme-p next-theme)
+                 (enable-theme next-theme)
+               (load-theme next-theme t t))
+             (message "Loaded theme: %s" next-theme))
+
+    )
+  (setq quick-switch-themes (cdr quick-switch-themes)))
+
+;; From emacs or local
+;; (load-theme 'leuven t t)
+(use-package-elpa color-theme-modern
+  :config
+  (load-theme 'high-contrast t t))
+
+(use-package-elpa modus-themes
+  :config
+  (load-theme 'modus-operandi t t)
+  (load-theme 'modus-vivendi t t))
+(enable-theme (car quick-switch-themes)) ; first in list
+#+end_src
+*** Modus setup
+:PROPERTIES:
+:ID:       org_2020-12-06+00-00:031AC435-9F4F-46D3-931F-5A79F7EF033F
+:END:
+vivendi is dark
+#+NAME: org_2020-12-06+00-00_0A5F5673-C8F4-4FCE-869B-205BC1B9DAF5
+#+begin_src emacs-lisp :tangle no :noweb-ref theme-modus
+(use-package-elpa modus-themes
+  ;; :mwb-load-path "fork/modus-themes"
+  :demand
+  :init
+  ;; (setq modus-themes-region '())     ; the default
+
+  ;; Enable the theme files only as local
+  ;; (use-package modus-operandi-theme)
+  ;; (use-package modus-vivendi-theme)
+  (modus-themes-load-themes)
+  :config
+  ;; Load the theme of your choice
+  (modus-themes-load-vivendi)
+
+  :custom
+  (modus-themes-bold-constructs t)
+  (modus-themes-completions
+   '((matches extrabold background intense)
+	 (selection semibold accented intense)
+	 (popup text-also accented intense)))
+  (modus-themes-fringes 'subtle)
+  (modus-themes-headings
+   '((t rainbow-highlight bold background variable-pitch 1.25)))
+  (modus-themes-hl-line '(accented))
+  (modus-themes-intense-markup t)
+  (modus-themes-italic-constructs t)
+  (modus-themes-lang-checkers '(straight-underline background))
+  (modus-themes-mixed-fonts t)
+  (modus-themes-mode-line '(accented))
+  (modus-themes-org-blocks 'tinted-background)
+  (modus-themes-paren-match '(bold intense underline))
+  (modus-themes-prompts '(intense background bold))
+  (modus-themes-region '(bg-only accented))
+  (modus-themes-syntax '(green-strings alt-syntax))
+  (modus-themes-variable-pitch-ui nil))
+#+end_src
+* Show color definitions
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220819T093521.795180
+:END:
+If we have a color shown as RGB value then make it the colour.
+#+NAME: org_mark_mini20.local_20220819T093521.777078
+#+begin_src emacs-lisp
+(use-package-elpa rainbow-mode
+  :commands rainbow-mode)
+#+end_src
+* Sounds
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210628T102012.945985
+:END:
+Stop emacs beeping so much
+From [[ https://www.reddit.com/r/emacs/comments/1a6z4n/can_i_make_emacs_beep_less/c8v5][reddit]]
+Reduce the number of times the bell rings. Turn off the bell for the listed functions.
+#+NAME: org_mark_mini20.local_20210628T102012.908898
+#+begin_src emacs-lisp
+(setq ring-bell-function
+      (lambda ()
+        (unless (memq this-command
+                      '(isearch-abort
+                        abort-recursive-edit
+                        exit-minibuffer
+                        keyboard-quit
+                        flycheck-mode
+                        previous-line
+                        next-line
+                        scroll-down
+                        scroll-up
+                        cua-scroll-down
+                        cua-scroll-up))
+          (ding))))
+#+end_src

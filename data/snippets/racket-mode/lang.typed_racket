@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# key: lang
+# name: typed_racket: #lang typed  racket file template
+# condition: (= (1+ (length "lang")) (point))
+# expand-env: ((yas-indent-line 'fixed))
+# contributor: Greg Hendershott <greghendershot@gmail.com>
+# --
+#lang ${1:typed/racket/base}
+
+(require)
+
+(provide)
+
+(module+ test
+(require typed/rackunit))
+
+$0

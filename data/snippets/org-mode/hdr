@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: hdr
+# key: hdr
+# --
+#+TITLE:  ${1:`(replace-regexp-in-string "-" " " (capitalize (file-name-nondirectory (file-name-sans-extension (buffer-file-name)))))`}
+#+AUTHOR: `(user-full-name)`
+#+DATE:   `(format-time-string "%d %b %Y")`
+#+PROPERTY:header-args :tangle  ${2:$$(yas-choose-value '("no" "yes"))}
+
+$0

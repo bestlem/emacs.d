@@ -1,0 +1,216 @@
+#+TITLE Emacs configuration org sml config
+#+PROPERTY:header-args :cache yes :tangle yes  :comments link
+
+
+All this runs in the config section so not loaded until needed.
+A separate file for documentation ie comments
+
+
+* SML
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:2FA3F9DB-2E93-49A3-8CF4-653482E10D47
+:END:
+sml-mode from elpa - documentation on sml/nj is old
+
+Make this one file as loading is now all files.
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_06AB4FFF-E369-48A3-BAED-2DC818FB3C7C
+#+begin_src emacs-lisp
+(use-package-elpa sml-mode
+  :commands sml-mode
+  :bind (:map sml-mode-map
+              ("<f5>" . mwb-sml-run-file)
+              :map inferior-sml-mode-map
+              ("<f5>" . mwb-sml-run-file))
+  :hook (
+         ;; (sml-mode . aggressive-indent-mode)
+         (sml-mode . prettify-symbols-mode)
+         (sml-mode . smartparens-mode))
+  :init                              ; remove from customise for easier control
+  (setq sml-abbrev-skeletons nil
+        sml-config-file "~/.config/.smlproc.sml"
+        sml-electric-pipe-mode nil)
+  :config
+  <<sml-config>>
+  )
+#+end_src
+
+** Org mode helper
+:PROPERTIES:
+:ID:       org_mark_2020-11-10T11-48-28+00-00_mini12.local:668BE38D-3E38-4D0B-A8F1-CCB4CE0AF979
+:END:
+Separated out
+#+NAME: org_mark_2020-11-10T11-48-28+00-00_mini12.local_8FC71439-07B8-480C-A285-3C0F6AA4192C
+#+begin_src emacs-lisp
+(use-package-elpa ob-sml
+  :demand
+  :after (sml-mode org-mode))
+#+end_src
+
+** Config
+:PROPERTIES:
+:header-args: :noweb-ref  sml-config :tangle no
+:ID:       org_mark_2020-11-12T14-28-56+00-00_mini12.local:BEB80221-3122-4A7D-81E3-FFD3F7291FDC
+:END:
+All these are tangled together
+
+*** Kill subprocess
+:PROPERTIES:
+:ID:       org_mark_2020-11-12T14-28-56+00-00_mini12.local:65F43092-52F2-4494-B4A7-E90CAD827903
+:END:
+
+#+NAME: org_mark_2020-02-10T11-53-11+00-00_mini12_C11A8481-74E0-4DDE-AC2E-1E4666BD903C
+#+begin_src emacs-lisp
+(defun mwb-sml--kill-sml-repl ()
+  "Just kill the current *sml* process.
+     Taken from https://stackoverflow.com/a/19341341/151019
+Which is wrong you need delete-process as quit-process won't kill if processis owned by shell
+For a more singing and dancing version see https://www.reddit.com/r/ProgLangEmacs/comments/4x698w/one_command_to_kill_sml_restart_it_guess_and_load/
+but on next read only the killing using comint functions seems better"
+  (let ((sml-process (get-process "sml")))
+    (when sml-process
+      (delete-process sml-process)))
+  (let ((sml-process (get-process "poly")))
+    (when sml-process
+      (delete-process sml-process)))
+  (let ((sml-process (get-process "polyml")))
+    (when sml-process
+      (delete-process sml-process)))
+  (sleep-for 0.25)
+  (let ((sml-buffer (get-buffer "*sml*")))
+    (when sml-buffer
+      (kill-buffer sml-buffer)))
+  (let ((sml-buffer (get-buffer "*poly*")))
+    (when sml-buffer
+      (kill-buffer sml-buffer)))
+  (let ((sml-buffer (get-buffer "*polyml*")))
+    (when sml-buffer
+      (kill-buffer sml-buffer))))
+#+end_src
+
+**** Run
+:PROPERTIES:
+:ID:       org_mark_2020-11-12T14-28-56+00-00_mini12.local:30C0D9F1-C4BF-430E-BB3D-2BED9EAF61B6
+:END:
+Run the file - the main action for sml
+#+NAME: org_mark_2020-02-10T11-53-11+00-00_mini12_B8DBE76D-CEA3-4D61-9344-D0885064B7BE
+#+begin_src emacs-lisp
+(defun mwb-sml-run-file (file &optional and-go)
+  "Runs a file in a new sml REPL
+     Note does not be clever and assumes a lot"
+  (interactive
+   (list (read-file-name "File to load: " nil nil t)
+	 current-prefix-arg))
+
+  (save-window-excursion
+    (mwb-sml--kill-sml-repl)
+    (mwb-projectile-save-project-buffers))
+  (sml-run sml-program-name file))
+  #+end_src
+
+*** Polyml setup
+:PROPERTIES:
+:ID:       org_mark_2020-02-24T14-59-33+00-00_mini12.local:87878122-BFDC-4A05-B7C4-27253725B7E7
+:END:
+Various variables need to be set to use polyml
+
+#+NAME: org_mark_2020-02-24T14-59-33+00-00_mini12.local_3B211187-3491-4006-ACC5-786801998CF9
+#+begin_src emacs-lisp
+(defun mwb-sml-set-polyml ()
+  "Set the sml-mode setup so that Poly/ML is used"
+  (interactive)
+  (setq sml-program-name  "polyml"      ; a shell command to make iy
+					; poly --use
+	sml-default-arg   ""
+	sml-use-command   "PolyML.use \"%s\""
+	sml-cd-command    "PolyML.cd \"%s\""
+	;; sml-prompt-regexp "^[>#] *"
+	;; sml-error-regexp  sml-poly-ml-error-regexp
+	;; sml-error-parser  'sml-poly-ml-error-parser
+	))
+
+(mwb-sml-set-polyml)
+#+end_src
+
+**** Error search
+:PROPERTIES:
+:ID:       org_mark_2020-02-24T14-59-33+00-00_mini12.local:FBBDC8BF-0F91-4D49-9046-D87AA2D3EBE9
+:END:
+Well this is fun
+#+NAME: org_mark_2020-02-24T14-59-33+00-00_mini12.local_B644C571-4746-411E-A82D-915B6C837269
+#+begin_src emacs-lisp
+(setq sml-error-regexp-alist
+      `( ;; Poly/ML messages
+	;;
+	;; Warning- in 'polyml.ML', line 135.
+	;; Matches are not exhaustive.
+	;; Found near
+	;;   fun
+	;;      convert _ (... ...) = ML_Pretty.Break (false, ...) |
+	;;         convert _ ... = ML_Pretty.Break (...) |
+	;;         convert ... = let ... in ... end |
+	;;         convert ... = …
+	;;
+	;; Error- in 'HTTP.sml', line 370.
+	;; Value or constructor (read_line) has not been declared
+	;; Found near
+	;;   case read_line bin of
+	;;      NONE => () |
+	;;      SOME s => (if s = "" then print "DONE\n" else (... ...; ...))
+	("^\\(?:> \\)?\\(?:Error\\|W\\(arning\\)\\)[-:] in '\\(.+\\)', line \\([0-9]+\\)" 2 3 nil (1))
+	( ,(rx (seq bol
+		    (group
+		     (zero-or-more nonl)
+		     (not (any "\n)")))
+		    ":"
+		    (group
+		     (one-or-more
+		      (any "0-9")))
+		    ": "
+		    ;; (or "error"
+		    ;;     (seq "w"
+		    ;;          (group "arning")))
+
+		    ;; ": "
+		    (zero-or-more nonl)))
+	  1 2 nil nil           )
+	;; Moscow ML
+	("^File \"\\([^\"]+\\)\", line \\([0-9]+\\)\\(-\\([0-9]+\\)\\)?, characters \\([0-9]+\\)-\\([0-9]+\\):" 1 2 5)
+	;; SML/NJ:  the file-pattern is anchored to avoid
+	;; pathological behavior with very long lines.
+	("^[-= ]*\\(.*[^\n)]\\)\\( (.*)\\)?:\\([0-9]+\\)\\.\\([0-9]+\\)\\(-\\([0-9]+\\)\\.\\([0-9]+\\)\\)? \\(Error\\|Warnin\\(g\\)\\): .*" 1
+	 (3 . 6) (4 . 7) (9))
+	;; SML/NJ's exceptions:  see above.
+	("^ +\\(raised at: \\)?\\(.+\\):\\([0-9]+\\)\\.\\([0-9]+\\)\\(-\\([0-9]+\\)\\.\\([0-9]+\\)\\)" 2
+	 (3 . 6) (4 . 7))
+	;; MLTon from http://mlton.org/Emacs
+	(
+	 "^[[:space:]]*\\(\\(?:\\(Error\\)\\|\\(Warning\\)\\|\\(\\(?:\\(?:defn\\|spec\\) at\\)\\|\\(?:escape \\(?:from\\|to\\)\\)\\|\\(?:scoped at\\)\\)\\): \\(.+\\) \\([0-9]+\\)\\.\\([0-9]+\\)\\(?:-\\([0-9]+\\)\\.\\([0-9]+\\)\\)?\\.?\\)$"
+	 5 (6 . 8) (7 . 9) (3 . 4) 1))
+      )
+#+end_src
+*** Smartparens
+:PROPERTIES:
+:ID:       org_mark_2020-02-24T14-59-33+00-00_mini12.local:E9595AFD-17D5-4511-B97A-587E9BA7F9C7
+:END:
+Setup smartparens to allow insert of comments
+ #+NAME: org_mark_2020-02-10T11-53-11+00-00_mini12_67B0138B-D586-41FE-9E48-9AA1D41C2C54
+ #+begin_src emacs-lisp
+(sp-with-modes 'sml-mode
+  (sp-local-pair "(*" "*)" ))
+#+end_src
+* REPL
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:135984DE-6093-4E14-AB4E-EA9D2666C799
+:END:
+Hmm prob OK for the code, but my tests ar a large thing not one expr + you need to send the ; separately
+
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_3ADF6D5F-A5EB-4041-A8B4-17DD2B99F4F6
+#+BEGIN_SRC emacs-lisp :tangle no
+(use-feature eval-in-repl-sml
+  :demand t
+  :after (sml-mode)
+  :config
+  ;; Evaluate expression in the current buffer.
+  :bind (:map sml-mode-map ("<f6>" . eir-eval-in-sml)
+	     ("H-;" . eir-send-to-sml-semicolon )))
+#+END_SRC

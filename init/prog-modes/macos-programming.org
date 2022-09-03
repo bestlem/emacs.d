@@ -1,0 +1,74 @@
+#+TITLE:  Macos Programming
+#+AUTHOR: Mark Bestley
+#+DATE:   17 Mar 2022
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+STARTUP: overview
+
+See centuar for lsp setup
+
+* Swift
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220317T112921.678405
+:END:
+** Language
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220317T112921.676869
+:END:
+Simple language editing
+See https://github.com/xenodium/dotsies/blob/main/emacs/features/fe-swift.el for more
+Also jojojames
+#+NAME: org_mark_mini20.local_20220317T110546.762908
+#+begin_src emacs-lisp
+(use-package-elpa swift-mode
+  :commands swift-mode
+  :config
+  (setq swift-mode:parenthesized-expression-offset 4) ;; Match xcode.
+  (setq swift-mode:multiline-statement-offset 4)	  ;; Match xcode.
+  )
+#+end_src
+** Help
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220317T112921.675486
+:END:
+Curated Swift  documentation with cross-references, and keyword/topic indices.
+#+NAME: org_mark_mini20.local_20220317T112921.668781
+#+begin_src emacs-lisp
+(use-package-elpa swift-helpful
+  :bind (:map swift-mode-map
+		 ("<f1><f1>" . swift-helpful)))
+#+end_src
+** Flycheck
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220405T140718.195475
+:END:
+#+NAME: org_mark_mini20.local_20220405T140718.190737
+#+begin_src emacs-lisp
+(use-package-elpa flycheck-swift
+  :after (flycheck swift-mode)
+  :config
+  (setq flycheck-swift-executable
+		"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc")
+  (setq flycheck-swift-sdk-path
+		"/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk")
+  (setq flycheck-swift-target "arm64-apple-ios15")
+  (flycheck-swift-setup))
+#+end_src
+** Playground
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220322T200137.123634
+:END:
+This has not been updated.
+
+* Objective C
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220317T112921.673795
+:END:
+This is where I have really lost history there used to be all sorts of indentation rules.
+Look at jojojames init for a complete one - but no lsp/completion.
+#+NAME: org_mark_mini20.local_20220317T112921.670268
+#+begin_src emacs-lisp
+   ;; objective C
+   (add-to-list 'auto-mode-alist '("\\.h$" . objc-mode) )
+   (add-to-list 'auto-mode-alist '("\\.m$" . objc-mode))
+   (add-to-list 'auto-mode-alist '("\\.mm$" . objc-mode))
+#+end_src

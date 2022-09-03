@@ -1,0 +1,307 @@
+#+TITLE:  Editing
+#+AUTHOR: Mark Bestley
+#+DATE:   12 Feb 2021
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+STARTUP: overview
+
+General text editing issues
+
+* Fill and wrap
+:PROPERTIES:
+:ID:       org_2020-12-05+00-00:7B38E572-7C2E-4BC1-B03E-FD4E4396CB6E
+:END:
+Lets put these in one place
+Fill is use hard returns. Wrap keeps the line in one in the file
+*** Non aquamacs
+:PROPERTIES:
+:ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:E9328D54-1280-43B6-9DA6-D921C7A3AFF9
+:END:
+This config was written using Aquamacs which adds things.
+Some are just too embedded
+**** set-word-wrap
+:PROPERTIES:
+:ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:9DB3DB85-AFC6-483E-8D3D-AB11217FB071
+:END:
+This gets set in customize for all modes. Copy from Aquamacs
+#+NAME: org_mark_2020-10-01T11-27-32+01-00_mini12.local_0DFCC3B0-BDFE-4A98-87D3-46866915E99E
+#+begin_src emacs-lisp
+(unless *aquamacs*
+  (defun turn-off-longlines ()
+  "Unconditionally turn off Longlines mode."
+  (interactive)
+  (and (boundp 'longlines-mode)
+       (longlines-mode -1)))
+  (defun set-word-wrap ()
+    "Turn on Word Wrap mode in current buffer.
+This function sets `auto-fill-mode', `truncate-lines' and `visual-line-mode'."
+    (interactive)
+    (turn-on-visual-line-mode)          ; let it save settings first
+    (turn-off-longlines)
+    (turn-off-auto-fill)
+    (setq truncate-lines nil)
+    (if (interactive-p)
+        (message "Line wrapping set to Word Wrap mode in this buffer."))))
+#+end_src
+
+*** Fill column in code
+:PROPERTIES:
+:ID:       org_mark_2020-02-24T14-59-33+00-00_mini12.local:573326D1-BD3B-4F5B-A721-E49A096DE72B
+:END:
+Where to wrap the line iff too long. Set locally in prog-modes and differ in comment
+
+This is from [[https://www.emacswiki.org/emacs/AutoFillMode][emacs wiki]]
+However only want to fill modes where there are line based comments e.g. Emacs lisp. If there is a block comment then don't fill
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_9B7EA331-7A72-4DCE-9798-9D3B378A8C1B
+#+begin_src emacs-lisp
+(setq-default comment-auto-fill-only-comments t)
+(defun _mwb-prog-auto-fill (max-column)
+  (setq-local comment-auto-fill-only-comments t)
+  (setq-local fill-column max-column)
+  (setq-local comment-fill-column max-column)
+  (auto-fill-mode 1))
+
+;; use by setting in the actual program mode
+;;(add-hook 'prog-mode-hook 'mwb-prog-auto-fill)
+(defun mwb-prog-auto-fill-80 ()
+  "Fill for 80 column screen - I only use where standards are enforced"
+  (_mwb-prog-auto-fill 79))
+
+(defun mwb-auto-fill-80 ()
+  "Fill for 80 column screen "
+  (_mwb-prog-auto-fill 76))
+
+(defun mwb-prog-auto-fill-120 ()
+  "Fill for 120 column screen - \"I only use where standards are enforced\"s to be my current screen"
+  (_mwb-prog-auto-fill 119))
+#+end_src
+
+*** Fill unfill region
+:PROPERTIES:
+:ID:       org_2020-12-05+00-00:294E3107-DC95-404D-B72F-9EDC09C6F4C8
+:END:
+Look at aquamacs-editing.el
+
+*** Set defaults text mode
+:PROPERTIES:
+:ID:       org_2020-12-05+00-00:A67E0CAF-C655-434D-A9EE-99510387828D
+:END:
+This is in text mode
+#+NAME: org_2020-12-05+00-00_A13E1BED-9FD1-4F87-91FA-B180A313487C
+#+begin_src emacs-lisp
+(setq text-mode-hook '(abbrev-mode set-word-wrap))
+(setq-default auto-fill-function nil)
+(setq fill-nobreak-predicate
+   '(fill-single-word-nobreak-p fill-single-char-nobreak-p))
+(visual-line-mode 1)
+#+end_src
+
+*** Message mode
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210213T120515.517115
+:END:
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210212T194748.541737
+:END:s
+Well if text only want to fill if HTML then don't
+
+End up setting refill-mode - on a key f19-f
+
+* Delete if selected
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:1093B961-57F6-4B74-9CCD-F155EEDA2E87
+:END:
+Also see [[https://www.emacswiki.org/emacs/DeleteSelectionMode][EmacsWiki]] (and my old init) but cua should do this. Possibly because minor modes are toggles
+Issue is lispy removes this as lispy is vi based. I am OK with override if in position but not with region selected except pairs.
+
+Separate issue - forgotten what-  my understanding was wrong the issue is select with mouse puts things into system clipboard.
+So use separate PRIMARY and CLIPBOARD - hmm That is old emacs.
+
+Doing Racket repl copying from pdf I want mouse-2 to work so change back. Actually comint (ie REPL) behaves differently mouse-2 is M-n sort of)
+
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_D91D1B0C-20B5-4AEF-8E53-7056B6CE706F
+#+begin_src emacs-lisp
+(delete-selection-mode 1)
+(setq select-enable-clipboard t)
+(setq select-enable-primary nil)
+#+end_src
+
+* Sentence end
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220610T204152.282217
+:END:
+Sentences do not end with two spaces
+#+NAME: org_mark_mini20.local_20220610T204152.261035
+#+begin_src emacs-lisp
+(setq sentence-end-double-space nil)
+#+end_src
+* Undo
+:PROPERTIES:
+:ID:       org_2020-12-06+00-00:BB0C42D6-AA66-4E9F-8F30-E30F9DA016FB
+:END:
+#+NAME: org_2020-12-06+00-00_D742B5F4-E383-4802-B407-EED83363E7D4
+#+begin_src emacs-lisp
+(setq undo-limit 800000)
+#+end_src
+
+* Multiple places to edit at once
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220610T162031.078447
+:END:
+There are things like multiple-cursors but iedit sounds simpler
+** Edit
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210708T102755.604371
+:END:
+#+NAME: org_mark_mini20.local_20210708T102755.576131
+#+begin_src emacs-lisp
+(use-package-elpa iedit
+  :bind (:map iedit-mode-keymap
+			  ("<f5>" . iedit-hydra/body))
+  :pretty-hydra
+  ((:title "IEdit" :hint nil)
+   ("Navigate" (("j" iedit-next-occurrence "next")
+				("k" iedit-prev-occurrence "previous")
+				("<" iedit-goto-first-occurrence "first")
+				(">" iedit-goto-last-occurrence "last")
+				("h" iedit-show/hide-unmatched-lines "hide"))
+	"Restrict" (("c" iedit-toggle-case-sensitive "case" :toggle iedit-case-sensitive)
+				("f" iedit-restrict-function "function")
+				("l" iedit-restrict-current-line "line")
+				("i" iedit-toggle-selection "toggle")
+				("n" iedit-expand-down-to-occurrence "down-expand")
+				("p" iedit-expand-up-to-occurrence "up-expand"))
+	"Edit" (("r" iedit-replace-occurrences "replace" :exit t)
+			("d" iedit-delete-occurrences "delete" :exit t)
+			("1" iedit-number-occurrences "number")
+			;; ("m" iedit-switch-to-mc-mode "multiple-cursors" :exit t)
+			))))
+#+end_src
+
+* Navigation
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:BE5A6CDF-F170-4698-B347-4B501EE71EB5
+:END:
+
+** TODO Hyperspace
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220804T094921.792192
+:END:
+https://codeberg.org/emacs-weirdware/hyperspace
+Use an external search but note I need to write helpers to allow search at point etc.
+** Expand region
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:CF24C2F4-0089-45C0-A3CE-72AAFBE47D97
+:END:
+The hydra did not add anything. Just keep hitting f2
+
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_95AB0DCA-FC55-45BB-A888-847322BD6CA0
+#+begin_src emacs-lisp
+(use-package-elpa expand-region
+  :commands er/expand-region
+  :bind ("C-=" . er/expand-region)
+  ("<f2>" . er/expand-region)
+  ("<S-f2>" . er/contract-region)
+  ("<C-f2>" . er/contract-region)
+  :custom (expand-region-show-usage-message nil))
+#+end_src
+*** TODO python mode
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220819T153522.603763
+:END:
+Does not work - try renaming the python test to python mode and run them
+
+** Begin end line
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:79C47FC8-B71F-40B4-84F3-DB78319B9E33
+:END:
+There are several ways to make begin go to first non whitespace  then to begin line, some will then make next press go to defun or buffer.
+Note home and end are in Aquamacs osx-mode-map makes life more complex (actually not as mosey overrides it unless you deactivate and reactivate it). Perhaps I will have to unset them to allow modes to do their things These include crux, [[https://github.com/alezost/mwim.el][mwin]] and ergoemacs,  [[https://github.com/alphapapa/mosey.el][mosey]] + snippets on web.
+Note that lispy also does this but not back a form.
+Tried mosey as it has the back function - NB can use smartparens, unfortunately does not seem to work with shift and as others do try another.
+mwin seems the current winner
+*** mwin
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:73B44400-98DA-4212-B923-8DC1AF3E360A
+:END:
+mwin might have mode aware
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_DBEC557B-9FAB-458C-AACF-C315E3DCB0FB
+#+begin_src emacs-lisp
+(use-package-elpa mwim
+  :commands (mwim-beginning mwim-end)
+  :bind (([remap move-beginning-of-line] . mwin-beginning)
+         ([remap move-end-of-line] . mwin-end))
+  :init
+  (bind-key mwbkey-home 'mwim-beginning)
+  (bind-key mwbkey-end 'mwim-end))
+#+end_src
+* Registers
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:BB78D792-D0B1-443F-80B7-9633B1AD3B09
+:END:
+I haven't used before but might try with hydra from [[https://sriramkswamy.github.io/dotemacs/#orgheadline245][Hydra heavy init]]
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_E6AD754D-191C-4314-B178-A976FFCA0A45
+#+begin_src emacs-lisp
+(defhydra sk/hydra-registers (:color blue
+									 :hint nil)
+  "
+ _a_: append     _c_: copy-to    _j_: jump       _r_: rectangle-copy   _q_: quit
+ _i_: insert     _n_: number-to  _f_: frameset   _w_: window-config
+ _+_: increment  _p_: point-to
+  "
+  ("a" append-to-register)
+  ("c" copy-to-register)
+  ("i" insert-register)
+  ("f" frameset-to-register)
+  ("j" jump-to-register)
+  ("n" number-to-register)
+  ("r" copy-rectangle-to-register)
+  ("w" window-configuration-to-register)
+  ("+" increment-register)
+  ("p" point-to-register)
+  ("q" nil :color blue))
+
+(bind-key "M-r" 'sk/hydra-registers/body)
+
+
+#+end_src
+* Old stuff
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220610T193741.457001
+:END:
+This has nowhere else to go but is in my oldest init.
+** Incremental search
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220610T193741.455096
+:END:
+incremental search highlights the current match ---
+#+NAME: org_mark_mini20.local_20220610T193741.437826
+#+begin_src emacs-lisp
+(setq search-highlight t)
+#+end_src
+** Query-replace highlight
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220610T193741.452314
+:END:
+highlight words during query replacement ---
+#+NAME: org_mark_mini20.local_20220610T193741.441095
+#+begin_src emacs-lisp
+(setq query-replace-highlight t)
+#+end_src
+** Kill whole line
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220610T204152.279456
+:END:
+kill-line at start of line kills the whole line.
+#+NAME: org_mark_mini20.local_20220610T204152.265929
+#+begin_src emacs-lisp
+(setq kill-whole-line t)
+#+end_src
+** Move over end of line
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220610T204543.108982
+:END:
+Vertical motion starting at end of line keeps to ends of lines.
+#+NAME: org_mark_mini20.local_20220610T204543.093036
+#+begin_src emacs-lisp
+(setq track-eol t)
+#+end_src

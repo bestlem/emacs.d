@@ -1,0 +1,231 @@
+#+TITLE:  Mode Line
+#+AUTHOR: Mark Bestley
+#+EMAIL:  emacs@bestley.co.uk
+#+DATE:   01 Jun 2021
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+STARTUP: overview
+
+* Overview
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210604T101559.873281
+:END:
+There are several ways see
+
+** Possibilities
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210604T101559.872240
+:END:
+
+[[https://github.com/domtronn/all-the-icons.el/wiki/Mode-Line][All the icons]] has icons but example code is broken and incomplete
+
+[[https://www.manueluberti.eu/emacs/2018/03/10/moody-and-minions/][Uberti]] for a comment on smartline aand powerline - I might  this first due to use of minions. then discovered smart-mode-line also has similar rich-minority-mode well not quite. Minion is sort of needed
+
+[[https://github.com/Malabarba/smart-mode-line/][Smart Mode Line]] the one that seems to have a fuller set of builders - well not so much
+
+doom-modeline seems to be the best to start especially via centaur but difficult to add another segment.
+It makes the usual issue with frameworks. Once you need a small change it is difficult. e.g. look up by mode is all partiiallyn hard coded as it is a look up by mode - not a case statement so I can't add a rule e.g. for lisp. I effectively wantr to edit the totp level but that is hidden.
+
+
+So minions is needed and is the main issue that I had - all the minor mode info I do not need to see.
+
+Spaceline also has some setup ideas.
+
+[[https://github.com/rougier/nano-modeline][nano-modeline]]is what jerrypnz is based on now. It does a headline only form. (Noone does both). Its eval is mode dependent explicitly
+
+From my collection of init see
+
+leuven for a setup possibly using powerline
+greghendershott  for a seemingly simple one
+howardabrams for a powerline  and a smart-mode-line
+jerrypnz for complex but lead to  http://amitp.blogspot.co.nz/2011/08/emacs-custom-mode-line.html and then https://gist.github.com/redblobgames/5d9cf891120028440a4bdb429f101de6
+kaushalmodi as author of smart mode line
+
+At the end doom-modeline looks the best and has most detail but internals are hidden - you need to clone it and modify the internals.
+
+Spaceline looks like it has the parts to build up but not all the needed defined segments. But it is not variable space. But the segments have more external controls like a toggle and have :when options. The :when allows the icon to be listed all the time but igoned if not in correct mode e.g. :when (derived-mode-p 'paradox-menu-mode) means only display if in paradox mode.
+
+** Attempts
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210604T101559.870927
+:END:
+So try
+all-the-icons - it is incomplete
+jerry pnz as it uses all-the icons - OK but need to do a bit more. Right hand goes off end
+centaur for fuller use of doom-modeline and minions
+
+Current best jerry pnz + minions + get segments from doom-modeline. The reason is that I want to alter things depending on mode. Or doom-modeline if I can get the constructor in public
+Another issue with frameworks is that mode specific stuff has to be in the segments not in the construction of the header (This is really a framework) - well excpt for the repitious lists.
+
+doom-modeline seems expandable enough. The one issue left is that it sets itself for all modes, better I think if set in prog-mode hook as it does for other modes e.g. info. In practice so far the only one messed up is gnus, so an alternative might be to reset that manually.
+
+So back to spaceline - but again complex.
+
+Stick with jp- but I suspect when complete will be as bad as the others e.g. need to define segments and colours and icons
+
+But jp- is based on nano-modeline so lets see that, Note it only appeard beginning of Jun 2021 so I could not have it earlier before like jp- I would have had to cut and paste. from nano
+
+nano well config is nice but each build up hardcodes the buffer status and uses its own colors. I think I can just override the status but colors no. I can see copying it all into mine.
+nano-modeline sets face (but not if I had it at bottom, as does nano-modeline-compose, or some face remapping :(
+
+Basically nano has lots of different mode lines but that can be done with spaceline as well - although not done in space line as such.
+
+So use spaceline works but with the eval as per nano (segments nicked from doom)
+
+Actually nano does not add much here - it is simple and des separate out the active/inactive
+
+Back to spaceline
+
+Back to doom - noting I don't need to setup the mode - that can be copied to my mode.
+
+Spaceline looks the best architected need a minions and possibly icons done. e.g. hat icon just in Unicode (OK doom looks best) But does not get the icons and setup there. Doom just has more already. So I write crappier code for doom but less. (Basically if I was better at emacs I would modify spaceline)
+
+** Current thought
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210626T143427.653264
+:END:
+doom mixes all things together look at .. status-icon it messes with a variable and at bottom level and has to deal with active/inactive but some things are correct e.g. doom-modeline-icon wraps up the icon with no other things.
+
+Basically the active/inactive flag  should be above the segment level or if complex to level of segment  function
+
+The author of doom-modeline did spaceline-allthe-icons - perhaps they are the problem.
+Let's try pure spaceline. However its speedup of interning things makes debugging difficult
+
+However spaceline hard codes modeline as it depends on powerline - and the things to change are macros - so not a simple one.
+
+So in effect I need to replace all. nano has a minimal set and does headline. So start there. (doom probbaly has the most but is complex - but I would not be surprised if we end up with that complexity)
+
+OK more - the active flag has to go into the segment and the icon
+
+So giveup and hack doom, Dooms problem is that the active/non active is right down in the icons which are then used in segments. nano - does this is the compose but then no icons.
+jp active is at low level as well. spaceline seems to hide this all in spaceline--get-face
+
+And that paragraph is better analysis than for the last month.
+
+So spaceline - all the icons based.
+
+Found eyeline - spaceline wioth icons but less that all-the icons - might be easier though unfortunately author noiw uses doom.
+
+** Design
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210907T094034.689822
+:END:
+In essence you need the equivalent of  spaceline--get-face (and I had to change that fior header) to choose face depending on active/inactive/selected then icons need these three choices which breaks treemacs which does not have the 3 cases and would need another set as background for active is not bright.
+
+Then you need to wrap the logic in a macro so this active etc flag is passed in.
+
+So again spaceline is best but is based off powerline - and I want just the one background no chevrons. set the separator to nil (and for color set both the same)
+
+So arat from not dealing with icon spacing (ie width) does all.
+
+* Support Packages
+:PROPERTIES:
+:ID:       org_mark_mini20o.local:20210602T212500.391684
+:END:
+Mainly things used for specific fields.
+** Minions
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210625T080416.517119
+:END:
+This cuts out all diminish issues but also see https://www.manueluberti.eu/emacs/2018/03/10/moody-and-minions/ for noting can make some minor modes stay
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210602T224030.560968
+:END:
+#+NAME: org_mark_mini20.local_20210602T224030.555025
+#+begin_src emacs-lisp
+(use-package-elpa minions
+  :hook ((mwb-headline-mode doom-modeline-mode) . minions-mode)
+  :commands minions-mode
+
+  :init
+  (setq minions-blacklist '(auto-compile-mode
+                            auto-compile-on-load-mode
+							beacon-mode
+							company-mode
+							company-posframe
+							dash-fontify-mode
+                            diff-hl-flydiff-mode
+							eldoc-mode
+							flycheck-mode
+							font-lock-mode
+							gcmh-mode
+							global-hardhat-mode
+							guess-style-info-mode
+							highlight-indent-guides-mode
+							lispy-mnemonic-mode
+							org-src-mode
+							persistent-scratch-autosave-mode
+							rainbow-delimiters-mode
+							which-key-mode
+							ws-butler-mode))
+  :config
+  (setq minions-mode-line-minor-modes-map
+        (let ((map (make-sparse-keymap)))
+          (define-key map [mode-line down-mouse-1] 'minions-minor-modes-menu)
+          (define-key map [header-line down-mouse-1] 'minions-minor-modes-menu)
+          map)))
+#+end_src
+* Spaceline
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210606T165448.626960
+:END:
+** Load
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210606T165448.625918
+:END:
+This is problematic as the only autoloads are the actual themes which I do not want.
+So have to lump as one and put in config.
+#+NAME: org_mark_mini20.local_20210706T132917.944916
+#+begin_src emacs-lisp
+(use-package-elpa spaceline
+  :defer 1
+  :init
+  (setq powerline-default-separator nil) ; no chevrons etc
+)
+  #+end_src
+#+end_src
+** All the icons
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210606T165448.624436
+:END:
+#+NAME: spaceline-all-the-icons
+#+begin_src emacs-lisp
+(use-package-elpa spaceline-all-the-icons :demand :after spaceline)
+#+end_src
+** My version
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210620T171618.632190
+:END:
+#+NAME: spaceline-mwb
+#+begin_src emacs-lisp
+(use-feature spaceline-mwb
+  :demand
+  :after spaceline-all-the-icons
+  :config (spaceline-mwb-theme))
+#+end_src
+
+* Eyeliner
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210720T211034.187440
+:header-args:    :tangle no
+:END:
+And another from spaceline.
+It has not been update since creation so take as mine
+#+NAME: org_mark_mini20.local_20210720T211034.172150
+#+begin_src emacs-lisp :tangle no
+(use-feature eyeliner
+  :config
+  (require 'eyeliner)
+
+  (setq eyeliner/left-hand-segments
+        '((eyeliner/buffer-modified)
+          (eyeliner/branch-icon :skip-alternate t :tight-right t)
+          (eyeliner/branch-name)
+          (eyeliner/project-name :skip-alternate t)
+          (eyeliner/mode-icon :skip-alternate t :tight t)
+          (eyeliner/buffer-name))
+
+        eyeliner/right-hand-segments
+        '(("%l:%c")))
+
+  (eyeliner/install))
+#+end_src

@@ -1,0 +1,76 @@
+#+TITLE:  Imenu
+#+AUTHOR: Mark Bestley
+#+DATE:   30 Apr 2021
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+STARTUP: overview
+* Imenu
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210430T161141.960043
+:END:
+Setup is used in many modes.
+#+NAME: org_mark_mini20.local_20220714T180325.278475
+#+begin_src emacs-lisp
+(use-feature imenu
+  :custom
+  (imenu-sort-function #'imenu--sort-by-name))
+#+end_src
+
+* Add to menubar
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210831T062026.341629
+:END:
+#+NAME: org_mark_mini20.local_20210831T062026.317944
+From https://www.emacswiki.org/emacs/ImenuMode
+#+NAME: org_mark_mini20.local_20220714T132326.969130
+#+begin_src emacs-lisp
+(defun imenu-mwb-hook-function ()
+  "Add iMenu to menubar"
+  (condition-case nil (imenu-add-to-menubar "Imenu") (error nil)))
+
+(add-hook 'font-lock-mode-hook #'imenu-mwb-hook-function)
+#+end_src
+* Force rescan
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210831T062026.340893
+:END:
+Normal works for elisp and org mode but racket seems to need a rescan. So let's try setting it.
+#+NAME: org_mark_mini20.local_20210831T062026.318856
+#+begin_src emacs-lisp
+(setq imenu-auto-rescan t)
+#+end_src
+
+* Which function
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20211031T140445.090521
+:END:
+Shows the current function being edited.
+Setup for all prog modes
+#+NAME: org_mark_mini20.local_20210828T133944.980854
+#+begin_src emacs-lisp
+(use-feature which-func
+  :demand
+  :after imenu
+  :custom (which-func-non-auto-modes '(treemacs-mode))
+  :config
+
+  ;; for debug shows the mode causing the error.
+  (defun which-func-ff-hook ()
+	"`after-change-major-mode-hook' for Which Function mode.
+It creates the Imenu index for the buffer, if necessary."
+	(which-func-try-to-enable)
+
+	(condition-case err
+		(if (and which-func-mode
+				 (not (member major-mode which-func-non-auto-modes))
+				 (or (null which-func-maxout)
+					 (< buffer-saved-size which-func-maxout)
+					 (= which-func-maxout 0)))
+			(setq imenu--index-alist
+                  (save-excursion (funcall imenu-create-index-function))))
+      (imenu-unavailable
+       (setq which-func-mode nil))
+      (error
+       (message "which-func-ff-hook error: %S in mode %s" err major-mode)
+       (setq which-func-mode nil))))
+  (which-function-mode))
+#+end_src

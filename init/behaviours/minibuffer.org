@@ -1,0 +1,532 @@
+#+TITLE:  Minibuffer
+#+AUTHOR: Mark Bestley
+#+DATE:   01 Aug 2021
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+
+This originally was ivy.org but when trying to replace ivy I realised that this was not just command completion but anything involving the minibuffer. (example is ivy-posframe)
+
+There now could be overlap with completion of the text you are editing, for that see completion.org.
+
+* History
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:B8539BA6-84DE-4075-80AF-0B37BE1CBA52
+:END:
+This is completion for emacs commands. Choice is ido, ivy helm.
+I'll try ivy.
+In general most supported by minibuffer (well buffer switching) can get in a mess and Aquamacs fails with swiper - and now
+So the new stuff seems to be [[https://github.com/minad/consult][consult]] and spectrum and marginalia but they don't seem to have posframe but try mini-frame
+Well posframe seems to be used but with same beep problem.
+mini-fram also allows editing in the frame so a nicer typing experience but not as polished visual.
+
+
+* Support packages
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210731T000507.093126
+:END:
+General purpose but used for the completion
+** prescient
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:AF2C3A97-2934-4856-9FB3-B831C48B5ADC
+:END:
+[[https://github.com/raxod502/prescient.el][Prescient]]  is a library which sorts and filters lists of candidates,
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_378BD735-5E0C-4075-9ED5-A69FC65B29E4
+#+begin_src emacs-lisp
+(use-package-elpa prescient
+  :commands prescient-persist-mode prescient-sort
+  :config (prescient-persist-mode 1))
+#+end_src
+** Find M-x commands
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:2B101998-0D34-4143-95AF-769C4001D58C
+:END:
+#+begin_quote
+Smex is a M-x enhancement for Emacs. Built on top of IDO, it provides a convenient interface to your recently and most frequently used commands. And to all the other commands, too.
+#+end_quote
+
+However smex seems not to be maintained so try amx.
+I don't explicitly bind this as 'amx-mode' does this so that needs to be called.
+#+NAME: org_2020-11-30+00-00_28F3664A-77DF-4D77-8554-E9F37CB1815E
+#+begin_src emacs-lisp
+(use-package-elpa amx
+  :defer 1
+  :commands amx
+  :init
+  (setq amx-history-length 20)
+  (amx-mode 1))
+#+end_src
+** Emacs mini frame
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210801T194100.725461
+:END:
+Put the minibuffer elsewhere.
+posframe does a few more things as it works with non minibuffer. But mini-frame works with all minibuffer.
+
+This puts it at the top
+But it does blank the header line - noticeable with ivy-posframe.
+Also I want it in middle or over the non treemacs frame. Look at treemacs-current-visibility to see if visible in current frame
+
+Well I don't know what the frame parameters are left and width can be proportion of screen, pixels or characters. And mini frame does not seem to react well to them so just something that works sort of.
+
+#+NAME: org_mark_mini20.local_20210801T194100.707636
+#+begin_src emacs-lisp
+(when *emacs/>=26p*
+  (use-package-elpa mini-frame
+	:defer 0.5
+	:custom
+	(mini-frame-internal-border-color "yellow")
+	(mini-frame-standalone 't)
+	(mini-frame-detach-on-hide 'nil)
+	(mini-frame-standalone 'nil)
+
+	:init
+	(defun mwb-mini-treemacs-width ()
+	  "Find width of treemacs window if it exists plus a fringe."
+	  (if (treemacs-get-local-window)
+		  (/ treemacs-width (float (frame-width)))
+		0))
+
+	(defun mwb-mini-frame-parameters ()
+	  "Normal minibuffer extents."
+	  (message "In mini frame para : left %d" (mwb-mini-treemacs-width))
+	  `((left . ,(mwb-mini-treemacs-width)) (top . 0.0) (width . 1.0) (height . 1)))
+	(defun mwb-mini-frame-completions-parameters ()
+	  "Minibuffer for completions extents."
+	  `((left . ,(mwb-mini-treemacs-width)) (width . 1.0) (height . 0.25)))
+	(defvar my/mini-frame-normal-functions
+	  '(isearch-forward
+		consult-line
+		consult-line-symbol-at-point
+		consult-grep
+		consult-git-grep
+		consult-find
+		consult-ripgrep
+		bsp-ctrlf-region-forward
+		ctrlf-backward-default
+		ctrlf-forward-default
+		ctrlf-forward-alternate
+		ctrlf-backward-alternate
+		ctrlf-forward-symbol
+		ctrlf-forward-symbol-at-point)
+	  "List the functions that don't appear in a posframe.")
+
+	(defun my/mini-frame-parameters ()
+	  "Set mini frame parameters based on `this-command'."
+	  (if (member this-command my/mini-frame-normal-functions)
+		  (let ((left (mwb-mini-treemacs-width)))
+			`((top . 0)
+			  ;; (left . 0.5)
+			  (left . ,left)
+			  (width . ,(- 1.0 left))))
+		`((top . 0.3)
+		  (left . .4)
+		  (width . .8))))
+
+	(setq mini-frame-show-parameters 'my/mini-frame-parameters)
+	;; (setq mini-frame-show-parameters #'mwb-mini-frame-parameters)
+	(setq mini-frame-completions-show-parameters
+		  #'mwb-mini-frame-completions-parameters)
+	:config
+	(mini-frame-mode 1)
+	))
+#+end_src
+
+** Faces
+:PROPERTIES:
+:ID:       org_2020-12-06+00-00:1F4101B0-7C06-4F8F-857A-A8B25A034CF2
+:END:
+#+NAME: org_2020-12-06+00-00_55BEC998-6943-4AEF-8ED3-4ED6611B0625
+#+begin_src emacs-lisp
+(use-feature emacs
+  :custom
+  (minibuffer-prompt-properties
+   '(read-only t
+	 face minibuffer-prompt
+	 cursor-intangible t)))
+#+end_src
+** Kill it
+:PROPERTIES:
+:ID:       org_2020-12-06+00-00:DDCA46D9-A278-4657-A77D-2A95B5BCF660
+:END:
+Kill it from anywhewre from blog with-Emacs but take version from [[https://www.reddit.com/r/emacs/comments/ffbser/withemacs_quit_current_context/][Reddit]]
+This has been a major annoyance since I began using emacs.
+#+NAME: org_mark_2020-03-06T13-08-35+00-00_mini12.local_983EF586-334E-442B-B675-D73D0165A612
+#+begin_src emacs-lisp
+(defun keyboard-quit-context+ ()
+  "Quit current context.
+
+    This function is a combination of `keyboard-quit' and
+    `keyboard-escape-quit' with some parts omitted and some custom
+    behavior added."
+  (interactive)
+  (cond ((region-active-p)
+         ;; Avoid adding the region to the window selection.
+         (setq saved-region-selection nil)
+         (let (select-active-regions)
+           (deactivate-mark)))
+        ((eq last-command 'mode-exited) nil)
+        (current-prefix-arg
+         nil)
+        (defining-kbd-macro
+          (message
+           (substitute-command-keys
+            "Quit is ignored during macro defintion, use \\[kmacro-end-macro] if you want to stop macro definition"))
+          (cancel-kbd-macro-events))
+        ((active-minibuffer-window)
+         (when (get-buffer-window "*Completions*")
+           ;; hide completions first so point stays in active window when
+           ;; outside the minibuffer
+           (minibuffer-hide-completions))
+         (abort-recursive-edit))
+        (t
+		 ;; if we got this far just use the default so we don't miss
+         ;; any upstream changes
+         (keyboard-quit))))
+
+(bind-key "H-q" 'keyboard-quit-context+)
+#+end_src
+** Sessions
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220607T170807.709547
+:END:
+Save registers et al but not the whole desktop.
+This is saving minibuffer information but can do more as told.
+#+NAME: org_mark_mini20.local_20220607T170807.684168
+#+begin_src emacs-lisp
+(use-feature savehist
+  :commands savehist-minibuffer-hook savehist-autosave
+  :demand
+  :unless *aquamacs*
+  :config
+  (setq savehist-additional-variables
+		'(kill-ring
+		  search-ring
+		  regexp-search-ring
+		  last-kbd-macro
+		  kmacro-ring
+		  shell-command-history
+          bookmark-alist
+		  Info-history-list
+		  register-alist))
+  (setq savehist-file (locate-user-emacs-file "savehist.el"))
+  (savehist-mode 1))
+#+end_src
+* Yes or no
+:PROPERTIES:
+:ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:3F1F190C-6747-4CF2-939E-14386756F579
+:END:
+  Does anyone type =yes= anymore?
+   #+NAME: org_mark_2020-10-01T11-27-32+01-00_mini12.local_B854EC7F-0938-4897-9815-3D77C26F2E4B
+   #+BEGIN_SRC elisp
+(unless *aquamacs*
+  (fset 'yes-or-no-p 'y-or-n-p))
+   #+END_SRC
+*** Some dialog
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220608T221604.421703
+:END:
+Either as use-dialog or perhaps better a popup
+* The collection of packages to do minibuffer completion
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210731T152331.776146
+:END:
+Mainly from  consult
+** [[https://github.com/raxod502/ctrlf][CTRLF]]
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210804T165415.286035
+:END:
+Replace isearch but not so easy as consult-line plus can leave the progress marker on screen.
+#+NAME: org_mark_mini20.local_20210804T165415.264578
+#+begin_src emacs-lisp
+(use-package-elpa ctrlf
+  :init (ctrlf-mode 1)
+  :bind (:map ctrlf-minibuffer-mode-map
+		 ("C-<f3>" . ctrlf-backward-alternate)
+		 ("<f3>" . ctrlf-forward-alternate)
+		 ("<f4>" . ctrlf-forward-default)
+		 ("<f5>" . ctrlf-backward-default)
+		 ("C-<f4>" . ctrlf-backward-default)
+		 ("S-<f4>" . ctrlf-backward-default))
+  :custom (ctrlf-auto-recenter t)
+  :commands (ctrlf-backward-default
+			 ctrlf-forward-default
+			 ctrlf-forward
+			 ctrlf-forward-alternate
+			 ctrlf-backward-alternate
+			 ctrlf-forward-symbol
+			 ctrlf-forward-symbol-at-point)
+  :init
+  (defun bsp-ctrlf-region-forward ()
+    (interactive)
+    (if (use-region-p)
+        (let ((beg (region-beginning))
+              (end (region-end)))
+          (deactivate-mark)
+          (ctrlf-forward ctrlf-default-search-style nil
+						 (buffer-substring-no-properties beg end)))
+      (ctrlf-forward-default))))
+#+end_src
+** Consult
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210731T152331.774706
+:END:
+#+NAME: org_mark_mini20.local_20210731T152331.759640
+#+begin_src emacs-lisp
+(when *emacs/>=26p*
+  (use-package-elpa consult
+	:init
+	(setq register-preview-delay 0
+		  register-preview-function #'consult-register-format)
+	;; Optionally tweak the register preview window.
+	;; This adds thin lines, sorting and hides the mode line of the window.
+	(advice-add #'register-preview :override #'consult-register-window)
+
+	;; Use Consult to select xref locations with preview
+	(setq xref-show-xrefs-function #'consult-xref
+		  xref-show-definitions-function #'consult-xref)
+
+	:config
+	(setq consult-project-root-function #'projectile-project-root)
+	(setq consult-narrow-key "<")
+
+	;;  Delay preview
+	(consult-customize consult-theme consult-buffer
+					   :preview-key '(:debounce 1.0 any))
+	(mini-frame-mode 1)
+	(marginalia-mode 1)
+	:bind (("C-x r x" . consult-register)
+		   ("C-x r b" . consult-bookmark)
+		   ("C-c k" . consult-kmacro)
+		   ("C-x M-:" . consult-complex-command) ;; orig. repeat-complet-command
+		   ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
+		   ("C-x 5 b" . consult-buffer-other-frame)
+		   ("M-#" . consult-register-load)
+		   ("M-'" . consult-register-store) ;; orig. abbrev-prefix-mark (unrelated)
+		   ("C-M-#" . consult-register)
+		   ("C-x b" . consult-buffer)
+		   ("<help> a" . consult-apropos) ;; orig. apropos-command
+		   ;; Goto keys
+		   ("M-g h" . consult-org-heading)
+		   ("M-g e" . consult-compile-error)
+		   ("M-g f" . consult-flycheck)
+		   ("M-g g" . consult-goto-line)   ;; orig. goto-line
+		   ("M-g M-g" . consult-goto-line) ;; orig. goto-line
+		   ("M-g a" . consult-org-agenda)
+		   ("M-g m" . consult-mark)
+		   ("M-g o" . consult-outline)
+		   ("M-g m" . consult-mark)
+		   ("M-g k" . consult-global-mark)
+		   ("M-g i" . consult-imenu)
+		   ("M-g I" . consult-project-imenu)
+		   ;; M-s bindings (search-map)
+		   ("M-s f" . consult-find)
+		   ("M-s L" . consult-locate)
+		   ("M-s g" . consult-grep)
+		   ("M-s G" . consult-git-grep)
+		   ("M-s r" . consult-ripgrep)
+		   ("M-s l" . consult-line)
+		   ("M-s m" . consult-multi-occur)
+		   ("M-s k" . consult-keep-lines)
+		   ("M-s u" . consult-focus-lines)
+		   ;; Isearch integration
+		   ("M-s e" . consult-isearch)
+		   ;; ("M-g l" . consult-line)
+		   ("C-x c SPC" . consult-mark)
+		   :map isearch-mode-map
+		   ("M-e" . consult-isearch)   ;; orig. isearch-edit-string
+		   ("M-s e" . consult-isearch) ;; orig. isearch-edit-string
+		   ("M-s l" . consult-line)
+		   :map mac-key-mode-map
+		   ("s-f" . consult-line)
+		   ("s-b" . consult-buffer))))
+#+end_src
+** All-the-icons-completion
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210815T090804.369866
+:END:
+Add icons to completion screens
+#+NAME: org_mark_mini20.local_20210815T090804.348976
+#+begin_src emacs-lisp
+(use-package-elpa all-the-icons-completion
+  :config
+  (all-the-icons-completion-mode)
+  :hook (marginalia-mode . all-the-icons-completion-marginalia-setup))
+#+end_src
+** Marginalia
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210801T165758.232477
+:END:
+Add decoration/information
+#+NAME: org_mark_mini20.local_20210801T165758.216698
+#+begin_src emacs-lisp
+(use-package-elpa marginalia
+  :commands marginalia-mode
+  :config
+  (setq marginalia-annotators
+		'(marginalia-annotators-heavy marginalia-annotators-light))
+  (advice-add #'marginalia-cycle :after
+			  (lambda () (when (bound-and-true-p selectrum-mode)
+                      (selectrum-exhibit))))
+  :bind (:map minibuffer-local-completion-map
+		 ("M-A" . marginalia-cycle)
+		 ("C-i" . marginalia-cycle-annotators)))
+#+end_src
+** Embark
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210801T171053.885805
+:END:
+Take action in selection buffer
+#+NAME: org_mark_mini20.local_20210801T171053.868666
+#+begin_src emacs-lisp
+(use-package-elpa embark
+  :after vertico
+  :config
+  (setq embark-prompter 'embark-keymap-prompter)
+  ;; (add-to-list 'embark-target-finders 'my/embark-org-element)
+  ;; (add-to-list 'embark-allow-edit-commands #'my/stream-message)
+  ;; (add-to-list 'embark-allow-edit-commands #'my/journal-post)
+  ;; (embark-define-keymap embark-sketch-actions
+  ;;   "Org Mode sketch-related actions"
+  ;;   ("o" my/sketch-insert-file-as-link)
+  ;;   ("v" my/geeqie-view))
+  ;; (embark-define-keymap embark-journal-actions
+  ;;   "Journal"
+  ;;   ("e" my/journal-edit))
+  (add-to-list 'embark-keymap-alist '(sketch . embark-sketch-actions))
+  (add-to-list 'embark-keymap-alist '(journal . embark-journal-actions))
+
+  ;; Hide the mode line of the Embark live/completions buffers from embark
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 nil
+                 (window-parameters (mode-line-format . none))))
+
+  :bind
+  (:map minibuffer-local-map
+        (("C-c e" . embark-act)
+         ("C-;" . embark-act))
+        :map embark-collect-mode-map
+        (("C-c e" . embark-act)
+         ("C-;" . embark-act))
+        :map embark-general-map
+        (("j" . my/journal-post)
+         ("m" . my/stream-message))
+        :map embark-variable-map
+        ("l" . edit-list)))
+
+#+end_src
+*** Embark counsel
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210801T171307.569379
+:END:
+#+NAME: org_mark_mini20.local_20210801T171307.553247
+#+begin_src emacs-lisp
+(use-package-elpa embark-consult
+  :after (embark consult)
+  :demand t                ; only necessary if you have the hook below
+  ;; if you want to have consult previews as you move around an
+  ;; auto-updating embark collect buffer
+  :hook (embark-collect-mode . embark-consult-preview-minor-mode))
+#+end_src
+** Selectrum
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210801T174734.765653
+:HEADER-ARGS: :tangle no
+:END:
+The display part as vertical list
+#+NAME: org_mark_mini20.local_20210801T174734.748739
+#+begin_src emacs-lisp
+(use-package-elpa selectrum
+  :defer 2
+  :init (selectrum-mode +1)
+  :bind (:map selectrum-minibuffer-map
+		 ("C-<enter>" . exit-minibuffer)))
+#+end_src
+*** Prescient
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210801T174941.158080
+:END:
+To put in order
+#+NAME: org_mark_mini20.local_20210801T174941.141568
+#+begin_src emacs-lisp
+(use-package-elpa selectrum-prescient
+  :demand
+  :init
+  (setq prescient-save-file (mwb-user-emacs-file "var/prescient-save.el"))
+  (selectrum-prescient-mode 1)
+  (prescient-persist-mode +1)
+  :after selectrum)
+#+end_src
+** [[https://github.com/minad/vertico][Vertico]]
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220610T223433.980880
+:END:
+Seems to be replacing selectrum.
+#+NAME: org_mark_mini20.local_20220610T223433.967130
+#+begin_src emacs-lisp
+(use-package-elpa vertico
+  :straight (vertico :files (:defaults "extensions/*"))
+  :demand
+  :init
+  (vertico-mode 1)
+
+  ;; Different scroll margin
+  ;; (setq vertico-scroll-margin 0)
+
+  ;; Show more candidates
+  (setq vertico-count 20)
+
+  ;; Grow and shrink the Vertico minibuffer
+  ;; (setq vertico-resize t)
+
+  ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
+  (setq vertico-cycle t)
+  (setq read-file-name-completion-ignore-case t
+        read-buffer-completion-ignore-case t
+        completion-ignore-case t)
+  )
+#+end_src
+*** vertico-mouse
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220617T113029.101620
+:END:
+#+NAME: org_mark_mini20.local_20220617T113029.084367
+#+begin_src emacs-lisp
+(use-feature vertico-mouse
+  :after vertico
+  :demand
+  :config (vertico-mouse-mode 1))
+#+end_src
+** Orderless
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220610T225642.615445
+:END:
+Search for completions
+#+NAME: org_mark_mini20.local_20220610T225642.601196
+#+begin_src emacs-lisp
+(use-package-elpa orderless
+  :defer 1
+
+  :bind (:map vertico-map
+		 ("?" . minibuffer-completion-help)
+		 ("C-<return>" . vertico-exit-input))
+  :init
+  ;; Define orderless style with initialism by default
+  ;; (orderless-define-completion-style	;
+  ;;     +orderless-with-initialism
+  ;;   (orderless-matching-styles '(orderless-initialism orderless-literal orderless-regexp)))
+
+  ;; Configure a custom style dispatcher (see the Consult wiki)
+  ;; (setq orderless-style-dispatchers '(+orderless-dispatch)
+  ;;       orderless-component-separator #'orderless-escapable-split-on-space)
+
+  (setq completion-styles '(substring orderless basic)
+		completion-category-defaults nil)
+  (setq completion-category-defaults
+        '((file (styles partial-completion))) )
+  ;; (setq completion-category-overrides '((file (styles partial-completion))
+  ;;                                       (command (styles +orderless-with-initialism))
+  ;; 		                                (variable (styles +orderless-with-initialism))
+  ;;                                       (symbol (styles +orderless-with-initialism)))
+  ;;       )
+  )
+#+end_src

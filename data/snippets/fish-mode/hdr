@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: hdr
+# key: hdr
+# --
+#!/usr/bin/env fish
+$0

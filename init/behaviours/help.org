@@ -1,0 +1,89 @@
+#+TITLE:  Help
+#+AUTHOR: Mark Bestley
+#+DATE:   07 Jul 2021
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+STARTUP: show2levels
+* Overview
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210707T125803.377704
+:END:
+I use two improvements for help plus counsel. The only issue is controlling the keybindings so have to control the order.
+Basically help-fns+ is not what I want even then it is just f1-c
+
+* Improve on help
+:PROPERTIES:
+:ID:       org_2020-12-08+00-00:19F09EB5-F1E8-4BB8-956D-B6F0893377C0
+:END:
+This will be fun as it uses *Help* and I use *Helpful*
+#+NAME: org_2020-12-08+00-00_F53AC824-5902-4E24-B6C7-AC4EC2BA328B
+#+begin_src emacs-lisp :tangle no
+(use-package-elpa help-fns+
+  :defer 15)
+#+end_src
+* Helpful
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210707T131028.187628
+:END:
+Let's use [[https://github.com/Wilfred/helpful][Helpful]] But bind the keys in keys.org
+Although that causes loading issues so done here. This also means the helpful gets loaded.
+Note helpful uses its own elisp references elisp-refs - see lisp_emacs for that.
+** emacs-lisp-references
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220703T205406.289050
+:END:
+As a Branch needs to be set before help.
+*** elisp-xref
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220703T205406.282343
+:END:
+Used by helpful and might be more use elsewhere.
+#+NAME: org_mark_mini20.local_20220703T205406.264074
+#+begin_src emacs-lisp
+(use-package-elpa elisp-refs
+  :bind (:map elisp-refs-mode-map
+		 ("<double-mouse-1>" . elisp-refs-visit-match-other-window)
+		 ("<next>" . elisp-refs-next-match)
+		 ("<prior>" . elisp-refs-prev-match)))
+#+end_src
+** helpful
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220703T205406.275247
+:END:
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_20EF0E45-D1C2-493C-B710-6E2B48D98DB9
+#+begin_src emacs-lisp
+(use-package-elpa helpful
+;;  :after help-fns+
+  :bind (:map help-map
+			  ;; mine
+			  ("c" . describe-char)
+			  ;; ("l" . counsel-find-library)
+
+			  ;; From helpful - not using remsp - make it explicit
+			  ;; Note these use consult be default - counsel need explicit.
+			  ("." . helpful-at-point)
+			  ("<f1>" . helpful-at-point)
+			  ("f" . helpful-callable)
+			  ("v" . helpful-variable)
+			  ;; This worked when in helpful I spose it did the prefix as well
+			  ;; ([remap describe-key] . helpful-key)
+			  ("k" . helpful-key)
+
+			  ;; hemacs
+			  ;; ("g" . google-this)
+			  ("K" . free-keys)
+			  ;;  ("f" . flymake-show-diagnostics-buffer)
+
+			  ;; discover my major
+			  ("C-m" . discover-my-major)
+			  ("M-m" . discover-my-mode)))
+#+end_src
+* Improve majors
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210526T204803.505076
+:END:
+This package helps to discover the major mode bindings. I use it very occasionally and hence not binding it to any modal binding.
+#+NAME: org_mark_mini20.local_20210526T204803.473143
+#+begin_src emacs-lisp
+(use-package-elpa discover-my-major
+  :commands (discover-my-mode discover-my-major))
+#+end_src

@@ -1,0 +1,410 @@
+#+TITLE Emacs configuration - dired
+#+PROPERTY:header-args :cache yes :tangle yes :comments link
+#+STARTUP: content
+
+Dired is required elsewhere so is loaded early s we need to defer a lot or use a full noweb
+
+* Dired
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:86DB2C97-15D2-4ADA-8AFA-13397998FDC8
+:END:
+Dired is a mess as really one package but broken up to several e.g. -aux ls-lisp -x
+
+Original setup is jweigley but you need to remember all the keys, Some ideas a re good but....
+The good idea is dired two pane for doing finder type things - may be I need a new frame and/or may be several defined dual panes
+
+So try [[https://cloudnine.github.io/science/2020-03-17-emacs-parentheses-directories-clipboard-command-line-history/][Yuri Tricys]] as they have a pretty hydra - which I will make into a major mode
+Also fromauthor of modus-themes https://protesilaos.com/dotemacs/#h:c519300f-8a9a-472b-b26d-c2f49adbdb5d
+and https://writequit.org/denver-emacs/presentations/2016-05-24-elpy-and-dired.html
+** ls
+:PROPERTIES:
+:ID:       org_mark_2020-09-29T11-53-58+01-00_mini12.local:4529B01B-7464-4099-AD76-43AD7970A977
+:END:
+
+  From Howard Abrams but using MacPorts
+  Since the default ls for the Mac isn't so good, I always have the GNU ls version available in =/opt/local/bin/gls=.
+
+  #+NAME: org_mark_2020-09-29T11-53-58+01-00_mini12.local_9DEAAB07-8C5F-4986-8DC0-D64A59C4DF65
+  #+BEGIN_SRC elisp
+(require 'ls-lisp)
+(setq ls-lisp-use-insert-directory-program t)
+(setq insert-directory-program "/opt/local/bin/gls")
+  #+END_SRC
+
+** Main Use-package
+:PROPERTIES:
+:ID:       org_mark_2020-10-19T10-12-58+01-00_mini12.local:DB259300-B567-4C97-8731-C56AAFDC5074
+:END:
+Need to allow more to expand - especially for macports
+
+Take from jweigley then find a hydra and prettify it.
+#+NAME: org_mark_2020-11-27T01-10-38+00-00_mini12.local_8A575AE6-49B6-4503-835E-19A6739AB60C
+#+begin_src emacs-lisp
+(use-feature dired
+  :commands dired
+  :bind (:map dired-mode-map
+              ("j" . dired)
+
+              ("e" . ora-ediff-files)
+              ("l" . dired-up-directory)
+              ("q" . pop-window-configuration)
+              ("Y" . ora-dired-rsync)
+              ("M-!" . async-shell-command)
+              ("<tab>" . dired-next-window)
+              (")" . dired-hide-details-mode)
+              ("(" . dired-hide-details-mode)
+              ("C-M-u" . dired-subtree-up)
+              ("C-M-d" . dired-subtree-down)
+              ("C-M-p" . dired-subtree-previous-sibling)
+              ("C-M-n" . dired-subtree-next-sibling)
+              )
+  :diminish dired-omit-mode
+
+  :init
+  (setq dired-recursive-copies 'always)
+  (setq dired-recursive-deletes 'always)
+  (setq dired-listing-switches
+        "-AGFhlv --group-directories-first --time-style=long-iso")
+  (setq ls-lisp-dirs-first t)
+  (setq dired-dwim-target t)
+
+  :hook ((dired-mode . dired-hide-details-mode))
+  ;; :hook (dired-mode . dired-hide-details-mode)
+  ;;:hook (dired-mode . dired-omit-mode)
+  )
+#+end_src
+
+*** Before load
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20210111T183550.429542
+:END:
+This is equivalent to being in :preface so don't need to be inside use-package (well unless :disabled)
+**** Old
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20210111T183550.424254
+:END:
+This is the original from jweigley
+Now not used in general ideas might be taken
+#+NAME: org_mark_mini12.local_20210111T183550.405616
+#+begin_src emacs-lisp :tangle no
+
+    (defvar saved-window-configuration nil)
+
+    (defun push-window-configuration ()
+      (interactive)
+      (push (current-window-configuration) saved-window-configuration))
+
+    (defun pop-window-configuration ()
+      (interactive)
+      (let ((config (pop saved-window-configuration)))
+        (if config
+            (set-window-configuration config)
+          (if (> (length (window-list)) 1)
+              (delete-window)
+            (bury-buffer)))))
+
+    (defun dired-two-pane ()
+      (interactive)
+      (push-window-configuration)
+      (let ((here default-directory))
+        (delete-other-windows)
+        (dired "~/Downloads")
+        (split-window-horizontally)
+        (dired here)))
+
+    (defun dired-next-window ()
+      (interactive)
+      (let ((next (car (cl-remove-if-not #'(lambda (wind)
+                                             (with-current-buffer (window-buffer wind)
+                                               (eq major-mode 'dired-mode)))
+                                         (cdr (window-list))))))
+        (when next
+          (select-window next))))
+
+    (defvar mark-files-cache (make-hash-table :test #'equal))
+
+    (defun mark-similar-versions (name)
+      (let ((pat name))
+        (if (string-match "^\\(.+?\\)-[0-9._-]+$" pat)
+            (setq pat (match-string 1 pat)))
+        (or (gethash pat mark-files-cache)
+            (ignore (puthash pat t mark-files-cache)))))
+
+    (defun dired-mark-similar-version ()
+      (interactive)
+      (setq mark-files-cache (make-hash-table :test #'equal))
+      (dired-mark-sexp '(mark-similar-versions name)))
+
+    (defun ora-dired-rsync (dest)
+      (interactive
+       (list
+        (expand-file-name
+         (read-file-name "Rsync to: " (dired-dwim-target-directory)))))
+      (let ((files (dired-get-marked-files
+                    nil current-prefix-arg))
+            (tmtxt/rsync-command "rsync -aP "))
+        (dolist (file files)
+          (setq tmtxt/rsync-command
+                (concat tmtxt/rsync-command
+                        (shell-quote-argument file)
+                        " ")))
+        (setq tmtxt/rsync-command
+              (concat tmtxt/rsync-command
+                      (shell-quote-argument dest)))
+        (async-shell-command tmtxt/rsync-command "*rsync*")
+        (other-window 1)))
+
+    (defun ora-ediff-files ()
+      (interactive)
+      (let ((files (dired-get-marked-files))
+            (wnd (current-window-configuration)))
+        (if (<= (length files) 2)
+            (let ((file1 (car files))
+                  (file2 (if (cdr files)
+                             (cadr files)
+                           (read-file-name
+                            "file: "
+                            (dired-dwim-target-directory)))))
+              (if (file-newer-than-file-p file1 file2)
+                  (ediff-files file2 file1)
+                (ediff-files file1 file2))
+              (add-hook 'ediff-after-quit-hook-internal
+                        `(lambda ()
+                           (setq ediff-after-quit-hook-internal nil)
+                           (set-window-configuration ,wnd))))
+          (error "no more than 2 files should be marked"))))
+
+
+#+end_src
+**** New Window
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20210111T183550.421548
+:END:
+Add new code so in new @ pane window
+#+NAME: org_mark_mini12.local_20210111T183550.407387
+#+begin_src emacs-lisp
+(defun dired-mwb-new-two-pane (dir-left dir-right)
+  "Open new frame with two dired buffers"
+  (interactive)
+  (select-frame (make-frame-command))
+  (dired dir-right)
+  (split-window-horizontally)
+  (dired dir-left))
+
+
+;; (defun dir-test ()
+;;   (interactive)
+;;   (dired-mwb-new-two-pane "~/Downloads" "~/tmp"))
+
+(pretty-hydra-define hyd-dired-common (:color pink :quit-key "q" :exit "t")
+  ("Common dired setup"
+   (("d" (dired-mwb-new-two-pane "~/Downloads" "/Volumes/G Data 1/Video") "Downloads - video")
+    ("e" (dired-mwb-new-two-pane "~/.emacs.d" "~/Library/Application Support/Aquamacs Emacs") "emacs")
+    ("x" (dired-mwb-new-two-pane "~/Library/Application Support/XMenu" "/Applications")))))
+#+end_src
+**** Open in external app
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20210111T222739.277719
+:END:
+ From https://stackoverflow.com/a/25124808/151019
+ xah lee has improved it so uses shell-command which is wrong for macos
+
+#+NAME: org_mark_mini12.local_20210111T222739.254462
+#+begin_src emacs-lisp
+    (defun my-open-in-external-app (&optional file)
+      "Open the current FILE or dired marked files in external app.
+   The app is chosen from your OS's preference."
+      (interactive)
+      (message "%s" (concat "my-open-in-external-app called with \"" file "\" as argument"))
+      ;; FIXXME: add check if FILE is an existing file; show error message if not
+      (let (doIt
+            (myFileList
+             (cond
+               ((string-equal major-mode "dired-mode") (dired-get-marked-files))
+               ((not file) (list (buffer-file-name)))
+               (file (list file)))))
+
+        (setq doIt (if (<= (length myFileList) 5)
+                       t
+                     (y-or-n-p "Open more than 5 files? ")))
+
+        (when doIt
+          (cond
+            ((string-equal system-type "windows-nt")
+             (mapc (lambda (fPath) (w32-shell-execute "open" (replace-regexp-in-string "/" "\\" fPath t t))) myFileList))
+            ((string-equal system-type "darwin")
+             (mapc (lambda (fPath) (shell-command (format "open \"%s\"" fPath))) myFileList))
+            ((string-equal system-type "gnu/linux")
+             (mapc (lambda (fPath) (let ((process-connection-type nil)) (start-process "" nil "xdg-open" fPath))) myFileList))))))
+
+#+end_src
+**** Copy via async rsync
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20210111T222739.273414
+:END:
+Originally oraemacs via jweigley
+#+NAME: org_mark_mini12.local_20210111T222739.256233
+#+begin_src emacs-lisp
+(defun ora-dired-rsync (dest)
+  (interactive
+   (list (expand-file-name
+          (read-file-name "Rsync to:" (dired-dwim-target-directory)))))
+  ;; store all selected files into "files" list
+  (let ((files (dired-get-marked-files nil current-prefix-arg))
+        ;; the rsync command
+        (tmtxt/rsync-command "rsync -arvzu  --progress "))
+    ;; add all selected file names as arguments to the rsync command
+    (dolist (file files)
+      (setq tmtxt/rsync-command
+            (concat tmtxt/rsync-command
+                    (if (string-match "^/ssh:\\(.*:\\)\\(.*\\)$" file)
+                        (format " -e ssh \"%s%s\""
+                                (match-string 1 file)
+                                (shell-quote-argument (match-string 2 file)))
+                      (shell-quote-argument file)) " ")))
+    ;; append the destination
+    (setq tmtxt/rsync-command
+          (concat tmtxt/rsync-command
+                  (if (string-match "^/ssh:\\(.*\\)$" dest)
+                      (format " -e ssh %s" (match-string 1 dest))
+                    (shell-quote-argument dest))))
+    ;; run the async shell command
+    (let ((default-directory (expand-file-name "~")))
+      (async-shell-command tmtxt/rsync-command))
+    (message tmtxt/rsync-command)
+    ;; finally, switch to that window
+    (other-window 1)))
+#+end_src
+
+** Dired-x
+:PROPERTIES:
+:ID:       org_mark_2020-11-27T01-10-38+00-00_mini12.local:2838D467-BDF1-4220-9E50-2DD22E2C9544
+:END:
+Part of emacs but not loaded automatically by emacs.
+#+NAME: org_mark_2020-11-27T01-10-38+00-00_mini12.local_CA35C2DA-DA84-43A8-8E14-9DDCADEF692C
+#+begin_src emacs-lisp
+(use-feature dired-x
+    :after dired
+    :demand
+    :init (setq-default dired-omit-files-p t)
+    (setq dired-clean-up-buffers-too t)
+    (setq dired-clean-confirm-killing-deleted-buffers t)
+    (setq dired-x-hands-off-my-keys t)  ; easier to show the keys I use
+    :config
+    (add-to-list 'dired-omit-extensions ".DS_Store"))
+#+end_src
+
+** File compression
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20210110T010949.866708
+:END:
+#+NAME: org_mark_2020-10-19T10-12-58+01-00_mini12.local_6D5339D7-14C1-4CC7-A8DA-9615DE298096
+#+begin_src emacs-lisp :tangle no
+(add-to-list 'dired-compress-file-suffixes
+             '("\\.tbz2\\'" ".tar" "bunzip2")
+             )
+#+end_src
+
+** Dired subtree
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20210110T010949.864281
+:END:
+Show directories in line not at bottom
+Use tab to show/hide
+#+NAME: org_mark_mini12.local_20210110T010949.854060
+#+begin_src emacs-lisp
+(use-package-elpa dired-subtree
+  :after dired
+  :config
+  (setq dired-subtree-use-backgrounds nil)
+  :bind (:map dired-mode-map
+              ("<tab>" . dired-subtree-toggle)
+              ("<C-tab>" . dired-subtree-cycle)
+              ("<S-iso-lefttab>" . dired-subtree-remove)))
+#+end_src
+
+** Icons
+:PROPERTIES:
+:ID:       org_2020-11-30+00-00:9D16D081-3299-4F23-ACBD-BA3919DBC70E
+:END:
+
+*** All the icons
+:PROPERTIES:
+:ID:       org_2020-12-06+00-00:F61E2069-E55F-4A4E-AB78-147D022F698C
+:END:
+From Greg Hendershott
+But treemacs gets prettier coloured icons
+#+NAME: org_2020-11-30+00-00_6A809D36-52F1-4E8A-9634-2A75404F6CEC
+#+begin_src emacs-lisp :tangle no
+(use-package-elpa all-the-icons-dired
+  :disabled
+  :hook (dired-mode . all-the-icons-dired-mode))
+#+end_src
+
+*** Treemacs icons
+:PROPERTIES:
+:ID:       org_2020-12-06+00-00:10976CEB-1382-4621-BB2A-57B5E73226DB
+:END:
+Use icons from treemacs
+#+NAME: org_2020-12-06+00-00_C748F245-1E25-4A85-BE27-BD671864B180
+#+begin_src emacs-lisp
+(use-package-elpa treemacs-icons-dired
+  :after treemacs dired
+  :demand
+  :config (treemacs-icons-dired-mode))
+#+end_src
+
+** Hydra
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20210109T234936.614752
+:END:
+#+NAME: org_mark_mini12.local_20210109T234936.604576
+#+begin_src emacs-lisp
+(use-feature dired-mode
+  :init
+  (require 'jp-icons)
+  (defvar dired-title (with-material "folder_open" "Directories"))
+  (defun my-dired-create-file (file)
+    (interactive
+	 (list (read-file-name "Create file: "
+						   (concat (dired-current-directory)
+								   (create-new-file (directory-files
+													 (dired-current-directory)))))))
+    (write-region "" nil (expand-file-name file) t)
+    (dired-add-file file)
+    (revert-buffer)
+    (dired-goto-file (expand-file-name file)))
+  :mode-hydra
+  ((:title dired-title :color pink :foreign-keys run)
+   ("Mode"
+    (("d" dired "Directory Choose")
+     ("+" dired-create-directory "Create A Directory")
+     ("f" my-dired-create-file "Create A File")
+     ;; ("x" xah-open-in-external-app "Open In External Program")
+     ("g" revert-buffer "Refresh Directory")
+     ("~" dired-hide-details-mode "Show Details" :toggle t)
+     ;; ("i" all-the-icons-dired-mode "Directory With Icons" :toggle t)
+     ;; ("h" hydra-helm/body "Go To Hydra Helm" :color blue )m
+     )
+
+    "Mark"
+    (("SPC" dired-mark "Mark Selection At Point")
+     ("u" dired-unmark "Unmark Selection At Point")
+     ("a" dired-toggle-marks "Mark Or Unmark All In Directory" :toggle t)
+     ("A" dired-unmark-all-files "Unmark All Files")
+     ("*" dired-change-marks "Change Marks")
+     ;; ("o" dired-find-file-other-window "Open File In Other Window")
+     ("C" dired-copy-filename-as-kill "Copy Selection Name")
+     ;; ("<SPC>" nil "Quit" :color blue)
+     )
+
+    "Action"
+    (("o" my-open-in-external-app "Open in app")
+	 ("l" mac-key-quick-look "Open in QuickLook")
+     ("D" dired-do-delete "Delete Marked Sections")
+     ("r" dired-do-rename "Rename Selection At Point")
+     ("R" ora-dired-rsync "Rsync")
+     ("c" dired-do-copy "Copy Marked Selections")
+     ("s" dired-do-symlink "Symlink Marked Selections")
+     ("m" dired-do-rename "Move Marked Selections")))))
+#+end_src

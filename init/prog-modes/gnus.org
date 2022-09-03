@@ -1,0 +1,585 @@
+#+TITLE Emacs configuration gnus
+#+PROPERTY:header-args :cache yes :tangle yes  :comments noweb
+#+STARTUP: content
+* Gnus
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20210110T215548.805789
+:END:
+** Package Header
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20210110T204217.459337
+:END:
+Not valid lisp
+use-package outline.
+#+NAME: org_mark_mini12.local_20210110T204217.428432
+#+begin_src emacs-lisp
+(use-feature gnus
+    :commands gnus
+    :preface
+<<gnus-preface>>
+    :init
+    <<gnus-init>>
+    :config
+    <<gnus-config>>
+    :custom
+   <<gnus-custom>>
+    )
+#+end_src
+*** Preface
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20210111T165218.719067
+:END:
+**** New Frame
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20210111T165322.972167
+:END:
+Cover method for gnus to create new frame
+
+#+NAME: org_mark_mini12.local_20210111T165218.684308
+#+begin_src emacs-lisp :tangle no :noweb-ref gnus-preface
+;; (require 'zoom-frm)
+(defun gnus-mwb ()
+  "Cover gnus command to put it in a new frame"
+  (interactive)
+  (select-frame (make-frame-command))
+  (gnus)
+  ;; (zoom-frm-in)
+  ;; (zoom-frm-in)
+  )
+#+end_src
+**** Kill frame on exit
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20210111T165322.969863
+:END:
+#+NAME: org_mark_mini12.local_20210111T165322.934612
+#+begin_src emacs-lisp :tangle no :noweb-ref gnus-preface
+(add-hook 'gnus-after-exiting-gnus-hook #'delete-frame)
+#+end_src
+*** Upfront setup
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20210110T211235.407871
+:END:
+#+NAME: org_mark_mini12.local_20210110T211235.365791
+#+begin_src emacs-lisp :tangle no :noweb-ref gnus-preface
+;(setq gnus-directory "~/Library/Preferences/Aquamacs Emacs/News")
+(setq message-directory "~/.emacs.d/var/mail/") ; set as well as custom as the
+										; nnfolder-directory can't be and seems
+										; to use this
+(setq nnfolder-directory "~/.emacs.d/var/mail/archive")
+;; (setq nndraft-directory "~/.emacs.d/data/mail/drafts/")
+;; (setcdr (assoc 'nndraft-directory
+;;                (nnoo-variables 'nndraft))
+;;         nndraft-directory)
+(setq gnus-dribble-directory (expand-file-name "~/tmp/emacs_unwanted"))
+(setq gnus-kill-save-kill-file t)
+(setq gnus-server-browse-in-group-buffer t)
+(setq gnus-read-active-file nil)
+
+(setq gnus-visual t
+	  gnus-large-newsgroup 4000)
+#+end_src
+#+NAME: org_mark_mini20.local_20220706T195409.877150
+#+begin_src emacs-lisp :tangle no :noweb-ref gnus-custom
+(gnus-suppress-duplicates t)
+#+end_src
+*** Directories
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220706T194343.324974
+:END:
+#+NAME: org_mark_mini20.local_20220706T194343.304616
+#+begin_src emacs-lisp :tangle no :noweb-ref gnus-custom
+(gnus-directory "~/Library/Preferences/Aquamacs Emacs/News")
+(gnus-home-directory "~/.emacs.d/var/gnus")
+(mail-default-directory "~/.emacs.d/var/Mail")
+(message-auto-save-directory "~/.emacs.d/var/gnus/Mail")
+(message-directory "~/.emacs.d/var/Mail/")
+(nnmail-message-id-cache-file "~/.emacs.d/var/gnus/.nnmail-cache")
+#+end_src
+*** Scoring
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20210110T211235.405030
+:END:
+#+NAME: org_mark_mini12.local_20210110T211235.366707
+#+begin_src emacs-lisp :tangle no :noweb-ref gnus-init
+(setq gnus-use-adaptive-scoring t)
+(setq gnus-score-mimic-keymap nil)
+
+(setq gnus-default-adaptive-score-alist
+	  '((gnus-unread-mark)
+		(gnus-read-mark (subject 1))
+		(gnus-ticked-mark (subject 10))
+		(gnus-killed-mark (subject -5))
+		(gnus-catchup-mark (subject -1))
+		(gnus-spam-mark (from -50))))
+#+end_src
+*** User names
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20210110T211235.401748
+:END:
+#+NAME: org_mark_mini12.local_20210110T211235.367533
+#+begin_src emacs-lisp :tangle no :noweb-ref gnus-custom
+(user-full-name  "Mark Bestley")
+(user-mail-address "gnus@bestley.co.uk")
+(gnus-posting-styles
+ '((".*"
+	(signature "Mark"))
+   ("bar\\.baen\\.com"
+	(address "baen@bestley.co.uk")
+	(signature "Mark"))
+   ("baensbar\\.net"
+	(address "baen@bestley.co.uk")
+	(signature "Mark"))
+   ("aquamacs"
+	(address "aquamacs@bestley.co.uk"))
+   ("macports"
+	(address "macports@bestley.co.uk"))
+   ("racket"
+	(address "racket@bestley.co.uk"))))
+#+end_src
+*** Emacs close
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20210110T211235.398798
+:END:
+Save the status if emacs shuts down with gnus open
+#+NAME: org_mark_mini12.local_20210110T211235.368342
+#+begin_src emacs-lisp :tangle no :noweb-ref gnus-config
+(defun exit-gnus-on-exit ()
+  (if (and (fboundp 'gnus-group-exit)
+		   (gnus-alive-p))
+	  (with-current-buffer (get-buffer "*Group*")
+		(let (gnus-interactive-exit)
+		  (gnus-group-exit)))))
+(add-hook 'kill-emacs-hook 'exit-gnus-on-exit)
+#+end_src
+*** Gnus exit
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220706T195409.906458
+:END:
+#+NAME: org_mark_mini20.local_20220706T195409.882325
+#+begin_src emacs-lisp :tangle no :noweb-ref gnus-custom
+(gnus-interactive-exit nil)
+#+end_src
+** Backups
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:A14E37C1-5805-43D2-A9B0-AC0DFF42BEA0
+:END:
+Well turn them off
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_8DED55B5-DC3E-4E7B-ACF9-45F8C7D77127
+#+begin_src emacs-lisp :tangle no :noweb-ref gnus-config
+(add-hook 'nnfolder-save-buffer-hook 'turn-off-backup-for-current-buffer)
+#+end_src
+
+** Servers
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:362C07A4-045F-4987-84D2-6D8E61BD5558
+:END:
+  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_B2356EEF-66A7-45A4-8287-C9E84A56E33A
+
+*** nntp
+:PROPERTIES:
+:ID:       org_mark_2020-10-04T16-13-47+01-00_mini12.local:D0B3DA7F-6653-4FF1-B1FE-EFAE8B93E16B
+:END:
+Use eternal-September but add Baen and then gmane for mail list
+There might also be gwene for RSS
+#+NAME: org_mark_2020-10-04T16-13-47+01-00_mini12.local_1BF43E07-3359-4A4B-ADC1-9E5E2F15053A
+  #+begin_src emacs-lisp :tangle no :noweb-ref gnus-init
+(setq auth-source-debug 'trivia)
+(setq gnus-read-active-file 'some)
+(setq gnus-secondary-select-methods '((nntp "news.gmane.io")
+                                        (nntp "baensbar.net")))
+(setq gnus-select-method '(nntp "news.eternal-september.org"))
+  #+end_src
+
+**** Cancel
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220706T195409.902902
+:END:
+Id yourself for cancellation
+#+NAME: org_mark_mini20.local_20220706T195409.885034
+#+begin_src emacs-lisp :tangle no :noweb-ref gnus-custom
+(canlock-password "5bc496f914e12916cdaf3640fdc97aa6b23f0fe3")
+#+end_src
+
+*** Fastmail
+:PROPERTIES:
+:ID:       org_mark_2020-10-03T14-51-52+01-00_mini12.local:BA02593B-B929-41AE-92D3-EAD8E740172D
+:END:
+Try reading email basic set up https://gnus.ding.narkive.com/8d6BbA6o/gnus-with-fastmail-fm-account
+
+But not used. I really want a separate email for mail lists, I used to have gmail for this - but I do prefer separate usenames
+So this is not used
+
+However looking at old setup - they key is (setq nnimap-split-inbox   '("INBOX" ))
+Change that INBOX to something else then gnus rules only work on that mailbox
+
+#+NAME: org_mark_2020-10-03T14-51-52+01-00_mini12.local_09D28CC8-C58C-4D23-ABB3-AA0DC1F53B0F
+#+begin_src emacs-lisp :tangle no
+(add-to-list 'gnus-secondary-select-methods
+             '(nnimap "Fastmail"
+                      (nnimap-address "imap.fastmail.com")
+                      (nnimap-server-port 993)
+                      (nnimap-authenticator login)
+                      (nnimap-record-commands)
+                      (nnimap-expunge-on-close 'ask)
+                      (nnimap-stream ssl)))
+
+ ;; Sending via Fastmail's SMTP
+(require 'smtpmail)
+(setq send-mail-function 'smtpmail-send-it
+      message-send-mail-function 'smtpmail-send-it
+      smtpmail-smtp-server "smtp.fastmail.com")
+#+end_src
+
+* Group buffer
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:69B84509-B2E9-488C-AA74-7AC740464640
+:END:
+Put groups in order by my ranking (comes from NeXT news setup)
+  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_BE3A6DE4-5A1C-4EDC-BA10-3A62E1A307F4
+  #+begin_src emacs-lisp
+  (setq gnus-group-sort-function 'gnus-group-sort-by-rank)
+  #+end_src
+Add a hydra https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/gnus-guide-en.org
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_2008EC6E-C927-4D6C-8F4A-F72FF33E521F
+#+begin_src emacs-lisp
+(use-feature gnus-group
+  :after gnus
+  :custom (gnus-group-sort-function
+		   '(gnus-group-sort-by-level))
+  :mode-hydra (gnus-group-mode
+               (:color pink)
+               ("List groups"
+                (("a" gnus-group-list-active "All")
+                 ("L" gnus-group-list-all-groups "Subscribed")
+                 ("l" gnus-group-list-groups "Unread"))
+                "One Group"
+                (("c" gnus-topic-catchup-current "Mark all Read")
+                 ("#" gnus-topic-mark-topic "Mark topic"))
+                "All"
+                (;; ("G" dianyou-group-make-nnir-group)
+                 ("g" gnus-group-get-new-news "Refresh")
+                 ("^" gnus-group-enter-server-mode "Servers")
+                 ;; ("m" gnus-group-new-mail )
+                 ("x" gnus-group-exit "Exit" :exit t ))
+                "Levels"
+                (("S" gnus-group-sort-by-level)
+                 ("s" (lambda () (interactive) (gnus-group-set-current-level)))))))
+#+end_src
+* Summary buffer
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:9EDC2D64-A78E-4A43-AE91-20545CB9D79A
+:END:
+** Threads
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:02EDEFDB-B154-47E0-AB5B-13EEA6B01F29
+:END:
+*** On entry
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210122T112028.127642
+:END:
+   Collapse threads when entering a group
+#+NAME: org_mark_mini20.local_20210122T112028.106666
+#+begin_src emacs-lisp
+(add-hook 'gnus-summary-prepared-hook 'gnus-summary-hide-all-threads)
+#+end_src
+*** Structure
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210122T112028.126712
+:END:
+How to put the thread together
+#+NAME: org_mark_mini20.local_20210122T112028.107626
+#+begin_src emacs-lisp
+(setq gnus-fetch-old-headers 'some               ; Try to connect threads with the minimum number of old headers
+	  gnus-build-sparse-threads 'some            ; Include not-received articles too with References:
+	  gnus-summary-gather-subject-limit 'fuzzy   ; Use a smart fuzzy Subject-matcher
+	  gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references ; Use the References: header to thread root by dummy-article-creation
+	  gnus-treat-display-smileys t
+	  gnus-thread-ignore-subject t               ; Ignore Subject: changes
+
+	  gnus-thread-hide-killed t)                 ; Hiding propagates to subtrees
+#+end_src
+** Sort Order
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:D1C6B89C-0CE1-4FC7-B29A-3420DEC97802
+:END:
+   Push the threads with bigger score on top of the buffer
+   #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_12F9DBB8-2351-459B-A1F2-A8774BC2379B
+   #+begin_src emacs-lisp
+   (setq gnus-thread-sort-functions
+		 '(gnus-thread-sort-by-number
+		   (not gnus-thread-sort-by-date)		; Dates matter...
+		   gnus-thread-sort-by-total-score))
+   #+end_src
+** Tree
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:757C714E-BC96-4925-8FF9-B1A6E74A677E
+:END:
+*** Tree buffer
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210122T120850.139717
+:END:
+Now removed
+ #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_3D80CD27-96E0-4735-9EB5-AA2B404C2B71
+ #+begin_src emacs-lisp
+(setq gnus-use-trees nil)
+
+;; (setq gnus-use-trees t
+;; 	  gnus-generate-tree-function 'gnus-generate-horizontal-tree
+;; 	  gnus-tree-minimize-window nil)
+;; (gnus-add-configuration
+;;  '(article
+;;    (vertical 1.0
+;;    		  (horizontal 0.25
+;;    					  (summary 0.75 point)
+;;    					  (tree 1.0))
+;;    		  (article 1.0))))
+
+ #+end_src
+*** Display article in summary
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210122T120850.138449
+:END:
+Make it so only the first article in thread is shown
+#+NAME: org_mark_mini20.local_20210122T120850.123169
+#+begin_src emacs-lisp
+(setq gnus-thread-hide-subtree
+	  '(or gnus-article-unread-p
+		gnus-article-unseen-p))
+#+end_src
+** Prettify tree
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:A58333F7-FF23-4C0A-8F27-2D97E8ED92C5
+:END:
+From [[http://doc.rix.si/cce/cce-gnus.html][Here]]
+*** Format of line
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210122T112028.125725
+:END:
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_C487340F-0BAB-4B52-984E-41534760ABBD
+#+begin_src emacs-lisp
+;; (setq gnus-summary-line-format "%*%U%R%z%3t%4i %4V %(%&user-date; %-15,15f  %B%s%)\n"
+;; (setq gnus-summary-line-format
+;; 	  "%U%R%z%I%(%[%4L: %-23,23f%]%) %s\\n" )
+(setq gnus-summary-line-format
+	  "%U %20,20&user-date; %-40,40s%B %f \n" )
+#+end_src
+*** Threading
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210122T112028.124592
+:END:
+Show nice characters for structure
+#+NAME: org_mark_mini20.local_20210122T112028.108810
+#+begin_src emacs-lisp
+(setq gnus-sum-thread-tree-false-root ""
+	  gnus-sum-thread-tree-indent " "
+	  gnus-sum-thread-tree-leaf-with-other "├► "
+	  gnus-sum-thread-tree-root ""
+	  gnus-sum-thread-tree-single-leaf "╰► "
+	  gnus-sum-thread-tree-vertical "│"
+	  ;; gnus-user-date-format-alist '((t . "%d %b %Y %H:%M"))
+	  )
+
+#+end_src
+** Hydra
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:E8EFA10F-FB8B-4F0D-ACCA-1657E77DC650
+:END:
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_9DE6155E-257B-4E50-8963-F6F79E307C6A
+#+begin_src emacs-lisp
+(use-feature gnus-sum
+    :mode-hydra (gnus-summary-mode
+                 (:color blue)
+                 ("Thread"
+                  (("s" gnus-summary-show-thread "Show Thread")
+                   ("h" gnus-summary-hide-thread "Hide Thread")
+                   ("n" gnus-summary-insert-new-articles "Refresh")
+                   ("c" gnus-summary-catchup-and-exit "Read All"))
+                  "Article"
+                  (("F" gnus-summary-mail-forward "Forward (C-c C-f)")
+                   ("R" gnus-summary-reply-with-original "Reply with original")
+                   ("r" gnus-summary-reply "Reply")
+                   ("W" gnus-summary-wide-reply-with-original "Reply all (S w)")
+                   ("w" gnus-summary-wide-reply "Reply all with original (S W)")
+                   ("e" gnus-summary-resend-message-edit "Resend"))
+
+                  "Disk"
+                  (("d" gnus-summary-put-mark-as-read-next "Disk -> mail")
+                   ("!" gnus-summary-tick-article-forward "Mail -> disk"))
+                  "Other"
+                  (
+                   ("#" gnus-topic-mark-topic "Mark topic")
+                   ("G" dianyou-group-make-nnir-group "Search mails")))))
+#+end_src
+* Article buffer
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:312BB8DC-395F-4F6C-AB50-81F336EFAD62
+:END:
+  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_2D9464DC-D14F-4AF0-830B-935B15693080
+  #+begin_src emacs-lisp
+(setq gnus-single-article-buffer t
+      mm-text-html-renderer 'shr)
+(setq gnus-show-all-headers nil)
+  #+end_src
+From same place as above
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_E6250F15-2AC9-4CCC-8AC3-CFE8494CAD37
+#+begin_src emacs-lisp
+(use-feature gnus-art
+  :after gnus
+  :custom (gnus-article-skip-boring t)
+  (gnus-visible-headers
+   '("^From:"
+	 "^Newsgroups:"
+	 "^Subject:"
+	 "^Date:"
+	 "^Followup-To:"
+	 "^Reply-To:"
+	 "^Summary:"
+	 "^Keywords:"
+	 "^To:"
+	 "^[BGF]?Cc:"
+	 "^Posted-To:"
+	 "^Mail-Copies-To:"
+	 "^Mail-Followup-To:"
+	 "^Apparently-To:"
+	 "^Gnus-Warning:"
+	 "^Resent-From:"))
+  :config
+  (major-mode-hydra-define gnus-article-mode
+	(:title "Gnus Article")
+	("Followup" (("f" gnus-article-followup-with-original "Follow up and yank"))
+	 "Reply" (("F" gnus-summary-mail-forward "Mail Forward")
+			  ("r" gnus-article-reply "Reply")
+			  ("R" gnus-article-reply-with-original "Reply with original")
+			  ("w" gnus-article-wide-reply "Reply to all")
+			  ("W" gnus-article-wide-reply-with-original "Reply to all with original"))
+	 "Enhance" (("o" gnus-mime-save-part "Save attachment")
+				;; ("v" w3mext-open-with-mplayer)
+				;; ("d" w3mext-download-rss-stream)
+				;; ("b" w3mext-open-link-or-image-or-url)
+				("b" gnus-article-browse-html-article "Browse in web")
+				;; ("g" w3m-lnum-goto)
+				)))
+  (add-hook 'message-mode-hook #'mwb-auto-fill-80))
+#+end_src
+* Old setup
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:AB214078-BB19-4135-8B01-396536C0F0BA
+:END:
+Bin it
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_1214AA34-1B76-413C-8D80-D3AF2DC48692
+#+begin_src emacs-lisp :tangle no
+;; GNUS
+; gmail
+(require 'gnus )
+	
+
+
+(add-to-list 'gnus-secondary-select-methods 
+			 '(nnimap "gmail"
+					  (nnimap-address "imap.gmail.com")
+					  (nnimap-server-port 993)
+					  (nnimap-stream ssl))
+)
+;; (add-to-list 'gnus-secondary-select-methods 
+;; 			 '(nnimap "by2"
+;; 					  (nnimap-address "imap4.blueyonder.co.uk")
+;; 					  (nnimap-server-port 143)
+;; 					  )
+;; )
+(setq user-full-name "Mark Bestley")
+(setq user-mail-address "gnus@bestley.co.uk")
+
+(setq message-send-mail-function 'smtpmail-send-it)
+(setq message-send-mail-function 'smtpmail-send-it
+      smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
+      smtpmail-auth-credentials '(("smtp.gmail.com" 587 "mark.bestley@googlemail.com" nil))
+      smtpmail-default-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-service 587
+      smtpmail-local-domain "bestley.co.uk")
+
+
+
+
+
+;; mime from http://www.emacswiki.org/emacs/MimeTypesWithGnus
+;; Inline images?
+(setq mm-attachment-override-types '("image/.*"))
+
+
+
+;; No HTML mail
+(setq mm-discouraged-alternatives '("text/html" "text/richtext"))
+(defun my-gnus-summary-view-html-alternative-in-browser ()
+      "Display the HTML part of the current multipart/alternative MIME message
+    in OmniWeb."
+      (interactive)
+      (save-current-buffer
+        (gnus-summary-show-article)
+        (set-buffer gnus-article-buffer)
+        (let ((file (make-temp-file "html-message-" nil ".html"))
+              (handle (nth 3 (assq 1 gnus-article-mime-handle-alist))))
+          (mm-save-part-to-file handle file)
+          (browse-url (concat "file://" file)))))
+
+
+(define-key gnus-summary-mode-map [?K ?M]
+  'my-gnus-summary-view-html-alternative-in-browser)
+
+
+
+(setq nnimap-split-inbox
+        '("INBOX" ))
+
+(setq nnimap-split-rule '(("by2" ("INBOX" nnimap-split-fancy))
+                          ("gmail" ("INBOX" nnimap-split-fancy))))
+(setq nnimap-split-predicate "UNDELETED")
+(setq nnimap-split-fancy ;; (1)
+	  '(|                                ;; (2) begin a split list
+	;;	(: gnus-registry-split-fancy-with-parent) ;; (3)
+		;; splitting rules go here       ;; (4)
+
+;; accu seems to have an issue
+;;		("List-Id" ".*accu-general.*" "lists.accugeneral.new" )
+
+
+;; we have size problems
+ 		("List-Id" ".*<\\(.+\\)\\.lists\\.mysociety\\.org>.*" "lists.\\1\\.mysociety")
+
+		("List-Id" ".*<\\(.+\\)\\.googlegroups\\.com>.*" "lists.\\1\\.gg")
+
+		("List-Id" ".*<\\(.+\\)>.*" "lists.\\1")
+
+	;; old yahoo  has no List Id - nore does apple
+		(any "\\b\\(\\w+\\)@yahoogroups\\.com" "lists.yahoo.\\1")
+		(any "\\b\\(\\w+\\)@lists\\.apple\\.com" "lists.apple.\\1")
+
+		;; Rules to hit the various google groups. We're having
+		;; problems with dashes, so we have to expand these
+	;; my fail	(any  "<\\(.*\\)\\.googlegroups\\.com>" "lists.google.\\1")
+
+	;	(any "\\b\\(\\w+\\)-\\b\\(\\w+\\)@googlegroups.com" "lists.google.\\1-\\2")
+	;	(any "\\b\\(\\w+\\)@googlegroups\\.com" "lists.google.\\1")
+		(from "calendar-notification" "calendar" )
+		(to "moneywell@bestley.co.uk" "moneywell" )
+
+		; note also the subject has to have waf in it - but wait until I join more projects
+		(from "codesite-noreply@google.com" 
+			  (|
+			   ("subject" "waf" "lists.waf-users.gg")
+			   "unfiled"
+			   )
+			  )
+		"unfiled"                          ;; (5)
+        )
+)
+
+
+#+end_src
+* Aliases
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210212T092352.713712
+:END:
+As I use different emails in different places I need this for gnus as well so use [[https://www.emacswiki.org/emacs/gnus-alias.el][gnus-alias]] but from the version in melpa which is slightly newer
+
+However reading EmacsWiki the in built posting styles is all I need now as I just want to change per newsgroup

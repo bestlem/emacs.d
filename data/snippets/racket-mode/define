@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: (define  ... ...)
+# key: deff
+# comment for functions
+# --
+(define (${1:fn-name} (${2:arguments})) : ${4:return-type}
+$0)

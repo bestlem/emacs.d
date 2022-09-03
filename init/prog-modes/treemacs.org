@@ -1,0 +1,222 @@
+#+TITLE:  Treemacs
+#+AUTHOR: Mark Bestley
+#+EMAIL:  @bestley.co.uk
+#+DATE:   01 Jun 2022
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+STARTUP: overview
+
+This is the visual tree to manage files etc
+
+Try a change to config. I want a use-package that works but there is too much in config so I could weave but then use-package is not valid elisp.
+All the small bits could go in a function but then that would need to be declared upfront.
+
+On second thoughts after the main one you can use-package emacs with an after. But only :config can go there those which produce a :command e.g. :bind and hydras need to be in the first to force the load.
+
+Also note as I have this in my startup they can be done on demand but otherwise back to weave.
+
+* TODO Look at centaur
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220610T130200.406548
+:END:
+icons
+More in startup
+* Main setup
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210811T192501.325010
+:END:
+ #+NAME: org_mark_mini20.local_20210811T192501.283076
+#+begin_src emacs-lisp
+(use-package-elpa treemacs
+  ;;:demand
+  :init
+  (setq treemacs-width 50)
+  :commands (treemacs treemacs-rightclick-menu)
+  :mode-hydra
+  <<treemacs-mode-hydra>>
+  :bind
+  <<treemacs-bind>>
+
+
+  :custom
+  (treemacs-indent-guide-mode t)
+  (treemacs-indent-guide-style 'line)
+  (treemacs-silent-refresh t)
+  (treemacs-silent-filewatch t)
+  (treemacs-tag-follow-delay 2.5)
+  (treemacs-user-header-line-format #'treemacs-header-buttons-format)
+
+:config
+(setq treemacs--no-messages nil)
+
+(setq hydra-key-regex "\\[\\|]\\|[-\\[:alnum:] ~.,;:/|?<>={}*+#%@!&^⇧⌘⌥↑↓←→⌫⌦⏎'`()\"$]+?") ; add Mac key symbols
+
+(setq treemacs-persist-file (mwb-user-emacs-file "data/treemacs-persist"))
+
+(add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?)
+
+;; The default width and height of the icons is 22 pixels. If you are
+;; using a Hi-DPI display, uncomment this to double the icon size.
+;;(treemacs-resize-icons 44)
+
+(treemacs-follow-mode t)
+(treemacs-fringe-indicator-mode t)
+
+<<treemacs-config>>
+)
+#+end_src
+
+* Support functions
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210819T110926.745369
+:END:
+** Key hook
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210819T110926.744579
+:HEADER-ARGS: :tangle no
+:END:
+So not tangled.
+I need to set the mouse - unfortunately it is in a minor mode map not global so simple bind does not work
+#+NAME: org_mark_mini20.local_20210819T110926.728132
+#+begin_src emacs-lisp
+(defun treemacs-mwb-mouse ()
+  (let ((oldmap (cdr (assoc 'mac-key-mode-map minor-mode-map-alist)))
+        (newmap (make-sparse-keymap)))
+    (set-keymap-parent newmap oldmap)
+    (define-key (kbd "<mouse-3>")  #'treemacs-rightclick-menu)
+    (make-local-variable 'minor-mode-overriding-map-alist)
+    (push `(mac-key-mode-map . ,newmap) minor-mode-overriding-map-alist)))
+#+end_src
+** Context Menu
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220602T095242.843998
+:END:
+Emacs 28 look at [[help:prog-context-menu][prog-context-menu]]
+* Keys
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210811T192501.323662
+:END:
+#+NAME: org_mark_mini20.local_20210811T192501.298758
+#+begin_src emacs-lisp :tangle no :noweb-ref treemacs-bind
+(:map treemacs-mode-map
+ ;;("<mouse-5>" . treemacs-rightclick-menu)
+ ("<f5>" . treemacs-switch-workspace)
+ ("<mouse-2>" . treemacs-rightclick-menu)
+ ("<C-f5>" . treemacs-edit-workspaces))
+#+end_src
+
+* Hydra
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220609T123743.420323
+:END:
+#+NAME: org_mark_mini20.local_20220609T123743.407283
+#+begin_src emacs-lisp :tangle no :noweb-ref treemacs-mode-hydra
+(treemacs-mode
+ ("Project" (("c" treemacs-add-project-to-workspace "Create Project")
+			 ("d" treemacs-remove-project-from-workspace "Delete Project"))
+  "All" (("h" treemacs--common-helpful-hydra/body "Hydra.."))
+  "Workspace" (("s" treemacs-switch-workspace "Switch")
+			   ("e" treemacs-edit-workspaces "Edit"))
+  "Width" (("w" treemacs-toggle-fixed-width "Toggle variable width"))))
+#+end_src
+
+* Main menu
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220601T114847.139794
+:END:
+Treemacs' context menu does not work with emacs 28 context menu.
+Start with a main menu
+
+This takes long to load - well my init timers notice 0.2 secs and I don't use it so don't add.
+#+NAME: org_mark_mini20.local_20220601T114847.133569
+#+begin_src emacs-lisp :tangle no
+(easy-menu-define treemacs-mode-menu treemacs-mode-map
+  "Menu for `treemacs-mode'."
+  `("Treemacs"
+	("New"
+     ["New File"      treemacs-create-file]
+     ["New Directory" treemacs-create-dir])
+	("Projects"
+	 ["Add Project" treemacs-add-project]
+	 ,@(--map `(,(car it) ,@(funcall (cdr it)))
+	    treemacs--mouse-project-list-functions)
+	 ;; ["Remove Project" treemacs-remove-project-from-workspace :visible ,(check project)]
+	 ;; ["Rename Project" treemacs-rename-project                :visible ,(check project)]
+	 )
+	("Workspaces"
+     ["Edit Workspaces"        treemacs-edit-workspaces]
+     ["Create Workspace"       treemacs-create-workspace]
+     ["Remove Workspace"       treemacs-remove-workspace]
+     ["Rename Workspace"       treemacs-rename-workspace]
+     ["Switch Workspace"       treemacs-switch-workspace]
+     ["Set Fallback Workspace" treemacs-set-fallback-workspace])
+	("Toggles"
+     [,(format "Dotfile Visibility (Currently %s)"
+		(if treemacs-show-hidden-files "Enabled" "Disabled"))
+      treemacs-toggle-show-dotfiles]
+     [,(format "Follow-Mode (Currently %s)"
+		(if treemacs-follow-mode "Enabled" "Disabled"))
+      treemacs-follow-mode]
+     [,(format "Filewatch-Mode (Currently %s)"
+		(if treemacs-filewatch-mode "Enabled" "Disabled"))
+      treemacs-filewatch-mode]
+     [,(format "Fringe-Indicator-Mode (Currently %s)"
+		(if treemacs-fringe-indicator-mode "Enabled" "Disabled"))
+      treemacs-fringe-indicator-mode])
+	("Help"
+     ["Show Helpful Hydra"     treemacs-helpful-hydra]
+     ["Show Active Extensions" treemacs-show-extensions]
+     ["Show Changelog"         treemacs-show-changelog])
+	))
+
+#+end_src
+
+* Filewatch and dynamic update
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220609T131017.145596
+:END:
+Collect the actions together
+#+NAME: org_mark_mini20.local_20220609T132032.402898
+#+begin_src emacs-lisp :tangle no :noweb-ref treemaacs-config
+;; This seems to have changed and causes a bug
+;; https://github.com/Alexander-Miller/treemacs/issues/944
+
+(treemacs-hide-gitignored-files-mode 1)
+(treemacs-filewatch-mode t)
+
+(pcase (cons (not (null (executable-find "git")))
+			 (not (null treemacs-python-executable)))
+  (`(t . t)
+   (treemacs-git-mode 'deferred))
+  (`(t . _)
+   (treemacs-git-mode 'simple)))
+
+#+end_src
+* Projectile
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210811T192501.322521
+:END:
+#+NAME: org_mark_mini20.local_20210811T192501.299143
+#+begin_src emacs-lisp
+(use-package-elpa treemacs-projectile
+  :demand
+  :after treemacs projectile
+  )
+#+end_src
+
+* magit
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210811T192501.320012
+:END:
+#+NAME: org_mark_mini20.local_20210811T192501.299460
+#+begin_src emacs-lisp
+(use-package-elpa treemacs-magit
+  :after treemacs magit
+  :demand)
+#+end_src
+* Debug
+:PROPERTIES:
+:ID:       org_mark_2020-11-14T12-12-03+00-00_mini12.local:4F9B14A7-978B-4BF7-A64E-41B8EE921099
+:END:
+I get
+Error running timer ‘treemacs--process-file-events’: (wrong-type-argument sequencep t)
+So from https://github.com/Alexander-Miller/treemacs/issues/168

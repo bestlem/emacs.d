@@ -1,0 +1,56 @@
+* Default Workspace
+** My init .emacs.d
+ - path :: ~/.emacs.d
+** dotfiles
+ - path :: ~/SyncServices/Dropbox/env/dotfiles
+** Org
+ - path :: ~/SyncServices/Dropbox/Docs/org
+** Local out of .emacs.d
+ - path :: ~/.local/emacs
+** emacs-init
+ - path :: ~/src/ThirdParty/emacs-init
+** aquamacs-emacs code
+ - path :: ~/src/macos/aquamacs-emacs
+** emacs-macport-code
+ - path :: ~/src/ThirdParty/emacs-mac
+** xonsh
+ - path :: ~/src/python/xonsh
+* Racket
+** my realm
+ - path :: ~/src/Racket/realm
+** realm book
+ - path :: ~/src/Racket/realm.source
+** RacketProgrammingtheFunWay
+ - path :: ~/src/Racket/RacketProgrammingtheFunWay
+** mandlebrot
+ - path :: ~/src/Racket/mandelbrot
+** dummy-load
+ - path :: ~/src/Racket/dummy-load
+** web
+ - path :: ~/src/Racket/web
+** aoc21
+ - path :: ~/src/Racket/aoc21
+** racket-docker
+ - path :: ~/src/Racket/racket-docker
+** PillowData
+ - path :: ~/src/ThirdParty/PillowData
+** aoc-racket
+ - path :: ~/src/ThirdParty/aoc-racket
+* C based
+** rftg
+ - path :: ~/src/cpp/rftg
+** test_gtk
+ - path :: ~/src/cpp/test_gtk
+** macports-ports
+ - path :: ~/src/cpp/macports-ports
+** my-macports
+ - path :: ~/src/my-macports
+* Swift
+** SwiftUITutorial-Landmarks
+ - path :: ~/src/Swift/SwiftUITutorial-Landmarks
+** JellyFin Swift
+ - path :: ~/src/swift/JellyfinSwiftPlayer
+** jellyfin server
+ - path :: ~/src/ThirdParty/jellyfin
+** 2048
+ - path :: ~/src/Swift/2048 related

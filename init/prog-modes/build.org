@@ -1,0 +1,88 @@
+#+TITLE:  Build Systems
+#+AUTHOR: Mark Bestley
+#+DATE:   09 Jun 2022
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+STARTUP: show2levels
+
+This is just cargo cult as I haven't used them.
+Arguably these could be in Java or C for closer collaboration.
+* Gradle
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:D059B203-9EB7-4713-8AB5-3D49422DAFD7
+:END:
+As Emacs is bad for java my java setup is now just gradle so that should be a generic build when I rename.
+This also takes time to load. Need to sort out config entries and gradele-mode needs a bind as you need the keystrokes but only in some modes.
+ #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_8FC0E8CB-72D8-4306-96E3-F856F8917088
+ #+begin_src emacs-lisp
+
+;; gradle and other java
+;; from http://www.coli.uni-saarland.de/~slemaguer/emacs/main.html#orgac34543
+
+(use-package-elpa groovy-mode
+  :disabled
+  :mode ("\.groovy$" "\.gradle$")
+  :interpreter ("gradle" "groovy")
+  :init
+  (autoload 'run-groovy "inf-groovy" "Run an inferior Groovy process")
+  (autoload 'inf-groovy-keys "inf-groovy" "Set local key defs for inf-groovy in groovy-mode")
+  ;; Subpackages
+  (use-package-elpa groovy-imports)
+  ;; Some keys for
+  (add-hook 'groovy-mode-hook
+			'(lambda ()
+			   (inf-groovy-keys))))
+
+
+;; ;; This does work with Aquamacs
+;; (add-to-list 'auto-mode-alist (cons "\\.gradle\\'" 'groovy-mode))
+;; (add-to-list 'auto-mode-alist (cons "\\.groovy\\'" 'groovy-mode))
+;; ;; This _might_ not work with Aquamacs (not sure what value it offers)
+;; ;(add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
+;; ;(add-to-list 'interpreter-mode-alist '("gradle" . groovy-mode))
+
+;; ;;; make Groovy mode electric by default.
+;; (add-hook 'groovy-mode-hook
+;;           '(lambda ()
+;;              (require 'groovy-electric)
+;;              (groovy-electric-mode)))
+;; (require 'gradle)
+
+(use-package-elpa gradle-mode
+  :diminish
+  :disabled
+  :config
+  (setq gradle-gradlew-executable "./gradlew"
+		gradle-use-gradlew t)
+  (gradle-mode))
+ #+end_src
+* make
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:C53BB68B-57E2-4F16-9BE7-B629633B3C4B
+:END:
+#+NAME: org_mark_mini20.local_20210828T122054.531791
+#+begin_src emacs-lisp
+(use-package-elpa make-mode
+  :commands makefile-mode
+  :mode
+  ("Imakefile\\'" . makefile-imake-mode)
+  ("Makeppfile\\(?:\\.mk\\)?\\'" . makefile-makepp-mode)
+  ("\\.makepp\\'" . makefile-makepp-mode)
+  ("\\.mk\\'" . makefile-bsdmake-mode)
+  ("\\.make\\'" . makefile-bsdmake-mode)
+  ("GNUmakefile\\'" . makefile-gmake-mode)
+  ("[Mm]akefile\\'" . makefile-bsdmake-mode)
+  ("\\.am\\'" . makefile-automake-mode))
+#+end_src
+* Cmake
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210828T122054.549211
+:END:
+#+NAME: org_mark_mini20.local_20210828T122054.532611
+#+begin_src emacs-lisp
+(use-package-elpa cmake-mode
+  :mode
+  ("\\.cmake\\'" . cmake-mode)
+  ("CMakeLists\\.txt\\'" . cmake-mode)
+  :config
+  (setq cmake-tab-width 2))
+#+end_src

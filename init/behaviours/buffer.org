@@ -1,0 +1,137 @@
+#+TITLE:  Buffer
+#+AUTHOR: Mark Bestley
+#+DATE:   10 Jun 2022
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+STARTUP: show2levels
+
+
+
+* Buffers
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:2C7F2E45-19AE-43EC-8536-C7A69744CCC2
+:END:
+** Protect library and other files
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:04EFE611-1F9B-479D-A3BB-0C428F8EBA20
+:END:
+[[https://github.com/rolandwalker/hardhat][Hardhat]] provides an extra layer of protection in your work. If you visit a file which looks unsafe to edit, Emacs will make the buffer read-only -- even when the underlying file is writable.
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_5C4ABBCE-2400-4CD9-8740-96E9FD163C43
+#+begin_src emacs-lisp
+(use-package-elpa hardhat                    ; Protect user-writable files
+  :demand
+  :init (setq hardhat-basename-protected-regexps
+              '("~\\'"
+                "\\.lock\\'"
+                "\\.ix\\'"
+                "\\`test\\.out\\'"
+                "-autoloads\\.el\\'"
+                "\\`Desktop\\.ini\\'"
+                "\\`META\\.yml\\'"
+                "\\`MYMETA\\.yml\\'"
+                "\\`TAGS\\'"
+                "\\`Thumbs\\.db\\'"
+                "\\`\\.dropbox\\'"
+                "\\`\\.dropbox\\.cache\\'"
+                "\\`\\.emacs\\.desktop\\'"
+                "\\`\\.emacs\\.desktop\\.lock\\'"
+                "\\.orig\\'"
+                "\\.rej\\'"
+                "\\.el\\.gz$"))
+  (setq hardhat-fullpath-protected-regexps
+        '("~/\\.emacs\\.d/elpa/"
+          "~/\\.cpan/"
+          "~/\\.cabal/"
+          "~/perl5/perlbrew/"
+          "~/\\.npm/"
+          "~/\\.virtualenv/"
+          "~/\\.virthualenv/"
+          "~/\\.rvm/"
+          "/[._]build/"
+          "/\\.bzr/"
+          "/\\.coverage/"
+          "/\\.git/"
+          "/\\.hg/"
+          "/\\.rspec/"
+          "/\\.sass-cache/"
+          "/\\.svn/"
+          "/_MTN/"
+          "/_darcs/" "/CVS/"
+          "/pm_to_blib/"
+          "/RCS/"
+          "/SCCS/"
+          "/blib/"
+          "/test_output/"
+          "~/\\.emacs\\.d/\\.cask/"
+          "~/\\.cask/"
+          "/Applications/"
+          "~/Library/Preferences/Aquamacs Emacs/Packages"
+          "~/src/ThirdParty/"
+          "emacs\\.d/elpa/"
+          "straight/build"
+          "straight/repos/"))
+  :config
+  (global-hardhat-mode)
+  (validate-setq hardhat-mode-lighter "Ⓗ"))
+#+end_src
+*** Separate out my additions
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220614T120500.373254
+:END:
+ie move to config and setup as two parts.
+and/ot move to :custom
+** Buffer switch
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:4551A020-6DAB-4E1D-A70F-60DF7729834F
+:END:
+Switch to last buffer on one key. From https://emacsredux.com/blog/2013/04/28/switch-to-previous-buffer/
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_BB244CD3-591D-499E-8A36-3DA1E4696166
+#+begin_src emacs-lisp
+(defun er-switch-to-previous-buffer ()
+  "Switch to previously open buffer.
+Repeated invocations toggle between the two most recently open buffers."
+  (interactive)
+  (switch-to-buffer (other-buffer (current-buffer) 1)))
+#+end_src
+** Buffer removal
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:99F964B4-DBAA-4EBE-9B09-0D7840CAA7CC
+:END:
+*** KIll buffer
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:0194DAD8-98E5-42AA-82A6-7C4D741A5F91
+:END:
+Normally when you are in a buffer you do ^x-^k to kill the current buffer but emacs asks you for the name. [[http://pragmaticemacs.com/emacs/dont-kill-buffer-kill-this-buffer-instead/][Pragmatic Emacs]] suggests this.
+By default C-x k runs the command kill-buffer which prompts you for which buffer you want to kill, defaulting to the current active buffer. I don’t know about you, but I rarely want to kill a different buffer than the one I am looking at, so I rebind C-x k to kill-this-buffer which just kills the current buffer without prompting (unless there are unsaved changes).
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_6A3049D3-0E8A-43B3-83DF-07B123D61C04
+#+begin_src emacs-lisp
+(defun bjm/kill-this-buffer ()
+  "Kill the current buffer."
+  (interactive)
+  (kill-buffer (current-buffer)))
+#+end_src
+*** Deal with subprocesses
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:EE6B876F-8EE3-40C1-BBD1-0BEA1BBDDD58
+:END:
+If a buffer has a subprocess running (e.g. shell, racket-run then emacs will prompt to ask if you want to kill it. I think you always do. So from https://emacs.stackexchange.com/a/14511/9874
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_4D892993-8FA6-4917-A0AD-D75C5B69035E
+#+begin_src emacs-lisp :tangle no
+(setq kill-buffer-query-functions
+      (delq 'process-kill-buffer-query-function kill-buffer-query-functions))
+#+end_src
+But emacs 26 seems to have improved this from [[https://emacs.stackexchange.com/a/52677/9874][Another SO]]
+#+NAME: org_mark_mini20.local_20210906T081112.772859
+#+begin_src emacs-lisp
+(setq confirm-kill-processes nil)
+#+end_src
+** Revert buffer
+:PROPERTIES:
+:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:10B9D32A-E48F-4CA7-8D0B-397EC17233D6
+:END:
+I don't want to confirm https://emacs.stackexchange.com/a/10349/9874 The key bind is from NeXT days so 25 years of muscle memory.
+#+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_049AD418-4D1B-4088-B9EE-85A110A9E554
+#+begin_src emacs-lisp
+(defun revert-buffer-no-confirm ()
+  "Revert buffer without confirmation."
+  (interactive) (revert-buffer t t))
+#+end_src

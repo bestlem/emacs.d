@@ -1,0 +1,628 @@
+#+TITLE Emacs configuration - file management
+#+PROPERTY:header-args :cache yes :tangle yes :comments noweb
+#+STARTUP: content
+
+* Trash
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:D2691EE6-AB96-4EB1-A369-A3CDACD148E2
+:END:
+MacOs needs specific trash management not just mv to ~/.Trash
+Perhaps only if in dired or other user controlled file
+See [[https://github.com/lunaryorn/osx-trash.el][osx-trash]] but might need to find /opt/local/bin/trash
+Or better patch Aquamacs to have this C code - perhaps done?
+Need also to exclude some files - basically only iof you edit them
+Well I was going to include [[https://github.com/lunaryorn/osx-trash.el][osx trash]] which uses the trash executable or an applescript to do the proper trash. But realised I don't want to trash files - just those I delete by hand so the patching of the emacs delete is not a good idea. By default emacs does not delete by moving to trash. It is customisable so set to to never.
+But the mac port does have this if set mac_system_move_file_to_trash_use_finder
+Think of editing dired and treemacs
+On reading more this is only if passed to delete functions so might not be too much trash.
+And I hear a sound on deletes so Finder is being used. Fixed with -F argument
+** Tell emacs to try using trash
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220605T102029.602639
+:END:
+#+NAME: org_mark_mini20.local_20220605T102029.575852
+#+begin_src emacs-lisp
+(setq delete-by-moving-to-trash t)
+#+end_src
+** Implement trash on macOS
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220605T102029.600068
+:END:
+#+NAME: org_mark_mini20.local_20220605T102029.580941
+#+begin_src emacs-lisp
+(when *sys/macp*
+  (if *emacs/mac-port-p*
+	  (setq mac_system_move_file_to_trash_use_finder t)
+	(use-package-elpa osx-trash
+	  :defer 0.5
+	  :config (osx-trash-setup))))
+#+end_src
+* Backups
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:64531695-B8F1-4AF7-8D8A-7893541FBD6C
+:END:
+Emacs defaults are crap. Backups do not occur on each save and auto-save is odd.
+First attempt is add special save so when I save a file it makes a backup see =mwb/mac-key-save-buffer-force-backup=
+But note that =projectile-save-project-buffers= does a direct save-buffer as does super-save-mode (The former I noted before but had not actually used 🤔
+
+Literate programming suggests each setq should be in a separate block - see later but EOL comment changes where closing parenthesis is maybe better copy code iif we had a macro to do this.
+
+This set of variables is from [[https://www.emacswiki.org/emacs/ForceBackups][Emacs Wiki - Force Backup]] but that is not the best explanation. The version numbers are explained better elsewhere
+
+Need to look in customisation as some things are easier to edit there . e,g, the list for where backup files are. Currently I do to the current directory/.~ which no one's init files seem to have but then found it in Emacs manual: 🤣😳
+
+The best inits I found for this were [[http://pragmaticemacs.com/emacs/auto-save-and-backup-every-save/][Pragmatic Emacs]] and [[https://github.com/jwiegley/dot-emacs/blob/master/init.el][developer of use package]]  which build on [[https://www.emacswiki.org/emacs/ForceBackup][Emacs Wiki Force Backups]]
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_9DCF5D76-D3FC-41D2-A9E6-FF186AAB1FEB
+#+begin_src emacs-lisp
+(setq
+ backup-by-copying t     ;  Copy all files, don't rename them and don't clobber symlinks
+ kept-new-versions 10    ; keep 10 latest versions
+ kept-old-versions 0     ; don't bother with old versions
+ delete-old-versions "keep them all"   ; t is don't ask about deleting old versions - otyher non nil is don't delete
+ version-control t       ; number backups
+ )
+#+end_src
+
+** Do the backups
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:98AE04BC-CDDA-49C0-B0A2-A8152C7E5571
+:END:
+Aquamacs seems to turn this off sometimes in customization so need to investigate more
+ #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_8D7B76E7-DCB4-46D7-8DE7-1063A4FF19D3
+ #+begin_src emacs-lisp
+(setq make-backup-files t)
+ #+end_src
+**  Backup directories
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220616T214644.328833
+:END:
+Set up a few variables.
+#+NAME: org_mark_mini20.local_20220616T214644.307766
+#+begin_src emacs-lisp
+(defconst mwb-init-auto-save-directory
+  (f-join mwb-emacs-work-dir "auto-save-dir")
+  "Directory the auto-saved files go in.")
+(defconst mwb-init-auto-save-list-directory
+  (f-join mwb-emacs-work-dir "auto-save-list")
+  "Directory the files that say what the auto-saved files are go in.")
+
+(defconst mwb-init-backup-directory
+  (f-join mwb-emacs-work-dir "backups")
+  "Directory the backups to keep go in.")
+(defconst mwb-init-backup-unwanted-directory
+  (f-join mwb-emacs-work-dir "unwanted")
+  "Directory the backups of files I don't want go in.")
+
+(dolist (dir (list mwb-init-auto-save-directory
+                   mwb-init-backup-directory
+                   mwb-init-auto-save-directory
+				   mwb-init-auto-save-list-directory
+                   ))
+  (when (not (file-exists-p dir))
+	(make-directory dir t)))
+#+end_src
+** TODO Where
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20210105T204218.554567
+:END:
+There are fixes in revision
+
+The default is the ~ on end of file.
+All the google searches say put in one directory
+But the GNU manual gives the best - in a subdirectory of where you are - OK Tramp and other machines and NFS etc might be different. Changed as backup-walker should be able to find old and thus don't need to use finder etc.
+
+Now changed to one directory as I have found backup-walker
+#+NAME: org_mark_mini12.local_20210105T204218.521153
+#+begin_src emacs-lisp
+(setq backup-directory-alist
+	  `((,(rx (or "recentf"
+			   "Recent Files"
+			   "drafts"
+			   "archive/sent"
+			   ".newsrc"
+			   "treemacs-persist"
+			   "COMMIT_EDITMSG"
+			   "/tmp/"
+			   (seq "emacs.d/init/" (one-or-more anything) ".el" eos)))
+         . ,mwb-init-backup-unwanted-directory)
+		("." . ,mwb-init-backup-directory))
+	  ;; ("." . ".~")
+	  )
+#+end_src
+
+** Backup on save
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:EBBF14AB-888E-4043-8ADB-8DE11ACDBC46
+:END:
+Emacs is odd backups are started when loaded in a session and then not again (I suppose that is what auto save is for) but really we want a copy taken when saved as well.
+
+All the logs are very clever but what I want is the version number to increase so just see [[https://stackoverflow.com/a/9452080/151019][this SO answer]] I have modified it so that only saves on mac save ie when you manually save - possibly not good on emacs exit.
+
+ Filters are interesting for other reasons
+#+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_2B3B6826-1AF6-4ABC-B4F7-4AEE52B62E50
+#+begin_src emacs-lisp
+(require 'mac-extra-functions) ; From Aquamacs
+(defun mwb/mac-key-save-buffer-force-backup ()
+  (interactive)
+  "Save buffer. If needed, select file by dialog"
+  (if buffer-file-name
+	  (save-buffer 16)
+    ;; This is not defined in non aquamacs
+	(mac-key-save-file-as)))
+#+end_src
+*** TODO save special buffers
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:0A3506D6-DE37-44F4-A990-C06C1D567023
+:END:
+There are some modes that have special save actions e.g. *Abbrev* which is a buffer with no file name. I force a save using a dialog box but this should be call the special call - stick with ^x^s
+** Turn off backup current buffer
+:PROPERTIES:
+:ID:       org_mark_mini12.local:20210111T173758.270995
+:END:
+This will turn backup off for current buffer.
+Comes from gnus setup
+#+NAME: org_mark_mini12.local_20210111T173758.246257
+#+begin_src emacs-lisp
+(defun turn-off-backup-for-current-buffer ()
+  (set (make-local-variable 'backup-inhibited) t))
+#+end_src
+** Look at backups
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210605T200354.655882
+:END:
+This is [[https://github.com/lewang/backup-walker][Backup Walker]]
+#+NAME: org_mark_mini20.local_20210605T200354.625130
+#+begin_src emacs-lisp
+(use-package-elpa backup-walker
+  :commands backup-walker-start)
+  #+end_src
+** Super save
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210120T104054.760044
+:END:
+Save as often as possible - don't need auto-save
+
+However only saves and not make a backup copy. Also note [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Auto-Save-Files.html][Emacs manual]]
+#+begin_quote
+Auto-saving does not normally save in the files that you visited, because it can be very undesirable to save a change that you did not want to make permanent. Instead, auto-saving is done in a different file called the auto-save file, and the visited file is changed only when you request saving explicitly (such as with C-x C-s).
+#+end_quote
+
+From [[https://github.com/bbatsov/super-save][Github readme]]
+
+#+begin_quote
+Sometimes you might want to exclude specific files from super-save. You can achieve this via super-save-exclude, for example:
+
+(setq super-save-exclude '(".gpg"))
+#+end_quote
+
+#+NAME: org_mark_mini20.local_20210120T104054.741884
+#+begin_src emacs-lisp :tangle no
+(use-package-elpa super-save
+    :disabled
+    :diminish
+    :commands super-save-mode
+    :config
+    (setq super-save-auto-save-when-idle t)
+    :init (super-save-mode +1)
+    :preface (setq auto-save-default nil)
+    )
+#+end_src
+** Auto saves
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210120T104054.759177
+:END:
+Auto-saves are for dealing with files that have not been saved yet. After =auto-save-timeout= idle the files are saved to a file beginning and ending with #. The default is for tramp files save in one directory and for others in the current directory. So I have put all in the one place.
+As per emacs code comment
+#begin_quote
+The default value is set up to put the auto-save file into the
+temporary directory (see the variable `temporary-file-directory') for
+editing a remote file.
+#end_quote
+
+*** Set the auto-saves up
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220616T231153.081333
+:END:
+Taken from jweigley and expanded
+But then note super-save
+Also odds/main.org
+#+NAME: org_mark_mini20.local_20210120T014441.002252
+#+begin_src emacs-lisp
+(setq auto-save-file-name-transforms
+      `(( ".*"
+          ,(file-name-as-directory mwb-init-auto-save-directory) t)))
+(setq auto-save-interval 64
+	  auto-save-list-file-prefix
+	  (expand-file-name ".saves-" mwb-init-auto-save-list-directory)
+	  auto-save-timeout 2
+	  auto-save-default 't)
+#+end_src
+*** Turn off auto-save and backups for secrecy
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210120T104054.758295
+:END:
+From leuven but earlier https://anirudhsasikumar.net/blog/2005.01.21.html
+Disable backups and auto-save only in the current buffer with
+~M-x sensitive-mode~:
+
+Emacs 28 complains Warning: Use keywords rather than deprecated positional arguments to `define-minor-mode'
+#+NAME: org_mark_mini20.local_20210120T104054.742450
+#+begin_src emacs-lisp :tangle no
+(define-minor-mode sensitive-mode
+    "For sensitive files like password lists.
+  It disables backup creation and auto saving in the current buffer.
+
+  With no argument, this command toggles the mode.  Non-null prefix argument
+  turns on the mode.  Null prefix argument turns off the mode."
+  nil                                   ; Initial value.
+  " Sensitive"                          ; Indicator for the mode line.
+  nil                                   ; Minor mode bindings.
+  (if (symbol-value sensitive-mode)
+      (progn
+        ;; Disable backups.
+        (set (make-local-variable 'backup-inhibited) t)
+        ;; Disable auto-save.
+        (if auto-save-default
+            (auto-save-mode -1)))
+    ;; Resort to default value of backup-inhibited.
+    (kill-local-variable 'backup-inhibited)
+    ;; Resort to default auto save setting.
+    (if auto-save-default
+        (auto-save-mode 1))))
+#+end_src
+
+You should enable it for all =.vcf= and =.gpg= files.
+
+*** Make those with auto-save more obvious
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210120T104054.757121
+:END:
+From leuven and I assume dired based.
+Make the message "/FILENAME has auto save data/" unmissable:
+#+NAME: org_mark_mini20.local_20210120T104054.742797
+#+begin_src emacs-lisp :tangle no
+(defface recover-this-file
+    '((t (:weight bold :background "#FF3F3F")))
+  "Face for buffers visiting files with auto save data."
+  :group 'files)
+
+(defvar leuven--recover-this-file nil
+  "If non-nil, an overlay indicating that the visited file has auto save data.")
+
+(defun leuven--recover-this-file ()
+  (let ((warn (not buffer-read-only)))
+    (when (and warn
+               ;; No need to warn if buffer is auto-saved under the name of
+               ;; the visited file.
+               (not (and buffer-file-name
+                         auto-save-visited-file-name))
+               (file-newer-than-file-p (or buffer-auto-save-file-name
+                                           (make-auto-save-file-name))
+                                       buffer-file-name))
+      (set (make-local-variable 'leuven--recover-this-file)
+           (make-overlay (point-min) (point-max)))
+      (overlay-put leuven--recover-this-file
+                   'face 'recover-this-file))))
+
+(add-hook 'find-file-hook #'leuven--recover-this-file)
+#+end_src
+
+* Files
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:86DB2C97-15D2-4ADA-8AFA-13397998FDC8
+:END:
+** Find file
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220610T194258.282253
+:END:
+From very old init.
+*** File is in another buffer
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220610T194258.280097
+:END:
+if any existing buffer is visiting the file you want
+under another name, you get the existing buffer instead of a new buffer.
+#+NAME: org_mark_mini20.local_20220610T194258.251607
+#+begin_src emacs-lisp
+(setq find-file-existing-other-name t)
+#+end_src
+*** Use the full name
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220610T194258.278050
+:END:
+Work out correct name using links.
+This could explain the issue with packlage-quickstart/
+#+NAME: org_mark_mini20.local_20220610T194258.258934
+#+begin_src emacs-lisp
+(setq find-file-visit-truename t)	; visit a file under its true name
+#+end_src
+*** Dos to Unix line endings
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220610T194258.274436
+:END:
+#+NAME: org_mark_mini20.local_20220610T194258.259764
+#+begin_src emacs-lisp
+(defun dos-to-unix ()
+  "Replace \r\n with \n"
+  (interactive)
+  (save-excursion
+	(goto-char (point-min))
+	(replace-string "\r\n" "\n")))
+#+end_src
+** Recent Files
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210830T180007.828713
+:END:
+Exclusion regexes from [[https://www.reddit.com/r/emacs/comments/3g468d/stop_recent_files_showing_elpa_packages/][reddit]]
+
+Issue is that recentf-exclude is used by passing the expanded filename(which makes sense)  and the file list uses the shortened name which also makes sense at least in the file as then is independent of ~
+
+The save in file is done by the set of abbreviate-file-name to recentf-filename-handlers which means that the name is expanded and then replaced by ~. Unfortunately the regexes are done on just the expanded file name. But all expansion is done the same way so all should work
+
+Cleanup does seem to normalize file names
+
+The problem is that we have regex
+
+#+NAME: org_mark_mini20.local_20210830T180007.805003
+#+begin_src emacs-lisp
+(use-feature recentf
+  :commands (recentf-mode
+			 recentf-add-file
+			 recentf-apply-filename-handlers
+			 recentf-save-list)
+  :init
+  (setq recentf-filename-handlers '(abbreviate-file-name)
+		recentf-auto-cleanup (* 3600 2) ; 2 hours
+		recentf-keep '(file-remote-p file-readable-p)
+		recentf-max-saved-items 500
+		recentf-max-menu-items 25)
+  (unless *aquamacs*
+	(setq recentf-save-file (mwb-user-emacs-file "var/recentf-save.el")))
+  :config
+  (setq recentf-exclude '("COMMIT_MSG"
+			  "COMMIT_EDITMSG"
+			  "github.*txt$"
+			  "^/var/folders\\.*"
+			  "COMMIT_EDITMSG\\'"
+			  ".recentf"
+			  "~$"
+			  ".~/"
+			  ".*-autoloads\\.el\\'"
+			  ".*png$"
+			  ".*cache$"
+			  "SessionDesktop\\.el"
+			  "treemacs-persist"
+			  "~/.local/emacs/straight/repos/"
+			  "~/src/ThirdParty/emacs-init/"
+			  "/Applications/MacPorts/Emacs"
+			  "^/Volumes/"))
+  (recentf-mode 1))
+#+end_src
+
+** TODO Compressed files
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:D8E61D05-2A53-45CF-A59D-EC1D1883BAC5
+:END:
+From original not certain how used now.
+#+NAME: org_mark_2020-10-01T11-27-32+01-00_mini12.local_CD86B2AF-5CC6-4C90-AFED-8A52D571E7A2
+#+begin_src emacs-lisp
+
+;; Old commented out code - need to review
+
+;;  --- uncompress *.Z and *.gz files when visiting ---
+;;
+;; (autoload 'uncompress-while-visiting "uncompress"
+;;   "Temporary \"major mode\" used for .Z and .gz files, to uncompress them.")
+;; (setq auto-mode-alist
+;; 	  (cons '("\\.Z$" . uncompress-while-visiting) auto-mode-alist))
+;; (setq auto-mode-alist
+;; 	  (cons '("\\.gz$" . uncompress-while-visiting) auto-mode-alist))
+;; (setq auto-mode-alist
+;;       (cons '("\\.tgz$" . uncompress-while-visiting) auto-mode-alist))
+
+
+;; Transparently open compressed files
+(auto-compression-mode t)
+#+end_src
+** Sudo
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220727T205858.778890
+:END:
+#+NAME: org_mark_mini20.local_20220727T205858.763550
+#+begin_src emacs-lisp
+(use-package-elpa sudo-edit
+  :commands sudo-edit sudo-edit-find-file)
+#+end_src
+* Project management
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:D3D03019-395E-4091-A21C-5639C985398E
+:END:
+Started as file management but actually deals with files and what is in them/ Treemacs looks at git so there are files that cannot be see so dired needed.
+** Searching
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:B3E628C3-AD55-45E3-86FD-0504FBA08159
+:END:
+   rg aka ripgrep seems to be the newest. However there is rg.el and ripgrep.el I am confused
+*** [[https://github.com/Wilfred/deadgrep][Deadgrep]]
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:88F75F08-A36B-4A9D-AC7B-B618451935B6
+:END:
+This provides a cover for ripgrep.
+Now use a fork to allow search of ignored files.
+#+NAME: org_mark_mini20.local_20220527T140337.009175
+#+begin_src emacs-lisp
+(use-package-elpa deadgrep
+  :straight (:fork (:repo "bestlem/deadgrep" :branch "work")
+			 :local-repo  "../local-repos/deadgrep")
+  :commands deadgrep
+  :bind (:map deadgrep-mode-map
+		 ("<double-mouse-1>" . deadgrep-visit-result-other-window)
+		 ("<mouse-2>" . deadgrep-toggle-file-results)
+		 ("<escape>" . deadgrep-kill-process))
+  :config (unless (executable-find "rg")
+			(warning "Please install ripgrep ...")))
+#+end_src
+*** [[https://github.com/dajva/rg.el][rg]]
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210620T213143.122210
+:END:
+Might allow search in ignore files. It is more flexible but display is not as easy to use as you don't switch to found buffer and cannot tab to fold items
+#+NAME: org_mark_mini20.local_20210620T213143.089059
+#+begin_src emacs-lisp :tangle no
+(use-package-elpa rg
+  :disabled
+  )
+#+end_src
+** Projectile
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:4F9B2163-41AC-4087-B80D-C1A8815C6D20
+:END:
+This add functions. I would use John Wiegley's setup but projectile hung
+So take from projectile
+*** use_package
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20211002T193350.827718
+:END:
+#+NAME: org_mark_mini20.local_20211002T193350.818453
+#+begin_src emacs-lisp
+(use-package-elpa projectile
+  :defer 5
+  :commands (projectile-project-p
+			 projectile-project-root
+			 projectile-find-file
+			 projectile-switch-project
+			 projectile-switch-to-buffer
+			 projectile-ag
+			 projectile-recentf)
+  :init
+  (let ((root (f-join user-emacs-directory "projectile")))
+	(unless (file-directory-p root)
+	  (f-mkdir root))
+	(setq projectile-known-projects-file (f-join root "projectile-bookmarks.eld"))
+	(setq projectile-cache-file (f-join root "projectile.cache")))
+  (setq projectile-enable-caching t)
+  (setq projectile-completion-system 'auto)
+  :custom
+  (projectile-file-exists-local-cache-expire 300)
+  (projectile-sort-order 'recentf)
+  (projectile-project-search-path '("~/src"))
+
+  :config
+  ;; racket
+  (add-to-list 'projectile-globally-ignored-directories "*compiled")
+  ;; (add-to-list 'projectile-globally-ignored-directories "straight/repos")
+  ;; (add-to-list 'projectile-globally-ignored-directories "ThirdParty/emacs-init")
+
+  ;; ignore some of my projects
+  (defun mwb-projectile-ignore-project (path)
+	(string-match (rx (or "straight/repos" "ThirdParty/emacs-init")) path))
+  (setq projectile-ignored-project-function #'mwb-projectile-ignore-project)
+  (projectile-mode 1)
+  (defhydra hydra-projectile-other-window (:color teal)
+    "projectile-other-window"
+    ("f"  projectile-find-file-other-window        "file")
+    ("g"  projectile-find-file-dwim-other-window   "file dwim")
+    ("d"  projectile-find-dir-other-window         "dir")
+    ("b"  projectile-switch-to-buffer-other-window "buffer")
+    ("q"  nil                                      "cancel" :color blue))
+
+  (defhydra hydra-projectile ( :color teal)
+    "
+  	  PROJECTILE: %(projectile-project-root)
+
+   Search: [_a_] deadgrep  [_A_] counsel-rg
+   Find:   [_b_] buffer    [_d_] dir        [_f_] file
+   Look:   [_i_] ibuffer   [_j_] imenu
+
+   Fun:    [_o_] other win [_l_] lsp        [_K_] cleanup
+   "
+    ("a"   deadgrep "deadgrep")
+    ("A"   counsel-rg "counsel rg")
+    ("b"   projectile-switch-to-buffer "buf")
+    ("d"   projectile-find-dir "dir")
+    ("f"   projectile-find-file "file")
+    ("i"   projectile-ibuffer "ibuf")
+    ("j"   counsel-imenu "imenu")
+    ("K"   projectile-kill-buffers)
+    ("l"   hydra-lsp/body)
+    ("P"   projectile-switch-project)
+    ("p"   projectile-switch-project)
+    ("r"   projectile-recentf "recentf")
+    ("x"   projectile-remove-known-project)
+    ("X"   projectile-cleanup-known-projects)
+    ("z"   projectile-cache-current-file)
+    ("o"   hydra-projectile-other-window/body "other")
+    ("q"   nil "cancel" :color blue))
+
+  (bind-key "H-p" 'hydra-projectile/body)
+  (projectile-cleanup-known-projects))
+#+end_src
+*** File saving
+:PROPERTIES:
+:ID:       org_mark_2020-03-02T07-49-31+00-00_mini12.local:AA45827A-2D69-4702-9D2D-F48D20F1A2AB
+:END:
+projectile-save-project-buffers is nice but save-buffer does not make a backup. I have mwb/mac-key-save-buffer-force-backup ( to force a save. I need to integrate these
+#+NAME: org_mark_2020-03-02T07-49-31+00-00_mini12.local_EAB2D4CD-DF1F-4845-87F8-EF1531AFB411
+#+begin_src emacs-lisp
+(defun mwb-projectile-save-project-buffers ()
+  "Save all project buffers."
+  (interactive)
+  (let* ((project (projectile-ensure-project (projectile-project-root)))
+		 (project-name (projectile-project-name project))
+		 (modified-buffers (cl-remove-if-not (lambda (buf)
+											   (and (buffer-file-name buf)
+													(buffer-modified-p buf)))
+											 (projectile-project-buffers project))))
+	(unless (null modified-buffers)
+	  (dolist (buf modified-buffers)
+		(with-current-buffer buf
+		  (message "Project %s Saved buffer %s"
+				   project-name buf)
+		  (save-buffer 16)))
+	  )))
+#+end_src
+*** Hydra
+:PROPERTIES:
+:ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:ABDFEF9C-A337-466D-859C-D186DBE3A9ED
+:END:
+ I really do not want all but for ease just do it from [[https://github.com/jojojames/matcha][Matcha]] but that is too much as is the Hydra wiki So lets try from [[http://doc.rix.si/cce/cce-code-core.html][Ryan Rix]], also he uses rg (bbatsov has a complex one as well)
+ #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_01B9A5FA-87F9-4520-A7A0-E0C04BA45AD9
+ #+begin_src emacs-lisp :noweb-ref projectile-hydra
+(defhydra hydra-projectile-other-window (:color teal)
+  "projectile-other-window"
+  ("f"  projectile-find-file-other-window        "file")
+  ("g"  projectile-find-file-dwim-other-window   "file dwim")
+  ("d"  projectile-find-dir-other-window         "dir")
+  ("b"  projectile-switch-to-buffer-other-window "buffer")
+  ("q"  nil                                      "cancel" :color blue))
+
+(defhydra hydra-projectile ( :color teal)
+  "
+	  PROJECTILE: %(projectile-project-root)
+
+ Search: [_a_] deadgrep  [_A_] counsel-rg
+ Find:   [_b_] buffer    [_d_] dir        [_f_] file
+ Look:   [_i_] ibuffer   [_j_] imenu
+
+ Fun:    [_o_] other win [_l_] lsp        [_K_] cleanup
+ "
+  ("a"   deadgrep "deadgrep")
+  ("A"   counsel-rg "counsel rg")
+  ("b"   projectile-switch-to-buffer "buf")
+  ("d"   projectile-find-dir "dir")
+  ("f"   projectile-find-file "file")
+  ("i"   projectile-ibuffer "ibuf")
+  ("j"   counsel-imenu "imenu")
+  ("K"   projectile-kill-buffers)
+  ("l"   hydra-lsp/body)
+  ("P"   projectile-switch-project)
+  ("p"   projectile-switch-project)
+  ("r"   projectile-recentf "recentf")
+  ("x"   projectile-remove-known-project)
+  ("X"   projectile-cleanup-known-projects)
+  ("z"   projectile-cache-current-file)
+  ("o"   hydra-projectile-other-window/body "other")
+  ("q"   nil "cancel" :color blue))
+
+(bind-key "H-p" 'hydra-projectile/body)
+ #+end_src

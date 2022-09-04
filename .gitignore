@@ -3,7 +3,6 @@ config.el
 init/**/*.el
 SessionDesktop.el
 elpa
-data/abbrev.el
 var
 .org-id-locations
 .cask

@@ -432,8 +432,8 @@ Show the frequency of keys
 (use-package-elpa keyfreq
   :demand
   :init
-  (setq keyfreq-file (concat user-emacs-directory "emacs.keyfreq"))
-  (setq keyfreq-lock (concat user-emacs-directory "emacs.keyfreq.lock"))
+  ;;(setq keyfreq-file (concat user-emacs-directory "emacs.keyfreq"))
+  ;;(setq keyfreq-lock (concat user-emacs-directory "emacs.keyfreq.lock"))
   (setq keyfreq-excluded-commands
 		'(self-insert-command
 		  org-self-insert-command

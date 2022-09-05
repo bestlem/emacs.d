@@ -380,7 +380,7 @@ This is minmal as *scratch* is always created.
   (use-package-elpa persistent-scratch
     :defer 10
     :init
-    (setq persistent-scratch-save-file (mwb-user-emacs-file "var/persistent-scratch"))
+    ;; (setq persistent-scratch-save-file (mwb-user-emacs-file "var/persistent-scratch"))
     :config
     (persistent-scratch-setup-default)))
 #+end_src

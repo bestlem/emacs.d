@@ -23,6 +23,11 @@
   "Directory on local machine wwhere emacs outside start directory.")
 ;; org_mark_mini20.local_20220616T101718.145323 ends here
 
+;; [[file:init.org::org_mark_mini20.local_20220904T092511.225344][org_mark_mini20.local_20220904T092511.225344]]
+(defvar mwb-emacs-share-dir (expand-file-name "~/SyncServices/Dropbox/data/emacs" )
+  "Directory on local machine wwhere emacs outside start directory.")
+;; org_mark_mini20.local_20220904T092511.225344 ends here
+
 ;; [[file:init.org::org_mark_mini20.local_20220616T101718.152005][org_mark_mini20.local_20220616T101718.152005]]
 (defvar mwb-emacs-eln-cache-dir
   (expand-file-name "eln-cache" mwb-emacs-work-dir))

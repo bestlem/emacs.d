@@ -207,7 +207,7 @@ This is saving minibuffer information but can do more as told.
           bookmark-alist
 		  Info-history-list
 		  register-alist))
-  (setq savehist-file (locate-user-emacs-file "savehist.el"))
+  ;; (setq savehist-file (locate-user-emacs-file "savehist.el"))
   (savehist-mode 1))
 #+end_src
 * Yes or no
@@ -451,7 +451,7 @@ To put in order
 (use-package-elpa selectrum-prescient
   :demand
   :init
-  (setq prescient-save-file (mwb-user-emacs-file "var/prescient-save.el"))
+  ;;(setq prescient-save-file (mwb-user-emacs-file "var/prescient-save.el"))
   (selectrum-prescient-mode 1)
   (prescient-persist-mode +1)
   :after selectrum)

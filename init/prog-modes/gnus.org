@@ -70,7 +70,7 @@ Cover method for gnus to create new frame
 ;; (setcdr (assoc 'nndraft-directory
 ;;                (nnoo-variables 'nndraft))
 ;;         nndraft-directory)
-(setq gnus-dribble-directory (expand-file-name "~/tmp/emacs_unwanted"))
+(setq gnus-dribble-directory mwb-init-backup-unwanted-directory)
 (setq gnus-kill-save-kill-file t)
 (setq gnus-server-browse-in-group-buffer t)
 (setq gnus-read-active-file nil)
@@ -88,12 +88,13 @@ Cover method for gnus to create new frame
 :END:
 #+NAME: org_mark_mini20.local_20220706T194343.304616
 #+begin_src emacs-lisp :tangle no :noweb-ref gnus-custom
-(gnus-directory "~/Library/Preferences/Aquamacs Emacs/News")
-(gnus-home-directory "~/.emacs.d/var/gnus")
-(mail-default-directory "~/.emacs.d/var/Mail")
-(message-auto-save-directory "~/.emacs.d/var/gnus/Mail")
-(message-directory "~/.emacs.d/var/Mail/")
-(nnmail-message-id-cache-file "~/.emacs.d/var/gnus/.nnmail-cache")
+(gnus-home-directory (expand-file-name "gnus" mwb-emacs-share-dir ))
+(message-directory (expand-file-name "Mail" mwb-emacs-share-dir ))
+
+;; (gnus-directory (expand-file-name "News" gnus-home-directory))
+(mail-default-directory (expand-file-name "mail/drafts" mwb-emacs-share-dir ))
+;; (message-auto-save-directory "~/.emacs.d/var/gnus/Mail")
+;; (nnmail-message-id-cache-file "~/.emacs.d/var/gnus/.nnmail-cache")
 #+end_src
 *** Scoring
 :PROPERTIES:

@@ -301,11 +301,135 @@ Well does not show what takes time - just which file. So I use more files. It al
   ;; To disable collection of benchmark data after init is done.
   (add-hook 'after-init-hook 'benchmark-init/deactivate))
 #+end_src
+*** Directories
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220904T161143.424342
+:END:
+This is after much messing around
 *** Extras needed for loading
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:8EEFB5D5-EB93-442F-8ECA-CB62A943A310
 :END:
  These are used in the use-package macro
+**** No littering
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220904T161143.422027
+:END:
+Mess around with where files are see [[id:org_mark_mini20.local:20210424T122854.182819][README.org]] for more.
+But don't bother
+#+NAME: org_mark_mini20.local_20220904T161143.389942
+#+begin_src emacs-lisp :tangle no
+(use-package-elpa no-littering
+  :demand
+  :init
+  (setq no-littering-etc-directory
+		(expand-file-name "data/" mwb-user-emacs-directory))
+  (setq no-littering-var-directory
+		mwb-emacs-work-dir))
+#+end_src
+***** Migration
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220905T085754.563789
+:END:
+#+NAME: org_mark_mini20.local_20220905T085754.523940
+#+begin_src emacs-lisp :tangle no
+
+;; (setq no-littering-new-values (no-littering-get-current-variables))
+
+;; (setq x  (no-littering-generate-migration no-littering-current-values
+;; 										  no-littering-new-values))
+
+;; (nil
+
+;;  (progn "gnus-dribble-directory"
+;; 		(make-directory "/Users/mark/.local/emacs/gnus/dribble/" t)
+;; 		(rename-file "/Users/mark/tmp/emacs_unwanted" "/Users/mark/.local/emacs/gnus/dribble/" 1))
+;;  (progn "gnus-init-file"
+;; 		(make-directory "/Users/mark/.emacs.d/data/gnus/" t)
+;; 		(rename-file "/Users/mark/SyncServices/Dropbox/data/emacs/gnus/.gnus" "/Users/mark/.emacs.d/data/gnus/init.el" 1))
+(progn "nsm-settings-file"
+	   (make-directory "/Users/mark/.local/emacs/" t)
+	   (rename-file "/Users/mark/.emacs.d/var/network-security.data" "/Users/mark/.local/emacs/nsm-settings.el" 1))
+(progn "org-id-locations-file"
+	   (make-directory "/Users/mark/.local/emacs/org/" t)
+	   (rename-file "/Users/mark/.emacs.d/var/.org-id-locations" "/Users/mark/.local/emacs/org/id-locations.el" 1))
+;;  (progn "org-persist-directory"
+;; 		(make-directory "/Users/mark/.local/emacs/org/persist/" t)
+;; 		(rename-file "/Users/mark/.cache/org-persist/" "/Users/mark/.local/emacs/org/persist/" 1))
+(progn "project-list-file"
+	   (make-directory "/Users/mark/.local/emacs/" t)
+	   (rename-file "/Users/mark/.emacs.d/var/projects" "/Users/mark/.local/emacs/project-list.el" 1))
+(progn "recentf-save-file"
+	   (make-directory "/Users/mark/.local/emacs/" t)
+	   (rename-file "/Users/mark/SyncServices/Dropbox/data/emacs/recentf-save.el" "/Users/mark/.local/emacs/recentf-save.el" 1))
+(progn "savehist-file"
+	   (make-directory "/Users/mark/.local/emacs/" t)
+	   (rename-file "/Users/mark/.emacs.d/var/savehist.el" "/Users/mark/.local/emacs/savehist.el" 1))
+(progn "url-cache-directory"
+	   (make-directory "/Users/mark/.local/emacs/url/cache/" t)
+	   (rename-file "/Users/mark/.emacs.d/var/url/cache" "/Users/mark/.local/emacs/url/cache/" 1))
+(progn "url-configuration-directory"
+	   (make-directory "/Users/mark/.local/emacs/url/" t)
+	   (rename-file "/Users/mark/.emacs.d/var/url/" "/Users/mark/.local/emacs/url/" 1))
+(progn "url-cookie-file"
+	   (make-directory "/Users/mark/.local/emacs/url/" t)
+	   (rename-file "/Users/mark/.emacs.d/var/url/cookies" "/Users/mark/.local/emacs/url/cookies.el" 1))
+(progn "url-history-file"
+	   (make-directory "/Users/mark/.local/emacs/url/" t)
+	   (rename-file "/Users/mark/.emacs.d/var/url/history" "/Users/mark/.local/emacs/url/history.el" 1))
+;;  (progn "max-save-file"
+;; 		(make-directory "/Users/mark/.local/emacs/" t)
+;; 		(rename-file "/Users/mark/.emacs.d/var/amx-items" "/Users/mark/.local/emacs/max-save.el" 1))
+;;  (progn "keyfreq-file"
+;; 		(make-directory "/Users/mark/.local/emacs/" t)
+;; 		(rename-file "/Users/mark/.emacs.d/var/emacs.keyfreq" "/Users/mark/.local/emacs/keyfreq.el" 1))
+;;  (progn "keyfreq-file-lock"
+;; 		(make-directory "/Users/mark/.local/emacs/" t)
+;; 		(rename-file "/Users/mark/.emacs.keyfreq.lock" "/Users/mark/.local/emacs/keyfreq.lock" 1))
+;;  (progn "package-quickstart-file"
+;; 		(make-directory "/Users/mark/.local/emacs/" t)
+;; 		(rename-file "/Users/mark/.emacs.d/package-quickstart.el" "/Users/mark/.local/emacs/package-quickstart.el" 1))
+;;  (progn "persistent-scratch-save-file"
+;; 		(make-directory "/Users/mark/.local/emacs/" t)
+;; 		(rename-file "/Users/mark/.emacs.d/var/persistent-scratch" "/Users/mark/.local/emacs/persistent-scratch.el" 1))
+;;  (progn "prescient-save-file"
+;; 		(make-directory "/Users/mark/.local/emacs/" t)
+;; 		(rename-file "/Users/mark/.emacs.d/var/var/prescient-save.el" "/Users/mark/.local/emacs/prescient-save.el" 1))
+;;  (progn "projectile-cache-file"
+;; 		(make-directory "/Users/mark/.local/emacs/projectile/" t)
+;; 		(rename-file "/Users/mark/.emacs.d/var/projectile/projectile.cache" "/Users/mark/.local/emacs/projectile/cache.el" 1))
+(progn "projectile-known-projects-file"
+	   (make-directory "/Users/mark/.local/emacs/projectile/" t)
+	   (rename-file "/Users/mark/.emacs.d/var/projectile/projectile-bookmarks.eld" "/Users/mark/.local/emacs/projectile/known-projects.el" 1))
+(progn "svg-lib-icons-dir"
+	   (make-directory "/Users/mark/.local/emacs/svg-lib/icons/" t)
+	   (rename-file "/Users/mark/.emacs.d/var/.cache/svg-lib/" "/Users/mark/.local/emacs/svg-lib/icons/" 1))
+;;  (progn "treemacs-persist-file"
+;; 		(make-directory "/Users/mark/.local/emacs/treemacs/" t)
+;; 		(rename-file "/Users/mark/.emacs.d/data/treemacs-persist" "/Users/mark/.local/emacs/treemacs/persist.org" 1))
+;;  (progn "treemacs-last-error-persist-file"
+;; 		(make-directory "/Users/mark/.local/emacs/treemacs/" t)
+;; 		(rename-file "/Users/mark/.emacs.d/var/.cache/treemacs-persist-at-last-error" "/Users/mark/.local/emacs/treemacs/persist-last-error.org" 1))
+;;  (progn yas-snippet-dirs "Value is not a directory"))
+
+(no-littering-custom-reset)
+(custom-save-all)
+(defun no-littering--custom-show-symbol (symbol)
+  (put symbol 'variable-comment nil)
+  (put symbol 'standard-value nil)
+  (put symbol 'customized-value nil)
+  (put symbol 'customized-variable-comment nil)
+  (when (or (get symbol 'saved-value)
+			(get symbol 'saved-variable-comment))
+    (message "Symbol %S " symbol )
+    ))
+
+(defun no-littering-custom-print ()
+  (dolist (var (no-littering-get-themed-variables))
+    (no-littering--custom-show-symbol (car var))))
+
+(no-littering-custom-print)
+#+end_src
 **** Async
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20211104T083255.480572

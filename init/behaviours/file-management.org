@@ -376,26 +376,26 @@ The problem is that we have regex
 		recentf-keep '(file-remote-p file-readable-p)
 		recentf-max-saved-items 500
 		recentf-max-menu-items 25)
-  (unless *aquamacs*
-	(setq recentf-save-file (mwb-user-emacs-file "var/recentf-save.el")))
+  ;; (unless *aquamacs*
+  ;; 	(setq recentf-save-file (expand-file-name "recentf-save.el" mwb-emacs-share-dir)))
   :config
   (setq recentf-exclude '("COMMIT_MSG"
-			  "COMMIT_EDITMSG"
-			  "github.*txt$"
-			  "^/var/folders\\.*"
-			  "COMMIT_EDITMSG\\'"
-			  ".recentf"
-			  "~$"
-			  ".~/"
-			  ".*-autoloads\\.el\\'"
-			  ".*png$"
-			  ".*cache$"
-			  "SessionDesktop\\.el"
-			  "treemacs-persist"
-			  "~/.local/emacs/straight/repos/"
-			  "~/src/ThirdParty/emacs-init/"
-			  "/Applications/MacPorts/Emacs"
-			  "^/Volumes/"))
+						  "COMMIT_EDITMSG"
+						  "github.*txt$"
+						  "^/var/folders\\.*"
+						  "COMMIT_EDITMSG\\'"
+						  ".recentf"
+						  "~$"
+						  ".~/"
+						  ".*-autoloads\\.el\\'"
+						  ".*png$"
+						  ".*cache$"
+						  "SessionDesktop\\.el"
+						  "treemacs-persist"
+						  "~/.local/emacs/straight/repos/"
+						  "~/src/ThirdParty/emacs-init/"
+						  "/Applications/MacPorts/Emacs"
+						  "^/Volumes/"))
   (recentf-mode 1))
 #+end_src
 
@@ -495,11 +495,11 @@ So take from projectile
 			 projectile-ag
 			 projectile-recentf)
   :init
-  (let ((root (f-join user-emacs-directory "projectile")))
-	(unless (file-directory-p root)
-	  (f-mkdir root))
-	(setq projectile-known-projects-file (f-join root "projectile-bookmarks.eld"))
-	(setq projectile-cache-file (f-join root "projectile.cache")))
+  ;; (let ((root (f-join user-emacs-directory "projectile")))
+  ;;   (unless (file-directory-p root)
+  ;;     (f-mkdir root))
+  ;;   (setq projectile-known-projects-file (f-join root "projectile-bookmarks.eld"))
+  ;;   (setq projectile-cache-file (f-join root "projectile.cache")))
   (setq projectile-enable-caching t)
   (setq projectile-completion-system 'auto)
   :custom

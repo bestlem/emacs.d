@@ -61,9 +61,23 @@ In constant mwb-user-emacs-directory
 :END:
 We want some stuff not under .emacs.d so if on dropbox then this is not.
 This is the root position.
+**** Local
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220904T092511.255706
+:END:
 #+NAME: org_mark_mini20.local_20220616T101718.145323
 #+begin_src emacs-lisp
 (defvar mwb-emacs-work-dir (expand-file-name "~/.local/emacs" )
+  "Directory on local machine wwhere emacs outside start directory.")
+#+end_src
+**** Shared
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220904T092511.247144
+:END:
+When I found gnus messed up and moving between emacs inits I realised the non git files need to be outside ~/.emacs.d but coul;d be local but really shared across machines
+#+NAME: org_mark_mini20.local_20220904T092511.225344
+#+begin_src emacs-lisp
+(defvar mwb-emacs-share-dir (expand-file-name "~/SyncServices/Dropbox/data/emacs" )
   "Directory on local machine wwhere emacs outside start directory.")
 #+end_src
 *** Eln-cache - native compile
@@ -102,6 +116,13 @@ Ignore warnings as we can't do much about them as most code is not written by me
   Main reason to use is so that I can put init under version control and the rest go elsewhere."
 	(expand-file-name name mwb-user-emacs-directory))
   #+end_src
+** Package
+:PROPERTIES:
+:ID:       org_mark_2020-09-28T01-08-28+01-00_mini12.local:D069442D-B7AF-4771-800A-87C4F3376AF0
+:END:
+Package initialize occurs automatically, before `user-init-file' is loaded, but after `early-init-file'. emacs handles package initialization, so we must prevent Emacs from doing it early!
+But if using package we do want it done - early-init turn off is for straight.el etc
+#+NAME:
 *** Package manager
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220614T202601.874691
@@ -130,14 +151,7 @@ Set the path to packages
 	   (format "package-quickstart.%d.el" emacs-major-version)
 	   mwb-user-emacs-directory))
 #+end_src
-** Package
-:PROPERTIES:
-:ID:       org_mark_2020-09-28T01-08-28+01-00_mini12.local:D069442D-B7AF-4771-800A-87C4F3376AF0
-:END:
-Package initialize occurs automatically, before `user-init-file' is loaded, but after `early-init-file'. emacs handles package initialization, so we must prevent Emacs from doing it early!
-But if using package we do want it done - early-init turn off is for straight.el etc
-#+NAME:
-*** Straight
+*** Not package.el
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220614T202654.959342
 :END:

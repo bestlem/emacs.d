@@ -27,7 +27,7 @@ So choice is as org-mode in emacs is new enough the use this. or delete the pack
 
 init.org contains the minimal amout to load other things so in essence should not need to be edited.-originally put this text in here.
 
-There is now an alternate - which is a way to try other init setups
+There is now an alternate - which is a way to try other init setups. However I found it easier to keep an emacs open and mv the emacs startup directories.
 
 ** config.org nor init/all-in-one.org
 :PROPERTIES:
@@ -38,6 +38,10 @@ The last thing it does is load init/org.all
 
 The only reason to do this rather than init.org is that you don't need to save the .el as well. But config.org has 156 commits and init.org has 31.
 Also the separate allows easy choice of alt-init.
+
+Org-mode is complex so needs a separate file to start it - actually two one for tangling etc from Grant Rekke other is all the variables.
+Then keys as I need mac-key-mode before the other minor modes.
+The all.org which is under full org weaving.
 
 ** init
 :PROPERTIES:
@@ -73,7 +77,7 @@ I think can be moved out to modes or behaviours - the latter makes sense
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210424T171159.511861
 :END:
-Well this can be the last - basically sets up my key bindings.\
+Well this can be the last - basically sets up my key bindings.
 The one odd case is dealing with Aquamacs/macOS differences which have to be done upfront.
 *** Startup
 :PROPERTIES:
@@ -84,7 +88,7 @@ Detailed of extra setup at end
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210424T171159.510292
 :END:
-How things look
+How things look - moved to behaviours.
 
 * Use of org mode
 :PROPERTIES:
@@ -221,28 +225,9 @@ Start by tangle on save if in init dir [[https://emacs.stackexchange.com/a/20733
 :ID:       org_mark_mini20.local:20210424T122854.183708
 :END:
 This file runs under Aquamacs, I use Aquamacs because it was the easiest distribution to set up in 2002. Nowadays with package loaders and starter kits this is not so needed.
- Aquamacs does have one advantage it uses Apple's spellchecker and that will not be rolled into GNU.
-Aquamacs though is old Aquamacs 3.4 GNU Emacs 25.3.50.1 Emacs is now on 26 and has been for over a year but if we just need new packages then version is OK.
-Now in 2022 some packages need emacs 26.1 and so don't use.
-
-*** user-emacs-directory
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20210424T122854.182819
-:END:
-This is the directory emacs reads and writers support files from. This is a mess as some files are under version control and others are created on the fly. The ones on the fly can have the same name as packages and so stop loading (e.g. Tramp and Calc). There are several ways round this e.g. [[https://github.com/emacscollective/no-littering][No Littering]] Aquamacs does this by moving user-emacs-directory and putting the start dir on the load-path but also every possible directory so can't find it easily and hard codes paths and no use a directory so have to have our own const.
-
-Aquamacs does drop a lot into its directory and makes use-emacs-directory always this even if the config files are elsewhere.
-
-Now text based things don't like spaces (programmers are lazy) I want a structured text editor.
-The issue here is when tangling the references to files are encoded to remove spaces so the directory becomes ~/Library/Preferences/Aquamacs%20Emacs so round tripping fails.
-
-On using no-littering - all it does is special case some things but not many so better either do Aquamacs way but use a new directory or deal on case by case basis. The latter might be needed for etc files.
-
-**** DONE Need to move all init files into a path that has no spaces
-	  CLOSED: [2019-05-06 Mon 02:21]
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20210424T122854.181719
-:END:
+Aquamacs does have one advantage it uses Apple's spellchecker and that will not be rolled into GNU. - although I found a package that does use this.
+Aquamacs though is old Aquamacs 3.4 GNU Emacs 25.3.50.1 Emacs is now on 26 and has been for over a year but if we don't need new packages then version is OK.
+Now in 2022 some packages need emacs 26.1 and so don't use Aquamacs.
 
 *** Load order
 :PROPERTIES:
@@ -261,3 +246,53 @@ From  aquamacs-get-custom-file-dotemacs-warning
 
 
 #  LocalWords:  ibuffer progmodes starterkit
+** user-emacs-directory
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210424T122854.182819
+:END:
+This is the directory emacs reads and writers support files from. This is a mess as some files are under version control and others are created on the fly. The ones on the fly can have the same name as packages and so stop loading (e.g. Tramp and Calc). There are several ways round this e.g. [[https://github.com/emacscollective/no-littering][No Littering]] Aquamacs does this by moving user-emacs-directory and putting the start dir on the load-path but also every possible directory so can't find it easily and hard codes paths and no use a directory so have to have our own const.
+
+Aquamacs does drop a lot into its directory and makes use-emacs-directory always this even if the config files are elsewhere.
+
+Now text based things don't like spaces (programmers are lazy) I want a structured text editor.
+The issue here is when tangling the references to files are encoded to remove spaces so the directory becomes ~/Library/Preferences/Aquamacs%20Emacs so round tripping fails.
+
+On using no-littering - all it does is special case some things but not many so better either do Aquamacs way but use a new directory or deal on case by case basis. The latter might be needed for etc files. However It might act as a template - so no harm in setting it. I will still have to set many.
+
+**** Types of directory
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220904T132752.511307
+:END:
+After playing more especially after moving different .emacs.d I think there are at least three sets of files not two.
+
+****** Data files
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220904T123633.478162
+:END:
+Controlled and must be under version control. no-littering etc files. I have in ~/.emacs.d/data/
+
+******  Shared files
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220904T123633.473185
+:END:
+Want to keep across machines e.g. News - I have on dropbox mwb-emacs-share-dir
+
+****** Local files
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220904T123633.466623
+:END:
+Keep around but only on one machine e.g. backups as they have a file included.
+
+****** Cache or other short lived.
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220904T132752.500698
+:END:
+These probably should be in ~/.cache so can be deleted.
+
+
+**** DONE Need to move all init files into a path that has no spaces
+	  CLOSED: [2019-05-06 Mon 02:21]
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210424T122854.181719
+:END:
+

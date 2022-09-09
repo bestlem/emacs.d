@@ -17,6 +17,42 @@
 (setq init-file-debug t)
 ;; org_mark_mini20.local_20220606T145002.738615 ends here
 
+;; [[file:init.org::org_mark_mini20.local_20220905T162607.803924][org_mark_mini20.local_20220905T162607.803924]]
+(defvar modi/variables-to-be-watched ()
+  "List of variables to be watched.
+Used by `modi/set-variable-watchers' and
+`modi/unset-variable-watchers'")
+
+(defun modi/variable-watcher-fn (symbol newval operation where)
+  "Print message when the value of variable SYMBOL changes.
+The message shows the NEWVAL it changed to, the OPERATION that
+caused that, and the buffer WHERE that happened if the value
+change was buffer-local."
+  (message (format "[Watcher: %s] Now set to %S, by `%S'%s"
+                   (symbol-name symbol)
+                   newval
+                   operation
+                   (if where
+                       (format " in %S" where)
+                     ""))))
+
+(defun modi/set-variable-watchers ()
+  "Enable printing messages when any watched variable changes.
+The variables to be watched should be added to
+`modi/variables-to-be-watched'."
+  (interactive)
+  (dolist (var modi/variables-to-be-watched)
+    (add-variable-watcher var #'modi/variable-watcher-fn)))
+
+(defun modi/unset-variable-watchers ()
+  "Disable variable watchers.
+Variable watching will be disabled for the list of variables set
+in `modi/variables-to-be-watched'."
+  (interactive)
+  (dolist (var modi/variables-to-be-watched)
+    (remove-variable-watcher var #'modi/variable-watcher-fn)))
+;; org_mark_mini20.local_20220905T162607.803924 ends here
+
 ;; [[file:init.org::org_mark_mini20.local_20220313T215512.598628][org_mark_mini20.local_20220313T215512.598628]]
 (defvar mwb-message-offset (float-time) "Time of last message")
 
@@ -61,7 +97,6 @@
     (message "add timestamp")))
 
 (add-hook 'after-init-hook 'mwb-message-remove-timediff)
-;; (message "test")
 ;; org_mark_mini20.local_20220313T215512.598628 ends here
 
 ;; [[file:init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_315EE687-FC28-4D41-810D-4FF19AA66CD4][org_mark_2020-01-23T20-40-42+00-00_mini12_315EE687-FC28-4D41-810D-4FF19AA66CD4]]

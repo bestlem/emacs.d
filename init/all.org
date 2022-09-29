@@ -84,6 +84,7 @@ From [[https://www.reddit.com/r/emacs/comments/ck4zb3/trying_to_understand_emacs
 (defun ap/garbage-collect ()
   "Run `garbage-collect' and print stats about memory usage."
   (interactive)
+  (message " %d garbage collections" gcs-done)
   (message (cl-loop for (type size used free) in (garbage-collect)
                     for used = (* used size)
                     for free = (* (or free 0) size)

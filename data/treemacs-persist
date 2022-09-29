@@ -2,9 +2,9 @@
 ** My init .emacs.d
  - path :: ~/.emacs.d
 ** dotfiles
- - path :: ~/SyncServices/Dropbox/env/dotfiles
+ - path :: ~/Library/CloudStorage/Dropbox/env/dotfiles
 ** Org
- - path :: ~/SyncServices/Dropbox/Docs/org
+ - path :: ~/Library/CloudStorage/Dropbox/Docs/org
 ** Local out of .emacs.d
  - path :: ~/.local/emacs
 ** emacs-init
@@ -15,6 +15,8 @@
  - path :: ~/src/ThirdParty/emacs-mac
 ** xonsh
  - path :: ~/src/python/xonsh
+** emacs.elpaca
+ - path :: ~/emacs.elpaca
 * Racket
 ** my realm
  - path :: ~/src/Racket/realm

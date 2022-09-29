@@ -35,9 +35,9 @@ From https://github.com/chenyanming/calibredb.el and also https://dindi.garjola.
 (use-package-elpa calibredb
   :commands calibredb
   :config
-  (setq calibredb-root-dir "~/SyncServices/Dropbox/Books/calibre_transfer")
+  (setq calibredb-root-dir (concat  mwb-dropbox-root "/Books/calibre_transfer"))
   (setq calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir))
-  (setq calibredb-library-alist '(("~/SyncServices/Dropbox/Books/calibre_transfer")
+  (setq calibredb-library-alist `((,calibredb-root-dir)
 								  ("~/SyncServices/Google Drive/calibre/calibre_computing")
 								  ("~/SyncServices/Google Drive/calibre/games")
 								  ("~/SyncServices/Google Drive/calibre/fiction")
@@ -64,7 +64,7 @@ Optional argument CANDIDATE is the selected item."
   :mode-hydra
   ((calibredb-search-mode)
    (:color teal :quit-key "q"
-		   :title (mwb-icon-string "epub" "Calibre"))
+	:title (mwb-icon-string "epub" "Calibre"))
    ("Libraries"
 	(("L" calibredb-library-list "Switch Library"))
 	"View"

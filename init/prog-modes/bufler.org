@@ -115,7 +115,7 @@ Mainly from alphapapa and jerrypnz
 	 ;; 			(dir mwb-emacs-work-dir))
 
 	 (group (group-or "Config"
-					  (dir "~/SyncServices/Dropbox/env/dotfiles")
+					  (dir (concat  mwb-dropbox-root "/env/dotfiles"))
 					  (dir '("~/.config" "~/.homesick/repos/main"))
 					  (dir "~/.local/bin"))
 			(auto-directory))

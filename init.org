@@ -77,7 +77,11 @@ This is the root position.
 When I found gnus messed up and moving between emacs inits I realised the non git files need to be outside ~/.emacs.d but coul;d be local but really shared across machines
 #+NAME: org_mark_mini20.local_20220904T092511.225344
 #+begin_src emacs-lisp
-(defvar mwb-emacs-share-dir (expand-file-name "~/SyncServices/Dropbox/data/emacs" )
+(defvar mwb-dropbox-root
+  (expand-file-name  "~/Library/CloudStorage/Dropbox")
+  "Where dropbox is")
+(defvar mwb-emacs-share-dir
+  (concat mwb-dropbox-root "/data/emacs")
   "Directory on local machine wwhere emacs outside start directory.")
 #+end_src
 *** Eln-cache - native compile

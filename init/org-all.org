@@ -81,8 +81,8 @@ It is now for subtree todo refile and links
   <<org-key-binds>>
   :config
   (setq org-datetree-add-timestamp (quote active)
-        org-default-notes-file "~/SyncServices/Dropbox/Docs/org/notes.org"
-        org-directory "/Users/mark/SyncServices/Dropbox/Docs/org"
+        org-directory (concat  mwb-dropbox-root "/Docs/org")
+        org-default-notes-file (concat org-directory "/notes.org")
         org-support-shift-select t
         ;;          org-use-speed-commands t
         )
@@ -93,7 +93,7 @@ It is now for subtree todo refile and links
   :preface (declare-function org-hide-properties-mode "org-hide-properties")
   :mode-hydra
   <<org-mode-hydra>>
-  
+
   :config
   (require 'init-mwb-org)
 

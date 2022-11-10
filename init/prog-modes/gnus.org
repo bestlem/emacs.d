@@ -81,16 +81,17 @@ Cover method for gnus to create new frame
 :ID:       org_mark_mini20.local:20220706T194343.324974
 :END:
 #+NAME: org_mark_mini20.local_20220706T194343.304616
-#+begin_src emacs-lisp :tangle no :noweb-ref gnus-preface
-(setq gnus-home-directory (expand-file-name "gnus" mwb-emacs-share-dir)
-	  message-directory (expand-file-name "Mail" mwb-emacs-share-dir)
-	  ;gnus-directory (expand-file-name "News" gnus-home-directory)
-	  ;gnus-startup-file (expand-file-name  ".newsrc" gnus-home-directory)
-	  ;; mail-default-directory (expand-file-name "drafts" message-directory)
-	  ;; message-auto-save-directory (expand-file-name "Mail" gnus-home-directory)
-	  nnmail-message-id-cache-file (expand-file-name "nnmail-cache" gnus-home-directory))
+#+begin_src emacs-lisp :tangle no :noweb-ref gnus-custom
+(gnus-home-directory (expand-file-name "gnus" mwb-emacs-share-dir))
+(message-directory (expand-file-name "Mail" mwb-emacs-share-dir))
+(gnus-directory (expand-file-name "News" gnus-home-directory))
+(gnus-startup-file (expand-file-name  ".newsrc" gnus-home-directory))
+;; mail-default-directory (expand-file-name "drafts" message-directory)
+;; message-auto-save-directory (expand-file-name "Mail" gnus-home-directory)
+(nnmail-message-id-cache-file (expand-file-name "nnmail-cache" gnus-home-directory)
+							  )
 ;; (setq nnfolder-directory "~/.emacs.d/var/mail/archive")
-(setq gnus-dribble-directory mwb-init-backup-unwanted-directory)
+(gnus-dribble-directory mwb-init-backup-unwanted-directory)
 #+end_src
 *** Scoring
 :PROPERTIES:

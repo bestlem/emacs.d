@@ -683,7 +683,7 @@ This package [[https://github.com/snosov1/toc-org][toc-org]] seems it might be u
 
 I think using treemacs is nearer what I need as puts menu in other window - although length matters. Also set the startup to show 2 levels.
 #+NAME: org_mark_2020-10-24T15-08-22+01-00_mini12.local_E0715861-9815-4AA9-8E93-095091F21C56
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 (use-package-elpa toc-org
   :hook (org-mode . toc-org-mode))
 #+end_src

@@ -24,7 +24,9 @@
  - path :: ~/src/Racket/realm.source
 ** RacketProgrammingtheFunWay
  - path :: ~/src/Racket/RacketProgrammingtheFunWay
-** mandlebrot
+** mandlebrot dropbox
+ - path :: ~/Library/CloudStorage/Dropbox/src/Racket/mandelbrot
+** mandlebrot src
  - path :: ~/src/Racket/mandelbrot
 ** dummy-load
  - path :: ~/src/Racket/dummy-load

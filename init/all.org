@@ -22,6 +22,7 @@ Memory is now in gcmh and out again.
 (defun init-mwb-hook-after-init ()
   (interactive)
   (setq debug-on-error nil)
+  (setq debug-on-error t)
   (setq debug-on-quit nil)
   (setq file-name-handler-alist file-name-handler-alist-old
 		gc-cons-percentage 0.1)

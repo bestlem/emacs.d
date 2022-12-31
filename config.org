@@ -120,6 +120,7 @@ In this case var and overlap no-littering
 ** Straight
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220614T204548.065961
+:header-args: :tangle no
 :END:
 Lets try straight,
 Allows some forks and emacs_wiki to be dealt with as standard.
@@ -202,6 +203,87 @@ Unfortunalt expand-region uses the newer one
 #+begin_src emacs-lisp :tangle no
 (add-to-list 'straight-built-in-pseudo-packages 'org)
 #+end_src
+*** Load use-package
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20221231T180402.455625
+:END:
+#+NAME: org_mark_mini20.local_20221231T180402.404202
+#+begin_src emacs-lisp
+(straight-use-package 'use-package)
+#+end_src
+** Elpaca
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20221231T180402.453117
+:END:
+*** Set paths
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20221231T180402.450586
+:END:
+#+NAME: org_mark_mini20.local_20221231T180402.407128
+#+begin_src emacs-lisp
+(defvar elpaca-directory (expand-file-name "elpaca/" mwb-emacs-work-dir))
+(defvar elpaca-builds-directory (expand-file-name (concat "builds-" emacs-version) elpaca-directory))
+#+end_src
+*** Bootstrap
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20221231T180402.447650
+:END:
+This uses a feature branch.
+#+NAME: org_mark_mini20.local_20221231T180402.409206
+#+begin_src emacs-lisp
+(defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
+                       :ref "feat/new-elpaca-wait"
+                       :build (:not elpaca--activate-package)))
+
+(when-let ((repo  (expand-file-name "repos/elpaca/" elpaca-directory))
+           (build (expand-file-name "elpaca/" elpaca-builds-directory))
+           (order (cdr elpaca-order))
+           ((add-to-list 'load-path (if (file-exists-p build) build repo)))
+           ((not (file-exists-p repo))))
+  (condition-case-unless-debug err
+      (if-let ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
+               ((zerop (call-process "git" nil buffer t "clone"
+                                     (plist-get order :repo) repo)))
+               (default-directory repo)
+               ((zerop (call-process "git" nil buffer t "checkout"
+                                     (or (plist-get order :ref) "--")))))
+          (progn
+            (byte-recompile-directory repo 0 'force)
+            (require 'elpaca)
+            (and (fboundp 'elpaca-generate-autoloads)
+                 (elpaca-generate-autoloads "elpaca" repo))
+            (kill-buffer buffer))
+        (error "%s" (with-current-buffer buffer (buffer-string))))
+    ((error)
+     (warn "%s" err)
+     (delete-directory repo 'recursive))))
+(require 'elpaca-autoloads)
+(add-hook 'after-init-hook #'elpaca-process-queues)
+(elpaca `(,@elpaca-order))
+#+end_src
+*** use-package
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20221231T180402.443446
+:END:
+#+NAME: org_mark_mini20.local_20221231T180402.412822
+#+begin_src emacs-lisp
+;; Install use-package
+(elpaca use-package
+		;; Enable :eplaca keyword support
+		(elpaca-use-package-mode)
+		;; Assume :elpaca t for packages unless otherwise specified.
+		(setq elpaca-use-package-by-default t)
+		)
+#+end_src
+*** Build queues
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20221231T180735.618367
+:END:
+#+NAME: org_mark_mini20.local_20221231T180735.580311
+#+begin_src emacs-lisp
+;; Process use-package's queue. This will block!
+(elpaca-wait)
+#+end_src
 ** Macros to set up how modes are set up
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:A3665416-954F-4BD9-B55F-86949CFA7719
@@ -218,7 +300,6 @@ Ideally I will use as per hemacs use-feature if on load-path and use-package if 
 ;; (unless (package-installed-p 'use-package)
 ;;   (package-refresh-contents)
 ;;   (package-install 'use-package))
-(straight-use-package 'use-package)
 
 ;; Enable use-package
 (eval-when-compile
@@ -226,7 +307,7 @@ Ideally I will use as per hemacs use-feature if on load-path and use-package if 
   (require 'use-package)
   (setq bind-key-describe-special-forms t)
   ;; (setq use-package-always-defer t)
-  (setq straight-use-package-by-default t)
+  ;; (setq straight-use-package-by-default t)
   (setq byte-compile-current-buffer t)
   (if init-file-debug
       (setq use-package-verbose t
@@ -249,7 +330,8 @@ Use package just off load-path
   (declare (indent 1))
   `(use-package ,name
 	 :ensure nil
-	 :straight nil
+	 ;:straight nil
+	 :elpaca nil
      ,@args))
 #+end_src
 **** use-package-elpa
@@ -265,8 +347,7 @@ use-package using :ensure t
 (defmacro use-package-elpa (name &rest args)
   (declare (indent 1))
   `(use-package ,name
-	 :ensure t
-     ,@args))
+	,@args))
 #+end_src
 *** Profile/Benchmark init
 :PROPERTIES:

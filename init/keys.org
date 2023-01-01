@@ -305,34 +305,6 @@ Deal with stuff done by Aquamacs and original mac-key-mode
   :if *aquamacs*
   :demand)
 #+end_src
-** Mac key mode
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20220701T094925.499637
-:END:
-Do the main bindings. Needed for macport so use for GNU as well.
-#+NAME: org_mark_mini20.local_20220701T094925.469704
-#+begin_src emacs-lisp
-(use-feature mac-key-mode
-  :unless *aquamacs*
-  :straight (:host github :repo "bestlem/mac-key-mode"
-             :local-repo "../local-repos/mac-key-mode") ; not a fork as this is old
-  :demand
-  :diminish
-  :config (mac-key-mode 1)
-  (unbind-key "<C-down-mouse-1>" mac-key-mode-map))
-#+end_src
-
-** Choose mode map
-:PROPERTIES:
-:ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:27CB584A-8AD0-44AD-B508-D9765EBFD3A4
-:END:
-Both Aquamacs and mac-keys-mode introduce a map for macOS keys. Unfortunately it is not the same one. So lets add indirection.
-#+NAME: org_mark_2020-10-01T11-27-32+01-00_mini12.local_EDE062E4-8660-4455-B106-B376CA99E96C
-#+begin_src emacs-lisp
-(setq macos-key-map (if *aquamacs*
-                        'osx-key-mode-map
-                      'mac-key-mode-map))
-#+end_src
 * Name keys
 :PROPERTIES:
 :ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:069F9DA8-F579-40AF-86F2-ECE349FF6181
@@ -999,7 +971,7 @@ Tried inherit to set f19 s as mode dependant but seems not to work with pretty h
 :END:
 Used for some window management in the hydras.
 #+NAME: org_mark_mini20.local_20220621T085721.215336
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package-elpa ace-window
   :commands ace-window
   ace-delete-window
@@ -1292,7 +1264,7 @@ _b_: backward-char      _W_: backward-word      _p_: previous-line
 _s_: forward sentence   _a_: forward paragraph  _g_: forward page
 _S_: backward sentence  _A_: backward paragraph _G_: backward page
 
- _B_: buffer list       _i_: window
+ _B_: buffer list
 _<left>_: previous buffer   _<right>_: next buffer
 _<up>_: scroll-up           _<down>_: scroll-down
 
@@ -1315,7 +1287,7 @@ _<_ beginning of buffer _>_ end of buffer _m_: set mark _/_: jump to mark
   ("G" backward-page)
   ("<right>" next-buffer)
   ("<left>" previous-buffer)
-  ("i" ace-window :color blue)
+  ;("i" ace-window :color blue)
   ("m" org-mark-ring-push)
   ("/" org-mark-ring-goto :color blue)
   ("B" counsel-buffers)

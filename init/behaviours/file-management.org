@@ -452,8 +452,8 @@ Now use a fork to allow search of ignored files.
 #+NAME: org_mark_mini20.local_20220527T140337.009175
 #+begin_src emacs-lisp
 (use-package-elpa deadgrep
-  :straight (:fork (:repo "bestlem/deadgrep" :branch "work")
-			 :local-repo  "../local-repos/deadgrep")
+  :elpaca (:fork (:repo "bestlem/deadgrep" :branch "work")
+			 :local-repo  "../../local-repos/deadgrep")
   :commands deadgrep
   :bind (:map deadgrep-mode-map
 		 ("<double-mouse-1>" . deadgrep-visit-result-other-window)

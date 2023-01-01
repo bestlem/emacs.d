@@ -625,7 +625,7 @@ ALso see https://github.com/amno1/org-hide-properties or https://github.com/org-
 #+NAME: org_mark_mini20.local_20220605T223855.714238
 #+begin_src emacs-lisp :tangle no
 (use-package-elpa org-hide-properties
-  :straight (:host github :repo  "amno1/org-hide-properties" )
+  :elpaca (:host github :repo  "amno1/org-hide-properties" )
   :hook (org-mode . org-hide-properties-mode)
   :config
   (major-mode-hydra-define+ org-mode nil
@@ -669,7 +669,7 @@ Normal org-indent does not work. See [[https://github.com/minad/org-modern/issue
 #+NAME: org_mark_mini20.local_20220628T124925.624904
 #+begin_src emacs-lisp
 (use-package-elpa org-modern-indent
-  :straight (:host github :repo "jdtsmith/org-modern-indent")
+  :elpaca (:host github :repo "jdtsmith/org-modern-indent")
   ;; :straight or :load-path here, to taste
   :custom (org-startup-indented t)
   :hook

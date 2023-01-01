@@ -388,7 +388,7 @@ Show message with timestamp - commented out
 	(setq mwb-message-timestamp t)
     (message "add timestamp")))
 
-(add-hook 'after-init-hook 'mwb-message-remove-timediff)
+(add-hook 'elpaca-after-init-hook 'mwb-message-remove-timediff)
 #+end_src
 ** Code to do loading
 :PROPERTIES:

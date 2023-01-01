@@ -151,8 +151,8 @@ I modified to use python's python-mode
   #+NAME: org_mark_mini20.local_20220815T132525.327650
   #+begin_src emacs-lisp
 (use-package-elpa xonsh-mode
-  :straight (:fork (:repo "bestlem/xonsh-mode" :branch "python-mode")
-			 :local-repo "../local-repos/xonsh-mode")
+  :elpaca (:fork (:repo "bestlem/xonsh-mode" :branch "python-mode")
+			 :local-repo "../../local-repos/xonsh-mode")
   :mode "\\.xsh\\'"
   :init
   ;; Need to hard code and not copy python as python.el sets in python-mode
@@ -181,8 +181,8 @@ Take this out until I do python again. conda.el uses pythonic-activate and that 
 #+NAME: org_mark_mini20.local_20210127T110448.825291
  #+begin_src emacs-lisp :tangle no
 (use-package-elpa conda
-  :straight (:fork (:repo "bestlem/conda.el" :branch "python-mode")
-			 :local-repo  "../local-repos/conda.el")
+  :elpaca (:fork (:repo "bestlem/conda.el" :branch "python-mode")
+			 :local-repo  "../../local-repos/conda.el")
   :demand
   :after (any python python-mode)
   :commands conda-env-activate

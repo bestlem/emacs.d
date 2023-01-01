@@ -96,7 +96,7 @@ in `modi/variables-to-be-watched'."
 	(setq mwb-message-timestamp t)
     (message "add timestamp")))
 
-(add-hook 'after-init-hook 'mwb-message-remove-timediff)
+(add-hook 'elpaca-after-init-hook 'mwb-message-remove-timediff)
 ;; org_mark_mini20.local_20220313T215512.598628 ends here
 
 ;; [[file:init.org::org_mark_2020-01-23T20-40-42+00-00_mini12_315EE687-FC28-4D41-810D-4FF19AA66CD4][org_mark_2020-01-23T20-40-42+00-00_mini12_315EE687-FC28-4D41-810D-4FF19AA66CD4]]

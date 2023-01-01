@@ -464,7 +464,7 @@ Seems to be replacing selectrum.
 #+NAME: org_mark_mini20.local_20220610T223433.967130
 #+begin_src emacs-lisp
 (use-package-elpa vertico
-  :straight (vertico :files (:defaults "extensions/*"))
+  :elpaca (vertico :files (:defaults "extensions/*"))
   :demand
   :init
   (vertico-mode 1)

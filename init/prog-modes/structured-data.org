@@ -134,7 +134,7 @@ See as a tree.
 Loading issue see https://github.com/DamienCassou/json-navigator/issues/22
 #+NAME: org_mark_mini20.local_20220727T183214.995481
      #+begin_src emacs-lisp
-(add-to-list 'straight-built-in-pseudo-packages 'hierarchy)
+;(add-to-list 'straight-built-in-pseudo-packages 'hierarchy)
 (use-package-elpa json-navigator
   :demand
   :after json-mode)

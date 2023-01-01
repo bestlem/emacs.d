@@ -53,11 +53,11 @@ See https://github.com/alphapapa/prism.el/issues/8 to add
 								   :colors (modus-themes-with-colors
 											 `(,fg-special-cold
 											   ,magenta
-											   ,magenta-alt-other
-											   ,cyan-alt-other
+											   ,magenta-cooler
+											   ,cyan-cooler
 											   ,fg-main
-											   ,blue-alt
-											   ,red-alt-other
+											   ,blue-warmer
+											   ,red-cooler
 											   ,cyan))))
 		((eq prism-num-faces 16) (prism-set-colors
 								   :desaturations '(0) ; do not change---may lower the contrast ratio
@@ -65,20 +65,20 @@ See https://github.com/alphapapa/prism.el/issues/8 to add
 								   :colors (modus-themes-with-colors
 											 (list magenta
 												   fg-main
-												   cyan-alt-other
-												   magenta-alt-other
+												   cyan-cooler
+												   magenta-cooler
 												   blue
-												   magenta-alt
-												   cyan-alt
-												   red-alt-other
+												   magenta-warmer
+												   cyan-warmer
+												   red-cooler
 												   green
 												   fg-main
 												   cyan
 												   yellow
-												   blue-alt
-												   red-alt
-												   green-alt-other
-												   fg-special-warm)))
+												   blue-warmer
+												   red-warmer
+												   green-cooler
+												   fg-alt)))
 		 )
 		(t 'nil))
 
@@ -263,8 +263,8 @@ Put markers in the fringe which messed up lispy and is slow - I suspect not for 
 #+NAME: org_mark_mini20.local_20220824T134532.207188
 #+begin_src emacs-lisp
 (use-package-elpa hideshowvis
-  :straight (:fork (:repo "bestlem/hideshowvis" :branch "work")
-             :local-repo  "../local-repos/hideshowvis")
+  :elpaca (:fork (:repo "bestlem/hideshowvis" :branch "work")
+             :local-repo  "../../local-repos/hideshowvis")
   :commands (hideshowvis-enable)
   :init
   (defun hideshowvis-mwb-enable ()

@@ -3,10 +3,7 @@
 #+PROPERTY:header-args :cache yes :tangle yes :comments link
 #+STARTUP: content
 This file has no complex weaving and so can be tangled without using org-mode.
-* Init environment
-:PROPERTIES:
-:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:714AABB4-0858-48B3-BFDB-0F9D17A40C40
-:END:
+
 The minimum setup needed to load the rest.
 ** Various constants
 :PROPERTIES:
@@ -153,7 +150,7 @@ To use a forked straight.el
 (defvar straight-base-dir)
 (defvar straight-profiles)
 (setq straight-base-dir mwb-emacs-work-dir)
-(setq mwb-straight-local-repos (expand-file-name "local-repos" mwb-emacs-work-dir))
+(setq mwb-local-repos (expand-file-name "local-repos" mwb-emacs-work-dir))
 (setq straight-profiles `((nil . ,mwb-straight-profile)))
 (setq straight-use-version-specific-build-dir t)
 (setq straight-vc-git-default-protocol 'ssh)
@@ -284,12 +281,12 @@ This uses a feature branch.
 ;; Process use-package's queue. This will block!
 (elpaca-wait)
 #+end_src
-** Macros to set up how modes are set up
+** Helpers to set up how modes are set up
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:A3665416-954F-4BD9-B55F-86949CFA7719
 :END:
 Basically use-package and helpers - strictly some of these can be left to later.
-*** use-package
+*** use-package config
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:3D4EAA9E-BE50-474E-8111-F20ACA6A1703
 :END:
@@ -380,18 +377,14 @@ Well does not show what takes time - just which file. So I use more files. It al
 (use-package-elpa benchmark-init
   :config
   ;; To disable collection of benchmark data after init is done.
-  (add-hook 'after-init-hook 'benchmark-init/deactivate))
+  (add-hook 'elpaca-after-init-hook 'benchmark-init/deactivate))
 #+end_src
-*** Directories
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20220904T161143.424342
-:END:
-This is after much messing around
 *** Extras needed for loading
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:8EEFB5D5-EB93-442F-8ECA-CB62A943A310
 :END:
  These are used in the use-package macro
+ Other packages are used elsewhere in init and so have to be force loaded
 **** No littering
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220904T161143.422027
@@ -605,48 +598,6 @@ Need to alter list
   :disabled
   :config (key-chord-mode 1))
 #+end_src
-**** use-package load path
-:PROPERTIES:
-:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:25E6B29E-1FD7-4FB8-BA7C-5546A45CFA00
-:END:
-The code is relative to this file and not user-emacs-directory
-So add :mwb-load-path as a new key to use-package
-Note that this is making the addition explicit so for example the aquamacs path does not get added in Aquamacs.
-Not really needed as should set load-path
-#+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_A19E700E-BA25-4246-8752-B775A2177D5D
-#+begin_src emacs-lisp
-(defun use-package-normalize-mwb-paths (label arg &optional recursed)
-  "Normalize a list of filesystem paths."
-  (cond
-   ((and arg (or (use-package-non-nil-symbolp arg) (functionp arg)))
-    (let ((value (use-package-normalize-value label arg)))
-      (use-package-normalize-paths label (eval value))))
-   ((stringp arg)
-    (let ((path (if (file-name-absolute-p arg)
-                    arg
-                  (mwb-user-emacs-file arg))))
-      (list path)))
-   ((and (not recursed) (listp arg) (listp (cdr arg)))
-    (mapcar #'(lambda (x)
-                (car (use-package-normalize-paths label x t))) arg))
-   (t
-    (use-package-error
-     (concat label " wants a directory path, or list of paths")))))
-
-
-;;;; :mwb-load-path
-
-(defun use-package-normalize/:mwb-load-path (_name keyword args)
-  (use-package-as-one (symbol-name keyword) args
-    #'use-package-normalize-mwb-paths))
-
-(defun use-package-handler/:mwb-load-path (name keyword arg rest state)
-  (use-package-handler/:load-path name keyword arg rest state))
-
-(setq use-package-keywords
-      (mwb-insert-before-element :load-path :mwb-load-path  use-package-keywords))
-#+end_src
-
 **** load-path
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:BBB5C272-C2B4-4F38-948C-ED758D56E6A4
@@ -728,11 +679,7 @@ Treemacs icons are better but they are purely keyed off file extensions. All the
 :END:
 #+NAME: org_mark_mini20.local_20210602T212702.684671
 #+begin_src emacs-lisp
-(message "start jp-icons")
-(use-feature jp-icons
-  :demand
-  :mwb-load-path "site-lisp/jerrypnz")
-(message "end jp-icons")
+(use-feature jp-icons :demand)
 #+end_src
 
 ****** My icon code
@@ -764,6 +711,88 @@ Treemacs icons are better but they are purely keyed off file extensions. All the
     (setq major-mode-hydra-title-generator #'jp-major-mode-hydra-title-generator)))
 #+end_src
 
+
+**** Mac key mode
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220701T094925.499637
+:END:
+Do the main bindings. Needed for macport so use for GNU as well.
+#+NAME: org_mark_mini20.local_20220701T094925.469704
+#+begin_src emacs-lisp
+(message "looking at mac-key-mode")
+(use-package-elpa mac-key-mode
+  :unless *aquamacs*
+  :elpaca (:host github :repo "bestlem/mac-key-mode"
+           :local-repo "../../local-repos/mac-key-mode") ; not a fork as this is old
+  :demand
+  :diminish
+  :config (mac-key-mode 1)
+  (unbind-key "<C-down-mouse-1>" mac-key-mode-map))
+#+end_src
+***** Choose mode map
+:PROPERTIES:
+:ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:27CB584A-8AD0-44AD-B508-D9765EBFD3A4
+:END:
+Both Aquamacs and mac-keys-mode introduce a map for macOS keys. Unfortunately it is not the same one. So lets add indirection.
+#+NAME: org_mark_2020-10-01T11-27-32+01-00_mini12.local_EDE062E4-8660-4455-B106-B376CA99E96C
+#+begin_src emacs-lisp
+(setq macos-key-map (if *aquamacs*
+                        'osx-key-mode-map
+                      'mac-key-mode-map))
+#+end_src
+*** Elpaca force load
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20230101T114327.039474
+:END:
+#+NAME: org_mark_mini20.local_20230101T114327.011984
+#+begin_src emacs-lisp
+(elpaca-wait)
+#+end_src
+*** use-package load path
+:PROPERTIES:
+:ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:25E6B29E-1FD7-4FB8-BA7C-5546A45CFA00
+:END:
+The code is relative to this file and not user-emacs-directory
+So add :mwb-load-path as a new key to use-package
+Note that this is making the addition explicit so for example the aquamacs path does not get added in Aquamacs.
+Not really needed as should set load-path
+#+NAME: org_mark_2020-02-06T12-27-27+00-00_mini12_A19E700E-BA25-4246-8752-B775A2177D5D
+#+begin_src emacs-lisp
+(defun use-package-normalize-mwb-paths (label arg &optional recursed)
+  "Normalize a list of filesystem paths."
+  (cond
+   ((and arg (or (use-package-non-nil-symbolp arg) (functionp arg)))
+    (let ((value (use-package-normalize-value label arg)))
+      (use-package-normalize-paths label (eval value))))
+   ((stringp arg)
+    (let ((path (if (file-name-absolute-p arg)
+                    arg
+                  (mwb-user-emacs-file arg))))
+      (list path)))
+   ((and (not recursed) (listp arg) (listp (cdr arg)))
+    (mapcar #'(lambda (x)
+                (car (use-package-normalize-paths label x t))) arg))
+   (t
+    (use-package-error
+     (concat label " wants a directory path, or list of paths")))))
+
+
+;;;; :mwb-load-path
+
+(defun use-package-normalize/:mwb-load-path (_name keyword args)
+  (use-package-as-one (symbol-name keyword) args
+    #'use-package-normalize-mwb-paths))
+
+(defun use-package-handler/:mwb-load-path (name keyword arg rest state)
+  (use-package-handler/:load-path name keyword arg rest state))
+
+(setq use-package-keywords
+      (mwb-insert-before-element :load-path :mwb-load-path  use-package-keywords))
+#+end_src
+*** Local packages needed
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20230101T123656.209609
+:END:
 ** Customisation file
 :PROPERTIES:
 :ID:       org_mark_2020-02-06T12-27-27+00-00_mini12:A28603F3-9100-4C41-855A-5D202E7ACFE3
@@ -811,7 +840,7 @@ The emacs basic version. Need it for dependency load use by initsplit
 :END:
 More Drew Adams https://www.emacswiki.org/emacs/CustomizingAndSaving#CustomizePlus
 #+NAME: org_mark_2020-10-29T09-11-06+00-00_mini12.local_D3E6606B-7E85-4FD1-BA2D-3B40885ED97B
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package-elpa cus-edit+
   :disabled                             ; messes up switch-to-buffers advice
   :after cus-edit
@@ -906,11 +935,12 @@ Needs to load immeduiately to load the other customization files
     (unless (string-equal system-type "windows") "MSWindows"))))
 
 #+end_src
-** Key setup
+** TODO Key setup
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220701T033523.884122
 :END:
 As mac-key-mode is a minor needs to be before org-mode.
+But as now elpaca makes me load this earlier this could be moved to after org
 #+NAME: org_mark_mini20.local_20220701T033523.860467
 #+begin_src emacs-lisp
 (mwb-init-load "init/keys" "no-org")
@@ -946,7 +976,7 @@ occur before loading Org-Mode. *Never* remove this from a submitted ECM.
 :END:
 #+NAME: org_mark_mini20.local_20220625T123220.259788
 #+begin_src emacs-lisp
-(use-package-elpa org
+(use-feature org
   :commands org-mode)
 #+end_src
 *** Grettke babel

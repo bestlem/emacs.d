@@ -17,6 +17,7 @@ We need the environment set up before we load files. Appearance and keys are lat
 :END:
 Run this immediately after init to set a more reasonable setup
 Memory is now in gcmh and out again.
+Elpaca runs on after-init-hook so change the hook
 #+NAME: org_mark_mini20.local_20220313T215313.571669
 #+begin_src emacs-lisp
 (defun init-mwb-hook-after-init ()
@@ -29,7 +30,7 @@ Memory is now in gcmh and out again.
   (setq frame-inhibit-implied-resize orig-frame-inhibit-implied-resize)
   ;; (garbage-collect)
   (message "Emacs init-time %s" (emacs-init-time)))
-(add-hook 'after-init-hook #'init-mwb-hook-after-init)
+(add-hook 'elpaca-after-init-hook #'init-mwb-hook-after-init)
 #+end_src
 
 * memory
@@ -94,11 +95,6 @@ From [[https://www.reddit.com/r/emacs/comments/ck4zb3/trying_to_understand_emacs
                     for free = (file-size-human-readable free)
                     concat (format "%s: %s + %s = %s\n" type used free total))))
 #+end_src
-
-#+RESULTS[bb5f47ba8d2eadf96ea65aac260e9e61e1c42162]:
-#+begin_EXAMPLE
-ap/garbage-collect
-#+end_EXAMPLE
 
 * Setting variables with a check on type
 :PROPERTIES:
@@ -268,7 +264,18 @@ Make it all UTF-8.  From http://ergoemacs.org/emacs/emacs_make_modern.html but s
 (set-default-coding-systems 'utf-8)
 
 #+end_src
+** Appearance
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20230101T170038.101666
+:END:
+These have to be loaded earlier to deal with elpaca So needs a force wait for the queue,
+#+NAME: org_mark_mini20.local_20230101T170038.081982
+#+begin_src emacs-lisp
+(mwb-init-load "init/appearance")
+(mwb-init-load "init/treemacs")
 
+(elpaca-wait)
+#+end_src
 ** Minor mode related
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220610T203957.981736
@@ -386,21 +393,3 @@ This is minmal as *scratch* is always created.
     :config
     (persistent-scratch-setup-default)))
 #+end_src
-*** Windows
-:PROPERTIES:
-:ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:E5DA693A-871D-4201-B814-758C4738654A
-:END:
-I want two windows in a frame and treemacs
-
-Emacs 27 seems to have a timing issue pop to buffer seems not to see the spare window unless after treemacs
-#+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_60953FEE-7E07-48DE-AD1C-66D90DAE2D5A
-#+begin_src emacs-lisp
-(defun init-window-setup ()
-  (split-window-horizontally)
-  (treemacs)
-  (pop-to-buffer "*Messages*"))
-
-(add-hook 'window-setup-hook
-          #'init-window-setup)
-#+end_src
-

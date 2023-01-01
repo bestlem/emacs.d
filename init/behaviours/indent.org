@@ -73,13 +73,13 @@ Don't use the defaults look at the file
 :ID:       org_mark_mini20.local:20210526T185848.660684
 :END:
 #+NAME: org_mark_mini20.local_20210526T195505.023756
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package-elpa guess-style
   :commands guess-style-guess-all
   guess-style-info-mode
   global-guess-style-info-mode
-  )
-(global-guess-style-info-mode 1)
+  :config
+  (global-guess-style-info-mode 1))
 #+end_src
 * [[https://github.com/Malabarba/aggressive-indent-mode][Aggressive indent]]
 :PROPERTIES:

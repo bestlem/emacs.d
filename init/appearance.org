@@ -222,7 +222,7 @@ The easiest way.
 #+NAME: org_mark_mini20.local_20220627T102146.106862
 #+begin_src emacs-lisp
 (use-package-elpa ligature
-  :straight (:host github :repo "mickeynp/ligature.el")
+  :elpaca (:host github :repo "mickeynp/ligature.el")
   :unless *macport*
   :config
   (defvar ligatures-jetbrains
@@ -666,11 +666,12 @@ vivendi is dark
   ;; Enable the theme files only as local
   ;; (use-package modus-operandi-theme)
   ;; (use-package modus-vivendi-theme)
-  (modus-themes-load-themes)
+  ;; (modus-themes-load-themes)
+  (message "Modus themes init")
   :config
   ;; Load the theme of your choice
-  (modus-themes-load-vivendi)
-
+  ;(modus-themes-load-vivendi)
+  (load-theme 'modus-vivendi :no-confim)
   :custom
   (modus-themes-bold-constructs t)
   (modus-themes-completions
@@ -727,4 +728,21 @@ Reduce the number of times the bell rings. Turn off the bell for the listed func
                         cua-scroll-down
                         cua-scroll-up))
           (ding))))
+#+end_src
+** Windows
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20230101T164802.284368
+:END:
+I want two windows in a frame and treemacs
+
+Emacs 27 seems to have a timing issue pop to buffer seems not to see the spare window unless after treemacs
+#+NAME: org_mark_mini20.local_20230101T164802.258510
+#+begin_src emacs-lisp
+(defun init-window-setup ()
+  (split-window-horizontally)
+  (treemacs)
+  (pop-to-buffer "*Messages*"))
+
+(add-hook 'window-setup-hook
+          #'init-window-setup)
 #+end_src

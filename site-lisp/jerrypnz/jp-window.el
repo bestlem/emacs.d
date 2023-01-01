@@ -9,7 +9,7 @@
 ;;; Code:
 
 (require 'pretty-hydra)
-(require 'ace-window)
+;; (require 'ace-window)
 ;; (require 'move-border)
 ;; (require 'zoom-frm)
 (require 'jp-icons)
@@ -47,10 +47,11 @@
 									  :quit-key "q")
   ("Actions"
    (("TAB" other-window "switch")
-    ("x" ace-delete-window "delete")
-    ("m" ace-delete-other-windows "maximize")
-    ("s" ace-swap-window "swap" )
-    ("a" ace-select-window "select"))
+    ;; ("x" ace-delete-window "delete")
+    ;; ("m" ace-delete-other-windows "maximize")
+    ;; ("s" ace-swap-window "swap" )
+    ;; ("a" ace-select-window "select")
+    )
 
    "Resize"
    (

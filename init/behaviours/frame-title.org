@@ -72,5 +72,5 @@ This calculates the string to be evaluated
 
 #+NAME: org_mark_mini20.local_20210606T230814.836007
 #+begin_src emacs-lisp
-(add-hook 'after-init-hook 'mwb-activate-form-title)
+(add-hook 'elpaca-after-init-hook 'mwb-activate-form-title)
 #+end_src

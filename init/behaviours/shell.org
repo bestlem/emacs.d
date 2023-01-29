@@ -59,7 +59,6 @@ As noted the aquamacs way might be better. But at the moment all disabled.
 #+begin_src emacs-lisp
 (setq exec-path-from-shell-debug nil)
 (use-package-elpa exec-path-from-shell
-  :disabled
   :when  (and (not *aquamacs*) (memq window-system '(mac ns x)))
   :init
   (setq exec-path-from-shell-variables '("PATH" "MANPATH" "CONDA_PREFIX"))

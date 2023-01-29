@@ -1,0 +1,45 @@
+#+TITLE:  Nix
+#+AUTHOR: Mark Bestley
+#+DATE:   10 Jan 2023
+#+PROPERTY:header-args :tangle  yes
+See John Weigley for more.
+
+* Mode
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20230110T215640.016716
+:END:
+For editing nix files.
+#+NAME: org_mark_mini20.local_20230110T215639.992629
+#+begin_src emacs-lisp
+(use-package-elpa nix-mode
+  :mode "\\.nix\\'"
+  :mode-hydra ((:idle 0.5)
+               ("Flakes"
+                (("s" nix3-flake-show "Show")
+                 ("S" nix3-flake-show-url "Remote show")
+                 ("i" nix3-flake-init "Init")
+                 ("n" nix3-flake-new "New")
+                 ("t" nix3-flake-tranient "Transient")))
+               )
+  )
+#+end_src
+
+* Flakes
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20230113T120501.928066
+:END:
+A cover for nix flake
+Nut does not run on darwin
+#+NAME: org_mark_mini20.local_20230113T120501.923647
+#+begin_src emacs-lisp
+(use-feature nix3
+  :straight (:host github :repo "emacs-twist/nix3.el"
+										; not a fork as this is not in MELP etc
+             :local-repo "../../local-repos/nix3.el")
+  :commands nix3-transient
+  nix3-flake-show
+  nix3-flake-show-url
+  nix3-flake-init
+  nix3-flake-new
+  )
+#+end_src

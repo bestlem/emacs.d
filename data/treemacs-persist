@@ -5,6 +5,17 @@
  - path :: ~/Library/CloudStorage/Dropbox/env/dotfiles
 ** Org
  - path :: ~/Library/CloudStorage/Dropbox/Docs/org
+** nixpkgs shared
+ - path :: ~/Public/nix
+** nixpkgs
+ - path :: ~/.config/nixpkgs
+** Local out of .emacs.d
+ - path :: ~/.local/emacs
+** xonsh
+ - path :: ~/src/python/xonsh
+* Emacs
+** My init .emacs.d
+ - path :: ~/.emacs.d
 ** Local out of .emacs.d
  - path :: ~/.local/emacs
 ** emacs-init
@@ -13,10 +24,35 @@
  - path :: ~/src/macos/aquamacs-emacs
 ** emacs-macport-code
  - path :: ~/src/ThirdParty/emacs-mac
-** xonsh
- - path :: ~/src/python/xonsh
 ** emacs.elpaca
  - path :: ~/emacs.elpaca
+** emacs-elpaca-full
+ - path :: ~/emacs-elpaca-full
+* Nix
+** nixpkgs shared
+ - path :: ~/Public/nix
+** nix-simple
+ - path :: ~/Public/nix-simple
+** misterio77
+ - path :: ~/src/nix/misterio77
+** luxos
+ - path :: ~/src/nix/luxos
+** reconrode
+ - path :: ~/src/nix/reckenrode
+** Nix Starter configs
+ - path :: ~/src/nix/nix-starter-configs
+** thexyno
+ - path :: ~/src/nix/thexyno
+** shaunsingh
+ - path :: ~/src/nix/shaunsingh
+** srid
+ - path :: ~/src/nix/srid
+** Mattias
+ - path :: ~/src/nix/Matthias
+** sebastiant
+ - path :: ~/src/nix/sebastiant
+** nixpkgs
+ - path :: ~/.config/nixpkgs
 * Racket
 ** my realm
  - path :: ~/src/Racket/realm

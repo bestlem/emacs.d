@@ -101,7 +101,8 @@ Emacs 28 look at [[help:prog-context-menu][prog-context-menu]]
  ;;("<mouse-5>" . treemacs-rightclick-menu)
  ("<f5>" . treemacs-switch-workspace)
  ("<mouse-2>" . treemacs-rightclick-menu)
- ("<C-f5>" . treemacs-edit-workspaces))
+ ("<C-f5>" . treemacs-edit-workspaces)
+ ("<f4>" . treemacs-edit-workspaces))
 #+end_src
 
 * Hydra

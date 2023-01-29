@@ -112,6 +112,56 @@ Edit  the RELAX NG compact schemas for nxml. (This must have been in my old emac
   :init
   (setq rnc-indent-level 3))
 #+end_src
+
+** Apple plist
+:PROPERTIES:
+:ID:       org_mark_mini20:20230129T103159.289848
+:END:
+
+*** Plist mode
+:PROPERTIES:
+:ID:       org_mark_mini20:20230129T110027.621038
+:END:
+There is a [[https://github.com/gonewest818/osx-plist][plist mode]] for XML + hook to convert from binary
+#+NAME: org_mark_mini20_20230129T110113.155635
+#+begin_src emacs-lisp :tangle no
+(use-package-elpa osx-plist
+  :mode (rx (seq ".plist" string-end))
+  :init
+  ;; Allow editing of binary .plist files.
+  (add-to-list 'jka-compr-compression-info-list
+			   ["\\.plist$"
+				"converting text XML to binary plist"
+				"plutil"
+				("-convert" "binary1" "-o" "-" "-")
+				"converting binary plist to text XML"
+				"plutil"
+				("-convert" "xml1" "-o" "-" "-")
+				nil nil "bplist"])
+
+  ;;It is necessary to perform an update!
+  (jka-compr-update)
+  )
+#+end_src
+*** As json
+:PROPERTIES:
+:ID:       org_mark_mini20:20230129T110027.615223
+:END:
+There is also a [[https://jherrlin.github.io/posts/emacs-on-macos-monterey/][comment]] how to convert plist to and from json - which might be better.
+#+NAME: org_mark_mini20_20230129T110027.594296
+#+begin_src emacs-lisp
+(add-to-list 'jka-compr-compression-info-list
+			 ["\\.plist$"
+			  "converting text json to binary plist"
+			  "plutil"
+			  ("-convert" "binary1" "-o" "-" "-")
+			  "converting binary plist to text json"
+			  "plutil"
+			  ("-convert" "json" "-r " "-o" "-" "-")
+			  nil t "bplist"])
+;;It is necessary to perform an update!
+(jka-compr-update)
+#+end_src
 * Json
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:BB5E4DA3-3168-4AA7-9B08-6B3E11930CB2

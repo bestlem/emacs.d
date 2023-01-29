@@ -458,7 +458,11 @@ Now use a fork to allow search of ignored files.
   :bind (:map deadgrep-mode-map
 		 ("<double-mouse-1>" . deadgrep-visit-result-other-window)
 		 ("<mouse-2>" . deadgrep-toggle-file-results)
-		 ("<escape>" . deadgrep-kill-process))
+		 ("<escape>" . deadgrep-kill-process)
+		 ("<f5>"  . deadgrep-edit-mode)
+		 :map deadgrep-edit-mode-map
+		 ("<f5>"  . deadgrep-mode)
+		 )
   :config (unless (executable-find "rg")
 			(warning "Please install ripgrep ...")))
 #+end_src

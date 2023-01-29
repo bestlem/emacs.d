@@ -315,7 +315,7 @@ Do the main bindings. Needed for macport so use for GNU as well.
 (use-feature mac-key-mode
   :unless *aquamacs*
   :straight (:host github :repo "bestlem/mac-key-mode"
-             :local-repo "../local-repos/mac-key-mode") ; not a fork as this is old
+             :local-repo "../../local-repos/mac-key-mode") ; not a fork as this is old
   :demand
   :diminish
   :config (mac-key-mode 1)

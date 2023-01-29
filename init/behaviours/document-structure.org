@@ -264,7 +264,7 @@ Put markers in the fringe which messed up lispy and is slow - I suspect not for 
 #+begin_src emacs-lisp
 (use-package-elpa hideshowvis
   :straight (:fork (:repo "bestlem/hideshowvis" :branch "work")
-             :local-repo  "../local-repos/hideshowvis")
+             :local-repo  "../../local-repos/hideshowvis")
   :commands (hideshowvis-enable)
   :init
   (defun hideshowvis-mwb-enable ()

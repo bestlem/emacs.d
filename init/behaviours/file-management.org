@@ -453,7 +453,7 @@ Now use a fork to allow search of ignored files.
 #+begin_src emacs-lisp
 (use-package-elpa deadgrep
   :straight (:fork (:repo "bestlem/deadgrep" :branch "work")
-			 :local-repo  "../local-repos/deadgrep")
+			 :local-repo  "../../local-repos/deadgrep")
   :commands deadgrep
   :bind (:map deadgrep-mode-map
 		 ("<double-mouse-1>" . deadgrep-visit-result-other-window)

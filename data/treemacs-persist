@@ -5,8 +5,8 @@
  - path :: ~/Library/CloudStorage/Dropbox/env/dotfiles
 ** Org
  - path :: ~/Library/CloudStorage/Dropbox/Docs/org
-** nixpkgs shared
- - path :: ~/Public/nix
+** nix-simple
+ - path :: ~/Public/vm/nix-simple
 ** nixpkgs
  - path :: ~/.config/nixpkgs
 ** Local out of .emacs.d
@@ -29,14 +29,14 @@
 ** emacs-elpaca-full
  - path :: ~/emacs-elpaca-full
 * Nix
-** nixpkgs shared
- - path :: ~/Public/nix
 ** nix-simple
- - path :: ~/Public/nix-simple
+ - path :: ~/Public/vm/nix-simple
 ** misterio77
  - path :: ~/src/nix/misterio77
 ** luxos
  - path :: ~/src/nix/luxos
+** jweigley
+ - path :: ~/src/nix/jweigley
 ** reconrode
  - path :: ~/src/nix/reckenrode
 ** Nix Starter configs
@@ -53,6 +53,8 @@
  - path :: ~/src/nix/sebastiant
 ** nixpkgs
  - path :: ~/.config/nixpkgs
+** nixpkgs shared
+ - path :: ~/Public/nix
 * Racket
 ** my realm
  - path :: ~/src/Racket/realm

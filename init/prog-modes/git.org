@@ -107,7 +107,7 @@ https://github.com/alphapapa/magit-todos
 			 magit-diff-buffer-file)
   :custom
   (magit-diff-refine-hunk t)
-  (magit-repository-directories '(("~/src/" . 2)
+  (magit-repository-directories '(("~/Developer/" . 2)
 								  (org-directory . 0)))
   (magit-log-margin
    '(t "%Y-%m-%d %H:%M " magit-log-margin-width t 18))

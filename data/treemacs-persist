@@ -12,18 +12,18 @@
 ** Local out of .emacs.d
  - path :: ~/.local/emacs
 ** xonsh
- - path :: ~/src/python/xonsh
+ - path :: ~/Developer/python/xonsh
 * Emacs
 ** My init .emacs.d
  - path :: ~/.emacs.d
 ** Local out of .emacs.d
  - path :: ~/.local/emacs
 ** emacs-init
- - path :: ~/src/ThirdParty/emacs-init
+ - path :: ~/Developer/ThirdParty/emacs-init
 ** aquamacs-emacs code
- - path :: ~/src/macos/aquamacs-emacs
+ - path :: ~/Developer/macos/aquamacs-emacs
 ** emacs-macport-code
- - path :: ~/src/ThirdParty/emacs-mac
+ - path :: ~/Developer/ThirdParty/emacs-mac
 ** emacs.elpaca
  - path :: ~/emacs.elpaca
 ** emacs-elpaca-full
@@ -32,67 +32,69 @@
 ** nix-simple
  - path :: ~/Public/vm/nix-simple
 ** misterio77
- - path :: ~/src/nix/misterio77
+ - path :: ~/Developer/ThirdParty/nix/misterio77
 ** luxos
- - path :: ~/src/nix/luxos
+ - path :: ~/Developer/ThirdParty/nix/luxos
 ** jweigley
- - path :: ~/src/nix/jweigley
+ - path :: ~/Developer/ThirdParty/nix/jweigley
 ** reconrode
- - path :: ~/src/nix/reckenrode
+ - path :: ~/Developer/ThirdParty/nix/reckenrode
 ** Nix Starter configs
- - path :: ~/src/nix/nix-starter-configs
+ - path :: ~/Developer/ThirdParty/nix/nix-starter-configs
 ** thexyno
- - path :: ~/src/nix/thexyno
+ - path :: ~/Developer/ThirdParty/nix/thexyno
 ** shaunsingh
- - path :: ~/src/nix/shaunsingh
+ - path :: ~/Developer/ThirdParty/nix/shaunsingh
 ** srid
- - path :: ~/src/nix/srid
+ - path :: ~/Developer/ThirdParty/nix/srid
 ** Mattias
- - path :: ~/src/nix/Matthias
+ - path :: ~/Developer/ThirdParty/nix/Matthias
 ** sebastiant
- - path :: ~/src/nix/sebastiant
+ - path :: ~/Developer/ThirdParty/nix/sebastiant
 ** nixpkgs
  - path :: ~/.config/nixpkgs
 ** nixpkgs shared
  - path :: ~/Public/nix
+** lillecarl
+ - path :: ~/Developer/ThirdParty/nix/lillecarl
 * Racket
 ** my realm
- - path :: ~/src/Racket/realm
+ - path :: ~/Developer/Racket/realm
 ** realm book
- - path :: ~/src/Racket/realm.source
+ - path :: ~/Developer/Racket/realm.source
 ** RacketProgrammingtheFunWay
- - path :: ~/src/Racket/RacketProgrammingtheFunWay
+ - path :: ~/Developer/Racket/RacketProgrammingtheFunWay
 ** mandlebrot dropbox
  - path :: ~/Library/CloudStorage/Dropbox/src/Racket/mandelbrot
 ** mandlebrot src
- - path :: ~/src/Racket/mandelbrot
+ - path :: ~/Developer/Racket/mandelbrot
 ** dummy-load
- - path :: ~/src/Racket/dummy-load
+ - path :: ~/Developer/Racket/dummy-load
 ** web
- - path :: ~/src/Racket/web
+ - path :: ~/Developer/Racket/web
 ** aoc21
- - path :: ~/src/Racket/aoc21
+ - path :: ~/Developer/Racket/aoc21
 ** racket-docker
- - path :: ~/src/Racket/racket-docker
+ - path :: ~/Developer/Racket/racket-docker
 ** PillowData
- - path :: ~/src/ThirdParty/PillowData
+ - path :: ~/Developer/ThirdParty/PillowData
 ** aoc-racket
- - path :: ~/src/ThirdParty/aoc-racket
+ - path :: ~/Developer/ThirdParty/aoc-racket
 * C based
 ** rftg
- - path :: ~/src/cpp/rftg
+ - path :: ~/Developer/cpp/rftg
 ** test_gtk
- - path :: ~/src/cpp/test_gtk
+ - path :: ~/Developer/cpp/test_gtk
 ** macports-ports
- - path :: ~/src/cpp/macports-ports
+ - path :: ~/Developer/cpp/macports-ports
 ** my-macports
- - path :: ~/src/my-macports
+ - path :: ~/Developer/my-macports
 * Swift
 ** SwiftUITutorial-Landmarks
- - path :: ~/src/Swift/SwiftUITutorial-Landmarks
+ - path :: ~/Developer/Swift/SwiftUITutorial-Landmarks
 ** JellyFin Swift
- - path :: ~/src/swift/JellyfinSwiftPlayer
+ - path :: ~/Developer/swift/JellyfinSwiftPlayer
 ** jellyfin server
- - path :: ~/src/ThirdParty/jellyfin
+ - path :: ~/Developer/ThirdParty/jellyfin
 ** 2048
- - path :: ~/src/Swift/2048 related
+ - path :: ~/Developer/Swift/2048 related

@@ -65,10 +65,11 @@
           "~/\\.cask/"
           "/Applications/"
           "~/Library/Preferences/Aquamacs Emacs/Packages"
-          "~/src/ThirdParty/"
+          "~/Developer/ThirdParty/"
           "emacs\\.d/elpa/"
           "straight/build"
-          "straight/repos/"))
+          "straight/repos/"
+          "src/nix/"))
   :config
   (global-hardhat-mode)
   (validate-setq hardhat-mode-lighter "Ⓗ"))

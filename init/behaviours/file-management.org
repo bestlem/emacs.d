@@ -393,7 +393,7 @@ The problem is that we have regex
 						  "SessionDesktop\\.el"
 						  "treemacs-persist"
 						  "~/.local/emacs/straight/repos/"
-						  "~/src/ThirdParty/emacs-init/"
+						  "~/Developer/ThirdParty/emacs-init/"
 						  "/Applications/MacPorts/Emacs"
 						  "^/Volumes/"))
   (recentf-mode 1))

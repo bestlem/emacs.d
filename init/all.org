@@ -165,7 +165,7 @@ For one example see https://github.com/mclear-tools/build-emacs-macos
 #+NAME: org_mark_mini20.local_20220625T103004.465231
 #+begin_src emacs-lisp
 (setq find-function-C-source-directory
-	  (cond (*emacs/mac-port-p* "/Users/mark/src/ThirdParty/emacs-mac/src/")
+	  (cond (*emacs/mac-port-p* "/Users/mark/Developer/ThirdParty/emacs-mac/src/")
 			(t "/Applications/Emacs.app/Contents/Resources/src")))
 #+end_src
 

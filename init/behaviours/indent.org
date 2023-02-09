@@ -150,5 +150,21 @@ I have wanted a good visual identification of indentation since I had the dos pr
   ;; (setq highlight-indent-guides-auto-even-face-perc 30)
   ;; (setq highlight-indent-guides-auto-character-face-perc 40)
 
-  :hook ((prog-mode yaml-mode nxml-mode json-mode ) . highlight-indent-guides-mode))
+  ;; Emacs 29 changes increase color hue by percent to multiply by the
+  ;; percentage not add it as emacs 28 did. Thus breaking the auto scaling.
+  (setq highlight-indent-guides-auto-enabled nil)
+
+  :hook ((prog-mode yaml-mode nxml-mode json-mode) . highlight-indent-guides-mode)
+  :config
+  (defun hi-mwb--set-color (face percentage)
+	"Set the background fopr FACE to a hue reduced by PERCENTAGE given from white."
+	(set-face-background face (color-darken-name "white" percentage)))
+
+  (hi-mwb--set-color 'highlight-indent-guides-odd-face 90)
+  (hi-mwb--set-color 'highlight-indent-guides-even-face 80)
+  (hi-mwb--set-color 'highlight-indent-guides-top-odd-face 70)
+  (hi-mwb--set-color 'highlight-indent-guides-top-even-face 75)
+  (hi-mwb--set-color 'highlight-indent-guides-stack-odd-face 90)
+  (hi-mwb--set-color 'highlight-indent-guides-stack-even-face 80)
+  (set-face-foreground 'highlight-indent-guides-character-face "dimgray"))
  #+end_src

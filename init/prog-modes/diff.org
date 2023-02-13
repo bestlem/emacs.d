@@ -36,11 +36,13 @@ However all the save frame and window is from my old diff (no idea where that ca
 (defun local-ediff-before-setup-hook ()
   (setq local-ediff-saved-frame-configuration (current-frame-configuration))
   (setq local-ediff-saved-window-configuration (current-window-configuration))
-  (select-frame (make-frame))
+  (setq local-ediff-frame (make-frame))
+  (select-frame local-ediff-frame )
   ;; (local-ediff-frame-maximize)
   )
 
 (defun local-ediff-quit-hook ()
+  (delete-frame local-ediff-frame)
   (set-frame-configuration local-ediff-saved-frame-configuration)
   (set-window-configuration local-ediff-saved-window-configuration))
 
@@ -51,11 +53,11 @@ However all the save frame and window is from my old diff (no idea where that ca
 ;; (defun local-ediff-after-control-hook ()
 ;;   (message "in ediff help toggle")
 ;;   (ediff-toggle-help))
+;; (add-hook 'ediff-after-setup-control-frame-hook 'local-ediff-after-control-hook)
 
 (add-hook 'ediff-before-setup-hook 'local-ediff-before-setup-hook)
 (add-hook 'ediff-quit-hook 'local-ediff-quit-hook 'append)
 (add-hook 'ediff-suspend-hook 'local-ediff-suspend-hook 'append)
-;; (add-hook 'ediff-after-setup-control-frame-hook 'local-ediff-after-control-hook)
 
 #+end_src
 ** Set control panel larger
@@ -69,7 +71,7 @@ From Emacs wiki
 
 :init
 (defun ediff-mwb-startup-control-hook ()
-  (select-frame-by-name "Ediff")
+  (select-frame local-ediff-frame )
   (set-frame-size(selected-frame) 40 10))
 #+end_src
 

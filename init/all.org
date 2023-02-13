@@ -395,8 +395,7 @@ Emacs 27 seems to have a timing issue pop to buffer seems not to see the spare w
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_60953FEE-7E07-48DE-AD1C-66D90DAE2D5A
 #+begin_src emacs-lisp
 (defun init-window-setup ()
-  (split-window-horizontally)
-  (treemacs)
+  (mwb-new-treemacs-frame-setup)
   (pop-to-buffer "*Messages*"))
 
 (add-hook 'window-setup-hook

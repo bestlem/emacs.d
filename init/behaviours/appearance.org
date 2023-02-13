@@ -494,14 +494,33 @@ Move customization out
 :PROPERTIES:
 :ID:       org_2020-12-03+00-00:1B23DC2B-5C55-4813-92A9-04D1291698B2
 :END:
-Make a new popup frame
+
+** Frame for a buffer
+:PROPERTIES:
+:ID:       org_mark_mini20:20230213T112932.146404
+:END:
+Make a new popup frame. The example is for messages.
 #+NAME: org_2020-12-03+00-00_76F8853D-BB00-4F70-9F82-0AC74BA7B9A5
 #+begin_src emacs-lisp
-(defun mwb-new-frame (buffer_name &optional go-to-end)
+(defun mwb-new-frame-for-buffer (buffer_name &optional go-to-end)
   (interactive)
   (select-frame (make-frame))
   (switch-to-buffer buffer_name)
   (unless go-to-end (goto-char (point-max))))
+#+end_src
+
+** Treemacs frame
+:PROPERTIES:
+:ID:       org_mark_mini20:20230213T112932.143208
+:END:
+Create a new treemacs frame
+#+NAME: org_mark_mini20_20230213T112932.115866
+#+begin_src emacs-lisp
+(defun mwb-new-treemacs-frame-setup (&optional choose-workspace)
+  "Call after the frame exists to setup my prferred windows in a frame.
+CHOOSE-WORKSPACE is set then you have to select a workspace otherwise the default one."
+  (split-window-horizontally)
+  (treemacs choose-workspace))
 #+end_src
 * Colour theme
 :PROPERTIES:

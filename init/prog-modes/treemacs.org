@@ -29,7 +29,6 @@ More in startup
 (use-package-elpa treemacs
   ;;:demand
   :init
-  (setq treemacs-width 50)
   :commands (treemacs treemacs-rightclick-menu)
   :mode-hydra
   <<treemacs-mode-hydra>>
@@ -41,28 +40,29 @@ More in startup
   (treemacs-indent-guide-mode t)
   (treemacs-indent-guide-style 'line)
   (treemacs-silent-refresh t)
-  (treemacs-silent-filewatch t)
-  (treemacs-tag-follow-delay 2.5)
+
   (treemacs-user-header-line-format #'treemacs-header-buttons-format)
+  (treemacs-width-is-initially-locked nil)
+  (treemacs-width 40)
 
-:config
-(setq treemacs--no-messages nil)
+  :config
+  (setq treemacs--no-messages nil)
+  ;; add Mac key symbols
+  (setq hydra-key-regex
+        "\\[\\|]\\|[-\\[:alnum:] ~.,;:/|?<>={}*+#%@!&^⇧⌘⌥↑↓←→⌫⌦⏎'`()\"$]+?")
 
-(setq hydra-key-regex "\\[\\|]\\|[-\\[:alnum:] ~.,;:/|?<>={}*+#%@!&^⇧⌘⌥↑↓←→⌫⌦⏎'`()\"$]+?") ; add Mac key symbols
+  (setq treemacs-persist-file (mwb-user-emacs-file "data/treemacs-persist"))
 
-(setq treemacs-persist-file (mwb-user-emacs-file "data/treemacs-persist"))
+  (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?)
 
-(add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?)
+  ;; The default width and height of the icons is 22 pixels. If you are
+  ;; using a Hi-DPI display, uncomment this to double the icon size.
+  ;;(treemacs-resize-icons 44)
 
-;; The default width and height of the icons is 22 pixels. If you are
-;; using a Hi-DPI display, uncomment this to double the icon size.
-;;(treemacs-resize-icons 44)
+  (treemacs-fringe-indicator-mode t)
 
-(treemacs-follow-mode t)
-(treemacs-fringe-indicator-mode t)
-
-<<treemacs-config>>
-)
+  <<treemacs-config>>
+  )
 #+end_src
 
 * Support functions
@@ -181,8 +181,13 @@ Collect the actions together
 ;; This seems to have changed and causes a bug
 ;; https://github.com/Alexander-Miller/treemacs/issues/944
 
+(setq treemacs-silent-filewatch t
+	  treemacs-tag-follow-delay 3)
+(treemacs-tag-follow-mode t)
+;; (treemacs-follow-mode t)
 (treemacs-hide-gitignored-files-mode 1)
 (treemacs-filewatch-mode t)
+(treemacs-git-commit-diff-mode 1)
 
 (pcase (cons (not (null (executable-find "git")))
 			 (not (null treemacs-python-executable)))

@@ -31,32 +31,34 @@
 * Nix
 ** nix-simple
  - path :: ~/Public/vm/nix-simple
+** nixpkgs shared
+ - path :: ~/Public/nix
+** srid
+ - path :: ~/Developer/ThirdParty/nix/srid
+** recenrode
+ - path :: ~/Developer/ThirdParty/nix/reckenrode
 ** misterio77
  - path :: ~/Developer/ThirdParty/nix/misterio77
 ** luxos
  - path :: ~/Developer/ThirdParty/nix/luxos
 ** jweigley
  - path :: ~/Developer/ThirdParty/nix/jweigley
-** reconrode
- - path :: ~/Developer/ThirdParty/nix/reckenrode
 ** Nix Starter configs
  - path :: ~/Developer/ThirdParty/nix/nix-starter-configs
 ** thexyno
  - path :: ~/Developer/ThirdParty/nix/thexyno
 ** shaunsingh
  - path :: ~/Developer/ThirdParty/nix/shaunsingh
-** srid
- - path :: ~/Developer/ThirdParty/nix/srid
 ** Mattias
  - path :: ~/Developer/ThirdParty/nix/Matthias
 ** sebastiant
  - path :: ~/Developer/ThirdParty/nix/sebastiant
 ** nixpkgs
  - path :: ~/.config/nixpkgs
-** nixpkgs shared
- - path :: ~/Public/nix
 ** lillecarl
  - path :: ~/Developer/ThirdParty/nix/lillecarl
+** connorfeely
+ - path :: ~/Public/connorfeely
 * Racket
 ** my realm
  - path :: ~/Developer/Racket/realm

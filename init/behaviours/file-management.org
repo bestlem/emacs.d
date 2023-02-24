@@ -463,6 +463,12 @@ Now use a fork to allow search of ignored files.
 		 :map deadgrep-edit-mode-map
 		 ("<f5>"  . deadgrep-mode)
 		 )
+  :mode-hydra
+  (deadgrep-mode
+   ("Edit Search" (("d" deadgrep-directory "Directory")
+				   (".." deadgrep-parent-directory "Parent dir")
+				   ("s" deadgrep-search-term "Search"))
+	"Redo" (("D" deadgrep-debug))))
   :config (unless (executable-find "rg")
 			(warning "Please install ripgrep ...")))
 #+end_src

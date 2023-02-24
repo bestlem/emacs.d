@@ -514,13 +514,33 @@ Make a new popup frame. The example is for messages.
 :ID:       org_mark_mini20:20230213T112932.143208
 :END:
 Create a new treemacs frame
+
+*** Setup Windows on existing frame
+:PROPERTIES:
+:ID:       org_mark_mini20:20230213T145647.041672
+:END:
 #+NAME: org_mark_mini20_20230213T112932.115866
 #+begin_src emacs-lisp
 (defun mwb-new-treemacs-frame-setup (&optional choose-workspace)
-  "Call after the frame exists to setup my prferred windows in a frame.
+  "Call after the frame exists to setup my preferred windows in a frame.
 CHOOSE-WORKSPACE is set then you have to select a workspace otherwise the default one."
   (split-window-horizontally)
   (treemacs choose-workspace))
+#+end_src
+
+*** Create the frame
+:PROPERTIES:
+:ID:       org_mark_mini20:20230213T145647.037433
+:END:
+#+NAME: org_mark_mini20_20230213T145647.011465
+#+begin_src emacs-lisp
+(defun mwb-new-treemacs-frame (&optional choose-workspace)
+  "Create and pop[ulate the frame.
+]
+CHOOSE-WORKSPACE is set then you have to select a workspace otherwise the default one."
+  (select-frame (make-frame))
+  (set-frame-size (selected-frame) 230 50)
+  (mwb-new-treemacs-frame-setup choose-workspace))
 #+end_src
 * Colour theme
 :PROPERTIES:

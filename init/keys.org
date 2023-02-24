@@ -1034,7 +1034,7 @@ Used for some window management in the hydras.
    "Windows"
    (("fo" other-frame "Switch Frame")
     ("fm" (mwb-new-frame-for-buffer "*Messages*" t) "Messages")
-	("ft" (mwb-new-treemacs-frame-setup t) "Treemacs frame")
+	("ft" (mwb-new-treemacs-frame t) "Treemacs frame")
     ("fw" hydra-jp-window/body "Window Management")
 	(")" delete-window "Delete Window")
 	("`" other-frame "Switch Frame")

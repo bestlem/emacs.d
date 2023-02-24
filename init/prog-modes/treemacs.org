@@ -182,9 +182,10 @@ Collect the actions together
 ;; https://github.com/Alexander-Miller/treemacs/issues/944
 
 (setq treemacs-silent-filewatch t
-	  treemacs-tag-follow-delay 3)
-(treemacs-tag-follow-mode t)
-;; (treemacs-follow-mode t)
+	  treemacs-tag-follow-delay 5
+	  treemacs-file-follow-delay 3)
+;; (treemacs-tag-follow-mode t)
+(treemacs-follow-mode t)
 (treemacs-hide-gitignored-files-mode 1)
 (treemacs-filewatch-mode t)
 (treemacs-git-commit-diff-mode 1)

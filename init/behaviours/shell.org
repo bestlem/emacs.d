@@ -54,7 +54,7 @@ Aquamacs uses shell-file-name and prints using printenv to a file and plays with
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210122T193718.269509
 :END:
-As noted the aquamacs way might be better. But at the moment all disabled.
+As noted the aquamacs way might be better. But at the moment all disabled. Added back for nix.
 #+NAME: org_mark_mini20.local_20210122T193718.254955
 #+begin_src emacs-lisp
 (setq exec-path-from-shell-debug nil)

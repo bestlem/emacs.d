@@ -144,16 +144,25 @@ This is needed to mix the completions up.
   (setq corfu-sort-override-function #'prescient-sort)
   ;; Add `completion-at-point-functions', used by `completion-at-point'.
 
-  (add-to-list 'completion-at-point-functions #'cape-file)
 
   ;;(add-to-list 'completion-at-point-functions #'cape-history)
   ;;(add-to-list 'completion-at-point-functions #'cape-keyword)
   ;;(add-to-list 'completion-at-point-functions #'cape-tex)
-  (add-to-list 'completion-at-point-functions #'cape-sgml)
   ;; (add-to-list 'completion-at-point-functions #'cape-rfc1345)
   (add-to-list 'completion-at-point-functions #'cape-abbrev)
-  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-  (add-to-list 'completion-at-point-functions #'cape-ispell)
+  ;; (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  ;; (add-to-list 'completion-at-point-functions #'cape-ispell)
+  (defalias 'cape-mwb-dabbrev-dict
+	(cape-super-capf #'cape-dabbrev #'cape-ispell #'cape-keyword))
+  (add-to-list 'completion-at-point-functions #'cape-mwb-dabbrev+dict)
+  ;; (setq-local completion-at-point-functions
+  ;; 			  (list (cape-super-capf
+  ;; 					 (cape-company-to-capf #'company-yasnippet)
+  ;; 					 #'cape-abbrev
+  ;; 					 #'cape-dabbrev
+  ;; 					 #'cape-keyword)))
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-sgml)
 
   ;;(add-to-list 'completion-at-point-functions #'cape-dict)
   ;;(add-to-list 'completion-at-point-functions #'cape-symbol)
@@ -169,15 +178,27 @@ This is needed to mix the completions up.
   (defun my/ignore-elisp-keywords (cand)
 	(or (not (keywordp cand))
 		(eq (char-after (car completion-in-region--data)) ?:)))
+  (defalias 'my/cape-elisp-super-capf
+	(cape-super-capf
+	 (cape-company-to-capf #'company-yasnippet)
+	 #'elisp-completion-at-point
+	 ;; 'cape-dabbrev
+	 ))
   (defun my/setup-elisp-completion ()
 	(setq-local completion-at-point-functions
 				(list
-				 (cape-super-capf
-				  (cape-company-to-capf #'company-yasnippet)
-				  #'elisp-completion-at-point
-				  #'cape-dabbrev)
-				 #'cape-file)))
+				 #'my/cape-elisp-super-capf
+				 (cape-company-to-capf #'company-yasnippet)
+				 #'elisp-completion-at-point
+				 #'cape-file
+				 #'cape-keyword
+				 #'cape-sgml
+				 ;; #'cape-mwb-dabbrev-dict
+
+
+				 )))
   (add-hook 'emacs-lisp-mode-hook #'my/setup-elisp-completion ))
+
 #+end_src
 
 **** TODO Issues

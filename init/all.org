@@ -94,11 +94,18 @@ From [[https://www.reddit.com/r/emacs/comments/ck4zb3/trying_to_understand_emacs
                     concat (format "%s: %s + %s = %s\n" type used free total))))
 #+end_src
 
-#+RESULTS[bb5f47ba8d2eadf96ea65aac260e9e61e1c42162]:
-#+begin_EXAMPLE
-ap/garbage-collect
-#+end_EXAMPLE
-
+** memory-usage
+:PROPERTIES:
+:ID:       org_mark_mini20:20230301T120326.186419
+:END:
+Try this after =memory-report= failed.
+#+NAME: org_mark_mini20_20230301T120326.129714
+#+begin_src emacs-lisp
+(use-package-elpa memory-usage
+  :commands
+  memory-usage-find-large-variables
+  memory-usage)
+#+end_src
 * Setting variables with a check on type
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:86E6A7B5-5C85-4429-AE49-FA5AE7AEF73D

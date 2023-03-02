@@ -31,6 +31,8 @@
 * Nix
 ** nix-simple
  - path :: ~/Public/vm/nix-simple
+** nixed
+ - path :: ~/Developer/ThirdParty/nix/nixed
 ** nixpkgs shared
  - path :: ~/Public/nix
 ** srid
@@ -63,8 +65,6 @@
  - path :: ~/Public/connorfeely
 ** montchr
  - path :: ~/Developer/ThirdParty/nix/montchr
-** my-system
- - path :: ~/Public/vm/my-system
 * Racket
 ** my realm
  - path :: ~/Developer/Racket/realm

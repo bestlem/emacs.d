@@ -6,11 +6,10 @@
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:D2691EE6-AB96-4EB1-A369-A3CDACD148E2
 :END:
-MacOs needs specific trash management not just mv to ~/.Trash
-Perhaps only if in dired or other user controlled file
-See [[https://github.com/lunaryorn/osx-trash.el][osx-trash]] but might need to find /opt/local/bin/trash
-Or better patch Aquamacs to have this C code - perhaps done?
-Need also to exclude some files - basically only iof you edit them
+MacOs needs specific trash management not just mv to =~/.Trash=.
+Perhaps only if in dired or other user controlled file. See [[https://github.com/lunaryorn/osx-trash.el][osx-trash]] but might need to find =/opt/local/bin/trash=, or better patch Aquamacs to have this C code - perhaps done?
+Need also to exclude some files - basically only if you edit them.
+
 Well I was going to include [[https://github.com/lunaryorn/osx-trash.el][osx trash]] which uses the trash executable or an applescript to do the proper trash. But realised I don't want to trash files - just those I delete by hand so the patching of the emacs delete is not a good idea. By default emacs does not delete by moving to trash. It is customisable so set to to never.
 But the mac port does have this if set mac_system_move_file_to_trash_use_finder
 Think of editing dired and treemacs
@@ -515,7 +514,7 @@ So take from projectile
   :custom
   (projectile-file-exists-local-cache-expire 300)
   (projectile-sort-order 'recentf)
-  (projectile-project-search-path '("~/src"))
+  (projectile-project-search-path '("~/Developer"))
 
   :config
   ;; racket

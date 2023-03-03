@@ -457,5 +457,5 @@ Main use if for merge conflicts
 							(smerge-mode 1)))))
 		 (magit-diff-visit-file . (lambda ()
 									(when smerge-mode
-									  (hydra-smerge-mode/body))))))
+									  (smerge-mode-hydra/body))))))
 #+end_src

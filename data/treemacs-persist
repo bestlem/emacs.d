@@ -35,6 +35,8 @@
  - path :: ~/Developer/ThirdParty/nix/nixed
 ** nixpkgs shared
  - path :: ~/Public/nix
+** My nixed
+ - path :: ~/Public/vm/nixed
 ** srid
  - path :: ~/Developer/ThirdParty/nix/srid
 ** recenrode

@@ -154,7 +154,7 @@ This is needed to mix the completions up.
   ;; (add-to-list 'completion-at-point-functions #'cape-ispell)
   (defalias 'cape-mwb-dabbrev-dict
 	(cape-super-capf #'cape-dabbrev #'cape-ispell #'cape-keyword))
-  (add-to-list 'completion-at-point-functions #'cape-mwb-dabbrev+dict)
+  (add-to-list 'completion-at-point-functions #'cape-mwb-dabbrev-dict)
   ;; (setq-local completion-at-point-functions
   ;; 			  (list (cape-super-capf
   ;; 					 (cape-company-to-capf #'company-yasnippet)
@@ -167,7 +167,7 @@ This is needed to mix the completions up.
   ;;(add-to-list 'completion-at-point-functions #'cape-dict)
   ;;(add-to-list 'completion-at-point-functions #'cape-symbol)
   ;;(add-to-list 'completion-at-point-functions #'cape-line)
-  (add-to-list 'completion-at-point-functions (cape-company-to-capf #'company-yasnippet))
+  (add-to-list 'completion-at-point-functions #'cape-yasnippet)
   ;; (setq-local completion-at-point-functions
   ;; 			  (list (cape-super-capf
   ;; 					 (cape-company-to-capf #'company-yasnippet)
@@ -179,23 +179,19 @@ This is needed to mix the completions up.
 	(or (not (keywordp cand))
 		(eq (char-after (car completion-in-region--data)) ?:)))
   (defalias 'my/cape-elisp-super-capf
-	(cape-super-capf
-	 (cape-company-to-capf #'company-yasnippet)
-	 #'elisp-completion-at-point
-	 ;; 'cape-dabbrev
-	 ))
+	(cape-super-capf #'cape-yasnippet
+					 #'elisp-completion-at-point
+					 ;; 'cape-dabbrev
+					 ))
+
   (defun my/setup-elisp-completion ()
 	(setq-local completion-at-point-functions
 				(list
 				 #'my/cape-elisp-super-capf
-				 (cape-company-to-capf #'company-yasnippet)
-				 #'elisp-completion-at-point
 				 #'cape-file
 				 #'cape-keyword
 				 #'cape-sgml
 				 ;; #'cape-mwb-dabbrev-dict
-
-
 				 )))
   (add-hook 'emacs-lisp-mode-hook #'my/setup-elisp-completion ))
 
@@ -236,6 +232,8 @@ My current view is yasnippet for the templating (old include skeleton)
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:876C8965-C38A-42AE-956A-3994F872E82D
 :END:
 I suspect that emacs's inbuilt skeleton can do what I need but there are more examples using yasnippet + Emacs doc is as usual impenetrable until you know how it works.
+
+Note that the inheritance of modes is not the same as emacs. e.g. basic-lisp-mode does not exist in emacs.
 
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_CA0CCF5A-02BB-401E-8186-F16136047A8F
 #+begin_src emacs-lisp
@@ -319,6 +317,17 @@ For loading as yasnippet is on defer we get this and yasnippets' config on eval-
 
 But the expansions are too much so better to copy them as needed and if understood.
 
+*** cape-yasnippet
+:PROPERTIES:
+:ID:       org_mark_mini20:20230308T192123.711577
+:END:
+No documentation
+#+NAME: org_mark_mini20_20230308T192123.690566
+#+begin_src emacs-lisp
+(use-feature cape-yasnippet
+  :demand
+  :after cape)
+#+end_src
 ** Abbrev
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:4B573BD4-4E53-431B-AE36-3924CE30D9CC

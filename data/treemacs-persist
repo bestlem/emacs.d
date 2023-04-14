@@ -31,16 +31,24 @@
 * Nix
 ** nix-simple
  - path :: ~/Public/vm/nix-simple
-** My nixed
- - path :: ~/Public/vm/nixed
 ** nixed
  - path :: ~/Developer/ThirdParty/nix/nixed
 ** nixpkgs shared
  - path :: ~/Public/nix
+** my-nixos-flake
+ - path :: ~/Public/vm/my-nixos-flake
+** nixos-flake
+ - path :: ~/Public/vm/nixos-flake
 ** srid
  - path :: ~/Developer/ThirdParty/nix/srid
+** nixos-flake-generated
+ - path :: ~/Public/vm/nixos-flake-generated
+** my srid
+ - path :: ~/Public/vm/srid
 ** recenrode
  - path :: ~/Developer/ThirdParty/nix/reckenrode
+** montchr
+ - path :: ~/Developer/ThirdParty/nix/montchr
 ** misterio77
  - path :: ~/Developer/ThirdParty/nix/misterio77
 ** nyx
@@ -65,8 +73,20 @@
  - path :: ~/Developer/ThirdParty/nix/lillecarl
 ** connorfeely
  - path :: ~/Public/connorfeely
-** montchr
- - path :: ~/Developer/ThirdParty/nix/montchr
+** My Nixed
+ - path :: ~/Public/vm/nixed
+** My  nyx
+ - path :: ~/Public/vm/nyx
+** My dotfield
+ - path :: ~/Public/vm/dotfield
+** mitchellh
+ - path :: ~/Developer/ThirdParty/nix/mitchellh
+** GTrunSec
+ - path :: ~/Developer/ThirdParty/nix/GTrunSec
+** nome
+ - path :: ~/Developer/ThirdParty/nix/nome
+** mynixos-demo-macos
+ - path :: ~/Developer/ThirdParty/nix/mynixos-demo-macos
 * Racket
 ** my realm
  - path :: ~/Developer/Racket/realm

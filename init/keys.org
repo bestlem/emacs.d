@@ -1,7 +1,7 @@
 #+TITLE:  Keys
 #+AUTHOR: Mark Bestley
 #+PROPERTY:header-args :cache yes :tangle yes :comments noweb :noweb no
-#+STARTUP: content
+#+STARTUP: overview
 
 * Global key bindings musings
 :PROPERTIES:
@@ -655,6 +655,7 @@ Rebind just
 (bind-key "M-s-k" 'bjm/kill-this-buffer macos-key-map)
 (bind-key "C-x k" 'bjm/kill-this-buffer macos-key-map)
 (bind-key "s-k" 'bury-buffer macos-key-map)
+;; remove as consult-buffer works.
 ;; (bind-chord "kk" #'er-switch-to-previous-buffer macos-key-map)
 (unless *macport*
   (bind-key "s-p" 'ns-print-buffer macos-key-map))

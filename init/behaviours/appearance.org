@@ -494,7 +494,6 @@ Move customization out
 :PROPERTIES:
 :ID:       org_2020-12-03+00-00:1B23DC2B-5C55-4813-92A9-04D1291698B2
 :END:
-
 ** Frame for a buffer
 :PROPERTIES:
 :ID:       org_mark_mini20:20230213T112932.146404
@@ -506,15 +505,13 @@ Make a new popup frame. The example is for messages.
   (interactive)
   (select-frame (make-frame))
   (switch-to-buffer buffer_name)
-  (unless go-to-end (goto-char (point-max))))
+  (when go-to-end (goto-char (point-max))))
 #+end_src
-
 ** Treemacs frame
 :PROPERTIES:
 :ID:       org_mark_mini20:20230213T112932.143208
 :END:
 Create a new treemacs frame
-
 *** Setup Windows on existing frame
 :PROPERTIES:
 :ID:       org_mark_mini20:20230213T145647.041672

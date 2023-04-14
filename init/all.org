@@ -133,7 +133,7 @@ This is a function so can run only from old emacs as newer emacs will not unders
 TODO: exclude sopme directories - especially modus-themes and treemacs as they need a proper build and/or can be done for later emacs.
 #+NAME: org_mark_mini20.local_20210624T203034.951856
 #+begin_src emacs-lisp
-(unless *emacs/>=26p*
+(when (< emacs-major-version 29)
   (defun mwb-init-recompile-site-lisp ()
     "Recompile packages in site-lisp directory."
     (interactive)
@@ -231,9 +231,9 @@ The lisp list from `sp-lisp-modes`, but I can't use that as smartparens is not u
                            stumpwm-mode)
   "Mode that are lisp like")
 (defconst mwb-braces-modes '(c-mode
-							 cpp-mode
-							 objc-mode
-							 ))
+                             cpp-mode
+                             objc-mode
+                             ))
 
 (defun mwb-lisp-hooks ()
   "Return hooks that are lispy."
@@ -249,7 +249,7 @@ The lisp list from `sp-lisp-modes`, but I can't use that as smartparens is not u
 
 (defun mwb-add-hook-fn (hooks fn)
   (dolist (h hooks)
-	(add-hook h fn)))
+    (add-hook h fn)))
 #+end_src
 
 

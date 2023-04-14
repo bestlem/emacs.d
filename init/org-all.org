@@ -173,12 +173,16 @@ From http://doc.norang.ca/org-mode.html#Capture
 :END:
 *** Startup
 :PROPERTIES:
+:ID:       org_mark_mini20:20230308T124250.997294
+:END:
+
+:PROPERTIES:
 :ID:       org_mark_mini20.local:20220627T115411.767788
 :END:
 This describes how the org file is shown I think 9.4 altered this
 #+NAME: org_mark_mini20.local_20220627T115411.731459
 #+begin_src emacs-lisp :tangle no :noweb-ref org-custom
-(org-startup-folded 'overview)
+(org-startup-folded 'show2levels)
 #+end_src
 *** Folding unhide on search
 :PROPERTIES:

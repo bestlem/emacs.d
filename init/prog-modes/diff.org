@@ -37,6 +37,7 @@ However all the save frame and window is from my old diff (no idea where that ca
   (setq local-ediff-saved-frame-configuration (current-frame-configuration))
   (setq local-ediff-saved-window-configuration (current-window-configuration))
   (setq local-ediff-frame (make-frame))
+  (set-frame-size (selected-frame) 230 50)
   (select-frame local-ediff-frame )
   ;; (local-ediff-frame-maximize)
   )

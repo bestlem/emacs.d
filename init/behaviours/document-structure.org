@@ -261,7 +261,7 @@ Let us set it up
 :END:
 Put markers in the fringe which messed up lispy and is slow - I suspect not for elisp.
 #+NAME: org_mark_mini20.local_20220824T134532.207188
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package-elpa hideshowvis
   :straight (:fork (:repo "bestlem/hideshowvis" :branch "work")
              :local-repo  "../../local-repos/hideshowvis")
@@ -276,7 +276,10 @@ Put markers in the fringe which messed up lispy and is slow - I suspect not for 
   ;; :config (hideshowvis-symbols)
   :custom-face (hideshowvis-hidden-region-face
                 ((t
-                  (:box (:line-width (2 . 2) :color "white" :style released-button)
+                  (:box (:line-width (2 . 2)
+                         :color "white"
+                         :style released-button)
+				   :background "blue"
                    :inherit custom-button-mouse))))
   )
 #+end_src

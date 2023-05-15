@@ -29,7 +29,6 @@ However all the save frame and window is from my old diff (no idea where that ca
 (defadvice ediff-quit (after edit-after-quit-hooks activate)
   (run-hooks 'ediff-after-quit-hooks))
 
-
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 (setq ediff-split-window-function 'split-window-horizontally)
 
@@ -37,8 +36,8 @@ However all the save frame and window is from my old diff (no idea where that ca
   (setq local-ediff-saved-frame-configuration (current-frame-configuration))
   (setq local-ediff-saved-window-configuration (current-window-configuration))
   (setq local-ediff-frame (make-frame))
-  (set-frame-size (selected-frame) 230 50)
   (select-frame local-ediff-frame )
+  (set-frame-size (selected-frame) 230 50)
   ;; (local-ediff-frame-maximize)
   )
 

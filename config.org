@@ -83,6 +83,14 @@ Add more based on [[https://github.com/seagle0128/.emacs.d][Centaur Emacs]]
   (>= emacs-major-version 28)
   "Emacs is 28 or above.")
 
+(defconst *emacs/>=29p*
+  (>= emacs-major-version 29)
+  "Emacs is 29 or above.")
+
+(defconst *emacs/>=30p*
+  (>= emacs-major-version 30)
+  "Emacs is 30 or above.")
+
 ;;  well this is true for all installed one
 (defconst *emacs/>=25.3p*
   (or *emacs/>=26p*
@@ -135,7 +143,7 @@ Allows some forks and emacs_wiki to be dealt with as standard.
 :END:
 To use a forked straight.el
 #+NAME: org_mark_mini20.local_20220625T102847.585074
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (setq straight-repository-user "bestlem")
 (setq straight-repository-branch "work")
 #+end_src
@@ -155,7 +163,7 @@ To use a forked straight.el
 (setq mwb-straight-local-repos (expand-file-name "local-repos" mwb-emacs-work-dir))
 (setq straight-profiles `((nil . ,mwb-straight-profile)))
 (setq straight-use-version-specific-build-dir t)
-(setq straight-vc-git-default-protocol 'ssh)
+;;(setq straight-vc-git-default-protocol 'ssh)
 #+end_src
 *** Bootstrap
 :PROPERTIES:
@@ -171,8 +179,9 @@ To use a forked straight.el
         "straight/repos/straight.el/bootstrap.el"
         (or (bound-and-true-p straight-base-dir)
             user-emacs-directory)))
-      (bootstrap-version 5))
+      (bootstrap-version 6))
   (unless (file-exists-p bootstrap-file)
+	(message "Downloading stright.el")
     (with-current-buffer
         (url-retrieve-synchronously
          "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
@@ -218,7 +227,8 @@ Ideally I will use as per hemacs use-feature if on load-path and use-package if 
 ;; (unless (package-installed-p 'use-package)
 ;;   (package-refresh-contents)
 ;;   (package-install 'use-package))
-(straight-use-package 'use-package)
+(unless  *emacs/>=29p*
+  (straight-use-package 'use-package))
 
 ;; Enable use-package
 (eval-when-compile

@@ -78,7 +78,7 @@ This is the minimal setup and does not need changing
 		 )
   :mode (rx (seq ".racket" string-end))
   :init
-  (setq racket-program "/Applications/Racket v8.8/bin/racket"
+  (setq racket-program "/Applications/Racket v8.9/bin/racket"
         racket-images-inline t)
   (setq racket-repl-buffer-name-function
         #'racket-repl-buffer-name-project)

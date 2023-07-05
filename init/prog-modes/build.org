@@ -86,3 +86,33 @@ This also takes time to load. Need to sort out config entries and gradele-mode n
   :config
   (setq cmake-tab-width 2))
 #+end_src
+* Just
+:PROPERTIES:
+:ID:       org_mark_mini20:20230703T174733.347180
+:END:
+** [[https://github.com/psibi/justl.el][justl.el]]
+:PROPERTIES:
+:ID:       org_mark_mini20:20230703T174733.346024
+:END:
+For running
+#+NAME: org_mark_mini20_20230703T174733.330170
+#+begin_src emacs-lisp
+(use-package-elpa justl
+  :commands justl justl-exec-recipe-in-dir
+  :custom (justl-executable (executable-find "just"))
+  :bind (:map just-mode-map
+		 ("<f5>" . justl-help-popup)))
+#+end_src
+** Just Mode
+:PROPERTIES:
+:ID:       org_mark_mini20:20230703T123906.397906
+:END:
+For editing.
+#+NAME: org_mark_mini20_20230703T123906.382638
+#+begin_src emacs-lisp
+(use-package-elpa just-mode
+  :mode ((rx bos (any "Jj") "ustfile" eol) . just-mode)
+  :bind (:map just-mode-map
+		 ("<f5>" . justl))
+  :hook (just-mode . turn-on-smartparens-mode))
+#+end_src

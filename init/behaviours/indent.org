@@ -81,6 +81,19 @@ Don't use the defaults look at the file
   )
 (global-guess-style-info-mode 1)
 #+end_src
+* [[https://editorconfig.org/][EditorConfig]]
+:PROPERTIES:
+:ID:       org_mark_mini20:20230704T034938.234300
+:END:
+This sets indentation etc. from an external file.
+#+NAME: org_mark_mini20_20230704T034938.216309
+#+begin_src emacs-lisp
+(use-package-elpa editorconfig
+  :demand
+  :config
+  (editorconfig-mode 1)
+  )
+#+end_src
 * [[https://github.com/Malabarba/aggressive-indent-mode][Aggressive indent]]
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210625T090940.640769
@@ -88,7 +101,7 @@ Don't use the defaults look at the file
 Indent as you type.
 If want to exclude then set (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
  https://github.com/Malabarba/aggressive-indent-mode
- Setup from centuar
+ Setup from centaur
 
 #+NAME: org_mark_mini20.local_20210625T090940.620775
 #+begin_src emacs-lisp

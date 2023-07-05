@@ -5,8 +5,8 @@
  - path :: ~/Library/CloudStorage/Dropbox/env/dotfiles
 ** Org
  - path :: ~/Library/CloudStorage/Dropbox/Docs/org
-** nix-simple
- - path :: ~/Public/vm/nix-simple
+** nix-config - based on nixed
+ - path :: ~/Public/vm/nix-config
 ** nixpkgs
  - path :: ~/.config/nixpkgs
 ** Local out of .emacs.d
@@ -29,34 +29,56 @@
 ** emacs-elpaca-full
  - path :: ~/emacs-elpaca-full
 * Nix
-** nix-simple
- - path :: ~/Public/vm/nix-simple
+** nix-config - based on nixed
+ - path :: ~/Public/vm/nix-config
+** my-fmoda3
+ - path :: ~/Public/vm/fmoda3
+**  mitchellh
+ - path :: ~/Developer/ThirdParty/nix/mitchellh
 ** nixed
- - path :: ~/Developer/ThirdParty/nix/nixed
-** nixpkgs shared
- - path :: ~/Public/nix
-** my-nixos-flake
- - path :: ~/Public/vm/my-nixos-flake
-** nixos-flake
- - path :: ~/Public/vm/nixos-flake
-** srid
- - path :: ~/Developer/ThirdParty/nix/srid
-** nixos-flake-generated
- - path :: ~/Public/vm/nixos-flake-generated
-** my srid
- - path :: ~/Public/vm/srid
-** recenrode
- - path :: ~/Developer/ThirdParty/nix/reckenrode
-** montchr
- - path :: ~/Developer/ThirdParty/nix/montchr
-** misterio77
- - path :: ~/Developer/ThirdParty/nix/misterio77
+ - path :: ~/Developer/ThirdParty/nix/flake-parts/nixed
 ** nyx
  - path :: ~/Developer/ThirdParty/nix/nyx
-** luxos
- - path :: ~/Developer/ThirdParty/nix/luxos
+** fmoda3
+ - path :: ~/Developer/ThirdParty/nix/fmoda3
+** My Nixed
+ - path :: ~/Public/vm/nixed
+** enzime
+ - path :: ~/Public/vm/enzime
+* Nix system
+** nixpkgs - first attempt with xonsh
+ - path :: ~/.config/nixpkgs
+** nix-darwin
+ - path :: ~/Public/vm/nix-darwin
+* Nix flake parts
+** srid
+ - path :: ~/Developer/ThirdParty/nix/flake-parts/srid
+** nixed
+ - path :: ~/Developer/ThirdParty/nix/flake-parts/nixed
+** Weathercold
+ - path :: ~/Developer/ThirdParty/nix/flake-parts/Weathercold
+** nixos-flake-generated
+ - path :: ~/Public/vm/nixos-flake-generated
+** enzime
+ - path :: ~/Developer/ThirdParty/nix/flake-parts/enzime
+** lyndeno
+ - path :: ~/Developer/ThirdParty/nix/flake-parts/lyndeno
+* Nix config examples - not structure
 ** jweigley
  - path :: ~/Developer/ThirdParty/nix/jweigley
+** lillecarl
+ - path :: ~/Developer/ThirdParty/nix/lillecarl
+* Nix all
+** nix-simple my attempt at all singing dancing
+ - path :: ~/Public/vm/nix-simple
+** nyx
+ - path :: ~/Developer/ThirdParty/nix/nyx
+** recenrode
+ - path :: ~/Developer/ThirdParty/nix/reckenrode
+** misterio77
+ - path :: ~/Developer/ThirdParty/nix/misterio77
+** luxos
+ - path :: ~/Developer/ThirdParty/nix/luxos
 ** Nix Starter configs
  - path :: ~/Developer/ThirdParty/nix/nix-starter-configs
 ** thexyno
@@ -67,26 +89,21 @@
  - path :: ~/Developer/ThirdParty/nix/Matthias
 ** sebastiant
  - path :: ~/Developer/ThirdParty/nix/sebastiant
-** nixpkgs
- - path :: ~/.config/nixpkgs
-** lillecarl
- - path :: ~/Developer/ThirdParty/nix/lillecarl
-** connorfeely
- - path :: ~/Public/connorfeely
-** My Nixed
- - path :: ~/Public/vm/nixed
-** My  nyx
- - path :: ~/Public/vm/nyx
-** My dotfield
- - path :: ~/Public/vm/dotfield
-** mitchellh
- - path :: ~/Developer/ThirdParty/nix/mitchellh
-** GTrunSec
- - path :: ~/Developer/ThirdParty/nix/GTrunSec
 ** nome
  - path :: ~/Developer/ThirdParty/nix/nome
 ** mynixos-demo-macos
  - path :: ~/Developer/ThirdParty/nix/mynixos-demo-macos
+* Nix hive
+** trueelecter
+ - path :: ~/Developer/ThirdParty/nix/hive/trueelecter
+** david-arnold
+ - path :: ~/Developer/ThirdParty/nix/hive/david-arnold
+** GTrunSec
+ - path :: ~/Developer/ThirdParty/nix/hive/GTrunSec
+** montchr
+ - path :: ~/Developer/ThirdParty/nix/hive/montchr
+** flk
+ - path :: ~/Developer/ThirdParty/nix/hive/flk
 * Racket
 ** my realm
  - path :: ~/Developer/Racket/realm
@@ -122,8 +139,6 @@
 * Swift
 ** SwiftUITutorial-Landmarks
  - path :: ~/Developer/Swift/SwiftUITutorial-Landmarks
-** JellyFin Swift
- - path :: ~/Developer/swift/JellyfinSwiftPlayer
 ** jellyfin server
  - path :: ~/Developer/ThirdParty/jellyfin
 ** 2048

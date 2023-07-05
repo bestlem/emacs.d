@@ -33,11 +33,15 @@ Although that should be in prog mode
   :commands rainbow-delimiters-mode
   :delight rainbow-delimiters-mode)
 #+end_src
-*** Colour code by level
+** Colour code by level
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220612T130916.315429
 :END:
-Use prism which is sort of descended from rainbow-mode.
+Use prism which is sort of descended from rainbow-mode. This colours by level not keyword.
+**** Prism install
+:PROPERTIES:
+:ID:       org_mark_mini20:20230704T030543.536076
+:END:
 See https://github.com/alphapapa/prism.el/issues/8 to add
 #+NAME: org_mark_mini20.local_20220612T124244.221077
 #+begin_src emacs-lisp
@@ -86,7 +90,7 @@ See https://github.com/alphapapa/prism.el/issues/8 to add
   ;; for 8 colours
   )
 #+end_src
-*** Setup the format
+**** Setup the format for prog-mode
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220612T185341.377015
 :END:
@@ -261,7 +265,7 @@ Let us set it up
 :END:
 Put markers in the fringe which messed up lispy and is slow - I suspect not for elisp.
 #+NAME: org_mark_mini20.local_20220824T134532.207188
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 (use-package-elpa hideshowvis
   :straight (:fork (:repo "bestlem/hideshowvis" :branch "work")
              :local-repo  "../../local-repos/hideshowvis")

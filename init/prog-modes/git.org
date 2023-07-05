@@ -130,7 +130,7 @@ Show choices in posframe
 (when *emacs/>=26p*
   (use-package-elpa transient-posframe
     :demand
-    :after magit
+    :after transient
     :init
     (setq transient-posframe-border-width 3
           transient-posframe-min-height 22
@@ -138,7 +138,7 @@ Show choices in posframe
           transient-posframe-parameters '((left-fringe . 8)
                                           (right-fringe . 8)))
     :config
-    (transient-posframe-mode)
+    (transient-posframe-mode 1)
     (with-no-warnings
       (defun my-transient-posframe--show-buffer (buffer _alist)
         "Show BUFFER in posframe and we do not use _ALIST at this period."

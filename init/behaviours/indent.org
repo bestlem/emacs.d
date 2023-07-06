@@ -106,8 +106,8 @@ If want to exclude then set (add-to-list 'aggressive-indent-excluded-modes 'html
 #+NAME: org_mark_mini20.local_20210625T090940.620775
 #+begin_src emacs-lisp
 (use-package-elpa aggressive-indent
-  :hook
-  (prog-mode . aggressive-indent-mode)
+  :defer 5
+
   ;; (python-mode . (lambda () (aggressive-indent-mode -1)))
   :config
   ;; Disable in some modes
@@ -116,8 +116,9 @@ If want to exclude then set (add-to-list 'aggressive-indent-excluded-modes 'html
 				  html-mode
 				  css-mode
 				  go-mode
-				  yth
 				  scala-mode
+				  snippet-mode
+				  snippet
 				  prolog-inferior-mode))
 	(push mode aggressive-indent-excluded-modes))
   ;; Be slightly less aggressive in C/C++/C#/Java/Go/Swift
@@ -136,7 +137,8 @@ If want to exclude then set (add-to-list 'aggressive-indent-excluded-modes 'html
 											  (or "if" "for" "while"))
 											 word-boundary))))
 						;; "\\([;{}]\\|\\b\\(if\\|for\\|while\\)\\b\\)"
-						(thing-at-point 'line))))))
+						(thing-at-point 'line)))))
+  (global-aggressive-indent-mode))
 #+end_src
 
 * Highlight indents

@@ -233,23 +233,36 @@ The lisp list from `sp-lisp-modes`, but I can't use that as smartparens is not u
 (defconst mwb-braces-modes '(c-mode
                              cpp-mode
                              objc-mode
-                             ))
+                             )
+  "Modes that use braces for program blocks")
+
+(defconst mwb-indent-modes '(prog-mode
+							 yaml-mode
+							 nxml-mode
+							 conf-mode
+							 )
+  "Modes that have indentation rules")
 
 (defun mwb-lisp-hooks ()
   "Return hooks that are lispy."
   (mapcar (lambda (mode)
-            (intern (concat (symbol-name mode) "-hook")))
-          mwb-lisp-modes))
+			(intern (concat (symbol-name mode) "-hook")))
+		  mwb-lisp-modes))
 
 (defun mwb-braces-hooks ()
-  "Return hooks that have braces."
+  "Return hooks that need indetation."
   (mapcar (lambda (mode)
             (intern (concat (symbol-name mode) "-hook")))
-          mwb-braces-modes))
+          mwb-indent-modes))
 
 (defun mwb-add-hook-fn (hooks fn)
   (dolist (h hooks)
     (add-hook h fn)))
+
+(defun mwb-add-hook-for-modes (modes hook-fn)
+  "Add HOOK_FN aa a hook for all modes in MODES."
+  (dolist (m modes)
+	(add-hook (intern (concat (symbol-name m) "-hook"))  hook-fn)))
 #+end_src
 
 
@@ -371,7 +384,7 @@ Need to control how it is restarted. Aquamacs saves it
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220603T173200.242928
 :END:
-This is minmal as *scratch* is always created.
+This is minimal as *scratch* is always created.
 #+NAME: org_mark_mini20.local_20220603T173200.216019
 #+begin_src emacs-lisp
 ;; (setq initial-major-mode 'emacs-lisp-mode)

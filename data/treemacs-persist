@@ -41,10 +41,8 @@
  - path :: ~/Developer/ThirdParty/nix/nyx
 ** fmoda3
  - path :: ~/Developer/ThirdParty/nix/fmoda3
-** My Nixed
+** My Old Nixed
  - path :: ~/Public/vm/nixed
-** enzime
- - path :: ~/Public/vm/enzime
 * Nix system
 ** nixpkgs - first attempt with xonsh
  - path :: ~/.config/nixpkgs
@@ -93,6 +91,8 @@
  - path :: ~/Developer/ThirdParty/nix/nome
 ** mynixos-demo-macos
  - path :: ~/Developer/ThirdParty/nix/mynixos-demo-macos
+** dotfield
+ - path :: ~/Developer/ThirdParty/nix/dotfield
 * Nix hive
 ** trueelecter
  - path :: ~/Developer/ThirdParty/nix/hive/trueelecter

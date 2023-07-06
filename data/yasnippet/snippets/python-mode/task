@@ -1,0 +1,9 @@
+# name : task
+# key : task
+# contributor : Mark Bestley
+# --
+
+@task
+def ${1:fun}(${2:args}):
+	"""$3"""
+	$0

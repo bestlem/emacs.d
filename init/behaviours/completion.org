@@ -261,10 +261,6 @@ Note that the inheritance of modes is not the same as emacs. e.g. basic-lisp-mod
   ;; Use define key as :bind needs a function but don't use as don't auto expand
   ;;(define-key yas-minor-mode-map (kbd "SPC") yas-maybe-expand)
 
-  ;; (use-package-elpa yasnippet-snippets
-  ;;   :config (yasnippet-snippets-initialize)
-  ;;   (message "loaded yasnippets collection")
-  ;;   )
   (yas-reload-all)
   (yas-global-mode 1)
 
@@ -316,6 +312,16 @@ However there are so many elisp ones that it might be too confusing. Similarly t
 For loading as yasnippet is on defer we get this and yasnippets' config on eval-after load/ So what order do they load in? I suspect LIFO as yasnippet is delayed. So to get load put the use-package in the config.
 
 But the expansions are too much so better to copy them as needed and if understood.
+Now switching to a key so lets try - I can always override.
+#+NAME: org_mark_mini20_20230705T205204.076117
+#+begin_src emacs-lisp
+(use-package-elpa yasnippet-snippets
+  :demand
+  :config (yasnippet-snippets-initialize)
+  (message "loaded yasnippets collection")
+  :after yasnippet
+  )
+#+end_src
 
 *** cape-yasnippet
 :PROPERTIES:

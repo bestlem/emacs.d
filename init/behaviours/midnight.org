@@ -58,13 +58,13 @@ Look [[https://github.com/chadbraunduin/backups-mode/blob/master/scripts/show-or
   (defun mwb-midnight--add-to-clean-buffer-regex (str)
 	(add-to-list 'clean-buffer-list-kill-regexps
 				 (rx-to-string `(seq line-start "*" ,str " ")))
-    (add-to-list 'clean-buffer-list-kill-regexps
-				 (rx (seq bos "magit"
-                          (opt "-" (one-or-more nonl))
-	                      ": ")))
     )
   (mwb-midnight--add-to-clean-buffer-regex "deadgrep")
   (mwb-midnight--add-to-clean-buffer-regex "helpful")
+  (add-to-list 'clean-buffer-list-kill-regexps
+			   (rx (seq bos "magit"
+                        (opt "-" (one-or-more nonl))
+	                    ": ")))
   (midnight-mode 1)
   (add-hook 'midnight-hook
             (if (bound-and-true-p gcmh-mode)

@@ -21,6 +21,7 @@ We have the best discussion at https://www.emacswiki.org/emacs/TabsAreEvil
 So try smart-tabs - later
 First issue is we need to switch as many people use spaces so we need to guess indent levewls - python.el does this automatically. There is the [[https://www.emacswiki.org/emacs/GuessStyle][GuessStyle ]]but it is old and not maintained. [[https://github.com/jscheid/dtrt-indent][dtrt-indent]] seems more modern and has a maintainer but.... and comments on python worry - but is does tabs mode things and dtrt-indent can't deal well with files that mix hard tabs with spaces for indentation. Which is the case I really want but seems OK - however need to then think on what to do for (un)tabify
 dtrt-indent-mode does not set hard tabs for python - which I need so hack guess-style that does for wrongh python mode.
+Now we have a lot of reformmatter - it just used to be astyle and these can now overcome some issues. However nix treefmt does not have yapf so stuck with black which does no spaces.
 
 ** Tab can complete
 :PROPERTIES:
@@ -31,7 +32,7 @@ dtrt-indent-mode does not set hard tabs for python - which I need so hack guess-
 (setq tab-always-indent 'complete)
 #+end_src
 
-**  Basics
+** Basics
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210526T204810.692856
 :END:
@@ -115,7 +116,7 @@ If want to exclude then set (add-to-list 'aggressive-indent-excluded-modes 'html
 				  web-mode
 				  html-mode
 				  css-mode
-				  go-mode
+				  ;; go-mode
 				  scala-mode
 				  snippet-mode
 				  snippet
@@ -183,3 +184,20 @@ I have wanted a good visual identification of indentation since I had the dos pr
   (hi-mwb--set-color 'highlight-indent-guides-stack-even-face 80)
   (set-face-foreground 'highlight-indent-guides-character-face "dimgray"))
  #+end_src
+* Format it all
+:PROPERTIES:
+:ID:       org_mark_mini20:20230707T094340.205016
+:END:
+There are various reformatters - [[https://github.com/radian-software/apheleia][apheleia]] messes with git-gutter
+format-all is global so reformatter seems to allow more control.
+
+** [[https://github.com/purcell/emacs-reformatter][emacs-reformatter]]
+:PROPERTIES:
+:ID:       org_mark_mini20:20230707T094340.202912
+:END:
+#+NAME: org_mark_mini20_20230707T094559.893050
+#+begin_src emacs-lisp
+(use-package-elpa reformatter
+  :demand 								; as this is a macro
+  )
+#+end_src

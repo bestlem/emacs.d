@@ -64,7 +64,7 @@ Other issue is for pure python in hard tab files - something sets the offset to 
   ;;:disabled
   ;;  add as multiple python-modes so need to force a bit
   :mode ("\\.py\\'" . python-mode)
-  :interpreter ("python" . python-mode)
+  :interpreter ("python3" . python-mode)
   :bind (:map python-mode-map
          ("<f5>" . py-execute-buffer)
          ("C-c C-z" . python-shell))
@@ -118,7 +118,9 @@ One in emacs and has things built on it but not enabled
 
   :interpreter ("python3" . python-mode)
 
-  :bind ("<f5>" . python-shell-send-buffer)
+  :bind (:map python-mode-map
+         ("<f5>" . python-shell-send-buffer)
+         ("<f6>" . black-format-buffer))
   :init
   (setq-default indent-tabs-mode 't)
   (setq org-babel-python-mode 'python-mode)
@@ -130,9 +132,12 @@ One in emacs and has things built on it but not enabled
     (smartparens-mode 1)
     (mwb-prog-auto-fill-80)
     )
+
   :config
   (setq python-indent-offset 4)
   (setq python-indent-guess-indent-offset nil)
+  (reformatter-define black-format :program "black" :args '("-"))
+
   ;; (add-hook 'python-mode-hook 'color-identifiers-mode)
   :hook (python-mode . python-hook-mwb)
   )

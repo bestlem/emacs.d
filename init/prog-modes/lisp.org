@@ -58,7 +58,7 @@ Changes are now made directly to the package which is only now here
   ;; :init (lispy-mode 1)
   :commands lispy-mnemonic-mode
   :init
-  (mwb-add-hook-fn (mwb-lisp-hooks) #'lispy-mnemonic-mode ))
+  (mwb-add-hook-fn (mwb-lisp-hooks) #'lispy-mnemonic-mode))
  #+end_src
 ** Evaluation
 :PROPERTIES:

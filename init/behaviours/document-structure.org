@@ -129,9 +129,10 @@ Hydra from From https://gist.githubusercontent.com/ptrv/7e27e0e18ae37d3f80aff7b9
 #+begin_src emacs-lisp
 (use-package-elpa smartparens
   :commands sp-with-modes
-  sp-local-pair
+  sp-local-pairs
   smartparens-mode
   turn-off-smartparens-mode
+
   :diminish smartparens-mode
   :bind (:map smartparens-mode-map
 		 ("M-(" . sp-wrap-round)
@@ -149,9 +150,12 @@ Hydra from From https://gist.githubusercontent.com/ptrv/7e27e0e18ae37d3f80aff7b9
 		 ("C-k" . sp-kill-hybrid-sexp)
 		 ("C-M-f" . sp-forward-sexp)
 		 ("C-M-b" . sp-backward-sexp))
+  :init
+  (require 'smartparens-config)
+
   :config
   (setq sp-show-pair-from-inside nil)
-  (require 'smartparens-config)
+  (smartparens-global-mode t)
   (sp-local-pair '(xml-mode nxml-mode php-mode) "<!--" "-->"
                  :post-handlers '(("| " "SPC")))
   ;; (smartparens-global-mode)

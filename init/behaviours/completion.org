@@ -135,7 +135,8 @@ This is needed to mix the completions up.
 		 ("C-c p _" . cape-tex)
 		 ("C-c p ^" . cape-tex)
 		 ("C-c p &" . cape-sgml)
-		 ("C-c p r" . cape-rfc1345))
+		 ("C-c p r" . cape-rfc1345)
+		 ("C-c p y" . cape-yasnippet))
 
   :config
   ;; Add prescient
@@ -167,7 +168,7 @@ This is needed to mix the completions up.
   ;;(add-to-list 'completion-at-point-functions #'cape-dict)
   ;;(add-to-list 'completion-at-point-functions #'cape-symbol)
   ;;(add-to-list 'completion-at-point-functions #'cape-line)
-  (add-to-list 'completion-at-point-functions #'cape-yasnippet)
+  ;; (add-to-list 'completion-at-point-functions #'cape-yasnippet)
   ;; (setq-local completion-at-point-functions
   ;; 			  (list (cape-super-capf
   ;; 					 (cape-company-to-capf #'company-yasnippet)
@@ -187,14 +188,14 @@ This is needed to mix the completions up.
   (defun my/setup-elisp-completion ()
 	(setq-local completion-at-point-functions
 				(list
-				 #'my/cape-elisp-super-capf
+				 ;; #'my/cape-elisp-super-capf
+				 #'elisp-completion-at-point
 				 #'cape-file
 				 #'cape-keyword
 				 #'cape-sgml
 				 ;; #'cape-mwb-dabbrev-dict
 				 )))
   (add-hook 'emacs-lisp-mode-hook #'my/setup-elisp-completion ))
-
 #+end_src
 
 **** TODO Issues

@@ -32,9 +32,32 @@ And I hear a sound on deletes so Finder is being used. Fixed with -F argument
 (when *sys/macp*
   (if *emacs/mac-port-p*
 	  (setq mac_system_move_file_to_trash_use_finder t)
-	(use-package-elpa osx-trash
-	  :defer 0.5
-	  :config (osx-trash-setup))))
+
+	;; From https://github.com/emacsorphanage/osx-trash/issues/4
+
+	;; macOS trashing: inspired first by
+	;; https://github.com/emacsorphanage/osx-trash, but then by
+	;; https://gist.github.com/dabrahams/14fedc316441c350b382528ea64bc09c
+	;; (from https://apple.stackexchange.com/a/162354).
+	;; `ns-do-applescript' seems fast enough to me.
+
+	(defun my:ns-move-files-to-trash (&rest paths)
+	  (let ((as-paths
+			 (mapconcat
+			  (lambda (path)
+				(format "the POSIX file \"%s\"" (replace-regexp-in-string
+												 (rx (group (any ?\\ ?\")))
+												 "\\\\\\1"
+												 (expand-file-name path))))
+			  paths
+			  ", ")))
+		(ns-do-applescript
+		 (format "tell application \"Finder\" to move {%s} to trash" as-paths))))
+
+	(when (eq system-type 'darwin)
+	  (defalias 'system-move-file-to-trash #'my:ns-move-files-to-trash))
+
+	))
 #+end_src
 * Backups
 :PROPERTIES:

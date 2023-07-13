@@ -290,9 +290,8 @@ Make subtree cut and paste adjust to current level.
 :ID:       org_mark_mini20:20230707T085033.572003
 :END:
 Needed for alt-up
-	#+begin_src emacs-lisp :tangle no :noweb-ref org-mode-hooks
-(org-mode . turn-off-smartparens-mode)
-	#+end_src
+Unfortunately the sequenbce of loading on startup fails this so move to smartparens setup.
+
 ** Tangle
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220628T220421.764169

@@ -32,8 +32,7 @@ Set compat so that the keys for these modes work. But macrostep does not - see i
   (setq lispy-compat '(edebug macrostep)
 		lispy-safe-paste t)
   (diminish 'eldoc-mode)
-  (bind-key mwbkey-delete 'lispy-delete lispy-mode-map)
-  :hook (lispy-mode . turn-off-smartparens-mode))
+  (bind-key mwbkey-delete 'lispy-delete lispy-mode-map))
 	 #+end_src
 *** Get lispy test working
 :PROPERTIES:

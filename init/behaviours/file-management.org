@@ -196,6 +196,14 @@ This is [[https://github.com/lewang/backup-walker][Backup Walker]]
 #+NAME: org_mark_mini20.local_20210605T200354.625130
 #+begin_src emacs-lisp
 (use-package-elpa backup-walker
+  :config
+  (defun backup-walker-mwb-revert ()
+    "Revert to the hunk"
+    (interactive)
+    (diff-apply-hunk -1)
+    )
+  :bind (:map backup-walker-mode-map
+         ("<f5>" . backup-walker-mwb-revert))
   :commands backup-walker-start)
   #+end_src
 ** Super save

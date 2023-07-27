@@ -98,6 +98,20 @@ Possibly lost as I did have cperl at one time but from comments that might have 
    ;; )
    ;; (add-hook 'perldb-mode-hook 'my-perldb-mode-hook)
 #+end_src
+* Rust
+:PROPERTIES:
+:ID:       org_mark_mini20:20230722T130148.456924
+:END:
+This is a minimal setup just for editing.
+For full use see https://github.com/rust-lang/rust-mode for config of keys formatters etc.
+#+NAME: org_mark_mini20_20230722T130148.438755
+#+begin_src emacs-lisp
+(use-package-elpa rust-mode
+  :mode ((rx ".rs" eos) . rust-mode)
+  )
+
+#+end_src
+
 * SQL
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:FA08DE52-A532-4D20-AB12-A3B358E3FC56

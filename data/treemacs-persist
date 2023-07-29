@@ -7,6 +7,8 @@
  - path :: ~/Library/CloudStorage/Dropbox/Docs/org
 ** nix-config - based on nixed
  - path :: ~/Public/vm/nix-config
+** my_enzime
+ - path :: ~/Public/vm/my_enzime
 ** nixpkgs
  - path :: ~/.config/nixpkgs
 ** Local out of .emacs.d
@@ -29,6 +31,8 @@
 ** emacs-elpaca-full
  - path :: ~/emacs-elpaca-full
 * Nix
+** my_enzime
+ - path :: ~/Public/vm/my_enzime
 ** nix-config - based on nixed
  - path :: ~/Public/vm/nix-config
 ** my-fmoda3
@@ -43,20 +47,24 @@
  - path :: ~/Developer/ThirdParty/nix/fmoda3
 ** My Old Nixed
  - path :: ~/Public/vm/nixed
+** nix-simple
+ - path :: ~/Public/vm/nix-simple
 * Nix system
 ** nixpkgs - first attempt with xonsh
  - path :: ~/.config/nixpkgs
 ** nix-darwin
  - path :: ~/Public/vm/nix-darwin
 * Nix flake parts
+** nixos-flake-generated
+ - path :: ~/Public/vm/nixos-flake-generated
+** nixos-flake
+ - path :: ~/Public/vm/nixos-flake
 ** srid
  - path :: ~/Developer/ThirdParty/nix/flake-parts/srid
 ** nixed
  - path :: ~/Developer/ThirdParty/nix/flake-parts/nixed
 ** Weathercold
  - path :: ~/Developer/ThirdParty/nix/flake-parts/Weathercold
-** nixos-flake-generated
- - path :: ~/Public/vm/nixos-flake-generated
 ** enzime
  - path :: ~/Developer/ThirdParty/nix/flake-parts/enzime
 ** lyndeno
@@ -67,12 +75,20 @@
 ** lillecarl
  - path :: ~/Developer/ThirdParty/nix/lillecarl
 * Nix all
-** nix-simple my attempt at all singing dancing
- - path :: ~/Public/vm/nix-simple
+** nix-config
+ - path :: ~/Public/vm/nix-config
 ** nyx
  - path :: ~/Developer/ThirdParty/nix/nyx
-** recenrode
+** nixed
+ - path :: ~/Developer/ThirdParty/nix/flake-parts/nixed
+** enzime
+ - path :: ~/Developer/ThirdParty/nix/flake-parts/enzime
+** reckenrode
  - path :: ~/Developer/ThirdParty/nix/reckenrode
+** jweigley
+ - path :: ~/Developer/ThirdParty/nix/jweigley
+** nix-simple my attempt at all singing dancing
+ - path :: ~/Public/vm/nix-simple
 ** misterio77
  - path :: ~/Developer/ThirdParty/nix/misterio77
 ** luxos
@@ -91,8 +107,36 @@
  - path :: ~/Developer/ThirdParty/nix/nome
 ** mynixos-demo-macos
  - path :: ~/Developer/ThirdParty/nix/mynixos-demo-macos
-** dotfield
+** cfeely-dotfield
  - path :: ~/Developer/ThirdParty/nix/dotfield
+** srid
+ - path :: ~/Developer/ThirdParty/nix/flake-parts/srid
+** Weathercold
+ - path :: ~/Developer/ThirdParty/nix/flake-parts/Weathercold
+** nixos-flake-generated
+ - path :: ~/Public/vm/nixos-flake-generated
+** lyndeno
+ - path :: ~/Developer/ThirdParty/nix/flake-parts/lyndeno
+** lillecarl
+ - path :: ~/Developer/ThirdParty/nix/lillecarl
+** trueelecter
+ - path :: ~/Developer/ThirdParty/nix/hive/trueelecter
+** david-arnold
+ - path :: ~/Developer/ThirdParty/nix/hive/david-arnold
+** GTrunSec
+ - path :: ~/Developer/ThirdParty/nix/hive/GTrunSec
+** dotfield-montchr
+ - path :: ~/Developer/ThirdParty/nix/hive/montchr
+** flk
+ - path :: ~/Developer/ThirdParty/nix/hive/flk
+** pub-solar
+ - path :: ~/Developer/ThirdParty/nix/pub-solar
+** ulli
+ - path :: ~/Developer/ThirdParty/nix/ulli
+** viperML
+ - path :: ~/Developer/ThirdParty/nix/viperML
+** figsoda
+ - path :: ~/Developer/ThirdParty/nix/figsoda
 * Nix hive
 ** trueelecter
  - path :: ~/Developer/ThirdParty/nix/hive/trueelecter
@@ -136,6 +180,8 @@
  - path :: ~/Developer/cpp/macports-ports
 ** my-macports
  - path :: ~/Developer/my-macports
+** nix-your-shell
+ - path :: ~/Developer/Rust/nix-your-shell
 * Swift
 ** SwiftUITutorial-Landmarks
  - path :: ~/Developer/Swift/SwiftUITutorial-Landmarks

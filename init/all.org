@@ -322,7 +322,7 @@ The data that emacs works on.
 :END:
 This saves the state perhaps I need to see how it works.
 #+NAME: org_mark_2020-10-03T11-41-17+01-00_mini12.local_DC2C7645-A251-449C-AC77-40AD4B76D5B4
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package desktop
   :unless *aquamacs*
   :disabled
@@ -344,7 +344,7 @@ This is what Aquamacs used - version copied from there.
 Odd editing I can't edit the file lispy decides it needs to comment everything. So better just override
 However decided to use more recent updated workspace2 first
 #+NAME: org_mark_2020-10-09T10-33-48+01-00_mini12.local_28EE6DA2-AFFB-4773-9037-6E5E3898046D
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 
 #+end_src
 ** [[https://github.com/pashinin/workgroups2][Workgroups2]]
@@ -354,7 +354,7 @@ However decided to use more recent updated workspace2 first
 Seems one of few in development and on github
 Well tried and treemacs screwed up
 #+NAME: org_mark_2020-10-09T10-33-48+01-00_mini12.local_3B37CB96-2AF0-4558-8B03-007D832A3898
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package-elpa workgroups2
   :disabled
   :config (workgroups-mode 1)

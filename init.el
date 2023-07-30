@@ -14,7 +14,7 @@
 
 ;; [[file:init.org::org_mark_mini20.local_20220606T145002.738615][org_mark_mini20.local_20220606T145002.738615]]
 (setq init-file-debug 'nil)
-(setq init-file-debug t)
+;; (setq init-file-debug t)
 ;; org_mark_mini20.local_20220606T145002.738615 ends here
 
 ;; [[file:init.org::org_mark_mini20.local_20220905T162607.803924][org_mark_mini20.local_20220905T162607.803924]]

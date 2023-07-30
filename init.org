@@ -265,7 +265,7 @@ True adds staistics - only set to nil when I actually use emacs and not just fid
 #+NAME: org_mark_mini20.local_20220606T145002.738615
 #+begin_src emacs-lisp
 (setq init-file-debug 'nil)
-(setq init-file-debug t)
+;; (setq init-file-debug t)
  #+end_src
 *** Variable watcher helpers
 :PROPERTIES:
@@ -592,7 +592,6 @@ Perhaps might need to sort by length as - is before . so lisp.org loads after li
 :ID:       org_mark_mini20.local:20220613T182746.504886
 :END:
 Also switch between an alternate setup - ideally should be driven from command line but.....
-
 #+NAME: org_mark_mini12.local_20201213T195905.304356
 #+begin_src emacs-lisp
 (when (>= emacs-major-version 27)

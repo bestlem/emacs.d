@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Pretty Hydra
+# key: Pretty
+# contributor : Mark Bestley
+# --
+
+(pretty-hydra-define $1
+  (:title "$2"
+   :quit-key ("q" "ESC")
+   :color blue)
+   ("$3"
+   (($0))))

@@ -37,7 +37,7 @@ However all the save frame and window is from my old diff (no idea where that ca
   (setq local-ediff-saved-window-configuration (current-window-configuration))
   (setq local-ediff-frame (make-frame))
   (select-frame local-ediff-frame )
-  (set-frame-size (selected-frame) 230 50)
+  ;; (set-frame-size local-ediff-frame 230 50)
   ;; (local-ediff-frame-maximize)
   )
 
@@ -72,6 +72,6 @@ From Emacs wiki
 :init
 (defun ediff-mwb-startup-control-hook ()
   (select-frame local-ediff-frame )
-  (set-frame-size(selected-frame) 40 10))
+  (set-frame-size(selected-frame) 230  50))
 #+end_src
 

@@ -27,6 +27,9 @@
 (defvar mwb-dropbox-root
   (expand-file-name  "~/Library/CloudStorage/Dropbox")
   "Where dropbox is")
+(defvar mwb-icloud-root
+  (expand-file-name  "~/Library/Mobile Documents/com~apple~CloudDocs")
+  "Where icloud is")
 (defvar mwb-emacs-share-dir
   (concat mwb-dropbox-root "/data/emacs")
   "Directory on local machine wwhere emacs outside start directory.")

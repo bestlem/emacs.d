@@ -34,13 +34,16 @@ From https://github.com/chenyanming/calibredb.el and also https://dindi.garjola.
 #+begin_src emacs-lisp
 (use-package-elpa calibredb
   :commands calibredb
+  :custom
+  (calibredb-id-width 6)
   :config
   (setq calibredb-root-dir (concat  mwb-dropbox-root "/Books/calibre_transfer"))
   (setq calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir))
   (setq calibredb-library-alist `((,calibredb-root-dir)
-								  ("~/SyncServices/Google Drive/calibre/calibre_computing")
-								  ("~/SyncServices/Google Drive/calibre/games")
-								  ("~/SyncServices/Google Drive/calibre/fiction")
+								  (,(concat mwb-icloud-root "/calibre/computing"))
+								  (,(concat mwb-icloud-root "/calibre/games"))
+								  (,(concat mwb-icloud-root "/calibre/fiction"))
+								  (,(concat mwb-icloud-root "/calibre/history"))
 								  ("http://opds.oreilly.com/opds/")
 								  ("https://bookserver.archive.org/catalog/")
 								  ("http://arxiv.maplepop.com/catalog/")
@@ -48,7 +51,7 @@ From https://github.com/chenyanming/calibredb.el and also https://dindi.garjola.
 								  ("http://www.feedbooks.com/catalog.atom")
 								  ("https://tatsu-zine.com/catalogs.opds")
 								  ("http://aozora.textlive.net/catalog.opds")))
-  ;; (setq calibredb-format-all-the-icons t)
+  (setq calibredb-format-all-the-icons t)
   (setq sql-sqlite-program "/opt/local/bin/sqlite3")
   (setq calibredb-program "/Applications/calibre.app/Contents/MacOS/calibredb")
 
@@ -66,10 +69,10 @@ Optional argument CANDIDATE is the selected item."
    (:color teal :quit-key "q"
 	:title (mwb-icon-string "epub" "Calibre"))
    ("Libraries"
-	(("L" calibredb-library-list "Switch Library"))
+	(("l" calibredb-library-list "Switch Library"))
 	"View"
 	(("," calibredb-quick-look "Quick Look")
 	 ("v" calibredb-view "View")
-	 ("V" calibredb-open-file-with-default-tool "Read external")
+	 ("o" calibredb-open-file-with-default-tool "Read external")
 	 ("r" my/calibredb-open-file-with-emacs "Read in emacs")))))
 #+end_src

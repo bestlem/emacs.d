@@ -9,7 +9,7 @@
 ;;  setting to nil turns them off
 (setq debug-on-error t)
 ;; (setq debug-on-error nil)
-										;(setq debug-on-quit nil)
+(setq debug-on-quit nil)
 ;; org_mark_mini20.local_20220606T145002.735412 ends here
 
 ;; [[file:init.org::org_mark_mini20.local_20220606T145002.738615][org_mark_mini20.local_20220606T145002.738615]]

@@ -189,6 +189,11 @@ To use a forked straight.el
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
+
+;; Stop loading packages from elpa
+(add-to-list 'straight-built-in-pseudo-packages 'org-mode)
+(add-to-list 'straight-built-in-pseudo-packages 'org)
+
 (message "Bootstrapping straight...done")
 #+end_src
 *** el-patch
@@ -880,7 +885,7 @@ Need to make search expand?
 :END:
 #+NAME: org_mark_mini20.local_20220625T123220.259788
 #+begin_src emacs-lisp
-(use-package-elpa org
+(use-feature org
   :commands org-mode)
 #+end_src
 *** Grettke babel

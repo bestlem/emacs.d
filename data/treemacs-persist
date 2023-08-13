@@ -7,10 +7,6 @@
  - path :: ~/Library/CloudStorage/Dropbox/Docs/org
 ** nix-config - based on nixed
  - path :: ~/Public/vm/nix-config
-** my_enzime
- - path :: ~/Public/vm/my_enzime
-** nixpkgs
- - path :: ~/.config/nixpkgs
 ** Local out of .emacs.d
  - path :: ~/.local/emacs
 ** xonsh
@@ -28,13 +24,13 @@
  - path :: ~/emacs.elpaca
 ** emacs-elpaca-full
  - path :: ~/emacs-elpaca-full
-* Nix
-** my_enzime
- - path :: ~/Public/vm/my_enzime
+* Nix Work
 ** nix-config - based on nixed
  - path :: ~/Public/vm/nix-config
-** my-fmoda3
- - path :: ~/Public/vm/fmoda3
+** my_enzime
+ - path :: ~/Public/vm/my_enzime
+** my-hoppla20-nix-example
+ - path :: ~/Public/vm/my-hoppla20-nix-example
 **  mitchellh
  - path :: ~/Developer/ThirdParty/nix/mitchellh
 ** nixed
@@ -43,8 +39,6 @@
  - path :: ~/Developer/ThirdParty/nix/nyx
 ** fmoda3
  - path :: ~/Developer/ThirdParty/nix/fmoda3
-** My Old Nixed
- - path :: ~/Public/vm/nixed
 ** nix-simple
  - path :: ~/Public/vm/nix-simple
 * Nix system
@@ -135,6 +129,8 @@
  - path :: ~/Developer/ThirdParty/nix/viperML
 ** figsoda
  - path :: ~/Developer/ThirdParty/nix/figsoda
+** my-hoppla20-nix-example
+ - path :: ~/Public/vm/my-hoppla20-nix-example
 * Nix hive
 ** trueelecter
  - path :: ~/Developer/ThirdParty/nix/hive/trueelecter
@@ -146,6 +142,8 @@
  - path :: ~/Developer/ThirdParty/nix/hive/montchr
 ** flk
  - path :: ~/Developer/ThirdParty/nix/hive/flk
+** hoppla20-example
+ - path :: ~/Developer/ThirdParty/nix/hive/hoppla20-example
 * Racket
 ** my realm
  - path :: ~/Developer/Racket/realm

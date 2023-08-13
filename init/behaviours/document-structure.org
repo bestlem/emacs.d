@@ -21,6 +21,7 @@ These are set by Aquamacs but might as well reinforce.
 #+NAME: org_mark_mini20.local_20220612T163046.004811
 #+begin_src emacs-lisp
 (show-paren-mode t)
+(setq show-paren-context-when-offscreen 'child-frame)
 #+end_src
 *** Make parentheses pretty
 :PROPERTIES:

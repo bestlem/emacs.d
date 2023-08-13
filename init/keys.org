@@ -140,7 +140,8 @@ So look at keys: ✓ denotes the best, x is what is provided. Default to GNU as 
 | s         |      | x   | x  | save-buffer                                 |
 |           |      |     |    | mwb/mac-key-save-buffer-force-backup        |
 |           | x    |     |    | mac-key-save-file                           |
-| t         |      | ✓   |    | ns-popup-font-panel                         |
+| t         |      | <29 |    | ns-popup-font-panel                         |
+|           |      | ✓   |    | menu-set-font                               |
 |           |      |     | x  | mac-font-panel-mode                         |
 |           | x    |     |    | new-tab                                     |
 | u         |      | x   |    | revert-buffer                               |

@@ -69,12 +69,11 @@ Well I don't know what the frame parameters are left and width can be proportion
 
 #+NAME: org_mark_mini20.local_20210801T194100.707636
 #+begin_src emacs-lisp
-(when *emacs/>=26p*
+(when (and *emacs/>=26p* (not *macport*))
   (use-package-elpa mini-frame
 	:defer 0.5
 	:custom
 	(mini-frame-internal-border-color "yellow")
-	(mini-frame-standalone 't)
 	(mini-frame-detach-on-hide 'nil)
 	(mini-frame-standalone 'nil)
 
@@ -291,7 +290,7 @@ Replace isearch but not so easy as consult-line plus can leave the progress mark
 	;;  Delay preview
 	(consult-customize consult-theme consult-buffer
 					   :preview-key '(:debounce 1.0 any))
-	(mini-frame-mode 1)
+	;; (mini-frame-mode 1)
 	(marginalia-mode 1)
 	:bind (("C-x r x" . consult-register)
 		   ("C-x r b" . consult-bookmark)

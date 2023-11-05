@@ -329,8 +329,9 @@ Now switching to a key so lets try - I can always override.
 :ID:       org_mark_mini20:20230308T192123.711577
 :END:
 No documentation
+Removes as now we have yasnippet on f12
 #+NAME: org_mark_mini20_20230308T192123.690566
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-feature cape-yasnippet
   :demand
   :after cape)

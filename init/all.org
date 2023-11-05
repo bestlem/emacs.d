@@ -304,6 +304,26 @@ These tend to be settings of minor modes
 :END:
 Where there is common put them together. This part is really why I have separate files so I can deal with one thing at a time. But thing is more than one mode.
 Lets just load them not explicitly - everything in prog-modes (a better name would be modes or config However leave as this breaks git history and I break enough - pity bazaar failed)
+** Common setup
+:PROPERTIES:
+:ID:       org_mark_mini20:20230813T133036.448808
+:END:
+Use tree-sitter versions from https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
+#+NAME: org_mark_mini20_20230813T133036.419342
+#+begin_src emacs-lisp
+(setq major-mode-remap-alist
+	  '((yaml-mode . yaml-ts-mode)
+		(bash-mode . bash-ts-mode)
+		(js2-mode . js-ts-mode)
+		(typescript-mode . typescript-ts-mode)
+		(json-mode . json-ts-mode)
+		(css-mode . css-ts-mode)
+		(python-mode . python-ts-mode)))
+#+end_src
+** Individual major modes
+:PROPERTIES:
+:ID:       org_mark_mini20:20230813T133036.442131
+:END:
 #+NAME: org_mark_mini20.local_20210126T225208.743497
 #+begin_src emacs-lisp
 (mwb-init-load-directory "init/prog-modes/")

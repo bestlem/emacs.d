@@ -113,18 +113,18 @@ One in emacs and has things built on it but not enabled
 #+begin_src emacs-lisp
 (use-feature python
   :mode
-  ("\\.py\\'" . python-mode)
-  ("\\.wsgi$" . python-mode)
+  ("\\.py\\'" . python-ts-mode)
+  ("\\.wsgi$" . python-ts-mode)
 
-  :interpreter ("python3" . python-mode)
+  :interpreter ("python3" . python-ts-mode)
 
-  :bind (:map python-mode-map
+  :bind (:map python-ts-mode-map
          ("<f5>" . python-shell-send-buffer)
          ("<f6>" . black-format-buffer))
   :init
   (setq-default indent-tabs-mode 't)
-  (setq org-babel-python-mode 'python-mode)
-  (setq expand-region-preferred-python-mode 'python)
+  (setq org-babel-python-ts-mode 'python-ts-mode)
+  (setq expand-region-preferred-python-ts-mode 'python)
 
   (defun python-hook-mwb ()
     (setq tab-width 4)
@@ -138,8 +138,10 @@ One in emacs and has things built on it but not enabled
   (setq python-indent-guess-indent-offset nil)
   (reformatter-define black-format :program "black" :args '("-"))
 
-  ;; (add-hook 'python-mode-hook 'color-identifiers-mode)
-  :hook (python-mode . python-hook-mwb)
+  ;; (add-hook 'python-ts-mode-hook 'color-identifiers-mode)
+  :hook
+(python-ts-mode . python-hook-mwb)
+  (python-mode . python-hook-mwb)
   )
 #+end_src
 * TODO Org mode

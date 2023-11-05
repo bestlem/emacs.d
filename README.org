@@ -77,7 +77,7 @@ I think can be moved out to modes or behaviours - the latter makes sense
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210424T171159.511861
 :END:
-Well this can be the last - basically sets up my key bindings.
+Well this can be the last - basically sets up my key bindings. Unfortunately due to the order of keymaps I think in org-mode and mouse the keys have to be set first.
 The one odd case is dealing with Aquamacs/macOS differences which have to be done upfront.
 *** Startup
 :PROPERTIES:

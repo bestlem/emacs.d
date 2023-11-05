@@ -172,7 +172,7 @@ There is also a [[https://jherrlin.github.io/posts/emacs-on-macos-monterey/][com
 :END:
 This is the standard mode
   #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_61706197-9647-456A-9F2C-0A91722F017C
-  #+begin_src emacs-lisp
+  #+begin_src emacs-lisp :tangle no
 (use-package-elpa json-mode
   :mode (rx  (seq  ".json" string-end)))
   #+end_src

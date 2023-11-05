@@ -131,6 +131,10 @@
  - path :: ~/Developer/ThirdParty/nix/figsoda
 ** my-hoppla20-nix-example
  - path :: ~/Public/vm/my-hoppla20-nix-example
+** nix-darwin
+ - path :: ~/Developer/ThirdParty/nix/nix-darwin
+** dustinlyons
+ - path :: ~/Developer/ThirdParty/nix/dustinlyons
 * Nix hive
 ** trueelecter
  - path :: ~/Developer/ThirdParty/nix/hive/trueelecter

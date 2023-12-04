@@ -308,17 +308,19 @@ Lets just load them not explicitly - everything in prog-modes (a better name wou
 :PROPERTIES:
 :ID:       org_mark_mini20:20230813T133036.448808
 :END:
-Use tree-sitter versions from https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
+*** Tree sitter
+:PROPERTIES:
+:ID:       org_mark_mini20:20231105T091409.276349
+:END:
+Original tree-sitter versions from https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
+but later a fuller MELPA package https://github.com/renzmann/treesit-auto
 #+NAME: org_mark_mini20_20230813T133036.419342
 #+begin_src emacs-lisp
-(setq major-mode-remap-alist
-	  '((yaml-mode . yaml-ts-mode)
-		(bash-mode . bash-ts-mode)
-		(js2-mode . js-ts-mode)
-		(typescript-mode . typescript-ts-mode)
-		(json-mode . json-ts-mode)
-		(css-mode . css-ts-mode)
-		(python-mode . python-ts-mode)))
+(use-package-elpa treesit-auto
+  :demand t
+  :config
+  (setq treesit-auto-install t)
+  (global-treesit-auto-mode))
 #+end_src
 ** Individual major modes
 :PROPERTIES:

@@ -372,3 +372,16 @@ This is another basic emacs thing.
    :bind (("M-/"   . hippie-expand)
           ("C-M-/" . dabbrev-completion)))
  #+END_SRC
+** spdx
+:PROPERTIES:
+:ID:       org_mark_mini20:20231203T111438.560293
+:END:
+For copyright and licence
+#+NAME: org_mark_mini20_20231203T111438.543132
+#+begin_src emacs-lisp
+(use-package-elpa spdx
+  :custom
+  (spdx-copyright-holder 'user)
+  (spdx-project-detection 'projectile)
+  )
+#+end_src

@@ -519,6 +519,21 @@ Might allow search in ignore files. It is more flexible but display is not as ea
 :END:
 This add functions. I would use John Wiegley's setup but projectile hung
 So take from projectile
+*** Set my project
+:PROPERTIES:
+:ID:       org_mark_mini20:20231203T140137.869995
+:END:
+Variables to allow .dir-locals.el to set a Project name.
+#+NAME: org_mark_mini20_20231203T140137.850311
+#+begin_src emacs-lisp :tangle no
+(defvar mwb-project-name nil)
+(put 'mwb-project-name 'safe-local-variable #'stringp)
+
+(defun projectile-project-name--prefer-mine ()
+  (or mwb-project-name (projectile-default-project-name (projectile-project-root))))
+
+
+#+end_src
 *** use_package
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20211002T193350.827718
@@ -548,6 +563,9 @@ So take from projectile
   (projectile-project-search-path '("~/Developer"))
 
   :config
+  ;;  use project name make it safe if set as string
+  (put 'projectile-project-name 'safe-local-variable #'stringp)
+
   ;; racket
   (add-to-list 'projectile-globally-ignored-directories "*compiled")
   ;; (add-to-list 'projectile-globally-ignored-directories "straight/repos")
@@ -595,6 +613,7 @@ So take from projectile
     ("q"   nil "cancel" :color blue))
 
   (bind-key "H-p" 'hydra-projectile/body)
+
   (projectile-cleanup-known-projects))
 #+end_src
 *** File saving

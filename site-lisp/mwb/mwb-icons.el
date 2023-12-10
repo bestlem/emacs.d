@@ -110,7 +110,7 @@ ARGS is same as `all-the-icons-octicon' and others."
   (eval-when-compile
 	(list
 	 (mwb-icon--name-and-icon 'hardhat-protected
-							  'faicon "h-square"  "⛑" "%1*"
+							  'faicon "h-square"  "Ⓗ" "%1*"
 							  `(:inherit warning  ))
 	 (mwb-icon--name-and-icon 'read-only
 							  'material "lock" "🔒" "%1*"

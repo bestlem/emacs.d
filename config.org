@@ -163,7 +163,7 @@ To use a forked straight.el
 (setq mwb-straight-local-repos (expand-file-name "local-repos" mwb-emacs-work-dir))
 (setq straight-profiles `((nil . ,mwb-straight-profile)))
 (setq straight-use-version-specific-build-dir t)
-(setq straight-vc-git-default-protocol 'ssh)
+;; (setq straight-vc-git-default-protocol 'ssh)
 #+end_src
 *** Bootstrap
 :PROPERTIES:

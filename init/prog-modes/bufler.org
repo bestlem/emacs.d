@@ -24,11 +24,13 @@ Mainly from alphapapa and jerrypnz
 #+begin_src emacs-lisp
 (use-package-elpa bufler
   :bind (("C-x C-b" . bufler)
-		 ("C-s-b" . bufler))
+		 ("C-s-b" . bufler)
+		 :map bufler-list-mode-map
+		 ("<double-mouse-1>" . bufler-list-buffer-peek))
 
   :custom
   (bufler-initial-face-depth 2)
-  ;; (bufler-reverse 1)
+  (bufler-reverse 1)
   (bufler-column-name-modified-buffer-sigil "🛑")
   (bufler-groups
    (bufler-defgroups
@@ -44,7 +46,7 @@ Mainly from alphapapa and jerrypnz
 	  ;; through to other groups, so they end up grouped with their project
 	  ;; buffers).
 	  ;;  Comment from other source - looks like the code also moves org and dired
-	  (group-not "*Special*"
+	  (group-not "**Special*"
 				 (group-or "*Special* or"
 						   (name-match "Org Src " (rx bos "*Org Src"))
 						   (mode-match "Magit" (rx bos "magit-status"))
@@ -71,23 +73,24 @@ Mainly from alphapapa and jerrypnz
 	  ;; Remaining special buffers are grouped automatically by mode.
 	  (auto-mode))
 
-	 (group (group-or "Nix store"
+	 (group (group-or "*Nix store"
 					  (dir "/nix/store/")
 					  (dir "/nix/store/" 1))
 			(auto-directory))
 
-	 (group (group-and "Third Party"
+	 (group (group-and "*Third Party"
 					   (dir "~/Developer/ThirdParty"))
 			(auto-projectile))
 
 	 (group
-	  (group-and "Emacs Other" (group-or "Emacs other"
-										 (dir (f-join straight-base-dir "straight"))
-										 (dir mwb-emacs-work-dir)
-										 (dir "~/Developer/ThirdParty/emacs-init")
-										 (dir "/Applications/MacPorts/Emacs.app")
-										 (dir "/Applications/MacPorts/EmacsMac.app")
-										 )
+	  (group-and "Emacs Background"
+				 (group-or "Emacs other"
+						   (dir (f-join straight-base-dir "straight"))
+						   (dir mwb-emacs-work-dir)
+						   (dir "~/Developer/ThirdParty/emacs-init")
+						   (dir "/Applications/MacPorts/Emacs.app")
+						   (dir "/Applications/MacPorts/EmacsMac.app")
+						   )
 				 (group-not "not enmacs other"
 							(group-or "bits to ignore"
 									  (dir (f-join mwb-emacs-work-dir "local-repos"))
@@ -111,7 +114,7 @@ Mainly from alphapapa and jerrypnz
 			(auto-directory)
 			(auto-mode))
 
-	 (group (group-or "Config"
+	 (group (group-or "Dotfiles"
 					  (dir (concat  mwb-dropbox-root "/env/dotfiles"))
 					  (dir '("~/.config" "~/.homesick/repos/main"))
 					  (dir "~/.local/bin"))
@@ -122,11 +125,14 @@ Mainly from alphapapa and jerrypnz
 					  (dir "~/Public/vm"))
 			(auto-projectile)
 			(auto-directory))
+
 	 (group ;; Subgroup collecting buffers in `org-directory'
 	  ;; (or "~/org" if `org-directory' is not yet defined).
-	  (dir (if (bound-and-true-p org-directory)
-			   org-directory
-			 "~/org"))
+	  (group-or "Org files"
+				(dir (if (bound-and-true-p org-directory)
+						 org-directory
+					   "~/org")
+					 ))
 	  (group
 	   ;; Subgroup collecting indirect Org buffers, grouping them by file.
 	   ;; This is very useful when used with `org-tree-to-indirect-buffer'.

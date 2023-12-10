@@ -28,6 +28,7 @@ Mainly from alphapapa and jerrypnz
 
   :custom
   (bufler-initial-face-depth 2)
+  ;; (bufler-reverse 1)
   (bufler-column-name-modified-buffer-sigil "🛑")
   (bufler-groups
    (bufler-defgroups
@@ -44,18 +45,20 @@ Mainly from alphapapa and jerrypnz
 	  ;; buffers).
 	  ;;  Comment from other source - looks like the code also moves org and dired
 	  (group-not "*Special*"
-				 (group-or "*Special*"
+				 (group-or "*Special* or"
 						   (name-match "Org Src " (rx bos "*Org Src"))
 						   (mode-match "Magit" (rx bos "magit-status"))
 						   (mode-match "Forge" (rx bos "forge-"))
+						   (mode-match "deadgrep" (rx bos "deadgrep-"))
 						   (mode-match "Org" (rx bos "org-"))
 						   (auto-file)
-						   (mode-match "Dired" (rx bos "dired-"))))
+						   (mode-match "Dired" (rx bos "dired-"))
+						   ))
 	  (group
-	   (name-match "**Emacs**"
+	   (name-match "Emacs standard"
 				   (rx bos "*" (or "Messages" "Warnings" "scratch" "Backtrace") "*")))
 	  (group
-	   (group-or "*Help/Info*"
+	   (group-or "Help/Info"
 				 (mode-match "*Help*" (rx bos "help-"))
 				 (mode-match "*Help*" (rx bos "helpful-"))
 				 (mode-match "*Info*" (rx bos "info-")))
@@ -67,6 +70,58 @@ Mainly from alphapapa and jerrypnz
 	   (mode-match "*Helm*" (rx bos "helm-")))
 	  ;; Remaining special buffers are grouped automatically by mode.
 	  (auto-mode))
+
+	 (group (group-or "Nix store"
+					  (dir "/nix/store/")
+					  (dir "/nix/store/" 1))
+			(auto-directory))
+
+	 (group (group-and "Third Party"
+					   (dir "~/Developer/ThirdParty"))
+			(auto-projectile))
+
+	 (group
+	  (group-and "Emacs Other" (group-or "Emacs other"
+										 (dir (f-join straight-base-dir "straight"))
+										 (dir mwb-emacs-work-dir)
+										 (dir "~/Developer/ThirdParty/emacs-init")
+										 (dir "/Applications/MacPorts/Emacs.app")
+										 (dir "/Applications/MacPorts/EmacsMac.app")
+										 )
+				 (group-not "not enmacs other"
+							(group-or "bits to ignore"
+									  (dir (f-join mwb-emacs-work-dir "local-repos"))
+									  (dir "/nix/store/")   )))
+	  (group (dir mwb-emacs-work-dir) (auto-projectile) (auto-directory))
+	  (group (dir "~/Developer/ThirdParty/emacs-init") (auto-projectile))
+	  (group (dir "/Applications/MacPorts") (auto-directory))
+
+	  )
+
+
+	 (group (group-or "Emacs Init"
+					  (dir "~/.emacs.d")
+					  (dir "/usr/share/emacs")
+					  (dir "~/Developer/emacs")
+					  (dir "~/Developer/emacs/emacs")
+					  (dir (f-join  mwb-emacs-work-dir "local-repos"))
+					  (dir "~/Developer/archive/emacs"))
+			(group  (dir "~/.emacs.d"))
+			(group  (auto-projectile))
+			(auto-directory)
+			(auto-mode))
+
+	 (group (group-or "Config"
+					  (dir (concat  mwb-dropbox-root "/env/dotfiles"))
+					  (dir '("~/.config" "~/.homesick/repos/main"))
+					  (dir "~/.local/bin"))
+			(auto-projectile)
+			(auto-directory))
+
+	 (group (group-or "Shared for vm"
+					  (dir "~/Public/vm"))
+			(auto-projectile)
+			(auto-directory))
 	 (group ;; Subgroup collecting buffers in `org-directory'
 	  ;; (or "~/org" if `org-directory' is not yet defined).
 	  (dir (if (bound-and-true-p org-directory)
@@ -81,44 +136,7 @@ Mainly from alphapapa and jerrypnz
 	  (group-not "*special*" (auto-file))
 	  (auto-mode))
 
-	 (group (group-or "Emacs Init"
-					  (dir "~/.emacs.d")
-					  (dir "/usr/share/emacs")
-					  (dir "~/Developer/emacs")
-					  (dir "~/Developer/emacs/emacs")
-					  (dir (f-join straight-base-dir "straight" "local-repos"))
-					  (dir "~/Developer/archive/emacs"))
-			(group  (dir "~/.emacs.d"))
-			(group  (auto-projectile)))
 
-	 (group (group-or "Emacs other"
-					  (dir (f-join straight-base-dir "straight"))
-					  (dir mwb-emacs-work-dir)
-					  (dir "~/Developer/ThirdParty/emacs-init")
-					  (dir "/Applications/MacPorts/Emacs.app")
-					  (dir "/Applications/MacPorts/EmacsMac.app"))
-			(group (dir (f-join straight-base-dir "straight")) (auto-projectile))
-			(group (dir mwb-emacs-work-dir) (auto-directory))
-			(group (dir "~/Developer/ThirdParty/emacs-init") (auto-projectile))
-			(group (dir "/Applications/MacPorts"))
-			(auto-projectile))
-
-	 ;; (group (group-or "Emacs" (dir "/usr/share/emacs")
-	 ;; 				   (dir "~/Developer/emacs")
-	 ;; 				   (dir "~/Developer/emacs/emacs")
-	 ;; 				   (dir "~/Developer/archive/emacs")
-	 ;; 				   ;; "editable non init"
-	 ;; 				   (dir mwb-straight-local-repos)
-	 ;; 				   (dir (f-join straight-base-dir "straight"))))
-	 ;; (group-or "Non editable"
-	 ;; 			(dir (f-join straight-base-dir "straight"))
-	 ;; 			(dir mwb-emacs-work-dir))
-
-	 (group (group-or "Config"
-					  (dir (concat  mwb-dropbox-root "/env/dotfiles"))
-					  (dir '("~/.config" "~/.homesick/repos/main"))
-					  (dir "~/.local/bin"))
-			(auto-directory))
 	 ;; (group
 	 ;;  (auto-parent-project)
 	 ;;  (auto-indirect))

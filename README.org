@@ -197,7 +197,7 @@ CLOSED: [2019-12-16 Mon 15:15]
 :ID:       org_mark_mini20.local:20210424T122854.186336
 :END:
 I tried to include all the org text in the source code but that adds extra links which seem to defeat detangle - but could be space related
-** Include
+** TODO Include
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210424T122854.185381
 :END:
@@ -213,12 +213,14 @@ With experience messing stuff up.
 
 You need the .el to edit if crashed.
 
-*** TODO Hack
+*** DONE Hack
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210424T122854.184541
 :END:
+- State "DONE"       from "TODO"       [2023-12-09 Sat 16:16]
 Eventual is probably based off nullman.net
 Start by tangle on save if in init dir [[https://emacs.stackexchange.com/a/20733/9874][SO answer]] and also do a starterkit loader that check date of el and org and regenerates if needed. Eventually the el file is not needed but let's convert fully first (unless you need fast starts)
+Done years before date here.
 
 ** Aquamacs
 :PROPERTIES:
@@ -296,3 +298,55 @@ These probably should be in ~/.cache so can be deleted.
 :ID:       org_mark_mini20.local:20210424T122854.181719
 :END:
 
+** TODO
+:PROPERTIES:
+:ID:       org_mark_mini20:20231209T162441.997456
+:END:
+
+*** TODO Kill Aquamacs
+:PROPERTIES:
+:ID:       org_mark_mini20:20231209T162441.996225
+:END:
+As it has not been updated forget it.
+
+*** TODO kill initsplit
+:PROPERTIES:
+:ID:       org_mark_mini20:20231209T162441.994988
+:END:
+As nearly all customization does not need to be saved and as aquamacs goes - then not needed.
+
+*** TODO kill mac-key-map
+:PROPERTIES:
+:ID:       org_mark_mini20:20231209T162441.993755
+:END:
+Put it all in global map. Allows me to change these keys per mode. (and for treemacs ber buffer-local)
+
+*** TODO Tangle selectively
+:PROPERTIES:
+:ID:       org_mark_mini20:20231209T162441.992315
+:END:
+Make it so not all org files are tangles.
+For projects this could be a .dir-locals.el file.
+For others not all files.
+
+*** TODO Tangle add extra stepson
+:PROPERTIES:
+:ID:       org_mark_mini20:20231209T162441.989003
+:END:
+For example set up the tangled file to be formatted by outside formatter - not just indet-region as now.
+
+*** TODO Nix
+:PROPERTIES:
+:ID:       org_mark_mini20:20231209T164001.632026
+:END:
+
+**** TODO Make clear which use-package actually load from, elpa and which use :straight
+:PROPERTIES:
+:ID:       org_mark_mini20:20231209T164001.628606
+:END:
+Add macro use-package-non-elpa for the latter.
+
+**** TODO Generate list of packages for nix.
+:PROPERTIES:
+:ID:       org_mark_mini20:20231209T164001.625551
+:END:

@@ -60,7 +60,6 @@
           "~/\\.emacs\\.d/\\.cask/"
           "~/\\.cask/"
           "/Applications/"
-          "/nix/"
           "~/Library/Preferences/Aquamacs Emacs/Packages"
           "~/Developer/ThirdParty/"
           "emacs\\.d/elpa/"

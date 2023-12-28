@@ -5,8 +5,6 @@
  - path :: ~/Library/CloudStorage/Dropbox/env/dotfiles
 ** Org
  - path :: ~/Library/CloudStorage/Dropbox/Docs/org
-** nix-config - based on nixed
- - path :: ~/Public/vm/nix-config
 ** Local out of .emacs.d
  - path :: ~/.local/emacs
 ** xonsh
@@ -24,155 +22,18 @@
  - path :: ~/emacs.elpaca
 ** emacs-elpaca-full
  - path :: ~/emacs-elpaca-full
-* Nix Work
-** nix-config - based on nixed
- - path :: ~/Public/vm/nix-config
-** my_enzime
- - path :: ~/Public/vm/my_enzime
-** my-hoppla20-nix-example
- - path :: ~/Public/vm/my-hoppla20-nix-example
-**  mitchellh
- - path :: ~/Developer/ThirdParty/nix/mitchellh
-** nixed
- - path :: ~/Developer/ThirdParty/nix/flake-parts/nixed
-** nyx
- - path :: ~/Developer/ThirdParty/nix/nyx
-** fmoda3
- - path :: ~/Developer/ThirdParty/nix/fmoda3
-** nix-simple
- - path :: ~/Public/vm/nix-simple
-* Nix system
-** nixpkgs - first attempt with xonsh
- - path :: ~/.config/nixpkgs
-** snowfallorg-lib
- - path :: ~/Developer/ThirdParty/nix/snowfall/snowfallorg-lib
 * Nix flake parts
-** nixos-flake-generated
- - path :: ~/Public/vm/nixos-flake-generated
-** nixos-flake
- - path :: ~/Public/vm/nixos-flake
-** srid
- - path :: ~/Developer/ThirdParty/nix/flake-parts/srid
-** nixed
- - path :: ~/Developer/ThirdParty/nix/flake-parts/nixed
-** Weathercold
- - path :: ~/Developer/ThirdParty/nix/flake-parts/Weathercold
-** enzime
- - path :: ~/Developer/ThirdParty/nix/flake-parts/enzime
-** lyndeno
- - path :: ~/Developer/ThirdParty/nix/flake-parts/lyndeno
-* Nix config examples - not structure
-** jweigley
- - path :: ~/Developer/ThirdParty/nix/jweigley
-** lillecarl
- - path :: ~/Developer/ThirdParty/nix/lillecarl
-* Nix all
-** nix-config
- - path :: ~/Public/vm/nix-config
-** mwb-snowfall
- - path :: ~/Public/vm/mwb-snowfall
-** my_enzime
- - path :: ~/Public/vm/my_enzime
-** nixos-flake-generated
- - path :: ~/Public/vm/nixos-flake-generated
-** nyx
- - path :: ~/Developer/ThirdParty/nix/nyx
-** nixed
- - path :: ~/Developer/ThirdParty/nix/flake-parts/nixed
-** enzime
- - path :: ~/Developer/ThirdParty/nix/flake-parts/enzime
-** reckenrode
- - path :: ~/Developer/ThirdParty/nix/reckenrode
-** jweigley
- - path :: ~/Developer/ThirdParty/nix/jweigley
-** nix-simple my attempt at all singing dancing
- - path :: ~/Public/vm/nix-simple
-** misterio77
- - path :: ~/Developer/ThirdParty/nix/misterio77
-** luxos
- - path :: ~/Developer/ThirdParty/nix/luxos
-** Nix Starter configs
- - path :: ~/Developer/ThirdParty/nix/nix-starter-configs
-** thexyno
- - path :: ~/Developer/ThirdParty/nix/thexyno
-** shaunsingh
- - path :: ~/Developer/ThirdParty/nix/shaunsingh
-** Mattias
- - path :: ~/Developer/ThirdParty/nix/Matthias
-** sebastiant
- - path :: ~/Developer/ThirdParty/nix/sebastiant
-** cfeely-dotfield
- - path :: ~/Developer/ThirdParty/nix/dotfield
-** srid
- - path :: ~/Developer/ThirdParty/nix/flake-parts/srid
-** nome
- - path :: ~/Developer/ThirdParty/nix/nome
-** Weathercold
- - path :: ~/Developer/ThirdParty/nix/flake-parts/Weathercold
-** lyndeno
- - path :: ~/Developer/ThirdParty/nix/flake-parts/lyndeno
-** lillecarl
- - path :: ~/Developer/ThirdParty/nix/lillecarl
-** trueelecter
- - path :: ~/Developer/ThirdParty/nix/hive/trueelecter
-** david-arnold
- - path :: ~/Developer/ThirdParty/nix/hive/david-arnold
-** GTrunSec
- - path :: ~/Developer/ThirdParty/nix/hive/GTrunSec
-** dotfield-montchr
- - path :: ~/Developer/ThirdParty/nix/hive/montchr
-** pub-solar
- - path :: ~/Developer/ThirdParty/nix/pub-solar
-** ulli
- - path :: ~/Developer/ThirdParty/nix/ulli
-** viperML
- - path :: ~/Developer/ThirdParty/nix/viperML
-** figsoda
- - path :: ~/Developer/ThirdParty/nix/figsoda
-** my-hoppla20-nix-example
- - path :: ~/Public/vm/my-hoppla20-nix-example
-** nix-darwin
- - path :: ~/Developer/ThirdParty/nix/nix-darwin
-** dustinlyons
- - path :: ~/Developer/ThirdParty/nix/dustinlyons
-** fmoda3
- - path :: ~/Developer/ThirdParty/nix/fmoda3
-** snowfall
- - path :: ~/Developer/ThirdParty/nix/snowfall/jakehamilton
-** ALT-F4-ALL
- - path :: ~/Developer/ThirdParty/nix/ALT-F4-ALL
-** mayday
- - path :: ~/Developer/ThirdParty/nix/mayday
+** flake-parts
+ - path :: ~/Developer/ThirdParty/nix/flake-parts
 * Nix snowfall
 ** mwb-snowfall
- - path :: ~/Public/vm/mwb-snowfall
+ - path :: ~/Public/vm/old/mwb-snowfall
 ** nix-config - based on nixed
- - path :: ~/Public/vm/nix-config
+ - path :: ~/Public/vm/mwb-nixed-config
 ** snowfall
- - path :: ~/Developer/ThirdParty/nix/snowfall/jakehamilton
-** snowfallorg-lib
- - path :: ~/Developer/ThirdParty/nix/snowfall/snowfallorg-lib
-** khanelinix
- - path :: ~/Developer/ThirdParty/nix/snowfall/khanelinix
-** IogaMaster
- - path :: ~/Developer/ThirdParty/nix/snowfall/IogaMaster
-** TGuimbert
- - path :: ~/Developer/ThirdParty/nix/snowfall/TGuimbert
-** matt.camp
- - path :: ~/Developer/ThirdParty/nix/snowfall/matt.camp
-* Nix hive
-** trueelecter
- - path :: ~/Developer/ThirdParty/nix/hive/trueelecter
-** david-arnold
- - path :: ~/Developer/ThirdParty/nix/hive/david-arnold
-** GTrunSec
- - path :: ~/Developer/ThirdParty/nix/hive/GTrunSec
-** montchr
- - path :: ~/Developer/ThirdParty/nix/hive/montchr
-** flk
- - path :: ~/Developer/ThirdParty/nix/hive/flk
-** hoppla20-example
- - path :: ~/Developer/ThirdParty/nix/hive/hoppla20-example
+ - path :: ~/Developer/ThirdParty/nix/snowfall
+** mwb-ez-config
+ - path :: ~/Public/vm/old/mwb-ez-config
 * Racket
 ** my realm
  - path :: ~/Developer/Racket/realm
@@ -214,3 +75,21 @@
  - path :: ~/Developer/ThirdParty/jellyfin
 ** 2048
  - path :: ~/Developer/Swift/2048 related
+* nix ez-configs
+** mwb-ez-config
+ - path :: ~/Public/vm/old/mwb-ez-config
+** ez-config-lib
+ - path :: ~/Developer/ThirdParty/nix/lib/ez-configs
+** ez-configs
+ - path :: ~/Developer/ThirdParty/nix/flake-parts/ez-config
+** mwb-snowfall
+ - path :: ~/Public/vm/old/mwb-snowfall
+** nix-config
+ - path :: ~/Public/vm/mwb-nixed-config
+* Nix Thirdparty
+** mwb-nixed-config
+ - path :: ~/Public/vm/mwb-nixed-config
+** nix
+ - path :: ~/Developer/ThirdParty/nix
+** vm
+ - path :: ~/Public/vm/Old

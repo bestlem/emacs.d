@@ -102,7 +102,7 @@ Emacs 28 look at [[help:prog-context-menu][prog-context-menu]]
  ("<f5>" . treemacs-switch-workspace)
  ("<mouse-2>" . treemacs-rightclick-menu)
  ("<C-f5>" . treemacs-edit-workspaces)
- ("<f4>" . treemacs-edit-workspaces))
+ ("<f6>" . treemacs-edit-workspaces))
 #+end_src
 
 * Hydra
@@ -227,3 +227,44 @@ Collect the actions together
 I get
 Error running timer ‘treemacs--process-file-events’: (wrong-type-argument sequencep t)
 So from https://github.com/Alexander-Miller/treemacs/issues/168
+* Edit workspaces
+:PROPERTIES:
+:ID:       org_mark_mini20:20231209T145941.267619
+:END:
+Treemacs uses org-mode with a local-set-key. I want to add my normal keys A-s, A-k etc. but I can't.
+From [[https://stackoverflow.com/q/38511253/151019][Stack Overflow]] there are two ways - replace the function either directly or via advice, or the correct way is make the editor a derived major mode. The latter hink needs treemacs' author.
+So use advice.
+
+But local key changes the key in the major mode according to SO and also emacs documentation. Note treemacs use of ~use-local-map~. But my change does not work.
+
+Argh it is the normal problem that the keys I want are in minor mode ~mac-key~mode~ So none of these fixes work. So kill that mp - as had this issue before.
+#+NAME: org_mark_mini20_20231209T145941.250838
+#+begin_src emacs-lisp
+(defun treemacs-mwb-edit-workspaces ()
+  "Edit your treemacs workspaces and projects as an `org-mode' file.
+
+With more keys"
+  (interactive)
+  (require 'org)
+  (require 'outline)
+  (treemacs--persist)
+  (switch-to-buffer (get-buffer-create treemacs--org-edit-buffer-name))
+  (erase-buffer)
+  (org-mode)
+  (use-local-map (copy-keymap (with-no-warnings org-mode-map)))
+  (local-set-key (kbd "C-c C-c") #'treemacs-finish-edit)
+  (local-set-key (kbd "s-s") #'treemacs-finish-edit)
+  (local-set-key (kbd "s-k") #'bjm/kill-this-buffer)
+
+  (insert "#+TITLE: Edit Treemacs Workspaces & Projects\n")
+  (when treemacs-show-edit-workspace-help
+    (insert "# Call ~treemacs-finish-edit~ or press ~C-c C-c~ when done.\n")
+    (insert "# [[https://github.com/Alexander-Miller/treemacs#conveniently-editing-your-projects-and-workspaces][Click here for detailed documentation.]]\n")
+    (insert "# To cancel you can simply kill this buffer.\n\n"))
+  (insert-file-contents treemacs-persist-file)
+  (with-no-warnings
+    (outline-show-all))
+  (goto-char 0))
+
+(advice-add 'treemacs-edit-workspaces :override #'treemacs-mwb-edit-workspaces)
+#+end_src

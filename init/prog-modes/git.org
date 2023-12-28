@@ -47,6 +47,7 @@ This is [[https://github.com/magit/with-editor][with-editor]] Magit calls it - o
 (use-package-elpa with-editor
   :bind (:map with-editor-mode-map
          ("s-k" . with-editor-cancel)
+		 ("M-s-k" . with-editor-cancel)
          ("s-s" . with-editor-finish)
          ))
 #+end_src

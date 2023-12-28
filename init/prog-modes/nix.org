@@ -14,14 +14,13 @@ For editing nix files.
 (use-package-elpa nix-mode
   :mode "\\.nix\\'"
   :mode-hydra ((:idle 0.5)
-               ("Flakes"
-                (("s" nix3-flake-show "Show")
-                 ("S" nix3-flake-show-url "Remote show")
-                 ("i" nix3-flake-init "Init")
-                 ("n" nix3-flake-new "New")
-                 ("t" nix3-flake-tranient "Transient")))
-               )
-  )
+			   ("State"
+				(("s" nix3-flake-show "Show")
+				 ("S" nix3-flake-show-url "Remote show")
+				 ("t" nix3-transient "Transient"))
+				"Create"
+				(("i" nix3-flake-init "Init")
+				 ("n" nix3-flake-new "New")))))
 #+end_src
 
 * Flakes
@@ -35,11 +34,25 @@ Nut does not run on darwin
 (use-feature nix3
   :straight (:host github :repo "emacs-twist/nix3.el"
 										; not a fork as this is not in MELP etc
-             :local-repo "../../local-repos/nix3.el")
+             ;; :local-repo "../../local-repos/nix3.el"
+             ;; :files (:defaults "extra/*") ; remove as slkows things down
+             )
   :commands nix3-transient
   nix3-flake-show
   nix3-flake-show-url
   nix3-flake-init
   nix3-flake-new
   )
+#+end_src
+
+* Org mode helper
+:PROPERTIES:
+:ID:       org_mark_2023-12-08T12-06-31+00-00_mini20:ECCB061F-A460-4B64-9ED9-8892FB739774
+:END:
+Separated out and not working as recipe uses ssh
+#+NAME: org_mark_2020-11-10T11-48-28+00-00_mini12.local_8FC71439-07B8-480C-A285-3C0F6AA4192C
+#+begin_src emacs-lisp :tangle no
+(use-package-elpa ob-nix
+  :demand
+  :after (nix-mode org-mode))
 #+end_src

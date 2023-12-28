@@ -325,11 +325,31 @@ Code block behaviour - but also see customization for appearance
 	  )
  #+end_src
 
-*** Evaluating
+*** Evaluating Languages
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220619T143614.114358
 :END:
-My languages
+
+*****  Load language only when needed
+:PROPERTIES:
+:ID:       org_mark_2023-12-08T13-27-13+00-00_mini20:0E893C25-A57B-4265-B226-57C7CE1B6B9E
+:END:
+Taken from https://emacs.stackexchange.com/a/20618/9874
+#+NAME: org_mark_2023-12-08T13-27-13+00-00_mini20_2A35BBAB-8CBE-4011-8013-B8B3B0E1F8BF
+#+begin_src emacs-lisp
+(defadvice org-babel-execute-src-block (around load-language nil activate)
+  "Load language if needed"
+  (let ((language (org-element-property :language (org-element-at-point))))
+    (unless (cdr (assoc (intern language) org-babel-load-languages))
+      (add-to-list 'org-babel-load-languages (cons (intern language) t))
+      (org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages))
+    ad-do-it))
+
+#+end_src
+**** My languages
+:PROPERTIES:
+:ID:       org_mark_2023-12-08T13-27-13+00-00_mini20:580DD065-B662-4790-BEC2-C69CA7CC6A73
+:END:
 #+NAME: org_mark_mini20.local_20220619T143246.381888
 #+BEGIN_SRC emacs-lisp
 (org-babel-do-load-languages

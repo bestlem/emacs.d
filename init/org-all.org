@@ -472,7 +472,7 @@ Set the keywords - ie life cycle.
 #+NAME: org_mark_mini20.local_20220628T220421.730792
 #+begin_src emacs-lisp :tangle no :noweb-ref org-custom
 (org-todo-keywords
-   '((sequence "TODO" "DONE(!)" "LEAVE(@)")))
+   '((sequence "TODO" "|" "DONE(!)" "LEAVE(@)")))
 #+end_src
 *** Add timestamp for done
 :PROPERTIES:

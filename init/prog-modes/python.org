@@ -120,7 +120,7 @@ One in emacs and has things built on it but not enabled
 
   :bind (:map python-ts-mode-map
          ("<f5>" . python-shell-send-buffer)
-         ("<f6>" . black-format-buffer))
+         ("<f6>" . ruff-format-buffer))
   :init
   (setq-default indent-tabs-mode 't)
   (setq org-babel-python-ts-mode 'python-ts-mode)
@@ -131,16 +131,17 @@ One in emacs and has things built on it but not enabled
     (aggressive-indent-mode -1)
     (smartparens-mode 1)
     (mwb-prog-auto-fill-80)
+    (ruff-format-on-save-mode 1)
     )
 
   :config
   (setq python-indent-offset 4)
   (setq python-indent-guess-indent-offset nil)
-  (reformatter-define black-format :program "black" :args '("-"))
+  (reformatter-define ruff-format :program "ruff" :args '("format" "-"))
 
   ;; (add-hook 'python-ts-mode-hook 'color-identifiers-mode)
   :hook
-(python-ts-mode . python-hook-mwb)
+  (python-ts-mode . python-hook-mwb)
   (python-mode . python-hook-mwb)
   )
 #+end_src

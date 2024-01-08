@@ -3,6 +3,8 @@
  - path :: ~/.emacs.d
 ** dotfiles
  - path :: ~/Library/CloudStorage/Dropbox/env/dotfiles
+** nix-config - based on nixed
+ - path :: ~/Public/vm/mwb-nixed-config
 ** Org
  - path :: ~/Library/CloudStorage/Dropbox/Docs/org
 ** Local out of .emacs.d
@@ -35,26 +37,10 @@
 ** mwb-ez-config
  - path :: ~/Public/vm/old/mwb-ez-config
 * Racket
-** my realm
- - path :: ~/Developer/Racket/realm
-** realm book
- - path :: ~/Developer/Racket/realm.source
-** RacketProgrammingtheFunWay
- - path :: ~/Developer/Racket/RacketProgrammingtheFunWay
+** Racket projects
+ - path :: ~/Developer/Racket
 ** mandlebrot dropbox
  - path :: ~/Library/CloudStorage/Dropbox/src/Racket/mandelbrot
-** mandlebrot src
- - path :: ~/Developer/Racket/mandelbrot
-** dummy-load
- - path :: ~/Developer/Racket/dummy-load
-** web
- - path :: ~/Developer/Racket/web
-** aoc21
- - path :: ~/Developer/Racket/aoc21
-** racket-docker
- - path :: ~/Developer/Racket/racket-docker
-** PillowData
- - path :: ~/Developer/ThirdParty/PillowData
 ** aoc-racket
  - path :: ~/Developer/ThirdParty/aoc-racket
 * C based

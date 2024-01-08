@@ -131,7 +131,8 @@ One in emacs and has things built on it but not enabled
     (aggressive-indent-mode -1)
     (smartparens-mode 1)
     (mwb-prog-auto-fill-80)
-    (ruff-format-on-save-mode 1)
+    (unless (eq major-mode xonsh-mode)
+      (ruff-format-on-save-mode 1))
     )
 
   :config

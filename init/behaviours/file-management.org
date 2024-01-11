@@ -172,6 +172,12 @@ All the logs are very clever but what I want is the version number to increase s
     ;; This is not defined in non aquamacs
 	(mac-key-save-file-as)))
 #+end_src
+
+*** TODO macport get mac-key-save-file-as
+:PROPERTIES:
+:ID:       org_mark_mini20:20240111T140545.301358
+:END:
+This at the moment used a ns- call which is not in macport.
 *** TODO save special buffers
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:0A3506D6-DE37-44F4-A990-C06C1D567023

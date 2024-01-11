@@ -311,6 +311,13 @@ Deal with stuff done by Aquamacs and original mac-key-mode
 :ID:       org_mark_mini20.local:20220701T094925.499637
 :END:
 Do the main bindings. Needed for macport so use for GNU as well.
+However this is a minor mode so a pain when want to do buffer overides,
+So change to load the code but not use the mode.
+*** The mode
+:PROPERTIES:
+:ID:       org_mark_mini20:20240111T131458.342351
+:END:
+Just need some functions.
 #+NAME: org_mark_mini20.local_20220701T094925.469704
 #+begin_src emacs-lisp
 (use-feature mac-key-mode
@@ -319,8 +326,68 @@ Do the main bindings. Needed for macport so use for GNU as well.
              :local-repo "../../local-repos/mac-key-mode") ; not a fork as this is old
   :demand
   :diminish
-  :config (mac-key-mode 1)
-  (unbind-key "<C-down-mouse-1>" mac-key-mode-map))
+  ;; :config (mac-key-mode 1)
+  ;; (unbind-key "<C-down-mouse-1>" mac-key-mode-map)
+  )
+#+end_src
+*** Keys for mac
+:PROPERTIES:
+:ID:       org_mark_mini20:20240111T124641.031208
+:END:
+mac-mode keys made into global.
+#+NAME: org_mark_mini20_20240111T124640.997628
+#+begin_src emacs-lisp
+(when *sys/macp*
+  ;; mwb/mac-key-save-buffer-force-backup
+  ;; (bind-key "A-<mouse-1>" browse-url-at-mouse)
+  (bind-key "A-S-<mouse-1>" #'mouse-buffer-menu)
+  (bind-key "C-<home>" #'beginning-of-buffer)
+  ;; (bind-key "C-x C-s"  #'mwb/mac-key-save-buffer-force-backup)
+  (bind-key "C-x k"  #'bjm/kill-this-buffer)
+  (bind-key "H-<down>" #'scroll-up)
+  (bind-key "H-<up>" #'scroll-down)
+  (bind-key "M-s-f" #'occur)
+  (bind-key "M-s-k" #'bjm/kill-this-buffer)
+  (bind-key "M-s-u" #'ediff-revision)
+  (bind-key "S-<down-mouse-1>" #'mac-key-shift-mouse-select)
+  (bind-key "s-." #'keyboard-quit)
+  (bind-key "s-/" #'comment-dwim-2)
+  (bind-key "s-<down>" #'end-of-buffer)
+  (bind-key "s-<kp-0>" #'text-scale-mode)
+  (bind-key "s-<kp-add>" #'text-scale-increase)
+  (bind-key "s-<kp-subtract>" #'text-scale-decrease)
+  (bind-key "s-<left>" #'beginning-of-line)
+  (bind-key "s-<mouse-1>" #'browse-url-at-mouse)
+  (bind-key "s-<right>" #'end-of-line)
+  (bind-key "s-<up>" #'beginning-of-buffer)
+  (bind-key "s-?" #'info)
+  (bind-key "s-G" #'isearch-repeat-backward)
+  (bind-key "s-N" #'make-frame-command)
+  (bind-key "s-O" #'mac-key-open-file-other-frame)
+  (bind-key "s-S" #'mac-key-save-as)
+  (bind-key "s-W" #'delete-frame)
+  (bind-key "s-Z" #'undo-fu-only-redo)
+  (bind-key "s-`" #'other-frame)
+  (bind-key "s-a" #'mark-whole-buffer)
+  (bind-key "s-b" #'consult-buffer)
+  (bind-key "s-c" #'clipboard-kill-ring-save)
+  (bind-key "s-f" #'consult-line)
+  (bind-key "s-g" #'isearch-repeat-forward)
+  (bind-key "s-i" #'mac-key-show-in-finder)
+  (bind-key "s-k" #'bury-buffer)
+  (bind-key "s-l" #'goto-line)
+  (bind-key "s-m" #'iconify-frame)
+  (bind-key "s-o" #'mac-key-open-file)
+  (bind-key "s-p" #'ns-print-buffer)
+  (bind-key "s-q" #'save-buffers-kill-emacs)
+  (bind-key "s-s" #'save-buffer)
+  (bind-key "s-t" #'ns-popup-font-panel)
+  (bind-key "s-u" #'revert-buffer-no-confirm)
+  (bind-key "s-v" #'clipboard-yank)
+  (bind-key "s-w" #'delete-frame)
+  (bind-key "s-x" #'clipboard-kill-region)
+  (bind-key "s-y" #'ns-paste-secondary)
+  (bind-key "s-z" #'undo-fu-only-undo))
 #+end_src
 
 ** Choose mode map
@@ -475,7 +542,7 @@ s-h seems just to work
 Delete the frame
 #+NAME: org_mark_mini20.local_20220701T205227.944357
 #+begin_src emacs-lisp
-(bind-key "s-w" 'delete-frame macos-key-map)
+(bind-key "s-w" 'delete-frame)
 #+end_src
 ** Home/End/Paging
 :PROPERTIES:
@@ -484,10 +551,10 @@ Delete the frame
  #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_4281835C-7CD8-4FE9-B6A7-EBB5B2B0ED08
  #+begin_src emacs-lisp
  ;;(define-key osx-key-mode-map [C-end] 'end-of-buffer ) ; seems to be there by default
-(bind-key [C-home] 'beginning-of-buffer macos-key-map)
+(bind-key [C-home] 'beginning-of-buffer)
 (when *macport*
-  (bind-key [C-H-left] 'beginning-of-buffer macos-key-map)
-  (bind-key [C-H-right] 'end-of-buffer macos-key-map))
+  (bind-key [C-H-left] 'beginning-of-buffer)
+  (bind-key [C-H-right] 'end-of-buffer))
 
 ;;  From old Windows/Next/Unix -
 (bind-key [C-kp-end] 'end-of-buffer)
@@ -507,8 +574,8 @@ I suspect not touched since before ages. But need for macport
 ;; (bind-key [s-left] 'scroll-left)
 ;; (bind-key [s-right] 'scroll-right)
 ;;(bind-key [?\M-left] 'scroll-left )
-(bind-key "H-<up>" 'scroll-down macos-key-map)
-(bind-key "H-<down>" 'scroll-up macos-key-map)
+(bind-key "H-<up>" 'scroll-down)
+(bind-key "H-<down>" 'scroll-up)
 #+end_src
 
 ** Deleting and return
@@ -584,7 +651,7 @@ Setting the following option makes it so that when you kill something in Emacs, 
 :END:
 #+NAME: org_mark_mini20.local_20220701T205455.175864
 #+begin_src emacs-lisp
-(bind-key "s-y" 'ns-paste-secondary macos-key-map)
+(bind-key "s-y" 'ns-paste-secondary)
 #+end_src
 ** undo
 :PROPERTIES:
@@ -597,14 +664,14 @@ Use Aquamacs' which is redo+
   :unless *aquamacs*
   :commands aquamacs-undo
   :demand
-  (bind-key "s-z" aquamacs-undo macos-key-map))
+  (bind-key "s-z" aquamacs-undo))
 #+end_src
 See [[http://xahlee.info/emacs/emacs/emacs_best_redo_mode.html][xahlee]] so try undo-fu.
 #+NAME: org_mark_mini20.local_20220701T220249.842682
 #+begin_src emacs-lisp
 (use-package-elpa undo-fu
   :unless *aquamacs*
-  :bind (:map mac-key-mode-map
+  :bind (
 		 ("s-z" . 'undo-fu-only-undo)
 		 ("s-Z" . 'undo-fu-only-redo)))
 #+end_src
@@ -640,11 +707,12 @@ This is the override of save etc to the mode maps
 Rebind just
 #+NAME: org_mark_2020-10-01T11-27-32+01-00_mini12.local_1707CDE5-818A-4399-863A-F81E8653D8F6
 #+begin_src emacs-lisp
-(bind-key [remap mac-key-save-file] 'mwb/mac-key-save-buffer-force-backup macos-key-map)
-(bind-key [remap save-buffer] 'mwb/mac-key-save-buffer-force-backup macos-key-map)
+(bind-key "s-s" 'mwb/mac-key-save-buffer-force-backup)
+(bind-key [remap save-buffer] 'mwb/mac-key-save-buffer-force-backup)
+(bind-key "C-x C-s" 'mwb/mac-key-save-buffer-force-backup)
 (require 'mac-extra-functions)
-(bind-key "s-o" 'mac-key-open-file macos-key-map)
-(bind-key "s-O" 'mac-key-open-file-other-frame macos-key-map)
+(bind-key "s-o" 'mac-key-open-file)
+(bind-key "s-O" 'mac-key-open-file-other-frame)
 #+end_src
 *** Buffer related
 :PROPERTIES:
@@ -652,21 +720,21 @@ Rebind just
 :END:
 #+NAME: org_mark_2020-09-24T21-45-16+01-00_mini12.local_427A6531-52EE-4F7E-A5E8-B2841C9B166A
 #+begin_src emacs-lisp
-;; (bind-key "A-b" 'ivy-switch-buffer macos-key-map)
-(bind-key "M-s-k" 'bjm/kill-this-buffer macos-key-map)
-(bind-key "C-x k" 'bjm/kill-this-buffer macos-key-map)
-(bind-key "s-k" 'bury-buffer macos-key-map)
+;; (bind-key "A-b" 'ivy-switch-buffer )
+(bind-key "M-s-k" 'bjm/kill-this-buffer)
+(bind-key "C-x k" 'bjm/kill-this-buffer)
+(bind-key "s-k" 'bury-buffer)
 ;; remove as consult-buffer works.
-;; (bind-chord "kk" #'er-switch-to-previous-buffer macos-key-map)
+;; (bind-chord "kk" #'er-switch-to-previous-buffer )
 (unless *macport*
-  (bind-key "s-p" 'ns-print-buffer macos-key-map))
-(bind-key  "s-u" 'revert-buffer-no-confirm macos-key-map)
+  (bind-key "s-p" 'ns-print-buffer))
+(bind-key "s-u" 'revert-buffer-no-confirm)
 #+end_src
 Stuff in ns-win so not macports
 #+NAME: org_mark_mini20.local_20220702T104450.180229
 #+begin_src emacs-lisp
 (when *macport*
-  (bind-key "s-^" 'kill-some-buffers macos-key-map))
+  (bind-key "s-^" 'kill-some-buffers))
 #+end_src
 ** TODO Customise
 :PROPERTIES:
@@ -697,12 +765,12 @@ I just want the font to change. But seems only to do a buffer.
 #+NAME: org_mark_mini20.local_20220702T143714.749527
 #+begin_src emacs-lisp
 (if *aquamacs*
-	(progn (bind-key "s-<kp-add>" 'zoom-font macos-key-map)
-		   (bind-key "s-<kp-subtract>" 'zoom-font-out macos-key-map))
+	(prog (bind-key "s-<kp-add>" 'zoom-font)
+		  (bind-key "s-<kp-subtract>" 'zoom-font-out))
   (progn (setq text-scale-mode-step 1.05)
-		 (bind-key "s-<kp-add>" 'text-scale-increase macos-key-map)
-		 (bind-key "s-<kp-subtract>" 'text-scale-decrease macos-key-map)
-		 (bind-key "s-<kp-0>" 'text-scale-mode macos-key-map)))
+		 (bind-key "s-<kp-add>" 'text-scale-increase)
+		 (bind-key "s-<kp-subtract>" 'text-scale-decrease)
+		 (bind-key "s-<kp-0>" 'text-scale-mode)))
 #+end_src
 * Single key bindings
 :PROPERTIES:
@@ -774,18 +842,16 @@ A later thought is to use f5 as leader use key chords and then others for test
 :END:
 #+NAME: org_mark_mini20.local_20220702T144257.931599
 #+begin_src emacs-lisp
-(bind-key "M-s-u" 'ediff-revision macos-key-map)
+(bind-key "M-s-u" 'ediff-revision)
 (bind-key "s-/"
 		  (if *aquamacs*
 			  'comment-or-uncomment-region-or-line
-			'comment-dwim-2)
-		  macos-key-map)
+			'comment-dwim-2))
 (unless *macport*
-  (bind-key "s-p" 'ns-print-buffer macos-key-map))
+  (bind-key "s-p" 'ns-print-buffer))
 
 (bind-key "s-t"
-		  (if *macport* 'mac-font-panel-mode 'ns-popup-font-panel)
-		  macos-key-map)
+		  (if *macport* 'mac-font-panel-mode 'ns-popup-font-panel))
 (when *macport*
   (bind-key "s-D" 'dired)
   (bind-key "s-E" 'edit-abbrevs)
@@ -918,7 +984,7 @@ Try with an enhanced one but test to mouse-4 which might have issues with treema
 (unless (or *emacs/>=28p* *aquamacs*)
   (use-package-elpa mouse3
 	:demand
-	:preface (unbind-key [mouse-3] macos-key-map)
+;;	:preface (unbind-key [mouse-3] macos-key-map)
 	:custom (mouse3-menu-always-flag t)
 	:bind (("<mouse-4>" . 'mouse3-action-wo-save-then-kill))))
 #+end_src
@@ -1120,7 +1186,7 @@ _R_ebuild package |_P_ull package  |_V_ersions thaw  |_W_atcher quit    |prun_e_
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220601T145842.185461
 :END:
-Remove need for C-x keys
+Remove need for C-x keys and use ffap where relevant.
 #+NAME: org_mark_mini20.local_20220601T145842.163332
 #+begin_src emacs-lisp
 (pretty-hydra-define x-hydra-readonly
@@ -1129,9 +1195,10 @@ Remove need for C-x keys
    :color blue)
   ("Files"
    (("b" consult-buffer "switch buffer")
-	("f" mac-key-open-file "find-file")
-	("F" sudo-edit-find-file "sudo-edit-find-file")
-	("S" sudo-edit "Sudo current file")
+	("f" find-file-at-point "find-file")
+	("F" mac-key-open-file "find-file in Finder")
+	("sf" sudo-edit-find-file "sudo-edit-find-file")
+	("se" sudo-edit "Sudo current file")
 	("r" consult-recent-file "recentf")
 	("w" write-file "write file"))
    "Buffers" (("x" exchange-point-and-mark "exchange-point-and-mark" ))))

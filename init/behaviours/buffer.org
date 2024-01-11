@@ -180,3 +180,51 @@ I don't want to confirm https://emacs.stackexchange.com/a/10349/9874 The key bin
   "Revert buffer without confirmation."
   (interactive) (revert-buffer t t))
 #+end_src
+** Kill unused
+:PROPERTIES:
+:ID:       org_mark_mini20:20240108T160838.222300
+:END:
+midnight just looks at buffer names not the file name.
+However [[https://www.emacswiki.org/emacs?TempbufMode][tempbuf-mode]] seems to work more as I might need. Basically kill all read-only buffers that are backed by a file. midnight can deal with internal buffers,
+
+#+NAME: org_mark_mini20_20240108T154734.320112
+#+begin_src emacs-lisp
+(use-package-elpa tempbuf
+  :demand
+
+  :config
+  (defun tempbuf-protect ()
+	"Prevent tempbuf from killing visible or unsaved buffers."
+	(when (or (get-buffer-window)
+			  (buffer-modified-p))
+	  (throw 'tempbuf-skip-kill nil)))
+  :hook (tempbuf-kill . tempbuf-protect))
+
+#+end_src
+** When read-only
+:PROPERTIES:
+:ID:       org_mark_mini20:20240108T160838.220353
+:END:
+Get rid of them after some time.
+Example based on [[https://emacs.stackexchange.com/a/38245/9874][Emacs SX answer]]
+#+NAME: org_mark_mini20_20240108T160838.202894
+#+begin_src emacs-lisp
+(defun mwb-buffer-read-only-watcher (symbol newval operation where)
+  "Whena buffer becomes read-only or not do things incl tempbuf-mode
+
+Just for file backed buffers"
+  (interactive "P")
+  (when (and (eq symbol 'buffer-read-only)
+			 (memq operation '(set let))
+			 (eq where (current-buffer)))
+	(setq-local show-trailing-whitespace (not newval))
+	(when buffer-file-name
+	  (if newval
+		  (turn-on-tempbuf-mode)
+		(turn-off-tempbuf-mode)))))
+#+end_src
+Add watch on read-only changing.
+#+NAME: org_mark_mini20_20240108T160838.204762
+#+begin_src emacs-lisp
+(add-variable-watcher 'buffer-read-only 'mwb-buffer-read-only-watcher)
+#+end_src

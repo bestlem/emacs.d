@@ -278,13 +278,10 @@ Originally oraemacs via jweigley
 :PROPERTIES:
 :ID:       org_mark_mini20:20231105T081548.961922
 :END:
-If you are editing you need to be able to exit
+If you are editing you need to be able to exit.
+However from manual this isn't needed as part of dired.
 #+NAME: org_mark_mini20_20231105T081548.941548
-#+begin_src emacs-lisp
-(use-feature wdired-mode
-  :bind (("<f5>" . wdired-finish-edit))
-  )
-#+end_src
+
 ** Dired-x
 :PROPERTIES:
 :ID:       org_mark_2020-11-27T01-10-38+00-00_mini12.local:2838D467-BDF1-4220-9E50-2DD22E2C9544

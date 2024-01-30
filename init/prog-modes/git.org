@@ -105,6 +105,7 @@ https://github.com/alphapapa/magit-todos
 			 magit-log-buffer-file
 			 magit-log-current
 			 magit-blame-addition
+			 magit-stage-file
 			 magit-diff-buffer-file)
   :custom
   (magit-diff-refine-hunk t)
@@ -117,6 +118,9 @@ https://github.com/alphapapa/magit-todos
   :config
   ;; (setq magit-completing-read-function 'ivy-completing-read)
   (setq magit-completing-read-function 'magit-builtin-completing-read)
+  ;;  make git output slower but in colour
+  ;; https://github.com/magit/magit/pull/3159
+  (setq magit-process-finish-apply-ansi-colors t)
   (transient-bind-q-to-quit)
   :bind (:map magit-blame-read-only-mode-map
 		 ("<double-mouse-1" . magit-show-commit)))
@@ -408,7 +412,8 @@ This is called from the main menu and thus not dependant on any of the git modes
 			 ("l" magit-log-buffer-file "commit log (current file)")
 			 ("L" magit-log-current "commit log (project)")
 			 ("B" magit-blame-addition "blame"))
-   "Diff" (("d" magit-diff-buffer-file "diff buffer"))
+   "Buffer" (("a" magit-stage-file "stage current buffer")
+			 ("d" magit-diff-buffer-file "diff buffer"))
    "Other" (("g" hydra-git-gutter/body "Git gutter")
 			("t" git-timemachine "time machine")
 			("m" git-messenger:popup-message "messenger"))))

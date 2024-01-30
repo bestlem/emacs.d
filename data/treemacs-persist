@@ -28,8 +28,6 @@
 ** flake-parts
  - path :: ~/Developer/ThirdParty/nix/flake-parts
 * Nix snowfall
-** mwb-snowfall
- - path :: ~/Public/vm/old/mwb-snowfall
 ** nix-config - based on nixed
  - path :: ~/Public/vm/mwb-nixed-config
 ** snowfall
@@ -68,11 +66,11 @@
  - path :: ~/Developer/ThirdParty/nix/lib/ez-configs
 ** ez-configs
  - path :: ~/Developer/ThirdParty/nix/flake-parts/ez-config
-** mwb-snowfall
- - path :: ~/Public/vm/old/mwb-snowfall
 ** nix-config
  - path :: ~/Public/vm/mwb-nixed-config
 * Nix Thirdparty
+** mwb-snowfall
+ - path :: ~/Public/vm/mwb-snowfall
 ** mwb-nixed-config
  - path :: ~/Public/vm/mwb-nixed-config
 ** nix

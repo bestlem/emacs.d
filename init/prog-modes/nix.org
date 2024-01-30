@@ -13,6 +13,8 @@ For editing nix files.
 #+begin_src emacs-lisp
 (use-package-elpa nix-mode
   :mode "\\.nix\\'"
+  :bind (:map nix-mode-map
+		 ("<f5>" .  nix3-transient))
   :mode-hydra ((:idle 0.5)
 			   ("State"
 				(("s" nix3-flake-show "Show")

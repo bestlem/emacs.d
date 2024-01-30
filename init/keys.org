@@ -340,10 +340,9 @@ mac-mode keys made into global.
 (when *sys/macp*
   ;; mwb/mac-key-save-buffer-force-backup
   ;; (bind-key "A-<mouse-1>" browse-url-at-mouse)
-  (bind-key "A-S-<mouse-1>" #'mouse-buffer-menu)
   (bind-key "C-<home>" #'beginning-of-buffer)
   ;; (bind-key "C-x C-s"  #'mwb/mac-key-save-buffer-force-backup)
-  (bind-key "C-x k"  #'bjm/kill-this-buffer)
+  (bind-key "C-x k" #'bjm/kill-this-buffer)
   (bind-key "H-<down>" #'scroll-up)
   (bind-key "H-<up>" #'scroll-down)
   (bind-key "M-s-f" #'occur)
@@ -387,7 +386,11 @@ mac-mode keys made into global.
   (bind-key "s-w" #'delete-frame)
   (bind-key "s-x" #'clipboard-kill-region)
   (bind-key "s-y" #'ns-paste-secondary)
-  (bind-key "s-z" #'undo-fu-only-undo))
+  (bind-key "s-z" #'undo-fu-only-undo)
+
+  (bind-key "A-S-<mouse-1>" #'mouse-buffer-menu)
+  (bind-key [S-down-mouse-1] 'mac-key-shift-mouse-select)
+  (bind-key [s-mouse-1] 'browse-url-at-mouse))
 #+end_src
 
 ** Choose mode map

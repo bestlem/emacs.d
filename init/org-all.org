@@ -123,10 +123,11 @@ Put the bind bit in noweb
  :map org-mode-map
  ("<f5>" . org-ctrl-c-ctrl-c)
  :map org-src-mode-map
- ([remap save-buffer] . my/org-edit-src-exit)
- ([remap bury-buffer] . org-edit-src-abort)
- ;; :map org-capture-mode-map
- ;; ("<f12>" . org-capture-finalize)
+ (("s-s" . my/org-edit-src-exit)
+  ([remap bury-buffer] . org-edit-src-abort)
+  ;; :map org-capture-mode-map
+  ;; ("<f12>" . org-capture-finalize)
+  )
  )
 #+end_src
 

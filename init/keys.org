@@ -379,6 +379,8 @@ mac-mode keys made into global.
   (bind-key "s-o" #'mac-key-open-file)
   (bind-key "s-p" #'ns-print-buffer)
   (bind-key "s-q" #'save-buffers-kill-emacs)
+  (bind-key "s-r" #'replace-string)
+  (bind-key "s-R" #'query-replace)
   (bind-key "s-s" #'save-buffer)
   (bind-key "s-t" #'ns-popup-font-panel)
   (bind-key "s-u" #'revert-buffer-no-confirm)
@@ -957,7 +959,7 @@ Emacs 28 now has context-menu-function . Which seems much simpler. However read 
 :ID:       org_mark_mini20.local:20220702T101540.282405
 :END:
 #+NAME: org_mark_mini20.local_20220702T101540.255108
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-feature emacs
   :demand
   :after mac-key-mode

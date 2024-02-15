@@ -402,6 +402,7 @@ The problem is that we have regex
 #+NAME: org_mark_mini20.local_20210830T180007.805003
 #+begin_src emacs-lisp
 (use-feature recentf
+  :defer 2
   :commands (recentf-mode
 			 recentf-add-file
 			 recentf-apply-filename-handlers

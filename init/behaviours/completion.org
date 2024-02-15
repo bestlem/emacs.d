@@ -154,10 +154,10 @@ This is needed to mix the completions up.
   ;; (add-to-list 'completion-at-point-functions #'cape-dabbrev)
   ;; (add-to-list 'completion-at-point-functions #'cape-ispell)
   (defalias 'cape-mwb-dabbrev-dict
-	(cape-super-capf #'cape-dabbrev #'cape-ispell #'cape-keyword))
+	(cape-capf-super #'cape-dabbrev #'cape-ispell #'cape-keyword))
   (add-to-list 'completion-at-point-functions #'cape-mwb-dabbrev-dict)
   ;; (setq-local completion-at-point-functions
-  ;; 			  (list (cape-super-capf
+  ;; 			  (list (cape-capf-super
   ;; 					 (cape-company-to-capf #'company-yasnippet)
   ;; 					 #'cape-abbrev
   ;; 					 #'cape-dabbrev
@@ -170,7 +170,7 @@ This is needed to mix the completions up.
   ;;(add-to-list 'completion-at-point-functions #'cape-line)
   ;; (add-to-list 'completion-at-point-functions #'cape-yasnippet)
   ;; (setq-local completion-at-point-functions
-  ;; 			  (list (cape-super-capf
+  ;; 			  (list (cape-capf-super
   ;; 					 (cape-company-to-capf #'company-yasnippet)
   ;; 					 #'cape-abbrev
   ;; 					 #'cape-dabbrev
@@ -180,7 +180,7 @@ This is needed to mix the completions up.
 	(or (not (keywordp cand))
 		(eq (char-after (car completion-in-region--data)) ?:)))
   (defalias 'my/cape-elisp-super-capf
-	(cape-super-capf #'cape-yasnippet
+	(cape-capf-super #'cape-yasnippet
 					 #'elisp-completion-at-point
 					 ;; 'cape-dabbrev
 					 ))

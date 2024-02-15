@@ -410,14 +410,14 @@ Both Aquamacs and mac-keys-mode introduce a map for macOS keys. Unfortunately it
 :PROPERTIES:
 :ID:       org_mark_2020-10-01T11-27-32+01-00_mini12.local:069F9DA8-F579-40AF-86F2-ECE349FF6181
 :END:
-Now unused so just documentation.
+Now unused so just documentation. - ventura seems to have messed this up as ,home> is now seen by karabinier as s-<left>
 However needed for navigation. But can do directly as macport has the problem.
 No home end needed for mwin as can't do a rebind. Also lispy-delete. Issue is the base globale map is deletechar and mapped to C-d not a delete so can't rebind.
 #+NAME: org_mark_mini20.local_20220630T234727.947741
 #+begin_src emacs-lisp
 ;; Set best default names - begin with aquamacs and NS emacs
-(setq mwbkey-home "<home>"
-      mwbkey-end "<end>"
+(setq mwbkey-home "s-<left>"
+      mwbkey-end "s-<right>"
       mwbkey-page-up "<prior>"
       mwbkey-page-down "<next>"
       mwbkey-insert "<f18>"             ; This is a karabinier bind as insert

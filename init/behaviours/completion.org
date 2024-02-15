@@ -383,5 +383,6 @@ For copyright and licence
   :custom
   (spdx-copyright-holder 'user)
   (spdx-project-detection 'projectile)
+  (spdx-copyright-prefix "SPDX-FileCopyrightText: ")
   )
 #+end_src

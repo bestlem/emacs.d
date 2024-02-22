@@ -108,7 +108,7 @@ Other issue is for pure python in hard tab files - something sets the offset to 
 :PROPERTIES:
 :ID:       org_mark_2020-11-24T21-22-09+00-00_mini12.local:5313A1ED-609C-49B1-9C6B-C6A1279D4873
 :END:
-One in emacs and has things built on it but not enabled
+One in emacs and has things built on it.
 #+NAME: org_mark_2020-11-24T21-22-09+00-00_mini12.local_D8E951D0-C15C-4B10-AAC8-8DAF8382B214
 #+begin_src emacs-lisp
 (use-feature python
@@ -121,10 +121,19 @@ One in emacs and has things built on it but not enabled
   :bind (:map python-ts-mode-map
          ("<f5>" . python-shell-send-buffer)
          ("<f6>" . ruff-format-buffer))
+  :custom
+  ;; non python mode
+  (expand-region-preferred-python-mode 'python)
+  (expand-region-guess-python-mode nil)
+  (org-babel-python-mode 'python-ts-mode)
+
+  (python-indent-offset 4)
+  (python-indent-guess-indent-offset nil)
+  (python-interpreter "python3")
+
   :init
   (setq-default indent-tabs-mode 't)
-  (setq org-babel-python-ts-mode 'python-ts-mode)
-  (setq expand-region-preferred-python-ts-mode 'python)
+
 
   (defun python-hook-mwb ()
     (setq tab-width 4)
@@ -136,8 +145,6 @@ One in emacs and has things built on it but not enabled
     )
 
   :config
-  (setq python-indent-offset 4)
-  (setq python-indent-guess-indent-offset nil)
   (reformatter-define ruff-format :program "ruff" :args '("format" "-"))
 
   ;; (add-hook 'python-ts-mode-hook 'color-identifiers-mode)

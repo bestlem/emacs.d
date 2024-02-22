@@ -51,8 +51,26 @@ See https://github.com/alphapapa/prism.el/issues/8 to add
   :config
   (setq prism-comments nil)             ; non-nil distorts colours
   (setq prism-num-faces 16)
-
-
+  (prism-set-colors
+    :desaturations '(0) ; do not change---may lower the contrast ratio
+    :lightens '(0)      ; same
+    :colors (modus-themes-with-colors
+              (list fg-main
+                    magenta
+                    cyan-cooler
+                    magenta-cooler
+                    blue
+                    magenta-warmer
+                    cyan-warmer
+                    red-cooler
+                    green
+                    fg-main
+                    cyan
+                    yellow
+                    blue-warmer
+                    red-warmer
+                    green-cooler
+                    yellow-faint)))
 
   ;; for 8 colours
   )

@@ -2,11 +2,8 @@
 #+AUTHOR: Mark Bestley
 #+DATE:   10 Jun 2022
 #+PROPERTY:header-args :cache yes :tangle yes :comments noweb
-* Buffers
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:2C7F2E45-19AE-43EC-8536-C7A69744CCC2
-:END:
-** Protect library and other files
+
+* Protect library and other files
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:04EFE611-1F9B-479D-A3BB-0C428F8EBA20
 :END:
@@ -69,17 +66,17 @@
   (global-hardhat-mode)
   (validate-setq hardhat-mode-lighter "Ⓗ"))
 #+end_src
-*** Separate out my additions
+** Separate out my additions
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220614T120500.373254
 :END:
 ie move to config and setup as two parts.
 and/ot move to :custom
-** Buffer switch
+* Buffer switch
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:4551A020-6DAB-4E1D-A70F-60DF7729834F
 :END:
-*** Switch on one key - not used
+** Switch on one key - not used
 :PROPERTIES:
 :ID:       org_mark_mini20:20230308T134355.679256
 :END:
@@ -93,7 +90,7 @@ Repeated invocations toggle between the two most recently open buffers."
   (interactive)
   (switch-to-buffer (other-buffer (current-buffer) 1)))
 #+end_src
-*** Switch depending on frame.
+** Switch depending on frame.
 :PROPERTIES:
 :ID:       org_mark_mini20:20230308T134355.673639
 :END:
@@ -137,11 +134,11 @@ This is from [[https://protesilaos.com/emacs/beframe#h:5b751614-8749-4aa8-aaed-f
   :config
   (beframe-mode 1))
 #+end_src
-** Buffer removal
+* Buffer removal
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:99F964B4-DBAA-4EBE-9B09-0D7840CAA7CC
 :END:
-*** KIll buffer
+** KIll buffer
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:0194DAD8-98E5-42AA-82A6-7C4D741A5F91
 :END:
@@ -154,7 +151,7 @@ By default C-x k runs the command kill-buffer which prompts you for which buffer
   (interactive)
   (kill-buffer (current-buffer)))
 #+end_src
-*** Deal with subprocesses
+** Deal with subprocesses
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:EE6B876F-8EE3-40C1-BBD1-0BEA1BBDDD58
 :END:
@@ -169,7 +166,7 @@ But emacs 26 seems to have improved this from [[https://emacs.stackexchange.com/
 #+begin_src emacs-lisp
 (setq confirm-kill-processes nil)
 #+end_src
-** Revert buffer
+* Revert buffer
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:10B9D32A-E48F-4CA7-8D0B-397EC17233D6
 :END:
@@ -180,7 +177,7 @@ I don't want to confirm https://emacs.stackexchange.com/a/10349/9874 The key bin
   "Revert buffer without confirmation."
   (interactive) (revert-buffer t t))
 #+end_src
-** Kill unused
+* Kill unused
 :PROPERTIES:
 :ID:       org_mark_mini20:20240108T160838.222300
 :END:
@@ -198,10 +195,16 @@ However [[https://www.emacswiki.org/emacs?TempbufMode][tempbuf-mode]] seems to w
 	(when (or (get-buffer-window)
 			  (buffer-modified-p))
 	  (throw 'tempbuf-skip-kill nil)))
-  :hook (tempbuf-kill . tempbuf-protect))
+  :hook (tempbuf-kill . tempbuf-protect)
+  ((
+	deadgrep-mode
+	help-mode
+	helpful-mode
+	magit-mode
+	) . turn-on-tempbuf-mode))
 
 #+end_src
-** When read-only
+* When read-only
 :PROPERTIES:
 :ID:       org_mark_mini20:20240108T160838.220353
 :END:
@@ -210,7 +213,7 @@ Example based on [[https://emacs.stackexchange.com/a/38245/9874][Emacs SX answer
 #+NAME: org_mark_mini20_20240108T160838.202894
 #+begin_src emacs-lisp
 (defun mwb-buffer-read-only-watcher (symbol newval operation where)
-  "Whena buffer becomes read-only or not do things incl tempbuf-mode
+  "When a buffer becomes read-only or not do things incl tempbuf-mode
 
 Just for file backed buffers"
   (interactive "P")

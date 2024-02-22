@@ -128,7 +128,6 @@ This is needed to mix the completions up.
 		 ("C-c p k" . cape-keyword)
 		 ("C-c p s" . cape-symbol)
 		 ("C-c p a" . cape-abbrev)
-		 ("C-c p i" . cape-ispell)
 		 ("C-c p l" . cape-line)
 		 ("C-c p w" . cape-dict)
 		 ("C-c p \\" . cape-tex)
@@ -154,7 +153,7 @@ This is needed to mix the completions up.
   ;; (add-to-list 'completion-at-point-functions #'cape-dabbrev)
   ;; (add-to-list 'completion-at-point-functions #'cape-ispell)
   (defalias 'cape-mwb-dabbrev-dict
-	(cape-capf-super #'cape-dabbrev #'cape-ispell #'cape-keyword))
+	(cape-capf-super #'cape-dabbrev #'cape-dict #'cape-keyword))
   (add-to-list 'completion-at-point-functions #'cape-mwb-dabbrev-dict)
   ;; (setq-local completion-at-point-functions
   ;; 			  (list (cape-capf-super
@@ -253,17 +252,13 @@ Note that the inheritance of modes is not the same as emacs. e.g. basic-lisp-mod
   ;; :bind (:map yas-minor-mode-map
   ;; ("SPC" . mwb-yas-expand)
 
-  :preface
-  (setq yas-alias-to-yas/prefix-p nil)  ; force it
-  ;; (defun mwb-yas-expand ()
-  ;;   (eval yas-maybe-expand))
+
   :config
   ;;(setq yas-snippet-dirs (list (mwb-user-emacs-file "data/snippets")))
   ;; Use define key as :bind needs a function but don't use as don't auto expand
   ;;(define-key yas-minor-mode-map (kbd "SPC") yas-maybe-expand)
 
   (yas-reload-all)
-  (yas-global-mode 1)
 
   ;; Add to company
   (unless (fboundp #'cape-dabbrev)
@@ -285,6 +280,10 @@ Note that the inheritance of modes is not the same as emacs. e.g. basic-lisp-mod
                   company-symbol))))
 		(t
 		 (apply orig-fun args)))))
+
+  :custom
+  (yas-alias-to-yas/prefix-p nil)
+  (yas-choose-keys-first nil)
 
   :mode-hydra (snippet-mode
 			   (:idle 0.5)

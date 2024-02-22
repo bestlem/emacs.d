@@ -14,7 +14,13 @@ For editing nix files.
 (use-package-elpa nix-mode
   :mode "\\.nix\\'"
   :bind (:map nix-mode-map
-		 ("<f5>" .  nix3-transient))
+		 ("<f5>" . nix3-transient))
+  ;; TODO when put on exec-path
+  ;; :config
+  ;; (reformatter-define alejandra-format :program "alejandra")
+
+  ;; :hook (nix-mode . alejandra-format-on-save-mode)
+
   :mode-hydra ((:idle 0.5)
 			   ("State"
 				(("s" nix3-flake-show "Show")

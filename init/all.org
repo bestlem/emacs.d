@@ -233,6 +233,7 @@ The lisp list from `sp-lisp-modes`, but I can't use that as smartparens is not u
 (defconst mwb-braces-modes '(c-mode
                              cpp-mode
                              objc-mode
+                             nix-mode
                              )
   "Modes that use braces for program blocks")
 

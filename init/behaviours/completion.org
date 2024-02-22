@@ -240,24 +240,19 @@ Note that the inheritance of modes is not the same as emacs. e.g. basic-lisp-mod
 (use-package-elpa yasnippet
   :diminish yas-minor-mode
   :demand
-  :after company cape
+  :after cape
   :mode ((rx (or "/.emacs.d/data/snippets/"
                  (seq ".yasnippet" eol ))) . snippet-mode)
   :bind (:map snippet-mode-map
          ("<f5>" . yas-load-snippet-buffer)
          ("C-<f5>" . yas-load-snippet-buffer-and-close)
-         ;; :map yas-minor-mode-map
-         ;; ("<SPC>" . yas-maybe-expand)
          )
-  ;; :bind (:map yas-minor-mode-map
-  ;; ("SPC" . mwb-yas-expand)
 
+
+  :custom
+  (yas-snippit-dirs  (list (mwb-user-emacs-file "data/snippets")))
 
   :config
-  ;;(setq yas-snippet-dirs (list (mwb-user-emacs-file "data/snippets")))
-  ;; Use define key as :bind needs a function but don't use as don't auto expand
-  ;;(define-key yas-minor-mode-map (kbd "SPC") yas-maybe-expand)
-
   (yas-reload-all)
 
   ;; Add to company

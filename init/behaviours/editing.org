@@ -215,21 +215,23 @@ Does not work - try renaming the python test to python mode and run them
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:79C47FC8-B71F-40B4-84F3-DB78319B9E33
 :END:
 There are several ways to make begin go to first non whitespace  then to begin line, some will then make next press go to defun or buffer.
-Note home and end are in Aquamacs osx-mode-map makes life more complex (actually not as mosey overrides it unless you deactivate and reactivate it). Perhaps I will have to unset them to allow modes to do their things These include crux, [[https://github.com/alezost/mwim.el][mwin]] and ergoemacs,  [[https://github.com/alphapapa/mosey.el][mosey]] + snippets on web.
+Note home and end are in Aquamacs osx-mode-map makes life more complex (actually not as mosey overrides it unless you deactivate and reactivate it). Perhaps I will have to unset them to allow modes to do their things These include crux, [[https://github.com/alezost/mwim.el][mwim]] and ergoemacs,  [[https://github.com/alphapapa/mosey.el][mosey]] + snippets on web.
 Note that lispy also does this but not back a form.
 Tried mosey as it has the back function - NB can use smartparens, unfortunately does not seem to work with shift and as others do try another.
-mwin seems the current winner
-*** mwin
+mwim seems the current winner
+*** mwim
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:73B44400-98DA-4212-B923-8DC1AF3E360A
 :END:
-mwin might have mode aware
+mwim might have mode aware
 #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_DBEC557B-9FAB-458C-AACF-C315E3DCB0FB
 #+begin_src emacs-lisp
 (use-package-elpa mwim
   :commands (mwim-beginning mwim-end)
-  :bind (([remap move-beginning-of-line] . mwin-beginning)
-         ([remap move-end-of-line] . mwin-end))
+  :bind (([remap move-beginning-of-line] . mwim-beginning)
+         ([remap beginning-of-line] . mwim-beginning)
+         ([remap move-end-of-line] . mwim-end)
+         ([remap end-of-line] . mwim-end))
   :init
   (bind-key mwbkey-home 'mwim-beginning)
   (bind-key mwbkey-end 'mwim-end))

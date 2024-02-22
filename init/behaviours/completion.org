@@ -251,8 +251,11 @@ Note that the inheritance of modes is not the same as emacs. e.g. basic-lisp-mod
 
   :custom
   (yas-snippit-dirs  (list (mwb-user-emacs-file "data/snippets")))
+  (yas-alias-to-yas/prefix-p nil)
+  (yas-choose-keys-first nil)
 
   :config
+  (yas-global-mode 1)
   (yas-reload-all)
 
   ;; Add to company
@@ -276,9 +279,9 @@ Note that the inheritance of modes is not the same as emacs. e.g. basic-lisp-mod
 		(t
 		 (apply orig-fun args)))))
 
-  :custom
-  (yas-alias-to-yas/prefix-p nil)
-  (yas-choose-keys-first nil)
+  :init
+  (define-key yas-minor-mode-map (kbd "<tab>") nil)
+  (define-key yas-minor-mode-map (kbd "TAB") nil)
 
   :mode-hydra (snippet-mode
 			   (:idle 0.5)

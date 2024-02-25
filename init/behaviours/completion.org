@@ -279,7 +279,7 @@ Note that the inheritance of modes is not the same as emacs. e.g. basic-lisp-mod
 		(t
 		 (apply orig-fun args)))))
 
-  :init
+  :config
   (define-key yas-minor-mode-map (kbd "<tab>") nil)
   (define-key yas-minor-mode-map (kbd "TAB") nil)
 
@@ -377,6 +377,7 @@ For copyright and licence
 #+NAME: org_mark_mini20_20231203T111438.543132
 #+begin_src emacs-lisp
 (use-package-elpa spdx
+  :commands spdx-insert-spdx-copyright
   :custom
   (spdx-copyright-holder 'user)
   (spdx-project-detection 'projectile)

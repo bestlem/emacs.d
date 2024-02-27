@@ -21,7 +21,9 @@ We have the best discussion at https://www.emacswiki.org/emacs/TabsAreEvil
 So try smart-tabs - later
 First issue is we need to switch as many people use spaces so we need to guess indent levewls - python.el does this automatically. There is the [[https://www.emacswiki.org/emacs/GuessStyle][GuessStyle ]]but it is old and not maintained. [[https://github.com/jscheid/dtrt-indent][dtrt-indent]] seems more modern and has a maintainer but.... and comments on python worry - but is does tabs mode things and dtrt-indent can't deal well with files that mix hard tabs with spaces for indentation. Which is the case I really want but seems OK - however need to then think on what to do for (un)tabify
 dtrt-indent-mode does not set hard tabs for python - which I need so hack guess-style that does for wrongh python mode.
-Now we have a lot of reformmatter - it just used to be astyle and these can now overcome some issues. However nix treefmt does not have yapf so stuck with black which does no spaces.
+Now we have a lot of reformmatter - it just used to be astyle and these can now overcome some issues. However nix treefmt does not have yapf so stuck with black which does no spaces, now it has ruff which can be configured.
+
+Alternative is to force things ie use .editorconfig files and do nopt guess. Also format on save using formatters like ruff, clang-format etc.
 
 ** Tab can complete
 :PROPERTIES:
@@ -62,7 +64,7 @@ Don't use the defaults look at the file
 :ID:       org_2020-11-30+00-00:DB587002-CCA1-4A79-8F32-4E389CEE1126
 :END:
 #+NAME: org_2020-11-29+00-00_5DF7AA9A-5AD2-4C8E-8FFE-5D878310646D
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package-elpa dtrt-indent
   :diminish
   :init
@@ -74,7 +76,7 @@ Don't use the defaults look at the file
 :ID:       org_mark_mini20.local:20210526T185848.660684
 :END:
 #+NAME: org_mark_mini20.local_20210526T195505.023756
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package-elpa guess-style
   :commands guess-style-guess-all
   guess-style-info-mode
@@ -91,9 +93,9 @@ This sets indentation etc. from an external file.
 #+begin_src emacs-lisp
 (use-package-elpa editorconfig
   :demand
+  :custom (editorconfig-trim-whitespaces-mode 'ws-butler-mode)
   :config
-  (editorconfig-mode 1)
-  )
+  (editorconfig-mode 1))
 #+end_src
 * [[https://github.com/Malabarba/aggressive-indent-mode][Aggressive indent]]
 :PROPERTIES:

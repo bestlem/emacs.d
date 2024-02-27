@@ -182,13 +182,27 @@ I don't want to confirm https://emacs.stackexchange.com/a/10349/9874 The key bin
 :ID:       org_mark_mini20:20240108T160838.222300
 :END:
 midnight just looks at buffer names not the file name.
-However [[https://www.emacswiki.org/emacs?TempbufMode][tempbuf-mode]] seems to work more as I might need. Basically kill all read-only buffers that are backed by a file. midnight can deal with internal buffers,
+However [[https://www.emacswiki.org/emacs?TempbufMode][tempbuf-mode]] seems to work more as I might need. Basically kill all read-only fbuffers that are backed by a file. midnight can deal with internal buffers,
+
+org-mode is set as not being done as the org buffer can be closed if there is an *Org Src buffer open. A more complex way would be better.
 
 #+NAME: org_mark_mini20_20240108T154734.320112
 #+begin_src emacs-lisp
 (use-package-elpa tempbuf
   :demand
 
+  :preface
+  (defun tempbuf--mwb-kill-message-function (msg)
+	"Make the message clearer."
+	(interactive "P")
+	(message "%s ============= tempbuf %s"
+			 (format-time-string "[%F %T] ")
+			 msg))
+
+  ;; :custom (tempbuf-kill-message-function .
+  ;; "tempbuf--mwb-kill-message-function")
+  ;; :custom (tempbuf-kill-message
+  ;; 		   . "============= tempbuf Killed inactive buffer: %s.")
   :config
   (defun tempbuf-protect ()
 	"Prevent tempbuf from killing visible or unsaved buffers."
@@ -200,11 +214,11 @@ However [[https://www.emacswiki.org/emacs?TempbufMode][tempbuf-mode]] seems to w
 	deadgrep-mode
 	help-mode
 	helpful-mode
-	magit-mode
-	) . turn-on-tempbuf-mode))
+	magit-mode) . turn-on-tempbuf-mode)
+  ((org-mode) . turn-off-tempbuf-mode))
 
 #+end_src
-* When read-only
+** When read-only
 :PROPERTIES:
 :ID:       org_mark_mini20:20240108T160838.220353
 :END:
@@ -219,8 +233,16 @@ Just for file backed buffers"
   (interactive "P")
   (when (and (eq symbol 'buffer-read-only)
 			 (memq operation '(set let))
-			 (eq where (current-buffer)))
+			 (eq where (current-buffer))
+			 (not (string-equal (substring (buffer-name where) 0 2) " *")))
 	(setq-local show-trailing-whitespace (not newval))
+	(message "name <%s> substr <%s>" (buffer-name where)
+			 (substring (buffer-name where) 0 2))
+	(message
+	 "mwb-watcher newval = %s symbol = %s buffer = %s"
+	 newval
+	 symbol
+	 (buffer-name where))
 	(when buffer-file-name
 	  (if newval
 		  (turn-on-tempbuf-mode)

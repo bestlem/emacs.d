@@ -14,12 +14,6 @@ On second thoughts after the main one you can use-package emacs with an after. B
 
 Also note as I have this in my startup they can be done on demand but otherwise back to weave.
 
-* TODO Look at centaur
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20220610T130200.406548
-:END:
-icons
-More in startup
 * Main setup
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210811T192501.325010
@@ -44,7 +38,8 @@ More in startup
   (treemacs-user-header-line-format #'treemacs-header-buttons-format)
   (treemacs-width-is-initially-locked nil)
   (treemacs-width 40)
-
+  (treemacs-sorting 'alphabetic-case-insensitive-asc)
+  (treemacs-follow-after-init . t)
   :config
   (setq treemacs--no-messages nil)
   ;; add Mac key symbols
@@ -76,8 +71,9 @@ More in startup
 :END:
 So not tangled.
 I need to set the mouse - unfortunately it is in a minor mode map not global so simple bind does not work
+Remove as now mac-key-mode removed for much.
 #+NAME: org_mark_mini20.local_20210819T110926.728132
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (defun treemacs-mwb-mouse ()
   (let ((oldmap (cdr (assoc 'mac-key-mode-map minor-mode-map-alist)))
         (newmap (make-sparse-keymap)))
@@ -188,7 +184,7 @@ Collect the actions together
 (treemacs-tag-follow-mode t)
 (treemacs-hide-gitignored-files-mode 1)
 (treemacs-filewatch-mode t)
-(treemacs-git-commit-diff-mode 1)
+;; (treemacs-git-commit-diff-mode nil)
 
 (pcase (cons (not (null (executable-find "git")))
 			 (not (null treemacs-python-executable)))
@@ -218,7 +214,12 @@ Collect the actions together
 #+begin_src emacs-lisp
 (use-package-elpa treemacs-magit
   :after treemacs magit
-  :demand)
+  :demand
+  :hook ((magit-post-commit
+		  git-commit-post-finish
+		  magit-post-stage
+		  magit-post-unstage)
+		 . treemacs-magit--schedule-update))
 #+end_src
 * Debug
 :PROPERTIES:
@@ -237,7 +238,9 @@ So use advice.
 
 But local key changes the key in the major mode according to SO and also emacs documentation. Note treemacs use of ~use-local-map~. But my change does not work.
 
-Argh it is the normal problem that the keys I want are in minor mode ~mac-key~mode~ So none of these fixes work. So kill that mp - as had this issue before.
+Argh it is the normal problem that the keys I want are in minor mode ~mac-key~mode~ So none of these fixes work. So kill that map - as had this issue before.
+
+However allows set of startup view.
 #+NAME: org_mark_mini20_20231209T145941.250838
 #+begin_src emacs-lisp
 (defun treemacs-mwb-edit-workspaces ()
@@ -258,13 +261,18 @@ With more keys"
 
   (insert "#+TITLE: Edit Treemacs Workspaces & Projects\n")
   (when treemacs-show-edit-workspace-help
-    (insert "# Call ~treemacs-finish-edit~ or press ~C-c C-c~ when done.\n")
-    (insert "# [[https://github.com/Alexander-Miller/treemacs#conveniently-editing-your-projects-and-workspaces][Click here for detailed documentation.]]\n")
-    (insert "# To cancel you can simply kill this buffer.\n\n"))
+	(insert "# Call ~treemacs-finish-edit~ or press ~C-c C-c~ when done.\n")
+	(insert "# [[https://github.com/Alexander-Miller/treemacs#conveniently-editing-your-projects-and-workspaces][Click here for detailed documentation.]]\n")
+	(insert "# To cancel you can simply kill this buffer.\n\n"))
   (insert-file-contents treemacs-persist-file)
   (with-no-warnings
-    (outline-show-all))
+	(outline-hide-sublevels 1))
   (goto-char 0))
 
 (advice-add 'treemacs-edit-workspaces :override #'treemacs-mwb-edit-workspaces)
 #+end_src
+** TODO Key map change
+:PROPERTIES:
+:ID:       org_mark_mini20:20240227T113632.376309
+:END:
+I have moved keys into global map. So can delete?

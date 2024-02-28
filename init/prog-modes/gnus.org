@@ -71,6 +71,7 @@ Cover method for gnus to create new frame
 (setq gnus-read-active-file nil)
 (setq gnus-visual t
 	  gnus-large-newsgroup 4000)
+(setq gnus-home-directory (expand-file-name "gnus" mwb-emacs-share-dir))
 #+end_src
 #+NAME: org_mark_mini20.local_20220706T195409.877150
 #+begin_src emacs-lisp :tangle no :noweb-ref gnus-custom
@@ -82,7 +83,6 @@ Cover method for gnus to create new frame
 :END:
 #+NAME: org_mark_mini20.local_20220706T194343.304616
 #+begin_src emacs-lisp :tangle no :noweb-ref gnus-custom
-(gnus-home-directory (expand-file-name "gnus" mwb-emacs-share-dir))
 (message-directory (expand-file-name "Mail" mwb-emacs-share-dir))
 (gnus-directory (expand-file-name "News" gnus-home-directory))
 (gnus-startup-file (expand-file-name  ".newsrc" gnus-home-directory))

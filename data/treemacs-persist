@@ -3,14 +3,10 @@
  - path :: ~/.emacs.d
 ** dotfiles
  - path :: ~/Library/CloudStorage/Dropbox/env/dotfiles
-** nix-config - based on nixed
- - path :: ~/Public/vm/mwb-nixed-config
 ** Org
- - path :: ~/Library/CloudStorage/Dropbox/Docs/org
+ - path :: ~/Library/Mobile Documents/com~apple~CloudDocs/_Docs/org
 ** Local out of .emacs.d
  - path :: ~/.local/emacs
-** xonsh
- - path :: ~/Developer/python/xonsh
 * Emacs
 ** My init .emacs.d
  - path :: ~/.emacs.d
@@ -24,16 +20,47 @@
  - path :: ~/emacs.elpaca
 ** emacs-elpaca-full
  - path :: ~/emacs-elpaca-full
-* Nix flake parts
-** flake-parts
- - path :: ~/Developer/ThirdParty/nix/flake-parts
+* Nix All
+** mwb-nixed-config
+ - path :: ~/Public/vm/mwb-nixed-config
+** hive
+ - path :: /Users/nix/hive
+** nix
+ - path :: ~/Developer/ThirdParty/nix
+* Nix hive
+** my-hive
+ - path :: /Users/nix/hive
+** hive
+ - path :: ~/Developer/ThirdParty/nix/hive
+** mwb-nixed-config
+ - path :: ~/Public/vm/mwb-nixed-config
+** mwb-snowfall
+ - path :: ~/Public/vm/mwb-snowfall
 * Nix snowfall
+** mwb-nix-snowfall
+ - path :: ~/Public/vm/mwb-snowfall
+** mwb-snowfall-old
+ - path :: ~/Public/vm/Old/mwb-snowfall
 ** nix-config - based on nixed
  - path :: ~/Public/vm/mwb-nixed-config
 ** snowfall
  - path :: ~/Developer/ThirdParty/nix/snowfall
+** mwb-snowfall-flake-parts
+ - path :: ~/Public/vm/Old/mwb-snowfall-flake-parts
+** hive
+ - path :: /Users/nix/hive
+* Nix flake parts
+** flake-parts
+ - path :: ~/Developer/ThirdParty/nix/flake-parts
+* nix ez-configs
 ** mwb-ez-config
  - path :: ~/Public/vm/old/mwb-ez-config
+** ez-config-lib
+ - path :: ~/Developer/ThirdParty/nix/lib/ez-configs
+** ez-configs
+ - path :: ~/Developer/ThirdParty/nix/flake-parts/ez-config
+** nix-config
+ - path :: ~/Public/vm/mwb-nixed-config
 * Racket
 ** Racket projects
  - path :: ~/Developer/Racket
@@ -59,21 +86,3 @@
  - path :: ~/Developer/ThirdParty/jellyfin
 ** 2048
  - path :: ~/Developer/Swift/2048 related
-* nix ez-configs
-** mwb-ez-config
- - path :: ~/Public/vm/old/mwb-ez-config
-** ez-config-lib
- - path :: ~/Developer/ThirdParty/nix/lib/ez-configs
-** ez-configs
- - path :: ~/Developer/ThirdParty/nix/flake-parts/ez-config
-** nix-config
- - path :: ~/Public/vm/mwb-nixed-config
-* Nix Thirdparty
-** mwb-snowfall
- - path :: ~/Public/vm/mwb-snowfall
-** mwb-nixed-config
- - path :: ~/Public/vm/mwb-nixed-config
-** nix
- - path :: ~/Developer/ThirdParty/nix
-** vm
- - path :: ~/Public/vm/Old

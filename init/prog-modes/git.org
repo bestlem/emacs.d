@@ -47,6 +47,7 @@ This is [[https://github.com/magit/with-editor][with-editor]] Magit calls it - o
 (use-package-elpa with-editor
   :bind (:map with-editor-mode-map
          ("s-k" . with-editor-cancel)
+		 ("M-s-k" . with-editor-cancel)
          ("s-s" . with-editor-finish)
          ))
 #+end_src
@@ -104,10 +105,11 @@ https://github.com/alphapapa/magit-todos
 			 magit-log-buffer-file
 			 magit-log-current
 			 magit-blame-addition
+			 magit-stage-file
 			 magit-diff-buffer-file)
   :custom
   (magit-diff-refine-hunk t)
-  (magit-repository-directories '(("~/src/" . 2)
+  (magit-repository-directories '(("~/Developer/" . 2)
 								  (org-directory . 0)))
   (magit-log-margin
    '(t "%Y-%m-%d %H:%M " magit-log-margin-width t 18))
@@ -116,6 +118,9 @@ https://github.com/alphapapa/magit-todos
   :config
   ;; (setq magit-completing-read-function 'ivy-completing-read)
   (setq magit-completing-read-function 'magit-builtin-completing-read)
+  ;;  make git output slower but in colour
+  ;; https://github.com/magit/magit/pull/3159
+  (setq magit-process-finish-apply-ansi-colors t)
   (transient-bind-q-to-quit)
   :bind (:map magit-blame-read-only-mode-map
 		 ("<double-mouse-1" . magit-show-commit)))
@@ -130,7 +135,7 @@ Show choices in posframe
 (when *emacs/>=26p*
   (use-package-elpa transient-posframe
     :demand
-    :after magit
+    :after transient
     :init
     (setq transient-posframe-border-width 3
           transient-posframe-min-height 22
@@ -138,7 +143,7 @@ Show choices in posframe
           transient-posframe-parameters '((left-fringe . 8)
                                           (right-fringe . 8)))
     :config
-    (transient-posframe-mode)
+    (transient-posframe-mode 1)
     (with-no-warnings
       (defun my-transient-posframe--show-buffer (buffer _alist)
         "Show BUFFER in posframe and we do not use _ALIST at this period."
@@ -407,7 +412,8 @@ This is called from the main menu and thus not dependant on any of the git modes
 			 ("l" magit-log-buffer-file "commit log (current file)")
 			 ("L" magit-log-current "commit log (project)")
 			 ("B" magit-blame-addition "blame"))
-   "Diff" (("d" magit-diff-buffer-file "diff buffer"))
+   "Buffer" (("a" magit-stage-file "stage current buffer")
+			 ("d" magit-diff-buffer-file "diff buffer"))
    "Other" (("g" hydra-git-gutter/body "Git gutter")
 			("t" git-timemachine "time machine")
 			("m" git-messenger:popup-message "messenger"))))
@@ -457,5 +463,5 @@ Main use if for merge conflicts
 							(smerge-mode 1)))))
 		 (magit-diff-visit-file . (lambda ()
 									(when smerge-mode
-									  (hydra-smerge-mode/body))))))
+									  (smerge-mode-hydra/body))))))
 #+end_src

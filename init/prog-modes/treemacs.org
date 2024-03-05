@@ -14,12 +14,6 @@ On second thoughts after the main one you can use-package emacs with an after. B
 
 Also note as I have this in my startup they can be done on demand but otherwise back to weave.
 
-* TODO Look at centaur
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20220610T130200.406548
-:END:
-icons
-More in startup
 * Main setup
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210811T192501.325010
@@ -29,7 +23,6 @@ More in startup
 (use-package-elpa treemacs
   ;;:demand
   :init
-  (setq treemacs-width 50)
   :commands (treemacs treemacs-rightclick-menu)
   :mode-hydra
   <<treemacs-mode-hydra>>
@@ -41,28 +34,30 @@ More in startup
   (treemacs-indent-guide-mode t)
   (treemacs-indent-guide-style 'line)
   (treemacs-silent-refresh t)
-  (treemacs-silent-filewatch t)
-  (treemacs-tag-follow-delay 2.5)
+
   (treemacs-user-header-line-format #'treemacs-header-buttons-format)
+  (treemacs-width-is-initially-locked nil)
+  (treemacs-width 40)
+  (treemacs-sorting 'alphabetic-case-insensitive-asc)
+  (treemacs-follow-after-init t)
+  :config
+  (setq treemacs--no-messages nil)
+  ;; add Mac key symbols
+  (setq hydra-key-regex
+        "\\[\\|]\\|[-\\[:alnum:] ~.,;:/|?<>={}*+#%@!&^⇧⌘⌥↑↓←→⌫⌦⏎'`()\"$]+?")
 
-:config
-(setq treemacs--no-messages nil)
+  (setq treemacs-persist-file (mwb-user-emacs-file "data/treemacs-persist"))
 
-(setq hydra-key-regex "\\[\\|]\\|[-\\[:alnum:] ~.,;:/|?<>={}*+#%@!&^⇧⌘⌥↑↓←→⌫⌦⏎'`()\"$]+?") ; add Mac key symbols
+  (add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?)
 
-(setq treemacs-persist-file (mwb-user-emacs-file "data/treemacs-persist"))
+  ;; The default width and height of the icons is 22 pixels. If you are
+  ;; using a Hi-DPI display, uncomment this to double the icon size.
+  ;;(treemacs-resize-icons 44)
 
-(add-to-list 'treemacs-pre-file-insert-predicates #'treemacs-is-file-git-ignored?)
+  (treemacs-fringe-indicator-mode t)
 
-;; The default width and height of the icons is 22 pixels. If you are
-;; using a Hi-DPI display, uncomment this to double the icon size.
-;;(treemacs-resize-icons 44)
-
-(treemacs-follow-mode t)
-(treemacs-fringe-indicator-mode t)
-
-<<treemacs-config>>
-)
+  <<treemacs-config>>
+  )
 #+end_src
 
 * Support functions
@@ -76,8 +71,9 @@ More in startup
 :END:
 So not tangled.
 I need to set the mouse - unfortunately it is in a minor mode map not global so simple bind does not work
+Remove as now mac-key-mode removed for much.
 #+NAME: org_mark_mini20.local_20210819T110926.728132
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (defun treemacs-mwb-mouse ()
   (let ((oldmap (cdr (assoc 'mac-key-mode-map minor-mode-map-alist)))
         (newmap (make-sparse-keymap)))
@@ -101,7 +97,8 @@ Emacs 28 look at [[help:prog-context-menu][prog-context-menu]]
  ;;("<mouse-5>" . treemacs-rightclick-menu)
  ("<f5>" . treemacs-switch-workspace)
  ("<mouse-2>" . treemacs-rightclick-menu)
- ("<C-f5>" . treemacs-edit-workspaces))
+ ("<C-f5>" . treemacs-edit-workspaces)
+ ("<f6>" . treemacs-edit-workspaces))
 #+end_src
 
 * Hydra
@@ -180,8 +177,14 @@ Collect the actions together
 ;; This seems to have changed and causes a bug
 ;; https://github.com/Alexander-Miller/treemacs/issues/944
 
+(setq treemacs-silent-filewatch t
+	  treemacs-tag-follow-delay 5
+	  treemacs-file-follow-delay 3)
+;; (treemacs-follow-mode t)
+(treemacs-tag-follow-mode t)
 (treemacs-hide-gitignored-files-mode 1)
 (treemacs-filewatch-mode t)
+;; (treemacs-git-commit-diff-mode nil)
 
 (pcase (cons (not (null (executable-find "git")))
 			 (not (null treemacs-python-executable)))
@@ -211,7 +214,12 @@ Collect the actions together
 #+begin_src emacs-lisp
 (use-package-elpa treemacs-magit
   :after treemacs magit
-  :demand)
+  :demand
+  :hook ((magit-post-commit
+		  git-commit-post-finish
+		  magit-post-stage
+		  magit-post-unstage)
+		 . treemacs-magit--schedule-update))
 #+end_src
 * Debug
 :PROPERTIES:
@@ -220,3 +228,51 @@ Collect the actions together
 I get
 Error running timer ‘treemacs--process-file-events’: (wrong-type-argument sequencep t)
 So from https://github.com/Alexander-Miller/treemacs/issues/168
+* Edit workspaces
+:PROPERTIES:
+:ID:       org_mark_mini20:20231209T145941.267619
+:END:
+Treemacs uses org-mode with a local-set-key. I want to add my normal keys A-s, A-k etc. but I can't.
+From [[https://stackoverflow.com/q/38511253/151019][Stack Overflow]] there are two ways - replace the function either directly or via advice, or the correct way is make the editor a derived major mode. The latter hink needs treemacs' author.
+So use advice.
+
+But local key changes the key in the major mode according to SO and also emacs documentation. Note treemacs use of ~use-local-map~. But my change does not work.
+
+Argh it is the normal problem that the keys I want are in minor mode ~mac-key~mode~ So none of these fixes work. So kill that map - as had this issue before.
+
+However allows set of startup view.
+#+NAME: org_mark_mini20_20231209T145941.250838
+#+begin_src emacs-lisp
+(defun treemacs-mwb-edit-workspaces ()
+  "Edit your treemacs workspaces and projects as an `org-mode' file.
+
+With more keys"
+  (interactive)
+  (require 'org)
+  (require 'outline)
+  (treemacs--persist)
+  (switch-to-buffer (get-buffer-create treemacs--org-edit-buffer-name))
+  (erase-buffer)
+  (org-mode)
+  (use-local-map (copy-keymap (with-no-warnings org-mode-map)))
+  (local-set-key (kbd "C-c C-c") #'treemacs-finish-edit)
+  (local-set-key (kbd "s-s") #'treemacs-finish-edit)
+  (local-set-key (kbd "s-k") #'bjm/kill-this-buffer)
+
+  (insert "#+TITLE: Edit Treemacs Workspaces & Projects\n")
+  (when treemacs-show-edit-workspace-help
+	(insert "# Call ~treemacs-finish-edit~ or press ~C-c C-c~ when done.\n")
+	(insert "# [[https://github.com/Alexander-Miller/treemacs#conveniently-editing-your-projects-and-workspaces][Click here for detailed documentation.]]\n")
+	(insert "# To cancel you can simply kill this buffer.\n\n"))
+  (insert-file-contents treemacs-persist-file)
+  (with-no-warnings
+	(outline-hide-sublevels 1))
+  (goto-char 0))
+
+(advice-add 'treemacs-edit-workspaces :override #'treemacs-mwb-edit-workspaces)
+#+end_src
+** TODO Key map change
+:PROPERTIES:
+:ID:       org_mark_mini20:20240227T113632.376309
+:END:
+I have moved keys into global map. So can delete?

@@ -2,55 +2,87 @@
 ** My init .emacs.d
  - path :: ~/.emacs.d
 ** dotfiles
- - path :: ~/SyncServices/Dropbox/env/dotfiles
+ - path :: ~/Library/CloudStorage/Dropbox/env/dotfiles
 ** Org
- - path :: ~/SyncServices/Dropbox/Docs/org
+ - path :: ~/Library/Mobile Documents/com~apple~CloudDocs/_Docs/org
+** Local out of .emacs.d
+ - path :: ~/.local/emacs
+* Emacs
+** My init .emacs.d
+ - path :: ~/.emacs.d
 ** Local out of .emacs.d
  - path :: ~/.local/emacs
 ** emacs-init
- - path :: ~/src/ThirdParty/emacs-init
-** aquamacs-emacs code
- - path :: ~/src/macos/aquamacs-emacs
+ - path :: ~/Developer/ThirdParty/emacs-init
 ** emacs-macport-code
- - path :: ~/src/ThirdParty/emacs-mac
-** xonsh
- - path :: ~/src/python/xonsh
+ - path :: ~/Developer/ThirdParty/emacs-mac
+** emacs.elpaca
+ - path :: ~/emacs.elpaca
+** emacs-elpaca-full
+ - path :: ~/emacs-elpaca-full
+* Nix All
+** mwb-nixed-config
+ - path :: ~/Public/vm/mwb-nixed-config
+** hive
+ - path :: /Users/nix/hive
+** nix
+ - path :: ~/Developer/ThirdParty/nix
+* Nix hive
+** my-hive
+ - path :: /Users/nix/hive
+** hive
+ - path :: ~/Developer/ThirdParty/nix/hive
+** mwb-nixed-config
+ - path :: ~/Public/vm/mwb-nixed-config
+** mwb-snowfall
+ - path :: ~/Public/vm/mwb-snowfall
+* Nix snowfall
+** mwb-nix-snowfall
+ - path :: ~/Public/vm/mwb-snowfall
+** mwb-snowfall-old
+ - path :: ~/Public/vm/Old/mwb-snowfall
+** nix-config - based on nixed
+ - path :: ~/Public/vm/mwb-nixed-config
+** snowfall
+ - path :: ~/Developer/ThirdParty/nix/snowfall
+** mwb-snowfall-flake-parts
+ - path :: ~/Public/vm/Old/mwb-snowfall-flake-parts
+** hive
+ - path :: /Users/nix/hive
+* Nix flake parts
+** flake-parts
+ - path :: ~/Developer/ThirdParty/nix/flake-parts
+* nix ez-configs
+** mwb-ez-config
+ - path :: ~/Public/vm/old/mwb-ez-config
+** ez-config-lib
+ - path :: ~/Developer/ThirdParty/nix/lib/ez-configs
+** ez-configs
+ - path :: ~/Developer/ThirdParty/nix/flake-parts/ez-config
+** nix-config
+ - path :: ~/Public/vm/mwb-nixed-config
 * Racket
-** my realm
- - path :: ~/src/Racket/realm
-** realm book
- - path :: ~/src/Racket/realm.source
-** RacketProgrammingtheFunWay
- - path :: ~/src/Racket/RacketProgrammingtheFunWay
-** mandlebrot
- - path :: ~/src/Racket/mandelbrot
-** dummy-load
- - path :: ~/src/Racket/dummy-load
-** web
- - path :: ~/src/Racket/web
-** aoc21
- - path :: ~/src/Racket/aoc21
-** racket-docker
- - path :: ~/src/Racket/racket-docker
-** PillowData
- - path :: ~/src/ThirdParty/PillowData
+** Racket projects
+ - path :: ~/Developer/Racket
+** mandlebrot dropbox
+ - path :: ~/Library/CloudStorage/Dropbox/src/Racket/mandelbrot
 ** aoc-racket
- - path :: ~/src/ThirdParty/aoc-racket
+ - path :: ~/Developer/ThirdParty/aoc-racket
 * C based
 ** rftg
- - path :: ~/src/cpp/rftg
+ - path :: ~/Developer/cpp/rftg
 ** test_gtk
- - path :: ~/src/cpp/test_gtk
+ - path :: ~/Developer/cpp/test_gtk
 ** macports-ports
- - path :: ~/src/cpp/macports-ports
+ - path :: ~/Developer/cpp/macports-ports
 ** my-macports
- - path :: ~/src/my-macports
+ - path :: ~/Developer/my-macports
+** nix-your-shell
+ - path :: ~/Developer/Rust/nix-your-shell
 * Swift
 ** SwiftUITutorial-Landmarks
- - path :: ~/src/Swift/SwiftUITutorial-Landmarks
-** JellyFin Swift
- - path :: ~/src/swift/JellyfinSwiftPlayer
+ - path :: ~/Developer/Swift/SwiftUITutorial-Landmarks
 ** jellyfin server
- - path :: ~/src/ThirdParty/jellyfin
+ - path :: ~/Developer/ThirdParty/jellyfin
 ** 2048
- - path :: ~/src/Swift/2048 related
+ - path :: ~/Developer/Swift/2048 related

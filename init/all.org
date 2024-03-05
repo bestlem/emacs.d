@@ -84,6 +84,7 @@ From [[https://www.reddit.com/r/emacs/comments/ck4zb3/trying_to_understand_emacs
 (defun ap/garbage-collect ()
   "Run `garbage-collect' and print stats about memory usage."
   (interactive)
+  (message " %d garbage collections" gcs-done)
   (message (cl-loop for (type size used free) in (garbage-collect)
                     for used = (* used size)
                     for free = (* (or free 0) size)
@@ -93,11 +94,18 @@ From [[https://www.reddit.com/r/emacs/comments/ck4zb3/trying_to_understand_emacs
                     concat (format "%s: %s + %s = %s\n" type used free total))))
 #+end_src
 
-#+RESULTS[bb5f47ba8d2eadf96ea65aac260e9e61e1c42162]:
-#+begin_EXAMPLE
-ap/garbage-collect
-#+end_EXAMPLE
-
+** memory-usage
+:PROPERTIES:
+:ID:       org_mark_mini20:20230301T120326.186419
+:END:
+Try this after =memory-report= failed.
+#+NAME: org_mark_mini20_20230301T120326.129714
+#+begin_src emacs-lisp
+(use-package-elpa memory-usage
+  :commands
+  memory-usage-find-large-variables
+  memory-usage)
+#+end_src
 * Setting variables with a check on type
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:86E6A7B5-5C85-4429-AE49-FA5AE7AEF73D
@@ -125,7 +133,7 @@ This is a function so can run only from old emacs as newer emacs will not unders
 TODO: exclude sopme directories - especially modus-themes and treemacs as they need a proper build and/or can be done for later emacs.
 #+NAME: org_mark_mini20.local_20210624T203034.951856
 #+begin_src emacs-lisp
-(unless *emacs/>=26p*
+(when (< emacs-major-version 29)
   (defun mwb-init-recompile-site-lisp ()
     "Recompile packages in site-lisp directory."
     (interactive)
@@ -143,7 +151,7 @@ TODO: exclude sopme directories - especially modus-themes and treemacs as they n
 Recompile emacs lisp  if already compiled on save but also on load.
 #+NAME: org_mark_mini20.local_20210822T130010.997493
 #+begin_src emacs-lisp
-(when (= emacs-major-version 28)
+(when (= emacs-major-version 29)
   (use-package-elpa auto-compile
     :defer 15
     :config
@@ -164,7 +172,7 @@ For one example see https://github.com/mclear-tools/build-emacs-macos
 #+NAME: org_mark_mini20.local_20220625T103004.465231
 #+begin_src emacs-lisp
 (setq find-function-C-source-directory
-	  (cond (*emacs/mac-port-p* "/Users/mark/src/ThirdParty/emacs-mac/src/")
+	  (cond (*emacs/mac-port-p* "/Users/mark/Developer/ThirdParty/emacs-mac/src/")
 			(t "/Applications/Emacs.app/Contents/Resources/src")))
 #+end_src
 
@@ -223,25 +231,39 @@ The lisp list from `sp-lisp-modes`, but I can't use that as smartparens is not u
                            stumpwm-mode)
   "Mode that are lisp like")
 (defconst mwb-braces-modes '(c-mode
-							 cpp-mode
-							 objc-mode
-							 ))
+                             cpp-mode
+                             objc-mode
+                             nix-mode
+                             )
+  "Modes that use braces for program blocks")
+
+(defconst mwb-indent-modes '(prog-mode
+							 yaml-mode
+							 nxml-mode
+							 conf-mode
+							 )
+  "Modes that have indentation rules")
 
 (defun mwb-lisp-hooks ()
   "Return hooks that are lispy."
   (mapcar (lambda (mode)
-            (intern (concat (symbol-name mode) "-hook")))
-          mwb-lisp-modes))
+			(intern (concat (symbol-name mode) "-hook")))
+		  mwb-lisp-modes))
 
 (defun mwb-braces-hooks ()
-  "Return hooks that have braces."
+  "Return hooks that need indetation."
   (mapcar (lambda (mode)
             (intern (concat (symbol-name mode) "-hook")))
-          mwb-braces-modes))
+          mwb-indent-modes))
 
 (defun mwb-add-hook-fn (hooks fn)
   (dolist (h hooks)
-	(add-hook h fn)))
+    (add-hook h fn)))
+
+(defun mwb-add-hook-for-modes (modes hook-fn)
+  "Add HOOK_FN aa a hook for all modes in MODES."
+  (dolist (m modes)
+	(add-hook (intern (concat (symbol-name m) "-hook"))  hook-fn)))
 #+end_src
 
 
@@ -283,6 +305,28 @@ These tend to be settings of minor modes
 :END:
 Where there is common put them together. This part is really why I have separate files so I can deal with one thing at a time. But thing is more than one mode.
 Lets just load them not explicitly - everything in prog-modes (a better name would be modes or config However leave as this breaks git history and I break enough - pity bazaar failed)
+** Common setup
+:PROPERTIES:
+:ID:       org_mark_mini20:20230813T133036.448808
+:END:
+*** Tree sitter
+:PROPERTIES:
+:ID:       org_mark_mini20:20231105T091409.276349
+:END:
+Original tree-sitter versions from https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
+but later a fuller MELPA package https://github.com/renzmann/treesit-auto
+#+NAME: org_mark_mini20_20230813T133036.419342
+#+begin_src emacs-lisp
+(use-package-elpa treesit-auto
+  :demand t
+  :config
+  (setq treesit-auto-install t)
+  (global-treesit-auto-mode))
+#+end_src
+** Individual major modes
+:PROPERTIES:
+:ID:       org_mark_mini20:20230813T133036.442131
+:END:
 #+NAME: org_mark_mini20.local_20210126T225208.743497
 #+begin_src emacs-lisp
 (mwb-init-load-directory "init/prog-modes/")
@@ -301,7 +345,7 @@ The data that emacs works on.
 :END:
 This saves the state perhaps I need to see how it works.
 #+NAME: org_mark_2020-10-03T11-41-17+01-00_mini12.local_DC2C7645-A251-449C-AC77-40AD4B76D5B4
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package desktop
   :unless *aquamacs*
   :disabled
@@ -323,7 +367,7 @@ This is what Aquamacs used - version copied from there.
 Odd editing I can't edit the file lispy decides it needs to comment everything. So better just override
 However decided to use more recent updated workspace2 first
 #+NAME: org_mark_2020-10-09T10-33-48+01-00_mini12.local_28EE6DA2-AFFB-4773-9037-6E5E3898046D
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 
 #+end_src
 ** [[https://github.com/pashinin/workgroups2][Workgroups2]]
@@ -333,7 +377,7 @@ However decided to use more recent updated workspace2 first
 Seems one of few in development and on github
 Well tried and treemacs screwed up
 #+NAME: org_mark_2020-10-09T10-33-48+01-00_mini12.local_3B37CB96-2AF0-4558-8B03-007D832A3898
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package-elpa workgroups2
   :disabled
   :config (workgroups-mode 1)
@@ -363,7 +407,7 @@ Need to control how it is restarted. Aquamacs saves it
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220603T173200.242928
 :END:
-This is minmal as *scratch* is always created.
+This is minimal as *scratch* is always created.
 #+NAME: org_mark_mini20.local_20220603T173200.216019
 #+begin_src emacs-lisp
 ;; (setq initial-major-mode 'emacs-lisp-mode)
@@ -380,7 +424,7 @@ This is minmal as *scratch* is always created.
   (use-package-elpa persistent-scratch
     :defer 10
     :init
-    (setq persistent-scratch-save-file (mwb-user-emacs-file "var/persistent-scratch"))
+    ;; (setq persistent-scratch-save-file (mwb-user-emacs-file "var/persistent-scratch"))
     :config
     (persistent-scratch-setup-default)))
 #+end_src
@@ -394,8 +438,7 @@ Emacs 27 seems to have a timing issue pop to buffer seems not to see the spare w
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_60953FEE-7E07-48DE-AD1C-66D90DAE2D5A
 #+begin_src emacs-lisp
 (defun init-window-setup ()
-  (split-window-horizontally)
-  (treemacs)
+  (mwb-new-treemacs-frame-setup)
   (pop-to-buffer "*Messages*"))
 
 (add-hook 'window-setup-hook

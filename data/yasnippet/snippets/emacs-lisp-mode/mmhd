@@ -1,7 +1,7 @@
 # -*- mode: snippet; -*-
 # name : major-mode-hydra-define
-# key : mmhd
-# contributor : Mark Bestley 
+# key : mm
+# contributor : Mark Bestley
 # --
 
 (major-mode-hydra-define $1 nil
@@ -12,4 +12,3 @@
    "REPL"
    (("I" ielm "ielm")
     ("x" matcha-goto-scratch "*Scratch*")))
-   

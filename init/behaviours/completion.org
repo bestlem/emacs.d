@@ -128,14 +128,14 @@ This is needed to mix the completions up.
 		 ("C-c p k" . cape-keyword)
 		 ("C-c p s" . cape-symbol)
 		 ("C-c p a" . cape-abbrev)
-		 ("C-c p i" . cape-ispell)
 		 ("C-c p l" . cape-line)
 		 ("C-c p w" . cape-dict)
 		 ("C-c p \\" . cape-tex)
 		 ("C-c p _" . cape-tex)
 		 ("C-c p ^" . cape-tex)
 		 ("C-c p &" . cape-sgml)
-		 ("C-c p r" . cape-rfc1345))
+		 ("C-c p r" . cape-rfc1345)
+		 ("C-c p y" . cape-yasnippet))
 
   :config
   ;; Add prescient
@@ -143,23 +143,33 @@ This is needed to mix the completions up.
   (setq corfu-sort-function #'prescient-sort)
   (setq corfu-sort-override-function #'prescient-sort)
   ;; Add `completion-at-point-functions', used by `completion-at-point'.
-  (add-to-list 'completion-at-point-functions #'cape-ispell)
 
-  (add-to-list 'completion-at-point-functions #'cape-file)
 
   ;;(add-to-list 'completion-at-point-functions #'cape-history)
-  ;;(add-to-list 'completion-at-point-functions #'cape-keyword)
+  (add-to-list 'completion-at-point-functions #'cape-keyword)
   ;;(add-to-list 'completion-at-point-functions #'cape-tex)
-  (add-to-list 'completion-at-point-functions #'cape-sgml)
   ;; (add-to-list 'completion-at-point-functions #'cape-rfc1345)
   (add-to-list 'completion-at-point-functions #'cape-abbrev)
-  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  ;; (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  ;; (add-to-list 'completion-at-point-functions #'cape-ispell)
+  (defalias 'cape-mwb-dabbrev-dict
+	(cape-capf-super #'cape-dabbrev #'cape-dict #'cape-keyword))
+  (add-to-list 'completion-at-point-functions #'cape-mwb-dabbrev-dict)
+  ;; (setq-local completion-at-point-functions
+  ;; 			  (list (cape-capf-super
+  ;; 					 (cape-company-to-capf #'company-yasnippet)
+  ;; 					 #'cape-abbrev
+  ;; 					 #'cape-dabbrev
+  ;; 					 #'cape-keyword)))
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-sgml)
+
   ;;(add-to-list 'completion-at-point-functions #'cape-dict)
   ;;(add-to-list 'completion-at-point-functions #'cape-symbol)
   ;;(add-to-list 'completion-at-point-functions #'cape-line)
-  (add-to-list 'completion-at-point-functions (cape-company-to-capf #'company-yasnippet))
+  ;; (add-to-list 'completion-at-point-functions #'cape-yasnippet)
   ;; (setq-local completion-at-point-functions
-  ;; 			  (list (cape-super-capf
+  ;; 			  (list (cape-capf-super
   ;; 					 (cape-company-to-capf #'company-yasnippet)
   ;; 					 #'cape-abbrev
   ;; 					 #'cape-dabbrev
@@ -168,14 +178,22 @@ This is needed to mix the completions up.
   (defun my/ignore-elisp-keywords (cand)
 	(or (not (keywordp cand))
 		(eq (char-after (car completion-in-region--data)) ?:)))
+  (defalias 'my/cape-elisp-super-capf
+	(cape-capf-super #'cape-yasnippet
+					 #'elisp-completion-at-point
+					 ;; 'cape-dabbrev
+					 ))
+
   (defun my/setup-elisp-completion ()
 	(setq-local completion-at-point-functions
 				(list
-				 (cape-super-capf
-				  (cape-company-to-capf #'company-yasnippet)
-				  #'elisp-completion-at-point
-				  #'cape-dabbrev)
-				 #'cape-file)))
+				 ;; #'my/cape-elisp-super-capf
+				 #'elisp-completion-at-point
+				 #'cape-file
+				 #'cape-keyword
+				 #'cape-sgml
+				 ;; #'cape-mwb-dabbrev-dict
+				 )))
   (add-hook 'emacs-lisp-mode-hook #'my/setup-elisp-completion ))
 #+end_src
 
@@ -215,38 +233,30 @@ My current view is yasnippet for the templating (old include skeleton)
 :END:
 I suspect that emacs's inbuilt skeleton can do what I need but there are more examples using yasnippet + Emacs doc is as usual impenetrable until you know how it works.
 
+Note that the inheritance of modes is not the same as emacs. e.g. basic-lisp-mode does not exist in emacs.
+
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_CA0CCF5A-02BB-401E-8186-F16136047A8F
 #+begin_src emacs-lisp
 (use-package-elpa yasnippet
   :diminish yas-minor-mode
   :demand
-  :after company cape
+  :after cape
   :mode ((rx (or "/.emacs.d/data/snippets/"
                  (seq ".yasnippet" eol ))) . snippet-mode)
   :bind (:map snippet-mode-map
          ("<f5>" . yas-load-snippet-buffer)
          ("C-<f5>" . yas-load-snippet-buffer-and-close)
-         ;; :map yas-minor-mode-map
-         ;; ("<SPC>" . yas-maybe-expand)
          )
-  ;; :bind (:map yas-minor-mode-map
-  ;; ("SPC" . mwb-yas-expand)
 
-  :preface
-  (setq yas-alias-to-yas/prefix-p nil)  ; force it
-  ;; (defun mwb-yas-expand ()
-  ;;   (eval yas-maybe-expand))
+
+  :custom
+  (yas-snippit-dirs  (list (mwb-user-emacs-file "data/snippets")))
+  (yas-alias-to-yas/prefix-p nil)
+  (yas-choose-keys-first nil)
+
   :config
-  (setq yas-snippet-dirs (list (mwb-user-emacs-file "data/snippets")))
-  ;; Use define key as :bind needs a function but don't use as don't auto expand
-  ;;(define-key yas-minor-mode-map (kbd "SPC") yas-maybe-expand)
-
-  ;; (use-package-elpa yasnippet-snippets
-  ;;   :config (yasnippet-snippets-initialize)
-  ;;   (message "loaded yasnippets collection")
-  ;;   )
-  (yas-reload-all)
   (yas-global-mode 1)
+  (yas-reload-all)
 
   ;; Add to company
   (unless (fboundp #'cape-dabbrev)
@@ -268,6 +278,10 @@ I suspect that emacs's inbuilt skeleton can do what I need but there are more ex
                   company-symbol))))
 		(t
 		 (apply orig-fun args)))))
+
+  :config
+  (define-key yas-minor-mode-map (kbd "<tab>") nil)
+  (define-key yas-minor-mode-map (kbd "TAB") nil)
 
   :mode-hydra (snippet-mode
 			   (:idle 0.5)
@@ -296,7 +310,29 @@ However there are so many elisp ones that it might be too confusing. Similarly t
 For loading as yasnippet is on defer we get this and yasnippets' config on eval-after load/ So what order do they load in? I suspect LIFO as yasnippet is delayed. So to get load put the use-package in the config.
 
 But the expansions are too much so better to copy them as needed and if understood.
+Now switching to a key so lets try - I can always override.
+#+NAME: org_mark_mini20_20230705T205204.076117
+#+begin_src emacs-lisp
+(use-package-elpa yasnippet-snippets
+  :demand
+  :config (yasnippet-snippets-initialize)
+  (message "loaded yasnippets collection")
+  :after yasnippet
+  )
+#+end_src
 
+*** cape-yasnippet
+:PROPERTIES:
+:ID:       org_mark_mini20:20230308T192123.711577
+:END:
+No documentation
+Removes as now we have yasnippet on f12
+#+NAME: org_mark_mini20_20230308T192123.690566
+#+begin_src emacs-lisp :tangle no
+(use-feature cape-yasnippet
+  :demand
+  :after cape)
+#+end_src
 ** Abbrev
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:4B573BD4-4E53-431B-AE36-3924CE30D9CC
@@ -333,3 +369,18 @@ This is another basic emacs thing.
    :bind (("M-/"   . hippie-expand)
           ("C-M-/" . dabbrev-completion)))
  #+END_SRC
+** spdx
+:PROPERTIES:
+:ID:       org_mark_mini20:20231203T111438.560293
+:END:
+For copyright and licence
+#+NAME: org_mark_mini20_20231203T111438.543132
+#+begin_src emacs-lisp
+(use-package-elpa spdx
+  :commands spdx-insert-spdx-copyright
+  :custom
+  (spdx-copyright-holder 'user)
+  (spdx-project-detection 'projectile)
+  (spdx-copyright-prefix "SPDX-FileCopyrightText: ")
+  )
+#+end_src

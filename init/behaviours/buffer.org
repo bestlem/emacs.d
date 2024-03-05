@@ -2,15 +2,8 @@
 #+AUTHOR: Mark Bestley
 #+DATE:   10 Jun 2022
 #+PROPERTY:header-args :cache yes :tangle yes :comments noweb
-#+STARTUP: show2levels
 
-
-
-* Buffers
-:PROPERTIES:
-:ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:2C7F2E45-19AE-43EC-8536-C7A69744CCC2
-:END:
-** Protect library and other files
+* Protect library and other files
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:04EFE611-1F9B-479D-A3BB-0C428F8EBA20
 :END:
@@ -65,7 +58,7 @@
           "~/\\.cask/"
           "/Applications/"
           "~/Library/Preferences/Aquamacs Emacs/Packages"
-          "~/src/ThirdParty/"
+          "~/Developer/ThirdParty/"
           "emacs\\.d/elpa/"
           "straight/build"
           "straight/repos/"))
@@ -73,30 +66,79 @@
   (global-hardhat-mode)
   (validate-setq hardhat-mode-lighter "Ⓗ"))
 #+end_src
-*** Separate out my additions
+** Separate out my additions
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220614T120500.373254
 :END:
 ie move to config and setup as two parts.
 and/ot move to :custom
-** Buffer switch
+* Buffer switch
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:4551A020-6DAB-4E1D-A70F-60DF7729834F
 :END:
+** Switch on one key - not used
+:PROPERTIES:
+:ID:       org_mark_mini20:20230308T134355.679256
+:END:
 Switch to last buffer on one key. From https://emacsredux.com/blog/2013/04/28/switch-to-previous-buffer/
+However consult-buffer effectively works well enough so not needed.
 #+NAME: org_mark_2020-01-23T20-40-42+00-00_mini12_BB244CD3-591D-499E-8A36-3DA1E4696166
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (defun er-switch-to-previous-buffer ()
   "Switch to previously open buffer.
 Repeated invocations toggle between the two most recently open buffers."
   (interactive)
   (switch-to-buffer (other-buffer (current-buffer) 1)))
 #+end_src
-** Buffer removal
+** Switch depending on frame.
+:PROPERTIES:
+:ID:       org_mark_mini20:20230308T134355.673639
+:END:
+straight.rel could not find it.
+
+This is from [[https://protesilaos.com/emacs/beframe#h:5b751614-8749-4aa8-aaed-f181beaddc57][beframe]]
+#+NAME: org_mark_mini20_20230308T134355.638987
+#+begin_src emacs-lisp :tangle no
+(use-package-elpa beframe
+  :commands beframe-switch-buffer
+  beframe-buffer-menu
+  beframe-buffer-names
+
+  :init
+  ;; This is the default value.  Write here the names of buffers that
+  ;; should not be beframed.
+  (setq beframe-global-buffers '("*scratch*"
+								 "*Messages*"
+								 "*Backtrace*"
+								 "*Warnings*"))
+  (defvar consult-buffer-sources)
+  (declare-function consult--buffer-state "consult")
+
+  (with-eval-after-load 'consult
+	(defface beframe-buffer
+	  '((t :inherit font-lock-string-face))
+	  "Face for `consult' framed buffers.")
+
+	(defvar beframe-consult-source
+	  `( :name     "Frame-specific buffers (current frame)"
+		 :narrow   ?F
+		 :category buffer
+		 :face     beframe-buffer
+		 :history  beframe-history
+		 :items    ,#'beframe-buffer-names
+		 :action   ,#'switch-to-buffer
+		 :state    ,#'consult--buffer-state))
+
+	(add-to-list 'consult-buffer-sources 'beframe-consult-source))
+
+  :config
+  (beframe-mode 1))
+#+end_src
+* Buffer removal
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:99F964B4-DBAA-4EBE-9B09-0D7840CAA7CC
 :END:
-*** KIll buffer
+** KIll buffer
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:0194DAD8-98E5-42AA-82A6-7C4D741A5F91
 :END:
@@ -109,7 +151,7 @@ By default C-x k runs the command kill-buffer which prompts you for which buffer
   (interactive)
   (kill-buffer (current-buffer)))
 #+end_src
-*** Deal with subprocesses
+** Deal with subprocesses
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:EE6B876F-8EE3-40C1-BBD1-0BEA1BBDDD58
 :END:
@@ -124,7 +166,7 @@ But emacs 26 seems to have improved this from [[https://emacs.stackexchange.com/
 #+begin_src emacs-lisp
 (setq confirm-kill-processes nil)
 #+end_src
-** Revert buffer
+* Revert buffer
 :PROPERTIES:
 :ID:       org_mark_2020-01-23T20-40-42+00-00_mini12:10B9D32A-E48F-4CA7-8D0B-397EC17233D6
 :END:
@@ -134,4 +176,80 @@ I don't want to confirm https://emacs.stackexchange.com/a/10349/9874 The key bin
 (defun revert-buffer-no-confirm ()
   "Revert buffer without confirmation."
   (interactive) (revert-buffer t t))
+#+end_src
+* Kill unused
+:PROPERTIES:
+:ID:       org_mark_mini20:20240108T160838.222300
+:END:
+midnight just looks at buffer names not the file name.
+However [[https://www.emacswiki.org/emacs?TempbufMode][tempbuf-mode]] seems to work more as I might need. Basically kill all read-only fbuffers that are backed by a file. midnight can deal with internal buffers,
+
+org-mode is set as not being done as the org buffer can be closed if there is an *Org Src buffer open. A more complex way would be better.
+
+#+NAME: org_mark_mini20_20240108T154734.320112
+#+begin_src emacs-lisp
+(use-package-elpa tempbuf
+  :demand
+
+  :preface
+  (defun tempbuf--mwb-kill-message-function (msg)
+	"Make the message clearer."
+	(interactive "P")
+	(message "%s ============= tempbuf %s"
+			 (format-time-string "[%F %T] ")
+			 msg))
+
+  ;; :custom (tempbuf-kill-message-function .
+  ;; "tempbuf--mwb-kill-message-function")
+  ;; :custom (tempbuf-kill-message
+  ;; 		   . "============= tempbuf Killed inactive buffer: %s.")
+  :config
+  (defun tempbuf-protect ()
+	"Prevent tempbuf from killing visible or unsaved buffers."
+	(when (or (get-buffer-window)
+			  (buffer-modified-p))
+	  (throw 'tempbuf-skip-kill nil)))
+  :hook (tempbuf-kill . tempbuf-protect)
+  ((
+	deadgrep-mode
+	help-mode
+	helpful-mode
+	magit-mode) . turn-on-tempbuf-mode)
+  ((org-mode) . turn-off-tempbuf-mode))
+
+#+end_src
+** When read-only
+:PROPERTIES:
+:ID:       org_mark_mini20:20240108T160838.220353
+:END:
+Get rid of them after some time.
+Example based on [[https://emacs.stackexchange.com/a/38245/9874][Emacs SX answer]]
+#+NAME: org_mark_mini20_20240108T160838.202894
+#+begin_src emacs-lisp
+(defun mwb-buffer-read-only-watcher (symbol newval operation where)
+  "When a buffer becomes read-only or not do things incl tempbuf-mode
+
+Just for file backed buffers"
+  (interactive "P")
+  (when (and (eq symbol 'buffer-read-only)
+			 (memq operation '(set let))
+			 (eq where (current-buffer))
+			 (not (string-equal (substring (buffer-name where) 0 2) " *")))
+	(setq-local show-trailing-whitespace (not newval))
+	(message "name <%s> substr <%s>" (buffer-name where)
+			 (substring (buffer-name where) 0 2))
+	(message
+	 "mwb-watcher newval = %s symbol = %s buffer = %s"
+	 newval
+	 symbol
+	 (buffer-name where))
+	(when buffer-file-name
+	  (if newval
+		  (turn-on-tempbuf-mode)
+		(turn-off-tempbuf-mode)))))
+#+end_src
+Add watch on read-only changing.
+#+NAME: org_mark_mini20_20240108T160838.204762
+#+begin_src emacs-lisp
+(add-variable-watcher 'buffer-read-only 'mwb-buffer-read-only-watcher)
 #+end_src

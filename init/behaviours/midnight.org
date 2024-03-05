@@ -40,6 +40,13 @@ Ideally should look at the actual auto-save file and delete all not in them."
 		  (delete-file file))))))
 #+end_src
 
+** Delete function
+:PROPERTIES:
+:ID:       org_mark_mini20:20230713T121731.524185
+:END:
+This will test for deletion not just regexps.
+
+
 ** backup files
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220618T132458.599096
@@ -52,19 +59,31 @@ Look [[https://github.com/chadbraunduin/backups-mode/blob/master/scripts/show-or
 #+NAME: org_mark_mini20.local_20210126T142916.726975
 #+begin_src emacs-lisp
 (use-feature midnight
-  :defer 30
+  :defer 300
+  :custom (clean-buffer-list-delay-general  1)
+  :init
+  (defun mwb-midnight--add-to-clean-buffer-regex-hidden-line-start (str)
+    (add-to-list 'clean-buffer-list-kill-regexps
+			     (rx-to-string `(seq line-start "*" ,str " ")))
+    )
+
+  (defun midnight-mwb-add-to-clean-buffer-regex ()
+	"This ggroups all the chnages together"
+	(mwb-midnight--add-to-clean-buffer-regex-hidden-line-start "deadgrep")
+	(mwb-midnight--add-to-clean-buffer-regex-hidden-line-start "helpful")
+	(mwb-midnight--add-to-clean-buffer-regex-hidden-line-start "Nix ")
+	(add-to-list 'clean-buffer-list-kill-regexps
+				 (rx (seq bos "magit"
+						  (opt "-" (one-or-more nonl))
+						  ": ")))
+	;;  diff-mode leaves a million of these and they can be HUGE
+	(add-to-list 'clean-buffer-list-kill-regexps (rx bos " *diff-syntax:")))
+
+
   :config
   (midnight-delay-set 'midnight-delay "06:15")
-  (defun mwb-midnight--add-to-clean-buffer-regex (str)
-	(add-to-list 'clean-buffer-list-kill-regexps
-				 (rx-to-string `(seq line-start "*" ,str " ")))
-    (add-to-list 'clean-buffer-list-kill-regexps
-				 (rx (seq bos "magit"
-                          (opt "-" (one-or-more nonl))
-	                      ": ")))
-    )
-  (mwb-midnight--add-to-clean-buffer-regex "deadgrep")
-  (mwb-midnight--add-to-clean-buffer-regex "helpful")
+  (midnight-mwb-add-to-clean-buffer-regex)
+
   (midnight-mode 1)
   (add-hook 'midnight-hook
             (if (bound-and-true-p gcmh-mode)

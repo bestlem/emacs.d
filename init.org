@@ -61,9 +61,30 @@ In constant mwb-user-emacs-directory
 :END:
 We want some stuff not under .emacs.d so if on dropbox then this is not.
 This is the root position.
+**** Local
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220904T092511.255706
+:END:
 #+NAME: org_mark_mini20.local_20220616T101718.145323
 #+begin_src emacs-lisp
 (defvar mwb-emacs-work-dir (expand-file-name "~/.local/emacs" )
+  "Directory on local machine wwhere emacs outside start directory.")
+#+end_src
+**** Shared
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220904T092511.247144
+:END:
+When I found gnus messed up and moving between emacs inits I realised the non git files need to be outside ~/.emacs.d but coul;d be local but really shared across machines
+#+NAME: org_mark_mini20.local_20220904T092511.225344
+#+begin_src emacs-lisp
+(defvar mwb-dropbox-root
+  (expand-file-name  "~/Library/CloudStorage/Dropbox")
+  "Where dropbox is")
+(defvar mwb-icloud-root
+  (expand-file-name  "~/Library/Mobile Documents/com~apple~CloudDocs")
+  "Where icloud is")
+(defvar mwb-emacs-share-dir
+  (concat mwb-dropbox-root "/data/emacs")
   "Directory on local machine wwhere emacs outside start directory.")
 #+end_src
 *** Eln-cache - native compile
@@ -102,6 +123,13 @@ Ignore warnings as we can't do much about them as most code is not written by me
   Main reason to use is so that I can put init under version control and the rest go elsewhere."
 	(expand-file-name name mwb-user-emacs-directory))
   #+end_src
+** Package
+:PROPERTIES:
+:ID:       org_mark_2020-09-28T01-08-28+01-00_mini12.local:D069442D-B7AF-4771-800A-87C4F3376AF0
+:END:
+Package initialize occurs automatically, before `user-init-file' is loaded, but after `early-init-file'. emacs handles package initialization, so we must prevent Emacs from doing it early!
+But if using package we do want it done - early-init turn off is for straight.el etc
+#+NAME:
 *** Package manager
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220614T202601.874691
@@ -130,14 +158,7 @@ Set the path to packages
 	   (format "package-quickstart.%d.el" emacs-major-version)
 	   mwb-user-emacs-directory))
 #+end_src
-** Package
-:PROPERTIES:
-:ID:       org_mark_2020-09-28T01-08-28+01-00_mini12.local:D069442D-B7AF-4771-800A-87C4F3376AF0
-:END:
-Package initialize occurs automatically, before `user-init-file' is loaded, but after `early-init-file'. emacs handles package initialization, so we must prevent Emacs from doing it early!
-But if using package we do want it done - early-init turn off is for straight.el etc
-#+NAME:
-*** Straight
+*** Not package.el
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220614T202654.959342
 :END:
@@ -187,7 +208,18 @@ This variable tells Emacs to prefer the .el file if itq’s newer, even if there
 #+begin_src emacs-lisp
 (setq load-prefer-newer t)
 #+end_src
+** use-package
+:PROPERTIES:
+:ID:       org_mark_mini20:20240227T114518.783665
+:END:
+From centaur.
+`use-package' is builtin since 29. It must be set before loading `use-package'.
+#+NAME: org_mark_mini20_20240227T114518.751441
+#+begin_src emacs-lisp
+(setq use-package-enable-imenu-support t)
+#+end_src
 
+(setq use-package-enable-imenu-support t)
 * Implement init environment (init.el)
 :PROPERTIES:
   :header-args:    :tangle init.el :comments link
@@ -236,8 +268,7 @@ Later toggles in main hydra.
 ;;  setting to nil turns them off
 (setq debug-on-error t)
 ;; (setq debug-on-error nil)
-										;(setq debug-on-quit nil)
-
+(setq debug-on-quit nil)
 #+end_src
 *** use-package
 :PROPERTIES:
@@ -247,8 +278,58 @@ True adds staistics - only set to nil when I actually use emacs and not just fid
 #+NAME: org_mark_mini20.local_20220606T145002.738615
 #+begin_src emacs-lisp
 (setq init-file-debug 'nil)
-(setq init-file-debug t)
+;; (setq init-file-debug t)
  #+end_src
+*** Variable watcher helpers
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220905T162607.836672
+:END:
+From kasual modi
+#+NAME: org_mark_mini20.local_20220905T162607.803924
+#+begin_src emacs-lisp
+(defvar modi/variables-to-be-watched ()
+  "List of variables to be watched.
+Used by `modi/set-variable-watchers' and
+`modi/unset-variable-watchers'")
+
+(defun modi/variable-watcher-fn (symbol newval operation where)
+  "Print message when the value of variable SYMBOL changes.
+The message shows the NEWVAL it changed to, the OPERATION that
+caused that, and the buffer WHERE that happened if the value
+change was buffer-local."
+  (message (format "[Watcher: %s] Now set to %S, by `%S'%s"
+                   (symbol-name symbol)
+                   newval
+                   operation
+                   (if where
+                       (format " in %S" where)
+                     ""))))
+
+(defun modi/set-variable-watchers ()
+  "Enable printing messages when any watched variable changes.
+The variables to be watched should be added to
+`modi/variables-to-be-watched'."
+  (interactive)
+  (dolist (var modi/variables-to-be-watched)
+    (add-variable-watcher var #'modi/variable-watcher-fn)))
+
+(defun modi/unset-variable-watchers ()
+  "Disable variable watchers.
+Variable watching will be disabled for the list of variables set
+in `modi/variables-to-be-watched'."
+  (interactive)
+  (dolist (var modi/variables-to-be-watched)
+    (remove-variable-watcher var #'modi/variable-watcher-fn)))
+#+end_src
+**** Actual watchers
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20220905T162607.833929
+:END:
+#+NAME: org_mark_mini20.local_20220905T162607.813679
+#+begin_src emacs-lisp
+(add-to-list 'modi/variables-to-be-watched 'debug-on-quit)
+(modi/set-variable-watchers)
+#+end_src
 *** Trace
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220606T145002.754955
@@ -321,7 +402,6 @@ Show message with timestamp - commented out
     (message "add timestamp")))
 
 (add-hook 'after-init-hook 'mwb-message-remove-timediff)
-;; (message "test")
 #+end_src
 ** Code to do loading
 :PROPERTIES:
@@ -525,7 +605,6 @@ Perhaps might need to sort by length as - is before . so lisp.org loads after li
 :ID:       org_mark_mini20.local:20220613T182746.504886
 :END:
 Also switch between an alternate setup - ideally should be driven from command line but.....
-
 #+NAME: org_mark_mini12.local_20201213T195905.304356
 #+begin_src emacs-lisp
 (when (>= emacs-major-version 27)

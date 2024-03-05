@@ -1,0 +1,8 @@
+# name : use-feature
+# key : usef
+# group : use-package
+# contributor : Mark Bestley
+# --
+(use-feature ${1:package}
+$0
+)

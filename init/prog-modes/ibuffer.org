@@ -304,7 +304,7 @@ Set the key in the map but also add the hydra at the end which shadows the /
 (define-ibuffer-filter dir
 	"Toggle current view to buffers with dir QUALIFIER."
   (:description "directory" :reader (read-from-minibuffer "Filter by dir (regexp): "))
-  (ibuffer-awhen (buffer-file-name buf)
+  (when-let (buffer-file-name buf)
 	(string= qualifier (file-name-directory it))))
 #+end_src
 

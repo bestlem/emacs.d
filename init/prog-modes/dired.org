@@ -43,21 +43,20 @@ Take from jweigley then find a hydra and prettify it.
 (use-feature dired
   :commands dired
   :bind (:map dired-mode-map
-              ("j" . dired)
-
-              ("e" . ora-ediff-files)
-              ("l" . dired-up-directory)
-              ("q" . pop-window-configuration)
-              ("Y" . ora-dired-rsync)
-              ("M-!" . async-shell-command)
-              ("<tab>" . dired-next-window)
-              (")" . dired-hide-details-mode)
-              ("(" . dired-hide-details-mode)
-              ("C-M-u" . dired-subtree-up)
-              ("C-M-d" . dired-subtree-down)
-              ("C-M-p" . dired-subtree-previous-sibling)
-              ("C-M-n" . dired-subtree-next-sibling)
-              )
+         ("j" . dired)
+         ("<f5>" . dired-toggle-read-only)
+         ("e" . ora-ediff-files)
+         ("l" . dired-up-directory)
+         ("Y" . ora-dired-rsync)
+         ("M-!" . async-shell-command)
+         ("<tab>" . dired-next-window)
+         (")" . dired-hide-details-mode)
+         ("(" . dired-hide-details-mode)
+         ("C-M-u" . dired-subtree-up)
+         ("C-M-d" . dired-subtree-down)
+         ("C-M-p" . dired-subtree-previous-sibling)
+         ("C-M-n" . dired-subtree-next-sibling)
+         )
   :diminish dired-omit-mode
 
   :init
@@ -275,6 +274,13 @@ Originally oraemacs via jweigley
     ;; finally, switch to that window
     (other-window 1)))
 #+end_src
+** wdired
+:PROPERTIES:
+:ID:       org_mark_mini20:20231105T081548.961922
+:END:
+If you are editing you need to be able to exit.
+However from manual this isn't needed as part of dired.
+#+NAME: org_mark_mini20_20231105T081548.941548
 
 ** Dired-x
 :PROPERTIES:

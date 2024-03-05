@@ -1,0 +1,20 @@
+# Editor configuration, see http://editorconfig.org
+# This is for emacs only.
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+charset = utf-8
+indent_style = space
+indent_size = 2
+
+
+[{LICENSES/**,LICENSE,secrets/**}]
+charset=unset
+end_of_line=unset
+indent_size=unset
+indent_style=unset
+insert_final_newline=unset
+trim_trailing_whitespace=unset

@@ -69,12 +69,11 @@ Well I don't know what the frame parameters are left and width can be proportion
 
 #+NAME: org_mark_mini20.local_20210801T194100.707636
 #+begin_src emacs-lisp
-(when *emacs/>=26p*
+(when (and *emacs/>=26p* (not *macport*))
   (use-package-elpa mini-frame
 	:defer 0.5
 	:custom
 	(mini-frame-internal-border-color "yellow")
-	(mini-frame-standalone 't)
 	(mini-frame-detach-on-hide 'nil)
 	(mini-frame-standalone 'nil)
 
@@ -207,7 +206,7 @@ This is saving minibuffer information but can do more as told.
           bookmark-alist
 		  Info-history-list
 		  register-alist))
-  (setq savehist-file (locate-user-emacs-file "savehist.el"))
+  ;; (setq savehist-file (locate-user-emacs-file "savehist.el"))
   (savehist-mode 1))
 #+end_src
 * Yes or no
@@ -291,9 +290,11 @@ Replace isearch but not so easy as consult-line plus can leave the progress mark
 	;;  Delay preview
 	(consult-customize consult-theme consult-buffer
 					   :preview-key '(:debounce 1.0 any))
-	(mini-frame-mode 1)
+	;; (mini-frame-mode 1)
 	(marginalia-mode 1)
-	:bind (("C-x r x" . consult-register)
+	:bind (("s-f" . consult-line)
+		   ("s-b" . consult-buffer)
+		   ("C-x r x" . consult-register)
 		   ("C-x r b" . consult-bookmark)
 		   ("C-c k" . consult-kmacro)
 		   ("C-x M-:" . consult-complex-command) ;; orig. repeat-complet-command
@@ -308,7 +309,7 @@ Replace isearch but not so easy as consult-line plus can leave the progress mark
 		   ("M-g h" . consult-org-heading)
 		   ("M-g e" . consult-compile-error)
 		   ("M-g f" . consult-flycheck)
-		   ("M-g g" . consult-goto-line)   ;; orig. goto-line
+		   ("M-g g" . consult-goto-line) ;; orig. goto-line
 		   ("M-g M-g" . consult-goto-line) ;; orig. goto-line
 		   ("M-g a" . consult-org-agenda)
 		   ("M-g m" . consult-mark)
@@ -332,12 +333,9 @@ Replace isearch but not so easy as consult-line plus can leave the progress mark
 		   ;; ("M-g l" . consult-line)
 		   ("C-x c SPC" . consult-mark)
 		   :map isearch-mode-map
-		   ("M-e" . consult-isearch)   ;; orig. isearch-edit-string
+		   ("M-e" . consult-isearch) ;; orig. isearch-edit-string
 		   ("M-s e" . consult-isearch) ;; orig. isearch-edit-string
-		   ("M-s l" . consult-line)
-		   :map mac-key-mode-map
-		   ("s-f" . consult-line)
-		   ("s-b" . consult-buffer))))
+		   ("M-s l" . consult-line))))
 #+end_src
 ** All-the-icons-completion
 :PROPERTIES:
@@ -451,7 +449,7 @@ To put in order
 (use-package-elpa selectrum-prescient
   :demand
   :init
-  (setq prescient-save-file (mwb-user-emacs-file "var/prescient-save.el"))
+  ;;(setq prescient-save-file (mwb-user-emacs-file "var/prescient-save.el"))
   (selectrum-prescient-mode 1)
   (prescient-persist-mode +1)
   :after selectrum)

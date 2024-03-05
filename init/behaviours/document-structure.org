@@ -21,6 +21,7 @@ These are set by Aquamacs but might as well reinforce.
 #+NAME: org_mark_mini20.local_20220612T163046.004811
 #+begin_src emacs-lisp
 (show-paren-mode t)
+(setq show-paren-context-when-offscreen 'child-frame)
 #+end_src
 *** Make parentheses pretty
 :PROPERTIES:
@@ -33,11 +34,15 @@ Although that should be in prog mode
   :commands rainbow-delimiters-mode
   :delight rainbow-delimiters-mode)
 #+end_src
-*** Colour code by level
+** Colour code by level
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220612T130916.315429
 :END:
-Use prism which is sort of descended from rainbow-mode.
+Use prism which is sort of descended from rainbow-mode. This colours by level not keyword.
+**** Prism install
+:PROPERTIES:
+:ID:       org_mark_mini20:20230704T030543.536076
+:END:
 See https://github.com/alphapapa/prism.el/issues/8 to add
 #+NAME: org_mark_mini20.local_20220612T124244.221077
 #+begin_src emacs-lisp
@@ -46,47 +51,31 @@ See https://github.com/alphapapa/prism.el/issues/8 to add
   :config
   (setq prism-comments nil)             ; non-nil distorts colours
   (setq prism-num-faces 16)
-
-  (cond ((eq prism-num-faces 8)  (prism-set-colors
-								   :desaturations '(0) ; may lower the contrast ratio
-								   :lightens '(0)	   ; same
-								   :colors (modus-themes-with-colors
-											 `(,fg-special-cold
-											   ,magenta
-											   ,magenta-alt-other
-											   ,cyan-alt-other
-											   ,fg-main
-											   ,blue-alt
-											   ,red-alt-other
-											   ,cyan))))
-		((eq prism-num-faces 16) (prism-set-colors
-								   :desaturations '(0) ; do not change---may lower the contrast ratio
-								   :lightens '(0)      ; same
-								   :colors (modus-themes-with-colors
-											 (list magenta
-												   fg-main
-												   cyan-alt-other
-												   magenta-alt-other
-												   blue
-												   magenta-alt
-												   cyan-alt
-												   red-alt-other
-												   green
-												   fg-main
-												   cyan
-												   yellow
-												   blue-alt
-												   red-alt
-												   green-alt-other
-												   fg-special-warm)))
-		 )
-		(t 'nil))
-
+  (prism-set-colors
+    :desaturations '(0) ; do not change---may lower the contrast ratio
+    :lightens '(0)      ; same
+    :colors (modus-themes-with-colors
+              (list fg-main
+                    magenta
+                    cyan-cooler
+                    magenta-cooler
+                    blue
+                    magenta-warmer
+                    cyan-warmer
+                    red-cooler
+                    green
+                    fg-main
+                    cyan
+                    yellow
+                    blue-warmer
+                    red-warmer
+                    green-cooler
+                    yellow-faint)))
 
   ;; for 8 colours
   )
 #+end_src
-*** Setup the format
+**** Setup the format for prog-mode
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220612T185341.377015
 :END:
@@ -125,9 +114,10 @@ Hydra from From https://gist.githubusercontent.com/ptrv/7e27e0e18ae37d3f80aff7b9
 #+begin_src emacs-lisp
 (use-package-elpa smartparens
   :commands sp-with-modes
-  sp-local-pair
+  sp-local-pairs
   smartparens-mode
   turn-off-smartparens-mode
+
   :diminish smartparens-mode
   :bind (:map smartparens-mode-map
 		 ("M-(" . sp-wrap-round)
@@ -145,12 +135,17 @@ Hydra from From https://gist.githubusercontent.com/ptrv/7e27e0e18ae37d3f80aff7b9
 		 ("C-k" . sp-kill-hybrid-sexp)
 		 ("C-M-f" . sp-forward-sexp)
 		 ("C-M-b" . sp-backward-sexp))
+  :init
+  (require 'smartparens-config)
+
   :config
   (setq sp-show-pair-from-inside nil)
-  (require 'smartparens-config)
+  (smartparens-global-mode t)
   (sp-local-pair '(xml-mode nxml-mode php-mode) "<!--" "-->"
                  :post-handlers '(("| " "SPC")))
   ;; (smartparens-global-mode)
+  :hook ((lispy-mode org-mode) . turn-off-smartparens-mode)
+
   :hydra (ptrv/smartparens
 		  (:hint nil)
 		  "
@@ -264,7 +259,7 @@ Put markers in the fringe which messed up lispy and is slow - I suspect not for 
 #+begin_src emacs-lisp
 (use-package-elpa hideshowvis
   :straight (:fork (:repo "bestlem/hideshowvis" :branch "work")
-             :local-repo  "../local-repos/hideshowvis")
+             :local-repo  "../../local-repos/hideshowvis")
   :commands (hideshowvis-enable)
   :init
   (defun hideshowvis-mwb-enable ()
@@ -276,7 +271,10 @@ Put markers in the fringe which messed up lispy and is slow - I suspect not for 
   ;; :config (hideshowvis-symbols)
   :custom-face (hideshowvis-hidden-region-face
                 ((t
-                  (:box (:line-width (2 . 2) :color "white" :style released-button)
+                  (:box (:line-width (2 . 2)
+                         :color "white"
+                         :style released-button)
+				   :background "blue"
                    :inherit custom-button-mouse))))
   )
 #+end_src

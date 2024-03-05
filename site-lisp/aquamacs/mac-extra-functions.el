@@ -296,132 +296,19 @@ end tell"
 ;; a temporary file.
 ;; dr. 07/2008
 
-(defun mac-read-environment-vars-from-shell ()
-  "Import the environment from the system's default login shell
-specified in `shell-file-name'."
-  
-  (setq environment-temp-file (make-temp-file "envvar-"))
-  ;; running the shell with -l (to load the environment)
-  (let ((default-directory "~/"))	; ensure it can be executed
-  
-  (message "Shell: %s" shell-file-name)
-
-  (let* ((coding-system-for-write 'raw-text-unix)
-         (shell (or shell-file-name "/bin/bash"))   ;; can shell-file-name be nil?
-	 (command (format "printenv >%s.tmp; mv %s.tmp %s"
-			  environment-temp-file 
-			  environment-temp-file 
-			  environment-temp-file)))
-
-    (if (string-match ".*/\\(ba\\|z\\)sh" shell)
-	(call-process shell nil
-		      0 nil
-		      "-l" "-c" command)
-      (if (or (string-match ".*/\\tcsh" shell)
-	      (string-match ".*/ksh" shell))
-	  (call-process shell nil
-			0 nil
-			;; we can't start tcsh as a login shell
-			;; because it doesn't accept -l in combination
-			;; with a command.
-			;; call-process-region wouldn't work because it's
-			;; not interactive.
-			"-c" command)
-	(message "Could not retrieve login shell environment with login shell: %s" shell)
-	;; won't work for csh, because it doesn't take -l -c ...
-	)))))
-;; we call the process asynchronuously
-;; using start-process does not work for unknown reasons: 
-;; sometimes it doesn't get the environment.
-
-;; (mac-read-environment-vars-from-shell)
-;; (sit-for 1)
-;; (mac-read-environment-vars-from-shell-2)
-;; (insert (getenv "TEST"))
 
 
-(defun mac-read-environment-vars-from-shell-2 ()
-  "Reads temporary file if it exists."
-  (if (and environment-temp-file (file-readable-p environment-temp-file))
-      (prog1
-	  (with-temp-buffer
-	    (condition-case nil
-		(progn
-		  (insert-file-contents-literally environment-temp-file nil)
-		  (delete-file environment-temp-file))
-	      (error nil))
-	    (protect ;; set-env can throw errors wrt. coding system
-	     (let ((num 0))
-	       (if (eq (buffer-size) 0)
-		   (message "Warning: Login shell did not return environment.")
-		 (goto-char (point-min))
-		 (while (re-search-forward "^[A-Za-z_0-9]+=()\s*[^\x]*?
-\s*}\s*$" nil t)
-		   (replace-match "..." nil nil))
-		 (goto-char (point-min))
-		 (while (search-forward-regexp "^\\(LC_ALL\\|LC_CTYPE\\|LANG\\)=\\(.*\\)$" nil t)
-		   (when (member (match-string 1) '("LC_ALL" "LANG"))
-		     (setenv (match-string 1) (match-string 2))))
-		 ;; init correct locale
-		 (set-locale-environment)
-		 ;; decode buffer (because setenv wants it this way!)
-		 (decode-coding-region (point-min) (point-max) locale-coding-system)
-		 (while (search-forward-regexp "^\\([A-Za-z_0-9]+\\)=\\(.*\\)$" nil t)
-		   (setq num (1+ num))
-		   (setenv (match-string 1)
-			   (if (equal (match-string 1) "PATH")  ;; this is probably not needed.
-			       (concat (match-string 2) ":" (getenv "PATH"))
-			     (match-string 2)))))
-	       (message "%d environment variables imported from login shell (%s)." 
-			num shell-file-name)
-	       (mac-post-environment-vars-function)
-	       num)))
-	nil)))
- 
-
-(defun mac-post-environment-vars-function ()
-
-  (mac-add-path-to-exec-path)
-  (mac-add-local-directory-to-exec-path) ;; needed for CocoAspell
-
-  ;; inferior workaround, until mac.c is fixed not to set INFOPATH any longer
-  ;; do we still need this?
-  ;; nsterm.m does set INFOPATH.
-  (if (equal (concat (mac-resources-path)
-		     "info:")
-  	     (getenv "INFOPATH"))
-      (setenv "INFOPATH"))
-  
-;; when INFOPATH is set from outside, it will only load INFOPATH
-
-  (let ((extra-dirs (list
-		     "~/Library/Application Support/Emacs/info"
-		     "/Library/Application Support/Emacs/info"
-		     (concat (mac-resources-path)
-			     "lisp/aquamacs/edit-modes/info")
-		     (concat (mac-resources-path)
-			     "info"))))
-    
-    (setq Info-default-directory-list (append extra-dirs
-				       Info-default-directory-list
-				       ))
-    (setq Info-directory-list nil) ; force reinitialization
-
-    (when (getenv "INFOPATH")
-      (setenv "INFOPATH" (apply 'concat (getenv "INFOPATH")
-				(mapcar (lambda (x) (concat ":" x))
-					extra-dirs))))))
 
 
 (defun mac-add-path-to-exec-path ()
   "Add elements from environment variable `PATH' to `exec-path'."
   (let ((l (split-string (getenv "PATH") ":")))
-  (mapc
-   (lambda (p)
-     (unless (member p l)
-       (nconc l (list p))))
-   exec-path)
-  (setq exec-path l)))
+	(mapc
+	 (lambda (p)
+       (unless (member p l)
+		 (nconc l (list p))))
+	 exec-path)
+	(setq exec-path l)))
 
 (defun mac-add-local-directory-to-exec-path ()
   "Add /usr/locaL/bin to `exec-path'"

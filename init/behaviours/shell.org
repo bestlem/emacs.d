@@ -54,16 +54,25 @@ Aquamacs uses shell-file-name and prints using printenv to a file and plays with
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210122T193718.269509
 :END:
-As noted the aquamacs way might be better. But at the moment all disabled.
+As noted the aquamacs way might be better. But at the moment all disabled. Added back for nix.
 #+NAME: org_mark_mini20.local_20210122T193718.254955
 #+begin_src emacs-lisp
 (setq exec-path-from-shell-debug nil)
 (use-package-elpa exec-path-from-shell
-  :disabled
-  :when  (and (not *aquamacs*) (memq window-system '(mac ns x)))
-  :init
-  (setq exec-path-from-shell-variables '("PATH" "MANPATH" "CONDA_PREFIX"))
+  :if  (and (not *aquamacs*)
+			(memq window-system '(mac ns x))
+			(not (daemonp)))
   :config
+  (dolist (var '("CONDA_PREFIX"
+                 ;; "SSH_AUTH_SOCK"
+                 ;; "SSH_AGENT_PID"
+                 ;; "GPG_AGENT_INFO"
+                 "LANG"
+                 "LC_CTYPE"
+                 ;; "NIX_SSL_CERT_FILE"
+                 ;; "NIX_PATH"
+				 ))
+    (add-to-list 'exec-path-from-shell-variables var))
   (exec-path-from-shell-initialize))
 #+end_src
 *** Other

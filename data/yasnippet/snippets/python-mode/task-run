@@ -1,0 +1,10 @@
+# name : task-run
+# key : task
+# group : tasks
+# contributor : Mark Bestley
+# --
+
+@task
+def ${1:fun}(c):
+    """$2"""
+    c.run($0)

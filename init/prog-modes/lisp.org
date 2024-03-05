@@ -28,12 +28,13 @@ Set compat so that the keys for these modes work. But macrostep does not - see i
 		lispy-safe-delete t
 		lispy-safe-actions-no-pull-delimiters-into-comments t)
   :custom (lispy-eval-display-style "overlay")
+  (lispy-comment-use-single-semucolon t)
+  (lispy-completion-method 'default)
   :config
   (setq lispy-compat '(edebug macrostep)
 		lispy-safe-paste t)
   (diminish 'eldoc-mode)
-  (bind-key mwbkey-delete 'lispy-delete lispy-mode-map)
-  :hook (lispy-mode . turn-off-smartparens-mode))
+  (bind-key mwbkey-delete 'lispy-delete lispy-mode-map))
 	 #+end_src
 *** Get lispy test working
 :PROPERTIES:
@@ -58,7 +59,7 @@ Changes are now made directly to the package which is only now here
   ;; :init (lispy-mode 1)
   :commands lispy-mnemonic-mode
   :init
-  (mwb-add-hook-fn (mwb-lisp-hooks) #'lispy-mnemonic-mode ))
+  (mwb-add-hook-fn (mwb-lisp-hooks) #'lispy-mnemonic-mode))
  #+end_src
 ** Evaluation
 :PROPERTIES:

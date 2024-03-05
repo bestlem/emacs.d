@@ -1,9 +1,6 @@
 *.elc
 config.el
 init/**/*.el
-SessionDesktop.el
 elpa
-var
-.org-id-locations
 .cask
 eln-cache

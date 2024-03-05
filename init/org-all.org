@@ -81,8 +81,8 @@ It is now for subtree todo refile and links
   <<org-key-binds>>
   :config
   (setq org-datetree-add-timestamp (quote active)
-        org-default-notes-file "~/SyncServices/Dropbox/Docs/org/notes.org"
-        org-directory "/Users/mark/SyncServices/Dropbox/Docs/org"
+        org-directory (concat  mwb-dropbox-root "/Docs/org")
+        org-default-notes-file (concat org-directory "/notes.org")
         org-support-shift-select t
         ;;          org-use-speed-commands t
         )
@@ -93,7 +93,7 @@ It is now for subtree todo refile and links
   :preface (declare-function org-hide-properties-mode "org-hide-properties")
   :mode-hydra
   <<org-mode-hydra>>
-  
+
   :config
   (require 'init-mwb-org)
 
@@ -123,10 +123,11 @@ Put the bind bit in noweb
  :map org-mode-map
  ("<f5>" . org-ctrl-c-ctrl-c)
  :map org-src-mode-map
- ([remap save-buffer] . my/org-edit-src-exit)
- ([remap bury-buffer] . org-edit-src-abort)
- ;; :map org-capture-mode-map
- ;; ("<f12>" . org-capture-finalize)
+ (("s-s" . my/org-edit-src-exit)
+  ([remap bury-buffer] . org-edit-src-abort)
+  ;; :map org-capture-mode-map
+  ;; ("<f12>" . org-capture-finalize)
+  )
  )
 #+end_src
 
@@ -173,12 +174,16 @@ From http://doc.norang.ca/org-mode.html#Capture
 :END:
 *** Startup
 :PROPERTIES:
+:ID:       org_mark_mini20:20230308T124250.997294
+:END:
+
+:PROPERTIES:
 :ID:       org_mark_mini20.local:20220627T115411.767788
 :END:
 This describes how the org file is shown I think 9.4 altered this
 #+NAME: org_mark_mini20.local_20220627T115411.731459
 #+begin_src emacs-lisp :tangle no :noweb-ref org-custom
-(org-startup-folded 'overview)
+(org-startup-folded 'show2levels)
 #+end_src
 *** Folding unhide on search
 :PROPERTIES:
@@ -281,6 +286,13 @@ Make subtree cut and paste adjust to current level.
 #+begin_src emacs-lisp :tangle no :noweb-ref org-custom
 (org-yank-adjusted-subtrees t)
 #+end_src
+*** Turn off smartparens
+:PROPERTIES:
+:ID:       org_mark_mini20:20230707T085033.572003
+:END:
+Needed for alt-up
+Unfortunately the sequenbce of loading on startup fails this so move to smartparens setup.
+
 ** Tangle
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220628T220421.764169
@@ -314,11 +326,31 @@ Code block behaviour - but also see customization for appearance
 	  )
  #+end_src
 
-*** Evaluating
+*** Evaluating Languages
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220619T143614.114358
 :END:
-My languages
+
+*****  Load language only when needed
+:PROPERTIES:
+:ID:       org_mark_2023-12-08T13-27-13+00-00_mini20:0E893C25-A57B-4265-B226-57C7CE1B6B9E
+:END:
+Taken from https://emacs.stackexchange.com/a/20618/9874
+#+NAME: org_mark_2023-12-08T13-27-13+00-00_mini20_2A35BBAB-8CBE-4011-8013-B8B3B0E1F8BF
+#+begin_src emacs-lisp
+(defadvice org-babel-execute-src-block (around load-language nil activate)
+  "Load language if needed"
+  (let ((language (org-element-property :language (org-element-at-point))))
+    (unless (cdr (assoc (intern language) org-babel-load-languages))
+      (add-to-list 'org-babel-load-languages (cons (intern language) t))
+      (org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages))
+    ad-do-it))
+
+#+end_src
+**** My languages
+:PROPERTIES:
+:ID:       org_mark_2023-12-08T13-27-13+00-00_mini20:580DD065-B662-4790-BEC2-C69CA7CC6A73
+:END:
 #+NAME: org_mark_mini20.local_20220619T143246.381888
 #+BEGIN_SRC emacs-lisp
 (org-babel-do-load-languages
@@ -441,7 +473,7 @@ Set the keywords - ie life cycle.
 #+NAME: org_mark_mini20.local_20220628T220421.730792
 #+begin_src emacs-lisp :tangle no :noweb-ref org-custom
 (org-todo-keywords
-   '((sequence "TODO" "DONE(!)" "LEAVE(@)")))
+   '((sequence "TODO" "|" "DONE(!)" "LEAVE(@)")))
 #+end_src
 *** Add timestamp for done
 :PROPERTIES:
@@ -683,7 +715,7 @@ This package [[https://github.com/snosov1/toc-org][toc-org]] seems it might be u
 
 I think using treemacs is nearer what I need as puts menu in other window - although length matters. Also set the startup to show 2 levels.
 #+NAME: org_mark_2020-10-24T15-08-22+01-00_mini12.local_E0715861-9815-4AA9-8E93-095091F21C56
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 (use-package-elpa toc-org
   :hook (org-mode . toc-org-mode))
 #+end_src

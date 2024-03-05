@@ -6,11 +6,10 @@
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:D2691EE6-AB96-4EB1-A369-A3CDACD148E2
 :END:
-MacOs needs specific trash management not just mv to ~/.Trash
-Perhaps only if in dired or other user controlled file
-See [[https://github.com/lunaryorn/osx-trash.el][osx-trash]] but might need to find /opt/local/bin/trash
-Or better patch Aquamacs to have this C code - perhaps done?
-Need also to exclude some files - basically only iof you edit them
+MacOs needs specific trash management not just mv to =~/.Trash=.
+Perhaps only if in dired or other user controlled file. See [[https://github.com/lunaryorn/osx-trash.el][osx-trash]] but might need to find =/opt/local/bin/trash=, or better patch Aquamacs to have this C code - perhaps done?
+Need also to exclude some files - basically only if you edit them.
+
 Well I was going to include [[https://github.com/lunaryorn/osx-trash.el][osx trash]] which uses the trash executable or an applescript to do the proper trash. But realised I don't want to trash files - just those I delete by hand so the patching of the emacs delete is not a good idea. By default emacs does not delete by moving to trash. It is customisable so set to to never.
 But the mac port does have this if set mac_system_move_file_to_trash_use_finder
 Think of editing dired and treemacs
@@ -33,9 +32,32 @@ And I hear a sound on deletes so Finder is being used. Fixed with -F argument
 (when *sys/macp*
   (if *emacs/mac-port-p*
 	  (setq mac_system_move_file_to_trash_use_finder t)
-	(use-package-elpa osx-trash
-	  :defer 0.5
-	  :config (osx-trash-setup))))
+
+	;; From https://github.com/emacsorphanage/osx-trash/issues/4
+
+	;; macOS trashing: inspired first by
+	;; https://github.com/emacsorphanage/osx-trash, but then by
+	;; https://gist.github.com/dabrahams/14fedc316441c350b382528ea64bc09c
+	;; (from https://apple.stackexchange.com/a/162354).
+	;; `ns-do-applescript' seems fast enough to me.
+
+	(defun my:ns-move-files-to-trash (&rest paths)
+	  (let ((as-paths
+			 (mapconcat
+			  (lambda (path)
+				(format "the POSIX file \"%s\"" (replace-regexp-in-string
+												 (rx (group (any ?\\ ?\")))
+												 "\\\\\\1"
+												 (expand-file-name path))))
+			  paths
+			  ", ")))
+		(ns-do-applescript
+		 (format "tell application \"Finder\" to move {%s} to trash" as-paths))))
+
+	(when (eq system-type 'darwin)
+	  (defalias 'system-move-file-to-trash #'my:ns-move-files-to-trash))
+
+	))
 #+end_src
 * Backups
 :PROPERTIES:
@@ -150,6 +172,12 @@ All the logs are very clever but what I want is the version number to increase s
     ;; This is not defined in non aquamacs
 	(mac-key-save-file-as)))
 #+end_src
+
+*** TODO macport get mac-key-save-file-as
+:PROPERTIES:
+:ID:       org_mark_mini20:20240111T140545.301358
+:END:
+This at the moment used a ns- call which is not in macport.
 *** TODO save special buffers
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T17-28-10+00-00_mini12:0A3506D6-DE37-44F4-A990-C06C1D567023
@@ -174,6 +202,14 @@ This is [[https://github.com/lewang/backup-walker][Backup Walker]]
 #+NAME: org_mark_mini20.local_20210605T200354.625130
 #+begin_src emacs-lisp
 (use-package-elpa backup-walker
+  :config
+  (defun backup-walker-mwb-revert ()
+    "Revert to the hunk"
+    (interactive)
+    (diff-apply-hunk -1)
+    )
+  :bind (:map backup-walker-mode-map
+         ("<f5>" . backup-walker-mwb-revert))
   :commands backup-walker-start)
   #+end_src
 ** Super save
@@ -366,6 +402,7 @@ The problem is that we have regex
 #+NAME: org_mark_mini20.local_20210830T180007.805003
 #+begin_src emacs-lisp
 (use-feature recentf
+  :defer 2
   :commands (recentf-mode
 			 recentf-add-file
 			 recentf-apply-filename-handlers
@@ -376,26 +413,26 @@ The problem is that we have regex
 		recentf-keep '(file-remote-p file-readable-p)
 		recentf-max-saved-items 500
 		recentf-max-menu-items 25)
-  (unless *aquamacs*
-	(setq recentf-save-file (mwb-user-emacs-file "var/recentf-save.el")))
+  ;; (unless *aquamacs*
+  ;; 	(setq recentf-save-file (expand-file-name "recentf-save.el" mwb-emacs-share-dir)))
   :config
   (setq recentf-exclude '("COMMIT_MSG"
-			  "COMMIT_EDITMSG"
-			  "github.*txt$"
-			  "^/var/folders\\.*"
-			  "COMMIT_EDITMSG\\'"
-			  ".recentf"
-			  "~$"
-			  ".~/"
-			  ".*-autoloads\\.el\\'"
-			  ".*png$"
-			  ".*cache$"
-			  "SessionDesktop\\.el"
-			  "treemacs-persist"
-			  "~/.local/emacs/straight/repos/"
-			  "~/src/ThirdParty/emacs-init/"
-			  "/Applications/MacPorts/Emacs"
-			  "^/Volumes/"))
+						  "COMMIT_EDITMSG"
+						  "github.*txt$"
+						  "^/var/folders\\.*"
+						  "COMMIT_EDITMSG\\'"
+						  ".recentf"
+						  "~$"
+						  ".~/"
+						  ".*-autoloads\\.el\\'"
+						  ".*png$"
+						  ".*cache$"
+						  "SessionDesktop\\.el"
+						  "treemacs-persist"
+						  "~/.local/emacs/straight/repos/"
+						  "~/Developer/ThirdParty/emacs-init/"
+						  "/Applications/MacPorts/Emacs"
+						  "^/Volumes/"))
   (recentf-mode 1))
 #+end_src
 
@@ -453,12 +490,22 @@ Now use a fork to allow search of ignored files.
 #+begin_src emacs-lisp
 (use-package-elpa deadgrep
   :straight (:fork (:repo "bestlem/deadgrep" :branch "work")
-			 :local-repo  "../local-repos/deadgrep")
+			 :local-repo  "../../local-repos/deadgrep")
   :commands deadgrep
   :bind (:map deadgrep-mode-map
 		 ("<double-mouse-1>" . deadgrep-visit-result-other-window)
 		 ("<mouse-2>" . deadgrep-toggle-file-results)
-		 ("<escape>" . deadgrep-kill-process))
+		 ("<escape>" . deadgrep-kill-process)
+		 ("<f5>"  . deadgrep-edit-mode)
+		 :map deadgrep-edit-mode-map
+		 ("<f5>"  . deadgrep-mode)
+		 )
+  :mode-hydra
+  (deadgrep-mode
+   ("Edit Search" (("d" deadgrep-directory "Directory")
+				   (".." deadgrep-parent-directory "Parent dir")
+				   ("s" deadgrep-search-term "Search"))
+	"Redo" (("D" deadgrep-debug))))
   :config (unless (executable-find "rg")
 			(warning "Please install ripgrep ...")))
 #+end_src
@@ -479,6 +526,21 @@ Might allow search in ignore files. It is more flexible but display is not as ea
 :END:
 This add functions. I would use John Wiegley's setup but projectile hung
 So take from projectile
+*** Set my project
+:PROPERTIES:
+:ID:       org_mark_mini20:20231203T140137.869995
+:END:
+Variables to allow .dir-locals.el to set a Project name.
+#+NAME: org_mark_mini20_20231203T140137.850311
+#+begin_src emacs-lisp :tangle no
+(defvar mwb-project-name nil)
+(put 'mwb-project-name 'safe-local-variable #'stringp)
+
+(defun projectile-project-name--prefer-mine ()
+  (or mwb-project-name (projectile-default-project-name (projectile-project-root))))
+
+
+#+end_src
 *** use_package
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20211002T193350.827718
@@ -495,19 +557,22 @@ So take from projectile
 			 projectile-ag
 			 projectile-recentf)
   :init
-  (let ((root (f-join user-emacs-directory "projectile")))
-	(unless (file-directory-p root)
-	  (f-mkdir root))
-	(setq projectile-known-projects-file (f-join root "projectile-bookmarks.eld"))
-	(setq projectile-cache-file (f-join root "projectile.cache")))
+  ;; (let ((root (f-join user-emacs-directory "projectile")))
+  ;;   (unless (file-directory-p root)
+  ;;     (f-mkdir root))
+  ;;   (setq projectile-known-projects-file (f-join root "projectile-bookmarks.eld"))
+  ;;   (setq projectile-cache-file (f-join root "projectile.cache")))
   (setq projectile-enable-caching t)
   (setq projectile-completion-system 'auto)
   :custom
   (projectile-file-exists-local-cache-expire 300)
   (projectile-sort-order 'recentf)
-  (projectile-project-search-path '("~/src"))
+  (projectile-project-search-path '("~/Developer"))
 
   :config
+  ;;  use project name make it safe if set as string
+  (put 'projectile-project-name 'safe-local-variable #'stringp)
+
   ;; racket
   (add-to-list 'projectile-globally-ignored-directories "*compiled")
   ;; (add-to-list 'projectile-globally-ignored-directories "straight/repos")
@@ -555,6 +620,7 @@ So take from projectile
     ("q"   nil "cancel" :color blue))
 
   (bind-key "H-p" 'hydra-projectile/body)
+
   (projectile-cleanup-known-projects))
 #+end_src
 *** File saving

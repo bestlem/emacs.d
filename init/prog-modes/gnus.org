@@ -62,21 +62,16 @@ Cover method for gnus to create new frame
 #+NAME: org_mark_mini12.local_20210110T211235.365791
 #+begin_src emacs-lisp :tangle no :noweb-ref gnus-preface
 ;(setq gnus-directory "~/Library/Preferences/Aquamacs Emacs/News")
-(setq message-directory "~/.emacs.d/var/mail/") ; set as well as custom as the
-										; nnfolder-directory can't be and seems
-										; to use this
-(setq nnfolder-directory "~/.emacs.d/var/mail/archive")
 ;; (setq nndraft-directory "~/.emacs.d/data/mail/drafts/")
 ;; (setcdr (assoc 'nndraft-directory
 ;;                (nnoo-variables 'nndraft))
 ;;         nndraft-directory)
-(setq gnus-dribble-directory (expand-file-name "~/tmp/emacs_unwanted"))
 (setq gnus-kill-save-kill-file t)
 (setq gnus-server-browse-in-group-buffer t)
 (setq gnus-read-active-file nil)
-
 (setq gnus-visual t
 	  gnus-large-newsgroup 4000)
+(setq gnus-home-directory (expand-file-name "gnus" mwb-emacs-share-dir))
 #+end_src
 #+NAME: org_mark_mini20.local_20220706T195409.877150
 #+begin_src emacs-lisp :tangle no :noweb-ref gnus-custom
@@ -88,12 +83,15 @@ Cover method for gnus to create new frame
 :END:
 #+NAME: org_mark_mini20.local_20220706T194343.304616
 #+begin_src emacs-lisp :tangle no :noweb-ref gnus-custom
-(gnus-directory "~/Library/Preferences/Aquamacs Emacs/News")
-(gnus-home-directory "~/.emacs.d/var/gnus")
-(mail-default-directory "~/.emacs.d/var/Mail")
-(message-auto-save-directory "~/.emacs.d/var/gnus/Mail")
-(message-directory "~/.emacs.d/var/Mail/")
-(nnmail-message-id-cache-file "~/.emacs.d/var/gnus/.nnmail-cache")
+(message-directory (expand-file-name "Mail" mwb-emacs-share-dir))
+(gnus-directory (expand-file-name "News" gnus-home-directory))
+(gnus-startup-file (expand-file-name  ".newsrc" gnus-home-directory))
+;; mail-default-directory (expand-file-name "drafts" message-directory)
+;; message-auto-save-directory (expand-file-name "Mail" gnus-home-directory)
+(nnmail-message-id-cache-file (expand-file-name "nnmail-cache" gnus-home-directory)
+							  )
+;; (setq nnfolder-directory "~/.emacs.d/var/mail/archive")
+(gnus-dribble-directory mwb-init-backup-unwanted-directory)
 #+end_src
 *** Scoring
 :PROPERTIES:
@@ -244,6 +242,7 @@ Add a hydra https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blo
 #+begin_src emacs-lisp
 (use-feature gnus-group
   :after gnus
+  :demand
   :custom (gnus-group-sort-function
 		   '(gnus-group-sort-by-level))
   :mode-hydra (gnus-group-mode
@@ -387,28 +386,30 @@ Show nice characters for structure
 #+NAME: org_mark_2020-01-24T17-28-10+00-00_mini12_9DE6155E-257B-4E50-8963-F6F79E307C6A
 #+begin_src emacs-lisp
 (use-feature gnus-sum
-    :mode-hydra (gnus-summary-mode
-                 (:color blue)
-                 ("Thread"
-                  (("s" gnus-summary-show-thread "Show Thread")
-                   ("h" gnus-summary-hide-thread "Hide Thread")
-                   ("n" gnus-summary-insert-new-articles "Refresh")
-                   ("c" gnus-summary-catchup-and-exit "Read All"))
-                  "Article"
-                  (("F" gnus-summary-mail-forward "Forward (C-c C-f)")
-                   ("R" gnus-summary-reply-with-original "Reply with original")
-                   ("r" gnus-summary-reply "Reply")
-                   ("W" gnus-summary-wide-reply-with-original "Reply all (S w)")
-                   ("w" gnus-summary-wide-reply "Reply all with original (S W)")
-                   ("e" gnus-summary-resend-message-edit "Resend"))
+  :after gnus
+  :demand
+  :mode-hydra (gnus-summary-mode
+               (:color blue)
+               ("Thread"
+                (("s" gnus-summary-show-thread "Show Thread")
+                 ("h" gnus-summary-hide-thread "Hide Thread")
+                 ("n" gnus-summary-insert-new-articles "Refresh")
+                 ("c" gnus-summary-catchup-and-exit "Read All"))
+                "Article"
+                (("F" gnus-summary-mail-forward "Forward (C-c C-f)")
+                 ("R" gnus-summary-reply-with-original "Reply with original")
+                 ("r" gnus-summary-reply "Reply")
+                 ("W" gnus-summary-wide-reply-with-original "Reply all (S w)")
+                 ("w" gnus-summary-wide-reply "Reply all with original (S W)")
+                 ("e" gnus-summary-resend-message-edit "Resend"))
 
-                  "Disk"
-                  (("d" gnus-summary-put-mark-as-read-next "Disk -> mail")
-                   ("!" gnus-summary-tick-article-forward "Mail -> disk"))
-                  "Other"
-                  (
-                   ("#" gnus-topic-mark-topic "Mark topic")
-                   ("G" dianyou-group-make-nnir-group "Search mails")))))
+                "Disk"
+                (("d" gnus-summary-put-mark-as-read-next "Disk -> mail")
+                 ("!" gnus-summary-tick-article-forward "Mail -> disk"))
+                "Other"
+                (
+                 ("#" gnus-topic-mark-topic "Mark topic")
+                 ("G" dianyou-group-make-nnir-group "Search mails")))))
 #+end_src
 * Article buffer
 :PROPERTIES:
@@ -425,6 +426,7 @@ From same place as above
 #+begin_src emacs-lisp
 (use-feature gnus-art
   :after gnus
+  :demand
   :custom (gnus-article-skip-boring t)
   (gnus-visible-headers
    '("^From:"

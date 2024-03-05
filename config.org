@@ -283,6 +283,19 @@ use-package using :ensure t
 	 :ensure t
      ,@args))
 #+end_src
+**** use-package-non-elpa
+:PROPERTIES:
+:ID:       org_mark_mini20:20240302T100622.541001
+:END:
+use-package calling :straight (or whatever) that gets a package not from an elpa repo.
+Effectively just use-package
+#+NAME: org_mark_mini20_20240302T100622.511406
+#+begin_src emacs-lisp
+(defmacro use-package-non-elpa (name &rest args)
+  (declare (indent 1))
+  `(use-package ,name
+	   ,@args))
+#+end_src
 *** Profile/Benchmark init
 :PROPERTIES:
 :ID:       org_mark_2020-11-12T14-43-30+00-00_mini12.local:CCEFA537-D499-4E55-8B0C-62DA4221E19B

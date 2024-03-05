@@ -148,7 +148,13 @@ If want to exclude then set (add-to-list 'aggressive-indent-excluded-modes 'html
 :PROPERTIES:
 :ID:       org_mark_2020-01-24T12-43-54+00-00_mini12:83292AA8-EE2B-4044-9E4B-99DDF6A034D1
 :END:
-I have wanted a good visual identification of indentation since I had the dos printer program in mid 80s. I *now* have it. https://github.com/DarthFennec/highlight-indent-guides
+I have wanted a good visual identification of indentation since I had the dos printer program in mid 80s. I *now* have it.
+
+** [[https://github.com/DarthFennec/highlight-indent-guides][Highlight Indent Bars]]
+:PROPERTIES:
+:ID:       org_mark_mini20:20240302T101516.548965
+:END:
+Works well but emacs 29 changed color increase/decrease and the package is not maintained.
 
 #+NAME: org_mark_2020-01-24T12-43-54+00-00_mini12_E4106683-C45F-422A-9DBC-6265837B502D
   #+begin_src emacs-lisp
@@ -186,6 +192,41 @@ I have wanted a good visual identification of indentation since I had the dos pr
   (hi-mwb--set-color 'highlight-indent-guides-stack-even-face 80)
   (set-face-foreground 'highlight-indent-guides-character-face "dimgray"))
  #+end_src
+
+
+** [[https://github.com/jdtsmith/indent-bars][Indent Bars]]
+:PROPERTIES:
+:ID:       org_mark_mini20:20240302T101516.547914
+:END:
+New thing. But not as good.
+It just does bars and not really check.
+#+NAME: org_mark_mini20_20240302T101516.530657
+#+begin_src emacs-lisp :tangle no
+(use-package-non-elpa indent-bars 
+  :straight (indent-bars :type git :host github :repo "jdtsmith/indent-bars")
+  :init (if (and *sys/macp* (not *macport*))
+			(setq
+			 indent-bars-color '(highlight :face-bg t :blend 0.75)
+			 indent-bars-color-by-depth '(:regexp "outline-\\([0-9]+\\)" :blend 1)
+			 indent-bars-unspecified-fg-color "white"
+			 indent-bars-unspecified-bg-color "black")
+		  (setq
+		   indent-bars-pattern ". . . . "
+		   indent-bars-width-frac 0.25
+		   indent-bars-pad-frac 0.2
+		   indent-bars-zigzag 0.1
+		   indent-bars-color-by-depth '(:regexp "outline-\\([0-9]+\\)" :blend 1)
+		   indent-bars-highlight-current-depth '(:pattern "." :pad 0.1 :width 0.45)))
+
+  :hook ((prog-mode
+		  yaml-ts-mode
+		  yaml-mode
+		  toml-ts-mode
+		  nxml-mode)
+		 . indent-bars-mode))
+
+#+end_src
+
 * Format it all
 :PROPERTIES:
 :ID:       org_mark_mini20:20230707T094340.205016

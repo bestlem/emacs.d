@@ -208,7 +208,18 @@ This variable tells Emacs to prefer the .el file if itq’s newer, even if there
 #+begin_src emacs-lisp
 (setq load-prefer-newer t)
 #+end_src
+** use-package
+:PROPERTIES:
+:ID:       org_mark_mini20:20240227T114518.783665
+:END:
+From centaur.
+`use-package' is builtin since 29. It must be set before loading `use-package'.
+#+NAME: org_mark_mini20_20240227T114518.751441
+#+begin_src emacs-lisp
+(setq use-package-enable-imenu-support t)
+#+end_src
 
+(setq use-package-enable-imenu-support t)
 * Implement init environment (init.el)
 :PROPERTIES:
   :header-args:    :tangle init.el :comments link
@@ -315,8 +326,8 @@ in `modi/variables-to-be-watched'."
 :ID:       org_mark_mini20.local:20220905T162607.833929
 :END:
 #+NAME: org_mark_mini20.local_20220905T162607.813679
-#+begin_src emacs-lisp :tangle no
-(add-to-list 'modi/variables-to-be-watched 'gnus-startup-file)
+#+begin_src emacs-lisp
+(add-to-list 'modi/variables-to-be-watched 'debug-on-quit)
 (modi/set-variable-watchers)
 #+end_src
 *** Trace

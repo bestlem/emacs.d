@@ -1,0 +1,77 @@
+#+TITLE:  Todo
+#+AUTHOR: Mark Bestley
+#+DATE:   05 Mar 2024
+#+PROPERT:header-args :tangle no
+
+# SPDX-FileCopyrightText: (C) 2024 Mark Bestley
+# SPDX-License-Identifier: CC0-1.0
+
+
+* TODO Tangle selectively
+:PROPERTIES:
+:ID:       org_mark_mini20:20231209T162441.992315
+:END:
+Make it so not all org files are tangles.
+For projects this could be a .dir-locals.el file.
+For others not all files.
+
+* TODO Tangle add extra stepson
+:PROPERTIES:
+:ID:       org_mark_mini20:20231209T162441.989003
+:END:
+For example set up the tangled file to be formatted by outside formatter - not just indet-region as now.
+
+* TODO Nix
+:PROPERTIES:
+:ID:       org_mark_mini20:20231209T164001.632026
+:END:
+
+*** TODO Make clear which use-package actually load from, elpa and which use :straight
+:PROPERTIES:
+:ID:       org_mark_mini20:20231209T164001.628606
+:END:
+Add macro use-package-non-elpa for the latter.
+
+*** TODO Generate list of packages for nix.
+:PROPERTIES:
+:ID:       org_mark_mini20:20231209T164001.625551
+:END:
+
+
+* DONE Kill Aquamacs
+CLOSED: [2024-03-05 Tue 11:46]
+:PROPERTIES:
+:ID:       org_mark_mini20:20231209T162441.996225
+:END:
+- State "DONE"       from "TODO"       [2024-03-05 Tue 11:46]
+As it has not been updated forget it.
+
+* DONE kill initsplit
+CLOSED: [2024-03-05 Tue 11:46]
+:PROPERTIES:
+:ID:       org_mark_mini20:20231209T162441.994988
+:END:
+- State "DONE"       from "TODO"       [2024-03-05 Tue 11:46]
+As nearly all customization does not need to be saved and as aquamacs goes - then not needed.
+
+* DONE kill mac-key-map
+CLOSED: [2024-03-05 Tue 11:46]
+:PROPERTIES:
+:ID:       org_mark_mini20:20231209T162441.993755
+:END:
+- State "DONE"       from "TODO"       [2024-03-05 Tue 11:46]
+Put it all in global map. Allows me to change these keys per mode. (and for treemacs ber buffer-local)
+* DONE Spaces
+CLOSED: [2020-01-19 Sun 22:18]
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210424T122854.187351
+:END:
+Current babel code encodes files with spaces by http encoding so result is not the same as the start. I think that this is not required in tangle but that is a code change. Safest fix is to move init files but need to deal with customisation
+I think newer org-mode fixes this.
+
+* DONE Links
+CLOSED: [2019-12-16 Mon 15:15]
+:PROPERTIES:
+:ID:       org_mark_mini20.local:20210424T122854.186336
+:END:
+I tried to include all the org text in the source code but that adds extra links which seem to defeat detangle - but could be space related

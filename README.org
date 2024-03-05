@@ -1,6 +1,8 @@
 #+ TITLE Org mode emacs startup
 #+PROPERTY:header-args :cache yes :tangle no :comments link
 #+STARTUP: showall
+# SPDX-FileCopyrightText: (C) 2019-2024 Mark Bestley
+# SPDX-License-Identifier: CC0-1.0
 
 * Introduction
 :PROPERTIES:
@@ -20,12 +22,12 @@ I would note that my programming style is to have lots of small functions. With 
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210424T122437.576128
 :END:
-generates init.el and early-init.el (if emacs > 26). These .el files need to be in source code control as they need to run the startup. They include a minimal tangle method, this does not allow weaving or other controls. This minimal method is used on config.org (init.org currently could use this as well)
+Generates init.el and early-init.el (if emacs > 26). These .el files need to be in source code control as they need to run the startup. They include a minimal tangle method, this does not allow weaving or other controls. This minimal method is used on config.org (init.org currently could use this as well). This was needed as emacs's provided org-mode had issues, from emacs 29 I think these have gone so could replace all by org-mode.
 
-However I messed up config.org now uses tangle properties in the heading so the nullman export does not really work. Also I note nullman has now commented out his code and it had an error.
+However I messed up config.org now uses tangle properties in the heading so the nullman export does not work 100%. The generated code doesseen=m to  work but it does not have all the features Also I note nullman has now commented out his code and it had an error.
 So choice is as org-mode in emacs is new enough the use this. or delete the package section in config so all works again,
 
-init.org contains the minimal amout to load other things so in essence should not need to be edited.-originally put this text in here.
+init.org contains the minimal amout to load other things so in essence should not need to be edited.
 
 There is now an alternate - which is a way to try other init setups. However I found it easier to keep an emacs open and mv the emacs startup directories.
 
@@ -40,7 +42,7 @@ The only reason to do this rather than init.org is that you don't need to save t
 Also the separate allows easy choice of alt-init.
 
 Org-mode is complex so needs a separate file to start it - actually two one for tangling etc from Grant Rekke other is all the variables.
-Then keys as I need mac-key-mode before the other minor modes.
+Then keys as I need mac-key-mode before the other minor modes. (I now have changed this so its key bindings are now in the global map and so could be moved).
 The all.org which is under full org weaving.
 
 ** init
@@ -61,35 +63,19 @@ Ideally this should just controls the order of loading things but originally did
 :ID:       org_mark_mini20.local:20210424T155316.631696
 :END:
 This controls how emacs works. Sets up the environment for how other things work.
-Given latest insight to prog-modes - this is mainly minor modes that need to be available and not loaded after a major mode.
+
 They are all minor modes grouped by some commonality and are loaded from init/behaviours
 *** modes
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210424T155316.629706
 :END:
 Originally programming modes but these are all the major modes. The load order dies not need to be determined.
-*** command completion
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20210424T171159.512509
-:END:
-I think can be moved out to modes or behaviours - the latter makes sense
 *** keys
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210424T171159.511861
 :END:
 Well this can be the last - basically sets up my key bindings. Unfortunately due to the order of keymaps I think in org-mode and mouse the keys have to be set first.
 The one odd case is dealing with Aquamacs/macOS differences which have to be done upfront.
-*** Startup
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20210424T171159.511203
-:END:
-Detailed of extra setup at end
-*** Appearance
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20210424T171159.510292
-:END:
-How things look - moved to behaviours.
-
 * Use of org mode
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210424T122854.198055
@@ -144,7 +130,7 @@ Issue I think is how much do you need the IDE features.
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210424T122854.193065
 :END:
-This does not use org-mode but does not allow weaving - and just found out tangling to separate files. SO need an init.org and a config.org
+This does not use org-mode but does not allow weaving - and just found out tangling to separate files. So need an init.org and a config.org
 
 *** Others
 :PROPERTIES:
@@ -178,26 +164,7 @@ Detangle works if simple but if you start using weaving then jumping back to cod
 :ID:       org_mark_mini20.local:20210424T122854.189194
 :END:
 The code tools work on the tangled files
-*** Problems
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20210424T122854.188365
-:END:
-
-*** DONE Spaces
-CLOSED: [2020-01-19 Sun 22:18]
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20210424T122854.187351
-:END:
-Current babel code encodes files with spaces by http encoding so result is not the same as the start. I think that this is not required in tangle but that is a code change. Safest fix is to move init files but need to deal with customisation
-I think newer org-mode fixes this.
-
-*** DONE Links
-CLOSED: [2019-12-16 Mon 15:15]
-:PROPERTIES:
-:ID:       org_mark_mini20.local:20210424T122854.186336
-:END:
-I tried to include all the org text in the source code but that adds extra links which seem to defeat detangle - but could be space related
-** TODO Include
+*** TODO Include
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210424T122854.185381
 :END:
@@ -213,7 +180,7 @@ With experience messing stuff up.
 
 You need the .el to edit if crashed.
 
-*** DONE Hack
+**** DONE Hack
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210424T122854.184541
 :END:
@@ -226,7 +193,8 @@ Done years before date here.
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20210424T122854.183708
 :END:
-This file runs under Aquamacs, I use Aquamacs because it was the easiest distribution to set up in 2002. Nowadays with package loaders and starter kits this is not so needed.
+This file used to under Aquamacs, I use Aquamacs because it was the easiest distribution to set up in 2002. Nowadays with package loaders and starter kits this is not so needed.
+
 Aquamacs does have one advantage it uses Apple's spellchecker and that will not be rolled into GNU. - although I found a package that does use this.
 Aquamacs though is old Aquamacs 3.4 GNU Emacs 25.3.50.1 Emacs is now on 26 and has been for over a year but if we don't need new packages then version is OK.
 Now in 2022 some packages need emacs 26.1 and so don't use Aquamacs.
@@ -271,7 +239,7 @@ After playing more especially after moving different .emacs.d I think there are 
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220904T123633.478162
 :END:
-Controlled and must be under version control. no-littering etc files. I have in ~/.emacs.d/data/
+Controlled and must be under version control. no-littering etc files. I have in ~~/.emacs.d/data/~
 
 ******  Shared files
 :PROPERTIES:
@@ -283,13 +251,13 @@ Want to keep across machines e.g. News - I have on dropbox mwb-emacs-share-dir
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220904T123633.466623
 :END:
-Keep around but only on one machine e.g. backups as they have a file included.
+Keep around but only on one machine e.g. backups as they have a file included. In ~~/.local/emacs~
 
 ****** Cache or other short lived.
 :PROPERTIES:
 :ID:       org_mark_mini20.local:20220904T132752.500698
 :END:
-These probably should be in ~/.cache so can be deleted.
+These probably should be in ~~/.cache~ so can be deleted.
 
 
 **** DONE Need to move all init files into a path that has no spaces
@@ -298,55 +266,3 @@ These probably should be in ~/.cache so can be deleted.
 :ID:       org_mark_mini20.local:20210424T122854.181719
 :END:
 
-** TODO
-:PROPERTIES:
-:ID:       org_mark_mini20:20231209T162441.997456
-:END:
-
-*** TODO Kill Aquamacs
-:PROPERTIES:
-:ID:       org_mark_mini20:20231209T162441.996225
-:END:
-As it has not been updated forget it.
-
-*** TODO kill initsplit
-:PROPERTIES:
-:ID:       org_mark_mini20:20231209T162441.994988
-:END:
-As nearly all customization does not need to be saved and as aquamacs goes - then not needed.
-
-*** TODO kill mac-key-map
-:PROPERTIES:
-:ID:       org_mark_mini20:20231209T162441.993755
-:END:
-Put it all in global map. Allows me to change these keys per mode. (and for treemacs ber buffer-local)
-
-*** TODO Tangle selectively
-:PROPERTIES:
-:ID:       org_mark_mini20:20231209T162441.992315
-:END:
-Make it so not all org files are tangles.
-For projects this could be a .dir-locals.el file.
-For others not all files.
-
-*** TODO Tangle add extra stepson
-:PROPERTIES:
-:ID:       org_mark_mini20:20231209T162441.989003
-:END:
-For example set up the tangled file to be formatted by outside formatter - not just indet-region as now.
-
-*** TODO Nix
-:PROPERTIES:
-:ID:       org_mark_mini20:20231209T164001.632026
-:END:
-
-**** TODO Make clear which use-package actually load from, elpa and which use :straight
-:PROPERTIES:
-:ID:       org_mark_mini20:20231209T164001.628606
-:END:
-Add macro use-package-non-elpa for the latter.
-
-**** TODO Generate list of packages for nix.
-:PROPERTIES:
-:ID:       org_mark_mini20:20231209T164001.625551
-:END:

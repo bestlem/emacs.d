@@ -39,7 +39,7 @@ Also note as I have this in my startup they can be done on demand but otherwise 
   (treemacs-width-is-initially-locked nil)
   (treemacs-width 40)
   (treemacs-sorting 'alphabetic-case-insensitive-asc)
-  (treemacs-follow-after-init . t)
+  (treemacs-follow-after-init t)
   :config
   (setq treemacs--no-messages nil)
   ;; add Mac key symbols
